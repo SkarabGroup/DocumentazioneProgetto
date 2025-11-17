@@ -1,0 +1,168 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage{fancyhdr}
+\usepackage{helvet}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{pdfpages}
+\usepackage{longtable}
+\usepackage[colorlinks=true, linkcolor=black, urlcolor=blue]{hyperref}
+
+\geometry{margin=2.5cm}
+\setstretch{1.0}
+
+\begin{document}
+
+\newcommand{\titoloDocumento}{Verbale Interno}
+\newcommand{\dataDocumento}{2025-11-17}
+\newcommand{\emailGruppo}{skarabswegroup@gmail.com}
+\newcommand{\redattoreDocumento}{Suar Alberto}
+\newcommand{\immagine}{../templates/skarablogo_.jpg}
+\pagenumbering{gobble}
+\begin{titlepage}
+\centering
+
+\vspace*{\fill}
+
+\includegraphics[width=0.4\linewidth]{\immagine}
+\vspace{1cm}
+
+{\Huge \textbf{Skarab Group}}\\[0.5cm]
+
+\rule{0.8\textwidth}{0.5pt}\\[0.5cm]
+
+{\LARGE \textbf{\titoloDocumento}}\\[0.5cm]
+
+\rule{0.8\textwidth}{0.5pt}
+\vspace*{\fill}
+\begin{center}
+    \emailGruppo
+\end{center}
+\vspace*{\fill}
+
+\end{titlepage}
+\newpage
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\textbf{Skarab Group - Anno accademico 2025/2026}}
+\fancyfoot[C]{\thepage}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\section*{Versionamento e changelog}
+\begin{center}
+\begin{tabular}{|>{\centering\arraybackslash}m{2.5cm}|
+                >{\centering\arraybackslash}m{1.7cm}|
+                >{\centering\arraybackslash}m{5.0cm}|
+                >{\centering\arraybackslash}m{2.5cm}|
+                >{\centering\arraybackslash}m{2.5cm}|}
+\hline
+\rowcolor{gray!30}
+\textbf{Data Modifica} & \textbf{Versione} & \textbf{Descrizione Modifica} & \textbf{Redattore} & \textbf{Verificatore}\\ 
+\hline
+2025-11-17 & 1.0.0 & Prima stesura del documento & Suar Alberto & Sandu Antonio \\
+\hline
+\end{tabular}
+\end{center}
+\newpage
+\tableofcontents
+
+\newcommand{\MeetingDate}{2025-11-15}
+\newcommand{\MeetingStartingTime}{09:55}
+\newcommand{\MeetingEndingTime}{11:05}
+\newcommand{\Location}{Discord}
+\newcommand{\Chair}{Suar Alberto}
+\newcommand{\Attendees}{Suar Alberto, Zago Alice, Sandu Antonio, Sgreva Andrea, Berengan Riccardo, Basso Kevin}
+\newcommand{\Assenti}{Martinello Riccardo}
+
+\fancyhead[L]{Verbale riunione}
+\fancyhead[R]{\MeetingDate}
+\newpage
+\section{Informazioni generali}
+\subsection{Apertura}
+La riunione, svolta su \Location, ha avuto inizio alle \MeetingStartingTime, introdotta da \Chair, 
+che ha illustrato brevemente gli obiettivi del giorno.
+
+\subsection{Presenti e assenti}
+\begin{tabular}{@{}p{0.48\textwidth} p{0.48\textwidth}@{}}
+\textbf{Presenti:} & \Attendees \\
+\textbf{Assenti:} & \Assenti \\
+\end{tabular}
+
+\vspace{1em}
+
+\section{Ordine del giorno}
+\begin{enumerate}
+    \item Generatore automatico di documenti
+    \item Diario di Bordo
+    \item Analisi tecnologie proposte dall'azienda
+\end{enumerate}
+
+\vspace{1em}
+
+\section{Svolgimento della Riunione}
+
+                    \subsection{Punto 1 — Generatore automatico di documenti}
+                    \subsubsection*{Sintesi}
+                    Il team necessita di un generatore automatico di documenti per velocizzare le tempistiche di stesura dei documenti e limitare il più possibile il tempo produttivo da rendicontare per il ruolo di Responsabile, in quanto figura chiamante della stesura dei documenti
+
+                    \subsubsection*{Decisione}
+                    Suar Alberto si occuperà di definire un generatore di documenti automatico e di renderlo disponibile a tutti i membri del gruppo
+                   
+
+                    \subsection{Punto 2 — Diario di Bordo}
+                    \subsubsection*{Sintesi}
+                    Per la lezione di Lunedì 17 Novembre è necessario definire il terzo diario di bordo
+
+                    \subsubsection*{Decisione}
+                    Sandu Antonio si occuperà di definire il diario di bordo per la lezione di lunedì
+                   
+
+                    \subsection{Punto 3 — Analisi tecnologie proposte dall'azienda}
+                    \subsubsection*{Sintesi}
+                    Ogni componente del gruppo ha svolto autonomamente una prima sessione di analisi delle tecnologie proposte dalla azienda proponente, focalizzandosi sul definire i pregi e i difetti di ognuna e delle possibili alternative da presentare alla proponente
+
+                    \subsubsection*{Decisione}
+                    Il team si impegna a continuare questa analisi, cercando di spostare l'attenzione su esercizi di potenziamento per comprendere meglio lnologie proposte e stabilire delle strutture predefinite per salvare i link e le note relative ad ogni argomento
+                   
+
+
+\section{Azioni e responsabilità}
+\begin{longtable}{p{0.42\textwidth} p{0.22\textwidth} p{0.16\textwidth} p{0.16\textwidth}}
+\toprule
+\textbf{Azione} & \textbf{Responsabile} & \textbf{Scadenza} & \textbf{Stato} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Azione} & \textbf{Responsabile} & \textbf{Scadenza} & \textbf{Stato} \\
+\midrule
+\endhead
+Definizione template & Suar Alberto | Berengan Riccardo & 2025-11-21 & In corso \\ \midrule
+Analisi delle tecnologie & SkarabGroup & 2025-11-24 & In corso \\ \midrule
+Definizione primi requisiti & SkarabGroup & 2025-11-21 & In corso \\ \midrule
+\bottomrule
+\end{longtable}
+\section*{Chiusura}
+La riunione si è conclusa alle \MeetingEndingTime.
+
+\vspace{2em}
+
+\noindent\begin{tabular}{@{}p{0.48\textwidth}@{}}
+  \textbf{Presiede:} \\
+  \\[2.5em]
+  \rule{0.9\linewidth}{0.6pt} \\
+  \Chair \\
+\end{tabular}
+
+\vfill
+\hrulefill
+
+\end{document}
