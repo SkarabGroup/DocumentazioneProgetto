@@ -17,13 +17,19 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Get NEW PDF files only
-        id: changed-files
+      - name: Get newly added PDFs
+        id: new_pdfs
         run: |
-          FILES=$(git diff --name-only --diff-filter=A HEAD^ HEAD | grep '^verbali/.*\.pdf$' || true)
-          echo "files=$FILES" >> $GITHUB_OUTPUT
-          echo "New PDFs:"
-          echo "$FILES"
+          NEWPDFS=$(git diff --name-status ${{ github.sha }}^ ${{ github.sha }} \
+            | grep '^A' | cut -f2 | grep '^verbali/.*\.pdf$' || true)
+          echo "newpdfs=$NEWPDFS" >> $GITHUB_OUTPUT
+
+      - name: Add links for new PDFs
+        if: ${{ steps.new_pdfs.outputs.newpdfs != '' }}
+        run: |
+          echo "${{ steps.new_pdfs.outputs.newpdfs }}" | tr ' ' '\n' | while read f; do
+            python website/autoUpdate.py "$f"
+          done
 
 
       - name: Run autoUpdate.py
