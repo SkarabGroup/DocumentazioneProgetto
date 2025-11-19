@@ -30,7 +30,7 @@ def add_link(rel_file_path_str: str):
         print(f"Ignorato: impossibile determinare categoria -> {rel_path}")
         return
 
-    link_html = f'  <a href="{rel_path}" class="doc-link" target="_blank">{file_path.stem}</a>'
+    link_html = f'            <a href="{rel_path}" class="doc-link" target="_blank">{file_path.stem}</a>'
 
     if not INDEX_FILE.exists():
         print(f"Errore: index.html non trovato in {INDEX_FILE}")
@@ -38,7 +38,7 @@ def add_link(rel_file_path_str: str):
 
     html_content = INDEX_FILE.read_text(encoding="utf-8")
 
-    placeholder = f""
+    placeholder = f"<!-- VERBALI {categoria.upper()}-->"
     idx = html_content.find(placeholder)
 
     if idx == -1:
