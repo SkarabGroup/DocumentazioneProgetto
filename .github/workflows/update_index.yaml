@@ -17,11 +17,14 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Get changed PDF files
+      - name: Get NEW PDF files only
         id: changed-files
         run: |
-          FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^verbali/.*\.pdf$' || true)
+          FILES=$(git diff --name-only --diff-filter=A HEAD^ HEAD | grep '^verbali/.*\.pdf$' || true)
           echo "files=$FILES" >> $GITHUB_OUTPUT
+          echo "New PDFs:"
+          echo "$FILES"
+
 
       - name: Run autoUpdate.py
         run: |
