@@ -2,7 +2,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).parent.parent
 VERBALI_DIR = BASE_DIR / "verbali"
-INDEX_FILE = BASE_DIR / "website" / "index.html"
+INDEX_FILE = BASE_DIR / "index.html"
 
 CATEGORIE = ["interni", "esterni"]
 
