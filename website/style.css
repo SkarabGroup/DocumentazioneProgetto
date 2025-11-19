@@ -1,18 +1,46 @@
+:root {
+  --bg: #F9FAFB; 
+  --text: #1F1A1B;
+  --primary: #5E2129;       
+  --primary-dark: #3D151A;
+  --primary-light: #7D2E39;
+  --accent: #D4A373;
+  --accent-hover: #E9C46A; 
+  --accent-text: #5E2129;
+  --surface: #FFFFFF;
+  --shadow: rgba(94, 33, 41, 0.15); 
+  --shadow-strong: rgba(94, 33, 41, 0.4);
+}
+
+.dark-theme {
+  --bg: #120B0D;
+  --text: #EAE0E2;
+  --primary: #8F323F;       
+  --primary-dark: #5E2129;
+  --primary-light: #B04857; 
+  --accent: #D4A373;
+  --accent-hover: #F4D35E;
+  --surface: #1E1416; 
+  --shadow: rgba(0, 0, 0, 0.6);
+  --shadow-strong: rgba(143, 50, 63, 0.3);
+}
+
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
-  background-color: #faf9f9;
-  color: #333;
+  background-color: var(--bg);
+  color: var(--text);
   scroll-behavior: smooth;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 header {
   text-align: center;
-  background-color: #5e2129;
+  background-color: var(--primary-dark);
   color: #fff;
   padding: 2rem 1rem;
   border-radius: 0 0 24px 24px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 12px var(--shadow);
 }
 
 header h1 {
@@ -24,16 +52,9 @@ header h1 {
   animation: fadeInTitle 1.5s ease forwards;
 }
 
-/* Leggero ritardo per un effetto più naturale */
 @keyframes fadeInTitle {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 .logo-circle {
@@ -41,104 +62,20 @@ header h1 {
   height: 250px;
   border-radius: 50%;
   overflow: hidden;
-  /* border: 3px solid #842a36; */
-  box-shadow: 0 4px 10px rgba(94, 33, 41, 0.3);
+  box-shadow: 0 4px 10px var(--shadow-strong);
   margin: 1.5rem auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
+  background-color: var(--surface);
 }
 
 .logo-circle img {
   width: 90%;
   height: 90%;
-  object-fit: contain; 
+  object-fit: contain;
   border-radius: 50%;
 }
-
-.team-box {
-  background-color: #842a36;
-  color: white;
-  border-radius: 25px;
-  box-shadow: 0 0 20px rgba(255,255,255,0.1);
-  padding: 30px;
-  margin: 40px auto;
-  text-align: center;
-  max-width: 90%;
-}
-
-.team-box h2 {
-  font-size: 1.8rem;
-  margin-top: 10px;
-  margin-bottom: 25px;
-}
-
-.team-section {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 25px;
-}
-
-.team-member {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 120px;
-  transition: all 0.3s ease;
-}
-
-.team-member img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 8px;
-  transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
-}
-
-.team-member p {
-  font-size: 0.9rem;
-  white-space: nowrap;
-}
-
-/* 🔹 Adattamento dinamico per finestre strette */
-@media (max-width: 900px) {
-  .team-member {
-    width: 90px;
-  }
-
-  .team-member img {
-    width: 75px;
-    height: 75px;
-  }
-
-  .team-member p {
-    font-size: 0.8rem;
-  }
-}
-
-/* 🔹 Se lo spazio è davvero poco, mostra solo i nomi */
-@media (max-width: 600px) {
-  .team-member img {
-    display: none;
-  }
-
-  .team-member {
-    width: auto;
-  }
-
-  .team-section {
-    gap: 10px;
-  }
-
-  .team-member p {
-    font-size: 0.85rem;
-    color: #ccc;
-  }
-}
-
 
 .contact-button {
   margin-top: 1.5rem;
@@ -148,7 +85,7 @@ header h1 {
 .contact-button a {
   display: inline-block;
   background: var(--primary);
-  color: white;
+  color: var(--surface);
   text-decoration: none;
   font-weight: 600;
   padding: 0.8rem 1.8rem;
@@ -162,31 +99,27 @@ header h1 {
 
 @keyframes glowPulse {
   0%, 100% {
-    box-shadow: 0 0 10px rgba(94, 33, 41, 0.6), 0 0 20px rgba(94, 33, 41, 0.4);
+    box-shadow: 0 0 10px var(--shadow), 0 0 20px var(--shadow);
   }
   50% {
-    box-shadow: 0 0 20px rgba(138, 57, 69, 0.8), 0 0 35px rgba(138, 57, 69, 0.5);
+    box-shadow: 0 0 20px var(--shadow-strong), 0 0 35px var(--shadow);
   }
 }
 
 .contact-button a:hover {
   background: var(--primary-light);
+  color: var(--accent-dark);
   transform: scale(1.07);
-  box-shadow: 0 0 25px rgba(138, 57, 69, 0.8), 0 0 40px rgba(94, 33, 41, 0.5);
+  box-shadow: 0 0 25px var(--shadow-strong);
 }
 
-.contact-button a:active {
-  transform: scale(0.97);
-  box-shadow: 0 0 10px rgba(94, 33, 41, 0.6);
-}
 
 nav {
   position: sticky;
   top: 0;
   z-index: 1000;
-
-  background-color: #842a36;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  background-color: var(--primary);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
   border-radius: 12px;
   margin: 1rem auto;
   max-width: 1000px;
@@ -204,19 +137,23 @@ nav ul {
 nav a {
   display: block;
   padding: 1rem 1.5rem;
-  color: #fff;
+  color: #fff; 
   text-decoration: none;
   font-weight: 500;
   border-radius: 12px;
   transition: all 0.3s ease;
 }
 
-nav a:hover,
-nav a.active {
-  background: linear-gradient(90deg, #a13545, #5e2129);
-  box-shadow: 0 0 10px rgba(94, 33, 41, 0.4);
+.dark-theme nav a {
+    color: #051209; 
 }
 
+nav a:hover,
+nav a.active {
+  background: linear-gradient(90deg, var(--primary-light), var(--primary-dark));
+  color: #fff;
+  box-shadow: 0 0 10px var(--shadow-strong);
+}
 
 .container {
   max-width: 1000px;
@@ -225,15 +162,16 @@ nav a.active {
 }
 
 .section {
-  background-color: #fff;
+  background-color: var(--surface);
   padding: 2rem;
   margin-bottom: 2rem;
   border-radius: 20px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 12px var(--shadow);
+  transition: background-color 0.3s ease;
 }
 
 .section h2 {
-  color: #5e2129;
+  color: var(--primary);
   margin-bottom: 1rem;
 }
 
@@ -244,22 +182,24 @@ nav a.active {
 }
 
 .doc-card {
-  background-color: #fff;
+  background-color: var(--bg);
   border-radius: 18px;
+  border: 1px solid var(--shadow);
   padding: 1.5rem;
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 5px var(--shadow);
   transition: all 0.3s ease;
 }
 
 .doc-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 10px 20px rgba(94, 33, 41, 0.25);
+  box-shadow: 0 10px 20px var(--shadow-strong);
+  border-color: var(--primary);
 }
 
 .doc-category {
   display: inline-block;
-  background-color: #842a36;
-  color: #fff;
+  background-color: var(--primary);
+  color: #fff; 
   padding: 0.3rem 0.7rem;
   border-radius: 8px;
   font-size: 0.8rem;
@@ -267,9 +207,18 @@ nav a.active {
   text-transform: uppercase;
 }
 
+.dark-theme .doc-category {
+    color: var(--bg);
+}
+
+.doc-card h3 {
+    margin-top: 10px;
+    color: var(--text);
+}
+
 .doc-links a {
   display: block;
-  color: #842a36;
+  color: var(--primary);
   font-weight: 500;
   margin: 0.3rem 0;
   text-decoration: none;
@@ -279,27 +228,54 @@ nav a.active {
 }
 
 .doc-links a:hover {
-  color: #5e2129;
-  background-color: #fbeaec;
-  box-shadow: 0 2px 6px rgba(94, 33, 41, 0.2);
+  color: var(--primary-dark);
+  background-color: var(--primary-light);
+  box-shadow: 0 2px 6px var(--shadow);
+}
+
+.dark-theme .doc-links a:hover {
+    color: var(--bg); 
 }
 
 footer {
-  background-color: #5e2129;
+  background-color: var(--primary-dark);
   color: #fff;
   text-align: center;
   padding: 1.2rem 0;
   border-radius: 24px 24px 0 0;
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 -4px 10px var(--shadow);
 }
 
+/* --- 8. RESPONSIVE --- */
 @media (max-width: 600px) {
-  nav a {
-    padding: 0.8rem 1rem;
-    font-size: 0.9rem;
-  }
+  nav a { padding: 0.8rem 1rem; font-size: 0.9rem; }
+  .section { padding: 1.2rem; }
+  .team-member img { display: none; }
+  .team-member { width: auto; }
+}
 
-  .section {
-    padding: 1.2rem;
-  }
+.theme-toggle {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+#toggle-theme {
+  background-color: var(--surface);
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 0.5rem 1.2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px var(--shadow);
+  transition: all 0.3s ease;
+}
+
+#toggle-theme:hover {
+  background-color: var(--primary);
+  color: #fff;
+  transform: scale(1.05);
+}
+.dark-theme #toggle-theme:hover {
+    color: var(--bg);
 }

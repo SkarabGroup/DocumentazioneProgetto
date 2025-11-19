@@ -1,13 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('nav a');
   const sections = document.querySelectorAll('.section');
-  const scrollIndicator = document.createElement('div');
+  const toggleButton = document.getElementById("toggle-theme");
 
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-theme');
+    toggleButton.textContent = "☀️ Light Mode";
+  }
+
+  toggleButton.addEventListener("click", () => {
+    document.body.classList.toggle("dark-theme");
+
+    if (document.body.classList.contains("dark-theme")) {
+      toggleButton.textContent = "☀️ Light Mode";
+      localStorage.setItem('theme', 'dark');
+    } else {
+      toggleButton.textContent = "🌙 Dark Mode";
+      localStorage.setItem('theme', 'light');
+    }
+  });
+
+  const scrollIndicator = document.createElement('div');
   scrollIndicator.style.position = 'fixed';
   scrollIndicator.style.top = 0;
   scrollIndicator.style.left = 0;
   scrollIndicator.style.height = '4px';
-  scrollIndicator.style.background = 'linear-gradient(90deg, #5e2129, #a13545)';
+  
+  scrollIndicator.style.background = 'linear-gradient(90deg, var(--primary), var(--primary-light))';
   scrollIndicator.style.width = '0%';
   scrollIndicator.style.zIndex = '9999';
   scrollIndicator.style.borderRadius = '4px';
@@ -36,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let found = false;
     const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
     const scrollPercent = (window.scrollY / scrollHeight) * 100;
+    
     scrollIndicator.style.width = `${scrollPercent}%`;
 
     sections.forEach(section => {
@@ -45,7 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (scrollPos >= top && scrollPos < top + height) {
         navLinks.forEach(link => {
-          link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+          const href = link.getAttribute('href');
+          link.classList.toggle('active', href === `#${id}`);
         });
         found = true;
       }
@@ -75,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-      border-radius: 20px;
+      /* Rimuovo border-radius qui perché è già definito nel CSS principale */
     }
     .visible {
       opacity: 1;
