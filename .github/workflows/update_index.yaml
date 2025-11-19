@@ -20,11 +20,18 @@ jobs:
       - name: Get changed PDF files
         id: changed-files
         run: |
-          echo "files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^verbali/.*\.pdf$' || true)" >> $GITHUB_OUTPUT
+          FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^verbali/.*\.pdf$' || true)
+          echo "files=$FILES" >> $GITHUB_OUTPUT
 
       - name: Run autoUpdate.py
         run: |
-          echo "${{ steps.changed-files.outputs.files }}" | tr ' ' '\n' | while read f; do
+          if [ -z "${{ steps.changed-files.outputs.files }}" ]; then
+            echo "Nessun PDF modificato.";
+            exit 0;
+          fi
+
+          for f in ${{ steps.changed-files.outputs.files }}; do
+            [ -z "$f" ] && continue
             python website/autoUpdate.py "$f"
           done
 
