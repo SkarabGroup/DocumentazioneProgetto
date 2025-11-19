@@ -3,51 +3,46 @@ name: Update Index
 on:
   push:
     paths:
-      - 'verbali/**'
+      - 'verbali/**/*.pdf'
 
 jobs:
   update_index:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
-      - name: Get newly added PDFs
+      - name: Get newly added PDF files
         id: new_pdfs
+        uses: tj-actions/changed-files@v45
+        with:
+          files: verbali/**/*.pdf
+          json: true
+          escape_json: false
+
+      - name: Update HTML with new PDFs
+        if: steps.new_pdfs.outputs.added_files != ''
+        env:
+          ADDED_FILES: ${{ steps.new_pdfs.outputs.added_files }}
         run: |
-          NEWPDFS=$(git diff --name-status ${{ github.sha }}^ ${{ github.sha }} \
-            | grep '^A' | cut -f2 | grep '^verbali/.*\.pdf$' || true)
-          echo "newpdfs=$NEWPDFS" >> $GITHUB_OUTPUT
-
-      - name: Add links for new PDFs
-        if: ${{ steps.new_pdfs.outputs.newpdfs != '' }}
-        run: |
-          echo "${{ steps.new_pdfs.outputs.newpdfs }}" | tr ' ' '\n' | while read f; do
-            python website/autoUpdate.py "$f"
-          done
-
-
-      - name: Run autoUpdate.py
-        run: |
-          if [ -z "${{ steps.changed-files.outputs.files }}" ]; then
-            echo "Nessun PDF modificato.";
-            exit 0;
-          fi
-
-          for f in ${{ steps.changed-files.outputs.files }}; do
-            [ -z "$f" ] && continue
-            python website/autoUpdate.py "$f"
+          echo "$ADDED_FILES" | jq -r '.[]' | while read -r file; do
+            python website/autoUpdate.py "$file"
           done
 
       - name: Commit and push changes
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-          git add index.html
-          git commit -m "Aggiornato index.html automaticamente" || echo "No changes to commit"
-          git push
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if [[ `git status --porcelain index.html` ]]; then
+            git add index.html
+            git commit -m "Auto-update index [skip ci]"
+            git push
+          fi
