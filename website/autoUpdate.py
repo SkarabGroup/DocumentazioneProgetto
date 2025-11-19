@@ -1,39 +1,28 @@
 from pathlib import Path
+import sys
 
 BASE_DIR = Path(__file__).parent.parent
-VERBALI_DIR = BASE_DIR / "verbali"
 INDEX_FILE = BASE_DIR / "index.html"
 
-CATEGORIE = ["interni", "esterni"]
+def add_link(file_path: Path):
+    categoria = "interni" if "interni" in file_path.parts else "esterni"
 
-def generate_links_html(categoria_dir, indent="  "):
-    files = sorted(
-        [f for f in categoria_dir.glob("*.*") if f.suffix.lower() == ".pdf"],
-        key=lambda f: f.stem,
-        reverse=True
-    )
-    links_html = ""
-    for f in files:
-        name = f.stem
-        link = f'{indent}<a href="{f.relative_to(BASE_DIR).as_posix()}" class="doc-link" target="_blank">{name}</a>'
-        links_html += f"{link}\n"
-    return links_html
+    rel_path = file_path.relative_to(BASE_DIR).as_posix()
+    link_html = f'  <a href="{rel_path}" class="doc-link" target="_blank">{file_path.stem}</a>\n'
 
-def update_index():
-    with INDEX_FILE.open("r", encoding="utf-8") as f:
-        html = f.read()
+    html = INDEX_FILE.read_text(encoding="utf-8")
 
-    for categoria in CATEGORIE:
-        placeholder = f"<!-- VERBALI {categoria.upper()} -->"
-        idx = html.find(placeholder)
-        if idx == -1:
-            continue
+    placeholder = f"<!-- VERBALI {categoria.upper()} -->"
+    idx = html.find(placeholder)
+    if idx == -1:
+        print(f"Placeholder {placeholder} non trovato.")
+        return
 
-        new_links = generate_links_html(VERBALI_DIR / categoria)
-        html = html[:idx + len(placeholder)] + "\n" + new_links + html[idx + len(placeholder):]
+    html = html[:idx + len(placeholder)] + "\n" + link_html + html[idx + len(placeholder):]
 
-    with INDEX_FILE.open("w", encoding="utf-8") as f:
-        f.write(html)
+    INDEX_FILE.write_text(html, encoding="utf-8")
+    print(f"Aggiunto {file_path.name} a {categoria}")
 
 if __name__ == "__main__":
-    update_index()
+    for arg in sys.argv[1:]:
+        add_link(Path(arg))
