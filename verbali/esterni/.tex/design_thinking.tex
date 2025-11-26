@@ -78,7 +78,7 @@
 \newcommand{\MeetingDate}{2025-11-25}
 \newcommand{\MeetingStartingTime}{14:05}
 \newcommand{\MeetingEndingTime}{18:00}
-\newcommand{\Location}{Sede Var Group SpA}
+\newcommand{\Location}{sede di Var Group SpA}
 \newcommand{\Chair}{Suar Alberto}
 \newcommand{\Attendees}{Suar Alberto, Zago Alice, Basso Kevin, Berengan Riccardo, Sandu Antonio, Sgreva Andrea}
 \newcommand{\Assenti}{Martinello Riccardo}
@@ -89,7 +89,7 @@
 \newpage
 \section{Informazioni generali}
 \subsection{Apertura}
-La riunione, svolta nella \Location, ha avuto inizio alle \MeetingStartingTime, con i referenti dell'azienda che hanno esposto 
+La riunione, svolta nella \Location, ha avuto inizio alle \MeetingStartingTime, con i referenti dell'azienda che hanno esposto i principali punti del giorno.
 
 \subsection{Presenti e assenti}
 \begin{tabular}{@{}p{0.48\textwidth} p{0.48\textwidth}@{}}
@@ -115,10 +115,10 @@ La riunione, svolta nella \Location, ha avuto inizio alle \MeetingStartingTime, 
 
 \subsection{Punto 1 — Allineamento sullo scopo del progetto}
 \subsubsection*{Sintesi}
-Prima dell'inizio effettivo della sessione di design thinking, l'azienda proponente ha chiesto di definire, in linea generale, lo scopo del progetto \textit{CodeGuardian}, così da chiarire eventuali dubbi relativi alla presentazione del capitolato e fornire una descrizione chiara di ciò che viene richiesto.
+Prima dell'inizio effettivo della sessione di design thinking, l'azienda proponente ha chiesto di definire, in linea generale, lo scopo del progetto \textit{CodeGuardian}, così da chiarire eventuali dubbi relativi alla presentazione del capitolato e strutturare una base di partenza.
 
 \subsubsection*{Decisione}
-Il team ha discusso e condiviso le proprie opinioni riguardo allo scopo del progetto \textit{CodeGuardian}, giungendo alla conclusione che esso consista in \textbf{una piattaforma basata su un sistema ad agenti, capace di analizzare repository e fornire report dettagliati} relativi a controlli del codice — come analisi statica e copertura dei test — \textbf{controlli di sicurezza}, come la verifica del rispetto degli standard OWASP, e \textbf{controlli sulla documentazione}, verificando la presenza di documenti chiari e completi che descrivano accuratamente le funzionalità del prodotto analizzato.
+Il team ha discusso e condiviso le proprie opinioni riguardo allo scopo del progetto \textit{CodeGuardian}, giungendo alla conclusione che consista in \textbf{una piattaforma basata su un sistema ad agenti, capace di analizzare repository e fornire report dettagliati} relativi a controlli del codice — come analisi statica e copertura dei test — \textbf{controlli di sicurezza}, come la verifica del rispetto degli standard OWASP, e \textbf{controlli sulla documentazione}, verificando la presenza di documenti chiari e completi che descrivano accuratamente le funzionalità del prodotto analizzato.
 
                    
 
@@ -133,7 +133,7 @@ A seguito di un'analisi inizialmente individuale e successivamente condivisa, so
     \item Responsabili di Progetto
     \item Consulenti informatici
 \end{itemize}
-Per la prima fase del progetto, il team si concentrerà sulla definizione di numerosi casi d'uso e requisiti che rappresentino le necessità e le aspettative tipiche di queste categorie di utenti.
+Per la prima fase del progetto, il team si concentrerà sulla \textbf{definizione di numerosi casi d'uso e requisiti} che rappresentino le necessità e le aspettative tipiche di queste categorie di utenti.
 
 \subsection{Punto 3 — Definizione delle principali funzionalità in relazione alle Personas}
 \subsubsection*{Sintesi}
@@ -142,9 +142,9 @@ Sulla base delle Personas individuate come principali utilizzatrici del prodotto
 \subsubsection*{Decisione}
 Per quanto riguarda le funzionalità considerate desiderabili da un \textbf{Software Developer}, sono emersi requisiti di questo tipo:
 \begin{itemize}
-    \item I tempi di risposta devono essere ragionevoli e, qualora si verifichino problemi durante l'elaborazione, l'utente deve essere avvisato tempestivamente, possibilmente con suggerimenti su come procedere.
+    \item I \textbf{tempi di risposta} devono essere \textbf{ragionevoli} e, qualora si verificassero problemi durante l'elaborazione, l'utente deve essere avvisato tempestivamente, possibilmente con suggerimenti su come procedere.
     \item Deve essere mostrato l'esito dei test eseguiti, evidenziando quelli eventualmente falliti.
-    \item Devono essere forniti, tramite dashboard e rappresentazioni grafiche, indicatori che mostrino il miglioramento (o il peggioramento) rispetto alle versioni precedenti, specificando inoltre quali best practices non sono state rispettate nello sviluppo delle nuove funzionalità.
+    \item Devono essere forniti, tramite \textbf{dashboard e rappresentazioni grafiche}, indicatori che mostrino il miglioramento (o il peggioramento) rispetto alle versioni precedenti, \textbf{specificando} inoltre quali \textbf{best practices} non sono state rispettate nello sviluppo delle nuove funzionalità.
 \end{itemize}
 Per quanto riguarda le funzionalità desiderabili da un \textbf{Responsabile di Progetto}, sono stati evidenziati i seguenti requisiti:
 \begin{itemize}
@@ -163,16 +163,13 @@ Per quanto riguarda le funzionalità desiderabili da un \textbf{Consulente Infor
     \item Deve essere possibile ottenere una valutazione complessiva sul livello di \textbf{compliance del progetto}, utile per supportare audit tecnici o consulenze strategiche.
 \end{itemize}
 
-                    
-                   
-
- \subsection{Punto 4 — Scelta del modello di riferimento per la creazione degli agenti}
+\subsection{Punto 4 — Scelta del modello di riferimento per la creazione degli agenti}
 \subsubsection*{Sintesi}
 Data la natura del progetto, fortemente basata sull'impiego di agenti AI, l'azienda ha introdotto i due principali modelli architetturali utilizzati per strutturare flussi di gestione delle richieste. Tali modelli definiscono il modo in cui gli agenti devono collaborare per fornire risposte chiare, coerenti e affidabili all'utente finale. I modelli presentati sono la \textbf{Rete Democratica di Agenti} e l'\textbf{Orchestratore Autocratico}.\\
 A seguito di questa introduzione, il team è stato incaricato di analizzare entrambi i modelli, evidenziandone vantaggi e svantaggi, per poi scegliere quello più adeguato agli obiettivi del progetto.
 
 \subsubsection*{Decisione}
-Il team ha deciso di adottare un approccio basato sull'\textbf{Orchestratore Autocratico}. In questo modello è presente un agente principale (leader) che coordina il lavoro degli altri agenti: definisce i compiti che ciascun agente deve svolgere, fornisce gli strumenti necessari alla loro esecuzione e raccoglie i risultati prodotti, decidendo di volta in volta quale agente attivare successivamente. La struttura più essere strutturata ad albero dove ogni nodo è orchestratore di uno o più agenti sottostanti fino ad arrivare ad agenti specifici con tool ad hoc per l'anallisi dettagliata della richiesta.
+Il team ha deciso di adottare un approccio basato sull'\textbf{Orchestratore Autocratico}. In questo modello è presente un agente principale (leader) che coordina il lavoro degli altri agenti: definisce i compiti che ciascun agente deve svolgere, fornisce gli strumenti necessari alla loro esecuzione e raccoglie i risultati prodotti, decidendo di volta in volta quale agente attivare successivamente. A livello strutturale, si può visualizzarlo come un albero in cui ogni agente è orchestratore di uno o più sottoagenti specializzati in modo da poter utilizzare tool ad hoc, al fine di eseguire minuziosamente la richiesta.
 \\
 Le motivazioni principali che hanno portato a preferire l'approccio dell'orchestratore rispetto alla rete democratica degli agenti sono le seguenti:
 \begin{itemize}
@@ -221,38 +218,20 @@ Dalla costruzione del diagramma di flusso è emerso un processo articolato, stru
     \begin{itemize}
         \item \textbf{Analisi sintattica}  
         \item \textbf{Analisi semantica}  
-        \item \textbf{Analisi del rispetto delle best practices e standard aziendali} (coerenza tra ciò che la documentazione dichiara e ciò che il codice effettivamente realizza e rispendo di eventuali templates aziendali)  
+        \item \textbf{Analisi del rispetto delle best practices e standard aziendali} (coerenza tra ciò che la documentazione dichiara e ciò che il codice effettivamente realizza)  
     \end{itemize}
 
     \item \textbf{Raccolta e consolidamento dei risultati}  
     L’orchestratore raccoglie gli output prodotti dagli agenti, li sintetizza e li prepara per la fase successiva.
 
     \item \textbf{Eventuale intervento del modulo di Remediation}  
-    Nel caso siano individuati errori, vulnerabilità o pratiche scorrette, l’agente di *Remediation* suggerisce possibili soluzioni, fix o azioni correttive.
+    Nel caso siano individuati errori, vulnerabilità o pratiche scorrette, l’agente di \textit{Remediation} suggerisce possibili soluzioni, fix o azioni correttive.
 
     \item \textbf{Salvataggio nel database e visualizzazione}  
     I risultati finali vengono salvati nel database e resi disponibili all’utente tramite dashboard, grafici e report dettagliati.
 \end{enumerate}
+Il diagramma costruito rappresenta quindi una prima versione dell’architettura operativa di \textit{CodeGuardian}, sul quale il team potrà iterare nelle sessioni successive di progettazione.
 
-Il diagramma costruito rappresenta quindi una prima versione dell’architettura operativa di \textit{CodeGuardian}, sulla quale il team potrà iterare nelle sessioni successive di progettazione.
-
-                   
-
-
-\section{Azioni e responsabilità}
-In concordanza con l'azienda, verrà svolta una riunione di allineamento \textbf{ogni 2 settimane} (salvo diversa indicazione) al fine di mostrare lo stato di avanzamento del progetto, chiarire problematiche bloccanti e fornire idee strutturate di progettazione. 
-\begin{longtable}{p{0.42\textwidth} p{0.22\textwidth} p{0.16\textwidth} p{0.16\textwidth}}
-\toprule
-\textbf{Azione} & \textbf{Responsabile} & \textbf{Scadenza} & \textbf{Stato} \\
-\midrule
-\endfirsthead
-\toprule
-\textbf{Azione} & \textbf{Responsabile} & \textbf{Scadenza} & \textbf{Stato} \\
-\midrule
-\endhead
-
-\bottomrule
-\end{longtable}
 \section*{Chiusura}
 La riunione si è conclusa alle \MeetingEndingTime.
 
