@@ -68,7 +68,7 @@
 \rowcolor{gray!30}
 \textbf{Data Modifica} & \textbf{Versione} & \textbf{Descrizione Modifica} & \textbf{Redattore} & \textbf{Verificatore}\\ 
 \hline
-2025-11-25 & 1.0.0 & Prima stesura del documento & Suar Alberto & <<<VERIFICATORE>>> \\
+2025-11-25 & 1.0.0 & Prima stesura del documento & Suar Alberto & Basso Kevin \\
 \hline
 \end{tabular}
 \end{center}
@@ -124,7 +124,7 @@ Il team ha discusso e condiviso le proprie opinioni riguardo allo scopo del prog
 
 \subsection{Punto 2 — Definizione delle Personas utilizzatrici del prodotto}
 \subsubsection*{Sintesi}
-L'azienda ha introdotto come argomento di discussione la definizione delle Personas di *CodeGuardian*, ovvero le tipologie di utenti che il team ritiene essere maggiormente inclini a utilizzare il prodotto.
+L'azienda ha introdotto come argomento di discussione la definizione delle Personas di \textit{CodeGuardian}, ovvero le tipologie di utenti che il team ritiene essere maggiormente inclini a utilizzare il prodotto.
 
 \subsubsection*{Decisione}
 A seguito di un'analisi inizialmente individuale e successivamente condivisa, sono emerse come principali Personas i seguenti ruoli:
@@ -137,7 +137,7 @@ Per la prima fase del progetto, il team si concentrerà sulla definizione di num
 
 \subsection{Punto 3 — Definizione delle principali funzionalità in relazione alle Personas}
 \subsubsection*{Sintesi}
-Sulla base delle Personas individuate come principali utilizzatrici del prodotto, l'azienda ha richiesto di focalizzarsi sulla definizione delle funzionalità che ciascuna figura professionale si aspetterebbe di trovare in \textit{CodeGuardian}.
+Sulla base delle Personas individuate come principali utilizzatrici del prodotto, l'azienda ha richiesto di focalizzarsi sulla definizione delle funzionalità che ciascuna figura professionale vorrebbe trovare in \textit{CodeGuardian}.
 
 \subsubsection*{Decisione}
 Per quanto riguarda le funzionalità considerate desiderabili da un \textbf{Software Developer}, sono emersi requisiti di questo tipo:
@@ -172,7 +172,7 @@ Data la natura del progetto, fortemente basata sull'impiego di agenti AI, l'azie
 A seguito di questa introduzione, il team è stato incaricato di analizzare entrambi i modelli, evidenziandone vantaggi e svantaggi, per poi scegliere quello più adeguato agli obiettivi del progetto.
 
 \subsubsection*{Decisione}
-Il team ha deciso di adottare un approccio basato sull'\textbf{Orchestratore Autocratico}. In questo modello è presente un agente principale (leader) che coordina il lavoro degli altri agenti: definisce i compiti che ciascun agente deve svolgere, fornisce gli strumenti necessari alla loro esecuzione e raccoglie i risultati prodotti, decidendo di volta in volta quale agente attivare successivamente.
+Il team ha deciso di adottare un approccio basato sull'\textbf{Orchestratore Autocratico}. In questo modello è presente un agente principale (leader) che coordina il lavoro degli altri agenti: definisce i compiti che ciascun agente deve svolgere, fornisce gli strumenti necessari alla loro esecuzione e raccoglie i risultati prodotti, decidendo di volta in volta quale agente attivare successivamente. La struttura più essere strutturata ad albero dove ogni nodo è orchestratore di uno o più agenti sottostanti fino ad arrivare ad agenti specifici con tool ad hoc per l'anallisi dettagliata della richiesta.
 \\
 Le motivazioni principali che hanno portato a preferire l'approccio dell'orchestratore rispetto alla rete democratica degli agenti sono le seguenti:
 \begin{itemize}
@@ -185,7 +185,7 @@ Le motivazioni principali che hanno portato a preferire l'approccio dell'orchest
 
 \subsection{Punto 5 — Costruzione di un diagramma di flusso del prodotto}
 \subsubsection*{Sintesi}
-Come ultimo aspetto analizzato durante questa prima sessione di design thinking, l'azienda ha richiesto la definizione di un diagramma di flusso che rappresentasse un'interazione completa con *CodeGuardian*, dall'inserimento di una nuova repository fino alla generazione dei risultati finali. Il team, attraverso l’uso di post-it colorati e una discussione collaborativa, ha quindi costruito una prima versione del flusso logico del prodotto.
+Come ultimo aspetto analizzato durante questa prima sessione di design thinking, l'azienda ha richiesto la definizione di un diagramma di flusso che rappresentasse un'interazione completa con \textit{CodeGuardian}, dall'inserimento di una nuova repository fino alla generazione dei risultati finali. Il team, attraverso l’uso di post-it colorati e una discussione collaborativa, ha quindi costruito una prima versione del flusso logico del prodotto.
 
 \subsubsection*{Decisione}
 Dalla costruzione del diagramma di flusso è emerso un processo articolato, strutturato in più fasi e orchestrato da un agente centrale. Il flusso individuato può essere sintetizzato nei seguenti passaggi principali:
@@ -209,7 +209,7 @@ Dalla costruzione del diagramma di flusso è emerso un processo articolato, stru
     \item \textbf{Analisi del Codice}  
     Il ramo del codice è suddiviso in più sotto-moduli:
     \begin{itemize}
-        \item \textbf{Analisi statica} (eventualmente tramite tool esterni)  
+        \item \textbf{Analisi statica} (tramite tool esterni)  
         \item \textbf{Aggiornamento delle librerie} (verifica dipendenze, versioni obsolete, potenziali vulnerabilità)  
         \item \textbf{Copertura dei test} (interpretazione dei risultati, individuazione test mancanti)  
         \item \textbf{Controlli di sicurezza OWASP} attraverso strumenti specifici  
@@ -221,7 +221,7 @@ Dalla costruzione del diagramma di flusso è emerso un processo articolato, stru
     \begin{itemize}
         \item \textbf{Analisi sintattica}  
         \item \textbf{Analisi semantica}  
-        \item \textbf{Analisi del rispetto delle best practices} (coerenza tra ciò che la documentazione dichiara e ciò che il codice effettivamente realizza)  
+        \item \textbf{Analisi del rispetto delle best practices e standard aziendali} (coerenza tra ciò che la documentazione dichiara e ciò che il codice effettivamente realizza e rispendo di eventuali templates aziendali)  
     \end{itemize}
 
     \item \textbf{Raccolta e consolidamento dei risultati}  
@@ -234,7 +234,7 @@ Dalla costruzione del diagramma di flusso è emerso un processo articolato, stru
     I risultati finali vengono salvati nel database e resi disponibili all’utente tramite dashboard, grafici e report dettagliati.
 \end{enumerate}
 
-Il diagramma costruito rappresenta quindi una prima versione dell’architettura operativa di *CodeGuardian*, sulla quale il team potrà iterare nelle sessioni successive di progettazione.
+Il diagramma costruito rappresenta quindi una prima versione dell’architettura operativa di \textit{CodeGuardian}, sulla quale il team potrà iterare nelle sessioni successive di progettazione.
 
                    
 
