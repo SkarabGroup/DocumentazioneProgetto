@@ -1,0 +1,253 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage{fancyhdr}
+\usepackage{helvet}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{pdfpages}
+\usepackage{longtable}
+\usepackage[colorlinks=true, linkcolor=black, urlcolor=blue]{hyperref}
+
+\geometry{margin=2.5cm}
+\setstretch{1.0}
+
+\begin{document}
+
+\newcommand{\titoloDocumento}{Design Thinking}
+\newcommand{\dataDocumento}{2025-11-25}
+\newcommand{\emailGruppo}{skarabswegroup@gmail.com}
+\newcommand{\redattoreDocumento}{Suar Alberto}
+\newcommand{\immagine}{skarablogo_.jpg}
+\pagenumbering{gobble}
+\begin{titlepage}
+\centering
+
+\vspace*{\fill}
+
+\includegraphics[width=0.4\linewidth]{\immagine}
+\vspace{1cm}
+
+{\Huge \textbf{Skarab Group}}\\[0.5cm]
+
+\rule{0.8\textwidth}{0.5pt}\\[0.5cm]
+
+{\LARGE \textbf{\titoloDocumento}}\\[0.5cm]
+
+\rule{0.8\textwidth}{0.5pt}
+\vspace*{\fill}
+\begin{center}
+    \emailGruppo
+\end{center}
+\vspace*{\fill}
+
+\end{titlepage}
+\newpage
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\textbf{Skarab Group - Anno accademico 2025/2026}}
+\fancyfoot[C]{\thepage}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\section*{Versionamento e changelog}
+\begin{center}
+\begin{tabular}{|>{\centering\arraybackslash}m{2.5cm}|
+                >{\centering\arraybackslash}m{1.7cm}|
+                >{\centering\arraybackslash}m{5.0cm}|
+                >{\centering\arraybackslash}m{2.5cm}|
+                >{\centering\arraybackslash}m{2.5cm}|}
+\hline
+\rowcolor{gray!30}
+\textbf{Data Modifica} & \textbf{Versione} & \textbf{Descrizione Modifica} & \textbf{Redattore} & \textbf{Verificatore}\\
+\hline
+2025-11-26 & 1.1.0 & Rimossa tabella Azioni e Responsabilità | Correzione errori & Suar Alberto & Basso Kevin \\ 
+\hline
+2025-11-25 & 1.0.0 & Prima stesura del documento & Suar Alberto & Basso Kevin \\
+\hline
+\end{tabular}
+\end{center}
+\newpage
+\tableofcontents
+
+\newcommand{\MeetingDate}{2025-11-25}
+\newcommand{\MeetingStartingTime}{14:05}
+\newcommand{\MeetingEndingTime}{18:00}
+\newcommand{\Location}{sede di Var Group SpA}
+\newcommand{\Chair}{Suar Alberto}
+\newcommand{\Attendees}{Suar Alberto, Zago Alice, Basso Kevin, Berengan Riccardo, Sandu Antonio, Sgreva Andrea}
+\newcommand{\Assenti}{Martinello Riccardo}
+\newcommand{\Managers}{Dindo Stefano, Massaro Michele, Pivetta Federico}
+
+\fancyhead[L]{Verbale riunione}
+\fancyhead[R]{\MeetingDate}
+\newpage
+\section{Informazioni generali}
+\subsection{Apertura}
+La riunione, svolta nella \Location, ha avuto inizio alle \MeetingStartingTime, con i referenti dell'azienda che hanno esposto i principali punti del giorno.
+
+\subsection{Presenti e assenti}
+\begin{tabular}{@{}p{0.48\textwidth} p{0.48\textwidth}@{}}
+\textbf{Presenti:} & \Attendees \\
+\textbf{Assenti:} & \Assenti \\
+\textbf{Referenti Aziendali:} & \Managers \\
+\end{tabular}
+
+\vspace{1em}
+
+\section{Ordine del giorno}
+\begin{enumerate}
+    \item Allineamento sullo scopo del progetto
+    \item Definizione delle Personas utilizzatrici del prodotto
+    \item Definizione delle principali funzionalità in relazione alle Personas
+    \item Scelta del modello di riferimento per la creazione degli agenti
+    \item Costruzione di un diagramma di flusso del prodotto
+\end{enumerate}
+
+\vspace{1em}
+
+\section{Svolgimento della Riunione}
+
+\subsection{Punto 1 — Allineamento sullo scopo del progetto}
+\subsubsection*{Sintesi}
+Prima dell'inizio effettivo della sessione di design thinking, l'azienda proponente ha chiesto di definire, in linea generale, lo scopo del progetto \textit{CodeGuardian}, così da chiarire eventuali dubbi relativi alla presentazione del capitolato e strutturare una base di partenza.
+
+\subsubsection*{Decisione}
+Il team ha discusso e condiviso le proprie opinioni riguardo allo scopo del progetto \textit{CodeGuardian}, giungendo alla conclusione che consista in \textbf{una piattaforma basata su un sistema ad agenti, capace di analizzare repository e fornire report dettagliati} relativi a controlli del codice — come analisi statica e copertura dei test — \textbf{controlli di sicurezza}, come la verifica del rispetto degli standard OWASP, e \textbf{controlli sulla documentazione}, verificando la presenza di documenti chiari e completi che descrivano accuratamente le funzionalità del prodotto analizzato.
+
+                   
+
+\subsection{Punto 2 — Definizione delle Personas utilizzatrici del prodotto}
+\subsubsection*{Sintesi}
+L'azienda ha introdotto come argomento di discussione la definizione delle Personas di \textit{CodeGuardian}, ovvero le tipologie di utenti che il team ritiene essere maggiormente inclini a utilizzare il prodotto.
+
+\subsubsection*{Decisione}
+A seguito di un'analisi inizialmente individuale e successivamente condivisa, sono emerse come principali Personas i seguenti ruoli:
+\begin{itemize}
+    \item Sviluppatori Software
+    \item Responsabili di Progetto
+    \item Consulenti informatici
+\end{itemize}
+Per la prima fase del progetto, il team si concentrerà sulla \textbf{definizione di numerosi casi d'uso e requisiti} che rappresentino le necessità e le aspettative tipiche di queste categorie di utenti.
+
+\subsection{Punto 3 — Definizione delle principali funzionalità in relazione alle Personas}
+\subsubsection*{Sintesi}
+Sulla base delle Personas individuate come principali utilizzatrici del prodotto, l'azienda ha richiesto di focalizzarsi sulla definizione delle funzionalità che ciascuna figura professionale vorrebbe trovare in \textit{CodeGuardian}.
+
+\subsubsection*{Decisione}
+Per quanto riguarda le funzionalità considerate desiderabili da un \textbf{Software Developer}, sono emersi requisiti di questo tipo:
+\begin{itemize}
+    \item I \textbf{tempi di risposta} devono essere \textbf{ragionevoli} e, qualora si verificassero problemi durante l'elaborazione, l'utente deve essere avvisato tempestivamente, possibilmente con suggerimenti su come procedere.
+    \item Deve essere mostrato l'esito dei test eseguiti, evidenziando quelli eventualmente falliti.
+    \item Devono essere forniti, tramite \textbf{dashboard e rappresentazioni grafiche}, indicatori che mostrino il miglioramento (o il peggioramento) rispetto alle versioni precedenti, \textbf{specificando} inoltre quali \textbf{best practices} non sono state rispettate nello sviluppo delle nuove funzionalità.
+\end{itemize}
+Per quanto riguarda le funzionalità desiderabili da un \textbf{Responsabile di Progetto}, sono stati evidenziati i seguenti requisiti:
+\begin{itemize}
+    \item Il sistema deve verificare il rispetto degli \textbf{standard di sicurezza}, con particolare attenzione alle linee guida \textbf{OWASP}, segnalando eventuali vulnerabilità e suggerendo possibili azioni correttive.
+    \item Devono essere disponibili confronti chiari tra versioni, mostrando in modo sintetico il \textbf{miglioramento o peggioramento} del progetto nel tempo, sia in termini di qualità del codice sia di sicurezza.
+    \item Il sistema deve controllare che la \textbf{documentazione sia coerente con il comportamento effettivo del codice} e viceversa, identificando eventuali discrepanze.
+    \item Devono essere fornite valutazioni di alto livello sull'\textbf{aderenza del team alle best practices}, con particolare attenzione a mantenibilità, qualità del design e conformità alle linee guida del progetto.
+\end{itemize}
+Per quanto riguarda le funzionalità desiderabili da un \textbf{Consulente Informatico}, sono state individuate esigenze aggiuntive legate all'analisi approfondita, alla sicurezza dei dati e alla valutazione complessiva del progetto:
+\begin{itemize}
+    \item Il sistema deve offrire una \textbf{analisi storica dettagliata} del repository, permettendo di comprendere l’evoluzione del progetto, del codice e della documentazione nel tempo.
+    \item Deve essere garantita la \textbf{protezione dei dati} forniti alla piattaforma, in particolare nel caso di utilizzo di modelli linguistici (LLM). Il sistema deve assicurare che le informazioni del repository siano trattate nel rispetto di criteri di sicurezza, privacy e riservatezza.
+    \item Devono essere mostrati chiaramente gli \textbf{standard adottati} dal progetto (ad esempio sicurezza, formattazione, architettura), evidenziando le versioni obsolete o non più raccomandate.
+    \item Il sistema deve indicare la presenza di \textbf{test mancanti o insufficienti}, segnalando l’impatto potenziale in termini di rischio.
+    \item Devono essere forniti indicatori chiari sul \textbf{miglioramento o peggioramento} tra versioni diverse, includendo aspetti come sicurezza, qualità del codice e coerenza documentale.
+    \item Deve essere possibile ottenere una valutazione complessiva sul livello di \textbf{compliance del progetto}, utile per supportare audit tecnici o consulenze strategiche.
+\end{itemize}
+
+\subsection{Punto 4 — Scelta del modello di riferimento per la creazione degli agenti}
+\subsubsection*{Sintesi}
+Data la natura del progetto, fortemente basata sull'impiego di agenti AI, l'azienda ha introdotto i due principali modelli architetturali utilizzati per strutturare flussi di gestione delle richieste. Tali modelli definiscono il modo in cui gli agenti devono collaborare per fornire risposte chiare, coerenti e affidabili all'utente finale. I modelli presentati sono la \textbf{Rete Democratica di Agenti} e l'\textbf{Orchestratore Autocratico}.\\
+A seguito di questa introduzione, il team è stato incaricato di analizzare entrambi i modelli, evidenziandone vantaggi e svantaggi, per poi scegliere quello più adeguato agli obiettivi del progetto.
+
+\subsubsection*{Decisione}
+Il team ha deciso di adottare un approccio basato sull'\textbf{Orchestratore Autocratico}. In questo modello è presente un agente principale (leader) che coordina il lavoro degli altri agenti: definisce i compiti che ciascun agente deve svolgere, fornisce gli strumenti necessari alla loro esecuzione e raccoglie i risultati prodotti, decidendo di volta in volta quale agente attivare successivamente. A livello strutturale, si può visualizzarlo come un albero in cui ogni agente è orchestratore di uno o più sottoagenti specializzati in modo da poter utilizzare tool ad hoc, al fine di eseguire minuziosamente la richiesta.
+\\
+Le motivazioni principali che hanno portato a preferire l'approccio dell'orchestratore rispetto alla rete democratica degli agenti sono le seguenti:
+\begin{itemize}
+    \item \textbf{Maggiore controllo del flusso di esecuzione}: la presenza di un agente coordinatore consente di mantenere un flusso chiaro e prevedibile, fondamentale per un sistema che deve eseguire analisi complesse come test coverage, controlli di sicurezza e verifica della documentazione.
+    \item \textbf{Riduzione dell'ambiguità nelle risposte}: in una rete democratica gli agenti possono fornire risposte divergenti, rendendo necessario un ulteriore livello di conciliazione. L'approccio autocratico garantisce invece una risposta coerente e univoca.
+    \item \textbf{Facilità di estensione}: aggiungere nuovi agenti specializzati risulta più semplice, poiché basta inserirli nella pipeline coordinata dall’orchestratore senza modificare le logiche di negoziazione tipiche di una rete democratica.
+    \item \textbf{Maggiore affidabilità nella gestione degli errori}: l'orchestratore può monitorare l'esecuzione dei singoli agenti e gestire eventuali problemi, ad esempio fornendo fallback o notificando tempestivamente l’utente.
+    \item \textbf{Coerenza con gli obiettivi del progetto}: CodeGuardian richiede una struttura rigorosa e verificabile dei processi di analisi; la presenza di un coordinatore centralizzato contribuisce a mantenere un comportamento stabile e riproducibile.
+\end{itemize}
+
+\subsection{Punto 5 — Costruzione di un diagramma di flusso del prodotto}
+\subsubsection*{Sintesi}
+Come ultimo aspetto analizzato durante questa prima sessione di design thinking, l'azienda ha richiesto la definizione di un diagramma di flusso che rappresentasse un'interazione completa con \textit{CodeGuardian}, dall'inserimento di una nuova repository fino alla generazione dei risultati finali. Il team, attraverso l’uso di post-it colorati e una discussione collaborativa, ha quindi costruito una prima versione del flusso logico del prodotto.
+
+\subsubsection*{Decisione}
+Dalla costruzione del diagramma di flusso è emerso un processo articolato, strutturato in più fasi e orchestrato da un agente centrale. Il flusso individuato può essere sintetizzato nei seguenti passaggi principali:
+
+\begin{enumerate}
+    \item \textbf{Inserimento di una nuova repository}  
+    L’utente fornisce i riferimenti della repository da analizzare.  
+    In questa fase vengono inoltre raccolte informazioni preliminari, come eventuali vincoli, obiettivi o punti di attenzione richiesti dall’azienda.
+
+    \item \textbf{Richiesta dei punti da analizzare}  
+    L'utente specifica quali categorie di controlli desidera svolgere (analisi del codice, test, sicurezza, documentazione, ecc.).
+
+    \item \textbf{Attivazione dell’Orchestratore}  
+    L'orchestratore rappresenta il nodo centrale del flusso: riceve la richiesta, la scompone in attività distinte e definisce quali agenti coinvolgere e in quale ordine.  
+    Da questo punto si sviluppano due grandi rami paralleli:
+    \begin{itemize}
+        \item il ramo relativo al \textbf{Codice}
+        \item il ramo relativo alla \textbf{Documentazione}
+    \end{itemize}
+
+    \item \textbf{Analisi del Codice}  
+    Il ramo del codice è suddiviso in più sotto-moduli:
+    \begin{itemize}
+        \item \textbf{Analisi statica} (tramite tool esterni)  
+        \item \textbf{Aggiornamento delle librerie} (verifica dipendenze, versioni obsolete, potenziali vulnerabilità)  
+        \item \textbf{Copertura dei test} (interpretazione dei risultati, individuazione test mancanti)  
+        \item \textbf{Controlli di sicurezza OWASP} attraverso strumenti specifici  
+    \end{itemize}
+    Ogni modulo produce un risultato parziale che viene inviato all’orchestratore.
+
+    \item \textbf{Analisi della Documentazione}  
+    Questo ramo include tre tipologie di analisi:
+    \begin{itemize}
+        \item \textbf{Analisi sintattica}  
+        \item \textbf{Analisi semantica}  
+        \item \textbf{Analisi del rispetto delle best practices e standard aziendali} (coerenza tra ciò che la documentazione dichiara e ciò che il codice effettivamente realizza)  
+    \end{itemize}
+
+    \item \textbf{Raccolta e consolidamento dei risultati}  
+    L’orchestratore raccoglie gli output prodotti dagli agenti, li sintetizza e li prepara per la fase successiva.
+
+    \item \textbf{Eventuale intervento del modulo di Remediation}  
+    Nel caso siano individuati errori, vulnerabilità o pratiche scorrette, l’agente di \textit{Remediation} suggerisce possibili soluzioni, fix o azioni correttive.
+
+    \item \textbf{Salvataggio nel database e visualizzazione}  
+    I risultati finali vengono salvati nel database e resi disponibili all’utente tramite dashboard, grafici e report dettagliati.
+\end{enumerate}
+Il diagramma costruito rappresenta quindi una prima versione dell’architettura operativa di \textit{CodeGuardian}, sul quale il team potrà iterare nelle sessioni successive di progettazione.
+
+\section*{Chiusura}
+La riunione si è conclusa alle \MeetingEndingTime. In concordanza con l'azienda, è stato definito un ambiente Jira per la comunicazione asincrona in sostituzione alle email ed è stata stabilita una cadenza quindicinale per lo svolgimento delle riunioni di allineamento.
+
+\vspace{2em}
+
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+  \textbf{Responsabile Team Skarab:} \\[2.5em]
+  \Chair
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+  \textbf{Referente Aziendale:} \\[2.5em]
+  \rule{0.9\linewidth}{0.6pt} \\[0.5em]
+  Var Group S.p.A
+\end{minipage}
+\end{document}
