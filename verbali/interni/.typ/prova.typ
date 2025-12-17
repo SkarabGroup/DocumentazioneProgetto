@@ -1,14 +1,21 @@
 // Importa il template del verbale
 #import "../../../lib/verbale.typ": *
 
-// Applica il template tramite show rule
+// Applica il template
 #show: body => verbale(
   data: datetime(day: 22, month: 11, year: 2025),
   tipo: [interno],
   versioni: (
     (
-      vers: "1.0.0",
       date: datetime(day: 22, month: 11, year: 2025),
+      vers: "1.0.0",
+      autore: name.kevin,
+      verificatore: name.alice,
+      descr: "Creazione Documento."
+    ),
+    (
+      date: datetime(day: 22, month: 11, year: 2025),
+      vers: "1.0.0",
       autore: name.kevin,
       verificatore: name.alice,
       descr: "Creazione Documento."

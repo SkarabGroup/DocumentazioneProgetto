@@ -27,10 +27,6 @@
   name.cognome
 }
 
-#let issue(n, repo: repo.docs) = {
-  link(repo.link + repo.issues + str(n), repo.abbrev + str(n))
-}
-
 #let prima-pagina(titolo, extra, ..entries) = {
   set align(center)
 
@@ -72,10 +68,13 @@
     line(length: 100%, stroke: 0.5pt)
 }
 
-#let footer= {
+#let footer()= {
     line(length: 100%, stroke: 0.5pt)
+    set align(center)
     v(0.3em)
-    align(center)[context {counter(page).display()}]
+    context [
+      Pagina #counter(page).display(page.numbering) di #counter(page).final().first()
+  ]
 }
 
 #let registro-modifiche(modifiche) = {
@@ -124,4 +123,43 @@
     depth: 3,
     indent: auto
   )
+}
+
+#let def(parola) = {
+  let yml = yaml("../RTB/glossario.yml")
+
+  if type(parola) == content {
+    parola = parola.text
+  }
+
+//carco la lettera iniziale e cerco la parola
+  let found = false
+  for (letter, words) in yml {
+    if parola in words {
+      found = true
+      break
+    }
+  }
+
+  if not found {
+    panic("Parola non definita nel glossario: " + parola)
+  } else {
+    //link("" + parola, parola) TO DO link alla sezione del glossario
+  }
+}
+#let indice-tabelle() = {
+  show outline.entry.where(level: 1): it => {
+    v(12pt, weak: true)
+    strong(it)
+  }
+  outline(title: [#v(2em) Lista delle tabelle #v(2em)], indent: 1em, target: figure.where(kind: table))
+}
+
+/// Indicizza le immagini presenti nel documento
+#let indice-immagini() = {
+  show outline.entry.where(level: 1): it => {
+    v(12pt, weak: true)
+    strong(it)
+  }
+  outline(title: [#v(2em) Lista delle immagini #v(2em)], indent: 1em, target: figure.where(kind: image))
 }
