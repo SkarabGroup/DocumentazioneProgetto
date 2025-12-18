@@ -10,7 +10,7 @@
 
 #show: body => maindocs(
   data: datetime(day: 03, month: 02, year: 2025),
-  tipo: [esterno],
+  tipo: [interno],
   versione: ver,
   versioni: (
     (
@@ -20,8 +20,22 @@
       verifica: name.alice,
       descr: "Creazione documento",
     ),
+    (
+      vers: "1.0.0",
+      date: datetime(day: 17, month: 12, year: 2025),
+      autore: name.kevin,
+      verifica: name.alice,
+      descr: "Creazione documento",
+    ),
+    (
+      vers: "1.0.0",
+      date: datetime(day: 17, month: 12, year: 2025),
+      autore: name.kevin,
+      verifica: name.alice,
+      descr: "Creazione documento",
+    ),
   ),
-  stato: [Approvato per RTB],
+  stato: [Da creare],
   responsabile: (
     name.kevin,
   ),

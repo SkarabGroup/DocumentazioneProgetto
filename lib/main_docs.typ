@@ -73,8 +73,10 @@
   indice()
   pagebreak()
 
+  indice_tabelle()
   pagebreak()
 
+  indice_immagini()
   pagebreak()
 
   body

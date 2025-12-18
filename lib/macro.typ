@@ -6,7 +6,7 @@
     cardin: (nome: "Riccardo", cognome: "Cardin"),
 
     kevin: (nome: "Kevin", cognome: "Basso", matricola: "2101077"),
-    suar: (nome: "Suar", cognome: "Alberto", matricola: "2101051"),
+    suar: (nome: "Alberto", cognome: "Suar", matricola: "2101051"),
     andrea: (nome: "Andrea", cognome: "Sgreva", matricola: "2113179"),
     riccardob: (nome: "Riccardo", cognome: "Berengan", matricola: "2080041"),
     alice: (nome: "Alice", cognome: "Zago", matricola: "2116430"),
@@ -147,7 +147,7 @@
     //link("" + parola, parola) TO DO link alla sezione del glossario
   }
 }
-#let indice-tabelle() = {
+#let indice_tabelle() = {
   show outline.entry.where(level: 1): it => {
     v(12pt, weak: true)
     strong(it)
@@ -156,7 +156,7 @@
 }
 
 /// Indicizza le immagini presenti nel documento
-#let indice-immagini() = {
+#let indice_immagini() = {
   show outline.entry.where(level: 1): it => {
     v(12pt, weak: true)
     strong(it)
