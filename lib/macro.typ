@@ -39,11 +39,8 @@
   line(length: 80%, stroke: 0.5pt)
   v(2.25em)
 
-  show grid.cell.where(x: 0): cell => align(right, cell)
-  show grid.cell.where(x: 1): cell => align(left, cell)
-  set text(11pt)
   box(
-    width: 80%,
+    width: 100%,
     grid(
       columns: (1fr,1fr),
       grid.vline(x:1,stroke: 0.5pt),
@@ -78,7 +75,7 @@
 }
 
 #let registro-modifiche(modifiche) = {
-  text(16pt, weight: "black", fill: black)[Registro delle Modifiche]
+  text(16pt, weight: "black", fill: black)[Registro versioni]
   table(
     fill: (x, y) => if (y == 0) {
       rgb("#afafaf")
@@ -152,7 +149,7 @@
     v(12pt, weak: true)
     strong(it)
   }
-  outline(title: [#v(2em) Lista delle tabelle #v(2em)], indent: 1em, target: figure.where(kind: table))
+  outline(title: [#v(2em) Indice tabelle #v(2em)], indent: 1em, target: figure.where(kind: table))
 }
 
 /// Indicizza le immagini presenti nel documento
@@ -161,5 +158,11 @@
     v(12pt, weak: true)
     strong(it)
   }
-  outline(title: [#v(2em) Lista delle immagini #v(2em)], indent: 1em, target: figure.where(kind: image))
+  outline(title: [#v(2em) Indice immagini #v(2em)], indent: 1em, target: figure.where(kind: image))
 }
+
+#let SG = text(font: "Futura", weight: 500)[Skarab Group]
+
+#let CG = text(font: "Futura", weight: 500)[Code Guardian] 
+
+
