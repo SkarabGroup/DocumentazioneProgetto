@@ -1,2 +1,8 @@
-K: 
-  Kevin: persona 
+A:
+  API: 
+    acronimo: Application Programming Interface
+    descrizione: Interfaccia di programmazione di un'applicazione, che permette l'interazione tra diversi software.
+
+C:
+  Caso d'uso:
+    Descrizione di come un utente interagisce con un sistema per raggiungere un obiettivo specifico.

@@ -125,25 +125,41 @@
 #let def(parola) = {
   let yml = yaml("../RTB/glossario.yml")
 
+  // Converte da content a stringa se necessario
+  // Permette di usare sia def("parola") che def[parola]
   if type(parola) == content {
     parola = parola.text
   }
 
-//carco la lettera iniziale e cerco la parola
+  // Cerca la parola nel glossario (case-insensitive)
   let found = false
+  let termine_originale = ""
   for (letter, words) in yml {
-    if parola in words {
-      found = true
+    for (termine, def) in words {
+      if lower(termine) == lower(parola) {
+        found = true
+        termine_originale = termine
+        break
+      }
+    }
+    if found {
       break
     }
   }
 
+  // Se la parola non esiste, genera errore a compile-time
   if not found {
     panic("Parola non definita nel glossario: " + parola)
   } else {
-    //link("" + parola, parola) TO DO link alla sezione del glossario
+    // Normalizza il nome per la label (sostituisce spazi con trattini)
+    let label_name = termine_originale.replace(" ", "-")
+    // Crea il link alla label del glossario
+    //link(label(label_name))[#parola#sub[G]]
+    underline(text(parola))
   }
 }
+
+
 #let indice_tabelle() = {
   show outline.entry.where(level: 1): it => {
     v(12pt, weak: true)

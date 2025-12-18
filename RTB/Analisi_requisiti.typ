@@ -17,15 +17,22 @@
       vers: "1.0.0",
       date: datetime(day: 17, month: 12, year: 2025),
       autore: name.kevin,
-      verifica: name.alice,
+      verifica: "",
       descr: "Creazione documento",
     ),
+    (
+        vers: "1.1.0",
+        date: datetime(day: 18, month: 12, year: 2025),
+        autore: name.kevin,
+        verifica: "",
+        descr: "Inserimento UC1 - ",
+    )
   ),
   stato: [Da creare],
   responsabile: (
     name.kevin,
   ),
-  verificatore: (name.alice,),
+  verificatore: (),
   redattori: (name.kevin,),
   descrizione: "Questo documento contiene l'analisi dei requisiti del sistema Software per la gestione di un sistema multiagente per l'analisi di repository github da Skarab Group.",
   titolo: "Analisi dei Requisiti",
@@ -42,6 +49,8 @@
 }
 
 = Introduzione
+
+#def("caso d'uso"),
 
 == Scopo del documento
 
