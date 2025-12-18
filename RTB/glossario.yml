@@ -3,6 +3,58 @@ A:
     acronimo: Application Programming Interface
     descrizione: Interfaccia di programmazione di un'applicazione, che permette l'interazione tra diversi software.
 
+  Agente:
+    Componente sistema software autonomo che percepisce il proprio ambiente, prende decisioni e intraprende azioni in modo indipendente per raggiungere obiettivi specifici grazie all'utilizzo di intelligenza artificiale
+B: 
+  Back-end:
+    Parte di un'applicazione o sistema che gestisce la logica di business, l'archiviazione dei dati e l'elaborazione delle richieste degli utenti, solitamente non visibile direttamente dagli utenti finali.
 C:
   Caso d'uso:
     Descrizione di come un utente interagisce con un sistema per raggiungere un obiettivo specifico.
+
+  Code Guardian:
+    Nome del progetto software che Skarab Group intende sviluppare per l'azienda Var Group.
+
+D:
+  Database:
+    Collezione organizzata di dati memorizzati e accessibili elettronicamente, spesso gestita da un sistema di gestione di database (DBMS).
+
+#E:
+
+F:
+  Front-end:
+    Parte di un'applicazione o sistema con cui gli utenti interagiscono direttamente, comprendente l'interfaccia utente e l'esperienza utente.
+G:
+  GUI:
+    acronimo: Graphical User Interface
+    descrizione: Interfaccia utente grafica che consente agli utenti di interagire con un sistema attraverso elementi visivi come finestre, icone e menu.
+#H: 
+
+#I:
+#J:
+#K:
+#L:
+#M:
+#N:
+#O:
+#P:
+#Q:
+R:
+  Requisiti funzionali:
+    Requisiti che specificano un comportamento o una funzione che un sistema deve eseguire ovvero il "cosa deve fare".
+  Requisiti non funzionali:
+    Requisiti che descrivono le caratteristiche e le qualità che il sistema deve possedere per soddisfare le aspettative degli utenti, stabilendo "come deve funzionare" il sistema.
+S:
+  Skarab Group:
+    Nome del team di studenti che intende sviluppare il sistema software a partire dal capitolato proposto dall'azienda Var Group.
+#T:
+U:
+  Utente:
+    Persona che utilizza un sistema o un'applicazione software.
+V:
+  Var Group:
+    Azienda che ha proposto il capitolato per lo sviluppo del sistema software da parte del team di studenti Skarab Group.
+#W:
+#X:
+#Y:
+#Z:    

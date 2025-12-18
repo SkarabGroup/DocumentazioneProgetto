@@ -26,7 +26,7 @@
 
 ## 📋 Indice
 
-- [Presentazione](#-presentazione)
+- [Presentazione](#presentazione)
 - [Capitolato](#-capitolato)
 - [Struttura Repository](#-struttura-repository)
 - [Documentazione](#-documentazione)

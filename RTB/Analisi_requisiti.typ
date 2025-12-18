@@ -25,7 +25,7 @@
         date: datetime(day: 18, month: 12, year: 2025),
         autore: name.kevin,
         verifica: "",
-        descr: "Inserimento UC1 - ",
+        descr: "Inizio stesura documento, scopo e prospettiva del prodotto",
     )
   ),
   stato: [Da creare],
@@ -50,9 +50,8 @@
 
 = Introduzione
 
-#def("caso d'uso"),
-
 == Scopo del documento
+Il presente documento ha lo scopo di definire e analizzare i #def("requisiti funzionali") e i #def("requisiti non funzionali") del sistema software che #def("Skarab Group") intende sviluppare a supporto del progetto '#def("Code Guardian")' proposto dall'azienda #def("Var Group").
 
 == Prospetttiva del prodotto
 
