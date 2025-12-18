@@ -4,57 +4,103 @@ A:
     descrizione: Interfaccia di programmazione di un'applicazione, che permette l'interazione tra diversi software.
 
   Agente:
-    Componente sistema software autonomo che percepisce il proprio ambiente, prende decisioni e intraprende azioni in modo indipendente per raggiungere obiettivi specifici grazie all'utilizzo di intelligenza artificiale
+    descrizione: Componente sistema software autonomo che percepisce il proprio ambiente, prende decisioni e intraprende azioni in modo indipendente per raggiungere obiettivi specifici grazie all'utilizzo di intelligenza artificiale
+
+  Analisi dei requisiti:
+    descrizione: Processo di raccolta, valutazione e documentazione delle esigenze e delle aspettative degli stakeholder per un sistema software, al fine di definire chiaramente cosa il sistema deve fare.
 B: 
   Back-end:
-    Parte di un'applicazione o sistema che gestisce la logica di business, l'archiviazione dei dati e l'elaborazione delle richieste degli utenti, solitamente non visibile direttamente dagli utenti finali.
+    descrizione: Parte di un'applicazione o sistema che gestisce la logica di business, l'archiviazione dei dati e l'elaborazione delle richieste degli utenti, solitamente non visibile direttamente dagli utenti finali.
 C:
   Caso d'uso:
-    Descrizione di come un utente interagisce con un sistema per raggiungere un obiettivo specifico.
+    alternative: Use case, casi d'uso
+    descrizione: Descrizione di come un utente interagisce con un sistema per raggiungere un obiettivo specifico.
 
   Code Guardian:
-    Nome del progetto software che Skarab Group intende sviluppare per l'azienda Var Group.
+    descrizione: Nome del progetto software che Skarab Group intende sviluppare per l'azienda Var Group.
 
+  Collaudatori:
+    descrizione: Persone o team responsabili di testare il sistema software per garantire che funzioni correttamente e soddisfi i requisiti specificati durante il processo di collaudo.
 D:
   Database:
-    Collezione organizzata di dati memorizzati e accessibili elettronicamente, spesso gestita da un sistema di gestione di database (DBMS).
+    descrizione: Collezione organizzata di dati memorizzati e accessibili elettronicamente, spesso gestita da un sistema di gestione di database (DBMS).
 
+  Diagrammi dei casi d'uso:
+    descrizione: Rappresentazioni grafiche che illustrano le interazioni tra gli attori e il sistema, mostrando i casi d'uso e le relazioni tra di essi.
 #E:
 
 F:
   Front-end:
-    Parte di un'applicazione o sistema con cui gli utenti interagiscono direttamente, comprendente l'interfaccia utente e l'esperienza utente.
+    descrizione: Parte di un'applicazione o sistema con cui gli utenti interagiscono direttamente, comprendente l'interfaccia utente e l'esperienza utente.
 G:
   GUI:
     acronimo: Graphical User Interface
     descrizione: Interfaccia utente grafica che consente agli utenti di interagire con un sistema attraverso elementi visivi come finestre, icone e menu.
+
+  GitHub:
+    descrizione: Piattaforma di hosting per il controllo delle versioni e la collaborazione sul codice sorgente, basata su Git.
 #H: 
 
 #I:
 #J:
 #K:
 #L:
-#M:
+M:
+  MVP:
+    acronimo: Minimum Viable Product
+    descrizione: Versione minima di un prodotto software che include solo le funzionalità essenziali per soddisfare i requisiti principali e permettere il rilascio sul mercato.
+
+
 #N:
 #O:
-#P:
+P:
+  Progettisti:
+    descrizione: Membri del team di sviluppo responsabili della progettazione dell'architettura e delle funzionalità del sistema software.
+
+  Programmatori:
+    descrizione: Membri del team di sviluppo responsabili della scrittura del codice sorgente per implementare le funzionalità del sistema software.
+
+  Progetto:
+    descrizione: Esso é inteso nel senso di project, ovvero un'insieme di attività coordinate e gestite per sviluppare un sistema software che soddisfi specifici requisiti e obiettivi.
 #Q:
 R:
   Requisiti funzionali:
-    Requisiti che specificano un comportamento o una funzione che un sistema deve eseguire ovvero il "cosa deve fare".
+    descrizione: Requisiti che specificano un comportamento o una funzione che un sistema deve eseguire ovvero il "cosa deve fare".
   Requisiti non funzionali:
-    Requisiti che descrivono le caratteristiche e le qualità che il sistema deve possedere per soddisfare le aspettative degli utenti, stabilendo "come deve funzionare" il sistema.
+    descrizione: Requisiti che descrivono le caratteristiche e le qualità che il sistema deve possedere per soddisfare le aspettative degli utenti, stabilendo "come deve funzionare" il sistema.
+
+  Repository:
+    descrizione: Archivio digitale dove il codice sorgente e la documentazione di un progetto software sono memorizzati e gestiti, spesso utilizzato per il controllo delle versioni e la collaborazione tra sviluppatori.
 S:
   Skarab Group:
-    Nome del team di studenti che intende sviluppare il sistema software a partire dal capitolato proposto dall'azienda Var Group.
+    descrizione: Nome del team di studenti che intende sviluppare il sistema software a partire dal capitolato proposto dall'azienda Var Group.
+
+  Sistema software:
+    alternative: Software system, sistema 
+    descrizione: Insieme di componenti software che lavorano insieme per eseguire specifiche funzioni o servizi.
+
+  Sistema multiagente:
+    alternative: Multi-agent system, sistema multi agente, multiagente
+    descrizione: Sistema software composto da più agenti autonomi che interagiscono tra loro per raggiungere obiettivi comuni o individuali.
 #T:
 U:
   Utente:
-    Persona che utilizza un sistema o un'applicazione software.
+    alternative: User, utenti
+    descrizione: Persona che utilizza un sistema o un'applicazione software.
+
+  URL:
+    acronimo: Uniform Resource Locator
+    descrizione: Indirizzo web che specifica la posizione di una risorsa su Internet.
 V:
   Var Group:
-    Azienda che ha proposto il capitolato per lo sviluppo del sistema software da parte del team di studenti Skarab Group.
-#W:
+    descrizione: Azienda che ha proposto il capitolato per lo sviluppo del sistema software da parte del team di studenti Skarab Group.
+
+  Verificatori:
+    descrizione: Persone o team responsabili di controllare che il sistema software soddisfi i requisiti specificati durante il processo di verifica.
+W:
+  webapp:
+    alternative: applicazione web, web application
+    descrizione: Applicazione software accessibile tramite un browser web, che consente agli utenti di interagire con il sistema attraverso Internet.
 #X:
 #Y:
 #Z:    

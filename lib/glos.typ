@@ -45,27 +45,32 @@
 
   body
 
-  for (letter, words) in yaml("../RTB/glossario.yml") [
+  for (letter, terms) in yaml("../RTB/glossario.yml") [
     #heading(letter, level: 1)
-    #for (w, d) in words [
-      #if (w != "") [
-        #strong[#list(w)]
-        #label(w)
-        // Controlla il tipo di d
-        #if type(d) == dictionary [
-          #if "acronimo" in d and "descrizione" in d [ // gestione di dizionari con acronimo e descrizione oltre che descrizione e stop
-            (#emph[#d.acronimo]) \
-            #d.descrizione
-          ] else [
-            #d
-          ]
-        ] else [
-          // Caso semplice: stringa diretta
-          #d
+    #for (key, value) in terms [
+      #if (key != "") [
+        // Usa emph o strong, non list()
+        #strong[#key]
+        #label(key)
+        
+        // Mostra l'acronimo se presente
+        #if "acronimo" in value [ 
+          (#emph[#value.acronimo]) 
         ]
+        
+        // Mostra le alternative se presenti
+        #if "alternative" in value [
+          #text(size: 0.9em, fill: gray)[(#value.alternative)]
+        ]
+        
+        // Descrizione
+        #if "descrizione" in value [
+          #value.descrizione
+        ]
+        
+        #v(0.5em) // Spazio tra i termini
       ]
     ]
-    
     #if (letter != "Z") [
       #pagebreak()
     ]
