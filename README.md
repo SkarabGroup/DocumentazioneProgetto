@@ -9,7 +9,7 @@
 
 **Sistema Multiagente per la Valutazione di Repository GitHub**
 
-*Progetto di Ingegneria del Software • Università degli Studi di Padova • A.A. 2024/2025*
+*Progetto di Ingegneria del Software • Università degli Studi di Padova • A.A. 2025/2026*
 
 [![Typst](https://img.shields.io/badge/Typst-239DAD?style=for-the-badge&logo=typst&logoColor=white)](https://typst.app/)
 [![University](https://img.shields.io/badge/UniPD-Ingegneria_del_Software-b51f1f?style=for-the-badge)](https://www.unipd.it/)
@@ -131,7 +131,7 @@ Tuttavia si consiglia di usare l'estensione Tinymist di vs code
 - 🌐 [www.vargroup.it](https://www.vargroup.it/)
 
 ### Team Skarab
-- 📧 Email: [team.skarab@studenti.unipd.it]
+- 📧 Email: skarabswegroup@gmail.com
 - 💼 Repository: https://github.com/SkarabGroup
 
 

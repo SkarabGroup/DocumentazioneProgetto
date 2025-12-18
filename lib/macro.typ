@@ -161,8 +161,6 @@
   outline(title: [#v(2em) Indice immagini #v(2em)], indent: 1em, target: figure.where(kind: image))
 }
 
-#let SG = text(font: "Futura", weight: 500)[Skarab Group]
 
-#let CG = text(font: "Futura", weight: 500)[Code Guardian] 
 
 

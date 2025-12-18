@@ -50,6 +50,14 @@
 
     #for (w, d) in words [
       #if (w != "") [
+        #let definition = if type(d) == "dictionary" {
+          for (key, value) in d [
+            #text(9pt, style: "italic")[#key:] #value \
+          ]
+        } else {
+          d
+        }
+        #definition
         #strong[#list(w)]
         #label(w)
         #d
