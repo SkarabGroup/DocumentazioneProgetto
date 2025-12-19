@@ -19,9 +19,9 @@
   let versione = versioni.at(0).vers
   
   if tipo == [interno] {
-    [ #metadata[VI #data.display("[day]-[month]-[year]") v#versione #disambiguatore] <titolo>]
+    [ #metadata[VI #data.display("[year]-[month]-[day]") v#versione #disambiguatore] <titolo>]
   } else if tipo == [esterno] {
-    [ #metadata[VE #data.display("[day]-[month]-[year]") v#versione #disambiguatore] <titolo>]
+    [ #metadata[VE #data.display("[year]-[month]-[day]") v#versione #disambiguatore] <titolo>]
   } else {
     panic("Tipo di verbale sconosciuto: " + tipo)
   }
@@ -38,7 +38,7 @@
     titolo,
     {
       v(1cm)
-      text(12pt)[Data: #data.display("[day]-[month]-[year]")]
+      text(12pt)[Data: #data.display("[year]-[month]-[day]")]
       linebreak()
       text(12pt)[Ora: #ora-inizio]
       linebreak()
@@ -81,20 +81,19 @@
 
   // Presenze
   [= Presenze]
-  grid(
-    columns: (1.5fr, 2fr),
-    [*Presenti*], grid(align: left, gutter: 4pt, ..presenze.map(persona)),
-    [*Assenti*], if assenze.len() > 0 {
-      grid(align: left, gutter: 4pt, ..assenze.map(persona))
-    } else {
-      [-]
-    }
-  )
+ grid(
+  columns: (1.5fr, 2fr),
+  [*Presenti*], grid(align: left, gutter: 4pt, ..presenze.map(persona)),
+  [], v(15pt),  // spazio verticale specifico
+  [*Assenti*], if assenze.len() > 0 {
+    grid(align: left, gutter: 4pt, ..assenze.map(persona))
+  } else {
+    [-]
+  }
+)
   v(1em)
   [Inizio riunione ore #ora-inizio.]
   v(1em)
-  [Agenda:]
-  odg
   
   body
   
