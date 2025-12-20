@@ -19,6 +19,13 @@
       verifica: "",
       descr: "Aggiunta primi termini al glossario",
     ),
+    (
+      vers: "1.2.0",
+      date: datetime(day: 20, month: 12, year: 2025),
+      autore: name.kevin,
+      verifica: "",
+      descr: "Aggiunta termini IT e sviluppatore software",
+    ),
   ),
   stato: [In redazione],
   responsabile: ((name.kevin),),

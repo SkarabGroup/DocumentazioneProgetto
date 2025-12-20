@@ -41,7 +41,10 @@ G:
     descrizione: Piattaforma di hosting per il controllo delle versioni e la collaborazione sul codice sorgente, basata su Git.
 #H: 
 
-#I:
+I:
+  IT:
+    acronimo: Information Technology
+    descrizione: Settore che si occupa dell'uso di computer, software e reti per la gestione e l'elaborazione delle informazioni.
 #J:
 #K:
 #L:
@@ -82,6 +85,10 @@ S:
   Sistema multiagente:
     alternative: Multi-agent system, sistema multi agente, multiagente
     descrizione: Sistema software composto da più agenti autonomi che interagiscono tra loro per raggiungere obiettivi comuni o individuali.
+
+  sviluppatore software:
+    alternative: software developer, sviluppatori software, sviluppatori
+    descrizione: Persona che scrive, testa e mantiene il codice sorgente di applicazioni o sistemi software.
 #T:
 U:
   Utente:

@@ -26,7 +26,14 @@
         autore: name.kevin,
         verifica: "",
         descr: "Inizio stesura documento, introduzione, scopo e prospettiva del prodotto",
-    )
+    ),
+    (
+        vers: "1.2.0",
+        date: datetime(day: 20, month: 12, year: 2025),
+        autore: name.kevin,
+        verifica: "",
+        descr: "Completamento sezione funzioni del prodotto e caratteristiche degli utenti",
+    ),
   ),
   stato: [Da creare],
   responsabile: (
@@ -88,7 +95,10 @@ L'#def("utente") potrá richiedere l'analisi di uno o piú #def("repository") #d
 
 == Caratteristiche degli utenti
 
-== Definizioni, acronimi e abbreviazioni
+Gli #def("utenti") principali del sistema sono #def("sviluppatori software"), manager #def("IT") e #TODO("ultimo utente, non ricordo") che desiderano una valutazione sulla qualitá del codice e della documentazione nei loro progetti. Gli utenti avranno diversi livelli di competenza tecnica, pertanto l'interfaccia utente sará progettata per essere accessibile sia a utenti esperti che a quelli meno esperti.  
+
+== Definizioni e Acronimi
+Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo documento sono elencati nel #strong("Glossario"), un documento separato fornito al lettore. Questo glossario serve a garantire una comprensione chiara e condivisa dei termini utilizzati nel contesto del progetto e del sistema software in sviluppo.
 
 == Riferimenti
 
