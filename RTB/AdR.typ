@@ -1,59 +1,49 @@
-#import "../lib/main_docs.typ": *
-#import "../lib/UC.typ": *
-#let ver = [1.0.0] // vá aggiornata manualmente
+#import "../lib/docsUtil.typ": *
+#import "../lib/variables.typ": *
+#import "../lib/useCaseUtil.typ": *
 
-#show ref: it => if str(it.target).starts-with("UC") {
-  link(it.target, "[" + str(it.target) + "]")
-} else {
-  it
-}
+//Note sul versionamento
+/*
+  x.y.z
+  La X si modifica solamente a documento completo
+  La Y si modifica solo quando vengono aggiunti nuovi elementi
+  La Z si modifica solo quando si modificano elementi già esistenti
 
-#show: body => maindocs(
-  data: datetime(day: 03, month: 02, year: 2025),
-  tipo: [interno],
-  versione: ver,
-  versioni: (
-    (
-      vers: "1.0.0",
-      date: datetime(day: 17, month: 12, year: 2025),
-      autore: name.kevin,
-      verifica: "",
-      descr: "Creazione documento",
-    ),
-    (
-        vers: "1.1.0",
-        date: datetime(day: 18, month: 12, year: 2025),
-        autore: name.kevin,
-        verifica: "",
-        descr: "Inizio stesura documento, introduzione, scopo e prospettiva del prodotto",
-    ),
-    (
-        vers: "1.2.0",
-        date: datetime(day: 20, month: 12, year: 2025),
-        autore: name.kevin,
-        verifica: "",
-        descr: "Completamento sezione funzioni del prodotto e caratteristiche degli utenti",
-    ),
+  Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
+*/
+#let versione = "v0.2.0"
+
+#titlePage("Analisi dei Requisiti", versione)
+#set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
+#let history = (
+  (
+    "20/12/2025",  
+    "0.2.0", 
+    "Completamento sezione funzioni del prodotto e caratteristiche degli utenti", 
+    members.kevin,
+    members.suar
   ),
-  stato: [Da creare],
-  responsabile: (
-    name.kevin,
+  
+  (
+    "18/12/2025", 
+    "0.1.0", 
+    "Inizio stesura documento, introduzione, scopo e prospettiva del prodotto", 
+    members.kevin, 
+    members.suar
   ),
-  verificatore: (),
-  redattori: (name.kevin,),
-  descrizione: "Questo documento contiene l'analisi dei requisiti del sistema Software per la gestione di un sistema multiagente per l'analisi di repository github da Skarab Group.",
-  titolo: "Analisi dei Requisiti",
-  body,
+  
+  (
+    "17/12/2025", 
+    "0.0.0", 
+    "Creazione documento", 
+    members.kevin, 
+    members.suar
+  ),
 )
 
-//cpntrolla che le references esistano
-#show ref: it => {
-  if str(it.target).starts-with("UC") {
-    link(it.target)[[#str(it.target), §2.3.#str(it.target).slice(2)]] //slice toglie la sottostringa "UC"
-  } else {
-    it
-  }
-}
+#versionTable(history)
+
+#indice()
 
 = Introduzione
 
@@ -114,7 +104,7 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
 
 === UC1 <UC1>
 
-#use-case(
+#useCase(
   attore: "...",
   pre: [
     - ...
@@ -129,12 +119,12 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
     - ...
   ],
   inclusioni: [
-    - @UC1
+    - //@UC1
   ],
   estensioni: [
     
   ],
   trigger: "...",
 )[
-  #use-case-diagram("1", "UC1")
+  #useCaseDiagram("1", "UC1")
 ]

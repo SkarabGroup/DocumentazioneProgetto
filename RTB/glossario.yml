@@ -92,7 +92,7 @@ S:
 #T:
 U:
   Utente:
-    alternative: User, utenti
+    alternative: User, Utenti
     descrizione: Persona che utilizza un sistema o un'applicazione software.
 
   URL:
@@ -105,8 +105,8 @@ V:
   Verificatori:
     descrizione: Persone o team responsabili di controllare che il sistema software soddisfi i requisiti specificati durante il processo di verifica.
 W:
-  webapp:
-    alternative: applicazione web, web application
+  Web Application:
+    alternative: Applicazione Web, Webapp
     descrizione: Applicazione software accessibile tramite un browser web, che consente agli utenti di interagire con il sistema attraverso Internet.
 #X:
 #Y:
