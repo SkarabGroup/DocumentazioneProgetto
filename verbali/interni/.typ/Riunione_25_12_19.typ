@@ -10,7 +10,7 @@
       date: datetime(day: 19, month: 12, year: 2025),
       vers: "1.0.0",
       autore: name.kevin,
-      verificatore: name.suar,
+      verificatore: "",
       descr: "Creazione Documento.",
     ),
   ),

@@ -22,9 +22,9 @@
 )
 
 #let persona(name) = {
-  name.nome
-  " "
-  name.cognome
+    name.nome
+    " "
+    name.cognome
 }
 
 #let prima-pagina(titolo, extra, ..entries) = {
@@ -60,7 +60,7 @@
     grid(
       columns: (1fr,2fr),
       align: (left, right),
-      [titolo],[*Skarab Group - Anno accademico 2025/2026*]
+      [#titolo],[*Skarab Group - Anno accademico 2025/2026*]
     )
     line(length: 100%, stroke: 0.5pt)
 }
@@ -100,7 +100,7 @@
         mod.vers,
         mod.descr,
         persona(mod.autore),
-        if "verificatore" in mod {
+        if "verificatore" in mod and mod.verificatore != "" {
           persona(mod.verificatore)
         } else {
           [-]
@@ -183,6 +183,10 @@
     strong(it)
   }
   outline(title: [#v(2em) Indice immagini #v(2em)], indent: 1em, target: figure.where(kind: image))
+}
+
+#let TODO(string) = {
+  box(fill: rgb("#ff6666"), inset: 4pt)[#text(fill: white)[TODO: #string]]
 }
 
 
