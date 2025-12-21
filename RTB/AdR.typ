@@ -100,29 +100,83 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
 
 == Lista
 
-=== UC1 <UC1>
-
+=== UC1: Registrazione a CodeGuardian <UC1>
 #useCase(
-  attore: "...",
+  attore: "Utente non registrato",
   pre: [
-    - ...
+    - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
   ],
   post: [
-    - ...
+    - L'utente possiede le credenziali di un account CodeGuardian censito dal Sistema
   ],
   scenari: [
-    - ....
-  ],
-  scenari_alternativi: [
-    - ...
+    - L'utente seleziona la sezione di registrazione di CodeGuardian
+    - L'utente inserisce il proprio nome (UC1.1)
+    - L'utente inserisce il proprio cognome (UC1.2)
+    - L'utente inserisce una username (UC1.3)
+    - L'utente inserisce una email di riferimento (UC1.4)
+    - L'utente inserisce una password (UC1.5)
   ],
   inclusioni: [
-    - //@UC1
+    - UC1.1 // Inserimento Nome
+    - UC1.2 // Inserimento Cognome
+    - UC1.3 // Inserimento Username
+    - UC1.4 // Inserimento Email
+    - UC1.5 // Inserimento Password
   ],
   estensioni: [
-    
+    - Nessuna
   ],
-  trigger: "...",
+  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
 )[
   #useCaseDiagram("1", "UC1")
+]
+
+=== UC1.1: Inserimento Nome <UC1.1>
+#useCase(
+  attore: "Utente non registrato",
+  pre: [
+    - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
+  ],
+  post: [
+    - L'utente ha inserito il nome con cui vuole effettuare la procedura di registrazione a CodeGuardian
+  ],
+  scenari: [
+    - L'utente inserisce il nome con cui vuole effettuare la procedura di registrazione a CodeGuardian
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - UC1.1.1 // Nome inserito non valido
+  ],
+  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+)[
+  #useCaseDiagram("1", "UC1")
+]
+
+=== UC1.1.1: Nome inserito non valido <UC1.1.1>
+#useCase(
+  attore: "Utente non registrato",
+  pre: [
+    - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
+    - L'utente ha inserito un nome non valido durante l'inserimento del nome (UC1.1)
+  ],
+  post: [
+    - L'utente riceve una notifica di errore che il nome inserito non è valido
+  ],
+  scenari: [
+    - L'utente inserisce un nome non valido
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna (è già un caso d'uso estensione)
+  ],
+  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+)[
+  #useCaseDiagram("1.1.1", "UC1.1.1")
 ]
