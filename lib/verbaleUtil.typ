@@ -1,85 +1,23 @@
-#let header(titolo) = {
-  grid(
-    columns: (1fr, 2fr),
-    align: (left, right),
-    [#titolo], [*Skarab Group - Anno accademico 2025/2026*]
-  )
-  line(length: 100%, stroke: 0.5pt)
-}
+#import "docsUtil.typ": *
+#import "variables.typ": members
 
-#let footer() = {
-  line(length: 100%, stroke: 0.5pt)
-  v(0.3em)
-  align(center)[#context {counter(page).display()}]
-}
-
-#let prima-pagina(
-  titolo,
-  data,
-  ora-inizio,
-  canale,
-  presiede,
-  logo-path: "../assets/logo.jpg"
-) = {
-  page(header: none, numbering: none)[
-    #align(center)[
-      #v(1fr)
-      #image(logo-path, width: 40%)
-      #v(1cm)
-      #text(size: 28pt, weight: "bold")[Skarab Group]
-      #v(0.5cm)
-      #line(length: 80%, stroke: 0.5pt)
-      #v(0.5cm)
-      #text(size: 18pt, weight: "bold")[#titolo]
-      #v(0.5cm)
-      #line(length: 80%, stroke: 0.5pt)
-      #v(1fr)
-      Data: #data.display("[year]-[month]-[day]") #linebreak()
-      Ora: #ora-inizio #linebreak()
-      Canale: #canale #linebreak()
-      #v(2cm)
-      Presiede: #presiede #linebreak()
-      #v(1fr)
-    ]
-  ]
-}
-
-#let registro-modifiche(versioni) = {
-  align(center)[
-    #table(
-      columns: (3cm, 3cm, 3.0cm, 3cm, 3cm),
-      align: center + horizon,
-      stroke: 0.5pt,
-      fill: (_, y) => if y == 0 { rgb("#d0d0d0") },
-      [*Data \ Modifica*], [*Versione*], [*Descrizione Modifica*], [*Redattore*], [*Verificatore*],
-      ..versioni.map(v => (
-        v.at(0), // Data
-        v.at(1), // Versione
-        v.at(2), // Descrizione
-        v.at(3), // Redattore
-        v.at(4)  // Verificatore
-      )).flatten()
-    )
-  ]
-}
-
-#let griglia-presenze(presenti, assenti) = {
+#let grigliaPresenze(presenti, assenti) = {
   heading(level: 1)[Presenze]
   grid(
     columns: (1.5fr, 2fr),
     [*Presenti*], [#presenti.join(", ")],
-    [*Assenti*], [#if assenti.len() > 0 { assenze.join(", ") } else { [] }]
+    [*Assenti*], [#assenti.join(", ")],
   )
 }
 
-#let punto-odg(
-  titolo, 
-  sintesi, 
-  decisione: none
+#let puntoOdg(
+  titolo,
+  sintesi,
+  decisione: none,
 ) = {
   pad(left: 2cm)[
     *Sintesi*: #sintesi
-    
+
     #if decisione != none {
       parbreak()
       [*Decisione presa*: #decisione]
@@ -87,33 +25,31 @@
   ]
 }
 
-#let tabella-azioni(azioni) = {
+#let tabellaAzioni(azioni) = {
   figure(
     table(
       columns: (1fr, 0.8fr, 0.6fr, 0.6fr),
       align: (left, left, left, left),
       stroke: none,
       table.hline(stroke: 1pt),
-      table.header(
-        [*Azione*], 
-        [*Responsabile*], 
-        [*Scadenza*], 
-        [*Stato*],
-      ),
+      table.header([*Azione*], [*Responsabile*], [*Scadenza*], [*Stato*]),
       table.hline(stroke: 0.5pt),
-      ..azioni.map(a => (
-        a.at(0), 
-        a.at(1), 
-        a.at(2), 
-        a.at(3),
-        table.hline(stroke: 0.3pt)
-      )).flatten(),
-      table.hline(stroke: 1pt), // Linea finale più spessa
-    )
+      ..azioni
+        .map(a => (
+          a.at(0),
+          a.at(1),
+          a.at(2),
+          a.at(3),
+          table.hline(stroke: 0.3pt),
+        ))
+        .flatten(),
+      table.hline(stroke: 1pt),
+      // Linea finale più spessa
+    ),
   )
 }
 
-#let chiusura-verbale(ora-fine, presiede) = {
+#let chiusuraVerbale(ora-fine, presiede) = {
   heading(level: 1)[Chiusura]
   [La riunione si è conclusa alle ore #ora-fine.]
 
@@ -124,45 +60,129 @@
 }
 
 #let verbale(
-  titolo: "Verbale riunione interna",
-  data: datetime.today(),
-  ora-inizio: "00:00",
-  ora-fine: "00:00",
-  canale: "Discord",
-  presiede: "Nome Cognome",
+  titolo: "Verbale riunione",
   versioni: (),
   presenti: (),
   assenze: (),
-  body
+  body,
 ) = {
   set page(width: 210mm, height: 297mm, margin: 2.5cm)
   set text(font: "New Computer Modern", size: 12pt, lang: "it")
   set par(leading: 0.65em, justify: true)
-  
-  prima-pagina(titolo, data, ora-inizio, canale, presiede)
+
+  titlePage("Verbale riunione interna", "1.0.0")
 
   set page(
     header: header(titolo),
-    footer: footer()
+    footer: footer(),
   )
   v(1em)
 
-  registro-modifiche(versioni)
+  versionTable(versioni)
 
   pagebreak()
 
   outline(
     title: [Indice],
     depth: 3,
-    indent: auto
+    indent: auto,
   )
   pagebreak()
 
-  griglia-presenze(presenti, assenze)
+  grigliaPresenze(presenti, assenze)
 
-  [Inizio riunione ore #ora-inizio.]
-  
+  [Inizio riunione ore 09:00.]
+
   body
 
-  chiusura-verbale(ora-fine, presiede)
+  chiusuraVerbale("11:00", members.suar)
 }
+
+
+
+
+
+
+
+
+
+//Quando si definisce il verbale, copiare e modificare questi punti
+//#import "../../../lib/verbaleUtil.typ": *
+//#import "../../../lib/docsUtil.typ"
+
+#verbale(
+  versioni: (
+    ("DataVersione", "NumeroVersione", "DettaglioModifica", "Relatore", "Verificatore"),
+  ),
+
+  presenti: (
+    "Cognome e Nome",
+    "Cognome e Nome",
+  ),
+
+  assenze: (
+    "",
+  ),
+
+  [
+
+    = Ordine del giorno
+    == Argomenti proposti
+    #let punto1 = "PuntoOrdineDelGiorno1"
+    #let punto2 = "PuntoOrdineDelGiorno2"
+    + #punto1.
+    + #punto2.
+    + ...
+
+    = Svolgimento Riunione
+    #let orarioInizioRiunione = "09:00"//...
+    #let orarioFineRiunione = "09:00" //...
+    #let presidenteRiunione = "Io" //...
+    == Apertura
+    La riunione ha avuto inizio alle #orarioInizioRiunione, introdotta da #presidenteRiunione che ha presentato l'ordine del giorno.
+
+    == Discussione punto per punto
+    === Punto 1: #punto1
+    #puntoOdg(
+      punto1,
+      "Il gruppo ha discusso sui possibili linguaggi da utilizzare per la documentazione ed è arrivato a una scelta binaria tra LaTeX e typst.",
+      decisione: "Il gruppo ha scelto di redigere i documenti nel linguaggio che si preferisce, a condizione che venga adottato il formato standard definito dai template.",
+    )
+
+    === Punto 2: #punto2
+    #puntoOdg(
+      punto2,
+      "Sintesi Punto 2",
+      decisione: "Decisione Punto 2",
+    )
+
+    === Punto 3: Esposizione domande da porre a Var Group
+    #puntoOdg(
+      "Domande Var Group",
+      "Dopo aver esposto l'analisi delle tecnologie studiate, i membri hanno presentato le domande emerse da porre a Var Group.",
+      decisione: "Ognuno dovrà aggiungere le proprie domande a un documento sulla repository GitHub.",
+    )
+
+    = Azioni e responsabilità
+    #tabellaAzioni((
+      (
+        "Azione",
+        "Responsabile Azione",
+        "Scadenza Azione",
+        "Stato Azione",
+      ),
+      (
+        "Analisi delle tecnologie",
+        "SkarabGroup",
+        "2025-11-24",
+        "conclusa",
+      ),
+      (
+        "Definizione primi requisiti",
+        "SkarabGroup",
+        "2025-11-21",
+        "In corso",
+      ),
+    ))
+  ],
+)

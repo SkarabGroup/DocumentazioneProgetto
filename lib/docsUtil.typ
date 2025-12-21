@@ -26,7 +26,7 @@
 #let versionTable(rows) = {
   heading(level: 1, numbering: none, outlined: false)[Registro delle Modifiche]
   v(1em)
-  
+
   set text(size: 13pt)
 
   let normalizedRows = rows.map(row => {
@@ -34,65 +34,68 @@
   })
 
   table(
-    columns: (auto, auto, 1fr, auto, auto), 
+    columns: (auto, auto, 1fr, auto, auto),
     inset: 5pt,
     stroke: 0.5pt + luma(200),
-    fill: (col, row) => if row == 0 { luma(240) } else { none },
     
-    align: (col, row) => (
-      center, 
-      center,
-      left,
-      left,
-      left 
-    ).at(col) + horizon,
+    fill: (col, row) => if row == 0 {
+      luma(230)
+    } else if calc.even(row) {
+      luma(220)
+    } else {
+      none
+    },
 
-    table.header(
-      [*Data*], [*Versione*], [*Descrizione*], [*Redattore*], [*Verificatore*]
+    align: (col, row) => (
+      (
+        center,
+        center,
+        left,
+        left,
+        left,
+      ).at(col)
+        + horizon
     ),
 
-    ..normalizedRows.flatten()
+    table.header([*Data*], [*Versione*], [*Descrizione*], [*Redattore*], [*Verificatore*]),
+
+    ..normalizedRows.flatten(),
   )
 }
 
 #let header(titolo) = {
-    grid(
-      columns: (1fr,2fr),
-      align: (left, right),
-      [#titolo],[*Skarab Group - Anno accademico 2025/2026*]
-    )
-    line(length: 100%, stroke: 0.5pt)
+  grid(
+    columns: (1fr, 2fr),
+    align: (left, right),
+    [#titolo], [*Skarab Group - Anno accademico 2025/2026*],
+  )
+  line(length: 100%, stroke: 0.5pt)
 }
 
 #let footer() = {
-    line(length: 100%, stroke: 0.5pt)
-    set align(center)
-    v(0.3em)
-    context [
-      Pagina #counter(page).display() di #counter(page).final().first()
+  line(length: 100%, stroke: 0.5pt)
+  set align(center)
+  v(0.3em)
+  context [
+    Pagina #counter(page).display() di #counter(page).final().first()
   ]
 }
 
 #let indice() = {
   pagebreak()
 
-  // --- REGOLA PER LIVELLO 1 (= Titolo) ---
-  // Mette spazio sopra e testo in GRASSETTO
   show outline.entry.where(level: 1): it => {
     v(12pt, weak: true)
     text(weight: "bold", it)
   }
 
-  // --- REGOLA PER LIVELLO 2 (== Sottotitolo) ---
-  // Forza il testo REGULAR (normale) per evitare eredità strane
   show outline.entry.where(level: 2): it => {
     text(weight: "regular", it)
   }
 
-  // --- GENERAZIONE INDICE ---
   outline(
     title: text(weight: "bold", size: 22pt)[Indice],
-    depth: 3, 
+    depth: 3,
     indent: auto,
   )
 
@@ -107,7 +110,7 @@
   }
 
   let found = false
-  
+
   for (letter, words) in yml {
     for (termine, def) in words {
       // Controlla il termine principale
@@ -115,7 +118,7 @@
         found = true
         break
       }
-      
+
       // Controlla le alternative (verifica se la chiave esiste)
       if "alternative" in def {
         let alt_list = def.alternative.split(",").map(s => s.trim())
@@ -126,12 +129,12 @@
           }
         }
       }
-      
+
       if found { break }
     }
     if found { break }
   }
-  
+
   // Se la parola non esiste, genera errore a compile-time
   if not found {
     panic("Parola non definita nel glossario: " + parola)

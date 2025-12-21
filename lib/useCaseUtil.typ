@@ -38,7 +38,7 @@
     [- *Scenari alternativi*: #scenari_alternativi]
   }
 
-  #if (inclusioni != none) {     
+  #if (inclusioni != none) {
     [- *Inclusioni*: #inclusioni]
   }
 
