@@ -1,9 +1,0 @@
-{
-    "cSpell.words": [
-        "importantdocs"
-    ],
-
-    "[typst]": {
-        "editor.formatOnSave": true
-    }
-}
