@@ -11,19 +11,31 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.6.1"
+#let versione = "v0.8.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
-    "2025/12/24",
+    "2025/12/23",
+    "0.8.0",
+    "Aggiunti UC4 e UC5",
+    members.kevin
+  ),
+  (
+    "2025/12/22",
+    "0.7.0",
+    "Aggiunti UML UC2 e UC2.2",
+    members.kevin
+  ),
+  (
+    "2025/12/22",
     "0.6.1",
     "Correzione sezione Introduzione -> riferimenti",
     members.kevin,
   ),
   (
-    "2025/12/23",
+    "2025/12/22",
     "0.6.0",
     "Inizio stesura casi d'uso UC2 e UC2.X",
     members.kevin
@@ -674,7 +686,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'utente interagisce con la sezione di inserimento della password durante la procedura di autenticazione a CodeGuardian"
 )[
-  //#useCaseDiagram("2_2", "UC2.2 - Inserimento password")
+  #useCaseDiagram("2_2", "UC2.2 - Inserimento password")
 ]
 
 ===== UC2.2.1: Password non valida <UC2.2.1>
@@ -703,3 +715,383 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[]
 
 === UC3: Collegamento account CodeGuardian ad account GitHub <UC3>
+
+=== UC4: Richiesta analisi repository GitHub <UC4>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+  ],
+  post: [
+    - Il Sistema ha avviato l'analisi del repository GitHub specificato dall'utente
+  ],
+  scenari: [
+    - L'utente inserisce l'URL del repository GitHub da analizzare
+    - L'utente seleziona le aree di interesse per l'analisi (solo codice o entrambe (codice e documentazione)) 
+    - L'utente invia la richiesta di analisi al sistema
+  ],
+  inclusioni: [
+    - Inserimento URL repository GitHub #link(<UC4.1>)[#underline[\[UC4.1\]]] // Inserimento URL repository GitHub
+    - Selezione aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]] // Selezione aree di interesse
+    - Invio richiesta di analisi #link(<UC4.3>)[#underline[\[UC4.3\]]] // Invio richiesta di analisi
+  ],
+  estensioni: [
+    - nessuna
+  ],
+  trigger: "L'utente accede alla sezione di richiesta analisi repository GitHub di CodeGuardian"
+)[
+  //#useCaseDiagram("4", "UC4 - Richiesta analisi repository GitHub")
+]
+
+==== UC4.1: Inserimento URL repository GitHub <UC4.1>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+  ],
+  post: [
+    - Il Sistema ha validato l'URL del repository GitHub inserito dall'utente
+  ],
+  scenari: [
+    - L'utente inserisce l'URL del repository GitHub da analizzare
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC4.1.1>)[#underline[\[UC4.1.1\]]] // URL repository GitHub non valido
+  ],
+  trigger: "L'utente interagisce con la sezione di inserimento dell'URL del repository GitHub durante la procedura di richiesta analisi repository GitHub a CodeGuardian"
+)[
+  //#useCaseDiagram("4_1", "UC4.1 - Inserimento URL repository GitHub")
+]
+
+===== UC4.1.1: URL repository GitHub non valido <UC4.1.1>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha inserito un URL del repository GitHub non valido durante l'inserimento dell'URL del repository GitHub #link(<UC4.1>)[#underline[\[UC4.1\]]]
+  ],
+  post: [
+    - La procedura di richiesta analisi repository GitHub non viene finalizzata e il Sistema rimane nello stato di inserimento dati
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che l'URL del repository GitHub inserito non è valido per la procedura di richiesta analisi repository GitHub
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con la sezione di inserimento dell'URL del repository GitHub durante la procedura di richiesta analisi repository GitHub a CodeGuardian" 
+)[]
+
+
+==== UC4.2: Selezione aree di interesse <UC4.2>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha inserito un URL del repository GitHub valido durante l'inserimento dell'URL del repository GitHub #link(<UC4.1>)[#underline[\[UC4.1\]]]
+  ],
+  post: [
+    - L'utente ha selezionato le aree di interesse per l'analisi (solo codice o entrambe)
+  ],
+  scenari: [
+    - L'utente seleziona le aree di interesse per l'analisi (solo codice o entrambe)
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC4.2.1>)[#underline[\[UC4.2.1\]]] // nessuna area di interesse selezionata
+  ],
+  trigger: "L'utente interagisce con la sezione di selezione delle aree di interesse durante la procedura di richiesta analisi repository GitHub a CodeGuardian"
+)[]
+
+===== UC4.2.1: Nessuna area di interesse selezionata <UC4.2.1>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha inserito un URL del repository GitHub valido durante l'inserimento dell'URL del repository GitHub #link(<UC4.1>)[#underline[\[UC4.1\]]]
+    - L'utente non ha selezionato alcuna area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
+  ],
+  post: [
+    - La procedura di richiesta analisi repository GitHub non viene finalizzata e il Sistema rimane nello stato di inserimento dati
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che deve essere selezionata almeno
+      un'area di interesse per procedere con la richiesta di analisi del repository GitHub
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con la sezione di selezione delle aree di interesse durante la procedura di richiesta analisi repository GitHub a CodeGuardian"
+)[]
+
+==== UC4.3: Invio richiesta di analisi <UC4.3>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha inserito un URL del repository GitHub valido durante l'inserimento dell'URL del repository GitHub #link(<UC4.1>)[#underline[\[UC4.1\]]]
+    - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
+  ],
+  post: [
+    - Il Sistema ha avviato l'analisi del repository GitHub specificato dall'utente
+  ],
+  scenari: [
+    - L'utente invia la richiesta di analisi al sistema
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con la sezione di invio della richiesta di analisi durante la procedura di richiesta analisi repository GitHub a CodeGuardian"
+)[]
+
+
+=== UC5: Visualizzazione report analisi repository GitHub <UC5>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha richiesto l'analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
+    - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
+  ],
+  post: [
+    - L'utente ha visualizzato il report dell'analisi del repository GitHub richiesto
+  ],
+  scenari: [
+    - L'utente accede alla sezione di visualizzazione del report di analisi
+    - L'utente seleziona il report di analisi del repository GitHub di interesse
+    - L'utente seleziona se visualizzare i dettagli del singolo report o il rapporto rispetto ai report precedenti
+    - L'utente visualizza il report di analisi del repository GitHub richiesto
+  ],
+  inclusioni: [
+    - Accesso sezione visualizzazione report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]] // Accesso sezione visualizzazione report di analisi
+    - Selezione report di analisi #link(<UC5.2>)[#underline[\[UC5.2\]]] // Selezione report di analisi
+    - Selezione modalità visualizzazione report #link(<UC5.3>)[#underline[\[UC5.3\]]] // Selezione modalità visualizzazione report
+    - Visualizzazione report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]] // Visualizzazione report di analisi
+  ],
+  estensioni: [
+    - nessuna
+  ],
+  trigger: "L'utente accede alla sezione di visualizzazione del report di analisi repository GitHub di CodeGuardian"
+)[
+  //#useCaseDiagram("5", "UC5 - Visualizzazione report analisi repository GitHub")
+]
+
+==== UC5.1: Accesso sezione visualizzazione report di analisi <UC5.1>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]            
+    - L'utente ha richiesto l'analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
+    - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
+  ],
+  post: [
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi
+  ],
+  scenari: [
+    - L'utente accede alla sezione di visualizzazione del report di analisi
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con la sezione di visualizzazione del report di analisi repository GitHub di CodeGuardian"
+)[] 
+
+==== UC5.2: Selezione report di analisi <UC5.2>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]            
+    - L'utente ha richiesto l'analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
+    - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+  ],
+  post: [
+    - L'utente ha selezionato il report di analisi del repository GitHub di interesse
+  ],
+  scenari: [
+    - L'utente seleziona il report di analisi del repository GitHub di interesse
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessun report di analisi disponibile per il repository GitHub selezionato #link(<UC5.2.1>)[#underline[\[UC5.2.1\]]] // nessun report selezionato
+    - Nessun report selezionato #link(<UC5.2.2>)[#underline[\[UC5.2.2\]]] // nessun report selezionato
+
+  ],
+  trigger: "L'utente interagisce con la sezione di selezione del report di analisi repository GitHub di CodeGuardian"
+)[] 
+
+===== UC5.2.1: Nessun report di analisi disponibile per il repository GitHub selezionato <UC5.2.1>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]            
+    - L'utente ha richiesto l'analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
+    - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - Non sono disponibili report di analisi per il repository GitHub selezionato
+  ],
+  post: [
+    - L'utente non può procedere con la selezione del report di analisi del repository GitHub di interesse
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio che indica che non sono disponibili report di analisi
+      per il repository GitHub selezionato
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con la sezione di selezione del report di analisi repository GitHub di CodeGuardian"
+)[]
+
+===== UC5.2.2: Nessun report selezionato <UC5.2.2>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]            
+    - L'utente ha richiesto l'analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
+    - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+  ],
+  post: [
+    - L'utente non può procedere con la selezione del report di analisi del repository GitHub di interesse
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che deve selezionare un report di analisi per poter procedere con la visualizzazione del report
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con la sezione di selezione del report di analisi repository GitHub di CodeGuardian"
+)[]
+
+==== UC5.3: Selezione modalità visualizzazione report <UC5.3>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]            
+    - L'utente ha richiesto l'analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
+    - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
+  ],
+  post: [
+    - L'utente ha selezionato la modalità di visualizzazione del report di analisi
+  ],
+  scenari: [
+    - L'utente seleziona se visualizzare i dettagli del singolo report o il rapporto rispetto ai report precedenti
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna modalità di visualizzazione selezionata #link(<UC5.3.1>)[#underline[\[UC5.3.1\]]] // nessuna modalità selezionata
+  ],
+  trigger: "L'utente interagisce con la sezione di selezione della modalità di visualizzazione del report di analisi repository GitHub di CodeGuardian"
+)[] 
+
+===== UC5.3.1: Nessuna modalità di visualizzazione selezionata <UC5.3.1>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]            
+    - L'utente ha richiesto l'analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
+    - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
+  ],
+  post: [
+    - L'utente non può procedere con la selezione della modalità di visualizzazione del report di analisi
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che deve selezionare una modalità di visualizzazione per poter procedere con la visualizzazione del report
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con la sezione di selezione della modalità di visualizzazione del report di analisi repository GitHub di CodeGuardian"
+)[]
+
+==== UC5.4: Visualizzazione report di analisi <UC5.4>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]            
+    - L'utente ha richiesto l'analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
+    - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
+    - L'utente ha selezionato la modalità di visualizzazione del report di analisi #link(<UC5.3>)[#underline[\[UC5.3\]]]
+  ],
+  post: [
+    - L'utente ha visualizzato il report dell'analisi del repository GitHub richiesto
+  ],
+  scenari: [
+    - L'utente visualizza il report di analisi del repository GitHub richiesto
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con la sezione di visualizzazione del report di analisi repository GitHub di CodeGuardian"
+)[] 
+
+
+   
