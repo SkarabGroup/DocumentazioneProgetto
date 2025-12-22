@@ -11,16 +11,29 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.5.0"
+#let versione = "v0.6.1"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
+    "2025/12/24",
+    "0.6.1",
+    "Correzione sezione Introduzione -> riferimenti",
+    members.kevin,
+  ),
+  (
+    "2025/12/23",
+    "0.6.0",
+    "Inizio stesura casi d'uso UC2 e UC2.X",
+    members.kevin
+  ),
+  (
     "2025/12/22",
     "0.5.0",
     "Aggiunti diagrammi dei casi d'uso UC1 e da UC1.1 a UC1.5. Modificate le postcondizioni delle estensioni",
-    members.suar
+    members.suar,
+    members.kevin
   ),
   (
     "2025/12/22",
@@ -126,9 +139,9 @@ Gli #def("utenti") principali del sistema sono #def("sviluppatori software"), ma
 Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo documento sono elencati nel #strong("Glossario"), un documento separato fornito al lettore. Questo glossario serve a garantire una comprensione chiara e condivisa dei termini utilizzati nel contesto del progetto e del sistema software in sviluppo.
 
 == Riferimenti
-- Standard IEEE \ #underline[https://ieeexplore.ieee.org/document/720574]
-- Dispense del corso di Ingegneria del Software sull'analisi dei requisiti \ #underline[https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T05.pdf]
-- Dispense del corso di Ingegneria del Software sui casi d'uso \ #underline[https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20Use%20Case.pdf]
+- #strong("Standard IEEE") \ #underline[https://ieeexplore.ieee.org/document/720574] \ Ultimo accesso 2025/12/22
+- #strong("Dispense del corso di Ingegneria del Software sull'analisi dei requisiti") \ #underline[https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T05.pdf] \ Ultimo accesso 2025/12/22
+- #strong("Dispense del corso di Ingegneria del Software sui casi d'uso") \ #underline[https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20Use%20Case.pdf] \ Ultimo accesso 2025/12/22
 
 
 #pagebreak()
@@ -561,5 +574,132 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[]
 
 === UC2: Autenticazione a CodeGuardian <UC2>
+
+#useCase(
+  attore: "Utente registrato",
+  pre: [
+    - L'utente possiede le credenziali di un account CodeGuardian censito dal Sistema, ovvero ha già completato la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
+    - L'utente ha selezionato la sezione di autenticazione di CodeGuardian
+  ],
+  post: [
+    - L'utente è autenticato al sistema CodeGuardian e può utilizzare le funzionalità offerte
+      dal sistema
+  ],
+  scenari: [
+    - L'utente inserisce il proprio username
+    - L'utente inserisce la propria password
+  ],
+  inclusioni: [
+    - Inserimento username #link(<UC2.1>)[#underline[\[UC2.1\]]] // Inserimento username
+    - Inserimento password #link(<UC2.2>)[#underline[\[UC2.2\]]] // Inserimento password
+  ],
+  estensioni: [
+    - nessuna
+  ],
+  trigger: "L'utente accede alla sezione di autenticazione a CodeGuardian"
+)[
+  //#useCaseDiagram("2", "UC2 - Autenticazione")
+]
+
+==== UC2.1: Inserimento username <UC2.1>
+#useCase(
+  attore: "Utente registrato",
+  pre: [
+    - L'utente possiede le credenziali di un account CodeGuardian censito dal Sistema, ovvero ha già completato la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
+    - L'utente sta eseguendo la procedura di autenticazione a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+  ],
+  post: [
+    - Il Sistema ha validato l'username inserito dall'utente
+  ],
+  scenari: [
+    - L'utente inserisce l'username per la procedura di autenticazione
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC2.1.1>)[#underline[\[UC2.1.1\]]] // username non censita dal Sistema
+  ],
+  trigger: "L'utente interagisce con la sezione di inserimento dell'username durante la procedura di autenticazione a CodeGuardian"
+)[
+  #useCaseDiagram("2_1", "UC2.1 - Inserimento username")
+]
+
+
+===== UC2.1.1: Username non censito dal Sistema <UC2.1.1>
+#useCase(
+  attore: "Utente registrato",
+  pre: [
+    - L'utente possiede le credenziali di un account CodeGuardian censito dal Sistema, ovvero ha già completato la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
+    - L'utente sta eseguendo la procedura di autenticazione a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha inserito un username non censito dal sistema durante l'inserimento dell'username #link(<UC2.1>)[#underline[\[UC2.1\]]]
+  ],
+  post: [
+    - La procedura di autenticazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che l'username inserito non è valido
+      per la procedura di autenticazione (per questioni di sicurezza, non viene specificato che 
+      si tratta di un username non censito dal sistema)
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con la sezione di inserimento dell'username durante la procedura di autenticazione a CodeGuardian"
+)[
+]
+
+==== UC2.2: Inserimento password <UC2.2>
+#useCase(
+  attore: "Utente registrato",
+  pre: [
+    - L'utente possiede le credenziali di un account CodeGuardian censito dal Sistema, ovvero ha già completato la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
+    - L'utente sta eseguendo la procedura di autenticazione a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha inserito un username valido durante l'inserimento dell'username #link(<UC2.1>)[#underline[\[UC2.1\]]]
+  ],
+  post: [
+    - Il Sistema ha validato la password inserita dall'utente
+  ],
+  scenari: [
+    - L'utente inserisce la password per la procedura di autenticazione
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC2.2.1>)[#underline[\[UC2.2.1\]]] // password non valida
+  ],
+  trigger: "L'utente interagisce con la sezione di inserimento della password durante la procedura di autenticazione a CodeGuardian"
+)[
+  //#useCaseDiagram("2_2", "UC2.2 - Inserimento password")
+]
+
+===== UC2.2.1: Password non valida <UC2.2.1>
+#useCase(
+  attore: "Utente registrato",
+  pre: [
+    - L'utente possiede le credenziali di un account CodeGuardian censito dal Sistema, ovvero ha già completato la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
+    - L'utente sta eseguendo la procedura di autenticazione a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha inserito un username valido durante l'inserimento dell'username #link(<UC2.1>)[#underline[\[UC2.1\]]]
+    - L'utente ha inserito una password non valida (ovvero errata) durante l'inserimento della password #link(<UC2.2>)[#underline[\[UC2.2\]]]
+  ],
+  post: [
+    - La procedura di autenticazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che la password inserita non è
+      valida per la procedura di autenticazione per lo specificato username
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con la sezione di inserimento della password durante la procedura di autenticazione a CodeGuardian"
+)[]
 
 === UC3: Collegamento account CodeGuardian ad account GitHub <UC3>
