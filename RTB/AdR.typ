@@ -598,7 +598,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'utente accede alla sezione di autenticazione a CodeGuardian"
 )[
-  //#useCaseDiagram("2", "UC2 - Autenticazione")
+  #useCaseDiagram("2", "UC2 - Autenticazione")
 ]
 
 ==== UC2.1: Inserimento username <UC2.1>
