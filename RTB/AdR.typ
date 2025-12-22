@@ -465,7 +465,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
     - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
-    - L'utente ha inserita un email non valida durante l'inserimento dell'email #link(<UC1.4>)[#underline[\UC1.4\]]]
+    - L'utente ha inserita un email non valida durante l'inserimento dell'email #link(<UC1.4>)[#underline[\[UC1.4\]]]
   ],
   post: [
     - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato 
@@ -491,7 +491,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
     - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
-    - L'utente ha inserito un'email già censita dal sistema durante l'inserimento dell'email #link(<UC1.4>)[#underline[\UC1.4\]]]
+    - L'utente ha inserito un'email già censita dal sistema durante l'inserimento dell'email #link(<UC1.4>)[#underline[\[UC1.4\]]]
   ],
   post: [
     - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato 
