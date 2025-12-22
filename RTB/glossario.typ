@@ -1,34 +1,39 @@
-#import "../lib/glos.typ": *
+#import "../lib/docsUtil.typ": *
+#import "../lib/variables.typ": *
+#import "../lib/glossarioUtil.typ": *
 
-#let vers = [0.0.0]
+#let versione = "v0.2.0"
 
-#show: body => glossario(
-  data: datetime(day: 17, month: 02, year: 2025),
-  versioni: (
-    (
-      vers: "1.0.0",
-      date: datetime(day: 18, month: 12, year: 2025),
-      autore: name.kevin,
-      verifica: "",
-      descr: "Creazione documento",
-    ),
-    (
-      vers: "1.1.0",
-      date: datetime(day: 18, month: 12, year: 2025),
-      autore: name.kevin,
-      verifica: "",
-      descr: "Aggiunta primi termini al glossario",
-    ),
+#titlePage("Glossario", versione)
+#set page(numbering: "1", header: header("Glossario"), footer: footer())
+#let history = (
+  (
+    "20/12/2025", 
+    "0.2.0", 
+    "Aggiunti termini IT e sviluppatore software",
+    members.kevin, 
+    members.suar
   ),
-  stato: [In redazione],
-  responsabile: ((name.kevin),),
-  verificatore: ((name.alice),),
-  redattori: ((name.kevin),),
-  versione: vers,
-  descrizione: "Questo documento contiente il glossario dei termini utilizzati nel contesto del progetto Code Guardian proposto nel capitolato dell'azienda Var Group sviluppato dal team Skarab Group",
-  body,
+    
+  (
+    "19/12/2025", 
+    "0.1.0", 
+    "Aggiunti primi termini al glossario", 
+    members.kevin, 
+    members.suar
+  ),
+    
+  (
+    "18/12/2025", 
+    "0.0.0", 
+    "Creazione documento",
+    members.kevin,
+    members.suar
+  )
 )
 
-= Introduzione
+#versionTable(history)
 
-#pagebreak()
+#indice()
+
+#glossario()

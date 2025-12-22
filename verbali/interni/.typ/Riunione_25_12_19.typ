@@ -1,106 +1,101 @@
 // Importa il template del verbale
-#import "../../../lib/verbale.typ": *
 
-// Applica il template
-#show: body => verbale(
-  data: datetime(day: 19, month: 12, year: 2025),
-  tipo: [interno],
+#import "../../../lib/verbaleUtil.typ": *
+#import "../../../lib/docsUtil.typ": *
+#import "../../../lib/variables.typ": *
+
+#verbale(
   versioni: (
-    (
-      date: datetime(day: 19, month: 12, year: 2025),
-      vers: "1.0.0",
-      autore: name.kevin,
-      verificatore: name.suar,
-      descr: "Creazione Documento.",
-    ),
+    ("DataVersione", "NumeroVersione", "DettaglioModifica", "Relatore", "Verificatore"),
   ),
-  stato: [redatto],
-  presenze: (
-    name.suar,
-    name.kevin,
-    name.andrea,
-    name.riccardom,
-    name.antonio,
-    name.alice,
+
+  presenti: (
+    members.suar,
+    members.kevin,
+    members.andrea,
+    members.martinello,
+    members.antonio,
+    members.alice,
+    members.berengan,
   ),
-  assenze: (name.riccardob,),
-  odg: [
-    + Suddivisione ruoli per stesura documenti RTB.
-    + Standardizzaziione documenti in typst con templates.
+
+  assenze: (
+    "",
+  ),
+
+  [
+
+    = Ordine del giorno
+    == Argomenti proposti
+    #let punto1 = "Suddivisione ruoli per stesura documenti RTB"
+    #let punto2 = "Standardizzazione documenti in typst con templates"
+    #let punto3 = "Comprensione della struttura del POC"
+
+    + #punto1.
+    + #punto2.
+    + #punto3.
+
+    = Svolgimento Riunione
+    #let orarioInizioRiunione = "10:00"//...
+    #let orarioFineRiunione = "10:40" //...
+    #let presidenteRiunione = members.suar //...
+    == Apertura
+    La riunione ha avuto inizio alle #orarioInizioRiunione, introdotta da #presidenteRiunione che ha presentato l'ordine del giorno.
+
+    == Discussione punto per punto
+    === Punto 1: #punto1
+    #puntoOdg(
+      punto1,
+      "Il gruppo ha discusso sui possibili linguaggi da utilizzare per la documentazione ed è arrivato a una scelta binaria tra LaTeX e typst.",
+      decisione: [I membri hanno concordato una suddivisione chiara dei ruoli per ottimizzare la redazione dei documenti. In cui le persone sono divise cosí:
+        - #strong("Analisi dei requisiti"): #members.kevin, #members.suar
+        - #strong("Piano di progetto"): #members.andrea, #members.antonio
+        - #strong("Piano di qualifica"): #members.alice, #members.berengan
+        - #strong("Glossario"): #members.kevin, #members.suar, #members.andrea, #members.antonio, #members.alice, #members.berengan, #members.martinello
+        - #strong("Norme di progetto"): #members.martinello
+      ],
+    )
+
+    === Punto 2: #punto2
+    #puntoOdg(
+      punto2,
+      [#members.kevin ha prensentato i template in typst per la standardizzazione dei documenti.],
+      decisione: "I membri hanno deciso di utilizzare i template proposti per garantire coerenza e uniformità nei documenti.",
+    )
+
+    === Punto 3: #punto3
+    #puntoOdg(
+      punto3,
+      "Capire cosa bisogna presentare nell'POC",
+      decisione: "Si é deciso di procedere non come una sintesi del progetto ma un sistema che permette di mostrare che loe tecnologie funzionano senza che l'obiettivo effettivo sia raggiunto.",
+    )
+
+    = Azioni e responsabilità
+    #tabellaAzioni((
+      (
+        "Stesura documento di analisi dei requisiti e glossario",
+        members.suar + " - " + members.kevin,
+        "2025-12-29",
+        "In corso di svolgimento",
+      ),
+      (
+        "Stesura documento piano di progetto",
+        members.andrea + " - " + members.antonio,
+        "2025-12-29",
+        "Da iniziare",
+      ),
+      (
+        "Stesura documento piano di qualifica",
+        members.alice + " - " + members.berengan,
+        "2025-12-29",
+        "Da iniziare",
+      ),
+      (
+        "Stesura documento norme di progetto",
+        members.martinello,
+        "2025-12-29",
+        "Da iniziare",
+      ),
+    ))
   ],
-  canale: [Discord],
-  presiede: [name.suar],
-  ora-inizio: [10:00],
-  ora-fine: [10:40],
-  disambiguatore: [],
-  body,
-)
-
-= Ordine del giorno
-
-== Argomenti proposti
-+ Suddivisione ruoli per stesura documenti RTB.
-+ Standardizzaziione documenti in typst con templates.
-+ POC, capire come procedere e l'obiettivo effettivo
-+ definire incontro con prof. name.cardin e con l'azienda Var Group
-
-= Svolgimento Riunione
-
-== Apertura
-La riunione ha avuto inizio alle 9:53, introdotta da name.suar che ha presentato l'ordine del giorno.
-
-== Discussione punto per punto
-
-#punto-odg(
-  numero: [1],
-  titolo: [Suddivisione ruoli per stesura documenti RTB],
-  sintesi: [Il gruppo ha discusso sulla suddivisione dei ruoli per la stesura dei documenti RTB.],
-  decisione: [I membri hanno concordato una suddivisione chiara dei ruoli per ottimizzare la redazione dei documenti. In cui le persone sono divise cosí:
-    - #strong("Analisi dei requisiti"): #persona(name.kevin), #persona(name.suar)
-    - #strong("Piano di progetto"): #persona(name.andrea), #persona(name.antonio)
-    - #strong("Piano di qualifica"): #persona(name.alice), #persona(name.riccardob)
-    - #strong("Glossario"): tutti
-    - #strong("Norme di progetto"): #persona(name.riccardom)
-  ],
-)
-
-#punto-odg(
-  numero: [2],
-  titolo: [Standardizzaziione documenti in typst con templates],
-  sintesi: [name.kevin ha prensentato i template in typst per la standardizzazione dei documenti.],
-  decisione: [I membri hanno deciso di utilizzare i template proposti per garantire coerenza e uniformità nei documenti.],
-)
-
-#punto-odg(
-  numero: [3],
-  titolo: [POC - capire come procedere e l'obiettivo effettivo],
-  sintesi: [Capire cosa bisogna presentare nell'POC],
-  decisione: [Si é deciso di procedere non come una sintesi del progetto ma un sistema che permette di mostrare che loe tecnologie funzionano senza che l'obiettivo effettivo sia raggiunto.],
-)
-
-= Azioni e responsabilità
-
-#tabella-azioni(
-  [Stesura documento di analisi dei requisiti],
-  [name.suar, name.kevin],
-  [2025-12-29],
-  [Da iniziare],
-  table.hline(stroke: 0.3pt),
-
-  [Stesura documento piano di progetto],
-  [name.andrea, name.antonio],
-  [2025-12-29],
-  [Da iniziare],
-  table.hline(stroke: 0.3pt),
-
-  [Stesura documento piano di qualifica],
-  [name.alice, name.riccardob],
-  [2025-12-29],
-  [Da iniziare],
-
-  table.hline(stroke: 0.3pt),
-  [Stesura documento norme di progetto],
-  [name.riccardom],
-  [2025-12-29],
-  [Da iniziare],
 )

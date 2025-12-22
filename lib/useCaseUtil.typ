@@ -1,11 +1,11 @@
-#let use-case-diagram(version, caption, width: 60%) = [
+#let useCaseDiagram(version, caption, width: 60%) = [
   #figure(
     image("../assets/diagrams/UC" + version + ".png", width: width),
     caption: caption,
   )
 ]
 
-#let use-case(
+#let useCase(
   attore: [],
   pre: [],
   scenari: [],
@@ -38,7 +38,7 @@
     [- *Scenari alternativi*: #scenari_alternativi]
   }
 
-  #if (inclusioni != none) {     
+  #if (inclusioni != none) {
     [- *Inclusioni*: #inclusioni]
   }
 
@@ -50,4 +50,3 @@
     [- *Trigger*: #trigger]
   }
 ]
-

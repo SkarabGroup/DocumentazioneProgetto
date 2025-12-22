@@ -21,6 +21,9 @@ C:
 
   Collaudatori:
     descrizione: Persone o team responsabili di testare il sistema software per garantire che funzioni correttamente e soddisfi i requisiti specificati durante il processo di collaudo.
+
+  Consulente informatico:
+    descrizione: Professionista che fornisce consulenza e supporto tecnico in ambito informatico, aiutando le aziende a migliorare i loro sistemi e processi IT.
 D:
   Database:
     descrizione: Collezione organizzata di dati memorizzati e accessibili elettronicamente, spesso gestita da un sistema di gestione di database (DBMS).
@@ -41,7 +44,10 @@ G:
     descrizione: Piattaforma di hosting per il controllo delle versioni e la collaborazione sul codice sorgente, basata su Git.
 #H: 
 
-#I:
+I:
+  IT:
+    acronimo: Information Technology
+    descrizione: Settore che si occupa dell'uso di computer, software e reti per la gestione e l'elaborazione delle informazioni.
 #J:
 #K:
 #L:
@@ -82,15 +88,23 @@ S:
   Sistema multiagente:
     alternative: Multi-agent system, sistema multi agente, multiagente
     descrizione: Sistema software composto da più agenti autonomi che interagiscono tra loro per raggiungere obiettivi comuni o individuali.
+
+  sviluppatore software:
+    alternative: software developer, sviluppatori software, sviluppatori
+    descrizione: Persona che scrive, testa e mantiene il codice sorgente di applicazioni o sistemi software.
 #T:
 U:
   Utente:
-    alternative: User, utenti
+    alternative: User, Utenti
     descrizione: Persona che utilizza un sistema o un'applicazione software.
 
   URL:
     acronimo: Uniform Resource Locator
     descrizione: Indirizzo web che specifica la posizione di una risorsa su Internet.
+
+  UML:
+    acronimo: Unified Modeling Language
+    descrizione: Linguaggio di modellazione standardizzato utilizzato per visualizzare, specificare, costruire e documentare i componenti di un sistema software.
 V:
   Var Group:
     descrizione: Azienda che ha proposto il capitolato per lo sviluppo del sistema software da parte del team di studenti Skarab Group.
@@ -98,8 +112,8 @@ V:
   Verificatori:
     descrizione: Persone o team responsabili di controllare che il sistema software soddisfi i requisiti specificati durante il processo di verifica.
 W:
-  webapp:
-    alternative: applicazione web, web application
+  Web Application:
+    alternative: Applicazione Web, Webapp
     descrizione: Applicazione software accessibile tramite un browser web, che consente agli utenti di interagire con il sistema attraverso Internet.
 #X:
 #Y:
