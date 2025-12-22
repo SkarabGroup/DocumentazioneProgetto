@@ -11,22 +11,30 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.4.0"
+#let versione = "v0.5.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
     "2025/12/22",
+    "0.5.0",
+    "Aggiunti diagrammi dei casi d'uso UC1 e da UC1.1 a UC1.5. Modificate le postcondizioni delle estensioni",
+    members.suar
+  ),
+  (
+    "2025/12/22",
     "0.4.0",
     "Completato Introduzione e attori dei casi d'uso e correzione UC1.X",
-    members.kevin
+    members.kevin,
+    members.suar
   ),
   (
     "2025/12/22",
     "0.3.1",
     "Leggere correzioni lessicali",
-    members.kevin
+    members.kevin,
+    members.suar
   ),
   (
     "2025/12/21",
@@ -108,7 +116,7 @@ Questa sezione descrive le principali funzionalitá dovrá fornire all'utilizzat
   - Controllo della conformità agli standard di documentazione aziendali e non e delle best practice.
   - Analisi semantica per garantire che la documentazione rifletta accuratamente il funzionamento del codice.
 
-L'#def("utente") potrá richiedere l'analisi di uno o piú #def("repository") #def("GitHub") specificando l'#def("URL") del repository e le aree di interesse (codice, documentazione o entrambe). Il sistema genererà un report dettagliato con i risultati dell'analisi, evidenziando le aree di miglioramento e fornendo raccomandazioni per ottimizzare la qualitá del codice e della documentazione. L'interfaccia sará una #def("webapp") con una #def("GUI") intuitiva e user-friendlyc da cui l'utente potrá interagire con il sistema, richiedere analisi e visualizzare i report generati sottoforma di grafici e tabelle.
+L'#def("utente") potrá richiedere l'analisi di uno o piú #def("repository") #def("GitHub") specificando l'#def("URL") del repository e le aree di interesse (codice, documentazione o entrambe). Il sistema genererà un report dettagliato con i risultati dell'analisi, evidenziando le aree di miglioramento e fornendo raccomandazioni per ottimizzare la qualitá del codice e della documentazione. L'interfaccia sará una #def("webapp") con una #def("GUI") intuitiva e user-friendly da cui l'utente potrá interagire con il sistema, richiedere analisi e visualizzare i report generati sottoforma di grafici e tabelle.
 
 == Caratteristiche degli utenti
 
@@ -226,18 +234,18 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente possiede le credenziali di un account CodeGuardian censito dal Sistema
   ],
   scenari: [
-    - L'utente inserisce il proprio nome (UC1.1)
-    - L'utente inserisce il proprio cognome (UC1.2)
-    - L'utente inserisce un username (UC1.3)
-    - L'utente inserisce una email di riferimento (UC1.4)
-    - L'utente inserisce una password (UC1.5)
+    - L'utente inserisce il proprio nome #link(<UC1.1>)[#underline[\[UC1.1\]]]
+    - L'utente inserisce il proprio cognome #link(<UC1.2>)[#underline[\[UC1.2\]]]
+    - L'utente inserisce un username #link(<UC1.3>)[#underline[\[UC1.3\]]]
+    - L'utente inserisce una email di riferimento #link(<UC1.4>)[#underline[\[UC1.4\]]]
+    - L'utente inserisce una password #link(<UC1.5>)[#underline[\[UC1.5\]]]
   ],
   inclusioni: [
-    - UC1.1 // Inserimento Nome
-    - UC1.2 // Inserimento Cognome
-    - UC1.3 // Inserimento Username
-    - UC1.4 // Inserimento Email
-    - UC1.5 // Inserimento Password
+    - #link(<UC1.1>)[#underline[\[UC1.1\]]] // Inserimento Nome
+    - #link(<UC1.2>)[#underline[\[UC1.2\]]] // Inserimento Cognome
+    - #link(<UC1.3>)[#underline[\[UC1.3\]]] // Inserimento Username
+    - #link(<UC1.4>)[#underline[\[UC1.4\]]] // Inserimento Email
+    - #link(<UC1.5>)[#underline[\[UC1.5\]]] // Inserimento Password
   ],
   estensioni: [
     - Nessuna
@@ -247,24 +255,24 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   #useCaseDiagram("1", "UC1 - Registrazione")
 ]
 
-==== UC1.1: Inserimento Nome <UC1.1>
+==== UC1.1: Inserimento nome <UC1.1>
 #useCase(
   attore: "Utente non registrato",
   pre: [
     - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
   ],
   post: [
-    - L'utente ha inserito il nome con cui vuole effettuare la procedura di registrazione a CodeGuardian
+    - Il Sistema ha validato il nome inserito dall'utente
   ],
   scenari: [
-    - L'utente inserisce il nome con cui vuole effettuare la procedura di registrazione a CodeGuardian
+    - L'utente inserisce il nome per la procedura di registrazione
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - UC1.1.1 // Nome inserito non valido
+    - #link(<UC1.1.1>)[#underline[\[UC1.1.1\]]] // Nome inserito non valido
   ],
   trigger: "L'utente interagisce con la sezione di inserimento del nome durante la procedura di registrazione a CodeGuardian"
 )[
@@ -276,11 +284,12 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Utente non registrato",
   pre: [
     - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
-    - L'utente ha inserito un nome non valido durante
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
+    - L'utente ha inserito un nome non valido durante l'inserimento del nome #link(<UC1.1>)[#underline[\[UC1.1\]]]
   ],
   post: [
-    - La procedura di registrazione non viene completata
+    - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato
+      di inserimento dati
   ],
   scenari: [
     - L'utente visualizza un messaggio di errore che indica che il nome inserito non è valido
@@ -296,28 +305,28 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[
 ]
 
-==== UC1.2: Inserimento Cognome <UC1.2>
+==== UC1.2: Inserimento cognome <UC1.2>
 #useCase(
   attore: "Utente non registrato",
   pre: [
     - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
   ],
   post: [
-    - L'utente ha inserito il cognome con cui vuole effettuare la procedura di registrazione a CodeGuardian
+    - Il Sistema ha validato il cognome inserito dall'utente
   ],
   scenari: [
-    - L'utente inserisce il cognome con cui vuole effettuare la procedura di registrazione a CodeGuardian
+    - L'utente inserisce il cognome per la procedura di registrazione
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - UC1.2.1 // cognome inserito non valido
+    - #link(<UC1.2.1>)[#underline[\[UC1.2.1\]]] // cognome inserito non valido
   ],
   trigger: "L'utente interagisce con la sezione di inserimento del cognome durante la procedura di registrazione a CodeGuardian"
 )[
-  //#useCaseDiagram("1.2", "UC1.2")
+  #useCaseDiagram("1_2", "UC1.2: Inserimento cognome")
 ]
 
 ==== UC1.2.1: Cognome inserito non valido <UC1.2.1>
@@ -325,11 +334,12 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Utente non registrato",
   pre: [
     - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
-    - L'utente ha inserito un cognome non valido
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
+    - L'utente ha inserito un cognome non valido durante l'inserimento del nome #link(<UC1.2>)[#underline[\[UC1.2\]]]
   ],
   post: [
-    - La procedura di registrazione non viene completata
+    - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato
+      di inserimento dati
   ],
   scenari: [
     - L'utente visualizza un messaggio di errore che indica che il cognome inserito non è
@@ -351,23 +361,24 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Utente non registrato",
   pre: [
     - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
   ],
   post: [
-    - L'utente ha inserito l'username con cui vuole effettuare la procedura di registrazione a CodeGuardian
+    - Il Sistema ha validato l'username inserito dall'utente
   ],
   scenari: [
-    - L'utente inserisce l'username con cui vuole effettuare la procedura di registrazione a CodeGuardian
+    - L'utente inserisce l'username per la procedura di registrazione
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - UC1.3.1 // username inserita non valida
+    - #link(<UC1.3.1>)[#underline[\[UC1.3.1\]]] // username inserita non valida
+    - #link(<UC1.3.2>)[#underline[\[UC1.3.2\]]] // username già censita dal Sistema
   ],
   trigger: "L'utente interagisce con la sezione di inserimento dell'username durante la procedura di registrazione a CodeGuardian"
 )[
-  //#useCaseDiagram("1.3", "UC1.3")
+  #useCaseDiagram("1_3", "UC1.3: Inserimento username")
 ]
 
 ==== UC1.3.1: Username inserito non valido <UC1.3.1>
@@ -375,11 +386,12 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Utente non registrato",
   pre: [
     - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
-    - L'utente ha inserita un username non valida
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
+    - L'utente ha inserita un username non valido durante l'inserimento dell'username #link(<UC1.3>)[#underline[\[UC1.3\]]]
   ],
   post: [
-    - La procedura di registrazione non viene completata
+    - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato
+      di inserimento dati
   ],
   scenari: [
     - L'utente visualizza un messaggio di errore che indica che l'username inserito non è valido
@@ -400,11 +412,12 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Utente non registrato",
   pre: [
     - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
-    - L'utente ha inserito un username già censito dal sistema
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
+    - L'utente ha inserito un username già censito dal sistema durante l'inserimento dell'username #link(<UC1.3>)[#underline[\[UC1.3\]]]
   ],
   post: [
-    - La procedura di registrazione non viene completata
+    - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato
+      di inserimento dati
   ],
   scenari: [
     - L'utente visualizza un messaggio di errore che indica che l'username inserito non è valido
@@ -426,24 +439,24 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Utente non registrato",
   pre: [
     - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
   ],
   post: [
-    - L'utente ha inserito l'email con cui vuole effettuare la procedura di registrazione a CodeGuardian
+    - Il Sistema ha validato l'email inserita dall'utente
   ],
   scenari: [
-    - L'utente inserisce l'email con cui vuole effettuare la procedura di registrazione a CodeGuardian
+    - L'utente inserisce l'email per la procedura di registrazione
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - UC1.4.1 // email inserita non valido
-    - UC1.4.2 // email già censita a sistema
+    - #link(<UC1.4.1>)[#underline[\UC1.4.1\]]] // email inserita non valido
+    - #link(<UC1.4.2>)[#underline[\UC1.4.2\]]]// email già censita a sistema
   ],
   trigger: "L'utente interagisce con la sezione di inserimento dell'email durante la procedura di registrazione a CodeGuardian"
 )[
-  //#useCaseDiagram("1.4", "UC1.4")
+  #useCaseDiagram("1_4", "UC1.4: Inserimento email")
 ]
 
 ===== UC1.4.1: Email inserita non valida <UC1.4.1>
@@ -451,14 +464,16 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Utente non registrato",
   pre: [
     - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
-    - L'utente ha inserita un email non valida durante l'inserimento dell'email (UC1.4)
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
+    - L'utente ha inserita un email non valida durante l'inserimento dell'email #link(<UC1.4>)[#underline[\UC1.4\]]]
   ],
   post: [
-    - L'utente riceve una notifica di errore che il email inserita non è valida
+    - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato 
+      di inserimento dati
   ],
   scenari: [
-    - L'utente inserisce un email non valida
+    - L'utente visualizza un messaggio di errore che lo notifica del fatto che la email
+      inserita non è valida per la procedura di registrazione
   ],
   inclusioni: [
     - Nessuna
@@ -467,8 +482,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "L'utente interagisce con la sezione di inserimento dell'email durante la procedura di registrazione a CodeGuardian"
-)[
-]
+)[]
 
 
 ==== UC1.4.2: Email inserita già censita dal Sistema <UC1.4.2>
@@ -476,11 +490,12 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Utente non registrato",
   pre: [
     - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
-    - L'utente ha inserito un'email già censita dal sistema
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
+    - L'utente ha inserito un'email già censita dal sistema durante l'inserimento dell'email #link(<UC1.4>)[#underline[\UC1.4\]]]
   ],
   post: [
-    - La procedura di registrazione non viene terminata
+    - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato 
+      di inserimento dati
   ],
   scenari: [
     - L'utente visualizza un messaggio di errore che indica che la email inserita non è valida
@@ -494,15 +509,14 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "L'utente interagisce con la sezione di inserimento dell'email durante la procedura di registrazione a CodeGuardian"
-)[
-]
+)[]
 
 ==== UC1.5: Inserimento password <UC1.5>
 #useCase(
   attore: "Utente non registrato",
   pre: [
     - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
   ],
   post: [
     - L'utente ha inserito la password con cui vuole effettuare la procedura di registrazione a CodeGuardian
@@ -514,11 +528,11 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   estensioni: [
-    - UC1.5.1 // password inserita non valida
+    - #link(<UC1.5.1>)[#underline[\[UC1.5.1\]]] // password inserita non valida
   ],
   trigger: "L'utente interagisce con la sezione di inserimento della password durante la procedura di registrazione a CodeGuardian"
 )[
-  //#useCaseDiagram("1.4", "UC1.4")
+  #useCaseDiagram("1_5", "UC1.5: Inserimento password")
 ]
 
 ===== UC1.5.1: Password inserita non valida <UC1.5.1>
@@ -526,11 +540,12 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Utente non registrato",
   pre: [
     - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
-    - L'utente ha inserito una password non valida
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
+    - L'utente ha inserito una password non valida durante l'inserimento della password #link(<UC1.5>)[#underline[\[UC1.5\]]]
   ],
   post: [
-    - La procedura di registrazione non viene terminata
+    - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato 
+      di inserimento dati
   ],
   scenari: [
     - L'utente visualizza un messaggio di errore che indica che la password inserita non è
@@ -543,9 +558,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "L'utente interagisce con la sezione di inserimento della password durante la procedura di registrazione a CodeGuardian"
-)[
-]
+)[]
 
-=== UC2: Autenticazione account a CodeGuardian
+=== UC2: Autenticazione a CodeGuardian <UC2>
 
-=== UC3: Collegamento account CodeGuardian ad account GitHub
+=== UC3: Collegamento account CodeGuardian ad account GitHub <UC3>
