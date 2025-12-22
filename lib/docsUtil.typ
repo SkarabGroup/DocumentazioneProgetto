@@ -39,7 +39,7 @@
     stroke: 0.5pt + luma(200),
     
     fill: (col, row) => if row == 0 {
-      luma(230)
+      luma(62.75%)
     } else if calc.even(row) {
       luma(220)
     } else {
@@ -95,7 +95,7 @@
 
   outline(
     title: text(weight: "bold", size: 22pt)[Indice],
-    depth: 3,
+    depth: 5,
     indent: auto,
   )
 

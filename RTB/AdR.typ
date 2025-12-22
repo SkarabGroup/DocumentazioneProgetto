@@ -11,21 +11,34 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.3.0"
+#let versione = "v0.4.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
-    "21/12/2025",
+    "2025/12/22",
+    "0.4.0",
+    "Completato Introduzione e attori dei casi d'uso e correzione UC1.X",
+    members.kevin
+  ),
+  (
+    "2025/12/22",
+    "0.3.1",
+    "Leggere correzioni lessicali",
+    members.kevin
+  ),
+  (
+    "2025/12/21",
     "0.3.0",
     "Casi d'uso UC1 e da UC1.1 a UC1.5 (compresi di estensioni)",
     members.suar,
+    members.kevin
 
   ),
 
   (
-    "20/12/2025",  
+    "2025/12/20",  
     "0.2.0", 
     "Completamento sezione funzioni del prodotto e caratteristiche degli utenti", 
     members.kevin,
@@ -33,7 +46,7 @@
   ),
   
   (
-    "18/12/2025", 
+    "2025/12/18", 
     "0.1.0", 
     "Inizio stesura documento, introduzione, scopo e prospettiva del prodotto", 
     members.kevin, 
@@ -41,7 +54,7 @@
   ),
   
   (
-    "17/12/2025", 
+    "2025/12/17", 
     "0.0.0", 
     "Creazione documento", 
     members.kevin, 
@@ -52,6 +65,14 @@
 #versionTable(history)
 
 #indice()
+
+#indiceImmagini()
+
+#pagebreak()
+
+#indiceTabelle()
+
+#pagebreak()
 
 = Introduzione
 
@@ -91,20 +112,106 @@ L'#def("utente") potrá richiedere l'analisi di uno o piú #def("repository") #d
 
 == Caratteristiche degli utenti
 
-Gli #def("utenti") principali del sistema sono #def("sviluppatori software"), manager #def("IT") e #TODO("ultimo utente, non ricordo") che desiderano una valutazione sulla qualitá del codice e della documentazione nei loro progetti. Gli utenti avranno diversi livelli di competenza tecnica, pertanto l'interfaccia utente sará progettata per essere accessibile sia a utenti esperti che a quelli meno esperti.  
+Gli #def("utenti") principali del sistema sono #def("sviluppatori software"), manager #def("IT") e #def("consulente informatico") che desiderano una valutazione sulla qualitá del codice e della documentazione nei loro progetti. Gli utenti avranno diversi livelli di competenza tecnica, pertanto l'interfaccia utente sará progettata per essere accessibile sia a utenti esperti che a quelli meno esperti.  
 
 == Definizioni e Acronimi
 Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo documento sono elencati nel #strong("Glossario"), un documento separato fornito al lettore. Questo glossario serve a garantire una comprensione chiara e condivisa dei termini utilizzati nel contesto del progetto e del sistema software in sviluppo.
 
 == Riferimenti
+- Standard IEEE \ #underline[https://ieeexplore.ieee.org/document/720574]
+- Dispense del corso di Ingegneria del Software sull'analisi dei requisiti \ #underline[https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T05.pdf]
+- Dispense del corso di Ingegneria del Software sui casi d'uso \ #underline[https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20Use%20Case.pdf]
+
 
 #pagebreak()
 
 = Casi d'uso
 
 == Introduzione
+In questa sezione vengono descritti i #def("casi d'uso") principali del sistema software #def("Code Guardian"). Ogni #def("caso d'uso") è descritto in dettaglio, includendo gli attori coinvolti, le precondizioni e postcondizioni, gli scenari principali, nonché eventuali inclusioni ed estensioni. Inoltre, per ogni #def("caso d'uso") viene fornito un #def("UML") che illustra visivamente le interazioni tra gli attori e il sistema.
 
-== attori_secondari
+Di seguito sono elencati le componenti di un caso d'uso del sistema con relativa descrizione:
+
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(62.75%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (2fr, 5fr),
+    inset: 10pt,
+    table.header(
+      [*Campo*],
+      [*Descrizione*],
+    ),
+
+    [*Precondizioni*],
+    [Lista di elementi fondamentali affinché l'Attore possa compiere l'azione indicata dal caso d'uso],
+    [*Attori*], [Sono esterni al Sistema e interagiscono attivamente con esso per compiere l'azione descritta dal Caso d'Uso],
+    [*Attori secondari*], [Sono attori che interagiscono con il sistema solo passivamente],
+
+    [*Postcondizioni*],
+    [Insieme delle modifiche allo stato interno del Sistema che risultano dall'esecuzione del Caso d'Uso da parte dell'Attore.],
+
+    [*Scenario principale*],
+    [Sequenza ordinata di azioni che l'Attore deve eseguire affinché il Caso d'Uso venga portato a termine con successo],
+
+    [*Inclusioni*],
+    [Elenco dei Casi d'Uso aggiuntivi che devono essere necessariamente eseguiti dall'Attore per completare il Caso d'Uso corrente.],
+
+    [*Estensioni*],
+    [Insieme dei Casi d'Uso opzionali che possono manifestarsi durante l'esecuzione del Caso d'Uso principale in presenza di determinate condizioni.],
+
+    [*Trigger*],
+    [Evento o condizione che induce l'Attore ad avviare il Caso d'Uso descritto; può non essere specificato qualora il Caso d'Uso sia attivato come inclusione di un altro Caso d'Uso.],
+  ),
+  caption: [Campi dei Casi d'Uso],
+)
+
+#pagebreak()
+== Attori
+
+Di seguito sono elencati gli attori principali che interagiscono con il sistema software #def("Code Guardian"):
+
+#figure(
+  image("../assets/Actors.png", width: 70%),
+  caption: [Attori del sistema CodeGuardian],
+)
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(62.75%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (2fr, 5fr),
+    inset: 10pt,
+    table.header(
+      [*Attore*],
+      [*Descrizione*],
+    ),
+
+    [*Utente non registrato*],
+    [Utente che non possiede un account CodeGuardian e desidera registrarsi per utilizzare il sistema.],
+
+    [*Utente registrato*],
+    [Utente che ha completato la procedura di registrazione a CodeGuardian e possiede un account valido per accedere al sistema.],
+
+    [*Utente registrato avanzato*],
+    [Utente registrato che ha collegato con successo il proprio account CodeGuardian ad un account GitHub e può usufruire di funzionalitá avanzate del sistema.],
+
+    [*Utente autenticato*],
+    [Utente che ha effettuato con successo l'accesso al proprio account CodeGuardian e può utilizzare le funzionalità del sistema.],
+
+    [*Utente autenticato avanzato*],
+    [Utente autenticato che ha collegato con successo il proprio account CodeGuardian ad un account GitHub e può usufruire di funzionalitá avanzate del sistema.],
+
+    [*Sistema GitHub*],
+    [Piattaforma di hosting per lo sviluppo di software che fornisce servizi di controllo versione e collaborazione tramite repository Git.]
+  ),
+  caption: [Attori principali del sistema CodeGuardian],
+)
 
 == Lista
 
@@ -121,7 +228,7 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
   scenari: [
     - L'utente inserisce il proprio nome (UC1.1)
     - L'utente inserisce il proprio cognome (UC1.2)
-    - L'utente inserisce una username (UC1.3)
+    - L'utente inserisce un username (UC1.3)
     - L'utente inserisce una email di riferimento (UC1.4)
     - L'utente inserisce una password (UC1.5)
   ],
@@ -135,12 +242,12 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+  trigger: "L'utente accede alla sezione di registrazione a CodeGuardian"
 )[
-  #useCaseDiagram("1", "UC1")
+  #useCaseDiagram("1", "UC1 - Registrazione")
 ]
 
-=== UC1.1: Inserimento Nome <UC1.1>
+==== UC1.1: Inserimento Nome <UC1.1>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -159,12 +266,12 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
   estensioni: [
     - UC1.1.1 // Nome inserito non valido
   ],
-  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+  trigger: "L'utente interagisce con la sezione di inserimento del nome durante la procedura di registrazione a CodeGuardian"
 )[
-  #useCaseDiagram("1.1", "UC1.1")
+  #useCaseDiagram("1_1", "UC1.1 - Inserimento nome")
 ]
 
-=== UC1.1.1: Nome inserito non valido <UC1.1.1>
+===== UC1.1.1: Nome inserito non valido <UC1.1.1>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -185,11 +292,11 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+  trigger: "L'utente interagisce con la sezione di inserimento del nome durante la procedura di registrazione a CodeGuardian"
 )[
 ]
 
-=== UC1.2: Inserimento Cognome <UC1.2>
+==== UC1.2: Inserimento Cognome <UC1.2>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -208,12 +315,12 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
   estensioni: [
     - UC1.2.1 // cognome inserito non valido
   ],
-  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+  trigger: "L'utente interagisce con la sezione di inserimento del cognome durante la procedura di registrazione a CodeGuardian"
 )[
-  #useCaseDiagram("1.2", "UC1.2")
+  //#useCaseDiagram("1.2", "UC1.2")
 ]
 
-=== UC1.2.1: Cognome inserito non valido <UC1.2.1>
+==== UC1.2.1: Cognome inserito non valido <UC1.2.1>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -234,12 +341,12 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+  trigger: "L'utente interagisce con la sezione di inserimento del cognome durante la procedura di registrazione a CodeGuardian"
 )[
 ]
 
 
-=== UC1.3: Inserimento username <UC1.3>
+==== UC1.3: Inserimento username <UC1.3>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -258,12 +365,12 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
   estensioni: [
     - UC1.3.1 // username inserita non valida
   ],
-  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+  trigger: "L'utente interagisce con la sezione di inserimento dell'username durante la procedura di registrazione a CodeGuardian"
 )[
-  #useCaseDiagram("1.3", "UC1.3")
+  //#useCaseDiagram("1.3", "UC1.3")
 ]
 
-=== UC1.3.1: Username inserito non valido <UC1.3.1>
+==== UC1.3.1: Username inserito non valido <UC1.3.1>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -284,11 +391,11 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+  trigger: "L'utente interagisce con la sezione di inserimento dell'username durante la procedura di registrazione a CodeGuardian"
 )[
 ]
 
-=== UC1.3.2: Username inserito già censito dal Sistema <UC1.3.2>
+==== UC1.3.2: Username inserito già censito dal Sistema <UC1.3.2>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -310,11 +417,11 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+  trigger: "L'utente interagisce con la sezione di inserimento dell'username durante la procedura di registrazione a CodeGuardian"
 )[
 ]
 
-=== UC1.4: Inserimento email <UC1.4>
+==== UC1.4: Inserimento email <UC1.4>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -334,12 +441,12 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
     - UC1.4.1 // email inserita non valido
     - UC1.4.2 // email già censita a sistema
   ],
-  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+  trigger: "L'utente interagisce con la sezione di inserimento dell'email durante la procedura di registrazione a CodeGuardian"
 )[
-  #useCaseDiagram("1.4", "UC1.4")
+  //#useCaseDiagram("1.4", "UC1.4")
 ]
 
-=== UC1.4.1: Email inserita non valida <UC1.4.1>
+===== UC1.4.1: Email inserita non valida <UC1.4.1>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -359,12 +466,12 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+  trigger: "L'utente interagisce con la sezione di inserimento dell'email durante la procedura di registrazione a CodeGuardian"
 )[
 ]
 
 
-=== UC1.4.2: Email inserita già censita dal Sistema <UC1.4.2>
+==== UC1.4.2: Email inserita già censita dal Sistema <UC1.4.2>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -386,11 +493,11 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+  trigger: "L'utente interagisce con la sezione di inserimento dell'email durante la procedura di registrazione a CodeGuardian"
 )[
 ]
 
-=== UC1.5: Inserimento password <UC1.5>
+==== UC1.5: Inserimento password <UC1.5>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -409,12 +516,12 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
   estensioni: [
     - UC1.5.1 // password inserita non valida
   ],
-  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+  trigger: "L'utente interagisce con la sezione di inserimento della password durante la procedura di registrazione a CodeGuardian"
 )[
-  #useCaseDiagram("1.4", "UC1.4")
+  //#useCaseDiagram("1.4", "UC1.4")
 ]
 
-=== UC1.5.1: Password inserita non valida <UC1.5.1>
+===== UC1.5.1: Password inserita non valida <UC1.5.1>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -435,7 +542,7 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+  trigger: "L'utente interagisce con la sezione di inserimento della password durante la procedura di registrazione a CodeGuardian"
 )[
 ]
 

@@ -21,6 +21,9 @@ C:
 
   Collaudatori:
     descrizione: Persone o team responsabili di testare il sistema software per garantire che funzioni correttamente e soddisfi i requisiti specificati durante il processo di collaudo.
+
+  Consulente informatico:
+    descrizione: Professionista che fornisce consulenza e supporto tecnico in ambito informatico, aiutando le aziende a migliorare i loro sistemi e processi IT.
 D:
   Database:
     descrizione: Collezione organizzata di dati memorizzati e accessibili elettronicamente, spesso gestita da un sistema di gestione di database (DBMS).
@@ -98,6 +101,10 @@ U:
   URL:
     acronimo: Uniform Resource Locator
     descrizione: Indirizzo web che specifica la posizione di una risorsa su Internet.
+
+  UML:
+    acronimo: Unified Modeling Language
+    descrizione: Linguaggio di modellazione standardizzato utilizzato per visualizzare, specificare, costruire e documentare i componenti di un sistema software.
 V:
   Var Group:
     descrizione: Azienda che ha proposto il capitolato per lo sviluppo del sistema software da parte del team di studenti Skarab Group.
