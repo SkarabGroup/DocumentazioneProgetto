@@ -19,7 +19,7 @@
   (
     "21/12/2025",
     "0.3.0",
-    "Casi d'uso UC1, UC1.1, UC1.1.1",
+    "Casi d'uso UC1 e da UC1.1 a UC1.5 (compresi di estensioni)",
     members.suar,
 
   ),
@@ -113,12 +113,12 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
   attore: "Utente non registrato",
   pre: [
     - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
+    - L'utente seleziona la sezione di registrazione di CodeGuardian
   ],
   post: [
     - L'utente possiede le credenziali di un account CodeGuardian censito dal Sistema
   ],
   scenari: [
-    - L'utente seleziona la sezione di registrazione di CodeGuardian
     - L'utente inserisce il proprio nome (UC1.1)
     - L'utente inserisce il proprio cognome (UC1.2)
     - L'utente inserisce una username (UC1.3)
@@ -161,7 +161,7 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
   ],
   trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
 )[
-  #useCaseDiagram("1", "UC1")
+  #useCaseDiagram("1.1", "UC1.1")
 ]
 
 === UC1.1.1: Nome inserito non valido <UC1.1.1>
@@ -170,21 +170,275 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
   pre: [
     - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
     - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
-    - L'utente ha inserito un nome non valido durante l'inserimento del nome (UC1.1)
+    - L'utente ha inserito un nome non valido durante
   ],
   post: [
-    - L'utente riceve una notifica di errore che il nome inserito non è valido
+    - La procedura di registrazione non viene completata
   ],
   scenari: [
-    - L'utente inserisce un nome non valido
+    - L'utente visualizza un messaggio di errore che indica che il nome inserito non è valido
+      per la procedura di registrazione
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - Nessuna (è già un caso d'uso estensione)
+    - Nessuna
   ],
   trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
 )[
-  #useCaseDiagram("1.1.1", "UC1.1.1")
 ]
+
+=== UC1.2: Inserimento Cognome <UC1.2>
+#useCase(
+  attore: "Utente non registrato",
+  pre: [
+    - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
+  ],
+  post: [
+    - L'utente ha inserito il cognome con cui vuole effettuare la procedura di registrazione a CodeGuardian
+  ],
+  scenari: [
+    - L'utente inserisce il cognome con cui vuole effettuare la procedura di registrazione a CodeGuardian
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - UC1.2.1 // cognome inserito non valido
+  ],
+  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+)[
+  #useCaseDiagram("1.2", "UC1.2")
+]
+
+=== UC1.2.1: Cognome inserito non valido <UC1.2.1>
+#useCase(
+  attore: "Utente non registrato",
+  pre: [
+    - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
+    - L'utente ha inserito un cognome non valido
+  ],
+  post: [
+    - La procedura di registrazione non viene completata
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che il cognome inserito non è
+      valido per la procedura di registrazione
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+)[
+]
+
+
+=== UC1.3: Inserimento username <UC1.3>
+#useCase(
+  attore: "Utente non registrato",
+  pre: [
+    - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
+  ],
+  post: [
+    - L'utente ha inserito l'username con cui vuole effettuare la procedura di registrazione a CodeGuardian
+  ],
+  scenari: [
+    - L'utente inserisce l'username con cui vuole effettuare la procedura di registrazione a CodeGuardian
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - UC1.3.1 // username inserita non valida
+  ],
+  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+)[
+  #useCaseDiagram("1.3", "UC1.3")
+]
+
+=== UC1.3.1: Username inserito non valido <UC1.3.1>
+#useCase(
+  attore: "Utente non registrato",
+  pre: [
+    - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
+    - L'utente ha inserita un username non valida
+  ],
+  post: [
+    - La procedura di registrazione non viene completata
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che l'username inserito non è valido
+      per la procedura di registrazione
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+)[
+]
+
+=== UC1.3.2: Username inserito già censito dal Sistema <UC1.3.2>
+#useCase(
+  attore: "Utente non registrato",
+  pre: [
+    - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
+    - L'utente ha inserito un username già censito dal sistema
+  ],
+  post: [
+    - La procedura di registrazione non viene completata
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che l'username inserito non è valido
+      per la procedura di registrazione (per questioni di sicurezza, non viene specificato che 
+      si tratta di un username già in uso)
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+)[
+]
+
+=== UC1.4: Inserimento email <UC1.4>
+#useCase(
+  attore: "Utente non registrato",
+  pre: [
+    - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
+  ],
+  post: [
+    - L'utente ha inserito l'email con cui vuole effettuare la procedura di registrazione a CodeGuardian
+  ],
+  scenari: [
+    - L'utente inserisce l'email con cui vuole effettuare la procedura di registrazione a CodeGuardian
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - UC1.4.1 // email inserita non valido
+    - UC1.4.2 // email già censita a sistema
+  ],
+  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+)[
+  #useCaseDiagram("1.4", "UC1.4")
+]
+
+=== UC1.4.1: Email inserita non valida <UC1.4.1>
+#useCase(
+  attore: "Utente non registrato",
+  pre: [
+    - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
+    - L'utente ha inserita un email non valida durante l'inserimento dell'email (UC1.4)
+  ],
+  post: [
+    - L'utente riceve una notifica di errore che il email inserita non è valida
+  ],
+  scenari: [
+    - L'utente inserisce un email non valida
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+)[
+]
+
+
+=== UC1.4.2: Email inserita già censita dal Sistema <UC1.4.2>
+#useCase(
+  attore: "Utente non registrato",
+  pre: [
+    - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
+    - L'utente ha inserito un'email già censita dal sistema
+  ],
+  post: [
+    - La procedura di registrazione non viene terminata
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che la email inserita non è valida
+      per la procedura di registrazione (per questioni di sicurezza, non viene specificato che 
+      si tratta di un'email già in uso)
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+)[
+]
+
+=== UC1.5: Inserimento password <UC1.5>
+#useCase(
+  attore: "Utente non registrato",
+  pre: [
+    - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
+  ],
+  post: [
+    - L'utente ha inserito la password con cui vuole effettuare la procedura di registrazione a CodeGuardian
+  ],
+  scenari: [
+    - L'utente inserisce la password con cui vuole effettuare la procedura di registrazione a CodeGuardian
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - UC1.5.1 // password inserita non valida
+  ],
+  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+)[
+  #useCaseDiagram("1.4", "UC1.4")
+]
+
+=== UC1.5.1: Password inserita non valida <UC1.5.1>
+#useCase(
+  attore: "Utente non registrato",
+  pre: [
+    - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
+    - L'utente ha inserito una password non valida
+  ],
+  post: [
+    - La procedura di registrazione non viene terminata
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che la password inserita non è
+      valida per la procedura di registrazione
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente desidera effettuare la procedura di registrazione a CodeGuardian"
+)[
+]
+
+=== UC2: Autenticazione account a CodeGuardian
+
+=== UC3: Collegamento account CodeGuardian ad account GitHub
