@@ -136,10 +136,11 @@
 
     = Svolgimento Riunione
     #let orarioInizioRiunione = "09:00"//...
+    #let dataRiunione = "Data"
     #let orarioFineRiunione = "09:00" //...
     #let presidenteRiunione = "Io" //...
     == Apertura
-    La riunione ha avuto inizio alle #orarioInizioRiunione, introdotta da #presidenteRiunione che ha presentato l'ordine del giorno.
+    La riunione, svoltasi in data #dataRiunione ha avuto inizio alle #orarioInizioRiunione, introdotta da #presidenteRiunione che ha presentato l'ordine del giorno.
 
     == Discussione punto per punto
     === Punto 1: #punto1
