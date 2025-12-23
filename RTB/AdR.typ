@@ -2,6 +2,7 @@
 #import "../lib/variables.typ": *
 #import "../lib/useCaseUtil.typ": *
 
+
 //Note sul versionamento
 /*
   x.y.z
@@ -11,13 +12,19 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.8.0"
+#let versione = "v0.9.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
     "2025/12/23",
+    "0.9.0",
+    "Aggiunta UC4.1.2 e UC4.1.3",
+    members.kevin
+  ),
+  (
+    "2025/12/22",
     "0.8.0",
     "Aggiunti UC4 e UC5",
     members.kevin
@@ -758,12 +765,15 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   scenari: [
     - L'utente inserisce l'URL del repository GitHub da analizzare
+    
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
     - #link(<UC4.1.1>)[#underline[\[UC4.1.1\]]] // URL repository GitHub non valido
+    - #link(<UC4.1.2>)[#underline[\[UC4.1.2\]]] // repository GitHub non accessibile
+    - #link(<UC4.1.3>)[#underline[\[UC4.1.3\]]] // repository GitHub non inserito
   ],
   trigger: "L'utente interagisce con la sezione di inserimento dell'URL del repository GitHub durante la procedura di richiesta analisi repository GitHub a CodeGuardian"
 )[
@@ -794,6 +804,54 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente interagisce con la sezione di inserimento dell'URL del repository GitHub durante la procedura di richiesta analisi repository GitHub a CodeGuardian" 
 )[]
 
+===== UC4.1.2: Repository GitHub non accessibile <UC4.1.2>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha inserito un URL del repository GitHub non accessibile durante l'inserimento dell'URL del repository GitHub #link(<UC4.1>)[#underline[\[UC4.1\]]]
+  ],
+  post: [
+    - La procedura di richiesta analisi repository GitHub non viene finalizzata e il Sistema rimane nello stato di inserimento dati
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che il repository GitHub specificato non è accessibile per la procedura di richiesta analisi repository GitHub
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con la sezione di inserimento dell'URL del repository GitHub durante la procedura di richiesta analisi repository GitHub a CodeGuardian"
+)[
+]
+
+===== UC4.1.3: Repository GitHub non inserito <UC4.1.3>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente non ha inserito alcun URL del repository GitHub durante l'inserimento dell'URL del repository GitHub #link(<UC4.1>)[#underline[\[UC4.1\]]]
+  ],
+  post: [
+    - La procedura di richiesta analisi repository GitHub non viene finalizzata e il Sistema rimane nello stato di inserimento dati
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che deve essere inserito un URL del repository GitHub per procedere con la richiesta di analisi del repository GitHub
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con la sezione di inserimento dell'URL del repository GitHub durante la procedura di richiesta analisi repository GitHub a CodeGuardian"
+)[]
 
 ==== UC4.2: Selezione aree di interesse <UC4.2>
 #useCase(
@@ -1092,6 +1150,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'utente interagisce con la sezione di visualizzazione del report di analisi repository GitHub di CodeGuardian"
 )[] 
+
+==== UC6: Accesso al profilo CodeGuardian <UC6>
+==== UC7: modifica password profilo CodeGuardian <UC7>
+==== UC8: Recupero password profilo CodeGuardian <UC8>
 
 
    
