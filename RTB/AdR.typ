@@ -20,7 +20,7 @@
   (
     "2025/12/23",
     "0.9.0",
-    "Aggiunta UC4.1.2 e UC4.1.3",
+    "Aggiunta UC4.1.2 e UC4.1.3 e inizio stesura sezione Requisiti",
     members.kevin
   ),
   (
@@ -1155,5 +1155,36 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 ==== UC7: modifica password profilo CodeGuardian <UC7>
 ==== UC8: Recupero password profilo CodeGuardian <UC8>
 
+= Requisiti
+In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati da Skarab Grouop
 
+== Requisiti funzionali
+#figure(
+  table(
+    columns: (1fr, 3fr, 1fr),
+    inset: 5pt,
+    stroke: 0.5pt + luma(200),
+    
+    fill: (col, row) => if row == 0 {
+      luma(62.75%)
+    } else if calc.even(row) {
+      luma(220)
+    },
+
+    align: (col, row) => (
+      (
+        center,
+        center,
+        left,
+      ).at(col)
+        + horizon
+    ),
+
+    table.header([*ID*], [*Descrizione*], [*Use cases di riferimento*],),
+    ["RF1"], ["L'utente non registrato può registrarsi a CodeGuardian fornendo le informazioni richieste dal sistema."], ["#link(<UC1>)[#underline[\[UC1\]]]"],
+    ["RF2"], ["L'utente registrato può autenticarsi a CodeGuardian fornendo le proprie credenziali."], ["#link(<UC2>)[#underline[\[UC2\]]]"],
+    ["RF3"], ["L'utente autenticato avanzato può richiedere l'analisi di un repository GitHub collegato al proprio account CodeGuardian."], ["#link(<UC4>)[#underline[\[UC4\]]]"],
+    ["RF4"], ["L'utente autenticato avanzato può visualizzare il report dell'analisi del repository GitHub richiesto."], ["#link(<UC5>)[#underline[\[UC5\]]]"],
+  )
+)
    
