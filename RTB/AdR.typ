@@ -20,9 +20,8 @@
   (
     "2025/12/24",
     "0.8.0",
-    "Correzioni minori ai casi d'uso UC 1.5.1, aggiunto UC5.5, aggiornamento numerazione UC 5.X",
-    members.kevin,
-    members.suar
+    "Correzioni minori ai casi d'uso UC 1.5.1, aggiunto UC5.5, aggiornamento numerazione UC 5.X, Aggiunta UC6",
+    members.kevin
   ),
   (
     "2025/12/23",
