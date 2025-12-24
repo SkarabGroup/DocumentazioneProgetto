@@ -18,10 +18,18 @@
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
+    "2025/12/24",
+    "0.8.0",
+    "Correzioni minori ai casi d'uso UC 1.5.1",
+    members.kevin,
+    members.suar
+  ),
+  (
     "2025/12/23",
     "0.7.0",
     "Correzione UML dei casi d'uso descritti, aggiunti UC2.1.2 e UC2.2.2. Esplicitate le postcondizioni e i trigger degli UC",
-    members.suar
+    members.suar,
+    members.kevin
   ),
   (
     "2025/12/22",
@@ -530,7 +538,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   #useCaseDiagram("1_5", "UC1.5 - Inserimento password")
 ]
 
-===== UC1.5.1: Password inserita non valida <UC1.5.1>
+===== UC1.5.1: Password inserita non conforme ai vincoli di formato <UC1.5.1>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -989,14 +997,16 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   scenari: [
     - L'utente accede alla sezione di visualizzazione del report di analisi
     - L'utente seleziona il report di analisi del repository GitHub di interesse
+    - L'utente seleziona i dati specifici da visualizzare nel report di analisi
     - L'utente seleziona se visualizzare i dettagli del singolo report o il rapporto rispetto ai report precedenti
     - L'utente visualizza il report di analisi del repository GitHub richiesto
   ],
   inclusioni: [
     - Accesso sezione visualizzazione report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]] // Accesso sezione visualizzazione report di analisi
     - Selezione report di analisi #link(<UC5.2>)[#underline[\[UC5.2\]]] // Selezione report di analisi
-    - Selezione modalità visualizzazione report #link(<UC5.3>)[#underline[\[UC5.3\]]] // Selezione modalità visualizzazione report
-    - Visualizzazione report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]] // Visualizzazione report di analisi
+    - Selezione dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]] // Selezione dati specifici da visualizzare nel report
+    - Selezione modalità visualizzazione report #link(<UC5.4>)[#underline[\[UC5.4\]]] // Selezione modalità visualizzazione report
+    - Visualizzazione report di analisi #link(<UC5.5>)[#underline[\[UC5.5\]]] // Visualizzazione report di analisi
   ],
   estensioni: [
     - nessuna
@@ -1113,7 +1123,62 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente interagisce con la sezione di selezione del report di analisi repository GitHub di CodeGuardian"
 )[]
 
-==== UC5.3: Selezione modalità visualizzazione report <UC5.3>
+==== UC5.3: Selezione dati specifici da visualizzare nel report <UC5.3> 
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]            
+    - L'utente ha richiesto l'analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
+    - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
+  ],
+  post: [
+    - L'utente ha selezionato i dati specifici da visualizzare nel report
+  ],
+  scenari: [
+    - L'utente seleziona i dati specifici da visualizzare nel report
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessun dato specifico selezionato #link(<UC5.3.1>)[#underline[\[UC5.3.1\]]] // nessun dato selezionato
+  ],
+  trigger: "L'utente interagisce con la sezione di selezione dei dati specifici da visualizzare nel report di analisi repository GitHub di CodeGuardian"
+)[]
+
+===== UC5.3.1: Nessun dato specifico selezionato <UC5.3.1>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]            
+    - L'utente ha richiesto l'analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
+    - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
+  ],
+  post: [
+    - L'utente non può procedere con la selezione dei dati specifici da visualizzare nel report
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che deve selezionare almeno
+      un dato specifico da visualizzare nel report per poter procedere con la visualizzazione del report
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con la sezione di selezione dei dati specifici da visualizzare nel report di analisi repository GitHub di CodeGuardian"
+)[] 
+
+==== UC5.4: Selezione modalità visualizzazione report <UC5.4>
 #useCase(
   attore: "Utente autenticato avanzato",
   pre: [
@@ -1140,7 +1205,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente interagisce con la sezione di selezione della modalità di visualizzazione del report di analisi repository GitHub di CodeGuardian"
 )[] 
 
-===== UC5.3.1: Nessuna modalità di visualizzazione selezionata <UC5.3.1>
+===== UC5.4.1: Nessuna modalità di visualizzazione selezionata <UC5.4.1>
 #useCase(
   attore: "Utente autenticato avanzato",
   pre: [
@@ -1167,7 +1232,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente interagisce con la sezione di selezione della modalità di visualizzazione del report di analisi repository GitHub di CodeGuardian"
 )[]
 
-==== UC5.4: Visualizzazione report di analisi <UC5.4>
+==== UC5.5: Visualizzazione report di analisi <UC5.5>
 #useCase(
   attore: "Utente autenticato avanzato",
   pre: [
@@ -1178,7 +1243,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
     - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
-    - L'utente ha selezionato la modalità di visualizzazione del report di analisi #link(<UC5.3>)[#underline[\[UC5.3\]]]
+    - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
+    - L'utente ha selezionato la modalità di visualizzazione del report di analisi #link(<UC5.3>)[#underline[\[UC5.4\]]]
   ],
   post: [
     - L'utente ha visualizzato il report dell'analisi del repository GitHub richiesto
