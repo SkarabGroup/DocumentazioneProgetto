@@ -57,6 +57,7 @@ Bla bla //ricorda #def("parola") per glossario
 Bla bla //ricorda #def("parola") per glossario
 
 == Rischio Tecnologico
+//breve descrizione(?)
 
 === RT1: Rischio Tecnologico...
 #figure(
@@ -117,6 +118,7 @@ Bla bla //ricorda #def("parola") per glossario
 )
 
 == Rischio Individuale
+//breve descrizione(?)
 
 === RI1: Rischio Individuale...
 #figure(
@@ -148,6 +150,7 @@ Bla bla //ricorda #def("parola") per glossario
 )
 
 == Rischio Globale
+//breve descrizione(?)
 
 === RG1: Rischio Globale...
 #figure(
