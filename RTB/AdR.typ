@@ -20,7 +20,7 @@
   (
     "2025/12/24",
     "0.8.0",
-    "Correzioni minori ai casi d'uso UC 1.5.1",
+    "Correzioni minori ai casi d'uso UC 1.5.1, aggiunto UC5.5, aggiornamento numerazione UC 5.X",
     members.kevin,
     members.suar
   ),
@@ -988,15 +988,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
       #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha richiesto l'analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
-    - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
   ],
   post: [
     - L'utente ha visualizzato il report dell'analisi del repository GitHub richiesto
   ],
   scenari: [
     - L'utente accede alla sezione di visualizzazione del report di analisi
-    - L'utente seleziona il report di analisi del repository GitHub di interesse
+    - L'utente seleziona il report di analisi specifico del repository GitHub di interesse
     - L'utente seleziona i dati specifici da visualizzare nel report di analisi
     - L'utente seleziona se visualizzare i dettagli del singolo report o il rapporto rispetto ai report precedenti
     - L'utente visualizza il report di analisi del repository GitHub richiesto
@@ -1005,8 +1003,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Accesso sezione visualizzazione report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]] // Accesso sezione visualizzazione report di analisi
     - Selezione report di analisi #link(<UC5.2>)[#underline[\[UC5.2\]]] // Selezione report di analisi
     - Selezione dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]] // Selezione dati specifici da visualizzare nel report
-    - Selezione modalità visualizzazione report #link(<UC5.4>)[#underline[\[UC5.4\]]] // Selezione modalità visualizzazione report
-    - Visualizzazione report di analisi #link(<UC5.5>)[#underline[\[UC5.5\]]] // Visualizzazione report di analisi
+    - Visualizzazione report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]] // Visualizzazione report di analisi
   ],
   estensioni: [
     - nessuna
@@ -1023,8 +1020,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
       #link(<UC3>)[#underline[\[UC3\]]]            
-    - L'utente ha richiesto l'analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
-    - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
   ],
   post: [
     - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi
@@ -1038,7 +1033,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente interagisce con la sezione di visualizzazione del report di analisi repository GitHub di CodeGuardian"
+  trigger: "L'utente interagisce con il pulsante per accedere alla sezione di visualizzazione del report di analisi repository GitHub di CodeGuardian"
 )[] 
 
 ==== UC5.2: Selezione report di analisi <UC5.2>
@@ -1048,8 +1043,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
       #link(<UC3>)[#underline[\[UC3\]]]            
-    - L'utente ha richiesto l'analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
-    - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
     - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
   ],
   post: [
@@ -1076,8 +1069,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
       #link(<UC3>)[#underline[\[UC3\]]]            
-    - L'utente ha richiesto l'analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
-    - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
     - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
     - Non sono disponibili report di analisi per il repository GitHub selezionato
   ],
@@ -1104,8 +1095,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
       #link(<UC3>)[#underline[\[UC3\]]]            
-    - L'utente ha richiesto l'analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
-    - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
     - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
   ],
   post: [
@@ -1130,8 +1119,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
       #link(<UC3>)[#underline[\[UC3\]]]            
-    - L'utente ha richiesto l'analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
-    - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
     - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
   ],
@@ -1157,8 +1144,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
       #link(<UC3>)[#underline[\[UC3\]]]            
-    - L'utente ha richiesto l'analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
-    - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
     - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
   ],
@@ -1178,69 +1163,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente interagisce con la sezione di selezione dei dati specifici da visualizzare nel report di analisi repository GitHub di CodeGuardian"
 )[] 
 
-==== UC5.4: Selezione modalità visualizzazione report <UC5.4>
+==== UC5.4: Visualizzazione report di analisi <UC5.4>
 #useCase(
   attore: "Utente autenticato avanzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
       #link(<UC3>)[#underline[\[UC3\]]]            
-    - L'utente ha richiesto l'analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
-    - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
-    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
-  ],
-  post: [
-    - L'utente ha selezionato la modalità di visualizzazione del report di analisi
-  ],
-  scenari: [
-    - L'utente seleziona se visualizzare i dettagli del singolo report o il rapporto rispetto ai report precedenti
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna modalità di visualizzazione selezionata #link(<UC5.3.1>)[#underline[\[UC5.3.1\]]] // nessuna modalità selezionata
-  ],
-  trigger: "L'utente interagisce con la sezione di selezione della modalità di visualizzazione del report di analisi repository GitHub di CodeGuardian"
-)[] 
-
-===== UC5.4.1: Nessuna modalità di visualizzazione selezionata <UC5.4.1>
-#useCase(
-  attore: "Utente autenticato avanzato",
-  pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]            
-    - L'utente ha richiesto l'analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
-    - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
-    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
-  ],
-  post: [
-    - L'utente non può procedere con la selezione della modalità di visualizzazione del report di analisi
-  ],
-  scenari: [
-    - L'utente visualizza un messaggio di errore che indica che deve selezionare una modalità di visualizzazione per poter procedere con la visualizzazione del report
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente interagisce con la sezione di selezione della modalità di visualizzazione del report di analisi repository GitHub di CodeGuardian"
-)[]
-
-==== UC5.5: Visualizzazione report di analisi <UC5.5>
-#useCase(
-  attore: "Utente autenticato avanzato",
-  pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]            
-    - L'utente ha richiesto l'analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
-    - Il Sistema ha completato l'analisi del repository GitHub richiesto dall'utente
     - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
@@ -1261,9 +1190,214 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente interagisce con la sezione di visualizzazione del report di analisi repository GitHub di CodeGuardian"
 )[] 
 
-==== UC6: Accesso al profilo CodeGuardian <UC6>
-==== UC7: modifica password profilo CodeGuardian <UC7>
-==== UC8: Recupero password profilo CodeGuardian <UC8>
+=== UC6: Scelta intervallo temporale per visualizzazione confronto con report passati <UC6>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
+    - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
+    - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
+      durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian
+      #link(<UC5.4>)[#underline[\[UC5.4\]]]
+  ],
+  post: [
+    - L'utente ha selezionato l'intervallo temporale per il confronto con i report passati
+  ],
+  scenari: [
+    - L'utente seleziona l'intervallo temporale per il confronto con i report passati
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessun intervallo temporale selezionato #link(<UC6.1>)[#underline[\[UC6.1\]]]
+    - Intervallo temporale non valido #link(<UC6.2>)[#underline[\[UC6.2\]]]
+  ],
+  trigger: "L'utente interagisce con la sezione di selezione dell'intervallo temporale per il confronto con i report passati durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian"
+)[]
+
+===== UC6.1: Nessun intervallo temporale selezionato <UC6.1>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
+    - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
+    - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
+      durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian
+      #link(<UC5.4>)[#underline[\[UC5.4\]]]
+  ],
+  post: [
+    - L'utente non può procedere con la selezione dell'intervallo temporale per il confronto con i report passati
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che deve essere selezionato un intervallo temporale
+      per poter procedere con il confronto con i report passati
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con la sezione di selezione dell'intervallo temporale per il confronto con i report passati durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian"
+)[]
+
+===== UC6.2: Intervallo temporale non valido <UC6.2>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
+    - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
+    - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
+      durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian
+      #link(<UC5.4>)[#underline[\[UC5.4\]]]
+  ],
+  post: [
+    - L'utente non può procedere con la selezione dell'intervallo temporale per il confronto con i report passati
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che l'intervallo temporale selezionato non è valido
+      per poter procedere con il confronto con i report passati
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessun report di analisi disponibile nel periodo selezionato
+      #link(<UC6.2.1>)[#underline[\[UC6.2.1\]]]
+    - Intervallo temporale incoerente #link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]
+    - Intervallo temporale troppo ampio #link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]
+  ],
+  trigger: "L'utente interagisce con la sezione di selezione dell'intervallo temporale per il confronto con i report passati durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian"
+)[]
+
+===== UC6.2.1: Nessun report di analisi disponibile nel periodo selezionato <UC6.2.1>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
+    - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
+    - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
+      durante la procedura  di visualizzazione del report di analisi repository GitHub a CodeGuardian
+      #link(<UC5.4>)[#underline[\[UC5.4\]]]
+  ],
+  post: [
+    - L'utente non può procedere con la selezione dell'intervallo temporale per il confronto con i report passati
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che non sono disponibili report di analisi
+      nel periodo selezionato per poter procedere con il confronto con i report passati
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con la sezione di selezione dell'intervallo temporale per il confronto con i report passati durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian"
+)[]     
+
+===== UC6.2.2: Intervallo temporale incoerente <UC6.2.2>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
+    - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
+    - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
+      durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian
+      #link(<UC5.4>)[#underline[\[UC5.4\]]]
+  ],
+  post: [
+    - L'utente non può procedere con la selezione dell'intervallo temporale per il confronto con i report passati
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che l'intervallo temporale selezionato non è coerente
+      per poter procedere con il confronto con i report passati
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con la sezione di selezione dell'intervallo temporale per il confronto con i report passati durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian"
+)[] 
+
+===== UC6.2.3: Intervallo temporale troppo ampio <UC6.2.3>
+#useCase(
+  attore: "Utente autenticato avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
+    - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
+    - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
+      durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian
+      #link(<UC5.4>)[#underline[\[UC5.4\]]]
+  ],
+  post: [
+    - L'utente non può procedere con la selezione dell'intervallo temporale per il confronto con i report passati
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che l'intervallo temporale selezionato è troppo ampio
+      per poter procedere con il confronto con i report passati
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con la sezione di selezione dell'intervallo temporale per il confronto con i report passati durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian"
+)[] 
+
+
+=== UCx: Visualizzazione grafico comparativo tra report di analisi repository GitHub <UC7>\
+=== UCx: visualizzazione tabella comparativa tra report di analisi repository GitHub <UC8>\
+=== UCx: Visualizzazione valutazione copertura del codice
+=== UCx: Visualizzazione report analisi statica del codice repository GitHub <UC9>\
+=== UCx: Visualizzazione analisi librerie e dipendenze del codice repository GitHub <UC10>\
+=== UCx: Visualizzazione report analisi della sicurezza del codice repository GitHub <UC11>\
+=== UCx: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi codice repository GitHub <UC12>\
+=== UCx: Visualizzazione numero totale di issue individuate nel report di analisi codice repository GitHub <UC13>
+=== UCx: Visualizzazione report analisi della documentazione repository GitHub <UC10>\
+=== UCx: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi repository GitHub <UC6>\
+
+=== UCx: VIsualizzazione numero totale di issue individuate nel report di analisi repository GitHub <UC7>\
+=== UCx: Visualizzazione area metadati di un report di analisi repository GitHub <UC8>\
+=== UCx: Visualizzazione data report analisi repository GitHub <UC9>\
+=== UCx: Visualizzazione commit analizzati nel report di analisi repository GitHub <UC10>\
+=== UCx: Visualizzazione richiedente report di analisi repository GitHub <UC11>\
+=== UCx: Visualizzazione aree di interesse selezionate per l'analisi repository GitHub <UC12>\
+
+
+
+
+=== UCx: Accesso al profilo CodeGuardian <UC6>
+=== UCx: modifica password profilo CodeGuardian <UC7>
+=== UCx: Recupero password profilo CodeGuardian <UC8>
 
 = Requisiti
 In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati da Skarab Grouop
