@@ -10,11 +10,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.0.0"
+#let versione = "v0.1.0"
 
 #titlePage("Piano di Progetto", versione)
 #set page(numbering: "1", header: header("Piano di Progetto"), footer: footer())
 #let history = (
+  (
+    "2025/12/24", 
+    "0.1.0", 
+    "Inizio stesura documento, introduzione, scopo, glossario, introduzione analisi rischi", 
+    members.andrea
+  ),
   (
     "2025/12/23", 
     "0.0.0", 
