@@ -12,16 +12,23 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.7.0"
+#let versione = "v0.8.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
     "2025/12/24",
+    "0.9.0",
+    "Aggiunto UC3",
+    members.suar
+  ),
+  (
+    "2025/12/24",
     "0.8.0",
     "Correzioni minori ai casi d'uso UC 1.5.1, aggiunto UC5.5, aggiornamento numerazione UC 5.X, Aggiunta UC6",
-    members.kevin
+    members.kevin,
+    members.suar
   ),
   (
     "2025/12/23",
@@ -772,7 +779,177 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[
 ]
 
-=== UC3: Collegamento account CodeGuardian ad account GitHub <UC3>
+=== UC3: Collegamento account CodeGuardian con account GitHub <UC3>
+#useCase(
+  attore: "Utente autenticato",
+  attori_secondari: "GitHub",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+  ],
+  post: [
+    - L'utente è autenticato al sistema CodeGuardian e ha abilitato la condivisione di informazioni con GitHub
+  ],
+  scenari: [
+    - L'utente accede alla sezione dedicata al collegamento del proprio account GitHub
+    - L'utente visualizza l’avviso di reindirizzamento verso GitHub #link(<UC3.1>)[#underline[\[UC3.1\]]]
+    - L'utente viene rimandato a GitHub per completare l’autorizzazione #link(<UC3.2>)[#underline[\[UC3.2\]]]
+  ],
+  inclusioni: [
+    - #link(<UC3.1>)[#underline[\[UC3.1\]]] // Visualizzazione avviso redirect
+    - #link(<UC3.2>)[#underline[\[UC3.2\]]] // Reindirizzamento a GitHub e ricezione codice identificativo
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente autenticato seleziona la sezione di collegamento account GitHub in CodeGuardian"
+)[
+  //#useCaseDiagram("3", "UC3 - Collegamento account CodeGuardian con account GitHub")
+]
+
+==== UC3.1: Visualizzazione avviso redirect <UC3.1>
+#useCase(
+  attore: "Utente autenticato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha selezionato la sezione di collegamento account GitHub in CodeGuardian
+  ],
+  post: [
+    - L'utente ha confermato di essere consapevole che verrà rimandato a GitHub per l’autorizzazione
+  ],
+  scenari: [
+    - L'utente visualizza l’avviso di redirect verso GitHub
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC3.1.1>)[#underline[\[UC3.1.1\]]] // L’utente rifiuta il collegamento
+  ],
+  trigger: "L'utente visualizza la sezione di collegamento account e interagisce con il messaggio di avviso"
+)[
+  //#useCaseDiagram("3_1", "UC3.1 - Visualizzazione avviso redirect")
+]
+
+===== UC3.1.1: Utente rifiuta il collegamento a GitHub <UC3.1.1>
+#useCase(
+  attore: "Utente autenticato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente sta eseguendo la procedura di collegamento dell'account di CodeGuardian con l'account di GitHub #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha interagito con l'avviso di reindirizzamento a GitHub, rifiutando il collegamento #link(<UC3.1>)[#underline[\[UC3.1\]]]
+  ],
+  post: [
+    - La procedura di collegamento non viene finalizzata e l'utente ritorna alla sezione di collegamento account GitHub
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio che indica che il collegamento degli account non è stato completato
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente seleziona l’opzione di annullamento nel messaggio di avviso"
+)[
+]
+
+==== UC3.2: Reindirizzamento a GitHub e ricezione codice identificativo <UC3.2>
+#useCase(
+  attore: "Utente autenticato",
+  attori_secondari: "GitHub",
+  pre: [
+    - L'utente ha confermato di voler essere reindirizzato a GitHub #link(<UC3.1>)[#underline[\[UC3.1\]]]
+  ],
+  post: [
+    - Il codice identificativo ricevuto da GitHub è associato alle credenziali dell’utente CodeGuardian
+  ],
+  scenari: [
+    - L'utente viene reindirizzato a GitHub
+    - L'utente completa la procedura di autorizzazione su GitHub
+    - Il sistema riceve il codice identificativo univoco del profilo GitHub
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC3.2.1>)[#underline[\[UC3.2.1\]]] // Codice non ricevuto
+    - #link(<UC3.2.2>)[#underline[\[UC3.2.2\]]] // Codice già associato a un altro utente
+    - #link(<UC3.2.3>)[#underline[\[UC3.2.3\]]] // Codice non conforme
+  ],
+  trigger: "L'utente conferma il collegamento e viene reindirizzato a GitHub"
+)[
+  //#useCaseDiagram("3_2", "UC3.2 - Reindirizzamento a GitHub e ricezione codice identificativo")
+]
+
+===== UC3.2.1: Codice non ricevuto <UC3.2.1>
+#useCase(
+  attore: "Utente autenticato",
+  pre: [
+    - L'utente ha completato la sezione di reindirizzamento a GitHub #link(<UC3.2>)[#underline[\[UC3.2\]]]
+    - L'utente non ha autorizzato GitHub a condividere le informazioni necessarie con CodeGuardian
+  ],
+  post: [
+    - La procedura di collegamento account GitHub non viene finalizzata e il Sistema rimane nello stato di attesa di un nuovo tentativo
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio che indica che non è stato possibile ricevere il codice identificativo del profilo GitHub
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Il sistema rileva che non è stato ricevuto alcun codice da GitHub al termine della procedura di autorizzazione"
+)[
+]
+
+===== UC3.2.2: Codice già associato <UC3.2.2>
+#useCase(
+  attore: "Utente autenticato",
+  pre: [
+    - L'utente ha completato la sezione di reindirizzamento a GitHub #link(<UC3.2>)[#underline[\[UC3.2\]]]
+    - Il codice identificativo ricevuto da GitHub è già associato a un altro account CodeGuardian nel sistema
+  ],
+  post: [
+    - La procedura di collegamento account GitHub non viene finalizzata e il Sistema rimane nello stato di attesa di un nuovo tentativo
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che il codice ricevuto è già associato a un altro account CodeGuardian
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Il sistema rileva che il codice identificativo ricevuto da GitHub è già presente nel database associato a un altro account"
+)[
+]
+
+===== UC3.2.3: Codice non conforme <UC3.2.3>
+#useCase(
+  attore: "Utente autenticato",
+  pre: [
+    - L'utente ha completato la sezione di reindirizzamento a GitHub #link(<UC3.2>)[#underline[\[UC3.2\]]]
+    - Il codice identificativo ricevuto da GitHub non rispetta il formato previsto dal sistema
+  ],
+  post: [
+    - La procedura di collegamento account GitHub non viene finalizzata e il Sistema rimane nello stato di attesa di un nuovo tentativo
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che il codice ricevuto non è conforme al formato previsto
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Il sistema rileva che il codice identificativo ricevuto da GitHub non è conforme al formato previsto"
+)[
+]
 
 === UC4: Richiesta analisi repository GitHub <UC4>
 #useCase(
@@ -1399,7 +1576,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 === UCx: Recupero password profilo CodeGuardian <UC8>
 
 = Requisiti
-In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati da Skarab Grouop
+In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati da Skarab Group
 
 == Requisiti funzionali
 #figure(
