@@ -3,7 +3,7 @@
 
 //Definizione della prima pagina dei documenti
 #let titlePage(titoloDocumento, versioneDocumento) = {
-  set text(font: "Noto Serif Khmer", size: 15pt)
+  set text(font: "New Computer Modern", size: 15pt)
   set align(center)
   image("../assets/logo.jpg", height: 10cm)
   v(1em)
