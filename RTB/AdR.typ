@@ -21,7 +21,8 @@
     "2025/12/24",
     "0.9.0",
     "Aggiunto UC3",
-    members.suar
+    members.suar,
+    members.kevin
   ),
   (
     "2025/12/24",
