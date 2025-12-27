@@ -21,7 +21,7 @@
   (
     "2025/12/27",
     "0.10.0",
-    "Aggiunta UC7",
+    "Aggiunta UC7,C8",
     members.kevin
   ),
   (
@@ -1588,15 +1588,62 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente interagisce con la sezione di visualizzazione del grafico comparativo tra report di analisi repository GitHub durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian"
 )[]
 
-=== UCx: visualizzazione tabella comparativa tra report di analisi repository GitHub \
-=== UCx: Visualizzazione valutazione copertura del codice
+=== UC8: visualizzazione tabella comparativa tra report di analisi repository GitHub <UC8>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente ha selezionato l'intervallo temporale per il confronto con i report passati
+      #link(<UC6>)[#underline[\[UC6\]]]
+    - L'utente seleziona il tasto per la visualizzazione del grafico comparativo tra report di analisi repository GitHub durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian
+      #link(<UC5.4>)[#underline[\[UC5.4\]]]
+  ],
+  post: [
+    - L'utente ha visualizzato la tabella comparativa tra report di analisi repository GitHub
+  ],
+  scenari: [
+    - L'utente visualizza la tabella comparativa tra report di analisi repository GitHub
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con la sezione di visualizzazione della tabella comparativa tra report di analisi repository GitHub durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian"
+)[]
+
+
+
+=== UC9: Visualizzazione valutazione copertura del codice repository GitHub <UC9>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa alla valutazione della copertura del codice repository GitHub
+  ],
+  post: [
+    - L'utente ha visualizzato la valutazione della copertura del codice repository GitHub
+  ],
+  scenari: [
+    - L'utente visualizza la valutazione della copertura del codice repository GitHub
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa alla valutazione della copertura del codice repository GitHub"
+)[]
+
+
 === UCx: Visualizzazione report analisi statica del codice repository GitHub \
-=== UCx: Visualizzazione analisi librerie e dipendenze del codice repository GitHub >\
-=== UCx: Visualizzazione report analisi della sicurezza del codice repository GitHub >\
-=== UCx: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi codice repository GitHub \\
-=== UCx: Visualizzazione numero totale di issue individuate nel report di analisi codice repository GitHub \\
-=== UCx: Visualizzazione report analisi della documentazione repository GitHub \\
-=== UCx: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi repository GitHub 
+=== UCx: Visualizzazione analisi librerie e dipendenze del codice repository GitHub \
+=== UCx: Visualizzazione report analisi della sicurezza del codice repository GitHub \
+=== UCx: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi codice repository GitHub \
+=== UCx: Visualizzazione numero totale di problematiche individuate nel report di analisi codice repository GitHub \
+=== UCx: Visualizzazione report analisi della documentazione repository GitHub \
+=== UCx: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi repository GitHub \
 === UCx: Visualizzazione numero totale di issue individuate nel report di analisi repository GitHub \
 === UCx: Visualizzazione area metadati di un report di analisi repository GitHub \
 === UCx: Visualizzazione data report analisi repository GitHub \
