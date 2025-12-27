@@ -13,16 +13,23 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.10.0"
+#let versione = "v0.11.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
     "2025/12/27",
+    "0.11.0",
+    "Diagrammi UC3. Modificato UC4 e aggiunti diagrammi. Rivalutare UC5 per maggiore chiarezza",
+    members.suar
+  ),
+  (
+    "2025/12/27",
     "0.10.0",
     "Aggiunta UC da 7 a 12 con relativi sotto casi d'uso, aggiunta estensioni per UC4.3",
-    members.kevin
+    members.kevin,
+    members.suar
   ),
   (
     "2025/12/24",
@@ -811,7 +818,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'utente autenticato seleziona la sezione di collegamento account GitHub in CodeGuardian"
 )[
-  //#useCaseDiagram("3", "UC3 - Collegamento account CodeGuardian con account GitHub")
+  #useCaseDiagram("3", "UC3 - Collegamento account CodeGuardian con account GitHub")
 ]
 
 ==== UC3.1: Visualizzazione avviso redirect <UC3.1>
@@ -835,7 +842,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'utente visualizza la sezione di collegamento account e interagisce con il messaggio di avviso"
 )[
-  //#useCaseDiagram("3_1", "UC3.1 - Visualizzazione avviso redirect")
+  #useCaseDiagram("3_1", "UC3.1 - Visualizzazione avviso redirect")
 ]
 
 ===== UC3.1.1: Utente rifiuta il collegamento a GitHub <UC3.1.1>
@@ -874,8 +881,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   scenari: [
     - L'utente viene reindirizzato a GitHub
-    - L'utente completa la procedura di autorizzazione su GitHub
-    - Il sistema riceve il codice identificativo univoco del profilo GitHub
   ],
   inclusioni: [
     - Nessuna
@@ -887,10 +892,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'utente conferma il collegamento e viene reindirizzato a GitHub"
 )[
-  //#useCaseDiagram("3_2", "UC3.2 - Reindirizzamento a GitHub e ricezione codice identificativo")
+  #useCaseDiagram("3_2", "UC3.2 - Reindirizzamento a GitHub e ricezione codice identificativo")
 ]
 
-===== UC3.2.1: Codice non ricevuto <UC3.2.1>
+===== UC3.2.1: Codice GitHub non ricevuto dal Sistema <UC3.2.1>
 #useCase(
   attore: "Utente autenticato",
   pre: [
@@ -913,7 +918,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[
 ]
 
-===== UC3.2.2: Codice già associato <UC3.2.2>
+===== UC3.2.2: Codice già associato ad un altro utente censito dal Sistema <UC3.2.2>
 #useCase(
   attore: "Utente autenticato",
   pre: [
@@ -936,7 +941,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[
 ]
 
-===== UC3.2.3: Codice non conforme <UC3.2.3>
+===== UC3.2.3: Codice non conforme ai vincoli di formato <UC3.2.3>
 #useCase(
   attore: "Utente autenticato",
   pre: [
@@ -961,75 +966,92 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 === UC4: Richiesta analisi repository GitHub <UC4>
 #useCase(
-  attore: UAA,
+  attore: "Utente autenticato avanzato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+    - L'utente ha collegato con successo il proprio account CodeGuardian
+      ad un account GitHub e ha abilitato la condivisione di informazioni
       #link(<UC3>)[#underline[\[UC3\]]]
   ],
   post: [
-    - Il Sistema ha avviato l'analisi del repository GitHub specificato dall'utente
+    - La richiesta di analisi del repository GitHub è stata correttamente
+      inoltrata al Sistema
   ],
   scenari: [
+    - L'utente accede alla sezione dedicata alla richiesta di analisi
+      di un repository GitHub
     - L'utente inserisce l'URL del repository GitHub da analizzare
-    - L'utente seleziona le aree di interesse per l'analisi (solo codice o entrambe (codice e documentazione)) 
-    - L'utente invia la richiesta di analisi al sistema
+      #link(<UC4.1>)[#underline[\[UC4.1\]]]
+    - L'utente seleziona le aree di interesse per l’analisi
+      #link(<UC4.2>)[#underline[\[UC4.2\]]]
+    - L'utente conferma l'invio della richiesta di analisi
+      #link(<UC4.3>)[#underline[\[UC4.3\]]]
   ],
   inclusioni: [
-    - Inserimento URL repository GitHub #link(<UC4.1>)[#underline[\[UC4.1\]]] // Inserimento URL repository GitHub
-    - Selezione aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]] // Selezione aree di interesse
-    - Invio richiesta di analisi #link(<UC4.3>)[#underline[\[UC4.3\]]] // Invio richiesta di analisi
+    - #link(<UC4.1>)[#underline[\[UC4.1\]]] // Inserimento URL repository GitHub
+    - #link(<UC4.2>)[#underline[\[UC4.2\]]] // Selezione aree di interesse
+    - #link(<UC4.3>)[#underline[\[UC4.3\]]] // Invio richiesta di analisi
   ],
   estensioni: [
-    - nessuna
+    - Nessuna
   ],
-  trigger: "L'utente accede alla sezione di richiesta analisi repository GitHub di CodeGuardian"
+  trigger: "L'utente accede alla sezione di richiesta analisi repository 
+            GitHub in CodeGuardian"
 )[
-  //#useCaseDiagram("4", "UC4 - Richiesta analisi repository GitHub")
+  #useCaseDiagram("4", "UC4 - Richiesta analisi repository GitHub")
 ]
 
 ==== UC4.1: Inserimento URL repository GitHub <UC4.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autenticato avanzato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+    - L'utente ha collegato con successo il proprio account CodeGuardian
+      ad un account GitHub e ha abilitato la condivisione di informazioni
       #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente sta eseguendo la procedura di richiesta analisi
+      di un repository GitHub
+      #link(<UC4>)[#underline[\[UC4\]]]
   ],
   post: [
-    - Il Sistema ha validato l'URL del repository GitHub inserito dall'utente
+    - L'URL del repository GitHub inserito dall'utente è idoneo
+      alla procedura di analisi
   ],
   scenari: [
     - L'utente inserisce l'URL del repository GitHub da analizzare
-    
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC4.1.1>)[#underline[\[UC4.1.1\]]] // URL repository GitHub non valido
-    - #link(<UC4.1.2>)[#underline[\[UC4.1.2\]]] // repository GitHub non accessibile
-    - #link(<UC4.1.3>)[#underline[\[UC4.1.3\]]] // repository GitHub non inserito
+    - #link(<UC4.1.1>)[#underline[\[UC4.1.1\]]] // URL repository GitHub non conforme
+    - #link(<UC4.1.2>)[#underline[\[UC4.1.2\]]] // Repository GitHub non accessibile
   ],
-  trigger: "L'utente interagisce con la sezione di inserimento dell'URL del repository GitHub durante la procedura di richiesta analisi repository GitHub a CodeGuardian"
+  trigger: "L'utente conferma l'inserimento dell'URL del repository GitHub
+            durante la procedura di richiesta analisi"
 )[
-  //#useCaseDiagram("4_1", "UC4.1 - Inserimento URL repository GitHub")
+  #useCaseDiagram("4_1", "UC4.1 - Inserimento URL repository GitHub")
 ]
 
-===== UC4.1.1: URL repository GitHub non valido <UC4.1.1>
+===== UC4.1.1: URL repository GitHub non conforme ai vincoli di formato <UC4.1.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autenticato e avanzato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+    - L'utente ha collegato con successo il proprio account CodeGuardian
+      ad un account GitHub e ha abilitato la condivisione di informazioni
       #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha inserito un URL del repository GitHub non valido durante l'inserimento dell'URL del repository GitHub #link(<UC4.1>)[#underline[\[UC4.1\]]]
+    - L'utente sta eseguendo la procedura di richiesta analisi
+      di un repository GitHub
+      #link(<UC4>)[#underline[\[UC4\]]]
+    - L'utente ha inserito un URL non conforme ai vincoli di formato
+      previsti per l'inserimento dell'URL del repository GitHub
+      #link(<UC4.1>)[#underline[\[UC4.1\]]]
   ],
   post: [
-    - La procedura di richiesta analisi repository GitHub non viene finalizzata e il Sistema rimane nello stato di inserimento dati
+    - La procedura di richiesta analisi non viene finalizzata e il Sistema
+      rimane nello stato di inserimento dati
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che l'URL del repository GitHub inserito non è valido per la procedura di richiesta analisi repository GitHub
+    - L'utente visualizza un messaggio di errore che indica che l'URL
+      inserito non è valido per la procedura di analisi
   ],
   inclusioni: [
     - Nessuna
@@ -1037,23 +1059,29 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente interagisce con la sezione di inserimento dell'URL del repository GitHub durante la procedura di richiesta analisi repository GitHub a CodeGuardian" 
+  trigger: "L'utente conferma l'inserimento di un URL del repository GitHub
+            non conforme ai vincoli di formato"
 )[]
 
 ===== UC4.1.2: Repository GitHub non accessibile <UC4.1.2>
 #useCase(
-  attore: UAA,
+  attore: "Utente autenticato avanzato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      e ha abilitato la condivisione di informazioni
       #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha inserito un URL del repository GitHub non accessibile durante l'inserimento dell'URL del repository GitHub #link(<UC4.1>)[#underline[\[UC4.1\]]]
+    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
+      #link(<UC4>)[#underline[\[UC4\]]]
+    - L'utente ha inserito un URL del repository GitHub non accessibile
+      #link(<UC4.1>)[#underline[\[UC4.1\]]]
   ],
   post: [
-    - La procedura di richiesta analisi repository GitHub non viene finalizzata e il Sistema rimane nello stato di inserimento dati
+    - La procedura di richiesta analisi repository GitHub non viene finalizzata
+      e il Sistema rimane nello stato di inserimento dati
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che il repository GitHub specificato non è accessibile per la procedura di richiesta analisi repository GitHub
+    - L'utente visualizza un messaggio di errore che indica che il repository GitHub
+      specificato non è accessibile per la procedura di richiesta analisi
   ],
   inclusioni: [
     - Nessuna
@@ -1061,24 +1089,29 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente interagisce con la sezione di inserimento dell'URL del repository GitHub durante la procedura di richiesta analisi repository GitHub a CodeGuardian"
-)[
-]
+  trigger: "L'utente conferma l'inserimento dell'URL del repository GitHub non accessibile
+            durante la procedura di richiesta analisi"
+)[]
 
 ===== UC4.1.3: Repository GitHub non inserito <UC4.1.3>
 #useCase(
-  attore: UAA,
+  attore: "Utente autenticato avanzato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      e ha abilitato la condivisione di informazioni
       #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente non ha inserito alcun URL del repository GitHub durante l'inserimento dell'URL del repository GitHub #link(<UC4.1>)[#underline[\[UC4.1\]]]
+    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
+      #link(<UC4>)[#underline[\[UC4\]]]
+    - L'utente non ha inserito alcun URL del repository GitHub
+      #link(<UC4.1>)[#underline[\[UC4.1\]]]
   ],
   post: [
-    - La procedura di richiesta analisi repository GitHub non viene finalizzata e il Sistema rimane nello stato di inserimento dati
+    - La procedura di richiesta analisi repository GitHub non viene finalizzata
+      e il Sistema rimane nello stato di inserimento dati
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che deve essere inserito un URL del repository GitHub per procedere con la richiesta di analisi del repository GitHub
+    - L'utente visualizza un messaggio di errore che indica che deve essere inserito
+      un URL del repository GitHub per procedere con la richiesta di analisi
   ],
   inclusioni: [
     - Nessuna
@@ -1086,49 +1119,61 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente interagisce con la sezione di inserimento dell'URL del repository GitHub durante la procedura di richiesta analisi repository GitHub a CodeGuardian"
+  trigger: "L'utente conferma l'invio senza inserire alcun URL durante la procedura di richiesta analisi repository GitHub"
 )[]
 
 ==== UC4.2: Selezione aree di interesse <UC4.2>
 #useCase(
-  attore: UAA,
+  attore: "Utente autenticato avanzato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      e ha abilitato la condivisione di informazioni
       #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha inserito un URL del repository GitHub valido durante l'inserimento dell'URL del repository GitHub #link(<UC4.1>)[#underline[\[UC4.1\]]]
+    - L'utente sta eseguendo la procedura di richiesta analisi
+      di un repository GitHub
+      #link(<UC4>)[#underline[\[UC4\]]]
+    - L'utente ha inserito un URL del repository GitHub valido
+      #link(<UC4.1>)[#underline[\[UC4.1\]]]
   ],
   post: [
-    - L'utente ha selezionato le aree di interesse per l'analisi (solo codice o entrambe)
+    - L'utente ha selezionato le aree di interesse del repository GitHub da analizzare,
+      specificando se includere solo il codice, solo la documentazione,
+      o sia il codice che la documentazione
   ],
   scenari: [
-    - L'utente seleziona le aree di interesse per l'analisi (solo codice o entrambe)
+    - L'utente seleziona le aree del repository GitHub da analizzare, indicando se includere
+      solo il codice o sia il codice che la documentazione
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC4.2.1>)[#underline[\[UC4.2.1\]]] // nessuna area di interesse selezionata
+    - #link(<UC4.2.1>)[#underline[\[UC4.2.1\]]] // Nessuna area di interesse selezionata
   ],
-  trigger: "L'utente interagisce con la sezione di selezione delle aree di interesse durante la procedura di richiesta analisi repository GitHub a CodeGuardian"
-)[]
+  trigger: "L'utente conferma la selezione delle aree del repository GitHub da analizzare
+            durante la procedura di richiesta analisi repository GitHub"
+)[
+  #useCaseDiagram("4_2", "UC4.2: Selezione aree di interesse")
+]
 
 ===== UC4.2.1: Nessuna area di interesse selezionata <UC4.2.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autenticato avanzato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      e ha abilitato la condivisione di informazioni
       #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha inserito un URL del repository GitHub valido durante l'inserimento dell'URL del repository GitHub #link(<UC4.1>)[#underline[\[UC4.1\]]]
-    - L'utente non ha selezionato alcuna area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
+    - L'utente ha inserito un URL del repository GitHub valido
+      #link(<UC4.1>)[#underline[\[UC4.1\]]]
+    - L'utente non ha selezionato alcuna area di interesse durante la selezione delle aree di interesse
+      #link(<UC4.2>)[#underline[\[UC4.2\]]]
   ],
   post: [
     - La procedura di richiesta analisi repository GitHub non viene finalizzata e il Sistema rimane nello stato di inserimento dati
   ],
   scenari: [
     - L'utente visualizza un messaggio di errore che indica che deve essere selezionata almeno
-      un'area di interesse per procedere con la richiesta di analisi del repository GitHub
+      un'area di interesse (codice o documentazione) per procedere con la richiesta di analisi del repository GitHub
   ],
   inclusioni: [
     - Nessuna
@@ -1136,12 +1181,12 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente interagisce con la sezione di selezione delle aree di interesse durante la procedura di richiesta analisi repository GitHub a CodeGuardian"
+  trigger: "L'utente conferma la selezione delle aree del repository GitHub da analizzare durante la procedura di richiesta analisi repository GitHub"
 )[]
 
 ==== UC4.3: Invio richiesta di analisi <UC4.3>
 #useCase(
-  attore: UAA,
+  attore: "Utente autenticato avanzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1163,11 +1208,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Ultimo report in elaborazione #link(<UC4.3.2>)[#underline[\[UC4.3.2\]]]
   ],
   trigger: "L'utente interagisce con la sezione di invio della richiesta di analisi durante la procedura di richiesta analisi repository GitHub a CodeGuardian"
-)[]
+)[
+  #useCaseDiagram("4_3", "UC4.3: Invio richiesta di analisi")
+]
 
 ==== UC4.3.1: Ultimo report up-to-date <UC4.3.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autenticato avanzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1220,7 +1267,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Il sistema rileva che l'ultimo report di analisi del repository GitHub specificato è ancora in elaborazione"
 )[
 ]
-
 
 === UC5: Visualizzazione report analisi repository GitHub <UC5>
 #useCase(
