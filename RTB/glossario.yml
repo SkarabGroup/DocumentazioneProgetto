@@ -58,7 +58,10 @@ M:
 
 
 #N:
-#O:
+O:
+  OWASP:
+    acronimo: Open Web Application Security Project
+    descrizione: Organizzazione no-profit che si dedica a migliorare la sicurezza delle applicazioni web attraverso la creazione di risorse, strumenti e linee guida.
 P:
   Progettisti:
     descrizione: Membri del team di sviluppo responsabili della progettazione dell'architettura e delle funzionalità del sistema software.

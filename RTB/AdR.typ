@@ -1637,10 +1637,93 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[]
 
 
-=== UCx: Visualizzazione report analisi statica del codice repository GitHub \
-=== UCx: Visualizzazione analisi librerie e dipendenze del codice repository GitHub \
-=== UCx: Visualizzazione report analisi della sicurezza del codice repository GitHub \
-=== UCx: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi codice repository GitHub \
+=== UC10: Visualizzazione report analisi statica del codice repository GitHub <UC10>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi statica del codice repository GitHub
+  ],
+  post: [
+    - L'utente ha visualizzato il report di analisi statica del codice repository GitHub
+  ],
+  scenari: [
+    - L'utente visualizza il report di analisi statica del codice repository GitHub
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi statica del codice repository GitHub"
+)[]
+
+=== UC11: Visualizzazione analisi librerie e dipendenze del codice repository GitHub <UC11>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi librerie e dipendenze del codice repository GitHub
+  ],
+  post: [
+    - L'utente ha visualizzato il report di analisi librerie e dipendenze del codice repository GitHub
+  ],
+  scenari: [
+    - L'utente visualizza il report di analisi librerie e dipendenze del codice repository GitHub
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi librerie e dipendenze del codice repository GitHub"
+)[]
+
+=== UC12: Visualizzazione report analisi della sicurezza #def("OWASP") del codice repository GitHub <UC12>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della sicurezza OWASP del codice repository GitHub
+  ],
+  post: [
+    - L'utente ha visualizzato il report di analisi della sicurezza OWASP del codice repository GitHub
+  ],
+  scenari: [
+    - L'utente visualizza il report di analisi della sicurezza OWASP del codice repository GitHub
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi della sicurezza OWASP del codice repository GitHub"
+)[]
+
+=== UC13: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi codice repository GitHub <UC13>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi delle vulnerabilità del codice repository GitHub
+  ],
+  post: [
+    - L'utente ha visualizzato il report di analisi delle vulnerabilità del codice repository GitHub
+  ],
+  scenari: [
+    - L'utente visualizza il report di analisi delle vulnerabilità del codice repository GitHub
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi delle vulnerabilità del codice repository GitHub"
+)[]
 === UCx: Visualizzazione numero totale di problematiche individuate nel report di analisi codice repository GitHub \
 === UCx: Visualizzazione report analisi della documentazione repository GitHub \
 === UCx: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi repository GitHub \
