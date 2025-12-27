@@ -2,6 +2,7 @@
 #import "../lib/variables.typ": *
 #import "../lib/useCaseUtil.typ": *
 
+#let UAA = "Utente autenticato avanzato"
 
 //Note sul versionamento
 /*
@@ -12,11 +13,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.8.0"
+#let versione = "v0.10.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2025/12/27",
+    "0.10.0",
+    "Aggiunta UC7",
+    members.kevin
+  ),
   (
     "2025/12/24",
     "0.9.0",
@@ -954,7 +961,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 === UC4: Richiesta analisi repository GitHub <UC4>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -983,7 +990,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ==== UC4.1: Inserimento URL repository GitHub <UC4.1>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1011,7 +1018,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ===== UC4.1.1: URL repository GitHub non valido <UC4.1.1>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1035,7 +1042,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ===== UC4.1.2: Repository GitHub non accessibile <UC4.1.2>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1060,7 +1067,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ===== UC4.1.3: Repository GitHub non inserito <UC4.1.3>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1084,7 +1091,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ==== UC4.2: Selezione aree di interesse <UC4.2>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1108,7 +1115,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ===== UC4.2.1: Nessuna area di interesse selezionata <UC4.2.1>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1134,7 +1141,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ==== UC4.3: Invio richiesta di analisi <UC4.3>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1160,7 +1167,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 === UC5: Visualizzazione report analisi repository GitHub <UC5>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1192,7 +1199,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ==== UC5.1: Accesso sezione visualizzazione report di analisi <UC5.1>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1215,7 +1222,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ==== UC5.2: Selezione report di analisi <UC5.2>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1241,7 +1248,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ===== UC5.2.1: Nessun report di analisi disponibile per il repository GitHub selezionato <UC5.2.1>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1267,7 +1274,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ===== UC5.2.2: Nessun report selezionato <UC5.2.2>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1291,7 +1298,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ==== UC5.3: Selezione dati specifici da visualizzare nel report <UC5.3> 
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1316,7 +1323,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ===== UC5.3.1: Nessun dato specifico selezionato <UC5.3.1>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1342,7 +1349,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ==== UC5.4: Visualizzazione report di analisi <UC5.4>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1369,7 +1376,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 === UC6: Scelta intervallo temporale per visualizzazione confronto con report passati <UC6>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1397,9 +1404,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente interagisce con la sezione di selezione dell'intervallo temporale per il confronto con i report passati durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian"
 )[]
 
-===== UC6.1: Nessun intervallo temporale selezionato <UC6.1>
+==== UC6.1: Nessun intervallo temporale selezionato <UC6.1>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1427,9 +1434,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente interagisce con la sezione di selezione dell'intervallo temporale per il confronto con i report passati durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian"
 )[]
 
-===== UC6.2: Intervallo temporale non valido <UC6.2>
+==== UC6.2: Intervallo temporale non valido <UC6.2>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1462,7 +1469,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ===== UC6.2.1: Nessun report di analisi disponibile nel periodo selezionato <UC6.2.1>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1492,7 +1499,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ===== UC6.2.2: Intervallo temporale incoerente <UC6.2.2>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1522,7 +1529,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ===== UC6.2.3: Intervallo temporale troppo ampio <UC6.2.3>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
@@ -1551,30 +1558,60 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[] 
 
 
-=== UCx: Visualizzazione grafico comparativo tra report di analisi repository GitHub <UC7>\
-=== UCx: visualizzazione tabella comparativa tra report di analisi repository GitHub <UC8>\
+=== UC7: Visualizzazione grafico comparativo tra report di analisi repository GitHub <UC7>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
+    - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
+    - L'utente ha selezionato l'intervallo temporale per il confronto con i report passati
+      #link(<UC6>)[#underline[\[UC6\]]]
+    - L'utente seleziona il tasto per la visualizzazione del grafico comparativo tra report di analisi repository GitHub
+      durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian
+      #link(<UC5.4>)[#underline[\[UC5.4\]]]
+  ],
+  post: [
+    - L'utente ha visualizzato il grafico comparativo tra report di analisi repository GitHub
+  ],
+  scenari: [
+    - L'utente visualizza il grafico comparativo tra report di analisi repository GitHub
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con la sezione di visualizzazione del grafico comparativo tra report di analisi repository GitHub durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian"
+)[]
+
+=== UCx: visualizzazione tabella comparativa tra report di analisi repository GitHub \
 === UCx: Visualizzazione valutazione copertura del codice
-=== UCx: Visualizzazione report analisi statica del codice repository GitHub <UC9>\
-=== UCx: Visualizzazione analisi librerie e dipendenze del codice repository GitHub <UC10>\
-=== UCx: Visualizzazione report analisi della sicurezza del codice repository GitHub <UC11>\
-=== UCx: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi codice repository GitHub <UC12>\
-=== UCx: Visualizzazione numero totale di issue individuate nel report di analisi codice repository GitHub <UC13>
-=== UCx: Visualizzazione report analisi della documentazione repository GitHub <UC10>\
-=== UCx: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi repository GitHub <UC6>\
+=== UCx: Visualizzazione report analisi statica del codice repository GitHub \
+=== UCx: Visualizzazione analisi librerie e dipendenze del codice repository GitHub >\
+=== UCx: Visualizzazione report analisi della sicurezza del codice repository GitHub >\
+=== UCx: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi codice repository GitHub >\
+=== UCx: Visualizzazione numero totale di issue individuate nel report di analisi codice repository GitHub >
+=== UCx: Visualizzazione report analisi della documentazione repository GitHub >\
+=== UCx: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi repository GitHub 
 
-=== UCx: VIsualizzazione numero totale di issue individuate nel report di analisi repository GitHub <UC7>\
-=== UCx: Visualizzazione area metadati di un report di analisi repository GitHub <UC8>\
-=== UCx: Visualizzazione data report analisi repository GitHub <UC9>\
-=== UCx: Visualizzazione commit analizzati nel report di analisi repository GitHub <UC10>\
-=== UCx: Visualizzazione richiedente report di analisi repository GitHub <UC11>\
-=== UCx: Visualizzazione aree di interesse selezionate per l'analisi repository GitHub <UC12>\
-
-
+=== UCx: VIsualizzazione numero totale di issue individuate nel report di analisi repository GitHub \
+=== UCx: Visualizzazione area metadati di un report di analisi repository GitHub \
+=== UCx: Visualizzazione data report analisi repository GitHub \
+=== UCx: Visualizzazione commit analizzati nel report di analisi repository GitHub >\
+=== UCx: Visualizzazione richiedente report di analisi repository GitHub >\
+=== UCx: Visualizzazione aree di interesse selezionate per l'analisi repository GitHub >\
 
 
-=== UCx: Accesso al profilo CodeGuardian <UC6>
-=== UCx: modifica password profilo CodeGuardian <UC7>
-=== UCx: Recupero password profilo CodeGuardian <UC8>
+
+
+=== UCx: Accesso al profilo CodeGuardian 
+=== UCx: modifica password profilo CodeGuardian 
+=== UCx: Recupero password profilo CodeGuardian 
 
 = Requisiti
 In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati da Skarab Group
