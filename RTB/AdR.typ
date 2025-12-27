@@ -1357,7 +1357,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
-    - L'utente ha selezionato la modalità di visualizzazione del report di analisi #link(<UC5.3>)[#underline[\[UC5.4\]]]
   ],
   post: [
     - L'utente ha visualizzato il report dell'analisi del repository GitHub richiesto
@@ -1594,17 +1593,16 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 === UCx: Visualizzazione report analisi statica del codice repository GitHub \
 === UCx: Visualizzazione analisi librerie e dipendenze del codice repository GitHub >\
 === UCx: Visualizzazione report analisi della sicurezza del codice repository GitHub >\
-=== UCx: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi codice repository GitHub >\
-=== UCx: Visualizzazione numero totale di issue individuate nel report di analisi codice repository GitHub >
-=== UCx: Visualizzazione report analisi della documentazione repository GitHub >\
+=== UCx: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi codice repository GitHub \\
+=== UCx: Visualizzazione numero totale di issue individuate nel report di analisi codice repository GitHub \\
+=== UCx: Visualizzazione report analisi della documentazione repository GitHub \\
 === UCx: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi repository GitHub 
-
-=== UCx: VIsualizzazione numero totale di issue individuate nel report di analisi repository GitHub \
+=== UCx: Visualizzazione numero totale di issue individuate nel report di analisi repository GitHub \
 === UCx: Visualizzazione area metadati di un report di analisi repository GitHub \
 === UCx: Visualizzazione data report analisi repository GitHub \
-=== UCx: Visualizzazione commit analizzati nel report di analisi repository GitHub >\
-=== UCx: Visualizzazione richiedente report di analisi repository GitHub >\
-=== UCx: Visualizzazione aree di interesse selezionate per l'analisi repository GitHub >\
+=== UCx: Visualizzazione commit analizzati nel report di analisi repository GitHub \
+=== UCx: Visualizzazione richiedente report di analisi repository GitHub \
+=== UCx: Visualizzazione aree di interesse selezionate per l'analisi repository GitHub \
 
 
 
