@@ -1897,7 +1897,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa ai metadati del report di analisi repository GitHub"
 )[]
 
-=== UC12.1: Visualizzazione data report analisi repository GitHub <UC12.1>
+==== UC12.1: Visualizzazione data report analisi repository GitHub <UC12.1>
 #useCase(
   attore: UAA,
   pre: [
@@ -1919,7 +1919,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente visualizza la data nella sezione relativa ai metadati del report di analisi repository GitHub"
 )[]
 
-=== UC12.2: Visualizzazione commit analizzati nel report di analisi repository GitHub <UC12.2>
+==== UC12.2: Visualizzazione commit analizzati nel report di analisi repository GitHub <UC12.2>
 #useCase(
   attore: UAA,
   pre: [
@@ -1941,7 +1941,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente visualizza i commit analizzati nella sezione relativa ai metadati del report di analisi repository GitHub"
 )[]
 
-=== UC12.3: Visualizzazione richiedente report di analisi repository GitHub <UC12.3>
+==== UC12.3: Visualizzazione richiedente report di analisi repository GitHub <UC12.3>
 #useCase(
   attore: UAA,
   pre: [

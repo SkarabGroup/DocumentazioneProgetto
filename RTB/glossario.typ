@@ -10,7 +10,7 @@
   (
     "2025/12/27", 
     "0.3.0", 
-    "Correzioni sul formato delle date, standardizzate e aggiunta termini",
+    "Correzioni sul formato delle date, standardizzate, riordino in ordine alfabetico dei termini e aggiunta termini",
     members.kevin, 
   ),
   (
