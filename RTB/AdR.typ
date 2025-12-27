@@ -21,7 +21,7 @@
   (
     "2025/12/27",
     "0.10.0",
-    "Aggiunta UC7,C8",
+    "Aggiunta UC da 7 a 12 con relativi sotto casi d'uso, aggiunta estensioni per UC4.3",
     members.kevin
   ),
   (
@@ -1159,10 +1159,67 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   estensioni: [
-    - Nessuna
+    - Ultimo report up-to-date #link(<UC4.3.1>)[#underline[\[UC4.3.1\]]] 
+    - Ultimo report in elaborazione #link(<UC4.3.2>)[#underline[\[UC4.3.2\]]]
   ],
   trigger: "L'utente interagisce con la sezione di invio della richiesta di analisi durante la procedura di richiesta analisi repository GitHub a CodeGuardian"
 )[]
+
+==== UC4.3.1: Ultimo report up-to-date <UC4.3.1>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha inserito un URL del repository GitHub valido durante l'inserimento dell'URL del repository GitHub #link(<UC4.1>)[#underline[\[UC4.1\]]]
+    - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
+    - L'utente invia la richiesta di analisi al sistema #link(<UC4.3>)[#underline[\[UC4.3\]]]
+    - Il sistema rileva che l'ultimo report di analisi del repository GitHub specificato è già aggiornato rispetto all'ultima modifica del repository stesso
+  ],
+  post: [
+    - La procedura di richiesta analisi repository GitHub non viene finalizzata in quanto l'analisi risulta già aggiornata
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio che indica che l'analisi del repository GitHub specificato è già aggiornata e non è necessario avviare una nuova analisi
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Il sistema rileva che l'ultimo report di analisi del repository GitHub specificato è già aggiornato rispetto all'ultima modifica del repository stesso"
+)[
+]
+
+==== UC4.3.2: Ultimo report in elaborazione <UC4.3.2>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha inserito un URL del repository GitHub valido durante l'inserimento dell'URL del repository GitHub #link(<UC4.1>)[#underline[\[UC4.1\]]]
+    - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
+    - L'utente invia la richiesta di analisi al sistema #link(<UC4.3>)[#underline[\[UC4.3\]]]
+    - Il sistema rileva che l'ultimo report di analisi del repository GitHub specificato è ancora in elaborazione
+  ],
+  post: [
+    - La procedura di richiesta analisi repository GitHub non viene finalizzata in quanto l'analisi è ancora in corso
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio che indica che l'analisi del repository GitHub specificato è ancora in corso e non è possibile avviare una nuova analisi fino al completamento di quella in corso
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Il sistema rileva che l'ultimo report di analisi del repository GitHub specificato è ancora in elaborazione"
+)[
+]
 
 
 === UC5: Visualizzazione report analisi repository GitHub <UC5>
@@ -1794,16 +1851,118 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi della completezza della documentazione nei confronti del codice repository GitHub"
 )[]
 
-====
-=== UCx: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi repository GitHub \
-=== UCx: Visualizzazione numero totale di issue individuate nel report di analisi repository GitHub \
-=== UCx: Visualizzazione area metadati di un report di analisi repository GitHub \
-=== UCx: Visualizzazione data report analisi repository GitHub \
-=== UCx: Visualizzazione commit analizzati nel report di analisi repository GitHub \
-=== UCx: Visualizzazione richiedente report di analisi repository GitHub \
-=== UCx: Visualizzazione aree di interesse selezionate per l'analisi repository GitHub \
+=== UC11: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi repository GitHub <UC11>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al numero totale di vulnerabilità individuate nel report di analisi repository GitHub
+  ],
+  post: [
+    - L'utente ha visualizzato il numero totale di vulnerabilità individuate nel report di analisi repository GitHub
+  ],
+  scenari: [
+    - L'utente visualizza il numero totale di vulnerabilità individuate nel report di analisi repository GitHub
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [ 
+    - Nessuna
+  ],
+  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al numero totale di vulnerabilità individuate nel report di analisi repository GitHub"
+)[]
 
-=== UCx: Visualizzazione numero totale di problematiche individuate nel report di analisi codice repository GitHub \
+=== UC12: Visualizzazione area metadati di un report di analisi repository GitHub <UC12>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub
+  ],
+  post: [
+    - L'utente ha visualizzato l'area metadati del report di analisi repository GitHub
+  ],
+  scenari: [
+    - L'utente visualizza l'area metadati del report di analisi repository GitHub
+  ],
+  inclusioni: [
+    - Visualizzazione data report analisi repository GitHub #link(<UC12.1>)[#underline[\[UC12.1\]]]
+    - Visualizzazione commit analizzati nel report di analisi repository GitHub #link(<UC12.2>)[#underline[\[UC12.2\]]]
+    - Visualizzazione richiedente report di analisi repository GitHub #link(<UC12.3>)[#underline[\[UC12.3\]]]
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa ai metadati del report di analisi repository GitHub"
+)[]
+
+=== UC12.1: Visualizzazione data report analisi repository GitHub <UC12.1>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
+  ],
+  post: [
+    - L'utente ha visualizzato la data del report di analisi repository GitHub
+  ],
+  scenari: [
+    - L'utente visualizza la data del report di analisi repository GitHub
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente visualizza la data nella sezione relativa ai metadati del report di analisi repository GitHub"
+)[]
+
+=== UC12.2: Visualizzazione commit analizzati nel report di analisi repository GitHub <UC12.2>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
+  ],
+  post: [
+    - L'utente ha visualizzato i commit analizzati nel report di analisi repository GitHub
+  ],
+  scenari: [
+    - L'utente visualizza i commit analizzati nel report di analisi repository GitHub
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente visualizza i commit analizzati nella sezione relativa ai metadati del report di analisi repository GitHub"
+)[]
+
+=== UC12.3: Visualizzazione richiedente report di analisi repository GitHub <UC12.3>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
+  ],
+  post: [
+    - L'utente ha visualizzato il richiedente del report di analisi repository GitHub
+  ],
+  scenari: [
+    - L'utente visualizza il richiedente del report di analisi repository GitHub
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente visualizza il richiedente nella sezione relativa ai metadati del report di analisi repository GitHub"
+)[]
+
 
 
 
