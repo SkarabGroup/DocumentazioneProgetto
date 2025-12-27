@@ -1614,21 +1614,23 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 
 
-=== UC9: Visualizzazione valutazione copertura del codice repository GitHub <UC9>
+=== UC9: Visualizzazione valutazione analisi del codice repository GitHub <UC9>
 #useCase(
   attore: UAA,
   pre: [
     - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa alla valutazione della copertura del codice repository GitHub
   ],
   post: [
-    - L'utente ha visualizzato la valutazione della copertura del codice repository GitHub
+    - L'utente ha visualizzato la valutazione dell'analisi del codice repository GitHub
   ],
   scenari: [
-    - L'utente visualizza la valutazione della copertura del codice repository GitHub
+    - L'utente visualizza la valutazione dell'analisi del codice repository GitHub
   ],
   inclusioni: [
-    - Nessuna
+    - Visualizzazione report di analisi del codice repository GitHub #link(<UC9.1>)[#underline[\[UC9.1\]]]
+    - Visualizzazione analisi librerie e dipendenze del codice repository GitHub #link(<UC9.2>)[#underline[\[UC9.2\]]]
+    - Visualizzazione report analisi della sicurezza #def("OWASP") del codice repository GitHub #link(<UC9.3>)[#underline[\[UC9.3\]]]
+    - Visualizzazione numero totale di vulnerabilità individuate nel report di analisi codice repository GitHub #link(<UC9.4>)[#underline[\[UC9.4\]]]
   ],
   estensioni: [
     - Nessuna
@@ -1637,7 +1639,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[]
 
 
-=== UC10: Visualizzazione report analisi statica del codice repository GitHub <UC10>
+==== UC9.1: Visualizzazione report analisi statica del codice repository GitHub <UC9.1>
 #useCase(
   attore: UAA,
   pre: [
@@ -1659,7 +1661,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi statica del codice repository GitHub"
 )[]
 
-=== UC11: Visualizzazione analisi librerie e dipendenze del codice repository GitHub <UC11>
+==== UC9.2: Visualizzazione analisi librerie e dipendenze del codice repository GitHub <UC9.2>
 #useCase(
   attore: UAA,
   pre: [
@@ -1681,7 +1683,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi librerie e dipendenze del codice repository GitHub"
 )[]
 
-=== UC12: Visualizzazione report analisi della sicurezza #def("OWASP") del codice repository GitHub <UC12>
+==== UC9.3: Visualizzazione report analisi della sicurezza #def("OWASP") del codice repository GitHub <UC9.3>
 #useCase(
   attore: UAA,
   pre: [
@@ -1703,7 +1705,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi della sicurezza OWASP del codice repository GitHub"
 )[]
 
-=== UC13: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi codice repository GitHub <UC13>
+==== UC9.4: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi codice repository GitHub <UC9.4>
 #useCase(
   attore: UAA,
   pre: [
@@ -1724,8 +1726,75 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi delle vulnerabilità del codice repository GitHub"
 )[]
-=== UCx: Visualizzazione numero totale di problematiche individuate nel report di analisi codice repository GitHub \
-=== UCx: Visualizzazione report analisi della documentazione repository GitHub \
+
+=== UC10: Visualizzazione report analisi della documentazione repository GitHub <UC10>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della documentazione repository GitHub
+  ],
+  post: [
+    - L'utente ha visualizzato il report di analisi della documentazione repository GitHub
+  ],
+  scenari: [
+    - L'utente visualizza il report di analisi della documentazione repository GitHub
+  ],
+  inclusioni: [
+    - Visualizzazione errori di spelling #link(<UC10.1>)[#underline[\[UC10.1\]]]
+    - Visualizzazione completezza della documentazione nei confronti del codice#link(<UC10.2>)[#underline[\[UC10.2\]]]
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi della documentazione repository GitHub"
+)[]
+
+==== UC10.1: Visualizzazione errori di spelling <UC10.1>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della documentazione repository GitHub #link(<UC10>)[#underline[\[UC10\]]]
+  ],
+  post: [
+    - L'utente ha visualizzato il report di analisi degli errori di spelling della documentazione repository GitHub
+  ],
+  scenari: [
+    - L'utente visualizza il report di analisi degli errori di spelling della documentazione repository GitHub
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi degli errori di spelling della documentazione repository GitHub"
+)[]
+
+==== UC10.2: Visualizzazione completezza della documentazione nei confronti del codice <UC10.2>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della documentazione repository GitHub #link(<UC10>)[#underline[\[UC10\]]]
+  ],
+  post: [
+    - L'utente ha visualizzato il report di analisi della completezza della documentazione nei confronti del codice repository GitHub
+  ],
+  scenari: [
+    - L'utente visualizza il report di analisi della completezza della documentazione nei confronti del codice repository GitHub
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi della completezza della documentazione nei confronti del codice repository GitHub"
+)[]
+
+====
 === UCx: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi repository GitHub \
 === UCx: Visualizzazione numero totale di issue individuate nel report di analisi repository GitHub \
 === UCx: Visualizzazione area metadati di un report di analisi repository GitHub \
@@ -1734,6 +1803,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 === UCx: Visualizzazione richiedente report di analisi repository GitHub \
 === UCx: Visualizzazione aree di interesse selezionate per l'analisi repository GitHub \
 
+=== UCx: Visualizzazione numero totale di problematiche individuate nel report di analisi codice repository GitHub \
 
 
 
