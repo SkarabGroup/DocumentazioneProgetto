@@ -1480,13 +1480,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
-    - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
+    - L'utente ha selezionato il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
       durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian
       #link(<UC5.4>)[#underline[\[UC5.4\]]]
   ],
@@ -1664,15 +1661,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
-    - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
     - L'utente ha selezionato l'intervallo temporale per il confronto con i report passati
       #link(<UC6>)[#underline[\[UC6\]]]
-    - L'utente seleziona il tasto per la visualizzazione del grafico comparativo tra report di analisi repository GitHub
+    - L'utente ha selezionato il tasto per la visualizzazione del grafico comparativo tra report di analisi repository GitHub
       durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian
       #link(<UC5.4>)[#underline[\[UC5.4\]]]
   ],
@@ -1730,7 +1722,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente visualizza la valutazione dell'analisi del codice repository GitHub
   ],
   inclusioni: [
-    - Visualizzazione report di analisi del codice repository GitHub #link(<UC9.1>)[#underline[\[UC9.1\]]]
+    - Visualizzazione report di analisi statica del codice repository GitHub #link(<UC9.1>)[#underline[\[UC9.1\]]]
     - Visualizzazione analisi librerie e dipendenze del codice repository GitHub #link(<UC9.2>)[#underline[\[UC9.2\]]]
     - Visualizzazione report analisi della sicurezza #def("OWASP") del codice repository GitHub #link(<UC9.3>)[#underline[\[UC9.3\]]]
     - Visualizzazione numero totale di vulnerabilità individuate nel report di analisi codice repository GitHub #link(<UC9.4>)[#underline[\[UC9.4\]]]
@@ -1739,7 +1731,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa alla valutazione della copertura del codice repository GitHub"
-)[]
+)[
+  #useCaseDiagram("9", "UC9 - Visualizzazione valutazione analisi del codice repository GitHub")
+]
 
 
 ==== UC9.1: Visualizzazione report analisi statica del codice repository GitHub <UC9.1>
@@ -1941,7 +1935,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa ai metadati del report di analisi repository GitHub"
-)[]
+)[
+  #useCaseDiagram("12", "UC12 - Visualizzazione area metadati di un report di analisi repository GitHub")
+]
 
 ==== UC12.1: Visualizzazione data report analisi repository GitHub <UC12.1>
 #useCase(
