@@ -27,7 +27,6 @@
 
 #let glossario(file-dati: "../RTB/glossario.yml") = {
   let raw-data = yaml(file-dati)
-  let sorted-letters = raw-data.pairs().sorted(key: p => p.at(0))
 
   show heading.where(level: 2): it => {
     v(1em)
@@ -39,11 +38,10 @@
     v(0.5em)
   }
 
-  for (letter, terms) in sorted-letters {
+  for (letter, terms) in raw-data {
     heading(level: 2, numbering: none)[#letter]
     
-    let sorted-terms = terms.pairs().sorted(key: t => t.at(0))
-    for (term, definition) in sorted-terms {
+    for (term, definition) in terms {
       renderTerm(term, definition)
     }
   }
