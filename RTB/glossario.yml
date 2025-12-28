@@ -6,11 +6,18 @@ A:
   Agente:
     descrizione: Componente sistema software autonomo che percepisce il proprio ambiente, prende decisioni e intraprende azioni in modo indipendente per raggiungere obiettivi specifici grazie all'utilizzo di intelligenza artificiale
 
+  Approccio Agile:
+    alternative: Agile, metodo Agile
+    descrizione: Approccio alla gestione del progetto che privilegia iterazioni brevi, feedback continui e adattamento delle priorità in base al progresso e ai risultati ottenuti.
+
   Analisi dei requisiti:
     descrizione: Processo di raccolta, valutazione e documentazione delle esigenze e delle aspettative degli stakeholder per un sistema software, al fine di definire chiaramente cosa il sistema deve fare.
 B: 
   Back-end:
     descrizione: Parte di un'applicazione o sistema che gestisce la logica di business, l'archiviazione dei dati e l'elaborazione delle richieste degli utenti, solitamente non visibile direttamente dagli utenti finali.
+
+  Backlog:
+    descrizione: Elenco ordinato e prioritizzato di attività, requisiti e funzionalità da completare durante lo sviluppo del progetto.
 C:
   Caso d'uso:
     alternative: Use case, casi d'uso
@@ -45,6 +52,10 @@ G:
 #H: 
 
 I:
+  Ingegneria del Software:
+    alternative: Software Engineering, SWE
+    descrizione: Disciplina che si occupa della progettazione, sviluppo, manutenzione e gestione di sistemi software complessi in modo sistematico e metodico.
+
   IT:
     acronimo: Information Technology
     descrizione: Settore che si occupa dell'uso di computer, software e reti per la gestione e l'elaborazione delle informazioni.
@@ -56,10 +67,12 @@ M:
     acronimo: Minimum Viable Product
     descrizione: Versione minima di un prodotto software che include solo le funzionalità essenziali per soddisfare i requisiti principali e permettere il rilascio sul mercato.
 
-
 #N:
 #O:
 P:
+  Piano di progetto:
+    descrizione: Documento che definisce gli obiettivi, le attività, le risorse, i tempi e i costi necessari per completare un progetto software con successo.
+
   Progettisti:
     descrizione: Membri del team di sviluppo responsabili della progettazione dell'architettura e delle funzionalità del sistema software.
 
@@ -68,18 +81,38 @@ P:
 
   Progetto:
     descrizione: Esso é inteso nel senso di project, ovvero un'insieme di attività coordinate e gestite per sviluppare un sistema software che soddisfi specifici requisiti e obiettivi.
+
+  Product Baseline:
+    alternative: PB
+    descrizione: Fase del progetto in cui vengono definite le specifiche, i vincoli e le caratteristiche del prodotto finale da sviluppare.
 #Q:
 R:
   Requisiti funzionali:
     descrizione: Requisiti che specificano un comportamento o una funzione che un sistema deve eseguire ovvero il "cosa deve fare".
+  
   Requisiti non funzionali:
     descrizione: Requisiti che descrivono le caratteristiche e le qualità che il sistema deve possedere per soddisfare le aspettative degli utenti, stabilendo "come deve funzionare" il sistema.
-
+  
+  Requirements and Technology Baseline:
+    alternative: RTB
+    descrizione: Fase di progetto dedicata alla raccolta dei requisiti e alla definizione delle tecnologie e delle linee guida tecniche da adottare.
+  
   Repository:
     descrizione: Archivio digitale dove il codice sorgente e la documentazione di un progetto software sono memorizzati e gestiti, spesso utilizzato per il controllo delle versioni e la collaborazione tra sviluppatori.
+
+  Responsabile:
+    alternative: Project Manager, responsabile di progetto
+    descrizione: Membro del team incaricato di pianificare, coordinare e supervisionare le attività del progetto per garantire il raggiungimento degli obiettivi nei tempi e nei costi previsti.
+
+  Rischio:
+    alternative: Risk, rischi
+    descrizione: Evento incerto che, se si verifica, può avere un impatto positivo o negativo sugli obiettivi del progetto, come tempi, costi o qualità del software prodotto.
 S:
   Skarab Group:
     descrizione: Nome del team di studenti che intende sviluppare il sistema software a partire dal capitolato proposto dall'azienda Var Group.
+
+  Sprint:
+    descrizione: Periodo di lavoro di breve durata (tipicamente 1-2 settimane) durante il quale il team realizza un insieme definito di attività e obiettivi.
 
   Sistema software:
     alternative: Software system, sistema 
@@ -88,6 +121,9 @@ S:
   Sistema multiagente:
     alternative: Multi-agent system, sistema multi agente, multiagente
     descrizione: Sistema software composto da più agenti autonomi che interagiscono tra loro per raggiungere obiettivi comuni o individuali.
+
+  Slack:
+    descrizione: Piattaforma di comunicazione e collaborazione utilizzata dal team per facilit
 
   sviluppatore software:
     alternative: software developer, sviluppatori software, sviluppatori
