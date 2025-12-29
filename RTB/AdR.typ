@@ -13,16 +13,23 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.13.0"
+#let versione = "v0.14.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
+    "2025/12/29",
+    "0.14.0",
+    "Spunti su UC3, requisiti UC3, numerazione automatica requisiti",
+    members.kevin
+  ),
+  (
     "2025/12/28",
     "0.13.0",
     "Requisiti per UC1 e UC2",
     members.suar,
+    members.kevin
   ),
   (
     "2025/12/28",
@@ -2021,7 +2028,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 
 
-
+=== UCx: Scollegamento account GitHub da CodeGuardian
 === UCx: Accesso al profilo CodeGuardian 
 === UCx: modifica password profilo CodeGuardian 
 === UCx: Recupero password profilo CodeGuardian 
@@ -2030,6 +2037,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 = Requisiti
 In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati da Skarab Group
 
+#let rf_counter = counter("RF")
+#rf_counter.step() //parte da 1
+
+#let RFx = context ([RF#rf_counter.display()#rf_counter.step()])
 == Requisiti funzionali
 #table(
   columns: (1fr, 3fr, 1fr),
@@ -2041,74 +2052,84 @@ In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati
 
   // Stile righe alternate
   fill: (col, row) => if row == 0 {
-    luma(60%)
+    luma(62.75%)
   } else if calc.odd(row) {
-    luma(245%)
+    luma(220)
   },
+
+  
 
   align: (col, row) => (center, left, center).at(col) + horizon,
     // UC1
-    [RF1], ["L'utente non registrato deve poter visualizzare ed accedere alla sezione di registrazione di CodeGuardian"], [#link(<UC1>)[#underline[\[UC1\]]]],
+    [#RFx], [L'utente non registrato deve poter visualizzare ed accedere alla sezione di registrazione di CodeGuardian], [#link(<UC1>)[#underline[\[UC1\]]]],
     
-    [RFx], ["L'utente non registrato, durante la procedura di registrazione, deve poter inserire il proprio nome nell'apposito campo di testo"], [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
-    [RFx], ["Il Sistema, durante l'inserimento del nome, deve rimuovere automaticamente eventuali spazi bianchi superflui all'inizio e alla fine del testo (trimming)"], [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
-    [RFx], ["Il Sistema, al momento della conferma dei dati, deve verificare che il nome inserito non contenga caratteri numerici"], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
-    [RFx], ["Il Sistema, al momento della conferma dei dati, deve verificare che il nome inserito non contenga caratteri speciali (ad eccezione di apostrofi o trattini)"], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
-    [RFx], ["Il Sistema, in caso di rilevazione di caratteri non ammessi nel nome, deve impedire il proseguimento della registrazione"], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
-    [RFx], ["Il Sistema, in caso di nome non conforme, deve mostrare all'utente un messaggio di errore specifico che indichi il mancato rispetto dei vincoli di formato"], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
+    [#RFx], [L'utente non registrato, durante la procedura di registrazione, deve poter inserire il proprio nome nell'apposito campo di testo], [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
+    [#RFx], [Il Sistema, durante l'inserimento del nome, deve rimuovere automaticamente eventuali spazi bianchi superflui all'inizio e alla fine del testo (trimming)], [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
+    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare che il nome inserito non contenga caratteri numerici], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
+    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare che il nome inserito non contenga caratteri speciali (ad eccezione di apostrofi o trattini)], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
+    [#RFx], [Il Sistema, in caso di rilevazione di caratteri non ammessi nel nome, deve impedire il proseguimento della registrazione], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
+    [#RFx], [Il Sistema, in caso di nome non conforme, deve mostrare all'utente un messaggio di errore specifico che indichi il mancato rispetto dei vincoli di formato], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
 
-    [RFx], ["L'utente non registrato, durante la procedura di registrazione, deve poter inserire il proprio cognome nell'apposito campo di testo"], [#link(<UC1.2>)[#underline[\[UC1.2\]]]],
-    [RFx], ["Il Sistema, durante l'inserimento del cognome, deve rimuovere automaticamente eventuali spazi bianchi superflui all'inizio e alla fine del testo"], [#link(<UC1.2>)[#underline[\[UC1.2\]]]],
-    [RFx], ["Il Sistema, al momento della conferma dei dati, deve verificare che il cognome inserito non contenga caratteri numerici"], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
-    [RFx], ["Il Sistema, al momento della conferma dei dati, deve verificare che il cognome inserito non contenga caratteri speciali (ad eccezione di apostrofi, trattini o spazi intermadi)"], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
-    [RFx], ["Il Sistema, in caso di rilevazione di caratteri non ammessi nel cognome, deve impedire il proseguimento della registrazione"], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
-    [RFx], ["Il Sistema, in caso di cognome non conforme, deve mostrare all'utente un messaggio di errore specifico che indichi il mancato rispetto dei vincoli di formato"], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
+    [#RFx], [L'utente non registrato, durante la procedura di registrazione, deve poter inserire il proprio cognome nell'apposito campo di testo], [#link(<UC1.2>)[#underline[\[UC1.2\]]]],
+    [#RFx], [Il Sistema, durante l'inserimento del cognome, deve rimuovere automaticamente eventuali spazi bianchi superflui all'inizio e alla fine del testo], [#link(<UC1.2>)[#underline[\[UC1.2\]]]],
+    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare che il cognome inserito non contenga caratteri numerici], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
+    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare che il cognome inserito non contenga caratteri speciali (ad eccezione di apostrofi, trattini o spazi intermadi)], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
+    [#RFx], [Il Sistema, in caso di rilevazione di caratteri non ammessi nel cognome, deve impedire il proseguimento della registrazione], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
+    [#RFx], [Il Sistema, in caso di cognome non conforme, deve mostrare all'utente un messaggio di errore specifico che indichi il mancato rispetto dei vincoli di formato], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
 
-    [RFx], ["L'utente non registrato, durante la procedura di registrazione, deve poter inserire un identificativo univoco (username) nell'apposito campo di testo"], [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
-    [RFx], ["Il Sistema, al momento della conferma dei dati, deve verificare che l'username abbia una lunghezza compresa tra 4 e 20 caratteri"], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
-    [RFx], ["Il Sistema, al momento della conferma dei dati, deve verificare che l'username sia composto esclusivamente da caratteri alfanumerici"], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
-    [RFx], ["Il Sistema, in caso di username non conforme ai vincoli di formato, deve mostrare all'utente un messaggio di errore specifico"], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
-    [RFx], ["Il Sistema, al momento della conferma dei dati, deve verificare l'eventuale presenza dell'username all'interno del database tramite ricerca case-insensitive"], [#link(<UC1.3.2>)[#underline[\[UC1.3.2\]]]],
-    [RFx], ["Il Sistema, in caso di username già esistente o non disponibile, deve mostrare all'utente un messaggio di errore generico per finalità di sicurezza"], [#link(<UC1.3.2>)[#underline[\[UC1.3.2\]]]],
-    [RFx], ["Il Sistema, in caso di username non valido o non disponibile, deve impedire il completamento della procedura di registrazione"], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]], #link(<UC1.3.2>)[#underline[\[UC1.3.2\]]]],
+    [#RFx], [L'utente non registrato, durante la procedura di registrazione, deve poter inserire un identificativo univoco (username) nell'apposito campo di testo], [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
+    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare che l'username abbia una lunghezza compresa tra 4 e 20 caratteri], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare che l'username sia composto esclusivamente da caratteri alfanumerici], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+    [#RFx], [Il Sistema, in caso di username non conforme ai vincoli di formato, deve mostrare all'utente un messaggio di errore specifico], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare l'eventuale presenza dell'username all'interno del database tramite ricerca case-insensitive], [#link(<UC1.3.2>)[#underline[\[UC1.3.2\]]]],
+    [#RFx], [Il Sistema, in caso di username già esistente o non disponibile, deve mostrare all'utente un messaggio di errore generico per finalità di sicurezza], [#link(<UC1.3.2>)[#underline[\[UC1.3.2\]]]],
+    [#RFx], [Il Sistema, in caso di username non valido o non disponibile, deve impedire il completamento della procedura di registrazione], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]], #link(<UC1.3.2>)[#underline[\[UC1.3.2\]]]],
 
-    [RFx], ["L'utente non registrato, durante la procedura di registrazione, deve poter inserire un indirizzo email di riferimento nell'apposito campo di testo"], [#link(<UC1.4>)[#underline[\[UC1.4\]]]],
-    [RFx], ["Il Sistema, al momento della conferma dei dati, deve verificare la validità sintattica dell'email inserita (presenza del carattere '@' e di un dominio valido)"], [#link(<UC1.4.1>)[#underline[\[UC1.4.1\]]]],
-    [RFx], ["Il Sistema, in caso di email sintatticamente non valida, deve mostrare all'utente un messaggio di errore specifico e impedire il proseguimento della registrazione"], [#link(<UC1.4.1>)[#underline[\[UC1.4.1\]]]],
-    [RFx], ["Il Sistema, al momento della conferma dei dati, deve verificare l'eventuale presenza dell'indirizzo email all'interno del database"], [#link(<UC1.4.2>)[#underline[\[UC1.4.2\]]]],
-    [RFx], ["Il Sistema, in caso di email già censita o non disponibile, deve mostrare all'utente un messaggio di errore generico per finalità di sicurezza"], [#link(<UC1.4.2>)[#underline[\[UC1.4.2\]]]],
+    [#RFx], [L'utente non registrato, durante la procedura di registrazione, deve poter inserire un indirizzo email di riferimento nell'apposito campo di testo], [#link(<UC1.4>)[#underline[\[UC1.4\]]]],
+    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare la validità sintattica dell'email inserita (presenza del carattere '@' e di un dominio valido)], [#link(<UC1.4.1>)[#underline[\[UC1.4.1\]]]],
+    [#RFx], [Il Sistema, in caso di email sintatticamente non valida, deve mostrare all'utente un messaggio di errore specifico e impedire il proseguimento della registrazione], [#link(<UC1.4.1>)[#underline[\[UC1.4.1\]]]],
+    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare l'eventuale presenza dell'indirizzo email all'interno del database], [#link(<UC1.4.2>)[#underline[\[UC1.4.2\]]]],
+    [#RFx], [Il Sistema, in caso di email già censita o non disponibile, deve mostrare all'utente un messaggio di errore generico per finalità di sicurezza], [#link(<UC1.4.2>)[#underline[\[UC1.4.2\]]]],
 
-    [RFx], ["L'utente non registrato, durante la procedura di registrazione, deve poter inserire una password nell'apposito campo di testo"], [#link(<UC1.5>)[#underline[\[UC1.5\]]]],
-    [RFx], ["Il Sistema, al momento della conferma dei dati, deve verificare che la password abbia una lunghezza minima di 8 caratteri"], [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
-    [RFx], ["Il Sistema, al momento della conferma dei dati, deve verificare che la password contenga almeno una lettera maiuscola, una lettera minuscola, un numero e un carattere speciale"], [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
-    [RFx], ["Il Sistema, in caso di password non conforme ai vincoli di formato, deve mostrare all'utente un messaggio di errore specifico indicando i criteri non soddisfatti"], [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
-    [RFx], ["Il Sistema, in caso di password non valida, deve impedire il completamento della procedura di registrazione mantenendo il Sistema nello stato di inserimento dati"], [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],   
+    [#RFx], [L'utente non registrato, durante la procedura di registrazione, deve poter inserire una password nell'apposito campo di testo], [#link(<UC1.5>)[#underline[\[UC1.5\]]]],
+    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare che la password abbia una lunghezza minima di 8 caratteri], [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
+    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare che la password contenga almeno una lettera maiuscola, una lettera minuscola, un numero e un carattere speciale], [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
+    [#RFx], [Il Sistema, in caso di password non conforme ai vincoli di formato, deve mostrare all'utente un messaggio di errore specifico indicando i criteri non soddisfatti], [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
+    [#RFx], [Il Sistema, in caso di password non valida, deve impedire il completamento della procedura di registrazione mantenendo il Sistema nello stato di inserimento dati], [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],   
     
-    [RFx], ["L'utente non registrato, dopo aver compilato i campi richiesti, deve poter inviare il modulo di registrazione tramite un comando di conferma"], [#link(<UC1>)[#underline[\[UC1\]]]],
-    [RFx], ["Il Sistema, a seguito della validazione positiva di tutti i dati inseriti, deve creare in modo persistente il nuovo profilo utente nel database"], [#link(<UC1>)[#underline[\[UC1\]]]],
-    [RFx], ["Il Sistema, avvenuta la registrazione, deve inviare una notifica di conferma all'indirizzo email fornito dall'utente"], [#link(<UC1>)[#underline[\[UC1\]]]],
-    [RFx], ["Il Sistema, completata la registrazione, deve mostrare un messaggio di successo e reindirizzare l'utente alla pagina di login"], [#link(<UC1>)[#underline[\[UC1\]]]],
-    [RFx], ["Il Sistema deve permettere all'utente di visualizzare in chiaro la password inserita tramite l'interazione con un apposito comando (icona occhio)"], [#link(<UC1.5>)[#underline[\[UC1.5\]]]],
-    [RFx], ["Il Sistema deve mantenere il comando di conferma registrazione disabilitato finché tutti i campi obbligatori non risultano popolati"], [#link(<UC1>)[#underline[\[UC1\]]]],
+    [#RFx], [L'utente non registrato, dopo aver compilato i campi richiesti, deve poter inviare il modulo di registrazione tramite un comando di conferma], [#link(<UC1>)[#underline[\[UC1\]]]],
+    [#RFx], [Il Sistema, a seguito della validazione positiva di tutti i dati inseriti, deve creare in modo persistente il nuovo profilo utente nel database], [#link(<UC1>)[#underline[\[UC1\]]]],
+    [#RFx], [Il Sistema, avvenuta la registrazione, deve inviare una notifica di conferma all'indirizzo email fornito dall'utente], [#link(<UC1>)[#underline[\[UC1\]]]],
+    [#RFx], [Il Sistema, completata la registrazione, deve mostrare un messaggio di successo e reindirizzare l'utente alla pagina di login], [#link(<UC1>)[#underline[\[UC1\]]]],
+    [#RFx], [Il Sistema deve permettere all'utente di visualizzare in chiaro la password inserita tramite l'interazione con un apposito comando (icona occhio)], [#link(<UC1.5>)[#underline[\[UC1.5\]]]],
+    [#RFx], [Il Sistema deve mantenere il comando di conferma registrazione disabilitato finché tutti i campi obbligatori non risultano popolati], [#link(<UC1>)[#underline[\[UC1\]]]],
 
-    [RFx], ["L'utente registrato, nella sezione di autenticazione, deve poter visualizzare i campi di input per username e password"], [#link(<UC2>)[#underline[\[UC2\]]]],
-    [RFx], ["L'utente registrato, dopo aver inserito le credenziali, deve poter inviare il modulo di autenticazione tramite un comando di conferma"], [#link(<UC2>)[#underline[\[UC2\]]]],
-    [RFx], ["Il Sistema, a seguito della conferma dell'autenticazione, deve verificare la corrispondenza delle credenziali fornite con quelle censite nel database"], [#link(<UC2>)[#underline[\[UC2\]]]],
-    [RFx], ["Il Sistema, in caso di esito positivo della verifica delle credenziali, deve autenticare l'utente e permettere l'accesso alle funzionalità riservate"], [#link(<UC2>)[#underline[\[UC2\]]]],
-    [RFx], ["Il Sistema, avvenuta l'autenticazione, deve reindirizzare l'utente verso la dashboard principale dell'applicazione"], [#link(<UC2>)[#underline[\[UC2\]]]],
+    [#RFx], [L'utente registrato, nella sezione di autenticazione, deve poter visualizzare i campi di input per username e password], [#link(<UC2>)[#underline[\[UC2\]]]],
+    [#RFx], [L'utente registrato, dopo aver inserito le credenziali, deve poter inviare il modulo di autenticazione tramite un comando di conferma], [#link(<UC2>)[#underline[\[UC2\]]]],
+    [#RFx], [Il Sistema, a seguito della conferma dell'autenticazione, deve verificare la corrispondenza delle credenziali fornite con quelle censite nel database], [#link(<UC2>)[#underline[\[UC2\]]]],
+    [#RFx], [Il Sistema, in caso di esito positivo della verifica delle credenziali, deve autenticare l'utente e permettere l'accesso alle funzionalità riservate], [#link(<UC2>)[#underline[\[UC2\]]]],
+    [#RFx], [Il Sistema, avvenuta l'autenticazione, deve reindirizzare l'utente verso la dashboard principale dell'applicazione], [#link(<UC2>)[#underline[\[UC2\]]]],
 
-    [RFx], ["L'utente registrato, durante la procedura di autenticazione, deve poter inserire il proprio username nell'apposito campo di testo"], [#link(<UC2.1>)[#underline[\[UC2.1\]]]],
-    [RFx], ["Il Sistema, al momento della conferma dei dati, deve verificare che l'username inserito rispetti i vincoli di formato (4-20 caratteri, alfanumerico)"], [#link(<UC2.1.1>)[#underline[\[UC2.1.1\]]]],
-    [RFx], ["Il Sistema, in caso di username non conforme al formato, deve mostrare un messaggio di errore e impedire il proseguimento della procedura"], [#link(<UC2.1.1>)[#underline[\[UC2.1.1\]]]],
-    [RFx], ["Il Sistema, al momento della conferma dei dati, deve verificare l'esistenza dell'username all'interno del database"], [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
-    [RFx], ["Il Sistema, in caso di username non presente nel database, deve mostrare all'utente un messaggio di errore generico relativo alle credenziali"], [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
-    [RFx], ["Il Sistema deve garantire che i messaggi di errore per username non esistente o credenziali errate siano identici per prevenire l'enumerazione degli account"], [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
+    [#RFx], [L'utente registrato, durante la procedura di autenticazione, deve poter inserire il proprio username nell'apposito campo di testo], [#link(<UC2.1>)[#underline[\[UC2.1\]]]],
+    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare che l'username inserito rispetti i vincoli di formato (4-20 caratteri, alfanumerico)], [#link(<UC2.1.1>)[#underline[\[UC2.1.1\]]]],
+    [#RFx], [Il Sistema, in caso di username non conforme al formato, deve mostrare un messaggio di errore e impedire il proseguimento della procedura], [#link(<UC2.1.1>)[#underline[\[UC2.1.1\]]]],
+    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare l'esistenza dell'username all'interno del database], [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
+    [#RFx], [Il Sistema, in caso di username non presente nel database, deve mostrare all'utente un messaggio di errore generico relativo alle credenziali], [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
+    [#RFx], [Il Sistema deve garantire che i messaggi di errore per username non esistente o credenziali errate siano identici per prevenire l'enumerazione degli account], [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
 
-    [RFx], ["L'utente registrato, durante la procedura di autenticazione, deve poter inserire la propria password nell'apposito campo di testo"], [#link(<UC2.2>)[#underline[\[UC2.2\]]]],
-    [RFx], ["Il Sistema deve permettere all'utente di visualizzare la password in chiaro durante l'inserimento tramite apposito comando"], [#link(<UC2.2>)[#underline[\[UC2.2\]]]],
-    [RFx], ["Il Sistema, al momento della conferma dei dati, deve verificare che la password inserita rispetti i vincoli di formato definiti in fase di registrazione"], [#link(<UC2.2.1>)[#underline[\[UC2.2.1\]]]],
-    [RFx], ["Il Sistema, in caso di password non conforme al formato, deve mostrare all'utente un messaggio di errore specifico"], [#link(<UC2.2.1>)[#underline[\[UC2.2.1\]]]],
-    [RFx], ["Il Sistema, in caso di password non corrispondente all'username inserito, deve mostrare un messaggio di errore generico relativo alle credenziali"], [#link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]],
-    [RFx], ["Il Sistema, in caso di credenziali errate o non conformi, deve impedire l'accesso e mantenere l'utente nella sezione di autenticazione"], [#link(<UC2.2.1>)[#underline[\[UC2.2.1\]]], #link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]],
-  )
+    [#RFx], [L'utente registrato, durante la procedura di autenticazione, deve poter inserire la propria password nell'apposito campo di testo], [#link(<UC2.2>)[#underline[\[UC2.2\]]]],
+    [#RFx], [Il Sistema deve permettere all'utente di visualizzare la password in chiaro durante l'inserimento tramite apposito comando], [#link(<UC2.2>)[#underline[\[UC2.2\]]]],
+    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare che la password inserita rispetti i vincoli di formato definiti in fase di registrazione], [#link(<UC2.2.1>)[#underline[\[UC2.2.1\]]]],
+    [#RFx], [Il Sistema, in caso di password non conforme al formato, deve mostrare all'utente un messaggio di errore specifico], [#link(<UC2.2.1>)[#underline[\[UC2.2.1\]]]],
+    [#RFx], [Il Sistema, in caso di password non corrispondente all'username inserito, deve mostrare un messaggio di errore generico relativo alle credenziali], [#link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]],
+    [#RFx], [Il Sistema, in caso di credenziali errate o non conformi, deve impedire l'accesso e mantenere l'utente nella sezione di autenticazione], [#link(<UC2.2.1>)[#underline[\[UC2.2.1\]]], #link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]],
+
+    [#RFx], [L'utente registrato deve poter collegare un account GitHub al proprio profilo CodeGuardian], [#link(<UC3>)[#underline[\[UC3\]]]],
+    [#RFx], [L'utente che vuole collegare un account GitHub a CodeGuardian deve poter avviare la procedura di collegamento tramite un comando dedicato], [#link(<UC3>)[#underline[\[UC3\]]]],
+    [#RFx], [L'utente che sta collegando un account GitHub ad uno di CodeGuardian deve essere reindirizzato alla pagina di autenticazione di GitHub per autorizzare l'accesso alle informazioni del proprio account], [#link(<UC3.1>)[#underline[\[UC3.2\]]]],
+    [#RFx], [Il Sistema deve permettere all'utente di concedere o negare l'autorizzazione al collegamento con GitHub per il collegamento dell'account], [#link(<UC3.1>)[#underline[\[UC3.1\]]]], 
+    [#RFx],[Il Sistema, in caso di mancata autorizzazione da parte dell'utente, deve interrompere la procedura di collegamento e mostrare un messaggio di errore], [#link(<UC3.1.1>)[#underline[\[UC3.1.1\]]]],
+    [#RFx], [Il Sistema, avvenuto il collegamento dell'account GitHub, deve mostrare un messaggio di conferma all'utente], [/*#link(<UC3.1.2>)[#underline[\[UC3.1.2\]]]*/ #TODO("lo famo o no? (secondo Kevin si)")]
+
+  
 )
