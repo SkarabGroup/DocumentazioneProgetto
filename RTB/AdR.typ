@@ -1362,7 +1362,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'utente autenticato accede alla funzionalità di visualizzazione dei report di analisi di CodeGuardian"
 )[
-  //#useCaseDiagram("5", "UC5 - Visualizzazione report analisi repository GitHub")
+  #useCaseDiagram("5", "UC5 - Visualizzazione report analisi repository GitHub")
 ]
 
 ==== UC5.1: Accesso alla sezione di visualizzazione dei report di analisi <UC5.1>
@@ -1387,7 +1387,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "L'utente autenticato seleziona dal proprio account CodeGuardian la sezione dedicata ai report di analisi"
-)[]
+)[
+  #useCaseDiagram("5_1", "UC5.1 - Accesso alla sezione di visualizzazione dei report di analisi")
+]
  
 ==== UC5.2: Selezione report di analisi <UC5.2>
 #useCase(
@@ -1416,7 +1418,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
       #link(<UC5.2.2>)[#underline[\[UC5.2.2\]]]
   ],
   trigger: "L'utente interagisce con l’elenco dei report di analisi nella sezione dedicata del proprio account"
-)[]
+)[
+  #useCaseDiagram("5_2", "UC5.2: Selezione report di analisi")
+]
  
 
 ===== UC5.2.1: Nessun report di analisi disponibile per il repository GitHub selezionato <UC5.2.1>
@@ -1499,7 +1503,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
       #link(<UC5.3.1>)[#underline[\[UC5.3.1\]]]
   ],
   trigger: "L'utente interagisce con le opzioni di configurazione del report nella sezione di visualizzazione"
-)[]
+)[
+  #useCaseDiagram("5_3", "UC5.3: Selezione dati specifici da visualizzare nel report")
+]
 
 ===== UC5.3.1: Nessun dato specifico selezionato <UC5.3.1>
 #useCase(
@@ -1553,7 +1559,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "L'utente conferma la visualizzazione del report dalla sezione dedicata del proprio account CodeGuardian"
-)[]
+)[
+  #useCaseDiagram("5_4", "UC5.4: Visualizzazione report di analisi")
+]
 
 
 === UC6: Scelta intervallo temporale per visualizzazione confronto con report passati <UC6>
