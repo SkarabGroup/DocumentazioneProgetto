@@ -13,16 +13,29 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.14.0"
+#let versione = "v0.15.1"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
     "2025/12/29",
+    "0.15.1",
+    "Aggiunta sezione Classificazione Requisiti in Introduzione. Rielaborazione Introduzione per garantire maggiore formalità",
+    members.suar
+  ),
+  (
+    "2025/12/29",
+    "0.15.0",
+    "Classificazione dei requisiti. Requisiti relativi a UC1 - UC5",
+    members.suar
+  ),
+  (
+    "2025/12/29",
     "0.14.0",
     "Spunti su UC3, requisiti UC3, numerazione automatica requisiti",
-    members.kevin
+    members.kevin,
+    members.suar
   ),
   (
     "2025/12/28",
@@ -160,17 +173,33 @@ L'obiettivo stesso del documento identifica i suoi destinatari principali, che i
 - I #strong("team di sviluppo") #def("Skarab Group") ovvero #def("progettisti") e #def("programmatori"), che utilizzerà questo documento come guida per la progettazione e l'implementazione del sistema software.
 - I #strong("team di verificatori"), che utilizzeranno questo documento per garantire che il sistema soddisfi i requisiti specificati.
 
-Sono identificabili 3 tipi di requisiti:
-- #strong("Obbligatori"): requisiti che devono essere assolutamente soddisfatti dal sistema.
-- #strong("Desiderabili"): requisiti che sarebbe auspicabile soddisfare, ma che non sono strettamente necessari.
-- #strong("Opzionali"): requisiti che possono essere implementati se le risorse e il tempo lo permettono, ma che non sono essenziali per il funzionamento dell'#def("MVP"), potrebbero, tuttasi, essere presi in considerazione per versioni future del sistema.
+== Classificazione dei Requisiti
+
+Ogni requisito individuato viene classificato secondo due criteri distinti: la *priorità* (importanza strategica) e la *tipologia* (natura tecnica).
+
+==== Classificazione per Priorità
+I requisiti sono suddivisi in tre livelli di priorità in base alla loro necessità per il rilascio del sistema:
+
+- #strong("Obbligatori"): Requisiti vincolanti e indispensabili. Il mancato soddisfacimento di anche solo uno di questi requisiti implica che il sistema non è conforme agli obiettivi minimi del progetto (#def("MVP")).
+- #strong("Desiderabili"): Requisiti che apportano valore aggiunto al sistema e che sarebbe auspicabile soddisfare, ma la cui omissione non compromette le funzionalità core del prodotto.
+- #strong("Opzionali"): Requisiti di importanza marginale o funzionalità avanzate che possono essere implementate solo se le risorse e i tempi lo consentono. Sono candidati ideali per sviluppi futuri (versioni successive alla 1.0).
+
+==== Classificazione per Tipologia
+In accordo con lo standard #link(<R2>)[#underline[ISO/IEC/IEEE International Standard - Systems and software engineering -- Life cycle
+processes -- Requirements engineering]], i requisiti sono ulteriormente categorizzati in base alla loro natura tecnica:
+
+- #strong("Funzionali (FR)"): Descrivono i comportamenti specifici del sistema, le reazioni a input determinati e le regole di validazione dei dati ("cosa fa il sistema").
+- #strong("Performance (PR)"): Definiscono i vincoli prestazionali, come tempi di risposta, latenza, throughput e capacità di carico.
+- #strong("Usabilità (UR)"): Riguardano l'efficacia, l'efficienza e la soddisfazione dell'interazione utente, inclusi aspetti di accessibilità e feedback visivi.
+- #strong("Interfaccia (IR)"): Specificano le interazioni logiche e visive con l'utente (elementi UI) e le interfacce verso sistemi esterni (API, protocolli).
+- #strong("Logici del Database (LDR)"): Definiscono la struttura dei dati, le modalità di conservazione, i vincoli di integrità e le relazioni tra entità.
+- #strong("Vincoli di Design (DC)"): Limitazioni imposte da scelte tecnologiche obbligatorie, standard industriali, protocolli di comunicazione o normative specifiche.
+- #strong("Attributi del Software (SSA)"): Caratteristiche di qualità non funzionali critiche, con particolare focus su Sicurezza (cifratura, protezione dati), Affidabilità e Robustezza.
 
 == Prospettiva del prodotto
-
 Il prodotto che #def("Skarab Group") intende sviluppare è un #def("sistema software") #def("multiagente") per l'analisi di #def("repository") #def("GitHub"). Il sistema sarà progettato per essere modulare e scalabile, consentendo l'aggiunta di nuove funzionalità e agenti in futuro. Dal momento in cui l'obiettivo del #def("progetto") è lo sviluppo di un #def("MVP"), il sistema sarà sviluppato con un focus sulle funzionalità essenziali, garantendo al contempo una solida base per future espansioni.
 
 == Funzioni del prodotto
-
 Questa sezione descrive le principali funzionalitá dovrá fornire all'utilizzatore finale; esse sono suddivise in 2 sezioni principali, #emph("Codice") e #emph("Documentazione")
 - Codice:
   - Analisi statica del codice sorgente per identificare potenziali errori a compile time.
@@ -180,28 +209,42 @@ Questa sezione descrive le principali funzionalitá dovrá fornire all'utilizzat
   - Verifica della completezza della documentazione del codice.
   - Controllo della conformità agli standard di documentazione aziendali e non e delle best practice.
   - Analisi semantica per garantire che la documentazione rifletta accuratamente il funzionamento del codice.
-
 L'#def("utente") potrá richiedere l'analisi di uno o piú #def("repository") #def("GitHub") specificando l'#def("URL") del repository e le aree di interesse (codice, documentazione o entrambe). Il sistema genererà un report dettagliato con i risultati dell'analisi, evidenziando le aree di miglioramento e fornendo raccomandazioni per ottimizzare la qualitá del codice e della documentazione. L'interfaccia sará una #def("webapp") con una #def("GUI") intuitiva e user-friendly da cui l'utente potrá interagire con il sistema, richiedere analisi e visualizzare i report generati sottoforma di grafici e tabelle.
 
 == Caratteristiche degli utenti
-
 Gli #def("utenti") principali del sistema sono #def("sviluppatori software"), manager #def("IT") e #def("consulente informatico") che desiderano una valutazione sulla qualitá del codice e della documentazione nei loro progetti. Gli utenti avranno diversi livelli di competenza tecnica, pertanto l'interfaccia utente sará progettata per essere accessibile sia a utenti esperti che a quelli meno esperti.  
 
 == Definizioni e Acronimi
 Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo documento sono elencati nel #strong("Glossario"), un documento separato fornito al lettore. Questo glossario serve a garantire una comprensione chiara e condivisa dei termini utilizzati nel contesto del progetto e del sistema software in sviluppo.
 
 == Riferimenti
-- #strong("Standard IEEE") \ #underline[https://ieeexplore.ieee.org/document/720574] \ Ultimo accesso 2025/12/22
-- #strong("Dispense del corso di Ingegneria del Software sull'analisi dei requisiti") \ #underline[https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T05.pdf] \ Ultimo accesso 2025/12/22
-- #strong("Dispense del corso di Ingegneria del Software sui casi d'uso") \ #underline[https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20Use%20Case.pdf] \ Ultimo accesso 2025/12/22
+=== Riferimenti normativi
+- [R1] #strong("IEEE Recommended Practice for Software Requirements Specifications") \
+  #underline[https://ieeexplore.ieee.org/document/720574] \
+  Ultimo accesso: 22/12/2025 <R1>
+- [R2] #strong("ISO/IEC/IEEE International Standard – Systems and software engineering – Life cycle processes – Requirements engineering") \
+  #underline[https://ieeexplore.ieee.org/document/8559686] \
+  Ultimo accesso: 29/12/2025 <R2>
+
+=== Riferimenti organizzativi e didattici
+- [R3] #strong("Dispense del corso di Ingegneria del Software sull'analisi dei requisiti") \
+  #underline[https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T05.pdf] \
+  Ultimo accesso: 22/12/2025 <R3>
+- [R4] #strong("Dispense del corso di Ingegneria del Software sui casi d'uso") \
+  #underline[https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20Use%20Case.pdf] \
+  Ultimo accesso: 22/12/2025 <R4>
 
 
 #pagebreak()
 
 = Casi d'uso
-
 == Introduzione
-In questa sezione vengono descritti i #def("casi d'uso") principali del sistema software #def("Code Guardian"). Ogni #def("caso d'uso") è descritto in dettaglio, includendo gli attori coinvolti, le precondizioni e postcondizioni, gli scenari principali, nonché eventuali inclusioni ed estensioni. Inoltre, per ogni #def("caso d'uso") viene fornito un #def("UML") che illustra visivamente le interazioni tra gli attori e il sistema.
+In questa sezione vengono descritti i #def("casi d'uso") principali del sistema software #def("Code Guardian").  
+La definizione e la strutturazione dei casi d’uso sono state condotte in conformità alle linee guida e alle buone pratiche descritte negli standard IEEE per la specifica dei requisiti software #link(<R1>)[#underline[\[R1\]]] e per l’ingegneria dei requisiti #link(<R2>)[#underline[\[R2\]]], nonché facendo riferimento al materiale didattico adottato nel corso di Ingegneria del Software #link(<R3>)[#underline[\[R3\]]] #link(<R4>)[#underline[\[R4\]]].
+
+Ogni #def("caso d'uso") è descritto in modo dettagliato, includendo gli attori coinvolti, le precondizioni e postcondizioni, gli scenari principali, nonché eventuali inclusioni ed estensioni.  
+Inoltre, per ciascun caso d’uso viene fornita una rappresentazione #def("UML") che illustra visivamente le interazioni tra gli attori e il sistema, al fine di migliorare la comprensione del comportamento funzionale del sistema.
+
 
 Di seguito sono elencati le componenti di un caso d'uso del sistema con relativa descrizione:
 
@@ -1294,46 +1337,48 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
+    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub
       #link(<UC3>)[#underline[\[UC3\]]]
   ],
   post: [
-    - L'utente ha visualizzato il report dell'analisi del repository GitHub richiesto
+    - L'utente ha visualizzato il report di analisi del repository GitHub selezionato
   ],
   scenari: [
-    - L'utente accede alla sezione di visualizzazione del report di analisi
-    - L'utente seleziona il report di analisi specifico del repository GitHub di interesse
-    - L'utente seleziona i dati specifici da visualizzare nel report di analisi
-    - L'utente seleziona se visualizzare i dettagli del singolo report o il rapporto rispetto ai report precedenti
-    - L'utente visualizza il report di analisi del repository GitHub richiesto
+    - L'utente accede alla sezione di visualizzazione dei report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente seleziona un report di analisi relativo a un repository GitHub #link(<UC5.2>)[#underline[\[UC5.2\]]]
+    - L'utente seleziona i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
+    - L'utente visualizza il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
   ],
   inclusioni: [
-    - Accesso sezione visualizzazione report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]] // Accesso sezione visualizzazione report di analisi
-    - Selezione report di analisi #link(<UC5.2>)[#underline[\[UC5.2\]]] // Selezione report di analisi
-    - Selezione dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]] // Selezione dati specifici da visualizzare nel report
-    - Visualizzazione report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]] // Visualizzazione report di analisi
+    - #link(<UC5.1>)[#underline[\[UC5.1\]]] // Accesso sezione visualizzazione report
+    - #link(<UC5.2>)[#underline[\[UC5.2\]]] // Selezione report di analisi
+    - #link(<UC5.3>)[#underline[\[UC5.3\]]] // Selezione dati specifici
+    - #link(<UC5.4>)[#underline[\[UC5.4\]]] // Visualizzazione report
   ],
   estensioni: [
-    - nessuna
+    - #link(<UC5.2.1>)[#underline[\[UC5.2.1\]]] // Nessun report disponibile
+    - #link(<UC5.2.2>)[#underline[\[UC5.2.2\]]] // Nessun report selezionato
+    - #link(<UC5.3.1>)[#underline[\[UC5.3.1\]]] // Nessun dato selezionato
   ],
-  trigger: "L'utente accede alla sezione di visualizzazione del report di analisi repository GitHub di CodeGuardian"
+  trigger: "L'utente autenticato accede alla funzionalità di visualizzazione dei report di analisi di CodeGuardian"
 )[
   //#useCaseDiagram("5", "UC5 - Visualizzazione report analisi repository GitHub")
 ]
 
-==== UC5.1: Accesso sezione visualizzazione report di analisi <UC5.1>
+==== UC5.1: Accesso alla sezione di visualizzazione dei report di analisi <UC5.1>
 #useCase(
   attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]            
+    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
   ],
   post: [
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi
+    - L'utente visualizza la sezione del proprio account dedicata alla consultazione dei report di analisi dei repository GitHub
   ],
   scenari: [
-    - L'utente accede alla sezione di visualizzazione del report di analisi
+    - L'utente accede alla propria area personale di CodeGuardian
+    - L'utente seleziona la sezione di visualizzazione dei report di analisi dei repository GitHub
   ],
   inclusioni: [
     - Nessuna
@@ -1341,51 +1386,55 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente interagisce con il pulsante per accedere alla sezione di visualizzazione del report di analisi repository GitHub di CodeGuardian"
-)[] 
-
+  trigger: "L'utente autenticato seleziona dal proprio account CodeGuardian la sezione dedicata ai report di analisi"
+)[]
+ 
 ==== UC5.2: Selezione report di analisi <UC5.2>
 #useCase(
   attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]            
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente si trova nella sezione di visualizzazione dei report di analisi del proprio account
+      #link(<UC5.1>)[#underline[\[UC5.1\]]]
   ],
   post: [
-    - L'utente ha selezionato il report di analisi del repository GitHub di interesse
+    - L'utente ha selezionato un report di analisi associato a un repository GitHub collegato al proprio account
   ],
   scenari: [
-    - L'utente seleziona il report di analisi del repository GitHub di interesse
+    - Il sistema mostra l’elenco dei report di analisi disponibili per i repository GitHub dell’utente
+    - L'utente seleziona il report di analisi di interesse
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - Nessun report di analisi disponibile per il repository GitHub selezionato #link(<UC5.2.1>)[#underline[\[UC5.2.1\]]] // nessun report selezionato
-    - Nessun report selezionato #link(<UC5.2.2>)[#underline[\[UC5.2.2\]]] // nessun report selezionato
-
+    - Nessun report di analisi disponibile per il repository selezionato
+      #link(<UC5.2.1>)[#underline[\[UC5.2.1\]]]
+    - Nessun report selezionato
+      #link(<UC5.2.2>)[#underline[\[UC5.2.2\]]]
   ],
-  trigger: "L'utente interagisce con la sezione di selezione del report di analisi repository GitHub di CodeGuardian"
-)[] 
+  trigger: "L'utente interagisce con l’elenco dei report di analisi nella sezione dedicata del proprio account"
+)[]
+ 
 
 ===== UC5.2.1: Nessun report di analisi disponibile per il repository GitHub selezionato <UC5.2.1>
 #useCase(
   attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]            
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
-    - Non sono disponibili report di analisi per il repository GitHub selezionato
+    - L'utente ha collegato il proprio account CodeGuardian a GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente si trova nella sezione di visualizzazione dei report di analisi
+      #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - Non esistono report di analisi associati al repository GitHub selezionato
   ],
   post: [
-    - L'utente non può procedere con la selezione del report di analisi del repository GitHub di interesse
+    - L'utente non può procedere alla visualizzazione di alcun report di analisi
   ],
   scenari: [
-    - L'utente visualizza un messaggio che indica che non sono disponibili report di analisi
-      per il repository GitHub selezionato
+    - Il sistema informa l’utente che non sono disponibili report di analisi per il repository selezionato
   ],
   inclusioni: [
     - Nessuna
@@ -1393,23 +1442,25 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente interagisce con la sezione di selezione del report di analisi repository GitHub di CodeGuardian"
+  trigger: "Il sistema rileva l’assenza di report di analisi per il repository selezionato dall’utente"
 )[]
+
 
 ===== UC5.2.2: Nessun report selezionato <UC5.2.2>
 #useCase(
   attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]            
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha collegato il proprio account CodeGuardian a GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente si trova nella sezione di visualizzazione dei report di analisi
+      #link(<UC5.1>)[#underline[\[UC5.1\]]]
   ],
   post: [
-    - L'utente non può procedere con la selezione del report di analisi del repository GitHub di interesse
+    - L'utente rimane nella sezione di selezione dei report senza poter procedere
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che deve selezionare un report di analisi per poter procedere con la visualizzazione del report
+    - Il sistema segnala all’utente che è necessario selezionare un report di analisi per proseguire
   ],
   inclusioni: [
     - Nessuna
@@ -1417,32 +1468,37 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente interagisce con la sezione di selezione del report di analisi repository GitHub di CodeGuardian"
+  trigger: "L'utente tenta di procedere senza selezionare alcun report di analisi"
 )[]
 
-==== UC5.3: Selezione dati specifici da visualizzare nel report <UC5.3> 
+
+==== UC5.3: Selezione dati specifici da visualizzare nel report <UC5.3>
 #useCase(
   attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]            
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
-    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
+    - L'utente ha collegato il proprio account CodeGuardian a GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente si trova nella sezione di visualizzazione dei report
+      #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha selezionato un report di analisi
+      #link(<UC5.2>)[#underline[\[UC5.2\]]]
   ],
   post: [
-    - L'utente ha selezionato i dati specifici da visualizzare nel report
+    - L'utente ha definito l’insieme di dati da visualizzare nel report di analisi
   ],
   scenari: [
-    - L'utente seleziona i dati specifici da visualizzare nel report
+    - Il sistema presenta le opzioni di visualizzazione dei dati del report
+    - L'utente seleziona uno o più dati di interesse
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - Nessun dato specifico selezionato #link(<UC5.3.1>)[#underline[\[UC5.3.1\]]] // nessun dato selezionato
+    - Nessun dato specifico selezionato
+      #link(<UC5.3.1>)[#underline[\[UC5.3.1\]]]
   ],
-  trigger: "L'utente interagisce con la sezione di selezione dei dati specifici da visualizzare nel report di analisi repository GitHub di CodeGuardian"
+  trigger: "L'utente interagisce con le opzioni di configurazione del report nella sezione di visualizzazione"
 )[]
 
 ===== UC5.3.1: Nessun dato specifico selezionato <UC5.3.1>
@@ -1450,17 +1506,16 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]            
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
-    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
+    - L'utente ha collegato il proprio account CodeGuardian a GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha selezionato un report di analisi
+      #link(<UC5.2>)[#underline[\[UC5.2\]]]
   ],
   post: [
-    - L'utente non può procedere con la selezione dei dati specifici da visualizzare nel report
+    - L'utente non può procedere alla visualizzazione del report
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che deve selezionare almeno
-      un dato specifico da visualizzare nel report per poter procedere con la visualizzazione del report
+    - Il sistema informa l’utente che è necessario selezionare almeno un dato da visualizzare
   ],
   inclusioni: [
     - Nessuna
@@ -1468,25 +1523,28 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente interagisce con la sezione di selezione dei dati specifici da visualizzare nel report di analisi repository GitHub di CodeGuardian"
-)[] 
+  trigger: "L'utente tenta di visualizzare il report senza selezionare alcun dato"
+)[]
+ 
 
 ==== UC5.4: Visualizzazione report di analisi <UC5.4>
 #useCase(
   attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]            
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
-    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
-    - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
+    - L'utente ha collegato il proprio account CodeGuardian a GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha selezionato un report di analisi
+      #link(<UC5.2>)[#underline[\[UC5.2\]]]
+    - L'utente ha selezionato i dati da visualizzare
+      #link(<UC5.3>)[#underline[\[UC5.3\]]]
   ],
   post: [
-    - L'utente ha visualizzato il report dell'analisi del repository GitHub richiesto
+    - L'utente visualizza, nella sezione del proprio account, il report di analisi del repository GitHub selezionato
   ],
   scenari: [
-    - L'utente visualizza il report di analisi del repository GitHub richiesto
+    - Il sistema genera la vista del report in base alle preferenze selezionate
+    - L'utente consulta il report di analisi nella sezione di visualizzazione del proprio account
   ],
   inclusioni: [
     - Nessuna
@@ -1494,8 +1552,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente interagisce con la sezione di visualizzazione del report di analisi repository GitHub di CodeGuardian"
-)[] 
+  trigger: "L'utente conferma la visualizzazione del report dalla sezione dedicata del proprio account CodeGuardian"
+)[]
+
 
 === UC6: Scelta intervallo temporale per visualizzazione confronto con report passati <UC6>
 #useCase(
@@ -2034,102 +2093,347 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 === UCx: Recupero password profilo CodeGuardian 
 
 #pagebreak()
-= Requisiti
-In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati da Skarab Group
+= Requisiti di Sistema
+In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati da Skarab Group.
 
-#let rf_counter = counter("RF")
-#rf_counter.step() //parte da 1
+#let fr_counter = counter("FR")
+#let pr_counter = counter("PR")
+#let ur_counter = counter("UR")
+#let ir_counter = counter("IR")
+#let lr_counter = counter("LDR")
+#let dc_counter = counter("DC")
+#let sa_counter = counter("SSA")
 
-#let RFx = context ([RF#rf_counter.display()#rf_counter.step()])
-== Requisiti funzionali
+#let FRx = context ([FR#fr_counter.step()#fr_counter.display()])
+#let PRx = context ([PR#pr_counter.step()#pr_counter.display()])
+#let URx = context ([UR#ur_counter.step()#ur_counter.display()])
+#let IRx = context ([IR#ir_counter.step()#ir_counter.display()])
+#let LDRx = context ([LDR#lr_counter.step()#lr_counter.display()])
+#let DCx = context ([DC#dc_counter.step()#dc_counter.display()])
+#let SSAx = context ([SSA#sa_counter.step()#sa_counter.display()])
+
+== Requisiti Funzionali (FR)
+Descrivono cosa il sistema deve fare, inclusi i comportamenti, le reazioni a specifici input e le regole di validazione dei dati.
 #table(
   columns: (1fr, 3fr, 1fr),
   inset: 10pt,
   stroke: 0.5pt + luma(200),
-
-  // Header che si ripete su ogni pagina
-  table.header([*ID*], [*Descrizione*], [*Use cases di riferimento*]),
-
-  // Stile righe alternate
-  fill: (col, row) => if row == 0 {
-    luma(62.75%)
-  } else if calc.odd(row) {
-    luma(220)
-  },
-
-  
-
+  table.header([*ID*], [*Descrizione*], [*Rif.*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
   align: (col, row) => (center, left, center).at(col) + horizon,
-    // UC1
-    [#RFx], [L'utente non registrato deve poter visualizzare ed accedere alla sezione di registrazione di CodeGuardian], [#link(<UC1>)[#underline[\[UC1\]]]],
-    
-    [#RFx], [L'utente non registrato, durante la procedura di registrazione, deve poter inserire il proprio nome nell'apposito campo di testo], [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
-    [#RFx], [Il Sistema, durante l'inserimento del nome, deve rimuovere automaticamente eventuali spazi bianchi superflui all'inizio e alla fine del testo (trimming)], [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
-    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare che il nome inserito non contenga caratteri numerici], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
-    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare che il nome inserito non contenga caratteri speciali (ad eccezione di apostrofi o trattini)], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
-    [#RFx], [Il Sistema, in caso di rilevazione di caratteri non ammessi nel nome, deve impedire il proseguimento della registrazione], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
-    [#RFx], [Il Sistema, in caso di nome non conforme, deve mostrare all'utente un messaggio di errore specifico che indichi il mancato rispetto dei vincoli di formato], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
 
-    [#RFx], [L'utente non registrato, durante la procedura di registrazione, deve poter inserire il proprio cognome nell'apposito campo di testo], [#link(<UC1.2>)[#underline[\[UC1.2\]]]],
-    [#RFx], [Il Sistema, durante l'inserimento del cognome, deve rimuovere automaticamente eventuali spazi bianchi superflui all'inizio e alla fine del testo], [#link(<UC1.2>)[#underline[\[UC1.2\]]]],
-    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare che il cognome inserito non contenga caratteri numerici], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
-    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare che il cognome inserito non contenga caratteri speciali (ad eccezione di apostrofi, trattini o spazi intermadi)], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
-    [#RFx], [Il Sistema, in caso di rilevazione di caratteri non ammessi nel cognome, deve impedire il proseguimento della registrazione], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
-    [#RFx], [Il Sistema, in caso di cognome non conforme, deve mostrare all'utente un messaggio di errore specifico che indichi il mancato rispetto dei vincoli di formato], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
+  // UC1
+  [#FRx], [L'utente non registrato, accedendo all'applicazione, deve poter visualizzare la pagina di registrazione], [#link(<UC1>)[#underline[\[UC1\]]]],
+  [#FRx], [L'utente non registrato, completata la compilazione, deve poter inviare la richiesta tramite il pulsante di conferma], [#link(<UC1>)[#underline[\[UC1\]]]],
+  [#FRx], [Il Sistema, completata la registrazione con successo, deve reindirizzare l'utente alla pagina di Login], [#link(<UC1>)[#underline[\[UC1\]]]],
+  // UC1.1
+  [#FRx], [L'utente non registrato, nella schermata di registrazione, deve poter inserire il proprio nome nel campo di testo dedicato], [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
+  [#FRx], [Il Sistema deve rimuovere automaticamente gli spazi bianchi all'inizio e alla fine del nome], [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
+  [#FRx], [Il Sistema deve verificare che il nome non contenga caratteri numerici], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
+  [#FRx], [Il Sistema deve verificare che il nome non contenga caratteri speciali non ammessi], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
+  [#FRx], [Il Sistema deve mostrare un messaggio di errore visuale specifico se il nome non è valido], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
+  // UC1.2
+  [#FRx], [L'utente non registrato, nella schermata di registrazione, deve poter inserire il proprio cognome nel campo di testo dedicato], [#link(<UC1.2>)[#underline[\[UC1.2\]]]],
+  [#FRx], [Il Sistema deve rimuovere automaticamente gli spazi bianchi all'inizio e alla fine del cognome], [#link(<UC1.2>)[#underline[\[UC1.2\]]]],
+  [#FRx], [Il Sistema deve verificare che il cognome non contenga caratteri numerici], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
+  [#FRx], [Il Sistema deve verificare che il cognome non contenga caratteri speciali non ammessi], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
+  [#FRx], [Il Sistema deve mostrare un messaggio di errore visuale specifico se il cognome non è valido], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
+  // UC1.3
+  [#FRx], [L'utente non registrato, nella schermata di registrazione, deve poter inserire il proprio username nel campo di testo dedicato], [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
+  [#FRx], [Il Sistema deve verificare che l'username abbia una lunghezza minima di 4 caratteri], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+  [#FRx], [Il Sistema deve verificare che l'username abbia una lunghezza massima di 20 caratteri], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+  [#FRx], [Il Sistema deve verificare che l'username contenga solo caratteri alfanumerici], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+  [#FRx], [Il Sistema deve mostrare un messaggio di errore specifico se l'username non rispetta il formato], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+  [#FRx], [Il Sistema deve mostrare un messaggio di errore generico se l'username non è disponibile], [#link(<UC1.3.2>)[#underline[\[UC1.3.2\]]]],
+  //UC1.4
+  [#FRx], [L'utente non registrato, nella schermata di registrazione, deve poter inserire il proprio indirizzo email nel campo di testo dedicato], [#link(<UC1.4>)[#underline[\[UC1.4\]]]],
+  [#FRx], [Il Sistema deve verificare che l'email contenga il carattere '\@'], [#link(<UC1.4.1>)[#underline[\[UC1.4.1\]]]],
+  [#FRx], [Il Sistema deve verificare che l'email contenga un dominio valido], [#link(<UC1.4.1>)[#underline[\[UC1.4.1\]]]],
+  [#FRx], [Il Sistema deve mostrare un messaggio di errore specifico se l'email non rispetta il formato], [#link(<UC1.4.1>)[#underline[\[UC1.4.1\]]]],
+  [#FRx], [Il Sistema deve mostrare un messaggio di errore generico se l'email non è disponibile], [#link(<UC1.4.2>)[#underline[\[UC1.4.2\]]]],
+  // UC1.5
+  [#FRx], [L'utente non registrato, nella schermata di registrazione, deve poter inserire la propria password nel campo di testo dedicato], [#link(<UC1.5>)[#underline[\[UC1.5\]]]],
+  [#FRx], [Il Sistema, durante la digitazione della password, deve nascondere i caratteri inseriti (masking)], [#link(<UC1.5>)[#underline[\[UC1.5\]]]],
+  [#FRx], [L'utente non registrato, durante l'inserimento, deve poter attivare la visualizzazione in chiaro della password], [#link(<UC1.5>)[#underline[\[UC1.5\]]]],
+  [#FRx], [Il Sistema deve verificare che la password abbia una lunghezza minima di 8 caratteri], [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
+  [#FRx], [Il Sistema deve verificare che la password contenga almeno una lettera maiuscola], [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
+  [#FRx], [Il Sistema deve verificare che la password contenga almeno una lettera minuscola], [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
+  [#FRx], [Il Sistema deve verificare che la password contenga almeno un numero], [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
+  [#FRx], [Il Sistema deve verificare che la password contenga almeno un carattere speciale], [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
+  [#FRx], [Il Sistema deve mostrare un messaggio di errore specifico se la password non rispetta i criteri], [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
 
-    [#RFx], [L'utente non registrato, durante la procedura di registrazione, deve poter inserire un identificativo univoco (username) nell'apposito campo di testo], [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
-    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare che l'username abbia una lunghezza compresa tra 4 e 20 caratteri], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
-    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare che l'username sia composto esclusivamente da caratteri alfanumerici], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
-    [#RFx], [Il Sistema, in caso di username non conforme ai vincoli di formato, deve mostrare all'utente un messaggio di errore specifico], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
-    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare l'eventuale presenza dell'username all'interno del database tramite ricerca case-insensitive], [#link(<UC1.3.2>)[#underline[\[UC1.3.2\]]]],
-    [#RFx], [Il Sistema, in caso di username già esistente o non disponibile, deve mostrare all'utente un messaggio di errore generico per finalità di sicurezza], [#link(<UC1.3.2>)[#underline[\[UC1.3.2\]]]],
-    [#RFx], [Il Sistema, in caso di username non valido o non disponibile, deve impedire il completamento della procedura di registrazione], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]], #link(<UC1.3.2>)[#underline[\[UC1.3.2\]]]],
+  // UC2
+  [#FRx], [L'utente registrato, accedendo all'applicazione, deve poter visualizzare la pagina di login], [#link(<UC2>)[#underline[\[UC2\]]]],
+  [#FRx], [L'utente registrato, dopo aver inserito le credenziali, deve poter inviare la richiesta tramite pulsante], [#link(<UC2>)[#underline[\[UC2\]]]],
+  [#FRx], [Il Sistema, completata l'autenticazione con successo, deve reindirizzare l'utente alla dashboard], [#link(<UC2>)[#underline[\[UC2\]]]],
+  // UC2.1
+  [#FRx], [Il Sistema, in caso di autenticazione fallita, deve mostrare un messaggio di errore generico], [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]], #link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]],
+  [#FRx], [L'utente registrato, nella schermata di login, deve poter inserire il proprio username nel campo dedicato], [#link(<UC2.1>)[#underline[\[UC2.1\]]]],
+  [#FRx], [Il Sistema deve rimuovere automaticamente gli spazi bianchi all'inizio e alla fine dell'username], [#link(<UC2.1>)[#underline[\[UC2.1\]]]],
+  [#FRx], [Il Sistema deve verificare che l'username abbia una lunghezza compresa tra 4 e 20 caratteri], [#link(<UC2.1.1>)[#underline[\[UC2.1.1\]]]],
+  [#FRx], [Il Sistema deve verificare che l'username contenga solo caratteri alfanumerici], [#link(<UC2.1.1>)[#underline[\[UC2.1.1\]]]],
+  [#FRx], [Il Sistema deve mostrare un messaggio di errore specifico se il formato username non è valido], [#link(<UC2.1.1>)[#underline[\[UC2.1.1\]]]],
+  // UC2.2
+  [#FRx], [L'utente registrato, nella schermata di login, deve poter inserire la propria password nel campo dedicato], [#link(<UC2.2>)[#underline[\[UC2.2\]]]],
+  [#FRx], [Il Sistema, durante la digitazione della password, deve nascondere i caratteri inseriti], [#link(<UC2.2>)[#underline[\[UC2.2\]]]],
+  [#FRx], [L'utente registrato, durante l'inserimento, deve poter attivare la visualizzazione in chiaro della password], [#link(<UC2.2>)[#underline[\[UC2.2\]]]],
+  [#FRx], [Il Sistema deve verificare che la password rispetti i criteri di complessità (lunghezza, caratteri)], [#link(<UC2.2.1>)[#underline[\[UC2.2.1\]]]],
+  [#FRx], [Il Sistema deve mostrare un messaggio di errore specifico se il formato password non è valido], [#link(<UC2.2.1>)[#underline[\[UC2.2.1\]]]],
 
-    [#RFx], [L'utente non registrato, durante la procedura di registrazione, deve poter inserire un indirizzo email di riferimento nell'apposito campo di testo], [#link(<UC1.4>)[#underline[\[UC1.4\]]]],
-    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare la validità sintattica dell'email inserita (presenza del carattere '@' e di un dominio valido)], [#link(<UC1.4.1>)[#underline[\[UC1.4.1\]]]],
-    [#RFx], [Il Sistema, in caso di email sintatticamente non valida, deve mostrare all'utente un messaggio di errore specifico e impedire il proseguimento della registrazione], [#link(<UC1.4.1>)[#underline[\[UC1.4.1\]]]],
-    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare l'eventuale presenza dell'indirizzo email all'interno del database], [#link(<UC1.4.2>)[#underline[\[UC1.4.2\]]]],
-    [#RFx], [Il Sistema, in caso di email già censita o non disponibile, deve mostrare all'utente un messaggio di errore generico per finalità di sicurezza], [#link(<UC1.4.2>)[#underline[\[UC1.4.2\]]]],
+  // UC3
+  [#FRx], [L'utente autenticato deve poter accedere alla sezione di collegamento account GitHub], [#link(<UC3>)[#underline[\[UC3\]]]],
+  [#FRx], [Il Sistema deve generare l'URL di autorizzazione corretto per l'OAuth GitHub], [#link(<UC3>)[#underline[\[UC3\]]]],
+  [#FRx], [Il Sistema deve gestire il reindirizzamento dell'utente verso il portale esterno], [#link(<UC3>)[#underline[\[UC3\]]]],
+  // UC3.1
+  [#FRx], [Il Sistema deve mostrare un avviso informativo prima di reindirizzare l'utente], [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
+  [#FRx], [L'utente deve poter confermare la volontà di procedere con il collegamento], [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
+  [#FRx], [L'utente deve poter annullare la procedura tramite comando dedicato], [#link(<UC3.1.1>)[#underline[\[UC3.1.1\]]]],
+  [#FRx], [Il Sistema, in caso di annullamento, deve interrompere la procedura], [#link(<UC3.1.1>)[#underline[\[UC3.1.1\]]]],
+  // UC3.2
+  [#FRx], [Il Sistema deve catturare la richiesta di callback proveniente da GitHub], [#link(<UC3.2>)[#underline[\[UC3.2\]]]],
+  [#FRx], [Il Sistema deve estrarre il codice identificativo temporaneo dalla callback], [#link(<UC3.2>)[#underline[\[UC3.2\]]]],
+  [#FRx], [Il Sistema deve verificare la presenza del codice nella risposta], [#link(<UC3.2.1>)[#underline[\[UC3.2.1\]]]],
+  [#FRx], [Il Sistema deve mostrare un errore specifico se il codice non è stato ricevuto], [#link(<UC3.2.1>)[#underline[\[UC3.2.1\]]]],
+  [#FRx], [Il Sistema deve verificare che l'account GitHub non sia già associato a un altro utente], [#link(<UC3.2.2>)[#underline[\[UC3.2.2\]]]],
+  [#FRx], [Il Sistema deve impedire il collegamento se l'account GitHub risulta già censito], [#link(<UC3.2.2>)[#underline[\[UC3.2.2\]]]],
+  [#FRx], [Il Sistema deve mostrare un errore specifico se l'account GitHub è già associato], [#link(<UC3.2.2>)[#underline[\[UC3.2.2\]]]],
+  [#FRx], [Il Sistema deve verificare la conformità del formato del codice ricevuto], [#link(<UC3.2.3>)[#underline[\[UC3.2.3\]]]],
+  [#FRx], [Il Sistema deve mostrare un errore specifico se il codice non rispetta il formato], [#link(<UC3.2.3>)[#underline[\[UC3.2.3\]]]],
 
-    [#RFx], [L'utente non registrato, durante la procedura di registrazione, deve poter inserire una password nell'apposito campo di testo], [#link(<UC1.5>)[#underline[\[UC1.5\]]]],
-    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare che la password abbia una lunghezza minima di 8 caratteri], [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
-    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare che la password contenga almeno una lettera maiuscola, una lettera minuscola, un numero e un carattere speciale], [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
-    [#RFx], [Il Sistema, in caso di password non conforme ai vincoli di formato, deve mostrare all'utente un messaggio di errore specifico indicando i criteri non soddisfatti], [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
-    [#RFx], [Il Sistema, in caso di password non valida, deve impedire il completamento della procedura di registrazione mantenendo il Sistema nello stato di inserimento dati], [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],   
-    
-    [#RFx], [L'utente non registrato, dopo aver compilato i campi richiesti, deve poter inviare il modulo di registrazione tramite un comando di conferma], [#link(<UC1>)[#underline[\[UC1\]]]],
-    [#RFx], [Il Sistema, a seguito della validazione positiva di tutti i dati inseriti, deve creare in modo persistente il nuovo profilo utente nel database], [#link(<UC1>)[#underline[\[UC1\]]]],
-    [#RFx], [Il Sistema, avvenuta la registrazione, deve inviare una notifica di conferma all'indirizzo email fornito dall'utente], [#link(<UC1>)[#underline[\[UC1\]]]],
-    [#RFx], [Il Sistema, completata la registrazione, deve mostrare un messaggio di successo e reindirizzare l'utente alla pagina di login], [#link(<UC1>)[#underline[\[UC1\]]]],
-    [#RFx], [Il Sistema deve permettere all'utente di visualizzare in chiaro la password inserita tramite l'interazione con un apposito comando (icona occhio)], [#link(<UC1.5>)[#underline[\[UC1.5\]]]],
-    [#RFx], [Il Sistema deve mantenere il comando di conferma registrazione disabilitato finché tutti i campi obbligatori non risultano popolati], [#link(<UC1>)[#underline[\[UC1\]]]],
+  // UC4
+  [#FRx], [L'utente autenticato avanzato deve poter accedere alla sezione di richiesta analisi], [#link(<UC4>)[#underline[\[UC4\]]]],
+  // UC4.1
+  [#FRx], [L'utente deve poter inserire l'URL del repository GitHub nel campo di testo dedicato], [#link(<UC4.1>)[#underline[\[UC4.1\]]]],
+  [#FRx], [Il Sistema deve verificare che l'URL inizi con il protocollo 'https://'], [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
+  [#FRx], [Il Sistema deve verificare che il dominio dell'URL sia 'github.com'], [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
+  [#FRx], [Il Sistema deve verificare l'effettiva esistenza del repository tramite chiamata alle API di GitHub], [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
+  [#FRx], [Il Sistema deve verificare che il repository sia accessibile (pubblico o autorizzato)], [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
+  [#FRx], [Il Sistema deve mostrare un errore specifico se l'URL non rispetta il formato], [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
+  [#FRx], [Il Sistema deve mostrare un errore specifico se il repository non è accessibile o inesistente], [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
+  [#FRx], [Il Sistema deve mostrare un errore se il campo URL è vuoto al momento dell'invio], [#link(<UC4.1.3>)[#underline[\[UC4.1.3\]]]],
+  // UC4.2
+  [#FRx], [L'utente deve poter selezionare le aree di interesse per l'analisi (Codice, Documentazione)], [#link(<UC4.2>)[#underline[\[UC4.2\]]]],
+  [#FRx], [Il Sistema deve verificare che sia selezionata almeno un'area di interesse], [#link(<UC4.2.1>)[#underline[\[UC4.2.1\]]]],
+  [#FRx], [Il Sistema deve mostrare un errore specifico se nessuna area è selezionata], [#link(<UC4.2.1>)[#underline[\[UC4.2.1\]]]],
+  // UC4.3
+  [#FRx], [L'utente deve poter inviare la richiesta di analisi tramite pulsante di conferma], [#link(<UC4.3>)[#underline[\[UC4.3\]]]],
+  [#FRx], [Il Sistema deve verificare se esiste già un report di analisi aggiornato per il commit corrente], [#link(<UC4.3.1>)[#underline[\[UC4.3.1\]]]],
+  [#FRx], [Il Sistema deve inibire l'avvio di una nuova analisi se il report esistente è già up-to-date], [#link(<UC4.3.1>)[#underline[\[UC4.3.1\]]]],
+  [#FRx], [Il Sistema deve verificare se un'analisi per lo stesso repository è già in corso di elaborazione], [#link(<UC4.3.2>)[#underline[\[UC4.3.2\]]]],
+  [#FRx], [Il Sistema deve inibire l'avvio di una nuova analisi se ne esiste già una in corso per lo stesso repository], [#link(<UC4.3.2>)[#underline[\[UC4.3.2\]]]],
 
-    [#RFx], [L'utente registrato, nella sezione di autenticazione, deve poter visualizzare i campi di input per username e password], [#link(<UC2>)[#underline[\[UC2\]]]],
-    [#RFx], [L'utente registrato, dopo aver inserito le credenziali, deve poter inviare il modulo di autenticazione tramite un comando di conferma], [#link(<UC2>)[#underline[\[UC2\]]]],
-    [#RFx], [Il Sistema, a seguito della conferma dell'autenticazione, deve verificare la corrispondenza delle credenziali fornite con quelle censite nel database], [#link(<UC2>)[#underline[\[UC2\]]]],
-    [#RFx], [Il Sistema, in caso di esito positivo della verifica delle credenziali, deve autenticare l'utente e permettere l'accesso alle funzionalità riservate], [#link(<UC2>)[#underline[\[UC2\]]]],
-    [#RFx], [Il Sistema, avvenuta l'autenticazione, deve reindirizzare l'utente verso la dashboard principale dell'applicazione], [#link(<UC2>)[#underline[\[UC2\]]]],
+  // UC5
+  // UC5.1
+  [#FRx], [L'utente autenticato avanzato deve poter accedere alla sezione di visualizzazione dei report di analisi], [#link(<UC5.1>)[#underline[\[UC5.1\]]]],
+  // UC5.2
+  [#FRx], [Il Sistema deve mostrare l'elenco dei report di analisi disponibili per l'utente], [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
+  [#FRx], [L'utente deve poter selezionare un singolo report dall'elenco per consultarne i dettagli], [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
+  [#FRx], [Il Sistema deve mostrare un messaggio informativo se non sono presenti report per il repository selezionato], [#link(<UC5.2.1>)[#underline[\[UC5.2.1\]]]],
+  [#FRx], [Il Sistema deve impedire la prosecuzione se l'utente tenta di avanzare senza aver selezionato un report], [#link(<UC5.2.2>)[#underline[\[UC5.2.2\]]]],
+  [#FRx], [Il Sistema deve mostrare un errore specifico se nessun report è selezionato], [#link(<UC5.2.2>)[#underline[\[UC5.2.2\]]]],
+  // UC5.3
+  [#FRx], [Il Sistema deve presentare le opzioni di filtraggio dei dati disponibili per il report selezionato], [#link(<UC5.3>)[#underline[\[UC5.3\]]]],
+  [#FRx], [L'utente deve poter selezionare uno o più tipi di dati da includere nella visualizzazione (es. Vulnerabilità, Code Smells)], [#link(<UC5.3>)[#underline[\[UC5.3\]]]],
+  [#FRx], [Il Sistema deve impedire la visualizzazione del report se non è stato selezionato alcun dato], [#link(<UC5.3.1>)[#underline[\[UC5.3.1\]]]],
+  [#FRx], [Il Sistema deve mostrare un errore specifico se nessun dato è stato selezionato per la visualizzazione], [#link(<UC5.3.1>)[#underline[\[UC5.3.1\]]]],
+  [#FRx], [Il Sistema deve generare la vista del report includendo solo i dati filtrati dall'utente], [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
+  [#FRx], [L'utente deve poter visualizzare i dettagli completi dell'analisi (metriche, grafici, suggerimenti)], [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
+)
 
-    [#RFx], [L'utente registrato, durante la procedura di autenticazione, deve poter inserire il proprio username nell'apposito campo di testo], [#link(<UC2.1>)[#underline[\[UC2.1\]]]],
-    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare che l'username inserito rispetti i vincoli di formato (4-20 caratteri, alfanumerico)], [#link(<UC2.1.1>)[#underline[\[UC2.1.1\]]]],
-    [#RFx], [Il Sistema, in caso di username non conforme al formato, deve mostrare un messaggio di errore e impedire il proseguimento della procedura], [#link(<UC2.1.1>)[#underline[\[UC2.1.1\]]]],
-    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare l'esistenza dell'username all'interno del database], [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
-    [#RFx], [Il Sistema, in caso di username non presente nel database, deve mostrare all'utente un messaggio di errore generico relativo alle credenziali], [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
-    [#RFx], [Il Sistema deve garantire che i messaggi di errore per username non esistente o credenziali errate siano identici per prevenire l'enumerazione degli account], [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
+#pagebreak()
+== Requisiti di Performance (PR)
+Definiscono i vincoli sulle prestazioni del sistema, come tempi di risposta, latenza e capacità di carico.
+#table(
+  columns: (1fr, 3fr, 1fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*ID*], [*Descrizione*], [*Rif.*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, left, center).at(col) + horizon,
 
-    [#RFx], [L'utente registrato, durante la procedura di autenticazione, deve poter inserire la propria password nell'apposito campo di testo], [#link(<UC2.2>)[#underline[\[UC2.2\]]]],
-    [#RFx], [Il Sistema deve permettere all'utente di visualizzare la password in chiaro durante l'inserimento tramite apposito comando], [#link(<UC2.2>)[#underline[\[UC2.2\]]]],
-    [#RFx], [Il Sistema, al momento della conferma dei dati, deve verificare che la password inserita rispetti i vincoli di formato definiti in fase di registrazione], [#link(<UC2.2.1>)[#underline[\[UC2.2.1\]]]],
-    [#RFx], [Il Sistema, in caso di password non conforme al formato, deve mostrare all'utente un messaggio di errore specifico], [#link(<UC2.2.1>)[#underline[\[UC2.2.1\]]]],
-    [#RFx], [Il Sistema, in caso di password non corrispondente all'username inserito, deve mostrare un messaggio di errore generico relativo alle credenziali], [#link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]],
-    [#RFx], [Il Sistema, in caso di credenziali errate o non conformi, deve impedire l'accesso e mantenere l'utente nella sezione di autenticazione], [#link(<UC2.2.1>)[#underline[\[UC2.2.1\]]], #link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]],
+  // UC1
+  [#PRx], [Il Sistema deve completare la validazione lato client dei campi entro 100ms], [#link(<UC1>)[#underline[\[UC1\]]]],
+  [#PRx], [Il Sistema deve completare la procedura di registrazione nel database entro 2 secondi], [#link(<UC1>)[#underline[\[UC1\]]]],
 
-    [#RFx], [L'utente registrato deve poter collegare un account GitHub al proprio profilo CodeGuardian], [#link(<UC3>)[#underline[\[UC3\]]]],
-    [#RFx], [L'utente che vuole collegare un account GitHub a CodeGuardian deve poter avviare la procedura di collegamento tramite un comando dedicato], [#link(<UC3>)[#underline[\[UC3\]]]],
-    [#RFx], [L'utente che sta collegando un account GitHub ad uno di CodeGuardian deve essere reindirizzato alla pagina di autenticazione di GitHub per autorizzare l'accesso alle informazioni del proprio account], [#link(<UC3.1>)[#underline[\[UC3.2\]]]],
-    [#RFx], [Il Sistema deve permettere all'utente di concedere o negare l'autorizzazione al collegamento con GitHub per il collegamento dell'account], [#link(<UC3.1>)[#underline[\[UC3.1\]]]], 
-    [#RFx],[Il Sistema, in caso di mancata autorizzazione da parte dell'utente, deve interrompere la procedura di collegamento e mostrare un messaggio di errore], [#link(<UC3.1.1>)[#underline[\[UC3.1.1\]]]],
-    [#RFx], [Il Sistema, avvenuto il collegamento dell'account GitHub, deve mostrare un messaggio di conferma all'utente], [/*#link(<UC3.1.2>)[#underline[\[UC3.1.2\]]]*/ #TODO("lo famo o no? (secondo Kevin si)")]
+  // UC2
+  [#PRx], [Il Sistema deve completare il processo di verifica delle credenziali entro 1 secondo], [#link(<UC2>)[#underline[\[UC2\]]]],
 
+  // UC3
+  [#PRx], [Il Sistema deve generare l'URL di redirect verso GitHub in meno di 200ms], [#link(<UC3.2>)[#underline[\[UC3.2\]]]],
+  [#PRx], [Il Sistema deve processare la callback e completare l'associazione entro 2 secondi], [#link(<UC3.2>)[#underline[\[UC3.2\]]]],
+
+  //UC4
+  [#PRx], [Il Sistema deve verificare l'accessibilità del repository GitHub (chiamata API HEAD) entro 3 secondi], [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
+  [#PRx], [Il Sistema deve completare la verifica dello stato del report (aggiornato/in corso) entro 500ms], [#link(<UC4.3.1>)[#underline[\[UC4.3.1\]]], #link(<UC4.3.2>)[#underline[\[UC4.3.2\]]]],
+  [#PRx], [Il Sistema deve accodare il nuovo task di analisi nel sistema di elaborazione asincrono entro 200ms dalla conferma], [#link(<UC4.3>)[#underline[\[UC4.3\]]]],
+
+  // UC5
+  [#PRx], [Il Sistema deve caricare l'elenco dei report disponibili entro 1 secondo], [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
+  [#PRx], [Il Sistema deve renderizzare la vista di dettaglio del report entro 2 secondi dalla conferma dei filtri], [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
+)
+
+#pagebreak()
+== Requisiti di Usabilità (UR)
+Riguardano l'efficacia, l'efficienza e la soddisfazione dell'interazione utente, inclusi feedback visivi e facilità di apprendimento.
+#table(
+  columns: (1fr, 3fr, 1fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*ID*], [*Descrizione*], [*Rif.*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, left, center).at(col) + horizon,
+
+  // UC1
+  [#URx], [Il Sistema deve indicare graficamente i campi obbligatori], [#link(<UC1>)[#underline[\[UC1\]]]],
+  [#URx], [Il Sistema deve fornire feedback di validazione testuale immediato (inline)], [#link(<UC1>)[#underline[\[UC1\]]]],
+
+  // UC2
+  [#URx], [Il Sistema deve permettere l'invio del modulo di login tramite il tasto "Invio" della tastiera], [#link(<UC2>)[#underline[\[UC2\]]]],
+  [#URx], [Il Sistema, in caso di errore, deve mantenere il focus sul campo Password], [#link(<UC2>)[#underline[\[UC2\]]]],
+
+  // UC3
+  [#URx], [Il messaggio di avviso deve spiegare chiaramente che l'utente sta lasciando l'applicazione], [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
+  [#URx], [In caso di errore, il sistema deve suggerire all'utente di riprovare l'operazione], [#link(<UC3.2.1>)[#underline[\[UC3.2.1\]]]],
+
+  //UC4
+  [#URx], [Il Sistema deve mostrare un indicatore visivo di caricamento (spinner) durante la verifica dell'URL del repository], [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
+  [#URx], [In caso di analisi già esistente o in corso, il messaggio informativo deve fornire un link diretto al report o allo stato di avanzamento], [#link(<UC4.3.1>)[#underline[\[UC4.3.1\]]], #link(<UC4.3.2>)[#underline[\[UC4.3.2\]]]],
+
+  // UC5
+  [#URx], [Il Sistema deve ordinare l'elenco dei report cronologicamente (dal più recente al meno recente)], [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
+  [#URx], [Il Sistema deve utilizzare rappresentazioni grafiche (es. grafici a torta/barre) per riassumere le metriche di analisi], [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
+  [#URx], [Il Sistema deve utilizzare indicatori cromatici standard (Rosso/Giallo/Verde) per indicare la gravità delle problematiche], [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
+)
+
+#pagebreak()
+== Requisiti di Interfaccia (IR)
+Specificano le interazioni logiche e visive con l'utente (elementi UI) e con sistemi esterni (API, protocolli).
+#table(
+  columns: (1fr, 3fr, 1fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*ID*], [*Descrizione*], [*Rif.*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, left, center).at(col) + horizon,
+
+  // UC1
+  [#IRx], [Il campo password deve includere un'icona interattiva per il toggle della visibilità], [#link(<UC1.5>)[#underline[\[UC1.5\]]]],
+  [#IRx], [Il Sistema, in caso di errore, deve evidenziare il bordo del campo errato con il colore rosso], [#link(<UC1>)[#underline[\[UC1\]]]],
+
+  // UC2
+  [#IRx], [Il campo password deve includere un'icona interattiva per il toggle della visibilità], [#link(<UC2.2>)[#underline[\[UC2.2\]]]],
+  [#IRx], [Il modulo di login deve includere un collegamento per il recupero della password], [#link(<UC2>)[#underline[\[UC2\]]]],
+
+  // UC3
+  [#IRx], [Il pulsante di collegamento deve includere il logo ufficiale di GitHub], [#link(<UC3>)[#underline[\[UC3\]]]],
+  [#IRx], [La modale di conferma deve presentare due azioni distinte: "Procedi" e "Annulla"], [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
+
+  //UC4
+  [#IRx], [Il modulo di richiesta deve presentare le opzioni "Analisi Codice" e "Analisi Documentazione" come checkbox indipendenti], [#link(<UC4.2>)[#underline[\[UC4.2\]]]],
+  [#IRx], [Il pulsante di invio richiesta deve essere etichettato chiaramente (es. "Avvia Analisi")], [#link(<UC4.3>)[#underline[\[UC4.3\]]]],
+  [#IRx], [Il Sistema deve disabilitare il pulsante di invio se la validazione client-side dei campi fallisce], [#link(<UC4.3>)[#underline[\[UC4.3\]]]],
+
+  // UC5
+  [#IRx], [L'elenco dei report deve mostrare per ogni elemento: Nome Repository, Data Analisi e Stato], [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
+  [#IRx], [Le opzioni di selezione dati devono essere presentate tramite checkbox o interruttori (toggle)], [#link(<UC5.3>)[#underline[\[UC5.3\]]]],
+  [#IRx], [La vista di dettaglio deve permettere di espandere le singole voci per visualizzare suggerimenti di correzione], [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
+)
+
+#pagebreak()
+== Requisiti Logici del DB (LDR)
+Definiscono la struttura, l'organizzazione, la conservazione e i vincoli di integrità dei dati (es. unicità, relazioni).
+#table(
+  columns: (1fr, 3fr, 1fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*ID*], [*Descrizione*], [*Rif.*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, left, center).at(col) + horizon,
+
+  // UC1
+  [#LDRx], [Il database deve imporre un vincolo di unicità sulla colonna Username], [#link(<UC1.3.2>)[#underline[\[UC1.3.2\]]]],
+  [#LDRx], [Il database deve imporre un vincolo di unicità sulla colonna Email], [#link(<UC1.4.2>)[#underline[\[UC1.4.2\]]]],
+  [#LDRx], [Il database deve memorizzare la data e l'ora di creazione del profilo utente], [#link(<UC1>)[#underline[\[UC1\]]]],
+
+  // UC2
+  [#LDRx], [Il Sistema deve eseguire la ricerca utente in modalità case-insensitive], [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
+  [#LDRx], [Il Sistema deve aggiornare il timestamp di "Ultimo Accesso" al login avvenuto], [#link(<UC2>)[#underline[\[UC2\]]]],
+
+  // UC3
+  [#LDRx], [Il database deve imporre un vincolo di unicità sulla colonna dell'ID GitHub], [#link(<UC3.2.2>)[#underline[\[UC3.2.2\]]]],
+  [#LDRx], [Il database deve memorizzare l'Access Token di GitHub], [#link(<UC3.2>)[#underline[\[UC3.2\]]]],
+
+  //UC4
+  [#LDRx], [Il database deve memorizzare la richiesta di analisi associandola univocamente all'ID dell'utente e all'URL del repository], [#link(<UC4.3>)[#underline[\[UC4.3\]]]],
+  [#LDRx], [Il database deve registrare il timestamp di creazione della richiesta], [#link(<UC4.3>)[#underline[\[UC4.3\]]]],
+  [#LDRx], [Il database deve utilizzare la coppia (URL Repository, Commit SHA) per identificare duplicati o analisi aggiornate], [#link(<UC4.3.1>)[#underline[\[UC4.3.1\]]]],
+
+  // UC5
+  [#LDRx], [Il Sistema deve eseguire la query di recupero report filtrando rigorosamente per l'ID dell'utente autenticato], [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
+  [#LDRx], [Il Sistema deve associare ogni report al relativo repository GitHub presente nel database], [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
   
+)
+
+#pagebreak()
+== Limitazioni di Design (DC)
+Vincoli imposti da scelte tecnologiche obbligatorie, standard industriali, protocolli di comunicazione o normative
+#table(
+  columns: (1fr, 3fr, 1fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*ID*], [*Descrizione*], [*Rif.*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, left, center).at(col) + horizon,
+
+  // UC1
+  [#DCx], [Il Sistema deve trasmettere i dati di registrazione esclusivamente tramite protocollo HTTPS], [#link(<UC1>)[#underline[\[UC1\]]]],
+  [#DCx], [Il Sistema deve eseguire la validazione dei dati sia lato client che lato server], [#link(<UC1>)[#underline[\[UC1\]]]],
+
+  // UC2
+  [#DCx], [Il Sistema deve trasmettere le credenziali esclusivamente tramite protocollo HTTPS], [#link(<UC2>)[#underline[\[UC2\]]]],
+
+  // UC3
+  [#DCx], [Il processo deve aderire allo standard OAuth 2.0 (RFC 6749)], [#link(<UC3.2>)[#underline[\[UC3.2\]]]],
+  [#DCx], [Tutte le comunicazioni con GitHub devono avvenire su protocollo HTTPS], [#link(<UC3.2>)[#underline[\[UC3.2\]]]],
+
+  // UC4
+  [#DCx], [L'elaborazione dell'analisi deve essere gestita in modo asincrono tramite una coda di messaggi (Message Queue)], [#link(<UC4.3>)[#underline[\[UC4.3\]]]],
+  [#DCx], [Il Sistema deve utilizzare le API ufficiali di GitHub (REST o GraphQL) per verificare lo stato del repository], [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
+
+  // UC5 
+  [#DCx], [La visualizzazione dei report deve essere responsiva (adattabile a desktop e mobile)], [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
+)
+
+#pagebreak()
+== Attributi del Software di Sistema (SSA)
+Caratteristiche di qualità non funzionali critiche, principalmente focalizzate su Sicurezza (cifratura, protezione), Affidabilità e Robustezza.
+#table(
+  columns: (1fr, 3fr, 1fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*ID*], [*Descrizione*], [*Rif.*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, left, center).at(col) + horizon,
+
+  // UC1
+  [#SSAx], [Il Sistema, finché il form non è valido, deve mantenere il pulsante di conferma disabilitato], [#link(<UC1>)[#underline[\[UC1\]]]],
+  [#SSAx], [Il Sistema, in caso di username esistente, deve restituire un errore generico per prevenire l'enumerazione], [#link(<UC1.3.2>)[#underline[\[UC1.3.2\]]]],
+  [#SSAx], [Il Sistema, in caso di email esistente, deve restituire un errore generico per prevenire l'enumerazione], [#link(<UC1.4.2>)[#underline[\[UC1.4.2\]]]],
+  [#SSAx], [Il Sistema deve memorizzare la password applicando l'algoritmo di hashing Argon2id], [#link(<UC1.5>)[#underline[\[UC1.5\]]]],
+
+  // UC2
+  [#SSAx], [Il Sistema deve utilizzare messaggi di errore identici per credenziali errate (Anti-Enumeration)], [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]], #link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]],
+  [#SSAx], [Il Sistema deve verificare la password confrontando l'hash fornito con quello memorizzato (Argon2id)], [#link(<UC2>)[#underline[\[UC2\]]]],
+
+  // UC3
+  [#SSAx], [Il Sistema deve validare il parametro `state` per prevenire attacchi CSRF], [#link(<UC3.2>)[#underline[\[UC3.2\]]]],
+  [#SSAx], [Il Sistema deve memorizzare l'Access Token in formato cifrato (es. AES-256)], [#link(<UC3.2>)[#underline[\[UC3.2\]]]],
+
+  //UC4
+  [#SSAx], [Il Sistema deve sanitizzare l'input URL per prevenire attacchi di tipo Command Injection prima di utilizzarlo in operazioni di sistema], [#link(<UC4.1>)[#underline[\[UC4.1\]]]],
+  [#SSAx], [Il Sistema deve garantire che un utente possa richiedere l'analisi solo per repository pubblici o per quelli privati a cui ha esplicitamente accesso], [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
+
+  // UC5
+  [#SSAx], [Il Sistema deve verificare che l'utente abbia i permessi di lettura per il report richiesto (IDOR Protection)], [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
+  [#SSAx], [Il Sistema deve sanitizzare (HTML escaping) qualsiasi input proveniente dal repository analizzato prima di visualizzarlo], [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
 )
