@@ -1,5 +1,5 @@
 A:
-  API: 
+  API:
     acronimo: Application Programming Interface
     descrizione: Interfaccia di programmazione di un'applicazione, che permette l'interazione tra diversi software.
 
@@ -8,13 +8,20 @@ A:
 
   Analisi dei requisiti:
     descrizione: Processo di raccolta, valutazione e documentazione delle esigenze e delle aspettative degli stakeholder per un sistema software, al fine di definire chiaramente cosa il sistema deve fare.
-B: 
+B:
   Back-end:
     descrizione: Parte di un'applicazione o sistema che gestisce la logica di business, l'archiviazione dei dati e l'elaborazione delle richieste degli utenti, solitamente non visibile direttamente dagli utenti finali.
 C:
   Caso d'uso:
     alternative: Use case, casi d'uso
     descrizione: Descrizione di come un utente interagisce con un sistema per raggiungere un obiettivo specifico.
+
+  Ciclo di vita del software:
+    descrizione: Processo strutturato che guida la creazione, l'implementazione e la manutenzione di un prodotto software.
+
+  CMMI:
+    acronimo: Capability Maturity Model Integration
+    descrizione: Modello di miglioramento dei processi che aiuta le organizzazioni a ottimizzare le proprie attività. L'obiettivo è aumentare la qualità e migliorare l'efficienza, utilizzando un approccio di ottimizzazione continua.
 
   Code Guardian:
     descrizione: Nome del progetto software che Skarab Group intende sviluppare per l'azienda Var Group.
@@ -42,7 +49,7 @@ G:
 
   GitHub:
     descrizione: Piattaforma di hosting per il controllo delle versioni e la collaborazione sul codice sorgente, basata su Git.
-#H: 
+#H:
 
 I:
   IT:
@@ -56,10 +63,12 @@ M:
     acronimo: Minimum Viable Product
     descrizione: Versione minima di un prodotto software che include solo le funzionalità essenziali per soddisfare i requisiti principali e permettere il rilascio sul mercato.
 
-
 #N:
 #O:
 P:
+  Piano di Qualifica:
+    descrizione: Documento strategico che definisce obiettivi, requisiti, processi e standard di qualità per guidare lo sviluppo di un prodotto software. Esso comprende tre elementi fondamentali, cioè il Piano della Qualità, il Controllo di Qualità e il Miglioramento continuo.
+
   Progettisti:
     descrizione: Membri del team di sviluppo responsabili della progettazione dell'architettura e delle funzionalità del sistema software.
 
@@ -68,7 +77,11 @@ P:
 
   Progetto:
     descrizione: Esso é inteso nel senso di project, ovvero un'insieme di attività coordinate e gestite per sviluppare un sistema software che soddisfi specifici requisiti e obiettivi.
-#Q:
+
+Q:
+  Qualità:
+    descrizione: Insieme delle caratteristiche di un’entità, che ne determinano la capacità di soddisfare esigenze sia espresse che implicite.
+
 R:
   Requisiti funzionali:
     descrizione: Requisiti che specificano un comportamento o una funzione che un sistema deve eseguire ovvero il "cosa deve fare".
@@ -82,7 +95,7 @@ S:
     descrizione: Nome del team di studenti che intende sviluppare il sistema software a partire dal capitolato proposto dall'azienda Var Group.
 
   Sistema software:
-    alternative: Software system, sistema 
+    alternative: Software system, sistema
     descrizione: Insieme di componenti software che lavorano insieme per eseguire specifiche funzioni o servizi.
 
   Sistema multiagente:
@@ -117,4 +130,4 @@ W:
     descrizione: Applicazione software accessibile tramite un browser web, che consente agli utenti di interagire con il sistema attraverso Internet.
 #X:
 #Y:
-#Z:    
+#Z:
