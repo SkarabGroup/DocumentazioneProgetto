@@ -13,28 +13,23 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.16.0"
+#let versione = "v0.15.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
-    "2025/12/29",
-    "0.16.0",
-    "Diagrammi UC5",
-    members.suar
-  ),
-  (
-    "2025/12/29",
+    "2026/12/30",
     "0.15.1",
-    "Aggiunta sezione Classificazione Requisiti in Introduzione. Rielaborazione Introduzione per garantire maggiore formalità",
-    members.suar
+    "Piccoli fix e spell corrections",
+    members.kevin
   ),
   (
     "2025/12/29",
     "0.15.0",
-    "Classificazione dei requisiti. Requisiti relativi a UC1 - UC5",
-    members.suar
+    "Classificazione dei requisiti. Requisiti relativi a UC1 - UC5, aggiunta sezione Classificazione Requisiti in Introduzione. Rielaborazione Introduzione per garantire maggiore formalità, diagrammi UC5",
+    members.suar,
+    members.kevin
   ),
   (
     "2025/12/29",
@@ -2125,6 +2120,16 @@ In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati
 #let LDRx = context ([LDR#lr_counter.step()#lr_counter.display()])
 #let DCx = context ([DC#dc_counter.step()#dc_counter.display()])
 #let SSAx = context ([SSA#sa_counter.step()#sa_counter.display()])
+
+
+//partono da 1
+#fr_counter.step()
+#pr_counter.step()
+#ur_counter.step()
+#ir_counter.step()
+#lr_counter.step()
+#dc_counter.step()
+#sa_counter.step() 
 
 == Requisiti Funzionali (FR)
 Descrivono cosa il sistema deve fare, inclusi i comportamenti, le reazioni a specifici input e le regole di validazione dei dati.
