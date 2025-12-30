@@ -44,5 +44,6 @@
     for (term, definition) in terms {
       renderTerm(term, definition)
     }
+    pagebreak()
   }
 }
