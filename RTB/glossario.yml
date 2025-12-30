@@ -105,7 +105,16 @@ S:
   sviluppatore software:
     alternative: software developer, sviluppatori software, sviluppatori
     descrizione: Persona che scrive, testa e mantiene il codice sorgente di applicazioni o sistemi software.
-#T:
+T:
+  Test di Accettazione:
+    descrizione: Fase finale del testing software, che serve a verificare che un sistema soddisfi i requisiti e le aspettative. L'obiettivo è dare fiducia che il prodotto finito sia accettabile per il cliente.
+
+  Test di Sistema:
+    descrizione: Verifica l'intero sistema nel suo complesso, assicurandosi che il software funzioni come previsto e rispetti i requisiti specificati.
+
+  Test di Unità:
+    descrizione: Verificano in isolamento il corretto funzionamento delle più piccole parti autonome di codice.
+
 U:
   Utente:
     alternative: User, Utenti
@@ -125,6 +134,9 @@ V:
   Verificatori:
     descrizione: Persone o team responsabili di controllare che il sistema software soddisfi i requisiti specificati durante il processo di verifica.
 W:
+  Way of Working:
+    descrizione: Definisce il modo specifico in cui un team opera, includendo processi e strumenti che guidano le attività volte a raggiungere gli obiettivi stabiliti.
+
   Web Application:
     alternative: Applicazione Web, Webapp
     descrizione: Applicazione software accessibile tramite un browser web, che consente agli utenti di interagire con il sistema attraverso Internet.
