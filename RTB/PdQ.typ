@@ -246,8 +246,201 @@ Un prodotto software di alta qualità è caratterizzato da alcuni aspetti fondam
 
 = Metodi di Testing
 == Test di Sistema
-== Test di Accettazione
+Di seguito viene riportata la tabella che definisce i test di sistema (TS) necessari per validare il comportamento descritto nei casi d'uso.
+
+#figure(
+  table(
+    columns: (auto, 3fr, 1fr, 1fr),
+    inset: 10pt,
+    stroke: 0.5pt + luma(200),
+    align: (col, row) => (center, left, center, center).at(col) + horizon,
+    
+    table.header(
+      [*ID Test*], [*Descrizione*], [*Tipo*], [*UC Riferimento*]
+    ),
+
+    fill: (col, row) => if row == 0 {
+      luma(230)
+    } else if calc.odd(row) {
+      luma(250)
+    } else {
+      white
+    },
+
+    //GRUPPO UC1: REGISTRAZIONE
+    [TS-1.0], [Verifica procedura di registrazione completa con dati validi (Happy Path).], [Funzionale], [#link(<UC1>)[UC1]],
+    
+    [TS-1.1], [Verifica validazione formato Nome: rifiuto di numeri e caratteri speciali non ammessi.], [Validazione], [#link(<UC1.1.1>)[UC1.1.1]],
+    
+    [TS-1.2], [Verifica validazione formato Cognome: rifiuto di numeri e caratteri speciali non ammessi.], [Validazione], [#link(<UC1.2.1>)[UC1.2.1]],
+    
+    [TS-1.3], [Verifica unicità Username: tentativo di registrazione con username già esistente nel DB.], [Sicurezza], [#link(<UC1.3.2>)[UC1.3.2]],
+    
+    [TS-1.4], [Verifica validazione formato Username: lunghezza e caratteri non ammessi.], [Validazione], [#link(<UC1.3.1>)[UC1.3.1]],
+    
+    [TS-1.5], [Verifica unicità Email: tentativo di registrazione con email già presente nel DB.], [Sicurezza], [#link(<UC1.4.2>)[UC1.4.2]],
+    
+    [TS-1.6], [Verifica validazione formato Email: sintassi non valida (es. no @).], [Validazione], [#link(<UC1.4.1>)[UC1.4.1]],
+    
+    [TS-1.7], [Verifica complessità Password: mancato rispetto dei criteri di sicurezza (lunghezza, maiuscole, simboli).], [Sicurezza], [#link(<UC1.5.1>)[UC1.5.1]],
+
+    //GRUPPO UC2: AUTENTICAZIONE 
+    [TS-2.0], [Verifica login con credenziali corrette (Happy Path).], [Funzionale], [#link(<UC2>)[UC2]],
+    
+    [TS-2.1], [Verifica gestione errore per Username non esistente (Messaggio generico).], [Sicurezza], [#link(<UC2.1.2>)[UC2.1.2]],
+    
+    [TS-2.2], [Verifica gestione errore per Password errata (Messaggio generico).], [Sicurezza], [#link(<UC2.2.2>)[UC2.2.2]],
+    
+    [TS-2.3], [Verifica validazione formato input in fase di login (Username/Password malformati).], [Validazione], [#link(<UC2.1.1>)[UC2.1.1], #link(<UC2.2.1>)[UC2.2.1]],
+
+    //GRUPPO UC3: COLLEGAMENTO GITHUB
+    [TS-3.0], [Verifica flusso completo OAuth con GitHub (Redirect e ritorno con codice valido).], [Integrazione], [#link(<UC3>)[UC3], #link(<UC3.2>)[UC3.2]],
+    
+    [TS-3.1], [Verifica rifiuto collegamento da parte dell'utente (Annullamento su GitHub).], [Funzionale], [#link(<UC3.1.1>)[UC3.1.1]],
+    
+    [TS-3.2], [Verifica gestione errore ricezione codice mancante da GitHub.], [Integrazione], [#link(<UC3.2.1>)[UC3.2.1]],
+    
+    [TS-3.3], [Verifica gestione errore codice GitHub già associato ad altro utente.], [Sicurezza], [#link(<UC3.2.2>)[UC3.2.2]],
+
+    //GRUPPO UC4: RICHIESTA ANALISI
+    [TS-4.0], [Verifica invio richiesta analisi con URL valido e opzioni selezionate (Happy Path).], [Funzionale], [#link(<UC4>)[UC4]],
+    
+    [TS-4.1], [Verifica validazione URL Repository: formato non valido.], [Validazione], [#link(<UC4.1.1>)[UC4.1.1]],
+    
+    [TS-4.2], [Verifica accessibilità Repository: URL privato o inesistente (Simulazione risposta GitHub API).], [Integrazione], [#link(<UC4.1.2>)[UC4.1.2]],
+    
+    [TS-4.3], [Verifica obbligatorietà selezione aree di interesse (Codice/Documentazione).], [Validazione], [#link(<UC4.2.1>)[UC4.2.1]],
+    
+    [TS-4.4], [Verifica blocco analisi per report già "Up-to-date" (Hash commit invariato).], [Ottimizzazione], [#link(<UC4.3.1>)[UC4.3.1]],
+    
+    [TS-4.5], [Verifica blocco analisi concorrente (Analisi già in corso sulla stessa repo).], [Stato], [#link(<UC4.3.2>)[UC4.3.2]],
+
+    //GRUPPO UC5 - UC12: VISUALIZZAZIONE REPORT
+    [TS-5.0], [Verifica visualizzazione lista report e apertura dashboard di dettaglio.], [Funzionale], [#link(<UC5>)[UC5]],
+    
+    [TS-5.1], [Verifica gestione caso "Nessun report disponibile" per una repo.], [Funzionale], [#link(<UC5.2.1>)[UC5.2.1]],
+    
+    [TS-6.0], [Verifica filtro temporale sui report passati (Intervallo valido).], [Funzionale], [#link(<UC6>)[UC6]],
+    
+    [TS-6.1], [Verifica errore filtro temporale: intervallo incoerente (Start > End) o troppo ampio.], [Validazione], [#link(<UC6.2.2>)[UC6.2.2], #link(<UC6.2.3>)[UC6.2.3]],
+    
+    [TS-6.2], [Verifica messaggio "Nessun report nel periodo selezionato".], [Funzionale], [#link(<UC6.2.1>)[UC6.2.1]],
+    
+    [TS-7.0], [Verifica rendering grafico comparativo (Presenza dati e coerenza visiva).], [UI/UX], [#link(<UC7>)[UC7]],
+    
+    [TS-8.0], [Verifica rendering tabella comparativa (Corrispondenza dati con il grafico).], [UI/UX], [#link(<UC8>)[UC8]],
+
+    //DETTAGLI ANALISI (AGENTI)
+    [TS-9.0], [Verifica presenza e contenuto sezioni Analisi Codice (Statica, Dipendenze, OWASP).], [Contenuto], [#link(<UC9>)[UC9]],
+    
+    [TS-9.1], [Verifica conteggio vulnerabilità totali (Deve corrispondere alla somma delle vulnerabilità rilevate).], [Logica], [#link(<UC9.4>)[UC9.4]],
+    
+    [TS-10.0], [Verifica presenza e contenuto sezioni Analisi Documentazione (Spelling, Completezza vs Codice).], [Contenuto], [#link(<UC10>)[UC10]],
+    
+    [TS-12.0], [Verifica coerenza Metadati Report (Data, Commit ID, Richiedente).], [Integrazione], [#link(<UC12>)[UC12]],
+  ),
+  caption: [Tabella dei Test di Sistema],
+)
+#pagebreak()
 == Test di Unità
+In questa sezione sono definiti i test di unità volti a verificare il corretto funzionamento delle singole componenti software (funzioni di validazione, calcoli, parser) in isolamento.
+
+#figure(
+  table(
+    columns: (auto, auto, 3fr, 2fr),
+    inset: 10pt,
+    stroke: 0.5pt + luma(200),
+    align: (col, row) => (center, center, left, left).at(col) + horizon,
+    
+    table.header([*ID*], [*Rif. UC*], [*Descrizione del Test*], [*Risultato Atteso*]),
+
+    fill: (col, row) => if row == 0 {
+      luma(62.75%)
+    } else if calc.gcd(row, 2) == 1 {
+      luma(230) 
+    } else {
+      white  
+    },
+
+    // UC1: REGISTRAZIONE 
+    [TU-1.1], [#link(<UC1.1>)], [Verifica funzione di normalizzazione nome: input con spazi iniziali e finali.], [La stringa restituita non presenta spazi esterni (trim).],
+    [TU-1.2], [#link(<UC1.1.1>)], [Verifica validatore Nome: input contenente caratteri numerici.], [La funzione restituisce `false` e l'errore specifico.],
+    [TU-1.3], [#link(<UC1.1.1>)], [Verifica validatore Nome: input contenente simboli speciali non ammessi.], [La funzione restituisce `false`.],
+    [TU-1.4], [#link(<UC1.3.1>)], [Verifica validatore Username: lunghezza inferiore al minimo consentito (4 caratteri).], [La funzione restituisce `false`.],
+    [TU-1.5], [#link(<UC1.4.1>)], [Verifica validatore Email: formato sintattico errato (assenza di '@' o dominio).], [La funzione restituisce `false`.],
+    [TU-1.6], [#link(<UC1.5.1>)], [Verifica validatore Password: assenza di carattere maiuscolo o numero.], [La funzione restituisce `false` indicando il criterio mancante.],
+
+    // UC2: AUTENTICAZIONE
+    [TU-2.1], [#link(<UC2.1.1>)], [Verifica sanitizzazione input Username in fase di login (protezione Injection).], [Eventuali caratteri di escape pericolosi vengono rimossi.],
+    [TU-2.2], [#link(<UC2.2.1>)], [Verifica gestione input vuoti su campi obbligatori.], [La validazione blocca la richiesta prima dell'invio al server.],
+
+    // UC3: GITHUB 
+    [TU-3.1], [#link(<UC3.2.3>)], [Verifica parser codice OAuth: gestione stringa vuota o null.], [Il metodo solleva un'eccezione gestita senza effettuare chiamate esterne.],
+
+    // UC4: ANALISI 
+    [TU-4.1], [#link(<UC4.1.1>)], [Verifica validatore URL: input non appartenente al dominio github.com.], [La funzione restituisce errore "Dominio non supportato".],
+    [TU-4.2], [#link(<UC4.1.1>)], [Verifica validatore URL: formato malformato o incompleto.], [La funzione segnala l'URL come non valido.],
+    [TU-4.3], [#link(<UC4.3.1>)], [Verifica logica "Up-to-date": confronto hash commit identici.], [La funzione restituisce `true` (report aggiornato).],
+    [TU-4.4], [#link(<UC4.3.1>)], [Verifica logica "Up-to-date": confronto hash commit differenti.], [La funzione restituisce `false` (necessaria nuova analisi).],
+
+    // UC5-12: REPORTING 
+    [TU-6.1], [#link(<UC6.2.2>)], [Verifica validatore intervallo date: Data Inizio successiva a Data Fine.], [La funzione restituisce errore di incoerenza temporale.],
+    [TU-9.1], [#link(<UC9.4>)], [Verifica calcolo totale vulnerabilità: somma corretta dei parziali per categoria.], [Il valore restituito corrisponde alla somma aritmetica delle issue.],
+    [TU-10.1], [#link(<UC10.2>)], [Verifica calcolo percentuale coverage documentazione.], [Il calcolo restituisce il valore corretto arrotondato a due decimali.],
+    [TU-12.1], [#link(<UC12.1>)], [Verifica formattazione data report: conversione timestamp in formato locale.], [La data viene renderizzata nel formato "DD/MM/YYYY HH:mm".],
+  ),
+  caption: [Tabella dei Test di Unità],
+)
+
+#pagebreak()
+== Test di Accettazione
+In questa sezione sono definiti i test di accettazione, volti a validare il sistema rispetto ai requisiti utente e agli scenari d'uso reali, inclusa la verifica della qualità dell'analisi AI.
+
+#figure(
+  table(
+    columns: (auto, auto, 3fr, 2fr),
+    inset: 10pt,
+    stroke: 0.5pt + luma(200),
+    align: (col, row) => (center, center, left, left).at(col) + horizon,
+    
+    table.header([*ID*], [*Rif. UC*], [*Scenario di Verifica*], [*Criterio di Accettazione*]),
+
+    fill: (col, row) => if row == 0 {
+      luma(62.75%)
+    } else if calc.gcd(row, 2) == 1 {
+      luma(230)
+    } else {
+      white
+    },
+
+    // REGISTRAZIONE & LOGIN 
+    [TA-1.0], [#link(<UC1>)], [Utente completa la registrazione con dati validi.], [L'account viene creato, l'email di conferma inviata e l'utente reindirizzato al login.],
+    [TA-1.1], [#link(<UC1.1.1>)], [Utente tenta la registrazione con caratteri non ammessi nel nome.], [Il sistema mostra un errore visuale e disabilita il tasto di conferma.],
+    [TA-2.0], [#link(<UC2>)], [Utente effettua il login con credenziali corrette.], [L'utente accede alla dashboard e il token di sessione viene generato.],
+    [TA-2.1], [#link(<UC2.2.2>)], [Utente tenta il login con password errata.], [Il sistema nega l'accesso mostrando un messaggio di errore generico.],
+
+    // GITHUB LINKING 
+    [TA-3.0], [#link(<UC3>)], [Utente collega con successo l'account GitHub.], [La dashboard mostra lo stato "Collegato" e l'avatar dell'utente GitHub.],
+    [TA-3.1], [#link(<UC3.1.1>)], [Utente rifiuta il collegamento durante il redirect.], [L'operazione viene annullata e il sistema mostra un messaggio informativo.],
+
+    // ANALISI (CORE) 
+    [TA-4.0], [#link(<UC4>)], [Utente richiede analisi di una repository pubblica valida.], [L'analisi si avvia, mostrando lo stato di avanzamento/spinner.],
+    [TA-4.1], [#link(<UC4.1.2>)], [Utente inserisce URL di una repository privata non accessibile.], [Il sistema termina immediatamente segnalando l'errore di accesso.],
+    [TA-4.2], [#link(<UC4.3.1>)], [Utente richiede analisi su repo già analizzata senza modifiche.], [Il sistema notifica che il report è già aggiornato senza avviare l'analisi.],
+
+    // REPORT & AI QUALITY 
+    [TA-5.0], [#link(<UC5>)], [Utente visualizza il report finale.], [Tutte le sezioni (grafici, tabelle) sono popolate e leggibili.],
+    [TA-9.0], [#link(<UC9>)], [Verifica qualità AI: Rilevamento vulnerabilità nota (es. SQL Injection).], [Il report OWASP segnala correttamente la vulnerabilità presente nel codice di test.],
+    [TA-10.0], [#link(<UC10>)], [Verifica qualità AI: Rilevamento assenza documentazione.], [L'agente segnala correttamente la bassa coverage su file privi di commenti.],
+    [TA-10.1], [#link(<UC10.1>)], [Verifica correzione spelling documentazione.], [Gli errori di battitura presenti nei commenti vengono identificati e listati.],
+
+    // STORICO & CONFRONTO 
+    [TA-6.0], [#link(<UC6>)], [Utente filtra i report per un intervallo temporale specifico.], [La lista e i grafici mostrano solo i dati compresi nell'intervallo selezionato.],
+    [TA-7.0], [#link(<UC7>)], [Visualizzazione grafico comparativo tra analisi diverse.], [Il grafico mostra l'evoluzione temporale delle metriche di qualità.],
+    [TA-12.0], [#link(<UC12>)], [Verifica correttezza metadati (Data, Commit, Autore).], [I dati visualizzati corrispondono esattamente all'ultimo commit su GitHub.],
+  ),
+  caption: [Tabella dei Test di Accettazione],
+)
 
 #pagebreak()
 
