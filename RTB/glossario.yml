@@ -63,10 +63,12 @@ I:
 #K:
 #L:
 M:
+  Milestone:
+    descrizione: Punto di riferimento significativo nel ciclo di vita di un progetto, che indica il completamento di una fase importante o il raggiungimento di un obiettivo specifico.
+
   MVP:
     acronimo: Minimum Viable Product
     descrizione: Versione minima di un prodotto software che include solo le funzionalità essenziali per soddisfare i requisiti principali e permettere il rilascio sul mercato.
-
 #N:
 #O:
 P:
@@ -84,7 +86,7 @@ P:
 
   Product Baseline:
     alternative: PB
-    descrizione: Fase del progetto in cui vengono definite le specifiche, i vincoli e le caratteristiche del prodotto finale da sviluppare.
+    descrizione: Milestone del progetto in cui vengono definite le specifiche, i vincoli e le caratteristiche del prodotto finale da sviluppare e vengono successivamente implementate.
 #Q:
 R:
   Requisiti funzionali:
@@ -95,7 +97,7 @@ R:
   
   Requirements and Technology Baseline:
     alternative: RTB
-    descrizione: Fase di progetto dedicata alla raccolta dei requisiti e alla definizione delle tecnologie e delle linee guida tecniche da adottare.
+    descrizione: Milestone del progetto dedicata alla raccolta dei requisiti, alla definizione delle tecnologie e linee guida tecniche da adottare.
   
   Repository:
     descrizione: Archivio digitale dove il codice sorgente e la documentazione di un progetto software sono memorizzati e gestiti, spesso utilizzato per il controllo delle versioni e la collaborazione tra sviluppatori.

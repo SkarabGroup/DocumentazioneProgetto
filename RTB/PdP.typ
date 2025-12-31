@@ -10,11 +10,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.3.0"
+#let versione = "v1.0.0"
 
 #titlePage("Piano di Progetto", versione)
 #set page(numbering: "1", header: header("Piano di Progetto"), footer: footer())
 #let history = (
+  (
+    "2025/12/31", 
+    "1.0.0", 
+    "Completata pianificazione a lungo termine e a breve termine per RTB", 
+    members.antonio,
+  ),
   (
     "2025/12/27", 
     "0.3.0", 
@@ -59,7 +65,7 @@
 = Introduzione
 //ricorda #def("parola") per glossario 
 == Scopo del documento
-Il *#def[Piano di Progetto]* è un documento che ha l'obiettivo di definire la strategia di pianificazione e le attività necessarie per lo sviluppo del prodotto software durante il corso del progetto di *#def[Ingegneria del Software]*. #linebreak()
+Il *#def[Piano di Progetto]* è un documento che ha l'obiettivo di definire la strategia di pianificazione e le attività necessarie per lo sviluppo del prodotto software nel corso del progetto di *#def[Ingegneria del Software]*. #linebreak()
 Questo documento rappresenta lo strumento fondamentale a supporto del gruppo per: 
 - L'analisi e la mitigazione dei rischi che potrebbero insorgere durante il ciclo di vita del software;
 - La pianificazione temporale delle attività e la gestione delle scadenze;
@@ -72,7 +78,7 @@ Per questio motivo il documento adotterà un approccio incrementale: verrà cost
 == Glossario
 Al fine di garantire la massima chiarezza espositiva e prevenire ambiguità nell’interpretazione della documentazione di progetto, è stato redatto un documento apposito denominato #strong("Glossario").  #linebreak()
 Questo strumento ha lo scopo di definire in modo univoco la terminologia tecnica, gli acronimi e i concetti specifici di dominio adottati dal gruppo durante l'intero ciclo di vita del software. #linebreak()
-Il Glossario è da considerarsi un documento in costante aggiornamento, che evolve parallelamente allo sviluppo del progetto. Per la versione attuale consultare questo #underline[indirizzo]. #linebreak()
+Il Glossario è da considerarsi un documento in costante aggiornamento, che evolve parallelamente allo sviluppo del progetto. Per la versione attuale consultare questo indirizzo #underline[inirizzoglossario]. #linebreak()
 Per facilitare la lettura, ogni occorrenza di un termine presente nel Glossario viene contrassegnata con una sottolineatura.
 
 == Riferimenti
@@ -306,7 +312,7 @@ Consapevoli che l'inesperienza potrebbe ridurre l'efficacia iniziale delle mitig
 = Pianificazione nel lungo termine
 == Obiettivi di pianificazione
 La pianificazione a lungo termine ha l'obiettivo di delineare le attività principali e le milestone fondamentali per il completamento del progetto #def[Code Guardian].
-Le due milestone necessarie sono la *#def[Requirements and Technology Baseline] (RTB)* e la *#def[Product Baseline] (PB)*, che rappresentano rispettivamente la fase di raccolta dei requisiti e definizione delle tecnologie, e la fase di definizione delle specifiche del prodotto finale. #linebreak()  
+Le due milestone necessarie sono la *#def[Requirements and Technology Baseline] (RTB)* e la *#def[Product Baseline] (PB)*, che rappresentano rispettivamente la fase di raccolta dei requisiti e definizione delle tecnologie, e la fase di definizione e implementazione delle specifiche del prodotto finale. #linebreak()  
 Questa sezione fornisce una panoramica delle tappe chiave, delle scadenze e delle risorse necessarie per garantire il successo del progetto nel suo complesso. 
 Nella Dichiarazione degli impegni, la data ultima prevista di consegna del progetto è stata definita il 21/03/2026; con costi pari a €12.845,00.
 
@@ -361,7 +367,7 @@ Nella seguente tabella è riportata la distribuzione delle ore per ruolo present
     [*Totale*],
     [-],
     [630h],
-    [1345€],
+    [12845€],
   ),
   caption: [Distribuzione delle ore per ruolo nella candidatura],
 )
@@ -380,8 +386,8 @@ In seguito a un'analisi dell'andamento delle attività, il gruppo stima una cand
     } else if (calc.gcd(y, 2) == 2) {
       luma(220)
     },
-    columns: (1fr, 3fr, 1fr, 1fr),
-    inset: 10pt,
+    columns: (1fr, 2fr, 2fr, 1fr),
+    inset: 6pt,
     table.header(
       [*Attività*],
       [*Descrizione*],
@@ -394,7 +400,9 @@ In seguito a un'analisi dell'andamento delle attività, il gruppo stima una cand
     - Introduzione e definizione degli attori, 
     - Casi d'uso e relativi sottocasi,
     - Requisiti funzionali e non.], 
-    [17/12/2025 - /*da inserire gli sprint corretti*/],
+    [- Introduzione e attori: sprint 1,
+    - Casi d'uso: sprint 1 e 2,
+    - Requisiti funzionali e non: sprint 2],
     [In corso],
     
     [*Stesura del Piano di Progetto*],
@@ -403,7 +411,10 @@ In seguito a un'analisi dell'andamento delle attività, il gruppo stima una cand
     - Analisi e gestione dei rischi, 
     - Pianificazione a lungo termine, 
     - Pianificazione a breve termine.],
-    [23/12/2025 /*da inserire gli sprint corretti*/], 
+    [- Introduzione: sprint 1,
+    - Analisi e gestione dei rischi: sprint 1,
+    - Pianificazione a lungo termine: sprint 1,
+    - Pianificazione a breve termine: sprint 2], 
     [In corso],
 
     [*Stesura del Piano di Qualifica*],
@@ -414,7 +425,12 @@ In seguito a un'analisi dell'andamento delle attività, il gruppo stima una cand
     - Metodi di testing, 
     - Cruscotto di valutazione,
     - Automiglioramento.],
-    [23/12/2025 - /*da inserire gli sprint corretti*/],
+    [- Introduzione: sprint 1,
+    - Qualità di processo: sprint 1,
+    - Qualità di prodotto: sprint 1,
+    - Metodi di testing: sprint 1 e 2,
+    - Cruscotto di valutazione: sprint 2,
+    - Automiglioramento: sprint 2],
     [In corso],
 
     [*Stesura del documento di Norme di Progetto*],
@@ -424,19 +440,26 @@ In seguito a un'analisi dell'andamento delle attività, il gruppo stima una cand
     - Processi di supporto, 
     - Processi organizzativi, 
     - Norme di sviluppo.],
-    [20/12/2025 - /*da inserire gli sprint corretti*/],
+    [- Introduzione: sprint 1,
+    - Processi primari: sprint 1,
+    - Processi di supporto: sprint 1,
+    - Processi organizzativi: sprint 2,
+    - Norme di sviluppo: sprint 1 e 2],
     [In corso],
-    
-    [*Implemen- tazione del Glossario*],
+
+    [*Implementazione del Glossario*],
     [La redazione del Glossario sarà un documento in costante aggiornamento, che evolverà parallelamente allo sviluppo di altri documenti. Ogni membro del gruppo avrà la responsabilità di 
     - aggiungere nuove voci 
     qualora lo ritenesse necessario durante la stesura di altri documenti o durante lo sviluppo del progetto.],
-    [18/11/2025 - /*da inserire gli sprint corretti*/], 
+    [- Ogni sprint vengono aggiunte nuove voci al glossario], 
     [In corso],
 
     [*Sviluppo del Proof of Concept (PoC)*],
-    [La realizzazione di un Proof of Concept (PoC) serve a mostrare la fattibilità tecnica di alcune funzionalità chiave che il prodotto #def[Code Guardian] dovrebbe presentare alla #def[Product Baseline] (PB). Questo si traduce nella creazione di un prototipo che usa le tecnologie scelte per dimostrare la fattibilità.],
-    [Analisi delle tecnologie: sprint 2 (forse) /*da inserire gli sprint corretti*/],
+    [Svolgimento delle seguenti attività:
+    - Progettazione architetturale,
+    - Implementazione iniziale,],
+    [- Progettazione architetturale: sprint 2
+    - Implementazione iniziale: sprint 2 e 3],
     [Da iniziare],
   ),
   caption: [Attività previste per la Requirements and Technology Baseline (RTB)],
@@ -449,40 +472,372 @@ Questo paragrafo non è stato ancora redatto in quanto la pianificazione a lungo
 
 = Pianificazione nel breve termine
 == Introduzione
-La pianificazione a breve termine si concentra sulla suddivisione del lavoro degli #def[Sprint] settimanali o bisettimanale. 
+La pianificazione a breve termine si concentra sulla suddivisione del lavoro degli #def[Sprint] (di circa 2 settimane). 
 Il team ha scelto di seguire un #def[Approccio Agile], che prevede l'adozione di strumenti di gestione del progetto come #strong[Jira] per organizzare e monitorare le attività durante ogni sprint. #linebreak()
-Questa sezione descrive come il team intende organizzare le attività, assegnare le responsabilità e monitorare i progressi durante ciascun sprint. 
+Questa sezione descrive come il team intende organizzare le attività, assegnare le responsabilità e monitorare i progressi durante ciascuno sprint. 
 L'obiettivo principale della pianificazione a breve termine è garantire che ogni sprint sia ben definito, con obiettivi chiari e misurabili, che determini i ruoli per ciascun membro del gruppo, in modo da facilitare la gestione del progetto.
 
 Seguiranno ora le descrizioni dei vari #def[Sprint], in cui verranno esposte:
 - Informazioni generali e attività da svolgere
-- Prospetto consumo tempo e costi
-- Rischi attesi
-- Consumo tempo e costi effettivi
+- Prospetto del consumo temporale
+- Consumo del tempo effettivo 
 - Aggiornamento delle risorse rimanenti 
 - Retrospettiva, comprendente anche i rischi effettivamente riscontrati 
 #pagebreak()
 
+/*=== Nota: Attività preliminari allo sprint 1
+Prima dell'inizio del primo #def[Sprint], il gruppo ha svolto alcune attività preliminari per prepararsi al meglio alla fase di sviluppo. Queste attività includono:
+- Organizzazione di incontri con la proponente, sia allo scopo di stabilire delle linee guida generali e chiarire eventuali dubbi, sia per introdurci alle tecnologie che verranno utilizzate durante il progetto;
+- Creazione dei vari documenti iniziali, in particolare i verbali delle riunioni interne ed esterne;
+- Configurazione degli strumenti di gestione del progetto (#def[Jira]) e di comunicazione (#def[Slack]);
+
+Queste e altre attività non rendicontate di "Palestra" sono parte integrante del progetto che però sono fuori dagli sprint veri e propri, in quanto servono a preparare il gruppo per affrontare al meglio la fase di sviluppo. L'unica eccezione sono la stesura dei verbali che verranno rendicontati a parte. */
+
 == Requirements and Technology Baseline (RTB)
 === Sprint 1
-Inizio: 7/11/2025 
-Fine prevista: 14/11/2025
-Fine reale: 14/11/2025
+Inizio: 19/12/2025 #linebreak()
+Fine prevista: 29/12/2025 #linebreak()
+Fine reale: 29/12/2025 #linebreak()
 ==== Informazioni generali e attività da svolgere
-Placeholder testo
-==== Prospetto consumo tempo e costi
-Placeholder testo
-==== Rischi attesi
-Placeholder testo
+In questo primo sprint, il team ha intenzione di concentrarsi sulla stesura iniziale dei documenti fondamentali per la #def[Requirements and Technology Baseline] (RTB). Le attività principali includono:
+- Prima redazione del documento di Analisi dei Requisiti, con particolare attenzione alla definizione degli attori e dei casi d'uso principali;
+- Prima redazione del Piano di Progetto, compresi Rischi e pianificazione a lungo termine;
+- Prima redazione del Piano di Qualifica, focalizzandosi su qualità di processo/prodotto e testing;
+- Prima redazione delle Norme di Progetto, con particolare attenzione ai processi primari e di supporto;
+- Aggiornamento continuo del Glossario con nuovi termini rilevanti emersi durante la stesura dei documenti;
+==== Prospetto consumo tempo
+La seguente tabella mostra il preventivo di ore per ciascun membro del gruppo durante questo sprint:
+
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(66.67%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
+    inset: 10pt,
+    table.header(
+      [*Membro*],
+      [*Responsabile*],
+      [*Amministratore*],
+      [*Analista*],
+      [*Progettista*],
+      [*Programmatore*],
+      [*Verificatore*],
+    ),
+
+    [*Basso Kevin*],
+    [-],
+    [-],
+    [8h],
+    [-],
+    [-],
+    [-],
+
+    [*Berengan Riccardo*],
+    [-],
+    [-],
+    [8h],
+    [-],
+    [-],
+    [-],
+
+    [*Martinello Riccardo*],
+    [-],
+    [-],
+    [8h],
+    [-],
+    [-],
+    [-],
+
+    [*Sandu Antonio*],
+    [-],
+    [-],
+    [8h],
+    [-],
+    [-],
+    [-],
+
+    [*Sgreva Andrea*],
+    [-],
+    [-],
+    [8h],
+    [-],
+    [-],
+    [-],
+
+    [*Suar Alberto*],
+    [2h],
+    [-],
+    [6h],
+    [-],
+    [-],
+    [-],
+
+    [*Zago Alice*],
+    [-],
+    [-],
+    [8h],
+    [-],
+    [-],
+    [-],
+
+  ),
+  caption: [Prospetto consumo tempo preventivato per Sprint 1],
+)
+
 ==== Consumo tempo e costi effettivi
-Placeholder testo
+La seguente tabella mostra il numero di ore produttive effettivamente impiegate da ciascun membro del gruppo durante questo sprint:
+
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(66.67%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
+    inset: 10pt,
+    table.header(
+      [*Membro*],
+      [*Responsabile*],
+      [*Amministratore*],
+      [*Analista*],
+      [*Progettista*],
+      [*Programmatore*],
+      [*Verificatore*],
+    ),
+
+    [*Basso Kevin*],
+    [1h],
+    [-],
+    [6h],
+    [-],
+    [-],
+    [-],
+
+    [*Berengan Riccardo*],
+    [-],
+    [-],
+    [6h],
+    [-],
+    [-],
+    [-],
+
+    [*Martinello Riccardo*],
+    [-],
+    [-],
+    [6h],
+    [-],
+    [-],
+    [-],
+
+    [*Sandu Antonio*],
+    [-],
+    [-],
+    [6h],
+    [-],
+    [-],
+    [-],
+
+    [*Sgreva Andrea*],
+    [-],
+    [-],
+    [6h],
+    [-],
+    [-],
+    [-],
+
+    [*Suar Alberto*],
+    [2h],
+    [-],
+    [6h],
+    [-],
+    [-],
+    [-],
+
+    [*Zago Alice*],
+    [-],
+    [-],
+    [6h],
+    [-],
+    [-],
+    [-],
+
+  ),
+  caption: [Consumo effettivo del tempo per Sprint 1],
+)
+
 ==== Aggiornamento delle risorse rimanenti
-Placeholder testo
+Dopo il completamento dello Sprint 1, le risorse rimanenti per ciascun ruolo sono le seguenti:
+
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(66.67%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
+    inset: 10pt,
+    table.header(
+      [*Ruolo*],
+      [*Costo orario*],
+      [*Ore consumate*],
+      [*Ore rimanenti*],
+      [*Costo totale*],
+      [*Budget rimanente*],
+    ),
+
+    [*Responsabile*],
+    [30€/h],
+    [3h],
+    [60h],
+    [90€],
+    [1800€],
+
+    [*Amministratore*],
+    [20€/h],
+    [0h],
+    [56h],
+    [0€],
+    [1120€],
+
+    [*Analista*],
+    [25€/h],
+    [42h],
+    [85h],
+    [1050€],
+    [1225€],
+
+    [*Progettista*],
+    [25€/h],
+    [0h],
+    [126h],
+    [0€],
+    [3150€],
+
+    [*Programmatore*],
+    [15€/h],
+    [0h],
+    [147h],
+    [0€],
+    [2205€],
+
+    [*Verificatore*],
+    [15€/h],
+    [0h],
+    [147h],
+    [0€],
+    [2205€],
+
+    [*Totale*],
+    [-],
+    [45h],
+    [621h],
+    [1140€],
+    [11705€],
+  ),
+  caption: [Risorse rimanenti dopo Sprint 1],
+)
 ==== Retrospettiva
-Placeholder testo
+In retrospettiva, questo sprint è stato molto produttivo, in quanto sono stati completati tutti gli obiettivi prefissati. La suddivisione del lavoro è risultata efficace. Tuttavia, essendo questo sprint situato nel periodo natalizio, il team si è imbattuto nel RI1, che ha rallentato l'andamento del progetto. Nonostante ciò, il team è riuscito comunque a completare la maggior parte degli obiettivi proposti.
 #pagebreak()
 
 === Sprint 2 
-Inizio 
+Inizio: 29/12/2025 #linebreak()
+Fine prevista: 08/01/2026 #linebreak()
+Fine reale: /*da inserire*/
+==== Informazioni generali e attività da svolgere
+In questo secondo sprint, il team intende concentrarsi sul completamento della stesura dei documenti fondamentali per la #def[Requirements and Technology Baseline] (RTB) e iniziare lo sviluppo del Proof of Concept (PoC). Le attività principali includono:
+- Completamento del documento di Analisi dei Requisiti, inserendo gli ultimi casi d'uso e includendo i requisiti funzionali e non funzionali;
+- Incremento del Piano di Progetto, con particolare attenzione alla pianificazione a breve termine;
+- Completamento del Piano di Qualifica, includendo metodi di testing e cruscotto di valutazione;
+- Completamento delle Norme di Progetto, con particolare attenzione ai processi organizzativi e alle norme di sviluppo;
+- Continuo aggiornamento del Glossario con nuovi termini rilevanti emersi durante la stesura dei documenti;
+- Inizio dello sviluppo del Proof of Concept (PoC), concentrandosi sull'analisi delle tecnologie da utilizzare.
+==== Prospetto consumo tempo
+La seguente tabella mostra il preventivo di ore per ciascun membro del gruppo durante questo sprint:
 
-Circa 4 sprint definiamo insieme cosa fare
+#table(
+  fill: (x, y) => if (y == 0) {
+    luma(66.67%)
+  } else if (calc.gcd(y, 2) == 2) {
+    luma(220)
+  },
+  columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
+  inset: 10pt,
+  table.header(
+    [*Membro*],
+    [*Responsabile*],
+    [*Amministratore*],
+    [*Analista*],
+    [*Progettista*],
+    [*Programmatore*],
+    [*Verificatore*],
+  ),
+
+  [*Basso Kevin*],
+  [-],
+  [-],
+  [4h],
+  [2h],
+  [-],
+  [-],
+
+  [*Berengan Riccardo*],
+  [-],
+  [-],
+  [4h],
+  [2h],
+  [-],
+  [-],
+
+  [*Martinello Riccardo*],
+  [-],
+  [-],
+  [4h],
+  [2h],
+  [-],
+  [-],
+
+  [*Sandu Antonio*],
+  [-],
+  [-],
+  [4h],
+  [2h],
+  [-],
+  [-],
+
+  [*Sgreva Andrea*],
+  [-],
+  [-],
+  [4h],
+  [2h],
+  [-],
+  [-],
+
+  [*Suar Alberto*],
+  [-],
+  [-],
+  [4h],
+  [2h],
+  [-],
+  [-],
+
+  [*Zago Alice*],
+  [-],
+  [-],
+  [4h],
+  [2h],
+  [-],
+  [-],
+)
+==== Consumo tempo e costi effettivi
+Questa sezione verrà completata al termine dello sprint.
+==== Aggiornamento delle risorse rimanenti
+Questa sezione verrà completata al termine dello sprint.
+==== Retrospettiva
+Questa sezione verrà completata al termine dello sprint.
+ 
