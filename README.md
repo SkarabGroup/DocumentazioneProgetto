@@ -47,7 +47,7 @@
 
 ## 🏢 Capitolato
 
-Il progetto nasce dal capitolato **C6 - "Sistema Multiagente per la Valutazione di Repository GitHub"** proposto da **Var Group**.
+Il progetto nasce dal capitolato **C2 - "Sistema Multiagente per la Valutazione di Repository GitHub"** proposto da **Var Group**.
 
 **Var Group** è un'azienda leader nel settore IT che offre soluzioni innovative per la trasformazione digitale delle imprese. La collaborazione con l'università rappresenta un'opportunità di sviluppo sia per gli studenti che per l'azienda.
 
