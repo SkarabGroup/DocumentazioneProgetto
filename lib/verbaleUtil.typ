@@ -3,10 +3,14 @@
 
 #let grigliaPresenze(presenti, assenti) = {
   heading(level: 1)[Presenze]
+
+  let presentiText = if type(presenti) == "list" { presenti.join(", ") } else { presenti }
+  let assentiText  = if type(assenti)  == "list" { assenti.join(", ") }  else { assenti }
+
   grid(
-    columns: (1.5fr, 2fr),
-    [*Presenti*], [#presenti.join(", ")],
-    [*Assenti*], [#assenti.join(", ")],
+    columns: (1.5fr, 0.5fr, 2fr),
+    [*Presenti*], [], [#presentiText],
+    [*Assenti*], [], [#assentiText],
   )
 }
 
@@ -91,7 +95,6 @@
 
   grigliaPresenze(presenti, assenze)
 
-  [Inizio riunione ore 09:00.]
 
   body
 
@@ -121,7 +124,8 @@
   ),
 
   assenze: (
-    "",
+    "Cognome e Nome",
+    "Cognome e Nome",
   ),
 
   [
