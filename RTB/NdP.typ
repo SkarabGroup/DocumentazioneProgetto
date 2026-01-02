@@ -22,23 +22,21 @@
     "0.2.0",
     "Arricchimento con standard industriali, norme di codifica dettagliate e integrazioni progetto-specifiche",
     members.martinello,
-    // Verificatore TBD
-    "",
+    members.suar
   ),
   (
     "28/12/2025",
     "0.1.0",
     "Rilascio iniziale con norme, processi e strumenti aggiornati",
     members.martinello,
-    // Verificatore TBD
-    "",
+    members.suar
   ),
   (
     "20/12/2025",
     "0.0.1",
     "Prima bozza iniziale",
     members.martinello,
-    "-",
+    members.suar
   ),
 )
 
@@ -47,6 +45,8 @@
 #indice()
 
 #indiceTabelle()
+
+#pagebreak()
 
 = Introduzione
 
@@ -157,8 +157,8 @@ Il gruppo adotta un sistema di metriche per monitorare processi e prodotti.
   - *Integration Test*: Verifica delle interazioni tra moduli.
   - *System Test*: Verifica del sistema completo rispetto ai requisiti.
 
-=== #def("Software Quality Assurance") (#def("SQA"))
-L'#def("SQA") monitora tutti i processi per garantire conformità agli standard (es. #def("ISO 9001"), #def("ISO 25010")). Include:
+=== Software Quality Assurance #def("SQA")
+La #def("SQA") monitora tutti i processi per garantire conformità agli standard (es. #def("ISO 9001"), #def("ISO 25010")). Include:
 - *Politiche*: Definizione di procedure per ogni fase (requisiti, design, testing).
 - *Audit*: Revisioni periodiche per identificare non conformità.
 - *Attività*: Review di documenti, controllo qualità codice, #def("Gestione Rischi").
