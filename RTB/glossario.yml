@@ -1,8 +1,4 @@
 A:
-  API: 
-    acronimo: Application Programming Interface
-    descrizione: Interfaccia di programmazione di un'applicazione, che permette l'interazione tra diversi software.
-
   Agente:
     descrizione: Componente sistema software autonomo che percepisce il proprio ambiente, prende decisioni e intraprende azioni in modo indipendente per raggiungere obiettivi specifici grazie all'utilizzo di intelligenza artificiale
 
@@ -10,8 +6,18 @@ A:
     alternative: Agile, metodo Agile
     descrizione: Approccio alla gestione del progetto che privilegia iterazioni brevi, feedback continui e adattamento delle priorità in base al progresso e ai risultati ottenuti.
 
+  
   Analisi dei requisiti:
     descrizione: Processo di raccolta, valutazione e documentazione delle esigenze e delle aspettative degli stakeholder per un sistema software, al fine di definire chiaramente cosa il sistema deve fare.
+
+  Analista:
+    alternative: Requirement Analyst, Analisti
+    descrizione: Membro del team di sviluppo responsabile della raccolta e dell'analisi dei requisiti del sistema software, nonché della comunicazione con gli stakeholder per garantire che le esigenze siano comprese e documentate correttamente.
+
+  API: 
+    acronimo: Application Programming Interface
+    descrizione: Interfaccia di programmazione di un'applicazione, che permette l'interazione tra diversi software.
+
 B: 
   Back-end:
     descrizione: Parte di un'applicazione o sistema che gestisce la logica di business, l'archiviazione dei dati e l'elaborazione delle richieste degli utenti, solitamente non visibile direttamente dagli utenti finali.
@@ -22,6 +28,13 @@ C:
   Caso d'uso:
     alternative: Use case, casi d'uso
     descrizione: Descrizione di come un utente interagisce con un sistema per raggiungere un obiettivo specifico.
+
+  Ciclo di vita del software:
+    descrizione: Processo strutturato che guida la creazione, l'implementazione e la manutenzione di un prodotto software.
+
+  CMMI:
+    acronimo: Capability Maturity Model Integration
+    descrizione: Modello di miglioramento dei processi che aiuta le organizzazioni a ottimizzare le proprie attività. L'obiettivo è aumentare la qualità e migliorare l'efficienza, utilizzando un approccio di ottimizzazione continua.
 
   Code Guardian:
     descrizione: Nome del progetto software che Skarab Group intende sviluppare per l'azienda Var Group.
@@ -43,13 +56,16 @@ F:
   Front-end:
     descrizione: Parte di un'applicazione o sistema con cui gli utenti interagiscono direttamente, comprendente l'interfaccia utente e l'esperienza utente.
 G:
+  GitHub:
+    descrizione: Piattaforma di hosting per il controllo delle versioni e la collaborazione sul codice sorgente, basata su Git.
+  
   GUI:
     acronimo: Graphical User Interface
     descrizione: Interfaccia utente grafica che consente agli utenti di interagire con un sistema attraverso elementi visivi come finestre, icone e menu.
 
   GitHub:
     descrizione: Piattaforma di hosting per il controllo delle versioni e la collaborazione sul codice sorgente, basata su Git.
-#H: 
+#H:
 
 I:
   Ingegneria del Software:
@@ -69,15 +85,24 @@ M:
   MVP:
     acronimo: Minimum Viable Product
     descrizione: Versione minima di un prodotto software che include solo le funzionalità essenziali per soddisfare i requisiti principali e permettere il rilascio sul mercato.
+
 #N:
-#O:
+O:
+  OWASP:
+    acronimo: Open Web Application Security Project
+    descrizione: Organizzazione no-profit che si dedica a migliorare la sicurezza delle applicazioni web attraverso la creazione di risorse, strumenti e linee guida.
 P:
   Piano di progetto:
     descrizione: Documento che definisce gli obiettivi, le attività, le risorse, i tempi e i costi necessari per completare un progetto software con successo.
+  Piano di Qualifica:
+    descrizione: Documento strategico che definisce obiettivi, requisiti, processi e standard di qualità per guidare lo sviluppo di un prodotto software. Esso comprende tre elementi fondamentali, cioè il Piano della Qualità, il Controllo di Qualità e il Miglioramento continuo.
 
   Progettisti:
     descrizione: Membri del team di sviluppo responsabili della progettazione dell'architettura e delle funzionalità del sistema software.
 
+  Progetto:
+    descrizione: Esso é inteso nel senso di project, ovvero un'insieme di attività coordinate e gestite per sviluppare un sistema software che soddisfi specifici requisiti e obiettivi.
+  
   Programmatori:
     descrizione: Membri del team di sviluppo responsabili della scrittura del codice sorgente per implementare le funzionalità del sistema software.
 
@@ -88,7 +113,14 @@ P:
     alternative: PB
     descrizione: Milestone del progetto in cui vengono definite le specifiche, i vincoli e le caratteristiche del prodotto finale da sviluppare e vengono successivamente implementate.
 #Q:
+Q:
+  Qualità:
+    descrizione: Insieme delle caratteristiche di un’entità, che ne determinano la capacità di soddisfare esigenze sia espresse che implicite.
+
 R:
+  Repository:
+    descrizione: Archivio digitale dove il codice sorgente e la documentazione di un progetto software sono memorizzati e gestiti, spesso utilizzato per il controllo delle versioni e la collaborazione tra sviluppatori.
+ 
   Requisiti funzionali:
     descrizione: Requisiti che specificano un comportamento o una funzione che un sistema deve eseguire ovvero il "cosa deve fare".
   
@@ -109,6 +141,7 @@ R:
   Rischio:
     alternative: Risk, rischi
     descrizione: Evento incerto che, se si verifica, può avere un impatto positivo o negativo sugli obiettivi del progetto, come tempi, costi o qualità del software prodotto.
+
 S:
   Skarab Group:
     descrizione: Nome del team di studenti che intende sviluppare il sistema software a partire dal capitolato proposto dall'azienda Var Group.
@@ -117,7 +150,7 @@ S:
     descrizione: Periodo di lavoro di breve durata (tipicamente 1-2 settimane) durante il quale il team realizza un insieme definito di attività e obiettivi.
 
   Sistema software:
-    alternative: Software system, sistema 
+    alternative: Software system, sistema
     descrizione: Insieme di componenti software che lavorano insieme per eseguire specifiche funzioni o servizi.
 
   Sistema multiagente:
@@ -128,31 +161,53 @@ S:
     descrizione: Piattaforma di comunicazione e collaborazione utilizzata dal team per facilit
 
   sviluppatore software:
+  Sistema software:
+    alternative: Software system, sistema 
+    descrizione: Insieme di componenti software che lavorano insieme per eseguire specifiche funzioni o servizi.
+  
+  Skarab Group:
+    descrizione: Nome del team di studenti che intende sviluppare il sistema software a partire dal capitolato proposto dall'azienda Var Group.
+  
+  Sviluppatore software:
     alternative: software developer, sviluppatori software, sviluppatori
     descrizione: Persona che scrive, testa e mantiene il codice sorgente di applicazioni o sistemi software.
-#T:
-U:
-  Utente:
-    alternative: User, Utenti
-    descrizione: Persona che utilizza un sistema o un'applicazione software.
+T:
+  Test di Accettazione:
+    descrizione: Fase finale del testing software, che serve a verificare che un sistema soddisfi i requisiti e le aspettative. L'obiettivo è dare fiducia che il prodotto finito sia accettabile per il cliente.
 
+  Test di Sistema:
+    descrizione: Verifica l'intero sistema nel suo complesso, assicurandosi che il software funzioni come previsto e rispetti i requisiti specificati.
+
+  Test di Unità:
+    descrizione: Verificano in isolamento il corretto funzionamento delle più piccole parti autonome di codice.
+
+U:
+  UML:
+    acronimo: Unified Modeling Language
+    descrizione: Linguaggio di modellazione standardizzato utilizzato per visualizzare, specificare, costruire e documentare i componenti di un sistema software.
+  
   URL:
     acronimo: Uniform Resource Locator
     descrizione: Indirizzo web che specifica la posizione di una risorsa su Internet.
 
-  UML:
-    acronimo: Unified Modeling Language
-    descrizione: Linguaggio di modellazione standardizzato utilizzato per visualizzare, specificare, costruire e documentare i componenti di un sistema software.
+  Utente:
+    alternative: User, Utenti
+    descrizione: Persona che utilizza un sistema o un'applicazione software.
+
 V:
   Var Group:
     descrizione: Azienda che ha proposto il capitolato per lo sviluppo del sistema software da parte del team di studenti Skarab Group.
 
   Verificatori:
     descrizione: Persone o team responsabili di controllare che il sistema software soddisfi i requisiti specificati durante il processo di verifica.
+    
 W:
+  Way of Working:
+    descrizione: Definisce il modo specifico in cui un team opera, includendo processi e strumenti che guidano le attività volte a raggiungere gli obiettivi stabiliti.
+
   Web Application:
     alternative: Applicazione Web, Webapp
     descrizione: Applicazione software accessibile tramite un browser web, che consente agli utenti di interagire con il sistema attraverso Internet.
 #X:
 #Y:
-#Z:    
+#Z:
