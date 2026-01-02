@@ -2,37 +2,45 @@
 #import "../lib/variables.typ": *
 #import "../lib/glossarioUtil.typ": *
 
-#let versione = "v0.6.0"
+#let versione = "v0.8.0"
 
 #titlePage("Glossario", versione)
 #set page(numbering: "1", header: header("Glossario"), footer: footer())
 #let history = (
   (
-    "27/12/2025", 
-    "0.3.0", 
-    "Aggiunti i termini per PdP", 
+    "2026/01/02", 
+    "0.8.0", 
+    "Aggiunti i termini LLM, Norme di Progetto, Falso positivo, falso negativo per PdP", 
     members.andrea, 
     members.antonio
   ),
-  
   (
-    "20/12/2025", 
     "2025/12/30",
-    "0.6.0",
+    "0.7.0",
     "Aggiunti termini relativi ai test",
     members.alice,
+    members.kevin,
   ),
   (
     "2025/12/28",
-    "0.5.0",
+    "0.6.0",
     "Aggiunto termine CMMI",
     members.alice,
+    members.kevin,
+  ),
+  (
+    "2025/12/27", 
+    "0.5.0", 
+    "Aggiunti i termini per PdP", 
+    members.andrea, 
+    members.antonio
   ),
   (
     "2025/12/27",
     "0.4.0",
     "Aggiunti termini Qualità, Piano di Qualifica e Ciclo di vita del software",
     members.alice,
+    members.kevin,
   ),
   (
     "2025/12/27", 
