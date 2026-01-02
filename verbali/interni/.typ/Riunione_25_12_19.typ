@@ -6,7 +6,7 @@
 
 #verbale(
   versioni: (
-    ("DataVersione", "NumeroVersione", "DettaglioModifica", "Relatore", "Verificatore"),
+    ("2025-12-19", "1.0.0", "Creazione documento", "Basso Kevin", "Suar Alberto"),
   ),
 
   presenti: (
@@ -39,14 +39,15 @@
     #let orarioInizioRiunione = "10:00"//...
     #let orarioFineRiunione = "10:40" //...
     #let presidenteRiunione = members.suar //...
+    #let dataRiunione = "19 Dicembre 2025"
     == Apertura
-    La riunione ha avuto inizio alle #orarioInizioRiunione, introdotta da #presidenteRiunione che ha presentato l'ordine del giorno.
+    La riunione, svolta in data #dataRiunione, ha avuto inizio alle #orarioInizioRiunione, introdotta da #presidenteRiunione che ha presentato l'ordine del giorno.
 
     == Discussione punto per punto
     === Punto 1: #punto1
     #puntoOdg(
       punto1,
-      "Il gruppo ha discusso sui possibili linguaggi da utilizzare per la documentazione ed è arrivato a una scelta binaria tra LaTeX e typst.",
+      "Il gruppo ha discusso su una possibile suddivisione dei membri del gruppo per la stesura dei principali documenti previsti per la RTB.",
       decisione: [I membri hanno concordato una suddivisione chiara dei ruoli per ottimizzare la redazione dei documenti. In cui le persone sono divise cosí:
         - #strong("Analisi dei requisiti"): #members.kevin, #members.suar
         - #strong("Piano di progetto"): #members.andrea, #members.antonio
@@ -67,31 +68,31 @@
     #puntoOdg(
       punto3,
       "Capire cosa bisogna presentare nell'POC",
-      decisione: "Si é deciso di procedere non come una sintesi del progetto ma un sistema che permette di mostrare che loe tecnologie funzionano senza che l'obiettivo effettivo sia raggiunto.",
+      decisione: "Si é deciso di procedere non come una sintesi del progetto ma un sistema che permette di mostrare che le tecnologie funzionano senza che l'obiettivo effettivo sia raggiunto.",
     )
 
     = Azioni e responsabilità
     #tabellaAzioni((
       (
-        "Stesura documento di analisi dei requisiti e glossario",
+        "Prima stesura del documento di analisi dei requisiti e glossario",
         members.suar + " - " + members.kevin,
         "2025-12-29",
         "In corso di svolgimento",
       ),
       (
-        "Stesura documento piano di progetto",
+        "Prima stesura del documento piano di progetto",
         members.andrea + " - " + members.antonio,
         "2025-12-29",
         "Da iniziare",
       ),
       (
-        "Stesura documento piano di qualifica",
+        "Prima stesura del documento piano di qualifica",
         members.alice + " - " + members.berengan,
         "2025-12-29",
         "Da iniziare",
       ),
       (
-        "Stesura documento norme di progetto",
+        "Prima stesura del documento norme di progetto",
         members.martinello,
         "2025-12-29",
         "Da iniziare",
