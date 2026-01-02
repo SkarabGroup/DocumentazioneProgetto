@@ -2,12 +2,18 @@
 #import "../lib/variables.typ": *
 #import "../lib/glossarioUtil.typ": *
 
-#let versione = "v0.7.0"
+#let versione = "v0.8.0"
 
 #titlePage("Glossario", versione)
 #set page(numbering: "1", header: header("Glossario"), footer: footer())
 #let history = (
-  
+  (
+    "2026/01/02", 
+    "0.8.0", 
+    "Aggiunti termini per standard industriali, ruoli progetto e tecnologie (SQA, ISO, Node.js, etc.)",
+    members.martinello, 
+    members.suar
+  ),
   (
     "2025/12/30",
     "0.7.0",
