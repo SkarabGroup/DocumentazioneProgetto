@@ -11,12 +11,20 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.1.0"
+#let versione = "v0.2.0"
 
 #titlePage("Norme di Progetto", versione)
 #set page(numbering: "1", header: header("Norme di Progetto"), footer: footer())
 
 #let history = (
+  (
+    "02/01/2026",
+    "0.2.0",
+    "Arricchimento con standard industriali, norme di codifica dettagliate e integrazioni progetto-specifiche",
+    members.martinello,
+    // Verificatore TBD
+    "",
+  ),
   (
     "28/12/2025",
     "0.1.0",
@@ -54,6 +62,16 @@ Nel testo, i termini importanti possono essere evidenziati utilizzando la macro 
 I riferimenti normativi includono:
 - Regolamento del progetto didattico.
 - Standard ISO/IEC 12207 per i processi del ciclo di vita del software.
+
+== Standard Industriali e Riferimenti
+Il progetto adotta standard industriali riconosciuti per garantire qualità, conformità e best practices nel ciclo di vita del software. Di seguito i principali riferimenti:
+
+- *IEEE 830 - Standard for Software Requirements Specifications*: Guida alla documentazione dei requisiti funzionali e non funzionali, inclusa la classificazione (obbligatori, desiderabili, opzionali) e l'uso di casi d'uso.
+- *IEEE 1016 - Recommended Practice for Software Design Descriptions*: Fornisce linee guida per descrivere l'architettura software, inclusi diagrammi UML e design pattern (es. MVC, Singleton).
+- *IEEE 829 - Standard for Software and System Test Documentation*: Definisce la struttura per piani di test, casi di test, procedure e report per unit, integration e system testing.
+- *ISO/IEC 12207 - Software Life Cycle Processes*: Framework internazionale per processi di acquisizione, fornitura, sviluppo, operazione, manutenzione e disposal del software, supportando approcci iterativi e gestione del rischio.
+
+Questi standard sono integrati nei processi di analisi, progettazione, verifica e documentazione per assicurare tracciabilità e qualità.
 
 = Processi Primari
 
@@ -132,18 +150,46 @@ Il gruppo adotta un sistema di metriche per monitorare processi e prodotti.
 )
 
 === Strategie di Verifica
-- *Analisi Statica*: Review manuale del codice e uso di linter (ESLint per JS/TS, Pylint/Black per #def("Python")).
+- *Analisi Statica*: Review manuale del codice e uso di linter (#def("ESLint") per JS/TS, Pylint/Black per #def("Python")).
 - *Analisi Dinamica*: Esecuzione della suite di test.
 - *Test*:
   - *Unit Test*: Verifica di singole unità di codice.
   - *Integration Test*: Verifica delle interazioni tra moduli.
   - *System Test*: Verifica del sistema completo rispetto ai requisiti.
 
+=== #def("Software Quality Assurance") (#def("SQA"))
+L'#def("SQA") monitora tutti i processi per garantire conformità agli standard (es. #def("ISO 9001"), #def("ISO 25010")). Include:
+- *Politiche*: Definizione di procedure per ogni fase (requisiti, design, testing).
+- *Audit*: Revisioni periodiche per identificare non conformità.
+- *Attività*: Review di documenti, controllo qualità codice, #def("Gestione Rischi").
+
+=== Validazione
+La validazione conferma che il prodotto soddisfi le esigenze degli utenti.
+- *#def("Test di Accettazione")*: Verifica finale con stakeholder per requisiti non funzionali (es. usabilità, prestazioni).
+- *Feedback Utente*: Raccolta di input durante demo o beta testing.
+- *Allineamento Obiettivi*: Verifica rispetto agli obiettivi di progetto (es. automazione analisi qualità repository).
+
 = Processi Organizzativi
 
 == Gestione dei Processi
-Il Responsabile di Progetto monitora l'avanzamento dei lavori e assegna i task.
+Il #def("Responsabile di Progetto") monitora l'avanzamento dei lavori e assegna i task.
 Strumenti di coordinamento: #def("Jira"), #def("Slack"), #def("Telegram"), #def("Discord").
+
+=== Ruoli di Progetto
+- *#def("Responsabile di Progetto")*: Coordinamento generale e gestione stakeholder.
+- *#def("Amministratore")*: Gestione configurazione, documentazione e repository.
+- *#def("Analista")*: Analisi requisiti e modellazione sistema (casi d'uso, UML).
+- *Progettista*: Architettura e design tecnico.
+- *Programmatore*: Implementazione e sviluppo codice.
+- *Verificatore*: Controllo qualità, testing e verifica conformità.
+
+=== Approcci di Gestione Progetto (#def("PMI"))
+- *#def("Predictive")*: Pianificazione dettagliata per requisiti stabili (sequenziale, con milestone fisse).
+- *#def("Adaptive")*: Iterativo per requisiti incerti (es. Agile/Scrum, adatto a sviluppo incrementale).
+- *#def("Hybrid")*: Combinazione di entrambi, bilanciando flessibilità e struttura.
+
+=== #def("Gestione Rischi")
+Identificazione, valutazione e mitigazione rischi (es. tecnologici, di schedule). Aggiornamenti periodici durante riunioni.
 
 == Gestione delle Riunioni
 Per ogni riunione (interna o con esterni) viene redatto un *Verbale* che riporta:
@@ -173,6 +219,25 @@ Per ogni riunione (interna o con esterni) viene redatto un *Verbale* che riporta
 == #def("Typst") (Documentazione)
 - Utilizzare la sintassi standard per headings e liste.
 - Mantenere i file sorgente organizzati per capitoli o sezioni se il documento è esteso.
+
+
+== #def("Node.js") / JavaScript (Scripting/Backend)
+- *Naming*: `camelCase` per variabili e funzioni, `PascalCase` per classi e componenti.
+- *Indentazione*: 2 spazi.
+- *Variabili*: Utilizzare `const` e `let`, evitare `var`.
+- *Linting*: #def("ESLint") per controllo qualità codice; seguire regole standard (es. no-unused-vars, eqeqeq).
+- *Documentazione*: #def("JSDoc") per moduli e funzioni (`@param`, `@returns`).
+- *Esempio*:
+  ```javascript
+  /**
+   * Analizza un repository GitHub.
+   * @param {string} repoUrl - URL del repository.
+   * @returns {Promise<Object>} Risultati dell'analisi.
+   */
+  async function analyzeRepository(repoUrl) {
+      // Implementazione
+  }
+  ```
 
 = Strumenti Utilizzati
 - *Redazione*: #def("Visual Studio Code"), #def("Typst").
