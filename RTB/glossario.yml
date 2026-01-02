@@ -1,6 +1,11 @@
 A:
   Agente:
     descrizione: Componente sistema software autonomo che percepisce il proprio ambiente, prende decisioni e intraprende azioni in modo indipendente per raggiungere obiettivi specifici grazie all'utilizzo di intelligenza artificiale
+
+  Approccio Agile:
+    alternative: Agile, metodo Agile
+    descrizione: Approccio alla gestione del progetto che privilegia iterazioni brevi, feedback continui e adattamento delle priorità in base al progresso e ai risultati ottenuti.
+
   
   Analisi dei requisiti:
     descrizione: Processo di raccolta, valutazione e documentazione delle esigenze e delle aspettative degli stakeholder per un sistema software, al fine di definire chiaramente cosa il sistema deve fare.
@@ -16,6 +21,9 @@ A:
 B: 
   Back-end:
     descrizione: Parte di un'applicazione o sistema che gestisce la logica di business, l'archiviazione dei dati e l'elaborazione delle richieste degli utenti, solitamente non visibile direttamente dagli utenti finali.
+
+  Backlog:
+    descrizione: Elenco ordinato e prioritizzato di attività, requisiti e funzionalità da completare durante lo sviluppo del progetto.
 C:
   Caso d'uso:
     alternative: Use case, casi d'uso
@@ -60,6 +68,10 @@ G:
 #H:
 
 I:
+  Ingegneria del Software:
+    alternative: Software Engineering, SWE
+    descrizione: Disciplina che si occupa della progettazione, sviluppo, manutenzione e gestione di sistemi software complessi in modo sistematico e metodico.
+
   IT:
     acronimo: Information Technology
     descrizione: Settore che si occupa dell'uso di computer, software e reti per la gestione e l'elaborazione delle informazioni.
@@ -67,6 +79,9 @@ I:
 #K:
 #L:
 M:
+  Milestone:
+    descrizione: Punto di riferimento significativo nel ciclo di vita di un progetto, che indica il completamento di una fase importante o il raggiungimento di un obiettivo specifico.
+
   MVP:
     acronimo: Minimum Viable Product
     descrizione: Versione minima di un prodotto software che include solo le funzionalità essenziali per soddisfare i requisiti principali e permettere il rilascio sul mercato.
@@ -77,6 +92,8 @@ O:
     acronimo: Open Web Application Security Project
     descrizione: Organizzazione no-profit che si dedica a migliorare la sicurezza delle applicazioni web attraverso la creazione di risorse, strumenti e linee guida.
 P:
+  Piano di progetto:
+    descrizione: Documento che definisce gli obiettivi, le attività, le risorse, i tempi e i costi necessari per completare un progetto software con successo.
   Piano di Qualifica:
     descrizione: Documento strategico che definisce obiettivi, requisiti, processi e standard di qualità per guidare lo sviluppo di un prodotto software. Esso comprende tre elementi fondamentali, cioè il Piano della Qualità, il Controllo di Qualità e il Miglioramento continuo.
 
@@ -92,6 +109,10 @@ P:
   Progetto:
     descrizione: Esso é inteso nel senso di project, ovvero un'insieme di attività coordinate e gestite per sviluppare un sistema software che soddisfi specifici requisiti e obiettivi.
 
+  Product Baseline:
+    alternative: PB
+    descrizione: Milestone del progetto in cui vengono definite le specifiche, i vincoli e le caratteristiche del prodotto finale da sviluppare e vengono successivamente implementate.
+#Q:
 Q:
   Qualità:
     descrizione: Insieme delle caratteristiche di un’entità, che ne determinano la capacità di soddisfare esigenze sia espresse che implicite.
@@ -105,10 +126,28 @@ R:
   
   Requisiti non funzionali:
     descrizione: Requisiti che descrivono le caratteristiche e le qualità che il sistema deve possedere per soddisfare le aspettative degli utenti, stabilendo "come deve funzionare" il sistema.
+  
+  Requirements and Technology Baseline:
+    alternative: RTB
+    descrizione: Milestone del progetto dedicata alla raccolta dei requisiti, alla definizione delle tecnologie e linee guida tecniche da adottare.
+  
+  Repository:
+    descrizione: Archivio digitale dove il codice sorgente e la documentazione di un progetto software sono memorizzati e gestiti, spesso utilizzato per il controllo delle versioni e la collaborazione tra sviluppatori.
+
+  Responsabile:
+    alternative: Project Manager, responsabile di progetto
+    descrizione: Membro del team incaricato di pianificare, coordinare e supervisionare le attività del progetto per garantire il raggiungimento degli obiettivi nei tempi e nei costi previsti.
+
+  Rischio:
+    alternative: Risk, rischi
+    descrizione: Evento incerto che, se si verifica, può avere un impatto positivo o negativo sugli obiettivi del progetto, come tempi, costi o qualità del software prodotto.
 
 S:
   Skarab Group:
     descrizione: Nome del team di studenti che intende sviluppare il sistema software a partire dal capitolato proposto dall'azienda Var Group.
+
+  Sprint:
+    descrizione: Periodo di lavoro di breve durata (tipicamente 1-2 settimane) durante il quale il team realizza un insieme definito di attività e obiettivi.
 
   Sistema software:
     alternative: Software system, sistema
@@ -118,6 +157,10 @@ S:
     alternative: Multi-agent system, sistema multi agente, multiagente
     descrizione: Sistema software composto da più agenti autonomi che interagiscono tra loro per raggiungere obiettivi comuni o individuali.
 
+  Slack:
+    descrizione: Piattaforma di comunicazione e collaborazione utilizzata dal team per facilit
+
+  sviluppatore software:
   Sistema software:
     alternative: Software system, sistema 
     descrizione: Insieme di componenti software che lavorano insieme per eseguire specifiche funzioni o servizi.

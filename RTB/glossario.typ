@@ -8,6 +8,15 @@
 #set page(numbering: "1", header: header("Glossario"), footer: footer())
 #let history = (
   (
+    "27/12/2025", 
+    "0.3.0", 
+    "Aggiunti i termini per PdP", 
+    members.andrea, 
+    members.antonio
+  ),
+  
+  (
+    "20/12/2025", 
     "2025/12/30",
     "0.6.0",
     "Aggiunti termini relativi ai test",
