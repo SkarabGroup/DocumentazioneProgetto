@@ -1,29 +1,37 @@
 A:
+  Adaptive:
+    descrizione: Approccio di gestione progetto iterativo e flessibile, adatto a requisiti incerti, come in metodologie Agile.
+
+
   Agente:
     descrizione: Componente sistema software autonomo che percepisce il proprio ambiente, prende decisioni e intraprende azioni in modo indipendente per raggiungere obiettivi specifici grazie all'utilizzo di intelligenza artificiale
 
-  Approccio Agile:
-    alternative: Agile, metodo Agile
-    descrizione: Approccio alla gestione del progetto che privilegia iterazioni brevi, feedback continui e adattamento delle priorità in base al progresso e ai risultati ottenuti.
+  Amministratore:
+    descrizione: Ruolo nel team di progetto responsabile della gestione della configurazione, documentazione e repository.
 
-  
   Analisi dei requisiti:
     descrizione: Processo di raccolta, valutazione e documentazione delle esigenze e delle aspettative degli stakeholder per un sistema software, al fine di definire chiaramente cosa il sistema deve fare.
 
   Analista:
+    descrizione: Ruolo nel team di progetto responsabile dell'analisi dei requisiti e della modellazione del sistema.
     alternative: Requirement Analyst, Analisti
     descrizione: Membro del team di sviluppo responsabile della raccolta e dell'analisi dei requisiti del sistema software, nonché della comunicazione con gli stakeholder per garantire che le esigenze siano comprese e documentate correttamente.
 
   API: 
     acronimo: Application Programming Interface
-    descrizione: Interfaccia di programmazione di un'applicazione, che permette l'interazione tra diversi software.
-
+    descrizione: Insieme di regole e protocolli che consentono a diverse applicazioni software di comunicare tra loro.
+      
+  Approccio Agile:
+    alternative: Agile, metodo Agile
+    descrizione: Approccio alla gestione del progetto che privilegia iterazioni brevi, feedback continui e adattamento delle priorità in base al progresso e ai risultati ottenuti.
+  
 B: 
+  Backlog:
+    descrizione: Elenco ordinato e prioritizzato di attività, requisiti e funzionalità da completare durante lo sviluppo del progetto.
+
   Back-end:
     descrizione: Parte di un'applicazione o sistema che gestisce la logica di business, l'archiviazione dei dati e l'elaborazione delle richieste degli utenti, solitamente non visibile direttamente dagli utenti finali.
 
-  Backlog:
-    descrizione: Elenco ordinato e prioritizzato di attività, requisiti e funzionalità da completare durante lo sviluppo del progetto.
 C:
   Caso d'uso:
     alternative: Use case, casi d'uso
@@ -42,74 +50,142 @@ C:
   Collaudatori:
     descrizione: Persone o team responsabili di testare il sistema software per garantire che funzioni correttamente e soddisfi i requisiti specificati durante il processo di collaudo.
 
+  Complessità Ciclomatica:
+    descrizione: Metrica software che indica la complessità di un programma misurando il numero di percorsi linearmente indipendenti attraverso il codice sorgente.
+
   Consulente informatico:
     descrizione: Professionista che fornisce consulenza e supporto tecnico in ambito informatico, aiutando le aziende a migliorare i loro sistemi e processi IT.
+
+  Coverage:
+    alternative: Code Coverage
+    descrizione: Misura che indica la percentuale di codice sorgente esguito durante i test automatizzati.
+
 D:
   Database:
     descrizione: Collezione organizzata di dati memorizzati e accessibili elettronicamente, spesso gestita da un sistema di gestione di database (DBMS).
 
   Diagrammi dei casi d'uso:
     descrizione: Rappresentazioni grafiche che illustrano le interazioni tra gli attori e il sistema, mostrando i casi d'uso e le relazioni tra di essi.
-#E:
+
+  Discord:
+    descrizione: Piattaforma di comunicazione VoIP, messaggistica istantanea e distribuzione digitale progettata per creare comunità.
+
+E:
+  ESLint:
+    descrizione: Strumento di linting per JavaScript e TypeScript che aiuta a identificare e correggere errori di codice e mantenere uno stile consistente.
 
 F:
   Front-end:
     descrizione: Parte di un'applicazione o sistema con cui gli utenti interagiscono direttamente, comprendente l'interfaccia utente e l'esperienza utente.
 
-  Falso positivo:
-    alternative: Falsi positivi
-    descrizione: Risultato di un test o di un'analisi che indica erroneamente la presenza di una condizione o di un problema quando in realtà non esiste.
+  Falsi negativi:
+    descrizione: Risultati di test che indicano erroneamente che una condizione o un requisito non è stato soddisfatto quando in realtà lo è.
+  
+  Falsi positivi:
+    descrizione: Risultati di test che indicano erroneamente che una condizione o un requisito è stato soddisfatto quando in realtà non lo è.
 
-  Falso negativo:
-    alternative: Falsi negativi
-    descrizione: Risultato di un test o di un'analisi che indica erroneamente l'assenza di una condizione o di un problema quando in realtà esiste.
 G:
+  Gestione Rischi:
+    descrizione: Processo di identificazione, valutazione e mitigazione dei rischi che potrebbero influenzare il progetto software.
+
+  Git:
+    descrizione: Sistema di controllo versione distribuito utilizzato per tracciare i cambiamenti nel codice sorgente durante lo sviluppo del software.
+
   GitHub:
     descrizione: Piattaforma di hosting per il controllo delle versioni e la collaborazione sul codice sorgente, basata su Git.
-  
+
   GUI:
     acronimo: Graphical User Interface
     descrizione: Interfaccia utente grafica che consente agli utenti di interagire con un sistema attraverso elementi visivi come finestre, icone e menu.
 
-  GitHub:
-    descrizione: Piattaforma di hosting per il controllo delle versioni e la collaborazione sul codice sorgente, basata su Git.
-#H:
+  Gulpease:
+    descrizione: Indice di leggibilità di un testo tarato sulla lingua italiana.
+
+H: 
+  Hybrid:
+    descrizione: Approccio di gestione progetto che combina elementi predictive e adaptive per bilanciare flessibilità e struttura. 
 
 I:
   Ingegneria del Software:
     alternative: Software Engineering, SWE
     descrizione: Disciplina che si occupa della progettazione, sviluppo, manutenzione e gestione di sistemi software complessi in modo sistematico e metodico.
 
+  ISO 9001:
+    descrizione: Standard internazionale per i sistemi di gestione della qualità, che specifica requisiti per un sistema di gestione qualità efficace.
+
+  ISO 25010:
+    descrizione: Standard internazionale per la qualità del software e dei sistemi, che definisce modelli di qualità per prodotti software.
+
   IT:
     acronimo: Information Technology
     descrizione: Settore che si occupa dell'uso di computer, software e reti per la gestione e l'elaborazione delle informazioni.
-#J:
+
+J:
+  Jira:
+    descrizione: Software per la gestione dei progetti, tracciamento dei bug e gestione delle problematiche, sviluppato da Atlassian.
+
+  JSDoc:
+    descrizione: Sistema di documentazione per JavaScript che permette di aggiungere commenti strutturati al codice per generare documentazione automatica.
 #K:
 L:
-  Large Language Model:
-    alternative: LLM
-    descrizione: Modello di intelligenza artificiale addestrato su grandi quantità di dati testuali per comprendere e generare linguaggio naturale in modo coerente e contestuale.
+  LLM:
+    acronimo: Large Language Model
+    descrizione: Modello di intelligenza artificiale progettato per comprendere e generare testo naturale, addestrato su grandi quantità di dati testuali.
+
 M:
+  MDP:
+    acronimo: Multi-Dealer Platform
+    descrizione: Piattaforma che consente a più fornitori di servizi di offrire le loro soluzioni attraverso un'unica interfaccia, facilitando l'accesso e la gestione dei servizi.
+  
   Milestone:
     descrizione: Punto di riferimento significativo nel ciclo di vita di un progetto, che indica il completamento di una fase importante o il raggiungimento di un obiettivo specifico.
 
+  MPC:
+    acronimo: Multi-Party Computation
+    descrizione: Tecnica crittografica che consente a più parti di calcolare una funzione comune sui loro dati privati senza rivelare tali dati tra di loro.
+
+  MPD:
+    acronimo: Multi-Party Data
+    descrizione: Dati condivisi tra più parti o entità, spesso utilizzati in contesti di collaborazione o analisi congiunta.
+ 
+  MPS:
+    acronimo: Modello di Processo per la Software Industry
+    descrizione: Modello di miglioramento dei processi specifico per l'industria del software, sviluppato in Italia, che aiuta le organizzazioni a ottimizzare le proprie attività e a migliorare la qualità del software prodotto.
+  
   MVP:
     acronimo: Minimum Viable Product
     descrizione: Versione minima di un prodotto software che include solo le funzionalità essenziali per soddisfare i requisiti principali e permettere il rilascio sul mercato.
-
 N:
+  Node.js:
+    descrizione: Ambiente di runtime JavaScript lato server che permette di eseguire codice JavaScript al di fuori di un browser web.
+
   Norme di Progetto:
-    descrizione: Insieme di regole e linee guida che definiscono le modalità operative, i processi e le responsabilità all'interno di un progetto software per garantire coerenza e qualità.
+    descrizione: Insieme di regole e linee guida che definiscono le modalità operative, i processi e gli standard da seguire durante lo sviluppo di un progetto software.
+#O:
+
 O:
   OWASP:
     acronimo: Open Web Application Security Project
     descrizione: Organizzazione no-profit che si dedica a migliorare la sicurezza delle applicazioni web attraverso la creazione di risorse, strumenti e linee guida.
+
 P:
   Piano di progetto:
     descrizione: Documento che definisce gli obiettivi, le attività, le risorse, i tempi e i costi necessari per completare un progetto software con successo.
+  
   Piano di Qualifica:
     descrizione: Documento strategico che definisce obiettivi, requisiti, processi e standard di qualità per guidare lo sviluppo di un prodotto software. Esso comprende tre elementi fondamentali, cioè il Piano della Qualità, il Controllo di Qualità e il Miglioramento continuo.
+ 
+  PMI:
+    acronimo: Project Management Institute
+    descrizione: Organizzazione internazionale che promuove standard e best practices per la gestione di progetti.
+  
+  Predictive:
+    descrizione: Approccio di gestione progetto con pianificazione dettagliata e sequenziale, adatto a requisiti stabili e ben definiti.
 
+  Product Baseline:
+    alternative: PB
+    descrizione: Milestone del progetto in cui vengono definite le specifiche, i vincoli e le caratteristiche del prodotto finale da sviluppare e vengono successivamente implementate.
+ 
   Progettisti:
     descrizione: Membri del team di sviluppo responsabili della progettazione dell'architettura e delle funzionalità del sistema software.
 
@@ -119,80 +195,85 @@ P:
   Programmatori:
     descrizione: Membri del team di sviluppo responsabili della scrittura del codice sorgente per implementare le funzionalità del sistema software.
 
-  Progetto:
-    descrizione: Esso é inteso nel senso di project, ovvero un'insieme di attività coordinate e gestite per sviluppare un sistema software che soddisfi specifici requisiti e obiettivi.
-
-  Product Baseline:
-    alternative: PB
-    descrizione: Milestone del progetto in cui vengono definite le specifiche, i vincoli e le caratteristiche del prodotto finale da sviluppare e vengono successivamente implementate.
-#Q:
+  Python:
+    descrizione: Linguaggio di programmazione ad alto livello, interpretato e orientato agli oggetti, utilizzato per lo sviluppo degli Agenti.
+  
 Q:
   Qualità:
-    descrizione: Insieme delle caratteristiche di un’entità, che ne determinano la capacità di soddisfare esigenze sia espresse che implicite.
+    descrizione: Insieme delle caratteristiche di un'entità, che ne determinano la capacità di soddisfare esigenze sia espresse che implicite.
 
 R:
+  React:
+    descrizione: Libreria JavaScript open-source per la creazione di interfacce utente.
+
   Repository:
     descrizione: Archivio digitale dove il codice sorgente e la documentazione di un progetto software sono memorizzati e gestiti, spesso utilizzato per il controllo delle versioni e la collaborazione tra sviluppatori.
- 
-  Requisiti funzionali:
-    descrizione: Requisiti che specificano un comportamento o una funzione che un sistema deve eseguire ovvero il "cosa deve fare".
-  
-  Requisiti non funzionali:
-    descrizione: Requisiti che descrivono le caratteristiche e le qualità che il sistema deve possedere per soddisfare le aspettative degli utenti, stabilendo "come deve funzionare" il sistema.
   
   Requirements and Technology Baseline:
     alternative: RTB
     descrizione: Milestone del progetto dedicata alla raccolta dei requisiti, alla definizione delle tecnologie e linee guida tecniche da adottare.
   
-  Repository:
-    descrizione: Archivio digitale dove il codice sorgente e la documentazione di un progetto software sono memorizzati e gestiti, spesso utilizzato per il controllo delle versioni e la collaborazione tra sviluppatori.
-
-  Responsabile:
-    alternative: Project Manager, responsabile di progetto
-    descrizione: Membro del team incaricato di pianificare, coordinare e supervisionare le attività del progetto per garantire il raggiungimento degli obiettivi nei tempi e nei costi previsti.
+  Requisiti funzionali:
+    descrizione: Requisiti che specificano un comportamento o una funzione che un sistema deve eseguire ovvero il "cosa deve fare".
+  
+  Requisiti non funzionali:
+    descrizione: Requisiti che descrivono le caratteristiche e le qualità che il sistema deve possedere per soddisfare le aspettative degli utenti, stabilendo "come deve funzionare" il sistema.
 
   Rischio:
     alternative: Risk, rischi
     descrizione: Evento incerto che, se si verifica, può avere un impatto positivo o negativo sugli obiettivi del progetto, come tempi, costi o qualità del software prodotto.
+  
+  Responsabile:
+    alternative: Project Manager, responsabile di progetto
+    descrizione: Membro del team incaricato di pianificare, coordinare e supervisionare le attività del progetto per garantire il raggiungimento degli obiettivi nei tempi e nei costi previsti.
+
+  Responsabile di Progetto:
+    descrizione: Ruolo nel team di progetto responsabile del coordinamento generale e della gestione degli stakeholder.
 
 S:
-  Skarab Group:
-    descrizione: Nome del team di studenti che intende sviluppare il sistema software a partire dal capitolato proposto dall'azienda Var Group.
-
-  Sprint:
-    descrizione: Periodo di lavoro di breve durata (tipicamente 1-2 settimane) durante il quale il team realizza un insieme definito di attività e obiettivi.
-
-  Sistema software:
-    alternative: Software system, sistema
-    descrizione: Insieme di componenti software che lavorano insieme per eseguire specifiche funzioni o servizi.
-
   Sistema multiagente:
     alternative: Multi-agent system, sistema multi agente, multiagente
     descrizione: Sistema software composto da più agenti autonomi che interagiscono tra loro per raggiungere obiettivi comuni o individuali.
 
-  Slack:
-    descrizione: Piattaforma di comunicazione e collaborazione utilizzata dal team per facilit
-
-  sviluppatore software:
   Sistema software:
-    alternative: Software system, sistema 
+    alternative: Software system, sistema
     descrizione: Insieme di componenti software che lavorano insieme per eseguire specifiche funzioni o servizi.
   
   Skarab Group:
     descrizione: Nome del team di studenti che intende sviluppare il sistema software a partire dal capitolato proposto dall'azienda Var Group.
-  
+
+  Slack:
+    descrizione: Piattaforma di messaggistica istantanea aziendale utilizzata per la comunicazione interna.
+
+  Sprint:
+    descrizione: Periodo di lavoro di breve durata (tipicamente 1-2 settimane) durante il quale il team realizza un insieme definito di attività e obiettivi.
+
+  SQA:
+    acronimo: Software Quality Assurance
+    descrizione: Processo che monitora e garantisce la conformità agli standard di qualità durante tutto il ciclo di vita del software.
+
   Sviluppatore software:
     alternative: software developer, sviluppatori software, sviluppatori
     descrizione: Persona che scrive, testa e mantiene il codice sorgente di applicazioni o sistemi software.
+
 T:
+  Telegram:
+    descrizione: Servizio di messaggistica istantanea basato sul cloud.
+
   Test di Accettazione:
-    descrizione: Fase finale del testing software, che serve a verificare che un sistema soddisfi i requisiti e le aspettative. L'obiettivo è dare fiducia che il prodotto finito sia accettabile per il cliente.
+    descrizione: Tipo di test che verifica se il software soddisfa i requisiti e le aspettative degli utenti finali prima del rilascio.
 
   Test di Sistema:
     descrizione: Verifica l'intero sistema nel suo complesso, assicurandosi che il software funzioni come previsto e rispetti i requisiti specificati.
 
   Test di Unità:
     descrizione: Verificano in isolamento il corretto funzionamento delle più piccole parti autonome di codice.
+
+  TypeScript:
+    descrizione: Linguaggio di programmazione strongly-typed che si compila in JavaScript.
+
+  Typst:
+    descrizione: Nuovo sistema di typesetting basato su markup, progettato per essere potente quanto LaTeX ma più facile da imparare e utilizzare.
 
 U:
   UML:
@@ -213,6 +294,10 @@ V:
 
   Verificatori:
     descrizione: Persone o team responsabili di controllare che il sistema software soddisfi i requisiti specificati durante il processo di verifica.
+
+  Visual Studio Code:
+    acronimo: VS Code
+    descrizione: Editor di codice sorgente sviluppato da Microsoft, estensibile e supporta vari linguaggi di programmazione.
     
 W:
   Way of Working:
