@@ -10,28 +10,37 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v2.0.0"
+#let versione = "v0.5.1"
 
 #titlePage("Piano di Progetto", versione)
 #set page(numbering: "1", header: header("Piano di Progetto"), footer: footer())
 #let history = (
   (
+    "2026/01/03", 
+    "0.5.1", 
+    "Fix termini glossario e versionamento", 
+    members.andrea,
+    members.antonio,
+  ),
+  (
     "2026/01/02", 
-    "2.0.0", 
+    "0.5.0", 
     "Completata analisi e gestione dei rischi con aggiunta dei rischi RT3, RT4, RI3, RCO3 e RCO4", 
     members.andrea,
   ),
   (
     "2025/12/31", 
-    "1.0.0", 
+    "0.4.0", 
     "Completata pianificazione a lungo termine e a breve termine per RTB", 
     members.antonio,
+    members.andrea
   ),
   (
     "2025/12/27", 
     "0.3.0", 
     "Iniziata pianificazione a lungo termine e a breve termine per RTB, lievi modifiche all'introduzione", 
-    members.antonio
+    members.antonio,
+    members.andrea
   ),  
   (
     "2025/12/27", 
@@ -103,11 +112,11 @@ Per facilitare la lettura, ogni occorrenza di un termine presente nel Glossario 
 
 == Introduzione
 La gestione dei rischi è una componente critica per il successo del progetto. Un #def[Rischio] viene definito come un evento incerto che, qualora si verifichi, ha un impatto (positivo o negativo) su uno o più obiettivi del progetto, quali tempi, costi, o qualità del software prodotto. #linebreak()
-La redazione del #def[Piano di Progetto] non può prescindere da un'attenta analisi delle incertezze. L'obiettivo di questa sezione è classificare le possibili minacce per valutare se il carico di lavoro inserito nel #def[Backlog] sia sostenibile rispetto alle capacità del gruppo.
+La redazione del Piano di Progetto non può prescindere da un'attenta analisi delle incertezze. L'obiettivo di questa sezione è classificare le possibili minacce per valutare se il carico di lavoro inserito nel #def[Backlog] sia sostenibile rispetto alle capacità del gruppo.
 
 Per garantire un approccio strutturato ed efficace, il processo di gestione dei rischi è stato suddiviso in quattro fasi distinte:
 - #strong[Identificazione]: consiste nel rilevare e documentare tutte le potenziali fonti di rischio. Questa attività non si limita agli aspetti tecnici o strettamente legati al progetto, ma prende in esame anche la sfera organizzativa e la disponibilità personale dei membri del team;
-- #strong[Analisi]: una volta individuati, i rischi vengono esaminati per stimarne la probabilità di accadimento e l'impatto potenziale. Questo passaggio è fondamentale per comprendere le possibili ripercussioni sul completamento del singolo #def[Sprint] e sul successo complessivo del progetto;
+- #strong[Analisi]: una volta individuati, i rischi vengono esaminati per stimarne la probabilità di accadimento e l'impatto potenziale. Questo passaggio è fondamentale per comprendere le possibili ripercussioni sul completamento del singolo #def[sprint] e sul successo complessivo del progetto;
 - #strong[Pianificazione]: sulla base dell'analisi, vengono definite le strategie di risposta. L'obiettivo è elaborare misure preventive atte a ridurre la probabilità che l'evento si verifichi o, qualora non fosse possibile evitarlo, predisporre azioni di mitigazione per limitarne gli effetti negativi;
 - #strong[Controllo]: rappresenta la fase operativa di monitoraggio continuo durante lo svolgimento delle attività. Questo permette di intercettare tempestivamente l'insorgere di un rischio e di attivare prontamente le procedure di mitigazione stabilite in precedenza.
 
@@ -174,7 +183,7 @@ Consapevoli che l'inesperienza potrebbe ridurre l'efficacia iniziale delle mitig
     [*Descrizione*], 
     [Durante la fase di selezione delle tecnologie per il sistema ad agenti #def[Code Guardian], potrebbe essere effettuata una scelta non ottimale che non soddisfa appieno i requisiti del progetto. Questo potrebbe comportare difficoltà nell'implementazione, limitazioni funzionali o problemi di scalabilità in futuro.],
     [*Mitigazione*], 
-    [Effettuare una valutazione approfondita delle tecnologie disponibili, considerando fattori quali la compatibilità con i requisiti del progetto, la facilità d’uso, la disponibilità di risorse e il supporto della comunità. Mantenere una certa flessibilità nel #def[Piano di Progetto] per consentire eventuali cambiamenti tecnologici qualora emergano problemi significativi durante lo sviluppo. L’azienda #def[Var Group] offre inoltre supporto attraverso riunioni e strumenti di comunicazione (#def[Slack]) per alcune delle tecnologie descritte nel capitolato.],
+    [Effettuare una valutazione approfondita delle tecnologie disponibili, considerando fattori quali la compatibilità con i requisiti del progetto, la facilità d’uso, la disponibilità di risorse e il supporto della comunità. Mantenere una certa flessibilità nel Piano di Progetto per consentire eventuali cambiamenti tecnologici qualora emergano problemi significativi durante lo sviluppo. L’azienda Var Group offre inoltre supporto attraverso riunioni e strumenti di comunicazione (#def[Slack]) per alcune delle tecnologie descritte nel capitolato.],
     [*Probabilità di avvenimento*],
     [Media],
     [*Pericolosità delle ripercussioni*],
@@ -203,9 +212,9 @@ Consapevoli che l'inesperienza potrebbe ridurre l'efficacia iniziale delle mitig
     [*Nome*], 
     [Scarsa conoscenza del dominio e dell'IA generativa],
     [*Descrizione*], 
-    [Le tematiche relative ai #def[LLM] e alle architetture multi-agente non sono state approfondite nel percorso accademico obbligatorio. La mancanza di basi teoriche solide sulla gestione del contesto, del reasoning degli agenti e della sicurezza del codice (*OWASP*) potrebbe rallentare la fase di progettazione e l'efficacia dell'audit automatico.],
+    [Le tematiche relative ai #def[LLM] e alle architetture multi-agente non sono state approfondite nel percorso accademico obbligatorio. La mancanza di basi teoriche solide sulla gestione del contesto, del reasoning degli agenti e della sicurezza del codice (*#def[OWASP]*) potrebbe rallentare la fase di progettazione e l'efficacia dell'audit automatico.],
     [*Mitigazione*], 
-    [Organizzazione di sessioni di auto-formazione sfruttando le risorse fornite nel capitolato. I membri con maggiore esperienza in ambito IA agiranno da mentore per il gruppo. Sarà inoltre fondamentale sfruttare il supporto tecnico offerto dal proponente #def[Var Group], partecipando attivamente alle sessioni di mentoring previste per validare le scelte architetturali.],
+    [Organizzazione di sessioni di auto-formazione sfruttando le risorse fornite nel capitolato. I membri con maggiore esperienza in ambito IA agiranno da mentore per il gruppo. Sarà inoltre fondamentale sfruttare il supporto tecnico offerto dal proponente Var Group, partecipando attivamente alle sessioni di mentoring previste per validare le scelte architetturali.],
     [*Probabilità di avvenimento*],
     [Alta],
     [*Pericolosità delle ripercussioni*],
@@ -332,7 +341,7 @@ Consapevoli che l'inesperienza potrebbe ridurre l'efficacia iniziale delle mitig
     [*Descrizione*], 
     [Un membro potrebbe ritirarsi formalmente dal progetto o dal corso di studi, causando una riduzione significativa delle risorse umane disponibili. Questo potrebbe influire sulla capacità del gruppo di rispettare le scadenze e completare le attività pianificate.],
     [*Mitigazione*], 
-    [In caso di abbandono di un componente, il team si riorganizzerà per gestire le attività programmate con una forza lavoro ridotta. Si avvierà un confronto con il proponente per scremare le funzionalità secondarie e focalizzarsi sugli obiettivi primari dell'audit e della remediation. Il #def[responsabile] aggiornerà la ripartizione dei compiti per bilanciare l'impegno orario dei membri rimanenti e garantire la continuità dello sviluppo.],
+    [In caso di abbandono di un componente, il team si riorganizzerà per gestire le attività programmate con una forza lavoro ridotta. Si avvierà un confronto con il proponente per scremare le funzionalità secondarie e focalizzarsi sugli obiettivi primari dell'audit e della remediation. Il responsabile aggiornerà la ripartizione dei compiti per bilanciare l'impegno orario dei membri rimanenti e garantire la continuità dello sviluppo.],
     [*Probabilità di avvenimento*],
     [Bassa],
     [*Pericolosità delle ripercussioni*],
@@ -366,7 +375,7 @@ Consapevoli che l'inesperienza potrebbe ridurre l'efficacia iniziale delle mitig
     [*Descrizione*], 
     [Questo rischio riguarda la possibilità che all'interno del team si verifichino divergenze di opinioni o difficoltà nella collaborazione tra i vari membri del gruppo. Tali situazioni potrebbero influire negativamente sulla produttività del gruppo, rallentare il progresso del progetto e compromettere la qualità del lavoro svolto.],
     [*Mitigazione*], 
-    [Promuovere un ambiente di supporto all’interno del team, incoraggiando una comunicazione aperta. Qualora i conflitti non si risolvessero autonomamente tra gli interessati, il #def[Responsabile] interverrà per mediare e individuare soluzioni condivise. Nei casi più critici, si potrà ricorrere al supporto del docente],
+    [Promuovere un ambiente di supporto all’interno del team, incoraggiando una comunicazione aperta. Qualora i conflitti non si risolvessero autonomamente tra gli interessati, il responsabile interverrà per mediare e individuare soluzioni condivise. Nei casi più critici, si potrà ricorrere al supporto del docente],
     [*Probabilità di avvenimento*],
     [Media],
     [*Pericolosità delle ripercussioni*],
@@ -426,9 +435,9 @@ Consapevoli che l'inesperienza potrebbe ridurre l'efficacia iniziale delle mitig
     [*Nome*], 
     [Ritardi o incomprensioni nella comunicazione con la proponente],
     [*Descrizione*], 
-    [Possibili ritardi nelle risposte da parte di #def[Var Group] o interpretazioni errate dei feedback forniti durante le sessioni di mentoring. Questo potrebbe portare a sviluppare funzionalità non in linea con le aspettative della proponente.],
+    [Possibili ritardi nelle risposte da parte di Var Group o interpretazioni errate dei feedback forniti durante le sessioni di mentoring. Questo potrebbe portare a sviluppare funzionalità non in linea con le aspettative della proponente.],
     [*Mitigazione*], 
-    [Programmazione di incontri periodici fissi e redazione di verbali (verbali esterni) dopo ogni incontro per formalizzare quanto deciso. Uso di canali di comunicazione diretti (#def[Slack]) per chiarimenti rapidi. In caso di dubbi sull'interpretazione dei feedback, il gruppo si impegnerà a richiedere chiarimenti tempestivi alla proponente per evitare incomprensioni. Nel caso in cui la proponente non risponda entro tempi ragionevoli il gruppo contattera il Prof. Vardanega per consigli su come procedere.],
+    [Programmazione di incontri periodici fissi e redazione di verbali (verbali esterni) dopo ogni incontro per formalizzare quanto deciso. Uso di canali di comunicazione diretti (Slack) per chiarimenti rapidi. In caso di dubbi sull'interpretazione dei feedback, il gruppo si impegnerà a richiedere chiarimenti tempestivi alla proponente per evitare incomprensioni. Nel caso in cui la proponente non risponda entro tempi ragionevoli il gruppo contattera il Prof. Vardanega per consigli su come procedere.],
     [*Probabilità di avvenimento*],
     [Media],
     [*Pericolosità delle ripercussioni*],
@@ -457,7 +466,7 @@ Consapevoli che l'inesperienza potrebbe ridurre l'efficacia iniziale delle mitig
     [*Nome*], 
     [Disomogeneità nella produzione della documentazione],
     [*Descrizione*], 
-    [Dato che i membri del team hanno stili di scrittura diversi, i documenti (#def[Piano di Progetto], #def[Norme di Progetto], ecc.) potrebbero risultare frammentati, poco coerenti o con terminologie discordanti. Questo potrebbe compromettere la chiarezza e la professionalità della documentazione consegnata.],
+    [Dato che i membri del team hanno stili di scrittura diversi, i documenti (Piano di Progetto, #def[Norme di Progetto], ecc.) potrebbero risultare frammentati, poco coerenti o con terminologie discordanti. Questo potrebbe compromettere la chiarezza e la professionalità della documentazione consegnata.],
     [*Mitigazione*], 
     [Definizione rigorosa dei template riguardante l'aspetto visivo, l'impaginazione e la formattazione del testo. Ogni documento deve passare per una fase di verifica incrociata, un membro diverso dal redattore controlla il lavoro, prima di essere considerato definitivo. Inoltre, viene stabilito un glossario condiviso per uniformare la terminologia tecnica utilizzata nei documenti.],
     [*Probabilità di avvenimento*],
@@ -472,7 +481,7 @@ Consapevoli che l'inesperienza potrebbe ridurre l'efficacia iniziale delle mitig
 
 = Pianificazione nel lungo termine
 == Obiettivi di pianificazione
-La pianificazione a lungo termine ha l'obiettivo di delineare le attività principali e le milestone fondamentali per il completamento del progetto #def[Code Guardian].
+La pianificazione a lungo termine ha l'obiettivo di delineare le attività principali e le milestone fondamentali per il completamento del progetto Code Guardian.
 Le due milestone necessarie sono la *#def[Requirements and Technology Baseline] (RTB)* e la *#def[Product Baseline] (PB)*, che rappresentano rispettivamente la fase di raccolta dei requisiti e definizione delle tecnologie, e la fase di definizione e implementazione delle specifiche del prodotto finale. #linebreak()  
 Questa sezione fornisce una panoramica delle tappe chiave, delle scadenze e delle risorse necessarie per garantire il successo del progetto nel suo complesso. 
 Nella Dichiarazione degli impegni, la data ultima prevista di consegna del progetto è stata definita il 21/03/2026; con costi pari a €12.845,00.
@@ -535,7 +544,7 @@ Nella seguente tabella è riportata la distribuzione delle ore per ruolo present
 
 Questa suddivisione al momento sembra ragionevole, ma verranno monitorate le attività allo scopo di assicurare una distribuzione corretta rispetto a quanto riscontrato.
 
-In seguito a un'analisi dell'andamento delle attività, il gruppo stima una candidatura per la *#def[Requirements and Technology Baseline] (RTB)* entro il 20 gennaio 2026. #pagebreak()
+In seguito a un'analisi dell'andamento delle attività, il gruppo stima una candidatura per la #strong[Requirements and Technology Baseline] (#strong[RTB]) entro il 20 gennaio 2026. #pagebreak()
 
 
 == Attività previste per la Requirements and Technology Baseline (RTB)
@@ -558,69 +567,68 @@ In seguito a un'analisi dell'andamento delle attività, il gruppo stima una cand
 
     [*Stesura del documento di Analisi dei Requisiti*],
     [Redazione delle seguenti sezioni del documento di Analisi dei Requisiti:
-    - Introduzione e definizione degli attori, 
-    - Casi d'uso e relativi sottocasi,
+    - Introduzione e definizione degli attori; 
+    - Casi d'uso e relativi sottocasi;
     - Requisiti funzionali e non.], 
-    [- Introduzione e attori: sprint 1,
-    - Casi d'uso: sprint 1 e 2,
-    - Requisiti funzionali e non: sprint 2],
+    [- Introduzione e attori: sprint 1;
+    - Casi d'uso: sprint 1 e 2;
+    - Requisiti funzionali e non: sprint 2.],
     [In corso],
     
     [*Stesura del Piano di Progetto*],
     [Redazione delle seguenti sezioni del documento di Piano di Progetto: 
-    - Introduzione, 
-    - Analisi e gestione dei rischi, 
-    - Pianificazione a lungo termine, 
+    - Introduzione; 
+    - Analisi e gestione dei rischi; 
+    - Pianificazione a lungo termine; 
     - Pianificazione a breve termine.],
-    [- Introduzione: sprint 1,
-    - Analisi e gestione dei rischi: sprint 1,
-    - Pianificazione a lungo termine: sprint 1,
-    - Pianificazione a breve termine: sprint 2], 
+    [- Introduzione: sprint 1;
+    - Analisi e gestione dei rischi: sprint 1;
+    - Pianificazione a lungo termine: sprint 1;
+    - Pianificazione a breve termine: sprint 2.], 
     [In corso],
 
     [*Stesura del Piano di Qualifica*],
     [Redazione delle seguenti sezioni del documento di Piano di Qualifica: 
-    - Introduzione, 
-    - Qualità di processo, 
-    - Qualità di prodotto, 
-    - Metodi di testing, 
-    - Cruscotto di valutazione,
+    - Introduzione; 
+    - Qualità di processo; 
+    - Qualità di prodotto; 
+    - Metodi di testing; 
+    - Cruscotto di valutazione;
     - Automiglioramento.],
-    [- Introduzione: sprint 1,
-    - Qualità di processo: sprint 1,
-    - Qualità di prodotto: sprint 1,
-    - Metodi di testing: sprint 1 e 2,
-    - Cruscotto di valutazione: sprint 2,
+    [- Introduzione: sprint 1;
+    - Qualità di processo: sprint 1;
+    - Qualità di prodotto: sprint 1;
+    - Metodi di testing: sprint 1 e 2;
+    - Cruscotto di valutazione: sprint 2;
     - Automiglioramento: sprint 2],
     [In corso],
 
     [*Stesura del documento di Norme di Progetto*],
     [Redazione delle seguenti sezioni del documento di Norme di Progetto: 
-    - Introduzione, 
-    - Processi primari, 
-    - Processi di supporto, 
-    - Processi organizzativi, 
+    - Introduzione; 
+    - Processi primari; 
+    - Processi di supporto; 
+    - Processi organizzativi; 
     - Norme di sviluppo.],
     [- Introduzione: sprint 1,
     - Processi primari: sprint 1,
     - Processi di supporto: sprint 1,
     - Processi organizzativi: sprint 2,
-    - Norme di sviluppo: sprint 1 e 2],
+    - Norme di sviluppo: sprint 1 e 2.],
     [In corso],
 
     [*Implementazione del Glossario*],
-    [La redazione del Glossario sarà un documento in costante aggiornamento, che evolverà parallelamente allo sviluppo di altri documenti. Ogni membro del gruppo avrà la responsabilità di 
-    - aggiungere nuove voci 
-    qualora lo ritenesse necessario durante la stesura di altri documenti o durante lo sviluppo del progetto.],
-    [- Ogni sprint vengono aggiunte nuove voci al glossario], 
+    [La redazione del Glossario sarà un documento in costante aggiornamento, che evolverà parallelamente allo sviluppo di altri documenti. #linebreak()
+    Ogni membro del gruppo avrà la responsabilità di aggiungere nuove voci qualora lo ritenesse necessario durante la stesura di altri documenti o durante lo sviluppo del progetto.],
+    [- Ogni sprint vengono aggiunte nuove voci al glossario.], 
     [In corso],
 
     [*Sviluppo del Proof of Concept (PoC)*],
     [Svolgimento delle seguenti attività:
-    - Progettazione architetturale,
-    - Implementazione iniziale,],
-    [- Progettazione architetturale: sprint 2
-    - Implementazione iniziale: sprint 2 e 3],
+    - Progettazione architetturale;
+    - Implementazione iniziale.],
+    [- Progettazione architetturale: sprint 2;
+    - Implementazione iniziale: sprint 2 e 3.],
     [Da iniziare],
   ),
   caption: [Attività previste per la Requirements and Technology Baseline (RTB)],
@@ -628,17 +636,17 @@ In seguito a un'analisi dell'andamento delle attività, il gruppo stima una cand
 #pagebreak()
 
 == Attività previste per la Product Baseline (PB)
-Questo paragrafo non è stato ancora redatto in quanto la pianificazione a lungo termine per la #def[Product Baseline] (PB) risulterebbe poco realistica in questo momento. Al superamento della fase di RTB, quando si avranno maggiori informazioni sulle tecnologie, tempistiche e risorse necessarie per completare il progetto, verrà redatta una pianificazione dettagliata per la fase di PB.
+Questo paragrafo non è stato ancora redatto in quanto la pianificazione a lungo termine per la Product Baseline (PB) risulterebbe poco realistica in questo momento. Al superamento della fase di RTB, quando si avranno maggiori informazioni sulle tecnologie, tempistiche e risorse necessarie per completare il progetto, verrà redatta una pianificazione dettagliata per la fase di PB.
 #pagebreak()
 
 = Pianificazione nel breve termine
 == Introduzione
-La pianificazione a breve termine si concentra sulla suddivisione del lavoro degli #def[Sprint] (di circa 2 settimane). 
-Il team ha scelto di seguire un #def[Approccio Agile], che prevede l'adozione di strumenti di gestione del progetto come #strong[Jira] per organizzare e monitorare le attività durante ogni sprint. #linebreak()
+La pianificazione a breve termine si concentra sulla suddivisione del lavoro degli sprint (di circa 2 settimane). 
+Il team ha scelto di seguire un #def[Approccio Agile], che prevede l'adozione di strumenti di gestione del progetto come *#def[Jira]* per organizzare e monitorare le attività durante ogni sprint. #linebreak()
 Questa sezione descrive come il team intende organizzare le attività, assegnare le responsabilità e monitorare i progressi durante ciascuno sprint. 
 L'obiettivo principale della pianificazione a breve termine è garantire che ogni sprint sia ben definito, con obiettivi chiari e misurabili, che determini i ruoli per ciascun membro del gruppo, in modo da facilitare la gestione del progetto.
 
-Seguiranno ora le descrizioni dei vari #def[Sprint], in cui verranno esposte:
+Seguiranno ora le descrizioni dei vari sprint, in cui verranno esposte:
 - Informazioni generali e attività da svolgere
 - Prospetto del consumo temporale
 - Consumo del tempo effettivo 
@@ -657,10 +665,10 @@ Queste e altre attività non rendicontate di "Palestra" sono parte integrante de
 == Requirements and Technology Baseline (RTB)
 === Sprint 1
 Inizio: 19/12/2025 #linebreak()
-Fine prevista: 29/12/2025 #linebreak()
-Fine reale: 29/12/2025 #linebreak()
+Fine prevista: 03/01/2026 #linebreak()
+Fine reale: 03/01/2026 #linebreak()
 ==== Informazioni generali e attività da svolgere
-In questo primo sprint, il team ha intenzione di concentrarsi sulla stesura iniziale dei documenti fondamentali per la #def[Requirements and Technology Baseline] (RTB). Le attività principali includono:
+In questo primo sprint, il team ha intenzione di concentrarsi sulla stesura iniziale dei documenti fondamentali per la Requirements and Technology Baseline (RTB). Le attività principali includono:
 - Prima redazione del documento di Analisi dei Requisiti, con particolare attenzione alla definizione degli attori e dei casi d'uso principali;
 - Prima redazione del Piano di Progetto, compresi Rischi e pianificazione a lungo termine;
 - Prima redazione del Piano di Qualifica, focalizzandosi su qualità di processo/prodotto e testing;
@@ -903,15 +911,15 @@ Dopo il completamento dello Sprint 1, le risorse rimanenti per ciascun ruolo son
   caption: [Risorse rimanenti dopo Sprint 1],
 )
 ==== Retrospettiva
-In retrospettiva, questo sprint è stato molto produttivo, in quanto sono stati completati tutti gli obiettivi prefissati. La suddivisione del lavoro è risultata efficace. Tuttavia, essendo questo sprint situato nel periodo natalizio, il team si è imbattuto nel RI1, che ha rallentato l'andamento del progetto. Nonostante ciò, il team è riuscito comunque a completare la maggior parte degli obiettivi proposti.
+Questo sprint è stato molto produttivo, in quanto sono stati completati tutti gli obiettivi prefissati e la suddivisione del lavoro è risultata efficace. Tuttavia, essendo questo sprint situato nel periodo natalizio, il team si è imbattuto nel RI1, che ha rallentato l'andamento del progetto. Nonostante ciò, il team è riuscito comunque a completare la maggior parte degli obiettivi proposti.
 #pagebreak()
 
 === Sprint 2 
-Inizio: 29/12/2025 #linebreak()
+Inizio: 03/01/2026 #linebreak()
 Fine prevista: 08/01/2026 #linebreak()
 Fine reale: /*da inserire*/
 ==== Informazioni generali e attività da svolgere
-In questo secondo sprint, il team intende concentrarsi sul completamento della stesura dei documenti fondamentali per la #def[Requirements and Technology Baseline] (RTB) e iniziare lo sviluppo del Proof of Concept (PoC). Le attività principali includono:
+In questo secondo sprint, il team intende concentrarsi sul completamento della stesura dei documenti fondamentali per la Requirements and Technology Baseline (RTB) e iniziare lo sviluppo del Proof of Concept (PoC). Le attività principali includono:
 - Completamento del documento di Analisi dei Requisiti, inserendo gli ultimi casi d'uso e includendo i requisiti funzionali e non funzionali;
 - Incremento del Piano di Progetto, con particolare attenzione alla pianificazione a breve termine;
 - Completamento del Piano di Qualifica, includendo metodi di testing e cruscotto di valutazione;
