@@ -2,9 +2,6 @@ A:
   Adaptive:
     descrizione: Approccio di gestione progetto iterativo e flessibile, adatto a requisiti incerti, come in metodologie Agile.
 
-  API: 
-    acronimo: Application Programming Interface
-    descrizione: Interfaccia di programmazione di un'applicazione, che permette l'interazione tra diversi software.
 
   Agente:
     descrizione: Componente sistema software autonomo che percepisce il proprio ambiente, prende decisioni e intraprende azioni in modo indipendente per raggiungere obiettivi specifici grazie all'utilizzo di intelligenza artificiale
@@ -20,16 +17,20 @@ A:
     alternative: Requirement Analyst, Analisti
     descrizione: Membro del team di sviluppo responsabile della raccolta e dell'analisi dei requisiti del sistema software, nonché della comunicazione con gli stakeholder per garantire che le esigenze siano comprese e documentate correttamente.
 
+  API: 
+    acronimo: Application Programming Interface
+    descrizione: Insieme di regole e protocolli che consentono a diverse applicazioni software di comunicare tra loro.
+      
   Approccio Agile:
     alternative: Agile, metodo Agile
     descrizione: Approccio alla gestione del progetto che privilegia iterazioni brevi, feedback continui e adattamento delle priorità in base al progresso e ai risultati ottenuti.
   
 B: 
-  Back-end:
-    descrizione: Parte di un'applicazione o sistema che gestisce la logica di business, l'archiviazione dei dati e l'elaborazione delle richieste degli utenti, solitamente non visibile direttamente dagli utenti finali.
-
   Backlog:
     descrizione: Elenco ordinato e prioritizzato di attività, requisiti e funzionalità da completare durante lo sviluppo del progetto.
+
+  Back-end:
+    descrizione: Parte di un'applicazione o sistema che gestisce la logica di business, l'archiviazione dei dati e l'elaborazione delle richieste degli utenti, solitamente non visibile direttamente dagli utenti finali.
 
 C:
   Caso d'uso:
@@ -77,11 +78,11 @@ F:
   Front-end:
     descrizione: Parte di un'applicazione o sistema con cui gli utenti interagiscono direttamente, comprendente l'interfaccia utente e l'esperienza utente.
 
-  Falsi positivi:
-    descrizione: Risultati di test che indicano erroneamente che una condizione o un requisito è stato soddisfatto quando in realtà non lo è.
-
   Falsi negativi:
     descrizione: Risultati di test che indicano erroneamente che una condizione o un requisito non è stato soddisfatto quando in realtà lo è.
+  
+  Falsi positivi:
+    descrizione: Risultati di test che indicano erroneamente che una condizione o un requisito è stato soddisfatto quando in realtà non lo è.
 
 G:
   Gestione Rischi:
@@ -109,15 +110,15 @@ I:
     alternative: Software Engineering, SWE
     descrizione: Disciplina che si occupa della progettazione, sviluppo, manutenzione e gestione di sistemi software complessi in modo sistematico e metodico.
 
-  IT:
-    acronimo: Information Technology
-    descrizione: Settore che si occupa dell'uso di computer, software e reti per la gestione e l'elaborazione delle informazioni.
-
   ISO 9001:
     descrizione: Standard internazionale per i sistemi di gestione della qualità, che specifica requisiti per un sistema di gestione qualità efficace.
 
   ISO 25010:
     descrizione: Standard internazionale per la qualità del software e dei sistemi, che definisce modelli di qualità per prodotti software.
+
+  IT:
+    acronimo: Information Technology
+    descrizione: Settore che si occupa dell'uso di computer, software e reti per la gestione e l'elaborazione delle informazioni.
 
 J:
   Jira:
@@ -130,29 +131,30 @@ L:
   LLM:
     acronimo: Large Language Model
     descrizione: Modello di intelligenza artificiale progettato per comprendere e generare testo naturale, addestrato su grandi quantità di dati testuali.
+
 M:
+  MDP:
+    acronimo: Multi-Dealer Platform
+    descrizione: Piattaforma che consente a più fornitori di servizi di offrire le loro soluzioni attraverso un'unica interfaccia, facilitando l'accesso e la gestione dei servizi.
+  
   Milestone:
     descrizione: Punto di riferimento significativo nel ciclo di vita di un progetto, che indica il completamento di una fase importante o il raggiungimento di un obiettivo specifico.
-
-  MVP:
-    acronimo: Minimum Viable Product
-    descrizione: Versione minima di un prodotto software che include solo le funzionalità essenziali per soddisfare i requisiti principali e permettere il rilascio sul mercato.
 
   MPC:
     acronimo: Multi-Party Computation
     descrizione: Tecnica crittografica che consente a più parti di calcolare una funzione comune sui loro dati privati senza rivelare tali dati tra di loro.
 
-  MDP:
-    acronimo: Multi-Dealer Platform
-    descrizione: Piattaforma che consente a più fornitori di servizi di offrire le loro soluzioni attraverso un'unica interfaccia, facilitando l'accesso e la gestione dei servizi.
-
+  MPD:
+    acronimo: Multi-Party Data
+    descrizione: Dati condivisi tra più parti o entità, spesso utilizzati in contesti di collaborazione o analisi congiunta.
+ 
   MPS:
     acronimo: Modello di Processo per la Software Industry
     descrizione: Modello di miglioramento dei processi specifico per l'industria del software, sviluppato in Italia, che aiuta le organizzazioni a ottimizzare le proprie attività e a migliorare la qualità del software prodotto.
   
-  MPD:
-    acronimo: Multi-Party Data
-    descrizione: Dati condivisi tra più parti o entità, spesso utilizzati in contesti di collaborazione o analisi congiunta.
+  MVP:
+    acronimo: Minimum Viable Product
+    descrizione: Versione minima di un prodotto software che include solo le funzionalità essenziali per soddisfare i requisiti principali e permettere il rilascio sul mercato.
 N:
   Node.js:
     descrizione: Ambiente di runtime JavaScript lato server che permette di eseguire codice JavaScript al di fuori di un browser web.
@@ -167,19 +169,23 @@ O:
     descrizione: Organizzazione no-profit che si dedica a migliorare la sicurezza delle applicazioni web attraverso la creazione di risorse, strumenti e linee guida.
 
 P:
-  PMI:
-    acronimo: Project Management Institute
-    descrizione: Organizzazione internazionale che promuove standard e best practices per la gestione di progetti.
-  
-  Predictive:
-    descrizione: Approccio di gestione progetto con pianificazione dettagliata e sequenziale, adatto a requisiti stabili.
-
   Piano di progetto:
     descrizione: Documento che definisce gli obiettivi, le attività, le risorse, i tempi e i costi necessari per completare un progetto software con successo.
   
   Piano di Qualifica:
     descrizione: Documento strategico che definisce obiettivi, requisiti, processi e standard di qualità per guidare lo sviluppo di un prodotto software. Esso comprende tre elementi fondamentali, cioè il Piano della Qualità, il Controllo di Qualità e il Miglioramento continuo.
+ 
+  PMI:
+    acronimo: Project Management Institute
+    descrizione: Organizzazione internazionale che promuove standard e best practices per la gestione di progetti.
+  
+  Predictive:
+    descrizione: Approccio di gestione progetto con pianificazione dettagliata e sequenziale, adatto a requisiti stabili e ben definiti.
 
+  Product Baseline:
+    alternative: PB
+    descrizione: Milestone del progetto in cui vengono definite le specifiche, i vincoli e le caratteristiche del prodotto finale da sviluppare e vengono successivamente implementate.
+ 
   Progettisti:
     descrizione: Membri del team di sviluppo responsabili della progettazione dell'architettura e delle funzionalità del sistema software.
 
@@ -192,10 +198,6 @@ P:
   Python:
     descrizione: Linguaggio di programmazione ad alto livello, interpretato e orientato agli oggetti, utilizzato per lo sviluppo degli Agenti.
   
-  Product Baseline:
-    alternative: PB
-    descrizione: Milestone del progetto in cui vengono definite le specifiche, i vincoli e le caratteristiche del prodotto finale da sviluppare e vengono successivamente implementate.
-
 Q:
   Qualità:
     descrizione: Insieme delle caratteristiche di un'entità, che ne determinano la capacità di soddisfare esigenze sia espresse che implicite.
@@ -216,29 +218,29 @@ R:
   
   Requisiti non funzionali:
     descrizione: Requisiti che descrivono le caratteristiche e le qualità che il sistema deve possedere per soddisfare le aspettative degli utenti, stabilendo "come deve funzionare" il sistema.
+
+  Rischio:
+    alternative: Risk, rischi
+    descrizione: Evento incerto che, se si verifica, può avere un impatto positivo o negativo sugli obiettivi del progetto, come tempi, costi o qualità del software prodotto.
   
   Responsabile:
     alternative: Project Manager, responsabile di progetto
     descrizione: Membro del team incaricato di pianificare, coordinare e supervisionare le attività del progetto per garantire il raggiungimento degli obiettivi nei tempi e nei costi previsti.
 
-  Rischio:
-    alternative: Risk, rischi
-    descrizione: Evento incerto che, se si verifica, può avere un impatto positivo o negativo sugli obiettivi del progetto, come tempi, costi o qualità del software prodotto.
-
-  Repository:
-    descrizione: Archivio digitale dove il codice sorgente e la documentazione di un progetto software sono memorizzati e gestiti, spesso utilizzato per il controllo delle versioni e la collaborazione tra sviluppatori.
-
   Responsabile di Progetto:
     descrizione: Ruolo nel team di progetto responsabile del coordinamento generale e della gestione degli stakeholder.
+
 S:
+  Sistema multiagente:
+    alternative: Multi-agent system, sistema multi agente, multiagente
+    descrizione: Sistema software composto da più agenti autonomi che interagiscono tra loro per raggiungere obiettivi comuni o individuali.
 
   Sistema software:
     alternative: Software system, sistema
     descrizione: Insieme di componenti software che lavorano insieme per eseguire specifiche funzioni o servizi.
-
-  Sistema multiagente:
-    alternative: Multi-agent system, sistema multi agente, multiagente
-    descrizione: Sistema software composto da più agenti autonomi che interagiscono tra loro per raggiungere obiettivi comuni o individuali.
+  
+  Skarab Group:
+    descrizione: Nome del team di studenti che intende sviluppare il sistema software a partire dal capitolato proposto dall'azienda Var Group.
 
   Slack:
     descrizione: Piattaforma di messaggistica istantanea aziendale utilizzata per la comunicazione interna.
@@ -253,9 +255,6 @@ S:
   Sviluppatore software:
     alternative: software developer, sviluppatori software, sviluppatori
     descrizione: Persona che scrive, testa e mantiene il codice sorgente di applicazioni o sistemi software.
-  
-  Skarab Group:
-    descrizione: Nome del team di studenti che intende sviluppare il sistema software a partire dal capitolato proposto dall'azienda Var Group.
 
 T:
   Telegram:
@@ -264,23 +263,19 @@ T:
   Test di Accettazione:
     descrizione: Tipo di test che verifica se il software soddisfa i requisiti e le aspettative degli utenti finali prima del rilascio.
 
-  TypeScript:
-    descrizione: Linguaggio di programmazione strongly-typed che si compila in JavaScript.
-
-  Typst:
-    descrizione: Nuovo sistema di typesetting basato su markup, progettato per essere potente quanto LaTeX ma più facile da imparare e utilizzare.
-
   Test di Sistema:
     descrizione: Verifica l'intero sistema nel suo complesso, assicurandosi che il software funzioni come previsto e rispetti i requisiti specificati.
 
   Test di Unità:
     descrizione: Verificano in isolamento il corretto funzionamento delle più piccole parti autonome di codice.
 
+  TypeScript:
+    descrizione: Linguaggio di programmazione strongly-typed che si compila in JavaScript.
+
+  Typst:
+    descrizione: Nuovo sistema di typesetting basato su markup, progettato per essere potente quanto LaTeX ma più facile da imparare e utilizzare.
+
 U:
-  Utente:
-    alternative: User, Utenti
-    descrizione: Persona che utilizza un sistema o un'applicazione software.
-  
   UML:
     acronimo: Unified Modeling Language
     descrizione: Linguaggio di modellazione standardizzato utilizzato per visualizzare, specificare, costruire e documentare i componenti di un sistema software.
@@ -288,6 +283,10 @@ U:
   URL:
     acronimo: Uniform Resource Locator
     descrizione: Indirizzo web che specifica la posizione di una risorsa su Internet.
+
+  Utente:
+    alternative: User, Utenti
+    descrizione: Persona che utilizza un sistema o un'applicazione software.
 
 V:
   Var Group:
