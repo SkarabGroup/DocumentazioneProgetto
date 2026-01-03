@@ -20,10 +20,6 @@ A:
     alternative: Requirement Analyst, Analisti
     descrizione: Membro del team di sviluppo responsabile della raccolta e dell'analisi dei requisiti del sistema software, nonché della comunicazione con gli stakeholder per garantire che le esigenze siano comprese e documentate correttamente.
 
-  API: 
-    acronimo: Application Programming Interface
-    descrizione: Interfaccia di programmazione di un'applicazione, che permette l'interazione tra diversi software.
-
   Approccio Agile:
     alternative: Agile, metodo Agile
     descrizione: Approccio alla gestione del progetto che privilegia iterazioni brevi, feedback continui e adattamento delle priorità in base al progresso e ai risultati ottenuti.
@@ -34,6 +30,7 @@ B:
 
   Backlog:
     descrizione: Elenco ordinato e prioritizzato di attività, requisiti e funzionalità da completare durante lo sviluppo del progetto.
+
 C:
   Caso d'uso:
     alternative: Use case, casi d'uso
@@ -79,6 +76,13 @@ E:
 F:
   Front-end:
     descrizione: Parte di un'applicazione o sistema con cui gli utenti interagiscono direttamente, comprendente l'interfaccia utente e l'esperienza utente.
+
+  Falsi positivi:
+    descrizione: Risultati di test che indicano erroneamente che una condizione o un requisito è stato soddisfatto quando in realtà non lo è.
+
+  Falsi negativi:
+    descrizione: Risultati di test che indicano erroneamente che una condizione o un requisito non è stato soddisfatto quando in realtà lo è.
+
 G:
   Gestione Rischi:
     descrizione: Processo di identificazione, valutazione e mitigazione dei rischi che potrebbero influenzare il progetto software.
@@ -99,13 +103,6 @@ G:
 H: 
   Hybrid:
     descrizione: Approccio di gestione progetto che combina elementi predictive e adaptive per bilanciare flessibilità e struttura. 
-  GitHub:
-    descrizione: Piattaforma di hosting per il controllo delle versioni e la collaborazione sul codice sorgente, basata su Git.
-  
-  GUI:
-    acronimo: Graphical User Interface
-    descrizione: Interfaccia utente grafica che consente agli utenti di interagire con un sistema attraverso elementi visivi come finestre, icone e menu.
-#H:
 
 I:
   Ingegneria del Software:
@@ -121,6 +118,7 @@ I:
 
   ISO 25010:
     descrizione: Standard internazionale per la qualità del software e dei sistemi, che definisce modelli di qualità per prodotti software.
+
 J:
   Jira:
     descrizione: Software per la gestione dei progetti, tracciamento dei bug e gestione delle problematiche, sviluppato da Atlassian.
@@ -128,7 +126,10 @@ J:
   JSDoc:
     descrizione: Sistema di documentazione per JavaScript che permette di aggiungere commenti strutturati al codice per generare documentazione automatica.
 #K:
-#L:
+L:
+  LLM:
+    acronimo: Large Language Model
+    descrizione: Modello di intelligenza artificiale progettato per comprendere e generare testo naturale, addestrato su grandi quantità di dati testuali.
 M:
   Milestone:
     descrizione: Punto di riferimento significativo nel ciclo di vita di un progetto, che indica il completamento di una fase importante o il raggiungimento di un obiettivo specifico.
@@ -137,22 +138,42 @@ M:
     acronimo: Minimum Viable Product
     descrizione: Versione minima di un prodotto software che include solo le funzionalità essenziali per soddisfare i requisiti principali e permettere il rilascio sul mercato.
 
-#N:
+  MPC:
+    acronimo: Multi-Party Computation
+    descrizione: Tecnica crittografica che consente a più parti di calcolare una funzione comune sui loro dati privati senza rivelare tali dati tra di loro.
+
+  MDP:
+    acronimo: Multi-Dealer Platform
+    descrizione: Piattaforma che consente a più fornitori di servizi di offrire le loro soluzioni attraverso un'unica interfaccia, facilitando l'accesso e la gestione dei servizi.
+
+  MPS:
+    acronimo: Modello di Processo per la Software Industry
+    descrizione: Modello di miglioramento dei processi specifico per l'industria del software, sviluppato in Italia, che aiuta le organizzazioni a ottimizzare le proprie attività e a migliorare la qualità del software prodotto.
+  
+  MPD:
+    acronimo: Multi-Party Data
+    descrizione: Dati condivisi tra più parti o entità, spesso utilizzati in contesti di collaborazione o analisi congiunta.
+N:
   Node.js:
     descrizione: Ambiente di runtime JavaScript lato server che permette di eseguire codice JavaScript al di fuori di un browser web.
-#O:
-P:
-  PMI:
-    acronimo: Project Management Institute
-    descrizione: Organizzazione internazionale che promuove standard e best practices per la gestione di progetti.
 
-  Predictive:
-    descrizione: Approccio di gestione progetto con pianificazione dettagliata e sequenziale, adatto a requisiti stabili.
+  Norme di Progetto:
+    descrizione: Insieme di regole e linee guida che definiscono le modalità operative, i processi e gli standard da seguire durante lo sviluppo di un progetto software.
+#O:
+
 O:
   OWASP:
     acronimo: Open Web Application Security Project
     descrizione: Organizzazione no-profit che si dedica a migliorare la sicurezza delle applicazioni web attraverso la creazione di risorse, strumenti e linee guida.
+
 P:
+  PMI:
+    acronimo: Project Management Institute
+    descrizione: Organizzazione internazionale che promuove standard e best practices per la gestione di progetti.
+  
+  Predictive:
+    descrizione: Approccio di gestione progetto con pianificazione dettagliata e sequenziale, adatto a requisiti stabili.
+
   Piano di progetto:
     descrizione: Documento che definisce gli obiettivi, le attività, le risorse, i tempi e i costi necessari per completare un progetto software con successo.
   
@@ -168,15 +189,13 @@ P:
   Programmatori:
     descrizione: Membri del team di sviluppo responsabili della scrittura del codice sorgente per implementare le funzionalità del sistema software.
 
-  Progetto:
-    descrizione: Esso é inteso nel senso di project, ovvero un'insieme di attività coordinate e gestite per sviluppare un sistema software che soddisfi specifici requisiti e obiettivi.
-
   Python:
     descrizione: Linguaggio di programmazione ad alto livello, interpretato e orientato agli oggetti, utilizzato per lo sviluppo degli Agenti.
+  
   Product Baseline:
     alternative: PB
     descrizione: Milestone del progetto in cui vengono definite le specifiche, i vincoli e le caratteristiche del prodotto finale da sviluppare e vengono successivamente implementate.
-#Q:
+
 Q:
   Qualità:
     descrizione: Insieme delle caratteristiche di un'entità, che ne determinano la capacità di soddisfare esigenze sia espresse che implicite.
@@ -224,13 +243,20 @@ S:
   Slack:
     descrizione: Piattaforma di messaggistica istantanea aziendale utilizzata per la comunicazione interna.
 
+  Sprint:
+    descrizione: Periodo di lavoro di breve durata (tipicamente 1-2 settimane) durante il quale il team realizza un insieme definito di attività e obiettivi.
+
   SQA:
     acronimo: Software Quality Assurance
     descrizione: Processo che monitora e garantisce la conformità agli standard di qualità durante tutto il ciclo di vita del software.
 
-  sviluppatore software:
+  Sviluppatore software:
     alternative: software developer, sviluppatori software, sviluppatori
     descrizione: Persona che scrive, testa e mantiene il codice sorgente di applicazioni o sistemi software.
+  
+  Skarab Group:
+    descrizione: Nome del team di studenti che intende sviluppare il sistema software a partire dal capitolato proposto dall'azienda Var Group.
+
 T:
   Telegram:
     descrizione: Servizio di messaggistica istantanea basato sul cloud.
@@ -243,25 +269,6 @@ T:
 
   Typst:
     descrizione: Nuovo sistema di typesetting basato su markup, progettato per essere potente quanto LaTeX ma più facile da imparare e utilizzare.
-U:
-  Utente:
-    alternative: User, Utenti
-    descrizione: Persona che utilizza un sistema o un'applicazione software.
-  Skarab Group:
-    descrizione: Nome del team di studenti che intende sviluppare il sistema software a partire dal capitolato proposto dall'azienda Var Group.
-  
-  Slack:
-    descrizione: Piattaforma di comunicazione e collaborazione utilizzata dal team per facilitare lo scambio di informazioni, la gestione dei progetti e la comunicazione in tempo reale tra i membri del team.
-
-  Sprint:
-    descrizione: Periodo di lavoro di breve durata (tipicamente 1-2 settimane) durante il quale il team realizza un insieme definito di attività e obiettivi.
-  
-  Sviluppatore software:
-    alternative: software developer, sviluppatori software, sviluppatori
-    descrizione: Persona che scrive, testa e mantiene il codice sorgente di applicazioni o sistemi software.
-T:
-  Test di Accettazione:
-    descrizione: Fase finale del testing software, che serve a verificare che un sistema soddisfi i requisiti e le aspettative. L'obiettivo è dare fiducia che il prodotto finito sia accettabile per il cliente.
 
   Test di Sistema:
     descrizione: Verifica l'intero sistema nel suo complesso, assicurandosi che il software funzioni come previsto e rispetti i requisiti specificati.
@@ -270,6 +277,10 @@ T:
     descrizione: Verificano in isolamento il corretto funzionamento delle più piccole parti autonome di codice.
 
 U:
+  Utente:
+    alternative: User, Utenti
+    descrizione: Persona che utilizza un sistema o un'applicazione software.
+  
   UML:
     acronimo: Unified Modeling Language
     descrizione: Linguaggio di modellazione standardizzato utilizzato per visualizzare, specificare, costruire e documentare i componenti di un sistema software.
@@ -277,10 +288,6 @@ U:
   URL:
     acronimo: Uniform Resource Locator
     descrizione: Indirizzo web che specifica la posizione di una risorsa su Internet.
-
-  Utente:
-    alternative: User, Utenti
-    descrizione: Persona che utilizza un sistema o un'applicazione software.
 
 V:
   Var Group:

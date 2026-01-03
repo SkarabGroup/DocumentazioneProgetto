@@ -10,11 +10,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v1.0.0"
+#let versione = "v2.0.0"
 
 #titlePage("Piano di Progetto", versione)
 #set page(numbering: "1", header: header("Piano di Progetto"), footer: footer())
 #let history = (
+  (
+    "2026/01/02", 
+    "2.0.0", 
+    "Completata analisi e gestione dei rischi con aggiunta dei rischi RT3, RT4, RI3, RCO3 e RCO4", 
+    members.andrea,
+  ),
   (
     "2025/12/31", 
     "1.0.0", 
@@ -78,7 +84,7 @@ Per questio motivo il documento adotterà un approccio incrementale: verrà cost
 == Glossario
 Al fine di garantire la massima chiarezza espositiva e prevenire ambiguità nell’interpretazione della documentazione di progetto, è stato redatto un documento apposito denominato #strong("Glossario").  #linebreak()
 Questo strumento ha lo scopo di definire in modo univoco la terminologia tecnica, gli acronimi e i concetti specifici di dominio adottati dal gruppo durante l'intero ciclo di vita del software. #linebreak()
-Il Glossario è da considerarsi un documento in costante aggiornamento, che evolve parallelamente allo sviluppo del progetto. Per la versione attuale consultare questo indirizzo #underline[inirizzoglossario]. #linebreak()
+Il Glossario è da considerarsi un documento in costante aggiornamento, che evolve parallelamente allo sviluppo del progetto. Per la versione attuale consultare questo #underline[inirizzoglossario]. #linebreak()
 Per facilitare la lettura, ogni occorrenza di un termine presente nel Glossario viene contrassegnata con una sottolineatura.
 
 == Riferimenti
@@ -86,7 +92,7 @@ Per facilitare la lettura, ogni occorrenza di un termine presente nel Glossario 
 #underline[https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf] #linebreak() 
 //Ultimo accesso 2025/12/23
 - #strong("Dispense del corso di Ingegneria del Software sulla gestione di progetto") #linebreak() 
-#underline[https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T04.pdf] #linebreak 
+#underline[https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T04.pdf] #linebreak() 
 //Ultimo accesso 2025/12/23, toglierei gli ultimi accessi, non mi sembrano utili
 
 
@@ -177,6 +183,68 @@ Consapevoli che l'inesperienza potrebbe ridurre l'efficacia iniziale delle mitig
   caption: [Informazioni sul rischio RT2],
 )
 
+=== RT3: Rischio Tecnologico legato alla scarsa conoscenza del dominio e dell'IA generativa
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(63.75%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (3fr, 4fr),
+    inset: 10pt,
+    table.header(
+      [*Tipologia Dato*],
+      [*Valore*],
+    ),
+
+    [*Codice*],
+    [RT3],
+    [*Nome*], 
+    [Scarsa conoscenza del dominio e dell'IA generativa],
+    [*Descrizione*], 
+    [Le tematiche relative ai #def[LLM] e alle architetture multi-agente non sono state approfondite nel percorso accademico obbligatorio. La mancanza di basi teoriche solide sulla gestione del contesto, del reasoning degli agenti e della sicurezza del codice (*OWASP*) potrebbe rallentare la fase di progettazione e l'efficacia dell'audit automatico.],
+    [*Mitigazione*], 
+    [Organizzazione di sessioni di auto-formazione sfruttando le risorse fornite nel capitolato. I membri con maggiore esperienza in ambito IA agiranno da mentore per il gruppo. Sarà inoltre fondamentale sfruttare il supporto tecnico offerto dal proponente #def[Var Group], partecipando attivamente alle sessioni di mentoring previste per validare le scelte architetturali.],
+    [*Probabilità di avvenimento*],
+    [Alta],
+    [*Pericolosità delle ripercussioni*],
+    [Media],
+  ),
+  caption: [Informazioni sul rischio RT3],
+)
+
+=== RT4: Rischio Tecnologico legato alla inaccuratezza nell'audit e nella valutazione automatica
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(63.75%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (3fr, 4fr),
+    inset: 10pt,
+    table.header(
+      [*Tipologia Dato*],
+      [*Valore*],
+    ),
+
+    [*Codice*],
+    [RT4],
+    [*Nome*], 
+    [Inaccuratezza nell'audit e nella valutazione automatica],
+    [*Descrizione*], 
+    [Sussiste il rischio che i criteri di valutazione implementati negli agenti producano risultati imprecisi. Ciò potrebbe tradursi in #def[falsi positivi] o, più ravemente, in #def[falsi negativi]. Inoltre, il sistema potrebbe valutare come corretta una remediation che in realtà introduce nuovi bug. Questi errori potrebbero compromettere l'affidabilità del sistema e la fiducia degli utenti nel prodotto finale.],
+    [*Mitigazione*], 
+    [Usare tool di analisi con una comprovata efficacia e validati dalla comunità. Il software permetterà all'utente di revisionare ogni report per accettare, rifiutare o richiedere una nuova generazione delle remediation. Inoltre, il gruppo si impegnerà a testare approfonditamente il sistema con casi di studio noti per identificare e correggere eventuali errori nei criteri di valutazione.],
+    [*Probabilità di avvenimento*],
+    [Media],
+    [*Pericolosità delle ripercussioni*],
+    [Alta],
+  ),
+  caption: [Informazioni sul rischio RT4],
+)
+
 == Rischi Individuali
 //breve descrizione(?)
 
@@ -233,13 +301,44 @@ Consapevoli che l'inesperienza potrebbe ridurre l'efficacia iniziale delle mitig
     [*Descrizione*], 
     [Un membro del team potrebbe dover affrontare avvenimenti personali gravi, come problemi di salute o situazioni familiari critiche, che potrebbero diminuire e talvolta impedire il contributo al progetto per un periodo prolungato. Questo potrebbe influire sulla capacità del gruppo di rispettare le scadenze e completare le attività pianificate.],
     [*Mitigazione*], 
-    [Promuovere un ambiente di supporto all’interno del team, incoraggiando una comunicazione aperta in merito a eventuali difficoltà personali. Il #def[Responsabile] dovrebbe essere informato tempestivamente, così da poter riassegnare le responsabilità e adattare il piano di lavoro, escludendo temporaneamente il membro interessato per il periodo necessario. Al rientro, il membro del team dovrà recuperare il lavoro eventualmente non svolto, con il supporto degli altri componenti del gruppo.],
+    [Promuovere un ambiente di supporto all’interno del team, incoraggiando una comunicazione aperta in merito a eventuali difficoltà personali. Il #def[responsabile] dovrebbe essere informato tempestivamente, così da poter riassegnare le responsabilità e adattare il piano di lavoro, escludendo temporaneamente il membro interessato per il periodo necessario. Al rientro, il membro del team dovrà recuperare il lavoro eventualmente non svolto, con il supporto degli altri componenti del gruppo.],
     [*Probabilità di avvenimento*],
     [Bassa],
     [*Pericolosità delle ripercussioni*],
     [Alta],
   ),
   caption: [Informazioni sul rischio RI2],
+)
+
+=== RI3: Rischio Individuale legato al ritiro dal progetto
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(63.75%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (3fr, 4fr),
+    inset: 10pt,
+    table.header(
+      [*Tipologia Dato*],
+      [*Valore*],
+    ),
+
+    [*Codice*],
+    [RI3],
+    [*Nome*], 
+    [Ritiro dal progetto],
+    [*Descrizione*], 
+    [Un membro potrebbe ritirarsi formalmente dal progetto o dal corso di studi, causando una riduzione significativa delle risorse umane disponibili. Questo potrebbe influire sulla capacità del gruppo di rispettare le scadenze e completare le attività pianificate.],
+    [*Mitigazione*], 
+    [In caso di abbandono di un componente, il team si riorganizzerà per gestire le attività programmate con una forza lavoro ridotta. Si avvierà un confronto con il proponente per scremare le funzionalità secondarie e focalizzarsi sugli obiettivi primari dell'audit e della remediation. Il #def[responsabile] aggiornerà la ripartizione dei compiti per bilanciare l'impegno orario dei membri rimanenti e garantire la continuità dello sviluppo.],
+    [*Probabilità di avvenimento*],
+    [Bassa],
+    [*Pericolosità delle ripercussioni*],
+    [Elevata],
+  ),
+  caption: [Informazioni sul rischio RI3],
 )
 
 == Rischi Collettivi Organizzativi //chiedi se hanno senso le categotorie
@@ -305,6 +404,68 @@ Consapevoli che l'inesperienza potrebbe ridurre l'efficacia iniziale delle mitig
     [Elevata],
   ),
   caption: [Informazioni sul rischio RCO2],
+)
+
+=== RCO3: Rischio Collettivo Organizzativo legato a ritardi o incomprensioni nella comunicazione con la proponente
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(63.75%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (3fr, 4fr),
+    inset: 10pt,
+    table.header(
+      [*Tipologia Dato*],
+      [*Valore*],
+    ),
+
+    [*Codice*],
+    [RCO3],
+    [*Nome*], 
+    [Ritardi o incomprensioni nella comunicazione con la proponente],
+    [*Descrizione*], 
+    [Possibili ritardi nelle risposte da parte di #def[Var Group] o interpretazioni errate dei feedback forniti durante le sessioni di mentoring. Questo potrebbe portare a sviluppare funzionalità non in linea con le aspettative della proponente.],
+    [*Mitigazione*], 
+    [Programmazione di incontri periodici fissi e redazione di verbali (verbali esterni) dopo ogni incontro per formalizzare quanto deciso. Uso di canali di comunicazione diretti (#def[Slack]) per chiarimenti rapidi. In caso di dubbi sull'interpretazione dei feedback, il gruppo si impegnerà a richiedere chiarimenti tempestivi alla proponente per evitare incomprensioni. Nel caso in cui la proponente non risponda entro tempi ragionevoli il gruppo contattera il Prof. Vardanega per consigli su come procedere.],
+    [*Probabilità di avvenimento*],
+    [Media],
+    [*Pericolosità delle ripercussioni*],
+    [Media],
+  ),
+  caption: [Informazioni sul rischio RCO3],
+)
+
+=== RCO4: Rischio Collettivo Organizzativo legato alla disomogeneità nella produzione della documentazione
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(63.75%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (3fr, 4fr),
+    inset: 10pt,
+    table.header(
+      [*Tipologia Dato*],
+      [*Valore*],
+    ),
+
+    [*Codice*],
+    [RCO4],
+    [*Nome*], 
+    [Disomogeneità nella produzione della documentazione],
+    [*Descrizione*], 
+    [Dato che i membri del team hanno stili di scrittura diversi, i documenti (#def[Piano di Progetto], #def[Norme di Progetto], ecc.) potrebbero risultare frammentati, poco coerenti o con terminologie discordanti. Questo potrebbe compromettere la chiarezza e la professionalità della documentazione consegnata.],
+    [*Mitigazione*], 
+    [Definizione rigorosa dei template riguardante l'aspetto visivo, l'impaginazione e la formattazione del testo. Ogni documento deve passare per una fase di verifica incrociata, un membro diverso dal redattore controlla il lavoro, prima di essere considerato definitivo. Inoltre, viene stabilito un glossario condiviso per uniformare la terminologia tecnica utilizzata nei documenti.],
+    [*Probabilità di avvenimento*],
+    [Media],
+    [*Pericolosità delle ripercussioni*],
+    [Medio-Bassa],
+  ),
+  caption: [Informazioni sul rischio RCO4],
 )
 
 #pagebreak()
