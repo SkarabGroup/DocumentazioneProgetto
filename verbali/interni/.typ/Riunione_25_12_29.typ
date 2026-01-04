@@ -3,24 +3,26 @@
 #verbale(
   versioni: (
     (
-      "2025-12-29", 
-      "0.1.0", 
-      "Prima stesura del documento", 
-      members.suar, 
+      "2025-12-29",
+      "1.0.0",
+      "Prima stesura del documento",
+      members.suar,
+      members.alice,
     ),
   ),
 
   presenti: (
     [#members.suar,
-    #members.kevin,
-    #members.alice,
-    #members.antonio,
-    #members.andrea,
-    #members.berengan]
+      #members.kevin,
+      #members.alice,
+      #members.antonio,
+      #members.andrea,
+      #members.berengan, #v(0.3cm)]
   ),
 
+
   assenze: (
-    members.martinello
+    [#members.martinello]
   ),
 
   [
@@ -44,8 +46,8 @@
     === Punto 1: #punto1
     #puntoOdg(
       punto1,
-      "Il gruppo ha discusso dello stato di avanzamento dei documenti necessari per la RTB, dimostrandosi soddisfatti dell'attuale rendimento generale dei componenti del team. Sono stati posti quesiti rivolti a tutti in merito alla definizione di alcuni elementi per l'Analisi dei Requisiti, specialmente in relazione alla visualizzazione dei report analizzati.",
-      decisione: "SkarabGroup si impegna a continuare con questo ritmo in modo da poter svolgere una rotazione dei ruoli per una verifica collettiva in modo da marcare come completati alcuni dei principali documenti e focalizzarsi sul PoC. Il team inoltre effettuerà delle Pull Requests sul branch develop una volta che verranno caricati nel branch di riferimento i contenuti essenziali del documento.",
+      "Il gruppo ha discusso dello stato di avanzamento dei documenti necessari per la RTB, dimostrandosi soddisfatto dell'attuale rendimento generale dei componenti del team. Sono stati posti quesiti rivolti a tutti in merito alla definizione di alcuni elementi per l'Analisi dei Requisiti, specialmente in relazione alla visualizzazione dei report analizzati.",
+      decisione: "SkarabGroup si impegna a continuare con questo ritmo, in modo da poter svolgere una rotazione dei ruoli per una verifica collettiva, marcare come completati alcuni dei principali documenti e focalizzarsi sul PoC. Il team inoltre effettuerà delle Pull Requests sul branch develop una volta che verranno caricati nel branch di riferimento i contenuti essenziali del documento.",
     )
 
     === Punto 2: #punto2
