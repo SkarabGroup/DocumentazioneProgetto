@@ -2095,8 +2095,56 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[]
 
 
+=== UC13: Disconnessione account GitHub da CodeGuardian<UC13>
+#usecase(
+  attore: UAA,
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+  ],
+  post: [
+    - L'utente ha scollegato con successo il suo accont GitHub dalla piattaforma Codeguardian
+  ],
+  scenari: [
+    - L'utente entra nella sezione Impostazioni > Account dell'applicazione CodeGuardian
+    - L'utente selezione il tasto "Disconnetti Account"
+    - L'utente scollega il proprio account GitHub dalla paiattaforma CodeGuardian
+    - L'utente può ora connettere un altro account di GitHub alla piattaforma CodeGuardian #link(<UC3>)[#underline[\[UC3\]]]
+  ],
+  inclusioni: [
+    - #link(<UC13.1>)[#underline[\[UC13.1\]]] // Conferma disconnessione
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger : "L'utente entra nella sezione Impostazioni > Account dell'applicazione e disconnette il proprio account di GitHub dalla piattaforma CodeGuardian"
+)[]
 
-=== UCx: Scollegamento account GitHub da CodeGuardian
+==== UC13.1: Conferma disconnessione account<UC13.1>
+#usecase(
+  attore: UAA,
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+  ],
+  post: [
+    - L'utente ha disconnesso con successo il proprio account di GitHub dalla piattaforma CodeGuardian
+  ],
+  scenari: [
+    - L'utente visualizza il banner di conferma
+    - L'utente conferma la disconessione del proprio account
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente seleziona e conferma la disconnessione del proprio account GitHub dalla piattaforma CodeGuardian"
+)[]
+
 === UCx: Accesso al profilo CodeGuardian 
 === UCx: modifica password profilo CodeGuardian 
 === UCx: Recupero password profilo CodeGuardian 
