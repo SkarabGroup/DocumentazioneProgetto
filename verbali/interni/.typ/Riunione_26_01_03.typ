@@ -7,6 +7,7 @@
       "1.0.0",
       "Prima stesura del documento",
       members.alice,
+      members.suar
     ),
   ),
 
