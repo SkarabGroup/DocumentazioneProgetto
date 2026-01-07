@@ -2096,7 +2096,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 
 === UC13: Disconnessione account GitHub da CodeGuardian<UC13>
-#usecase(
+#useCase(
   attore: UAA,
   pre: [
     - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub
@@ -2119,8 +2119,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger : "L'utente entra nella sezione Impostazioni > Account > GitHub dell'applicazione e disconnette il proprio account di GitHub dalla piattaforma CodeGuardian"
 )[]
 
-==== UC13.1: Selezione tasto Disconnetti
-#usecase(
+==== UC13.1: Selezione tasto Disconnetti <UC13.1>
+#useCase(
   attore: UAA,
   pre: [
     - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub
@@ -2138,12 +2138,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   estensioni: [
     - Conferma finale della disconnessione #link(<UC13.1.1>)[#underline[\[UC13.1.1\]]]
+
   ],
   trigger:"L'untente seleziona e attiva il tasto disconnetti per disconnettere il proprio account"
 )[]
 
-==== UC13.1.1: Conferma disconnessione account<UC13.2>
-#usecase(
+==== UC13.1.1: Conferma disconnessione account<UC13.1.1>
+#useCase(
   attore: UAA,
   pre: [
     - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub
