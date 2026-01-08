@@ -1,6 +1,9 @@
 #import "@preview/cetz:0.3.2": *
 #import "@preview/cetz-plot:0.1.1": chart
 
+// In glossarioUtil.typ
+#let GLOSSARIO_URL = "https://tuousername.github.io/progetto/glossario.html"
+
 //Definizione della prima pagina dei documenti
 #let titlePage(titoloDocumento, versioneDocumento) = {
   set text(font: "New Computer Modern", size: 15pt)
