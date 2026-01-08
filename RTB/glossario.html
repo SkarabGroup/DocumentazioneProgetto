@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossario v0.8.0</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 3px solid #000;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .version {
+            color: #666;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        nav {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            position: sticky;
+            top: 1rem;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .alphabet-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .alphabet-nav a {
+            padding: 0.6rem 0.9rem;
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            text-decoration: none;
+            color: #000;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .alphabet-nav a:hover {
+            background: #000;
+            color: #fff;
+            border-color: #000;
+            transform: translateY(-2px);
+        }
+
+        .alphabet-nav a.disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .letter-section {
+            margin-bottom: 4rem;
+        }
+
+        .letter-heading {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #333;
+            color: #000;
+        }
+
+        .term {
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            background: #fafafa;
+            border-left: 5px solid #000;
+            border-radius: 4px;
+            scroll-margin-top: 7rem;
+            transition: all 0.3s ease;
+        }
+
+        .term:target {
+            background: #fff3cd;
+            box-shadow: 0 0 0 3px #ffc107;
+        }
+
+        .term:hover {
+            background: #f5f5f5;
+        }
+
+        .term-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #000;
+        }
+
+        .term-meta {
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .term-label {
+            font-weight: 600;
+            color: #000;
+        }
+
+        .term-description {
+            margin-top: 1rem;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #000;
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .back-to-top:hover {
+            background: #333;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .letter-heading {
+                font-size: 2rem;
+            }
+
+            .term-title {
+                font-size: 1.3rem;
+            }
+
+            .alphabet-nav a {
+                padding: 0.5rem 0.7rem;
+                font-size: 0.9rem;
+            }
+
+            .term {
+                padding: 1rem;
+            }
+        }
+
+        /* Animazione per highlight */
+        @keyframes highlight {
+            0%, 100% { background: #fafafa; }
+            50% { background: #fff3cd; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Glossario</h1>
+        <div class="version">v0.8.0</div>
+    </header>
+
+    <nav>
+        <div class="alphabet-nav">
+            <a href="#A">A</a>
+            <a href="#B">B</a>
+            <a href="#C">C</a>
+            <a href="#D">D</a>
+            <a href="#E">E</a>
+            <a href="#F">F</a>
+            <a href="#G">G</a>
+            <a href="#H">H</a>
+            <a href="#I">I</a>
+            <a href="#J">J</a>
+            <a href="#K" class="disabled">K</a>
+            <a href="#L">L</a>
+            <a href="#M">M</a>
+            <a href="#N">N</a>
+            <a href="#O">O</a>
+            <a href="#P">P</a>
+            <a href="#Q">Q</a>
+            <a href="#R">R</a>
+            <a href="#S">S</a>
+            <a href="#T">T</a>
+            <a href="#U">U</a>
+            <a href="#V">V</a>
+            <a href="#W">W</a>
+            <a href="#X" class="disabled">X</a>
+            <a href="#Y" class="disabled">Y</a>
+            <a href="#Z" class="disabled">Z</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="letter-section" id="A">
+            <h2 class="letter-heading">A</h2>
+
+            <article class="term" id="api">
+                <h3 class="term-title">API</h3>
+                <div class="term-meta">
+                    <span class="term-label">Acronimo:</span> Application Programming Interface
+                </div>
+                <p class="term-description">Insieme di regole e protocolli che consentono a diverse applicazioni software di comunicare tra loro.</p>
+            </article>
+
+            <article class="term" id="adaptive">
+                <h3 class="term-title">Adaptive</h3>
+                <p class="term-description">Approccio di gestione progetto iterativo e flessibile, adatto a requisiti incerti, come in metodologie Agile.</p>
+            </article>
+
+            <article class="term" id="agente">
+                <h3 class="term-title">Agente</h3>
+                <p class="term-description">Componente sistema software autonomo che percepisce il proprio ambiente, prende decisioni e intraprende azioni in modo indipendente per raggiungere obiettivi specifici grazie all'utilizzo di intelligenza artificiale</p>
+            </article>
+
+            <article class="term" id="amministratore">
+                <h3 class="term-title">Amministratore</h3>
+                <p class="term-description">Ruolo nel team di progetto responsabile della gestione della configurazione, documentazione e repository.</p>
+            </article>
+
+            <article class="term" id="analisi-dei-requisiti">
+                <h3 class="term-title">Analisi dei requisiti</h3>
+                <p class="term-description">Processo di raccolta, valutazione e documentazione delle esigenze e delle aspettative degli stakeholder per un sistema software, al fine di definire chiaramente cosa il sistema deve fare.</p>
+            </article>
+
+            <article class="term" id="analista">
+                <h3 class="term-title">Analista</h3>
+                <div class="term-meta">
+                    <span class="term-label">Alternative:</span> Requirement Analyst, Analisti
+                </div>
+                <p class="term-description">Membro del team di sviluppo responsabile della raccolta e dell'analisi dei requisiti del sistema software, nonché della comunicazione con gli stakeholder per garantire che le esigenze siano comprese e documentate correttamente.</p>
+            </article>
+
+            <article class="term" id="approccio-agile">
+                <h3 class="term-title">Approccio Agile</h3>
+                <div class="term-meta">
+                    <span class="term-label">Alternative:</span> Agile, metodo Agile
+                </div>
+                <p class="term-description">Approccio alla gestione del progetto che privilegia iterazioni brevi, feedback continui e adattamento delle priorità in base al progresso e ai risultati ottenuti.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="B">
+            <h2 class="letter-heading">B</h2>
+
+            <article class="term" id="back-end">
+                <h3 class="term-title">Back-end</h3>
+                <p class="term-description">Parte di un'applicazione o sistema che gestisce la logica di business, l'archiviazione dei dati e l'elaborazione delle richieste degli utenti, solitamente non visibile direttamente dagli utenti finali.</p>
+            </article>
+
+            <article class="term" id="backlog">
+                <h3 class="term-title">Backlog</h3>
+                <p class="term-description">Elenco ordinato e prioritizzato di attività, requisiti e funzionalità da completare durante lo sviluppo del progetto.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="C">
+            <h2 class="letter-heading">C</h2>
+
+            <article class="term" id="cmmi">
+                <h3 class="term-title">CMMI</h3>
+                <div class="term-meta">
+                    <span class="term-label">Acronimo:</span> Capability Maturity Model Integration
+                </div>
+                <p class="term-description">Modello di miglioramento dei processi che aiuta le organizzazioni a ottimizzare le proprie attività. L'obiettivo è aumentare la qualità e migliorare l'efficienza, utilizzando un approccio di ottimizzazione continua.</p>
+            </article>
+
+            <article class="term" id="caso-duso">
+                <h3 class="term-title">Caso d'uso</h3>
+                <div class="term-meta">
+                    <span class="term-label">Alternative:</span> Use case, casi d'uso
+                </div>
+                <p class="term-description">Descrizione di come un utente interagisce con un sistema per raggiungere un obiettivo specifico.</p>
+            </article>
+
+            <article class="term" id="ciclo-di-vita-del-software">
+                <h3 class="term-title">Ciclo di vita del software</h3>
+                <p class="term-description">Processo strutturato che guida la creazione, l'implementazione e la manutenzione di un prodotto software.</p>
+            </article>
+
+            <article class="term" id="code-guardian">
+                <h3 class="term-title">Code Guardian</h3>
+                <p class="term-description">Nome del progetto software che Skarab Group intende sviluppare per l'azienda Var Group.</p>
+            </article>
+
+            <article class="term" id="collaudatori">
+                <h3 class="term-title">Collaudatori</h3>
+                <p class="term-description">Persone o team responsabili di testare il sistema software per garantire che funzioni correttamente e soddisfi i requisiti specificati durante il processo di collaudo.</p>
+            </article>
+
+            <article class="term" id="complessita-ciclomatica">
+                <h3 class="term-title">Complessità Ciclomatica</h3>
+                <p class="term-description">Metrica software che indica la complessità di un programma misurando il numero di percorsi linearmente indipendenti attraverso il codice sorgente.</p>
+            </article>
+
+            <article class="term" id="consulente-informatico">
+                <h3 class="term-title">Consulente informatico</h3>
+                <p class="term-description">Professionista che fornisce consulenza e supporto tecnico in ambito informatico, aiutando le aziende a migliorare i loro sistemi e processi IT.</p>
+            </article>
+
+            <article class="term" id="coverage">
+                <h3 class="term-title">Coverage</h3>
+                <div class="term-meta">
+                    <span class="term-label">Alternative:</span> Code Coverage
+                </div>
+                <p class="term-description">Misura che indica la percentuale di codice sorgente esguito durante i test automatizzati.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="D">
+            <h2 class="letter-heading">D</h2>
+
+            <article class="term" id="database">
+                <h3 class="term-title">Database</h3>
+                <p class="term-description">Collezione organizzata di dati memorizzati e accessibili elettronicamente, spesso gestita da un sistema di gestione di database (DBMS).</p>
+            </article>
+
+            <article class="term" id="diagrammi-dei-casi-duso">
+                <h3 class="term-title">Diagrammi dei casi d'uso</h3>
+                <p class="term-description">Rappresentazioni grafiche che illustrano le interazioni tra gli attori e il sistema, mostrando i casi d'uso e le relazioni tra di essi.</p>
+            </article>
+
+            <article class="term" id="discord">
+                <h3 class="term-title">Discord</h3>
+                <p class="term-description">Piattaforma di comunicazione VoIP, messaggistica istantanea e distribuzione digitale progettata per creare comunità.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="E">
+            <h2 class="letter-heading">E</h2>
+
+            <article class="term" id="eslint">
+                <h3 class="term-title">ESLint</h3>
+                <p class="term-description">Strumento di linting per JavaScript e TypeScript che aiuta a identificare e correggere errori di codice e mantenere uno stile consistente.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="F">
+            <h2 class="letter-heading">F</h2>
+
+            <article class="term" id="falsi-negativi">
+                <h3 class="term-title">Falsi negativi</h3>
+                <p class="term-description">Risultati di test che indicano erroneamente che una condizione o un requisito non è stato soddisfatto quando in realtà lo è.</p>
+            </article>
+
+            <article class="term" id="falsi-positivi">
+                <h3 class="term-title">Falsi positivi</h3>
+                <p class="term-description">Risultati di test che indicano erroneamente che una condizione o un requisito è stato soddisfatto quando in realtà non lo è.</p>
+            </article>
+
+            <article class="term" id="front-end">
+                <h3 class="term-title">Front-end</h3>
+                <p class="term-description">Parte di un'applicazione o sistema con cui gli utenti interagiscono direttamente, comprendente l'interfaccia utente e l'esperienza utente.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="G">
+            <h2 class="letter-heading">G</h2>
+
+            <article class="term" id="gui">
+                <h3 class="term-title">GUI</h3>
+                <div class="term-meta">
+                    <span class="term-label">Acronimo:</span> Graphical User Interface
+                </div>
+                <p class="term-description">Interfaccia utente grafica che consente agli utenti di interagire con un sistema attraverso elementi visivi come finestre, icone e menu.</p>
+            </article>
+
+            <article class="term" id="gestione-rischi">
+                <h3 class="term-title">Gestione Rischi</h3>
+                <p class="term-description">Processo di identificazione, valutazione e mitigazione dei rischi che potrebbero influenzare il progetto software.</p>
+            </article>
+
+            <article class="term" id="git">
+                <h3 class="term-title">Git</h3>
+                <p class="term-description">Sistema di controllo versione distribuito utilizzato per tracciare i cambiamenti nel codice sorgente durante lo sviluppo del software.</p>
+            </article>
+
+            <article class="term" id="github">
+                <h3 class="term-title">GitHub</h3>
+                <p class="term-description">Piattaforma di hosting per il controllo delle versioni e la collaborazione sul codice sorgente, basata su Git.</p>
+            </article>
+
+            <article class="term" id="gulpease">
+                <h3 class="term-title">Gulpease</h3>
+                <p class="term-description">Indice di leggibilità di un testo tarato sulla lingua italiana.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="H">
+            <h2 class="letter-heading">H</h2>
+
+            <article class="term" id="hybrid">
+                <h3 class="term-title">Hybrid</h3>
+                <p class="term-description">Approccio di gestione progetto che combina elementi predictive e adaptive per bilanciare flessibilità e struttura.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="I">
+            <h2 class="letter-heading">I</h2>
+
+            <article class="term" id="iso-25010">
+                <h3 class="term-title">ISO 25010</h3>
+                <p class="term-description">Standard internazionale per la qualità del software e dei sistemi, che definisce modelli di qualità per prodotti software.</p>
+            </article>
+
+            <article class="term" id="iso-9001">
+                <h3 class="term-title">ISO 9001</h3>
+                <p class="term-description">Standard internazionale per i sistemi di gestione della qualità, che specifica requisiti per un sistema di gestione qualità efficace.</p>
+            </article>
+
+            <article class="term" id="it">
+                <h3 class="term-title">IT</h3>
+                <div class="term-meta">
+                    <span class="term-label">Acronimo:</span> Information Technology
+                </div>
+                <p class="term-description">Settore che si occupa dell'uso di computer, software e reti per la gestione e l'elaborazione delle informazioni.</p>
+            </article>
+
+            <article class="term" id="ingegneria-del-software">
+                <h3 class="term-title">Ingegneria del Software</h3>
+                <div class="term-meta">
+                    <span class="term-label">Alternative:</span> Software Engineering, SWE
+                </div>
+                <p class="term-description">Disciplina che si occupa della progettazione, sviluppo, manutenzione e gestione di sistemi software complessi in modo sistematico e metodico.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="J">
+            <h2 class="letter-heading">J</h2>
+
+            <article class="term" id="jsdoc">
+                <h3 class="term-title">JSDoc</h3>
+                <p class="term-description">Sistema di documentazione per JavaScript che permette di aggiungere commenti strutturati al codice per generare documentazione automatica.</p>
+            </article>
+
+            <article class="term" id="jira">
+                <h3 class="term-title">Jira</h3>
+                <p class="term-description">Software per la gestione dei progetti, tracciamento dei bug e gestione delle problematiche, sviluppato da Atlassian.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="L">
+            <h2 class="letter-heading">L</h2>
+
+            <article class="term" id="llm">
+                <h3 class="term-title">LLM</h3>
+                <div class="term-meta">
+                    <span class="term-label">Acronimo:</span> Large Language Model
+                </div>
+                <p class="term-description">Modello di intelligenza artificiale progettato per comprendere e generare testo naturale, addestrato su grandi quantità di dati testuali.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="M">
+            <h2 class="letter-heading">M</h2>
+
+            <article class="term" id="mdp">
+                <h3 class="term-title">MDP</h3>
+                <div class="term-meta">
+                    <span class="term-label">Acronimo:</span> Multi-Dealer Platform
+                </div>
+                <p class="term-description">Piattaforma che consente a più fornitori di servizi di offrire le loro soluzioni attraverso un'unica interfaccia, facilitando l'accesso e la gestione dei servizi.</p>
+            </article>
+
+            <article class="term" id="mpc">
+                <h3 class="term-title">MPC</h3>
+                <div class="term-meta">
+                    <span class="term-label">Acronimo:</span> Multi-Party Computation
+                </div>
+                <p class="term-description">Tecnica crittografica che consente a più parti di calcolare una funzione comune sui loro dati privati senza rivelare tali dati tra di loro.</p>
+            </article>
+
+            <article class="term" id="mpd">
+                <h3 class="term-title">MPD</h3>
+                <div class="term-meta">
+                    <span class="term-label">Acronimo:</span> Multi-Party Data
+                </div>
+                <p class="term-description">Dati condivisi tra più parti o entità, spesso utilizzati in contesti di collaborazione o analisi congiunta.</p>
+            </article>
+
+            <article class="term" id="mps">
+                <h3 class="term-title">MPS</h3>
+                <div class="term-meta">
+                    <span class="term-label">Acronimo:</span> Modello di Processo per la Software Industry
+                </div>
+                <p class="term-description">Modello di miglioramento dei processi specifico per l'industria del software, sviluppato in Italia, che aiuta le organizzazioni a ottimizzare le proprie attività e a migliorare la qualità del software prodotto.</p>
+            </article>
+
+            <article class="term" id="mvp">
+                <h3 class="term-title">MVP</h3>
+                <div class="term-meta">
+                    <span class="term-label">Acronimo:</span> Minimum Viable Product
+                </div>
+                <p class="term-description">Versione minima di un prodotto software che include solo le funzionalità essenziali per soddisfare i requisiti principali e permettere il rilascio sul mercato.</p>
+            </article>
+
+            <article class="term" id="milestone">
+                <h3 class="term-title">Milestone</h3>
+                <p class="term-description">Punto di riferimento significativo nel ciclo di vita di un progetto, che indica il completamento di una fase importante o il raggiungimento di un obiettivo specifico.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="N">
+            <h2 class="letter-heading">N</h2>
+
+            <article class="term" id="nodejs">
+                <h3 class="term-title">Node.js</h3>
+                <p class="term-description">Ambiente di runtime JavaScript lato server che permette di eseguire codice JavaScript al di fuori di un browser web.</p>
+            </article>
+
+            <article class="term" id="norme-di-progetto">
+                <h3 class="term-title">Norme di Progetto</h3>
+                <p class="term-description">Insieme di regole e linee guida che definiscono le modalità operative, i processi e gli standard da seguire durante lo sviluppo di un progetto software.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="O">
+            <h2 class="letter-heading">O</h2>
+
+            <article class="term" id="owasp">
+                <h3 class="term-title">OWASP</h3>
+                <div class="term-meta">
+                    <span class="term-label">Acronimo:</span> Open Web Application Security Project
+                </div>
+                <p class="term-description">Organizzazione no-profit che si dedica a migliorare la sicurezza delle applicazioni web attraverso la creazione di risorse, strumenti e linee guida.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="P">
+            <h2 class="letter-heading">P</h2>
+
+            <article class="term" id="pmi">
+                <h3 class="term-title">PMI</h3>
+                <div class="term-meta">
+                    <span class="term-label">Acronimo:</span> Project Management Institute
+                </div>
+                <p class="term-description">Organizzazione internazionale che promuove standard e best practices per la gestione di progetti.</p>
+            </article>
+
+            <article class="term" id="piano-di-qualifica">
+                <h3 class="term-title">Piano di Qualifica</h3>
+                <p class="term-description">Documento strategico che definisce obiettivi, requisiti, processi e standard di qualità per guidare lo sviluppo di un prodotto software. Esso comprende tre elementi fondamentali, cioè il Piano della Qualità, il Controllo di Qualità e il Miglioramento continuo.</p>
+            </article>
+
+            <article class="term" id="piano-di-progetto">
+                <h3 class="term-title">Piano di progetto</h3>
+                <p class="term-description">Documento che definisce gli obiettivi, le attività, le risorse, i tempi e i costi necessari per completare un progetto software con successo.</p>
+            </article>
+
+            <article class="term" id="predictive">
+                <h3 class="term-title">Predictive</h3>
+                <p class="term-description">Approccio di gestione progetto con pianificazione dettagliata e sequenziale, adatto a requisiti stabili e ben definiti.</p>
+            </article>
+
+            <article class="term" id="product-baseline">
+                <h3 class="term-title">Product Baseline</h3>
+                <div class="term-meta">
+                    <span class="term-label">Alternative:</span> PB
+                </div>
+                <p class="term-description">Milestone del progetto in cui vengono definite le specifiche, i vincoli e le caratteristiche del prodotto finale da sviluppare e vengono successivamente implementate.</p>
+            </article>
+
+            <article class="term" id="progettisti">
+                <h3 class="term-title">Progettisti</h3>
+                <p class="term-description">Membri del team di sviluppo responsabili della progettazione dell'architettura e delle funzionalità del sistema software.</p>
+            </article>
+
+            <article class="term" id="progetto">
+                <h3 class="term-title">Progetto</h3>
+                <p class="term-description">Esso é inteso nel senso di project, ovvero un'insieme di attività coordinate e gestite per sviluppare un sistema software che soddisfi specifici requisiti e obiettivi.</p>
+            </article>
+
+            <article class="term" id="programmatori">
+                <h3 class="term-title">Programmatori</h3>
+                <p class="term-description">Membri del team di sviluppo responsabili della scrittura del codice sorgente per implementare le funzionalità del sistema software.</p>
+            </article>
+
+            <article class="term" id="python">
+                <h3 class="term-title">Python</h3>
+                <p class="term-description">Linguaggio di programmazione ad alto livello, interpretato e orientato agli oggetti, utilizzato per lo sviluppo degli Agenti.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="Q">
+            <h2 class="letter-heading">Q</h2>
+
+            <article class="term" id="qualita">
+                <h3 class="term-title">Qualità</h3>
+                <p class="term-description">Insieme delle caratteristiche di un'entità, che ne determinano la capacità di soddisfare esigenze sia espresse che implicite.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="R">
+            <h2 class="letter-heading">R</h2>
+
+            <article class="term" id="react">
+                <h3 class="term-title">React</h3>
+                <p class="term-description">Libreria JavaScript open-source per la creazione di interfacce utente.</p>
+            </article>
+
+            <article class="term" id="repository">
+                <h3 class="term-title">Repository</h3>
+                <p class="term-description">Archivio digitale dove il codice sorgente e la documentazione di un progetto software sono memorizzati e gestiti, spesso utilizzato per il controllo delle versioni e la collaborazione tra sviluppatori.</p>
+            </article>
+
+            <article class="term" id="requirements-and-technology-baseline">
+                <h3 class="term-title">Requirements and Technology Baseline</h3>
+                <div class="term-meta">
+                    <span class="term-label">Alternative:</span> RTB
+                </div>
+                <p class="term-description">Milestone del progetto dedicata alla raccolta dei requisiti, alla definizione delle tecnologie e linee guida tecniche da adottare.</p>
+            </article>
+
+            <article class="term" id="requisiti-funzionali">
+                <h3 class="term-title">Requisiti funzionali</h3>
+                <p class="term-description">Requisiti che specificano un comportamento o una funzione che un sistema deve eseguire ovvero il "cosa deve fare".</p>
+            </article>
+
+            <article class="term" id="requisiti-non-funzionali">
+                <h3 class="term-title">Requisiti non funzionali</h3>
+                <p class="term-description">Requisiti che descrivono le caratteristiche e le qualità che il sistema deve possedere per soddisfare le aspettative degli utenti, stabilendo "come deve funzionare" il sistema.</p>
+            </article>
+
+            <article class="term" id="responsabile">
+                <h3 class="term-title">Responsabile</h3>
+                <div class="term-meta">
+                    <span class="term-label">Alternative:</span> Project Manager, responsabile di progetto
+                </div>
+                <p class="term-description">Membro del team incaricato di pianificare, coordinare e supervisionare le attività del progetto per garantire il raggiungimento degli obiettivi nei tempi e nei costi previsti.</p>
+            </article>
+
+            <article class="term" id="responsabile-di-progetto">
+                <h3 class="term-title">Responsabile di Progetto</h3>
+                <p class="term-description">Ruolo nel team di progetto responsabile del coordinamento generale e della gestione degli stakeholder.</p>
+            </article>
+
+            <article class="term" id="rischio">
+                <h3 class="term-title">Rischio</h3>
+                <div class="term-meta">
+                    <span class="term-label">Alternative:</span> Risk, rischi
+                </div>
+                <p class="term-description">Evento incerto che, se si verifica, può avere un impatto positivo o negativo sugli obiettivi del progetto, come tempi, costi o qualità del software prodotto.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="S">
+            <h2 class="letter-heading">S</h2>
+
+            <article class="term" id="sqa">
+                <h3 class="term-title">SQA</h3>
+                <div class="term-meta">
+                    <span class="term-label">Acronimo:</span> Software Quality Assurance
+                </div>
+                <p class="term-description">Processo che monitora e garantisce la conformità agli standard di qualità durante tutto il ciclo di vita del software.</p>
+            </article>
+
+            <article class="term" id="sistema-multiagente">
+                <h3 class="term-title">Sistema multiagente</h3>
+                <div class="term-meta">
+                    <span class="term-label">Alternative:</span> Multi-agent system, sistema multi agente, multiagente
+                </div>
+                <p class="term-description">Sistema software composto da più agenti autonomi che interagiscono tra loro per raggiungere obiettivi comuni o individuali.</p>
+            </article>
+
+            <article class="term" id="sistema-software">
+                <h3 class="term-title">Sistema software</h3>
+                <div class="term-meta">
+                    <span class="term-label">Alternative:</span> Software system, sistema
+                </div>
+                <p class="term-description">Insieme di componenti software che lavorano insieme per eseguire specifiche funzioni o servizi.</p>
+            </article>
+
+            <article class="term" id="skarab-group">
+                <h3 class="term-title">Skarab Group</h3>
+                <p class="term-description">Nome del team di studenti che intende sviluppare il sistema software a partire dal capitolato proposto dall'azienda Var Group.</p>
+            </article>
+
+            <article class="term" id="slack">
+                <h3 class="term-title">Slack</h3>
+                <p class="term-description">Piattaforma di messaggistica istantanea aziendale utilizzata per la comunicazione interna.</p>
+            </article>
+
+            <article class="term" id="sprint">
+                <h3 class="term-title">Sprint</h3>
+                <p class="term-description">Periodo di lavoro di breve durata (tipicamente 1-2 settimane) durante il quale il team realizza un insieme definito di attività e obiettivi.</p>
+            </article>
+
+            <article class="term" id="sviluppatore-software">
+                <h3 class="term-title">Sviluppatore software</h3>
+                <div class="term-meta">
+                    <span class="term-label">Alternative:</span> software developer, sviluppatori software, sviluppatori
+                </div>
+                <p class="term-description">Persona che scrive, testa e mantiene il codice sorgente di applicazioni o sistemi software.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="T">
+            <h2 class="letter-heading">T</h2>
+
+            <article class="term" id="telegram">
+                <h3 class="term-title">Telegram</h3>
+                <p class="term-description">Servizio di messaggistica istantanea basato sul cloud.</p>
+            </article>
+
+            <article class="term" id="test-di-accettazione">
+                <h3 class="term-title">Test di Accettazione</h3>
+                <p class="term-description">Tipo di test che verifica se il software soddisfa i requisiti e le aspettative degli utenti finali prima del rilascio.</p>
+            </article>
+
+            <article class="term" id="test-di-sistema">
+                <h3 class="term-title">Test di Sistema</h3>
+                <p class="term-description">Verifica l'intero sistema nel suo complesso, assicurandosi che il software funzioni come previsto e rispetti i requisiti specificati.</p>
+            </article>
+
+            <article class="term" id="test-di-unita">
+                <h3 class="term-title">Test di Unità</h3>
+                <p class="term-description">Verificano in isolamento il corretto funzionamento delle più piccole parti autonome di codice.</p>
+            </article>
+
+            <article class="term" id="typescript">
+                <h3 class="term-title">TypeScript</h3>
+                <p class="term-description">Linguaggio di programmazione strongly-typed che si compila in JavaScript.</p>
+            </article>
+
+            <article class="term" id="typst">
+                <h3 class="term-title">Typst</h3>
+                <p class="term-description">Nuovo sistema di typesetting basato su markup, progettato per essere potente quanto LaTeX ma più facile da imparare e utilizzare.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="U">
+            <h2 class="letter-heading">U</h2>
+
+            <article class="term" id="uml">
+                <h3 class="term-title">UML</h3>
+                <div class="term-meta">
+                    <span class="term-label">Acronimo:</span> Unified Modeling Language
+                </div>
+                <p class="term-description">Linguaggio di modellazione standardizzato utilizzato per visualizzare, specificare, costruire e documentare i componenti di un sistema software.</p>
+            </article>
+
+            <article class="term" id="url">
+                <h3 class="term-title">URL</h3>
+                <div class="term-meta">
+                    <span class="term-label">Acronimo:</span> Uniform Resource Locator
+                </div>
+                <p class="term-description">Indirizzo web che specifica la posizione di una risorsa su Internet.</p>
+            </article>
+
+            <article class="term" id="utente">
+                <h3 class="term-title">Utente</h3>
+                <div class="term-meta">
+                    <span class="term-label">Alternative:</span> User, Utenti
+                </div>
+                <p class="term-description">Persona che utilizza un sistema o un'applicazione software.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="V">
+            <h2 class="letter-heading">V</h2>
+
+            <article class="term" id="var-group">
+                <h3 class="term-title">Var Group</h3>
+                <p class="term-description">Azienda che ha proposto il capitolato per lo sviluppo del sistema software da parte del team di studenti Skarab Group.</p>
+            </article>
+
+            <article class="term" id="verificatori">
+                <h3 class="term-title">Verificatori</h3>
+                <p class="term-description">Persone o team responsabili di controllare che il sistema software soddisfi i requisiti specificati durante il processo di verifica.</p>
+            </article>
+
+            <article class="term" id="visual-studio-code">
+                <h3 class="term-title">Visual Studio Code</h3>
+                <div class="term-meta">
+                    <span class="term-label">Acronimo:</span> VS Code
+                </div>
+                <p class="term-description">Editor di codice sorgente sviluppato da Microsoft, estensibile e supporta vari linguaggi di programmazione.</p>
+            </article>
+
+        </section>
+
+        <section class="letter-section" id="W">
+            <h2 class="letter-heading">W</h2>
+
+            <article class="term" id="way-of-working">
+                <h3 class="term-title">Way of Working</h3>
+                <p class="term-description">Definisce il modo specifico in cui un team opera, includendo processi e strumenti che guidano le attività volte a raggiungere gli obiettivi stabiliti.</p>
+            </article>
+
+            <article class="term" id="web-application">
+                <h3 class="term-title">Web Application</h3>
+                <div class="term-meta">
+                    <span class="term-label">Alternative:</span> Applicazione Web, Webapp
+                </div>
+                <p class="term-description">Applicazione software accessibile tramite un browser web, che consente agli utenti di interagire con il sistema attraverso Internet.</p>
+            </article>
+
+        </section>
+
+    </main>
+
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+
+    <script>
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Smooth scroll per tutti i link interni
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Evidenzia termine se URL contiene hash
+        if (window.location.hash) {
+            setTimeout(() => {
+                const term = document.querySelector(window.location.hash);
+                if (term && term.classList.contains('term')) {
+                    term.style.animation = 'highlight 2s ease-in-out';
+                }
+            }, 100);
+        }
+    </script>
+</body>
+</html>
