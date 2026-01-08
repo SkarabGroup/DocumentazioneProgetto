@@ -19,7 +19,10 @@ header {
     margin-bottom: 3rem;
     padding-bottom: 2rem;
     border-bottom: 3px solid #000;
-    
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+    z-index: 50;
 }
 
 h1 {
@@ -166,6 +169,10 @@ nav {
     background: #333;
     transform: translateY(-3px);
     box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+section, [id] {
+    scroll-margin-top: 160px; /* Altezza header + eventuale margine extra */
 }
 
 /* Responsive per mobile e tablet */

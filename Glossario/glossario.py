@@ -17,20 +17,16 @@ def term_to_id(text):
     text = re.sub(r'[ìíîï]', 'i', text)
     text = re.sub(r'[òóôõö]', 'o', text)
     text = re.sub(r'[ùúûü]', 'u', text)
-    # Rimuovi caratteri non validi
     text = re.sub(r'[^a-z0-9\s-]', '', text)
-    # Sostituisci spazi con trattini
     text = re.sub(r'\s+', '-', text)
     return text.strip('-')
 
 def generate_html(yaml_file, output_file, version="v0.8.0"):
     """Genera HTML dal glossario YAML."""
     
-    # Leggi YAML
     with open(yaml_file, 'r', encoding='utf-8') as f:
         data = yaml.safe_load(f)
     
-    # Template HTML
     html = f'''<!DOCTYPE html>
 <html lang="it">
 <head>
@@ -49,7 +45,6 @@ def generate_html(yaml_file, output_file, version="v0.8.0"):
         <div class="alphabet-nav">
 '''
     
-    # Genera navigazione alfabeto
     letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     existing_letters = set(data.keys())
     

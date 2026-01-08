@@ -180,9 +180,10 @@
   if not found {
     panic("Parola non definita nel glossario: " + parola)
   } else {
+    let term_id = term-to-id(parola)
+    let url = GLOSSARIO_URL + "#" + term_id
     
-    link(GLOSSARIO_URL + "#" + label(label_name))[#parola#sub[G]]
-    
+    link(url)[#underline(parola)]
   }
 }
 
