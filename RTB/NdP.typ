@@ -22,21 +22,24 @@
     "0.2.0",
     "Arricchimento con standard industriali, norme di codifica dettagliate e integrazioni progetto-specifiche",
     members.martinello,
-    members.suar
+    members.suar,
+    members.kevin
   ),
   (
     "28/12/2025",
     "0.1.0",
     "Rilascio iniziale con norme, processi e strumenti aggiornati",
     members.martinello,
-    members.suar
+    members.suar,
+    members.kevin
   ),
   (
     "20/12/2025",
     "0.0.1",
     "Prima bozza iniziale",
     members.martinello,
-    members.suar
+    members.suar,
+    members.kevin
   ),
 )
 

@@ -30,11 +30,17 @@
   set text(size: 13pt)
 
   let normalizedRows = rows.map(row => {
-    if row.len() == 4 { row + ([],) } else { row }
+    if row.len() == 4 { row + ([],) } 
+    else if row.len() == 5 { row }
+    else {
+      // Più verificatori: combina tutti gli elementi dal 5° in poi
+      let verificatori = row.slice(4).join([, ])
+      row.slice(0, 4) + (verificatori,)
+    }
   })
 
   table(
-    columns: (auto, auto, 1fr, auto, auto),
+    columns: (auto, auto, auto, auto, auto),
     inset: 5pt,
     stroke: 0.5pt + luma(200),
     
