@@ -20,6 +20,12 @@
 #let history = (
   (
     "2026/01/09",
+    "0.19.1",
+    "Fix minori label del documento",
+    members.martinello,
+  ),
+  (
+    "2026/01/09",
     "0.19.0",
     "Scrittura di UC15",
     members.berengan,
@@ -2275,7 +2281,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente conferma l'esportazione del report di analisi dopo aver selezionato un formato valido"
 )[]
 
-=== UC15: modifica password profilo 
+=== UC15: modifica password profilo <UC15>
 #useCase(
   attore:UAA,
   pre: [
@@ -2308,7 +2314,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente inserisce la password attuale, la nuova password ed in seguito clicca il tasto di conferma"
 )[]
 
-==== UC15.1 inserimento della password corrente
+==== UC15.1 inserimento della password corrente <UC15.1>
 #useCase(
   attore: UAA,
   pre: [
@@ -2331,7 +2337,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente interagisce con il form di modifica inserendo la password corrente nell'apposto campo" 
 )[]
 
-===== UC15.1.1 Password corrente non inserita
+===== UC15.1.1 Password corrente non inserita <UC15.1.1>
 #useCase(
   attore: UAA,
   pre: [
@@ -2354,7 +2360,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente prova a cliccare su un altro campo del form o sul tasto di conferma senza aver inserito la password corrente" 
 )[]
 
-==== UC15.1.2 Password corrente errata
+==== UC15.1.2 Password corrente errata <UC15.1.2>
 #useCase(
   attore: UAA,
   pre: [
@@ -2376,7 +2382,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente interagisce con il form di modifica inserendo una password errata e visualizza a schermo un errore" 
 )[]
 
-==== UC15.2 Inserimento della nuova password
+==== UC15.2 Inserimento della nuova password <UC15.2>
 #useCase(
   attore: UAA,
   pre: [
@@ -2399,7 +2405,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente interagisce con il form di modifica inserendo una nuova password" 
 )[]
 
-===== UC15.2.1 Nessuna nuova password inserita
+===== UC15.2.1 Nessuna nuova password inserita <UC15.2.1>
 #useCase(
  attore: UAA,
  pre: [
@@ -2422,7 +2428,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[],
 
 
-===== UC15.2.2 Nuova password non conforme allo standard adottato
+===== UC15.2.2 Nuova password non conforme allo standard adottato <UC15.2.2>
 #useCase(
   attore: UAA,
   pre: [
@@ -2443,7 +2449,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente interagisce con il form di modifica inserendo una nuova password" 
 )[]
 
-===== UC15.2.3 Nuova password uguale alla precedente
+===== UC15.2.3 Nuova password uguale alla precedente <UC15.2.3>
 #useCase(
   attore: UAA,
   pre: [
@@ -2465,7 +2471,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente inserisce la nuova password all'interno dell'apposto campo del form di modifica" 
 )[]
 
-==== UC15.3 Conferma modifica password
+==== UC15.3 Conferma modifica password <UC15.3>
 #useCase(
   attore: UAA,
   pre: [
@@ -2487,8 +2493,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente interagisce con il tasto di conferma di modifica della password"
 )[],
 
-==== UC15.4 Ricezione dell'avvenuta modifica password
-#usecase(
+==== UC15.4 Ricezione dell'avvenuta modifica password <UC15.4>
+#useCase(
   attore: UAA,
   pre: [
     - La conferma della modifica password è andata a buon fine #link(<UC15.3>)[#underline[\[UC15.3\]]]
