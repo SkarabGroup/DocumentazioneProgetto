@@ -70,6 +70,9 @@ D:
   Discord:
     descrizione: Piattaforma di comunicazione VoIP, messaggistica istantanea e distribuzione digitale progettata per creare comunità.
 
+  Design Pattern:
+    descrizione: Soluzioni riutilizzabili a problemi comuni di progettazione del software, che forniscono un modello standard per affrontare determinate situazioni.
+
 E:
   ESLint:
     descrizione: Strumento di linting per JavaScript e TypeScript che aiuta a identificare e correggere errori di codice e mantenere uno stile consistente.
@@ -132,6 +135,9 @@ L:
     acronimo: Large Language Model
     descrizione: Modello di intelligenza artificiale progettato per comprendere e generare testo naturale, addestrato su grandi quantità di dati testuali.
 
+  Linter:
+    descrizione: Strumento che analizza il codice sorgente per identificare errori di programmazione, bug potenziali e violazioni delle convenzioni di stile.
+
 M:
   MDP:
     acronimo: Multi-Dealer Platform
@@ -141,17 +147,17 @@ M:
     descrizione: Punto di riferimento significativo nel ciclo di vita di un progetto, che indica il completamento di una fase importante o il raggiungimento di un obiettivo specifico.
 
   MPC:
-    acronimo: Multi-Party Computation
-    descrizione: Tecnica crittografica che consente a più parti di calcolare una funzione comune sui loro dati privati senza rivelare tali dati tra di loro.
+    acronimo: Metriche di Processo
+    descrizione: Insieme di metriche utilizzate per misurare la qualità e l'efficienza dei processi di sviluppo, come la Schedule Variance (SV) o la Budget Variance (BV).
 
   MPD:
-    acronimo: Multi-Party Data
-    descrizione: Dati condivisi tra più parti o entità, spesso utilizzati in contesti di collaborazione o analisi congiunta.
- 
+    acronimo: Metriche di Prodotto Documentale
+    descrizione: Insieme di metriche utilizzate per valutare la qualità della documentazione prodotta, ad esempio l'indice di Gulpease o la correttezza ortografica.
+
   MPS:
-    acronimo: Modello di Processo per la Software Industry
-    descrizione: Modello di miglioramento dei processi specifico per l'industria del software, sviluppato in Italia, che aiuta le organizzazioni a ottimizzare le proprie attività e a migliorare la qualità del software prodotto.
-  
+    acronimo: Metriche di Prodotto Software
+    descrizione: Insieme di metriche utilizzate per valutare la qualità del software sviluppato, come la Code Coverage o la complessità ciclomatica.
+
   MVP:
     acronimo: Minimum Viable Product
     descrizione: Versione minima di un prodotto software che include solo le funzionalità essenziali per soddisfare i requisiti principali e permettere il rilascio sul mercato.
@@ -188,12 +194,14 @@ P:
  
   Progettisti:
     descrizione: Membri del team di sviluppo responsabili della progettazione dell'architettura e delle funzionalità del sistema software.
+    alternative: Designer, Progettista
 
   Progetto:
     descrizione: Esso é inteso nel senso di project, ovvero un'insieme di attività coordinate e gestite per sviluppare un sistema software che soddisfi specifici requisiti e obiettivi.
   
   Programmatori:
     descrizione: Membri del team di sviluppo responsabili della scrittura del codice sorgente per implementare le funzionalità del sistema software.
+    alternative: Developer, Programmatore
 
   Python:
     descrizione: Linguaggio di programmazione ad alto livello, interpretato e orientato agli oggetti, utilizzato per lo sviluppo degli Agenti.
@@ -294,7 +302,8 @@ V:
 
   Verificatori:
     descrizione: Persone o team responsabili di controllare che il sistema software soddisfi i requisiti specificati durante il processo di verifica.
-
+    alternative: Tester, Verificatore
+    
   Visual Studio Code:
     acronimo: VS Code
     descrizione: Editor di codice sorgente sviluppato da Microsoft, estensibile e supporta vari linguaggi di programmazione.
