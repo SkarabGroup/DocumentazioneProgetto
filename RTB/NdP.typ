@@ -11,12 +11,19 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.2.0"
+#let versione = "v0.2.1"
 
 #titlePage("Norme di Progetto", versione)
 #set page(numbering: "1", header: header("Norme di Progetto"), footer: footer())
 
 #let history = (
+  (
+    "09/01/2026",
+    "0.2.1",
+    "Correzioni minori e miglioramenti alla documentazione",
+    members.kevin,
+    members.martinello,
+  ),
   (
     "02/01/2026",
     "0.2.0",
@@ -61,18 +68,30 @@ Il presente documento definisce le norme, le convenzioni, gli strumenti e i proc
 
 == Glossario e Riferimenti
 I termini tecnici o ambigui sono definiti nel glossario di progetto (`RTB/glossario.yml`).
-Nel testo, i termini importanti possono essere evidenziati utilizzando la macro `#def`.
+Nel testo, i termini importanti possono essere evidenziati utilizzando la macro `#def`, questo permette di rendere la parola un link al glossario presente nel sito del progetto.
+
 I riferimenti normativi includono:
 - Regolamento del progetto didattico.
 - Standard ISO/IEC 12207 per i processi del ciclo di vita del software.
+ -Ultimo accesso: 2026/01/02.
 
 == Standard Industriali e Riferimenti
 Il progetto adotta standard industriali riconosciuti per garantire qualità, conformità e best practices nel ciclo di vita del software. Di seguito i principali riferimenti:
 
 - *IEEE 830 - Standard for Software Requirements Specifications*: Guida alla documentazione dei requisiti funzionali e non funzionali, inclusa la classificazione (obbligatori, desiderabili, opzionali) e l'uso di casi d'uso.
+
+ -Ultimo accesso: 2026/01/02.
+
 - *IEEE 1016 - Recommended Practice for Software Design Descriptions*: Fornisce linee guida per descrivere l'architettura software, inclusi diagrammi UML e design pattern (es. MVC, Singleton).
+
+ -Ultimo accesso: 2026/01/02.
+
 - *IEEE 829 - Standard for Software and System Test Documentation*: Definisce la struttura per piani di test, casi di test, procedure e report per unit, integration e system testing.
+
+ -Ultimo accesso: 2026/01/02.
 - *ISO/IEC 12207 - Software Life Cycle Processes*: Framework internazionale per processi di acquisizione, fornitura, sviluppo, operazione, manutenzione e disposal del software, supportando approcci iterativi e gestione del rischio.
+
+ -Ultimo accesso: 2026/01/02.
 
 Questi standard sono integrati nei processi di analisi, progettazione, verifica e documentazione per assicurare tracciabilità e qualità.
 
@@ -93,7 +112,7 @@ Attività volta a comprendere e documentare le necessità degli stakeholder.
 === Progettazione
 Definizione dell'architettura logica e tecnica del sistema.
 - *#def("UML")*: Utilizzo di diagrammi di classi, sequenza e attività per modellare il sistema.
-- *Design Pattern*: Adozione di pattern noti (es. MVC, Singleton, Factory) dove applicabile per risolvere problemi ricorrenti.
+- *#def("Design Pattern")*: Adozione di pattern noti (es. MVC, Singleton, Factory) dove applicabile per risolvere problemi ricorrenti.
 
 === Codifica
 Implementazione del software seguendo le norme di codifica definite (vedi Sezione "Norme di Sviluppo").
@@ -116,6 +135,8 @@ Utilizzo di *#def("Git")* come sistema di controllo versione.
 - `develop`: Ramo di integrazione principale.
 - `feature/nome-feature`: Rami per lo sviluppo di nuove funzionalità.
 - `fix/nome-fix`: Rami per la correzione di bug.
+
+Inoltre si utilizzano branch diversi per la redazione dei diversi documenti, in modo che un gruppo assegnato ad un documento possa lavorarci senza interferire con il lavoro degli altri.
 
 === Conventional Commits
 I messaggi di commit devono seguire il formato:
@@ -153,7 +174,7 @@ Il gruppo adotta un sistema di metriche per monitorare processi e prodotti.
 )
 
 === Strategie di Verifica
-- *Analisi Statica*: Review manuale del codice e uso di linter (#def("ESLint") per JS/TS, Pylint/Black per #def("Python")).
+- *Analisi Statica*: Review manuale del codice e uso di #def("linter") (#def("ESLint") per JS/TS, Pylint/Black per #def("Python")).
 - *Analisi Dinamica*: Esecuzione della suite di test.
 - *Test*:
   - *Unit Test*: Verifica di singole unità di codice.
@@ -182,9 +203,9 @@ Strumenti di coordinamento: #def("Jira"), #def("Slack"), #def("Telegram"), #def(
 - *#def("Responsabile di Progetto")*: Coordinamento generale e gestione stakeholder.
 - *#def("Amministratore")*: Gestione configurazione, documentazione e repository.
 - *#def("Analista")*: Analisi requisiti e modellazione sistema (casi d'uso, UML).
-- *Progettista*: Architettura e design tecnico.
-- *Programmatore*: Implementazione e sviluppo codice.
-- *Verificatore*: Controllo qualità, testing e verifica conformità.
+- *#def("Progettista")*: Architettura e design tecnico.
+- *#def("Programmatore")*: Implementazione e sviluppo codice.
+- *#def("Verificatore")*: Controllo qualità, testing e verifica conformità.
 
 === Approcci di Gestione Progetto (#def("PMI"))
 - *#def("Predictive")*: Pianificazione dettagliata per requisiti stabili (sequenziale, con milestone fisse).
