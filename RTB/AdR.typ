@@ -2176,10 +2176,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente seleziona e conferma la disconnessione del proprio account GitHub dalla piattaforma CodeGuardian",
 )[]
 
-=== UCx: Accesso al profilo CodeGuardian
-=== UCx: modifica password profilo CodeGuardian
-=== UCx: Recupero password profilo CodeGuardian
-
 === UC14: Esportazione report di analisi repository GitHub <UC14>
 #useCase(
   attore: UAA,
@@ -2272,6 +2268,200 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'utente conferma l'esportazione del report di analisi dopo aver selezionato un formato valido",
 )[]
+
+=== UC15: modifica password profilo 
+#useCase(
+  attore:UAA,
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente vuole cambiare la password del proprio account
+  ],
+  post: [
+    - L'utente ha cambiato correttamente la propria password
+  ],
+  scenari: [
+    - L'utente è entrato nella sezione Impostazioni
+    - L'utente seleziona la sezione "Modifica Password" delle impostazioni
+    - L'utente inserisce la password corrente nel primo campo del form di modifica #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - L'utente inserisce la nuova password nel campo del form di modifica sottostante #link(<UC15.2>)[#underline[\[UC15.2\]]]
+    - L'utente conferma la modifica della propria password #link(<UC15.3>)[#underline[\[UC15.3\]]]
+    - L'utente riceve la conferma dell'avvenuta modifica della propria password #link(<UC15.4>)[#underline[\[UC15.4\]]]
+  ],
+  inclusioni: [
+    - #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - #link(<UC15.2>)[#underline[\[UC15.2\]]]
+    - #link(<UC15.3>)[#underline[\[UC15.3\]]]
+  ],
+  estensioni: [
+    - #link(<UC15.1.1>)[#underline[\[UC15.1.1\]]]
+    - #link(<UC15.1.2>)[#underline[\[UC15.1.2\]]]
+    - #link(<UC15.2.1>)[#underline[\[UC15.2.1\]]]
+    - #link(<UC15.2.2>)[#underline[\[UC15.2.2\]]]
+    - #link(<UC15.2.3>)[#underline[\[UC15.2.3\]]]
+  ],
+  trigger: "L'utente inserisce la password attuale, la nuova password ed in seguito clicca il tasto di conferma",
+
+)[]
+
+==== UC15.1 inserimento della password corrente
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente è entrato nella sezione Impostazioni > Modifica Password #link(<UC15>)[#underline[\[UC15\]]]
+  ],
+  post: [
+    - L'utente ha inserito correttamente la propria password 
+  ],
+  scenari:[
+    - L'utente clicca o tabba sul form di modifica password
+    - L'utente digita la password corrente
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC15.1.1>)[#underline[\[UC15.1.1 \]]]
+    - #link(<UC15.1.2>)[#underline[\[UC15.1.2\]]]
+  ],
+  trigger: "L'utente interagisce con il form di modifica inserendo la password corrente nell'apposto campo" 
+)[]
+
+===== UC15.1.1 Password corrente non inserita
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente è entrato nella sezione Impostazioni > Modifica Password #link(<UC15>)[#underline[\[UC15\]]]
+  ],
+  post: [
+    - L'utene non può inserire la nuova password nel campo del form
+  ],
+  scenari:[
+    - L'utente prova a cliccare su un altro campo del form
+    - L'utente prova a cliccare il tasto di conferma del cambio password
+    - L'utente visualizza un messaggio di errore che lo invita ad inserire la password corrente
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente prova a cliccare su un altro campo del form o sul tasto di conferma senza aver inserito la password corrente" 
+)[]
+
+==== UC15.1.2 Password corrente errata
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente ha inserito la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
+  ],
+  post: [
+    - All'utente viene impedito di cambiare la propria password
+  ],
+  scenari:[
+    - L'utene inserice una password errata nel form
+    - L'utente visualizza un messaggio di errore che lo invita a modificare la password inserita perchè errata
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con il form di modifica inserendo una password errata e visualizza a schermo un errore" 
+)[]
+
+==== UC15.2 Inserimento della nuova password
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
+  ],
+  post: [
+    - L'utente può procedere alla conferma della modifica password 
+  ],
+  scenari:[
+    - L'utente inserisce la nuova password all'interno del form di modifica
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC15.2.1>)[#underline[\[UC15.2.1\]]]
+    - #link(<UC15.2.2>)[#underline[\[UC15.2.2\]]]
+    - #link(<UC15.2.3>)[#underline[\[UC15.2.3\]]]
+  ],
+  trigger: "L'utente interagisce con il form di modifica inserendo una nuova password" 
+)[]
+
+===== UC15.2.1 Nessuna nuova password inserita
+#useCase(
+ attore: UAA,
+ pre: [
+    - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
+ ],
+ post: [
+  - L'utente non può procedere alla conferma della modirfica password
+ ],
+ scenari: [
+  - L'utente clicca il tasto di conferma della modifica password
+  - L'utente visualizza un errore a schermo che lo invita ad inserire una nuova password prima di confermare
+ ],
+ inclusioni: [
+  - Nessuna
+ ],
+ estensioni: [
+  - Nessuna
+ ],
+ trigger: "L'utente clicca il tasto di conferma della modifica password"
+)[],
+
+
+===== UC15.2.2 Nuova password non conforme allo standard adottato
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]] 
+  ],
+  post: [
+    - All'utente viene impedito di confermare la modifica della password
+  ],
+  scenari:[
+    - L'utente visualizza a schermo un errore che gli indica il tipo di caratteri da inseire nella nuova password in modo che sia conforme allo standard adottato
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con il form di modifica inserendo una nuova password" 
+)[]
+
+==== UC15.2.3 Nuova password uguale alla precedente
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]] 
+  ],
+  post: [
+    - All'utente viene impedito di confermare la modifica della password
+  ],
+  scenari:[
+    - L'utente inserisce una password uguale a quella precedente
+    - L'utente visualizza un errore a schermo che lo informa dell'ugualianza tra la nuova password e quella precedente
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente inserisce la nuova password all'interno dell'apposto campo del form di modifica" 
+)[]
+
+=== UCx: Accesso al profilo CodeGuardian
+=== UCx: Recupero password profilo CodeGuardian
 
 #pagebreak()
 = Requisiti di Sistema
