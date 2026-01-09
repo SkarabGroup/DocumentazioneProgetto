@@ -13,11 +13,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.17.0"
+#let versione = "v0.18.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2026/01/08",
+    "0.18.0",
+    "Modificati requisiti relativi a UC14. Aggiunti diagrammi UC14",
+    members.alice,
+  ),
   (
     "2026/01/06",
     "0.17.0",
@@ -2199,7 +2205,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC14.1.1>)[#underline[\[UC14.1.1\]]] // Nessun formato selezionato
   ],
   trigger: "L'utente interagisce con il pulsante di esportazione nella sezione di visualizzazione del report",
-)[]
+)[#useCaseDiagram("14", "UC14 - Esportazione report di analisi repository GitHub")]
 
 ==== UC14.1: Selezione formato di esportazione <UC14.1>
 #useCase(
@@ -2219,10 +2225,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC14.1.1>)[#underline[\[UC14.1.1\]]] // Nessun formato selezionato
+    - Nessun formato selezionato #link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]
   ],
   trigger: "L'utente seleziona il formato dopo aver cliccato il pulsante di esportazione nella sezione di visualizzazione del report",
-)[]
+)[#useCaseDiagram("14_1", "UC14.1 - Selezione formato di esportazione")]
 
 ===== UC14.1.1: Nessun formato selezionato <UC14.1.1>
 #useCase(
@@ -2684,27 +2690,27 @@ Descrivono cosa il sistema deve fare, inclusi i comportamenti, le reazioni a spe
   // UC14
   // UC14.1
   [#FRx],
-  [Il Sistema deve presentare un modale di selezione formato quando l'utente avvia l'esportazione],
+  [L'utente autenticato avanzato deve poter visualizzare un modale per la selezione del formato di esportazione],
   [#link(<UC14.1>)[#underline[\[UC14.1\]]]],
   // UC14.1.1
   [#FRx],
-  [Il Sistema deve impedire la prosecuzione dell'esportazione se nessun formato è stato selezionato],
-  [#link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]],
-
-  [#FRx],
-  [Il Sistema deve mostrare un messaggio di errore specifico quando l'utente tenta di esportare senza selezionare un formato],
+  [L'utente autenticato avanzato deve visualizzare un messaggio di errore se tenta di confermare l'esportazione senza aver selezionato un formato],
   [#link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]],
   // UC14.2
   [#FRx],
-  [Il Sistema deve generare il file di esportazione nel formato selezionato dall'utente],
+  [L'utente autenticato avanzato deve poter confermare l'esportazione del report solo dopo aver selezionato un formato],
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 
   [#FRx],
-  [L'utente deve poter visualizzare tutti i dati presenti nel report (metriche, vulnerabilità, suggerimenti)],
+  [L'utente autenticato avanzato deve poter scaricare il file generato nel formato selezionato],
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 
   [#FRx],
-  [Il Sistema deve avviare automaticamente il download del file generato],
+  [L'utente autenticato avanzato deve poter visualizzare tutti i dati del report nel file esportato (metriche, vulnerabilità, suggerimenti)],
+  [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
+
+  [#FRx],
+  [L'utente autenticato avanzato deve ricevere automaticamente il download del file generato],
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 )
 
@@ -2766,11 +2772,11 @@ Definiscono i vincoli sulle prestazioni del sistema, come tempi di risposta, lat
 
   // UC14
   [#PRx],
-  [Il Sistema deve caricare la lista dei formati disponibili entro 1 secondo],
+  [L'utente autenticato avanzato deve visualizzare la lista dei formati disponibili entro 1 secondo],
   [#link(<UC14.1>)[#underline[\[UC14.1\]]]],
 
   [#PRx],
-  [Il Sistema deve completare la generazione del file, nel formato richiesto dall'utente, entro 2 secondi dalla conferma],
+  [L'utente autenticato avanzato deve ricevere il file generato entro 2 secondi dalla conferma dell'esportazione],
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 )
 
@@ -2833,15 +2839,15 @@ Riguardano l'efficacia, l'efficienza e la soddisfazione dell'interazione utente,
 
   // UC14
   [#URx],
-  [La modale di selezione formato deve utilizzare icone riconoscibili per ogni formato disponibile],
+  [L'utente autenticato avanzato deve poter riconoscere facilmente ogni formato disponibile grazie a icone nella modale di selezione],
   [#link(<UC14.1>)[#underline[\[UC14.1\]]]],
 
   [#URx],
-  [Il messaggio di errore per formato non selezionato deve essere chiaro e indicare l'azione necessaria],
+  [L'utente autenticato avanzato deve comprendere chiaramente l'azione necessaria dal messaggio di errore quando nessun formato è selezionato],
   [#link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]],
 
   [#URx],
-  [Il Sistema deve mostrare un indicatore di caricamento (spinner) durante la generazione del file],
+  [L'utente autenticato avanzato deve visualizzare un indicatore di caricamento (spinner) durante la generazione del file],
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 )
 
@@ -2908,15 +2914,15 @@ Specificano le interazioni logiche e visive con l'utente (elementi UI) e con sis
 
   // UC14
   [#IRx],
-  [Il pulsante "Esporta Report" deve essere visibile nella pagina di visualizzazione del report di analisi],
+  [L'utente autenticato avanzato deve poter individuare facilmente il pulsante "Esporta Report" nella pagina di visualizzazione del report di analisi],
   [#link(<UC14>)[#underline[\[UC14\]]]],
 
   [#IRx],
-  [La modale di esportazione deve presentare i formati come card selezionabili],
+  [L'utente autenticato avanzato deve poter selezionare il formato di esportazione tramite card selezionabili nella modale],
   [#link(<UC14.1>)[#underline[\[UC14.1\]]]],
 
   [#IRx],
-  [Il pulsante di conferma esportazione deve essere disabilitato fino alla selezione di un formato],
+  [L'utente autenticato avanzato deve poter cliccare il pulsante di conferma solo dopo aver selezionato un formato (pulsante disabilitato fino alla selezione)],
   [#link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]],
 )
 
@@ -2984,7 +2990,7 @@ Definiscono la struttura, l'organizzazione, la conservazione e i vincoli di inte
 
   // UC14
   [#LDRx],
-  [Il database deve registrare il timestamp relativo all'inizio di ogni procedura di esportazione del report],
+  [L'utente autenticato avanzato deve poter verificare la cronologia delle proprie esportazioni attraverso i timestamp memorizzati nel database],
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 )
 
@@ -3035,11 +3041,11 @@ Vincoli imposti da scelte tecnologiche obbligatorie, standard industriali, proto
 
   // UC14
   [#DCx],
-  [L'esportazione deve avvenire esclusivamente lato server per garantire consistenza del formato],
+  [L'utente autenticato avanzato deve ricevere file esportati generati esclusivamente lato server, per garantire consistenza del formato],
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 
   [#DCx],
-  [Il Sistema deve supportare esportazioni concorrenti da parte di utenti diversi senza conflitti],
+  [L'utente autenticato avanzato deve poter esportare report contemporaneamente ad altri utenti senza conflitti],
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 )
 
@@ -3109,10 +3115,10 @@ Caratteristiche di qualità non funzionali critiche, principalmente focalizzate 
 
   // UC14
   [#SSAx],
-  [Il Sistema deve sanitizzare tutti i dati inclusi nei file esportati per prevenire code injection],
+  [L'utente autenticato avanzato deve ricevere file esportati con dati sanitizzati per prevenire code injection],
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 
   [#SSAx],
-  [Il Sistema deve validare il formato del file generato prima di inviarlo all'utente],
+  [L'utente autenticato avanzato deve ricevere file validati nel formato prima del download],
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 )
