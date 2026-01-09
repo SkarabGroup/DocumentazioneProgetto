@@ -19,6 +19,12 @@
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
+    "2026/01/09",
+    "0.19.0",
+    "Scrittura di UC15",
+    members.berengan,
+  ),
+  (
     "2026/01/08",
     "0.18.0",
     "Modificati requisiti relativi a UC14. Aggiunti diagrammi UC14",
@@ -2245,7 +2251,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente conferma l'esportazione del report di analisi senza aver selezionato alcun formato valido",
+  trigger: "L'utente conferma l'esportazione del report di analisi senza aver selezionato alcun formato valido"
 )[]
 
 ==== UC14.2: Conferma esportazione <UC14.2>
@@ -2266,7 +2272,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente conferma l'esportazione del report di analisi dopo aver selezionato un formato valido",
+  trigger: "L'utente conferma l'esportazione del report di analisi dopo aver selezionato un formato valido"
 )[]
 
 === UC15: modifica password profilo 
@@ -2299,8 +2305,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC15.2.2>)[#underline[\[UC15.2.2\]]]
     - #link(<UC15.2.3>)[#underline[\[UC15.2.3\]]]
   ],
-  trigger: "L'utente inserisce la password attuale, la nuova password ed in seguito clicca il tasto di conferma",
-
+  trigger: "L'utente inserisce la password attuale, la nuova password ed in seguito clicca il tasto di conferma"
 )[]
 
 ==== UC15.1 inserimento della password corrente
@@ -2438,7 +2443,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente interagisce con il form di modifica inserendo una nuova password" 
 )[]
 
-==== UC15.2.3 Nuova password uguale alla precedente
+===== UC15.2.3 Nuova password uguale alla precedente
 #useCase(
   attore: UAA,
   pre: [
@@ -2460,6 +2465,48 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente inserisce la nuova password all'interno dell'apposto campo del form di modifica" 
 )[]
 
+==== UC15.3 Conferma modifica password
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - L'utente ha inserito una nuova password valida nell'apposito campo del form #link(<UC15.2>)[#underline[\[UC15.2\]]] 
+  ],
+  post: [
+    - L'utente modifica e conferma correttamente la propria password
+  ],
+  scenari: [
+    - L'utente conferma la modifica della password
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con il tasto di conferma di modifica della password"
+)[],
+
+==== UC15.4 Ricezione dell'avvenuta modifica password
+#usecase(
+  attore: UAA,
+  pre: [
+    - La conferma della modifica password è andata a buon fine #link(<UC15.3>)[#underline[\[UC15.3\]]]
+  ],
+  post: [
+    - La password viene modificata correttamente
+  ],
+  scenari: [
+    - L'utente visualizza a schermo un messggio di avvenuta modifica
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Nessuno"
+)[],
 === UCx: Accesso al profilo CodeGuardian
 === UCx: Recupero password profilo CodeGuardian
 
