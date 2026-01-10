@@ -32,4 +32,4 @@ jobs:
         with:
           commit_message: "auto: aggiorna glossario HTML"
           file_pattern: |
-            Glossario/**/*.html
+            Glossario/*.html
