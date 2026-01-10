@@ -2,11 +2,16 @@
 #import "../lib/variables.typ": *
 #import "../lib/glossarioUtil.typ": *
 
-#let versione = "v0.8.0"
+#let versione = "v0.9.0"
 
 #titlePage("Glossario", versione)
 #set page(numbering: "1", header: header("Glossario"), footer: footer())
 #let history = (
+  (
+    "2026/01/10",
+    "0.9.0",
+    "Aggiunti termini Audit, BDUF, Consuntivo, Glossario, Gruppo di lavoro, Incrementale, Monitoraggio, Pianificazione, Preventivo, Remediation, Risorse umane, Schedulazione, Stakeholder, Stima, Task"
+  ),
   (
     "2026/01/02", 
     "0.8.0", 
