@@ -20,6 +20,12 @@
 #let history = (
   (
     "2026/01/09",
+    "0.19.2",
+    "Scrittura dei requisiti funzionali relativi ad UC15",
+    members.berengan,
+  ),
+  (
+    "2026/01/09",
     "0.19.1",
     "Fix minori label del documento",
     members.martinello,
@@ -2513,7 +2519,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "Nessuno"
 )[],
-=== UCx: Accesso al profilo CodeGuardian
+
 === UCx: Recupero password profilo CodeGuardian
 
 #pagebreak()
@@ -2955,6 +2961,50 @@ Descrivono cosa il sistema deve fare, inclusi i comportamenti, le reazioni a spe
   [#FRx],
   [L'utente autenticato avanzato deve ricevere automaticamente il download del file generato],
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
+
+  //UC15
+  [#FRx],
+  [L'utente autenticato avanzato deve poter accedere alla sezione Imopstazioni > Cambia Password],
+  [#link(<UC15>)[#underline[\[UC15\]]]],
+  [#FRx],
+  [L'utente autenticato avanzato deve porter visualizzare il form di modifica ed il tasto di conferma],
+  [#link(<UC15>)[#underline[\[UC15\]]]],
+  //UC15.1
+  [#FRx],
+  [L'utente autenticato avanzato deve poter inseire la propria password cprrente all'interno dell'apposto campo del form di modifica],
+  [#link(<UC15.1>)[#underline[\[UC15.1\]]]],
+  //UC15.1.1
+  [#FRx],
+  [L'utente autenticato avanazato deve poter visualizzare a schermo un messaggio d'errore se la password corrente inserita è errata],
+  [#link(<UC15.1.1>)[#underline[\[UC15.1.1]]]],
+  //UC15.1.2
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare a schermo un messaggio d'errore se non ha inserito alcuna password nel campo del form di inserimento password corrente],
+  [#link(<UC15.1.2>)[#underline[\[UC15.1.2\]]]],
+  //UC15.2
+  [#FRx],
+  [L'utente autenticato avanzato deve porte inseire la nuova password nell'apposito campo del form di modifica password],
+  [#link(<UC15.2>)[#underline[\[UC15.2\]]]],
+  //UC15.2.1
+  [#FRx],
+  [L'utente autenticato avanzato deve porte visualizzare a schermo un messaggio d'errore se non ha inserito alcuna password all'interno del campo "nuova password" nel form di modifica],
+  [#link(<UC15.2.1>)[#underline[\[UC15.2.1\]]]],
+  //UC15.2.2
+  [#FRx],
+  [L'utente autenticato avanzato deve porte visualizzare a schermo un messaggio d'errore se la nuova passsword inserita non è conforme allo standard adottato (ad es. manca un carattere speciale)],
+  [#link(<UC15.2.2>)[#underline[\[UC15.2.2\]]]],
+  //UC15.2.3
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare un messaggio d'errore se la nuova password inserita nel form di modifica è identica a quella precedente],
+  [#link(<UC15.2.3>)[#underline[\[UC15.2.3\]]]],
+  //UC15.3
+  [#FRx],
+  [L'utente autenticato avanzato deve poter confermare la modirfica della password],
+  [#link(<UC15.3>)[#underline[\[UC15.3\]]]],
+  //UC15.4
+  [#FRx],
+  [L'utente autenticato avanzato deve porte visualizzare a schermo un messaggio di conferma di avvenuta modifica della password],
+  [#link(<UC15.4>)[#underline[\[UC15.4\]]]],
 )
 
 #pagebreak()
