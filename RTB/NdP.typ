@@ -18,14 +18,14 @@
 
 #let history = (
   (
-    "09/01/2026",
+    "2026/01/09",
     "0.2.1",
     "Correzioni minori e miglioramenti alla documentazione",
     members.kevin,
     members.martinello,
   ),
   (
-    "02/01/2026",
+    "2026/01/02",
     "0.2.0",
     "Arricchimento con standard industriali, norme di codifica dettagliate e integrazioni progetto-specifiche",
     members.martinello,
@@ -33,7 +33,7 @@
     members.kevin
   ),
   (
-    "28/12/2025",
+    "2025/12/28",
     "0.1.0",
     "Rilascio iniziale con norme, processi e strumenti aggiornati",
     members.martinello,
@@ -41,7 +41,7 @@
     members.kevin
   ),
   (
-    "20/12/2025",
+    "2025/12/20",
     "0.0.1",
     "Prima bozza iniziale",
     members.martinello,
@@ -269,3 +269,7 @@ Per ogni riunione (interna o con esterni) viene redatto un *Verbale* che riporta
 - *Comunicazione*: #def("Slack"), #def("Telegram"), #def("Discord").
 - *Diagrammi*: Draw.io.
 - *Project Management*: #def("Jira").
+
+= Appendici
+== Standard per le date 
+Le date all'interno del progetto devono seguire il formato `AAAA/MM/GG` (es. 2025/12/31).

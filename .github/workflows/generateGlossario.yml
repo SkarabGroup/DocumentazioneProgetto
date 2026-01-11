@@ -29,7 +29,7 @@ jobs:
 
       - name: Generate HTML from glossario
         run: |
-          python Glossario/glossario.py
+          python ../../Glossario/glossario.py
 
       - name: Commit generated HTML
         uses: stefanzweifel/git-auto-commit-action@v5
