@@ -1,20 +1,28 @@
 #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
-
-//Note sul versionamento
-/*
-  x.y.z
-  La X si modifica solamente a documento completo
-  La Y si modifica solo quando vengono aggiunti nuovi elementi
-  La Z si modifica solo quando si modificano elementi già esistenti
-
-  Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
-*/
-#let versione = "v0.5.1"
+#let versione = "v0.6.0"
 
 #titlePage("Piano di Progetto", versione)
 #set page(numbering: "1", header: header("Piano di Progetto"), footer: footer())
 #let history = (
+  (
+    "2026/01/11",
+    "0.7.0",
+    "Rielaborazione sezione di pianificazione a breve a lungo termine",
+    members.suar
+  ),
+  (
+    "2026/01/10",
+    "0.6.0",
+    "Sezione di introduzione ai rischi. Rielaborazione rischi RT, RI e RCO e aggiunti rischi RT5, RT6, RT7, RT8, RT9, RI4, RI5.",
+    members.suar
+  ),
+  (
+    "2026/01/05",
+    "0.5.2",
+    "Revisione sezione Introduzione del documento e aggiunta nuovi termini in Glossario",
+    members.suar
+  ),
   (
     "2026/01/03", 
     "0.5.1", 
@@ -27,6 +35,7 @@
     "0.5.0", 
     "Completata analisi e gestione dei rischi con aggiunta dei rischi RT3, RT4, RI3, RCO3 e RCO4", 
     members.andrea,
+    members.antonio
   ),
   (
     "2025/12/31", 
@@ -78,407 +87,557 @@
 #pagebreak()
 
 = Introduzione
-//ricorda #def("parola") per glossario 
-== Scopo del documento
-Il *#def[Piano di Progetto]* è un documento che ha l'obiettivo di definire la strategia di pianificazione e le attività necessarie per lo sviluppo del prodotto software nel corso del progetto di *#def[Ingegneria del Software]*. #linebreak()
-Questo documento rappresenta lo strumento fondamentale a supporto del gruppo per: 
-- L'analisi e la mitigazione dei rischi che potrebbero insorgere durante il ciclo di vita del software;
-- La pianificazione temporale delle attività e la gestione delle scadenze;
-- La stima preventiva dei costi e delle risorse necessarie;
-- Il monitoraggio continuo tramite il confronto tra preventivo e consuntivo al termine di ogni periodo. #linebreak()
-Data la natura dinamica del progetto e la necessità di pianificare le attività volta per volta, la progettazione dettagliata a lungo termine risulta complessa e soprattutto inefficace. #linebreak()
-Per questio motivo il documento adotterà un approccio incrementale: verrà costantemente aggiornato con nuove pianificazioni e consuntivi man mano che il lavoro procede.
 
+== Contesto del Progetto
+Il presente documento fa riferimento al progetto #def[Code Guardian], commissionato dall'azienda #def[Var Group] e realizzato dal gruppo di studenti #def[Skarab Group] presso l'Università degli Studi di Padova.
+L'obiettivo del progetto è lo sviluppo di una piattaforma ad agenti per l'#def[audit] e la #def[remediation] automatizzata delle vulnerabilità nei #def[repository] software, come dettagliato nel capitolato C2.
+
+== Finalità del documento
+Il #def[Piano di Progetto] è il documento che definisce la strategia di #def[pianificazione] e le attività operative necessarie per lo sviluppo del #def[Sistema software] nel contesto del progetto di #def[Ingegneria del Software]. 
+Questo documento rappresenta lo strumento di riferimento per il #def[gruppo di lavoro] e per gli #def[Stakeholder], finalizzato a:
+- L'identificazione e la #def[Gestione Rischi] (tecnici e organizzativi) che potrebbero manifestarsi durante il #def[Ciclo di vita del software];
+- La #def[schedulazione] delle attività e il rispetto delle scadenze (#def[Milestone]);
+- La #def[stima] dei costi e l'allocazione delle #def[Risorse umane];
+- Il #def[monitoraggio] e controllo tramite il confronto tra #def[preventivo] e #def[consuntivo] al termine di ogni #def[Sprint].
+Data la natura dinamica del progetto e l'adozione di un modello di sviluppo #def[Agile], una pianificazione dettagliata a lungo termine (#def[Big Design Up Front]) risulterebbe inefficace. 
+Il documento adotterà pertanto un approccio #def[incrementale] e adattivo: i contenuti verranno aggiornati periodicamente (pianificazione *rolling wave*) in risposta all'evoluzione dei requisiti e ai feedback ricevuti.
+
+== Prodotti attesi
+I prodotti del progetto vengono rilasciati in modo incrementale in corrispondenza delle due principali scadenze di revisione (#def[Milestone]) previste dal ciclo di vita.
+
+=== Revisione dei Requisiti e della Tecnologia (RTB)
+Entro questa milestone, il gruppo fornirà:
+- *Documentazione preliminare*:
+  - Analisi dei Requisiti (comprendente studio di fattibilità e scelte tecnologiche);
+  - Piano di Progetto (pianificazione di dettaglio RTB e macro-pianificazione PB);
+  - Piano di Qualifica e Norme di Progetto (prime stesure);
+  - Glossario.
+- *Proof of Concept (#def[PoC])*: Un prototipo software funzionante, limitato alle funzionalità critiche, volto a dimostrare la fattibilità tecnica della soluzione (in particolare l'uso degli #def[Agenti] e delle API #def[LLM]).
+- *Verbali*: Registro delle riunioni interne ed esterne svolte fino a tale data.
+
+=== Revisione di Accettazione (Product Baseline - PB)
+Entro il termine del progetto, il gruppo fornirà il rilascio finale comprendente:
+- *Prodotto Software (#def[MVP])*: La versione del sistema completa e funzionante, conforme ai requisiti funzionali e qualitativi concordati nel capitolato e raffinati nell'Analisi dei Requisiti.
+- *Codice Sorgente*: L'intero codebase documentato e versionato sul #def[repository] ufficiale.
+- *Manuali*:
+  - *Manuale Utente*: Guida all'utilizzo della piattaforma;
+  - *Manuale Amministratore*: Guida all'installazione, configurazione e manutenzione del sistema.
+- *Documentazione Consolidata*: Versioni finali e approvate di tutti i documenti normativi e di gestione (Analisi, PdP, PdQ, NdP).
+- *Consuntivo Finale*: Analisi post-mortem dei costi, dei tempi e della qualità del prodotto rispetto agli obiettivi iniziali.
 
 == Glossario
-Al fine di garantire la massima chiarezza espositiva e prevenire ambiguità nell’interpretazione della documentazione di progetto, è stato redatto un documento apposito denominato #strong("Glossario").  #linebreak()
-Questo strumento ha lo scopo di definire in modo univoco la terminologia tecnica, gli acronimi e i concetti specifici di dominio adottati dal gruppo durante l'intero ciclo di vita del software. #linebreak()
-Il Glossario è da considerarsi un documento in costante aggiornamento, che evolve parallelamente allo sviluppo del progetto. Per la versione attuale consultare questo #underline[inirizzoglossario]. #linebreak()
-Per facilitare la lettura, ogni occorrenza di un termine presente nel Glossario viene contrassegnata con una sottolineatura.
+Al fine di garantire la massima chiarezza espositiva e prevenire ambiguità, è stato redatto un documento esterno denominato #def[Glossario]. 
+Tale strumento definisce in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio adottati. Per facilitare la lettura, ogni occorrenza di un termine presente nel Glossario è contrassegnata nel testo con una sottolineatura o formattazione specifica.
+La versione più recente del Glossario è disponibile al seguente indirizzo: #underline[https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html]
 
 == Riferimenti
-- #strong("Capitolato C2: Piattaforma ad agenti per l’audit e la remediation dei repository software") #linebreak() 
-#underline[https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf] #linebreak() 
-//Ultimo accesso 2025/12/23
-- #strong("Dispense del corso di Ingegneria del Software sulla gestione di progetto") #linebreak() 
-#underline[https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T04.pdf] #linebreak() 
-//Ultimo accesso 2025/12/23, toglierei gli ultimi accessi, non mi sembrano utili
+=== Riferimenti Normativi
+- *#def[Norme di Progetto]*: Documento interno che definisce le regole, le convenzioni e gli standard di qualità e di processo adottati dal gruppo; #linebreak()
+  #underline[link_norme_di_progetto] //modificare quando il documento viene caricato in repo ed è accessibile dal sito web
+- *Standard IEEE 1058-1998*: Standard for Software Project Management Plans. #linebreak()
+  #underline[https://ieeexplore.ieee.org/document/25325]
+=== Riferimenti Informativi
+- *Capitolato C2*: Piattaforma ad agenti per l’#def[audit] e la #def[remediation] dei #def[repository] software #linebreak()
+  #underline[https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf]
+- *Dispense del corso di Ingegneria del Software - Gestione di progetto* #linebreak()
+  #underline[https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T04.pdf]
 
+= Analisi dei Rischi
+L'attività di gestione dei rischi è un processo iterativo e continuo, indispensabile per garantire il successo del progetto #def[Code Guardian]. Essa consiste nell'identificazione, analisi e pianificazione delle risposte agli eventi avversi che potrebbero impattare negativamente su tempi, costi o qualità del prodotto software.
+Il processo di analisi viene ripetuto all'inizio di ogni #def[Sprint] e in corrispondenza delle principali #def[Milestone], permettendo al #def[gruppo di lavoro] di aggiornare le strategie di mitigazione in base all'evoluzione del progetto.
 
+== Metodologia di Analisi
+Il gruppo adotta un approccio quantitativo per la valutazione dei rischi. Ogni rischio identificato viene classificato in base a due parametri fondamentali:
+- *Probabilità di accadimento (P)*: La frequenza verosimile con cui l'evento potrebbe verificarsi.
+- *Impatto (I)*: La gravità delle conseguenze sul progetto qualora l'evento si verificasse.
+Il *Livello di Rischio (R)* è calcolato come il prodotto tra questi due fattori:
+$ R = P times I $
+I parametri $P$ e $I$ sono valutati su una scala intera da 1 a 3, secondo la seguente legenda:
+
+#figure(
+  table(
+    columns: (auto, auto, 1fr),
+    inset: 10pt,
+    align: horizon,
+    fill: (_, row) => if row == 0 { luma(230) } else { white },
+    stroke: 0.5pt + luma(200),
+    table.header([*Valore*], [*Livello*], [*Descrizione*]),
+    
+    [1], [Basso], [Evento improbabile o danno trascurabile, gestibile con le risorse ordinarie.],
+    [2], [Medio], [Evento possibile o danno che richiede una ri-pianificazione parziale delle attività.],
+    [3], [Alto], [Evento molto probabile o danno critico che potrebbe causare il fallimento di una milestone.],
+  ),
+  caption: [Scala di valutazione della Probabilità e dell'Impatto]
+)
+
+Sulla base del risultato $R$, i rischi vengono classificati per priorità di intervento:
+- *Rischio Basso ($1-3$)*: Monitoraggio periodico, nessuna azione immediata richiesta.
+- *Rischio Medio ($4-5$)*: Richiede un piano di mitigazione e un monitoraggio attento.
+- *Rischio Alto ($6-9$)*: Priorità critica, richiede azioni preventive immediate e piani di contingenza pronti all'uso.
+
+== Categorie di Rischio
+Per facilitare l'analisi e l'assegnazione delle responsabilità, i rischi sono raggruppati in tre macro-categorie identificative:
+- *RT (Rischi Tecnologici)*: Criticità legate alle tecnologie scelte (es. #def[LLM], #def[Agenti]), agli strumenti di sviluppo e all'infrastruttura hardware/software.
+- *RI (Rischi Interpersonali)*: Problematiche interne al #def[team di progetto], quali disponibilità dei membri, comunicazione e conflitti.
+- *RCO (Rischi Costi e Organizzativi)*: Rischi derivanti da stime errate, pianificazione temporale (#def[schedulazione]) e vincoli esterni.
+
+== Rischi Tecnologici (RT)
+Questa categoria raggruppa le criticità derivanti dalla natura tecnica e innovativa del progetto.
+L'adozione di architetture basate su Sistemi Multiagente e l'integrazione con #def[LLM] (Large Language Models) comportano un elevato grado di incertezza, dovuto sia alla complessità intrinseca di questi strumenti sia alla curva di apprendimento necessaria per padroneggiarli.
+In questa sezione vengono analizzati i rischi legati allo stack tecnologico, all'integrazione di componenti di terze parti (API) e all'infrastruttura di sviluppo.
+
+=== RT1: Scarsa conoscenza delle tecnologie <RT1>
+#schedaRischio(
+  "RT1",
+  "Scarsa conoscenza delle tecnologie",
+  [Si potrebbe verificare una scarsa conoscenza delle tecnologie scelte (es. framework per #def[Agenti], librerie Python). Questo potrebbe portare a ritardi nello sviluppo, errori di implementazione o difficoltà nell'integrazione.],
+  [Il progetto richiede l'uso di stack tecnologici (LangChain, LLM APIs, servizi AWS) mai affrontati nel percorso di studi universitario. La curva di apprendimento è ripida e richiede un cambio di paradigma rispetto alla programmazione classica.],
+  [Suddivisione del lavoro per specializzazione (#def[T-shaped skills]). Studio individuale anticipato tramite documentazione ufficiale. Sfruttamento delle sessioni di formazione offerte da #def[Var Group].],
+  [Riassegnazione delle risorse più esperte a supporto dei membri in difficoltà (#def[Pair Programming] intensivo). In casi critici, semplificazione dei requisiti tecnici non funzionali concordando una deroga con il proponente.],
+  "Alta",
+  "Medio-Alto"
+)
+
+=== RT2: Scelta errata delle tecnologie <RT2>
+#schedaRischio(
+  "RT2",
+  "Scelta errata delle tecnologie",
+  [Durante la fase di selezione delle tecnologie per il sistema ad agenti #def[Code Guardian], potrebbe essere effettuata una scelta non ottimale che non soddisfa appieno i requisiti del progetto. Questo potrebbe comportare difficoltà nell'implementazione, limitazioni funzionali o problemi di scalabilità in futuro.],
+  [Il panorama delle tecnologie per #def[LLM] e Agenti è in rapidissima evoluzione e spesso carente di standard consolidati. L'inesperienza del team su questi strumenti specifici aumenta la difficoltà nel valutare i limiti reali delle soluzioni candidate.],
+  [Effettuare una valutazione approfondita delle tecnologie disponibili tramite #def[PoC], considerando compatibilità e supporto della comunità. Mantenere flessibilità nel Piano di Progetto per consentire cambiamenti. Utilizzo del supporto di #def[Var Group] tramite i canali dedicati.],
+  [Sostituzione tempestiva della tecnologia inadeguata con un'alternativa più matura o semplice, accettando un eventuale incremento dei tempi di sviluppo. Consultazione immediata con il proponente per individuare soluzioni di ripiego.],
+  "Media",
+  "Alto"
+)
+
+=== RT3: Scarsa conoscenza del dominio IA
+#schedaRischio(
+  "RT3",
+  "Scarsa conoscenza del dominio e dell'IA generativa",
+  [Le tematiche relative ai #def[LLM] e alle architetture multi-agente non sono state approfondite nel percorso accademico obbligatorio. La mancanza di basi teoriche solide sul reasoning degli agenti e sulla sicurezza del codice (#def[OWASP]) potrebbe rallentare la progettazione.],
+  [Il curriculum accademico standard si concentra su ingegneria del software classica; le tecnologie di Generative AI sono troppo recenti per essere state assimilate nei corsi fondamentali, creando un gap di competenze "out-of-the-box".],
+  [Organizzazione di sessioni di auto-formazione e knowledge sharing. I membri con maggiore esperienza in ambito IA agiranno da mentori. Partecipazione attiva alle sessioni di mentoring con #def[Var Group] per validare le scelte architetturali.],
+  [Semplificazione dell'architettura: riduzione dell'autonomia degli agenti in favore di catene di esecuzione più lineari e prevedibili. Richiesta di supporto esterno mirato su specifici blocchi bloccanti.],
+  "Alta",
+  "Media"
+)
+
+=== RT4: Inaccuratezza Audit e Valutazione <RT4>
+#schedaRischio(
+  "RT4",
+  "Inaccuratezza nell'audit e nella valutazione automatica",
+  [Rischio che gli agenti producano #def[falsi positivi] o #def[falsi negativi], oppure che valutino come corretta una #def[remediation] che introduce nuovi bug, compromettendo la fiducia dell'utente.],
+  [Natura probabilistica dei modelli di linguaggio, che possono "allucinare" o perdere il contesto su file di codice molto grandi o complessi, non avendo una comprensione semantica reale del flusso di esecuzione.],
+  [Utilizzo di tool di analisi validati dalla comunità. Implementazione di un flusso che obbliga l'utente a revisionare ogni report (Human-in-the-loop). Test approfonditi con dataset di vulnerabilità note (es. benchmark di sicurezza).],
+  [Integrazione di tool di analisi statica tradizionali (es. SonarQube, ESLint) come "secondo parere" deterministico per filtrare le allucinazioni dell'IA prima di mostrare i risultati all'utente.],
+  "Media",
+  "Alta"
+)
+
+=== RT5: Limitazioni infrastrutturali e Costi API <RT5>
+#schedaRischio(
+  "RT5",
+  "Saturazione quote API e costi operativi",
+  [L'uso intensivo di #def[LLM] durante lo sviluppo e il testing potrebbe portare al rapido esaurimento del budget messo a disposizione o al raggiungimento dei limiti di richieste per minuto (Rate Limiting) imposti dai provider.],
+  [I modelli performanti (es. GPT-4) hanno costi per token elevati. Un'architettura multi-agente tende a generare un alto volume di traffico "chat" tra agenti, consumando risorse molto più velocemente di una chat singola.],
+  [Implementazione rigorosa di sistemi di #def[caching] delle risposte per evitare chiamate ripetute. Monitoraggio costante dei consumi tramite dashboard. Utilizzo di modelli più economici o "locali" per le fasi di test massive.],
+  [Passaggio temporaneo a modelli Open Source locali (es. tramite Ollama) per lo sviluppo, accettando un degrado delle performance intelligenti ma garantendo la continuità operativa a costo zero.],
+  "Alta",
+  "Media"
+)
+
+=== RT6: Privacy e Sicurezza dei dati <RT6>
+#schedaRischio(
+  "RT6",
+  "Rischi di Privacy e Data Leakage",
+  [L'invio di snippet di codice analizzato a servizi #def[LLM] esterni (es. OpenAI) potrebbe violare vincoli di riservatezza, specialmente se il repository analizzato contiene segreti o proprietà intellettuale sensibile.],
+  [Le API pubbliche di servizi cloud, se non configurate in modalità "Enterprise", potrebbero utilizzare i dati inviati per il training dei modelli, esponendo potenzialmente il codice del cliente.],
+  [Anonimizzazione dei dati prima dell'invio (rimozione di commenti sensibili, chiavi API hardcodate). Configurazione delle API con flag di "opt-out" per il training dei dati, ove disponibile.],
+  [Implementazione di un avviso bloccante per l'utente che richiede consenso esplicito prima dell'invio. In caso di vincoli stringenti, supporto per l'esecuzione esclusiva su LLM locali on-premise.],
+  "Bassa", // Ipoteticamente media
+  "Alta"
+)
+
+=== RT7: Gestione infrastruttura Cloud <RT7>
+#schedaRischio(
+  "RT7",
+  "Complessità e vincoli dell'infrastruttura Cloud",
+  [Il deployment su ambiente Cloud (es. AWS) introduce complessità legate alla configurazione di rete, permessi e gestione delle risorse. Discrepanze tra l'ambiente locale e quello remoto o l'esaurimento delle quote di utilizzo (Free Tier) potrebbero bloccare le attività di rilascio.],
+  [La gestione di infrastrutture distribuite richiede competenze DevOps specifiche spesso non consolidate nel team. L'ambiente di sviluppo locale tende a divergere da quello di produzione se non rigorosamente standardizzato.],
+  [Adozione di standard di *virtualizzazione o containerizzazione* per garantire la parità tra gli ambienti. Implementazione di un monitoraggio attivo delle risorse consumate per prevenire il superamento dei budget.],
+  [Predisposizione di una configurazione di "fallback" che permetta di eseguire una dimostrazione completa del sistema in locale, disaccoppiando il funzionamento dalla disponibilità dei servizi cloud.],
+  "Media",
+  "Alto"
+)
+
+=== RT8: Problemi di integrazione interna <RT8>
+#schedaRischio(
+  "RT8",
+  "Disallineamento nell'integrazione dei sottosistemi",
+  [L'unione delle diverse componenti (Frontend, Backend, Agenti) potrebbe rivelare incongruenze nello scambio dati, causando errori bloccanti nelle fasi avanzate del progetto.],
+  [Lo sviluppo parallelo senza una governance rigorosa dei flussi dati porta a interpretazioni divergenti delle specifiche tra i membri del team, rendendo i moduli incompatibili tra loro.],
+  [Definizione formale e condivisa dei *contratti di interfaccia* (API Contract) prima dell'inizio dello sviluppo. Adozione di pratiche di Integrazione Continua (CI) per verificare la compatibilità delle componenti ad ogni modifica.],
+  [Pianificazione di sessioni di integrazione incrementale (evitando l'approccio "Big Bang" finale). Uso di simulatori (mock) per permettere lo sviluppo parallelo anche in assenza di componenti stabili.],
+  "Alta",
+  "Alto"
+)
+
+=== RT9: Sicurezza nell'analisi del codice <RT9>
+#schedaRischio(
+  "RT9",
+  "Isolamento dei processi di analisi",
+  [L'analisi automatizzata di repository terzi comporta il rischio di eseguire codice non verificato o malevolo all'interno dell'infrastruttura di progetto, compromettendo la sicurezza del sistema ospitante.],
+  [Trattare codice sorgente sconosciuto ("untrusted input") richiede cautele superiori rispetto ai dati standard. L'esecuzione diretta sulla macchina host espone a vulnerabilità critiche.],
+  [Implementazione di *ambienti di esecuzione effimeri e isolati* (Sandboxing) per ogni processo di analisi, garantendo che nessuna operazione possa persistere o intaccare il sistema operativo sottostante.],
+  [Limitazione rigorosa delle capacità di esecuzione (es. blocco dell'accesso alla rete o al file system esterno) durante la fase di audit. Procedura di bonifica immediata dell'ambiente in caso di anomalia.],
+  "Media",
+  "Alto"
+)
+
+== Rischi Interpersonali (RI)
+Questa categoria analizza le criticità legate alle risorse umane, alle dinamiche di gruppo e alla gestione dei carichi di lavoro. Essendo il team composto da studenti con impegni paralleli, la gestione della disponibilità e della comunicazione rappresenta un fattore critico per il successo del progetto.
+
+=== RI1: Impegni personali <RI1>
+#schedaRischio(
+  "RI1",
+  "Impegni personali e accademici",
+  [Un membro del team potrebbe dover affrontare impegni personali (esami universitari, lavoro part-time) che limitano il tempo e l'energia disponibili. Questo potrebbe influire sulla capacità del gruppo di rispettare le scadenze pianificate.],
+  [La natura studentesca del team comporta la sovrapposizione delle attività di progetto con sessioni d'esame e scadenze di altri corsi, riducendo la disponibilità lavorativa in periodi specifici.],
+  [Comunicazione tempestiva delle indisponibilità tramite calendario condiviso. Pianificazione delle attività con margini di tolleranza ("Slack") per assorbire i cali di produttività fisiologici.],
+  [Ridistribuzione dinamica dei task critici sui membri più liberi. Ricorso al #def[Pair Programming] per accelerare il completamento delle funzionalità in ritardo senza sacrificare la qualità.],
+  "Media",
+  "Alto"
+)
+
+=== RI2: Avvenimenti personali gravi <RI2>
+#schedaRischio(
+  "RI2",
+  "Avvenimenti personali gravi",
+  [Un membro del team potrebbe dover affrontare problemi di salute o situazioni familiari critiche che impediscono il contributo al progetto per un periodo prolungato o indefinito.],
+  [Eventi di forza maggiore imprevedibili che colpiscono la sfera privata dei membri del team.],
+  [Promozione di un ambiente di supporto e trasparenza che incoraggi la comunicazione tempestiva delle difficoltà. Adozione di pratiche di condivisione della conoscenza (es. documentazione continua) per evitare che l'assenza di un singolo blocchi il lavoro altrui.],
+  [Riassegnazione immediata delle responsabilità del membro assente. Al suo rientro, pianificazione di un reinserimento graduale supportato dagli altri componenti, senza accumulare debito di lavoro eccessivo.],
+  "Bassa",
+  "Alto"
+)
+
+=== RI3: Ritiro dal progetto <RI3>
+#schedaRischio(
+  "RI3",
+  "Ritiro di un membro dal progetto",
+  [Un membro potrebbe ritirarsi formalmente dal progetto o dal corso di studi. Questo causerebbe una perdita secca di risorse umane (capacità produttiva) e di conoscenza tacita acquisita.],
+  [Valutazioni personali sulla sostenibilità del carico di studio, perdita di interesse o cause di forza maggiore che portano all'abbandono definitivo.],
+  [Monitoraggio costante del clima interno e del carico di lavoro per prevenire situazioni di burnout. Rotazione dei ruoli per garantire che nessun modulo software sia compreso da una sola persona (#def[Bus Factor]).],
+  [Riorganizzazione immediata del team. Avvio di un confronto formale con il proponente per concordare una riduzione dello scopo del progetto (rimozione funzionalità opzionali) proporzionale alla forza lavoro residua.],
+  "Bassa",
+  "Alto"
+)
+
+=== RI4: Conflitti interni e comunicazione inefficace <RI4>
+
+#schedaRischio(
+  "RI4",
+  "Attriti decisionali e incomprensioni comunicative",
+  [Divergenze di opinioni su scelte architetturali, ambiguità nell'assegnazione dei task o scarsa partecipazione alle riunioni possono generare un clima teso ("Storming phase"), bloccando il processo decisionale e riducendo la produttività.],
+  [Il team è composto da pari (senza una gerarchia aziendale imposta) con background diversi. L'uso predominante di comunicazione asincrona (chat) favorisce i fraintendimenti rispetto al confronto in presenza.],
+  [Istituzione di regole chiare di "Netiquette" e processi decisionali definiti (es. in caso di stallo decide il Responsabile o si vota). Stand-up meeting regolari per allineare tutti sugli obiettivi giornalieri.],
+  [Intervento del Responsabile di Progetto come mediatore super partes. Se il conflitto è tecnico e irrisolvibile internamente, escalation verso il Proponente o il Professore per un parere autorevole esterno.],
+  "Media",
+  "Medio"
+)
+
+=== RI5: Disomogeneità produttiva e Skill Gap <RI5>
+
+#schedaRischio(
+  "RI5",
+  "Sbilanciamento del carico di lavoro",
+  [Potrebbe crearsi un divario significativo tra membri più produttivi e membri in difficoltà tecnica. Questo porta al sovraccarico dei primi (rischio burnout) e alla demotivazione dei secondi, che non riescono a contribuire efficacemente.],
+  [Differenze pregresse nelle competenze tecniche (es. chi conosce già Python vs chi no) e diverse velocità di apprendimento individuali.],
+  [Monitoraggio costante delle ore produttive tramite Dashboard di progetto. Adozione sistematica del #def[Pair Programming] affiancando un membro esperto a uno meno esperto per favorire il travaso di conoscenze.],
+  [Ribilanciamento dei task: assegnazione di compiti più complessi ai membri esperti e task di documentazione/testing o moduli più semplici ai membri in difficoltà, garantendo comunque che tutti partecipino al codice (requisito didattico).],
+  "Alta",
+  "Medio"
+)
+== Rischi Collettivi Organizzativi (RCO)
+Questa categoria raggruppa le criticità legate alla pianificazione temporale, alla gestione delle risorse (ore-persona), al rapporto con gli stakeholder esterni e alla produzione della documentazione. Sono rischi che impattano direttamente sull'efficienza del processo produttivo e sul rispetto delle scadenze.
+
+=== RCO1: Sottostima e pianificazione <RCO1>
+#schedaRischio(
+  "RCO1",
+  "Sottostima delle attività e dei tempi",
+  [Le stime temporali per il completamento delle attività potrebbero rivelarsi ottimistiche, portando a ritardi a cascata sul cronoprogramma (Gantt). Spesso si tende a sottostimare la complessità di task apparentemente semplici.],
+  [Mancanza di metriche storiche sulla produttività del team e inesperienza nella valutazione di task complessi legati alle tecnologie #def[LLM]. Bias cognitivo di ottimismo (#def[Optimism Bias]).],
+  [Scomposizione dei task complessi in attività granulari per stime più precise. Adozione della pianificazione "Rolling Wave" (dettaglio alto solo per il breve periodo). Obbligo di segnalazione tempestiva ("Early Warning") di potenziali ritardi.],
+  [Riassegnazione delle risorse (Resource leveling): spostamento di membri da attività con margine di scorrimento a supporto del task critico. Se il ritardo impatta una Milestone, riduzione dello scopo dell'attività posticipando i requisiti opzionali.],
+  "Alta",
+  "Alto"
+)
+
+=== RCO2: Instabilità dei requisiti (Scope Creep) <RCO2>
+#schedaRischio(
+  "RCO2",
+  "Cambiamento dei requisiti e Scope Creep",
+  [Durante lo sviluppo, potrebbero emergere modifiche sostanziali ai requisiti o la tendenza ad aggiungere funzionalità non richieste per perfezionismo (#def[Gold Plating]), dilatando i tempi di consegna.],
+  [Comprensione imperfetta delle esigenze iniziali o desiderio del team di sperimentare tecnologie oltre il necessario, perdendo il focus sull'obiettivo minimo (#def[MVP]).],
+  [Congelamento dei requisiti al termine dell'Analisi. Ogni modifica successiva richiede una procedura formale di valutazione dell'impatto. Focalizzazione rigorosa sui requisiti obbligatori prima di quelli opzionali.],
+  [Valutazione critica della modifica: se non essenziale, viene scartata o posticipata. Se necessaria, si negozia la rimozione di un'altra funzionalità di pari onerosità per mantenere inalterato il carico di lavoro complessivo.],
+  "Media",
+  "Medio"
+)
+
+=== RCO3: Gestione delle risorse (Budget) <RCO3>
+#schedaRischio(
+  "RCO3",
+  "Divergenza dal preventivo orario",
+  [Il consuntivo delle ore lavorate potrebbe superare il preventivo stimato per ciascun ruolo, esaurendo il budget virtuale del progetto prima del completamento delle attività.],
+  [Inefficienze nello svolgimento dei task, necessità di rifacimento del lavoro (*rework*) per bassa qualità iniziale o blocchi tecnici imprevisti.],
+  [Monitoraggio settimanale delle ore rendicontate tramite Dashboard. I Responsabili verificano lo scostamento rispetto alla Baseline e intervengono se una specifica attività sta drenando troppe risorse.],
+  [Analisi delle cause di inefficienza. Riallocazione delle ore risparmiate da altri ruoli. In casi critici, semplificazione delle scelte tecniche per rientrare nel monte ore residuo.],
+  "Media",
+  "Medio"
+)
+
+=== RCO4: Comunicazione esterna <RCO4>
+#schedaRischio(
+  "RCO4",
+  "Disallineamento o ritardi nella comunicazione col proponente",
+  [Possibili ritardi nelle risposte da parte di #def[Var Group] o interpretazioni errate dei feedback forniti durante i SAL (#def[Stato Avanzamento Lavori]), portando allo sviluppo di funzionalità non allineate con le aspettative.],
+  [Il proponente è una realtà aziendale con impegni prioritari che potrebbero causare latenza. La comunicazione remota aumenta il rischio di ambiguità interpretativa.],
+  [Pianificazione di incontri periodici fissi. Redazione sistematica di verbali esterni dopo ogni meeting per formalizzare le decisioni. Uso di canali rapidi (#def[Slack]) per dubbi bloccanti.],
+  [Sollecito formale in caso di mancata risposta. In caso di blocco prolungato, escalation verso il Professore per definire una strategia di procedibilità o congelare i requisiti in attesa di feedback.],
+  "Media",
+  "Medio"
+)
+
+=== RCO5: Qualità della documentazione <RCO5>
+#schedaRischio(
+  "RCO5",
+  "Disomogeneità nella documentazione",
+  [La documentazione prodotta (Piano di Progetto, Norme di Progetto, ecc.) potrebbe risultare stilisticamente frammentata, poco coerente o con terminologie discordanti, compromettendo la professionalità degli elaborati.],
+  [La stesura collaborativa parallela da parte di più autori introduce differenze di stile e formattazione. Mancata aderenza rigorosa alle #def[Norme di Progetto].],
+  [Definizione di template #def[Typst] vincolanti. Adozione di un Glossario centralizzato. Ruolo di *Verificatore* distinto dal *Redattore* per ogni documento.],
+  [Fase di armonizzazione finale: assegnazione di un unico responsabile editoriale che revisiona l'intero documento prima del rilascio per uniformare lo stile ("One Voice Policy").],
+  "Media",
+  "Basso"
+)
+
+== Gestione e Monitoraggio dei Rischi
+
+L'analisi dei rischi non rappresenta un'attività statica limitata alla fase di avvio, bensì un processo ciclico di controllo che accompagnerà l'intero ciclo di vita del progetto.
+
+=== Procedura operativa
+Il gruppo adotterà la seguente procedura formale nel caso in cui un rischio identificato dovesse manifestarsi o dovessero emergerne di nuovi non previsti:
+
++ *Rilevamento (Detection):*
+  Ogni membro del team è tenuto a segnalare tempestivamente al *Responsabile di Progetto* l'insorgere di una problematica tecnica o organizzativa, oppure il superamento di una soglia di allarme (es. ritardo su un task superiore al 20%).
+
++ *Registrazione:*
+  L'evento viene tracciato formalmente nel *Verbale Interno* della riunione più vicina. Se il rischio comporta modifiche operative immediate, viene aperto o aggiornato il relativo ticket sulla piattaforma di gestione (#def[GitHub] Project).
+
++ *Attivazione della Contingenza:*
+  Il Responsabile, valutata la criticità, attiva la strategia di mitigazione o il piano di contingenza definito nelle schede di rischio (es. riallocazione delle risorse, riduzione dello scopo opzionale).
+
++ *Rendicontazione (Consuntivo):*
+  Al termine dello #def[Sprint] o della fase di progetto (es. #def[RTB]), l'accaduto viene documentato nella sezione *Consuntivi* del Piano di Progetto, analizzando:
+  - L'impatto effettivo in termini di ore e costi (scostamento dal preventivo).
+  - L'efficacia della contromisura adottata.
+  - La necessità di aggiornare la probabilità di ricorrenza per il futuro.
+
++ *Aggiornamento del Piano:*
+  Sulla base dell'esperienza maturata ("Lesson Learned"), il Registro dei Rischi viene revisionato: i rischi non più attuali vengono chiusi, le probabilità ricalibrate e i nuovi rischi emersi vengono catalogati.
 
 #pagebreak()
 
-= Analisi e gestione dei rischi
+= WORK IN PROGRESS !!!
+= Pianificazione temporale
 
-== Introduzione
-La gestione dei rischi è una componente critica per il successo del progetto. Un #def[Rischio] viene definito come un evento incerto che, qualora si verifichi, ha un impatto (positivo o negativo) su uno o più obiettivi del progetto, quali tempi, costi, o qualità del software prodotto. #linebreak()
-La redazione del Piano di Progetto non può prescindere da un'attenta analisi delle incertezze. L'obiettivo di questa sezione è classificare le possibili minacce per valutare se il carico di lavoro inserito nel #def[Backlog] sia sostenibile rispetto alle capacità del gruppo.
+In questa sezione viene descritta la #def[schedulazione] delle attività di progetto, necessaria per garantire il rispetto delle scadenze e la corretta allocazione delle risorse.
 
-Per garantire un approccio strutturato ed efficace, il processo di gestione dei rischi è stato suddiviso in quattro fasi distinte:
-- #strong[Identificazione]: consiste nel rilevare e documentare tutte le potenziali fonti di rischio. Questa attività non si limita agli aspetti tecnici o strettamente legati al progetto, ma prende in esame anche la sfera organizzativa e la disponibilità personale dei membri del team;
-- #strong[Analisi]: una volta individuati, i rischi vengono esaminati per stimarne la probabilità di accadimento e l'impatto potenziale. Questo passaggio è fondamentale per comprendere le possibili ripercussioni sul completamento del singolo #def[sprint] e sul successo complessivo del progetto;
-- #strong[Pianificazione]: sulla base dell'analisi, vengono definite le strategie di risposta. L'obiettivo è elaborare misure preventive atte a ridurre la probabilità che l'evento si verifichi o, qualora non fosse possibile evitarlo, predisporre azioni di mitigazione per limitarne gli effetti negativi;
-- #strong[Controllo]: rappresenta la fase operativa di monitoraggio continuo durante lo svolgimento delle attività. Questo permette di intercettare tempestivamente l'insorgere di un rischio e di attivare prontamente le procedure di mitigazione stabilite in precedenza.
+Coerentemente con quanto emerso nell'analisi dei rischi (in particolare #link(<RCO1>)[#underline[\[RCO1\]]] e #link(<RT2>)[#underline[\[RT2\]]]), la pianificazione adotta un approccio basato sulla strategia del *Rolling Wave Planning* (pianificazione a ondata). Questo metodo prevede una pianificazione estremamente dettagliata per le attività a breve termine e una pianificazione ad alto livello per le fasi successive, che verrà raffinata progressivamente man mano che il progetto avanza.
 
-I possibili rischi individuati da #def[Skarab Group] sono stati classificati in tre macro-categorie, in base alla loro natura e alle aree di influenza:
-- #strong[RT] = #strong[R]ischio #strong[T]ecnologico
-- #strong[RI] = #strong[R]ischio #strong[I]ndividuale
-- #strong[RCO] = #strong[R]ischio #strong[C]ollettivo #strong[O]rganizzativo
+Il ciclo di vita del progetto è scandito da due #def[Milestone] principali, imposte dal regolamento didattico, che fungono da spartiacque per la strategia di pianificazione:
 
-Consapevoli che l'inesperienza potrebbe ridurre l'efficacia iniziale delle mitigazioni, il gruppo agirà in questo modo: ogni fallimento nella gestione di un rischio verrà registrato durante la fase di controllo e sfruttato per aggiornare le procedure, garantendo così una risposta sempre più solida man mano che il progetto avanza.
+1.  *Requirements and Technology Baseline (#def[RTB]):* Milestone a breve termine. Il focus è sul consolidamento dei requisiti, la produzione della documentazione normativa e la validazione tecnologica tramite #def[PoC].
+2.  *Product Baseline (#def[PB]):* Milestone a lungo termine. Il focus si sposterà sullo sviluppo incrementale del prodotto software (#def[MVP]), sui test di sistema e sul rilascio finale.
 
-== Rischi Tecnologici
-//breve descrizione(?)
+Di seguito viene dettagliata la pianificazione per la prima fase (RTB) e delineate le linee guida strategiche per la seconda (PB).
+== Pianificazione a breve termine (Verso la RTB)
+Questa fase copre il periodo temporale che va dall'avvio del progetto fino al colloquio per la *Requirements and Technology Baseline* (#def[RTB]).
+L'obiettivo primario è duplice:
+1.  *Documentale:* Formalizzare i requisiti, i processi e la pianificazione per stabilire un perimetro di lavoro chiaro e condiviso.
+2.  *Tecnologico:* Mitigare i rischi tecnici critici (#link(<RT1>)[#underline[RT1]], #link(<RT2>)[#underline[RT2]]) attraverso lo sviluppo di un *Proof of Concept* (#def[PoC]).
 
-=== RT1: Rischio Tecnologico legato alla scarsa conoscenza delle tecnologie
+Le attività sono organizzate in *Sprint* (iterazioni) di durata variabile. Di seguito viene riportato il calendario temporale e il dettaglio operativo.
+
+=== Calendario degli Sprint (Fase RTB)
+// IMPORTANTE: Sostituisci le date segnaposto con quelle reali
 #figure(
   table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr),
-    inset: 10pt,
+    columns: (auto, 1fr, 1fr),
+    inset: 8pt,
+    align: (col, row) => if col == 0 { center + horizon } else { left + horizon },
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    stroke: 0.5pt + luma(200),
     table.header(
-      [*Tipologia Dato*],
-      [*Valore*],
+      text(fill: white, weight: "bold")[Iterazione],
+      text(fill: white, weight: "bold")[Data Inizio],
+      text(fill: white, weight: "bold")[Data Fine],
     ),
-
-    [*Codice*],
-    [RT1],
-    [*Nome*], 
-    [Scarsa conoscenza delle tecnologie],
-    [*Descrizione*], 
-    [Si potrebbe verificare una scarsa conoscenza delle tecnologie scelte per lo sviluppo del progetto, come ad esempio framework, linguaggi di programmazione o strumenti di gestione del codice. Questo potrebbe portare a ritardi nello sviluppo, errori di implementazione o difficoltà nell'integrazione delle componenti software.],
-    [*Mitigazione*], 
-    [Suddivisione del lavoro tale da permettere ai membri del gruppo di specializzarsi in specifiche tecnologie, per poi condividerle con il resto del team al fine di ottenere una conoscenza comune. Utilizzo di risorse online, documentazione ufficiale e tutorial per accelerare l’apprendimento e favorire lo studio autonomo, così da colmare eventuali lacune. L’azienda #def[Var Group] offre inoltre sessioni di formazione su alcune tecnologie e fornisce spunti rilevanti per il progetto.],
-    [*Probabilità di avvenimento*],
-    [Alta],
-    [*Pericolosità delle ripercussioni*],
-    [Medio-Alta],
+    [*Sprint 1*], [[19/12/2025]], [[03/01/2026]],
+    [*Sprint 2*], [[03/01/2026]], [[17/01/2026]],
+    [*Sprint 3*], [[GG/MM/AAAA]], [[GG/MM/AAAA]],
   ),
-  caption: [Informazioni sul rischio RT1],
+  caption: [Calendario degli Sprint pianificati per la fase RTB],
 )
 
-=== RT2: Rischio Tecnologico legato alla scelta errata delle tecnologie
+=== Dettaglio delle attività
+La seguente tabella dettaglia la ripartizione del carico di lavoro. Per ogni artefatto prodotto, vengono specificate le sezioni oggetto di stesura e l'allocazione temporale sugli sprint definiti.
+
+#show figure: set block(breakable: true)
 #figure(
   table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr),
+    fill: (col, row) => if row == 0 { luma(64%) } else if calc.even(row) { luma(96%) } else { white },
+    columns: (1.5fr, 3fr, 1.5fr, 0.8fr),
     inset: 10pt,
+    align: (col, row) => if col == 3 { center + horizon } else { left + top },
+    stroke: 0.5pt + luma(200),
+    
     table.header(
-      [*Tipologia Dato*],
-      [*Valore*],
+      text(fill: white, weight: "bold")[Attività / Artefatto],
+      text(fill: white, weight: "bold")[Descrizione Dettagliata],
+      text(fill: white, weight: "bold")[Periodo],
+      text(fill: white, weight: "bold")[Stato]
     ),
 
-    [*Codice*],
-    [RT2],
-    [*Nome*], 
-    [Scelta errata delle tecnologie],
-    [*Descrizione*], 
-    [Durante la fase di selezione delle tecnologie per il sistema ad agenti #def[Code Guardian], potrebbe essere effettuata una scelta non ottimale che non soddisfa appieno i requisiti del progetto. Questo potrebbe comportare difficoltà nell'implementazione, limitazioni funzionali o problemi di scalabilità in futuro.],
-    [*Mitigazione*], 
-    [Effettuare una valutazione approfondita delle tecnologie disponibili, considerando fattori quali la compatibilità con i requisiti del progetto, la facilità d’uso, la disponibilità di risorse e il supporto della comunità. Mantenere una certa flessibilità nel Piano di Progetto per consentire eventuali cambiamenti tecnologici qualora emergano problemi significativi durante lo sviluppo. L’azienda Var Group offre inoltre supporto attraverso riunioni e strumenti di comunicazione (#def[Slack]) per alcune delle tecnologie descritte nel capitolato.],
-    [*Probabilità di avvenimento*],
-    [Media],
-    [*Pericolosità delle ripercussioni*],
-    [Elevata],
+    // Analisi dei Requisiti
+    [*Analisi dei Requisiti*],
+    [Redazione delle sezioni fondamentali per definire il perimetro del problema:
+    - Introduzione e descrizione del dominio.
+    - Identificazione degli attori (primari e secondari).
+    - Specifica dei Casi d'Uso (*Use Case*) e sottocasi.
+    - Formalizzazione dei Requisiti Funzionali, Qualitativi e Vincolo.], 
+    [- Intro/Attori: *Sprint 1*
+    - Casi d'Uso: *Sprint 1-2-3*
+    - Requisiti: *Sprint 2-3*],
+    [In corso],
+    
+    // Piano di Progetto
+    [*Piano di Progetto*],
+    [Attività di gestione e previsione:
+    - Introduzione e riferimenti.
+    - Analisi approfondita e strategie di gestione dei rischi.
+    - Pianificazione temporale a breve (dettaglio) e lungo termine (strategica).
+    - Stima dei costi e preventivo.],
+    [- Intro/Rischi: *Sprint 1*
+    - Lungo termine: *Sprint 2*
+    - Breve termine: *Sprint 2*],
+    [In corso],
+
+    // Piano di Qualifica
+    [*Piano di Qualifica*],
+    [Definizione della strategia di verifica e validazione:
+    - Obiettivi di qualità di processo e prodotto.
+    - Definizione delle metriche (standard ISO/IEC).
+    - Metodologie di testing (*Unit*, *Integration*, *System*).
+    - Impostazione del Cruscotto di Valutazione e procedure di automiglioramento (*PDCA*).],
+    [- Qualità: *Sprint 1*
+    - Testing: *Sprint 1-2*
+    - Cruscotto: *Sprint 2*],
+    [In corso],
+
+    // Norme di Progetto
+    [*Norme di Progetto*],
+    [Codifica delle regole interne per garantire uniformità:
+    - Introduzione e scopo.
+    - Definizione dei Processi Primari (Sviluppo), di Supporto (Documentazione, Verifica) e Organizzativi (Gestione).
+    - Standard di codifica e convenzioni per il repository.],
+    [- Primari/Supp.: *Sprint 1*
+    - Organizzativi: *Sprint 2*
+    - Sviluppo: *Sprint 1-2*],
+    [In corso],
+
+    // Glossario
+    [*Glossario*],
+    [Redazione incrementale delle definizioni.
+    Ogni membro è responsabile dell'aggiunta immediata di termini tecnici, acronimi o ambigui incontrati durante la stesura degli altri documenti per garantire un vocabolario controllato (#link(<RCO5>)[#underline[RCO5]]).],
+    [Attività trasversale in *tutti gli Sprint*.],
+    [In corso],
+
+    // Proof of Concept
+    [*Sviluppo PoC*],
+    [Realizzazione del prototipo tecnologico per mitigare i rischi #link(<RT1>)[#underline[RT1]] e #link(<RT2>)[#underline[RT2]]:
+    - Studio delle API #def[LLM] e framework per Agenti.
+    - Progettazione architetturale preliminare.
+    - Implementazione di un agente base (Test di fattibilità).],
+    [- Progettazione: *Sprint 2*
+    - Implementazione: *Sprint 2-3*],
+    [Da iniziare],
+
+    // Gestione Processi
+    [*Gestione e Coordinamento*],
+    [Attività continuativa di monitoraggio del progetto:
+    - Svolgimento riunioni interne ed esterne .
+    - Stesura e approvazione dei verbali di riunione.
+    - Verifica avanzamento task rispetto al pianificato.],
+    [Attività trasversale in *tutti gli Sprint*.],
+    [In corso],
+
+    // Presentazione
+    [*Preparazione RTB*],
+    [Attività finale di sintesi per il colloquio:
+    - Realizzazione delle slide di presentazione (supporto visivo).
+    - Simulazione dell'esposizione (*Dry run*) e verifica dei tempi.],
+    [- Realizzazione/Prove: *Sprint 3*],
+    [Da iniziare],
   ),
-  caption: [Informazioni sul rischio RT2],
+  caption: [Dettaglio attività pianificate per la fase RTB],
 )
 
-=== RT3: Rischio Tecnologico legato alla scarsa conoscenza del dominio e dell'IA generativa
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr),
-    inset: 10pt,
-    table.header(
-      [*Tipologia Dato*],
-      [*Valore*],
-    ),
+== Pianificazione a lungo termine (Verso la PB)
+Superata la milestone della RTB, il progetto entrerà nella sua fase operativa più intensa, volta al raggiungimento della *Product Baseline* (#def[PB]).
 
-    [*Codice*],
-    [RT3],
-    [*Nome*], 
-    [Scarsa conoscenza del dominio e dell'IA generativa],
-    [*Descrizione*], 
-    [Le tematiche relative ai #def[LLM] e alle architetture multi-agente non sono state approfondite nel percorso accademico obbligatorio. La mancanza di basi teoriche solide sulla gestione del contesto, del reasoning degli agenti e della sicurezza del codice (*#def[OWASP]*) potrebbe rallentare la fase di progettazione e l'efficacia dell'audit automatico.],
-    [*Mitigazione*], 
-    [Organizzazione di sessioni di auto-formazione sfruttando le risorse fornite nel capitolato. I membri con maggiore esperienza in ambito IA agiranno da mentore per il gruppo. Sarà inoltre fondamentale sfruttare il supporto tecnico offerto dal proponente Var Group, partecipando attivamente alle sessioni di mentoring previste per validare le scelte architetturali.],
-    [*Probabilità di avvenimento*],
-    [Alta],
-    [*Pericolosità delle ripercussioni*],
-    [Media],
-  ),
-  caption: [Informazioni sul rischio RT3],
-)
+In accordo con la strategia di *Rolling Wave Planning*, la pianificazione di dettaglio (suddivisione in sprint e date) per questo periodo verrà consolidata e formalizzata nel *Piano di Progetto v2.0*, che sarà rilasciato a valle del colloquio RTB per recepire eventuali feedback correttivi del committente.
 
-=== RT4: Rischio Tecnologico legato alla inaccuratezza nell'audit e nella valutazione automatica
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr),
-    inset: 10pt,
-    table.header(
-      [*Tipologia Dato*],
-      [*Valore*],
-    ),
+Tuttavia, le linee guida strategiche per lo sviluppo del prodotto sono già definite e strutturate nelle seguenti 4 macro-fasi operative:
 
-    [*Codice*],
-    [RT4],
-    [*Nome*], 
-    [Inaccuratezza nell'audit e nella valutazione automatica],
-    [*Descrizione*], 
-    [Sussiste il rischio che i criteri di valutazione implementati negli agenti producano risultati imprecisi. Ciò potrebbe tradursi in #def[falsi positivi] o, più ravemente, in #def[falsi negativi]. Inoltre, il sistema potrebbe valutare come corretta una remediation che in realtà introduce nuovi bug. Questi errori potrebbero compromettere l'affidabilità del sistema e la fiducia degli utenti nel prodotto finale.],
-    [*Mitigazione*], 
-    [Usare tool di analisi con una comprovata efficacia e validati dalla comunità. Il software permetterà all'utente di revisionare ogni report per accettare, rifiutare o richiedere una nuova generazione delle remediation. Inoltre, il gruppo si impegnerà a testare approfonditamente il sistema con casi di studio noti per identificare e correggere eventuali errori nei criteri di valutazione.],
-    [*Probabilità di avvenimento*],
-    [Media],
-    [*Pericolosità delle ripercussioni*],
-    [Alta],
-  ),
-  caption: [Informazioni sul rischio RT4],
-)
+=== 1. Fase di Consolidamento Tecnologico
+Subito dopo la RTB, il team si concentrerà sulla trasformazione del *Proof of Concept* in un'architettura software solida e scalabile.
+- *Obiettivo:* Definire l'architettura finale (es. Microservizi o Modulare) e le interfacce API stabili.
+- *Attività chiave:*
+  - Refactoring del codice del PoC.
+  - Setup dell'ambiente di integrazione continua CI/CD definitivo.
+  - Selezione definitiva delle librerie di supporto per il sandboxing (#link(<RT9>)[#underline[RT9]]).
 
-== Rischi Individuali
-//breve descrizione(?)
+=== 2. Fase di Sviluppo MVP (Core Features)
+In questa fase verrà realizzato il *Minimum Viable Product* (#def[MVP]), ovvero la versione del software contenente le sole funzionalità essenziali per soddisfare i requisiti obbligatori.
+- *Obiettivo:* Avere un agente funzionante in grado di effettuare l'audit di una repository.
+- *Attività chiave:*
+  - Implementazione del modulo di clonazione e analisi statica.
+  - Integrazione completa con le API #def[LLM] per la generazione dei report.
+  - Implementazione dei meccanismi di sicurezza e isolamento dei processi.
 
-=== RI1: Rischio Individuale legato agli impegni personali
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr),
-    inset: 10pt,
-    table.header(
-      [*Tipologia Dato*],
-      [*Valore*],
-    ),
+=== 3. Fase di Estensione e Perfezionamento
+Una volta stabilizzato il nucleo, verranno sviluppate le funzionalità avanzate e l'interfaccia utente.
+- *Obiettivo:* Completare la copertura dei requisiti desiderabili e opzionali.
+- *Attività chiave:*
+  - Sviluppo del modulo di *Remediation* (correzione automatica del codice).
+  - Implementazione della Dashboard (Frontend) per la visualizzazione grafica dei risultati.
+  - Ottimizzazione dei costi delle API tramite caching delle risposte (#link(<RT5>)[#underline[RT5]]).
 
-    [*Codice*],
-    [RI1],
-    [*Nome*], 
-    [Impegni personali],
-    [*Descrizione*], 
-    [Un membro del team potrebbe dover affrontare impegni personali, come esami universitari, lavoro part-time o altre responsabilità che limitano il tempo e l'energia disponibili per il progetto. Questo potrebbe influire sulla capacità del gruppo di rispettare le scadenze e completare le attività pianificate.],
-    [*Mitigazione*], 
-    [Comunicazione tempestiva degli impegni personali da parte dei membri del team, in modo da poter pianificare le attività tenendo conto delle loro disponibilità. Suddivisione del lavoro in modo equo, considerando le capacità e i vincoli di ciascun membro del team. Utilizzo di strumenti di gestione del progetto per monitorare i progressi e identificare eventuali ritardi causati da impegni personali.],
-    [*Probabilità di avvenimento*],
-    [Medio-Alta],
-    [*Pericolosità delle ripercussioni*],
-    [Medio-Alta],
-  ),
-  caption: [Informazioni sul rischio RI1],
-)
+=== 4. Fase di Validazione e Rilascio
+L'ultimo periodo è dedicato esclusivamente alla qualità e alla produzione della documentazione finale.
+- *Obiettivo:* Garantire che il prodotto sia privo di bug critici e pronto per l'accettazione.
+- *Attività chiave:*
+  - Esecuzione intensiva dei Test di Sistema e di Accettazione.
+  - Stesura dei Manuali Utente e Manuali Sviluppatore.
+  - Preparazione della presentazione finale per la Revisione di Accettazione.
+#linebreak()
+La schedulazione sopra esposta rappresenta la linea guida temporale che il gruppo si impegna a seguire.
+Tuttavia, essendo questo un piano dinamico basato su approccio iterativo, la pianificazione potrà subire adattamenti in risposta ai feedback ricevuti durante le revisioni o al manifestarsi dei rischi previsti.
 
-=== RI2: Rischio Individuale legato ad avvenimenti personali gravi
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr),
-    inset: 10pt,
-    table.header(
-      [*Tipologia Dato*],
-      [*Valore*],
-    ),
-
-    [*Codice*],
-    [RI2],
-    [*Nome*], 
-    [Avvenimenti personali gravi],
-    [*Descrizione*], 
-    [Un membro del team potrebbe dover affrontare avvenimenti personali gravi, come problemi di salute o situazioni familiari critiche, che potrebbero diminuire e talvolta impedire il contributo al progetto per un periodo prolungato. Questo potrebbe influire sulla capacità del gruppo di rispettare le scadenze e completare le attività pianificate.],
-    [*Mitigazione*], 
-    [Promuovere un ambiente di supporto all’interno del team, incoraggiando una comunicazione aperta in merito a eventuali difficoltà personali. Il #def[responsabile] dovrebbe essere informato tempestivamente, così da poter riassegnare le responsabilità e adattare il piano di lavoro, escludendo temporaneamente il membro interessato per il periodo necessario. Al rientro, il membro del team dovrà recuperare il lavoro eventualmente non svolto, con il supporto degli altri componenti del gruppo.],
-    [*Probabilità di avvenimento*],
-    [Bassa],
-    [*Pericolosità delle ripercussioni*],
-    [Alta],
-  ),
-  caption: [Informazioni sul rischio RI2],
-)
-
-=== RI3: Rischio Individuale legato al ritiro dal progetto
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr),
-    inset: 10pt,
-    table.header(
-      [*Tipologia Dato*],
-      [*Valore*],
-    ),
-
-    [*Codice*],
-    [RI3],
-    [*Nome*], 
-    [Ritiro dal progetto],
-    [*Descrizione*], 
-    [Un membro potrebbe ritirarsi formalmente dal progetto o dal corso di studi, causando una riduzione significativa delle risorse umane disponibili. Questo potrebbe influire sulla capacità del gruppo di rispettare le scadenze e completare le attività pianificate.],
-    [*Mitigazione*], 
-    [In caso di abbandono di un componente, il team si riorganizzerà per gestire le attività programmate con una forza lavoro ridotta. Si avvierà un confronto con il proponente per scremare le funzionalità secondarie e focalizzarsi sugli obiettivi primari dell'audit e della remediation. Il responsabile aggiornerà la ripartizione dei compiti per bilanciare l'impegno orario dei membri rimanenti e garantire la continuità dello sviluppo.],
-    [*Probabilità di avvenimento*],
-    [Bassa],
-    [*Pericolosità delle ripercussioni*],
-    [Elevata],
-  ),
-  caption: [Informazioni sul rischio RI3],
-)
-
-== Rischi Collettivi Organizzativi //chiedi se hanno senso le categotorie
-//breve descrizione(?)
-
-=== RCO1: Rischio Collettivo Organizzativo legato alle divergenze interne 
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr),
-    inset: 10pt,
-    table.header(
-      [*Tipologia Dato*],
-      [*Valore*],
-    ),
-
-    [*Codice*],
-    [RCO1],
-    [*Nome*], 
-    [Divergenze interne al gruppo],
-    [*Descrizione*], 
-    [Questo rischio riguarda la possibilità che all'interno del team si verifichino divergenze di opinioni o difficoltà nella collaborazione tra i vari membri del gruppo. Tali situazioni potrebbero influire negativamente sulla produttività del gruppo, rallentare il progresso del progetto e compromettere la qualità del lavoro svolto.],
-    [*Mitigazione*], 
-    [Promuovere un ambiente di supporto all’interno del team, incoraggiando una comunicazione aperta. Qualora i conflitti non si risolvessero autonomamente tra gli interessati, il responsabile interverrà per mediare e individuare soluzioni condivise. Nei casi più critici, si potrà ricorrere al supporto del docente],
-    [*Probabilità di avvenimento*],
-    [Media],
-    [*Pericolosità delle ripercussioni*],
-    [Medio-Bassa],
-  ),
-  caption: [Informazioni sul rischio RCO1],
-)
-
-=== RCO2: Rischio Collettivo Organizzativo legato alla sottostima delle attività
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr),
-    inset: 10pt,
-    table.header(
-      [*Tipologia Dato*],
-      [*Valore*],
-    ),
-
-    [*Codice*],
-    [RCO2],
-    [*Nome*], 
-    [Sottostima di attività],
-    [*Descrizione*], 
-    [Questo rischio riguarda la possibilità che il gruppo sottovaluti l'entità del lavoro richiesto per completare un'attività pianificata e che quindi richieda più tempo del previsto. Questo potrebbe portare a ritardi, sovraccarico di lavoro e conseguenze negative sulla qualità del progetto.],
-    [*Mitigazione*], 
-    [Il membro o i membri responsabili dell’attività coinvolta dovranno avvisare il prima possibile gli altri componenti del gruppo in merito al possibile ritardo. A seguito di una valutazione condivisa, si procederà, se necessario, ad assegnare un ulteriore membro all’attività per rientrare nei tempi previsti, posticipando eventualmente attività di durata più breve e più facili da gestire.],
-    [*Probabilità di avvenimento*],
-    [Alta],
-    [*Pericolosità delle ripercussioni*],
-    [Elevata],
-  ),
-  caption: [Informazioni sul rischio RCO2],
-)
-
-=== RCO3: Rischio Collettivo Organizzativo legato a ritardi o incomprensioni nella comunicazione con la proponente
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr),
-    inset: 10pt,
-    table.header(
-      [*Tipologia Dato*],
-      [*Valore*],
-    ),
-
-    [*Codice*],
-    [RCO3],
-    [*Nome*], 
-    [Ritardi o incomprensioni nella comunicazione con la proponente],
-    [*Descrizione*], 
-    [Possibili ritardi nelle risposte da parte di Var Group o interpretazioni errate dei feedback forniti durante le sessioni di mentoring. Questo potrebbe portare a sviluppare funzionalità non in linea con le aspettative della proponente.],
-    [*Mitigazione*], 
-    [Programmazione di incontri periodici fissi e redazione di verbali (verbali esterni) dopo ogni incontro per formalizzare quanto deciso. Uso di canali di comunicazione diretti (Slack) per chiarimenti rapidi. In caso di dubbi sull'interpretazione dei feedback, il gruppo si impegnerà a richiedere chiarimenti tempestivi alla proponente per evitare incomprensioni. Nel caso in cui la proponente non risponda entro tempi ragionevoli il gruppo contattera il Prof. Vardanega per consigli su come procedere.],
-    [*Probabilità di avvenimento*],
-    [Media],
-    [*Pericolosità delle ripercussioni*],
-    [Media],
-  ),
-  caption: [Informazioni sul rischio RCO3],
-)
-
-=== RCO4: Rischio Collettivo Organizzativo legato alla disomogeneità nella produzione della documentazione
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr),
-    inset: 10pt,
-    table.header(
-      [*Tipologia Dato*],
-      [*Valore*],
-    ),
-
-    [*Codice*],
-    [RCO4],
-    [*Nome*], 
-    [Disomogeneità nella produzione della documentazione],
-    [*Descrizione*], 
-    [Dato che i membri del team hanno stili di scrittura diversi, i documenti (Piano di Progetto, #def[Norme di Progetto], ecc.) potrebbero risultare frammentati, poco coerenti o con terminologie discordanti. Questo potrebbe compromettere la chiarezza e la professionalità della documentazione consegnata.],
-    [*Mitigazione*], 
-    [Definizione rigorosa dei template riguardante l'aspetto visivo, l'impaginazione e la formattazione del testo. Ogni documento deve passare per una fase di verifica incrociata, un membro diverso dal redattore controlla il lavoro, prima di essere considerato definitivo. Inoltre, viene stabilito un glossario condiviso per uniformare la terminologia tecnica utilizzata nei documenti.],
-    [*Probabilità di avvenimento*],
-    [Media],
-    [*Pericolosità delle ripercussioni*],
-    [Medio-Bassa],
-  ),
-  caption: [Informazioni sul rischio RCO4],
-)
-
+La fattibilità di tale piano è strettamente correlata alla disponibilità e alla gestione efficiente delle risorse umane. Nella sezione successiva, verrà quindi dettagliato il preventivo dei costi e la ripartizione dei ruoli necessaria per sostenere le attività pianificate nel rispetto del budget prefissato.
 #pagebreak()
-
+#pagebreak()
 = Pianificazione nel lungo termine
 == Obiettivi di pianificazione
 La pianificazione a lungo termine ha l'obiettivo di delineare le attività principali e le milestone fondamentali per il completamento del progetto Code Guardian.

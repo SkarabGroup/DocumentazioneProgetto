@@ -10,7 +10,8 @@
   (
     "2026/01/10",
     "0.9.0",
-    "Aggiunti termini Audit, BDUF, Consuntivo, Glossario, Gruppo di lavoro, Incrementale, Monitoraggio, Pianificazione, Preventivo, Remediation, Risorse umane, Schedulazione, Stakeholder, Stima, Task"
+    "Aggiunti termini Analisi Statica, API Contract, Bus Factor, Caching, Containerizzazione, Data Leakage, DevOps, Gold Plating, Human-in-the-loop, Infrastructure as Code, Integrazione Continua, Mock, Optimism Bias, Pair Programming, Proof of Concept, Stato Avanzamento Lavori, T-Shaped Skills",
+    members.suar
   ),
   (
     "2026/01/02", 
