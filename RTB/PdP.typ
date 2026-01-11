@@ -1,14 +1,14 @@
 #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
-#let versione = "v0.6.0"
+#let versione = "v0.6.1"
 
 #titlePage("Piano di Progetto", versione)
 #set page(numbering: "1", header: header("Piano di Progetto"), footer: footer())
 #let history = (
   (
     "2026/01/11",
-    "0.7.0",
-    "Rielaborazione sezione di pianificazione a breve a lungo termine",
+    "0.6.1",
+    "Rielaborazione sezione di pianificazione a breve a lungo termine. Rielaborazione sezione di monitoraggio preventivo/consuntivo",
     members.suar
   ),
   (
@@ -142,6 +142,7 @@ La versione più recente del Glossario è disponibile al seguente indirizzo: #un
 - *Dispense del corso di Ingegneria del Software - Gestione di progetto* #linebreak()
   #underline[https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T04.pdf]
 
+#pagebreak()
 = Analisi dei Rischi
 L'attività di gestione dei rischi è un processo iterativo e continuo, indispensabile per garantire il successo del progetto #def[Code Guardian]. Essa consiste nell'identificazione, analisi e pianificazione delle risposte agli eventi avversi che potrebbero impattare negativamente su tempi, costi o qualità del prodotto software.
 Il processo di analisi viene ripetuto all'inizio di ogni #def[Sprint] e in corrispondenza delle principali #def[Milestone], permettendo al #def[gruppo di lavoro] di aggiornare le strategie di mitigazione in base all'evoluzione del progetto.
@@ -180,6 +181,33 @@ Per facilitare l'analisi e l'assegnazione delle responsabilità, i rischi sono r
 - *RT (Rischi Tecnologici)*: Criticità legate alle tecnologie scelte (es. #def[LLM], #def[Agenti]), agli strumenti di sviluppo e all'infrastruttura hardware/software.
 - *RI (Rischi Interpersonali)*: Problematiche interne al #def[team di progetto], quali disponibilità dei membri, comunicazione e conflitti.
 - *RCO (Rischi Costi e Organizzativi)*: Rischi derivanti da stime errate, pianificazione temporale (#def[schedulazione]) e vincoli esterni.
+
+== Gestione e Monitoraggio dei Rischi
+
+L'analisi dei rischi non rappresenta un'attività statica limitata alla fase di avvio, bensì un processo ciclico di controllo che accompagnerà l'intero ciclo di vita del progetto.
+
+=== Procedura operativa
+Il gruppo adotterà la seguente procedura formale nel caso in cui un rischio identificato dovesse manifestarsi o dovessero emergerne di nuovi non previsti:
+
++ *Rilevamento (Detection):*
+  Ogni membro del team è tenuto a segnalare tempestivamente al *Responsabile di Progetto* l'insorgere di una problematica tecnica o organizzativa, oppure il superamento di una soglia di allarme (es. ritardo su un task superiore al 20%).
+
++ *Registrazione:*
+  L'evento viene tracciato formalmente nel *Verbale Interno* della riunione più vicina. Se il rischio comporta modifiche operative immediate, viene aperto o aggiornato il relativo ticket sulla piattaforma di gestione (#def[GitHub] Project).
+
++ *Attivazione della Contingenza:*
+  Il Responsabile, valutata la criticità, attiva la strategia di mitigazione o il piano di contingenza definito nelle schede di rischio (es. riallocazione delle risorse, riduzione dello scopo opzionale).
+
++ *Rendicontazione (Consuntivo):*
+  Al termine dello #def[Sprint] o della fase di progetto (es. #def[RTB]), l'accaduto viene documentato nella sezione *Consuntivi* del Piano di Progetto, analizzando:
+  - L'impatto effettivo in termini di ore e costi (scostamento dal preventivo).
+  - L'efficacia della contromisura adottata.
+  - La necessità di aggiornare la probabilità di ricorrenza per il futuro.
+
++ *Aggiornamento del Piano:*
+  Sulla base dell'esperienza maturata ("Lesson Learned"), il Registro dei Rischi viene revisionato: i rischi non più attuali vengono chiusi, le probabilità ricalibrate e i nuovi rischi emersi vengono catalogati.
+
+#pagebreak()
 
 == Rischi Tecnologici (RT)
 Questa categoria raggruppa le criticità derivanti dalla natura tecnica e innovativa del progetto.
@@ -294,6 +322,7 @@ In questa sezione vengono analizzati i rischi legati allo stack tecnologico, all
   "Alto"
 )
 
+#pagebreak()
 == Rischi Interpersonali (RI)
 Questa categoria analizza le criticità legate alle risorse umane, alle dinamiche di gruppo e alla gestione dei carichi di lavoro. Essendo il team composto da studenti con impegni paralleli, la gestione della disponibilità e della comunicazione rappresenta un fattore critico per il successo del progetto.
 
@@ -358,7 +387,9 @@ Questa categoria analizza le criticità legate alle risorse umane, alle dinamich
   "Alta",
   "Medio"
 )
-== Rischi Collettivi Organizzativi (RCO)
+
+#pagebreak()
+== Rischi dei Costi ed Organizzativi (RCO)
 Questa categoria raggruppa le criticità legate alla pianificazione temporale, alla gestione delle risorse (ore-persona), al rapporto con gli stakeholder esterni e alla produzione della documentazione. Sono rischi che impattano direttamente sull'efficienza del processo produttivo e sul rispetto delle scadenze.
 
 === RCO1: Sottostima e pianificazione <RCO1>
@@ -421,36 +452,10 @@ Questa categoria raggruppa le criticità legate alla pianificazione temporale, a
   "Basso"
 )
 
-== Gestione e Monitoraggio dei Rischi
-
-L'analisi dei rischi non rappresenta un'attività statica limitata alla fase di avvio, bensì un processo ciclico di controllo che accompagnerà l'intero ciclo di vita del progetto.
-
-=== Procedura operativa
-Il gruppo adotterà la seguente procedura formale nel caso in cui un rischio identificato dovesse manifestarsi o dovessero emergerne di nuovi non previsti:
-
-+ *Rilevamento (Detection):*
-  Ogni membro del team è tenuto a segnalare tempestivamente al *Responsabile di Progetto* l'insorgere di una problematica tecnica o organizzativa, oppure il superamento di una soglia di allarme (es. ritardo su un task superiore al 20%).
-
-+ *Registrazione:*
-  L'evento viene tracciato formalmente nel *Verbale Interno* della riunione più vicina. Se il rischio comporta modifiche operative immediate, viene aperto o aggiornato il relativo ticket sulla piattaforma di gestione (#def[GitHub] Project).
-
-+ *Attivazione della Contingenza:*
-  Il Responsabile, valutata la criticità, attiva la strategia di mitigazione o il piano di contingenza definito nelle schede di rischio (es. riallocazione delle risorse, riduzione dello scopo opzionale).
-
-+ *Rendicontazione (Consuntivo):*
-  Al termine dello #def[Sprint] o della fase di progetto (es. #def[RTB]), l'accaduto viene documentato nella sezione *Consuntivi* del Piano di Progetto, analizzando:
-  - L'impatto effettivo in termini di ore e costi (scostamento dal preventivo).
-  - L'efficacia della contromisura adottata.
-  - La necessità di aggiornare la probabilità di ricorrenza per il futuro.
-
-+ *Aggiornamento del Piano:*
-  Sulla base dell'esperienza maturata ("Lesson Learned"), il Registro dei Rischi viene revisionato: i rischi non più attuali vengono chiusi, le probabilità ricalibrate e i nuovi rischi emersi vengono catalogati.
 
 #pagebreak()
 
-= WORK IN PROGRESS !!!
-= Pianificazione temporale
-
+= Strategie di pianificazione del ciclo di vita
 In questa sezione viene descritta la #def[schedulazione] delle attività di progetto, necessaria per garantire il rispetto delle scadenze e la corretta allocazione delle risorse.
 
 Coerentemente con quanto emerso nell'analisi dei rischi (in particolare #link(<RCO1>)[#underline[\[RCO1\]]] e #link(<RT2>)[#underline[\[RT2\]]]), la pianificazione adotta un approccio basato sulla strategia del *Rolling Wave Planning* (pianificazione a ondata). Questo metodo prevede una pianificazione estremamente dettagliata per le attività a breve termine e una pianificazione ad alto livello per le fasi successive, che verrà raffinata progressivamente man mano che il progetto avanza.
@@ -490,6 +495,13 @@ Le attività sono organizzate in *Sprint* (iterazioni) di durata variabile. Di s
   caption: [Calendario degli Sprint pianificati per la fase RTB],
 )
 
+=== Strategia di rispetto delle scadenze
+Per garantire il rispetto delle milestone ufficiali (#def[RTB] e #def[PB]) e mitigare il rischio di ritardi (#link(<RCO1>)[#underline[RCO1]]), il gruppo ha adottato una strategia basata su *scadenze interne*.
+Ogni Sprint termina con una *Internal Review* fissata con un anticipo di almeno 2-3 giorni rispetto alla scadenza reale o alla riunione con il proponente. Questo margine temporale (*Slack Time*) ha la duplice funzione di:
+1.  Permettere l'assorbimento di eventuali imprevisti senza impattare sulla consegna ufficiale.
+2.  Garantire il tempo necessario per una revisione incrociata dei documenti e del codice, assicurando che il rilascio rispetti gli standard di qualità prefissati.
+La fattibilità di tale piano è strettamente correlata alla disponibilità e alla gestione efficiente delle risorse umane. Nella sezione successiva, verrà quindi dettagliato il preventivo dei costi e la ripartizione dei ruoli necessaria per sostenere le attività pianificate nel rispetto del budget prefissato.
+
 === Dettaglio delle attività
 La seguente tabella dettaglia la ripartizione del carico di lavoro. Per ogni artefatto prodotto, vengono specificate le sezioni oggetto di stesura e l'allocazione temporale sugli sprint definiti.
 
@@ -497,7 +509,7 @@ La seguente tabella dettaglia la ripartizione del carico di lavoro. Per ogni art
 #figure(
   table(
     fill: (col, row) => if row == 0 { luma(64%) } else if calc.even(row) { luma(96%) } else { white },
-    columns: (1.5fr, 3fr, 1.5fr, 0.8fr),
+    columns: (1.5fr, 3fr, 1.5fr, 1.3fr),
     inset: 10pt,
     align: (col, row) => if col == 3 { center + horizon } else { left + top },
     stroke: 0.5pt + luma(200),
@@ -509,14 +521,13 @@ La seguente tabella dettaglia la ripartizione del carico di lavoro. Per ogni art
       text(fill: white, weight: "bold")[Stato]
     ),
 
-    // Analisi dei Requisiti
+    // Analisi dei Requisiti (AGGIORNATO CON STANDARDS)
     [*Analisi dei Requisiti*],
-    [Redazione delle sezioni fondamentali per definire il perimetro del problema:
-    - Introduzione e descrizione del dominio.
-    - Identificazione degli attori (primari e secondari).
-    - Specifica dei Casi d'Uso (*Use Case*) e sottocasi.
-    - Formalizzazione dei Requisiti Funzionali, Qualitativi e Vincolo.], 
-    [- Intro/Attori: *Sprint 1*
+    [Formalizzazione secondo i processi ISO/IEC/IEEE 29148 e struttura IEEE 830:
+    - *Metodologia:* Fonti e individuazione attori/UC.
+    - *Casi d'Uso:* Specifica UML con scenari (principali/alternativi).
+    - *Requisiti:* Classificazione dettagliata in: Funzionali, Prestazionali, Usabilità, Interfaccia, Logici del DB, Limitazioni di Design e Attributi del Software di Sistema.], 
+    [- Metodo/Attori: *Sprint 1*
     - Casi d'Uso: *Sprint 1-2-3*
     - Requisiti: *Sprint 2-3*],
     [In corso],
@@ -531,7 +542,7 @@ La seguente tabella dettaglia la ripartizione del carico di lavoro. Per ogni art
     [- Intro/Rischi: *Sprint 1*
     - Lungo termine: *Sprint 2*
     - Breve termine: *Sprint 2*],
-    [In corso],
+    [In fase di completamento],
 
     // Piano di Qualifica
     [*Piano di Qualifica*],
@@ -543,18 +554,18 @@ La seguente tabella dettaglia la ripartizione del carico di lavoro. Per ogni art
     [- Qualità: *Sprint 1*
     - Testing: *Sprint 1-2*
     - Cruscotto: *Sprint 2*],
-    [In corso],
+    [In attesa di revisione],
 
-    // Norme di Progetto
+    // Norme di Progetto (AGGIORNATO CON SLACK/JIRA)
     [*Norme di Progetto*],
-    [Codifica delle regole interne per garantire uniformità:
-    - Introduzione e scopo.
-    - Definizione dei Processi Primari (Sviluppo), di Supporto (Documentazione, Verifica) e Organizzativi (Gestione).
-    - Standard di codifica e convenzioni per il repository.],
-    [- Primari/Supp.: *Sprint 1*
+    [Codifica regole e setup infrastruttura:
+    - *Strumenti:* Adozione di #def[Slack] per la comunicazione esterna e setup di #def[Jira] per la rendicontazione dei task.
+    - *Processi:* Definizione processi primari, di supporto e organizzativi.
+    - *Sviluppo:* Standard di codifica e convenzioni per il repository.],
+    [- Strumenti/Proc.: *Sprint 1*
     - Organizzativi: *Sprint 2*
     - Sviluppo: *Sprint 1-2*],
-    [In corso],
+    [In attesa di revisione],
 
     // Glossario
     [*Glossario*],
@@ -569,16 +580,16 @@ La seguente tabella dettaglia la ripartizione del carico di lavoro. Per ogni art
     - Studio delle API #def[LLM] e framework per Agenti.
     - Progettazione architetturale preliminare.
     - Implementazione di un agente base (Test di fattibilità).],
-    [- Progettazione: *Sprint 2*
-    - Implementazione: *Sprint 2-3*],
+    [- Progettazione: *Sprint 2-3*
+    - Implementazione: *Sprint 3*],
     [Da iniziare],
 
     // Gestione Processi
     [*Gestione e Coordinamento*],
     [Attività continuativa di monitoraggio del progetto:
-    - Svolgimento riunioni interne ed esterne .
+    - Svolgimento riunioni interne ed esterne.
     - Stesura e approvazione dei verbali di riunione.
-    - Verifica avanzamento task rispetto al pianificato.],
+    - Verifica avanzamento task su Jira rispetto al pianificato.],
     [Attività trasversale in *tutti gli Sprint*.],
     [In corso],
 
@@ -592,7 +603,6 @@ La seguente tabella dettaglia la ripartizione del carico di lavoro. Per ogni art
   ),
   caption: [Dettaglio attività pianificate per la fase RTB],
 )
-
 == Pianificazione a lungo termine (Verso la PB)
 Superata la milestone della RTB, il progetto entrerà nella sua fase operativa più intensa, volta al raggiungimento della *Product Baseline* (#def[PB]).
 
@@ -600,42 +610,387 @@ In accordo con la strategia di *Rolling Wave Planning*, la pianificazione di det
 
 Tuttavia, le linee guida strategiche per lo sviluppo del prodotto sono già definite e strutturate nelle seguenti 4 macro-fasi operative:
 
-=== 1. Fase di Consolidamento Tecnologico
-Subito dopo la RTB, il team si concentrerà sulla trasformazione del *Proof of Concept* in un'architettura software solida e scalabile.
-- *Obiettivo:* Definire l'architettura finale (es. Microservizi o Modulare) e le interfacce API stabili.
+==== 1. Fase di Analisi Post-PoC e Progettazione Architetturale
+A valle della RTB, il team effettuerà una transizione critica dallo sviluppo sperimentale del prototipo alla progettazione ingegneristica del prodotto finale.
+- *Obiettivo:* Consolidare la conoscenza tecnologica acquisita e definire i blueprint del sistema.
 - *Attività chiave:*
-  - Refactoring del codice del PoC.
-  - Setup dell'ambiente di integrazione continua CI/CD definitivo.
-  - Selezione definitiva delle librerie di supporto per il sandboxing (#link(<RT9>)[#underline[RT9]]).
+  - *Analisi critica del PoC:* Valutazione delle soluzioni tecniche adottate nel prototipo per confermarne la fattibilità o identificare approcci alternativi necessari per la versione finale.
+  - *Technical Design:* Definizione dell'architettura logica e dei componenti tramite diagrammi UML (Classi, Sequenza, Attività).
+  - *Progettazione Dati:* Definizione degli schemi per la gestione della persistenza e dei flussi di informazione tra l'agente e i modelli #def[LLM].
+  - *Infrastruttura:* Setup dell'ambiente di sviluppo definitivo e della pipeline di Continuous Integration e Continuous Deployment.
 
-=== 2. Fase di Sviluppo MVP (Core Features)
+==== 2. Fase di Sviluppo MVP e Codifica Core
 In questa fase verrà realizzato il *Minimum Viable Product* (#def[MVP]), ovvero la versione del software contenente le sole funzionalità essenziali per soddisfare i requisiti obbligatori.
-- *Obiettivo:* Avere un agente funzionante in grado di effettuare l'audit di una repository.
+- *Obiettivo:* Implementazione del nucleo funzionale in un ambiente controllato, sicuro e testabile.
 - *Attività chiave:*
-  - Implementazione del modulo di clonazione e analisi statica.
-  - Integrazione completa con le API #def[LLM] per la generazione dei report.
-  - Implementazione dei meccanismi di sicurezza e isolamento dei processi.
+  - Scrittura del codice per il modulo di analisi statica, clonazione repository e integrazione agenti.
+  - Implementazione dei meccanismi di sicurezza e isolamento dei processi (sandboxing) analizzati nella fase RTB (#link(<RT9>)[#underline[RT9]]).
+  - Esecuzione sistematica di *Unit Test* e *Integration Test* contestualmente allo sviluppo per garantire la solidità del codice.
 
-=== 3. Fase di Estensione e Perfezionamento
-Una volta stabilizzato il nucleo, verranno sviluppate le funzionalità avanzate e l'interfaccia utente.
-- *Obiettivo:* Completare la copertura dei requisiti desiderabili e opzionali.
+==== 3. Fase di Estensione e Perfezionamento
+Una volta stabilizzato il nucleo, verranno sviluppate le funzionalità avanzate e l'interfaccia utente finale.
+- *Obiettivo:* Completare la copertura dei requisiti desiderabili e ottimizzare l'esperienza utente.
 - *Attività chiave:*
-  - Sviluppo del modulo di *Remediation* (correzione automatica del codice).
-  - Implementazione della Dashboard (Frontend) per la visualizzazione grafica dei risultati.
-  - Ottimizzazione dei costi delle API tramite caching delle risposte (#link(<RT5>)[#underline[RT5]]).
+  - Sviluppo del modulo di *Remediation* (correzione automatica del codice) e della Dashboard (Frontend).
+  - Ottimizzazione delle performance e gestione dei costi delle API tramite caching delle risposte (#link(<RT5>)[#underline[RT5]]).
+  - Revisione e allineamento dei diagrammi di design per riflettere l'implementazione effettiva del software.
 
-=== 4. Fase di Validazione e Rilascio
-L'ultimo periodo è dedicato esclusivamente alla qualità e alla produzione della documentazione finale.
-- *Obiettivo:* Garantire che il prodotto sia privo di bug critici e pronto per l'accettazione.
+==== 4. Fase di Validazione e Rilascio
+L'ultimo periodo è dedicato esclusivamente alla qualità del prodotto e alla produzione della documentazione finale per la consegna.
+- *Obiettivo:* Garantire la conformità totale ai requisiti e la stabilità del sistema per l'accettazione.
 - *Attività chiave:*
-  - Esecuzione intensiva dei Test di Sistema e di Accettazione.
-  - Stesura dei Manuali Utente e Manuali Sviluppatore.
-  - Preparazione della presentazione finale per la Revisione di Accettazione.
-#linebreak()
-La schedulazione sopra esposta rappresenta la linea guida temporale che il gruppo si impegna a seguire.
-Tuttavia, essendo questo un piano dinamico basato su approccio iterativo, la pianificazione potrà subire adattamenti in risposta ai feedback ricevuti durante le revisioni o al manifestarsi dei rischi previsti.
+  - Esecuzione intensiva di *System Test* e *Acceptance Test* con il proponente.
+  - Stesura della documentazione tecnica finale: Manuale Utente e Manuale Sviluppatore.
+  - Chiusura del Cruscotto di Valutazione della qualità e preparazione della presentazione finale.
 
-La fattibilità di tale piano è strettamente correlata alla disponibilità e alla gestione efficiente delle risorse umane. Nella sezione successiva, verrà quindi dettagliato il preventivo dei costi e la ripartizione dei ruoli necessaria per sostenere le attività pianificate nel rispetto del budget prefissato.
+#pagebreak()
+= Preventivo e Risorse
+
+In questa sezione viene presentata la stima dei costi e la pianificazione dell'allocazione delle risorse umane.
+Il preventivo è stato calcolato tenendo conto dei vincoli di budget e della scadenza finale di progetto fissata per il *21/03/2026*.
+
+== Preventivo Totale
+Il gruppo è composto da *7 membri*. Ciascun componente si impegna a rendicontare un monte ore produttivo pari a *90 ore*, per un totale complessivo di *630 ore* di progetto.
+
+Il costo totale stimato ammonta a *€ 12.845,00*.
+Tale preventivo rispetta il vincolo di costo imposto dal capitolato e garantisce una distribuzione equa del carico di lavoro e la rotazione dei ruoli tra tutti i componenti.
+
+Di seguito è riportata la ripartizione totale delle ore per ruolo sull'intero ciclo di vita (da avvio a #def[PB]).
+
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else if col == 0 { luma(96%) } else { white },
+    columns: (1.5fr, 1fr, 1fr, 1fr),
+    inset: 10pt,
+    align: (col, row) => if col == 0 { left + horizon } else { center + horizon },
+    stroke: 0.5pt + luma(200),
+    
+    table.header(
+      text(fill: white, weight: "bold")[Ruolo],
+      text(fill: white, weight: "bold")[Costo Orario],
+      text(fill: white, weight: "bold")[Ore Totali],
+      text(fill: white, weight: "bold")[Costo Totale]
+    ),
+
+    [Responsabile], [30 €/h], [63], [€ 1.890,00],
+    [Amministratore], [20 €/h], [56], [€ 1.120,00],
+    [Analista], [25 €/h], [91], [€ 2.275,00],
+    [Progettista], [25 €/h], [126], [€ 3.150,00],
+    [Programmatore], [15 €/h], [147], [€ 2.205,00],
+    [Verificatore], [15 €/h], [147], [€ 2.205,00],
+    
+    table.cell(colspan: 2, fill: luma(240))[*Totale*],
+    table.cell(fill: luma(240))[*630*],
+    table.cell(fill: luma(240))[*€ 12.845,00*],
+  ),
+  caption: [Distribuzione totale delle ore e dei costi per ruolo],
+)
+
+== Preventivo Fase RTB
+La prima fase del progetto, che si conclude con la milestone *Requirements and Technology Baseline* (#def[RTB]), prevede un impegno focalizzato prevalentemente sull'Analisi dei Requisiti, sulla predisposizione della documentazione normativa e sulla realizzazione del Proof of Concept.
+
+Il periodo rendicontato per questa fase va dal *19/12/2025* al *06/02/2026*.
+La seguente tabella illustra i costi preventivati specificamente per il raggiungimento della RTB. Le ore sono state stimate assegnando un peso maggiore ai ruoli documentali e di analisi, tipici di questa fase iniziale.
+
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    columns: (1fr, 1fr, 1fr),
+    inset: 10pt,
+    align: center + horizon,
+    stroke: 0.5pt + luma(200),
+    
+    table.header(
+      text(fill: white, weight: "bold")[Ruolo],
+      text(fill: white, weight: "bold")[Ore Previste (RTB)],
+      text(fill: white, weight: "bold")[Costo Parziale],
+    ),
+
+    // CALCOLI EFFETTUATI PER TE (Circa 32% del totale, focus su Analisi)
+    [Responsabile], [21], [€ 630,00],   // Gestione avvio e riunioni
+    [Amministratore], [25], [€ 500,00], // Setup strumenti, Norme, Verbali
+    [Analista], [65], [€ 1.625,00],     // Analisi Requisiti (MOLTO ALTA ORA)
+    [Progettista], [20], [€ 500,00],    // Solo architettura PoC
+    [Programmatore], [30], [€ 450,00],  // Codice del PoC
+    [Verificatore], [44], [€ 660,00],   // Verifica di tanti documenti
+    
+    table.cell(colspan: 1, fill: luma(240))[*Totale RTB*],
+    table.cell(fill: luma(240))[*205*],
+    table.cell(fill: luma(240))[*€ 4.365,00*],
+  ),
+  caption: [Preventivo di periodo per la fase RTB],
+)
+
+== Stima per la fase Product Baseline (PB)
+La pianificazione di dettaglio per la fase di *Product Baseline* sarà consolidata al termine della RTB (#def[Rolling Wave Planning]).
+Tuttavia, il budget residuo è stato interamente allocato per garantire la copertura delle attività di sviluppo del prodotto (#def[MVP]), test di sistema e rilascio finale.
+
+Le risorse a finire sono calcolate per differenza rispetto al preventivo RTB:
+$ "Risorse PB" = "Totale Progetto" - "Preventivo RTB" $
+
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    columns: (1fr, 1fr, 1fr),
+    inset: 10pt,
+    align: center + horizon,
+    stroke: 0.5pt + luma(200),
+    
+    table.header(
+      text(fill: white, weight: "bold")[Ruolo],
+      text(fill: white, weight: "bold")[Ore Allocate (PB)],
+      text(fill: white, weight: "bold")[Budget Residuo],
+    ),
+
+    // CALCOLI DIFFERENZIALI (Totale - RTB)
+    [Responsabile], [42], [€ 1.260,00],
+    [Amministratore], [31], [€ 620,00],
+    [Analista], [26], [€ 650,00],
+    [Progettista], [106], [€ 2.650,00], // Qui si progetta forte
+    [Programmatore], [117], [€ 1.755,00], // Qui si codifica tutto
+    [Verificatore], [103], [€ 1.545,00], // Qui si testa il codice
+    
+    table.cell(colspan: 1, fill: luma(240))[*Totale PB*],
+    table.cell(fill: luma(240))[*425*],
+    table.cell(fill: luma(240))[*€ 8.480,00*],
+  ),
+  caption: [Budget residuo stimato per la fase PB],
+)
+
+== Ripartizione oraria per membro
+Per garantire il rispetto del vincolo di *90 ore pro-capite* e assicurare la rotazione delle responsabilità come definito nelle Norme di Progetto, le ore sono state distribuite tra i 7 membri secondo la seguente matrice.
+
+I valori riportati rappresentano una *pianificazione media* volta a dimostrare la fattibilità della rotazione; l'assegnazione effettiva dei ruoli avverrà in modo dinamico sprint per sprint, bilanciando le necessità tecniche con l'equità organizzativa.
+
+#pagebreak()
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else if col == 0 { luma(96%) } else { white },
+    // Colonne proporzionate per far stare i nomi lunghi
+    columns: (1.2fr, 1fr, 1fr, 0.8fr, 1fr, 1fr, 1fr, 0.6fr),
+    inset: 5pt,
+    align: (col, row) => if col == 0 { left + horizon } else { center + horizon },
+    stroke: 0.5pt + luma(200),
+    
+    table.header(
+      text(fill: white, size: 9pt, weight: "bold")[Membro],
+      text(fill: white, size: 8pt, weight: "bold")[Responsabile],
+      text(fill: white, size: 8pt, weight: "bold")[Amministratore],
+      text(fill: white, size: 8pt, weight: "bold")[Analista],
+      text(fill: white, size: 8pt, weight: "bold")[Progettista],
+      text(fill: white, size: 8pt, weight: "bold")[Programmatore],
+      text(fill: white, size: 8pt, weight: "bold")[Verificatore],
+      text(fill: white, size: 9pt, weight: "bold")[Totale]
+    ),
+
+    // Ripartizione Equilibrata (Totale per riga: 90h - Totale per ruolo rispettato)
+    // Elemento che mi preme modificare è diminuire le ore di Responsabile e aumentare quelle di Amministratore per la stesura dei documenti
+    // Ipoteticamente si parla di 7 e 10, per conformità con le 90 ore previste
+    [#members.kevin], [9], [8], [13], [18], [21], [21], [*90*],
+    [#members.berengan], [9], [8], [13], [18], [21], [21], [*90*],
+    [#members.martinello], [9], [8], [13], [18], [21], [21], [*90*],
+    [#members.antonio], [9], [8], [13], [18], [21], [21], [*90*],
+    [#members.andrea], [9], [8], [13], [18], [21], [21], [*90*],
+    [#members.suar], [9], [8], [13], [18], [21], [21], [*90*],
+    [#members.alice], [9], [8], [13], [18], [21], [21], [*90*],
+
+    // Totali di colonna (Verifica: coincidenza perfetta con preventivo)
+    table.cell(colspan: 1, fill: luma(240), align: left)[*Totale Ore*],
+    table.cell(fill: luma(240))[*63*], 
+    table.cell(fill: luma(240))[*56*], 
+    table.cell(fill: luma(240))[*91*], 
+    table.cell(fill: luma(240))[*126*], 
+    table.cell(fill: luma(240))[*147*], 
+    table.cell(fill: luma(240))[*147*], 
+    table.cell(fill: luma(240))[*630*], 
+  ),
+  caption: [Matrice di ripartizione pianificata per membro],
+)
+
+#pagebreak()
+= Monitoraggio e controllo: Preventivo e Consuntivo
+
+In questa sezione viene rendicontato l'avanzamento effettivo del progetto attraverso il confronto sistematico tra quanto pianificato (*Preventivo*) e quanto realmente realizzato (*Consuntivo*). Tale attività avviene al termine di ogni #def[Sprint] e permette di valutare la salute economica e temporale del progetto.
+
+== Metodologia di monitoraggio
+Per garantire un controllo rigoroso, il gruppo, al termine di ogni iterazione, analizza i seguenti indicatori per ogni ruolo:
+
+- *Ore Previste:* Ore pianificate nel preventivo di fase.
+- *Ore Effettive:* Ore realmente impiegate e tracciate tramite il sistema di gestione dei task #def[Jira].
+- *Differenza (Delta):* Variazione oraria tra preventivo e consuntivo.
+- *Costo Effettivo:* Calcolato moltiplicando le ore effettive per la tariffa oraria del ruolo.
+
+L'analisi degli scostamenti (*Variance Analysis*) permette di individuare tempestivamente eventuali inefficienze o rischi manifesti, consentendo al Responsabile di attuare azioni correttive (es. riallocazione delle risorse o semplificazione dei requisiti opzionali) per rientrare nei vincoli di budget e tempo prefissati.
+
+=== Nota sulle attività preliminari (Periodo di Avviamento)
+Le attività svolte e le riunioni tenute antecedentemente alla data di avvio ufficiale del primo Sprint sono state classificate come *investimento interno* e *auto-formazione*.
+
+In questa fase preliminare ("Palestra"), il gruppo si è focalizzato su:
+- Studio delle tecnologie e degli strumenti di supporto (es. Typst, GitHub, Jira).
+- Definizione delle norme di collaborazione interna.
+- Acquisizione del dominio applicativo.
+
+Tali attività, pur essendo state tracciate nei verbali interni per fini di trasparenza e tracciabilità delle decisioni, *non vengono rendicontate* nel monte ore di progetto, in quanto propedeutiche all'avvio operativo e non direttamente imputabili alla produzione degli artefatti finali.
+La rendicontazione economica ufficiale decorre pertanto dalla data di inizio dello Sprint 1.
+== Riepilogo degli Sprint
+Di seguito vengono riportati i consuntivi dettagliati per ogni periodo di attività.
+
+=== Sprint 1
+*Periodo:* dal 19/12/2025 al 03/01/2026
+==== Informazioni generali e attività da svolgere
+In questo primo sprint di avvio, il team si è concentrato sulla definizione del perimetro normativo e sull'analisi preliminare del problema.
+Le attività principali hanno riguardato:
+- *Analisi dei Requisiti:* Identificazione degli attori primari e secondari e stesura dei primi casi d'uso (Use Case).
+- *Piano di Progetto:* Definizione della strategia di gestione dei rischi e pianificazione a lungo termine.
+- *Norme di Progetto:* Codifica dei processi primari e setup dell'infrastruttura di lavoro (GitHub, Typst).
+- *Piano di Qualifica:* Impostazione delle metriche di qualità e strategia di testing.
+- *Glossario:* Popolamento iniziale dei termini di dominio.
+
+==== Prospetto consumo tempo (Preventivo)
+La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
+
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    columns: (1.5fr, 0.6fr, 0.6fr, 0.6fr, 0.6fr, 0.6fr, 0.6fr),
+    inset: 8pt,
+    align: center + horizon,
+    stroke: 0.5pt + luma(200),
+    
+    table.header(
+      text(fill: white, weight: "bold")[Membro],
+      text(fill: white, size: 8pt, weight: "bold")[Resp],
+      text(fill: white, size: 8pt, weight: "bold")[Amm],
+      text(fill: white, size: 8pt, weight: "bold")[Anal],
+      text(fill: white, size: 8pt, weight: "bold")[Prog],
+      text(fill: white, size: 8pt, weight: "bold")[Cod],
+      text(fill: white, size: 8pt, weight: "bold")[Ver],
+    ),
+
+    // PREVENTIVO (Dati forniti)
+    [Basso Kevin], [-], [-], [8], [-], [-], [-],
+    [Berengan Riccardo], [-], [-], [8], [-], [-], [-],
+    [Martinello Riccardo], [-], [-], [8], [-], [-], [-],
+    [Sandu Antonio], [-], [-], [8], [-], [-], [-],
+    [Sgreva Andrea], [-], [-], [8], [-], [-], [-],
+    [Suar Alberto], [2], [-], [6], [-], [-], [-],
+    [Zago Alice], [-], [-], [8], [-], [-], [-],
+
+    table.cell(colspan: 1, fill: luma(240), align: left)[*Totale Ore*],
+    table.cell(fill: luma(240))[*2*], 
+    table.cell(fill: luma(240))[*0*], 
+    table.cell(fill: luma(240))[*54*], 
+    table.cell(fill: luma(240))[*0*], 
+    table.cell(fill: luma(240))[*0*], 
+    table.cell(fill: luma(240))[*0*], 
+  ),
+  caption: [Prospetto orario preventivato per lo Sprint 1],
+)
+
+==== Consumo tempo e costi effettivi (Consuntivo)
+La tabella sottostante illustra le ore produttive effettivamente rendicontate. 
+Si nota una leggera flessione nel monte ore totale dovuta alla concomitanza con le festività natalizie.
+
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    columns: (1.5fr, 0.6fr, 0.6fr, 0.6fr, 0.6fr, 0.6fr, 0.6fr),
+    inset: 8pt,
+    align: center + horizon,
+    stroke: 0.5pt + luma(200),
+    
+    table.header(
+      text(fill: white, weight: "bold")[Membro],
+      text(fill: white, size: 8pt, weight: "bold")[Resp],
+      text(fill: white, size: 8pt, weight: "bold")[Amm],
+      text(fill: white, size: 8pt, weight: "bold")[Anal],
+      text(fill: white, size: 8pt, weight: "bold")[Prog],
+      text(fill: white, size: 8pt, weight: "bold")[Cod],
+      text(fill: white, size: 8pt, weight: "bold")[Ver],
+    ),
+
+    // CONSUNTIVO (Dati forniti + Correzione logica suggerita: vedi nota sotto)
+    // NOTA: Ho lasciato i tuoi dati, ma considera di spostare ore su Amministratore!
+    [Basso Kevin], [1], [-], [6], [-], [-], [-],
+    [Berengan Riccardo], [-], [-], [6], [-], [-], [-],
+    [Martinello Riccardo], [-], [-], [6], [-], [-], [-],
+    [Sandu Antonio], [-], [-], [6], [-], [-], [-],
+    [Sgreva Andrea], [-], [-], [6], [-], [-], [-],
+    [Suar Alberto], [2], [-], [6], [-], [-], [-],
+    [Zago Alice], [-], [-], [6], [-], [-], [-],
+
+    table.cell(colspan: 1, fill: luma(240), align: left)[*Totale Ore*],
+    table.cell(fill: luma(240))[*3*], 
+    table.cell(fill: luma(240))[*0*], 
+    table.cell(fill: luma(240))[*42*], 
+    table.cell(fill: luma(240))[*0*], 
+    table.cell(fill: luma(240))[*0*], 
+    table.cell(fill: luma(240))[*0*], 
+  ),
+  caption: [Consuntivo orario effettivo dello Sprint 1],
+)
+
+==== Analisi degli scostamenti e Risorse Rimanenti
+In questo sprint sono state consumate *45 ore* a fronte delle *56 ore* preventivate (Delta: -11 ore). 
+Il budget economico risparmiato viene reimmesso nel monte ore totale per le fasi successive.
+
+// TABELLA DELTA (Importante per il controllo)
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    columns: (1fr, 1fr, 1fr, 1fr, 1fr),
+    inset: 8pt,
+    align: center + horizon,
+    stroke: 0.5pt + luma(200),
+    table.header(
+      text(fill: white, weight: "bold")[Ruolo],
+      text(fill: white, weight: "bold")[Ore Prev.],
+      text(fill: white, weight: "bold")[Ore Eff.],
+      text(fill: white, weight: "bold")[Delta],
+      text(fill: white, weight: "bold")[Costo],
+    ),
+    [Responsabile], [2], [3], [+1], [€ 90,00],
+    [Amministratore], [0], [0], [0], [€ 0,00],
+    [Analista], [54], [42], [-12], [€ 1.050,00],
+    // Gli altri ruoli sono a 0 quindi li omettiamo per brevità o li raggruppiamo
+    
+    table.cell(colspan: 1, fill: luma(240), align: left)[*Totale*],
+    table.cell(fill: luma(240))[*56*],
+    table.cell(fill: luma(240))[*45*],
+    table.cell(fill: luma(240))[-11],
+    table.cell(fill: luma(240))[*€ 1.140,00*],
+  ),
+  caption: [Riepilogo economico dello Sprint 1],
+)
+
+==== Retrospettiva
++ *Cosa ha funzionato:* L'avvio dei lavori sui documenti è stato rapido grazie alle attività preliminari di auto-formazione.
++ *Criticità:* Si è verificato un rallentamento produttivo dovuto alla pausa natalizia e agli impegni personali dei membri (#link(<RI1>)[#underline[RI1]]).
++ *Azioni Correttive:* Le 11 ore non lavorate verranno recuperate nello Sprint 2, aumentando leggermente il carico di lavoro per chiudere i documenti in vista della RTB.
+
+== Sprint 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+= IGNORA
+
 #pagebreak()
 #pagebreak()
 = Pianificazione nel lungo termine

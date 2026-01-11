@@ -310,6 +310,9 @@ R:
   Rischio:
     alternative: Risk
     descrizione: Evento incerto che, se si verifica, può avere un impatto positivo o negativo sugli obiettivi del progetto.
+  
+  Rolling Wave Planning:
+    descrizione: Tecnica di pianificazione iterativa in cui il lavoro da svolgere nel breve termine viene pianificato in dettaglio, mentre il lavoro previsto per il futuro è definito a un livello di astrazione superiore. I dettagli per le fasi successive vengono elaborati progressivamente man mano che l'orizzonte temporale si avvicina, permettendo di gestire l'incertezza e adattare il piano alle informazioni emergenti.
 S:
   Schedulazione: 
     descrizione: L'organizzazione temporale delle attività di progetto, che stabilisce le date di inizio e fine previste per ciascun task.
