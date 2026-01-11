@@ -167,3 +167,34 @@
   }
   outline(title: [#v(2em) Indice immagini #v(2em)], indent: 1em, target: figure.where(kind: image))
 }
+
+// Funzione per la costruzione della tabella dei rischi
+#let schedaRischio(codice, nome, descrizione, cause, mitigazione, contingenza, probabilità, pericolo) = {
+  figure(
+    table(
+      fill: (x, y) => if(y == 0) {
+        luma(63.75%)
+      } else if (calc.gcd(y, 2) == 2) {
+        luma(220)
+      } else {
+        white
+      }, 
+      columns: (3fr, 7fr),
+      inset: 10pt,
+      table.header(
+        text(fill: white, weight: "bold")[Tipologia Dato],
+        text(fill: white, weight: "bold")[Valore],
+      ),
+      [*Codice*], [#codice],
+      [*Nome*], [#nome],
+      [*Descrizione*], [#descrizione],
+      [*Cause*], [#cause],
+      [*Mitigazione \ (Preventiva)*], [#mitigazione],
+      [*Contingenza \ (Reattiva)*], [#contingenza],
+      [*Probabilità (P)*], [#probabilità],
+      [*Impatto (I)*], [#pericolo]
+    ),
+    caption: [Scheda del rischio #codice],
+    kind: table
+  )
+}
