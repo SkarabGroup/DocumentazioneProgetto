@@ -102,6 +102,9 @@ D:
   Discord:
     descrizione: Piattaforma di comunicazione VoIP, messaggistica istantanea e distribuzione digitale progettata per creare comunità.
 
+  Docker:
+    descrizione: Piattaforma open source per creare, distribuire e gestire applicazioni in container, ovvero ambienti isolati e standardizzati che includono codice, librerie e dipendenze, garantendo che l'app funzioni in modo affidabile su qualsiasi ambiente.
+
 E:
   ESLint:
     descrizione: Strumento di linting per JavaScript e TypeScript che aiuta a identificare e correggere errori di codice e mantenere uno stile consistente.
@@ -117,6 +120,9 @@ F:
     descrizione: Risultati di test che indicano erroneamente che una condizione o un requisito è stato soddisfatto quando in realtà non lo è.
 
 G:
+  Gantt:
+    descrizione: Rappresentazione grafica delle attività di un progetto nel tempo. Aiuta a visualizzare l'intero cronoprogramma, le interdipendenze tra le attività, le milestone e l'avanzamento rispetto al piano.
+
   Gestione Rischi:
     descrizione: Processo di identificazione, valutazione e mitigazione dei rischi che potrebbero influenzare il progetto software.
 
@@ -346,8 +352,8 @@ S:
     alternative: stakeholders, portatori di interesse
     descrizione: Individui o gruppi che possono influenzare o essere influenzati dalle attività o dai risultati del progetto.
   
-  Stato Avanzamento Lavori:
-    acronimo: SAL
+  SAL:
+    acronimo: Stato Avanzamento Lavori
     descrizione: Punto di controllo periodico nel ciclo di vita del progetto, durante il quale viene verificato il progresso delle attività rispetto alla pianificazione, si analizzano eventuali scostamenti (ritardi o imprevisti) e si definiscono gli obiettivi per la fase successiva.
   
   Stima: 
