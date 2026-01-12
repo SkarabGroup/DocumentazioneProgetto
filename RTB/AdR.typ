@@ -13,11 +13,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.21.0"
+#let versione = "v0.22.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2026/01/12",
+    "0.22.0",
+    "Caso d'uso UC16 con relativi sottocasi e diagrammi",
+    members.alice,
+  ),
   (
     "2026/01/10",
     "0.21.0",
@@ -59,6 +65,7 @@
     "0.16.0",
     "Aggiunta UC13 e relativi sottocasi",
     members.berengan,
+    members.alice,
   ),
   (
     "2025/12/30",
@@ -2130,7 +2137,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente visualizza il richiedente nella sezione relativa ai metadati del report di analisi repository GitHub",
 )[]
 
-
 === UC13: Disconnessione account GitHub da CodeGuardian<UC13>
 #useCase(
   attore: UAA,
@@ -2140,10 +2146,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente ha selezionato la sezione di disconnessione dell'account GitHub dal sistema CodeGuardian
   ],
   post: [
-    - L'utente ha scollegato con successo il suo accont GitHub dalla piattaforma Codeguardian
+    - L'utente ha disconnesso con successo il proprio accont GitHub dalla piattaforma Codeguardian
   ],
   scenari: [
-    - L'utente scollega il proprio account GitHub dalla paiattaforma CodeGuardian
+    - L'utente disconnette il proprio account GitHub dalla paiattaforma CodeGuardian
   ],
   inclusioni: [
     - #link(<UC13.1>)[#underline[\[UC13.1\]]] // Conferma disconnessione
@@ -2163,7 +2169,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente ha selezionato la sezione di disconnessione dell'account GitHub dal sistema CodeGuardian #link(<UC13>)[#underline[\[UC13\]]]
   ],
   post: [
-    - L'utente ha scollegato con successo il suo accont GitHub dalla piattaforma Codeguardian
+    - L'utente ha disconnesso con successo il proprio accont GitHub dalla piattaforma Codeguardian
   ],
   scenari: [
     - L'utente seleziona il tasto "Disconnetti Account"
@@ -2175,7 +2181,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Conferma finale della disconnessione #link(<UC13.1.1>)[#underline[\[UC13.1.1\]]]
 
   ],
-  trigger: "L'untente seleziona e attiva il tasto disconnetti per disconnettere il proprio account",
+  trigger: "L'untente seleziona e attiva il tasto Disconnetti per disconnettere il proprio account",
 )[]
 
 ===== UC13.1.1: Conferma disconnessione account<UC13.1.1>
@@ -2184,6 +2190,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente ha selezionato la sezione di disconnessione dell'account GitHub dal sistema CodeGuardian #link(<UC13>)[#underline[\[UC13\]]]
+    - L'utente ha selezionato il tasto Disconnetti #link(<UC13.1>)[#underline[\[UC13.1\]]]
   ],
   post: [
     - L'utente ha disconnesso con successo il proprio account di GitHub dalla piattaforma CodeGuardian
@@ -2205,9 +2212,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
   ],
   post: [
@@ -2223,7 +2227,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC14.2>)[#underline[\[UC14.2\]]] // Conferma esportazione
   ],
   estensioni: [
-    - #link(<UC14.1.1>)[#underline[\[UC14.1.1\]]] // Nessun formato selezionato
+    - Nessuna
   ],
   trigger: "L'utente interagisce con il pulsante di esportazione nella sezione di visualizzazione del report",
 )[#useCaseDiagram("14", "UC14 - Esportazione report di analisi repository GitHub")]
@@ -2255,6 +2259,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
+    - L'utente sta visualizzando il report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]]
     - L'utente sta eseguendo la procedura di esportazione #link(<UC14>)[#underline[\[UC14\]]]
     - L'utente tenta di procedere senza selezionare un formato #link(<UC14.1>)[#underline[\[UC14.1\]]]
   ],
@@ -2277,6 +2282,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
+    - L'utente sta visualizzando il report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente sta eseguendo la procedura di esportazione #link(<UC14>)[#underline[\[UC14\]]]
     - L'utente ha selezionato un formato di esportazione valido #link(<UC14.1>)[#underline[\[UC14.1\]]]
   ],
   post: [
@@ -2438,7 +2445,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "L'utente clicca il tasto di conferma della modifica password",
-)[],
+)[]
 
 ===== UC15.2.2 Nuova password non conforme allo standard adottato <UC15.2.2>
 #useCase(
@@ -2503,7 +2510,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "L'utente interagisce con il tasto di conferma di modifica della password",
-)[],
+)[]
 
 ==== UC15.4 Ricezione dell'avvenuta modifica password <UC15.4>
 #useCase(
@@ -2524,12 +2531,102 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Nessuno",
-)[],
+)[]
+
+=== UC16: Visualizzazione suggerimenti di remediation <UC16>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation
+  ],
+  post: [
+    - L'utente ha visualizzato la lista delle issue identificate e i relativi suggerimenti di remediation
+  ],
+  scenari: [
+    - L'utente visualizza la lista delle issue identificate #link(<UC16.1>)[#underline[\[UC16.1\]]]
+    - L'utente visualizza i dettagli del suggerimento di remediation di un'issue specifica #link(<UC16.2>)[#underline[\[UC16.2\]]]
+  ],
+  inclusioni: [
+    - #link(<UC16.1>)[#underline[\[UC16.1\]]] // Visualizzazione lista issue identificate
+    - #link(<UC16.2>)[#underline[\[UC16.2\]]] // Visualizzazione dettaglio suggerimento di remediation
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa ai suggerimenti di remediation",
+)[#useCaseDiagram("16", "UC16 - Visualizzazione suggerimenti di remediation")]
+
+==== UC16.1: Visualizzazione lista issue identificate <UC16.1>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
+  ],
+  post: [
+    - L'utente visualizza la lista completa delle issue identificate nel repository analizzato
+  ],
+  scenari: [
+    - L'utente consulta la lista delle issue
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna issue identificata nel repository #link(<UC16.1.1>)[#underline[\[UC16.1.1\]]]
+  ],
+  trigger: "L'utente accede alla sezione suggerimenti di remediation nel report di analisi",
+)[#useCaseDiagram("16_1", "UC16.1 - Visualizzazione lista issue identificate")]
+
+===== UC16.1.1: Nessuna issue identificata nel repository <UC16.1.1>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
+    - L'analisi del repository non ha identificato alcuna issue
+  ],
+  post: [
+    - L'utente è informato che non sono state identificate issue nel repository analizzato
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio che indica che l'analisi non ha identificato issue nel repository analizzato
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente accede alla sezione di visualizzazione delle issue per un repository privo di segnalazioni",
+)[]
+
+==== UC16.2: Visualizzazione dettaglio suggerimento di remediation <UC16.2>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
+    - L'utente sta visualizzando la lista delle issue identificate #link(<UC16.1>)[#underline[\[UC16.1\]]]
+  ],
+  post: [
+    - L'utente visualizza il dettaglio completo del suggerimento di remediation
+  ],
+  scenari: [
+    - L'utente consulta il suggerimento di remediation
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente clicca sul pulsante di visualizzazione remediation relativo all'issue",
+)[]
 
 === UCx: Accesso al profilo CodeGuardian
 === UCx: Recupero password profilo Codeguardian
-
-=== UC16: // Remediation
 
 #pagebreak()
 = Requisiti di Sistema
