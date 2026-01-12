@@ -146,7 +146,7 @@ I seguenti documenti hanno valore vincolante per la redazione del Piano di Proge
 - *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. #linebreak()
   #link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")
 - *Norme di Progetto*: regole, convenzioni e standard di qualità adottati dal gruppo. #linebreak()
-  #link("https://skarabgroup.github.io/DocumentazioneProgetto/NormeDiProgetto.pdf")[Documento interno]
+  #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[Documento interno]
 - *Standard IEEE 1058-1998*: Standard for Software Project Management Plans. #linebreak()
   #link("https://ieeexplore.ieee.org/document/25325")
 
