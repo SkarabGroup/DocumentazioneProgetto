@@ -198,3 +198,71 @@
     kind: table
   )
 }
+
+//Funzione per la tabella di consuntivo degli sprint
+#let sprint_table(data, caption_text) = {
+  let showVal(val) = {
+    if val == 0 { [-] } else { [#val] }
+  }
+  let tot_resp = 0
+  let tot_amm = 0
+  let tot_anal = 0
+  let tot_prog = 0
+  let tot_cod = 0
+  let tot_ver = 0
+
+  let table_body = ()
+
+  for row in data {
+    
+    tot_resp += row.at(1)
+    tot_amm  += row.at(2)
+    tot_anal += row.at(3)
+    tot_prog += row.at(4)
+    tot_cod  += row.at(5)
+    tot_ver  += row.at(6)
+
+    table_body.push(row.at(0))        // Nome
+    table_body.push(showVal(row.at(1)))  // Resp
+    table_body.push(showVal(row.at(2)))  // Amm
+    table_body.push(showVal(row.at(3)))  // Anal
+    table_body.push(showVal(row.at(4)))  // Prog
+    table_body.push(showVal(row.at(5)))  // Cod
+    table_body.push(showVal(row.at(6)))  // Ver
+  }
+
+  // Rendering della figura
+  figure(
+    table(
+      fill: (col, row) => if row == 0 { luma(64%) } else { white },
+      columns: (1.5fr, 0.7fr, 0.8fr, 0.5fr, 0.6fr, 0.8fr, 0.6fr),
+      inset: 8pt,
+      align: (col, row) => if col == 0 { left + horizon } else { center + horizon },
+      stroke: 0.5pt + luma(200),
+      
+      // Header
+      table.header(
+        text(fill: white, weight: "bold")[Membro],
+        text(fill: white, size: 8pt, weight: "bold")[Responsabile],
+        text(fill: white, size: 8pt, weight: "bold")[Amministratore],
+        text(fill: white, size: 8pt, weight: "bold")[Analista],
+        text(fill: white, size: 8pt, weight: "bold")[Progettista],
+        text(fill: white, size: 8pt, weight: "bold")[Programmatore],
+        text(fill: white, size: 8pt, weight: "bold")[Verificatore],
+      ),
+
+      // Inserisco le celle generate dal loop
+      ..table_body,
+
+      // Riga dei Totali (Calcolata automaticamente)
+      table.cell(colspan: 1, fill: luma(240), align: left)[*Totale Ore*],
+      table.cell(fill: luma(240))[*#tot_resp*],
+      table.cell(fill: luma(240))[*#tot_amm*],
+      table.cell(fill: luma(240))[*#tot_anal*],
+      table.cell(fill: luma(240))[*#tot_prog*],
+      table.cell(fill: luma(240))[*#tot_cod*],
+      table.cell(fill: luma(240))[*#tot_ver*],
+    ),
+    caption: caption_text,
+  )
+}

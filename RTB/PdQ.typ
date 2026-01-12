@@ -11,6 +11,7 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
+
 #let versione = "v0.4.0"
 
 #titlePage("Piano di Qualifica", versione)
