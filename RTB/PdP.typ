@@ -281,113 +281,112 @@ Nel caso in cui un rischio si manifesti o emergano nuovi rischi non precedenteme
 == Rischi Tecnologici (RT)
 Questa categoria raggruppa le criticità derivanti dalla natura innovativa dello stack tecnologico. L'adozione di architetture a Sistemi Multiagente e l'integrazione con #def[LLM] comportano un'intrinseca incertezza, dovuta alla natura non deterministica dei modelli e alla ripida curva di apprendimento.
 
-=== RT1: Inesperienza con stack tecnologico <RT1>
+=== RT1: Inesperienza con tecnologie IA <RT1>
 #schedaRischio(
   "RT1",
-  "Inesperienza con tecnologie LLM e framework ad Agenti",
-  [Il team non possiede pregressa esperienza con librerie di orchestrazione (es. LangChain) e servizi Cloud. Ciò può causare stime errate, debito tecnico e architetture instabili.],
-  [Il curriculum accademico non copre le tecnologie di Generative AI. Il gap tra teoria classica e pratica con gli Agenti è significativo.],
-  [Suddivisione del lavoro per competenze (#def[T-shaped skills]). Pair programming intensivo sui task critici. Validazione precoce tramite #def[PoC]. Mentoring con #def[Var Group].],
-  [Riallocazione delle risorse più esperte sui task "core". Semplificazione dell'architettura: riduzione dell'autonomia degli agenti in favore di catene deterministiche (Hardcoded Chains).],
-  "Alta", // P=3
-  "Alto"  // I=3 -> R=9 (Critico)
+  "Inesperienza con lo sviluppo di sistemi basati su IA",
+  [Il team non ha esperienza pregressa nella creazione di applicazioni che integrano l'Intelligenza Artificiale. Questa mancanza di familiarità con i nuovi paradigmi di sviluppo può portare a una gestione imprecisa delle tempistiche e a ostacoli tecnici imprevisti che potrebbero rallentare l'intero progetto.],
+  [Il percorso accademico tradizionale non copre ancora in dettaglio le tecnologie generative e le logiche di orchestrazione degli agenti, creando un significativo divario tra le conoscenze teoriche del team e le competenze pratiche richieste.],
+  [Formazione interna e condivisione continua delle conoscenze tra i membri. Sviluppo di piccoli prototipi mirati: si tratta di configurazioni atomiche di agenti IA con task estremamente basilari e compiti circoscritti, utili a testare singole funzionalità prima della loro integrazione in architetture più complesse.],
+  [Semplificazione del sistema: se la complessità tecnologica dovesse rivelarsi eccessiva per le risorse disponibili, si ridurrà l'autonomia decisionale degli agenti in favore di flussi di lavoro più rigidi, deterministici e facilmente controllabili.],
+  "Alta",
+  "Alto"
 )
 
 === RT2: Errata selezione delle tecnologie <RT2>
 #schedaRischio(
   "RT2",
-  "Adozione di strumenti immaturi o inadeguati",
-  [La scelta di librerie specifiche (es. Vector DB, Parser) potrebbe rivelarsi errata a progetto inoltrato per mancanza di feature o bug bloccanti.],
-  [Il panorama IA evolve rapidamente; strumenti popolari oggi potrebbero essere deprecati o superati a breve termine.],
-  [Disaccoppiamento tramite pattern architetturali (Adapter/Facade) per isolare le dipendenze esterne. PoC valutativi comparativi.],
-  [Refactoring mirato del componente difettoso. Implementazione di "wrapper" temporanei per aggirare i bug, accettando debito tecnico documentato.],
-  "Media", // P=2
-  "Alto"   // I=3 -> R=6
+  "Scelta di strumenti inadeguati o immaturi",
+  [Data la vastità e la velocità di evoluzione del panorama IA, il team potrebbe compiere scelte tecnologiche errate (librerie, framework o linguaggi) che si rivelano inadatte agli obiettivi del progetto o eccessivamente complesse da integrare.],
+  [La mancanza di standard consolidati e il fatto che queste tecnologie trattino temi mai affrontati nel percorso accademico rendono difficile per il team valutare correttamente la solidità di uno strumento prima di averlo utilizzato intensivamente.],
+  [Pianificazione di una fase di ricerca tecnologica approfondita e realizzazione di test comparativi. Progettazione modulare per isolare le dipendenze esterne, limitando l'impatto di un eventuale cambio di rotta.],
+  [Sostituzione del componente che si è rivelato una scelta errata. Accettazione di un debito tecnico controllato o creazione di soluzioni temporanee ("wrapper") per compensare le mancanze dello strumento scelto inizialmente.],
+  "Media",
+  "Alto"
 )
 
-=== RT3: Lacune teoriche sul dominio IA <RT3>
+=== RT3: Difficoltà nella progettazione degli Agenti <RT3>
 #schedaRischio(
   "RT3",
-  "Mancanza di basi teoriche su Agenti e Sicurezza",
-  [La mancanza di comprensione profonda dei pattern di reasoning (es. ReAct, Chain-of-Thought) potrebbe portare a un design inefficace degli agenti.],
-  [I paradigmi di sviluppo agentico differiscono radicalmente dalla programmazione imperativa o a oggetti standard.],
-  [Sessioni di Knowledge Sharing interne. Studio della letteratura di riferimento (paper scientifici). Supervisione continua delle scelte di design da parte del Responsabile Tecnico.],
-  [Richiesta di supporto specialistico esterno (Var Group). Adozione di template architetturali standard semplificati e già validati dalla community.],
-  "Alta", // P=3
-  "Medio" // I=2 -> R=6 (Alto)
+  "Errori di modellazione dei flussi di ragionamento",
+  [La progettazione della logica con cui il sistema decide ed esegue le azioni è un compito complesso. Un errore in questa fase può portare il sistema a non completare i compiti o a eseguire operazioni cicliche infinite senza produrre risultati.],
+  [Programmare un sistema basato su decisioni autonome richiede un approccio molto diverso dalla programmazione tradizionale insegnata nei corsi universitari, aumentando la probabilità di errori di logica strutturale.],
+  [Studio dei modelli di ragionamento già validati dalla comunità scientifica. Revisione condivisa tra i membri del team di ogni schema decisionale prima di passare alla fase di sviluppo.],
+  [Semplificazione della logica: passaggio da un sistema in cui l'intelligenza artificiale decide autonomamente i passaggi da seguire a un sistema a tappe fisse e predefinite, dove l'IA si limita a eseguire compiti all'interno di un percorso rigido stabilito dagli sviluppatori.],
+  "Alta",
+  "Medio"
 )
 
-
-=== RT4: Allucinazioni e Inaccuratezza <RT4>
+=== RT4: Affidabilità dell'IA <RT4>
 #schedaRischio(
   "RT4",
-  "Inaffidabilità dei risultati (Allucinazioni)",
-  [Il sistema potrebbe generare #def[falsi positivi] o suggerire correzioni sintatticamente errate, compromettendo la fiducia dell'utente.],
-  [Natura probabilistica degli LLM: non "comprendono" il codice ma predicono token, portando a errori logici su contesti complessi.],
-  [Prompt Engineering avanzato (Few-shot). Validazione output tramite tool di analisi statica deterministici (es. SonarQube) usati come filtro.],
-  [Obbligo di revisione umana ("Human-in-the-loop"). Disabilitazione dell'auto-fix: il sistema si limita a segnalare il problema senza proporre codice.],
-  "Alta", // P=3
-  "Medio" // I=2 -> R=6 (Alto)
+  "Generazione di contenuti errati o fuorvianti",
+  [Il sistema potrebbe produrre suggerimenti che appaiono formalmente corretti ma risultano logicamente errati o basati su vulnerabilità inesistenti (#def[Allucinazione]). Tali errori compromettono l'utilità del prodotto e potrebbero indurre l'utente a correzioni superflue o dannose.],
+  [La natura probabilistica degli LLM implica che il modello predice sequenze di testo senza una reale comprensione semantica del codice. Questo divario cognitivo, unito alla difficoltà del team nel distinguere output validi da quelli errati in contesti complessi, eleva il rischio di inaffidabilità.],
+  [Utilizzo di tecniche di #def[Prompt Engineering] avanzate, per guidare il modello con esempi concreti. Integrazione di strumenti di #def[Analisi Statica] deterministici che agiscono come filtri di validazione prima di mostrare l'output all'utente.],
+  [Attivazione di un modello #def[Human-in-the-loop]: il sistema viene declassato da strumento di auto-correzione a sistema di supporto alle decisioni. L'IA si limita a segnalare potenziali criticità, delegando interamente la validazione e l'applicazione delle modifiche alla supervisione umana.],
+  "Alta",
+  "Medio"
 )
 
-=== RT5: Costi e Rate Limiting API <RT5>
+=== RT5: Costi e Limiti di Utilizzo <RT5>
 #schedaRischio(
   "RT5",
-  "Saturazione budget o quote API",
-  [Esaurimento crediti OpenAI o blocco per eccesso di richieste (Rate Limit), con conseguente stop allo sviluppo.],
-  [I sistemi multi-agente generano traffico esponenziale (chat verbosa tra agenti).],
-  [Caching aggressivo delle risposte. Uso di modelli "small" per i test. Monitoraggio real-time dei costi.],
-  [Switch temporaneo su modelli locali Open Source (es. Llama via Ollama) per lo sviluppo base, accettando un degrado delle performance.],
-  "Alta", // P=3
-  "Medio" // I=2 -> R=6 (Alto)
+  "Saturazione del budget o blocco delle API",
+  [L'architettura multi-agente genera un traffico di dati elevato. Questo può portare all'esaurimento dei crediti disponibili o al blocco delle chiavi API per eccesso di richieste (Rate Limit), fermando lo sviluppo.],
+  [L'inesperienza nella gestione di flussi IA può portare a loop di chiamate ricorsive non previste, con conseguente spreco di risorse economiche in tempi brevissimi.],
+  [Implementazione di sistemi di caching per evitare chiamate ridondanti. Monitoraggio rigoroso dei costi tramite dashboard e utilizzo di modelli economici (small models) per lo sviluppo quotidiano.],
+  [Switch verso modelli Open Source eseguiti localmente (es. via Ollama). Sebbene meno performanti, garantiscono la continuità dello sviluppo senza costi variabili aggiuntivi.],
+  "Alta",
+  "Medio"
 )
 
-=== RT6: Privacy e Data Leakage <RT6>
+=== RT6: Riservatezza dei Dati <RT6>
 #schedaRischio(
   "RT6",
-  "Esposizione di codice sensibile",
-  [L'invio di codice proprietario ad API pubbliche potrebbe violare NDA o esporre proprietà intellettuale.],
-  [Policy dei provider che potrebbero usare i dati per il training.],
-  [Anonimizzazione (Scrubbing) preventiva dei dati. Utilizzo di flag "opt-out" per il training nelle API.],
-  [Blocco preventivo dell'invio dati e switch obbligato su modelli on-premise (locali), garantendo la "Data Sovereignty".],
-  "Bassa", // P=1 (grazie alle mitigazioni)
-  "Alto"   // I=3 -> R=3 (Basso/Monitoraggio)
+  "Esposizione involontaria di informazioni riservate",
+  [L'invio di porzioni di codice a servizi esterni per l'analisi potrebbe violare accordi di riservatezza o esporre segreti industriali del cliente. Esiste il pericolo che logiche proprietarie o dati sensibili escano dal controllo diretto del team di sviluppo.],
+  [Le condizioni d'uso di molti servizi di intelligenza artificiale sono complesse e spesso permettono ai fornitori di riutilizzare i dati ricevuti per migliorare i propri sistemi, rendendo tali informazioni potenzialmente accessibili a soggetti terzi in futuro.],
+  [Rimozione preventiva dal codice di ogni riferimento sensibile, come nomi propri, password o commenti riservati, prima dell'invio ai servizi esterni. Configurazione dei permessi per negare esplicitamente l'autorizzazione al riutilizzo dei dati per scopi di addestramento.],
+  [Blocco immediato del trasferimento dati verso l'esterno e passaggio all'utilizzo di modelli installati direttamente sui computer del team. Questa soluzione garantisce che nessun dato lasci mai l'ambiente di lavoro protetto.],
+  "Bassa",
+  "Alto"
 )
 
-=== RT7: Complessità Infrastruttura Cloud <RT7>
+=== RT7: Gestione dell'Infrastruttura <RT7>
 #schedaRischio(
   "RT7",
-  "Problemi di deployment e vincoli Cloud",
-  [Discrepanze tra ambiente locale e remoto (AWS) o esaurimento quote Free Tier.],
-  [Mancanza di figure DevOps specializzate nel team.],
-  [Containerizzazione rigorosa Docker) per parità ambientale. Monitoraggio risorse cloud.],
-  [Fallback su deployment locale completo per la dimostrazione (Demo), disaccoppiando il sistema dal cloud.],
-  "Media", // P=2
-  "Medio"  // I=2 -> R=4 (Medio)
+  "Incongruenze tra ambiente di sviluppo e produzione",
+  [Le differenze di configurazione tra i computer dei singoli membri e l'ambiente cloud finale possono causare malfunzionamenti critici rilevabili solo in fase di rilascio.],
+  [La mancanza di figure specializzate nella gestione operativa (DevOps) nel team rende la configurazione dei server un compito soggetto a errori umani e sviste sistemistiche.],
+  [Uso rigoroso della containerizzazione (Docker) per garantire che ogni membro lavori in un ambiente identico a quello di produzione. Automazione del deployment.],
+  [Fallback su una dimostrazione locale completa: in caso di problemi insormontabili con il cloud, il sistema verrà presentato come applicazione standalone durante la demo.],
+  "Media",
+  "Medio"
 )
 
 === RT8: Integrazione dei Sottosistemi <RT8>
 #schedaRischio(
   "RT8",
-  "Disallineamento interfacce moduli",
-  [L'integrazione tra Frontend, Backend e Agenti potrebbe fallire a causa di contratti dati non rispettati.],
-  [Sviluppo parallelo senza governance rigorosa delle API.],
-  [Definizione preventiva API Contract (OpenAPI). Integrazione Continua (CI) con test automatici.],
-  [Sessioni di "Integration War Room": stop allo sviluppo di nuove feature per risolvere i conflitti di integrazione.],
-  "Media", // P=2
-  "Alto"   // I=3 -> R=6 (Alto)
+  "Disallineamento delle interfacce di comunicazione",
+  [Il mancato rispetto dei "contratti" di scambio dati tra Frontend, Backend e moduli IA può rendere il sistema frammentato e inutilizzabile. Se i componenti non comunicano correttamente, l'intera applicazione perde la sua coerenza funzionale.],
+  [Lo sviluppo parallelo condotto da diversi membri del team, in assenza di una supervisione rigorosa sulle interfacce (API), facilita l'insorgere di incompatibilità tecniche che spesso emergono solo nelle fasi avanzate del progetto.],
+  [Definizione preventiva e formale delle specifiche di comunicazione. Utilizzo di test di integrazione automatizzati per intercettare eventuali discrepanze non appena il codice viene condiviso sul repository.],
+  [Sessioni di riallineamento intensivo: sospensione programmata dello sviluppo di nuove funzionalità per dedicare l'intero team alla risoluzione prioritaria dei conflitti di comunicazione e alla stabilizzazione dei collegamenti tra i moduli.],
+  "Media",
+  "Alto"
 )
 
-=== RT9: Sicurezza Sandbox <RT9>
+=== RT9: Sicurezza Ambiente di Analisi <RT9>
 #schedaRischio(
   "RT9",
-  "Compromissione ambiente di analisi",
-  [L'esecuzione di codice non fidato (repository utente) potrebbe danneggiare il sistema ospite.],
-  [Esecuzione di codice arbitrario per analisi dinamica.],
-  [Ambienti effimeri isolati (Docker senza rete/root).],
-  [Disabilitazione totale dell'esecuzione dinamica: il sistema degrada alla sola analisi statica del testo.],
-  "Bassa", // P=1
-  "Alto"   // I=3 -> R=3 (Basso)
+  "Esecuzione di codice arbitrario non sicuro",
+  [Per analizzare il comportamento del software, il sistema potrebbe trovarsi a eseguire frammenti di codice caricati dall'utente che potrebbero contenere malware o script dannosi per il sistema ospite.],
+  [L'analisi dinamica richiede l'attivazione di processi che, se non correttamente isolati, hanno accesso alle risorse hardware e di rete della macchina.],
+  [Creazione di ambienti effimeri e isolati (Sandbox) privi di privilegi di rete o di root. Ogni analisi viene eseguita in un ambiente che viene distrutto subito dopo l'uso.],
+  [Degrado funzionale: disabilitazione totale della componente di esecuzione dinamica, limitando il sistema alla sola analisi statica del testo del codice.],
+  "Bassa",
+  "Alto"
 )
 
 #pagebreak()
@@ -400,7 +399,7 @@ Questa categoria analizza le criticità legate alle risorse umane. Essendo il te
   "Sovrapposizione con esami e lavoro",
   [I membri del team affrontano sessioni d'esame o impegni lavorativi che riducono drasticamente la capacità produttiva in finestre temporali specifiche.],
   [La natura studentesca del team comporta cali di disponibilità fisiologici e prevedibili, ma difficili da quantificare con esattezza a priori.],
-  [Pianificazione con "Slack" (margini di tolleranza) nei periodi d'esame. Calendario condiviso delle indisponibilità aggiornato settimanalmente.],
+  [Pianificazione con margini di tolleranza nei periodi d'esame. Calendario condiviso delle indisponibilità aggiornato settimanalmente.],
   [Ridistribuzione dinamica dei task critici sui membri liberi. Ricorso al Pair Programming per accelerare il completamento dei task in ritardo.],
   "Alta", // P=3
   "Medio" // I=2 -> R=6 (Alto)
@@ -436,7 +435,7 @@ Questa categoria analizza le criticità legate alle risorse umane. Essendo il te
   "Comunicazione inefficace e stallo decisionale",
   [Divergenze su scelte tecniche o scarsa partecipazione possono generare un clima teso ("Storming"), bloccando il lavoro.],
   [Team di pari senza gerarchia imposta. Comunicazione asincrona (chat) che favorisce fraintendimenti.],
-  [Stand-up meeting regolari per allineamento. Processo decisionale codificato: in caso di stallo tecnico, decide il Responsabile.],
+  [Meeting regolari per allineamento. Processo decisionale codificato: in caso di stallo tecnico, decide il Responsabile.],
   [Intervento del Responsabile come mediatore. Escalation al Professore solo se il conflitto pregiudica la prosecuzione del progetto.],
   "Media", // P=2
   "Medio"  // I=2 -> R=4 (Medio)

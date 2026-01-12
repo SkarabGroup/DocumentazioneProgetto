@@ -9,6 +9,8 @@ A:
   Agile:
     descrizione: Approccio alla gestione del progetto che privilegia iterazioni brevi, feedback continui e adattamento delle priorità in base al progresso e ai risultati ottenuti.
 
+  Allucinazione:
+    descrizione: Fenomeno in cui un modello di intelligenza artificiale genera informazioni false, imprecise o prive di fondamento logico, presentandole però in modo estremamente convincente e grammaticalmente corretto. Si verifica quando il sistema, invece di ammettere di non conoscere una risposta o di non poter eseguire un compito, "inventa" dati, fatti o frammenti di codice che sembrano verosimili ma non corrispondono alla realtà o alle istruzioni ricevute.
   Amministratore:
     descrizione: Ruolo nel team di progetto responsabile della gestione della configurazione, documentazione e repository.
 
@@ -261,7 +263,9 @@ P:
   
   Programmatori:
     descrizione: Membri del team di sviluppo responsabili della scrittura del codice sorgente per implementare le funzionalità del sistema software.
-
+  
+  Prompt Engineering:
+    descrizione: L'insieme delle tecniche e delle strategie utilizzate per progettare, scrivere e affinare le istruzioni fornite a un sistema di intelligenza artificiale
   PoC:
     acronimo: Proof of Concept
     descrizione: Realizzazione preliminare e limitata di una funzionalità o di un sottosistema, sviluppata allo scopo di dimostrarne la fattibilità tecnica e validare le scelte architetturali critiche.
