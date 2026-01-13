@@ -11,12 +11,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-
-#let versione = "v0.4.0"
+#let versione = "v0.5.0"
 
 #titlePage("Piano di Qualifica", versione)
 #set page(numbering: "1", header: header("Piano di Qualifica"), footer: footer())
 #let history = (
+  (
+    "2025/12/02",
+    "0.5.0",
+    "Modifica tabelle qualità di processo, inserimento tabelle qualità di prodotto",
+    members.alice,
+  ),
   (
     "2025/12/30",
     "0.4.0",
@@ -64,7 +69,7 @@
 = Introduzione
 
 == Scopo del documento
-Il presente documento ha l'obiettivo di definire e formalizzare le strategie di gestione della #def("qualità") per il progetto _Code Guardian_. Esso descrive come il team intende monitorare l'intero #def("ciclo di vita del software"), assicurando che ogni fase sia misurabile, migliorabile e soddisfi pienamente i requisiti richiesti dall'azienda.
+Il presente documento ha l'obiettivo di definire e formalizzare le strategie di gestione della #def("qualità") per il progetto _Code Guardian_. Esso descrive come Skarab Group intende monitorare l'intero #def("ciclo di vita del software"), assicurando che ogni fase sia misurabile, migliorabile e soddisfi pienamente i requisiti richiesti dall'azienda.
 
 Il #def("Piano di Qualifica") integra meccanismi di misurazione oggettiva, controllo di conformità ai requisiti del capitolato e protocolli di miglioramento continuo per assicurare l'eccellenza.
 
@@ -108,25 +113,26 @@ I Processi Primari sono le attività fondamentali e dirette che guidano il ciclo
     } else if (calc.gcd(y, 2) == 2) {
       luma(220)
     },
-    columns: (1.5fr, 2fr, 1.2fr, 1.7fr),
+    columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
     inset: 10pt,
-    table.header([*Metrica di Processo*], [*Nome*], [*Valore Accettabile*], [*Valore Ottimo*]),
+    table.header([*Metrica di Processo*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
+    // BAC = Budget Totale Preventivato
 
     [*MP01*], [Earned Value (EV)],
     // Rappresenta il valore del lavoro effettivamente realizzato in una determinata data. Si calcola moltiplicando la percentuale di completamento delle attività per il budget totale.
-    [$>= 0$], [$<= E A C$], [*MP02*], [Planned Value (PV)],
+    [$E V = % "completamento" times B A C$], [$>= 0$], [$<= E A C$], [*MP02*], [Planned Value (PV)],
     // È il valore del lavoro che si era pianificato di completare entro una certa data. Indica quanto avremmo dovuto spendere secondo il piano iniziale.
-    [$>= 0$], [$<= B A C$], [*MP03*], [Actual Cost (AC)],
+    [$P V = % "pianificata" times B A C$], [$>= 0$], [$<= B A C$], [*MP03*], [Actual Cost (AC)],
     // Indica i costi reali sostenuti per il lavoro svolto fino a quel momento.
-    [$>= 0$], [$<= E A C$], [*MP04*], [Cost Performance Index (CPI)],
+    [Costi reali sostenuti], [$>= 0$], [$<= E A C$], [*MP04*], [Cost Performance Index (CPI)],
     // È il rapporto tra valore guadagnato e costi reali ($CPI = EV / AC$).
-    [$>= 0$], [1], [*MP05*], [Schedule Performance Index (SPI)],
+    [$C P I = (E V) / (A C)$], [$>= 0$], [1], [*MP05*], [Schedule Performance Index (SPI)],
     // È il rapporto tra valore guadagnato e valore pianificato ($SPI = EV / PV$).
-    [$>= 0$], [1], [*MP06*], [Estimate At Completion (EAC)],
+    [$S P I = (E V) / (P V)$], [$>= 0$], [1], [*MP06*], [Estimate At Completion (EAC)],
     // È la stima del costo totale finale del progetto basata sulle performance attuali.
-    [$>= 0$], [$<= B A C$], [*MP07*], [Estimate To Complete (ETC)],
+    [$E A C = (B A C) / (C P I)$], [$>= 0$], [$<= B A C$], [*MP07*], [Estimate To Complete (ETC)],
     // Indica quanto denaro aggiuntivo è necessario per terminare il progetto da oggi.
-    [$>= 0$], [$<= B A C$],
+    [$E T C = E A C - A C$], [$>= 0$], [$<= B A C$],
   ),
   caption: [Soglie metriche per il processo di Fornitura],
 )
@@ -139,12 +145,12 @@ I Processi Primari sono le attività fondamentali e dirette che guidano il ciclo
     } else if (calc.gcd(y, 2) == 2) {
       luma(220)
     },
-    columns: (1.5fr, 2.5fr, 1.2fr, 1.7fr),
+    columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
     inset: 10pt,
-    table.header([*Metrica di Processo*], [*Nome*], [*Valore Accettabile*], [*Valore Ottimo*]),
+    table.header([*Metrica di Processo*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
 
-    [*MP08*], [Requirements Stability Index], [$>= 70%$], [100%],
-  ),
+    [*MP08*], [Requirements Stability Index], [$R S I = (R_"tot" - Delta R) / R_"tot"$], [$>= 70%$], [100%],
+  ), // dove Delta R è la somma dei requisiti che sono stati aggiunti, modificati o eliminati durante lo sviluppo.
   caption: [Soglie metriche per il processo di Sviluppo],
 )
 
@@ -158,13 +164,13 @@ I Processi di Supporto sono attività che assistono altri processi per garantire
     } else if (calc.gcd(y, 2) == 2) {
       luma(220)
     },
-    columns: (1.5fr, 2.5fr, 1.2fr, 1.7fr),
+    columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
     inset: 10pt,
-    table.header([*Metrica di Processo*], [*Nome*], [*Valore Accettabile*], [*Valore Ottimo*]),
+    table.header([*Metrica di Processo*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
 
-    [*MP09*], [Gulpease Index], [$>= 60%$], [$>= 80%$],
+    [*MP09*], [Gulpease Index], [$89 + frac(300(L_f) - 10(L_p), F_p)$], [$>= 60%$], [$>= 80%$],
     // Utilizzato per garantire che i documenti prodotti dal gruppo siano chiari e comprensibili per chiunque debba leggerli.
-    [*MP10*], [Correttezza Ortografica], [0 errori], [0 errori],
+    [*MP10*], [Correttezza Ortografica], [N. errori rilevati], [0 errori], [0 errori],
   ),
   caption: [Soglie metriche per il processo di Documentazione],
 )
@@ -177,12 +183,12 @@ I Processi di Supporto sono attività che assistono altri processi per garantire
     } else if (calc.gcd(y, 2) == 2) {
       luma(220)
     },
-    columns: (1.5fr, 2.5fr, 1.2fr, 1.7fr),
+    columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
     inset: 10pt,
-    table.header([*Metrica di Processo*], [*Nome*], [*Valore Accettabile*], [*Valore Ottimo*]),
+    table.header([*Metrica di Processo*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
 
-    [*MP11*], [Code Coverage], [$>= 70%$], [$>= 90%$],
-    [*MP12*], [Test Success Rate], [100%], [100%],
+    [*MP11*], [Code Coverage], [$frac("Linee eseguite", "Linee totali") times 100$], [$>= 70%$], [$>= 90%$],
+    [*MP12*], [Test Success Rate], [$frac("Test superati", "Test eseguiti") times 100$], [100%], [100%],
   ),
   caption: [Soglie metriche per il processo di Verifica],
 )
@@ -195,11 +201,15 @@ I Processi di Supporto sono attività che assistono altri processi per garantire
     } else if (calc.gcd(y, 2) == 2) {
       luma(220)
     },
-    columns: (1.5fr, 2.5fr, 1.2fr, 1.7fr),
+    columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
     inset: 10pt,
-    table.header([*Metrica di Processo*], [*Nome*], [*Valore Accettabile*], [*Valore Ottimo*]),
+    table.header([*Metrica di Processo*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
 
-    [*MP13*], [Quality metrics satisfied], [$>= 80%$], [100%],
+    [*MP13*],
+    [Quality metrics satisfied],
+    [$frac("Metriche soddisfatte", "Metriche totali") times 100$],
+    [$>= 80%$],
+    [100%],
     // Serve a misurare l'efficacia complessiva del sistema di gestione della qualità del progetto.
   ),
   caption: [Soglie metriche per la Gestione della Qualità],
@@ -216,12 +226,16 @@ I Processi organizzativi sono quell'insieme di attività che servono a creare, g
     } else if (calc.gcd(y, 2) == 2) {
       luma(220)
     },
-    columns: (1.5fr, 2.5fr, 1.2fr, 1.7fr),
+    columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
     inset: 10pt,
-    table.header([*Metrica di Processo*], [*Nome*], [*Valore Accettabile*], [*Valore Ottimo*]),
+    table.header([*Metrica di Processo*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
 
-    [*MP15*], [Time Efficiency], [$>= 60%$], [100%],
-    [*MP16*], [Sprint Goal Achievement], [$>= 80%$], [100%],
+    [*MP14*], [Time Efficiency], [$frac("Tempo stimato", "Tempo effettivo") times 100$], [$>= 60%$], [100%],
+    [*MP15*],
+    [Sprint Goal Achievement],
+    [$frac("Obiettivi completati", "Obiettivi prefissati") times 100$],
+    [$>= 80%$],
+    [100%],
   ),
   caption: [Soglie metriche per la Gestione dei Processi],
 )
@@ -233,14 +247,155 @@ La qualità di prodotto è la misura in cui un software soddisfa i requisiti dic
 
 Un prodotto software di alta qualità è caratterizzato da alcuni aspetti fondamentali (stabiliti nella prima parte dello standard _ISO/IEC 9126_):
 - *Funzionalità*, ovvero la capacità di un prodotto software di fornire funzioni che soddisfano esigenze stabilite. In particolare, rispetta i requisiti funzionali e non funzionali definiti nel documento di *Analisi dei Requisiti*.
-- *Affidabilità*, ovvero mantiene uno specifico livello di prestazioni ed evitando che si verifichino errori.
+- *Affidabilità*, ovvero mantiene uno specifico livello di prestazioni ed evita che si verifichino errori.
 - *Efficienza*, in quanto capace di fornire adeguati tempi di risposta ed elaborazione.
 - *Usabilità*, dato che può essere capito, appreso e usato dall'utente finale.
 - *Manutenibilità*, ossia la capacità del software di essere modificato, includendo correzioni, miglioramenti o adattamenti.
 
+=== Funzionalità
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(63.75%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
+    inset: 10pt,
+    table.header([*Metrica di Prodotto*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
+
+    [*MPD01*],
+    [Copertura Requisiti Obbligatori],
+    [$frac("Req. Obbligatori Soddisfatti", "Totale Req. Obbligatori") times 100$],
+    [100%],
+    [100%],
+
+    [*MPD02*],
+    [Copertura Requisiti Opzionali],
+    [$frac("Req. Opzionali Soddisfatti", "Totale Req. Opzionali") times 100$],
+    [0%],
+    [100%],
+  ),
+  caption: [Soglie metriche Funzionalità prodotto],
+)
+
+=== Affidabilità
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(63.75%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
+    inset: 10pt,
+    table.header([*Metrica di Prodotto*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
+
+    [*MPD03*], [Failure Density], [$frac("N. guasti riscontrati", "KLOC")$], [$<= 0.5$], [0],
+    // Se ci sono molti guasti in poche righe di codice, il modulo è "fragile".
+    [*MPD04*], [Statement Coverage], [$frac("Linee eseguite", "Linee totali") times 100$], [$>= 70%$], [$>= 95%$],
+    // Indica quante righe di codice sono state effettivamente eseguite durante i test.
+  ),
+  caption: [Soglie metriche Affidabilità prodotto],
+)
+
+=== Efficienza
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(63.75%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
+    inset: 10pt,
+    table.header([*Metrica di Prodotto*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
+
+    [*MPD05*],
+    [Average Response Time (operazioni semplici)],
+    [$frac(sum (T_"fine" - T_"inizio"), "N. operazioni")$],
+    [$<= 2 "s"$],
+    [$<= 1 "s"$],
+    // Misura l'intervallo tra la richiesta dell'utente (semplice) e la risposta completa del sistema.
+    [*MPD06*],
+    [Average Response Time (analisi repo)],
+    [$frac(sum (T_"fine" - T_"inizio"), "N. analisi")$],
+    [$<= 20 "s"$],
+    [$<= 10 "s"$],
+  ),
+  caption: [Soglie metriche Efficienza prodotto],
+)
+
+=== Usabilità
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(63.75%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
+    inset: 10pt,
+    table.header([*Metrica di Prodotto*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
+
+    [*MPD07*],
+    [Comprehensibility],
+    [$frac("Funzioni comprese", "Totale funzioni testate") times 100$],
+    [$>= 80%$],
+    [100%],
+    // Misura quanto sia intuitivo per un nuovo utente capire a cosa servono i vari bottoni o funzioni.
+    [*MPD08*],
+    [Error Prevention],
+    [$frac("Azioni annullate (Undo)", "Totale azioni effettuate") times 100$],
+    [$<= 5%$],
+    [$<= 2%$],
+    // Analizza quanto spesso l'utente commette errori involontari o sente il bisogno di "tornare indietro" perché l'interfaccia lo ha indotto in errore.
+  ),
+  caption: [Soglie metriche Usabilità prodotto],
+)
+
+=== Manutenibilità
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(63.75%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
+    inset: 10pt,
+    table.header([*Metrica di Prodotto*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
+
+    [*MPD09*],
+    [Comment Density],
+    [$frac("Linee di commento", "Linee di codice totali") times 100$],
+    [$>= 10%$],
+    [$20% - 30%$],
+    // Misura quanto il codice è auto-esplicativo.
+    [*MPD10*], [Cyclomatic Complexity], [$V(G) = E - N + 2P$], [$<= 15$], [$<= 10$],
+    // Misura il numero di percorsi linearmente indipendenti attraverso il codice.
+    [*MPD11*], [Coupling], [N. dipendenze per modulo], [$<= 6$], [$<= 3$],
+    // Valuta quanto un modulo dipende dagli altri.
+  ),
+  caption: [Soglie metriche Manutenibilità prodotto],
+)
+
 #pagebreak()
 
 = Metodi di Testing
+Questa sezione definisce la strategia di testing per il progetto _CodeGuardian_.
+Skarab Group ha adottato un approccio di testing multilivello che copre:
+
+- *Test di Sistema (TS)*.
+- *Test di Unità (TU)*.
+- *Test di Accettazione (TA)*.
+
+== Convenzioni di Nomenclatura
+I test sono identificati secondo il seguente schema:
+
+*Formato*: `[Tipologia]-[Gruppo].[Sottogruppo]`
+
+Ogni test è esplicitamente collegato ai *Casi d'Uso (UC)*  relativi per garantire copertura funzionale completa.
 
 == Test di Sistema
 Di seguito, viene riportata la tabella che definisce i #def("Test di Sistema") (TS) necessari per validare il comportamento descritto nei Casi d'Uso.
@@ -284,10 +439,7 @@ Di seguito, viene riportata la tabella che definisce i #def("Test di Sistema") (
       [UC1.4.2],
 
       [TS-1.6], [Verifica validazione formato Email: sintassi non valida.], [Validazione], [UC1.4.1],
-      [TS-1.7],
-      [Verifica complessità Password: mancato rispetto dei criteri di sicurezza (lunghezza, maiuscole, simboli).],
-      [Sicurezza],
-      [UC1.5.1],
+      [TS-1.7], [Verifica complessità Password: mancato rispetto dei criteri di sicurezza.], [Sicurezza], [UC1.5.1],
 
       //GRUPPO UC2: AUTENTICAZIONE
       [TS-2.0], [Verifica login con credenziali corrette.], [Funzionale], [UC2],
@@ -577,6 +729,26 @@ In questa sezione vengono definiti i #def("Test di Accettazione"), volti a valid
 #pagebreak()
 
 = Cruscotto di Valutazione
+
+== Processi Primari: Fornitura
+=== Earned Value - Planned Value (MP01 e MP02)
+=== Actual Cost - Estimate To Complete (MP03 e MP07)
+=== Cost Performance Index - Schedule Performance Index (MP04 e MP05)
+=== Estimate At Completion (MP06)
+
+== Processi Primari: Sviluppo
+=== Requirements Stability Index (MP08)
+
+== Processi di Supporto: Documentazione
+=== Gulpease Index (MP09)
+=== Correttezza Ortografica (MP10)
+
+== Processi di Supporto: Gestione della Qualità
+=== Quality metrics satisfied (MP13)
+
+== Processi Organizzativi: Gestione dei Processi
+=== Time Efficiency (MP14)
+=== Sprint Goal Achievement (MP15)
 
 #pagebreak()
 
