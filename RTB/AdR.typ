@@ -19,6 +19,12 @@
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
+    "2026/01/9",
+    "0.19.0",
+    "Aggiunti diagrammi per UC9 e UC10. Modificati requisiti relativi a UC10",
+    members.antonio,
+  ),
+  (
     "2026/01/08",
     "0.18.0",
     "Modificati requisiti relativi a UC14. Aggiunti diagrammi UC14",
@@ -181,7 +187,7 @@
 Il presente documento ha lo scopo di definire e analizzare i #def("requisiti funzionali") e i #def("requisiti non funzionali") del sistema software che #def("Skarab Group") intende sviluppare a supporto del progetto '#def("Code Guardian")' proposto dall'azienda #def("Var Group").
 Il documento descrive attentamente i #def("casi d'uso") del sistema, che sono la fonte dei #def("requisiti funzionali"), ovvero l'obiettivo finale dell'#def("analisi dei requisiti"). Per ogni #def("caso d'uso"), vengono specificati gli attori coinvolti, le precondizioni e postcondizioni, gli scenari principali e alternativi, nonché eventuali inclusioni ed estensioni oltre che i #def("diagrammi dei casi d'uso")
 
-Questo documento si pone alla base di progettazione, implementazione e collaudo del #def("sistema software"), fornendo una chiara comprensione delle funzionalità richieste e delle aspettative degli stakeholder e garantendo che il sistema soddisfi le esigenze degli #def("utenti") finali.
+Questo documento si pone alla base di progettazione, implementazione e collaudo del #def("sistema software"), fornendo una chiara comprensione delle funzionalità richieste e delle aspettative degli stakeholder, garantendo che il sistema soddisfi le esigenze degli #def("utenti") finali.
 
 L'obiettivo stesso del documento identifica i suoi destinatari principali, che includono:
 - L' #strong("azienda committente") #def("Var Group"), che utilizzeranno questo documento per verificare che il sistema che verrá sviluppato soddisfi le loro esigenze e aspettative.
@@ -215,7 +221,7 @@ In accordo con lo standard #link(<R2>)[#underline[ISO/IEC/IEEE International Sta
 Il prodotto che #def("Skarab Group") intende sviluppare è un #def("sistema software") #def("multiagente") per l'analisi di #def("repository") #def("GitHub"). Il sistema sarà progettato per essere modulare e scalabile, consentendo l'aggiunta di nuove funzionalità e agenti in futuro. Dal momento in cui l'obiettivo del #def("progetto") è lo sviluppo di un #def("MVP"), il sistema sarà sviluppato con un focus sulle funzionalità essenziali, garantendo al contempo una solida base per future espansioni.
 
 == Funzioni del prodotto
-Questa sezione descrive le principali funzionalitá dovrá fornire all'utilizzatore finale; esse sono suddivise in 2 sezioni principali, #emph("Codice") e #emph("Documentazione")
+Questa sezione descrive le principali funzionalitá  DA SISTEMARE, NON CI SONO 3 SEZIONI??//dovrá fornire all'utilizzatore finale; esse sono suddivise in 2 sezioni principali, #emph("Codice") e #emph("Documentazione")
 - Codice:
   - Analisi statica del codice sorgente per identificare potenziali errori a compile time.
   - Analisi delle dipendenzanze per individuare librerie obsolete o vulnerabili.
@@ -1100,6 +1106,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - #link(<UC4.1.1>)[#underline[\[UC4.1.1\]]] // URL repository GitHub non conforme
     - #link(<UC4.1.2>)[#underline[\[UC4.1.2\]]] // Repository GitHub non accessibile
+    - #link(<UC4.1.3>)[#underline[\[UC4.1.3\]]] // Repository GitHub non inserito
   ],
   trigger: "L'utente conferma l'inserimento dell'URL del repository GitHub
             durante la procedura di richiesta analisi",
@@ -1109,7 +1116,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ===== UC4.1.1: URL repository GitHub non conforme ai vincoli di formato <UC4.1.1>
 #useCase(
-  attore: "Utente autenticato e avanzato",
+  attore: "Utente autenticato avanzato",
   pre: [
     - L'utente ha collegato con successo il proprio account CodeGuardian
       ad un account GitHub e ha abilitato la condivisione di informazioni
@@ -1819,13 +1826,17 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente ha visualizzato la valutazione dell'analisi del codice repository GitHub
   ],
   scenari: [
-    - L'utente visualizza la valutazione dell'analisi del codice repository GitHub
+    - L'utente visualizza l'insieme di sezioni di valutazione dell'analisi del codice repository GitHub
+    - L'utente visualizza il report di analisi statica del codice repository GitHub #link(<UC9.1>)[#underline[\[UC9.1\]]]
+    - L'utente visualizza l'analisi delle librerie e dipendenze del codice repository GitHub #link(<UC9.2>)[#underline[\[UC9.2\]]]
+    - L'utente visualizza il report di analisi della sicurezza #def("OWASP") del codice repository GitHub #link(<UC9.3>)[#underline[\[UC9.3\]]]
+    - L'utente visualizza il numero totale di vulnerabilità individuate nel report di analisi codice repository GitHub #link(<UC9.4>)[#underline[\[UC9.4\]]]
   ],
   inclusioni: [
-    - Visualizzazione report di analisi statica del codice repository GitHub #link(<UC9.1>)[#underline[\[UC9.1\]]]
-    - Visualizzazione analisi librerie e dipendenze del codice repository GitHub #link(<UC9.2>)[#underline[\[UC9.2\]]]
-    - Visualizzazione report analisi della sicurezza #def("OWASP") del codice repository GitHub #link(<UC9.3>)[#underline[\[UC9.3\]]]
-    - Visualizzazione numero totale di vulnerabilità individuate nel report di analisi codice repository GitHub #link(<UC9.4>)[#underline[\[UC9.4\]]]
+    - #link(<UC9.1>)[#underline[\[UC9.1\]]]
+    - #link(<UC9.2>)[#underline[\[UC9.2\]]]
+    - #link(<UC9.3>)[#underline[\[UC9.3\]]]
+    - #link(<UC9.4>)[#underline[\[UC9.4\]]]
   ],
   estensioni: [
     - Nessuna
@@ -1935,17 +1946,19 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente ha visualizzato il report di analisi della documentazione repository GitHub
   ],
   scenari: [
-    - L'utente visualizza il report di analisi della documentazione repository GitHub
+    - L'utente visualizza l'insieme delle sezioni di analisi relative alla documentazione del repository GitHub selezionato
+    - L'utente visualizza il report di analisi degli errori di spelling #link(<UC10.1>)[#underline[\[UC10.1\]]]
+    - L'utente visualizza il report di analisi della completezza della documentazione nei confronti del codice del repository GitHub #link(<UC10.2>)[#underline[\[UC10.2\]]]
   ],
   inclusioni: [
-    - Visualizzazione errori di spelling #link(<UC10.1>)[#underline[\[UC10.1\]]]
-    - Visualizzazione completezza della documentazione nei confronti del codice#link(<UC10.2>)[#underline[\[UC10.2\]]]
+    - #link(<UC10.1>)[#underline[\[UC10.1\]]]
+    - #link(<UC10.2>)[#underline[\[UC10.2\]]]
   ],
   estensioni: [
     - Nessuna
   ],
   trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi della documentazione repository GitHub",
-)[]
+)[#useCaseDiagram("10", "UC10 - Visualizzazione report analisi della documentazione repository GitHub")]
 
 ==== UC10.1: Visualizzazione errori di spelling <UC10.1>
 #useCase(
