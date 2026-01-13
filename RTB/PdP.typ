@@ -97,7 +97,7 @@
 == Contesto del Progetto
 Il presente documento descrive il #def[Piano di Progetto] relativo al progetto #def[Code Guardian], commissionato dall’azienda #def[Var Group] e realizzato dal gruppo di studenti #def[Skarab Group] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
 
-L’obiettivo del progetto è lo sviluppo di una piattaforma ad #def[Agenti] per l’#def[audit] e la #def[remediation] automatizzata delle vulnerabilità presenti nei repository di codice sorgente, in conformità a quanto specificato nel capitolato *C2*.
+L’obiettivo del progetto è lo sviluppo di una piattaforma ad #def[Agenti] per l’#def[audit] e la #def[remediation] automatizzata delle vulnerabilità presenti nei repository di codice sorgente, in conformità a quanto specificato nel #link(<capitolato>)[#underline[capitolato *C2*]].
 La piattaforma mira a supportare l’analisi statica del codice e l’individuazione di criticità di sicurezza, fornendo indicazioni di correzione mediante meccanismi automatizzati basati su modelli di linguaggio (#def[LLM]).
 
 == Finalità del Documento
@@ -108,8 +108,6 @@ Il documento costituisce il riferimento primario per il gruppo di lavoro e per g
 - definire la pianificazione temporale delle attività (#def[Schedulazione]) e le principali scadenze progettuali (#def[Milestone]);
 - stimare i costi e allocare in modo coerente le risorse umane;
 - monitorare l’avanzamento del progetto mediante il confronto sistematico tra preventivo e consuntivo al termine di ogni #def[Sprint].
-
-In linea con la metodologia #def[Agile], il Piano di Progetto supera la rigidità del #def[Big Design Up Front], poco funzionale in contesti a requisiti variabili. Si adotta invece un approccio incrementale (rolling wave planning), che permette alla pianificazione di evolversi parallelamente all'avanzamento dei lavori e alla definizione dei dettagli.
 
 == Prodotti Attesi
 I prodotti del progetto vengono rilasciati in modo incrementale in corrispondenza di due principali milestone: la *Revisione dei Requisiti e della Tecnologia* (RTB) e la *Revisione di Accettazione*, associata alla #def[Product Baseline] (PB).
@@ -126,7 +124,7 @@ Entro tale scadenza, verranno rilasciati e sottoposti a verifica i seguenti arte
 - *Verbali*: documentazione delle decisioni e delle riunioni interne ed esterne rilevanti ai fini progettuali.
 
 === Revisione di Accettazione (Product Baseline – PB)
-Il rilascio finale del progetto, corrispondente alla Product Baseline, è pianificato per la data ultima del *21/03/2026*. come preventivato nella *Candidatura al Capitolato*.
+Il rilascio finale del progetto, corrispondente alla Product Baseline, è pianificato per la data ultima del *21/03/2026*. come preventivato nella #link("https://skarabgroup.github.io/DocumentazioneProgetto/candidatura/Proposta_di_Candidatura.pdf")[*Proposta di Candidatura*] al capitolato.
 Entro tale termine, il gruppo fornirà:
 - *Prodotto Software (#def[MVP])*: versione completa e funzionante del sistema, conforme ai requisiti funzionali e qualitativi approvati;
 - *Codice Sorgente*: intero codebase documentato e versionato nel repository ufficiale del progetto;
@@ -147,7 +145,7 @@ Versione aggiornata del Glossario:
 
 === Riferimenti Normativi
 I seguenti documenti hanno valore vincolante per la redazione del Piano di Progetto e per lo svolgimento delle attività progettuali:
-- *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. #linebreak()
+- *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> #linebreak()
   #link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")
 - *Norme di Progetto*: regole, convenzioni e standard di qualità adottati dal gruppo. #linebreak()
   #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[Documento interno]
@@ -160,13 +158,7 @@ In termini di tracciabilità, l'adesione si riflette in:
 - *Struttura:* L'indice dei contenuti mappa fedelmente la struttura proposta dallo standard per evitare lacune gestionali.
 - *Risk Management:* La sezione rischi formalizza le procedure di monitoraggio (probabilità/impatto/contingenza) come richiesto dalla norma.
 - *Controllo:* Il documento separa nettamente le stime (Preventivo) dalla rendicontazione (Consuntivo).
-
-=== Riferimenti Informativi
-- *Dispense del corso di Ingegneria del Software – Gestione di progetto* #linebreak()
-  #link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T04.pdf")
-
-#pagebreak()
-
+// Specificare nelle norme di progetto in una sezione "Adozione Standard IEEE" il motivo della scelta
 = Analisi dei Rischi
 
 L’attività di gestione dei rischi è un processo iterativo, continuo e proattivo, finalizzato a supportare il conseguimento degli obiettivi del progetto #def[Code Guardian].
