@@ -68,31 +68,66 @@
 
 = Introduzione
 
-== Scopo del documento
-Il presente documento ha l'obiettivo di definire e formalizzare le strategie di gestione della #def("qualità") per il progetto _Code Guardian_. Esso descrive come Skarab Group intende monitorare l'intero #def("ciclo di vita del software"), assicurando che ogni fase sia misurabile, migliorabile e soddisfi pienamente i requisiti richiesti dall'azienda.
+== Contesto del Progetto
+Il presente documento descrive il #def[Piano di Qualifica] relativo al progetto #def[Code Guardian], commissionato dall’azienda #def[Var Group] e realizzato dal gruppo di studenti #def[Skarab Group] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
 
-Il #def("Piano di Qualifica") integra meccanismi di misurazione oggettiva, controllo di conformità ai requisiti del capitolato e protocolli di miglioramento continuo per assicurare l'eccellenza.
+L’obiettivo del progetto è lo sviluppo di una piattaforma ad #def[Agenti] per l’#def[audit] e la #def[remediation] automatizzata delle vulnerabilità nei repository GitHub, in conformità con quanto definito dal capitolato *C2*.
 
-Esso, quindi, comprende tre elementi fondamentali:
-1. *Piano della Qualità*.
+== Finalità del Documento
+Il Piano di Qualifica definisce le strategie, le metriche e le procedure necessarie per garantire la qualità del prodotto software e l'efficienza dei processi adottati. Esso formalizza l'approccio del gruppo alla rilevazione e correzione dei difetti, assicurando che ogni rilascio soddisfi i requisiti concordati.
 
-2. *Controllo di Qualità*.
+Il documento costituisce il riferimento primario per il #def[Responsabile] e per i #def[Verificatori], perseguendo i seguenti obiettivi:
+- definire gli obiettivi di qualità di processo e di prodotto, in conformità con lo standard #def[ISO/IEC 25010];
+- pianificare le attività di #def[Verifica] (statiche e dinamiche) per accertare la correttezza interna degli artefatti;
+- pianificare le attività di #def[Validazione] per garantire la conformità del prodotto alle aspettative degli #def[Stakeholder];
+- stabilire le metriche di misurazione e le relative soglie di accettazione/ottimalità.
 
-3. *Miglioramento continuo*.
+In linea con la metodologia #def[Agile] e il principio del miglioramento continuo, il Piano di Qualifica adotta il ciclo di Deming (#def[PDCA]: Plan-Do-Check-Act). Questo approccio permette di monitorare costantemente l'efficacia del *Way of Working*, attuando azioni correttive e preventive per ottimizzare le performance del gruppo parallelamente all'avanzamento dello sviluppo.
 
-L'approccio metodologico adottato configura la qualità come un processo dinamico di apprendimento, miglioramento e ottimizzazione continua, in linea con il _#def("Way of Working")_.
+== Traguardi Qualitativi
+L'assicurazione della qualità segue l'approccio incrementale del progetto, fissando obiettivi specifici per le due principali milestone:
+
+=== Revisione dei Requisiti e della Tecnologia (RTB)
+Per la milestone RTB (*05/02/2026*), le attività di qualità si concentrano sulla correttezza formale e sulla fattibilità tecnica:
+- *Qualità dei Documenti*: Verifica approfondita della documentazione (Analisi dei Requisiti, PdP, NdP) tramite analisi statica e walkthrough, per garantire assenza di ambiguità e coerenza interna (Indice di Gulpease).
+- *Qualità del Prototipo (#def[PoC])*: L'attività di verifica è focalizzata esclusivamente sulla **dimostrazione della fattibilità tecnica** (Technology Baseline), con particolare attenzione all'interazione Agenti-LLM. Il testing in questa fase ha valore **sperimentale e propedeutico**: esso funge da caso di studio per calibrare le metriche e validare le strategie di verifica che saranno poi applicate in modo sistematico ed estensivo sul #def[MVP].
+
+=== Revisione di Accettazione (Product Baseline – PB)
+Per il rilascio finale (*21/03/2026*), il focus si sposta sulla robustezza, sulla copertura e sulla soddisfazione dei requisiti:
+- *Qualità del Prodotto (#def[MVP])*: Esecuzione completa dei test di unità, integrazione e sistema. Validazione finale rispetto ai requisiti funzionali e prestazionali del capitolato.
+- *Qualità del Codice*: Rispetto dei vincoli di stile, assenza di *code smells* e raggiungimento delle soglie di copertura del codice (Code Coverage) definite nel presente piano.
+- *Validazione Utente*: Verifica dell'usabilità tramite test di accettazione (UAT) basati sui casi d'uso principali.
+
+== Glossario
+Al fine di prevenire ambiguità interpretative, è stato redatto un #def[Glossario] che definisce in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio utilizzati all’interno della documentazione.
+Le occorrenze dei termini presenti nel Glossario sono evidenziate nel testo mediante apposita formattazione.
+
+Versione aggiornata del Glossario:
+#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario]
 
 == Riferimenti
-=== Riferimenti normativi
-- *Way of Working v1.2:* \ #underline[https://github.com/SkarabGroup/DocumentazioneProgetto/blob/main/candidatura/WoW_Skarab_Group.pdf] \ *Ultimo Accesso:*
 
-- *Capitolato d'appalto C2: Piattaforma ad agenti per l’audit e la remediation dei repository GitHub:* \ #underline[https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf] \ *Ultimo Accesso:*
-=== Riferimenti informativi
-- *Glossario.* \ *Ultimo Accesso:*
+=== Riferimenti Normativi
+I seguenti documenti hanno valore vincolante per la definizione delle strategie di qualità e per le attività di verifica:
+- *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. #linebreak()
+  #link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")
+- *Norme di Progetto*: Il documento definisce il "Way of Working", stabilendo gli strumenti e le procedure che questo Piano si occupa di misurare. #linebreak()
+  #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[Documento interno]
 
-- *Standard ISO/IEC 9126 - Qualità del prodotto software:* \ #underline[https://it.wikipedia.org/wiki/ISO/IEC_9126] \ *Ultimo Accesso:*
-- *Standard ISO/IEC 12207:1995 - Processi del ciclo di vita del software:* \ #underline[https://www.math.unipd.it/~tullio/IS-1/2009/Approfondimenti/ISO_12207-1995.pdf] \ *Ultimo Accesso:*
+=== Riferimenti Informativi
+- *ISO/IEC 25010:2011*: Systems and software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE). #linebreak()
+  #link("https://iso25000.com/index.php/en/iso-25000-standards/iso-25010")
+- *ISO/IEC 12207:2008*: Systems and software engineering — Software life cycle processes. #linebreak()
+- *Dispense del corso di Ingegneria del Software – Qualità del software* #linebreak()
+  #link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T06.pdf")
 
+==== Nota sull'adozione dello Standard ISO/IEC 25010 e PDCA
+La redazione del presente documento e la definizione delle metriche si ispirano alla famiglia di standard ISO/IEC 25010 (SQuaRE). Tale scelta garantisce una classificazione rigorosa delle caratteristiche di qualità del prodotto (es. Sicurezza, Affidabilità, Usabilità).
+Inoltre, l'adozione strutturale del ciclo #def[PDCA] (Plan-Do-Check-Act) assicura che il processo di controllo qualità non sia statico, ma evolva:
+- *Plan:* Definizione delle metriche e delle soglie nel presente documento.
+- *Do:* Esecuzione delle misurazioni durante gli Sprint.
+- *Check:* Analisi degli scostamenti nei periodi di retrospettiva.
+- *Act:* Aggiornamento delle Norme di Progetto e ricalibrazione delle metriche per lo Sprint successivo.
 #pagebreak()
 
 = Qualità di processo
