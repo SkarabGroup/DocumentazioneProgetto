@@ -19,6 +19,12 @@
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
+    "2026/01/13",
+    "0.23.0",
+    "Requisiti funzionali relativi a UC9, UC10, UC11",
+    members.berengan,
+  ),
+  (
     "2026/01/12",
     "0.22.0",
     "Caso d'uso UC16 con relativi sottocasi e diagrammi",
@@ -3117,6 +3123,47 @@ Descrivono cosa il sistema deve fare, inclusi i comportamenti, le reazioni a spe
   [L'utente autenticato avanzato deve poter visualizzare indicatori di variazione rispetto al report precedente],
   [#link(<UC8>)[#underline[\[UC8\]]]],
 
+  //UC9
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare l'apposita sezione del report di analisi relativa all'analisi del codice],
+  [#link(<UC9>)[#undrline[\[UC9\]]]],
+  //UC9.1
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare la sotto sezione relativa all'analisi statica del codice all'interno della sezione "Analisi del codice" del report di analisi],
+  [#link(<UC9.1>)[#undrline[\[UC9.1\]]]],
+  //UC9.2
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare la sotto sezione relativa all'analisi delle dipendenze del codice e delle librerie all'interno della sezione "Analisi del codice" del report di analisi],
+  [#link(<UC9.2>)[#undrline[\[UC9.2\]]]],
+  //UC9.3
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare la sotto sezione relativa all'analisi della sicurezza all'interno della sezione "Analisi del codice" del report di analisi],
+  [#link(<UC9.3>)[#undrline[\[UC9.3\]]]],
+  //UC9.4
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare la sotto sezione relativa al numero totale di vulnerabilità individuate all'interno della sezione "Analisi del codice" del report di analisi],
+  [#link(<UC9.4>)[#undrline[\[UC9.4\]]]],
+
+  //UC10
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare la sezione relativa all'analisi della documentazione all'interno del report di analisi],
+  [#link(<UC10>)[#underline[\[UC10\]]]],
+  //UC10.1
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare la sotto sezione relativa agli errori di spelling all'interno della sezione relativa all documentazione del report],
+  [#link(<UC10.1>)[#underline[\[UC10.1\]]]],
+  //UC10.2
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare la sotto sezione relativa alla completezza della documentazione nei confronti del codice all'interno della sezione relativa alla documentazione del report di analisi],
+  [#link(<UC10.2>)[#underline[\[UC10.2\]]]],
+
+  //UC11
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare la sezione relativa al numero totale di vulnerabilità individuate nel report di analisi],
+  [#link(<UC11>)[#underline[\[UC11\]]]],
+
+  //UC12
+
   // UC14
   // UC14.1
   [#FRx],
@@ -3156,7 +3203,7 @@ Descrivono cosa il sistema deve fare, inclusi i comportamenti, le reazioni a spe
   // UC15.1.1
   [#FRx],
   [L'utente autenticato avanazato deve poter visualizzare a schermo un messaggio d'errore se la password corrente inserita è errata],
-  [#link(<UC15.1.1>)[#underline[\[UC15.1.1]]],
+  [#link(<UC15.1.1>)[#underline[\[UC15.1.1\]]]],
   // UC15.1.2
   [#FRx],
   [L'utente autenticato avanzato deve poter visualizzare a schermo un messaggio d'errore se non ha inserito alcuna password nel campo del form di inserimento password corrente],
