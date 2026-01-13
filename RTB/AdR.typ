@@ -13,11 +13,47 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.18.0"
+#let versione = "v0.22.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2026/01/13",
+    "0.23.0",
+    "Requisiti funzionali relativi a UC9, UC10, UC11",
+    members.berengan,
+  ),
+  (
+    "2026/01/12",
+    "0.22.0",
+    "Caso d'uso UC16 con relativi sottocasi e diagrammi",
+    members.alice,
+  ),
+  (
+    "2026/01/10",
+    "0.21.0",
+    "Requisiti funzionali relativi ad UC15",
+    members.berengan,
+  ),
+  (
+    "2026/01/09",
+    "0.20.1",
+    "Fix minori label del documento",
+    members.martinello,
+  ),
+  (
+    "2026/01/09",
+    "0.20.0",
+    "Caso d'uso UC15",
+    members.berengan,
+  ),
+  (
+    "2026/01/09",
+    "0.19.0",
+    "Requisiti da UC6 a UC8",
+    members.alice,
+  ),
   (
     "2026/01/9",
     "0.19.0",
@@ -41,12 +77,14 @@
     "0.16.0",
     "Aggiunta UC13 e relativi sottocasi",
     members.berengan,
+    members.alice,
   ),
   (
     "2025/12/30",
     "0.15.1",
     "Piccoli fix e spell corrections",
     members.kevin,
+    members.alice,
   ),
   (
     "2025/12/29",
@@ -1790,7 +1828,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente interagisce con la sezione di visualizzazione del grafico comparativo tra report di analisi repository GitHub durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian",
 )[]
 
-=== UC8: visualizzazione tabella comparativa tra report di analisi repository GitHub <UC8>
+=== UC8: Visualizzazione tabella comparativa tra report di analisi repository GitHub <UC8>
 #useCase(
   attore: UAA,
   pre: [
@@ -2118,7 +2156,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente visualizza il richiedente nella sezione relativa ai metadati del report di analisi repository GitHub",
 )[]
 
-
 === UC13: Disconnessione account GitHub da CodeGuardian<UC13>
 #useCase(
   attore: UAA,
@@ -2128,10 +2165,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente ha selezionato la sezione di disconnessione dell'account GitHub dal sistema CodeGuardian
   ],
   post: [
-    - L'utente ha scollegato con successo il suo accont GitHub dalla piattaforma Codeguardian
+    - L'utente ha disconnesso con successo il proprio accont GitHub dalla piattaforma Codeguardian
   ],
   scenari: [
-    - L'utente scollega il proprio account GitHub dalla paiattaforma CodeGuardian
+    - L'utente disconnette il proprio account GitHub dalla paiattaforma CodeGuardian
   ],
   inclusioni: [
     - #link(<UC13.1>)[#underline[\[UC13.1\]]] // Conferma disconnessione
@@ -2151,10 +2188,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente ha selezionato la sezione di disconnessione dell'account GitHub dal sistema CodeGuardian #link(<UC13>)[#underline[\[UC13\]]]
   ],
   post: [
-    - L'utente ha scollegato con successo il suo accont GitHub dalla piattaforma Codeguardian
+    - L'utente ha disconnesso con successo il proprio accont GitHub dalla piattaforma Codeguardian
   ],
   scenari: [
-    - L'utente seleziona il tasto "Disconnetti Account
+    - L'utente seleziona il tasto "Disconnetti Account"
   ],
   inclusioni: [
     - Nessuna
@@ -2163,7 +2200,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Conferma finale della disconnessione #link(<UC13.1.1>)[#underline[\[UC13.1.1\]]]
 
   ],
-  trigger: "L'untente seleziona e attiva il tasto disconnetti per disconnettere il proprio account",
+  trigger: "L'untente seleziona e attiva il tasto Disconnetti per disconnettere il proprio account",
 )[]
 
 ===== UC13.1.1: Conferma disconnessione account<UC13.1.1>
@@ -2172,6 +2209,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente ha selezionato la sezione di disconnessione dell'account GitHub dal sistema CodeGuardian #link(<UC13>)[#underline[\[UC13\]]]
+    - L'utente ha selezionato il tasto Disconnetti #link(<UC13.1>)[#underline[\[UC13.1\]]]
   ],
   post: [
     - L'utente ha disconnesso con successo il proprio account di GitHub dalla piattaforma CodeGuardian
@@ -2189,17 +2227,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente seleziona e conferma la disconnessione del proprio account GitHub dalla piattaforma CodeGuardian",
 )[]
 
-=== UCx: Accesso al profilo CodeGuardian
-=== UCx: modifica password profilo CodeGuardian
-=== UCx: Recupero password profilo CodeGuardian
-
 === UC14: Esportazione report di analisi repository GitHub <UC14>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
   ],
   post: [
@@ -2215,7 +2246,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC14.2>)[#underline[\[UC14.2\]]] // Conferma esportazione
   ],
   estensioni: [
-    - #link(<UC14.1.1>)[#underline[\[UC14.1.1\]]] // Nessun formato selezionato
+    - Nessuna
   ],
   trigger: "L'utente interagisce con il pulsante di esportazione nella sezione di visualizzazione del report",
 )[#useCaseDiagram("14", "UC14 - Esportazione report di analisi repository GitHub")]
@@ -2247,6 +2278,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
+    - L'utente sta visualizzando il report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]]
     - L'utente sta eseguendo la procedura di esportazione #link(<UC14>)[#underline[\[UC14\]]]
     - L'utente tenta di procedere senza selezionare un formato #link(<UC14.1>)[#underline[\[UC14.1\]]]
   ],
@@ -2269,6 +2301,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
+    - L'utente sta visualizzando il report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente sta eseguendo la procedura di esportazione #link(<UC14>)[#underline[\[UC14\]]]
     - L'utente ha selezionato un formato di esportazione valido #link(<UC14.1>)[#underline[\[UC14.1\]]]
   ],
   post: [
@@ -2285,6 +2319,333 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'utente conferma l'esportazione del report di analisi dopo aver selezionato un formato valido",
 )[]
+
+=== UC15: modifica password profilo <UC15>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente vuole cambiare la password del proprio account
+  ],
+  post: [
+    - L'utente ha cambiato correttamente la propria password
+  ],
+  scenari: [
+    - L'utente è entrato nella sezione Impostazioni
+    - L'utente seleziona la sezione "Modifica Password" delle impostazioni
+    - L'utente inserisce la password corrente nel primo campo del form di modifica #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - L'utente inserisce la nuova password nel campo del form di modifica sottostante #link(<UC15.2>)[#underline[\[UC15.2\]]]
+    - L'utente conferma la modifica della propria password #link(<UC15.3>)[#underline[\[UC15.3\]]]
+    - L'utente riceve la conferma dell'avvenuta modifica della propria password #link(<UC15.4>)[#underline[\[UC15.4\]]]
+  ],
+  inclusioni: [
+    - #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - #link(<UC15.2>)[#underline[\[UC15.2\]]]
+    - #link(<UC15.3>)[#underline[\[UC15.3\]]]
+  ],
+  estensioni: [
+    - #link(<UC15.1.1>)[#underline[\[UC15.1.1\]]]
+    - #link(<UC15.1.2>)[#underline[\[UC15.1.2\]]]
+    - #link(<UC15.2.1>)[#underline[\[UC15.2.1\]]]
+    - #link(<UC15.2.2>)[#underline[\[UC15.2.2\]]]
+    - #link(<UC15.2.3>)[#underline[\[UC15.2.3\]]]
+  ],
+  trigger: "L'utente inserisce la password attuale, la nuova password ed in seguito clicca il tasto di conferma",
+)[]
+
+==== UC15.1 inserimento della password corrente <UC15.1>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente è entrato nella sezione Impostazioni > Modifica Password #link(<UC15>)[#underline[\[UC15\]]]
+  ],
+  post: [
+    - L'utente ha inserito correttamente la propria password
+  ],
+  scenari: [
+    - L'utente clicca o tabba sul form di modifica password
+    - L'utente digita la password corrente
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC15.1.1>)[#underline[\[UC15.1.1 \]]]
+    - #link(<UC15.1.2>)[#underline[\[UC15.1.2\]]]
+  ],
+  trigger: "L'utente interagisce con il form di modifica inserendo la password corrente nell'apposto campo",
+)[]
+
+===== UC15.1.1 Password corrente non inserita <UC15.1.1>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente è entrato nella sezione Impostazioni > Modifica Password #link(<UC15>)[#underline[\[UC15\]]]
+  ],
+  post: [
+    - L'utene non può inserire la nuova password nel campo del form
+  ],
+  scenari: [
+    - L'utente prova a cliccare su un altro campo del form
+    - L'utente prova a cliccare il tasto di conferma del cambio password
+    - L'utente visualizza un messaggio di errore che lo invita ad inserire la password corrente
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente prova a cliccare su un altro campo del form o sul tasto di conferma senza aver inserito la password corrente",
+)[]
+
+==== UC15.1.2 Password corrente errata <UC15.1.2>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente ha inserito la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
+  ],
+  post: [
+    - All'utente viene impedito di cambiare la propria password
+  ],
+  scenari: [
+    - L'utene inserice una password errata nel form
+    - L'utente visualizza un messaggio di errore che lo invita a modificare la password inserita perchè errata
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con il form di modifica inserendo una password errata e visualizza a schermo un errore",
+)[]
+
+==== UC15.2 Inserimento della nuova password <UC15.2>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
+  ],
+  post: [
+    - L'utente può procedere alla conferma della modifica password
+  ],
+  scenari: [
+    - L'utente inserisce la nuova password all'interno del form di modifica
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC15.2.1>)[#underline[\[UC15.2.1\]]]
+    - #link(<UC15.2.2>)[#underline[\[UC15.2.2\]]]
+    - #link(<UC15.2.3>)[#underline[\[UC15.2.3\]]]
+  ],
+  trigger: "L'utente interagisce con il form di modifica inserendo una nuova password",
+)[]
+
+===== UC15.2.1 Nessuna nuova password inserita <UC15.2.1>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
+  ],
+  post: [
+    - L'utente non può procedere alla conferma della modirfica password
+  ],
+  scenari: [
+    - L'utente clicca il tasto di conferma della modifica password
+    - L'utente visualizza un errore a schermo che lo invita ad inserire una nuova password prima di confermare
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente clicca il tasto di conferma della modifica password",
+)[]
+
+===== UC15.2.2 Nuova password non conforme allo standard adottato <UC15.2.2>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
+  ],
+  post: [
+    - All'utente viene impedito di confermare la modifica della password
+  ],
+  scenari: [
+    - L'utente visualizza a schermo un errore che gli indica il tipo di caratteri da inseire nella nuova password in modo che sia conforme allo standard adottato
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con il form di modifica inserendo una nuova password",
+)[]
+
+===== UC15.2.3 Nuova password uguale alla precedente <UC15.2.3>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
+  ],
+  post: [
+    - All'utente viene impedito di confermare la modifica della password
+  ],
+  scenari: [
+    - L'utente inserisce una password uguale a quella precedente
+    - L'utente visualizza un errore a schermo che lo informa dell'ugualianza tra la nuova password e quella precedente
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente inserisce la nuova password all'interno dell'apposto campo del form di modifica",
+)[]
+
+==== UC15.3 Conferma modifica password <UC15.3>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - L'utente ha inserito una nuova password valida nell'apposito campo del form #link(<UC15.2>)[#underline[\[UC15.2\]]]
+  ],
+  post: [
+    - L'utente modifica e conferma correttamente la propria password
+  ],
+  scenari: [
+    - L'utente conferma la modifica della password
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente interagisce con il tasto di conferma di modifica della password",
+)[]
+
+==== UC15.4 Ricezione dell'avvenuta modifica password <UC15.4>
+#useCase(
+  attore: UAA,
+  pre: [
+    - La conferma della modifica password è andata a buon fine #link(<UC15.3>)[#underline[\[UC15.3\]]]
+  ],
+  post: [
+    - La password viene modificata correttamente
+  ],
+  scenari: [
+    - L'utente visualizza a schermo un messggio di avvenuta modifica
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Nessuno",
+)[]
+
+=== UC16: Visualizzazione suggerimenti di remediation <UC16>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation
+  ],
+  post: [
+    - L'utente ha visualizzato la lista delle issue identificate e i relativi suggerimenti di remediation
+  ],
+  scenari: [
+    - L'utente visualizza la lista delle issue identificate #link(<UC16.1>)[#underline[\[UC16.1\]]]
+    - L'utente visualizza i dettagli del suggerimento di remediation di un'issue specifica #link(<UC16.2>)[#underline[\[UC16.2\]]]
+  ],
+  inclusioni: [
+    - #link(<UC16.1>)[#underline[\[UC16.1\]]] // Visualizzazione lista issue identificate
+    - #link(<UC16.2>)[#underline[\[UC16.2\]]] // Visualizzazione dettaglio suggerimento di remediation
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa ai suggerimenti di remediation",
+)[#useCaseDiagram("16", "UC16 - Visualizzazione suggerimenti di remediation")]
+
+==== UC16.1: Visualizzazione lista issue identificate <UC16.1>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
+  ],
+  post: [
+    - L'utente visualizza la lista completa delle issue identificate nel repository analizzato
+  ],
+  scenari: [
+    - L'utente consulta la lista delle issue
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna issue identificata nel repository #link(<UC16.1.1>)[#underline[\[UC16.1.1\]]]
+  ],
+  trigger: "L'utente accede alla sezione suggerimenti di remediation nel report di analisi",
+)[#useCaseDiagram("16_1", "UC16.1 - Visualizzazione lista issue identificate")]
+
+===== UC16.1.1: Nessuna issue identificata nel repository <UC16.1.1>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
+    - L'analisi del repository non ha identificato alcuna issue
+  ],
+  post: [
+    - L'utente è informato che non sono state identificate issue nel repository analizzato
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio che indica che l'analisi non ha identificato issue nel repository analizzato
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente accede alla sezione di visualizzazione delle issue per un repository privo di segnalazioni",
+)[]
+
+==== UC16.2: Visualizzazione dettaglio suggerimento di remediation <UC16.2>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
+    - L'utente sta visualizzando la lista delle issue identificate #link(<UC16.1>)[#underline[\[UC16.1\]]]
+  ],
+  post: [
+    - L'utente visualizza il dettaglio completo del suggerimento di remediation
+  ],
+  scenari: [
+    - L'utente consulta il suggerimento di remediation
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente clicca sul pulsante di visualizzazione remediation relativo all'issue",
+)[]
+
+=== UCx: Accesso al profilo CodeGuardian
+=== UCx: Recupero password profilo Codeguardian
 
 #pagebreak()
 = Requisiti di Sistema
@@ -2700,6 +3061,122 @@ Descrivono cosa il sistema deve fare, inclusi i comportamenti, le reazioni a spe
   [L'utente deve poter visualizzare i dettagli completi dell'analisi (metriche, grafici, suggerimenti)],
   [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
 
+  // UC6
+  [#FRx],
+  [L'utente autenticato avanzato deve poter accedere alla funzione di selezione dell'intervallo temporale dalla pagina di visualizzazione del report di analisi],
+  [#link(<UC6>)[#underline[\[UC6\]]]],
+
+  [#FRx],
+  [L'utente autenticato avanzato deve poter selezionare una data di inizio per l'intervallo temporale],
+  [#link(<UC6>)[#underline[\[UC6\]]]],
+
+  [#FRx],
+  [L'utente autenticato avanzato deve poter selezionare una data di fine per l'intervallo temporale],
+  [#link(<UC6>)[#underline[\[UC6\]]]],
+
+  [#FRx],
+  [L'utente autenticato avanzato deve poter confermare la selezione dell'intervallo temporale],
+  [#link(<UC6>)[#underline[\[UC6\]]]],
+
+  [#FRx],
+  [L'utente autenticato avanzato deve poter modificare l'intervallo temporale dopo averlo selezionato],
+  [#link(<UC6>)[#underline[\[UC6\]]]],
+  // UC6.1
+  [#FRx],
+  [L'utente autenticato avanzato deve visualizzare un messaggio di errore se tenta di confermare senza aver selezionato un intervallo temporale],
+  [#link(<UC6.1>)[#underline[\[UC6.1\]]]],
+  // UC6.2 - UC6.2.1 - UC6.2.2 - UC6.2.3
+  [#FRx],
+  [L'utente autenticato avanzato deve visualizzare un messaggio di errore se l'intervallo temporale selezionato non è valido],
+  [#link(<UC6.2>)[#underline[\[UC6.2\]]]],
+
+  [#FRx],
+  [L'utente autenticato avanzato deve visualizzare un messaggio specifico se non esistono report nel periodo selezionato],
+  [#link(<UC6.2.1>)[#underline[\[UC6.2.1\]]]],
+
+  [#FRx],
+  [L'utente autenticato avanzato deve visualizzare un messaggio di errore se la data di inizio è successiva alla data di fine],
+  [#link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]],
+
+  [#FRx],
+  [L'utente autenticato avanzato deve visualizzare un messaggio di errore se l'intervallo temporale supera il limite massimo consentito],
+  [#link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]],
+
+  // UC7
+  [#FRx],
+  [L'utente autenticato avanzato deve poter accedere alla visualizzazione del grafico comparativo dopo aver selezionato un intervallo temporale valido],
+  [#link(<UC7>)[#underline[\[UC7\]]]],
+
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare nel grafico l'evoluzione temporale della qualità del codice e della documentazione],
+  [#link(<UC7>)[#underline[\[UC7\]]]],
+
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare nel grafico l'evoluzione temporale del numero di vulnerabilità],
+  [#link(<UC7>)[#underline[\[UC7\]]]],
+
+  [#FRx],
+  [L'utente autenticato avanzato deve poter interagire con il grafico per visualizzare dettagli specifici di ciascun punto dati (tooltip)],
+  [#link(<UC7>)[#underline[\[UC7\]]]],
+
+  // UC8
+  [#FRx],
+  [L'utente autenticato avanzato deve poter accedere alla visualizzazione della tabella comparativa dopo aver selezionato un intervallo temporale valido],
+  [#link(<UC8>)[#underline[\[UC8\]]]],
+
+  [#FRx],
+  [L'utente autenticato avanzato deve poter ordinare la tabella per data (crescente/decrescente), numero di vulnerabilità, qualità del codice o qualità della documentazione],
+  [#link(<UC8>)[#underline[\[UC8\]]]],
+
+  [#FRx],
+  [L'utente autenticato avanzato deve poter accedere al report completo tramite un pulsante presente nella riga corrispondente della tabella],
+  [#link(<UC8>)[#underline[\[UC8\]]]],
+
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare indicatori di variazione rispetto al report precedente],
+  [#link(<UC8>)[#underline[\[UC8\]]]],
+
+  //UC9
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare l'apposita sezione del report di analisi relativa all'analisi del codice],
+  [#link(<UC9>)[#undrline[\[UC9\]]]],
+  //UC9.1
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare la sotto sezione relativa all'analisi statica del codice all'interno della sezione "Analisi del codice" del report di analisi],
+  [#link(<UC9.1>)[#undrline[\[UC9.1\]]]],
+  //UC9.2
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare la sotto sezione relativa all'analisi delle dipendenze del codice e delle librerie all'interno della sezione "Analisi del codice" del report di analisi],
+  [#link(<UC9.2>)[#undrline[\[UC9.2\]]]],
+  //UC9.3
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare la sotto sezione relativa all'analisi della sicurezza all'interno della sezione "Analisi del codice" del report di analisi],
+  [#link(<UC9.3>)[#undrline[\[UC9.3\]]]],
+  //UC9.4
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare la sotto sezione relativa al numero totale di vulnerabilità individuate all'interno della sezione "Analisi del codice" del report di analisi],
+  [#link(<UC9.4>)[#undrline[\[UC9.4\]]]],
+
+  //UC10
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare la sezione relativa all'analisi della documentazione all'interno del report di analisi],
+  [#link(<UC10>)[#underline[\[UC10\]]]],
+  //UC10.1
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare la sotto sezione relativa agli errori di spelling all'interno della sezione relativa all documentazione del report],
+  [#link(<UC10.1>)[#underline[\[UC10.1\]]]],
+  //UC10.2
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare la sotto sezione relativa alla completezza della documentazione nei confronti del codice all'interno della sezione relativa alla documentazione del report di analisi],
+  [#link(<UC10.2>)[#underline[\[UC10.2\]]]],
+
+  //UC11
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare la sezione relativa al numero totale di vulnerabilità individuate nel report di analisi],
+  [#link(<UC11>)[#underline[\[UC11\]]]],
+
+  //UC12
+
   // UC14
   // UC14.1
   [#FRx],
@@ -2722,9 +3199,52 @@ Descrivono cosa il sistema deve fare, inclusi i comportamenti, le reazioni a spe
   [L'utente autenticato avanzato deve poter visualizzare tutti i dati del report nel file esportato (metriche, vulnerabilità, suggerimenti)],
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 
+  [#FRx], [Il download del file deve essere generato automaticamente], [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
+
+  // UC15
   [#FRx],
-  [L'utente autenticato avanzato deve ricevere automaticamente il download del file generato],
-  [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
+  [L'utente autenticato avanzato deve poter accedere alla sezione Imopstazioni > Cambia Password],
+  [#link(<UC15>)[#underline[\[UC15\]]]],
+
+  [#FRx],
+  [L'utente autenticato avanzato deve porter visualizzare il form di modifica ed il tasto di conferma],
+  [#link(<UC15>)[#underline[\[UC15\]]]],
+  // UC15.1
+  [#FRx],
+  [L'utente autenticato avanzato deve poter inseire la propria password cprrente all'interno dell'apposto campo del form di modifica],
+  [#link(<UC15.1>)[#underline[\[UC15.1\]]]],
+  // UC15.1.1
+  [#FRx],
+  [L'utente autenticato avanazato deve poter visualizzare a schermo un messaggio d'errore se la password corrente inserita è errata],
+  [#link(<UC15.1.1>)[#underline[\[UC15.1.1\]]]],
+  // UC15.1.2
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare a schermo un messaggio d'errore se non ha inserito alcuna password nel campo del form di inserimento password corrente],
+  [#link(<UC15.1.2>)[#underline[\[UC15.1.2\]]]],
+  // UC15.2
+  [#FRx],
+  [L'utente autenticato avanzato deve porte inseire la nuova password nell'apposito campo del form di modifica password],
+  [#link(<UC15.2>)[#underline[\[UC15.2\]]]],
+  // UC15.2.1
+  [#FRx],
+  [L'utente autenticato avanzato deve porte visualizzare a schermo un messaggio d'errore se non ha inserito alcuna password all'interno del campo "nuova password" nel form di modifica],
+  [#link(<UC15.2.1>)[#underline[\[UC15.2.1\]]]],
+  // UC15.2.2
+  [#FRx],
+  [L'utente autenticato avanzato deve porte visualizzare a schermo un messaggio d'errore se la nuova passsword inserita non è conforme allo standard adottato (ad es. manca un carattere speciale)],
+  [#link(<UC15.2.2>)[#underline[\[UC15.2.2\]]]],
+  // UC15.2.3
+  [#FRx],
+  [L'utente autenticato avanzato deve poter visualizzare un messaggio d'errore se la nuova password inserita nel form di modifica è identica a quella precedente],
+  [#link(<UC15.2.3>)[#underline[\[UC15.2.3\]]]],
+  // UC15.3
+  [#FRx],
+  [L'utente autenticato avanzato deve poter confermare la modirfica della password],
+  [#link(<UC15.3>)[#underline[\[UC15.3\]]]],
+  // UC15.4
+  [#FRx],
+  [L'utente autenticato avanzato deve porte visualizzare a schermo un messaggio di conferma di avvenuta modifica della password],
+  [#link(<UC15.4>)[#underline[\[UC15.4\]]]],
 )
 
 #pagebreak()
@@ -2783,13 +3303,34 @@ Definiscono i vincoli sulle prestazioni del sistema, come tempi di risposta, lat
   [Il Sistema deve renderizzare la vista di dettaglio del report entro 2 secondi dalla conferma dei filtri],
   [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
 
+  // UC6
+  [#PRx], [Il calendario di selezione date deve essere visualizzato entro 300ms], [#link(<UC6>)[#underline[\[UC6\]]]],
+
+  [#PRx],
+  [La conferma della validità dell'intervallo temporale deve avvenire entro 500ms dalla selezione],
+  [#link(<UC6>)[#underline[\[UC6\]]]],
+
+  // UC7
+  [#PRx],
+  [Il grafico comparativo deve essere renderizzato entro 2 secondi dal momento della richiesta],
+  [#link(<UC7>)[#underline[\[UC7\]]]],
+
+  // UC8
+  [#PRx], [La tabella comparativa deve essere renderizzata entro 1 secondo], [#link(<UC8>)[#underline[\[UC8\]]]],
+
+  [#PRx], [L'ordinamento della tabella deve essere aggiornato entro 200ms], [#link(<UC8>)[#underline[\[UC8\]]]],
+
+  [#PRx],
+  [Il reindirizzamento al report completo dopo il click sul pulsante nella tabella deve essere avviato entro 200ms],
+  [#link(<UC8>)[#underline[\[UC8\]]]],
+
   // UC14
   [#PRx],
-  [L'utente autenticato avanzato deve visualizzare la lista dei formati disponibili entro 1 secondo],
+  [La lista dei formati disponibili deve essere visualizzata entro 1 secondo],
   [#link(<UC14.1>)[#underline[\[UC14.1\]]]],
 
   [#PRx],
-  [L'utente autenticato avanzato deve ricevere il file generato entro 2 secondi dalla conferma dell'esportazione],
+  [Il file deve essere generato entro 2 secondi dalla conferma dell'esportazione],
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 )
 
@@ -2849,6 +3390,33 @@ Riguardano l'efficacia, l'efficienza e la soddisfazione dell'interazione utente,
   [#URx],
   [Il Sistema deve utilizzare indicatori cromatici standard (Rosso/Giallo/Verde) per indicare la gravità delle problematiche],
   [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
+
+  // UC6
+  [#URx],
+  [L'utente autenticato avanzato deve poter selezionare le date tramite un calendario visuale],
+  [#link(<UC6>)[#underline[\[UC6\]]]],
+
+  [#URx],
+  [L'utente autenticato avanzato deve comprendere chiaramente dal messaggio di errore perché l'intervallo non è valido],
+  [#link(<UC6.2>)[#underline[\[UC6.2\]]]],
+
+  [#URx],
+  [L'utente autenticato avanzato deve visualizzare nel messaggio di errore il limite massimo di ampiezza dell'intervallo quando viene superato],
+  [#link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]],
+
+  // UC7
+  [#URx],
+  [L'utente autenticato avanzato deve poter distinguere facilmente nel grafico le diverse metriche tramite l'uso di colori e di una legenda],
+  [#link(<UC7>)[#underline[\[UC7\]]]],
+
+  // UC8
+  [#URx],
+  [L'utente autenticato avanzato deve poter identificare immediatamente nella tabella i miglioramenti o i peggioramenti dei report tramite indicatori visivi],
+  [#link(<UC8>)[#underline[\[UC8\]]]],
+
+  [#URx],
+  [L'utente autenticato avanzato deve poter distinguere visivamente nella tabella quale colonna è attualmente utilizzata per l'ordinamento],
+  [#link(<UC8>)[#underline[\[UC8\]]]],
 
   // UC14
   [#URx],
@@ -2925,17 +3493,64 @@ Specificano le interazioni logiche e visive con l'utente (elementi UI) e con sis
   [La vista di dettaglio deve permettere di espandere le singole voci per visualizzare suggerimenti di correzione],
   [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
 
+  // UC6
+  [#IRx],
+  [La selezione dell'intervallo deve avvenire tramite un pulsante chiaramente etichettato nella pagina di visualizzazione del report],
+  [#link(<UC6>)[#underline[\[UC6\]]]],
+
+  [#IRx], [Il calendario di selezione date deve essere visualizzato in una modale], [#link(<UC6>)[#underline[\[UC6\]]]],
+
+  [#IRx],
+  [Il pulsante di "Conferma" dell'intervallo temporale deve essere disabilitato fino a quando non vengono selezionate entrambe le date],
+  [#link(<UC6.1>)[#underline[\[UC6.1\]]]],
+
+  // UC7
+  [#IRx],
+  [La visualizzazione del grafico comparativo deve avvenire tramite il pulsante "Visualizza Grafico"],
+  [#link(<UC7>)[#underline[\[UC7\]]]],
+
+  [#IRx],
+  [Il grafico deve avere assi chiaramente etichettati (tempo, valori metriche)],
+  [#link(<UC7>)[#underline[\[UC7\]]]],
+
+  [#IRx], [La legenda del grafico deve identificare le diverse metriche], [#link(<UC7>)[#underline[\[UC7\]]]],
+
+  [#IRx],
+  [Passando con il mouse sui punti del grafico, si devono visualizzare tooltip con dettagli (valori esatti delle metriche)],
+  [#link(<UC7>)[#underline[\[UC7\]]]],
+
+  // UC8
+  [#IRx],
+  [La visualizzazione della tabella comparativa deve avvenire tramite il pulsante "Visualizza Tabella"],
+  [#link(<UC8>)[#underline[\[UC8\]]]],
+
+  [#IRx],
+  [Nella tabella devono essere presenti header di colonna con etichette chiare (es. "Data Report", "Vulnerabilità")],
+  [#link(<UC8>)[#underline[\[UC8\]]]],
+
+  [#IRx],
+  [Gli header di colonna devono essere cliccabili e presentare delle icone di ordinamento (es. ↑↓)],
+  [#link(<UC8>)[#underline[\[UC8\]]]],
+
+  [#IRx],
+  [Nelle celle della tabella devono essere visualizzati indicatori di variazione (△ aumento, ▽ diminuzione) con codice colore per i delta (Verde/Giallo/Rosso)],
+  [#link(<UC8>)[#underline[\[UC8\]]]],
+
+  [#IRx],
+  [Il pulsante "Apri Report Completo" deve permettere di aprire il report completo],
+  [#link(<UC8>)[#underline[\[UC8\]]]],
+
   // UC14
   [#IRx],
-  [L'utente autenticato avanzato deve poter individuare facilmente il pulsante "Esporta Report" nella pagina di visualizzazione del report di analisi],
+  [Il pulsante "Esporta Report" deve essere facilmente individuabile nella pagina di visualizzazione del report di analisi],
   [#link(<UC14>)[#underline[\[UC14\]]]],
 
   [#IRx],
-  [L'utente autenticato avanzato deve poter selezionare il formato di esportazione tramite card selezionabili nella modale],
+  [Il formato di esportazione deve essere selezionabile tramite card nella modale],
   [#link(<UC14.1>)[#underline[\[UC14.1\]]]],
 
   [#IRx],
-  [L'utente autenticato avanzato deve poter cliccare il pulsante di conferma solo dopo aver selezionato un formato (pulsante disabilitato fino alla selezione)],
+  [Il pulsante di "Conferma" deve essere cliccabile solo dopo aver selezionato un formato (pulsante disabilitato fino alla selezione)],
   [#link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]],
 )
 
@@ -3001,9 +3616,29 @@ Definiscono la struttura, l'organizzazione, la conservazione e i vincoli di inte
   [Il Sistema deve associare ogni report al relativo repository GitHub presente nel database],
   [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
 
+  // UC6
+  [#LDRx],
+  [Il database deve supportare il recupero report in un intervallo temporale specificato],
+  [#link(<UC6>)[#underline[\[UC6\]]]],
+
+  // UC7
+  [#LDRx],
+  [I report per timestamp devono essere ordinati in ordine cronologico per la generazione del grafico],
+  [#link(<UC7>)[#underline[\[UC7\]]]],
+
+  // UC8
+  [#LDRx],
+  [Le variazioni (delta) tra report consecutivi devono essere calcolate per la visualizzazione nella tabella],
+  [#link(<UC8>)[#underline[\[UC8\]]]],
+
+  // UC7-8 (Requisito in comune)
+  [#LDRx],
+  [Il database deve memorizzare per ogni report le metriche necessarie al confronto],
+  [#link(<UC7>)[#underline[\[UC7\]]], #link(<UC8>)[#underline[\[UC8\]]]],
+
   // UC14
   [#LDRx],
-  [L'utente autenticato avanzato deve poter verificare la cronologia delle proprie esportazioni attraverso i timestamp memorizzati nel database],
+  [Il database deve memorizzare i timestamp delle esportazioni effettuate dall'utente],
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 )
 
@@ -3052,13 +3687,41 @@ Vincoli imposti da scelte tecnologiche obbligatorie, standard industriali, proto
   [La visualizzazione dei report deve essere responsiva (adattabile a desktop e mobile)],
   [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
 
+  // UC6
+  [#DCx],
+  [Il calendario di selezione date deve utilizzare il formato ISO 8601 (YYYY-MM-DD) per lo storage],
+  [#link(<UC6>)[#underline[\[UC6\]]]],
+
+  [#DCx],
+  [Per recuperare i report nell'intervallo temporale specificato, devono essere utilizzate le API REST interne],
+  [#link(<UC6>)[#underline[\[UC6\]]]],
+
+  [#DCx], [La selezione dell'intervallo temporale deve avere un limite massimo],
+  // limite da stabilire
+  [#link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]],
+
+  // UC7
+  [#DCx],
+  [La visualizzazione del grafico deve essere responsiva (adattabile a desktop e mobile)],
+  [#link(<UC7>)[#underline[\[UC7\]]]],
+
+  // UC8
+  [#DCx],
+  [L'ordinamento della tabella deve essere implementato lato client per performance ottimali],
+  [#link(<UC8>)[#underline[\[UC8\]]]],
+
+  [#DCx],
+  [La tabella deve implementare virtualizzazione (virtual scrolling) per ottimizzare le performance di rendering],
+  [#link(<UC8>)[#underline[\[UC8\]]]],
+  // se numero righe elevato
+
   // UC14
   [#DCx],
-  [L'utente autenticato avanzato deve ricevere file esportati generati esclusivamente lato server, per garantire consistenza del formato],
+  [I file esportati devono essere generati esclusivamente lato server, per garantire consistenza del formato],
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 
   [#DCx],
-  [L'utente autenticato avanzato deve poter esportare report contemporaneamente ad altri utenti senza conflitti],
+  [Deve essere possibile esportare report contemporaneamente ad altri utenti senza conflitti],
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 )
 
@@ -3125,6 +3788,25 @@ Caratteristiche di qualità non funzionali critiche, principalmente focalizzate 
   [#SSAx],
   [Il Sistema deve sanitizzare (HTML escaping) qualsiasi input proveniente dal repository analizzato prima di visualizzarlo],
   [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
+
+  // UC6
+  [#SSAx],
+  [L'utente autenticato avanzato deve poter visualizzare nel confronto temporale solo i report per cui possiede i permessi di lettura (IDOR Protection)],
+  [#link(<UC6>)[#underline[\[UC6\]]]],
+
+  // UC7
+  [#SSAx],
+  [L'utente autenticato avanzato deve visualizzare nel grafico dati sanitizzati per prevenire attacchi XSS],
+  [#link(<UC7>)[#underline[\[UC7\]]]],
+
+  [#SSAx],
+  [L'utente autenticato avanzato deve visualizzare nel grafico valori numerici validati per prevenire injection di codice malevolo],
+  [#link(<UC7>)[#underline[\[UC7\]]]],
+
+  // UC8
+  [#SSAx],
+  [L'utente autenticato avanzato deve visualizzare nella tabella dati sanitizzati per prevenire attacchi XSS],
+  [#link(<UC8>)[#underline[\[UC8\]]]],
 
   // UC14
   [#SSAx],
