@@ -19,45 +19,51 @@
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
+    "2026/01/14",
+    "0.24.1",
+    "Fix minori al documento",
+    members.antonio,
+  ),
+  (
     "2026/01/13",
-    "0.23.0",
+    "0.24.0",
     "Requisiti funzionali relativi a UC9, UC10, UC11",
     members.berengan,
   ),
   (
     "2026/01/12",
-    "0.22.0",
+    "0.23.0",
     "Caso d'uso UC16 con relativi sottocasi e diagrammi",
     members.alice,
   ),
   (
     "2026/01/10",
-    "0.21.0",
+    "0.22.0",
     "Requisiti funzionali relativi ad UC15",
     members.berengan,
   ),
   (
     "2026/01/09",
-    "0.20.1",
+    "0.21.1",
     "Fix minori label del documento",
     members.martinello,
   ),
   (
     "2026/01/09",
-    "0.20.0",
+    "0.21.0",
     "Caso d'uso UC15",
     members.berengan,
   ),
   (
     "2026/01/09",
-    "0.19.0",
+    "0.20.0",
     "Requisiti da UC6 a UC8",
     members.alice,
   ),
   (
     "2026/01/9",
     "0.19.0",
-    "Aggiunti diagrammi per UC9 e UC10. Modificati requisiti relativi a UC10",
+    "Aggiunti diagrammi per UC9 e UC10",
     members.antonio,
   ),
   (
@@ -259,16 +265,18 @@ In accordo con lo standard #link(<R2>)[#underline[ISO/IEC/IEEE International Sta
 Il prodotto che #def("Skarab Group") intende sviluppare è un #def("sistema software") #def("multiagente") per l'analisi di #def("repository") #def("GitHub"). Il sistema sarà progettato per essere modulare e scalabile, consentendo l'aggiunta di nuove funzionalità e agenti in futuro. Dal momento in cui l'obiettivo del #def("progetto") è lo sviluppo di un #def("MVP"), il sistema sarà sviluppato con un focus sulle funzionalità essenziali, garantendo al contempo una solida base per future espansioni.
 
 == Funzioni del prodotto
-Questa sezione descrive le principali funzionalitá  DA SISTEMARE, NON CI SONO 3 SEZIONI??//dovrá fornire all'utilizzatore finale; esse sono suddivise in 2 sezioni principali, #emph("Codice") e #emph("Documentazione")
-- Codice:
+Questa sezione descrive le principali funzionalitá che il prodotto dovrá fornire all'utilizzatore finale; esse sono suddivise in 3 sezioni principali, #emph("Test"), #emph("Sicurezza") e #emph("Documentazione").
+- Test:
   - Analisi statica del codice sorgente per identificare potenziali errori a compile time.
+  - Controllo dei test unitari per valutare l'efficacia di questi.
+- Sicurezza:
   - Analisi delle dipendenzanze per individuare librerie obsolete o vulnerabili.
-  - Copertura dei test per valutare l'efficacia dei test esistenti.
+  - Verifica della conformità alle normative di sicurezza dello standard OWASP.
 - Documentazione:
   - Verifica della completezza della documentazione del codice.
   - Controllo della conformità agli standard di documentazione aziendali e non e delle best practice.
   - Analisi semantica per garantire che la documentazione rifletta accuratamente il funzionamento del codice.
-L'#def("utente") potrá richiedere l'analisi di uno o piú #def("repository") #def("GitHub") specificando l'#def("URL") del repository e le aree di interesse (codice, documentazione o entrambe). Il sistema genererà un report dettagliato con i risultati dell'analisi, evidenziando le aree di miglioramento e fornendo raccomandazioni per ottimizzare la qualitá del codice e della documentazione. L'interfaccia sará una #def("webapp") con una #def("GUI") intuitiva e user-friendly da cui l'utente potrá interagire con il sistema, richiedere analisi e visualizzare i report generati sottoforma di grafici e tabelle.
+L'#def("utente") potrá richiedere l'analisi di uno o piú #def("repository") #def("GitHub") specificando l'#def("URL") del repository e le aree di interesse (tutte, solo una parte o solo una). Il sistema genererà un report dettagliato con i risultati dell'analisi, evidenziando le aree di miglioramento e fornendo raccomandazioni per ottimizzare la qualitá del codice e della documentazione. L'interfaccia sará una #def("webapp") con una #def("GUI") intuitiva e user-friendly da cui l'utente potrá interagire con il sistema, richiedere analisi e visualizzare i report generati sottoforma di grafici e tabelle.
 
 == Caratteristiche degli utenti
 Gli #def("utenti") principali del sistema sono #def("sviluppatori software"), manager #def("IT") e #def("consulente informatico") che desiderano una valutazione sulla qualitá del codice e della documentazione nei loro progetti. Gli utenti avranno diversi livelli di competenza tecnica, pertanto l'interfaccia utente sará progettata per essere accessibile sia a utenti esperti che a quelli meno esperti.
@@ -398,18 +406,14 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente possiede le credenziali di un account CodeGuardian censito dal Sistema
   ],
   scenari: [
-    - L'utente inserisce il proprio nome #link(<UC1.1>)[#underline[\[UC1.1\]]]
-    - L'utente inserisce il proprio cognome #link(<UC1.2>)[#underline[\[UC1.2\]]]
-    - L'utente inserisce un username #link(<UC1.3>)[#underline[\[UC1.3\]]]
-    - L'utente inserisce una email di riferimento #link(<UC1.4>)[#underline[\[UC1.4\]]]
-    - L'utente inserisce una password #link(<UC1.5>)[#underline[\[UC1.5\]]]
+    - L'utente inserisce un username #link(<UC1.1>)[#underline[\[UC1.1\]]]
+    - L'utente inserisce una email di riferimento #link(<UC1.2>)[#underline[\[UC1.2\]]]
+    - L'utente inserisce una password #link(<UC1.3>)[#underline[\[UC1.3\]]]
   ],
   inclusioni: [
-    - #link(<UC1.1>)[#underline[\[UC1.1\]]] // Inserimento Nome
-    - #link(<UC1.2>)[#underline[\[UC1.2\]]] // Inserimento Cognome
-    - #link(<UC1.3>)[#underline[\[UC1.3\]]] // Inserimento Username
-    - #link(<UC1.4>)[#underline[\[UC1.4\]]] // Inserimento Email
-    - #link(<UC1.5>)[#underline[\[UC1.5\]]] // Inserimento Password
+    - #link(<UC1.1>)[#underline[\[UC1.1\]]] // Inserimento Username
+    - #link(<UC1.2>)[#underline[\[UC1.2\]]] // Inserimento Email
+    - #link(<UC1.3>)[#underline[\[UC1.3\]]] // Inserimento Password
   ],
   estensioni: [
     - Nessuna
@@ -419,101 +423,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   #useCaseDiagram("1", "UC1 - Registrazione")
 ]
 
-==== UC1.1: Inserimento nome <UC1.1>
-#useCase(
-  attore: "Utente non registrato",
-  pre: [
-    - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
-  ],
-  post: [
-    - Il nome inserito dall'utente è idoneo alla procedura di registrazione
-  ],
-  scenari: [
-    - L'utente inserisce il nome per la procedura di registrazione
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC1.1.1>)[#underline[\[UC1.1.1\]]] // Nome inserito non conforme ai vincoli di formato
-  ],
-  trigger: "L'utente interagisce con la sezione di inserimento del nome durante la procedura di registrazione a CodeGuardian",
-)[
-  #useCaseDiagram("1_1", "UC1.1 - Inserimento nome")
-]
-
-===== UC1.1.1: Nome inserito non conforme ai vincoli di formato <UC1.1.1>
-#useCase(
-  attore: "Utente non registrato",
-  pre: [
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
-    - L'utente ha inserito un nome non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento del nome #link(<UC1.1>)[#underline[\[UC1.1\]]]
-  ],
-  post: [
-    - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
-  ],
-  scenari: [
-    - L'utente visualizza un messaggio di errore che indica che il nome inserito non rispetta i vincoli di formato previsti dal Sistema per la procedura di registrazione
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente conferma l'inserimento del nome durante la procedura di registrazione a CodeGuardian",
-)[
-]
-
-==== UC1.2: Inserimento cognome <UC1.2>
-#useCase(
-  attore: "Utente non registrato",
-  pre: [
-    - L'utente non possiede le credenziali di un account CodeGuardian censito dal Sistema
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
-  ],
-  post: [
-    - Il cognome inserito dall'utente è idoneo alla procedura di registrazione
-  ],
-  scenari: [
-    - L'utente inserisce il cognome per la procedura di registrazione
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC1.2.1>)[#underline[\[UC1.2.1\]]] // Cognome inserito non conforme ai vincoli di formato
-  ],
-  trigger: "L'utente interagisce con la sezione di inserimento del cognome durante la procedura di registrazione a CodeGuardian",
-)[
-  #useCaseDiagram("1_2", "UC1.2 - Inserimento cognome")
-]
-
-==== UC1.2.1: Cognome inserito non conforme con i vincoli di formato <UC1.2.1>
-#useCase(
-  attore: "Utente non registrato",
-  pre: [
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
-    - L'utente ha inserito un cognome non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento del cognome #link(<UC1.2>)[#underline[\[UC1.2\]]]
-  ],
-  post: [
-    - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
-  ],
-  scenari: [
-    - L'utente visualizza un messaggio di errore che indica che il cognome inserito non rispetta i vincoli di formato previsti dal Sistema per la procedura di registrazione
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente conferma l'inserimento del cognome durante la procedura di registrazione a CodeGuardian",
-)[
-]
-
-==== UC1.3: Inserimento username <UC1.3>
+==== UC1.1: Inserimento username <UC1.1>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -530,20 +440,20 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC1.3.1>)[#underline[\[UC1.3.1\]]] // Username non conforme ai vincoli di formato
-    - #link(<UC1.3.2>)[#underline[\[UC1.3.2\]]] // Username già censita dal Sistema
+    - #link(<UC1.1.1>)[#underline[\[UC1.1.1\]]] // Username non conforme ai vincoli di formato
+    - #link(<UC1.1.2>)[#underline[\[UC1.1.2\]]] // Username già censita dal Sistema
   ],
   trigger: "L'utente interagisce con la sezione di inserimento dell'username durante la procedura di registrazione a CodeGuardian",
 )[
-  #useCaseDiagram("1_3", "UC1.3 - Inserimento username")
+  #useCaseDiagram("1_1", "UC1.1 - Inserimento username") //da rifare
 ]
 
-==== UC1.3.1: Username non conforme ai vincoli di formato <UC1.3.1>
+==== UC1.1.1: Username non conforme ai vincoli di formato <UC1.1.1>
 #useCase(
   attore: "Utente non registrato",
   pre: [
     - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
-    - L'utente ha inserito un username non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento dell'username #link(<UC1.3>)[#underline[\[UC1.3\]]]
+    - L'utente ha inserito un username non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento dell'username #link(<UC1.1>)[#underline[\[UC1.1\]]]
   ],
   post: [
     - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
@@ -561,12 +471,12 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[
 ]
 
-==== UC1.3.2: Username inserito già censito dal Sistema <UC1.3.2>
+==== UC1.1.2: Username inserito già censito dal Sistema <UC1.1.2>
 #useCase(
   attore: "Utente non registrato",
   pre: [
     - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
-    - L'utente ha inserito un username già censito dal Sistema durante l'inserimento dell'username #link(<UC1.3>)[#underline[\[UC1.3\]]]
+    - L'utente ha inserito un username già censito dal Sistema durante l'inserimento dell'username #link(<UC1.1>)[#underline[\[UC1.1\]]]
   ],
   post: [
     - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
@@ -584,7 +494,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[
 ]
 
-==== UC1.4: Inserimento email <UC1.4>
+==== UC1.2: Inserimento email <UC1.2>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -601,20 +511,20 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC1.4.1>)[#underline[\[UC1.4.1\]]] // Email non conforme ai vincoli di formato
-    - #link(<UC1.4.2>)[#underline[\[UC1.4.2\]]] // Email già censita dal Sistema
+    - #link(<UC1.2.1>)[#underline[\[UC1.2.1\]]] // Email non conforme ai vincoli di formato
+    - #link(<UC1.2.2>)[#underline[\[UC1.2.2\]]] // Email già censita dal Sistema
   ],
   trigger: "L'utente conferma l'inserimento dell'email durante la procedura di registrazione a CodeGuardian",
 )[
-  #useCaseDiagram("1_4", "UC1.4 - Inserimento email")
+  #useCaseDiagram("1_2", "UC1.2 - Inserimento email") //da rifare
 ]
 
-===== UC1.4.1: Email inserita non valida <UC1.4.1>
+===== UC1.2.1: Email inserita non valida <UC1.2.1>
 #useCase(
   attore: "Utente non registrato",
   pre: [
     - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
-    - L'utente ha inserito un'email non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento dell'email #link(<UC1.4>)[#underline[\[UC1.4\]]]
+    - L'utente ha inserito un'email non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento dell'email #link(<UC1.2>)[#underline[\[UC1.2\]]]
   ],
   post: [
     - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
@@ -632,12 +542,12 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[
 ]
 
-==== UC1.4.2: Email inserita già censita dal Sistema <UC1.4.2>
+==== UC1.2.2: Email inserita già censita dal Sistema <UC1.2.2>
 #useCase(
   attore: "Utente non registrato",
   pre: [
     - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
-    - L'utente ha inserito un'email già censita dal Sistema durante l'inserimento dell'email #link(<UC1.4>)[#underline[\[UC1.4\]]]
+    - L'utente ha inserito un'email già censita dal Sistema durante l'inserimento dell'email #link(<UC1.2>)[#underline[\[UC1.2\]]]
   ],
   post: [
     - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
@@ -655,7 +565,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[
 ]
 
-==== UC1.5: Inserimento password <UC1.5>
+==== UC1.3: Inserimento password <UC1.3>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -672,19 +582,19 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC1.5.1>)[#underline[\[UC1.5.1\]]] // Password non conforme ai vincoli di formato
+    - #link(<UC1.3.1>)[#underline[\[UC1.3.1\]]] // Password non conforme ai vincoli di formato
   ],
   trigger: "L'utente conferma l'inserimento della password durante la procedura di registrazione a CodeGuardian",
 )[
-  #useCaseDiagram("1_5", "UC1.5 - Inserimento password")
+  #useCaseDiagram("1_3", "UC1.3 - Inserimento password")
 ]
 
-===== UC1.5.1: Password inserita non conforme ai vincoli di formato <UC1.5.1>
+===== UC1.3.1: Password inserita non conforme ai vincoli di formato <UC1.3.1>
 #useCase(
   attore: "Utente non registrato",
   pre: [
     - L'utente sta eseguendo la procedura di registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
-    - L'utente ha inserito una password non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento della password #link(<UC1.5>)[#underline[\[UC1.5\]]]
+    - L'utente ha inserito una password non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento della password #link(<UC1.3>)[#underline[\[UC1.3\]]]
   ],
   post: [
     - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
@@ -2701,124 +2611,81 @@ Descrivono cosa il sistema deve fare, inclusi i comportamenti, le reazioni a spe
   [#link(<UC1>)[#underline[\[UC1\]]]],
   // UC1.1
   [#FRx],
-  [L'utente non registrato, nella schermata di registrazione, deve poter inserire il proprio nome nel campo di testo dedicato],
-  [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
-
-  [#FRx],
-  [Il Sistema deve rimuovere automaticamente gli spazi bianchi all'inizio e alla fine del nome],
-  [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
-
-  [#FRx],
-  [Il Sistema deve verificare che il nome non contenga caratteri numerici],
-  [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
-
-  [#FRx],
-  [Il Sistema deve verificare che il nome non contenga caratteri speciali non ammessi],
-  [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
-
-  [#FRx],
-  [Il Sistema deve mostrare un messaggio di errore visuale specifico se il nome non è valido],
-  [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
-  // UC1.2
-  [#FRx],
-  [L'utente non registrato, nella schermata di registrazione, deve poter inserire il proprio cognome nel campo di testo dedicato],
-  [#link(<UC1.2>)[#underline[\[UC1.2\]]]],
-
-  [#FRx],
-  [Il Sistema deve rimuovere automaticamente gli spazi bianchi all'inizio e alla fine del cognome],
-  [#link(<UC1.2>)[#underline[\[UC1.2\]]]],
-
-  [#FRx],
-  [Il Sistema deve verificare che il cognome non contenga caratteri numerici],
-  [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
-
-  [#FRx],
-  [Il Sistema deve verificare che il cognome non contenga caratteri speciali non ammessi],
-  [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
-
-  [#FRx],
-  [Il Sistema deve mostrare un messaggio di errore visuale specifico se il cognome non è valido],
-  [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
-  // UC1.3
-  [#FRx],
   [L'utente non registrato, nella schermata di registrazione, deve poter inserire il proprio username nel campo di testo dedicato],
-  [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
+  [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
 
   [#FRx],
   [Il Sistema deve verificare che l'username abbia una lunghezza minima di 4 caratteri],
-  [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+  [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
 
   [#FRx],
   [Il Sistema deve verificare che l'username abbia una lunghezza massima di 20 caratteri],
-  [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+  [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
 
   [#FRx],
   [Il Sistema deve verificare che l'username contenga solo caratteri alfanumerici],
-  [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+  [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
 
   [#FRx],
   [Il Sistema deve mostrare un messaggio di errore specifico se l'username non rispetta il formato],
-  [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+  [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
 
   [#FRx],
   [Il Sistema deve mostrare un messaggio di errore generico se l'username non è disponibile],
-  [#link(<UC1.3.2>)[#underline[\[UC1.3.2\]]]],
-  //UC1.4
+  [#link(<UC1.1.2>)[#underline[\[UC1.1.2\]]]],
+  //UC1.2
   [#FRx],
   [L'utente non registrato, nella schermata di registrazione, deve poter inserire il proprio indirizzo email nel campo di testo dedicato],
-  [#link(<UC1.4>)[#underline[\[UC1.4\]]]],
+  [#link(<UC1.2>)[#underline[\[UC1.2\]]]],
 
   [#FRx],
   [Il Sistema deve verificare che l'email contenga il carattere '\@'],
-  [#link(<UC1.4.1>)[#underline[\[UC1.4.1\]]]],
+  [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
 
   [#FRx],
   [Il Sistema deve verificare che l'email contenga un dominio valido],
-  [#link(<UC1.4.1>)[#underline[\[UC1.4.1\]]]],
-
+  [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
   [#FRx],
   [Il Sistema deve mostrare un messaggio di errore specifico se l'email non rispetta il formato],
-  [#link(<UC1.4.1>)[#underline[\[UC1.4.1\]]]],
+  [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
 
   [#FRx],
   [Il Sistema deve mostrare un messaggio di errore generico se l'email non è disponibile],
-  [#link(<UC1.4.2>)[#underline[\[UC1.4.2\]]]],
-  // UC1.5
+  [#link(<UC1.2.2>)[#underline[\[UC1.2.2\]]]],
+  // UC1.3
   [#FRx],
   [L'utente non registrato, nella schermata di registrazione, deve poter inserire la propria password nel campo di testo dedicato],
-  [#link(<UC1.5>)[#underline[\[UC1.5\]]]],
+  [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
 
   [#FRx],
   [Il Sistema, durante la digitazione della password, deve nascondere i caratteri inseriti (masking)],
-  [#link(<UC1.5>)[#underline[\[UC1.5\]]]],
+  [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
 
   [#FRx],
   [L'utente non registrato, durante l'inserimento, deve poter attivare la visualizzazione in chiaro della password],
-  [#link(<UC1.5>)[#underline[\[UC1.5\]]]],
+  [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
 
   [#FRx],
   [Il Sistema deve verificare che la password abbia una lunghezza minima di 8 caratteri],
-  [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
+  [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
 
   [#FRx],
   [Il Sistema deve verificare che la password contenga almeno una lettera maiuscola],
-  [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
-
+  [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
   [#FRx],
   [Il Sistema deve verificare che la password contenga almeno una lettera minuscola],
-  [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
+  [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
 
   [#FRx],
   [Il Sistema deve verificare che la password contenga almeno un numero],
-  [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
+  [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
 
   [#FRx],
   [Il Sistema deve verificare che la password contenga almeno un carattere speciale],
-  [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
-
+  [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
   [#FRx],
   [Il Sistema deve mostrare un messaggio di errore specifico se la password non rispetta i criteri],
-  [#link(<UC1.5.1>)[#underline[\[UC1.5.1\]]]],
+  [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
 
   // UC2
   [#FRx],
@@ -3139,24 +3006,24 @@ Descrivono cosa il sistema deve fare, inclusi i comportamenti, le reazioni a spe
   //UC9
   [#FRx],
   [L'utente autenticato avanzato deve poter visualizzare l'apposita sezione del report di analisi relativa all'analisi del codice],
-  [#link(<UC9>)[#undrline[\[UC9\]]]],
+  [#link(<UC9>)[#underline[\[UC9\]]]],
   //UC9.1
   [#FRx],
   [L'utente autenticato avanzato deve poter visualizzare la sotto sezione relativa all'analisi statica del codice all'interno della sezione "Analisi del codice" del report di analisi],
-  [#link(<UC9.1>)[#undrline[\[UC9.1\]]]],
+  [#link(<UC9.1>)[#underline[\[UC9.1\]]]],
   //UC9.2
   [#FRx],
   [L'utente autenticato avanzato deve poter visualizzare la sotto sezione relativa all'analisi delle dipendenze del codice e delle librerie all'interno della sezione "Analisi del codice" del report di analisi],
-  [#link(<UC9.2>)[#undrline[\[UC9.2\]]]],
+  [#link(<UC9.2>)[#underline[\[UC9.2\]]]],
   //UC9.3
   [#FRx],
   [L'utente autenticato avanzato deve poter visualizzare la sotto sezione relativa all'analisi della sicurezza all'interno della sezione "Analisi del codice" del report di analisi],
-  [#link(<UC9.3>)[#undrline[\[UC9.3\]]]],
+  [#link(<UC9.3>)[#underline[\[UC9.3\]]]],
   //UC9.4
   [#FRx],
   [L'utente autenticato avanzato deve poter visualizzare la sotto sezione relativa al numero totale di vulnerabilità individuate all'interno della sezione "Analisi del codice" del report di analisi],
-  [#link(<UC9.4>)[#undrline[\[UC9.4\]]]],
-
+  [#link(<UC9.4>)[#underline[\[UC9.4\]]]],
+  
   //UC10
   [#FRx],
   [L'utente autenticato avanzato deve poter visualizzare la sezione relativa all'analisi della documentazione all'interno del report di analisi],
@@ -3446,7 +3313,7 @@ Specificano le interazioni logiche e visive con l'utente (elementi UI) e con sis
   // UC1
   [#IRx],
   [Il campo password deve includere un'icona interattiva per il toggle della visibilità],
-  [#link(<UC1.5>)[#underline[\[UC1.5\]]]],
+  [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
 
   [#IRx],
   [Il Sistema, in caso di errore, deve evidenziare il bordo del campo errato con il colore rosso],
@@ -3568,12 +3435,11 @@ Definiscono la struttura, l'organizzazione, la conservazione e i vincoli di inte
   // UC1
   [#LDRx],
   [Il database deve imporre un vincolo di unicità sulla colonna Username],
-  [#link(<UC1.3.2>)[#underline[\[UC1.3.2\]]]],
+  [#link(<UC1.1.2>)[#underline[\[UC1.1.2\]]]],
 
   [#LDRx],
   [Il database deve imporre un vincolo di unicità sulla colonna Email],
-  [#link(<UC1.4.2>)[#underline[\[UC1.4.2\]]]],
-
+  [#link(<UC1.2.2>)[#underline[\[UC1.2.2\]]]],
   [#LDRx],
   [Il database deve memorizzare la data e l'ora di creazione del profilo utente],
   [#link(<UC1>)[#underline[\[UC1\]]]],
@@ -3743,16 +3609,15 @@ Caratteristiche di qualità non funzionali critiche, principalmente focalizzate 
 
   [#SSAx],
   [Il Sistema, in caso di username esistente, deve restituire un errore generico per prevenire l'enumerazione],
-  [#link(<UC1.3.2>)[#underline[\[UC1.3.2\]]]],
+  [#link(<UC1.1.2>)[#underline[\[UC1.1.2\]]]],
 
   [#SSAx],
   [Il Sistema, in caso di email esistente, deve restituire un errore generico per prevenire l'enumerazione],
-  [#link(<UC1.4.2>)[#underline[\[UC1.4.2\]]]],
+  [#link(<UC1.2.2>)[#underline[\[UC1.2.2\]]]],
 
   [#SSAx],
   [Il Sistema deve memorizzare la password applicando l'algoritmo di hashing Argon2id],
-  [#link(<UC1.5>)[#underline[\[UC1.5\]]]],
-
+  [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
   // UC2
   [#SSAx],
   [Il Sistema deve utilizzare messaggi di errore identici per credenziali errate (Anti-Enumeration)],
