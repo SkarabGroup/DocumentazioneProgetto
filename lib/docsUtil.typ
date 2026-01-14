@@ -234,7 +234,7 @@
   // Rendering della figura
   figure(
     table(
-      fill: (col, row) => if row == 0 { luma(64%) } else { white },
+      fill: (col, row) => if row == 0 { luma(63.75%) } else { white },
       columns: (1.5fr, 0.7fr, 0.8fr, 0.5fr, 0.6fr, 0.8fr, 0.6fr),
       inset: 8pt,
       align: (col, row) => if col == 0 { left + horizon } else { center + horizon },
@@ -264,5 +264,20 @@
       table.cell(fill: luma(240))[*#tot_ver*],
     ),
     caption: caption_text,
+  )
+}
+
+#let metrics_table(caption_text, content_list) = {
+  figure(
+    table(
+      fill: (x, y) => if (y == 0) { luma(220) } else { white },
+      columns: (1.2fr, 2.2fr, 3fr, 1.1fr, 1.1fr),
+      inset: 10pt,
+      align: horizon,
+      table.header([*ID*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
+      ..content_list
+    ),
+    caption: caption_text,
+    kind: table
   )
 }
