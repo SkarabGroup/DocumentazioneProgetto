@@ -11,46 +11,58 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.5.0"
+#let versione = "v0.5.1"
 
 #titlePage("Piano di Qualifica", versione)
 #set page(numbering: "1", header: header("Piano di Qualifica"), footer: footer())
 #let history = (
   (
+    "2026/01/13",
+    "0.5.1",
+    "Rielaborazione introduzione documento e qualità di processo",
+    members.suar
+  ),
+  (
     "2025/12/02",
     "0.5.0",
     "Modifica tabelle qualità di processo, inserimento tabelle qualità di prodotto",
     members.alice,
+    members.suar
   ),
   (
     "2025/12/30",
     "0.4.0",
     "Iniziati metodi di testing, inserimento tabelle test",
     members.berengan,
+    members.suar
   ),
   (
     "2025/12/28",
     "0.3.0",
     "Processi secondari e processi organizzativi con tabelle soglie metriche, iniziata sezione automiglioramento e qualità di prodotto",
     members.alice,
+    members.suar
   ),
   (
     "2025/12/27",
     "0.2.0",
     "Qualità di processo, processi primari",
     members.alice,
+    members.suar
   ),
   (
     "2025/12/26",
     "0.1.0",
     "Inizio stesura documento, introduzione, scopo e riferimenti",
     members.alice,
+    members.suar
   ),
   (
     "2025/12/23",
     "0.0.0",
     "Creazione documento",
     members.alice,
+    members.suar
   ),
 )
 
@@ -74,14 +86,14 @@ Il presente documento descrive il #def[Piano di Qualifica] relativo al progetto 
 L’obiettivo del progetto è lo sviluppo di una piattaforma ad #def[Agenti] per l’#def[audit] e la #def[remediation] automatizzata delle vulnerabilità nei repository GitHub, in conformità con quanto definito dal capitolato *C2*.
 
 == Finalità del Documento
-Il Piano di Qualifica definisce le strategie, le metriche e le procedure necessarie per garantire la qualità del prodotto software e l'efficienza dei processi adottati. Esso formalizza l'approccio del gruppo alla rilevazione e correzione dei difetti, assicurando che ogni rilascio soddisfi i requisiti concordati.
+Il Piano di Qualifica definisce l’impostazione metodologica per la gestione della qualità, specificando come il gruppo intenda prevenire, rilevare e correggere i difetti.
 
-Il documento costituisce il riferimento primario per il #def[Responsabile] e per i #def[Verificatori], perseguendo i seguenti obiettivi:
-- definire gli obiettivi di qualità di processo e di prodotto, in conformità con lo standard #def[ISO/IEC 25010];
-- pianificare le attività di #def[Verifica] (statiche e dinamiche) per accertare la correttezza interna degli artefatti;
-- pianificare le attività di #def[Validazione] per garantire la conformità del prodotto alle aspettative degli #def[Stakeholder];
-- stabilire le metriche di misurazione e le relative soglie di accettazione/ottimalità.
+Il documento costituisce il riferimento primario per il #def[Responsabile] e per i #def[Verificatori], strutturando gli obiettivi nelle seguenti macro-aree:
 
+- *Piano della Qualità (Quality Assurance)*: definizione della strategia di gestione della qualità, identificando gli standard di riferimento (in particolare #def[ISO/IEC 25010]), le metriche di misurazione e le relative soglie di accettazione/ottimalità.
+- *Controllo di Qualità (Quality Control)*: pianificazione operativa delle attività di #def[Verifica] (analisi statica, test dinamici) per garantire la correttezza tecnica degli artefatti prodotti.
+- *Validazione di Prodotto*: definizione delle procedure necessarie per accertare la conformità del sistema rispetto alle aspettative degli #def[Stakeholder] e ai requisiti del capitolato.
+- *Miglioramento Continuo*: applicazione di meccanismi retroattivi (basati sul ciclo #def[PDCA]) che utilizzano i risultati delle misurazioni per ottimizzare i processi e il *Way of Working* in corso d'opera.
 In linea con la metodologia #def[Agile] e il principio del miglioramento continuo, il Piano di Qualifica adotta il ciclo di Deming (#def[PDCA]: Plan-Do-Check-Act). Questo approccio permette di monitorare costantemente l'efficacia del *Way of Working*, attuando azioni correttive e preventive per ottimizzare le performance del gruppo parallelamente all'avanzamento dello sviluppo.
 
 == Traguardi Qualitativi
@@ -90,7 +102,7 @@ L'assicurazione della qualità segue l'approccio incrementale del progetto, fiss
 === Revisione dei Requisiti e della Tecnologia (RTB)
 Per la milestone RTB (*05/02/2026*), le attività di qualità si concentrano sulla correttezza formale e sulla fattibilità tecnica:
 - *Qualità dei Documenti*: Verifica approfondita della documentazione (Analisi dei Requisiti, PdP, NdP) tramite analisi statica e walkthrough, per garantire assenza di ambiguità e coerenza interna (Indice di Gulpease).
-- *Qualità del Prototipo (#def[PoC])*: L'attività di verifica è focalizzata esclusivamente sulla **dimostrazione della fattibilità tecnica** (Technology Baseline), con particolare attenzione all'interazione Agenti-LLM. Il testing in questa fase ha valore **sperimentale e propedeutico**: esso funge da caso di studio per calibrare le metriche e validare le strategie di verifica che saranno poi applicate in modo sistematico ed estensivo sul #def[MVP].
+- *Qualità del Prototipo (#def[PoC])*: L'attività di verifica è focalizzata esclusivamente sulla *dimostrazione della fattibilità tecnica* (Technology Baseline), con particolare attenzione all'interazione Agenti-LLM. Il testing in questa fase ha valore _sperimentale e propedeutico_: esso funge da caso di studio per calibrare le metriche e validare le strategie di verifica che saranno poi applicate in modo sistematico ed estensivo sul #def[MVP].
 
 === Revisione di Accettazione (Product Baseline – PB)
 Per il rilascio finale (*21/03/2026*), il focus si sposta sulla robustezza, sulla copertura e sulla soddisfazione dei requisiti:
@@ -130,289 +142,408 @@ Inoltre, l'adozione strutturale del ciclo #def[PDCA] (Plan-Do-Check-Act) assicur
 - *Act:* Aggiornamento delle Norme di Progetto e ricalibrazione delle metriche per lo Sprint successivo.
 #pagebreak()
 
-= Qualità di processo
-La qualità di processo è fondamentale per assicurare che il _Way of Working_ sia sostenibile e tracciabile nel tempo. Si tratta di un'esigenza primaria per garantire il successo del progetto _Code Guardian_.
+// Da inserire nel glossario
+/*
+/ Budget Variance (BV): Metrica che indica lo scostamento tra il budget totale preventivato (BAC) e la stima del costo finale (EAC). Un valore positivo indica che si prevede di finire il progetto risparmiando budget.
 
-Pertanto, il progetto si avvale di:
-- *Modelli di riferimento:* Capability Maturity Model Integration (#def("CMMI")) e _ISO/IEC 12207_.
-- *Metriche di processo:* Strumenti che valutano l'efficienza e le prestazioni dei processi.
-- *Revisioni periodiche:* Sessioni di verifica bisettimanali che analizzano i risultati ottenuti rispetto agli obiettivi stabiliti.
+/ Code Coverage: Misura della percentuale di codice sorgente che viene eseguita durante il lancio della suite di test automatizzati. Indica il grado di copertura della verifica dinamica.
+
+/ Cost Performance Index (CPI): Indice di efficienza economica del progetto. Rapporto tra il valore del lavoro svolto (EV) e i costi effettivamente sostenuti (AC). Un valore pari a 1 indica perfetta aderenza al budget.
+
+/ Earned Value Management (EVM): Metodologia standard per il monitoraggio integrato di tempi, costi e scopo del progetto. Permette di rilevare precocemente scostamenti rispetto alla pianificazione (Baseline).
+
+/ Gulpease Index: Indice di leggibilità di un testo tarato sulla lingua italiana. Valuta la complessità linguistica basandosi sulla lunghezza delle parole e delle frasi.
+
+/ Requirements Stability Index (RSI): Metrica che misura la volatilità dei requisiti. Indica la percentuale di requisiti che non hanno subito modifiche, aggiunte o cancellazioni rispetto alla baseline iniziale.
+
+/ Schedule Performance Index (SPI): Indice di efficienza della schedulazione. Rapporto tra il valore del lavoro svolto (EV) e il valore che si era pianificato di svolgere (PV). Un valore pari a 1 indica perfetta aderenza ai tempi.
+
+/ Sprint Goal Achievement: Metrica agile che calcola la percentuale degli obiettivi prefissati nello Sprint Planning che sono stati effettivamente raggiunti e validati al termine dello Sprint.
+*/
+
+/*
+=== Monitoraggio della Fornitura (EVM)
+In qualità di fornitore del prodotto software, il gruppo ha la responsabilità di rispettare i vincoli contrattuali di tempo e budget definiti nel preventivo. A tale scopo, si adotta la metodologia *Earned Value Management (EVM)*.
+
+**Motivazione:**
+L'EVM è l'unico standard internazionale che permette di correlare il lavoro tecnico svolto (*Earned Value*) con i costi sostenuti e il tempo trascorso. L'utilizzo di semplici consuntivi (es. "abbiamo speso X ore") non sarebbe sufficiente a capire se il progetto è in ritardo o in anticipo rispetto al valore prodotto.
+
+**Procedura di Attuazione:**
+Al termine di ogni Sprint (durante la fase di *Sprint Review*), il Responsabile di Progetto:
+1. Calcola la percentuale di completamento delle attività pianificate.
+2. Aggiorna i valori di EV (Earned Value), AC (Actual Cost) e PV (Planned Value).
+3. Deriva gli indici di performance (CPI, SPI) e le stime a finire (EAC).
+I risultati vengono confrontati con le soglie definite nel Piano di Qualifica per determinare lo stato di salute della fornitura.
+*/
+= Qualità di Processo
+
+La garanzia della qualità del prodotto finale è intrinsecamente legata alla qualità dei processi produttivi che lo generano. Per il progetto #def("Code Guardian"), la gestione dei processi mira a rendere il #def("Way of Working") sostenibile, tracciabile e soggetto a miglioramento continuo.
+
+La strategia adottata si fonda su tre pilastri fondamentali:
+
+- *Modelli di Riferimento:* L'architettura dei processi è strutturata secondo lo standard #def("ISO/IEC 12207"), che definisce le attività fondamentali del ciclo di vita del software. Per la valutazione della maturità e l'ottimizzazione delle performance, il gruppo assume come riferimento i principi del modello #def("CMMI").
+
+- *Metriche di Processo:* Adozione di strumenti di misurazione oggettiva per valutare l'efficienza e l'efficacia delle attività svolte. Tali metriche permettono di quantificare il dispendio di risorse e la stabilità del metodo di lavoro.
+
+- *Revisioni Periodiche:* Esecuzione di verifiche sistematiche con cadenza bisettimanale (in corrispondenza della fine degli Sprint). Tali sessioni hanno lo scopo di analizzare i risultati ottenuti rispetto agli obiettivi prefissati e di attivare tempestivamente le azioni correttive necessarie (ciclo #def("PDCA")).
 
 == Processi Primari
-I Processi Primari sono le attività fondamentali e dirette che guidano il ciclo di vita del software. Essi sono essenziali perché gestiscono l'intero percorso del prodotto software, dalla sua nascita alla sua vita operativa.
+I Processi Primari costituiscono il nucleo operativo del ciclo di vita del software. Essi includono le attività dirette di realizzazione, fornitura e manutenzione del prodotto.
+
 === Fornitura
+_Riferimento: Norme di Progetto, Sezione [Monitoraggio della Fornitura]_ \ \
+Il processo di fornitura comprende le attività necessarie a consegnare il prodotto al committente rispettando gli accordi contrattuali presi.
+Vengono monitorati sia i valori assoluti (Misure) che gli indici di efficienza (Metriche) derivati dallo standard #def("Earned Value Management") (EVM).
+
 #figure(
   table(
     fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
+      luma(230)
+    } else {
+      luma(250)
     },
     columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
     inset: 10pt,
-    table.header([*Metrica di Processo*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
-    // BAC = Budget Totale Preventivato
+    table.header([*ID*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
 
-    [*MP01*], [Earned Value (EV)],
-    // Rappresenta il valore del lavoro effettivamente realizzato in una determinata data. Si calcola moltiplicando la percentuale di completamento delle attività per il budget totale.
-    [$E V = % "completamento" times B A C$], [$>= 0$], [$<= E A C$], [*MP02*], [Planned Value (PV)],
-    // È il valore del lavoro che si era pianificato di completare entro una certa data. Indica quanto avremmo dovuto spendere secondo il piano iniziale.
-    [$P V = % "pianificata" times B A C$], [$>= 0$], [$<= B A C$], [*MP03*], [Actual Cost (AC)],
-    // Indica i costi reali sostenuti per il lavoro svolto fino a quel momento.
-    [Costi reali sostenuti], [$>= 0$], [$<= E A C$], [*MP04*], [Cost Performance Index (CPI)],
-    // È il rapporto tra valore guadagnato e costi reali ($CPI = EV / AC$).
-    [$C P I = (E V) / (A C)$], [$>= 0$], [1], [*MP05*], [Schedule Performance Index (SPI)],
-    // È il rapporto tra valore guadagnato e valore pianificato ($SPI = EV / PV$).
-    [$S P I = (E V) / (P V)$], [$>= 0$], [1], [*MP06*], [Estimate At Completion (EAC)],
-    // È la stima del costo totale finale del progetto basata sulle performance attuali.
-    [$E A C = (B A C) / (C P I)$], [$>= 0$], [$<= B A C$], [*MP07*], [Estimate To Complete (ETC)],
-    // Indica quanto denaro aggiuntivo è necessario per terminare il progetto da oggi.
-    [$E T C = E A C - A C$], [$>= 0$], [$<= B A C$],
+    // --- MISURE BASE (Valori Assoluti) ---
+    [*MPC01*], [Budget At Completion (BAC)],
+    [Somma Preventivata],
+    [$= "Preventivo"$],
+    [$= "Preventivo"$],
+
+    [*MPC02*], [Planned Value (PV)],
+    [$% "pianificato" times B A C$],
+    [$>= 0$],
+    [Da Pianificazione],
+
+    [*MPC03*], [Actual Cost (AC)],
+    [Costi Sostenuti],
+    [$<= E A C$],
+    [$<= E V$],
+
+    [*MPC04*], [Earned Value (EV)],
+    [$% "completato" times B A C$],
+    [$>= 95% P V$],
+    [$>= P V$],
+
+    // --- METRICHE DERIVATE (Indici e Varianze) ---
+    [*MPC05*], [Budget Variance (BV)],
+    [$B V = B A C - E A C$],
+    [$>= 0$],
+    [$> 0$],
+
+    [*MPC06*], [Schedule Variance (SV)],
+    [$S V = E V - P V$],
+    [$> -5% "BAC"$],
+    [$>= 0$],
+
+    [*MPC07*], [Cost Performance Index (CPI)],
+    [$C P I = (E V) / (A C)$],
+    [$0.90 <= v <= 1.10$],
+    [$1.00$],
+
+    [*MPC08*], [Schedule Performance Index (SPI)],
+    [$S P I = (E V) / (P V)$],
+    [$0.90 <= v <= 1.10$],
+    [$1.00$],
+
+    [*MPC09*], [Estimate At Completion (EAC)],
+    [$E A C = (B A C) / (C P I)$],
+    [$<= B A C + 5%$],
+    [$<= B A C$],
   ),
-  caption: [Soglie metriche per il processo di Fornitura],
+  caption: [Soglie metriche per il processo di Fornitura (EVM)],
 )
-
 === Sviluppo
+_Riferimento: Norme di Progetto, Sezione [Inserire Riferimento]_ \ \
+Il processo di sviluppo trasforma i requisiti in un prodotto software funzionante.
+La qualità di questo processo viene valutata monitorando la stabilità dell'ambito di progetto. Una frequente modifica dei requisiti (*Scope Creep*) è indice di un'analisi iniziale lacunosa o di problemi di comunicazione con il proponente, e può compromettere la stabilità del ciclo di sviluppo.
+
 #figure(
   table(
     fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
+      luma(230)
+    } else {
+      luma(250)
     },
     columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
     inset: 10pt,
-    table.header([*Metrica di Processo*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
+    table.header([*ID*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
 
-    [*MP08*], [Requirements Stability Index], [$R S I = (R_"tot" - Delta R) / R_"tot"$], [$>= 70%$], [100%],
-  ), // dove Delta R è la somma dei requisiti che sono stati aggiunti, modificati o eliminati durante lo sviluppo.
+    [*MPC06*], [Requirements Stability Index (RSI)],
+    [$R S I = (R_"tot" - Delta R) / R_"tot" times 100$],
+    [$>= 80%$],
+    [100%],
+  ),
   caption: [Soglie metriche per il processo di Sviluppo],
 )
 
 == Processi di Supporto
-I Processi di Supporto sono attività che assistono altri processi per garantire la qualità e l'integrità del prodotto software.
+I Processi di Supporto sono attività trasversali che assistono i processi primari, garantendo la qualità, la correttezza e la consistenza del prodotto software.
+
 === Documentazione
+_Riferimento: Norme di Progetto, Sezione [Inserire Riferimento]_ \ \
+La documentazione rappresenta l'unica traccia formale delle scelte progettuali e del funzionamento del sistema.
+Per assicurarne l'efficacia, viene monitorata la leggibilità (per evitare linguaggio eccessivamente burocratico o oscuro) e la correttezza formale.
+
 #figure(
   table(
     fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
+      luma(230)
+    } else {
+      luma(250)
     },
     columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
     inset: 10pt,
-    table.header([*Metrica di Processo*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
+    table.header([*ID*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
 
-    [*MP09*], [Gulpease Index], [$89 + frac(300(L_f) - 10(L_p), F_p)$], [$>= 60%$], [$>= 80%$],
-    // Utilizzato per garantire che i documenti prodotti dal gruppo siano chiari e comprensibili per chiunque debba leggerli.
-    [*MP10*], [Correttezza Ortografica], [N. errori rilevati], [0 errori], [0 errori],
+    [*MPC07*], [Gulpease Index],
+    [$89 + (300(L_f) - 10(L_p)) / (F_p)$],
+    [$>= 40$],
+    [$>= 60$],
+
+    [*MPC08*], [Correttezza Ortografica],
+    [Errori segnalati dal linter],
+    [0],
+    [0],
   ),
   caption: [Soglie metriche per il processo di Documentazione],
 )
 
 === Verifica
+_Riferimento: Norme di Progetto, Sezione [Inserire Riferimento]_ \ \
+Il processo di verifica ha lo scopo di accertare che i prodotti di un'attività soddisfino i requisiti imposti.
+Si monitora la copertura del codice (per garantire che le logiche critiche siano testate) e il tasso di successo dei test (per impedire regressioni nel ramo principale del repository).
+
 #figure(
   table(
     fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
+      luma(230)
+    } else {
+      luma(250)
     },
     columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
     inset: 10pt,
-    table.header([*Metrica di Processo*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
+    table.header([*ID*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
 
-    [*MP11*], [Code Coverage], [$frac("Linee eseguite", "Linee totali") times 100$], [$>= 70%$], [$>= 90%$],
-    [*MP12*], [Test Success Rate], [$frac("Test superati", "Test eseguiti") times 100$], [100%], [100%],
+    [*MPC09*], [Code Coverage],
+    [$("Linee coperte") / ("Linee totali") times 100$],
+    [$>= 70%$],
+    [$>= 80%$],
+
+    [*MPC10*], [Test Success Rate],
+    [$("Test passati") / ("Test eseguiti") times 100$],
+    [100%],
+    [100%],
   ),
   caption: [Soglie metriche per il processo di Verifica],
 )
 
 === Gestione della Qualità
+_Riferimento: Norme di Progetto, Sezione [Inserire Riferimento]_ \ \
+Questo processo assicura che i prodotti e i processi siano conformi al Piano di Qualifica stesso.
+La metrica seguente fornisce una visione d'insieme (KPI) su quanto il progetto stia rispettando gli obiettivi qualitativi prefissati.
+
 #figure(
   table(
     fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
+      luma(230)
+    } else {
+      luma(250)
     },
     columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
     inset: 10pt,
-    table.header([*Metrica di Processo*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
+    table.header([*ID*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
 
-    [*MP13*],
-    [Quality metrics satisfied],
-    [$frac("Metriche soddisfatte", "Metriche totali") times 100$],
-    [$>= 80%$],
+    [*MPC11*], [Metrics Satisfaction],
+    [$("Metriche soddisfatte") / ("Metriche totali") times 100$],
+    [$>= 90%$],
     [100%],
-    // Serve a misurare l'efficacia complessiva del sistema di gestione della qualità del progetto.
   ),
   caption: [Soglie metriche per la Gestione della Qualità],
 )
 
 == Processi Organizzativi
-I Processi organizzativi sono quell'insieme di attività che servono a creare, gestire e migliorare l'infrastruttura e le risorse umane necessarie affinché i processi primari e di supporto possano funzionare correttamente.
+I Processi Organizzativi riguardano la gestione delle risorse, dell'infrastruttura e il miglioramento continuo del *Way of Working*.
 
-=== Gestione dei Processi
+=== Gestione Organizzativa
+_Riferimento: Norme di Progetto, Sezione [Inserire Riferimento]_ \ \
+Questo processo si occupa di pianificare e monitorare l'esecuzione delle attività secondo la metodologia #def("Agile").
+La metrica seguente misura l'affidabilità del team nel raggiungere gli obiettivi dichiarati all'inizio di ogni iterazione (Sprint Planning).
+
 #figure(
   table(
     fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
+      luma(230)
+    } else {
+      luma(250)
     },
     columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
     inset: 10pt,
-    table.header([*Metrica di Processo*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
+    table.header([*ID*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
 
-    [*MP14*], [Time Efficiency], [$frac("Tempo stimato", "Tempo effettivo") times 100$], [$>= 60%$], [100%],
-    [*MP15*],
-    [Sprint Goal Achievement],
-    [$frac("Obiettivi completati", "Obiettivi prefissati") times 100$],
+    [*MPC12*], [Sprint Goal Achievement],
+    [$("Obiettivi completati") / ("Obiettivi pianificati") times 100$],
     [$>= 80%$],
     [100%],
   ),
-  caption: [Soglie metriche per la Gestione dei Processi],
+  caption: [Soglie metriche per i Processi Organizzativi],
 )
 
 #pagebreak()
+/*
+/ Average Response Time: Tempo medio che intercorre tra l'invio di una richiesta da parte dell'utente e la ricezione della risposta completa dal sistema.
+/ Coupling (Accoppiamento): Misura della dipendenza di un modulo software da altri moduli. Un alto accoppiamento indica un sistema rigido e difficile da manutenere.
+/ Cyclomatic Complexity (McCabe): Metrica software che misura la complessità del flusso di controllo di un programma. Corrisponde al numero di percorsi linearmente indipendenti attraverso il codice sorgente.
+/ Failure Density: Rapporto tra il numero di guasti rilevati durante un periodo di osservazione e la dimensione del software (misurata in KLOC, migliaia di righe di codice).
+/ ISO/IEC 25010: Standard internazionale per la qualità del software che sostituisce la ISO 9126. Definisce un modello di qualità del prodotto basato su otto caratteristiche (es. Sicurezza, Affidabilità, Manutenibilità).
+/ Mean Time To Failure (MTTF): Tempo medio previsto prima che si verifichi un guasto in un componente o sistema non riparabile (o tra due guasti in sistemi riparabili). 
+*/
+= Qualità di Prodotto
+La qualità di prodotto è il grado con cui il software soddisfa i requisiti dichiarati e le aspettative implicite degli utenti.
+A differenza della qualità di processo (che misura _come_ lavoriamo), questa sezione misura il risultato finale.
 
-= Qualità di prodotto
-La qualità di prodotto è la misura in cui un software soddisfa i requisiti dichiarati e impliciti degli utenti e dei committenti.
+Il gruppo fa riferimento al modello di qualità definito dallo standard internazionale #def("ISO/IEC 25010") (evoluzione della ISO 9126), focalizzandosi sulle seguenti caratteristiche ritenute critiche per il progetto Code Guardian:
 
-Un prodotto software di alta qualità è caratterizzato da alcuni aspetti fondamentali (stabiliti nella prima parte dello standard _ISO/IEC 9126_):
-- *Funzionalità*, ovvero la capacità di un prodotto software di fornire funzioni che soddisfano esigenze stabilite. In particolare, rispetta i requisiti funzionali e non funzionali definiti nel documento di *Analisi dei Requisiti*.
-- *Affidabilità*, ovvero mantiene uno specifico livello di prestazioni ed evita che si verifichino errori.
-- *Efficienza*, in quanto capace di fornire adeguati tempi di risposta ed elaborazione.
-- *Usabilità*, dato che può essere capito, appreso e usato dall'utente finale.
-- *Manutenibilità*, ossia la capacità del software di essere modificato, includendo correzioni, miglioramenti o adattamenti.
+- *Functional Suitability* (Adeguatezza Funzionale): Completezza e correttezza delle funzioni.
+- *Reliability* (Affidabilità): Capacità del sistema di funzionare senza interruzioni.
+- *Performance Efficiency* (Efficienza): Comportamento temporale e utilizzo delle risorse.
+- *Usability* (Usabilità): Facilità di apprendimento e utilizzo.
+- *Maintainability* (Manutenibilità): Facilità di modifica e aggiornamento del codice.
+- *Security* (Sicurezza): Protezione dei dati e del codice analizzato.
 
-=== Funzionalità
+== Adeguatezza Funzionale
+_Riferimento: Norme di Progetto, Sezione [Requisiti]_ \ \
+Misura il grado di copertura dei requisiti tracciati nell'Analisi dei Requisiti, distinti per priorità (Obbligatori, Desiderabili, Opzionali).
+
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) { luma(230) } else { luma(250) },
+    columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
+    inset: 10pt,
+    table.header([*ID*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
+
+    [*MPD01*], [Copertura Req. Obbligatori], [$frac("Soddisfatti", "Totale Obbl.") times 100$], [100%], [100%],
+    [*MPD02*], [Copertura Req. Desiderabili], [$frac("Soddisfatti", "Totale Des.") times 100$], [0%], [100%],
+    [*MPD03*], [Copertura Req. Opzionali], [$frac("Soddisfatti", "Totale Opz.") times 100$], [0%], [100%],
+  ),
+  caption: [Metriche Adeguatezza Funzionale],
+)
+== Affidabilità (Reliability)
+_Riferimento: Norme di Progetto, Sezione [Inserire Riferimento]_ \ \
+Capacità del sistema di mantenere un determinato livello di prestazioni in un dato periodo di tempo.
+Si monitora la densità dei guasti per identificare moduli fragili e la disponibilità del servizio.
+
 #figure(
   table(
     fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
+      luma(230)
+    } else {
+      luma(250)
     },
     columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
     inset: 10pt,
-    table.header([*Metrica di Prodotto*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
+    table.header([*ID*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
 
-    [*MPD01*],
-    [Copertura Requisiti Obbligatori],
-    [$frac("Req. Obbligatori Soddisfatti", "Totale Req. Obbligatori") times 100$],
-    [100%],
-    [100%],
+    [*MPD03*], [Failure Density],
+    [$frac("N. guasti riscontrati", "KLOC")$],
+    [$<= 0.5$],
+    [0],
 
-    [*MPD02*],
-    [Copertura Requisiti Opzionali],
-    [$frac("Req. Opzionali Soddisfatti", "Totale Req. Opzionali") times 100$],
-    [0%],
-    [100%],
+    [*MPD04*], [Availability],
+    [$frac("Tempo operativo", "Tempo totale") times 100$],
+    [$>= 98%$],
+    [$>= 99.9%$],
   ),
-  caption: [Soglie metriche Funzionalità prodotto],
+  caption: [Soglie metriche Affidabilità],
 )
 
-=== Affidabilità
+== Usabilità (Usability)
+_Riferimento: Norme di Progetto, Sezione [Inserire Riferimento]_ \ \
+Grado con cui un prodotto può essere usato da specifici utenti per raggiungere specifici obiettivi con efficacia, efficienza e soddisfazione.
+
 #figure(
   table(
     fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
+      luma(230)
+    } else {
+      luma(250)
     },
     columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
     inset: 10pt,
-    table.header([*Metrica di Prodotto*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
-
-    [*MPD03*], [Failure Density], [$frac("N. guasti riscontrati", "KLOC")$], [$<= 0.5$], [0],
-    // Se ci sono molti guasti in poche righe di codice, il modulo è "fragile".
-    [*MPD04*], [Statement Coverage], [$frac("Linee eseguite", "Linee totali") times 100$], [$>= 70%$], [$>= 95%$],
-    // Indica quante righe di codice sono state effettivamente eseguite durante i test.
-  ),
-  caption: [Soglie metriche Affidabilità prodotto],
-)
-
-=== Efficienza
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
-    inset: 10pt,
-    table.header([*Metrica di Prodotto*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
-
-    [*MPD05*],
-    [Average Response Time (operazioni semplici)],
-    [$frac(sum (T_"fine" - T_"inizio"), "N. operazioni")$],
-    [$<= 2 "s"$],
-    [$<= 1 "s"$],
-    // Misura l'intervallo tra la richiesta dell'utente (semplice) e la risposta completa del sistema.
-    [*MPD06*],
-    [Average Response Time (analisi repo)],
-    [$frac(sum (T_"fine" - T_"inizio"), "N. analisi")$],
-    [$<= 20 "s"$],
-    [$<= 10 "s"$],
-  ),
-  caption: [Soglie metriche Efficienza prodotto],
-)
-
-=== Usabilità
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
-    inset: 10pt,
-    table.header([*Metrica di Prodotto*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
+    table.header([*ID*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
 
     [*MPD07*],
     [Comprehensibility],
-    [$frac("Funzioni comprese", "Totale funzioni testate") times 100$],
+    [$frac("Funzioni comprese", "Totale funzioni") times 100$],
     [$>= 80%$],
     [100%],
-    // Misura quanto sia intuitivo per un nuovo utente capire a cosa servono i vari bottoni o funzioni.
+
     [*MPD08*],
-    [Error Prevention],
-    [$frac("Azioni annullate (Undo)", "Totale azioni effettuate") times 100$],
+    [Error Prevention (Undo Rate)],
+    [$frac("Azioni annullate", "Totale azioni") times 100$],
     [$<= 5%$],
     [$<= 2%$],
-    // Analizza quanto spesso l'utente commette errori involontari o sente il bisogno di "tornare indietro" perché l'interfaccia lo ha indotto in errore.
   ),
-  caption: [Soglie metriche Usabilità prodotto],
+  caption: [Soglie metriche Usabilità],
 )
 
-=== Manutenibilità
+== Manutenibilità (Maintainability)
+_Riferimento: Norme di Progetto, Sezione [Inserire Riferimento]_ \ \
+Grado di efficacia ed efficienza con cui il prodotto può essere modificato. Alta manutenibilità riduce il debito tecnico.
+
 #figure(
   table(
     fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
+      luma(230)
+    } else {
+      luma(250)
     },
     columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
     inset: 10pt,
-    table.header([*Metrica di Prodotto*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
+    table.header([*ID*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
 
     [*MPD09*],
     [Comment Density],
-    [$frac("Linee di commento", "Linee di codice totali") times 100$],
+    [$frac("Linee commento", "Linee codice") times 100$],
     [$>= 10%$],
     [$20% - 30%$],
-    // Misura quanto il codice è auto-esplicativo.
-    [*MPD10*], [Cyclomatic Complexity], [$V(G) = E - N + 2P$], [$<= 15$], [$<= 10$],
-    // Misura il numero di percorsi linearmente indipendenti attraverso il codice.
-    [*MPD11*], [Coupling], [N. dipendenze per modulo], [$<= 6$], [$<= 3$],
-    // Valuta quanto un modulo dipende dagli altri.
+
+    [*MPD10*], [Cyclomatic Complexity],
+    [$V(G) = E - N + 2P$],
+    [$<= 15$],
+    [$<= 10$],
+
+    [*MPD11*], [Coupling (Fan-out)],
+    [Dipendenze esterne per classe],
+    [$<= 6$],
+    [$<= 3$],
   ),
-  caption: [Soglie metriche Manutenibilità prodotto],
+  caption: [Soglie metriche Manutenibilità],
+)
+
+== Sicurezza (Security)
+_Riferimento: Norme di Progetto, Sezione [Inserire Riferimento]_ \ \
+Grado con cui il prodotto protegge le informazioni e i dati. Essendo Code Guardian un tool di audit, la sicurezza del tool stesso è un requisito non funzionale primario.
+
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(230)
+    } else {
+      luma(250)
+    },
+    columns: (1.5fr, 2.5fr, 2.5fr, 1.3fr, 1.3fr),
+    inset: 10pt,
+    table.header([*ID*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
+
+    [*MPD12*], [Vulnerability Detection],
+    [Vulnerabilità trovate nel codice sorgente del prodotto (non nei repo analizzati)],
+    [0 Critical],
+    [0],
+  ),
+  caption: [Soglie metriche Sicurezza],
 )
 
 #pagebreak()
