@@ -281,3 +281,24 @@
     kind: table
   )
 }
+
+#let improvement_table(caption_text, content_list) = {
+  figure(
+    table(
+      fill: (x, y) => if (y == 0) {
+        luma(230) // Header scuro
+      } else {
+        luma(250) // Righe chiare
+      },
+      // 3 Colonne: ID, Problema, Azione
+      columns: (0.6fr, 2fr, 2.4fr),
+      inset: 10pt,
+      align: (x, y) => if x == 0 { center + horizon } else { left + horizon },
+      table.header([*ID*], [*Problema / Causa*], [*Azione Correttiva*]),
+      
+      ..content_list
+    ),
+    caption: caption_text,
+    kind: table
+  )
+}

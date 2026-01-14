@@ -201,7 +201,7 @@ Vengono monitorati sia i valori assoluti (Misure) che gli indici di efficienza (
     [*MPC03*], [Actual Cost (AC)], [$A C$], [$<= E A C$], [$<= E V$],
     [*MPC04*], [Earned Value (EV)], [$E V$], [$>= 95% P V$], [$>= P V$],
     // Indici
-    [*MPC05*], [Budget Variance (BV)], [$B V = B A C - E A C$], [$>= 0$], [$> 0$],
+    [*MPC05*], [Cost Variance (CV)], [$B V = E V - A C$], [$>= 0$], [$> 0$],
     [*MPC06*], [Schedule Variance (SV)], [$S V = E V - P V$], [$> -5% "BAC"$], [$>= 0$],
     [*MPC07*], [Cost Performance Index (CPI)], [$C P I = (E V) / (A C)$], [$0.90 <= v <= 1.10$], [$1.00$],
     [*MPC08*], [Schedule Performance Index (SPI)], [$S P I = (E V) / (P V)$], [$0.90 <= v <= 1.10$], [$1.00$],
@@ -687,70 +687,131 @@ In questa sezione vengono definiti i #def("Test di Accettazione"), volti a valid
 
 = Cruscotto di Valutazione
 
-== Processi Primari: Fornitura
-=== Earned Value - Planned Value (MP01 e MP02)
-=== Actual Cost - Estimate To Complete (MP03 e MP07)
-=== Cost Performance Index - Schedule Performance Index (MP04 e MP05)
-=== Estimate At Completion (MP06)
+In questa sezione vengono presentati i risultati delle misurazioni effettuate nel periodo di riferimento. L'analisi dei dati non è fine a se stessa, ma è orientata a fornire una visione oggettiva ("Data-Driven") dello stato di salute del progetto e della qualità del software rilasciato.
+I dati sono organizzati per area di processo e per qualità di prodotto, permettendo una rapida identificazione delle aree critiche e il confronto con le soglie di accettabilità definite nel Piano di Qualifica.
+
+== Processi Primari: Fornitura (EVM)
+Questa sezione monitora l'andamento economico e temporale del progetto utilizzando lo standard *Earned Value Management*. L'obiettivo è evidenziare scostamenti tra quanto pianificato (Baseline) e quanto effettivamente realizzato.
+
+=== Trend di Progetto (PV, AC, EV)
+_Metriche: MPC02, MPC03, MPC04_ \
+Viene visualizzato l'andamento cumulativo del valore pianificato (*Planned Value*), del costo reale sostenuto (*Actual Cost*) e del valore guadagnato (*Earned Value*). La sovrapposizione delle curve indica un progetto in linea con le aspettative; divergenze significative segnalano la necessità di interventi correttivi su budget o scadenze.
+
+=== Indici di Efficienza (CPI, SPI)
+_Metriche: MPC07, MPC08_ \
+Vengono riportati gli indici di performance puntuali per ogni Sprint. Questi valori normalizzati permettono di capire immediatamente l'efficienza di costo (*CPI*) e di schedulazione (*SPI*), dove un valore pari o superiore a 1.00 rappresenta lo stato ottimale.
+
+=== Varianze e Previsioni (CV, SV, EAC)
+_Metriche: MPC05, MPC06, MPC09_ \
+Questa sezione quantifica in termini monetari l'eventuale risparmio o perdita (*Cost Variance*) e l'anticipo o ritardo (*Schedule Variance*). Viene inoltre proiettata la stima del costo finale a finire (*Estimate At Completion*) confrontandola con il budget iniziale.
 
 == Processi Primari: Sviluppo
-=== Requirements Stability Index (MP08)
+Questa sezione analizza la stabilità dell'ambito tecnico del progetto.
+
+=== Requirements Stability Index (RSI)
+_Metrica: MPC10_ \
+Grafico che traccia la volatilità dei requisiti nel tempo. Un indice stabile e alto garantisce che il team stia lavorando su obiettivi consolidati, mentre fluttuazioni frequenti possono indicare incertezze nell'analisi o richieste di modifica eccessive (*Scope Creep*).
 
 == Processi di Supporto: Documentazione
-=== Gulpease Index (MP09)
-=== Correttezza Ortografica (MP10)
+Monitoraggio della qualità formale e della fruibilità della documentazione prodotta.
+
+=== Indice di Gulpease e Correttezza
+_Metriche: MPC11, MPC12_ \
+Viene riportato il livello di leggibilità linguistica (*Gulpease Index*) calcolato sui documenti principali, unitamente al numero di errori ortografici rilevati, per garantire che la documentazione sia accessibile e professionale.
+
+== Processi di Supporto: Verifica
+Monitoraggio dell'efficacia delle attività di testing dinamico.
+
+=== Code Coverage e Test Success
+_Metriche: MPC13, MPC14_ \
+Cruscotto tecnico che visualizza la copertura del codice raggiunta dai test automatizzati e il tasso di successo dei test eseguiti. Questi indicatori sono fondamentali per valutare la robustezza del codice prima del rilascio.
 
 == Processi di Supporto: Gestione della Qualità
-=== Quality metrics satisfied (MP13)
+Visione d'insieme sull'efficacia del Piano di Qualifica stesso.
+
+=== Soddisfazione delle Metriche
+_Metrica: MPC15_ \
+Indicatore sintetico (KPI) che mostra la percentuale totale delle metriche di progetto che rispettano le soglie di accettabilità definite. Fornisce un'indicazione immediata sulla conformità complessiva dei processi.
 
 == Processi Organizzativi: Gestione dei Processi
-=== Time Efficiency (MP14)
-=== Sprint Goal Achievement (MP15)
+Analisi dell'efficienza del metodo di lavoro Agile adottato dal team.
 
+=== Sprint Goal Achievement
+_Metrica: MPC16_ \
+Viene illustrata la capacità del team di completare gli obiettivi pianificati all'inizio di ogni iterazione (Sprint Planning). Questo dato è essenziale per calibrare la *Velocity* del team e migliorare la precisione delle pianificazioni future.
+
+== Qualità di Prodotto
+In questa sezione si verifica la conformità del software rilasciato rispetto ai requisiti e agli standard di qualità ISO/IEC 25010.
+
+=== Copertura Funzionale
+_Metriche: MPD01, MPD02, MPD03_ \
+Visualizzazione dello stato di implementazione dei requisiti, suddivisi per priorità (Obbligatori, Desiderabili, Opzionali), per confermare l'adeguatezza funzionale del rilascio corrente.
+
+=== Affidabilità e Manutenibilità
+_Metriche: MPD04, MPD05, MPD08, MPD09, MPD10_ \
+Analisi tecnica che combina indicatori di affidabilità (densità guasti, disponibilità) e metriche statiche del codice (complessità ciclomatica, densità commenti) per valutare la salute tecnica del prodotto.
+
+=== Usabilità e Sicurezza
+_Metriche: MPD06, MPD07, MPD11_ \
+Report sugli esiti delle verifiche di usabilità (comprensibilità, prevenzione errori) e scansione delle vulnerabilità di sicurezza, garantendo che il prodotto sia sicuro e utilizzabile dall'utente finale.
 #pagebreak()
 
-= Automiglioramento
-== Introduzione
-Il miglioramento continuo risulta fondamentale per garantire la qualità del progetto _Code Guardian_. Seguendo il _Way of Working_, il team effettua retrospettive bisettimanali per identificare i probemi principali e implementare delle soluzioni.
-Di seguito, vengono elencate le difficoltà individuate e le decisioni prese per risolverle.
+= Miglioramento Continuo
 
-== Valutazione organizzazione del team
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 3fr),
-    inset: 10pt,
-    table.header([*Problema*], [*Decisione presa*]),
+Il processo di miglioramento continuo rappresenta il motore evolutivo del *Way of Working* del gruppo #def("Skarab Group"). Non ci si limita a correggere gli errori nel codice, ma si punta a ottimizzare sistematicamente i processi organizzativi e di supporto per prevenire la ricorrenza delle anomalie.
 
-    [Difficoltà nel mantenere la coerenza stilistica dei documenti.], [Utilizzo di template condivisi in Typst.],
-    [Difficoltà nel monitorare l'avanzamento dei task.],
-    [Integrazione della piattaforma Jira per la gestione del progetto.],
-  ),
-  caption: [Decisioni prese per migliorare l'organizzazione del team],
-)
+La strategia adottata implementa rigorosamente il ciclo di Deming (#def("PDCA")), integrandosi con le iterazioni previste dalla metodologia #def("Agile"):
 
-== Valutazione strumenti utilizzati
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr, 4fr),
-    inset: 10pt,
-    table.header([*Strumento*], [*Problema*], [*Decisione presa*]),
+- *Plan (Pianificazione):* Definizione degli obiettivi di qualità e delle metriche e pianificazione delle attività.
+- *Do (Esecuzione):* Svolgimento delle attività di sviluppo e gestione durante lo Sprint.
+- *Check (Controllo):* Al termine di ogni iterazione si misurano i valori delle metriche e si confrontano con le soglie attese.
+- *Act (Azione):* Qualora si rilevino scostamenti negativi, vengono definite *Azioni Correttive* che modificano le Norme di Progetto, diventando operative dallo Sprint successivo.
 
-    [Typst],
-    [Non tutti i membri del team hanno familiarità con questa tecnologia.],
-    [Ogni membro del gruppo ha effettuato uno studio autonomo per garantire uniformità nella stesura dei documenti.],
-  ),
-  caption: [Decisioni prese per l'ottimizzazione degli strumenti di lavoro],
+== Azioni di Miglioramento Intraprese
+Di seguito sono riportate le criticità emerse e le relative azioni correttive, suddivise per ambito di intervento.
+
+#improvement_table(
+  [Storico delle azioni di miglioramento (Periodo RTB)],
+  (
+    // --- CATEGORIA: COMUNICAZIONE ---
+    table.cell(colspan: 3, fill: luma(200), align: center)[*Area: Comunicazione*],
+
+    [*AM01*],
+    [*Inefficienza nella Comunicazione Interna* \
+    Si sono verificati rallentamenti operativi causati da una comunicazione asincrona poco reattiva. Il team ha preso piena consapevolezza della scarsa efficacia delle modalità iniziali, che generavano colli di bottiglia.],
+    [*Ristrutturazione dei Flussi Informativi* \
+    I membri coinvolti hanno analizzato le cause (Root Cause Analysis) e compreso la lezione. Sono stati istituiti canali dedicati alle urgenze e aumentata la frequenza dei micro-allineamenti per sbloccare i task pendenti.],
+
+    // --- CATEGORIA: RUOLI E PIANIFICAZIONE ---
+    table.cell(colspan: 3, fill: luma(200), align: center)[*Area: Ruoli e Pianificazione*],
+
+    [*AM02*],
+    [*Pressione sulle Scadenze (Time-to-Result)* \
+    La necessità di produrre risultati tangibili (PoC) in tempi brevi per la revisione RTB rischiava di non essere soddisfatta con la pianificazione lineare iniziale.],
+    [*Ridistribuzione del Budget Orario* \
+    È stata effettuata una rimodulazione delle ore pianificate, allocando maggiori risorse sulle attività critiche di sviluppo e riducendo temporaneamente quelle a basso valore aggiunto, per garantire il rilascio puntuale.],
+
+    // --- CATEGORIA: STRUMENTI E TECNOLOGIE ---
+    table.cell(colspan: 3, fill: luma(200), align: center)[*Area: Strumenti e Tecnologie*],
+
+    [*AM03*],
+    [*Disomogeneità nella Documentazione* \
+    La stesura parallela dei documenti da parte di più persone ha inizialmente generato incoerenze stilistiche e ripetizioni ridondanti o formattate diversamente.],
+    [*Adozione di Template e Funzioni Comuni* \
+    Per garantire coerenza, sono state ingegnerizzate le funzioni di typesetting (in Typst) e creati template condivisi. Questo forza l'uniformità visiva e strutturale indipendentemente dall'autore della sezione.],
+
+    [*AM04*],
+    [*Overhead Nuovi Strumenti* \
+    L'adozione contemporanea di nuovi strumenti (Jira, GitHub, Typst) ha comportato un rallentamento iniziale dovuto alla curva di apprendimento.],
+    [*Consolidamento della Toolchain* \
+    Dopo la fase di rodaggio, l'uso degli strumenti è stato standardizzato nelle Norme di Progetto. La corretta rendicontazione è ora integrata nel flusso di lavoro quotidiano, trasformando l'overhead iniziale in un guadagno di efficienza.],
+  )
 )
 
 = Conclusioni
-Consideriamo il miglioramento continuo come un'attività strutturale per la garanzia di qualità del progetto _Code Guardian_. Le soluzioni applicate alle difficoltà riscontrate hanno permesso di affinare i flussi di lavoro, elevando il livello di efficienza del gruppo. Mantenendo una visione orientata al problem-solving, il team si dedica a un monitoraggio costante per prevenire criticità e ottimizzare le risorse impiegate nel ciclo di vita del software.
+
+L'attività di miglioramento continuo per il progetto #def("Code Guardian") si è rivelata non solo una pratica formale, ma una necessità operativa. L'analisi delle metriche e le retrospettive hanno evidenziato come l'avvio del progetto abbia scontato l'inevitabile "prezzo d'ingresso" dovuto alla curva di apprendimento dei nuovi strumenti (come Jira e Typst) e al necessario assestamento delle dinamiche comunicative interne.
+
+Le azioni correttive intraprese, in particolare la ristrutturazione dei canali informativi (*AM01*) e la standardizzazione documentale (*AM03*), hanno permesso di superare l'iniziale frammentazione operativa. Sebbene la ridistribuzione del budget orario (*AM02*) abbia garantito il raggiungimento degli obiettivi RTB, ha reso evidente l'importanza di una pianificazione più granulare per il futuro.
+
+Consapevoli che l'assetto attuale non è un traguardo definitivo ma uno stato da preservare, il team si impegna a mantenere alta la vigilanza. L'obiettivo per le prossime fasi non è l'assenza di problemi, ma la capacità di identificarli tempestivamente tramite il monitoraggio dei dati e risolverli con la stessa reattività dimostrata in questo primo periodo.
