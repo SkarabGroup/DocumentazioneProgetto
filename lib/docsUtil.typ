@@ -1,9 +1,50 @@
 #import "@preview/cetz:0.3.2": *
 #import "@preview/cetz-plot:0.1.1": chart
 
+// In glossarioUtil.typ
+#let GLOSSARIO_URL = "https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html"
+
+#let term-to-id(term) = {
+  let result = lower(term)
+  
+  // Caratteri accentati
+  let accents = (
+    ("à", "a"), ("á", "a"), ("â", "a"), ("ã", "a"), ("ä", "a"), ("å", "a"),
+    ("è", "e"), ("é", "e"), ("ê", "e"), ("ë", "e"),
+    ("ì", "i"), ("í", "i"), ("î", "i"), ("ï", "i"),
+    ("ò", "o"), ("ó", "o"), ("ô", "o"), ("õ", "o"), ("ö", "o"),
+    ("ù", "u"), ("ú", "u"), ("û", "u"), ("ü", "u"),
+  )
+  
+  for (from, to) in accents {
+    result = result.replace(from, to)
+  }
+  
+  // Altri caratteri comuni
+  result = result.replace("'", "")
+  result = result.replace(":", "")
+  result = result.replace(".", "")
+  result = result.replace(",", "")
+  result = result.replace(";", "")
+  
+  // Sostituisci spazi con trattini
+  result = result.replace(" ", "-")
+  
+  // Pulisci trattini multipli
+  while result.contains("--") {
+    result = result.replace("--", "-")
+  }
+  
+  // Rimuovi trattini iniziali/finali
+  result = result.trim("-", at: start, repeat: true)
+  result = result.trim("-", at: end, repeat: true)
+  
+  return result
+}
+
 //Definizione della prima pagina dei documenti
 #let titlePage(titoloDocumento, versioneDocumento) = {
-  set text(font: "Noto Serif Khmer", size: 15pt)
+  set text(font: "New Computer Modern", size: 15pt)
   set align(center)
   image("../assets/logo.jpg", height: 10cm)
   v(1em)
@@ -30,11 +71,17 @@
   set text(size: 13pt)
 
   let normalizedRows = rows.map(row => {
-    if row.len() == 4 { row + ([],) } else { row }
+    if row.len() == 4 { row + ([],) } 
+    else if row.len() == 5 { row }
+    else {
+      // Più verificatori: combina tutti gli elementi dal 5° in poi
+      let verificatori = row.slice(4).join([, ])
+      row.slice(0, 4) + (verificatori,)
+    }
   })
 
   table(
-    columns: (auto, auto, 1fr, auto, auto),
+    columns: (auto, auto, auto, auto, auto),
     inset: 5pt,
     stroke: 0.5pt + luma(200),
     
@@ -139,11 +186,10 @@
   if not found {
     panic("Parola non definita nel glossario: " + parola)
   } else {
-    // Normalizza il nome per la label (sostituisce spazi con trattini)
-    //let label_name = termine_originale.replace(" ", "-")
-    // Crea il link alla label del glossario
-    //link(label(label_name))[#parola#sub[G]]
-    underline(text(parola))
+    let term_id = term-to-id(parola)
+    let url = GLOSSARIO_URL + "#" + term_id
+    
+    link(url)[#underline(parola)]
   }
 }
 

@@ -3,10 +3,14 @@
 
 #let grigliaPresenze(presenti, assenti) = {
   heading(level: 1)[Presenze]
+
+  let presentiText = if type(presenti) == "list" { presenti.join(", ") } else { presenti }
+  let assentiText  = if type(assenti)  == "list" { assenti.join(", ") }  else { assenti }
+
   grid(
-    columns: (1.5fr, 2fr),
-    [*Presenti*], [#presenti.join(", ")],
-    [*Assenti*], [#assenti.join(", ")],
+    columns: (1.5fr, 0.5fr, 2fr),
+    [*Presenti*], [], [#presentiText],
+    [*Assenti*], [], [#assentiText],
   )
 }
 
@@ -91,7 +95,6 @@
 
   grigliaPresenze(presenti, assenze)
 
-  [Inizio riunione ore 09:00.]
 
   body
 
@@ -121,7 +124,8 @@
   ),
 
   assenze: (
-    "",
+    "Cognome e Nome",
+    "Cognome e Nome",
   ),
 
   [
@@ -136,10 +140,11 @@
 
     = Svolgimento Riunione
     #let orarioInizioRiunione = "09:00"//...
+    #let dataRiunione = "Data"
     #let orarioFineRiunione = "09:00" //...
     #let presidenteRiunione = "Io" //...
     == Apertura
-    La riunione ha avuto inizio alle #orarioInizioRiunione, introdotta da #presidenteRiunione che ha presentato l'ordine del giorno.
+    La riunione, svoltasi in data #dataRiunione ha avuto inizio alle #orarioInizioRiunione, introdotta da #presidenteRiunione che ha presentato l'ordine del giorno.
 
     == Discussione punto per punto
     === Punto 1: #punto1

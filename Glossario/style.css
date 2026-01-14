@@ -1,0 +1,234 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: #1a1a1a;
+    background: #ffffff;
+    padding: 2rem 2rem 2rem 200px; /* Spazio a sinistra per il nav */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 3px solid #000;
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+    z-index: 50;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.version {
+    color: #666;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Nav verticale fisso a sinistra */
+nav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 180px;
+    height: 100vh;
+    background: #f8f9fa;
+    padding: 2rem 1rem;
+    overflow-y: auto;
+    z-index: 100;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+}
+
+.alphabet-nav {
+    display: flex;
+    flex-direction: column; /* Verticale invece di orizzontale */
+    gap: 0.5rem;
+    align-items: stretch; /* Larghezza piena */
+}
+
+.alphabet-nav a {
+    padding: 0.7rem 1rem;
+    background: #fff;
+    border: 2px solid #e0e0e0;
+    text-decoration: none;
+    color: #000;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.alphabet-nav a:hover {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+    transform: translateX(5px); /* Scorre a destra invece che su */
+}
+
+.alphabet-nav a.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.letter-section {
+    margin-bottom: 4rem;
+}
+
+.letter-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #333;
+    color: #000;
+}
+
+.term {
+    margin-bottom: 2.5rem;
+    padding: 1.5rem;
+    background: #fafafa;
+    border-left: 5px solid #000;
+    border-radius: 4px;
+    scroll-margin-top: 2rem;
+    transition: all 0.3s ease;
+}
+
+.term:target {
+    background: #fff3cd;
+    box-shadow: 0 0 0 3px #ffc107;
+}
+
+.term:hover {
+    background: #f5f5f5;
+}
+
+.term-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #000;
+}
+
+.term-meta {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    color: #555;
+}
+
+.term-label {
+    font-weight: 600;
+    color: #000;
+}
+
+.term-description {
+    margin-top: 1rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: #000;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.back-to-top:hover {
+    background: #333;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+section, [id] {
+    scroll-margin-top: 160px; /* Altezza header + eventuale margine extra */
+}
+
+/* Responsive per mobile e tablet */
+@media (max-width: 968px) {
+    body {
+        padding: 80px 1rem 1rem 1rem; /* Spazio in alto per nav orizzontale */
+    }
+
+    /* Nav torna orizzontale in alto su mobile */
+    nav {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+    .alphabet-nav {
+        flex-direction: row; /* Orizzontale su mobile */
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+    }
+
+    .alphabet-nav a {
+        padding: 0.5rem 0.7rem;
+        font-size: 0.9rem;
+        flex-shrink: 0; /* Non comprimere i bottoni */
+    }
+
+    .alphabet-nav a:hover {
+        transform: translateY(-2px); /* Torna movimento verticale */
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .letter-heading {
+        font-size: 2rem;
+    }
+
+    .term-title {
+        font-size: 1.3rem;
+    }
+
+    .term {
+        padding: 1rem;
+    }
+}
+
+/* Animazione per highlight */
+@keyframes highlight {
+    0%, 100% { background: #fafafa; }
+    50% { background: #fff3cd; }
+}
