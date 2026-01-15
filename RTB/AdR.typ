@@ -20,6 +20,12 @@
 #let history = (
   (
     "2026/01/15",
+    "0.25.1",
+    "Fix per UC17 e UC18",
+    members.antonio,
+  ),
+  (
+    "2026/01/15",
     "0.25.0",
     "UC17 e UC18",
     members.berengan,
@@ -451,7 +457,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'utente interagisce con la sezione di inserimento dell'username durante la procedura di registrazione a CodeGuardian",
 )[
-  #useCaseDiagram("1_1", "UC1.1 - Inserimento username") //da rifare
+  #useCaseDiagram("1_1", "UC1.1 - Inserimento username") 
 ]
 
 ==== UC1.1.1: Username non conforme ai vincoli di formato <UC1.1.1>
@@ -522,7 +528,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'utente conferma l'inserimento dell'email durante la procedura di registrazione a CodeGuardian",
 )[
-  #useCaseDiagram("1_2", "UC1.2 - Inserimento email") //da rifare
+  #useCaseDiagram("1_2", "UC1.2 - Inserimento email") 
 ]
 
 ===== UC1.2.1: Email inserita non valida <UC1.2.1>
@@ -592,7 +598,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'utente conferma l'inserimento della password durante la procedura di registrazione a CodeGuardian",
 )[
-  #useCaseDiagram("1_3", "UC1.3 - Inserimento password")
+  #useCaseDiagram("1_3", "UC1.3 - Inserimento password") 
 ]
 
 ===== UC1.3.1: Password inserita non conforme ai vincoli di formato <UC1.3.1>
@@ -1360,9 +1366,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "L'utente autenticato seleziona dal proprio account CodeGuardian la sezione dedicata ai report di analisi",
-)[
-  #useCaseDiagram("5_1", "UC5.1 - Accesso alla sezione di visualizzazione dei report di analisi")
-]
+)[]
 
 ==== UC5.2: Selezione report di analisi <UC5.2>
 #useCase(
@@ -2566,9 +2570,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 //USE CASE DEL BACKEND
 // UC17
-=== UC17 Creazione dell'ambiente sand box
+=== UC17 Creazione dell'ambiente sand box <UC17>
 #useCase(
-  attore : FrontEnd,
+  attore : "FrontEnd",
   pre: [
     - L'utente autenticato avanzato ha effettuato l'accesso al proprio profilo di CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente autenticato avanzato ha effettuato la connessiono del proprio account di GitHub a CodeGuardian #link(<UC3>)[#underline[\[UC3\]]]
@@ -2591,11 +2595,11 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC17.1.2>)[#underline[\[UC17.1.2\]]]
   ],
   trigger: "Il FrontEnd comunica al backend la richiesta di analisi della repository. Il backend in risposta crea l'ambiente di sandbox",
-),
+)[]
 
-==== UC17.1 Errore durante la creazione dell'ambiente di sand box
+==== UC17.1 Errore durante la creazione dell'ambiente di sand box <UC17.1>
 #useCase(
-  attore : FrontEnd,
+  attore : "FrontEnd",
   pre: [
     - Il sistema CodeGuardian ha accettato la richesta di analisi della repository
   ],
@@ -2613,9 +2617,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Il backend comunica al frontend che c'è stato un errore duranrte la creazione dell'ambiente sandbox",
-),
+)[]
 
-=== UC17.1.2 Comunicazione dell'errore durante la creazione dell'ambiente di sand box
+=== UC17.1.2 Comunicazione dell'errore durante la creazione dell'ambiente di sand box <UC17.1.2>
 #useCase(
   attore : UAA,
   pre: [
@@ -2634,12 +2638,12 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Nessuno",
-),
+)[]
 
 
-=== UC18 Lettura delle richieste dell'utente da parte dell'orchestratore
+=== UC18 Lettura delle richieste dell'utente da parte dell'orchestratore <UC18>
 #useCase(
-  attore : FrontEnd,
+  attore : "FrontEnd",
   pre: [
     - L'utente autenticato avanzato ha richiesto l'analisi della propria repository al sistema CodeGuardian #link(<UC4>)[#underline[\[UC4\]]]
     - L'utente ha selezionato o meno le aree d'interesse di analisi della repository
@@ -2659,11 +2663,11 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "L'orchestratore una volta lette le richieste e visionato la repository decide come agire e come istruire gli agenti",
-),
+)[]
 
-==== UC18.1 È richiesta l'analisi completa
+==== UC18.1 È richiesta l'analisi completa <UC18.1>
 #useCase(
-  attore: frontend,
+  attore: "FrontEnd",
   pre: [
     - Non ci sono state richieste specifiche da parte dell'utente
   ],
@@ -2682,10 +2686,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Il frontend deve comunicare al backend che è richiesta un'analisi completa",
-),
-==== UC18.2 Ci sono delle richieste specifiche da parte del frontend su cosa debba essere analizzato
+)[]
+==== UC18.2 Ci sono delle richieste specifiche da parte del frontend su cosa debba essere analizzato <UC18.2>
 #useCase(
-  attore: frontend,
+  attore: "FrontEnd",
   pre: [
     - L'utente ha fatto delle richieste specifice in relazione alle aree della repository che ha interesse vengano analizzate
   ],
@@ -2705,10 +2709,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Il frontend deve cominca al backend le richieste che dovreanno essere prese in carico",
-),
-===== UC18.2.1 La repository non è mai stata analizzatoa prima e dunque le richieste specifiche non vengono rpese in considerazione
+)[]
+===== UC18.2.1 La repository non è mai stata analizzatoa prima e dunque le richieste specifiche non vengono rpese in considerazione <UC18.2.1>
 #useCase(
-  attore: frontend,
+  attore: "FrontEnd",
   pre: [
     - L'utente ha fatto delle richieste specifice in relazione alle aree della repository che ha interesse vengano analizzate #link(<UC18.2>)[#underline[\[UC18.2\]]]
     - La repository non era mai stata incaricata in precedenza
@@ -2727,8 +2731,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "L'orchestore non trova la repository in database e quindi si comporta come fosse stata richiesta l'analisi completa",
-), 
+)[]
 #pagebreak()
+
 = Requisiti di Sistema
 In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati da Skarab Group.
 
