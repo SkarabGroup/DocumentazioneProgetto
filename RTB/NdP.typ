@@ -160,12 +160,12 @@ I verbali possono essere di 2 tipi:
     // Rows
     [Lettera di Presentazione],
     [Responsabile],
-    [Proponente],
+    [Proponente, #members.cardin, #members.tullio, Skarab Group],
     [Esterno],
 
     [AdR – Analisi dei Requisiti],
     [Analisti],
-    [Proponente, Committente, Team],
+    [Proponente, #members.cardin, #members.tullio, Skarab Group],
     [Esterno],
 
     [Glossario],
@@ -175,22 +175,22 @@ I verbali possono essere di 2 tipi:
 
     [NdP – Norme di Progetto],
     [Responsabili di processo],
-    [Team di sviluppo],
+    [Skarab Group, #members.cardin, #members.tullio],
     [Interno],
 
     [PdP – Piano di Progetto],
     [Project Manager],
-    [Proponente, Team di sviluppo],
+    [Proponente, #members.cardin, #members.tullio, Skarab Group],
     [Esterno],
 
     [PdQ – Piano di Qualifica],
     [Responsabili Qualità],
-    [Team di sviluppo, Proponente],
+    [Skarab Group, #members.cardin, #members.tullio, Proponente],
     [Esterno],
 
     [Verbali delle Riunioni],
     [Segretario della riunione],
-    [Team, Proponente (se esterni)],
+    [Proponente (se esterni), #members.cardin, #members.tullio, Skarab Group],
     [Interno / Esterno],
   ),
   caption: [Tabella riepilogativa dei documenti di progetto],
