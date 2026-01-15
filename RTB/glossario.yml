@@ -310,7 +310,13 @@ V:
   Visual Studio Code:
     acronimo: VS Code
     descrizione: Editor di codice sorgente sviluppato da Microsoft, estensibile e supporta vari linguaggi di programmazione.
-    
+  
+  Verifica:
+    descrizione: Processo di valutazione del sistema software per assicurarsi che soddisfi i requisiti specificati e funzioni correttamente.
+  
+  Validazione:
+    descrizione: Processo di valutazione per garantire che il sistema software soddisfi le esigenze e le aspettative degli utenti finali.
+
 W:
   Way of Working:
     descrizione: Definisce il modo specifico in cui un team opera, includendo processi e strumenti che guidano le attività volte a raggiungere gli obiettivi stabiliti.

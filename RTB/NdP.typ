@@ -11,21 +11,27 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.2.1"
+#let versione = "v0.3.0"
 
 #titlePage("Norme di Progetto", versione)
 #set page(numbering: "1", header: header("Norme di Progetto"), footer: footer())
 
 #let history = (
   (
-    "09/01/2026",
+    "2026/01/15",
+    "0.3.0",
+    "Aggiunta prima versione sezione documenti",
+    members.kevin,
+  ),
+  (
+    "2026/01/09",
     "0.2.1",
     "Correzioni minori e miglioramenti alla documentazione",
     members.kevin,
     members.martinello,
   ),
   (
-    "02/01/2026",
+    "2026/01/02",
     "0.2.0",
     "Arricchimento con standard industriali, norme di codifica dettagliate e integrazioni progetto-specifiche",
     members.martinello,
@@ -33,7 +39,7 @@
     members.kevin
   ),
   (
-    "28/12/2025",
+    "2025/12/28",
     "0.1.0",
     "Rilascio iniziale con norme, processi e strumenti aggiornati",
     members.martinello,
@@ -41,7 +47,7 @@
     members.kevin
   ),
   (
-    "20/12/2025",
+    "2025/12/20",
     "0.0.1",
     "Prima bozza iniziale",
     members.martinello,
@@ -100,21 +106,96 @@ Questi standard sono integrati nei processi di analisi, progettazione, verifica 
 == Documentazione del Progetto
 In questa sezione si elencano tutti i documenti che #def("Skarab Group") produrrà durante il ciclo di vita del progetto #def("Code Guardian").
 
-==== AdR - Analisi dei Requisiti
+=== AdR - Analisi dei Requisiti
 Documento che raccoglie e specifica i requisiti funzionali e non funzionali del sistema software da sviluppare, basato sul capitolato fornito dal #def("Proponente"). Questo documento contiene:
 - Introduzione al progetto e obiettivi.
 - Lista degli attori coinvolti.
 - Lista dei casi d'uso.
 - Lista dei requisiti derivanti dai casi d'uso, classificati in obbligatori, desiderabili e opzionali.
 
-==== Glossario
+=== Glossario
 Documento che definisce i termini tecnici e specifici utilizzati nel progetto, per garantire una comprensione comune tra tutti i membri del team e gli stakeholder esterni. questo documento serve a fornire definizioni chiare e univoche per evitare ambiguità. Oltre che il documento in sé per s'é, il glossario é consultabile tramite una pagina nel sito web di Skarab Group. Questo permette interattivitá e link esterni all'interno di ogni documento che compone la documentazione di progetto. Per convenzione, un termine sará un link al glossario sul sito solo la prima volta che compare all'interno di un documento, assumento una lettura ordinata del documento stesso da parte del lettore.
 
-==== NdP - Norme di Progetto
+=== NdP - Norme di Progetto
 Documento che definisce il #def("WoW"),le norme, le convenzioni, gli strumenti e i processi che i membri del gruppo devono seguire durante il ciclo di vita del progetto.
 
-==== PdP - Piano di Progetto
+=== PdP - Piano di Progetto
 Documento che descrive l'organizzazione del lavoro, le risorse, il modello di ciclo di vita adottato, la pianificazione delle attività divise per #def("sprint") e la valutazione dei rischi associati al progetto. Inoltre, il PdP riporta attivamenre il monitoraggio del lavoro di ogni componente del gruppo, con l'obiettivo di garantire il rispetto delle tempistiche e le ore di lavoro previste per i vari ruoli.
+
+=== PdQ - Piano di Qualifica
+Documento che definisce le strategie, le metodologie e le attività di #def("verifica") e #def("validazione") per garantire che i prodotti del progetto soddisfino i requisiti specificati. Include la definizione delle metriche di qualità, i piani di test e le procedure di controllo qualità.
+
+=== Verbali delle Riunioni
+Sono documenti che riportano in modo sintetico e chiaro i punti discussi durante le riunioni, con le decisioni prese e i compiti assegnati. Ogni verbale include:
+- Data, ora e luogo della riunione.
+- Elenco dei partecipanti.
+- Ordine del giorno.
+- Sintesi delle discussioni.
+- Decisioni prese e azioni da intraprendere.
+
+I verbali possono essere di 2 tipi:
+- *Verbali Interni*: Riunioni tra i membri del gruppo per coordinare le attività di progetto.
+- *Verbali Esterni*: Riunioni con il #def("Proponente") esterni per discutere requisiti, progressi e feedback.
+
+
+#figure(
+  table(
+    columns: (2fr, 2fr, 3fr, 1.5fr),
+    align: horizon,
+    fill: (col, row) => if row == 0 {
+      luma(62.75%)
+    } else if calc.even(row) {
+      luma(220)
+    } else {
+      none
+    },
+    stroke: none,
+
+    // Header
+    text(white)[*Documento*],
+    text(white)[*Redattori*],
+    text(white)[*Destinatari*],
+    text(white)[*Uso*],
+
+    // Rows
+    [Lettera di Presentazione],
+    [Responsabile],
+    [Proponente],
+    [Esterno],
+
+    [AdR – Analisi dei Requisiti],
+    [Analisti],
+    [Proponente, Committente, Team],
+    [Esterno],
+
+    [Glossario],
+    [Tutti i membri del gruppo],
+    [Stakeholder interni ed esterni],
+    [Esterno],
+
+    [NdP – Norme di Progetto],
+    [Responsabili di processo],
+    [Team di sviluppo],
+    [Interno],
+
+    [PdP – Piano di Progetto],
+    [Project Manager],
+    [Proponente, Team di sviluppo],
+    [Esterno],
+
+    [PdQ – Piano di Qualifica],
+    [Responsabili Qualità],
+    [Team di sviluppo, Proponente],
+    [Esterno],
+
+    [Verbali delle Riunioni],
+    [Segretario della riunione],
+    [Team, Proponente (se esterni)],
+    [Interno / Esterno],
+  ),
+  caption: [Tabella riepilogativa dei documenti di progetto],
+)
+
 
 
 == Processo di Fornitura
