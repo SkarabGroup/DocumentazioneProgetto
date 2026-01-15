@@ -208,7 +208,7 @@ P:
   
   Proponente:
     descrizione: Azienda o ente che propone un capitolato per lo sviluppo di un sistema software da parte di un team di studenti o sviluppatori.
-    
+
 Q:
   Qualità:
     descrizione: Insieme delle caratteristiche di un'entità, che ne determinano la capacità di soddisfare esigenze sia espresse che implicite.
@@ -314,6 +314,7 @@ V:
 W:
   Way of Working:
     descrizione: Definisce il modo specifico in cui un team opera, includendo processi e strumenti che guidano le attività volte a raggiungere gli obiettivi stabiliti.
+    alternative: WoW
 
   Web Application:
     alternative: Applicazione Web, Webapp
