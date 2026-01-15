@@ -11,12 +11,19 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.2.1"
+#let versione = "v0.3.0"
 
 #titlePage("Norme di Progetto", versione)
 #set page(numbering: "1", header: header("Norme di Progetto"), footer: footer())
 
 #let history = (
+  (
+    "2026/01/15",
+    "0.3.0",
+    "Aggiunta prima versione sezione documenti",
+    members.kevin,
+    members.suar
+  ),
   (
     "2026/01/09",
     "0.2.1",
@@ -97,10 +104,123 @@ Questi standard sono integrati nei processi di analisi, progettazione, verifica 
 
 = Processi Primari
 
+== Documentazione del Progetto
+In questa sezione si elencano tutti i documenti che #def("Skarab Group") produrrà durante il ciclo di vita del progetto #def("Code Guardian").
+
+=== AdR - Analisi dei Requisiti
+Documento che raccoglie e specifica i requisiti funzionali e non funzionali del sistema software da sviluppare, basato sul capitolato fornito dal #def("Proponente"). Questo documento contiene:
+- Introduzione al progetto e obiettivi.
+- Lista degli attori coinvolti.
+- Lista dei casi d'uso.
+- Lista dei requisiti derivanti dai casi d'uso, classificati in obbligatori, desiderabili e opzionali.
+
+=== Glossario
+Documento che definisce i termini tecnici e specifici utilizzati nel progetto, per garantire una comprensione comune tra tutti i membri del team e gli stakeholder esterni. questo documento serve a fornire definizioni chiare e univoche per evitare ambiguità. Oltre che il documento in sé per s'é, il glossario é consultabile tramite una pagina nel sito web di Skarab Group. Questo permette interattivitá e link esterni all'interno di ogni documento che compone la documentazione di progetto. Per convenzione, un termine sará un link al glossario sul sito solo la prima volta che compare all'interno di un documento, assumento una lettura ordinata del documento stesso da parte del lettore.
+
+=== NdP - Norme di Progetto
+Documento che definisce il #def("WoW"),le norme, le convenzioni, gli strumenti e i processi che i membri del gruppo devono seguire durante il ciclo di vita del progetto.
+
+=== PdP - Piano di Progetto
+Documento che descrive l'organizzazione del lavoro, le risorse, il modello di ciclo di vita adottato, la pianificazione delle attività divise per #def("sprint") e la valutazione dei rischi associati al progetto. Inoltre, il PdP riporta attivamenre il monitoraggio del lavoro di ogni componente del gruppo, con l'obiettivo di garantire il rispetto delle tempistiche e le ore di lavoro previste per i vari ruoli.
+
+=== PdQ - Piano di Qualifica
+Documento che definisce le strategie, le metodologie e le attività di #def("verifica") e #def("validazione") per garantire che i prodotti del progetto soddisfino i requisiti specificati. Include la definizione delle metriche di qualità, i piani di test e le procedure di controllo qualità.
+
+
+=== Verbali delle Riunioni
+Sono documenti che riportano in modo sintetico e chiaro i punti discussi durante le riunioni, con le decisioni prese e i compiti assegnati. Ogni verbale include:
+- Data, ora e luogo della riunione.
+- Elenco dei partecipanti.
+- Ordine del giorno.
+- Sintesi delle discussioni.
+- Decisioni prese e azioni da intraprendere.
+
+I verbali possono essere di 2 tipi:
+- *Verbali Interni*: Riunioni tra i membri del gruppo per coordinare le attività di progetto.
+- *Verbali Esterni*: Riunioni con il #def("Proponente") esterni per discutere requisiti, progressi e feedback.
+
+
+#figure(
+  table(
+    columns: (2fr, 2fr, 3fr, 1.5fr),
+    align: horizon,
+    fill: (col, row) => if row == 0 {
+      luma(62.75%)
+    } else if calc.even(row) {
+      luma(220)
+    } else {
+      none
+    },
+    stroke: none,
+
+    // Header
+    text(white)[*Documento*],
+    text(white)[*Redattori*],
+    text(white)[*Destinatari*],
+    text(white)[*Uso*],
+
+    // Rows
+    [Lettera di Presentazione],
+    [Responsabile],
+    [Proponente, #members.cardin, #members.tullio, Skarab Group],
+    [Esterno],
+
+    [AdR – Analisi dei Requisiti],
+    [Analisti],
+    [Proponente, #members.cardin, #members.tullio, Skarab Group],
+    [Esterno],
+
+    [Glossario],
+    [Tutti i membri del gruppo],
+    [Stakeholder interni ed esterni],
+    [Esterno],
+
+    [NdP – Norme di Progetto],
+    [Responsabili di processo],
+    [Skarab Group, #members.cardin, #members.tullio],
+    [Interno],
+
+    [PdP – Piano di Progetto],
+    [Project Manager],
+    [Proponente, #members.cardin, #members.tullio, Skarab Group],
+    [Esterno],
+
+    [PdQ – Piano di Qualifica],
+    [Responsabili Qualità],
+    [Skarab Group, #members.cardin, #members.tullio, Proponente],
+    [Esterno],
+
+    [Verbali delle Riunioni],
+    [Segretario della riunione],
+    [Proponente (se esterni), #members.cardin, #members.tullio, Skarab Group],
+    [Interno / Esterno],
+  ),
+  caption: [Tabella riepilogativa dei documenti di progetto],
+)
+
+
+
 == Processo di Fornitura
-Questo processo copre le attività necessarie per fornire il prodotto al committente.
-- *Studio di fattibilità*: Analisi preliminare dei capitolati per valutare rischi, tecnologie e interesse del gruppo.
-- *Pianificazione*: Definizione di scadenze, milestone e ripartizione dei compiti tramite strumenti di project management.
+La fornitura é il processoadottato dal fornitore del prodotto finale, il quale scop è quello di acquisire i requisiti del cliente e fornire il prodotto conforme a tali requisiti.
+Tale processo comprende una fase iniziale di studio dei requisiti che il progetto dovrà soddisfare.
+Da questa analisi deriva il materiale necessario per avviare la contrattazione dei requisiti con il #def("proponente") e per comunicare una pianificazione preliminare delle attività, includendo una stima della data di consegna.
+Il processo di fornitura si compone di molte attività, tra cui:
+- Inizializzazione della fornitura 
+  - Momento in cui il fornitore analizza le richieste del proponente e valuta la sua capacità di soddisfarle.
+- Preparazione della proposta
+  - Redazione della proposta tecnica ed economica in risposta al capitolato.
+- Negoziazione e contrattazione
+  - Discussione e definizione dei termini contrattuali con il proponente.
+- Pianificazione della fornitura
+  - Viene stabilita l'organizzazione del lavoro, le risorse necessarie, il modello di ciclo di vita da adottare oltre che la valutazione dei rischi.
+- Esecuzione della fornitura
+  - Realizzazione del prodotto secondo i requisiti concordati.
+- Valutazione della fornitura
+  - Verifica della conformità del prodotto ai requisiti e alla qualità attesa, questo viene fatto mantenendosi in costante contatto con la proponente.
+- Consegna del prodotto
+  - Rilascio formale del prodotto al proponente, accompagnato dalla documentazione necessaria.
+
+=== Documentazione fornita
 
 == Processo di Sviluppo
 
