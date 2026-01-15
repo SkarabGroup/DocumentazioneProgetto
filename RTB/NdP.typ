@@ -107,6 +107,16 @@ Documento che raccoglie e specifica i requisiti funzionali e non funzionali del 
 - Lista dei casi d'uso.
 - Lista dei requisiti derivanti dai casi d'uso, classificati in obbligatori, desiderabili e opzionali.
 
+==== Glossario
+Documento che definisce i termini tecnici e specifici utilizzati nel progetto, per garantire una comprensione comune tra tutti i membri del team e gli stakeholder esterni. questo documento serve a fornire definizioni chiare e univoche per evitare ambiguità. Oltre che il documento in sé per s'é, il glossario é consultabile tramite una pagina nel sito web di Skarab Group. Questo permette interattivitá e link esterni all'interno di ogni documento che compone la documentazione di progetto. Per convenzione, un termine sará un link al glossario sul sito solo la prima volta che compare all'interno di un documento, assumento una lettura ordinata del documento stesso da parte del lettore.
+
+==== NdP - Norme di Progetto
+Documento che definisce il #def("WoW"),le norme, le convenzioni, gli strumenti e i processi che i membri del gruppo devono seguire durante il ciclo di vita del progetto.
+
+==== PdP - Piano di Progetto
+Documento che descrive l'organizzazione del lavoro, le risorse, il modello di ciclo di vita adottato, la pianificazione delle attività divise per #def("sprint") e la valutazione dei rischi associati al progetto. Inoltre, il PdP riporta attivamenre il monitoraggio del lavoro di ogni componente del gruppo, con l'obiettivo di garantire il rispetto delle tempistiche e le ore di lavoro previste per i vari ruoli.
+
+
 == Processo di Fornitura
 La fornitura é il processoadottato dal fornitore del prodotto finale, il quale scop è quello di acquisire i requisiti del cliente e fornire il prodotto conforme a tali requisiti.
 Tale processo comprende una fase iniziale di studio dei requisiti che il progetto dovrà soddisfare.
