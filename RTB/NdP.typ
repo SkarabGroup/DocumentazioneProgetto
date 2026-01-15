@@ -97,10 +97,37 @@ Questi standard sono integrati nei processi di analisi, progettazione, verifica 
 
 = Processi Primari
 
+== Documentazione del Progetto
+In questa sezione si elencano tutti i documenti che #def("Skarab Group") produrrà durante il ciclo di vita del progetto #def("Code Guardian").
+
+==== AdR - Analisi dei Requisiti
+Documento che raccoglie e specifica i requisiti funzionali e non funzionali del sistema software da sviluppare, basato sul capitolato fornito dal #def("Proponente"). Questo documento contiene:
+- Introduzione al progetto e obiettivi.
+- Lista degli attori coinvolti.
+- Lista dei casi d'uso.
+- Lista dei requisiti derivanti dai casi d'uso, classificati in obbligatori, desiderabili e opzionali.
+
 == Processo di Fornitura
-Questo processo copre le attività necessarie per fornire il prodotto al committente.
-- *Studio di fattibilità*: Analisi preliminare dei capitolati per valutare rischi, tecnologie e interesse del gruppo.
-- *Pianificazione*: Definizione di scadenze, milestone e ripartizione dei compiti tramite strumenti di project management.
+La fornitura é il processoadottato dal fornitore del prodotto finale, il quale scop è quello di acquisire i requisiti del cliente e fornire il prodotto conforme a tali requisiti.
+Tale processo comprende una fase iniziale di studio dei requisiti che il progetto dovrà soddisfare.
+Da questa analisi deriva il materiale necessario per avviare la contrattazione dei requisiti con il #def("proponente") e per comunicare una pianificazione preliminare delle attività, includendo una stima della data di consegna.
+Il processo di fornitura si compone di molte attività, tra cui:
+- Inizializzazione della fornitura 
+  - Momento in cui il fornitore analizza le richieste del proponente e valuta la sua capacità di soddisfarle.
+- Preparazione della proposta
+  - Redazione della proposta tecnica ed economica in risposta al capitolato.
+- Negoziazione e contrattazione
+  - Discussione e definizione dei termini contrattuali con il proponente.
+- Pianificazione della fornitura
+  - Viene stabilita l'organizzazione del lavoro, le risorse necessarie, il modello di ciclo di vita da adottare oltre che la valutazione dei rischi.
+- Esecuzione della fornitura
+  - Realizzazione del prodotto secondo i requisiti concordati.
+- Valutazione della fornitura
+  - Verifica della conformità del prodotto ai requisiti e alla qualità attesa, questo viene fatto mantenendosi in costante contatto con la proponente.
+- Consegna del prodotto
+  - Rilascio formale del prodotto al proponente, accompagnato dalla documentazione necessaria.
+
+=== Documentazione fornita
 
 == Processo di Sviluppo
 

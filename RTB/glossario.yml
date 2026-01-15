@@ -206,6 +206,9 @@ P:
   Python:
     descrizione: Linguaggio di programmazione ad alto livello, interpretato e orientato agli oggetti, utilizzato per lo sviluppo degli Agenti.
   
+  Proponente:
+    descrizione: Azienda o ente che propone un capitolato per lo sviluppo di un sistema software da parte di un team di studenti o sviluppatori.
+    
 Q:
   Qualità:
     descrizione: Insieme delle caratteristiche di un'entità, che ne determinano la capacità di soddisfare esigenze sia espresse che implicite.
