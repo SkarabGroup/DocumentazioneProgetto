@@ -19,6 +19,12 @@
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
+    "2026/01/15",
+    "0.25.0",
+    "UC17 e UC18",
+    members.berengan,
+  ),
+  (
     "2026/01/14",
     "0.24.1",
     "Fix minori al documento",
@@ -2557,6 +2563,171 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 === UCx: Accesso al profilo CodeGuardian
 === UCx: Recupero password profilo Codeguardian
 
+
+//USE CASE DEL BACKEND
+// UC17
+=== UC17 Creazione dell'ambiente sand box
+#useCase(
+  attore : FrontEnd,
+  pre: [
+    - L'utente autenticato avanzato ha effettuato l'accesso al proprio profilo di CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente autenticato avanzato ha effettuato la connessiono del proprio account di GitHub a CodeGuardian #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente autenticato avanzato ha richiesto l'avvio dell'analisi della prorpia repository di GitHub #link(<UC4>)[#underline[\[UC4\]]]
+    - Il sistema CodeGuardian ha accettato la richesta di analisi della repository
+  ],
+  post: [
+    - L'ambiente sandbox è stato correttamente creato ed è pronto all'uso
+  ],
+  scenari:[
+    - Il frontend riceve la richiesta di analisi della reposiry
+    - Il frontend comunica al backend la richiesta di analisi della repository
+    - Il bakcend crea l'ambiente sandbox tramite immagine docker
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC17.1>)[#underline[\[UC17.1\]]]
+    - #link(<UC17.1.2>)[#underline[\[UC17.1.2\]]]
+  ],
+  trigger: "Il FrontEnd comunica al backend la richiesta di analisi della repository. Il backend in risposta crea l'ambiente di sandbox",
+),
+
+==== UC17.1 Errore durante la creazione dell'ambiente di sand box
+#useCase(
+  attore : FrontEnd,
+  pre: [
+    - Il sistema CodeGuardian ha accettato la richesta di analisi della repository
+  ],
+  post: [
+    - L'ambiente di sandbox non viene creato correttamente e ciò viene comunicato al frontend
+  ],
+  scenari:[
+    - Occorre un errore durante la creazione dell'ambiente di sandbox
+    - Questo errore viene comunicato al frontend 
+  ],
+  inclusioni: [
+    - #link(<UC17.1.2>)[#underline[\[UC17.1.2\]]]
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Il backend comunica al frontend che c'è stato un errore duranrte la creazione dell'ambiente sandbox",
+),
+
+=== UC17.1.2 Comunicazione dell'errore durante la creazione dell'ambiente di sand box
+#useCase(
+  attore : UAA,
+  pre: [
+    - L'errore durante la creazione dell'ambiente di sandbox è stato comunicato al frontend
+  ],
+  post: [
+    - L'ambiente di sandbox non viene creato correttamente, e ciò viene comunicato all'utente autenticato avanzato
+  ],
+  scenari:[
+    - Il frontend comunica all'utente autenticato avanzato l'occorrenza dell'errore durante la creazione dell'ambiente sandbox
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Nessuno",
+),
+
+
+=== UC18 Lettura delle richieste dell'utente da parte dell'orchestratore
+#useCase(
+  attore : FrontEnd,
+  pre: [
+    - L'utente autenticato avanzato ha richiesto l'analisi della propria repository al sistema CodeGuardian #link(<UC4>)[#underline[\[UC4\]]]
+    - L'utente ha selezionato o meno le aree d'interesse di analisi della repository
+    - L'ambiente di sandbox é stato creato correttamente da parte del backend #link(<UC17>)[#underline[\[UC17\]]]
+  ],
+  post: [
+    - L'orchestratore ha letto le richieste ed ha istruito gli agenti sulle operazioni da svolgere per soddisfarle iin base alle richieste dell'utente
+  ],
+  scenari:[ 
+    - L'orchestratore legge le richieste dell'utente
+    - L'orchestratore istruisce gli agenti sui compiti che dovranno svolgere
+  ],
+  inclusioni: [
+    - #link(<UC18.1>)[#underline[\[UC18.1\]]]
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'orchestratore una volta lette le richieste e visionato la repository decide come agire e come istruire gli agenti",
+),
+
+==== UC18.1 È richiesta l'analisi completa
+#useCase(
+  attore: frontend,
+  pre: [
+    - Non ci sono state richieste specifiche da parte dell'utente
+  ],
+  post: [
+    - L'orchestratore istruisce gli agenti sullo svoglimento dell'analisi completa della repository
+  ],
+  scenari: [
+    - Il frontend comunica al backend che l'utente vuole svolgere un'analisi completa della propria repository
+    - Il backend prende in carico questa richiesta
+    - L'orchestratore istruisce gli agenti per un'analisi completa della repository in questione
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Il frontend deve comunicare al backend che è richiesta un'analisi completa",
+),
+==== UC18.2 Ci sono delle richieste specifiche da parte del frontend su cosa debba essere analizzato
+#useCase(
+  attore: frontend,
+  pre: [
+    - L'utente ha fatto delle richieste specifice in relazione alle aree della repository che ha interesse vengano analizzate
+  ],
+  post: [
+    - L'orchestratore istruisce gli agenti suli propri ruoli per l'analisi delle singole richieste dell'utente
+  ],
+  scenari: [
+    - Il frontend comunica al backend le specifiche richieste dell'utente rispetto alle aree da analizzare
+    - Il backend prende in carico la 
+    - L'orchestratore prima di istruire gli agenti controlla la pre esistenza della repository da analizzare nel database  e la trova
+    - L'orchestratore una volta compresa la richiesta istruisce gli agenti sui rispettivi ruoli per l'analisi delle specifiche richieste
+  ],
+  inclusioni: [
+    - #link(<UC18.2.1>)[#underline[\[UC18.2.1\]]]
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Il frontend deve cominca al backend le richieste che dovreanno essere prese in carico",
+),
+===== UC18.2.1 La repository non è mai stata analizzatoa prima e dunque le richieste specifiche non vengono rpese in considerazione
+#useCase(
+  attore: frontend,
+  pre: [
+    - L'utente ha fatto delle richieste specifice in relazione alle aree della repository che ha interesse vengano analizzate #link(<UC18.2>)[#underline[\[UC18.2\]]]
+    - La repository non era mai stata incaricata in precedenza
+  ],
+  post: [
+    - L'orchestratore istruisce gli agenti come se fosse stata richiesta un'analisi comlpleta
+  ],
+  scenari: [
+    - L'orchestratore prima di istruire gli agenti controlla la pre esistenza della repository da analizzare nel database e non la trova
+    - L'orchestratore si comporta quindi come se fosse stata richiesta l'analisi completa per istruire gli agenti
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'orchestore non trova la repository in database e quindi si comporta come fosse stata richiesta l'analisi completa",
+), 
 #pagebreak()
 = Requisiti di Sistema
 In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati da Skarab Group.
@@ -3112,6 +3283,8 @@ Descrivono cosa il sistema deve fare, inclusi i comportamenti, le reazioni a spe
   [#FRx],
   [L'utente autenticato avanzato deve porte visualizzare a schermo un messaggio di conferma di avvenuta modifica della password],
   [#link(<UC15.4>)[#underline[\[UC15.4\]]]],
+
+
 )
 
 #pagebreak()
