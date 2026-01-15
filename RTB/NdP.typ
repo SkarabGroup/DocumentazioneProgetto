@@ -22,6 +22,7 @@
     "0.3.0",
     "Aggiunta prima versione sezione documenti",
     members.kevin,
+    members.suar
   ),
   (
     "2026/01/09",
@@ -124,6 +125,7 @@ Documento che descrive l'organizzazione del lavoro, le risorse, il modello di ci
 
 === PdQ - Piano di Qualifica
 Documento che definisce le strategie, le metodologie e le attività di #def("verifica") e #def("validazione") per garantire che i prodotti del progetto soddisfino i requisiti specificati. Include la definizione delle metriche di qualità, i piani di test e le procedure di controllo qualità.
+
 
 === Verbali delle Riunioni
 Sono documenti che riportano in modo sintetico e chiaro i punti discussi durante le riunioni, con le decisioni prese e i compiti assegnati. Ogni verbale include:
@@ -387,3 +389,7 @@ Per ogni riunione (interna o con esterni) viene redatto un *Verbale* che riporta
 - *Comunicazione*: #def("Slack"), #def("Telegram"), #def("Discord").
 - *Diagrammi*: Draw.io.
 - *Project Management*: #def("Jira").
+
+= Appendici
+== Standard per le date 
+Le date all'interno del progetto devono seguire il formato `AAAA/MM/GG` (es. 2025/12/31).
