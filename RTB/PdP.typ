@@ -7,6 +7,12 @@
 #set heading(numbering: "1.1.1")
 #let history = (
   (
+    "2026/01/16",
+    "0.7.1",
+    "Retrospettiva degli Sprint 1 e 2",
+    members.suar,
+  ),
+  (
     "2026/01/12",
     "0.7.0",
     "Preventivo dei costi per la RTB e revisione sprint e retrospettiva",
