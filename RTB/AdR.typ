@@ -621,8 +621,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "L'utente conferma l'inserimento della password durante la procedura di registrazione a CodeGuardian",
-)[
-]
+)[]
 
 === UC2: Autenticazione a CodeGuardian <UC2>
 #useCase(
@@ -2585,7 +2584,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   scenari:[
     - Il frontend riceve la richiesta di analisi della reposiry
     - Il frontend comunica al backend la richiesta di analisi della repository
-    - Il bakcend crea l'ambiente sandbox tramite immagine docker
+    - Il Back-end crea l'ambiente sandbox tramite immagine docker
   ],
   inclusioni: [
     - Nessuna
@@ -2650,7 +2649,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'ambiente di sandbox é stato creato correttamente da parte del backend #link(<UC17>)[#underline[\[UC17\]]]
   ],
   post: [
-    - L'orchestratore ha letto le richieste ed ha istruito gli agenti sulle operazioni da svolgere per soddisfarle iin base alle richieste dell'utente
+    - L'orchestratore ha letto le richieste ed ha istruito gli agenti sulle operazioni da svolgere per soddisfarle in base alle richieste dell'utente
   ],
   scenari:[ 
     - L'orchestratore legge le richieste dell'utente
