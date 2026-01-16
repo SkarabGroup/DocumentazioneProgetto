@@ -290,27 +290,28 @@ In relazione alle baseline previste dal progetto, (#def("RTB") e #def("PB")), le
 L’Analisi dei Requisiti rappresenta una fase centrale del progetto e ha lo scopo di identificare in modo completo e non ambiguo tutti i requisiti che il sistema deve soddisfare.
 Essa è documentata nell’apposito documento di Analisi dei Requisiti e costituisce il riferimento principale per le successive attività di progettazione, sviluppo e verifica.
 
-I requisiti sono organizzati a partire dai Casi d’Uso, identificati tramite una nomenclatura univoca che ne garantisce la tracciabilità, e classificati secondo tipologia (funzionali, di qualità, di vincolo) e priorità (obbligatori, desiderabili, opzionali).
+I Casi d’Uso sono identificati tramite una nomenclatura univoca che ne garantisce la tracciabilità, la nomenclatura é la seguente: UCx.y.z, dove:
+- UC indica che si tratta di un Caso d’Uso.
+- x è un numero intero che identifica il Caso d’Uso principale.
+- y, z e i numeri successivi sono numeri interi che identificano sotto-casi d’Uso, ovvero inclusioni, composizioni o estensioni del Caso d’Uso principale.
 
-Codifica
+I requisiti, invece< #TODO("come sono acronimizzati i requisiti?")> 
+==== Codifica
 
 La codifica ha come obiettivo l’implementazione fedele delle soluzioni progettate, nel rispetto degli standard di qualità definiti dal gruppo.
 
-Per l’a.a. 2025/2026, Skarab Group adotta il linguaggio Golang, imponendo:
+I linguaggi di programmazione utilizzati per il progetto sono #def("TypeScript") per il frontend e gli script di automazione, #def("Python") e #def("Node.js") per il backend e gli agenti intelligenti e #def("MongoDB") per la gestione del database.
 
-formattazione automatica del codice tramite gofmt;
+Mentre per la documentazione viene utilizzato il linguaggio #def("Typst").
 
-utilizzo di strumenti di CI/CD per prevenire l’introduzione di codice non conforme;
+===== Convenzioni
+Per garantire uniformità e manutenibilità del codice, sono adottate delle convenzioni di codifica comuni a tutti i membri del gruppo. Queste convenzioni riguardano:
+- Nomenclatura di variabili, funzioni, classi e componenti, in particolare, si utilizza il `camelCase` per variabili e funzioni, e il `PascalCase` per classi e componenti.
+- Struttura e organizzazione del codice sorgente, con l’utilizzo di moduli e cartelle per separare le diverse funzionalità.
+- Commenti e documentazione del codice, ogni funzione deve possedere un commento che la descriva, i parametri in ingresso e il valore di ritorno.
+- Evitare funzioni lambda complesse e mantenere le funzioni con una singola responsabilità.
 
-rispetto di buone pratiche di programmazione, come funzioni semplici, nomi significativi e commenti chiari;
-
-uso esclusivo della lingua inglese per codice e documentazione tecnica.
-
-Questo approccio consente di garantire manutenibilità, leggibilità e qualità del software prodotto.
-=== Processo di Verifica
-Attività di controllo qualità per garantire che il prodotto soddisfi i requisiti specificati (
-vedi Sezione "Verifica e Qualità").
-
+#pagebreak()
 = Processi di Supporto
 
 == Documentazione
