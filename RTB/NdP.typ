@@ -105,14 +105,17 @@ Questi standard sono integrati nei processi di analisi, progettazione, verifica 
 = Processi Primari
 
 == Documentazione del Progetto
-In questa sezione si elencano tutti i documenti che #def("Skarab Group") produrrà durante il ciclo di vita del progetto #def("Code Guardian").
+In questa sezione si elencano tutti i documenti che #def("Skarab Group") produrrà durante il ciclo di vita del progetto #def("Code Guardian"). I documenti sono tutti scritti utilizzando il linguaggio #def("typst") per garantire una formattazione uniforme e professionale.
 
 === AdR - Analisi dei Requisiti
 Documento che raccoglie e specifica i requisiti funzionali e non funzionali del sistema software da sviluppare, basato sul capitolato fornito dal #def("Proponente"). Questo documento contiene:
 - Introduzione al progetto e obiettivi.
 - Lista degli attori coinvolti.
 - Lista dei casi d'uso.
-- Lista dei requisiti derivanti dai casi d'uso, classificati in obbligatori, desiderabili e opzionali.
+ - Essi sono descitti in UCx.y.z. ...
+  - UC é un acronimo che sta per usecase, x indica il numero del caso d'uso, y,z e i numeri successivi sono i sotto casi d'uso, ovvvero inclusioni, composizioni o estensioni del caso d'uso principale.
+- Lista dei requisiti funzionali e non funzionali, classificati in obbligatori, desiderabili e opzionali.
+  #TODO("come sono acronimizzati i requisiti?")
 
 === Glossario
 Documento che definisce i termini tecnici e specifici utilizzati nel progetto, per garantire una comprensione comune tra tutti i membri del team e gli stakeholder esterni. questo documento serve a fornire definizioni chiare e univoche per evitare ambiguità. Oltre che il documento in sé per s'é, il glossario é consultabile tramite una pagina nel sito web di Skarab Group. Questo permette interattivitá e link esterni all'interno di ogni documento che compone la documentazione di progetto. Per convenzione, un termine sará un link al glossario sul sito solo la prima volta che compare all'interno di un documento, assumento una lettura ordinata del documento stesso da parte del lettore.
@@ -138,6 +141,20 @@ Sono documenti che riportano in modo sintetico e chiaro i punti discussi durante
 I verbali possono essere di 2 tipi:
 - *Verbali Interni*: Riunioni tra i membri del gruppo per coordinare le attività di progetto.
 - *Verbali Esterni*: Riunioni con il #def("Proponente") esterni per discutere requisiti, progressi e feedback.
+
+=== Diario di bordo
+Documento che permette un allineamento settimanale con il professor #members.tullio, in cui il redattiore riporta riporta:
+- Attività svolte durante la settimana.
+- Problemi incontrati e soluzioni adottate.
+- Pianificazione delle attività per la settimana successiva.
+
+
+Tutti i documenti devono avere un formato uniforme e professionale stutturato in questo modo:
+- Prima pagina con logo e nome del team e versione attuale del documento.
+- Intestazioni e piè di pagina con titolo del documento e numero di pagina.
+- Indice automatico.
+- Indice delle tabelle (se presenti).
+- Contenuto.
 
 
 #figure(
@@ -226,6 +243,7 @@ Il processo di fornitura si compone di molte attività, tra cui:
 === Analisi dei Requisiti
 Attività volta a comprendere e documentare le necessità degli stakeholder.
 - *#def("Casi d'uso")*: Descrizione funzionale delle interazioni attore-sistema (formato tabellare con pre/post condizioni).
+
 - *Classificazione Requisiti*: #def("Requisiti funzionali"), #def("Requisiti non funzionali"), Obbligatori, Desiderabili, Opzionali.
 
 === Progettazione
@@ -243,7 +261,18 @@ In questa fase viene definita l'architettura del sistema software, includendo:
 In modo da assicurarsi che l'architettura software che verrá sviluppata sopperisce ai requisiti definiti nella fase di analisi.
 
 === Codifica
-Implementazione del software seguendo le norme di codifica definite (vedi Sezione "Norme di Sviluppo").
+Implementazione del software seguendo le norme di codifica definite. Questa parte é svolta dai programmatori di Skarab Goup e ha lo scopo di implementare quanto progettafo da progettisti e analisti.
+
+==== Linguaggi utilizzati
+- *#def("TypeScript")*: Per lo sviluppo del frontend e degli script di automazione.
+- *#def("Python")*: Per lo sviluppo del backend e degli agenti intelligenti.
+- *#def("Node.js")*: Per lo sviluppo di script e servizi backend.
+- #def("mongoDB"): Per la gestione del database NoSQL.
+
+==== Pratiche di Codifica
+- *Versionamento*: Utilizzo di #def("Git") per il controllo delle versioni.
+- *Code Review*: Revisione del codice tra pari per garantire qualità e conformità alle norme.
+- *Documentazione del Codice*: Uso di commenti e docstring per spiegare il funzionamento del codice. 
 
 === Processo di Verifica
 Attività di controllo qualità per garantire che il prodotto soddisfi i requisiti specificati (
@@ -257,7 +286,10 @@ Il ciclo di vita dei documenti prevede:
 2. *Verifica*: Controllo di conformità (ortografia, stile, contenuti) da parte di un membro diverso dal redattore.
 3. *Approvazione*: Validazione finale per il rilascio.
 
-La documentazione è redatta in #def("Typst") per garantire consistenza tipografica e facilità di versione.
+==== Strumenti di Redazione
+- *#def("Visual Studio Code")*: Editor principale per la scrittura dei documenti.
+- *#def("Typst")*: Linguaggio di markup utilizzato per la formattazione dei documenti.
+- *#def("Tinymist")*: Estensione per #def("VS Code") che fornisce supporto e preview per Typst
 
 == Gestione della Configurazione
 Utilizzo di *#def("Git")* come sistema di controllo versione.
