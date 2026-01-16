@@ -472,7 +472,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   #useCaseDiagram("1_1", "UC1.1 - Inserimento username") 
 ]
 
-==== UC1.1.1: Username non conforme ai vincoli di formato <UC1.1.1>
+===== UC1.1.1: Username non conforme ai vincoli di formato <UC1.1.1>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -495,7 +495,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[
 ]
 
-==== UC1.1.2: Username inserito già censito dal Sistema <UC1.1.2>
+===== UC1.1.2: Username inserito già censito dal Sistema <UC1.1.2>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -566,7 +566,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[
 ]
 
-==== UC1.2.2: Email inserita già censita dal Sistema <UC1.2.2>
+===== UC1.2.2: Email inserita già censita dal Sistema <UC1.2.2>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -3380,9 +3380,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[]
 
 
-=== UC29  Recuper e avvio tool esterni di analisi
+=== UC29  Recuper e avvio tool esterni di analisi <UC29>
 #useCase(
-  attore: BackEnd,
+  attore: "BackEnd",
   pre: [
     - Il BackEnd ha chiari i propri compiti rispetto alle richieste del FrontEnd realtive all'analisi #link(<UC17>)[#underline[\[UC18\]]]
   ],
@@ -3404,9 +3404,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Comunicazione con tool esterni",
 )[]
 
-==== UC29.1 Impossibilità di contattare un tool
+==== UC29.1 Impossibilità di contattare un tool <UC29.1>
 #useCase(
-  attore: BackEnd,
+  attore: "BackEnd",
   pre: [
     - Il BackEnd ha provato a contattare un tool esterno per l'analisi
   ],
@@ -3419,7 +3419,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Il BackEnd contatta il tool alternativo
   ],
   inclusioni: [
-    - #link(<UC19.1.1>)[#underline[\[UC29.1.2\]]]
+    - Nessuna
   ],
   estensioni: [
     - Nessuna
@@ -3429,9 +3429,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 
 // questo va assolutamente scelto come gestirlo, altrimenti va modificato il sottocaso
-=== UC30 Generazione del report finale
+=== UC30 Generazione del report finale <UC30>
 #useCase(
-  attore: BackEnd,
+  attore: "BackEnd",
   pre: [
     - Il BackEnd ha concluso con successo l'analisi della reposiry
   ],
@@ -3451,9 +3451,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Il report viene mandato al FrontEnd",
 )[]
 
-==== UC30.1 Integrazione delle singole parti nuove
+==== UC30.1 Integrazione delle singole parti nuove <UC30.1>
 #useCase(
-  attore: BackEnd,
+  attore: "BackEnd",
   pre: [
     - Era stata richiesta un'analisi parziale da parte del sistema FrontEnd
     - Il BackEnd ha concluso con successo l'analisi parziale
@@ -3476,6 +3476,171 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Integrazione delle nuove parti con il vecchio report",
 )[]
 
+//spazio per quelli in mezzo
+
+=== UC34  Notifica completamento al frontend <UC34>
+#useCase(
+  attore: "Back-end",
+  pre: [
+    - Il Back-end ha ricevuto una richiesta di analisi dal Front-end #link(<UC4>)[#underline[\[UC4\]]]
+    - Il Back-end ha iniziato l'analisi della repository #link(<UC29>)[#underline[\[UC29\]]]
+    - Il Back-end ha concluso con successo l'analisi della repository 
+  ],
+  post: [
+    - Il sistema Front-end è stato notificato del completamento dell'analisi
+  ],
+  scenari: [
+    - Il Back-end ha concluso l'analisi richiesta
+    - Il Back-end invia una notifica al Front-end del completamento dell'analisi
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC34.1>)[#underline[\[UC34.1\]]]
+  ],
+  trigger: "Il Back-end ha completato l'analisi della repository",
+)[]
+
+==== UC34.1 Nuovo tentativo di invio del messaggio di completamento <UC34.1>
+#useCase(
+  attore: "Back-end",
+  pre: [
+    - Il Back-end non riceve un ack dal Front-end dopo aver inviato la notifica di completamento dell'analisi #link(<UC34>)[#underline[\[UC34\]]]
+  ],
+  post: [
+    - Il Back-end ritenta l'invio della notifica di completamento dell'analisi al Front-end
+  ],
+  scenari: [
+    - Il Back-end non riceve l'ack di avvenuta ricezione della notifica di completamento dell'analisi
+    - Il Back-end ritenta l'invio della notifica al Front-end
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Il Back-end non riceve l'ack dal Front-end",
+)[]
+
+=== UC35 Gestione errore critico durante l'analisi <UC35>
+#useCase(
+  attore: "Back-end",
+  pre: [
+    - Il Back-end ha ricevuto una richiesta di analisi #link(<UC4>)[#underline[\[UC4\]]]
+    - Il Back-end ha avviato l'analisi della repository #link(<UC29>)[#underline[\[UC29\]]]
+    - Il Back-end riscontra un errore bloccante durante l'analisi
+  ],
+  post: [
+    - Il Front-end viene notificato che l'analisi non è andata a buon fine
+  ],
+  scenari: [
+    - Il Back-end inizia l'analisi della repository
+    - Durante l'analisi si verifica un errore critico che blocca il processo
+    - Il Back-end cattura l'errore e prepara una notifica di fallimento
+    - Il Back-end invia la notifica al Front-end informandolo del fallimento dell'analisi
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC35.1>)[#underline[\[UC35.1\]]]
+  ],
+  trigger: "Un errore critico blocca l'analisi della repository",
+)[]
+
+==== UC35.1 Nuovo tentativo di invio del messaggio di fallimento <UC35.1>
+#useCase(
+  attore: "Back-end",
+  pre: [
+    - Il Back-end non riceve un ack dal Front-end dopo aver inviato la notifica di fallimento dell'analisi #link(<UC35>)[#underline[\[UC35\]]]
+  ],
+  post: [
+    - Il Back-end ritenta l'invio della notifica di fallimento
+  ],
+  scenari: [
+    - Il Back-end non riceve l'ack di avvenuta ricezione della notifica di fallimento dell'analisi
+    - Il Back-end ritenta l'invio della notifica al Front-end
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Il Back-end non riceve l'ack dal Front-end",
+)[]
+
+=== UC36 Salvataggio metadati repository <UC36> 
+#useCase(
+  attore : "Orchestratore",
+  pre: [
+    - L'utente ha avviato un'analisi
+    - L'analisi è stata avviata e presa in carico da Back-end
+  ],
+  post: [
+    - I metadati della repository sono stati salvati nel database
+  ],
+  scenari: [
+    - L'Orchestratore manda al Database i metadati della repository selezionata dall'utente
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'analisi è stata avviata con successo",
+)[]
+
+=== UC37 Verifica esistenza repository analizzata <UC37>
+#useCase(
+  attore : "Back-end",
+  pre: [
+    - L’utente si trova nella sezione di visualizzazione dei report (#link(<UC5.1>)[#underline[\[UC5.1\]]])
+    - Il Front-end richiede al Back-end di inviare i dati relativi alle repository analizzate dall'utente 
+  ],
+  post: [
+    - L'utente visualizza le repository per le quali sono stati svolte delle analisi
+  ],
+  scenari: [
+    //- Il Back-end interroga il Database per recuperare le informazioni richieste
+    - Il Back-end invia al Front-end la lista delle repository analizzate
+    - Il Front-end mostra all'utente la lista delle repository analizzate
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC37.1>)[#underline[\[UC37.1\]]]
+  ],
+  trigger: "Richiesta di visualizzazione delle repository analizzate",
+)[]
+
+==== UC37.1 Nessuna repository analizzata <UC37.1>
+#useCase(
+  attore : "Back-end",
+  pre: [
+    - L’utente si trova nella sezione di visualizzazione dei report (#link(<UC5.1>)[#underline[\[UC5.1\]]])
+    - Il Front-end richiede al Back-end di inviare i dati relativi alle repository analizzate dall'utente 
+    - Non sono presenti repository analizzate per l'utente
+  ],
+  post: [
+    - L'utente viene informato che non sono presenti repository analizzate
+  ],
+  scenari: [
+    - Il Back-end invia al Front-end un messaggio di errore
+    - Il Front-end mostra all'utente il messaggio di errore
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Nessuna repository analizzata trovata",
+)[]
 
 #pagebreak()
 
