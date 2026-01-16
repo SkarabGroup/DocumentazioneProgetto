@@ -19,6 +19,12 @@
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
+    "2026/01/16",
+    "0.27.0",
+    "Aggiunta UC29 e UC30",
+    members.berengan,
+  ),
+  (
     "2026/01/15",
     "0.26.0",
     "Aggiunta UC19-UC28 con relativi sotto casi d'uso",
@@ -2752,30 +2758,30 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   scenari: [
     - L'utente richiede l'analisi delle dipendenze dal pannello del report
-    - L'analisi elenca le dipendenze con CVE note e misura la severità
+    - L'analisi elenca le dipendenze e ne misura la severità
     - Il sistema propone remediation (es. upgrade versione)
-    - L'utente accetta le remediation e le azioni vengono registrate come raccomandazioni
+    - L'utente accetta o rifuta le remediation
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC19.1>)[#underline[\[UC19.1\]]] // Notifica critica via email/Slack
+    - #link(<UC19.1>)[#underline[\[UC19.1\]]] // Notifica critica
   ],
   trigger: "L'utente richiede l'analisi dipendenze o la analisi viene pianificata automaticamente",
 )[]
 
-==== UC19.1: Notifica critica via email/Slack <UC19.1>
+==== UC19.1: Notifica di vulnerabilità critica <UC19.1>
 #useCase(
   attore: UAA,
   pre: [
     - Una vulnerabilità critica è stata rilevata nell'analisi delle dipendenze #link(<UC19>)[#underline[\[UC19\]]]
   ],
   post: [
-    - L'utente riceve una notifica via email o Slack
+    - L'utente riceve una notifica
   ],
   scenari: [
-    - Il sistema invia la notifica ai canali configurati
+    - Il sistema FrontEnd notifica l'utente dell'avvenuto ritrovamento di una o più vulnerabilità critiche
   ],
   inclusioni: [
     - Nessuna
@@ -2784,8 +2790,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Rilevamento di vulnerabilità critica",
-)[
-]
+)[]
+
 
 === UC20: Rilevamento segreti e token <UC20>
 #useCase(
@@ -2795,20 +2801,18 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   post: [
     - L'utente visualizza l'elenco dei possibili segreti trovati e le azioni consigliate
-    - L'utente accetta o ignora le raccomandazioni di revoca/rotazione
   ],
   scenari: [
     - L'utente avvia la scansione per segreti
     - Vengono segnalati file e commit sospetti contenenti possibili chiavi o token
-    - Il sistema propone remediation (revoca, rotazione, rimozione dalla storia)
-    - L'utente approva le remediation e riceve istruzioni operative
+    - Il sistema propone remediation all'utente
   ],
   inclusioni: [
     - #link(<UC20.1>)[#underline[\[UC20.1\]]] // Verifica manuale dei falsi positivi
   ],
   estensioni: [
     - #link(<UC20.2>)[#underline[\[UC20.2\]]] // Esecuzione automatica di revoca se integrata con provider
-  ],
+  ],  
   trigger: "L'utente avvia la scansione segreti o la scansione è parte di una pipeline CI",
 )[]
 
@@ -2831,8 +2835,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Rilevamento di possibili segreti",
-)[
-]
+)[]
 
 ==== UC20.2: Esecuzione automatica di revoca se integrata con provider <UC20.2>
 #useCase(
@@ -2853,18 +2856,17 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Conferma di segreti validi",
-)[
-]
+)[]
 
 === UC21: Verifica conformità licenze <UC21>
 #useCase(
   attore: UAA,
   pre: [
-    - Manifest delle dipendenze disponibile (es. package.json, requirements.txt)
+    - Manifest delle dipendenze disponibile
   ],
   post: [
     - L'utente riceve un report di compatibilità delle licenze e i rischi associati
-    - L'utente conferma le azioni consigliate (es. rimozione o sostituzione)
+    - L'utente conferma le azioni consigliate
   ],
   scenari: [
     - L'utente richiede la verifica licenze prima di una release
@@ -2899,9 +2901,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Rilevamento licenze non compatibili",
-)[
-]
+)[]
 
+//si
 === UC22: Revisione PR automatizzata <UC22>
 #useCase(
   attore: UAA,
@@ -2970,6 +2972,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[
 ]
 
+//sni
 === UC23: Monitor qualità del codice <UC23>
 #useCase(
   attore: UAA,
@@ -2993,6 +2996,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "Esecuzione pianificata o su richiesta",
 )[]
+
 
 ==== UC23.1: Integrazione con tool di metriche esterni <UC23.1>
 #useCase(
@@ -3035,9 +3039,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Analisi metriche completata",
-)[
-]
+)[]
 
+//sni
 === UC24: Suggerimenti di refactor <UC24>
 #useCase(
   attore: UAA,
@@ -3061,6 +3065,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Richiesta manuale o raccomandazione durante code review",
 )[]
 
+//altro caso
 ==== UC24.1: Verifica impatto tramite test automatizzati <UC24.1>
 #useCase(
   attore: UAA,
@@ -3306,8 +3311,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Merge su branch specifico",
-)[
-]
+)[]
 
 === UC28: Report programmabili e alert <UC28>
 #useCase(
@@ -3374,8 +3378,105 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Alert critico",
-)[
-]
+)[]
+
+
+=== UC29  Recuper e avvio tool esterni di analisi
+#useCase(
+  attore: BackEnd,
+  pre: [
+    - Il BackEnd ha chiari i propri compiti rispetto alle richieste del FrontEnd realtive all'analisi #link(<UC17>)[#underline[\[UC18\]]]
+  ],
+  post: [
+    - Il BackEnd ha contattato corettamente i tool esterni di analisi
+  ],
+  scenari: [
+    - Il BackEnd legge le richieste del sistema FrontEnd e le interpreta correttamente
+    - Il BackEnd sceglie quali sono i tool esterni di analisi da interrogare
+    - Il BackEnd contatta i tool esterni
+    - Il BackEnd inserisce all'interno dei tool esterni i dati appropriati da analizzare
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC29.1>)[#underline[\[UC29.1\]]]
+  ],
+  trigger: "Comunicazione con tool esterni",
+)[]
+
+==== UC29.1 Impossibilità di contattare un tool
+#useCase(
+  attore: BackEnd,
+  pre: [
+    - Il BackEnd ha provato a contattare un tool esterno per l'analisi
+  ],
+  post: [
+    - Il BackEnd trova un tool alternativo e lo contatta
+  ],
+  scenari: [
+    - Il BackEnd ha provato a contattare un tool esterno fallendo
+    - Il BackEnd cerca internamente un tool alternativo
+    - Il BackEnd contatta il tool alternativo
+  ],
+  inclusioni: [
+    - #link(<UC19.1.1>)[#underline[\[UC29.1.2\]]]
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Contatto con tool alternativo",
+)[]
+
+
+// questo va assolutamente scelto come gestirlo, altrimenti va modificato il sottocaso
+=== UC30 Generazione del report finale
+#useCase(
+  attore: BackEnd,
+  pre: [
+    - Il BackEnd ha concluso con successo l'analisi della reposiry
+  ],
+  post: [
+    - Il report è stato inviato correttamente al sistema FrontEnd
+  ],
+  scenari: [
+    - Il BackEnd finisce la propria analisi
+    - Il BackEnd ha scritto il report finale
+  ],
+  inclusioni: [
+    - #link(<UC30.1>)[#underline[\[UC30.1\]]]
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Il report viene mandato al FrontEnd",
+)[]
+
+==== UC30.1 Integrazione delle singole parti nuove
+#useCase(
+  attore: BackEnd,
+  pre: [
+    - Era stata richiesta un'analisi parziale da parte del sistema FrontEnd
+    - Il BackEnd ha concluso con successo l'analisi parziale
+  ],
+  post: [
+    - Il report è stato inviato correttamente al sistema FrontEnd
+  ],
+  scenari: [
+    - Il BackEnd conclude l'analisi parziale
+    - Il BackEnd integra le singole parti analizzate all'interno del vecchio report seguendo dei vincoli imposti
+    - Il BackEnd aggiorna i grafici relativi alle parti analizzate
+    - Il BackEnd invia il report comleto al sistema FrontEnd
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Integrazione delle nuove parti con il vecchio report",
+)[]
+
 
 #pagebreak()
 
