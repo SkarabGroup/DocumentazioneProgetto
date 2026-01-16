@@ -2,6 +2,7 @@ A:
   Adaptive:
     descrizione: Approccio di gestione progetto iterativo e flessibile, adatto a requisiti incerti, come in metodologie Agile.
 
+
   Agente:
     alternative: Agenti
     descrizione: Componente sistema software autonomo che percepisce il proprio ambiente, prende decisioni e intraprende azioni in modo indipendente per raggiungere obiettivi specifici grazie all'utilizzo di intelligenza artificiale
@@ -23,6 +24,10 @@ A:
   Analista:
     descrizione: Membro del team di sviluppo responsabile della raccolta e dell'analisi dei requisiti del sistema software, nonché della comunicazione con gli stakeholder per garantire che le esigenze siano comprese e documentate correttamente.
     alternative: Requirement Analyst, Analisti
+  Analista:
+    descrizione: Ruolo nel team di progetto responsabile dell'analisi dei requisiti e della modellazione del sistema.
+    alternative: Requirement Analyst, Analisti
+    descrizione: Membro del team di sviluppo responsabile della raccolta e dell'analisi dei requisiti del sistema software, nonché della comunicazione con gli stakeholder per garantire che le esigenze siano comprese e documentate correttamente.
 
   API: 
     acronimo: Application Programming Interface
@@ -31,6 +36,7 @@ A:
   API Contract:
     descrizione: Accordo formale tra un fornitore di API e i suoi consumatori che definisce endpoints, formati di richiesta/risposta e comportamenti attesi, garantendo la compatibilità tra sistemi.
 
+      
   Approccio Agile:
     alternative: Agile, metodo Agile
     descrizione: Approccio alla gestione del progetto che privilegia iterazioni brevi, feedback continui e adattamento delle priorità in base al progresso e ai risultati ottenuti.
@@ -104,6 +110,8 @@ D:
 
   Docker:
     descrizione: Piattaforma open source per creare, distribuire e gestire applicazioni in container, ovvero ambienti isolati e standardizzati che includono codice, librerie e dipendenze, garantendo che l'app funzioni in modo affidabile su qualsiasi ambiente.
+  Design Pattern:
+    descrizione: Soluzioni riutilizzabili a problemi comuni di progettazione del software, che forniscono un modello standard per affrontare determinate situazioni.
 
 E:
   ESLint:
@@ -193,6 +201,9 @@ L:
     acronimo: Large Language Model
     descrizione: Modello di intelligenza artificiale progettato per comprendere e generare testo naturale, addestrato su grandi quantità di dati testuali.
 
+  Linter:
+    descrizione: Strumento che analizza il codice sorgente per identificare errori di programmazione, bug potenziali e violazioni delle convenzioni di stile.
+
 M:
   MDP:
     acronimo: Multi-Dealer Platform
@@ -219,6 +230,18 @@ M:
     acronimo: Modello di Processo per la Software Industry
     descrizione: Modello di miglioramento dei processi specifico per l'industria del software, sviluppato in Italia, che aiuta le organizzazioni a ottimizzare le proprie attività e a migliorare la qualità del software prodotto.
   
+  MPC:
+    acronimo: Metriche di Processo
+    descrizione: Insieme di metriche utilizzate per misurare la qualità e l'efficienza dei processi di sviluppo, come la Schedule Variance (SV) o la Budget Variance (BV).
+
+  MPD:
+    acronimo: Metriche di Prodotto Documentale
+    descrizione: Insieme di metriche utilizzate per valutare la qualità della documentazione prodotta, ad esempio l'indice di Gulpease o la correttezza ortografica.
+
+  MPS:
+    acronimo: Metriche di Prodotto Software
+    descrizione: Insieme di metriche utilizzate per valutare la qualità del software sviluppato, come la Code Coverage o la complessità ciclomatica.
+
   MVP:
     acronimo: Minimum Viable Product
     descrizione: Versione minima di un prodotto software che include solo le funzionalità essenziali per soddisfare i requisiti principali e permettere il rilascio sul mercato.
@@ -228,12 +251,18 @@ N:
 
   Norme di Progetto:
     descrizione: Insieme di regole e linee guida che definiscono le modalità operative, i processi e gli standard da seguire durante lo sviluppo di un progetto software.
+
+  Norme di Progetto:
+    descrizione: Insieme di regole e linee guida che definiscono le modalità operative, i processi e gli standard da seguire durante lo sviluppo di un progetto software.
+#O:
+
 O:
   Optimism Bias:
     descrizione: Bias cognitivo che porta a sottostimare la probabilità di eventi negativi e i tempi necessari per completare un compito, basandosi su scenari ideali (il cosiddetto "Happy Path") piuttosto che su dati storici o realistici.
   OWASP:
     acronimo: Open Web Application Security Project
     descrizione: Organizzazione no-profit che si dedica a migliorare la sicurezza delle applicazioni web attraverso la creazione di risorse, strumenti e linee guida.
+
 P:
   Pair Programming: 
     descrizione: Tecnica di sviluppo software agile in cui due programmatori lavorano insieme alla stessa postazione. Uno scrive il codice ("Driver") mentre l'altro osserva, revisiona in tempo reale e pensa alla strategia ("Navigator"), scambiandosi frequentemente i ruoli.
@@ -263,6 +292,7 @@ P:
  
   Progettisti:
     descrizione: Membri del team di sviluppo responsabili della progettazione dell'architettura e delle funzionalità del sistema software.
+    alternative: Designer, Progettista
 
   Progetto:
     descrizione: Esso é inteso nel senso di project, ovvero un'insieme di attività coordinate e gestite per sviluppare un sistema software che soddisfi specifici requisiti e obiettivi.
@@ -275,6 +305,7 @@ P:
   PoC:
     acronimo: Proof of Concept
     descrizione: Realizzazione preliminare e limitata di una funzionalità o di un sottosistema, sviluppata allo scopo di dimostrarne la fattibilità tecnica e validare le scelte architetturali critiche.
+    alternative: Developer, Programmatore
 
   Python:
     descrizione: Linguaggio di programmazione ad alto livello, interpretato e orientato agli oggetti, utilizzato per lo sviluppo degli Agenti.
@@ -290,6 +321,7 @@ R:
   Remediation:
     descrizione: Processo di correzione, mitigazione o risoluzione di vulnerabilità, errori o non conformità identificate in un sistema software.
   
+
   Repository:
     descrizione: Archivio digitale dove il codice sorgente e la documentazione di un progetto software sono memorizzati e gestiti, spesso utilizzato per il controllo delle versioni e la collaborazione tra sviluppatori.
   
@@ -310,6 +342,9 @@ R:
   Responsabile:
     alternative: Project Manager, responsabile di progetto
     descrizione: Membro del team incaricato di pianificare, coordinare e supervisionare le attività del progetto per garantire il raggiungimento degli obiettivi nei tempi e nei costi previsti.
+
+  Responsabile di Progetto:
+    descrizione: Ruolo nel team di progetto responsabile del coordinamento generale e della gestione degli stakeholder.
 
   Responsabile di Progetto:
     descrizione: Ruolo nel team di progetto responsabile del coordinamento generale e della gestione degli stakeholder.
@@ -407,6 +442,8 @@ V:
   Verificatori:
     descrizione: Persone o team responsabili di controllare che il sistema software soddisfi i requisiti specificati durante il processo di verifica.
 
+    alternative: Tester, Verificatore
+    
   Visual Studio Code:
     acronimo: VS Code
     descrizione: Editor di codice sorgente sviluppato da Microsoft, estensibile e supporta vari linguaggi di programmazione.

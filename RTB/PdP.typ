@@ -136,13 +136,18 @@ Entro tale termine, il gruppo fornirà:
 - *Consuntivo Finale*: analisi conclusiva di costi, tempi e qualità, comprensiva degli scostamenti rispetto al preventivo.
 
 == Glossario
-Al fine di prevenire ambiguità interpretative, è stato redatto un #def[Glossario] che definisce in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio utilizzati all’interno della documentazione.
-Le occorrenze dei termini presenti nel Glossario sono evidenziate nel testo mediante apposita formattazione.
-
-Versione aggiornata del Glossario:
-#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario].
+Al fine di garantire la massima chiarezza espositiva e prevenire ambiguità nell’interpretazione della documentazione di progetto, è stato redatto un documento apposito denominato #strong("Glossario").  #linebreak()
+Questo strumento ha lo scopo di definire in modo univoco la terminologia tecnica, gli acronimi e i concetti specifici di dominio adottati dal gruppo durante l'intero ciclo di vita del software. #linebreak()
+Il Glossario è da considerarsi un documento in costante aggiornamento, che evolve parallelamente allo sviluppo del progetto. Per la versione attuale consultare questo #underline[inirizzoglossario]. #linebreak()
+Per facilitare la lettura, ogni occorrenza di un termine presente nel Glossario viene contrassegnata con una sottolineatura.
 
 == Riferimenti
+- #strong("Capitolato C2: Piattaforma ad agenti per l’audit e la remediation dei repository software") #linebreak() 
+#underline[https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf] #linebreak() 
+//Ultimo accesso 2025/12/23
+- #strong("Dispense del corso di Ingegneria del Software sulla gestione di progetto") #linebreak() 
+#underline[https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T04.pdf] #linebreak() 
+//Ultimo accesso 2025/12/23, toglierei gli ultimi accessi, non mi sembrano utili
 
 === Riferimenti Normativi
 I seguenti documenti hanno valore vincolante per la redazione del Piano di Progetto e per lo svolgimento delle attività progettuali:
@@ -461,6 +466,68 @@ Questa categoria analizza le criticità legate alle risorse umane. Essendo il te
   [Assegnazione task graduata: compiti complessi agli esperti, task di supporto/testing ai meno esperti, garantendo comunque la rotazione sui ruoli tecnici.],
   "Alta", // P=3
   "Medio", // I=2 -> R=6 (Alto)
+)
+
+=== RCO3: Rischio Collettivo Organizzativo legato a ritardi o incomprensioni nella comunicazione con la proponente
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(63.75%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (3fr, 4fr),
+    inset: 10pt,
+    table.header(
+      [*Tipologia Dato*],
+      [*Valore*],
+    ),
+
+    [*Codice*],
+    [RCO3],
+    [*Nome*], 
+    [Ritardi o incomprensioni nella comunicazione con la proponente],
+    [*Descrizione*], 
+    [Possibili ritardi nelle risposte da parte di #def[Var Group] o interpretazioni errate dei feedback forniti durante le sessioni di mentoring. Questo potrebbe portare a sviluppare funzionalità non in linea con le aspettative della proponente.],
+    [*Mitigazione*], 
+    [Programmazione di incontri periodici fissi e redazione di verbali (verbali esterni) dopo ogni incontro per formalizzare quanto deciso. Uso di canali di comunicazione diretti (#def[Slack]) per chiarimenti rapidi. In caso di dubbi sull'interpretazione dei feedback, il gruppo si impegnerà a richiedere chiarimenti tempestivi alla proponente per evitare incomprensioni. Nel caso in cui la proponente non risponda entro tempi ragionevoli il gruppo contattera il Prof. Vardanega per consigli su come procedere.],
+    [*Probabilità di avvenimento*],
+    [Media],
+    [*Pericolosità delle ripercussioni*],
+    [Media],
+  ),
+  caption: [Informazioni sul rischio RCO3],
+)
+
+=== RCO4: Rischio Collettivo Organizzativo legato alla disomogeneità nella produzione della documentazione
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(63.75%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (3fr, 4fr),
+    inset: 10pt,
+    table.header(
+      [*Tipologia Dato*],
+      [*Valore*],
+    ),
+
+    [*Codice*],
+    [RCO4],
+    [*Nome*], 
+    [Disomogeneità nella produzione della documentazione],
+    [*Descrizione*], 
+    [Dato che i membri del team hanno stili di scrittura diversi, i documenti (#def[Piano di Progetto], #def[Norme di Progetto], ecc.) potrebbero risultare frammentati, poco coerenti o con terminologie discordanti. Questo potrebbe compromettere la chiarezza e la professionalità della documentazione consegnata.],
+    [*Mitigazione*], 
+    [Definizione rigorosa dei template riguardante l'aspetto visivo, l'impaginazione e la formattazione del testo. Ogni documento deve passare per una fase di verifica incrociata, un membro diverso dal redattore controlla il lavoro, prima di essere considerato definitivo. Inoltre, viene stabilito un glossario condiviso per uniformare la terminologia tecnica utilizzata nei documenti.],
+    [*Probabilità di avvenimento*],
+    [Media],
+    [*Pericolosità delle ripercussioni*],
+    [Medio-Bassa],
+  ),
+  caption: [Informazioni sul rischio RCO4],
 )
 
 #pagebreak()

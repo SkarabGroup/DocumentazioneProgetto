@@ -2095,8 +2095,78 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[]
 
 
+=== UC13: Disconnessione account GitHub da CodeGuardian<UC13>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha selezionato la sezione di disconnessione dell'account GitHub dal sistema CodeGuardian
+  ],
+  post: [
+    - L'utente ha scollegato con successo il suo accont GitHub dalla piattaforma Codeguardian
+  ],
+  scenari: [
+    - L'utente scollega il proprio account GitHub dalla paiattaforma CodeGuardian
+  ],
+  inclusioni: [
+    - #link
+    - #link(<UC13.1>)[#underline[\[UC13.1\]]] // Conferma disconnessione
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger : "L'utente entra nella sezione Impostazioni > Account > GitHub dell'applicazione e disconnette il proprio account di GitHub dalla piattaforma CodeGuardian"
+)[]
 
-=== UCx: Scollegamento account GitHub da CodeGuardian
+==== UC13.1: Selezione tasto Disconnetti <UC13.1>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha selezionato la sezione di disconnessione dell'account GitHub dal sistema CodeGuardian #link(<UC13>)[#underline[\[UC13\]]]
+  ],
+  post: [
+    - L'utente ha scollegato con successo il suo accont GitHub dalla piattaforma Codeguardian
+  ],
+  scenari: [
+    - L'utente seleziona il tasto "Disconnetti Account
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Conferma finale della disconnessione #link(<UC13.1.1>)[#underline[\[UC13.1.1\]]]
+
+  ],
+  trigger:"L'untente seleziona e attiva il tasto disconnetti per disconnettere il proprio account"
+)[]
+
+==== UC13.1.1: Conferma disconnessione account<UC13.1.1>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub
+      #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha selezionato la sezione di disconnessione dell'account GitHub dal sistema CodeGuardian #link(<UC13>)[#underline[\[UC13\]]]
+  ],
+  post: [
+    - L'utente ha disconnesso con successo il proprio account di GitHub dalla piattaforma CodeGuardian
+  ],
+  scenari: [
+    - L'utente visualizza il banner di conferma
+    - L'utente conferma la disconessione del proprio account
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente seleziona e conferma la disconnessione del proprio account GitHub dalla piattaforma CodeGuardian"
+)[]
+
 === UCx: Accesso al profilo CodeGuardian 
 === UCx: modifica password profilo CodeGuardian 
 === UCx: Recupero password profilo CodeGuardian 
