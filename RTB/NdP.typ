@@ -220,7 +220,6 @@ Il processo di fornitura si compone di molte attività, tra cui:
 - Consegna del prodotto
   - Rilascio formale del prodotto al proponente, accompagnato dalla documentazione necessaria.
 
-=== Documentazione fornita
 
 == Processo di Sviluppo
 
@@ -234,8 +233,21 @@ Definizione dell'architettura logica e tecnica del sistema.
 - *#def("UML")*: Utilizzo di diagrammi di classi, sequenza e attività per modellare il sistema.
 - *#def("Design Pattern")*: Adozione di pattern noti (es. MVC, Singleton, Factory) dove applicabile per risolvere problemi ricorrenti.
 
+=== Analisi e Progettazione dell'Architettura
+In questa fase viene definita l'architettura del sistema software, includendo:
+- *Scelta dell'Architettura*: Definizione dello stile architetturale (es. a strati, microservizi).
+- *Componenti Principali*: Identificazione dei moduli e delle loro responsabilità.
+- *Interfacce*: Definizione delle interfacce tra i componenti.
+- *Diagrammi UML*: Creazione di diagrammi di classi, sequenza e attività per rappresentare la struttura e il comportamento del sistema. 
+
+In modo da assicurarsi che l'architettura software che verrá sviluppata sopperisce ai requisiti definiti nella fase di analisi.
+
 === Codifica
 Implementazione del software seguendo le norme di codifica definite (vedi Sezione "Norme di Sviluppo").
+
+=== Processo di Verifica
+Attività di controllo qualità per garantire che il prodotto soddisfi i requisiti specificati (
+vedi Sezione "Verifica e Qualità").
 
 = Processi di Supporto
 
