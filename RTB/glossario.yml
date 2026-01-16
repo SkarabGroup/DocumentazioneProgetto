@@ -73,6 +73,8 @@ D:
   Design Pattern:
     descrizione: Soluzioni riutilizzabili a problemi comuni di progettazione del software, che forniscono un modello standard per affrontare determinate situazioni.
 
+  Draw.io:
+    descrizione: Strumento di diagrammazione online che consente di creare diagrammi di flusso, organigrammi, mappe mentali e altri tipi di rappresentazioni visive.
 E:
   ESLint:
     descrizione: Strumento di linting per JavaScript e TypeScript che aiuta a identificare e correggere errori di codice e mantenere uno stile consistente.
@@ -96,6 +98,9 @@ G:
 
   GitHub:
     descrizione: Piattaforma di hosting per il controllo delle versioni e la collaborazione sul codice sorgente, basata su Git.
+
+  Google Calendar:
+    descrizione: Servizio di calendario online che consente di pianificare eventi, appuntamenti e attività, con funzionalità di condivisione e integrazione con altri strumenti Google.
 
   GUI:
     acronimo: Graphical User Interface
@@ -146,6 +151,8 @@ M:
   Milestone:
     descrizione: Punto di riferimento significativo nel ciclo di vita di un progetto, che indica il completamento di una fase importante o il raggiungimento di un obiettivo specifico.
 
+  Microsoft Teams:
+    descrizione: Piattaforma di comunicazione e collaborazione sviluppata da Microsoft, che integra chat, videoconferenze, archiviazione di file e integrazione con altre applicazioni Microsoft 365.
   MPC:
     acronimo: Metriche di Processo
     descrizione: Insieme di metriche utilizzate per misurare la qualità e l'efficienza dei processi di sviluppo, come la Schedule Variance (SV) o la Budget Variance (BV).
@@ -161,6 +168,9 @@ M:
   MVP:
     acronimo: Minimum Viable Product
     descrizione: Versione minima di un prodotto software che include solo le funzionalità essenziali per soddisfare i requisiti principali e permettere il rilascio sul mercato.
+
+  MongoDB:
+    descrizione: Database NoSQL orientato ai documenti che utilizza un formato di dati simile a JSON per memorizzare le informazioni in modo flessibile e scalabile.
 N:
   Node.js:
     descrizione: Ambiente di runtime JavaScript lato server che permette di eseguire codice JavaScript al di fuori di un browser web.
@@ -175,8 +185,13 @@ O:
     descrizione: Organizzazione no-profit che si dedica a migliorare la sicurezza delle applicazioni web attraverso la creazione di risorse, strumenti e linee guida.
 
 P:
+
+  PB:
+    acronimo: Product Baseline
+    descrizione: Milestone del progetto in cui vengono definite le specifiche, i vincoli e le caratteristiche del prodotto finale da sviluppare e vengono successivamente implementate, nel caso del progetto code guardian, questo é il punto d'arrivo
+
   Piano di progetto:
-    descrizione: Documento che definisce gli obiettivi, le attività, le risorse, i tempi e i costi necessari per completare un progetto software con successo.
+    descrizione: Documento che definisce gli obiettivi, lSe attività, le risorse, i tempi e i costi necessari per completare un progetto software con successo.
   
   Piano di Qualifica:
     descrizione: Documento strategico che definisce obiettivi, requisiti, processi e standard di qualità per guidare lo sviluppo di un prodotto software. Esso comprende tre elementi fondamentali, cioè il Piano della Qualità, il Controllo di Qualità e il Miglioramento continuo.
@@ -241,6 +256,10 @@ R:
   Responsabile di Progetto:
     descrizione: Ruolo nel team di progetto responsabile del coordinamento generale e della gestione degli stakeholder.
 
+  RTB:
+    acronimo: Requirements and Technology Baseline
+    descrizione: Milestone del progetto dedicata alla raccolta dei requisiti, alla definizione delle tecnologie e linee guida tecniche da adottare.
+
 S:
   Sistema multiagente:
     alternative: Multi-agent system, sistema multi agente, multiagente
@@ -286,6 +305,8 @@ T:
   Typst:
     descrizione: Nuovo sistema di typesetting basato su markup, progettato per essere potente quanto LaTeX ma più facile da imparare e utilizzare.
 
+  Tinymist:
+    descrizione: Estensione di Visual Studio Code che consente di visualizzare una preview di codice typst
 U:
   UML:
     acronimo: Unified Modeling Language
@@ -317,6 +338,8 @@ V:
   Validazione:
     descrizione: Processo di valutazione per garantire che il sistema software soddisfi le esigenze e le aspettative degli utenti finali.
 
+  VS code:
+    descrizione: Editor di codice sorgente sviluppato da Microsoft, estensibile e supporta vari linguaggi di programmazione.
 W:
   Way of Working:
     descrizione: Definisce il modo specifico in cui un team opera, includendo processi e strumenti che guidano le attività volte a raggiungere gli obiettivi stabiliti.

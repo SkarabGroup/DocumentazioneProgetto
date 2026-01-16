@@ -73,14 +73,9 @@ Il presente documento definisce le norme, le convenzioni, gli strumenti e i proc
 == Scopo del prodotto
 #def("Code Guardian") è una piattaforma software progettata per l'analisi automatizzata della qualità del codice e della documentazione di #def("repository") #def("GitHub"). Il sistema mira a supportare sviluppatori e manager fornendo metriche dettagliate e feedback semantico tramite agenti intelligenti.
 
-== Glossario e Riferimenti
+== Glossario
 I termini tecnici o ambigui sono definiti nel glossario di progetto (`RTB/glossario.yml`).
 Nel testo, i termini importanti possono essere evidenziati utilizzando la macro `#def`, questo permette di rendere la parola un link al glossario presente nel sito del progetto.
-
-I riferimenti normativi includono:
-- Regolamento del progetto didattico.
-- Standard ISO/IEC 12207 per i processi del ciclo di vita del software.
- -Ultimo accesso: 2026/01/02.
 
 == Standard Industriali e Riferimenti
 Il progetto adotta standard industriali riconosciuti per garantire qualità, conformità e best practices nel ciclo di vita del software. Di seguito i principali riferimenti:
@@ -104,10 +99,39 @@ Questi standard sono integrati nei processi di analisi, progettazione, verifica 
 
 = Processi Primari
 
-== Documentazione del Progetto
+== Processo di Fornitura
+La fornitura é il processoadottato dal fornitore del prodotto finale, il quale scop è quello di acquisire i requisiti del cliente e fornire il prodotto conforme a tali requisiti.
+Tale processo comprende una fase iniziale di studio dei requisiti che il progetto dovrà soddisfare.
+Da questa analisi deriva il materiale necessario per avviare la contrattazione dei requisiti con il #def("proponente") e per comunicare una pianificazione preliminare delle attività, includendo una stima della data di consegna.
+Il processo di fornitura si compone di molte attività, tra cui:
+- Inizializzazione della fornitura 
+  - Momento in cui il fornitore analizza le richieste del proponente e valuta la sua capacità di soddisfarle.
+- Preparazione della proposta
+  - Redazione della proposta tecnica ed economica in risposta al capitolato.
+- Negoziazione e contrattazione
+  - Discussione e definizione dei termini contrattuali con il proponente.
+- Pianificazione della fornitura
+  - Viene stabilita l'organizzazione del lavoro, le risorse necessarie, il modello di ciclo di vita da adottare oltre che la valutazione dei rischi.
+- Esecuzione della fornitura
+  - Realizzazione del prodotto secondo i requisiti concordati.
+- Valutazione della fornitura
+  - Verifica della conformità del prodotto ai requisiti e alla qualità attesa, questo viene fatto mantenendosi in costante contatto con la proponente.
+- Consegna del prodotto
+  - Rilascio formale del prodotto al proponente, accompagnato dalla documentazione necessaria.
+
+=== Strumenti di supporto
+- *#def("GitHub")*: Per il versionamento del codice e la gestione del repository.
+- *#def("Telegram")*, *#def("Discord")*: Per la comunicazione interna del team.
+- *#def("Draw.io")*: Per la creazione di diagrammi UML e altri schemi visivi.
+- *#def("Jira")*: Per la gestione delle attività e il monitoraggio del progresso.
+- *#def("VS Code")*: Per la scrittura del codice e la redazione dei documenti in #def("Typst").
+- *gmail*: Per la comunicazione con il proponente.
+- *#def("Google calendar")*: Per la pianificazione delle riunioni e delle scadenze.
+- *#def("Microsoft Teams")*: Per le riunioni virtuali e la collaborazione in tempo reale.
+=== Documentazione del Progetto
 In questa sezione si elencano tutti i documenti che #def("Skarab Group") produrrà durante il ciclo di vita del progetto #def("Code Guardian"). I documenti sono tutti scritti utilizzando il linguaggio #def("typst") per garantire una formattazione uniforme e professionale.
 
-=== AdR - Analisi dei Requisiti
+==== AdR - Analisi dei Requisiti
 Documento che raccoglie e specifica i requisiti funzionali e non funzionali del sistema software da sviluppare, basato sul capitolato fornito dal #def("Proponente"). Questo documento contiene:
 - Introduzione al progetto e obiettivi.
 - Lista degli attori coinvolti.
@@ -117,20 +141,20 @@ Documento che raccoglie e specifica i requisiti funzionali e non funzionali del 
 - Lista dei requisiti funzionali e non funzionali, classificati in obbligatori, desiderabili e opzionali.
   #TODO("come sono acronimizzati i requisiti?")
 
-=== Glossario
+==== Glossario
 Documento che definisce i termini tecnici e specifici utilizzati nel progetto, per garantire una comprensione comune tra tutti i membri del team e gli stakeholder esterni. questo documento serve a fornire definizioni chiare e univoche per evitare ambiguità. Oltre che il documento in sé per s'é, il glossario é consultabile tramite una pagina nel sito web di Skarab Group. Questo permette interattivitá e link esterni all'interno di ogni documento che compone la documentazione di progetto. Per convenzione, un termine sará un link al glossario sul sito solo la prima volta che compare all'interno di un documento, assumento una lettura ordinata del documento stesso da parte del lettore.
 
-=== NdP - Norme di Progetto
+==== NdP - Norme di Progetto
 Documento che definisce il #def("WoW"),le norme, le convenzioni, gli strumenti e i processi che i membri del gruppo devono seguire durante il ciclo di vita del progetto.
 
-=== PdP - Piano di Progetto
+==== PdP - Piano di Progetto
 Documento che descrive l'organizzazione del lavoro, le risorse, il modello di ciclo di vita adottato, la pianificazione delle attività divise per #def("sprint") e la valutazione dei rischi associati al progetto. Inoltre, il PdP riporta attivamenre il monitoraggio del lavoro di ogni componente del gruppo, con l'obiettivo di garantire il rispetto delle tempistiche e le ore di lavoro previste per i vari ruoli.
 
-=== PdQ - Piano di Qualifica
+==== PdQ - Piano di Qualifica
 Documento che definisce le strategie, le metodologie e le attività di #def("verifica") e #def("validazione") per garantire che i prodotti del progetto soddisfino i requisiti specificati. Include la definizione delle metriche di qualità, i piani di test e le procedure di controllo qualità.
 
 
-=== Verbali delle Riunioni
+==== Verbali delle Riunioni
 Sono documenti che riportano in modo sintetico e chiaro i punti discussi durante le riunioni, con le decisioni prese e i compiti assegnati. Ogni verbale include:
 - Data, ora e luogo della riunione.
 - Elenco dei partecipanti.
@@ -142,7 +166,7 @@ I verbali possono essere di 2 tipi:
 - *Verbali Interni*: Riunioni tra i membri del gruppo per coordinare le attività di progetto.
 - *Verbali Esterni*: Riunioni con il #def("Proponente") esterni per discutere requisiti, progressi e feedback.
 
-=== Diario di bordo
+==== Diario di bordo
 Documento che permette un allineamento settimanale con il professor #members.tullio, in cui il redattiore riporta riporta:
 - Attività svolte durante la settimana.
 - Problemi incontrati e soluzioni adottate.
@@ -215,65 +239,74 @@ Tutti i documenti devono avere un formato uniforme e professionale stutturato in
   caption: [Tabella riepilogativa dei documenti di progetto],
 )
 
-
-
-== Processo di Fornitura
-La fornitura é il processoadottato dal fornitore del prodotto finale, il quale scop è quello di acquisire i requisiti del cliente e fornire il prodotto conforme a tali requisiti.
-Tale processo comprende una fase iniziale di studio dei requisiti che il progetto dovrà soddisfare.
-Da questa analisi deriva il materiale necessario per avviare la contrattazione dei requisiti con il #def("proponente") e per comunicare una pianificazione preliminare delle attività, includendo una stima della data di consegna.
-Il processo di fornitura si compone di molte attività, tra cui:
-- Inizializzazione della fornitura 
-  - Momento in cui il fornitore analizza le richieste del proponente e valuta la sua capacità di soddisfarle.
-- Preparazione della proposta
-  - Redazione della proposta tecnica ed economica in risposta al capitolato.
-- Negoziazione e contrattazione
-  - Discussione e definizione dei termini contrattuali con il proponente.
-- Pianificazione della fornitura
-  - Viene stabilita l'organizzazione del lavoro, le risorse necessarie, il modello di ciclo di vita da adottare oltre che la valutazione dei rischi.
-- Esecuzione della fornitura
-  - Realizzazione del prodotto secondo i requisiti concordati.
-- Valutazione della fornitura
-  - Verifica della conformità del prodotto ai requisiti e alla qualità attesa, questo viene fatto mantenendosi in costante contatto con la proponente.
-- Consegna del prodotto
-  - Rilascio formale del prodotto al proponente, accompagnato dalla documentazione necessaria.
-
-
 == Processo di Sviluppo
 
-=== Analisi dei Requisiti
-Attività volta a comprendere e documentare le necessità degli stakeholder.
-- *#def("Casi d'uso")*: Descrizione funzionale delle interazioni attore-sistema (formato tabellare con pre/post condizioni).
+Il Processo di Sviluppo adottato da Skarab Group definisce l’insieme delle attività necessarie alla realizzazione del prodotto software, dalla definizione dei requisiti fino alla consegna e accettazione del sistema finale.
+Tale processo è conforme allo standard ISO/IEC 12207:1995 e garantisce un approccio strutturato, tracciabile e orientato alla qualità.
 
-- *Classificazione Requisiti*: #def("Requisiti funzionali"), #def("Requisiti non funzionali"), Obbligatori, Desiderabili, Opzionali.
+=== Attività del Processo di Sviluppo
 
-=== Progettazione
-Definizione dell'architettura logica e tecnica del sistema.
-- *#def("UML")*: Utilizzo di diagrammi di classi, sequenza e attività per modellare il sistema.
-- *#def("Design Pattern")*: Adozione di pattern noti (es. MVC, Singleton, Factory) dove applicabile per risolvere problemi ricorrenti.
+Il processo comprende le seguenti macro-attività:
+==== Definizione del processo: 
+Selezione del ciclo di vita del software più idoneo in base alla complessità, agli obiettivi e ai vincoli del progetto.
 
-=== Analisi e Progettazione dell'Architettura
-In questa fase viene definita l'architettura del sistema software, includendo:
-- *Scelta dell'Architettura*: Definizione dello stile architetturale (es. a strati, microservizi).
-- *Componenti Principali*: Identificazione dei moduli e delle loro responsabilità.
-- *Interfacce*: Definizione delle interfacce tra i componenti.
-- *Diagrammi UML*: Creazione di diagrammi di classi, sequenza e attività per rappresentare la struttura e il comportamento del sistema. 
+==== Analisi dei Requisiti: 
+Individuazione e formalizzazione delle esigenze dell’utente finale e dei vincoli imposti dal proponente, includendo funzionalità, requisiti di qualità e limitazioni progettuali.
 
-In modo da assicurarsi che l'architettura software che verrá sviluppata sopperisce ai requisiti definiti nella fase di analisi.
+==== Progettazione dell’architettura di sistema: 
+identificazione delle componenti hardware e software necessarie a soddisfare i requisiti, garantendo la tracciabilità degli stessi.
 
-=== Codifica
-Implementazione del software seguendo le norme di codifica definite. Questa parte é svolta dai programmatori di Skarab Goup e ha lo scopo di implementare quanto progettafo da progettisti e analisti.
+==== Analisi dei Requisiti Software: 
+studio di come il software risponde ai requisiti utente, includendo aspetti funzionali, prestazionali, di sicurezza e di interfaccia.
 
-==== Linguaggi utilizzati
-- *#def("TypeScript")*: Per lo sviluppo del frontend e degli script di automazione.
-- *#def("Python")*: Per lo sviluppo del backend e degli agenti intelligenti.
-- *#def("Node.js")*: Per lo sviluppo di script e servizi backend.
-- #def("mongoDB"): Per la gestione del database NoSQL.
+==== Progettazione dell’architettura software: 
+definizione della struttura complessiva del sistema software e delle relazioni tra le sue componenti, senza entrare nel dettaglio implementativo.
 
-==== Pratiche di Codifica
-- *Versionamento*: Utilizzo di #def("Git") per il controllo delle versioni.
-- *Code Review*: Revisione del codice tra pari per garantire qualità e conformità alle norme.
-- *Documentazione del Codice*: Uso di commenti e docstring per spiegare il funzionamento del codice. 
+==== Progettazione di dettaglio: 
+specifica delle singole unità software che compongono il sistema.
 
+==== Codifica e test delle unità: 
+implementazione del codice sorgente e verifica del corretto funzionamento delle singole unità.
+
+==== Integrazione software: 
+combinazione progressiva delle componenti software, supportata da test di integrazione.
+
+==== Test di qualifica del software: 
+verifica della conformità del prodotto agli obiettivi di qualità definiti.
+
+==== Integrazione e test di sistema: 
+assemblaggio del sistema completo e validazione del suo comportamento complessivo.
+Installazione: rilascio del software nell’ambiente concordato con il cliente.
+
+==== Supporto all’accettazione: 
+assistenza al proponente durante la fase di verifica finale del prodotto.
+
+=== Relazione con le Baseline di progetto
+
+In relazione alle baseline previste dal progetto, (#def("RTB") e #def("PB")), le attività di sviluppo si piú significative sono:
+
+==== Analisi dei Requisiti
+
+L’Analisi dei Requisiti rappresenta una fase centrale del progetto e ha lo scopo di identificare in modo completo e non ambiguo tutti i requisiti che il sistema deve soddisfare.
+Essa è documentata nell’apposito documento di Analisi dei Requisiti e costituisce il riferimento principale per le successive attività di progettazione, sviluppo e verifica.
+
+I requisiti sono organizzati a partire dai Casi d’Uso, identificati tramite una nomenclatura univoca che ne garantisce la tracciabilità, e classificati secondo tipologia (funzionali, di qualità, di vincolo) e priorità (obbligatori, desiderabili, opzionali).
+
+Codifica
+
+La codifica ha come obiettivo l’implementazione fedele delle soluzioni progettate, nel rispetto degli standard di qualità definiti dal gruppo.
+
+Per l’a.a. 2025/2026, Skarab Group adotta il linguaggio Golang, imponendo:
+
+formattazione automatica del codice tramite gofmt;
+
+utilizzo di strumenti di CI/CD per prevenire l’introduzione di codice non conforme;
+
+rispetto di buone pratiche di programmazione, come funzioni semplici, nomi significativi e commenti chiari;
+
+uso esclusivo della lingua inglese per codice e documentazione tecnica.
+
+Questo approccio consente di garantire manutenibilità, leggibilità e qualità del software prodotto.
 === Processo di Verifica
 Attività di controllo qualità per garantire che il prodotto soddisfi i requisiti specificati (
 vedi Sezione "Verifica e Qualità").
