@@ -54,7 +54,7 @@
     #puntoOdg(
       punto2,
       "In previsione della candidatura per la RTB, è stata discussa la necessità di avviare lo sviluppo del Proof of Concept (PoC).",
-      decisione: "A partire dallo Sprint 3, alcuni membri del gruppo si focalizzeranno sull'implementazione del PoC mentre altri si dedicheranno alla finalizzazione e alla verifica dei documenti restanti.",
+      decisione: "A partire dallo Sprint 3, alcuni membri del gruppo si focalizzeranno sull'implementazione del PoC mentre altri si dedicheranno alla finalizzazione e alla verifica dei documenti restanti. Qualora lo stato di avanzamento dei lavori fosse abbondantemente oltre i requisiti minimi, l'avvio del PoC verrebbe anticipato alla seconda metà del secondo sprint.",
     )
 
     === Punto 3: #punto3
@@ -77,25 +77,25 @@
           + members.antonio
           + " "
           + members.berengan,
-        "2026/01/11",
+        "2026/01/17",
         "In avanzamento",
       ),
       (
         "Verifica NdP",
         members.kevin,
-        "2026/01/11",
+        "2026/01/17",
         "Completata",
       ),
       (
         "Verifica PdP",
         members.suar,
-        "2026/01/11",
+        "2026/01/17",
         "Completata",
       ),
       (
         "Verifica PdQ",
         members.suar,
-        "2026/01/11",
+        "2026/01/17",
         "Da iniziare",
       ),
     ))
