@@ -11,11 +11,18 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.5.1"
+#let versione = "v0.5.2"
 
 #titlePage("Piano di Qualifica", versione)
+#set heading(numbering: "1.1.1")
 #set page(numbering: "1", header: header("Piano di Qualifica"), footer: footer())
 #let history = (
+  (
+    "2026/01/17",
+    "0.5.2",
+    "Revisione Automiglioramento",
+    members.suar
+  ),
   (
     "2026/01/13",
     "0.5.1",
@@ -69,8 +76,6 @@
 #versionTable(history)
 
 #indice()
-
-#indiceImmagini()
 
 #pagebreak()
 
@@ -174,11 +179,11 @@ Al termine di ogni Sprint (durante la fase di *Sprint Review*), il Responsabile 
 3. Deriva gli indici di performance (CPI, SPI) e le stime a finire (EAC).
 I risultati vengono confrontati con le soglie definite nel Piano di Qualifica per determinare lo stato di salute della fornitura.
 */
-==== Qualità di Processo
+== Qualità di Processo
 
 La garanzia della qualità del prodotto finale è intrinsecamente legata alla qualità dei processi produttivi che lo generano. Per il progetto #def("Code Guardian"), la gestione dei processi mira a rendere il #def("Way of Working") sostenibile, tracciabile e soggetto a miglioramento continuo attraverso l'applicazione del ciclo #def("PDCA").
 
-===== Strategia di Definizione delle Soglie Metriche
+=== Strategia di Definizione delle Soglie Metriche
 
 La determinazione delle soglie di accettabilità e ottimalità per le metriche adottate dal gruppo #def("Skarab Group") non è un processo arbitrario, ma segue una strategia ingegneristica basata sui seguenti criteri:
 
@@ -186,7 +191,7 @@ La determinazione delle soglie di accettabilità e ottimalità per le metriche a
 - *Analisi del Dominio e Benchmark:* Le metriche di supporto e sviluppo (es. #def("Gulpease Index"), #def("Complessità Ciclomatica")) sono tarate su benchmark di settore per lo sviluppo software moderno, garantendo che i requisiti di manutenibilità e sicurezza siano oggettivamente verificabili.
 - *Miglioramento Continuo e Calibrazione (PDCA):* In linea con l'approccio #def("Agile"), le soglie sono soggette a revisione periodica. Al termine di ogni #def("Sprint"), i valori vengono analizzati rispetto alle prestazioni storiche del team; questo permette una ricalibrazione dinamica delle soglie nel #def("Piano di Qualifica"), rendendo gli obiettivi sempre sfidanti ma tecnicamente sostenibili (obiettivi *S.M.A.R.T.*).
 
-===== Centralizzazione delle Metriche e Obiettivi
+=== Centralizzazione delle Metriche e Obiettivi
 
 Il presente documento costituisce il riferimento unico, autoritativo e analitico per la gestione della qualità del progetto #def("Code Guardian"). Mentre le #def("Norme di Progetto") definiscono le procedure operative, gli strumenti e le responsabilità per l'estrazione dei dati, il #def("Piano di Qualifica") ha il compito di centralizzare la "scienza della misurazione" del gruppo.
 
@@ -197,7 +202,7 @@ In particolare, ogni metrica qui esposta è corredata da:
 
 Ogni scostamento rilevato tra i valori misurati e le soglie qui definite viene analizzato durante le retrospettive di fine #def("Sprint"). Tali evidenze costituiscono la base oggettiva per l'attivazione di azioni correttive o per la ricalibrazione delle soglie stesse, garantendo che il processo di qualità evolva insieme alla maturità del team.
 
-===== Processi Primari: Fornitura e Sviluppo
+=== Processi Primari: Fornitura e Sviluppo
 Questi processi definiscono le attività core per la realizzazione del software. Il monitoraggio si focalizza sul rispetto dei vincoli di tempo e budget (tramite la metodologia EVM) e sulla gestione rigorosa dell'ambito di progetto.
 
 #metrics_table(
@@ -227,7 +232,7 @@ Il monitoraggio della stabilità dei requisiti è cruciale per prevenire lo *sco
   )
 )
 
-===== Processi di Supporto
+=== Processi di Supporto
 I processi di supporto garantiscono l'integrità e la verificabilità degli artefatti. La leggibilità della documentazione (Indice di Gulpease) e la copertura dei test sono i parametri cardine per assicurare la manutenibilità futura.
 
 #metrics_table(
@@ -240,7 +245,7 @@ I processi di supporto garantiscono l'integrità e la verificabilità degli arte
   )
 )
 
-===== Processi Organizzativi
+=== Processi Organizzativi
 Misurano l'efficienza interna del team Skarab Group nell'auto-organizzarsi e nel rispettare gli impegni presi durante gli Sprint.
 
 #metrics_table(
@@ -253,11 +258,11 @@ Misurano l'efficienza interna del team Skarab Group nell'auto-organizzarsi e nel
 
 #pagebreak()
 
-==== Qualità di Prodotto
+== Qualità di Prodotto
 
 La qualità di prodotto valuta il software consegnato rispetto ai requisiti e alle caratteristiche intrinseche definite dallo standard #def("ISO/IEC 25010").
 
-===== Adeguatezza Funzionale e Affidabilità
+=== Adeguatezza Funzionale e Affidabilità
 Si misura la capacità del sistema di svolgere i compiti richiesti e di rimanere operativo senza guasti critici, parametro fondamentale per un tool di audit.
 
 #metrics_table(
@@ -269,7 +274,7 @@ Si misura la capacità del sistema di svolgere i compiti richiesti e di rimanere
   )
 )
 
-===== Manutenibilità e Sicurezza
+=== Manutenibilità e Sicurezza
 Data la natura del progetto #def("Code Guardian"), queste metriche rappresentano il valore distintivo del prodotto. Un codice manutenibile e privo di vulnerabilità è condizione necessaria per l'accettazione.
 
 #metrics_table(
@@ -653,48 +658,77 @@ In questa sezione vengono definiti i #def("Test di Accettazione"), volti a valid
 
 #pagebreak()
 
-= Automiglioramento
-== Introduzione
-Il miglioramento continuo risulta fondamentale per garantire la qualità del progetto _Code Guardian_. Seguendo il _Way of Working_, il team effettua retrospettive bisettimanali per identificare i probemi principali e implementare delle soluzioni.
-Di seguito, vengono elencate le difficoltà individuate e le decisioni prese per risolverle.
+== Automiglioramento
 
-== Valutazione organizzazione del team
+=== Introduzione
+Il miglioramento continuo risulta fondamentale per garantire la qualità del progetto #def("Code Guardian"). Seguendo il #def("Way of Working"), il team effettua retrospettive periodiche per identificare i colli di bottiglia operativi e implementare soluzioni correttive secondo il ciclo #def("PDCA"). Le valutazioni sono state suddivise in tre ambiti critici identificati durante lo sviluppo iniziale.
+
+==== Valutazione Tecnologica
+L'adozione di nuovi strumenti ha richiesto una fase di adattamento per garantire che l'infrastruttura tecnologica supportasse, e non ostacolasse, la produttività.
+
 #figure(
   table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 3fr),
-    inset: 10pt,
-    table.header([*Problema*], [*Decisione presa*]),
-
-    [Difficoltà nel mantenere la coerenza stilistica dei documenti.], [Utilizzo di template condivisi in Typst.],
-    [Difficoltà nel monitorare l'avanzamento dei task.],
-    [Integrazione della piattaforma Jira per la gestione del progetto.],
-  ),
-  caption: [Decisioni prese per migliorare l'organizzazione del team],
-)
-
-== Valutazione strumenti utilizzati
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr, 4fr),
+    fill: (x, y) => if (y == 0) { luma(63.75%) } else if (calc.odd(y)) { luma(245) },
+    columns: (1fr, 2fr, 2fr),
     inset: 10pt,
     table.header([*Strumento*], [*Problema*], [*Decisione presa*]),
 
-    [Typst],
-    [Non tutti i membri del team hanno familiarità con questa tecnologia.],
-    [Ogni membro del gruppo ha effettuato uno studio autonomo per garantire uniformità nella stesura dei documenti.],
+    [#def("Typst")],
+    [Curva di apprendimento ripida e rischio di disomogeneità stilistica nei documenti.],
+    [Studio autonomo obbligatorio e creazione di template condivisi per centralizzare la logica di formattazione.],
+
+    [#def("Issue Tracking System")],
+    [Frammentazione delle informazioni tecniche e incomprensioni sui requisiti.],
+    [Centralizzazione della comunicazione asincrona su #def("Jira"), con obbligo di risoluzione dei dubbi tramite commenti tracciabili sulle singole task.],
   ),
-  caption: [Decisioni prese per l'ottimizzazione degli strumenti di lavoro],
+  caption: [Ottimizzazione tecnologica],
 )
 
-= Conclusioni
-Consideriamo il miglioramento continuo come un'attività strutturale per la garanzia di qualità del progetto _Code Guardian_. Le soluzioni applicate alle difficoltà riscontrate hanno permesso di affinare i flussi di lavoro, elevando il livello di efficienza del gruppo. Mantenendo una visione orientata al problem-solving, il team si dedica a un monitoraggio costante per prevenire criticità e ottimizzare le risorse impiegate nel ciclo di vita del software.
+==== Valutazione Organizzativa
+Il coordinamento di un gruppo numeroso ha richiesto un passaggio da una comunicazione informale a una struttura più gerarchica e definita.
+
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) { luma(63.75%) } else if (calc.odd(y)) { luma(245) },
+    columns: (1fr, 1fr),
+    inset: 10pt,
+    table.header([*Criticità*], [*Soluzione Organizzativa*]),
+
+    [Difficoltà di allineamento immediato su decisioni logistiche e urgenze.], 
+    [Definizione di canali gerarchici: #def("Telegram") per le urgenze, #def("Discord") per il lavoro sincrono e i meeting di allineamento.],
+    
+    [Sovrapposizione di sforzi o "buchi" operativi dovuti alla dimensione del gruppo (7 persone).], 
+    [Suddivisione in sotto-gruppi di lavoro tematici per ridurre il rumore comunicativo e aumentare la focalizzazione.],
+  ),
+  caption: [Miglioramento dell'efficienza organizzativa],
+)
+
+===== Valutazione delle Responsabilità
+Per evitare lo stallo decisionale e risolvere ambiguità metodologiche, è stato necessario definire chiaramente i confini d'azione dei ruoli e attivare canali di supporto esterni.
+
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) { luma(63.75%) } else if (calc.odd(y)) { luma(245) },
+    columns: (1fr, 1fr),
+    inset: 10pt,
+    table.header([*Problema di Ruolo / Criticità*], [*Azioni di Risposta*]),
+
+    [Mancanza di una visione d'insieme su documenti complessi come l'Analisi dei Requisiti.], 
+    [Nomina di un referente responsabile per ogni macro-documento, incaricato di supervisionare la coerenza finale e il rispetto delle scadenze.],
+
+    [Forte difficoltà degli #def("Analisti") nel tracciare correttamente attori e sistemi in conformità con gli standard richiesti.], 
+    [
+      Attivazione di una strategia di chiarimento a più livelli:
+      - Consultazione diretta con il *Prof. Cardin* per risolvere dubbi metodologici;
+      - Confronto costruttivo con altri gruppi di progetto per allineamento sugli standard;
+      - Richiesta di intervento dell'azienda proponente (#def("Var Group")) per chiarire il perimetro operativo del sistema.
+    ],
+    
+    [Incertezza sulla validazione degli incrementi prodotti e rischio di errori latenti.], 
+    [Rafforzamento del ruolo dei #def("Verificatori"), con l'introduzione di una revisione obbligatoria "a quattro occhi" prima di ogni merge sul repository principale.],
+  ),
+  caption: [Definizione e gestione delle responsabilità e risoluzione blocchi metodologici],
+)
+
+==== Conclusioni
+Il processo di automiglioramento ha permesso di trasformare le criticità iniziali — tipiche di un gruppo numeroso che opera su tecnologie nuove — in punti di forza procedurali. L'integrazione tra responsabilità chiare, strumenti di tracking e canali di comunicazione dedicati garantisce la sostenibilità del progetto verso la milestone #def("PB").

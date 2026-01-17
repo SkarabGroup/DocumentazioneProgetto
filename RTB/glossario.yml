@@ -175,7 +175,10 @@ I:
     descrizione: Standard internazionale che definisce i processi del ciclo di vita del software, fornendo un framework comune per la gestione e l'ingegneria dei sistemi.
   ISO/IEC 25010:
     descrizione: Standard internazionale (SQuaRE) che definisce un modello gerarchico per la qualità del software basato su otto caratteristiche (es. affidabilità, sicurezza).
-
+  Issue Tracking System:
+    alternative: Issue Tracking
+    acronimo: ITS
+    descrizione: Strumento software che permette di registrare, gestire e monitorare l'evoluzione di unità di lavoro o problemi riscontrati.
 J:
   Jira:
     descrizione: Software di gestione progetti utilizzato dal team per il tracking delle task, la gestione del backlog e la rendicontazione oraria tramite ticket.
