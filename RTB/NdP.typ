@@ -620,7 +620,13 @@ Il gruppo adotta un sistema di metriche per monitorare processi e prodotti.
     columns: (3cm, 8cm, 4cm),
     align: left + horizon,
     stroke: 0.5pt,
-    fill: (_, y) => if y == 0 { rgb("#f0f0f0") },
+    fill: (col, row) => if row == 0 {
+      luma(62.75%)
+    } else if calc.even(row) {
+      luma(220)
+    } else {
+      none
+    },
     [*ID*], [*Descrizione*], [*Soglia / Obiettivo*],
     // Processo
     [#def("MPC")1 (SV)], [Schedule Variance: differenza tra lavoro pianificato ed eseguito], [>= 0],
@@ -658,84 +664,3 @@ La validazione conferma che il prodotto soddisfi le esigenze degli utenti.
 - *#def("Test di Accettazione")*: Verifica finale con stakeholder per requisiti non funzionali (es. usabilità, prestazioni).
 - *Feedback Utente*: Raccolta di input durante demo o beta testing.
 - *Allineamento Obiettivi*: Verifica rispetto agli obiettivi di progetto (es. automazione analisi qualità repository).
-
-= Processi Organizzativi
-
-== Gestione dei Processi
-Il #def("Responsabile di Progetto") monitora l'avanzamento dei lavori e assegna i task.
-Strumenti di coordinamento: #def("Jira"), #def("Slack"), #def("Telegram"), #def("Discord").
-
-=== Ruoli di Progetto
-- *#def("Responsabile di Progetto")*: Coordinamento generale e gestione stakeholder.
-- *#def("Amministratore")*: Gestione configurazione, documentazione e repository.
-- *#def("Analista")*: Analisi requisiti e modellazione sistema (casi d'uso, UML).
-- *#def("Progettista")*: Architettura e design tecnico.
-- *#def("Programmatore")*: Implementazione e sviluppo codice.
-- *#def("Verificatore")*: Controllo qualità, testing e verifica conformità.
-
-=== Approcci di Gestione Progetto (#def("PMI"))
-- *#def("Predictive")*: Pianificazione dettagliata per requisiti stabili (sequenziale, con milestone fisse).
-- *#def("Adaptive")*: Iterativo per requisiti incerti (es. Agile/Scrum, adatto a sviluppo incrementale).
-- *#def("Hybrid")*: Combinazione di entrambi, bilanciando flessibilità e struttura.
-
-=== #def("Gestione Rischi")
-Identificazione, valutazione e mitigazione rischi (es. tecnologici, di schedule). Aggiornamenti periodici durante riunioni.
-
-== Gestione delle Riunioni
-Per ogni riunione (interna o con esterni) viene redatto un *Verbale* che riporta:
-- Data, ora, luogo e partecipanti.
-- Ordine del giorno.
-- Riassunto delle discussioni.
-- Decisioni prese e task assegnati.
-
-= Norme di Sviluppo
-
-== Convenzioni Generali
-- Utilizzare l'inglese per commenti, nomi di variabili e funzioni nel codice sorgente.
-- Utilizzare l'italiano per la documentazione destinata agli utenti o capitolato (se richiesto).
-
-== #def("TypeScript") / JavaScript (Frontend & Script)
-- Stile: `camelCase` per variabili/funzioni, `PascalCase` per Classi/Componenti.
-- Indentazione: 2 spazi.
-- Utilizzare `const` e `let`, evitare `var`.
-- Componenti #def("React"): Funzionali con Hooks.
-
-== #def("Python") (Backend/AI Agents)
-- Stile: Standard PEP 8.
-- `snake_case` per variabili e funzioni.
-- `PascalCase` per le Classi.
-- Docstrings per documentare moduli, classi e funzioni.
-
-== #def("Typst") (Documentazione)
-- Utilizzare la sintassi standard per headings e liste.
-- Mantenere i file sorgente organizzati per capitoli o sezioni se il documento è esteso.
-
-
-== #def("Node.js") / JavaScript (Scripting/Backend)
-- *Naming*: `camelCase` per variabili e funzioni, `PascalCase` per classi e componenti.
-- *Indentazione*: 2 spazi.
-- *Variabili*: Utilizzare `const` e `let`, evitare `var`.
-- *Linting*: #def("ESLint") per controllo qualità codice; seguire regole standard (es. no-unused-vars, eqeqeq).
-- *Documentazione*: #def("JSDoc") per moduli e funzioni (`@param`, `@returns`).
-- *Esempio*:
-  ```javascript
-  /**
-   * Analizza un repository GitHub.
-   * @param {string} repoUrl - URL del repository.
-   * @returns {Promise<Object>} Risultati dell'analisi.
-   */
-  async function analyzeRepository(repoUrl) {
-      // Implementazione
-  }
-  ```
-
-= Strumenti Utilizzati
-- *Redazione*: #def("Visual Studio Code"), #def("Typst").
-- *Gestione Versioni*: #def("Git"), #def("GitHub").
-- *Comunicazione*: #def("Slack"), #def("Telegram"), #def("Discord").
-- *Diagrammi*: Draw.io.
-- *Project Management*: #def("Jira").
-
-= Appendici
-== Standard per le date 
-Le date all'interno del progetto devono seguire il formato `AAAA/MM/GG` (es. 2025/12/31).
