@@ -452,6 +452,15 @@ I Test di Regressione garantiscono che le modifiche apportate al sistema non rei
 In caso di correzione di un fault, l’intera suite di test viene rieseguita per assicurare la stabilità del sistema.
 
 
+=== Validazione
+La Validazione ha l’obiettivo di accertare che il prodotto soddisfi le esigenze della proponente e le aspettative degli utenti finali, rispondendo alla domanda: "Did I build the right system?".
+
+==== Implementazione
+
+La validazione viene implementata attraverso test di accettazione e raccolta di feedback dagli utenti finali. Queste attività assicurano che il prodotto finale risponda alle esigenze e ai requisiti definiti all'inizio del progetto.
+
+= Processi Organizzativi
+
 === Metriche
 Il gruppo adotta un sistema di metriche per monitorare processi e prodotti.
 

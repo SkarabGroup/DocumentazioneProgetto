@@ -194,6 +194,7 @@ P:
     descrizione: Documento che definisce gli obiettivi, lSe attività, le risorse, i tempi e i costi necessari per completare un progetto software con successo.
   
   Piano di Qualifica:
+    alternative: PdQ
     descrizione: Documento strategico che definisce obiettivi, requisiti, processi e standard di qualità per guidare lo sviluppo di un prodotto software. Esso comprende tre elementi fondamentali, cioè il Piano della Qualità, il Controllo di Qualità e il Miglioramento continuo.
  
   PMI:
