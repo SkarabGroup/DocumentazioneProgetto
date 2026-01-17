@@ -288,6 +288,7 @@ Data la natura del progetto #def("Code Guardian"), queste metriche rappresentano
 )
 #pagebreak()
 
+#TODO("Svolgere una revisione approfondita delle metodologie di testing, facendo ovviamente riferimento alla sezione di descrizione delle NdP")
 = Metodi di Testing
 Questa sezione definisce la strategia di testing per il progetto _CodeGuardian_.
 Skarab Group ha adottato un approccio di testing multilivello che copre:
@@ -633,6 +634,7 @@ In questa sezione vengono definiti i #def("Test di Accettazione"), volti a valid
 )
 
 #pagebreak()
+#TODO("Aggiungere grafici del cruscotto di valutazione")
 
 = Cruscotto di Valutazione
 
@@ -660,6 +662,7 @@ In questa sezione vengono definiti i #def("Test di Accettazione"), volti a valid
 
 == Automiglioramento
 
+#TODO("Definire ulteriori problemi emersi durant lo sviluppo del progetto")
 === Introduzione
 Il miglioramento continuo risulta fondamentale per garantire la qualità del progetto #def("Code Guardian"). Seguendo il #def("Way of Working"), il team effettua retrospettive periodiche per identificare i colli di bottiglia operativi e implementare soluzioni correttive secondo il ciclo #def("PDCA"). Le valutazioni sono state suddivise in tre ambiti critici identificati durante lo sviluppo iniziale.
 
