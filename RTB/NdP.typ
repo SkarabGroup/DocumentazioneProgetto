@@ -460,6 +460,157 @@ La Validazione ha l’obiettivo di accertare che il prodotto soddisfi le esigenz
 La validazione viene implementata attraverso test di accettazione e raccolta di feedback dagli utenti finali. Queste attività assicurano che il prodotto finale risponda alle esigenze e ai requisiti definiti all'inizio del progetto.
 
 = Processi Organizzativi
+I porcessi organizzativi sono tutti quei processi di supporto che permettono al gruppo di lavorare in modo efficiente e coordinato.
+La gestione dei processi organizzativi include la definizione di ruoli, responsabilità, comunicazione e gestione delle riunioni.
+
+== Ruoli
+La seguente tebella riporterá tutti i ruoli presenti all'interno del progetto con le relative responsabilitá.
+
+#figure(
+  table(
+    columns: (auto,auto),
+    stroke: 0.5pt + luma(200),
+    
+    fill: (col, row) => if row == 0 {
+      luma(62.75%)
+    } else if calc.even(row) {
+      luma(220)
+    } else {
+      none
+    },
+    [*Ruolo*], [*Responsabilità*],
+    
+    [Responsabile],
+    [Coordina e supervisiona l'intero progetto, garantendo il rispetto delle scadule e del budget. Rappresenta il team nei rapporti con il committente e gli stakeholder esterni. Pianifica le attività, assegna le risorse, monitora l'avanzamento attraverso metriche e indicatori, gestisce i rischi e le criticità. Approva i documenti ufficiali e autorizza le spese. Convoca e presiede le riunioni, facilita la comunicazione interna ed esterna, risolve conflitti e prende decisioni strategiche per il successo del progetto.],
+    
+    [Amministratore],
+    [Gestisce l'infrastruttura tecnica e organizzativa del progetto. Configura e mantiene gli strumenti di versionamento, continuous integration, issue tracking e documentazione. Amministra i repository, definisce workflow e convenzioni, monitora l'ambiente di sviluppo. Gestisce la documentazione di processo, redige le norme di progetto, mantiene aggiornato il piano di qualifica. Supporta il team nella risoluzione di problemi tecnici relativi all'ambiente di lavoro, garantisce backup e sicurezza dei dati, ottimizza i processi di automazione.],
+    
+    [Verificatore],
+    [Assicura la qualità dei prodotti attraverso attività di verifica sistematica. Controlla la conformità dei documenti alle norme redazionali e tipografiche, verifica la correttezza tecnica e la coerenza dei contenuti. Esegue review del codice secondo checklist predefinite, controlla il rispetto degli standard di programmazione. Verifica la tracciabilità tra requisiti, design e implementazione. Redige verbali di verifica, segnala anomalie e non conformità, propone azioni correttive. Monitora le metriche di qualità e valida i test eseguiti dai programmatori.],
+    
+    [Analista],
+    [Raccoglie, analizza e formalizza i requisiti del sistema attraverso l'interazione con committente e stakeholder. Studia il dominio applicativo, comprende le esigenze degli utenti, identifica vincoli e opportunità. Redige l'Analisi dei Requisiti classificando requisiti funzionali, di qualità, di vincolo e prestazionali. Definisce casi d'uso, scenari operativi e modelli del dominio. Mantiene la tracciabilità tra requisiti e fonti, gestisce l'evoluzione dei requisiti durante il progetto. Collabora con i progettisti per garantire la fattibilità tecnica delle soluzioni proposte.],
+    
+    [Progettista],
+    [Definisce l'architettura del sistema e il design dettagliato dei componenti software. Individua pattern architetturali appropriati, decompone il sistema in moduli, definisce interfacce e dipendenze. Specifica la struttura delle classi, i diagrammi di sequenza e collaborazione, le strutture dati e gli algoritmi principali. Redige la Specifica Tecnica e il Piano di Qualifica nella parte relativa ai test di integrazione e sistema. Effettua scelte tecnologiche motivate, considera aspetti di manutenibilità, estensibilità e performance. Fornisce ai programmatori le specifiche di dettaglio necessarie all'implementazione.],
+
+    [Programmatore],
+    [Implementa il codice seguendo le specifiche fornite dai progettisti e rispettando gli standard di codifica definiti. Scrive codice pulito, manutenibile e ben documentato. Sviluppa unit test per verificare la correttezza delle singole unità software, garantendo un'adeguata code coverage. Gestisce le dipendenze, utilizza strumenti di build automation, integra librerie esterne. Documenta il codice con commenti significativi e mantiene aggiornata la documentazione tecnica. Esegue debugging e risolve difetti segnalati, ottimizza le performance quando necessario. Collabora con verificatori e progettisti per migliorare continuamente la qualità del software.],
+  ),
+  caption: [Ruoli di progetto e relative responsabilità],
+)
+
+=== Gestione dei task e allineamento
+La gestione dei task avviene tramite *#def("Jira")*, dove ogni membro del gruppo ha accesso alle proprie attività assegnate.
+Ogni task include una descrizione dettagliata, una stima del tempo necessario per il completamento e una scadenza.
+I membri del gruppo sono responsabili di aggiornare lo stato dei propri task in #def("Jira"), segnalando eventuali impedimenti o ritardi.
+Per garantire un allineamento costante, si tengono riunioni settimanali di team in cui si discutono i progressi, si risolvono problemi e si pianificano le attività future.
+
+==== Riunioni di allineamento
+===== Interne
+Le riunioni di allineamento si tengono settimanalmente e hanno lo scopo di:
+- Condividere lo stato di avanzamento delle attività.
+- Identificare e risolvere eventuali ostacoli o problemi.
+- Pianificare le attività per la settimana successiva.
+Le riunioni vengono svolte du Discord e permettono al Responsabile di Progetto di monitorare l'andamento del lavoro e di garantire che tutti i membri del team siano allineati sugli obiettivi comuni.
+
+===== esterne
+Le riunioni esterne si tengono con il #def("Proponente") e altri stakeholder per:
+- Presentare lo stato di avanzamento del progetto.
+- Discutere requisiti, feedback e modifiche.
+- Allineare le aspettative e pianificare le prossime fasi.
+é compito del Responsabile di Progetto organizzare e condurre queste riunioni, assicurando una comunicazione efficace tra il team di sviluppo e gli stakeholder esterni.
+
+===== Verbale
+Per ogni riunione, interna o esterna, viene redatto un verbale che riporta:
+- Data, ora, luogo e partecipanti.
+- Ordine del giorno.
+- Riassunto delle discussioni.
+- Decisioni prese e task assegnati.
+
+==== Comunicazione diretta
+La comunicazione interna del team avviene tramite varie piattaforme:
+- #def("Whatsapp"): Per comunicazioni rapide e urgenti, tramite un gruppo dedicato, utilizzato per aggiornamenti veloci e coordinamento immediato giornalmente.
+- #def("Telegram"): Per discussioni più strutturate e condivisione di file, utilizzato per comunicazioni di gruppo e condivisione di documenti importanti.
+- #def("Discord"): Per riunioni virtuali e collaborazione in tempo reale, utilizzato per meeting settimanali e sessioni di lavoro condivise.
+- Email: Per comunicazioni formali e invio di documenti ufficiali, utilizzato per comunicazioni con il proponente e con i professori ed é gestito principalmente dal Responsabile di Progetto.
+- #def("Jira"): Per la gestione delle attività e il monitoraggio del progresso, utilizzato per assegnare task, tracciare lo stato di avanzamento e gestire le scadenze.
+
+==== Strumenti di supporto all'organizzazione
+Come giá riportato in precedenza, il gruppo utilizza diversi strumenti per supportare l'organizzazione del lavoro anche in modo totalmente asincrono:
+- Google calendar: Per la pianificazione delle riunioni esterne.
+- Scripts di automazione: Per automatizzare attività ripetitive e migliorare l'efficienza del lavoro.
+ - queste comprendono, al momento del PoC: generazione glossario, sia in formato documento che in pagina web
+- Repository GitHub: Per il versionamento del codice e la gestione della documentazione di progetto.
+
+==== Creazione e gestione degli strumenti organizzativi
+La creazione e gestione degli strumenti organizzativi è responsabilità dell'Amministratore di Progetto, che si occupa di:
+- Configurare e mantenere gli strumenti di comunicazione e gestione delle attività.
+- Assicurare che tutti i membri del team abbiano accesso agli strumenti necessari.
+- Monitorare l'utilizzo degli strumenti e proporre miglioramenti o cambiamenti se necessario.
+
+===== Repository GitHub
+L'Amministratore di Progetto è responsabile della gestione del repository GitHub, che include:
+- Creazione e organizzazione delle cartelle per i documenti di progetto.
+- Definizione delle regole di branching e delle convenzioni di commit.
+- Monitoraggio delle pull request e delle revisioni del codice.
+- Assicurare che la documentazione sia aggiornata e accessibile a tutti i membri del team.
+
+La repository DocumentazioneProgetto é organizzata in questo modo:
+- .github/: Cartella contenente le configurazioni specifiche di GitHub, come azioni automatizzate e modelli di issue.
+- .github/workflows/: Contiene i file di configurazione per le GitHub Actions utilizzate nel progetto.
+- assets/: Cartella per le risorse multimediali utilizzate nei documenti (immagini, grafici, ecc.).
+- diarioDiBordo/: Contiene il diario di bordo del progetto.
+- Glossario/: Contiene l'infrastruttura necessaria per l'html del glossario dei termini tecnici utilizzati nel progetto.
+- lib/: Cartella che contiene tutti i file che copntengono le funzioni utilizzate nbei vari documenti typst.
+- RTB/: Cartella dedicata alla Requirements and Technology Baseline, contenente tutti i documenti relativi a questa fase del progetto.
+- verbali: Cartella che contiene tutti i verbali delle riunioni interne ed esterne.
+- website/: Cartella contenente i file sorgente del sito web di Skarab Group.
+
+====== Librerie .typ
+La cartella `lib/` contiene librerie di funzioni Typst che sono utilizzate in vari documenti del progetto per garantire coerenza e riusabilità del codice. Questa cartella é creata e gestita dall'amministratore del progetto, questo permette di avere un punto centrale dove vengono definite tutte le funzioni comuni, facilitando la manutenzione e l'aggiornamento delle stesse.
+
+== Processo di miglioramento
+Il processo di miglioramento continuo è fondamentale per garantire che i prodotti del progetto soddisfino gli standard di qualità definiti e le aspettative degli stakeholder. QWuesto processo si articola in 3 fasi principali:
+- Inizializzazione: Fase in cui vengono definiti i processi organizzativi che guideranno il lavoro del team.
+- Valutazione: Fase in cui vengono monitorati i processi e i prodotti attraverso metriche specifiche.
+- Miglioramento: Fase in cui vengono implementate azioni correttive basate sui risultati della valutazione.
+
+== Processo di formazione
+Il processo di formazione è progettato per garantire che tutti i membri del team abbiano le competenze necessarie per svolgere efficacemente i propri ruoli all'interno del progetto. Questo processo include:
+- Identificazione delle competenze chiave richieste per ogni ruolo.
+- Pianificazione di sessioni di formazione e workshop.
+- Monitoraggio del progresso formativo e valutazione delle competenze acquisite.
+Le ore svolte per formazione non sono rendicontate in quanto non fanno parte del lavoro di progetto vero e proprio ma della parte di 'palestra' che il corso universitario vuole fornire agli studenti.
+La seguente tabella riporta le fonti utilizzate per la formazione dei membri del gruppo in base alla tecnologia studiata.
+
+
+#figure(
+  table(
+    columns: (auto, auto),
+    stroke: 0.5pt + luma(200),
+    
+    fill: (col, row) => if row == 0 {
+      luma(62.75%)
+    } else if calc.even(row) {
+      luma(220)
+    } else {
+      none
+    },
+    [*Tecnologia*], [*Fonte di formazione*],
+    
+    [Python], [Documentazione ufficiale Python, youtube tutorial],
+    [Agenti AI], [Documentazione framework specifici, paper accademici, documentazione AWS],
+    [AWS], [documentazione ufficiale AWS],
+    [Git], [Documentazione ufficiale Git, guide interattive, corso di Metodi e tecnologie per lo sviluppo software],
+    [Node.js], [Documentazione ufficiale Node.js, tutorial youtube],
+    [MongoDB], [documentazione ufficiale,]
+  ),
+  caption: [Tecnologie e fonti di formazione],
+)
+
+Inoltre l'azienda proponente Var group ha tenuto delle lezioni specifiche per ognuna delle tecnologie necessarie allo sviluppo del progetto e ha dato disponibilitá per la risoluzione di dubbi e domande.
 
 === Metriche
 Il gruppo adotta un sistema di metriche per monitorare processi e prodotti.
