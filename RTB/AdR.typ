@@ -2589,7 +2589,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 // UC17
 === UC17 Creazione dell'ambiente sand box <UC17>
 #useCase(
-  attore : "FrontEnd",
+  attore : "Orchestratore",
   pre: [
     - L'utente autenticato avanzato ha effettuato l'accesso al proprio profilo di CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente autenticato avanzato ha effettuato la connessiono del proprio account di GitHub a CodeGuardian #link(<UC3>)[#underline[\[UC3\]]]
@@ -2601,8 +2601,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   scenari:[
     - Il frontend riceve la richiesta di analisi della reposiry
-    - Il frontend comunica al backend la richiesta di analisi della repository
-    - Il Back-end crea l'ambiente sandbox tramite immagine docker
+    - Il frontend comunica all'orchestratore la richiesta di analisi della repository
+    - L'orchestratore avvia la creazione dell'ambiente sandbox tramite immagine docker
   ],
   inclusioni: [
     - Nessuna
@@ -2611,12 +2611,12 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC17.1>)[#underline[\[UC17.1\]]]
     - #link(<UC17.1.2>)[#underline[\[UC17.1.2\]]]
   ],
-  trigger: "Il FrontEnd comunica al backend la richiesta di analisi della repository. Il backend in risposta crea l'ambiente di sandbox",
+  trigger: "Il sistema front-end comunica all'orchestratore la richiesta di avvio dell'aanlisi",
 )[]
 
 ==== UC17.1 Errore durante la creazione dell'ambiente di sand box <UC17.1>
 #useCase(
-  attore : "FrontEnd",
+  attore : "Orhcestratore",
   pre: [
     - Il sistema CodeGuardian ha accettato la richesta di analisi della repository
   ],
@@ -2638,15 +2638,16 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 === UC17.1.2 Comunicazione dell'errore durante la creazione dell'ambiente di sand box <UC17.1.2>
 #useCase(
-  attore : UAA,
+  attore : "Orchestratore",
   pre: [
-    - L'errore durante la creazione dell'ambiente di sandbox è stato comunicato al frontend
+    - Viene rilevato un errore durante la creazione dell'ambiente di sandbox
   ],
   post: [
-    - L'ambiente di sandbox non viene creato correttamente, e ciò viene comunicato all'utente autenticato avanzato
+    - L'ambiente di sandbox non viene creato correttamente, e ciò viene comunicato al sistema front-end
   ],
   scenari:[
-    - Il frontend comunica all'utente autenticato avanzato l'occorrenza dell'errore durante la creazione dell'ambiente sandbox
+    - L'orchestraore rileva un errore durante la creazione dell'ambiente di sandbox
+    - L'orrchestratore comunica l'errore al sistema front-end
   ],
   inclusioni: [
     - Nessuna
@@ -2657,21 +2658,20 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Nessuno",
 )[]
 
-
 === UC18 Lettura delle richieste dell'utente da parte dell'orchestratore <UC18>
 #useCase(
-  attore : "FrontEnd",
+  attore : "Orchestratore",
   pre: [
     - L'utente autenticato avanzato ha richiesto l'analisi della propria repository al sistema CodeGuardian #link(<UC4>)[#underline[\[UC4\]]]
     - L'utente ha selezionato o meno le aree d'interesse di analisi della repository
     - L'ambiente di sandbox é stato creato correttamente da parte del backend #link(<UC17>)[#underline[\[UC17\]]]
   ],
   post: [
-    - L'orchestratore ha letto le richieste ed ha istruito gli agenti sulle operazioni da svolgere per soddisfarle in base alle richieste dell'utente
+    - L'orchestratore ha letto e interpretato correttamente le richieste scritte nel sistema frontend
   ],
   scenari:[ 
     - L'orchestratore legge le richieste dell'utente
-    - L'orchestratore istruisce gli agenti sui compiti che dovranno svolgere
+    - L'orchestratore notifica al sistema back-end i compoti da svolgere
   ],
   inclusioni: [
     - #link(<UC18.1>)[#underline[\[UC18.1\]]]
@@ -2684,7 +2684,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ==== UC18.1 È richiesta l'analisi completa <UC18.1>
 #useCase(
-  attore: "FrontEnd",
+  attore: "Orchestratore",
   pre: [
     - Non ci sono state richieste specifiche da parte dell'utente
   ],
@@ -2706,7 +2706,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[]
 ==== UC18.2 Ci sono delle richieste specifiche da parte del frontend su cosa debba essere analizzato <UC18.2>
 #useCase(
-  attore: "FrontEnd",
+  attore: "Orchestratore",
   pre: [
     - L'utente ha fatto delle richieste specifice in relazione alle aree della repository che ha interesse vengano analizzate
   ],
@@ -2749,6 +2749,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'orchestore non trova la repository in database e quindi si comporta come fosse stata richiesta l'analisi completa",
 )[]
+
 /// USE CASE DELLE ANALISI
 === UC19: Analisi vulnerabilità dipendenze <UC19>
 #useCase(
@@ -2771,22 +2772,24 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC19.1>)[#underline[\[UC19.1\]]] // Notifica critica
+    - #link(<UC19>)[#underline[\[UC19.1\]]]
+    - #link(<UC19>)[#underline[\[UC19.2\]]]
   ],
   trigger: "L'utente richiede l'analisi dipendenze o la analisi viene pianificata automaticamente",
 )[]
-
-==== UC19.1: Notifica di vulnerabilità critica <UC19.1>
+==== UC19.1 L'utente accetta la remediation proposta
 #useCase(
   attore: UAA,
   pre: [
-    - Una vulnerabilità critica è stata rilevata nell'analisi delle dipendenze #link(<UC19>)[#underline[\[UC19\]]]
+    - L'utente ha preso visione dell'analisi delle vulnerabilità #link(<UC19>)[#underline[\[UC19\]]]
+    - L'utente ha visualizzato le remediation proposte
   ],
   post: [
-    - L'utente riceve una notifica
+    - Le remediation proposte vengono integrate
   ],
   scenari: [
-    - Il sistema FrontEnd notifica l'utente dell'avvenuto ritrovamento di una o più vulnerabilità critiche
+    - L'utente accetta le remediation proposte
+    - Le remediation proposte vengono integrate
   ],
   inclusioni: [
     - Nessuna
@@ -2794,10 +2797,31 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Rilevamento di vulnerabilità critica",
+  trigger: "Conferma delle remediation",
 )[]
-
-
+==== UC19.2 L'utente rifiuta la remediation proposta
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente ha preso visione dell'analisi delle vulnerabilità #link(<UC19>)[#underline[\[UC19\]]]
+    - L'utente ha visualizzato le remediation proposte
+  ],
+  post: [
+    - Le remediation prpoposte vengono scartate
+  ],
+  scenari: [
+    - L'utente visualiza le remediation proposte
+    - L'utente non accetta le remediation proposte
+    - Le remediation vengono scartate
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Remediation proposte non accettate",
+)[]
 === UC20: Rilevamento segreti e token <UC20>
 #useCase(
   attore: UAA,
@@ -2813,25 +2837,27 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Il sistema propone remediation all'utente
   ],
   inclusioni: [
-    - #link(<UC20.1>)[#underline[\[UC20.1\]]] // Verifica manuale dei falsi positivi
+    - Nessuna
   ],
   estensioni: [
+    - #link(<UC20.1>)[#underline[\[UC20.1\]]] // Verifica manuale dei falsi positivi
     - #link(<UC20.2>)[#underline[\[UC20.2\]]] // Esecuzione automatica di revoca se integrata con provider
   ],  
   trigger: "L'utente avvia la scansione segreti o la scansione è parte di una pipeline CI",
 )[]
 
-==== UC20.1: Verifica manuale dei falsi positivi <UC20.1>
+==== UC20.1: L'utente rifiuta le remediation proposte <UC20.1>
 #useCase(
   attore: UAA,
   pre: [
     - La scansione ha rilevato possibili segreti #link(<UC20>)[#underline[\[UC20\]]]
   ],
   post: [
-    - L'utente verifica manualmente i falsi positivi
+    - L'utente rifiuta le remediation proposte
   ],
   scenari: [
-    - L'utente esamina i risultati e conferma o scarta i falsi positivi
+    - L'utente esamina i warning proposti
+    - L'utente ignora i warning proposti
   ],
   inclusioni: [
     - Nessuna
@@ -2908,7 +2934,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Rilevamento licenze non compatibili",
 )[]
 
-//si
 === UC22: Revisione PR automatizzata <UC22>
 #useCase(
   attore: UAA,
@@ -2952,8 +2977,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Apertura PR",
-)[
-]
+)[]
 
 ==== UC22.2: Suggerimenti di modifica automatici (codemods) <UC22.2>
 #useCase(
@@ -2974,8 +2998,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Rilevamento problemi correggibili",
-)[
-]
+)[]
 
 //sni
 === UC23: Monitor qualità del codice <UC23>
@@ -3022,8 +3045,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Richiesta di metriche avanzate",
-)[
-]
+)[]
 
 ==== UC23.2: Suggerimenti KPI e obiettivi qualità <UC23.2>
 #useCase(
@@ -3090,8 +3112,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Selezione di refactor da applicare",
-)[
-]
+)[]
 
 ==== UC24.2: Applicazione automatica sotto supervisione <UC24.2>
 #useCase(
@@ -3112,8 +3133,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Approvazione dell'utente",
-)[
-]
+)[]
 
 === UC25: Generazione changelog e release notes <UC25>
 #useCase(
@@ -3158,8 +3178,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Analisi commit",
-)[
-]
+)[]
 
 ==== UC25.2: Pubblicazione automatica su GitHub Release <UC25.2>
 #useCase(
@@ -3180,8 +3199,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Approvazione del changelog",
-)[
-]
+)[]
 
 === UC26: Analisi test e coverage <UC26>
 #useCase(
@@ -3226,8 +3244,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Rilevamento flakiness",
-)[
-]
+)[]
 
 ==== UC26.2: Suggerimenti per test addizionali <UC26.2>
 #useCase(
@@ -3248,8 +3265,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Analisi coverage completata",
-)[
-]
+)[]
 
 === UC27: Policy CI/CD pre-merge <UC27>
 #useCase(
@@ -3294,8 +3310,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Fallimento policy",
-)[
-]
+)[]
 
 ==== UC27.2: Policy dinamiche per branch differenti <UC27.2>
 #useCase(
@@ -3361,8 +3376,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Configurazione report",
-)[
-]
+)[]
 
 ==== UC28.2: Azioni automatiche su alert critici <UC28.2>
 #useCase(
@@ -3385,8 +3399,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Alert critico",
 )[]
 
-
-=== UC29  Recuper e avvio tool esterni di analisi <UC29>
+=== UC29  Recupero e avvio tool esterni di analisi <UC29>
 #useCase(
   attore: "BackEnd",
   pre: [
@@ -3437,41 +3450,40 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 // questo va assolutamente scelto come gestirlo, altrimenti va modificato il sottocaso
 === UC30 Generazione del report finale <UC30>
 #useCase(
-  attore: "BackEnd",
+  attore: "Orchestratore",
   pre: [
-    - Il BackEnd ha concluso con successo l'analisi della reposiry
+    - Il sistema Back-end ha concluso con successo l'analisi della repository
   ],
   post: [
-    - Il report è stato inviato correttamente al sistema FrontEnd
+    - L'orchestratore ha preso in carico il report di analisi
   ],
   scenari: [
-    - Il BackEnd finisce la propria analisi
-    - Il BackEnd ha scritto il report finale
+    - Il sistema Back-end finisce la propria analisi
+    - Il sistema Back-end ha scritto il report finale
+    - L'orchestratore visualizza il report
   ],
   inclusioni: [
-    - #link(<UC30.1>)[#underline[\[UC30.1\]]]
+    - Nessuna
   ],
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il report viene mandato al FrontEnd",
+  trigger: "Il report è stato comlpletato dal sistema backend",
 )[]
 
-==== UC30.1 Integrazione delle singole parti nuove <UC30.1>
+=== UC31 Trasferimento del report di analisi al sistema front-end <UC31>
 #useCase(
-  attore: "BackEnd",
+  attore: "Orchestratore",
   pre: [
-    - Era stata richiesta un'analisi parziale da parte del sistema FrontEnd
-    - Il BackEnd ha concluso con successo l'analisi parziale
+    - L'orchestratore ha preso in carico il report di analisi #link(<UC30>)[#underline[\[UC30\]]]
   ],
   post: [
-    - Il report è stato inviato correttamente al sistema FrontEnd
+    - Il sistema front-end può mostrare correttamente il report di analisi
   ],
   scenari: [
-    - Il BackEnd conclude l'analisi parziale
-    - Il BackEnd integra le singole parti analizzate all'interno del vecchio report seguendo dei vincoli imposti
-    - Il BackEnd aggiorna i grafici relativi alle parti analizzate
-    - Il BackEnd invia il report comleto al sistema FrontEnd
+    - L'orchestratore comunica al sistema front-end che il report di analisi è disponibile
+    - L'orchestratore invia il report di analisi al sistema front-end
+    - Il sistema front-end può ora mostrare il report di analisi
   ],
   inclusioni: [
     - Nessuna
@@ -3479,7 +3491,29 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Integrazione delle nuove parti con il vecchio report",
+  trigger: "Il report deve arrivare all'utente tramite il sistema front-end", 
+)[]
+
+=== UC32 L'utente viene notificato della disponibilità di visualizzare il nuovo report id anlisi<UC32>
+#useCase(
+  attore: UAA,
+  pre: [
+    - Il sistema front-end ha ricevuto correttamente il report di analisi da parte dell'orchestratore #link(<UC31>)[#underline[\[UC31\]]]
+  ],
+  post: [
+    - L'utente può visualizzare il report richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+  ],
+  scenari: [
+    - Il sistema front-end ha ricevuto il report di analisi ed è pronto a mostrarlo
+    - Il sistema front-end notifica all'utente la disponibilità di visualizzazione del nuovo report di analisi
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Il report è pronto per la visualizzazione",
 )[]
 
 //spazio per quelli in mezzo
@@ -3650,7 +3684,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ==== UC38 Salvataggio del report dell'analisi <UC38>
 #useCase(
-  attore : "Front-end", // oppure utente?
+  attore : "Orchestratore", // oppure utente?
   pre: [
     - L'analisi della repository è stata completata con successo e notificata al Front-end #link(<UC34>)[#underline[\[UC34\]]]
     - L'utente visualizza il report dell'analisi #link(<UC5>)[#underline[\[UC5\]]]
