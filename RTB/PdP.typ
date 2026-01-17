@@ -946,18 +946,17 @@ Le attività svolte nel periodo di riferimento si sono focalizzate sul consolida
 
 - *Gestione Operativa e Task Tracking:*
   - Configurazione dell'ambiente di lavoro e adozione di #def[Jira] come strumento di gestione per la rendicontazione puntuale delle task svolte dai singoli componenti del team, garantendo la tracciabilità dell'impegno profuso.
-
+#TODO("Verificare che i conti siano giusti a livello di monte ore")
 ==== Prospetto consumo tempo (Preventivo)
 #sprint_table(
   (
-    // Formato: ("Nome", Resp, Amm, Anal, Prog, Cod, Ver)
-    ([Basso Kevin], 0, 3, 7, 0, 0, 2), // 12h
-    ([Berengan Riccardo], 0, 4, 0, 0, 0, 2), // 6h
-    ([Martinello Riccardo], 0, 4, 0, 0, 0, 0), // 4h
-    ([Sandu Antonio], 0, 4, 0, 0, 0, 2), // 6h
-    ([Sgreva Andrea], 0, 4, 0, 0, 0, 2), // 6h
-    ([Suar Alberto], 6, 5, 8, 0, 0, 2), // 21h (Resp)
-    ([Zago Alice], 0, 4, 0, 0, 0, 2), // 6h
+    ([Basso Kevin], 0, 3, 7, 0, 0, 2),
+    ([Berengan Riccardo], 0, 4, 0, 0, 0, 2),
+    ([Martinello Riccardo], 0, 4, 0, 0, 0, 0),
+    ([Sandu Antonio], 0, 4, 0, 0, 0, 2),
+    ([Sgreva Andrea], 0, 4, 0, 0, 0, 2),
+    ([Suar Alberto], 6, 5, 8, 0, 0, 2),
+    ([Zago Alice], 0, 4, 0, 0, 0, 2),
   ),
   [Prospetto orario preventivato per lo Sprint 1 (Totale: 61 ore)],
 )
@@ -967,18 +966,18 @@ Si nota una flessione nel monte ore totale dovuta alla pausa natalizia. Alcune a
 
 #sprint_table(
   (
-    // Formato: ("Nome", Resp, Amm, Anal, Prog, Cod, Ver)
-    ([Basso Kevin], 0, 4, 5, 0, 0, 2), // 11h (-1)
-    ([Berengan Riccardo], 0, 4, 0, 0, 0, 1), // 5h (-1)
-    ([Martinello Riccardo], 0, 3, 0, 0, 0, 0), // 3h (-1)
-    ([Sandu Antonio], 0, 4, 0, 0, 0, 1), // 5h (-1)
-    ([Sgreva Andrea], 0, 4, 0, 0, 0, 1), // 5h (-1)
-    ([Suar Alberto], 6, 5, 6, 0, 0, 2), // 19h (-2)
-    ([Zago Alice], 0, 4, 0, 0, 0, 1), // 5h (-1)
+    ([Basso Kevin], 0, 4, 5, 0, 0, 2),
+    ([Berengan Riccardo], 0, 4, 0, 0, 0, 1),
+    ([Martinello Riccardo], 0, 3, 0, 0, 0, 0),
+    ([Sandu Antonio], 0, 4, 0, 0, 0, 1),
+    ([Sgreva Andrea], 0, 4, 0, 0, 0, 1),
+    ([Suar Alberto], 6, 5, 6, 0, 0, 2),
+    ([Zago Alice], 0, 4, 0, 0, 0, 1),
   ),
   [Consuntivo orario effettivo per lo Sprint 1 (Totale: 53 ore)],
 )
 
+#TODO("Aggiungere sottosezione - Rischi Rilevati")
 ==== Analisi degli scostamenti
 In questo sprint sono state consumate *53 ore* a fronte delle *61 ore* preventivate (Delta: *-8 ore*).
 Il ritardo è fisiologico (periodo festivo). Le ore non lavorate sono state ripianificate nello Sprint 2 per il completamento dei documenti.
@@ -1019,18 +1018,19 @@ Attività principali:
 - *Incontri:* Meeting con Prof. Cardin e VarGroup per validazione direzione.
 
 ==== Prospetto consumo tempo (Preventivo)
+#TODO("questa frase sinceramente non mi piace molto (anche se l'ho scritta io :D) ~Suar". Anche qui, controllare gli orari)
 Pianificazione aggressiva per recuperare il delta dello Sprint 1.
 
 #sprint_table(
   (
     // Formato: ("Nome", Resp, Amm, Anal, Prog, Cod, Ver)
-    ([Basso Kevin], 0, 3, 0, 0, 0, 2), // 12h
-    ([Berengan Riccardo], 0, 1, 5, 0, 0, 2), // 8h
-    ([Martinello Riccardo], 0, 1, 5, 0, 0, 0), // 6h
-    ([Sandu Antonio], 0, 1, 3, 0, 0, 2), // 8h
-    ([Sgreva Andrea], 0, 1, 3, 0, 0, 2), // 8h
-    ([Suar Alberto], 0, 5, 0, 0, 3, 4), // 12h
-    ([Zago Alice], 6, 2, 5, 0, 3, 2), // 18h (Resp)
+    ([Basso Kevin], 0, 3, 0, 0, 0, 2),
+    ([Berengan Riccardo], 0, 1, 5, 0, 0, 2),
+    ([Martinello Riccardo], 0, 1, 5, 0, 0, 0),
+    ([Sandu Antonio], 0, 1, 6, 0, 0, 2),
+    ([Sgreva Andrea], 0, 1, 4, 0, 0, 2),
+    ([Suar Alberto], 0, 5, 0, 0, 3, 4),
+    ([Zago Alice], 6, 2, 5, 0, 3, 2),
   ),
   [Prospetto orario preventivato per lo Sprint 2 (Totale: 72 ore)],
 )
@@ -1041,13 +1041,13 @@ Le attività di analisi hanno richiesto più tempo del previsto, assorbendo part
 #sprint_table(
   (
     // Formato: ("Nome", Resp, Amm, Anal, Prog, Cod, Ver)
-    ([Basso Kevin], 0, 4, 0, 0, 0, 1), // 12h (Bilanciato)
-    ([Berengan Riccardo], 0, 1, 4, 0, 0, 1), // 8h (+1 Anal, -1 Ver)
-    ([Martinello Riccardo], 0, 1, 4, 0, 0, 0), // 6h (Ok)
-    ([Sandu Antonio], 0, 1, 1, 0, 0, 1), // 8h (+1 Anal, -1 Ver)
-    ([Sgreva Andrea], 0, 1, 1, 0, 0, 2), // 8h (Ok)
-    ([Suar Alberto], 0, 5, 0, 0, 0, 4), // 12h (Ok)
-    ([Zago Alice], 6, 2, 5, 0, 0, 1), // 18h (+1 Anal, -1 Ver)
+    ([Basso Kevin], 0, 4, 0, 0, 0, 1),
+    ([Berengan Riccardo], 0, 1, 4, 0, 0, 1),
+    ([Martinello Riccardo], 0, 1, 4, 0, 0, 0),
+    ([Sandu Antonio], 0, 1, 3, 0, 0, 1),
+    ([Sgreva Andrea], 0, 1, 1, 0, 0, 2),
+    ([Suar Alberto], 0, 5, 0, 0, 0, 4),
+    ([Zago Alice], 6, 2, 5, 0, 0, 1),
   ),
   [Consuntivo orario effettivo per lo Sprint 2 (Totale: 72 ore)],
 )
@@ -1105,7 +1105,6 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 
 #sprint_table(
   (
-    // Formato: ("Nome", Resp, Amm, Anal, Prog, Cod, Ver)
     ([Basso Kevin], 7, 0, 0, 0, 4, 0),
     ([Berengan Riccardo], 0, 0, 2, 0, 4, 0),
     ([Martinello Riccardo], 0, 1, 2, 0, 0, 4),
@@ -1144,3 +1143,4 @@ Il budget economico risparmiato viene reimmesso nel monte ore totale per le fasi
 + *Cosa ha funzionato:*
 + *Criticità:*
 + *Azioni Correttive:*
+#TODO("Aggiungerei anche una retrospettiva di fine baseline")
