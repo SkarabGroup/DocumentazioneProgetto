@@ -1087,19 +1087,32 @@ Le attività principali hanno riguardato:
 - *Glossario:*
 - *Proof of Concept (PoC):*
 #pagebreak()
+== Sprint 3
+*Periodo:* dal 17/01/2026 al 31/01/2026
+
+==== Informazioni generali e attività da svolgere
+In questo secondo sprint, ...
+Le attività principali hanno riguardato:
+- *Piano di Progetto (PdP):*
+- *Norme di Progetto (NdP):*
+- *Piano di Qualifica (PdQ):*
+- *Analisi dei Requisiti (AdR):*
+- *Glossario:*
+- *Proof of Concept (PoC):*
+#pagebreak()
 ==== Prospetto consumo tempo (Preventivo)
 La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
 
 #sprint_table(
   (
     // Formato: ("Nome", Resp, Amm, Anal, Prog, Cod, Ver)
-    ([Basso Kevin], 0, 0, 0, 0, 0, 0),
-    ([Berengan Riccardo], 0, 0, 0, 0, 0, 0),
-    ([Martinello Riccardo], 0, 0, 0, 0, 0, 0),
-    ([Sandu Antonio], 0, 0, 0, 0, 0, 0),
-    ([Sgreva Andrea], 0, 0, 0, 0, 0, 0),
-    ([Suar Alberto], 0, 0, 0, 0, 0, 0),
-    ([Zago Alice], 0, 0, 0, 0, 0, 0),
+    ([Basso Kevin], 7, 0, 0, 0, 4, 0),
+    ([Berengan Riccardo], 0, 0, 2, 0, 4, 0),
+    ([Martinello Riccardo], 0, 1, 2, 0, 0, 4),
+    ([Sandu Antonio], 0, 0, 5, 0, 0, 0),
+    ([Sgreva Andrea], 0, 0, 4, 0, 0, 0),
+    ([Suar Alberto], 0, 1, 2, 0, 4, 0),
+    ([Zago Alice], 0, 1, 3, 0, 0, 4),
   ),
   [Prospetto orario preventivato per lo Sprint 3],
 )
