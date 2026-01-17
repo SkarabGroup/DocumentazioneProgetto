@@ -20,6 +20,12 @@
 #let history = (
   (
     "2026/01/16",
+    "0.28.0",
+    "Aggiunta UC38, UC40, UC40.1, UC41",
+    members.andrea,
+  ),
+  (
+    "2026/01/16",
     "0.27.0",
     "Aggiunta UC29 e UC30",
     members.berengan,
@@ -3640,6 +3646,136 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Nessuna repository analizzata trovata",
+)[]
+
+==== UC38 Salvataggio del report dell'analisi <UC38>
+#useCase(
+  attore : "Front-end", // oppure utente?
+  pre: [
+    - L'analisi della repository è stata completata con successo e notificata al Front-end #link(<UC34>)[#underline[\[UC34\]]]
+    - L'utente visualizza il report dell'analisi #link(<UC5>)[#underline[\[UC5\]]]
+  ],
+  post: [
+    - Il report dell'analisi è stato salvato nel database
+  ],
+  scenari: [
+    - Il Front-end riceve la conferma del salvataggio del report dell'analisi dall'utente
+    - Il Front-end comunica al Back-end di salvare il report dell'analisi nel database
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente conferma il salvataggio del report dell'analisi",
+)[]
+
+==== UC39 Salvataggio metriche aggregate (grafici/tabelle) <UC39>
+#useCase(
+  attore : "",
+  pre: [
+    - 
+  ],
+  post: [
+    - 
+  ],
+  scenari: [
+    - 
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "",
+)[]
+
+==== UC40 Trasferimento delle credenziali al Back-end <UC40>
+#useCase(
+  attore : "Front-end",
+  pre: [
+    - Un utente completata la registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
+    - Il Front-end riceve le credenziali dell'utente
+  ],
+  post: [
+    - Il Back-end riceve le credenziali dell'utente dal Front-end
+  ],
+  scenari: [
+    - Il Front-end trasferisce le credenziali dell'utente al Back-end
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC40.1>)[#underline[\[UC40.1\]]]
+  ],
+  trigger: "L'utente ha completato la registrazione a CodeGuardian",
+)[]
+
+==== UC40.1 Errore nel trasferimento delle credenziali al Back-end <UC40.1>
+#useCase(
+  attore : "Front-end",
+  pre: [
+    - Il Front-end tenta di trasferire le credenziali dell'utente al Back-end #link(<UC40>)[#underline[\[UC40\]]]
+    - Si verifica un errore durante il trasferimento delle credenziali
+  ],
+  post: [
+    - Il trasferimento delle credenziali non va a buon fine
+  ],
+  scenari: [
+    - Il Front-end notifica l'utente con un messaggio di errore che indica le cause possibili del mancato trasferimento delle credenziali
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Il Back-end non riceve le credenziali dell'utente",
+)[]
+
+==== UC41 Validazione delle credenziali dell'utente <UC41>
+#useCase(
+  attore : "Back-end",
+  pre: [
+    - Il Back-end riceve le credenziali dell'utente dal Front-end #link(<UC40>)[#underline[\[UC40\]]]
+  ],
+  post: [
+    - Le credenziali dell'utente sono state validate con successo
+  ],
+  scenari: [
+    - Il Back-end comunica al Front-end l'esito della validazione delle credenziali dell'utente
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna // mancata validazione delle credenziali? Controlli già fatti in UC1.1.2 UC1.2.2
+  ],
+  trigger: " Il Back-end riceve le credenziali dell'utente dal Front-end",
+)[]
+
+==== UC42 Gestione del codice OAuth GitHub <UC42>
+#useCase(
+  attore : "",
+  pre: [
+    - 
+  ],
+  post: [
+    - 
+  ],
+  scenari: [
+    - 
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "",
 )[]
 
 #pagebreak()
