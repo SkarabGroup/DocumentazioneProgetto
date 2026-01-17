@@ -20,6 +20,12 @@
 #let history = (
   (
     "2026/01/17",
+    "0.29.0",
+    "Modifica ai UC19, 20 e da 24 a 29",
+    members.alice,
+  ),
+  (
+    "2026/01/17",
     "0.28.1",
     "Modificati requisiti funzionali. Eliminazione requisiti di performance",
     members.alice,
@@ -2778,12 +2784,12 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC19>)[#underline[\[UC19.1\]]]
-    - #link(<UC19>)[#underline[\[UC19.2\]]]
+    - #link(<UC19.1>)[#underline[\[UC19.1\]]]
+    - #link(<UC19.2>)[#underline[\[UC19.2\]]]
   ],
   trigger: "L'utente richiede l'analisi dipendenze o la analisi viene pianificata automaticamente",
 )[]
-==== UC19.1 L'utente accetta la remediation proposta
+==== UC19.1 L'utente accetta la remediation proposta <UC19.1>
 #useCase(
   attore: UAA,
   pre: [
@@ -2805,7 +2811,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "Conferma delle remediation",
 )[]
-==== UC19.2 L'utente rifiuta la remediation proposta
+==== UC19.2: L'utente rifiuta la remediation proposta <UC19.2>
 #useCase(
   attore: UAA,
   pre: [
@@ -2835,12 +2841,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente ha selezionato il repository da analizzare #link(<UC5.2>)[#underline[\[UC5.2\]]]
   ],
   post: [
-    - L'utente visualizza l'elenco dei possibili segreti trovati e le azioni consigliate
+    - Il sistema genera un report con i possibili segreti rilevati e raccomandazioni
   ],
   scenari: [
     - L'utente avvia la scansione per segreti
     - Vengono segnalati file e commit sospetti contenenti possibili chiavi o token
-    - Il sistema propone remediation all'utente
+    - Il motore segnala pattern sospetti e classifica i risultati per confidenza
+    - Il sistema prepara raccomandazioni e registra i risultati per revisione manuale o azioni automatiche
   ],
   inclusioni: [
     - Nessuna
@@ -2848,6 +2855,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - #link(<UC20.1>)[#underline[\[UC20.1\]]] // Verifica manuale dei falsi positivi
     - #link(<UC20.2>)[#underline[\[UC20.2\]]] // Esecuzione automatica di revoca se integrata con provider
+    - #link(<UC20.3>)[#underline[\[UC20.3\]]] // Visualizzazione risultati
   ],
   trigger: "L'utente avvia la scansione segreti o la scansione è parte di una pipeline CI",
 )[]
@@ -2893,6 +2901,27 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Conferma di segreti validi",
+)[]
+
+==== UC20.3: Visualizzazione risultati <UC20.3>
+#useCase(
+  attore: UAA,
+  pre: [
+    - Il report dei possibili segreti è disponibile #link(<UC20>)[#underline[\[UC20\]]]
+  ],
+  post: [
+    - L'utente visualizza l'elenco dei possibili segreti con dettagli e azioni
+  ],
+  scenari: [
+    - L'utente apre il pannello dei risultati; il frontend richiede il report al backend e mostra i dettagli con azioni suggerite
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Apertura pannello risultati da parte dell'utente",
 )[]
 
 === UC21: Verifica conformità licenze <UC21>
@@ -3094,6 +3123,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   estensioni: [
     - #link(<UC24.2>)[#underline[\[UC24.2\]]] // Applicazione automatica sotto supervisione
+    - #link(<UC24.3>)[#underline[\[UC24.3\]]] // Visualizzazione suggerimenti
   ],
   trigger: "Richiesta manuale o raccomandazione durante code review",
 )[]
@@ -3141,6 +3171,28 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Approvazione dell'utente",
 )[]
 
+==== UC24.3: Visualizzazione suggerimenti <UC24.3>
+#useCase(
+  attore: UAA,
+  pre: [
+    - Elenco suggerimenti di refactor generato #link(<UC24>)[#underline[\[UC24\]]]
+  ],
+  post: [
+    - L'utente visualizza i suggerimenti con snippet e azioni
+  ],
+  scenari: [
+    - L'utente apre il pannello refactor; il frontend richiede i suggerimenti e mostra snippet con azioni possibili
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Apertura pannello suggerimenti da parte dell'utente",
+)[
+]
+
 === UC25: Generazione changelog e release notes <UC25>
 #useCase(
   attore: UAA,
@@ -3148,19 +3200,20 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Lista commit/issue tra due tag o date disponibile
   ],
   post: [
-    - Viene generato un changelog strutturato in formato markdown
-    - L'utente approva il testo per la release
+    - Il sistema genera un changelog strutturato in formato markdown
+    - Il changelog è proposto come bozza per revisione e approvazione
   ],
   scenari: [
-    - Raggruppamento commit per tipo (feat, fix, docs)
-    - Generazione autom. del testo e proposta di release notes
-    - L'utente modifica/accetta e pubblica
+    - Il motore raccoglie i commit e li raggruppa per tipo
+    - Il sistema genera automaticamente il testo proposto per le release notes
+    - L'utente rivede e approva o modifica il testo prima della pubblicazione
   ],
   inclusioni: [
     - #link(<UC25.1>)[#underline[\[UC25.1\]]] // Rilevamento note di breaking change
   ],
   estensioni: [
     - #link(<UC25.2>)[#underline[\[UC25.2\]]] // Pubblicazione automatica su GitHub Release
+    - #link(<UC25.3>)[#underline[\[UC25.3\]]] // Visualizzazione e approvazione changelog
   ],
   trigger: "Preparazione della release o su richiesta dell'amministratore",
 )[]
@@ -3207,6 +3260,28 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Approvazione del changelog",
 )[]
 
+==== UC25.3: Visualizzazione e approvazione changelog <UC25.3>
+#useCase(
+  attore: UAA,
+  pre: [
+    - Changelog generato e disponibile #link(<UC25>)[#underline[\[UC25\]]]
+  ],
+  post: [
+    - L'utente visualizza la bozza del changelog, la modifica o la approva per pubblicazione
+  ],
+  scenari: [
+    - L'utente apre la bozza del changelog dal pannello release; il sistema mostra i dettagli e le proposte di testo
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Apertura bozza changelog da parte dell'utente",
+)[
+]
+
 === UC26: Analisi test e coverage <UC26>
 #useCase(
   attore: UAA,
@@ -3214,19 +3289,20 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Suite di test eseguibile e ambiente di esecuzione configurato
   ],
   post: [
-    - L'utente visualizza report dei test e coverage con gap evidenziati
-    - L'utente pianifica remediation sui casi mancanti
+    - Il sistema genera report di test e coverage con gap evidenziati e metriche aggregate
+    - Findings e gap sono registrati per pianificazione e remediation
   ],
   scenari: [
     - Esecuzione della suite di test e raccolta coverage
-    - Segnalazione test flakiness e failure critici
-    - L'utente valida i risultati e approva le azioni correttive
+    - Identificazione di test flakiness e failure critici; aggregazione delle metriche
+    - Il sistema suggerisce test addizionali e propone azioni correttive
   ],
   inclusioni: [
     - #link(<UC26.1>)[#underline[\[UC26.1\]]] // Replay test intermittenti
   ],
   estensioni: [
     - #link(<UC26.2>)[#underline[\[UC26.2\]]] // Suggerimenti per test addizionali
+    - #link(<UC26.3>)[#underline[\[UC26.3\]]] // Visualizzazione report
   ],
   trigger: "Esecuzione pipeline CI o richiesta manuale del team di QA",
 )[]
@@ -3273,6 +3349,28 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Analisi coverage completata",
 )[]
 
+==== UC26.3: Visualizzazione report <UC26.3>
+#useCase(
+  attore: UAA,
+  pre: [
+    - Report di test e coverage generato e disponibile #link(<UC26>)[#underline[\[UC26\]]]
+  ],
+  post: [
+    - L'utente visualizza il report dettagliato con gap e suggerimenti di test
+  ],
+  scenari: [
+    - L'utente apre il pannello dei report; il frontend richiede il report al backend e mostra percentuali di coverage, test falliti e suggerimenti
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Apertura pannello report da parte dell'utente",
+)[
+]
+
 === UC27: Policy CI/CD pre-merge <UC27>
 #useCase(
   attore: UAA,
@@ -3293,6 +3391,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   estensioni: [
     - #link(<UC27.2>)[#underline[\[UC27.2\]]] // Policy dinamiche per branch differenti
+    - #link(<UC27.3>)[#underline[\[UC27.3\]]] // Visualizzazione risultati policy
   ],
   trigger: "Tentativo di merge su branch protetto",
 )[]
@@ -3339,6 +3438,28 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Merge su branch specifico",
 )[]
 
+==== UC27.3: Visualizzazione risultati policy <UC27.3>
+#useCase(
+  attore: UAA,
+  pre: [
+    - Il tentativo di merge è stato valutato dal sistema e il report policy è disponibile #link(<UC27>)[#underline[\[UC27\]]]
+  ],
+  post: [
+    - L'utente visualizza dettagli sulle policy fallite e le eccezioni proposte
+  ],
+  scenari: [
+    - L'utente apre il pannello merge; il frontend richiede il report policy e mostra info su fallimenti e possibili azioni
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Apertura pannello merge da parte dell'utente",
+)[
+]
+
 === UC28: Report programmabili e alert <UC28>
 #useCase(
   attore: UAA,
@@ -3346,22 +3467,45 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Configurazione report e canali di notifica impostati
   ],
   post: [
-    - Invio report periodico con KPI e alert su regressioni
-    - L'utente riceve alert e approva azioni correttive
+    - Il sistema genera report periodici con KPI e alert su regressioni
+    - Gli alert vengono inviati sui canali configurati e gli eventi critici sono registrati per azioni successive
   ],
   scenari: [
-    - Generazione report personalizzato e invio sui canali configurati
-    - Alert inviati in caso di superamento soglie
-    - L'utente programma azioni e le approva
+    - La pianificazione o un evento di sistema attivano la generazione del report
+    - Il sistema elabora KPI e verifica soglie configurate
+    - In caso di alert critici il sistema lo notifica e propone azioni
   ],
   inclusioni: [
     - #link(<UC28.1>)[#underline[\[UC28.1\]]] // Filtri e template report
   ],
   estensioni: [
     - #link(<UC28.2>)[#underline[\[UC28.2\]]] // Azioni automatiche su alert critici
+    - #link(<UC28.3>)[#underline[\[UC28.3\]]] // Visualizzazione report
   ],
   trigger: "Pianificazione temporale o evento di sistema che provoca l'alert",
 )[]
+
+==== UC28.3: Visualizzazione report <UC28.3>
+#useCase(
+  attore: UAA,
+  pre: [
+    - Report programmabile generato e disponibile #link(<UC28>)[#underline[\[UC28\]]]
+  ],
+  post: [
+    - L'utente visualizza report periodici, KPI e alert
+  ],
+  scenari: [
+    - L'utente apre il pannello report
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Apertura pannello report da parte dell'utente",
+)[
+]
 
 ==== UC28.1: Filtri e template report <UC28.1>
 #useCase(
@@ -3424,7 +3568,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC29.1>)[#underline[\[UC29.1\]]]
+    - #link(<UC29.1>)[#underline[\[UC29.1\]]] // Gestione errore contatto tool
+    - #link(<UC29.2>)[#underline[\[UC29.3\]]] // Visualizzazione risultati tool
   ],
   trigger: "Comunicazione con tool esterni",
 )[]
@@ -3452,6 +3597,27 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Contatto con tool alternativo",
 )[]
 
+==== UC29.2: Visualizzazione risultati tool esterni <UC29.2>
+#useCase(
+  attore: UAA,
+  pre: [
+    - I risultati aggregati dalle esecuzioni degli strumenti esterni sono disponibili #link(<UC29>)[#underline[\[UC29\]]]
+  ],
+  post: [
+    - L'utente visualizza i risultati dettagliati dei tool esterni e le evidenze correlate
+  ],
+  scenari: [
+    - L'utente apre il report di analisi; il frontend richiede i risultati aggregati e mostra i dettagli dei tool esterni
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Apertura report analisi da parte dell'utente",
+)[
+]
 
 // questo va assolutamente scelto come gestirlo, altrimenti va modificato il sottocaso
 === UC30 Generazione del report finale <UC30>
