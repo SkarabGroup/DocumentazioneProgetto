@@ -320,12 +320,12 @@ Il ciclo di vita dei documenti prevede:
 2. *Verifica*: Controllo di conformità (ortografia, stile, contenuti) da parte di un membro diverso dal redattore.
 3. *Approvazione*: Validazione finale per il rilascio.
 
-==== Strumenti di Redazione
+=== Strumenti di Redazione
 - *#def("Visual Studio Code")*: Editor principale per la scrittura dei documenti.
-- *#def("Typst")*: Linguaggio di markup utilizzato per la formattazione dei documenti.
+- *#def("Typst")*: Linguaggio di markup utilizzato per la formattazione dei documenti. Questo linguaggio permette di creare documenti con una struttura chiara e professionale, facilitando la gestione di elementi come intestazioni, tabelle, figure e riferimenti incrociati. Inoltre, si possono creare funzioni personalizzate per automatizzare parti della formattazione.
 - *#def("Tinymist")*: Estensione per #def("VS Code") che fornisce supporto e preview per Typst
 
-== Gestione della Configurazione
+=== Gestione della Configurazione
 Utilizzo di *#def("Git")* come sistema di controllo versione.
 
 === Branching Strategy
@@ -333,16 +333,124 @@ Utilizzo di *#def("Git")* come sistema di controllo versione.
 - `develop`: Ramo di integrazione principale.
 - `feature/nome-feature`: Rami per lo sviluppo di nuove funzionalità.
 - `fix/nome-fix`: Rami per la correzione di bug.
+- 'acronimo-documento': Rami dedicati alla redazione dei documenti (es. `NdP`, `PdP`, `PdQ`, `AdR`).
 
-Inoltre si utilizzano branch diversi per la redazione dei diversi documenti, in modo che un gruppo assegnato ad un documento possa lavorarci senza interferire con il lavoro degli altri.
+Il ramo `develop` é protetto, questo vuol dire che ogni modifica deve essere effettuata tramite *pull request* e sottoposta a revisione da parte di almeno un membro del gruppo diverso dal redattore prima di essere unita.
+Questo assicura che ogni documento sia verificato prima di entrare nel branch.
 
-=== Conventional Commits
-I messaggi di commit devono seguire il formato:
-`tipo(ambito): descrizione breve`
-Tipi ammessi: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`.
+=== Datazione e versionamento documenti
+Ogni documento deve includere una sezione di cronologia delle versioni che riporta:
+- Data della modifica.
+- Numero di versione
+ - Il numero della versione deve seguire lo scema `x.y.z`, dove:
+   - `x`: Major version, incrementata per cambiamenti significativi o incompatibili.
+   - `y`: Minor version, incrementata per l'aggiunta di funzionalità mantenendo la compatibilità.
+   - `z`: Patch version, incrementata per correzioni di bug o modifiche minori.
+- Descrizione delle modifiche apportate.
+- Nomi dei redattori coinvolti.
+- Nomi dei verificatori coinvolti.
 
-== Verifica e Qualità
-La verifica ha l'obiettivo di accertare che i prodotti soddisfino i requisiti.
+=== Configurazione dei Documenti
+Tutti i documenti devono essere archiviati nel repository GitHub del progetto, organizzati in cartelle in base a Quale sezione del progetto appartengono, se appartengono al sito, ad una baseline specifica o ad altro.
+Ogni documento deve essere salvato in formato source (#def("Typst")) per permettere modifiche future e versionamento.
+
+Dal momento che SkarabGroup utilizza Jira per la gestione delle attività di progetto, ogni documento deve essere associato all'attività corrispondente in Jira . Questo facilita il tracciamento delle modifiche e la gestione delle responsabilità durante i vari sprint.
+
+Alla fine di ogni sprint, i documenti completati e verificati devono essere uniti nel ramo `develop` tramite pull request, seguendo la procedura di revisione stabilita. questo permette di iniziare lo sprint successivo con una base documentale aggiornata e approvata in quanto, la p[rima attivitá di ogni sprint é quella di fare un pull del develop sul branch del documento a cui si sta lavorando.
+
+== Qualifica
+
+=== Verifica
+La verifica ha l'obiettivo di accertare che i prodotti soddisfino i requisiti, ovvero di rispondere alla domanda: "Did I build the sistem right?".
+
+Tutti i prodotti del progetto sono soggetti a verifiche periodiche per garantire la conformità agli standard di qualità definiti nel Piano di Qualifica (#def("PdQ")).
+
+==== Implementazione
+Dal momento in cui per poter portare un documento, o parte di esso nel branch principlale `develop`, esso deve essere stato verificato e approvato, la verifica viene implementata tramite il sistema di *pull request* di GitHub. Questo assicura che tutto il codice e la documentazione presenti nel ramo principale abbiano superato un processo di verifica e che, quindi, siano conformi agli standard di qualità stabiliti.
+
+===== Verifica
+
+La Verifica rappresenta un processo fondamentale per Skarab Group e accompagna l’intero ciclo di vita del progetto (a.a. 2025/2026), con l’obiettivo di garantire la correttezza, la qualità e la conformità dei prodotti realizzati rispetto ai requisiti definiti.
+Tutte le informazioni relative agli esiti delle attività di verifica, incluse misurazioni e risultati dei test, sono documentate nel Piano di Qualifica.
+====== Verifica della Documentazione
+
+Nelle fasi iniziali del progetto, particolare attenzione è stata dedicata alla verifica della documentazione.
+Ogni documento, una volta redatto, viene sottoposto a verifica prima dell’integrazione nel ramo principale del repository.
+L’attività comprende:
+- controllo grammaticale e sintattico;
+- verifica della correttezza e coerenza dei contenuti.
+- Le modalità operative di redazione e verifica dei documenti sono descritte nelle regole di gestione dei branch e delle issue.
+
+====== Verifica del Codice
+
+Le attività di verifica del codice saranno approfondite in modo più dettagliato una volta raggiunta la Requirements and Technology Baseline (RTB).
+In generale, la verifica del software si articola in due approcci complementari: Analisi Statica e Analisi Dinamica.
+
+====== Analisi Statica
+
+L’Analisi Statica comprende tutte le attività di verifica che non richiedono l’esecuzione dell’oggetto analizzato.
+Essa si concentra sull’individuazione di errori sintattici, strutturali o concettuali, permettendo di prevenire problemi prima della fase di esecuzione.
+
+Può essere svolta tramite:
+- metodi formali, basati su dimostrazioni matematiche;
+- metodi di lettura, più flessibili e applicabili alla documentazione e al codice.
+
+Tra i metodi di lettura:
+
+il Walkthrough, che prevede un’analisi completa e approfondita dell’oggetto, ma risulta costoso e poco automatizzabile;l’Ispezione, basata su checklist di controllo, meno esaustiva ma più efficiente e facilmente automatizzabile.
+Considerata l’elevata quantità di artefatti da verificare, Skarab Group privilegia l’ispezione.
+
+====== Analisi Dinamica
+
+L’Analisi Dinamica prevede l’esecuzione dell’oggetto da verificare e si basa sull’identificazione delle failure, ossia comportamenti non conformi alle aspettative, al fine di individuare e correggere i relativi fault.
+Questa analisi è realizzata tramite Test, che devono essere:
+- ripetibili;
+
+- indipendenti dall’ambiente di esecuzione;
+
+- automatizzabili.
+
+L’automazione dei test è supportata dall’uso di driver, stub e logger per simulare e monitorare l’esecuzione del software.
+
+====== Tipologie di Test
+
+I test adottati nel progetto si suddividono nelle seguenti categorie:
+
+Test di Unità
+
+Test di Integrazione
+
+Test di Sistema
+
+Test di Regressione
+
+Ogni test è identificato da una nomenclatura standard e possiede uno stato che ne indica il livello di implementazione o superamento.
+
+======= Test di Unità
+
+I Test di Unità verificano il corretto funzionamento delle singole unità software.
+Si distinguono in:
+
+- test funzionali (black-box), che analizzano input e output;
+
+- test strutturali, che verificano i percorsi logici e le istruzioni eseguite.
+
+======= Test di Integrazione
+I Test di Integrazione verificano la corretta interazione tra le unità.
+L’integrazione può avvenire secondo due strategie:
+
+Top-Down, partendo dalle componenti di livello più alto;
+
+Bottom-Up, partendo dalle componenti di base.
+
+======= Test di Sistema
+I Test di Sistema valutano il comportamento del sistema nel suo complesso, verificandone la conformità ai requisiti e l’efficacia globale.
+
+======= Test di Regressione
+
+I Test di Regressione garantiscono che le modifiche apportate al sistema non reintroducano errori precedentemente risolti.
+In caso di correzione di un fault, l’intera suite di test viene rieseguita per assicurare la stabilità del sistema.
+
 
 === Metriche
 Il gruppo adotta un sistema di metriche per monitorare processi e prodotti.
