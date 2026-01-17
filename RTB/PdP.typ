@@ -1024,11 +1024,11 @@ Pianificazione aggressiva per recuperare il delta dello Sprint 1.
 #sprint_table(
   (
     // Formato: ("Nome", Resp, Amm, Anal, Prog, Cod, Ver)
-    ([Basso Kevin], 0, 3, 7, 0, 0, 2), // 12h
+    ([Basso Kevin], 0, 3, 0, 0, 0, 2), // 12h
     ([Berengan Riccardo], 0, 1, 5, 0, 0, 2), // 8h
     ([Martinello Riccardo], 0, 1, 5, 0, 0, 0), // 6h
-    ([Sandu Antonio], 0, 1, 5, 0, 0, 2), // 8h
-    ([Sgreva Andrea], 0, 1, 5, 0, 0, 2), // 8h
+    ([Sandu Antonio], 0, 1, 3, 0, 0, 2), // 8h
+    ([Sgreva Andrea], 0, 1, 3, 0, 0, 2), // 8h
     ([Suar Alberto], 0, 5, 0, 0, 3, 4), // 12h
     ([Zago Alice], 6, 2, 5, 0, 3, 2), // 18h (Resp)
   ),
@@ -1041,13 +1041,13 @@ Le attività di analisi hanno richiesto più tempo del previsto, assorbendo part
 #sprint_table(
   (
     // Formato: ("Nome", Resp, Amm, Anal, Prog, Cod, Ver)
-    ([Basso Kevin], 0, 4, 7, 0, 0, 1), // 12h (Bilanciato)
-    ([Berengan Riccardo], 0, 1, 6, 0, 0, 1), // 8h (+1 Anal, -1 Ver)
-    ([Martinello Riccardo], 0, 1, 5, 0, 0, 0), // 6h (Ok)
-    ([Sandu Antonio], 0, 1, 6, 0, 0, 1), // 8h (+1 Anal, -1 Ver)
-    ([Sgreva Andrea], 0, 1, 5, 0, 0, 2), // 8h (Ok)
-    ([Suar Alberto], 0, 5, 0, 0, 3, 4), // 12h (Ok)
-    ([Zago Alice], 6, 2, 6, 0, 3, 1), // 18h (+1 Anal, -1 Ver)
+    ([Basso Kevin], 0, 4, 0, 0, 0, 1), // 12h (Bilanciato)
+    ([Berengan Riccardo], 0, 1, 4, 0, 0, 1), // 8h (+1 Anal, -1 Ver)
+    ([Martinello Riccardo], 0, 1, 4, 0, 0, 0), // 6h (Ok)
+    ([Sandu Antonio], 0, 1, 1, 0, 0, 1), // 8h (+1 Anal, -1 Ver)
+    ([Sgreva Andrea], 0, 1, 1, 0, 0, 2), // 8h (Ok)
+    ([Suar Alberto], 0, 5, 0, 0, 0, 4), // 12h (Ok)
+    ([Zago Alice], 6, 2, 5, 0, 0, 1), // 18h (+1 Anal, -1 Ver)
   ),
   [Consuntivo orario effettivo per lo Sprint 2 (Totale: 72 ore)],
 )
