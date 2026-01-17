@@ -1,6 +1,6 @@
 #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
-#let versione = "v0.7.0"
+#let versione = "v0.7.1"
 
 #titlePage("Piano di Progetto", versione)
 #set page(numbering: "1", header: header("Piano di Progetto"), footer: footer())
@@ -1018,7 +1018,7 @@ Attività principali:
 - *Incontri:* Meeting con Prof. Cardin e VarGroup per validazione direzione.
 
 ==== Prospetto consumo tempo (Preventivo)
-#TODO("questa frase sinceramente non mi piace molto (anche se l'ho scritta io :D) ~Suar". Anche qui, controllare gli orari)
+#TODO("questa frase sinceramente non mi piace molto (anche se l'ho scritta io :D) ~Suar .Anche qui, controllare gli orari")
 Pianificazione aggressiva per recuperare il delta dello Sprint 1.
 
 #sprint_table(
