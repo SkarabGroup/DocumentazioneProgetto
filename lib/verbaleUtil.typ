@@ -97,8 +97,6 @@
 
 
   body
-
-  chiusuraVerbale("16:50", members.alice)
 }
 
 
