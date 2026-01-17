@@ -93,8 +93,7 @@ Il documento costituisce il riferimento primario per il #def[Responsabile] e per
 - *Piano della Qualità (Quality Assurance)*: definizione della strategia di gestione della qualità, identificando gli standard di riferimento (in particolare #def[ISO/IEC 25010]), le metriche di misurazione e le relative soglie di accettazione/ottimalità.
 - *Controllo di Qualità (Quality Control)*: pianificazione operativa delle attività di #def[Verifica] (analisi statica, test dinamici) per garantire la correttezza tecnica degli artefatti prodotti.
 - *Validazione di Prodotto*: definizione delle procedure necessarie per accertare la conformità del sistema rispetto alle aspettative degli #def[Stakeholder] e ai requisiti del capitolato.
-- *Miglioramento Continuo*: applicazione di meccanismi retroattivi (basati sul ciclo #def[PDCA]) che utilizzano i risultati delle misurazioni per ottimizzare i processi e il *Way of Working* in corso d'opera.
-In linea con la metodologia #def[Agile] e il principio del miglioramento continuo, il Piano di Qualifica adotta il ciclo di Deming (#def[PDCA]: Plan-Do-Check-Act). Questo approccio permette di monitorare costantemente l'efficacia del *Way of Working*, attuando azioni correttive e preventive per ottimizzare le performance del gruppo parallelamente all'avanzamento dello sviluppo.
+- *Miglioramento Continuo*: applicazione di meccanismi retroattivi (basati sul ciclo #def[Plan-Do-Check-Act]) che utilizzano i risultati delle misurazioni per ottimizzare i processi e il *Way of Working* in corso d'opera.
 
 == Traguardi Qualitativi
 L'assicurazione della qualità segue l'approccio incrementale del progetto, fissando obiettivi specifici per le due principali milestone:
@@ -175,22 +174,31 @@ Al termine di ogni Sprint (durante la fase di *Sprint Review*), il Responsabile 
 3. Deriva gli indici di performance (CPI, SPI) e le stime a finire (EAC).
 I risultati vengono confrontati con le soglie definite nel Piano di Qualifica per determinare lo stato di salute della fornitura.
 */
-= Qualità di Processo
+==== Qualità di Processo
 
-La garanzia della qualità del prodotto finale è intrinsecamente legata alla qualità dei processi produttivi che lo generano. Per il progetto #def("Code Guardian"), la gestione dei processi mira a rendere il #def("Way of Working") sostenibile, tracciabile e soggetto a miglioramento continuo.
+La garanzia della qualità del prodotto finale è intrinsecamente legata alla qualità dei processi produttivi che lo generano. Per il progetto #def("Code Guardian"), la gestione dei processi mira a rendere il #def("Way of Working") sostenibile, tracciabile e soggetto a miglioramento continuo attraverso l'applicazione del ciclo #def("PDCA").
 
-La strategia adottata si fonda su tre pilastri fondamentali:
-- *Modelli di Riferimento:* ISO/IEC 12207 e CMMI.
-- *Metriche di Processo:* Misurazione oggettiva dell'efficienza.
-- *Revisioni Periodiche:* Ciclo PDCA applicato agli Sprint.
+===== Strategia di Definizione delle Soglie Metriche
 
-== Processi Primari
-I Processi Primari costituiscono il nucleo operativo del ciclo di vita del software.
+La determinazione delle soglie di accettabilità e ottimalità per le metriche adottate dal gruppo #def("Skarab Group") non è un processo arbitrario, ma segue una strategia ingegneristica basata sui seguenti criteri:
 
-=== Fornitura
-_Riferimento: Norme di Progetto, Sezione [Monitoraggio della Fornitura]_ \ \
-Il processo di fornitura comprende le attività necessarie a consegnare il prodotto al committente rispettando gli accordi contrattuali presi.
-Vengono monitorati sia i valori assoluti (Misure) che gli indici di efficienza (Metriche) derivati dallo standard #def("Earned Value Management") (EVM).
+- *Adesione agli Standard Internazionali:* Per i processi di fornitura, il gruppo adotta il framework #def("Earned Value Management") (EVM), utilizzando gli intervalli di confidenza standard del settore ($0.90 - 1.10$) per garantire la stabilità economica e temporale. Per la qualità del prodotto, le soglie sono calibrate sulle caratteristiche del modello #def("ISO/IEC 25010").
+- *Analisi del Dominio e Benchmark:* Le metriche di supporto e sviluppo (es. #def("Gulpease Index"), #def("Complessità Ciclomatica")) sono tarate su benchmark di settore per lo sviluppo software moderno, garantendo che i requisiti di manutenibilità e sicurezza siano oggettivamente verificabili.
+- *Miglioramento Continuo e Calibrazione (PDCA):* In linea con l'approccio #def("Agile"), le soglie sono soggette a revisione periodica. Al termine di ogni #def("Sprint"), i valori vengono analizzati rispetto alle prestazioni storiche del team; questo permette una ricalibrazione dinamica delle soglie nel #def("Piano di Qualifica"), rendendo gli obiettivi sempre sfidanti ma tecnicamente sostenibili (obiettivi *S.M.A.R.T.*).
+
+===== Centralizzazione delle Metriche e Obiettivi
+
+Il presente documento costituisce il riferimento unico, autoritativo e analitico per la gestione della qualità del progetto #def("Code Guardian"). Mentre le #def("Norme di Progetto") definiscono le procedure operative, gli strumenti e le responsabilità per l'estrazione dei dati, il #def("Piano di Qualifica") ha il compito di centralizzare la "scienza della misurazione" del gruppo.
+
+In particolare, ogni metrica qui esposta è corredata da:
+- *Identificativo univoco:* (MPC per il processo, MPD per il prodotto);
+- *Formulazione matematica:* Per garantire l'oggettività del calcolo;
+- *Soglie di Valutazione:* Distinte in "Accettabilità" (requisito minimo per la validazione) e "Ottimalità" (target di eccellenza desiderato).
+
+Ogni scostamento rilevato tra i valori misurati e le soglie qui definite viene analizzato durante le retrospettive di fine #def("Sprint"). Tali evidenze costituiscono la base oggettiva per l'attivazione di azioni correttive o per la ricalibrazione delle soglie stesse, garantendo che il processo di qualità evolva insieme alla maturità del team.
+
+===== Processi Primari: Fornitura e Sviluppo
+Questi processi definiscono le attività core per la realizzazione del software. Il monitoraggio si focalizza sul rispetto dei vincoli di tempo e budget (tramite la metodologia EVM) e sulla gestione rigorosa dell'ambito di progetto.
 
 #metrics_table(
   [Soglie metriche per il processo di Fornitura (EVM)],
@@ -199,141 +207,77 @@ Vengono monitorati sia i valori assoluti (Misure) che gli indici di efficienza (
     [*MPC01*], [Budget At Completion (BAC)], [Preventivo], [Preventivo], [Preventivo],
     [*MPC02*], [Planned Value (PV)], [$P V$], [$>= 0$], [Da Piano],
     [*MPC03*], [Actual Cost (AC)], [$A C$], [$<= E A C$], [$<= E V$],
-    [*MPC04*], [Earned Value (EV)], [$E V$], [$>= 95% P V$], [$>= P V$],
+    [*MPC04*], [Earned Value (EV)], [$E V$], [$>= 90% P V$], [$>= P V$], // Calibrata tolleranza per ritardi fisiologici
     // Indici
     [*MPC05*], [Budget Variance (BV)], [$B V = B A C - E A C$], [$>= 0$], [$> 0$],
-    [*MPC06*], [Schedule Variance (SV)], [$S V = E V - P V$], [$> -5% "BAC"$], [$>= 0$],
+    [*MPC06*], [Schedule Variance (SV)], [$S V = E V - P V$], [$> -10% "BAC"$], [$>= 0$],
     [*MPC07*], [Cost Performance Index (CPI)], [$C P I = (E V) / (A C)$], [$0.90 <= v <= 1.10$], [$1.00$],
     [*MPC08*], [Schedule Performance Index (SPI)], [$S P I = (E V) / (P V)$], [$0.90 <= v <= 1.10$], [$1.00$],
     [*MPC09*], [Estimate At Completion (EAC)], [$E A C = (B A C) / (C P I)$], [$<= B A C + 5%$], [$<= B A C$],
   )
 )
 
-=== Sviluppo
-_Riferimento: Norme di Progetto, Sezione [Stabilità dei Requisiti]_ \ \
-Si monitora la stabilità dell'ambito di progetto per evitare modifiche incontrollate (*Scope Creep*).
+_Riferimento: Norme di Progetto, Sezione [Stabilità dei Requisiti]_
+Il monitoraggio della stabilità dei requisiti è cruciale per prevenire lo *scope creep*, specialmente a seguito delle revisioni correttive post-S2.
 
 #metrics_table(
   [Soglie metriche per il processo di Sviluppo],
   (
-    [*MPC10*], [Requirements Stability Index], [$R S I = (R_"tot" - Delta R) / R_"tot" times 100$], [$>= 80%$], [100%],
+    [*MPC10*], [Requirements Stability Index], [$R S I = (R_"tot" - Delta R) / R_"tot" times 100$], [$>= 75%$], [100%], // Abbassato leggermente per accomodare il refactoring dei requisiti
   )
 )
 
-== Processi di Supporto
-
-=== Documentazione
-_Riferimento: Norme di Progetto, Sezione [Documentazione]_ \ \
-Si monitora la leggibilità per garantire l'accessibilità delle informazioni.
+===== Processi di Supporto
+I processi di supporto garantiscono l'integrità e la verificabilità degli artefatti. La leggibilità della documentazione (Indice di Gulpease) e la copertura dei test sono i parametri cardine per assicurare la manutenibilità futura.
 
 #metrics_table(
-  [Soglie metriche Documentazione],
+  [Soglie metriche Documentazione e Verifica],
   (
     [*MPC11*], [Gulpease Index], [$89 + (300(L_f) - 10(L_p)) / (F_p)$], [$>= 40$], [$>= 60$],
     [*MPC12*], [Correttezza Ortografica], [Errori segnalati], [0], [0],
-  )
-)
-
-=== Verifica
-_Riferimento: Norme di Progetto, Sezione [Verifica]_ \ \
-Si monitora la copertura dei test per garantire la robustezza del codice.
-
-#metrics_table(
-  [Soglie metriche Verifica],
-  (
     [*MPC13*], [Code Coverage], [$("Linee coperte") / ("Linee totali") times 100$], [$>= 70%$], [$>= 80%$],
     [*MPC14*], [Test Success Rate], [$("Passati") / ("Eseguiti") times 100$], [100%], [100%],
   )
 )
 
-=== Gestione della Qualità
-_Riferimento: Norme di Progetto, Sezione [Gestione Qualità]_
-
-#metrics_table(
-  [Soglie metriche Gestione Qualità],
-  (
-    [*MPC15*], [Metrics Satisfaction], [$("Metriche OK") / ("Metriche Tot") times 100$], [$>= 90%$], [100%],
-  )
-)
-
-== Processi Organizzativi
-
-=== Gestione Organizzativa
-_Riferimento: Norme di Progetto, Sezione [Gestione Agile]_ \ \
-Si misura l'affidabilità del team nel raggiungere gli obiettivi di Sprint.
+===== Processi Organizzativi
+Misurano l'efficienza interna del team Skarab Group nell'auto-organizzarsi e nel rispettare gli impegni presi durante gli Sprint.
 
 #metrics_table(
   [Soglie metriche Organizzative],
   (
+    [*MPC15*], [Metrics Satisfaction], [$("Metriche OK") / ("Metriche Tot") times 100$], [$>= 90%$], [100%],
     [*MPC16*], [Sprint Goal Achievement], [$("Completati") / ("Pianificati") times 100$], [$>= 80%$], [100%],
   )
 )
 
 #pagebreak()
 
-= Qualità di Prodotto
-La qualità di prodotto è il grado con cui il software soddisfa i requisiti dichiarati e le aspettative implicite degli utenti.
-A differenza della qualità di processo (che misura _come_ lavoriamo), questa sezione misura il risultato finale.
+==== Qualità di Prodotto
 
-Il gruppo fa riferimento al modello di qualità definito dallo standard internazionale #def("ISO/IEC 25010").
+La qualità di prodotto valuta il software consegnato rispetto ai requisiti e alle caratteristiche intrinseche definite dallo standard #def("ISO/IEC 25010").
 
-== Adeguatezza Funzionale
-_Riferimento: Norme di Progetto, Sezione [Requisiti]_ \ \
-Misura il grado di copertura dei requisiti tracciati nell'Analisi dei Requisiti.
+===== Adeguatezza Funzionale e Affidabilità
+Si misura la capacità del sistema di svolgere i compiti richiesti e di rimanere operativo senza guasti critici, parametro fondamentale per un tool di audit.
 
 #metrics_table(
-  [Metriche Adeguatezza Funzionale],
+  [Metriche Adeguatezza e Affidabilità],
   (
     [*MPD01*], [Copertura Req. Obbligatori], [$frac("Soddisfatti", "Totale Obbl.") times 100$], [100%], [100%],
-    [*MPD02*], [Copertura Req. Desiderabili], [$frac("Soddisfatti", "Totale Des.") times 100$], [0%], [100%],
-    [*MPD03*], [Copertura Req. Opzionali], [$frac("Soddisfatti", "Totale Opz.") times 100$], [0%], [100%],
-  )
-)
-
-== Affidabilità (Reliability)
-_Riferimento: Norme di Progetto, Sezione [Affidabilità]_ \ \
-Capacità del sistema di mantenere un determinato livello di prestazioni in un dato periodo di tempo.
-
-#metrics_table(
-  [Metriche Affidabilità],
-  (
     [*MPD04*], [Failure Density], [$frac("N. guasti", "KLOC")$], [$<= 0.5$], [0],
     [*MPD05*], [Availability], [$frac("Tempo Up", "Tempo Tot") times 100$], [$>= 98%$], [$>= 99.9%$],
   )
 )
 
-== Usabilità (Usability)
-_Riferimento: Norme di Progetto, Sezione [Usabilità]_ \ \
-Grado con cui un prodotto può essere usato da specifici utenti per raggiungere specifici obiettivi con efficacia, efficienza e soddisfazione.
+===== Manutenibilità e Sicurezza
+Data la natura del progetto #def("Code Guardian"), queste metriche rappresentano il valore distintivo del prodotto. Un codice manutenibile e privo di vulnerabilità è condizione necessaria per l'accettazione.
 
 #metrics_table(
-  [Metriche Usabilità],
+  [Metriche Manutenibilità e Sicurezza],
   (
-    [*MPD06*], [Comprehensibility], [$frac("Comprese", "Totale funzioni") times 100$], [$>= 80%$], [100%],
-    [*MPD07*], [Error Prevention], [$frac("Undo", "Azioni Totali") times 100$], [$<= 5%$], [$<= 2%$],
-  )
-)
-
-== Manutenibilità (Maintainability)
-_Riferimento: Norme di Progetto, Sezione [Manutenibilità]_ \ \
-Grado di efficacia ed efficienza con cui il prodotto può essere modificato.
-
-#metrics_table(
-  [Metriche Manutenibilità],
-  (
-    [*MPD08*], [Comment Density], [$frac("Linee commento", "Linee codice") times 100$], [$>= 10%$], [$20% - 30%$],
-    [*MPD09*], [Cyclomatic Complexity], [$V(G) = E - N + 2P$], [$<= 15$], [$<= 10$],
+    [*MPD08*], [Comment Density], [$frac("Linee commento", "Linee codice") times 100$], [$>= 15%$], [$20% - 25%$], // Ottimale ridotto per favorire il Clean Code
+    [*MPD09*], [Cyclomatic Complexity], [$V(G)$], [$<= 15$], [$<= 10$],
     [*MPD10*], [Coupling (Fan-out)], [Dipendenze esterne], [$<= 6$], [$<= 3$],
-  )
-)
-
-== Sicurezza (Security)
-_Riferimento: Norme di Progetto, Sezione [Sicurezza]_ \ \
-Grado con cui il prodotto protegge le informazioni e i dati.
-
-#metrics_table(
-  [Metriche Sicurezza],
-  (
     [*MPD11*], [Vulnerability Detection], [N. vulnerabilità critiche], [0], [0],
   )
 )

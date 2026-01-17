@@ -130,6 +130,16 @@
         }
       }
 
+      if "acronimo" in def {
+        let alt_list = def.acronimo.split(",").map(s => s.trim())
+        for alt in alt_list {
+          if lower(alt) == lower(parola) {
+            found = true
+            break
+          }
+        }
+      }
+
       if found { break }
     }
     if found { break }
