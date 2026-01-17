@@ -13,16 +13,34 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.26.0"
+#let versione = "v0.30.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
+    "2026/01/17",
+    "0.31.0",
+    "Modifica alla struttura dei requisiti",
+    members.antonio,
+  ),
+  (
+    "2026/01/17",
+    "0.30.0",
+    "Aggiunta UC30, UC31, UC32",
+    members.berengan,
+  ),
+  (
     "2026/01/16",
-    "0.28.0",
+    "0.29.0",
     "Aggiunta UC38, UC40, UC40.1, UC41",
     members.andrea,
+  ),
+  (
+    "2026/01/16",
+    "0.28.0",
+    "Aggiunta UC34, UC35, UC36 e UC37",
+    members.antonio,
   ),
   (
     "2026/01/16",
@@ -280,7 +298,23 @@ I requisiti sono suddivisi in tre livelli di priorità in base alla loro necessi
 - #strong("Opzionali"): Requisiti di importanza marginale o funzionalità avanzate che possono essere implementate solo se le risorse e i tempi lo consentono. Sono candidati ideali per sviluppi futuri (versioni successive alla 1.0).
 
 ==== Classificazione per Tipologia
-In accordo con lo standard #link(<R2>)[#underline[ISO/IEC/IEEE International Standard - Systems and software engineering -- Life cycle
+Seguendo la classificazinoe proposta da #link(<R3>)[#underline[Dispense del corso di Ingegneria del Software sull'analisi dei requisiti]], i requisiti sono inizialmente suddivisi in 3 macro-categorie: 
+- #strong("Requisiti Funzionali (FR)"): riguardano l'usabilità del prodotto finale;
+- #strong("Requisiti di Qualità (QR)"): includono gli strumenti e la documentazione da fornire; 
+- #strong("Requisiti di Vincolo (VR)"): fanno riferimento alle tecnologie da utilizzare;
+
+=== Fonte dei requisiti
+I requisiti sono stati identificati a partire dalle seguenti fonti:
+- #strong("Capitolato"): requisiti individuati nel capitolato fornito da #def("Var Group");
+- #strong("Interno"): requisiti individuati dal team di sviluppo #def("Skarab Group") durante le riunioni interne;
+- #strong("Esterno"): requisiti individuati durante gli incontri con l'azienda propontente #def("Var Group").
+- #strong("Piano di Qualifica"): requisiti necessari pre rispettare standard di qualità definiti nel documento di Piano di Qualifica;
+- #strong("Norme di Progetto"): requisiti necessari per rispettare le norme di progetto definite nel documento di Norme di Progetto;
+
+=== Descrizione dei Requisiti
+Ogni requisito è identificato da un codice univoco che ne facilita il tracciamento e la gestione durante l'intero ciclo di vita del progetto. Verrà inoltre fornita una descrizione concisa del requisito, insieme alla sua classificazione per priorità e tipologia.
+
+/*In accordo con lo standard #link(<R2>)[#underline[ISO/IEC/IEEE International Standard - Systems and software engineering -- Life cycle
   processes -- Requirements engineering]], i requisiti sono ulteriormente categorizzati in base alla loro natura tecnica:
 
 - #strong("Funzionali (FR)"): Descrivono i comportamenti specifici del sistema, le reazioni a input determinati e le regole di validazione dei dati ("cosa fa il sistema").
@@ -289,7 +323,7 @@ In accordo con lo standard #link(<R2>)[#underline[ISO/IEC/IEEE International Sta
 - #strong("Interfaccia (IR)"): Specificano le interazioni logiche e visive con l'utente (elementi UI) e le interfacce verso sistemi esterni (API, protocolli).
 - #strong("Logici del Database (LDR)"): Definiscono la struttura dei dati, le modalità di conservazione, i vincoli di integrità e le relazioni tra entità.
 - #strong("Vincoli di Design (DC)"): Limitazioni imposte da scelte tecnologiche obbligatorie, standard industriali, protocolli di comunicazione o normative specifiche.
-- #strong("Attributi del Software (SSA)"): Caratteristiche di qualità non funzionali critiche, con particolare focus su Sicurezza (cifratura, protezione dati), Affidabilità e Robustezza.
+- #strong("Attributi del Software (SSA)"): Caratteristiche di qualità non funzionali critiche, con particolare focus su Sicurezza (cifratura, protezione dati), Affidabilità e Robustezza.*/
 
 == Prospettiva del prodotto
 Il prodotto che #def("Skarab Group") intende sviluppare è un #def("sistema software") #def("multiagente") per l'analisi di #def("repository") #def("GitHub"). Il sistema sarà progettato per essere modulare e scalabile, consentendo l'aggiunta di nuove funzionalità e agenti in futuro. Dal momento in cui l'obiettivo del #def("progetto") è lo sviluppo di un #def("MVP"), il sistema sarà sviluppato con un focus sulle funzionalità essenziali, garantendo al contempo una solida base per future espansioni.
