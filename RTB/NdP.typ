@@ -126,7 +126,7 @@ Il processo di fornitura si compone di molte attività, tra cui:
 - *#def("Jira")*: Per la gestione delle attività e il monitoraggio del progresso.
 - *#def("VS Code")*: Per la scrittura del codice e la redazione dei documenti in #def("Typst").
 - *gmail*: Per la comunicazione con il proponente.
-- *#def("Google calendar")*: Per la pianificazione delle riunioni e delle scadenze.
+- *#def("Google calendar")*: Perta dei requisiti funzionali e non funzionali, classificati in obbliga la pianificazione delle riunioni e delle scadenze.
 - *#def("Microsoft Teams")*: Per le riunioni virtuali e la collaborazione in tempo reale.
 === Documentazione del Progetto
 In questa sezione si elencano tutti i documenti che #def("Skarab Group") produrrà durante il ciclo di vita del progetto #def("Code Guardian"). I documenti sono tutti scritti utilizzando il linguaggio #def("typst") per garantire una formattazione uniforme e professionale.
@@ -341,6 +341,7 @@ Questo assicura che ogni documento sia verificato prima di entrare nel branch.
 === Datazione e versionamento documenti
 Ogni documento deve includere una sezione di cronologia delle versioni che riporta:
 - Data della modifica.
+
 - Numero di versione
  - Il numero della versione deve seguire lo scema `x.y.z`, dove:
    - `x`: Major version, incrementata per cambiamenti significativi o incompatibili.

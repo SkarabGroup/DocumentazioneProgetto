@@ -1,4 +1,4 @@
-#import "../lib/docsUtil.typ": *
+  #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
 
 //Note sul versionamento
