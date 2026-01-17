@@ -10,7 +10,7 @@
   (
     "2026/01/17",
     "0.11.0",
-    "Rielaborazione generale dei termini del glossario"
+    "Rielaborazione generale dei termini del glossario",
     members.suar
   ),
   (
