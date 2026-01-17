@@ -12,6 +12,7 @@
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
 #let versione = "v0.3.0"
+#set heading(numbering: "1,1,1")
 
 #titlePage("Norme di Progetto", versione)
 #set page(numbering: "1", header: header("Norme di Progetto"), footer: footer())
@@ -613,7 +614,7 @@ La seguente tabella riporta le fonti utilizzate per la formazione dei membri del
 
 Inoltre l'azienda proponente Var group ha tenuto delle lezioni specifiche per ognuna delle tecnologie necessarie allo sviluppo del progetto e ha dato disponibilitá per la risoluzione di dubbi e domande.
 
-=== Metriche
+= Metriche
 Il gruppo adotta un sistema di metriche per monitorare processi e prodotti.
 
 #figure(
@@ -646,7 +647,7 @@ Il gruppo adotta un sistema di metriche per monitorare processi e prodotti.
   caption: [Tabella delle metriche di progetto],
 )
 
-=== Strategie di Verifica
+== Strategie di Verifica
 - *Analisi Statica*: Review manuale del codice e uso di #def("linter") (#def("ESLint") per JS/TS, Pylint/Black per #def("Python")).
 - *Analisi Dinamica*: Esecuzione della suite di test.
 - *Test*:
@@ -654,13 +655,13 @@ Il gruppo adotta un sistema di metriche per monitorare processi e prodotti.
   - *Integration Test*: Verifica delle interazioni tra moduli.
   - *System Test*: Verifica del sistema completo rispetto ai requisiti.
 
-=== Software Quality Assurance #def("SQA")
+== Software Quality Assurance #def("SQA")
 La #def("SQA") monitora tutti i processi per garantire conformità agli standard (es. #def("ISO 9001"), #def("ISO 25010")). Include:
 - *Politiche*: Definizione di procedure per ogni fase (requisiti, design, testing).
 - *Audit*: Revisioni periodiche per identificare non conformità.
 - *Attività*: Review di documenti, controllo qualità codice, #def("Gestione Rischi").
 
-=== Validazione
+== Validazione
 La validazione conferma che il prodotto soddisfi le esigenze degli utenti.
 - *#def("Test di Accettazione")*: Verifica finale con stakeholder per requisiti non funzionali (es. usabilità, prestazioni).
 - *Feedback Utente*: Raccolta di input durante demo o beta testing.
