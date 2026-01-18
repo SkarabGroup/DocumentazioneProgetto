@@ -13,33 +13,40 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.32.0"
+#let versione = "v0.32.1"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
+    "2026/01/18",
+    "0.32.1",
+    "Riorganizzazione requisiti funzionali relativi ai casi d'uso da UC1 a UC4",
+    members.alice,
+  ),
+  (
     "2026/01/17",
     "0.32.0",
     "Modifica alla struttura dei requisiti",
     members.antonio,
+    members.alice,
   ),
   (
     "2026/01/17",
     "0.31.0",
-    "Modifica ai UC19, 20 e da 24 a 29",
+    "Modifica UC19, 20 e da 24 a 29",
     members.martinello,
   ),
   (
     "2026/01/17",
-    "0.30.1",
+    "0.30.2",
     "Modificati requisiti funzionali. Eliminazione requisiti di performance",
     members.alice,
   ),
   (
     "2026/01/17",
-    "0.30.0",
-    "Aggiunta UC30, UC31, UC32",
+    "0.30.1",
+    "Modifica UC30. Aggiunta UC31, UC32",
     members.berengan,
   ),
   (
@@ -301,20 +308,20 @@ L'obiettivo stesso del documento identifica i suoi destinatari principali, che i
 
 == Classificazione dei Requisiti
 
-Ogni requisito individuato viene classificato secondo due criteri distinti: la *priorità* (importanza strategica) e la *tipologia* (natura tecnica).
+Ogni Requisito individuato viene classificato secondo due criteri distinti: la *priorità* (importanza strategica) e la *tipologia* (natura tecnica).
 
 ==== Classificazione per Priorità
-I requisiti sono suddivisi in tre livelli di priorità in base alla loro necessità per il rilascio del sistema:
+I Requisiti sono suddivisi in tre livelli di priorità, definiti in base alla loro criticità per il successo del progetto e per il rilascio del Sistema:
 
-- #strong("Obbligatori"): Requisiti vincolanti e indispensabili. Il mancato soddisfacimento di anche solo uno di questi requisiti implica che il sistema non è conforme agli obiettivi minimi del progetto (#def("MVP")).
-- #strong("Desiderabili"): Requisiti che apportano valore aggiunto al sistema e che sarebbe auspicabile soddisfare, ma la cui omissione non compromette le funzionalità core del prodotto.
-- #strong("Opzionali"): Requisiti di importanza marginale o funzionalità avanzate che possono essere implementate solo se le risorse e i tempi lo consentono. Sono candidati ideali per sviluppi futuri (versioni successive alla 1.0).
+- #strong("Obbligatori"): Requisiti vincolanti e indispensabili. Il mancato soddisfacimento di anche uno solo di questi requisiti rende il sistema non conforme agli obiettivi minimi del progetto (#def("MVP")).
+- #strong("Desiderabili"): Requisiti che apportano valore aggiunto al sistema. Sebbene la loro implementazione sia auspicabile, la loro eventuale omissione non compromette le funzionalità core del prodotto.
+- #strong("Opzionali"): Requisiti di importanza secondaria o funzionalità avanzate da implementare solo qualora le risorse e le tempistiche lo consentano. Sono candidati ideali per sviluppi futuri (versioni successive alla 1.0.0).
 
 ==== Classificazione per Tipologia
-Seguendo la classificazinoe proposta da #link(<R3>)[#underline[Dispense del corso di Ingegneria del Software sull'analisi dei requisiti]], i requisiti sono inizialmente suddivisi in 3 macro-categorie: 
-- #strong("Requisiti Funzionali (FR)"): riguardano l'usabilità del prodotto finale;
-- #strong("Requisiti di Qualità (QR)"): includono gli strumenti e la documentazione da fornire; 
-- #strong("Requisiti di Vincolo (VR)"): fanno riferimento alle tecnologie da utilizzare;
+Seguendo la classificazione definita nelle #link(<R3>)[#underline[Dispense del corso di Ingegneria del Software sull'Analisi dei Requisiti]], i Requisiti sono stati suddivisi in 3 macro-categorie:
+- #strong("Requisiti Funzionali (FR)"): descrivono cosa il Sistema deve fare, inclusi i comportamenti, le reazioni a specifici input e le regole di validazione dei dati;
+- #strong("Requisiti di Qualità (QR)"): specificano caratteristiche come le prestazioni e la documentazione tecnica a corredo del _Software_;
+- #strong("Requisiti di Vincolo (VR)"): impongono limiti e condizioni di progetto, come l'utilizzo di tecnologie specifiche, standard o piattaforme;
 
 === Fonte dei requisiti
 I requisiti sono stati identificati a partire dalle seguenti fonti:
@@ -325,7 +332,7 @@ I requisiti sono stati identificati a partire dalle seguenti fonti:
 - #strong("Norme di Progetto"): requisiti necessari per rispettare le norme di progetto definite nel documento di Norme di Progetto;
 
 === Descrizione dei Requisiti
-Ogni requisito è identificato da un codice univoco che ne facilita il tracciamento e la gestione durante l'intero ciclo di vita del progetto. Verrà inoltre fornita una descrizione concisa del requisito, insieme alla sua classificazione per priorità e tipologia.
+Ogni Requisito è identificato da un codice univoco, strutturato per garantirne la *piena tracciabilità* e facilitarne la gestione lungo l'intero ciclo di vita del progetto. Per ciascuno di essi vengono specificati: una descrizione concisa, la categoria tipologica di appartenenza e il relativo livello di priorità.
 
 /*In accordo con lo standard #link(<R2>)[#underline[ISO/IEC/IEEE International Standard - Systems and software engineering -- Life cycle
   processes -- Requirements engineering]], i requisiti sono ulteriormente categorizzati in base alla loro natura tecnica:
@@ -4024,30 +4031,19 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati da _Skarab Group_.
 
 #let fr_counter = counter("FR")
-#let ur_counter = counter("UR")
-#let ir_counter = counter("IR")
-#let lr_counter = counter("LDR")
-#let dc_counter = counter("DC")
-#let sa_counter = counter("SSA")
+#let qr_counter = counter("QR")
+#let vr_counter = counter("VR")
 
 #let FRx = context [FR#fr_counter.step()#fr_counter.display()]
-#let URx = context [UR#ur_counter.step()#ur_counter.display()]
-#let IRx = context [IR#ir_counter.step()#ir_counter.display()]
-#let LDRx = context [LDR#lr_counter.step()#lr_counter.display()]
-#let DCx = context [DC#dc_counter.step()#dc_counter.display()]
-#let SSAx = context [SSA#sa_counter.step()#sa_counter.display()]
-
+#let QRx = context [QR#qr_counter.step()#qr_counter.display()]
+#let VRx = context [VR#vr_counter.step()#vr_counter.display()]
 
 //partono da 1
 #fr_counter.step()
-#ur_counter.step()
-#ir_counter.step()
-#lr_counter.step()
-#dc_counter.step()
-#sa_counter.step()
+#qr_counter.step()
+#vr_counter.step()
 
 == Requisiti Funzionali (FR)
-Descrivono cosa il sistema deve fare, inclusi i comportamenti, le reazioni a specifici input e le regole di validazione dei dati.
 
 #table(
   columns: (1fr, 3fr, 1fr),
@@ -4059,252 +4055,143 @@ Descrivono cosa il sistema deve fare, inclusi i comportamenti, le reazioni a spe
 
   // UC1
   [#FRx],
-  [L'utente non registrato, accedendo all'applicazione, deve poter visualizzare la pagina di registrazione],
+  [L'Utente non registrato deve poter visualizzare la pagina di registrazione],
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
   [#FRx],
-  [L'utente non registrato, completata la compilazione, deve inviare la richiesta tramite il pulsante di conferma],
+  [L'Utente non registrato deve poter inviare la richiesta di registrazione tramite pulsante di conferma],
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
   [#FRx],
-  [Completata la registrazione con successo, l'utente deve essere reindirizzato alla pagina di Login],
-  [#link(<UC1>)[#underline[\[UC1\]]]],
-  // UC1.1
-  [#FRx],
-  [L'utente non registrato, nella schermata di registrazione, deve inserire il proprio username nel campo di testo dedicato],
-  [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
-
-  [#FRx], [L'username deve avere una lunghezza minima di 4 caratteri], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
-
-  [#FRx], [L'username deve avere una lunghezza massima di 20 caratteri], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
-
-  [#FRx], [L'username deve contenere solo caratteri alfanumerici], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
+  [L'Utente non registrato deve poter inserire l'username nel campo dedicato],
+  [#link(<UC1>)[#underline[\[UC1\]]], #link(<UC1.1>)[#underline[\[UC1.1\]]]],
 
   [#FRx],
-  [Se l'username non rispetta il formato, deve essere mostrato un messaggio di errore specifico],
+  [L'Utente non registrato deve poter inserire l'email nel campo dedicato],
+  [#link(<UC1>)[#underline[\[UC1\]]], #link(<UC1.2>)[#underline[\[UC1.2\]]]],
+
+  [#FRx],
+  [L'Utente non registrato deve poter inserire la password nel campo dedicato],
+  [#link(<UC1>)[#underline[\[UC1\]]], #link(<UC1.3>)[#underline[\[UC1.3\]]]],
+
+  [#FRx],
+  [L'Utente deve ricevere un messaggio di errore se l'username non rispetta il formato],
   [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
 
   [#FRx],
-  [Se l'username non è disponibile, deve essere mostrato un messaggio di errore generico],
+  [L'Utente deve ricevere un messaggio di errore se l'username è già censito],
   [#link(<UC1.1.2>)[#underline[\[UC1.1.2\]]]],
-  //UC1.2
-  [#FRx],
-  [L'utente non registrato, nella schermata di registrazione, deve inserire il proprio indirizzo email nel campo di testo dedicato],
-  [#link(<UC1.2>)[#underline[\[UC1.2\]]]],
-
-  [#FRx], [L'email deve contenere il carattere '\@'], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
-
-  [#FRx], [L'email deve contenere un dominio valido], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
 
   [#FRx],
-  [Se l'email non rispetta il formato, deve essere mostrato un messaggio di errore specifico],
+  [L'Utente deve ricevere un messaggio di errore se l'email non rispetta il formato],
   [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
 
   [#FRx],
-  [Se l'email non è disponibile, deve essere mostrato un messaggio di errore generico],
+  [L'Utente deve ricevere un messaggio di errore se l'email è già censita],
   [#link(<UC1.2.2>)[#underline[\[UC1.2.2\]]]],
-  // UC1.3
-  [#FRx],
-  [L'utente non registrato, nella schermata di registrazione, deve inserire la propria password nel campo di testo dedicato],
-  [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
 
   [#FRx],
-  [Durante la digitazione della password, i caratteri inseriti (masking) devono essere nascosti],
-  [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
-
-  [#FRx],
-  [L'utente non registrato, durante l'inserimento, deve poter attivare la visualizzazione in chiaro della password],
-  [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
-
-  [#FRx], [La password deve avere una lunghezza minima di 8 caratteri], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
-
-  [#FRx], [La password deve contenere almeno una lettera maiuscola], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
-
-  [#FRx], [La password deve contenere almeno una lettera minuscola], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
-
-  [#FRx], [La password deve contenere almeno un numero], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
-
-  [#FRx], [La password deve contenere almeno un carattere speciale], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
-
-  [#FRx],
-  [Se la password non rispetta i criteri, deve essere mostrato un messaggio di errore specifico],
+  [L'Utente deve ricevere un messaggio di errore se la password non rispetta i vincoli di formato],
   [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
 
   // UC2
   [#FRx],
-  [L'utente registrato, accedendo all'applicazione, deve poter visualizzare la pagina di Login],
+  [L'Utente registrato deve poter visualizzare la pagina di autenticazione],
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
   [#FRx],
-  [L'utente registrato, dopo aver inserito le credenziali, deve inviare la richiesta tramite pulsante],
-  [#link(<UC2>)[#underline[\[UC2\]]]],
+  [L'Utente registrato deve poter inserire il proprio username per autenticarsi],
+  [#link(<UC2>)[#underline[\[UC2\]]], #link(<UC2.1>)[#underline[\[UC2.1\]]]],
 
   [#FRx],
-  [Completata l'autenticazione con successo, l'utente deve essere reindirizzato alla dashboard],
-  [#link(<UC2>)[#underline[\[UC2\]]]],
-  // UC2.1
-  [#FRx],
-  [In caso di autenticazione fallita, deve essere mostrato un messaggio di errore generico],
-  [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]], #link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]],
+  [L'Utente registrato deve poter inserire la propria password per autenticarsi],
+  [#link(<UC2>)[#underline[\[UC2\]]], #link(<UC2.2>)[#underline[\[UC2.2\]]]],
 
   [#FRx],
-  [L'utente registrato, nella schermata di Login, deve inserire il proprio username nel campo dedicato],
-  [#link(<UC2.1>)[#underline[\[UC2.1\]]]],
-
-  [#FRx],
-  [Gli spazi bianchi all'inizio e alla fine dell'username devono essere rimossi automaticamente],
-  [#link(<UC2.1>)[#underline[\[UC2.1\]]]],
-
-  [#FRx],
-  [L'username deve avere una lunghezza compresa tra 4 e 20 caratteri],
+  [L'Utente registrato deve ricevere un messaggio di errore se l'username non è conforme ai vincoli],
   [#link(<UC2.1.1>)[#underline[\[UC2.1.1\]]]],
 
-  [#FRx], [L'username deve contenere solo caratteri alfanumerici], [#link(<UC2.1.1>)[#underline[\[UC2.1.1\]]]],
+  [#FRx],
+  [L'Utente registrato deve ricevere un messaggio di errore se l'username non è censito],
+  [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
 
   [#FRx],
-  [Se il formato username non è valido, deve essere mostrato un messaggio di errore specifico],
-  [#link(<UC2.1.1>)[#underline[\[UC2.1.1\]]]],
-  // UC2.2
-  [#FRx],
-  [L'utente registrato, nella schermata di Login, deve inserire la propria password nel campo dedicato],
-  [#link(<UC2.2>)[#underline[\[UC2.2\]]]],
-
-  [#FRx],
-  [Durante la digitazione della password, i caratteri inseriti devono essere nascosti],
-  [#link(<UC2.2>)[#underline[\[UC2.2\]]]],
-
-  [#FRx],
-  [L'utente registrato, durante l'inserimento, deve poter attivare la visualizzazione in chiaro della password],
-  [#link(<UC2.2>)[#underline[\[UC2.2\]]]],
-
-  [#FRx],
-  [La password deve rispettare i criteri di complessità (lunghezza, caratteri)],
+  [L'Utente registrato deve ricevere un messaggio di errore se la password non è conforme],
   [#link(<UC2.2.1>)[#underline[\[UC2.2.1\]]]],
 
   [#FRx],
-  [Se il formato password non è valido, deve essere mostrato un messaggio di errore specifico],
-  [#link(<UC2.2.1>)[#underline[\[UC2.2.1\]]]],
+  [L'Utente registrato deve ricevere un messaggio di errore se la password non è corretta],
+  [#link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]],
 
   // UC3
   [#FRx],
-  [L'utente autenticato deve poter accedere alla sezione di collegamento account GitHub],
+  [L'Utente autenticato deve poter accedere alla sezione di collegamento account GitHub],
   [#link(<UC3>)[#underline[\[UC3\]]]],
 
   [#FRx],
-  [Deve essere generato l'URL di autorizzazione corretto per l'OAuth GitHub],
-  [#link(<UC3>)[#underline[\[UC3\]]]],
-
-  [#FRx], [L'utente deve essere reindirizzato verso il portale esterno], [#link(<UC3>)[#underline[\[UC3\]]]],
-  // UC3.1
-  [#FRx],
-  [L'utente, prima di essere reindirizzato, deve visualizzare un avviso informativo],
+  [L'Utente autenticato deve visualizzare un avviso prima del redirect a GitHub],
   [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
 
   [#FRx],
-  [L'utente deve confermare la volontà di procedere con il collegamento],
+  [L'Utente deve poter confermare la volontà di procedere con il collegamento a GitHub],
   [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
 
-  [#FRx],
-  [L'utente deve poter annullare la procedura tramite comando dedicato],
-  [#link(<UC3.1.1>)[#underline[\[UC3.1.1\]]]],
+  [#FRx], [L'Utente deve poter rifiutare il collegamento a GitHub], [#link(<UC3.1.1>)[#underline[\[UC3.1.1\]]]],
 
-  [#FRx], [In caso di annullamento, deve essere interrotta la procedura], [#link(<UC3.1.1>)[#underline[\[UC3.1.1\]]]],
-  // UC3.2
   [#FRx],
-  [La richiesta di callback proveniente da GitHub deve essere catturata],
+  [L'Utente deve poter completare l'autorizzazione tramite il reindirizzamento a GitHub e il successivo ritorno automatico all'applicazione per il recupero del codice identificativo],
   [#link(<UC3.2>)[#underline[\[UC3.2\]]]],
 
   [#FRx],
-  [Il codice identificativo temporaneo dalla callback deve essere estratto],
-  [#link(<UC3.2>)[#underline[\[UC3.2\]]]],
-
-  [#FRx], [La presenza del codice nella risposta deve essere verificata], [#link(<UC3.2.1>)[#underline[\[UC3.2.1\]]]],
-
-  [#FRx],
-  [Se il codice non è stato ricevuto, deve essere mostrato un errore specifico],
+  [L'Utente deve ricevere un messaggio di errore se il codice GitHub non viene ricevuto],
   [#link(<UC3.2.1>)[#underline[\[UC3.2.1\]]]],
 
   [#FRx],
-  [L'account GitHub non deve essere già associato a un altro utente],
+  [L'Utente deve ricevere un messaggio di errore se il codice è già associato ad altro utente],
   [#link(<UC3.2.2>)[#underline[\[UC3.2.2\]]]],
 
   [#FRx],
-  [Se l'account GitHub risulta già censito, il collegamento deve essere impedito],
-  [#link(<UC3.2.2>)[#underline[\[UC3.2.2\]]]],
-
-  [#FRx],
-  [Se l'account GitHub è già associato, deve essere mostrato un errore specifico],
-  [#link(<UC3.2.2>)[#underline[\[UC3.2.2\]]]],
-
-  [#FRx], [Il codice ricevuto deve essere conforme al formato], [#link(<UC3.2.3>)[#underline[\[UC3.2.3\]]]],
-
-  [#FRx],
-  [Se il codice non rispetta il formato, deve essere mostrato un errore specifico],
+  [L'Utente deve ricevere un messaggio di errore se il codice non è conforme al formato],
   [#link(<UC3.2.3>)[#underline[\[UC3.2.3\]]]],
 
   // UC4
+  [#FRx], [L'Utente deve poter accedere alla sezione di richiesta analisi], [#link(<UC4>)[#underline[\[UC4\]]]],
+
   [#FRx],
-  [L'utente autenticato avanzato deve poter accedere alla sezione di richiesta analisi],
-  [#link(<UC4>)[#underline[\[UC4\]]]],
-  // UC4.1
-  [#FRx],
-  [L'utente deve poter inserire l'URL del repository GitHub nel campo di testo dedicato],
+  [L'Utente deve poter inserire l'URL del repository GitHub nel campo dedicato],
   [#link(<UC4.1>)[#underline[\[UC4.1\]]]],
 
-  [#FRx], [L'URL deve iniziare con il protocollo 'https://'], [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
-
-  [#FRx], [Il dominio dell'URL deve essere 'github.com'], [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
-
   [#FRx],
-  [L'effettiva esistenza del repository deve essere verificata tramite chiamata alle API di GitHub],
-  [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
-
-  [#FRx], [Il repository deve essere accessibile (pubblico o autorizzato)], [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
-
-  [#FRx],
-  [Se l'URL non rispetta il formato, deve essere mostrato un errore specifico],
+  [L'Utente deve ricevere un messaggio di errore se l'URL non è conforme ai vincoli di formato],
   [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
 
   [#FRx],
-  [Se il repository non è accessibile o inesistente, deve essere mostrato un errore specifico],
+  [L'Utente deve ricevere un messaggio di errore se il repository non è accessibile o è inesistente],
   [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
 
   [#FRx],
-  [Se il campo URL è vuoto al momento dell'invio, deve essere mostrato un errore],
+  [L'Utente deve ricevere un messaggio di errore se non inserisce alcun URL],
   [#link(<UC4.1.3>)[#underline[\[UC4.1.3\]]]],
-  // UC4.2
-  [#FRx],
-  [L'utente deve poter selezionare le aree di interesse per l'analisi (Codice, Documentazione)],
-  [#link(<UC4.2>)[#underline[\[UC4.2\]]]],
 
-  [#FRx], [L'utente deve selezionare almeno un'area di interesse], [#link(<UC4.2.1>)[#underline[\[UC4.2.1\]]]],
+  [#FRx], [L'Utente deve poter selezionare le aree di interesse per l'analisi], [#link(<UC4.2>)[#underline[\[UC4.2\]]]],
 
   [#FRx],
-  [Se nessuna area è selezionata, deve essere mostrato un errore specifico],
+  [L'Utente deve ricevere un messaggio di errore se non seleziona alcuna area di interesse],
   [#link(<UC4.2.1>)[#underline[\[UC4.2.1\]]]],
-  // UC4.3
+
   [#FRx],
-  [L'utente deve inviare la richiesta di analisi tramite pulsante di conferma],
+  [L'utente deve poter inviare la richiesta di analisi tramite pulsante di conferma],
   [#link(<UC4.3>)[#underline[\[UC4.3\]]]],
 
   [#FRx],
-  [Deve essere verificata l'esistenza di un report di analisi aggiornato per il commit corrente],
+  [L'Utente deve ricevere un avviso se l'ultimo report è già up-to-date],
   [#link(<UC4.3.1>)[#underline[\[UC4.3.1\]]]],
 
   [#FRx],
-  [L'avvio di una nuova analisi deve essere inibito se il report esistente è già up-to-date],
-  [#link(<UC4.3.1>)[#underline[\[UC4.3.1\]]]],
-
-  [#FRx],
-  [Deve essere verificato se un'analisi per lo stesso repository è già in corso di elaborazione],
-  [#link(<UC4.3.2>)[#underline[\[UC4.3.2\]]]],
-
-  [#FRx],
-  [L'avvio di una nuova analisi deve essere inibito se ne esiste già una in corso per lo stesso repository],
+  [L'Utente deve ricevere un avviso se un'analisi è già in elaborazione],
   [#link(<UC4.3.2>)[#underline[\[UC4.3.2\]]]],
 
   // UC5
-  // UC5.1
   [#FRx],
   [L'utente autenticato avanzato deve poter accedere alla sezione di visualizzazione dei report di analisi],
   [#link(<UC5.1>)[#underline[\[UC5.1\]]]],
@@ -4534,8 +4421,8 @@ Descrivono cosa il sistema deve fare, inclusi i comportamenti, le reazioni a spe
 )
 
 #pagebreak()
-== Requisiti di Usabilità (UR)
-Riguardano l'efficacia, l'efficienza e la soddisfazione dell'interazione utente, inclusi feedback visivi e facilità di apprendimento.
+== Requisiti di Qualità (QR)
+
 #table(
   columns: (1fr, 3fr, 1fr),
   inset: 10pt,
@@ -4543,97 +4430,11 @@ Riguardano l'efficacia, l'efficienza e la soddisfazione dell'interazione utente,
   table.header([*ID*], [*Descrizione*], [*Rif.*]),
   fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
   align: (col, row) => (center, left, center).at(col) + horizon,
-
-  // UC1
-  [#URx], [Il Sistema deve indicare graficamente i campi obbligatori], [#link(<UC1>)[#underline[\[UC1\]]]],
-  [#URx],
-  [Il Sistema deve fornire feedback di validazione testuale immediato (inline)],
-  [#link(<UC1>)[#underline[\[UC1\]]]],
-
-  // UC2
-  [#URx],
-  [Il Sistema deve permettere l'invio del modulo di login tramite il tasto "Invio" della tastiera],
-  [#link(<UC2>)[#underline[\[UC2\]]]],
-
-  [#URx],
-  [Il Sistema, in caso di errore, deve mantenere il focus sul campo Password],
-  [#link(<UC2>)[#underline[\[UC2\]]]],
-
-  // UC3
-  [#URx],
-  [Il messaggio di avviso deve spiegare chiaramente che l'utente sta lasciando l'applicazione],
-  [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
-
-  [#URx],
-  [In caso di errore, il sistema deve suggerire all'utente di riprovare l'operazione],
-  [#link(<UC3.2.1>)[#underline[\[UC3.2.1\]]]],
-
-  //UC4
-  [#URx],
-  [Il Sistema deve mostrare un indicatore visivo di caricamento (spinner) durante la verifica dell'URL del repository],
-  [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
-
-  [#URx],
-  [In caso di analisi già esistente o in corso, il messaggio informativo deve fornire un link diretto al report o allo stato di avanzamento],
-  [#link(<UC4.3.1>)[#underline[\[UC4.3.1\]]], #link(<UC4.3.2>)[#underline[\[UC4.3.2\]]]],
-
-  // UC5
-  [#URx],
-  [Il Sistema deve ordinare l'elenco dei report cronologicamente (dal più recente al meno recente)],
-  [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
-
-  [#URx],
-  [Il Sistema deve utilizzare rappresentazioni grafiche (es. grafici a torta/barre) per riassumere le metriche di analisi],
-  [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
-
-  [#URx],
-  [Il Sistema deve utilizzare indicatori cromatici standard (Rosso/Giallo/Verde) per indicare la gravità delle problematiche],
-  [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
-
-  // UC6
-  [#URx],
-  [L'utente autenticato avanzato deve poter selezionare le date tramite un calendario visuale],
-  [#link(<UC6>)[#underline[\[UC6\]]]],
-
-  [#URx],
-  [L'utente autenticato avanzato deve comprendere chiaramente dal messaggio di errore perché l'intervallo non è valido],
-  [#link(<UC6.2>)[#underline[\[UC6.2\]]]],
-
-  [#URx],
-  [L'utente autenticato avanzato deve visualizzare nel messaggio di errore il limite massimo di ampiezza dell'intervallo quando viene superato],
-  [#link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]],
-
-  // UC7
-  [#URx],
-  [L'utente autenticato avanzato deve poter distinguere facilmente nel grafico le diverse metriche tramite l'uso di colori e di una legenda],
-  [#link(<UC7>)[#underline[\[UC7\]]]],
-
-  // UC8
-  [#URx],
-  [L'utente autenticato avanzato deve poter identificare immediatamente nella tabella i miglioramenti o i peggioramenti dei report tramite indicatori visivi],
-  [#link(<UC8>)[#underline[\[UC8\]]]],
-
-  [#URx],
-  [L'utente autenticato avanzato deve poter distinguere visivamente nella tabella quale colonna è attualmente utilizzata per l'ordinamento],
-  [#link(<UC8>)[#underline[\[UC8\]]]],
-
-  // UC14
-  [#URx],
-  [L'utente autenticato avanzato deve poter riconoscere facilmente ogni formato disponibile grazie a icone nella modale di selezione],
-  [#link(<UC14.1>)[#underline[\[UC14.1\]]]],
-
-  [#URx],
-  [L'utente autenticato avanzato deve comprendere chiaramente l'azione necessaria dal messaggio di errore quando nessun formato è selezionato],
-  [#link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]],
-
-  [#URx],
-  [L'utente autenticato avanzato deve visualizzare un indicatore di caricamento (spinner) durante la generazione del file],
-  [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 )
 
 #pagebreak()
-== Requisiti di Interfaccia (IR)
-Specificano le interazioni logiche e visive con l'utente (elementi UI) e con sistemi esterni (API, protocolli).
+== Requisiti di Vincolo (VR)
+
 #table(
   columns: (1fr, 3fr, 1fr),
   inset: 10pt,
@@ -4641,377 +4442,4 @@ Specificano le interazioni logiche e visive con l'utente (elementi UI) e con sis
   table.header([*ID*], [*Descrizione*], [*Rif.*]),
   fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
   align: (col, row) => (center, left, center).at(col) + horizon,
-
-  // UC1
-  [#IRx],
-  [Il campo password deve includere un'icona interattiva per il toggle della visibilità],
-  [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
-
-  [#IRx],
-  [Il Sistema, in caso di errore, deve evidenziare il bordo del campo errato con il colore rosso],
-  [#link(<UC1>)[#underline[\[UC1\]]]],
-
-  // UC2
-  [#IRx],
-  [Il campo password deve includere un'icona interattiva per il toggle della visibilità],
-  [#link(<UC2.2>)[#underline[\[UC2.2\]]]],
-
-  [#IRx],
-  [Il modulo di login deve includere un collegamento per il recupero della password],
-  [#link(<UC2>)[#underline[\[UC2\]]]],
-
-  // UC3
-  [#IRx], [Il pulsante di collegamento deve includere il logo ufficiale di GitHub], [#link(<UC3>)[#underline[\[UC3\]]]],
-  [#IRx],
-  [La modale di conferma deve presentare due azioni distinte: "Procedi" e "Annulla"],
-  [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
-
-  //UC4
-  [#IRx],
-  [Il modulo di richiesta deve presentare le opzioni "Analisi Codice" e "Analisi Documentazione" come checkbox indipendenti],
-  [#link(<UC4.2>)[#underline[\[UC4.2\]]]],
-
-  [#IRx],
-  [Il pulsante di invio richiesta deve essere etichettato chiaramente (es. "Avvia Analisi")],
-  [#link(<UC4.3>)[#underline[\[UC4.3\]]]],
-
-  [#IRx],
-  [Il Sistema deve disabilitare il pulsante di invio se la validazione client-side dei campi fallisce],
-  [#link(<UC4.3>)[#underline[\[UC4.3\]]]],
-
-  // UC5
-  [#IRx],
-  [L'elenco dei report deve mostrare per ogni elemento: Nome Repository, Data Analisi e Stato],
-  [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
-
-  [#IRx],
-  [Le opzioni di selezione dati devono essere presentate tramite checkbox o interruttori (toggle)],
-  [#link(<UC5.3>)[#underline[\[UC5.3\]]]],
-
-  [#IRx],
-  [La vista di dettaglio deve permettere di espandere le singole voci per visualizzare suggerimenti di correzione],
-  [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
-
-  // UC6
-  [#IRx],
-  [La selezione dell'intervallo deve avvenire tramite un pulsante chiaramente etichettato nella pagina di visualizzazione del report],
-  [#link(<UC6>)[#underline[\[UC6\]]]],
-
-  [#IRx], [Il calendario di selezione date deve essere visualizzato in una modale], [#link(<UC6>)[#underline[\[UC6\]]]],
-
-  [#IRx],
-  [Il pulsante di "Conferma" dell'intervallo temporale deve essere disabilitato fino a quando non vengono selezionate entrambe le date],
-  [#link(<UC6.1>)[#underline[\[UC6.1\]]]],
-
-  // UC7
-  [#IRx],
-  [La visualizzazione del grafico comparativo deve avvenire tramite il pulsante "Visualizza Grafico"],
-  [#link(<UC7>)[#underline[\[UC7\]]]],
-
-  [#IRx],
-  [Il grafico deve avere assi chiaramente etichettati (tempo, valori metriche)],
-  [#link(<UC7>)[#underline[\[UC7\]]]],
-
-  [#IRx], [La legenda del grafico deve identificare le diverse metriche], [#link(<UC7>)[#underline[\[UC7\]]]],
-
-  [#IRx],
-  [Passando con il mouse sui punti del grafico, si devono visualizzare tooltip con dettagli (valori esatti delle metriche)],
-  [#link(<UC7>)[#underline[\[UC7\]]]],
-
-  // UC8
-  [#IRx],
-  [La visualizzazione della tabella comparativa deve avvenire tramite il pulsante "Visualizza Tabella"],
-  [#link(<UC8>)[#underline[\[UC8\]]]],
-
-  [#IRx],
-  [Nella tabella devono essere presenti header di colonna con etichette chiare (es. "Data Report", "Vulnerabilità")],
-  [#link(<UC8>)[#underline[\[UC8\]]]],
-
-  [#IRx],
-  [Gli header di colonna devono essere cliccabili e presentare delle icone di ordinamento (es. ↑↓)],
-  [#link(<UC8>)[#underline[\[UC8\]]]],
-
-  [#IRx],
-  [Nelle celle della tabella devono essere visualizzati indicatori di variazione (△ aumento, ▽ diminuzione) con codice colore per i delta (Verde/Giallo/Rosso)],
-  [#link(<UC8>)[#underline[\[UC8\]]]],
-
-  [#IRx],
-  [Il pulsante "Apri Report Completo" deve permettere di aprire il report completo],
-  [#link(<UC8>)[#underline[\[UC8\]]]],
-
-  // UC14
-  [#IRx],
-  [Il pulsante "Esporta Report" deve essere facilmente individuabile nella pagina di visualizzazione del report di analisi],
-  [#link(<UC14>)[#underline[\[UC14\]]]],
-
-  [#IRx],
-  [Il formato di esportazione deve essere selezionabile tramite card nella modale],
-  [#link(<UC14.1>)[#underline[\[UC14.1\]]]],
-
-  [#IRx],
-  [Il pulsante di "Conferma" deve essere cliccabile solo dopo aver selezionato un formato (pulsante disabilitato fino alla selezione)],
-  [#link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]],
-)
-
-#pagebreak()
-== Requisiti Logici del DB (LDR)
-Definiscono la struttura, l'organizzazione, la conservazione e i vincoli di integrità dei dati (es. unicità, relazioni).
-#table(
-  columns: (1fr, 3fr, 1fr),
-  inset: 10pt,
-  stroke: 0.5pt + luma(200),
-  table.header([*ID*], [*Descrizione*], [*Rif.*]),
-  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
-  align: (col, row) => (center, left, center).at(col) + horizon,
-
-  // UC1
-  [#LDRx],
-  [Il database deve imporre un vincolo di unicità sulla colonna Username],
-  [#link(<UC1.1.2>)[#underline[\[UC1.1.2\]]]],
-
-  [#LDRx],
-  [Il database deve imporre un vincolo di unicità sulla colonna Email],
-  [#link(<UC1.2.2>)[#underline[\[UC1.2.2\]]]],
-
-  [#LDRx],
-  [Il database deve memorizzare la data e l'ora di creazione del profilo utente],
-  [#link(<UC1>)[#underline[\[UC1\]]]],
-
-  // UC2
-  [#LDRx],
-  [Il Sistema deve eseguire la ricerca utente in modalità case-insensitive],
-  [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
-
-  [#LDRx],
-  [Il Sistema deve aggiornare il timestamp di "Ultimo Accesso" al login avvenuto],
-  [#link(<UC2>)[#underline[\[UC2\]]]],
-
-  // UC3
-  [#LDRx],
-  [Il database deve imporre un vincolo di unicità sulla colonna dell'ID GitHub],
-  [#link(<UC3.2.2>)[#underline[\[UC3.2.2\]]]],
-
-  [#LDRx], [Il database deve memorizzare l'Access Token di GitHub], [#link(<UC3.2>)[#underline[\[UC3.2\]]]],
-
-  //UC4
-  [#LDRx],
-  [Il database deve memorizzare la richiesta di analisi associandola univocamente all'ID dell'utente e all'URL del repository],
-  [#link(<UC4.3>)[#underline[\[UC4.3\]]]],
-
-  [#LDRx],
-  [Il database deve registrare il timestamp di creazione della richiesta],
-  [#link(<UC4.3>)[#underline[\[UC4.3\]]]],
-
-  [#LDRx],
-  [Il database deve utilizzare la coppia (URL Repository, Commit SHA) per identificare duplicati o analisi aggiornate],
-  [#link(<UC4.3.1>)[#underline[\[UC4.3.1\]]]],
-
-  // UC5
-  [#LDRx],
-  [Il Sistema deve eseguire la query di recupero report filtrando rigorosamente per l'ID dell'utente autenticato],
-  [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
-
-  [#LDRx],
-  [Il Sistema deve associare ogni report al relativo repository GitHub presente nel database],
-  [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
-
-  // UC6
-  [#LDRx],
-  [Il database deve supportare il recupero report in un intervallo temporale specificato],
-  [#link(<UC6>)[#underline[\[UC6\]]]],
-
-  // UC7
-  [#LDRx],
-  [I report per timestamp devono essere ordinati in ordine cronologico per la generazione del grafico],
-  [#link(<UC7>)[#underline[\[UC7\]]]],
-
-  // UC8
-  [#LDRx],
-  [Le variazioni (delta) tra report consecutivi devono essere calcolate per la visualizzazione nella tabella],
-  [#link(<UC8>)[#underline[\[UC8\]]]],
-
-  // UC7-8 (Requisito in comune)
-  [#LDRx],
-  [Il database deve memorizzare per ogni report le metriche necessarie al confronto],
-  [#link(<UC7>)[#underline[\[UC7\]]], #link(<UC8>)[#underline[\[UC8\]]]],
-
-  // UC14
-  [#LDRx],
-  [Il database deve memorizzare i timestamp delle esportazioni effettuate dall'utente],
-  [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
-)
-
-#pagebreak()
-== Limitazioni di Design (DC)
-Vincoli imposti da scelte tecnologiche obbligatorie, standard industriali, protocolli di comunicazione o normative
-#table(
-  columns: (1fr, 3fr, 1fr),
-  inset: 10pt,
-  stroke: 0.5pt + luma(200),
-  table.header([*ID*], [*Descrizione*], [*Rif.*]),
-  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
-  align: (col, row) => (center, left, center).at(col) + horizon,
-
-  // UC1
-  [#DCx],
-  [Il Sistema deve trasmettere i dati di registrazione esclusivamente tramite protocollo HTTPS],
-  [#link(<UC1>)[#underline[\[UC1\]]]],
-
-  [#DCx],
-  [Il Sistema deve eseguire la validazione dei dati sia lato client che lato server],
-  [#link(<UC1>)[#underline[\[UC1\]]]],
-
-  // UC2
-  [#DCx],
-  [Il Sistema deve trasmettere le credenziali esclusivamente tramite protocollo HTTPS],
-  [#link(<UC2>)[#underline[\[UC2\]]]],
-
-  // UC3
-  [#DCx], [Il processo deve aderire allo standard OAuth 2.0 (RFC 6749)], [#link(<UC3.2>)[#underline[\[UC3.2\]]]],
-  [#DCx],
-  [Tutte le comunicazioni con GitHub devono avvenire su protocollo HTTPS],
-  [#link(<UC3.2>)[#underline[\[UC3.2\]]]],
-
-  // UC4
-  [#DCx],
-  [L'elaborazione dell'analisi deve essere gestita in modo asincrono tramite una coda di messaggi (Message Queue)],
-  [#link(<UC4.3>)[#underline[\[UC4.3\]]]],
-
-  [#DCx],
-  [Il Sistema deve utilizzare le API ufficiali di GitHub (REST o GraphQL) per verificare lo stato del repository],
-  [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
-
-  // UC5
-  [#DCx],
-  [La visualizzazione dei report deve essere responsiva (adattabile a desktop e mobile)],
-  [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
-
-  // UC6
-  [#DCx],
-  [Il calendario di selezione date deve utilizzare il formato ISO 8601 (YYYY-MM-DD) per lo storage],
-  [#link(<UC6>)[#underline[\[UC6\]]]],
-
-  [#DCx],
-  [Per recuperare i report nell'intervallo temporale specificato, devono essere utilizzate le API REST interne],
-  [#link(<UC6>)[#underline[\[UC6\]]]],
-
-  [#DCx], [La selezione dell'intervallo temporale deve avere un limite massimo],
-  // limite da stabilire
-  [#link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]],
-
-  // UC7
-  [#DCx],
-  [La visualizzazione del grafico deve essere responsiva (adattabile a desktop e mobile)],
-  [#link(<UC7>)[#underline[\[UC7\]]]],
-
-  // UC8
-  [#DCx],
-  [L'ordinamento della tabella deve essere implementato lato client per performance ottimali],
-  [#link(<UC8>)[#underline[\[UC8\]]]],
-
-  [#DCx],
-  [La tabella deve implementare virtualizzazione (virtual scrolling) per ottimizzare le performance di rendering],
-  [#link(<UC8>)[#underline[\[UC8\]]]],
-  // se numero righe elevato
-
-  // UC14
-  [#DCx],
-  [I file esportati devono essere generati esclusivamente lato server, per garantire consistenza del formato],
-  [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
-
-  [#DCx],
-  [Deve essere possibile esportare report contemporaneamente ad altri utenti senza conflitti],
-  [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
-)
-
-#pagebreak()
-== Attributi del Software di Sistema (SSA)
-Caratteristiche di qualità non funzionali critiche, principalmente focalizzate su Sicurezza (cifratura, protezione), Affidabilità e Robustezza.
-#table(
-  columns: (1fr, 3fr, 1fr),
-  inset: 10pt,
-  stroke: 0.5pt + luma(200),
-  table.header([*ID*], [*Descrizione*], [*Rif.*]),
-  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
-  align: (col, row) => (center, left, center).at(col) + horizon,
-
-  // UC1
-  [#SSAx],
-  [Il Sistema, finché il form non è valido, deve mantenere il pulsante di conferma disabilitato],
-  [#link(<UC1>)[#underline[\[UC1\]]]],
-
-  [#SSAx],
-  [Il Sistema, in caso di username esistente, deve restituire un errore generico per prevenire l'enumerazione],
-  [#link(<UC1.1.2>)[#underline[\[UC1.1.2\]]]],
-
-  [#SSAx],
-  [Il Sistema, in caso di email esistente, deve restituire un errore generico per prevenire l'enumerazione],
-  [#link(<UC1.2.2>)[#underline[\[UC1.2.2\]]]],
-
-  [#SSAx],
-  [Il Sistema deve memorizzare la password applicando l'algoritmo di hashing Argon2id],
-  [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
-  // UC2
-  [#SSAx],
-  [Il Sistema deve utilizzare messaggi di errore identici per credenziali errate (Anti-Enumeration)],
-  [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]], #link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]],
-
-  [#SSAx],
-  [Il Sistema deve verificare la password confrontando l'hash fornito con quello memorizzato (Argon2id)],
-  [#link(<UC2>)[#underline[\[UC2\]]]],
-
-  // UC3
-  [#SSAx],
-  [Il Sistema deve validare il parametro `state` per prevenire attacchi CSRF],
-  [#link(<UC3.2>)[#underline[\[UC3.2\]]]],
-
-  [#SSAx],
-  [Il Sistema deve memorizzare l'Access Token in formato cifrato (es. AES-256)],
-  [#link(<UC3.2>)[#underline[\[UC3.2\]]]],
-
-  //UC4
-  [#SSAx],
-  [Il Sistema deve sanitizzare l'input URL per prevenire attacchi di tipo Command Injection prima di utilizzarlo in operazioni di sistema],
-  [#link(<UC4.1>)[#underline[\[UC4.1\]]]],
-
-  [#SSAx],
-  [Il Sistema deve garantire che un utente possa richiedere l'analisi solo per repository pubblici o per quelli privati a cui ha esplicitamente accesso],
-  [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
-
-  // UC5
-  [#SSAx],
-  [Il Sistema deve verificare che l'utente abbia i permessi di lettura per il report richiesto (IDOR Protection)],
-  [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
-
-  [#SSAx],
-  [Il Sistema deve sanitizzare (HTML escaping) qualsiasi input proveniente dal repository analizzato prima di visualizzarlo],
-  [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
-
-  // UC6
-  [#SSAx],
-  [L'utente autenticato avanzato deve poter visualizzare nel confronto temporale solo i report per cui possiede i permessi di lettura (IDOR Protection)],
-  [#link(<UC6>)[#underline[\[UC6\]]]],
-
-  // UC7
-  [#SSAx],
-  [L'utente autenticato avanzato deve visualizzare nel grafico dati sanitizzati per prevenire attacchi XSS],
-  [#link(<UC7>)[#underline[\[UC7\]]]],
-
-  [#SSAx],
-  [L'utente autenticato avanzato deve visualizzare nel grafico valori numerici validati per prevenire injection di codice malevolo],
-  [#link(<UC7>)[#underline[\[UC7\]]]],
-
-  // UC8
-  [#SSAx],
-  [L'utente autenticato avanzato deve visualizzare nella tabella dati sanitizzati per prevenire attacchi XSS],
-  [#link(<UC8>)[#underline[\[UC8\]]]],
-
-  // UC14
-  [#SSAx],
-  [L'utente autenticato avanzato deve ricevere file esportati con dati sanitizzati per prevenire code injection],
-  [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
-
-  [#SSAx],
-  [L'utente autenticato avanzato deve ricevere file validati nel formato prima del download],
-  [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 )
