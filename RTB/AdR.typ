@@ -13,11 +13,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.32.1"
+#let versione = "v0.33.1"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2026/01/19",
+    "0.33.1",
+    "Aggiunti requisiti funzionali UC12 e UC13. Modifica requisiti UC5-UC15",
+    members.alice,
+  ),
   (
     "2026/01/18",
     "0.32.1",
@@ -90,12 +96,14 @@
     "0.24.1",
     "Fix minori al documento",
     members.antonio,
+    members.alice,
   ),
   (
     "2026/01/13",
     "0.24.0",
     "Requisiti funzionali relativi a UC9, UC10, UC11",
     members.berengan,
+    members.alice,
   ),
   (
     "2026/01/12",
@@ -108,18 +116,21 @@
     "0.22.0",
     "Requisiti funzionali relativi ad UC15",
     members.berengan,
+    members.alice,
   ),
   (
     "2026/01/09",
     "0.21.1",
     "Fix minori label del documento",
     members.martinello,
+    members.alice,
   ),
   (
     "2026/01/09",
     "0.21.0",
     "Caso d'uso UC15",
     members.berengan,
+    members.alice,
   ),
   (
     "2026/01/09",
@@ -2181,7 +2192,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente ha disconnesso con successo il proprio accont GitHub dalla piattaforma Codeguardian
   ],
   scenari: [
-    - L'utente seleziona il tasto "Disconnetti Account"
+    - L'utente seleziona il tasto "Disconnetti"
   ],
   inclusioni: [
     - Nessuna
@@ -2310,50 +2321,47 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente conferma l'esportazione del report di analisi dopo aver selezionato un formato valido",
 )[]
 
-=== UC15: modifica password profilo <UC15>
+=== UC15: Modifica password profilo <UC15>
 #useCase(
   attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente vuole cambiare la password del proprio account
+    - L'utente vuole modificare la password del proprio account
   ],
   post: [
-    - L'utente ha cambiato correttamente la propria password
+    - L'utente ha modificato correttamente la propria password
   ],
   scenari: [
-    - L'utente è entrato nella sezione Impostazioni
-    - L'utente seleziona la sezione "Modifica Password" delle impostazioni
+    - L'utente entra nella sezione "Impostazioni"
+    - L'utente seleziona la sezione "Modifica Password"
     - L'utente inserisce la password corrente nel primo campo del form di modifica #link(<UC15.1>)[#underline[\[UC15.1\]]]
     - L'utente inserisce la nuova password nel campo del form di modifica sottostante #link(<UC15.2>)[#underline[\[UC15.2\]]]
     - L'utente conferma la modifica della propria password #link(<UC15.3>)[#underline[\[UC15.3\]]]
     - L'utente riceve la conferma dell'avvenuta modifica della propria password #link(<UC15.4>)[#underline[\[UC15.4\]]]
   ],
   inclusioni: [
-    - #link(<UC15.1>)[#underline[\[UC15.1\]]]
-    - #link(<UC15.2>)[#underline[\[UC15.2\]]]
-    - #link(<UC15.3>)[#underline[\[UC15.3\]]]
+    - #link(<UC15.1>)[#underline[\[UC15.1\]]] // Inserimento password corrente
+    - #link(<UC15.2>)[#underline[\[UC15.2\]]] // Inserimento nuova password
+    - #link(<UC15.3>)[#underline[\[UC15.3\]]] // Conferma modifica password
+    - #link(<UC15.4>)[#underline[\[UC15.4\]]] // Ricezione avvenuta modifica
   ],
   estensioni: [
-    - #link(<UC15.1.1>)[#underline[\[UC15.1.1\]]]
-    - #link(<UC15.1.2>)[#underline[\[UC15.1.2\]]]
-    - #link(<UC15.2.1>)[#underline[\[UC15.2.1\]]]
-    - #link(<UC15.2.2>)[#underline[\[UC15.2.2\]]]
-    - #link(<UC15.2.3>)[#underline[\[UC15.2.3\]]]
+    - Nessuna
   ],
-  trigger: "L'utente inserisce la password attuale, la nuova password ed in seguito clicca il tasto di conferma",
+  trigger: "L'utente seleziona l'opzione Modifica Password nella sezione Impostazioni",
 )[]
 
-==== UC15.1 inserimento della password corrente <UC15.1>
+==== UC15.1 Inserimento della password corrente <UC15.1>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente è entrato nella sezione Impostazioni > Modifica Password #link(<UC15>)[#underline[\[UC15\]]]
+    - L'utente entra nella sezione Impostazioni > Modifica Password #link(<UC15>)[#underline[\[UC15\]]]
   ],
   post: [
-    - L'utente ha inserito correttamente la propria password
+    - L'utente ha inserito correttamente la password corrente
   ],
   scenari: [
-    - L'utente clicca o tabba sul form di modifica password
+    - L'utente clicca sul campo password corrente
     - L'utente digita la password corrente
   ],
   inclusioni: [
@@ -2363,21 +2371,19 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC15.1.1>)[#underline[\[UC15.1.1 \]]]
     - #link(<UC15.1.2>)[#underline[\[UC15.1.2\]]]
   ],
-  trigger: "L'utente interagisce con il form di modifica inserendo la password corrente nell'apposto campo",
+  trigger: "L'utente interagisce con il form di modifica inserendo la password corrente nell'apposito campo",
 )[]
 
 ===== UC15.1.1 Password corrente non inserita <UC15.1.1>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente è entrato nella sezione Impostazioni > Modifica Password #link(<UC15>)[#underline[\[UC15\]]]
+    - L'utente entra nella sezione Impostazioni > Modifica Password #link(<UC15>)[#underline[\[UC15\]]]
   ],
   post: [
-    - L'utene non può inserire la nuova password nel campo del form
+    - L'utente non può procedere con la modifica della password
   ],
   scenari: [
-    - L'utente prova a cliccare su un altro campo del form
-    - L'utente prova a cliccare il tasto di conferma del cambio password
     - L'utente visualizza un messaggio di errore che lo invita ad inserire la password corrente
   ],
   inclusioni: [
@@ -2386,7 +2392,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente prova a cliccare su un altro campo del form o sul tasto di conferma senza aver inserito la password corrente",
+  trigger: "L'utente tenta di confermare senza aver inserito la password corrente",
 )[]
 
 ==== UC15.1.2 Password corrente errata <UC15.1.2>
@@ -2399,7 +2405,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - All'utente viene impedito di cambiare la propria password
   ],
   scenari: [
-    - L'utene inserice una password errata nel form
+    - L'utene inserice una password corrente errata nel form
     - L'utente visualizza un messaggio di errore che lo invita a modificare la password inserita perchè errata
   ],
   inclusioni: [
@@ -2408,7 +2414,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente interagisce con il form di modifica inserendo una password errata e visualizza a schermo un errore",
+  trigger: "L'utente interagisce con il form di modifica inserendo una password corrente errata",
 )[]
 
 ==== UC15.2 Inserimento della nuova password <UC15.2>
@@ -2418,7 +2424,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
   ],
   post: [
-    - L'utente può procedere alla conferma della modifica password
+    - L'utente ha inserito una nuova password valida
   ],
   scenari: [
     - L'utente inserisce la nuova password all'interno del form di modifica
@@ -2441,11 +2447,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
   ],
   post: [
-    - L'utente non può procedere alla conferma della modirfica password
+    - L'utente non può procedere alla conferma della modifica password
   ],
   scenari: [
-    - L'utente clicca il tasto di conferma della modifica password
-    - L'utente visualizza un errore a schermo che lo invita ad inserire una nuova password prima di confermare
+    - L'utente visualizza un messaggio di errore che lo invita ad inserire una nuova password prima di confermare
   ],
   inclusioni: [
     - Nessuna
@@ -2453,7 +2458,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente clicca il tasto di conferma della modifica password",
+  trigger: "L'utente tenta di confermare senza aver inserito una nuova password",
 )[]
 
 ===== UC15.2.2 Nuova password non conforme allo standard adottato <UC15.2.2>
@@ -2466,7 +2471,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - All'utente viene impedito di confermare la modifica della password
   ],
   scenari: [
-    - L'utente visualizza a schermo un errore che gli indica il tipo di caratteri da inseire nella nuova password in modo che sia conforme allo standard adottato
+    - L'utente visualizza un messaggio di errore che indica i requisiti necessari affinché la password sia conforme
   ],
   inclusioni: [
     - Nessuna
@@ -2474,7 +2479,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente interagisce con il form di modifica inserendo una nuova password",
+  trigger: "L'utente interagisce con il form di modifica inserendo una nuova password non conforme allo standard",
 )[]
 
 ===== UC15.2.3 Nuova password uguale alla precedente <UC15.2.3>
@@ -2487,8 +2492,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - All'utente viene impedito di confermare la modifica della password
   ],
   scenari: [
-    - L'utente inserisce una password uguale a quella precedente
-    - L'utente visualizza un errore a schermo che lo informa dell'ugualianza tra la nuova password e quella precedente
+    - L'utente visualizza un messaggio di errore che lo informa dell'uguaglianza
   ],
   inclusioni: [
     - Nessuna
@@ -2496,7 +2500,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente inserisce la nuova password all'interno dell'apposto campo del form di modifica",
+  trigger: "L'utente inserisce una nuova password uguale a quella corrente",
 )[]
 
 ==== UC15.3 Conferma modifica password <UC15.3>
@@ -2507,10 +2511,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente ha inserito una nuova password valida nell'apposito campo del form #link(<UC15.2>)[#underline[\[UC15.2\]]]
   ],
   post: [
-    - L'utente modifica e conferma correttamente la propria password
+    - L'utente conferma correttamente la modifica della propria password
   ],
   scenari: [
-    - L'utente conferma la modifica della password
+    - L'utente clicca sul pulsante di conferma
   ],
   inclusioni: [
     - Nessuna
@@ -2528,10 +2532,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - La conferma della modifica password è andata a buon fine #link(<UC15.3>)[#underline[\[UC15.3\]]]
   ],
   post: [
-    - La password viene modificata correttamente
+    - L'utente è informato del successo dell'operazione
   ],
   scenari: [
-    - L'utente visualizza a schermo un messggio di avvenuta modifica
+    - L'utente visualizza un messaggio di avvenuta modifica
   ],
   inclusioni: [
     - Nessuna
@@ -2539,7 +2543,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Nessuno",
+  trigger: "L'utente ha completato con successo la modifica della password",
 )[]
 
 === UC16: Visualizzazione suggerimenti di remediation <UC16>
@@ -4074,6 +4078,12 @@ In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati
   [L'Utente non registrato deve poter inserire la password nel campo dedicato],
   [#link(<UC1>)[#underline[\[UC1\]]], #link(<UC1.3>)[#underline[\[UC1.3\]]]],
 
+  [#FRx], [L'username deve avere una lunghezza minima di 4 caratteri], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
+
+  [#FRx], [L'username deve avere una lunghezza massima di 20 caratteri], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
+
+  [#FRx], [L'username deve contenere solo caratteri alfanumerici], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
+
   [#FRx],
   [L'Utente deve ricevere un messaggio di errore se l'username non rispetta il formato],
   [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
@@ -4082,6 +4092,10 @@ In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati
   [L'Utente deve ricevere un messaggio di errore se l'username è già censito],
   [#link(<UC1.1.2>)[#underline[\[UC1.1.2\]]]],
 
+  [#FRx], [L'email deve contenere il carattere '\@'], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
+
+  [#FRx], [L'email deve contenere un dominio valido], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
+
   [#FRx],
   [L'Utente deve ricevere un messaggio di errore se l'email non rispetta il formato],
   [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
@@ -4089,6 +4103,16 @@ In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati
   [#FRx],
   [L'Utente deve ricevere un messaggio di errore se l'email è già censita],
   [#link(<UC1.2.2>)[#underline[\[UC1.2.2\]]]],
+
+  [#FRx], [La password deve avere una lunghezza minima di 8 caratteri], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+
+  [#FRx], [La password deve contenere almeno una lettera maiuscola], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+
+  [#FRx], [La password deve contenere almeno una lettera minuscola], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+
+  [#FRx], [La password deve contenere almeno un numero], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+
+  [#FRx], [La password deve contenere almeno un carattere speciale], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
 
   [#FRx],
   [L'Utente deve ricevere un messaggio di errore se la password non rispetta i vincoli di formato],
@@ -4106,6 +4130,10 @@ In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati
   [#FRx],
   [L'Utente registrato deve poter inserire la propria password per autenticarsi],
   [#link(<UC2>)[#underline[\[UC2\]]], #link(<UC2.2>)[#underline[\[UC2.2\]]]],
+
+  [#FRx],
+  [L'username deve avere una lunghezza compresa tra 4 e 20 caratteri],
+  [#link(<UC2.1.1>)[#underline[\[UC2.1.1\]]]],
 
   [#FRx],
   [L'Utente registrato deve ricevere un messaggio di errore se l'username non è conforme ai vincoli],
@@ -4161,6 +4189,10 @@ In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati
   [L'Utente deve poter inserire l'URL del repository GitHub nel campo dedicato],
   [#link(<UC4.1>)[#underline[\[UC4.1\]]]],
 
+  [#FRx], [L'URL deve iniziare con il protocollo 'https://'], [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
+
+  [#FRx], [Il dominio dell'URL deve essere 'github.com'], [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
+
   [#FRx],
   [L'Utente deve ricevere un messaggio di errore se l'URL non è conforme ai vincoli di formato],
   [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
@@ -4193,231 +4225,198 @@ In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati
 
   // UC5
   [#FRx],
-  [L'utente autenticato avanzato deve poter accedere alla sezione di visualizzazione dei report di analisi],
+  [L'Utente deve poter accedere alla sezione di visualizzazione dei report di analisi],
   [#link(<UC5.1>)[#underline[\[UC5.1\]]]],
-  // UC5.2
+
   [#FRx],
-  [L'utente deve poter visualizzare l'elenco dei report di analisi disponibili],
+  [L'Utente deve poter visualizzare l'elenco dei report di analisi disponibili],
   [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
 
   [#FRx],
-  [L'utente deve poter selezionare un singolo report dall'elenco per consultarne i dettagli],
+  [L'Utente deve poter selezionare un report dall'elenco per consultarne i dettagli],
   [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
 
   [#FRx],
-  [Se non sono presenti report per il repository selezionato, deve essere mostrato un avviso informativo],
+  [L'Utente deve ricevere un avviso se non ci sono report disponibili per il repository],
   [#link(<UC5.2.1>)[#underline[\[UC5.2.1\]]]],
 
-  [#FRx], [L'utente non può avanzare senza aver selezionato un report], [#link(<UC5.2.2>)[#underline[\[UC5.2.2\]]]],
-
   [#FRx],
-  [Se nessun report è selezionato, deve essere mostrato un errore specifico],
+  [L'Utente deve ricevere un messaggio di errore se non seleziona alcun report],
   [#link(<UC5.2.2>)[#underline[\[UC5.2.2\]]]],
-  // UC5.3
-  [#FRx],
-  [I dati disponibili per il report selezionato devono poter essere filtrati],
-  [#link(<UC5.3>)[#underline[\[UC5.3\]]]],
+
+  [#FRx], [L'Utente deve poter selezionare i dati specifici da visualizzare], [#link(<UC5.3>)[#underline[\[UC5.3\]]]],
 
   [#FRx],
-  [L'utente deve poter selezionare uno o più tipi di dati da includere nella visualizzazione (es. Vulnerabilità, Code Smells)],
-  [#link(<UC5.3>)[#underline[\[UC5.3\]]]],
-
-  [#FRx],
-  [Il report non può essere visualizzato se non viene selezionato alcun dato],
+  [L'Utente deve ricevere un messaggio di errore se non seleziona alcun dato specifico],
   [#link(<UC5.3.1>)[#underline[\[UC5.3.1\]]]],
 
-  [#FRx],
-  [Se nessun dato è stato selezionato per la visualizzazione, deve essere mostrato un errore specifico],
-  [#link(<UC5.3.1>)[#underline[\[UC5.3.1\]]]],
-
-  [#FRx],
-  [La vista del report deve includere solo i dati filtrati dall'utente],
-  [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
-
-  [#FRx],
-  [L'utente deve poter visualizzare i dettagli completi dell'analisi (metriche, grafici, suggerimenti)],
-  [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
+  [#FRx], [L'Utente deve poter visualizzare i dettagli completi dell'analisi], [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
 
   // UC6
   [#FRx],
-  [L'utente deve poter accedere alla funzione di selezione dell'intervallo temporale dalla pagina di visualizzazione del report di analisi],
+  [L'Utente deve poter selezionare un intervallo temporale per il confronto],
+  [#link(<UC6>)[#underline[\[UC6\]]]],
+
+  [#FRx], [L'Utente deve poter confermare la selezione dell'intervallo temporale], [#link(<UC6>)[#underline[\[UC6\]]]],
+
+  [#FRx],
+  [L'Utente deve poter modificare l'intervallo temporale dopo averlo selezionato],
   [#link(<UC6>)[#underline[\[UC6\]]]],
 
   [#FRx],
-  [L'utente deve poter selezionare una data di inizio per l'intervallo temporale],
-  [#link(<UC6>)[#underline[\[UC6\]]]],
-
-  [#FRx],
-  [L'utente deve poter selezionare una data di fine per l'intervallo temporale],
-  [#link(<UC6>)[#underline[\[UC6\]]]],
-
-  [#FRx], [L'utente deve poter confermare la selezione dell'intervallo temporale], [#link(<UC6>)[#underline[\[UC6\]]]],
-
-  [#FRx],
-  [L'utente deve poter modificare l'intervallo temporale dopo averlo selezionato],
-  [#link(<UC6>)[#underline[\[UC6\]]]],
-
-  // UC6.1
-  [#FRx],
-  [L'utente deve visualizzare un messaggio di errore se tenta di confermare senza aver selezionato un intervallo temporale],
+  [L'Utente deve ricevere un messaggio di errore se tenta di confermare senza aver selezionato un intervallo temporale],
   [#link(<UC6.1>)[#underline[\[UC6.1\]]]],
-  // UC6.2 - UC6.2.1 - UC6.2.2 - UC6.2.3
+
   [#FRx],
-  [L'utente deve visualizzare un messaggio di errore se l'intervallo temporale selezionato non è valido],
+  [L'Utente deve ricevere un messaggio di errore se l'intervallo temporale non è valido],
   [#link(<UC6.2>)[#underline[\[UC6.2\]]]],
 
   [#FRx],
-  [L'utente deve visualizzare un messaggio specifico se non esistono report nel periodo selezionato],
+  [L'Utente deve ricevere un avviso se non ci sono report nel periodo selezionato],
   [#link(<UC6.2.1>)[#underline[\[UC6.2.1\]]]],
 
   [#FRx],
-  [L'utente deve visualizzare un messaggio di errore se la data di inizio è successiva alla data di fine],
+  [L'Utente deve ricevere un messaggio di errore se l'intervallo temporale è incoerente],
   [#link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]],
 
   [#FRx],
-  [L'utente deve visualizzare un messaggio di errore se l'intervallo temporale supera il limite massimo consentito],
+  [L'Utente deve ricevere un messaggio di errore se l'intervallo temporale è troppo ampio],
   [#link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]],
 
   // UC7
-  [#FRx],
-  [L'utente deve poter accedere alla visualizzazione del grafico comparativo dopo aver selezionato un intervallo temporale valido],
-  [#link(<UC7>)[#underline[\[UC7\]]]],
+  [#FRx], [L'Utente deve poter visualizzare un grafico comparativo tra report], [#link(<UC7>)[#underline[\[UC7\]]]],
 
   [#FRx],
-  [Il grafico deve mostrare l'evoluzione temporale della qualità del codice e della documentazione],
-  [#link(<UC7>)[#underline[\[UC7\]]]],
-
-  [#FRx],
-  [Il grafico deve mostrare l'evoluzione temporale del numero di vulnerabilità],
-  [#link(<UC7>)[#underline[\[UC7\]]]],
-
-  [#FRx],
-  [L'utente deve poter interagire con il grafico per visualizzare dettagli specifici di ciascun punto dati (tooltip)],
+  [L'Utente deve poter interagire con il grafico per visualizzare dettagli specifici di ciascun punto dati],
   [#link(<UC7>)[#underline[\[UC7\]]]],
 
   // UC8
-  [#FRx],
-  [L'utente deve poter accedere alla visualizzazione della tabella comparativa dopo aver selezionato un intervallo temporale valido],
-  [#link(<UC8>)[#underline[\[UC8\]]]],
+  [#FRx], [L'Utente deve poter visualizzare una tabella comparativa tra report], [#link(<UC8>)[#underline[\[UC8\]]]],
 
   [#FRx],
-  [L'utente deve poter ordinare la tabella per data (crescente/decrescente), numero di vulnerabilità, qualità del codice o qualità della documentazione],
-  [#link(<UC8>)[#underline[\[UC8\]]]],
-
-  [#FRx],
-  [L'utente deve poter accedere al report completo tramite un pulsante presente nella riga corrispondente della tabella],
-  [#link(<UC8>)[#underline[\[UC8\]]]],
-
-  [#FRx],
-  [L'utente deve poter visualizzare indicatori di variazione rispetto al report precedente],
+  [L'utente, all'interno della tabella, deve poter visualizzare indicatori di variazione rispetto al report precedente],
   [#link(<UC8>)[#underline[\[UC8\]]]],
 
   //UC9
   [#FRx],
-  [L'utente deve poter visualizzare l'apposita sezione del report di analisi relativa all'analisi del codice],
+  [L'Utente deve poter visualizzare la sezione del report di analisi relativa all'analisi del codice],
   [#link(<UC9>)[#underline[\[UC9\]]]],
-  //UC9.1
+
   [#FRx],
-  [L'utente deve poter visualizzare la sottosezione relativa all'analisi statica del codice all'interno della sezione "Analisi del codice" del report di analisi],
-  [#link(<UC9.1>)[#underline[\[UC9.1\]]]],
-  //UC9.2
+  [L'Utente deve poter visualizzare il report di analisi statica del codice],
+  [#link(<UC9>)[#underline[\[UC9\]]], #link(<UC9.1>)[#underline[\[UC9.1\]]]],
+
   [#FRx],
-  [L'utente deve poter visualizzare la sottosezione relativa all'analisi delle dipendenze del codice e delle librerie all'interno della sezione "Analisi del codice" del report di analisi],
-  [#link(<UC9.2>)[#underline[\[UC9.2\]]]],
-  //UC9.3
+  [L'Utente deve poter visualizzare l'analisi delle librerie e dipendenze],
+  [#link(<UC9>)[#underline[\[UC9\]]], #link(<UC9.2>)[#underline[\[UC9.2\]]]],
+
   [#FRx],
-  [L'utente deve poter visualizzare la sottosezione relativa all'analisi della sicurezza all'interno della sezione "Analisi del codice" del report di analisi],
-  [#link(<UC9.3>)[#underline[\[UC9.3\]]]],
-  //UC9.4
+  [L'Utente deve poter visualizzare il report di analisi della sicurezza OWASP],
+  [#link(<UC9>)[#underline[\[UC9\]]], #link(<UC9.3>)[#underline[\[UC9.3\]]]],
+
   [#FRx],
-  [L'utente deve poter visualizzare la sottosezione relativa al numero totale di vulnerabilità individuate all'interno della sezione "Analisi del codice" del report di analisi],
-  [#link(<UC9.4>)[#underline[\[UC9.4\]]]],
+  [L'Utente deve poter visualizzare il numero totale di vulnerabilità del codice],
+  [#link(<UC9>)[#underline[\[UC9\]]], #link(<UC9.4>)[#underline[\[UC9.4\]]]],
 
   //UC10
   [#FRx],
-  [L'utente deve poter visualizzare la sezione relativa all'analisi della documentazione all'interno del report di analisi],
+  [L'Utente deve poter visualizzare la sezione del report di analisi relativa all'analisi della documentazione],
   [#link(<UC10>)[#underline[\[UC10\]]]],
-  //UC10.1
+
   [#FRx],
-  [L'utente deve poter visualizzare la sottosezione relativa agli errori di spelling all'interno della sezione relativa alla documentazione del report],
-  [#link(<UC10.1>)[#underline[\[UC10.1\]]]],
-  //UC10.2
+  [L'Utente deve poter visualizzare gli errori di spelling nella documentazione],
+  [#link(<UC10>)[#underline[\[UC10\]]], #link(<UC10.1>)[#underline[\[UC10.1\]]]],
+
   [#FRx],
-  [L'utente deve poter visualizzare la sottosezione relativa alla completezza della documentazione nei confronti del codice all'interno della sezione relativa alla documentazione del report di analisi],
-  [#link(<UC10.2>)[#underline[\[UC10.2\]]]],
+  [L'Utente deve poter visualizzare la completezza della documentazione rispetto al codice],
+  [#link(<UC10>)[#underline[\[UC10\]]], #link(<UC10.2>)[#underline[\[UC10.2\]]]],
 
   //UC11
   [#FRx],
-  [L'utente deve poter visualizzare la sezione relativa al numero totale di vulnerabilità individuate nel report di analisi],
+  [L'Utente deve poter visualizzare la sezione del report di analisi relativa al numero totale di vulnerabilità del repository],
   [#link(<UC11>)[#underline[\[UC11\]]]],
 
   //UC12
+  [#FRx],
+  [L'Utente deve poter visualizzare l'area metadati di un report di analisi],
+  [#link(<UC12>)[#underline[\[UC12\]]]],
+
+  [#FRx],
+  [L'Utente deve poter visualizzare la data del report di analisi],
+  [#link(<UC12>)[#underline[\[UC12\]]], #link(<UC12.1>)[#underline[\[UC12.1\]]]],
+
+  [#FRx],
+  [L'Utente deve poter visualizzare i commit analizzati nel report],
+  [#link(<UC12>)[#underline[\[UC12\]]], #link(<UC12.2>)[#underline[\[UC12.2\]]]],
+
+  [#FRx],
+  [L'Utente deve poter visualizzare il richiedente del report di analisi],
+  [#link(<UC12>)[#underline[\[UC12\]]], #link(<UC12.3>)[#underline[\[UC12.3\]]]],
+
+  //UC13
+  [#FRx], [L'Utente deve poter disconnettere il proprio account GitHub], [#link(<UC13>)[#underline[\[UC13\]]]],
+
+  [#FRx],
+  [L'Utente deve selezionare il tasto "Disconnetti" per avviare la procedura],
+  [#link(<UC13>)[#underline[\[UC13\]]], #link(<UC13.1>)[#underline[\[UC13.1\]]]],
+
+  [#FRx],
+  [L'Utente deve poter confermare la disconnessione del proprio account GitHub],
+  [#link(<UC13>)[#underline[\[UC13\]]], #link(<UC13.1.1>)[#underline[\[UC13.1.1\]]]],
 
   // UC14
-  // UC14.1
+  [#FRx], [L'Utente deve poter esportare il report di analisi], [#link(<UC14>)[#underline[\[UC14\]]]],
+
   [#FRx],
-  [L'utente deve poter visualizzare un modale per la selezione del formato di esportazione],
-  [#link(<UC14.1>)[#underline[\[UC14.1\]]]],
-  // UC14.1.1
+  [L'Utente deve selezionare il formato di esportazione desiderato],
+  [#link(<UC14>)[#underline[\[UC14\]]], #link(<UC14.1>)[#underline[\[UC14.1\]]]],
+
   [#FRx],
-  [L'utente deve visualizzare un messaggio di errore se tenta di confermare l'esportazione senza aver selezionato un formato],
+  [L'Utente deve ricevere un messaggio di errore se non seleziona alcun formato],
   [#link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]],
-  // UC14.2
-  [#FRx],
-  [L'utente deve poter confermare l'esportazione del report solo dopo aver selezionato un formato],
-  [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 
   [#FRx],
-  [L'utente deve poter scaricare il file generato nel formato selezionato],
-  [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
-
-  [#FRx],
-  [Il file esportato deve contenere tutti i dati del report (metriche, vulnerabilità, suggerimenti)],
-  [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
-
-  [#FRx], [Il download del file deve essere generato automaticamente], [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
+  [L'Utente deve poter confermare l'esportazione del report],
+  [#link(<UC14>)[#underline[\[UC14\]]], #link(<UC14.2>)[#underline[\[UC14.2\]]]],
 
   // UC15
-  [#FRx],
-  [L'utente deve poter accedere alla sezione Impostazioni > Cambia Password],
-  [#link(<UC15>)[#underline[\[UC15\]]]],
+  [#FRx], [L'Utente deve poter accedere alla sezione di modifica password], [#link(<UC15>)[#underline[\[UC15\]]]],
 
-  [#FRx], [L'utente deve poter visualizzare il form di modifica], [#link(<UC15>)[#underline[\[UC15\]]]],
-
-  // UC15.1
   [#FRx],
   [L'utente deve inserire la password corrente all'interno dell'apposito campo del form di modifica],
-  [#link(<UC15.1>)[#underline[\[UC15.1\]]]],
-  // UC15.1.1
+  [#link(<UC15>)[#underline[\[UC15\]]], #link(<UC15.1>)[#underline[\[UC15.1\]]]],
+
   [#FRx],
-  [L'utente deve visualizzare un messaggio di errore se la password corrente inserita è errata],
+  [L'Utente deve ricevere un messaggio di errore se non inserisce la password corrente],
   [#link(<UC15.1.1>)[#underline[\[UC15.1.1\]]]],
-  // UC15.1.2
+
   [#FRx],
-  [L'utente deve visualizzare un messaggio di errore se non ha inserito alcuna password all'interno del campo "password corrente"],
+  [L'Utente deve ricevere un messaggio di errore se la password corrente è errata],
   [#link(<UC15.1.2>)[#underline[\[UC15.1.2\]]]],
-  // UC15.2
+
   [#FRx],
-  [L'utente deve inserire la nuova password nell'apposito campo di modifica password],
-  [#link(<UC15.2>)[#underline[\[UC15.2\]]]],
-  // UC15.2.1
+  [L'Utente deve inserire la nuova password nell'apposito campo del form di modifica],
+  [#link(<UC15>)[#underline[\[UC15\]]], #link(<UC15.2>)[#underline[\[UC15.2\]]]],
+
   [#FRx],
-  [L'utente deve visualizzare un messaggio di errore se non ha inserito alcuna password all'interno del campo "nuova password"],
+  [L'Utente deve ricevere un messaggio di errore se non inserisce la nuova password],
   [#link(<UC15.2.1>)[#underline[\[UC15.2.1\]]]],
-  // UC15.2.2
+
   [#FRx],
-  [L'utente deve visualizzare un messaggio di errore se la nuova passsword inserita non è conforme allo standard adottato (es. manca un carattere speciale)],
+  [L'Utente deve ricevere un messaggio di errore se la nuova password non è conforme allo standard],
   [#link(<UC15.2.2>)[#underline[\[UC15.2.2\]]]],
-  // UC15.2.3
+
   [#FRx],
-  [L'utente deve visualizzare un messaggio di errore se la nuova password inserita è identica a quella precedente],
+  [L'Utente deve ricevere un messaggio di errore se la nuova password è uguale alla precedente],
   [#link(<UC15.2.3>)[#underline[\[UC15.2.3\]]]],
-  // UC15.3
-  [#FRx], [L'utente deve poter confermare la modifica della password], [#link(<UC15.3>)[#underline[\[UC15.3\]]]],
-  // UC15.4
+
   [#FRx],
-  [L'utente deve visualizzare un messaggio di conferma di avvenuta modifica della password tramite pulsante],
-  [#link(<UC15.4>)[#underline[\[UC15.4\]]]],
+  [L'Utente deve poter confermare la modifica della password tramite pulsante],
+  [#link(<UC15>)[#underline[\[UC15\]]], #link(<UC15.3>)[#underline[\[UC15.3\]]]],
+
+  [#FRx],
+  [L'Utente deve ricevere conferma dell'avvenuta modifica della password],
+  [#link(<UC15>)[#underline[\[UC15\]]], #link(<UC15.4>)[#underline[\[UC15.4\]]]],
 )
 
 #pagebreak()
