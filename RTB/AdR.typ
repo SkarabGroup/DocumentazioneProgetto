@@ -21,7 +21,7 @@
   (
     "2026/01/19",
     "0.33.1",
-    "Aggiunti requisiti funzionali UC12 e UC13. Modifica requisiti UC5-UC15",
+    "Aggiunti requisiti funzionali UC12 e UC13, UC16-UC20 e UC24-UC28. Modifica requisiti UC5-UC15",
     members.alice,
   ),
   (
@@ -2641,24 +2641,22 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 === UCx: Accesso al profilo CodeGuardian
 === UCx: Recupero password profilo Codeguardian
 
-
 //USE CASE DEL BACKEND
 // UC17
 === UC17 Creazione dell'ambiente sand box <UC17>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'utente autenticato avanzato ha effettuato l'accesso al proprio profilo di CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente autenticato avanzato ha effettuato l'accesso al proprio profilo CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente autenticato avanzato ha effettuato la connessiono del proprio account di GitHub a CodeGuardian #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente autenticato avanzato ha richiesto l'avvio dell'analisi della prorpia repository di GitHub #link(<UC4>)[#underline[\[UC4\]]]
-    - Il sistema CodeGuardian ha accettato la richesta di analisi della repository
+    - L'utente autenticato avanzato ha richiesto l'avvio dell'analisi del proprio repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
   ],
   post: [
     - L'ambiente sandbox è stato correttamente creato ed è pronto all'uso
   ],
   scenari: [
-    - Il frontend riceve la richiesta di analisi della reposiry
-    - Il frontend comunica all'orchestratore la richiesta di analisi della repository
+    - Il frontend riceve la richiesta di analisi del repository
+    - Il frontend comunica all'orchestratore la richiesta di analisi del repository
     - L'orchestratore avvia la creazione dell'ambiente sandbox tramite immagine docker
   ],
   inclusioni: [
@@ -2666,45 +2664,43 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   estensioni: [
     - #link(<UC17.1>)[#underline[\[UC17.1\]]]
-    - #link(<UC17.1.2>)[#underline[\[UC17.1.2\]]]
+    - #link(<UC17.1.1>)[#underline[\[UC17.1.1\]]]
   ],
-  trigger: "Il sistema front-end comunica all'orchestratore la richiesta di avvio dell'aanlisi",
+  trigger: "Il sistema frontend comunica all'orchestratore la richiesta di avvio dell'analisi",
 )[]
 
-==== UC17.1 Errore durante la creazione dell'ambiente di sand box <UC17.1>
+==== UC17.1 Errore durante la creazione dell'ambiente sand box <UC17.1>
 #useCase(
   attore: "Orhcestratore",
   pre: [
-    - Il sistema CodeGuardian ha accettato la richesta di analisi della repository
+    - Il sistema CodeGuardian ha accettato la richesta di analisi del repository
   ],
   post: [
-    - L'ambiente di sandbox non viene creato correttamente e ciò viene comunicato al frontend
+    - L'ambiente sand box non viene creato correttamente
   ],
   scenari: [
-    - Occorre un errore durante la creazione dell'ambiente di sandbox
-    - Questo errore viene comunicato al frontend
+    - Si verifica un errore durante la creazione dell'ambiente sandbox
   ],
   inclusioni: [
-    - #link(<UC17.1.2>)[#underline[\[UC17.1.2\]]]
+    - #link(<UC17.1.1>)[#underline[\[UC17.1.1\]]]
   ],
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il backend comunica al frontend che c'è stato un errore duranrte la creazione dell'ambiente sandbox",
+  trigger: "Durante la creazione dell'ambiente sandbox si verifica un errore",
 )[]
 
-=== UC17.1.2 Comunicazione dell'errore durante la creazione dell'ambiente di sand box <UC17.1.2>
+=== UC17.1.1 Comunicazione dell'errore durante la creazione dell'ambiente sand box <UC17.1.1>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - Viene rilevato un errore durante la creazione dell'ambiente di sandbox
+    - Viene rilevato un errore durante la creazione dell'ambiente sandbox #link(<UC17.1>)[#underline[\[UC17.1\]]]
   ],
   post: [
-    - L'ambiente di sandbox non viene creato correttamente, e ciò viene comunicato al sistema front-end
+    - L'ambiente sandbox non viene creato correttamente e ciò viene comunicato al frontend
   ],
   scenari: [
-    - L'orchestraore rileva un errore durante la creazione dell'ambiente di sandbox
-    - L'orrchestratore comunica l'errore al sistema front-end
+    - L'orchestratore comunica l'errore al frontend
   ],
   inclusioni: [
     - Nessuna
@@ -2712,46 +2708,45 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Nessuno",
+  trigger: "Durante la creazione dell'ambiente sandbox si verifica un errore",
 )[]
 
 === UC18 Lettura delle richieste dell'utente da parte dell'orchestratore <UC18>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'utente autenticato avanzato ha richiesto l'analisi della propria repository al sistema CodeGuardian #link(<UC4>)[#underline[\[UC4\]]]
-    - L'utente ha selezionato o meno le aree d'interesse di analisi della repository
-    - L'ambiente di sandbox é stato creato correttamente da parte del backend #link(<UC17>)[#underline[\[UC17\]]]
+    - L'utente autenticato avanzato ha richiesto l'analisi del proprio repository al sistema CodeGuardian #link(<UC4>)[#underline[\[UC4\]]]
+    - L'ambiente sandbox é stato creato correttamente #link(<UC17>)[#underline[\[UC17\]]]
   ],
   post: [
-    - L'orchestratore ha letto e interpretato correttamente le richieste scritte nel sistema frontend
+    - L'orchestratore ha letto e interpretato correttamente le richieste dell'utente
   ],
   scenari: [
     - L'orchestratore legge le richieste dell'utente
-    - L'orchestratore notifica al sistema back-end i compoti da svolgere
+    - L'orchestratore notifica al backend i compiti da svolgere
   ],
   inclusioni: [
     - #link(<UC18.1>)[#underline[\[UC18.1\]]]
+    - #link(<UC18.2>)[#underline[\[UC18.2\]]]
   ],
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'orchestratore una volta lette le richieste e visionato la repository decide come agire e come istruire gli agenti",
+  trigger: "L'orchestratore, una volta lette le richieste e visionato il repository, decide come agire e come istruire gli agenti",
 )[]
 
-==== UC18.1 È richiesta l'analisi completa <UC18.1>
+==== UC18.1 Richiesta di analisi completa <UC18.1>
 #useCase(
   attore: "Orchestratore",
   pre: [
     - Non ci sono state richieste specifiche da parte dell'utente
   ],
   post: [
-    - L'orchestratore istruisce gli agenti sullo svoglimento dell'analisi completa della repository
+    - L'orchestratore istruisce gli agenti sullo svoglimento dell'analisi completa del repository
   ],
   scenari: [
-    - Il frontend comunica al backend che l'utente vuole svolgere un'analisi completa della propria repository
-    - Il backend prende in carico questa richiesta
-    - L'orchestratore istruisce gli agenti per un'analisi completa della repository in questione
+    - Il frontend comunica al backend che l'utente vuole svolgere un'analisi completa del proprio repository
+    - L'orchestratore istruisce gli agenti per un'analisi completa del repository
   ],
   inclusioni: [
     - Nessuna
@@ -2759,22 +2754,21 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il frontend deve comunicare al backend che è richiesta un'analisi completa",
+  trigger: "Il frontend deve comunicare al backend la richiesta di analisi completa",
 )[]
-==== UC18.2 Ci sono delle richieste specifiche da parte del frontend su cosa debba essere analizzato <UC18.2>
+==== UC18.2 Richieste specifiche sull'analisi da parte del frontend <UC18.2>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'utente ha fatto delle richieste specifice in relazione alle aree della repository che ha interesse vengano analizzate
+    - L'utente ha fatto delle richieste specifiche
   ],
   post: [
-    - L'orchestratore istruisce gli agenti suli propri ruoli per l'analisi delle singole richieste dell'utente
+    - L'orchestratore istruisce gli agenti sui ruoli per l'analisi delle singole richieste dell'utente
   ],
   scenari: [
     - Il frontend comunica al backend le specifiche richieste dell'utente rispetto alle aree da analizzare
-    - Il backend prende in carico la
-    - L'orchestratore prima di istruire gli agenti controlla la pre esistenza della repository da analizzare nel database  e la trova
-    - L'orchestratore una volta compresa la richiesta istruisce gli agenti sui rispettivi ruoli per l'analisi delle specifiche richieste
+    - L'orchestratore, prima di istruire gli agenti, controlla la pre esistenza del repository da analizzare nel database e la trova
+    - L'orchestratore, una volta compresa la richiesta, istruisce gli agenti
   ],
   inclusioni: [
     - #link(<UC18.2.1>)[#underline[\[UC18.2.1\]]]
@@ -2782,21 +2776,22 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il frontend deve cominca al backend le richieste che dovreanno essere prese in carico",
+  trigger: "Il frontend deve comunicare al backend le richieste che dovranno essere prese in carico",
 )[]
-===== UC18.2.1 La repository non è mai stata analizzatoa prima e dunque le richieste specifiche non vengono rpese in considerazione <UC18.2.1>
+
+===== UC18.2.1 Repository mai analizzato in precedenza <UC18.2.1>
 #useCase(
   attore: "FrontEnd",
   pre: [
-    - L'utente ha fatto delle richieste specifice in relazione alle aree della repository che ha interesse vengano analizzate #link(<UC18.2>)[#underline[\[UC18.2\]]]
-    - La repository non era mai stata incaricata in precedenza
+    - L'utente ha fatto delle richieste specifice in relazione alle aree del repository che ha interesse vengano analizzate #link(<UC18.2>)[#underline[\[UC18.2\]]]
+    - Il repository non era mai stato analizzato in precedenza
   ],
   post: [
     - L'orchestratore istruisce gli agenti come se fosse stata richiesta un'analisi comlpleta
   ],
   scenari: [
-    - L'orchestratore prima di istruire gli agenti controlla la pre esistenza della repository da analizzare nel database e non la trova
-    - L'orchestratore si comporta quindi come se fosse stata richiesta l'analisi completa per istruire gli agenti
+    - L'orchestratore prima di istruire gli agenti controlla la pre esistenza del repository da analizzare nel database e non la trova
+    - L'orchestratore si comporta come se fosse stata richiesta l'analisi completa
   ],
   inclusioni: [
     - Nessuna
@@ -2804,7 +2799,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'orchestore non trova la repository in database e quindi si comporta come fosse stata richiesta l'analisi completa",
+  trigger: "L'orchestore non trova la repository nel database e si comporta come fosse stata richiesta l'analisi completa",
 )[]
 
 /// USE CASE DELLE ANALISI
@@ -2864,7 +2859,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente ha visualizzato le remediation proposte
   ],
   post: [
-    - Le remediation prpoposte vengono scartate
+    - Le remediation proposte vengono scartate
   ],
   scenari: [
     - L'utente visualiza le remediation proposte
@@ -4417,6 +4412,150 @@ In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati
   [#FRx],
   [L'Utente deve ricevere conferma dell'avvenuta modifica della password],
   [#link(<UC15>)[#underline[\[UC15\]]], #link(<UC15.4>)[#underline[\[UC15.4\]]]],
+
+  //UC16
+  [#FRx], [L'Utente deve poter visualizzare i suggerimenti di remediation], [#link(<UC16>)[#underline[\[UC16\]]]],
+
+  [#FRx],
+  [L'Utente deve poter visualizzare la lista delle issue identificate],
+  [#link(<UC16>)[#underline[\[UC16\]]], #link(<UC16.1>)[#underline[\[UC16.1\]]]],
+
+  [#FRx],
+  [L'Utente deve ricevere un avviso se non ci sono issue identificate],
+  [#link(<UC16.1.1>)[#underline[\[UC16.1.1\]]]],
+
+  [#FRx],
+  [L'Utente deve poter visualizzare il dettaglio di ogni suggerimento di remediation],
+  [#link(<UC16>)[#underline[\[UC16\]]], #link(<UC16.2>)[#underline[\[UC16.2\]]]],
+
+  //UC17
+  [#FRx], [L'Orchestratore deve creare l'ambiente sandbox per l'analisi], [#link(<UC17>)[#underline[\[UC17\]]]],
+
+  [#FRx],
+  [Gli errori verificatisi durante la creazione dell'ambiente sandbox devono essere intercettati],
+  [#link(<UC17.1>)[#underline[\[UC17.1\]]]],
+
+  [#FRx],
+  [L'Orchestratore deve comunicare al frontend gli errori nella creazione del sandbox],
+  [#link(<UC17.1.1>)[#underline[\[UC17.1.1\]]]],
+
+  //UC18
+  [#FRx],
+  [L'Orchestratore deve leggere le richieste dell'utente per configurare l'analisi],
+  [#link(<UC18>)[#underline[\[UC18\]]]],
+
+  [#FRx],
+  [L'Orchestratore deve eseguire l'analisi completa se richiesta dall'utente],
+  [#link(<UC18>)[#underline[\[UC18\]]], #link(<UC18.1>)[#underline[\[UC18.1\]]]],
+
+  [#FRx],
+  [L'Orchestratore deve processare le richieste specifiche dell'utente sulle aree da analizzare],
+  [#link(<UC18>)[#underline[\[UC18\]]], #link(<UC18.2>)[#underline[\[UC18.2\]]]],
+
+  [#FRx],
+  [L'Orchestratore deve eseguire l'analisi completa se il repository non è mai stato analizzato],
+  [#link(<UC18.2.1>)[#underline[\[UC18.2.1\]]]],
+
+  //UC19
+  [#FRx], [Le vulnerabilità delle dipendenze devono essere analizzate], [#link(<UC19>)[#underline[\[UC19\]]]],
+
+  [#FRx],
+  [L'Utente deve poter accettare le remediation proposte per le vulnerabilità],
+  [#link(<UC19>)[#underline[\[UC19\]]], #link(<UC19.1>)[#underline[\[UC19.1\]]]],
+
+  [#FRx],
+  [L'Utente deve poter rifiutare le remediation proposte],
+  [#link(<UC19>)[#underline[\[UC19\]]], #link(<UC19.2>)[#underline[\[UC19.2\]]]],
+
+  //UC20
+  [#FRx], [Segreti e token esposti devono essere rilevati], [#link(<UC20>)[#underline[\[UC20\]]]],
+
+  [#FRx],
+  [L'Utente deve poter rifiutare le remediation proposte per i segreti rilevati],
+  [#link(<UC20>)[#underline[\[UC20\]]], #link(<UC20.1>)[#underline[\[UC20.1\]]]],
+
+  [#FRx],
+  [La revoca automatica di segreti, se integrata con provider, deve poter essere eseguita],
+  [#link(<UC20>)[#underline[\[UC20\]]], #link(<UC20.2>)[#underline[\[UC20.2\]]]],
+
+  [#FRx],
+  [L'Utente deve poter visualizzare i risultati del rilevamento segreti],
+  [#link(<UC20>)[#underline[\[UC20\]]], #link(<UC20.3>)[#underline[\[UC20.3\]]]],
+
+  //UC21
+  //UC22
+  //UC23
+
+  //UC24
+  [#FRx], [Deve essere suggerito refactoring del codice], [#link(<UC24>)[#underline[\[UC24\]]]],
+
+  [#FRx],
+  [I refactor devono poter essere applicati automaticamente sotto supervisione],
+  [#link(<UC24>)[#underline[\[UC24\]]], #link(<UC24.2>)[#underline[\[UC24.2\]]]],
+
+  [#FRx],
+  [L'Utente deve poter visualizzare i suggerimenti di refactoring],
+  [#link(<UC24>)[#underline[\[UC24\]]], #link(<UC24.3>)[#underline[\[UC24.3\]]]],
+
+  //UC25
+  [#FRx], [Devono poter essere generati changelog e release notes], [#link(<UC25>)[#underline[\[UC25\]]]],
+
+  [#FRx],
+  [Le note di breaking change devono essere rilevate e segnalate],
+  [#link(<UC25>)[#underline[\[UC25\]]], #link(<UC25.1>)[#underline[\[UC25.1\]]]],
+
+  [#FRx],
+  [La pubblicazione su GitHub Release deve avvenire automaticamente],
+  [#link(<UC25>)[#underline[\[UC25\]]], #link(<UC25.2>)[#underline[\[UC25.2\]]]],
+
+  [#FRx],
+  [L'Utente deve poter visualizzare, modificare e approvare il changelog generato],
+  [#link(<UC25>)[#underline[\[UC25\]]], #link(<UC25.3>)[#underline[\[UC25.3\]]]],
+
+  //UC26
+  [#FRx], [I test e il coverage del codice devono essere analizzati], [#link(<UC26>)[#underline[\[UC26\]]]],
+
+  [#FRx],
+  [Devono poter essere rieseguiti test intermittenti per conferma],
+  [#link(<UC26>)[#underline[\[UC26\]]], #link(<UC26.1>)[#underline[\[UC26.1\]]]],
+
+  [#FRx],
+  [Devono essere suggeriti test addizionali per coprire gap di coverage],
+  [#link(<UC26>)[#underline[\[UC26\]]], #link(<UC26.2>)[#underline[\[UC26.2\]]]],
+
+  [#FRx],
+  [L'Utente deve poter visualizzare il report di test e coverage],
+  [#link(<UC26>)[#underline[\[UC26\]]], #link(<UC26.3>)[#underline[\[UC26.3\]]]],
+
+  //UC27
+  [#FRx], [Devono poter essere applicate policy CI/CD pre-merge], [#link(<UC27>)[#underline[\[UC27\]]]],
+
+  [#FRx],
+  [Devono poter essere gestite eccezioni manuali alle policy],
+  [#link(<UC27>)[#underline[\[UC27\]]], #link(<UC27.1>)[#underline[\[UC27.1\]]]],
+
+  [#FRx],
+  [Devono poter essere applicate policy dinamiche per branch differenti],
+  [#link(<UC27>)[#underline[\[UC27\]]], #link(<UC27.2>)[#underline[\[UC27.2\]]]],
+
+  [#FRx],
+  [L'Utente deve poter visualizzare i risultati delle policy applicate],
+  [#link(<UC27>)[#underline[\[UC27\]]], #link(<UC27.3>)[#underline[\[UC27.3\]]]],
+
+  //UC28
+  [#FRx], [Devono poter essere generati report programmabili e inviati alert], [#link(<UC28>)[#underline[\[UC28\]]]],
+
+  [#FRx],
+  [L'Utente deve poter configurare filtri e template per i report],
+  [#link(<UC28>)[#underline[\[UC28\]]], #link(<UC28.1>)[#underline[\[UC28.1\]]]],
+
+  [#FRx],
+  [Devono poter essere eseguite azioni automatiche su alert critici],
+  [#link(<UC28>)[#underline[\[UC28\]]], #link(<UC28.2>)[#underline[\[UC28.2\]]]],
+
+  [#FRx],
+  [L'Utente deve poter visualizzare i report programmati generati],
+  [#link(<UC28>)[#underline[\[UC28\]]], #link(<UC28.3>)[#underline[\[UC28.3\]]]],
 )
 
 #pagebreak()
