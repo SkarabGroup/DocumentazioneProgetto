@@ -19,6 +19,12 @@
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
+    "2026/01/21",
+    "0.34.0",
+    "Aggiunta di sottocasi di UC29 e 30 e altri fix",
+    members.berengan
+  ),
+  (
     "2026/01/19",
     "0.33.1",
     "Aggiunti requisiti funzionali UC12 e UC13, UC16-UC20 e UC24-UC28. Modifica requisiti UC5-UC15",
@@ -2874,6 +2880,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "Remediation proposte non accettate",
 )[]
+
+
 === UC20: Rilevamento segreti e token <UC20>
 #useCase(
   attore: UAA,
@@ -3591,7 +3599,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 === UC29  Recupero e avvio tool esterni di analisi <UC29>
 #useCase(
-  attore: "BackEnd",
+  attore: "Orchestratore",
   pre: [
     - Il BackEnd ha chiari i propri compiti rispetto alle richieste del FrontEnd realtive all'analisi #link(<UC17>)[#underline[\[UC18\]]]
   ],
@@ -3605,18 +3613,19 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Il BackEnd inserisce all'interno dei tool esterni i dati appropriati da analizzare
   ],
   inclusioni: [
-    - Nessuna
+    - #link(<UC29.2>)[#underline[\[UC29.2\]]]
+    - #link(<UC29.3>)[#underline[\[UC29.3\]]]
+    - #link(<UC29.4>)[#underline[\[UC29.4\]]]
   ],
   estensioni: [
     - #link(<UC29.1>)[#underline[\[UC29.1\]]] // Gestione errore contatto tool
-    - #link(<UC29.2>)[#underline[\[UC29.3\]]] // Visualizzazione risultati tool
   ],
   trigger: "Comunicazione con tool esterni",
 )[]
 
 ==== UC29.1 Impossibilità di contattare un tool <UC29.1>
 #useCase(
-  attore: "BackEnd",
+  attore: "Orchestratore",
   pre: [
     - Il BackEnd ha provato a contattare un tool esterno per l'analisi
   ],
@@ -3637,29 +3646,100 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Contatto con tool alternativo",
 )[]
 
-==== UC29.2: Visualizzazione risultati tool esterni <UC29.2>
+==== UC29.2 Richiesta di analisi del codice <UC29.2>
 #useCase(
-  attore: UAA,
+  attore: "Orchestratore",
+  attori_secondari: "SonarQube/Semgrep",
   pre: [
-    - I risultati aggregati dalle esecuzioni degli strumenti esterni sono disponibili #link(<UC29>)[#underline[\[UC29\]]]
+    - L'orchestratore ha istruito il Back-end sulla necessità di contattare lo strumento di analisi del codice
   ],
   post: [
-    - L'utente visualizza i risultati dettagliati dei tool esterni e le evidenze correlate
+    - Lo strumento di analisi del codice ha ricevuto correttamente il codice da analizzare e può iniziare l'analisi
   ],
   scenari: [
-    - L'utente apre il report di analisi; il frontend richiede i risultati aggregati e mostra i dettagli dei tool esterni
+    - Il backend riceve istruzione del codice da analizzare da parte dell'orchestratore
+    - Il sistema backend recupera il codice da analizzare e contatta il tool di analisi
+    - Lo strumento di analisi del codice viene contattato e gli viene passato il codice da analizzare
+    - Lo strumento di analisi del codice analizza il codice
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
+    - #link(<UC29.2.1>)[#underline[\[UC29.2.1\]]]
+  ],
+  trigger: "viene richiesta l'analisi del codice",
+)[]
+===== UC29.2.1 Uno o più linguaggi presenti nella codebase non sono supportati dallo strumento di analisi <UC29.2.1>
+#useCase(
+  attore: "SonarQube/Semgrep",
+  pre: [
+    - Lo strumento di analisi del codice ha ricevuto correttamente #link(<UC29.2>)[#underline[\[UC29.2\]]]
+  ],
+  post:[
+    - Lo strumento di analisi del codice comunica al sistema backend che il linguaggio non è supportato 
+  ],
+  scenari: [
+    - Lo strumento di analisi del codice legge la richiesta del sistema backend
+    - Lo struento di analis del codice rileva dei linguaggi non riconosciuti
+    - Lo strumento di analis del codice comunica l'errore al sistema backend
+  ],
+  inclusioni:[
     - Nessuna
   ],
-  trigger: "Apertura report analisi da parte dell'utente",
-)[
-]
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Viene richiesta l'analisi del codice"
+)[]
+==== UC29.3 Richiesta di analisi della documentazione <UC29.3>
+#useCase(
+  attore: "Orchestratore",
+  attori_secondari: "OpenAI",
+  pre: [
+    - L'orchestratore ha istruito il Back-end sulla necessità di contattare lo strumento di analisi della documentazione
+  ],
+  post:[
+    - La documentazione viene passata correttamente allo strumento di analisi
+  ],
+  scenari: [
+    - Il sistema backend riceve istruzione di analizzare la documentazione da parte dell'orchestratore
+    - Il backend recupera la documentazione appropriata da passare allo strumento di analisi
+    - Lo strumento di analisi riceve la documentazione
+  ],
+  inclusioni:[
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Viene richiesta l'analisi della documentazione"
+)[]
 
-// questo va assolutamente scelto come gestirlo, altrimenti va modificato il sottocaso
+==== UC29.4 Richiesta di analisi del rispetto degi standard OWASP <UC29.4>
+#useCase(
+  attore: "Orchestratore",
+  attori_secondari: "OWASP ZAP",
+  pre: [
+    - L'orchestratore ha istruito il Back-end sulla necessità di contattare lo strumento di analisi degli standard OWASP
+  ],
+  post:[
+    - Lo strumento di analisi degli standard OWASP riceve l'applicazione da analizzare correttamente
+  ],
+  scenari: [
+    - Il sistema backend riceve istruzione di analizzare l'applicazione rispetto agli standard OWASP da parte dell'orchestratore
+    - Il backend recupera correttamente l'applicazione da passare allo strumenti di anlisi degli standard OWASP
+    - Lo strumento di analisi riceve correttamente l'applicazione e può procedere con l'analisi
+  ],
+  inclusioni:[
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Richiesta di analisi del rispetto degli standard",
+)[]
+
 === UC30 Generazione del report finale <UC30>
 #useCase(
   attore: "Orchestratore",
@@ -3675,12 +3755,36 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'orchestratore visualizza il report
   ],
   inclusioni: [
+    - #link(<UC30.1>)[#underline[\[UC30.1\]]]
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Viene completata l'analisi della repository",
+)[]
+
+==== UC30.1 Integrazione delle nuove analisi singole <UC30.1>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - Il sistema backend ha completato la parte di analisi richiesta
+  ],
+  post:[
+    - L'orchestratore ha preso in carico la nuova sezione del report di analisi
+  ],
+  scenari: [
+    - Il sistema backend ha finito la parte di analisi richiesta da parte dell'utente
+    - L'orchestratore ha visualizzato la nuova sezione del report
+    - L'orchestratore integra la nuova sezione nel report corrente
+    - L'orchestratore modifica il report segnalando che una sezione è avanti nell'analisi rispetto alle alte
+  ],
+  inclusioni:[
     - Nessuna
   ],
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il report è stato comlpletato dal sistema backend",
+  trigger: "Viene completata l'analisi della repository"
 )[]
 
 === UC31 Trasferimento del report di analisi al sistema front-end <UC31>
@@ -4000,7 +4104,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna // mancata validazione delle credenziali? Controlli già fatti in UC1.1.2 UC1.2.2
   ],
-  trigger: " Il Back-end riceve le credenziali dell'utente dal Front-end",
+  trigger: "Il Back-end riceve le credenziali dell'utente dal Front-end",
 )[]
 
 ==== UC42 Gestione del codice OAuth GitHub <UC42>
