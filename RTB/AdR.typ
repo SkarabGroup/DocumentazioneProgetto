@@ -13,11 +13,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.33.1"
+#let versione = "v0.35.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2026/01/21",
+    "0.35.0",
+    "Inserimento diagrammi aggiornati per UC1 e UC2",
+    members.antonio,
+  ),
   (
     "2026/01/21",
     "0.34.0",
@@ -3998,7 +4004,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Nessuna repository analizzata trovata",
 )[]
 
-==== UC38 Salvataggio del report dell'analisi <UC38>
+=== UC38 Salvataggio del report dell'analisi <UC38>
 #useCase(
   attore: "Orchestratore", // oppure utente?
   pre: [
@@ -4021,7 +4027,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente conferma il salvataggio del report dell'analisi",
 )[]
 
-==== UC39 Salvataggio metriche aggregate (grafici/tabelle) <UC39>
+=== UC39 Salvataggio metriche aggregate (grafici/tabelle) <UC39>
 #useCase(
   attore: "",
   pre: [
@@ -4042,7 +4048,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "",
 )[]
 
-==== UC40 Trasferimento delle credenziali al Back-end <UC40>
+=== UC40 Trasferimento delle credenziali al Back-end <UC40>
 #useCase(
   attore: "Front-end",
   pre: [
@@ -4086,7 +4092,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Il Back-end non riceve le credenziali dell'utente",
 )[]
 
-==== UC41 Validazione delle credenziali dell'utente <UC41>
+=== UC41 Validazione delle credenziali dell'utente <UC41>
 #useCase(
   attore: "Back-end",
   pre: [
@@ -4107,7 +4113,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Il Back-end riceve le credenziali dell'utente dal Front-end",
 )[]
 
-==== UC42 Gestione del codice OAuth GitHub <UC42>
+=== UC42 Gestione del codice OAuth GitHub <UC42>
 #useCase(
   attore: "",
   pre: [
