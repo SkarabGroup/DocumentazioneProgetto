@@ -11,65 +11,71 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.5.2"
+#let versione = "v0.6.0"
 
 #titlePage("Piano di Qualifica", versione)
 #set heading(numbering: "1.1.1")
 #set page(numbering: "1", header: header("Piano di Qualifica"), footer: footer())
 #let history = (
   (
+    "2026/01/21",
+    "0.6.0",
+    "Cruscotto di valutazione, grafico PV-AC-EV",
+    members.alice,
+  ),
+  (
     "2026/01/17",
     "0.5.2",
     "Revisione Automiglioramento",
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/13",
     "0.5.1",
     "Rielaborazione introduzione documento e qualità di processo",
-    members.suar
+    members.suar,
   ),
   (
     "2025/12/02",
     "0.5.0",
     "Modifica tabelle qualità di processo, inserimento tabelle qualità di prodotto",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2025/12/30",
     "0.4.0",
     "Iniziati metodi di testing, inserimento tabelle test",
     members.berengan,
-    members.suar
+    members.suar,
   ),
   (
     "2025/12/28",
     "0.3.0",
     "Processi secondari e processi organizzativi con tabelle soglie metriche, iniziata sezione automiglioramento e qualità di prodotto",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2025/12/27",
     "0.2.0",
     "Qualità di processo, processi primari",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2025/12/26",
     "0.1.0",
     "Inizio stesura documento, introduzione, scopo e riferimenti",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2025/12/23",
     "0.0.0",
     "Creazione documento",
     members.alice,
-    members.suar
+    members.suar,
   ),
 )
 
@@ -101,7 +107,7 @@ Il documento costituisce il riferimento primario per il #def[Responsabile] e per
 - *Miglioramento Continuo*: applicazione di meccanismi retroattivi (basati sul ciclo #def[Plan-Do-Check-Act]) che utilizzano i risultati delle misurazioni per ottimizzare i processi e il *Way of Working* in corso d'opera.
 
 == Traguardi Qualitativi
-L'assicurazione della qualità segue l'approccio incrementale del progetto, fissando obiettivi specifici per le due principali milestone:
+L'assicurazione della qualità segue l'approccio incrementale del progetto, fissando obiettivi specifici per le due principali milestones:
 
 === Revisione dei Requisiti e della Tecnologia (RTB)
 Per la milestone RTB (*05/02/2026*), le attività di qualità si concentrano sulla correttezza formale e sulla fattibilità tecnica:
@@ -209,17 +215,53 @@ Questi processi definiscono le attività core per la realizzazione del software.
   [Soglie metriche per il processo di Fornitura (EVM)],
   (
     // Misure Base
-    [*MPC01*], [Budget At Completion (BAC)], [Preventivo], [Preventivo], [Preventivo],
-    [*MPC02*], [Planned Value (PV)], [$P V$], [$>= 0$], [Da Piano],
-    [*MPC03*], [Actual Cost (AC)], [$A C$], [$<= E A C$], [$<= E V$],
-    [*MPC04*], [Earned Value (EV)], [$E V$], [$>= 90% P V$], [$>= P V$], // Calibrata tolleranza per ritardi fisiologici
+    [*MPC01*],
+    [Budget At Completion (BAC)],
+    [Preventivo],
+    [Preventivo],
+    [Preventivo],
+    [*MPC02*],
+    [Planned Value (PV)],
+    [$P V$],
+    [$>= 0$],
+    [Da Piano],
+    [*MPC03*],
+    [Actual Cost (AC)],
+    [$A C$],
+    [$<= E A C$],
+    [$<= E V$],
+    [*MPC04*],
+    [Earned Value (EV)],
+    [$E V$],
+    [$>= 90% P V$],
+    [$>= P V$], // Calibrata tolleranza per ritardi fisiologici
     // Indici
-    [*MPC05*], [Budget Variance (BV)], [$B V = B A C - E A C$], [$>= 0$], [$> 0$],
-    [*MPC06*], [Schedule Variance (SV)], [$S V = E V - P V$], [$> -10% "BAC"$], [$>= 0$],
-    [*MPC07*], [Cost Performance Index (CPI)], [$C P I = (E V) / (A C)$], [$0.90 <= v <= 1.10$], [$1.00$],
-    [*MPC08*], [Schedule Performance Index (SPI)], [$S P I = (E V) / (P V)$], [$0.90 <= v <= 1.10$], [$1.00$],
-    [*MPC09*], [Estimate At Completion (EAC)], [$E A C = (B A C) / (C P I)$], [$<= B A C + 5%$], [$<= B A C$],
-  )
+    [*MPC05*],
+    [Budget Variance (BV)],
+    [$B V = B A C - E A C$],
+    [$>= 0$],
+    [$> 0$],
+    [*MPC06*],
+    [Schedule Variance (SV)],
+    [$S V = E V - P V$],
+    [$> -10% "BAC"$],
+    [$>= 0$],
+    [*MPC07*],
+    [Cost Performance Index (CPI)],
+    [$C P I = (E V) / (A C)$],
+    [$0.90 <= v <= 1.10$],
+    [$1.00$],
+    [*MPC08*],
+    [Schedule Performance Index (SPI)],
+    [$S P I = (E V) / (P V)$],
+    [$0.90 <= v <= 1.10$],
+    [$1.00$],
+    [*MPC09*],
+    [Estimate At Completion (EAC)],
+    [$E A C = (B A C) / (C P I)$],
+    [$<= B A C + 5%$],
+    [$<= B A C$],
+  ),
 )
 
 _Riferimento: Norme di Progetto, Sezione [Stabilità dei Requisiti]_
@@ -228,8 +270,12 @@ Il monitoraggio della stabilità dei requisiti è cruciale per prevenire lo *sco
 #metrics_table(
   [Soglie metriche per il processo di Sviluppo],
   (
-    [*MPC10*], [Requirements Stability Index], [$R S I = (R_"tot" - Delta R) / R_"tot" times 100$], [$>= 75%$], [100%], // Abbassato leggermente per accomodare il refactoring dei requisiti
-  )
+    [*MPC10*],
+    [Requirements Stability Index],
+    [$R S I = (R_"tot" - Delta R) / R_"tot" times 100$],
+    [$>= 75%$],
+    [100%], // Abbassato leggermente per accomodare il refactoring dei requisiti
+  ),
 )
 
 === Processi di Supporto
@@ -238,11 +284,27 @@ I processi di supporto garantiscono l'integrità e la verificabilità degli arte
 #metrics_table(
   [Soglie metriche Documentazione e Verifica],
   (
-    [*MPC11*], [Gulpease Index], [$89 + (300(L_f) - 10(L_p)) / (F_p)$], [$>= 40$], [$>= 60$],
-    [*MPC12*], [Correttezza Ortografica], [Errori segnalati], [0], [0],
-    [*MPC13*], [Code Coverage], [$("Linee coperte") / ("Linee totali") times 100$], [$>= 70%$], [$>= 80%$],
-    [*MPC14*], [Test Success Rate], [$("Passati") / ("Eseguiti") times 100$], [100%], [100%],
-  )
+    [*MPC11*],
+    [Gulpease Index],
+    [$89 + (300(L_f) - 10(L_p)) / (F_p)$],
+    [$>= 40$],
+    [$>= 60$],
+    [*MPC12*],
+    [Correttezza Ortografica],
+    [Errori segnalati],
+    [0],
+    [0],
+    [*MPC13*],
+    [Code Coverage],
+    [$("Linee coperte") / ("Linee totali") times 100$],
+    [$>= 70%$],
+    [$>= 80%$],
+    [*MPC14*],
+    [Test Success Rate],
+    [$("Passati") / ("Eseguiti") times 100$],
+    [100%],
+    [100%],
+  ),
 )
 
 === Processi Organizzativi
@@ -251,9 +313,17 @@ Misurano l'efficienza interna del team Skarab Group nell'auto-organizzarsi e nel
 #metrics_table(
   [Soglie metriche Organizzative],
   (
-    [*MPC15*], [Metrics Satisfaction], [$("Metriche OK") / ("Metriche Tot") times 100$], [$>= 90%$], [100%],
-    [*MPC16*], [Sprint Goal Achievement], [$("Completati") / ("Pianificati") times 100$], [$>= 80%$], [100%],
-  )
+    [*MPC15*],
+    [Metrics Satisfaction],
+    [$("Metriche OK") / ("Metriche Tot") times 100$],
+    [$>= 90%$],
+    [100%],
+    [*MPC16*],
+    [Sprint Goal Achievement],
+    [$("Completati") / ("Pianificati") times 100$],
+    [$>= 80%$],
+    [100%],
+  ),
 )
 
 #pagebreak()
@@ -268,10 +338,22 @@ Si misura la capacità del sistema di svolgere i compiti richiesti e di rimanere
 #metrics_table(
   [Metriche Adeguatezza e Affidabilità],
   (
-    [*MPD01*], [Copertura Req. Obbligatori], [$frac("Soddisfatti", "Totale Obbl.") times 100$], [100%], [100%],
-    [*MPD04*], [Failure Density], [$frac("N. guasti", "KLOC")$], [$<= 0.5$], [0],
-    [*MPD05*], [Availability], [$frac("Tempo Up", "Tempo Tot") times 100$], [$>= 98%$], [$>= 99.9%$],
-  )
+    [*MPD01*],
+    [Copertura Req. Obbligatori],
+    [$frac("Soddisfatti", "Totale Obbl.") times 100$],
+    [100%],
+    [100%],
+    [*MPD04*],
+    [Failure Density],
+    [$frac("N. guasti", "KLOC")$],
+    [$<= 0.5$],
+    [0],
+    [*MPD05*],
+    [Availability],
+    [$frac("Tempo Up", "Tempo Tot") times 100$],
+    [$>= 98%$],
+    [$>= 99.9%$],
+  ),
 )
 
 === Manutenibilità e Sicurezza
@@ -280,15 +362,33 @@ Data la natura del progetto #def("Code Guardian"), queste metriche rappresentano
 #metrics_table(
   [Metriche Manutenibilità e Sicurezza],
   (
-    [*MPD08*], [Comment Density], [$frac("Linee commento", "Linee codice") times 100$], [$>= 15%$], [$20% - 25%$], // Ottimale ridotto per favorire il Clean Code
-    [*MPD09*], [Cyclomatic Complexity], [$V(G)$], [$<= 15$], [$<= 10$],
-    [*MPD10*], [Coupling (Fan-out)], [Dipendenze esterne], [$<= 6$], [$<= 3$],
-    [*MPD11*], [Vulnerability Detection], [N. vulnerabilità critiche], [0], [0],
-  )
+    [*MPD08*],
+    [Comment Density],
+    [$frac("Linee commento", "Linee codice") times 100$],
+    [$>= 15%$],
+    [$20% - 25%$], // Ottimale ridotto per favorire il Clean Code
+    [*MPD09*],
+    [Cyclomatic Complexity],
+    [$V(G)$],
+    [$<= 15$],
+    [$<= 10$],
+    [*MPD10*],
+    [Coupling (Fan-out)],
+    [Dipendenze esterne],
+    [$<= 6$],
+    [$<= 3$],
+    [*MPD11*],
+    [Vulnerability Detection],
+    [N. vulnerabilità critiche],
+    [0],
+    [0],
+  ),
 )
 #pagebreak()
 
-#TODO("Svolgere una revisione approfondita delle metodologie di testing, facendo ovviamente riferimento alla sezione di descrizione delle NdP")
+#TODO(
+  "Svolgere una revisione approfondita delle metodologie di testing, facendo ovviamente riferimento alla sezione di descrizione delle NdP",
+)
 = Metodi di Testing
 Questa sezione definisce la strategia di testing per il progetto _CodeGuardian_.
 Skarab Group ha adottato un approccio di testing multilivello che copre:
@@ -634,35 +734,49 @@ In questa sezione vengono definiti i #def("Test di Accettazione"), volti a valid
 )
 
 #pagebreak()
-#TODO("Aggiungere grafici del cruscotto di valutazione")
-
 = Cruscotto di Valutazione
+Il presente cruscotto costituisce il sistema di monitoraggio attraverso il quale Skarab Group valuta oggettivamente l'andamento del progetto. Le metriche qui raccolte rappresentano l'evidenza empirica necessaria per attivare il ciclo _PDCA_ (Plan-Do-Check-Act), trasformando i dati grezzi in informazioni per il miglioramento continuo.
 
-== Processi Primari: Fornitura
-=== Earned Value - Planned Value (MP01 e MP02)
-=== Actual Cost - Estimate To Complete (MP03 e MP07)
-=== Cost Performance Index - Schedule Performance Index (MP04 e MP05)
-=== Estimate At Completion (MP06)
+== Finalità del Cruscotto
+Il cruscotto di valutazione assolve a due funzioni fondamentali:
+- *Monitoraggio Proattivo:* Consente di rilevare scostamenti rispetto alle soglie definite all'interno del _Piano di Qualifica_ stesso, evitando che criticità latenti si trasformino in blocchi operativi.
+- *Tracciabilità Storica:* Documenta l'evoluzione delle prestazioni del gruppo nel tempo, permettendo di identificare pattern ricorrenti e validare l'efficacia delle azioni correttive implementate.
 
-== Processi Primari: Sviluppo
-=== Requirements Stability Index (MP08)
+== Struttura delle Misurazioni
+Per ciascuna metrica viene fornita una rappresentazione grafica dell'andamento temporale accompagnata da un'analisi qualitativa. Tali misurazioni e i relativi obiettivi di qualità sono in linea con quanto redatto all'interno del #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/PdP.pdf")[#underline[*Piano di Progetto*]].
 
-== Processi di Supporto: Documentazione
-=== Gulpease Index (MP09)
-=== Correttezza Ortografica (MP10)
+Ogni grafico, quindi, è accompagnato da un commento interpretativo che collega le variazioni delle metriche con le cause organizzative, tecniche o procedurali che le hanno generate, garantendo che i dati non rimangano meri numeri ma si traducano in azioni concrete di miglioramento.
 
-== Processi di Supporto: Gestione della Qualità
-=== Quality metrics satisfied (MP13)
+Le misurazioni coprono il periodo che va dall'*aggiudicazione del capitolato* fino alla milestone *RTB* (06/02/2026). Per la fase di *Product Baseline* (PB), in assenza di dati storici completi, vengono fornite _stime previsionali_ basate sui trend consolidati durante la RTB.
 
-== Processi Organizzativi: Gestione dei Processi
-=== Time Efficiency (MP14)
-=== Sprint Goal Achievement (MP15)
+È importante evidenziare che il periodo iniziale, dall'aggiudicazione fino all'avvio formale delle attività di progetto, ha rappresentato una fase di "palestra" durante la quale il gruppo si è dedicato allo studio approfondito delle tecnologie necessarie, partecipando anche a sessioni di formazione tecnica organizzate dall'azienda proponente Var Group.
+
+== Processi Primari: Fornitura e Sviluppo
+=== Planned Value - Actual Cost - Earned Value (MPC02, MPC03 e MPC04)
+#image("../assets/graficiPdQ/grafico_pv_ac_ev.png")
+Dopo la fase iniziale, in cui le attività di formazione e setup sono state gestite come investimento interno senza gravare sul budget, il progetto è entrato nella fase operativa con l'avvio dello _Sprint 1_. In questa prima iterazione Skarab Group ha mostrato un buon equilibrio economico, completando il lavoro con un dispendio di risorse coerente con il valore prodotto, pur registrando un lieve ritardo rispetto alla pianificazione ideale.
+
+Tuttavia, la situazione ha subito una variazione significativa durante lo _Sprint 2_: a fronte di un incremento del _Planned Value_ (PV) e dell'_Actual Cost_ (AC), l'_Earned Value_ (EV) ha subito una brusca flessione. Questo testimonia l'insorgere di inefficienze produttive e debito tecnico, legati alla necessità di ricalibrare task qualitativamente insufficienti che hanno rallentato la produzione.
+
+#pagebreak()
+=== Budget Variance - Schedule Variance (MPC05 e MPCO6)
+=== Cost Performance Index - Schedule Performance Index (MPC07 e MPC08)
+=== Estimate At Completion (MPC09)
+=== Requirements Stability Index (MPC10)
+
+== Processi di Supporto
+=== Gulpease Index (MPC11)
+=== Correttezza Ortografica (MPC12)
+
+== Processi Organizzativi
+=== Metrics Satisfaction (MPC15)
+=== Sprint Goal Achievement (MPC16)
 
 #pagebreak()
 
 == Automiglioramento
 
-#TODO("Definire ulteriori problemi emersi durant lo sviluppo del progetto")
+#TODO("Definire ulteriori problemi emersi durante lo sviluppo del progetto")
 === Introduzione
 Il miglioramento continuo risulta fondamentale per garantire la qualità del progetto #def("Code Guardian"). Seguendo il #def("Way of Working"), il team effettua retrospettive periodiche per identificare i colli di bottiglia operativi e implementare soluzioni correttive secondo il ciclo #def("PDCA"). Le valutazioni sono state suddivise in tre ambiti critici identificati durante lo sviluppo iniziale.
 
@@ -697,10 +811,10 @@ Il coordinamento di un gruppo numeroso ha richiesto un passaggio da una comunica
     inset: 10pt,
     table.header([*Criticità*], [*Soluzione Organizzativa*]),
 
-    [Difficoltà di allineamento immediato su decisioni logistiche e urgenze.], 
+    [Difficoltà di allineamento immediato su decisioni logistiche e urgenze.],
     [Definizione di canali gerarchici: #def("Telegram") per le urgenze, #def("Discord") per il lavoro sincrono e i meeting di allineamento.],
-    
-    [Sovrapposizione di sforzi o "buchi" operativi dovuti alla dimensione del gruppo (7 persone).], 
+
+    [Sovrapposizione di sforzi o "buchi" operativi dovuti alla dimensione del gruppo (7 persone).],
     [Suddivisione in sotto-gruppi di lavoro tematici per ridurre il rumore comunicativo e aumentare la focalizzazione.],
   ),
   caption: [Miglioramento dell'efficienza organizzativa],
@@ -716,18 +830,18 @@ Per evitare lo stallo decisionale e risolvere ambiguità metodologiche, è stato
     inset: 10pt,
     table.header([*Problema di Ruolo / Criticità*], [*Azioni di Risposta*]),
 
-    [Mancanza di una visione d'insieme su documenti complessi come l'Analisi dei Requisiti.], 
+    [Mancanza di una visione d'insieme su documenti complessi come l'Analisi dei Requisiti.],
     [Nomina di un referente responsabile per ogni macro-documento, incaricato di supervisionare la coerenza finale e il rispetto delle scadenze.],
 
-    [Forte difficoltà degli #def("Analisti") nel tracciare correttamente attori e sistemi in conformità con gli standard richiesti.], 
+    [Forte difficoltà degli #def("Analisti") nel tracciare correttamente attori e sistemi in conformità con gli standard richiesti.],
     [
       Attivazione di una strategia di chiarimento a più livelli:
       - Consultazione diretta con il *Prof. Cardin* per risolvere dubbi metodologici;
       - Confronto costruttivo con altri gruppi di progetto per allineamento sugli standard;
       - Richiesta di intervento dell'azienda proponente (#def("Var Group")) per chiarire il perimetro operativo del sistema.
     ],
-    
-    [Incertezza sulla validazione degli incrementi prodotti e rischio di errori latenti.], 
+
+    [Incertezza sulla validazione degli incrementi prodotti e rischio di errori latenti.],
     [Rafforzamento del ruolo dei #def("Verificatori"), con l'introduzione di una revisione obbligatoria "a quattro occhi" prima di ogni merge sul repository principale.],
   ),
   caption: [Definizione e gestione delle responsabilità e risoluzione blocchi metodologici],
