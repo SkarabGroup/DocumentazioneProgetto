@@ -152,7 +152,6 @@ Versione aggiornata del Glossario:
 
 === Riferimenti Normativi
 I seguenti documenti hanno valore vincolante per la redazione del Piano di Progetto e per lo svolgimento delle attività progettuali:
-<<<<<<< HEAD
 - *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> #linebreak()
   #link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")
 - *Norme di Progetto*: regole, convenzioni e standard di qualità adottati dal gruppo. #linebreak()
