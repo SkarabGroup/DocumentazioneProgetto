@@ -11,12 +11,18 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.6.0"
+#let versione = "v0.7.0"
 
 #titlePage("Piano di Qualifica", versione)
 #set heading(numbering: "1.1.1")
 #set page(numbering: "1", header: header("Piano di Qualifica"), footer: footer())
 #let history = (
+  (
+    "2026/01/22",
+    "0.7.0",
+    "Grafici CPI-SPI, EAC, RSI e SGA",
+    members.alice,
+  ),
   (
     "2026/01/21",
     "0.6.0",
@@ -82,8 +88,6 @@
 #versionTable(history)
 
 #indice()
-
-#pagebreak()
 
 #indiceTabelle()
 
@@ -747,30 +751,52 @@ Per ciascuna metrica viene fornita una rappresentazione grafica dell'andamento t
 
 Ogni grafico, quindi, è accompagnato da un commento interpretativo che collega le variazioni delle metriche con le cause organizzative, tecniche o procedurali che le hanno generate, garantendo che i dati non rimangano meri numeri ma si traducano in azioni concrete di miglioramento.
 
-Le misurazioni coprono il periodo che va dall'*aggiudicazione del capitolato* fino alla milestone *RTB* (06/02/2026). Per la fase di *Product Baseline* (PB), in assenza di dati storici completi, vengono fornite _stime previsionali_ basate sui trend consolidati durante la RTB.
+Le misurazioni coprono il periodo che va dall'*aggiudicazione del capitolato* fino alla milestone *RTB* (06/02/2026).
 
-È importante evidenziare che il periodo iniziale, dall'aggiudicazione fino all'avvio formale delle attività di progetto, ha rappresentato una fase di "palestra" durante la quale il gruppo si è dedicato allo studio approfondito delle tecnologie necessarie, partecipando anche a sessioni di formazione tecnica organizzate dall'azienda proponente Var Group.
+Per la fase di *Product Baseline* (PB) vengono fornite _stime previsionali_.
+Rispetto a quanto rilevato nella RTB, ci si attende un _incremento dell'efficienza_ e una maggiore aderenza alle tempistiche prefissate. La fase precedente, infatti, ha risentito dei rallentamenti dovuti alla concomitanza con la sessione d'esame.
+Con il superamento di tale periodo, la PB riflette una pianificazione più fluida e una gestione operativa che punta a stabilizzare i ritmi, ottimizzando i risultati.
+
+È importante evidenziare che il periodo iniziale, dall'aggiudicazione fino all'avvio formale delle attività di progetto, ha rappresentato una fase di "palestra" durante la quale il gruppo si è dedicato allo studio approfondito delle tecnologie necessarie, partecipando anche a sessioni di formazione organizzate dall'azienda proponente Var Group.
 
 == Processi Primari: Fornitura e Sviluppo
 === Planned Value - Actual Cost - Earned Value (MPC02, MPC03 e MPC04)
-#image("../assets/graficiPdQ/grafico_pv_ac_ev.png")
+#image("../assets/graficiPdQ/grafico_pv_ac_ev.png", height: 50%)
 Dopo la fase iniziale, in cui le attività di formazione e setup sono state gestite come investimento interno senza gravare sul budget, il progetto è entrato nella fase operativa con l'avvio dello _Sprint 1_. In questa prima iterazione Skarab Group ha mostrato un buon equilibrio economico, completando il lavoro con un dispendio di risorse coerente con il valore prodotto, pur registrando un lieve ritardo rispetto alla pianificazione ideale.
 
-Tuttavia, la situazione ha subito una variazione significativa durante lo _Sprint 2_: a fronte di un incremento del _Planned Value_ (PV) e dell'_Actual Cost_ (AC), l'_Earned Value_ (EV) ha subito una brusca flessione. Questo testimonia l'insorgere di inefficienze produttive e debito tecnico, legati alla necessità di ricalibrare task qualitativamente insufficienti che hanno rallentato la produzione.
+Tuttavia, la situazione ha subito una variazione significativa durante lo _Sprint 2_: a fronte di un incremento del _Planned Value_ (PV) e dell'_Actual Cost_ (AC), l'_Earned Value_ (EV) ha subito una flessione. Questo testimonia l'insorgere di inefficienze produttive e debito tecnico, legati alla necessità di ricalibrare task qualitativamente insufficienti che hanno rallentato la produzione.
 
 #pagebreak()
 === Budget Variance - Schedule Variance (MPC05 e MPCO6)
-=== Cost Performance Index - Schedule Performance Index (MPC07 e MPC08)
-=== Estimate At Completion (MPC09)
-=== Requirements Stability Index (MPC10)
 
+#pagebreak()
+=== Cost Performance Index - Schedule Performance Index (MPC07 e MPC08)
+#image("../assets/graficiPdQ/grafico_cpi_spi.png", height: 50%)
+Dal grafico è possibile notare come, inizialmente, lo _Schedule Performance Index_ (SPI) sia inferiore a 1, indicando un leggero ritardo fisiologico. La buona gestione dei costi è invece documentata dal _Cost Performance Index_ (CPI) che, essendo pari a 1, indica un ottimo utilizzo del budget.
+
+La situazione è peggiorata nel corso dello _Sprint 2_, durante il quale si è verificato un crollo dello _Schedule Performance Index_ (SPI) che segnala un ritardo critico rispetto alla pianificazione. La cattiva gestione temporale è in contrasto con il _Cost Performance Index_ (CPI) che si mantiene abbastanza stabile, confermando che il problema non è di natura economica ma organizzativa.
+
+#pagebreak()
+=== Estimate At Completion (MPC09)
+#image("../assets/graficiPdQ/grafico_eac.png", height: 50%)
+Dopo una fase iniziale di stabilità coincidente con il budget originale, è possibile notare come una gestione inefficiente delle risorse abbia spinto la previsione di spesa verso il limite massimo.
+
+#pagebreak()
+=== Requirements Stability Index (MPC10)
+#image("../assets/graficiPdQ/grafico_rsi.png", height: 50%)
+Il _Requirements Stability Index_ (RSI) registra un peggioramento nel corso dello _Sprint 2_. Tale flessione è riconducibile a una sottostima iniziale dei requisiti impliciti e all'emersione di ulteriori requisiti in seguito al colloquio con il Prof. Cardin: il team ha dovuto apportare modifiche significative per aggiungere i requisiti non tracciati in precedenza dagli Analisti.
+
+#pagebreak()
 == Processi di Supporto
 === Gulpease Index (MPC11)
 === Correttezza Ortografica (MPC12)
 
+#pagebreak()
 == Processi Organizzativi
 === Metrics Satisfaction (MPC15)
 === Sprint Goal Achievement (MPC16)
+#image("../assets/graficiPdQ/grafico_sga.png", height: 50%)
+Dal grafico è possibile osservare la buona efficacia operativa dimostrata durante lo _Sprint 1_ dal team, che è riuscito a completare gli obiettivi prefissati quasi nella loro interezza. Durante lo _Sprint 2_, invece, la metrica ha subito una flessione poiché gli obiettivi prefissati non sono stati pienamente raggiunti.
 
 #pagebreak()
 
