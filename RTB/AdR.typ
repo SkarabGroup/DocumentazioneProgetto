@@ -21,7 +21,7 @@
   (
     "2026/01/21",
     "0.35.0",
-    "Inserimento diagrammi aggiornati per UC1 e UC2",
+    "Inserimento diagrammi aggiornati per UC1-5 e UC34-37",
     members.antonio,
   ),
   (
@@ -1129,8 +1129,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente accede alla sezione di richiesta analisi repository
-            GitHub in CodeGuardian",
+  trigger: "L'utente accede alla sezione di richiesta analisi repository GitHub in CodeGuardian",
 )[
   #useCaseDiagram("4", "UC4 - Richiesta analisi repository GitHub")
 ]
@@ -1629,9 +1628,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "L'utente conferma la visualizzazione del report dalla sezione dedicata del proprio account CodeGuardian",
-)[
-  #useCaseDiagram("5_4", "UC5.4: Visualizzazione report di analisi")
-]
+)[]
 
 
 === UC6: Scelta intervallo temporale per visualizzazione confronto con report passati <UC6>
@@ -3840,20 +3837,20 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 //spazio per quelli in mezzo
 
-=== UC34  Notifica completamento al frontend <UC34>
+=== UC34: Notifica completamento al frontend <UC34>
 #useCase(
-  attore: "Back-end",
+  attore: "Orchestratore",
   pre: [
-    - Il Back-end ha ricevuto una richiesta di analisi dal Front-end #link(<UC4>)[#underline[\[UC4\]]]
-    - Il Back-end ha iniziato l'analisi della repository #link(<UC29>)[#underline[\[UC29\]]]
-    - Il Back-end ha concluso con successo l'analisi della repository
+    - L'orchestratore ha ricevuto una richiesta di analisi dal Front-end #link(<UC4>)[#underline[\[UC4\]]]
+    - L'orchestratore ha iniziato l'analisi della repository #link(<UC29>)[#underline[\[UC29\]]]
+    - L'orchestratore ha concluso con successo l'analisi della repository
   ],
   post: [
     - Il sistema Front-end è stato notificato del completamento dell'analisi
   ],
   scenari: [
-    - Il Back-end ha concluso l'analisi richiesta
-    - Il Back-end invia una notifica al Front-end del completamento dell'analisi
+    - L'orchestratore ha concluso l'analisi richiesta
+    - L'orchestratore invia una notifica al Front-end del completamento dell'analisi
   ],
   inclusioni: [
     - Nessuna
@@ -3861,21 +3858,23 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - #link(<UC34.1>)[#underline[\[UC34.1\]]]
   ],
-  trigger: "Il Back-end ha completato l'analisi della repository",
-)[]
+  trigger: "L'orchestratore ha completato l'analisi della repository",
+)[
+  #useCaseDiagram("34", "UC34 - Notifica completamento al frontend")
+]
 
-==== UC34.1 Nuovo tentativo di invio del messaggio di completamento <UC34.1>
+==== UC34.1: Nuovo tentativo di invio del messaggio di completamento <UC34.1>
 #useCase(
-  attore: "Back-end",
+  attore: "Orchestratore",
   pre: [
-    - Il Back-end non riceve un ack dal Front-end dopo aver inviato la notifica di completamento dell'analisi #link(<UC34>)[#underline[\[UC34\]]]
+    - L'Orchestratore non riceve un ack dal Front-end dopo aver inviato la notifica di completamento dell'analisi #link(<UC34>)[#underline[\[UC34\]]]
   ],
   post: [
-    - Il Back-end ritenta l'invio della notifica di completamento dell'analisi al Front-end
+    - L'Orchestratore ritenta l'invio della notifica di completamento dell'analisi al Front-end
   ],
   scenari: [
-    - Il Back-end non riceve l'ack di avvenuta ricezione della notifica di completamento dell'analisi
-    - Il Back-end ritenta l'invio della notifica al Front-end
+    - L'Orchestratore non riceve l'ack di avvenuta ricezione della notifica di completamento dell'analisi
+    - L'Orchestratore ritenta l'invio della notifica al Front-end
   ],
   inclusioni: [
     - Nessuna
@@ -3883,25 +3882,25 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il Back-end non riceve l'ack dal Front-end",
+  trigger: "L'Orchestratore non riceve l'ack dal Front-end",
 )[]
 
-=== UC35 Gestione errore critico durante l'analisi <UC35>
+=== UC35: Gestione errore critico durante l'analisi <UC35>
 #useCase(
-  attore: "Back-end",
+  attore: "Orchestratore",
   pre: [
-    - Il Back-end ha ricevuto una richiesta di analisi #link(<UC4>)[#underline[\[UC4\]]]
-    - Il Back-end ha avviato l'analisi della repository #link(<UC29>)[#underline[\[UC29\]]]
-    - Il Back-end riscontra un errore bloccante durante l'analisi
+    - L'Orchestratore ha ricevuto una richiesta di analisi #link(<UC4>)[#underline[\[UC4\]]]
+    - L'Orchestratore ha avviato l'analisi della repository #link(<UC29>)[#underline[\[UC29\]]]
+    - L'Orchestratore riscontra un errore bloccante durante l'analisi
   ],
   post: [
     - Il Front-end viene notificato che l'analisi non è andata a buon fine
   ],
   scenari: [
-    - Il Back-end inizia l'analisi della repository
+    - L'Orchestratore inizia l'analisi della repository
     - Durante l'analisi si verifica un errore critico che blocca il processo
-    - Il Back-end cattura l'errore e prepara una notifica di fallimento
-    - Il Back-end invia la notifica al Front-end informandolo del fallimento dell'analisi
+    - L'Orchestratore cattura l'errore e prepara una notifica di fallimento
+    - L'Orchestratore invia la notifica al Front-end informandolo del fallimento dell'analisi
   ],
   inclusioni: [
     - Nessuna
@@ -3910,20 +3909,22 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC35.1>)[#underline[\[UC35.1\]]]
   ],
   trigger: "Un errore critico blocca l'analisi della repository",
-)[]
+)[
+  #useCaseDiagram("35", "UC35 - Gestione errore critico durante l'analisi")
+]
 
-==== UC35.1 Nuovo tentativo di invio del messaggio di fallimento <UC35.1>
+==== UC35.1: Nuovo tentativo di invio del messaggio di fallimento <UC35.1>
 #useCase(
-  attore: "Back-end",
+  attore: "Orchestratore",
   pre: [
-    - Il Back-end non riceve un ack dal Front-end dopo aver inviato la notifica di fallimento dell'analisi #link(<UC35>)[#underline[\[UC35\]]]
+    - L'Orchestratore non riceve un ack dal Front-end dopo aver inviato la notifica di fallimento dell'analisi #link(<UC35>)[#underline[\[UC35\]]]
   ],
   post: [
-    - Il Back-end ritenta l'invio della notifica di fallimento
+    - L'Orchestratore ritenta l'invio della notifica di fallimento
   ],
   scenari: [
-    - Il Back-end non riceve l'ack di avvenuta ricezione della notifica di fallimento dell'analisi
-    - Il Back-end ritenta l'invio della notifica al Front-end
+    - L'Orchestratore non riceve l'ack di avvenuta ricezione della notifica di fallimento dell'analisi
+    - L'Orchestratore ritenta l'invio della notifica al Front-end
   ],
   inclusioni: [
     - Nessuna
@@ -3931,15 +3932,15 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il Back-end non riceve l'ack dal Front-end",
+  trigger: "L'Orchestratore non riceve l'ack dal Front-end",
 )[]
 
-=== UC36 Salvataggio metadati repository <UC36>
+=== UC36: Salvataggio metadati repository <UC36>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'utente ha avviato un'analisi
-    - L'analisi è stata avviata e presa in carico da Back-end
+    - L'utente ha richiesto l'analisi di una repository #link(<UC4>)[#underline[\[UC4\]]]
+    - L'analisi è stata avviata e presa in carico dall'Orchestratore #link(<UC29>)[#underline[\[UC29\]]]
   ],
   post: [
     - I metadati della repository sono stati salvati nel database
@@ -3956,19 +3957,19 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'analisi è stata avviata con successo",
 )[]
 
-=== UC37 Verifica esistenza repository analizzata <UC37>
+=== UC37: Verifica esistenza repository analizzata <UC37>
 #useCase(
-  attore: "Back-end",
+  attore: "Orchestratore",
   pre: [
     - L’utente si trova nella sezione di visualizzazione dei report (#link(<UC5.1>)[#underline[\[UC5.1\]]])
-    - Il Front-end richiede al Back-end di inviare i dati relativi alle repository analizzate dall'utente
+    - Il Front-end richiede all'Orchestratore di inviare i dati relativi alle repository analizzate dall'utente
   ],
   post: [
     - L'utente visualizza le repository per le quali sono stati svolte delle analisi
   ],
   scenari: [
-    //- Il Back-end interroga il Database per recuperare le informazioni richieste
-    - Il Back-end invia al Front-end la lista delle repository analizzate
+    //- L'Orchestratore interroga il Database per recuperare le informazioni richieste
+    - L'Orchestratore invia al Front-end la lista delle repository analizzate
     - Il Front-end mostra all'utente la lista delle repository analizzate
   ],
   inclusioni: [
@@ -3978,21 +3979,23 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC37.1>)[#underline[\[UC37.1\]]]
   ],
   trigger: "Richiesta di visualizzazione delle repository analizzate",
-)[]
+)[
+  #useCaseDiagram("37", "UC37 - Verifica esistenza repository analizzata")
+]
 
-==== UC37.1 Nessuna repository analizzata <UC37.1>
+==== UC37.1: Nessuna repository analizzata <UC37.1>
 #useCase(
-  attore: "Back-end",
+  attore: "Orchestratore",
   pre: [
     - L’utente si trova nella sezione di visualizzazione dei report (#link(<UC5.1>)[#underline[\[UC5.1\]]])
-    - Il Front-end richiede al Back-end di inviare i dati relativi alle repository analizzate dall'utente
+    - Il Front-end richiede all'Orchestratore di inviare i dati relativi alle repository analizzate dall'utente #link(<UC37>)[#underline[\[UC37\]]]
     - Non sono presenti repository analizzate per l'utente
   ],
   post: [
     - L'utente viene informato che non sono presenti repository analizzate
   ],
   scenari: [
-    - Il Back-end invia al Front-end un messaggio di errore
+    - L'Orchestratore invia al Front-end un messaggio di errore
     - Il Front-end mostra all'utente il messaggio di errore
   ],
   inclusioni: [
