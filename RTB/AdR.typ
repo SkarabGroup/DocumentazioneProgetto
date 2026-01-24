@@ -20,6 +20,12 @@
 #let history = (
   (
     "2026/01/24",
+    "0.37.0",
+    "Inserimento diagrammi per UC38-41",
+    members.andrea,
+  ),
+  (
+    "2026/01/24",
     "0.36.0",
     "Modifica dei casi d'uso UC38, UC40 e UC40.1 e aggiunta di UC38.1, UC39, UC39.1, UC41 e UC41.1",
     members.andrea,
@@ -4034,7 +4040,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC38.1>)[#underline[[UC38.1]]]
   ],
   trigger: "Il report finale è preso in carico dall'orchestratore",
-)[]
+)[
+  #useCaseDiagram("38", "UC38 - Salvataggio del report dell'analisi")
+]
 
 ==== UC38.1 Errore durante il salvataggio del report <UC38.1>
 #useCase(
@@ -4058,11 +4066,11 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Il sistema Back-end fallisce la procedura di archiviazione",
 )[]
 
-=== UC39 Salvataggio metriche aggregate (grafici/tabelle) <UC39>
+=== UC39 Salvataggio delle metriche aggregate <UC39>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - Il sistema ha completato con successo l'analisi della repository #link(<UC30>)[#underline[[UC30]]]
+    - L'analisi della repository è completata ed è stato generato il report finale #link(<UC30>)[#underline[[UC30]]]
   ],
   post: [
     - Le metriche aggregate per la visualizzazione di grafici e tabelle sono salvate nel database dal sistema Back-end
@@ -4079,9 +4087,11 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC39.1>)[#underline[[UC39.1]]]
   ],
   trigger: "Il report finale viene generato e completato",
-)[]
+)[
+  #useCaseDiagram("39", "UC39 - Salvataggio delle metriche aggregate")
+]
 
-==== UC39.1 Errore nel salvataggio delle metriche aggregate <UC39.1>
+==== UC39.1 Errore durante il salvataggio delle metriche aggregate <UC39.1>
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -4123,9 +4133,11 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC40.1>)[#underline[\[UC40.1\]]]
   ],
   trigger: "L'utente richiede la creazione di un nuovo account CodeGuardian",
-)[]
+)[
+  #useCaseDiagram("40", "UC40 - Invio delle credenziali al sistema Back-end")
+]
 
-==== UC40.1 Errore nel trasferimento delle credenziali al Back-end <UC40.1>
+==== UC40.1 Errore durante il trasferimento delle credenziali al Back-end <UC40.1>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -4171,9 +4183,11 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC41.1>)[#underline[[UC41.1]]]
   ],
   trigger: "Ricezione del codice di autorizzazione OAuth da parte del Front-end",
-)[]
+)[
+  #useCaseDiagram("41", "UC41 - Gestione del codice OAuth GitHub")
+]
 
-==== UC41.1 Errore durante lo scambio del codice <UC41.1>
+==== UC41.1 Errore durante lo scambio del codice OAuth GitHub <UC41.1>
 #useCase(
   attore: "Orchestratore",
   attori_secondari: "GitHub",
