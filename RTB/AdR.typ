@@ -20,6 +20,12 @@
 #let history = (
   (
     "2026/01/24",
+    "0.37.1",
+    "Fix alla struttura di inclusioni ed estensioni",
+    members.antonio,
+  ),
+  (
+    "2026/01/24",
     "0.37.0",
     "Inserimento diagrammi per UC38-41",
     members.andrea,
@@ -1351,8 +1357,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   estensioni: [
-    - Ultimo report up-to-date #link(<UC4.3.1>)[#underline[\[UC4.3.1\]]]
-    - Ultimo report in elaborazione #link(<UC4.3.2>)[#underline[\[UC4.3.2\]]]
+    - #link(<UC4.3.1>)[#underline[\[UC4.3.1\]]]
+    - #link(<UC4.3.2>)[#underline[\[UC4.3.2\]]]
   ],
   trigger: "L'utente interagisce con la sezione di invio della richiesta di analisi durante la procedura di richiesta analisi repository GitHub a CodeGuardian",
 )[
@@ -1439,9 +1445,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC5.4>)[#underline[\[UC5.4\]]] // Visualizzazione report
   ],
   estensioni: [
-    - #link(<UC5.2.1>)[#underline[\[UC5.2.1\]]] // Nessun report disponibile
-    - #link(<UC5.2.2>)[#underline[\[UC5.2.2\]]] // Nessun report selezionato
-    - #link(<UC5.3.1>)[#underline[\[UC5.3.1\]]] // Nessun dato selezionato
+    - Nessuna
   ],
   trigger: "L'utente autenticato accede alla funzionalità di visualizzazione dei report di analisi di CodeGuardian",
 )[
@@ -1493,10 +1497,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   estensioni: [
-    - Nessun report di analisi disponibile per il repository selezionato
-      #link(<UC5.2.1>)[#underline[\[UC5.2.1\]]]
-    - Nessun report selezionato
-      #link(<UC5.2.2>)[#underline[\[UC5.2.2\]]]
+    - #link(<UC5.2.1>)[#underline[\[UC5.2.1\]]]
+    - #link(<UC5.2.2>)[#underline[\[UC5.2.2\]]]
   ],
   trigger: "L'utente interagisce con l’elenco dei report di analisi nella sezione dedicata del proprio account",
 )[
@@ -1580,8 +1582,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   estensioni: [
-    - Nessun dato specifico selezionato
-      #link(<UC5.3.1>)[#underline[\[UC5.3.1\]]]
+    - #link(<UC5.3.1>)[#underline[\[UC5.3.1\]]]
   ],
   trigger: "L'utente interagisce con le opzioni di configurazione del report nella sezione di visualizzazione",
 )[
@@ -1664,8 +1665,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   estensioni: [
-    - Nessun intervallo temporale selezionato #link(<UC6.1>)[#underline[\[UC6.1\]]]
-    - Intervallo temporale non valido #link(<UC6.2>)[#underline[\[UC6.2\]]]
+    - #link(<UC6.1>)[#underline[\[UC6.1\]]]
+    - #link(<UC6.2>)[#underline[\[UC6.2\]]]
   ],
   trigger: "L'utente interagisce con la sezione di selezione dell'intervallo temporale per il confronto con i report passati durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian",
 )[]
@@ -1725,10 +1726,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   estensioni: [
-    - Nessun report di analisi disponibile nel periodo selezionato
-      #link(<UC6.2.1>)[#underline[\[UC6.2.1\]]]
-    - Intervallo temporale incoerente #link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]
-    - Intervallo temporale troppo ampio #link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]
+    - #link(<UC6.2.1>)[#underline[\[UC6.2.1\]]]
+    - #link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]
+    - #link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]
   ],
   trigger: "L'utente interagisce con la sezione di selezione dell'intervallo temporale per il confronto con i report passati durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian",
 )[]
@@ -2097,12 +2097,14 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente ha visualizzato l'area metadati del report di analisi repository GitHub
   ],
   scenari: [
-    - L'utente visualizza l'area metadati del report di analisi repository GitHub
+    - L'utente visualizza la data del report di analisi repository GitHub #link(<UC12.1>)[#underline[\[UC12.1\]]]
+    - L'utente visualizza i commit analizzati nel report di analisi repository GitHub #link(<UC12.2>)[#underline[\[UC12.2\]]]
+    - L'utente visualizza il richiedente del report di analisi repository GitHub #link(<UC12.3>)[#underline[\[UC12.3\]]]
   ],
   inclusioni: [
-    - Visualizzazione data report analisi repository GitHub #link(<UC12.1>)[#underline[\[UC12.1\]]]
-    - Visualizzazione commit analizzati nel report di analisi repository GitHub #link(<UC12.2>)[#underline[\[UC12.2\]]]
-    - Visualizzazione richiedente report di analisi repository GitHub #link(<UC12.3>)[#underline[\[UC12.3\]]]
+    - #link(<UC12.1>)[#underline[\[UC12.1\]]]
+    - #link(<UC12.2>)[#underline[\[UC12.2\]]]
+    - #link(<UC12.3>)[#underline[\[UC12.3\]]]
   ],
   estensioni: [
     - Nessuna
@@ -2219,7 +2221,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   estensioni: [
-    - Conferma finale della disconnessione #link(<UC13.1.1>)[#underline[\[UC13.1.1\]]]
+    - #link(<UC13.1.1>)[#underline[\[UC13.1.1\]]]
 
   ],
   trigger: "L'untente seleziona e attiva il tasto Disconnetti per disconnettere il proprio account",
@@ -2291,7 +2293,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   estensioni: [
-    - Nessun formato selezionato #link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]
+    - #link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]
   ],
   trigger: "L'utente seleziona il formato dopo aver cliccato il pulsante di esportazione nella sezione di visualizzazione del report",
 )[#useCaseDiagram("14_1", "UC14.1 - Selezione formato di esportazione")]
@@ -2608,7 +2610,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   estensioni: [
-    - Nessuna issue identificata nel repository #link(<UC16.1.1>)[#underline[\[UC16.1.1\]]]
+    - #link(<UC16.1.1>)[#underline[\[UC16.1.1\]]]
   ],
   trigger: "L'utente accede alla sezione suggerimenti di remediation nel report di analisi",
 )[#useCaseDiagram("16_1", "UC16.1 - Visualizzazione lista issue identificate")]
@@ -2685,14 +2687,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   estensioni: [
     - #link(<UC17.1>)[#underline[\[UC17.1\]]]
-    - #link(<UC17.1.1>)[#underline[\[UC17.1.1\]]]
   ],
   trigger: "Il sistema frontend comunica all'orchestratore la richiesta di avvio dell'analisi",
 )[]
 
 ==== UC17.1 Errore durante la creazione dell'ambiente sand box <UC17.1>
 #useCase(
-  attore: "Orhcestratore",
+  attore: "Orchestratore",
   pre: [
     - Il sistema CodeGuardian ha accettato la richesta di analisi del repository
   ],
@@ -2802,13 +2803,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ===== UC18.2.1 Repository mai analizzato in precedenza <UC18.2.1>
 #useCase(
-  attore: "FrontEnd",
+  attore: "Orchestratore", 
   pre: [
-    - L'utente ha fatto delle richieste specifice in relazione alle aree del repository che ha interesse vengano analizzate #link(<UC18.2>)[#underline[\[UC18.2\]]]
+    - L'utente ha fatto delle richieste specifiche in relazione alle aree del repository che ha interesse vengano analizzate #link(<UC18.2>)[#underline[\[UC18.2\]]]
     - Il repository non era mai stato analizzato in precedenza
   ],
   post: [
-    - L'orchestratore istruisce gli agenti come se fosse stata richiesta un'analisi comlpleta
+    - L'orchestratore istruisce gli agenti come se fosse stata richiesta un'analisi completa
   ],
   scenari: [
     - L'orchestratore prima di istruire gli agenti controlla la pre esistenza del repository da analizzare nel database e non la trova
@@ -3548,28 +3549,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Pianificazione temporale o evento di sistema che provoca l'alert",
 )[]
 
-==== UC28.3: Visualizzazione report <UC28.3>
-#useCase(
-  attore: UAA,
-  pre: [
-    - Report programmabile generato e disponibile #link(<UC28>)[#underline[\[UC28\]]]
-  ],
-  post: [
-    - L'utente visualizza report periodici, KPI e alert
-  ],
-  scenari: [
-    - L'utente apre il pannello report
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Apertura pannello report da parte dell'utente",
-)[
-]
-
 ==== UC28.1: Filtri e template report <UC28.1>
 #useCase(
   attore: UAA,
@@ -3612,6 +3591,28 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Alert critico",
 )[]
 
+==== UC28.3: Visualizzazione report <UC28.3>
+#useCase(
+  attore: UAA,
+  pre: [
+    - Report programmabile generato e disponibile #link(<UC28>)[#underline[\[UC28\]]]
+  ],
+  post: [
+    - L'utente visualizza report periodici, KPI e alert
+  ],
+  scenari: [
+    - L'utente apre il pannello report
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Apertura pannello report da parte dell'utente",
+)[
+]
+
 === UC29  Recupero e avvio tool esterni di analisi <UC29>
 #useCase(
   attore: "Orchestratore",
@@ -3628,40 +3629,17 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Il BackEnd inserisce all'interno dei tool esterni i dati appropriati da analizzare
   ],
   inclusioni: [
+    - #link(<UC29.1>)[#underline[\[UC29.1\]]]
     - #link(<UC29.2>)[#underline[\[UC29.2\]]]
     - #link(<UC29.3>)[#underline[\[UC29.3\]]]
-    - #link(<UC29.4>)[#underline[\[UC29.4\]]]
   ],
   estensioni: [
-    - #link(<UC29.1>)[#underline[\[UC29.1\]]] // Gestione errore contatto tool
+    - #link(<UC29.4>)[#underline[\[UC29.4\]]] // Gestione errore contatto tool
   ],
   trigger: "Comunicazione con tool esterni",
 )[]
 
-==== UC29.1 Impossibilità di contattare un tool <UC29.1>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - Il BackEnd ha provato a contattare un tool esterno per l'analisi
-  ],
-  post: [
-    - Il BackEnd trova un tool alternativo e lo contatta
-  ],
-  scenari: [
-    - Il BackEnd ha provato a contattare un tool esterno fallendo
-    - Il BackEnd cerca internamente un tool alternativo
-    - Il BackEnd contatta il tool alternativo
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Contatto con tool alternativo",
-)[]
-
-==== UC29.2 Richiesta di analisi del codice <UC29.2>
+==== UC29.1 Richiesta di analisi del codice <UC29.1>
 #useCase(
   attore: "Orchestratore",
   attori_secondari: "SonarQube/Semgrep",
@@ -3681,15 +3659,16 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC29.2.1>)[#underline[\[UC29.2.1\]]]
+    - #link(<UC29.1.1>)[#underline[\[UC29.1.1\]]]
   ],
   trigger: "viene richiesta l'analisi del codice",
 )[]
-===== UC29.2.1 Uno o più linguaggi presenti nella codebase non sono supportati dallo strumento di analisi <UC29.2.1>
+
+===== UC29.1.1 Uno o più linguaggi presenti nella codebase non sono supportati dallo strumento di analisi <UC29.1.1>
 #useCase(
   attore: "SonarQube/Semgrep",
   pre: [
-    - Lo strumento di analisi del codice ha ricevuto correttamente #link(<UC29.2>)[#underline[\[UC29.2\]]]
+    - Lo strumento di analisi del codice ha ricevuto correttamente #link(<UC29.1>)[#underline[\[UC29.1\]]]
   ],
   post:[
     - Lo strumento di analisi del codice comunica al sistema backend che il linguaggio non è supportato 
@@ -3707,7 +3686,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "Viene richiesta l'analisi del codice"
 )[]
-==== UC29.3 Richiesta di analisi della documentazione <UC29.3>
+
+==== UC29.2 Richiesta di analisi della documentazione <UC29.2>
 #useCase(
   attore: "Orchestratore",
   attori_secondari: "OpenAI",
@@ -3731,7 +3711,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Viene richiesta l'analisi della documentazione"
 )[]
 
-==== UC29.4 Richiesta di analisi del rispetto degi standard OWASP <UC29.4>
+==== UC29.3 Richiesta di analisi del rispetto degi standard OWASP <UC29.3>
 #useCase(
   attore: "Orchestratore",
   attori_secondari: "OWASP ZAP",
@@ -3753,6 +3733,29 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Richiesta di analisi del rispetto degli standard",
+)[]
+
+==== UC29.4 Impossibilità di contattare un tool <UC29.4>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - Il BackEnd ha provato a contattare un tool esterno per l'analisi
+  ],
+  post: [
+    - Il BackEnd trova un tool alternativo e lo contatta
+  ],
+  scenari: [
+    - Il BackEnd ha provato a contattare un tool esterno fallendo
+    - Il BackEnd cerca internamente un tool alternativo
+    - Il BackEnd contatta il tool alternativo
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Contatto con tool alternativo",
 )[]
 
 === UC30 Generazione del report finale <UC30>
