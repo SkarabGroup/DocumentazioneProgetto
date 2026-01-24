@@ -4013,7 +4013,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Nessuna repository analizzata trovata",
 )[]
 
-==== UC38 Salvataggio del report dell'analisi <UC38>
+=== UC38 Salvataggio del report dell'analisi <UC38>
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -4058,7 +4058,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Il sistema Back-end fallisce la procedura di archiviazione",
 )[]
 
-==== UC39 Salvataggio metriche aggregate (grafici/tabelle) <UC39>
+=== UC39 Salvataggio metriche aggregate (grafici/tabelle) <UC39>
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -4103,7 +4103,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Il sistema Back-end fallisce la procedura di archiviazione delle metriche",
 )[]
 
-==== UC40 Invio delle credenziali al sistema Back-end <UC40>
+=== UC40 Invio delle credenziali al sistema Back-end <UC40>
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -4147,7 +4147,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Il sistema Back-end non riceve le credenziali a causa di un errore di comunicazione",
 )[] 
 
-==== UC41 Gestione del codice OAuth GitHub <UC41>
+=== UC41 Gestione del codice OAuth GitHub <UC41>
 #useCase(
   attore: "Orchestratore",
   attori_secondari: "GitHub",
