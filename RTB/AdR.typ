@@ -19,6 +19,12 @@
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
+    "2026/01/24",
+    "0.36.0",
+    "Modifica dei casi d'uso UC38, UC40 e UC40.1 e aggiunta di UC38.1, UC39, UC39.1, UC41 e UC41.1",
+    members.andrea,
+  ),
+  (
     "2026/01/21",
     "0.35.0",
     "Inserimento diagrammi aggiornati per UC1-5 e UC34-37",
@@ -4007,19 +4013,41 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Nessuna repository analizzata trovata",
 )[]
 
-=== UC38 Salvataggio del report dell'analisi <UC38>
+==== UC38 Salvataggio del report dell'analisi <UC38>
 #useCase(
-  attore: "Orchestratore", // oppure utente?
+  attore: "Orchestratore",
   pre: [
-    - L'analisi della repository è stata completata con successo e notificata al Front-end #link(<UC34>)[#underline[\[UC34\]]]
-    - L'utente visualizza il report dell'analisi #link(<UC5>)[#underline[\[UC5\]]]
+    - Il report dell'analisi è stato completato e visualizzato dall'orchestratore #link(<UC30>)[#underline[[UC30]]]
   ],
   post: [
-    - Il report dell'analisi è stato salvato nel database
+    - Il report finale è archiviato nel database del sistema Back-end
   ],
   scenari: [
-    - Il Front-end riceve la conferma del salvataggio del report dell'analisi dall'utente
-    - Il Front-end comunica al Back-end di salvare il report dell'analisi nel database
+    - L'orchestratore invia una richiesta di persistenza al sistema Back-end
+    - Il sistema Back-end riceve i dati del report
+    - Il sistema Back-end memorizza il report nel database
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC38.1>)[#underline[[UC38.1]]]
+  ],
+  trigger: "Il report finale è preso in carico dall'orchestratore",
+)[]
+
+==== UC38.1 Errore durante il salvataggio del report <UC38.1>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - L'orchestratore ha richiesto l'archiviazione del report #link(<UC38>)[#underline[[UC38]]]
+  ],
+  post: [
+    - Il sistema Front-end è stato informato dall'orchestratore del fallimento del salvataggio
+  ],
+  scenari: [
+    - Il sistema Back-end riscontra un errore interno durante la persistenza dei dati
+    - L'orchestratore notifica il Front-end del mancato salvataggio
   ],
   inclusioni: [
     - Nessuna
@@ -4027,20 +4055,44 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente conferma il salvataggio del report dell'analisi",
+  trigger: "Il sistema Back-end fallisce la procedura di archiviazione",
 )[]
 
-=== UC39 Salvataggio metriche aggregate (grafici/tabelle) <UC39>
+==== UC39 Salvataggio metriche aggregate (grafici/tabelle) <UC39>
 #useCase(
-  attore: "",
+  attore: "Orchestratore",
   pre: [
-    -
+    - Il sistema ha completato con successo l'analisi della repository #link(<UC30>)[#underline[[UC30]]]
   ],
   post: [
-    -
+    - Le metriche aggregate per la visualizzazione di grafici e tabelle sono salvate nel database dal sistema Back-end
   ],
   scenari: [
-    -
+    - L'orchestratore richiede al sistema Back-end la sintesi dei dati raccolti dalle diverse analisi
+    - L'orchestratore elabora i dati dei singoli report degli agenti per calcolare le metriche globali e le invia al Back-end
+    - Il sistema Back-end memorizza le metriche all'interno del database
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC39.1>)[#underline[[UC39.1]]]
+  ],
+  trigger: "Il report finale viene generato e completato",
+)[]
+
+==== UC39.1 Errore nel salvataggio delle metriche aggregate <UC39.1>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - L'orchestratore ha richiesto il salvataggio delle metriche aggregate #link(<UC39>)[#underline[[UC39]]]
+  ],
+  post: [
+    - L'orchestratore viene informato dell'impossibilità di salvare le metriche per la dashboard
+  ],
+  scenari: [
+    - Il sistema Back-end riscontra un errore interno o di connessione al database durante il salvataggio dei dati
+    - L'orchestratore notifica il sistema Front-end del mancato aggiornamento delle metriche
   ],
   inclusioni: [
     - Nessuna
@@ -4048,21 +4100,21 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "",
+  trigger: "Il sistema Back-end fallisce la procedura di archiviazione delle metriche",
 )[]
 
-=== UC40 Trasferimento delle credenziali al Back-end <UC40>
+==== UC40 Invio delle credenziali al sistema Back-end <UC40>
 #useCase(
-  attore: "Front-end",
+  attore: "Utente non registrato",
   pre: [
-    - Un utente completata la registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
-    - Il Front-end riceve le credenziali dell'utente
+    - L'utente ha compilato i campi necessari alla registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
   ],
   post: [
-    - Il Back-end riceve le credenziali dell'utente dal Front-end
+    - Il sistema Back-end ha ricevuto correttamente le credenziali per l'elaborazione
   ],
   scenari: [
-    - Il Front-end trasferisce le credenziali dell'utente al Back-end
+    - L'utente conferma l'invio delle proprie credenziali attraverso l'interfaccia di CodeGuardian
+    - Il sistema Front-end trasmette le credenziali al sistema Back-end
   ],
   inclusioni: [
     - Nessuna
@@ -4070,21 +4122,21 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - #link(<UC40.1>)[#underline[\[UC40.1\]]]
   ],
-  trigger: "L'utente ha completato la registrazione a CodeGuardian",
+  trigger: "L'utente richiede la creazione di un nuovo account CodeGuardian",
 )[]
 
 ==== UC40.1 Errore nel trasferimento delle credenziali al Back-end <UC40.1>
 #useCase(
-  attore: "Front-end",
+  attore: "Utente non registrato",
   pre: [
-    - Il Front-end tenta di trasferire le credenziali dell'utente al Back-end #link(<UC40>)[#underline[\[UC40\]]]
-    - Si verifica un errore durante il trasferimento delle credenziali
+    - L'utente ha tentato l'invio delle credenziali #link(<UC40>)[#underline[[UC40]]]
   ],
   post: [
-    - Il trasferimento delle credenziali non va a buon fine
+    - Il sistema Back-end non acquisisce i dati e l'utente viene avvisato dell'impossibilità di procedere
   ],
   scenari: [
-    - Il Front-end notifica l'utente con un messaggio di errore che indica le cause possibili del mancato trasferimento delle credenziali
+    - Il sistema Front-end riscontra un errore di comunicazione interna o di rete durante il trasferimento dei dati al Back-end
+    - Il sistema Front-end mostra all'utente un messaggio di errore indicando il fallimento dell'operazione
   ],
   inclusioni: [
     - Nessuna
@@ -4092,50 +4144,61 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il Back-end non riceve le credenziali dell'utente",
+  trigger: "Il sistema Back-end non riceve le credenziali a causa di un errore di comunicazione",
+)[] 
+
+==== UC41 Gestione del codice OAuth GitHub <UC41>
+#useCase(
+  attore: "Orchestratore",
+  attori_secondari: "GitHub",
+  pre: [
+    - L'utente ha collegato il suo account CodeGuardian a GitHub #link(<UC3>)[#underline[[UC3]]]
+    - Il sistema Front-end ha ricevuto il codice temporaneo di autorizzazione (OAuth Code)
+  ],
+  post: [
+    - Il sistema Back-end ha ottenuto il token di accesso e lo ha associato al profilo dell'utente
+  ],
+  scenari: [
+    - Il sistema Front-end comunica al sistema Back-end il codice ricevuto da GitHub
+    - L'orchestratore richiede al sistema GitHub lo scambio del codice con un token di accesso permanente
+    - Il sistema GitHub restituisce il token di accesso e le informazioni del profilo autorizzate
+    - Il sistema Back-end memorizza il token nel database associandolo all'utente
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC41.1>)[#underline[[UC41.1]]]
+  ],
+  trigger: "Ricezione del codice di autorizzazione OAuth da parte del Front-end",
 )[]
 
-=== UC41 Validazione delle credenziali dell'utente <UC41>
+==== UC41.1 Errore durante lo scambio del codice <UC41.1>
 #useCase(
-  attore: "Back-end",
+  attore: "Orchestratore",
+  attori_secondari: "GitHub",
   pre: [
-    - Il Back-end riceve le credenziali dell'utente dal Front-end #link(<UC40>)[#underline[\[UC40\]]]
+    - L'orchestratore ha tentato di scambiare il codice di autorizzazione con il sistema GitHub
   ],
   post: [
-    - Le credenziali dell'utente sono state validate con successo
+    - La procedura di collegamento viene interrotta e il sistema Front-end viene notificato dell'errore da parte dell'orchestratore
   ],
   scenari: [
-    - Il Back-end comunica al Front-end l'esito della validazione delle credenziali dell'utente
+    - Il sistema GitHub restituisce un errore (es. codice scaduto o non valido)
+    - L'orchestratore notifica il sistema Front-end del fallimento della procedura di collegamento
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - Nessuna // mancata validazione delle credenziali? Controlli già fatti in UC1.1.2 UC1.2.2
+    - Nessuna
   ],
-  trigger: "Il Back-end riceve le credenziali dell'utente dal Front-end",
+  trigger: "Il sistema GitHub rifiuta lo scambio del codice o la connessione fallisce",
 )[]
 
-=== UC42 Gestione del codice OAuth GitHub <UC42>
-#useCase(
-  attore: "",
-  pre: [
-    -
-  ],
-  post: [
-    -
-  ],
-  scenari: [
-    -
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "",
-)[]
+#TODO("Valutare con il gruppo l'UC41")
+
+#TODO("UC42 Validazione delle credenziali dell'utente. Sinceramente eliminerei questo UC perchè la validazione è già presente nelle inclusioni di UC1 e UC2")
 
 #pagebreak()
 
