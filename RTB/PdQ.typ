@@ -144,6 +144,7 @@ I seguenti documenti hanno valore vincolante per la definizione delle strategie 
 - *ISO/IEC 25010:2011*: Systems and software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE). #linebreak()
   #link("https://iso25000.com/index.php/en/iso-25000-standards/iso-25010")
 - *ISO/IEC 12207:2008*: Systems and software engineering — Software life cycle processes. #linebreak()
+  #link("https://ieeexplore.ieee.org/document/4475826")
 - *Dispense del corso di Ingegneria del Software – Qualità del software* #linebreak()
   #link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T06.pdf")
 
@@ -152,6 +153,7 @@ La redazione del presente documento e la definizione delle metriche si ispirano 
 Inoltre, l'adozione strutturale del ciclo #def[PDCA] (Plan-Do-Check-Act) assicura che il processo di controllo qualità non sia statico, ma evolva:
 - *Plan:* Definizione delle metriche e delle soglie nel presente documento.
 - *Do:* Esecuzione delle misurazioni durante gli Sprint.
+#TODO("Study, non Check")
 - *Check:* Analisi degli scostamenti nei periodi di retrospettiva.
 - *Act:* Aggiornamento delle Norme di Progetto e ricalibrazione delle metriche per lo Sprint successivo.
 #pagebreak()
