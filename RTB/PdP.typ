@@ -1038,15 +1038,15 @@ Pianificazione aggressiva per recuperare il delta dello Sprint 1.
 #sprint_table(
   (
     // Formato: ("Nome", Resp, Amm, Anal, Prog, Cod, Ver)
-    ([Basso Kevin], 0, 3, 0, 0, 0, 2),
+    ([Basso Kevin], 0, 3, 0, 0, 3, 2),
     ([Berengan Riccardo], 0, 1, 5, 0, 0, 2),
     ([Martinello Riccardo], 0, 1, 5, 0, 0, 0),
     ([Sandu Antonio], 0, 1, 6, 0, 0, 2),
     ([Sgreva Andrea], 0, 1, 4, 0, 0, 2),
-    ([Suar Alberto], 0, 5, 0, 0, 3, 4),
-    ([Zago Alice], 6, 2, 5, 0, 3, 2),
+    ([Suar Alberto], 0, 5, 0, 0, 3, 2),
+    ([Zago Alice], 6, 0, 5, 0, 0, 2),
   ),
-  [Prospetto orario preventivato per lo Sprint 2 (Totale: 72 ore)],
+  [Prospetto orario preventivato per lo Sprint 2 (Totale: 61 ore)],
 )
 
 ==== Consumo tempo e costi effettivi (Consuntivo)
@@ -1060,10 +1060,10 @@ Le attività di analisi hanno richiesto più tempo del previsto, assorbendo part
     ([Martinello Riccardo], 0, 1, 4, 0, 0, 0),
     ([Sandu Antonio], 0, 1, 3, 0, 0, 1),
     ([Sgreva Andrea], 0, 1, 1, 0, 0, 2),
-    ([Suar Alberto], 0, 5, 0, 0, 0, 4),
-    ([Zago Alice], 6, 2, 5, 0, 0, 1),
+    ([Suar Alberto], 0, 5, 0, 0, 0, 2),
+    ([Zago Alice], 6, 0, 5, 0, 0, 1),
   ),
-  [Consuntivo orario effettivo per lo Sprint 2 (Totale: 72 ore)],
+  [Consuntivo orario effettivo per lo Sprint 2 (Totale: 44 ore)],
 )
 
 ==== Retrospettiva dello Sprint 2
@@ -1121,7 +1121,7 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
   (
     ([Basso Kevin], 7, 0, 0, 0, 4, 0),
     ([Berengan Riccardo], 0, 0, 2, 0, 4, 0),
-    ([Martinello Riccardo], 0, 1, 2, 0, 0, 4),
+    ([Martinello Riccardo], 0, 1, 0, 0, 0, 4),
     ([Sandu Antonio], 0, 0, 5, 0, 0, 0),
     ([Sgreva Andrea], 0, 0, 4, 0, 0, 0),
     ([Suar Alberto], 0, 1, 2, 0, 4, 0),
