@@ -13,11 +13,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.35.0"
+#let versione = "v0.38.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2026/01/27",
+    "0.38.0",
+    "Aggiunta dei requisiti funzionali UC38-UC41",
+    members.andrea,
+  ),
   (
     "2026/01/24",
     "0.37.1",
@@ -4749,6 +4755,72 @@ In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati
   [#FRx],
   [L'Utente deve poter visualizzare i report programmati generati],
   [#link(<UC28>)[#underline[\[UC28\]]], #link(<UC28.3>)[#underline[\[UC28.3\]]]],
+
+  //UC29
+
+  //UC30
+  
+  //UC31
+  
+  //UC32
+  
+  //UC33 
+  
+  //UC34
+  
+  //UC35
+  
+  //UC36
+  
+  //UC37
+
+  //UC38
+  [#FRx],
+  [Il sistema Back-end deve permettere all'Orchestratore di richiedere il salvataggio del report di analisi],
+  [#link(<UC38>)[#underline[\[UC38\]]]],
+
+  [#FRx],
+  [Il sistema Back-end deve archiviare in modo permanente il report finale nel database],
+  [#link(<UC38>)[#underline[\[UC38\]]]],
+
+  [#FRx],
+  [L'Orchestratore deve poter notificare al Front-end l'impossibilità di salvare il report in caso di errore interno],
+  [#link(<UC38>)[#underline[\[UC38\]]], #link(<UC38.1>)[#underline[\[UC38.1\]]]],
+
+  //UC39
+  [#FRx],
+  [L'Orchestratore deve poter elaborare i dati dei singoli agenti per calcolare metriche statistiche globali],
+  [#link(<UC39>)[#underline[\[UC39\]]]],
+
+  [#FRx],
+  [Il sistema Back-end deve poter memorizzare le metriche aggregate per consentire la visualizzazione di grafici e tabelle],
+  [#link(<UC39>)[#underline[\[UC39\]]]],
+
+  [#FRx],
+  [Il sistema deve poter segnalare al Front-end il mancato aggiornamento delle metriche in caso di errore del Back-end],
+  [#link(<UC39>)[#underline[\[UC39\]]], #link(<UC39.1>)[#underline[\[UC39.1\]]]],
+
+  //UC40
+  [#FRx],
+  [Il sistema Front-end deve poter trasmettere in modo sicuro le credenziali al sistema Back-end],
+  [#link(<UC40>)[#underline[\[UC40\]]]],
+
+  [#FRx],
+  [l'Utente deve ricevere un messaggio di errore se il trasferimento delle credenziali non avviene],
+  [#link(<UC40>)[#underline[\[UC40\]]], #link(<UC40.1>)[#underline[\[UC40.1\]]]],
+
+  //UC41
+  [#FRx],
+  [Il sistema Front-end deve poter scambiare il codice OAuth GitHub con un token di accesso persistente],
+  [#link(<UC41>)[#underline[\[UC41\]]]],
+
+  [#FRx],
+  [Il sistema Back-end deve associare il token di accesso GitHub al profilo dell'utente nel database],
+  [#link(<UC41>)[#underline[\[UC41\]]]],
+
+  [#FRx],
+  [L'Utente deve essere notificato se il sistema GitHub non da l'autorizzazione durante lo scambio del codice OAuth],
+  [#link(<UC41>)[#underline[\[UC41\]]], #link(<UC41.1>)[#underline[\[UC41.1\]]]],   
 )
 
 #pagebreak()
