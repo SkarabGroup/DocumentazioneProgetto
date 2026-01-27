@@ -11,12 +11,18 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.7.0"
+#let versione = "v0.8.1"
 
 #titlePage("Piano di Qualifica", versione)
 #set heading(numbering: "1.1.1")
 #set page(numbering: "1", header: header("Piano di Qualifica"), footer: footer())
 #let history = (
+  (
+    "2026/01/27",
+    "0.8.1",
+    "Aggiunta grafico BV-SV, revisione Metodi di Testing e aggiunta test, modifiche minori al documento",
+    members.alice,
+  ),
   (
     "2026/01/22",
     "0.7.0",
@@ -34,12 +40,14 @@
     "0.5.2",
     "Revisione Automiglioramento",
     members.suar,
+    members.alice,
   ),
   (
     "2026/01/13",
     "0.5.1",
     "Rielaborazione introduzione documento e qualità di processo",
     members.suar,
+    members.alice,
   ),
   (
     "2025/12/02",
@@ -108,13 +116,14 @@ Il documento costituisce il riferimento primario per il #def[Responsabile] e per
 - *Piano della Qualità (Quality Assurance)*: definizione della strategia di gestione della qualità, identificando gli standard di riferimento (in particolare #def[ISO/IEC 25010]), le metriche di misurazione e le relative soglie di accettazione/ottimalità.
 - *Controllo di Qualità (Quality Control)*: pianificazione operativa delle attività di #def[Verifica] (analisi statica, test dinamici) per garantire la correttezza tecnica degli artefatti prodotti.
 - *Validazione di Prodotto*: definizione delle procedure necessarie per accertare la conformità del sistema rispetto alle aspettative degli #def[Stakeholder] e ai requisiti del capitolato.
+#TODO("PDSA, non PDCA")
 - *Miglioramento Continuo*: applicazione di meccanismi retroattivi (basati sul ciclo #def[Plan-Do-Check-Act]) che utilizzano i risultati delle misurazioni per ottimizzare i processi e il *Way of Working* in corso d'opera.
 
 == Traguardi Qualitativi
 L'assicurazione della qualità segue l'approccio incrementale del progetto, fissando obiettivi specifici per le due principali milestones:
 
 === Revisione dei Requisiti e della Tecnologia (RTB)
-Per la milestone RTB (*05/02/2026*), le attività di qualità si concentrano sulla correttezza formale e sulla fattibilità tecnica:
+Per la milestone RTB (*06/02/2026*), le attività di qualità si concentrano sulla correttezza formale e sulla fattibilità tecnica:
 - *Qualità dei Documenti*: Verifica approfondita della documentazione (Analisi dei Requisiti, PdP, NdP) tramite analisi statica e walkthrough, per garantire assenza di ambiguità e coerenza interna (Indice di Gulpease).
 - *Qualità del Prototipo (#def[PoC])*: L'attività di verifica è focalizzata esclusivamente sulla *dimostrazione della fattibilità tecnica* (Technology Baseline), con particolare attenzione all'interazione Agenti-LLM. Il testing in questa fase ha valore _sperimentale e propedeutico_: esso funge da caso di studio per calibrare le metriche e validare le strategie di verifica che saranno poi applicate in modo sistematico ed estensivo sul #def[MVP].
 
@@ -137,26 +146,19 @@ Versione aggiornata del Glossario:
 I seguenti documenti hanno valore vincolante per la definizione delle strategie di qualità e per le attività di verifica:
 - *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. #linebreak()
   #link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")
+
 - *Norme di Progetto*: Il documento definisce il "Way of Working", stabilendo gli strumenti e le procedure che questo Piano si occupa di misurare. #linebreak()
   #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[Documento interno]
 
 === Riferimenti Informativi
 - *ISO/IEC 25010:2011*: Systems and software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE). #linebreak()
   #link("https://iso25000.com/index.php/en/iso-25000-standards/iso-25010")
+
 - *ISO/IEC 12207:2008*: Systems and software engineering — Software life cycle processes. #linebreak()
   #link("https://ieeexplore.ieee.org/document/4475826")
+
 - *Dispense del corso di Ingegneria del Software – Qualità del software* #linebreak()
   #link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T06.pdf")
-
-==== Nota sull'adozione dello Standard ISO/IEC 25010 e PDCA
-La redazione del presente documento e la definizione delle metriche si ispirano alla famiglia di standard ISO/IEC 25010 (SQuaRE). Tale scelta garantisce una classificazione rigorosa delle caratteristiche di qualità del prodotto (es. Sicurezza, Affidabilità, Usabilità).
-Inoltre, l'adozione strutturale del ciclo #def[PDCA] (Plan-Do-Check-Act) assicura che il processo di controllo qualità non sia statico, ma evolva:
-- *Plan:* Definizione delle metriche e delle soglie nel presente documento.
-- *Do:* Esecuzione delle misurazioni durante gli Sprint.
-#TODO("Study, non Check")
-- *Check:* Analisi degli scostamenti nei periodi di retrospettiva.
-- *Act:* Aggiornamento delle Norme di Progetto e ricalibrazione delle metriche per lo Sprint successivo.
-#pagebreak()
 
 // Da inserire nel glossario
 /*
@@ -191,17 +193,11 @@ Al termine di ogni Sprint (durante la fase di *Sprint Review*), il Responsabile 
 3. Deriva gli indici di performance (CPI, SPI) e le stime a finire (EAC).
 I risultati vengono confrontati con le soglie definite nel Piano di Qualifica per determinare lo stato di salute della fornitura.
 */
+
+#pagebreak()
 == Qualità di Processo
 
 La garanzia della qualità del prodotto finale è intrinsecamente legata alla qualità dei processi produttivi che lo generano. Per il progetto #def("Code Guardian"), la gestione dei processi mira a rendere il #def("Way of Working") sostenibile, tracciabile e soggetto a miglioramento continuo attraverso l'applicazione del ciclo #def("PDCA").
-
-=== Strategia di Definizione delle Soglie Metriche
-
-La determinazione delle soglie di accettabilità e ottimalità per le metriche adottate dal gruppo #def("Skarab Group") non è un processo arbitrario, ma segue una strategia ingegneristica basata sui seguenti criteri:
-
-- *Adesione agli Standard Internazionali:* Per i processi di fornitura, il gruppo adotta il framework #def("Earned Value Management") (EVM), utilizzando gli intervalli di confidenza standard del settore ($0.90 - 1.10$) per garantire la stabilità economica e temporale. Per la qualità del prodotto, le soglie sono calibrate sulle caratteristiche del modello #def("ISO/IEC 25010").
-- *Analisi del Dominio e Benchmark:* Le metriche di supporto e sviluppo (es. #def("Gulpease Index"), #def("Complessità Ciclomatica")) sono tarate su benchmark di settore per lo sviluppo software moderno, garantendo che i requisiti di manutenibilità e sicurezza siano oggettivamente verificabili.
-- *Miglioramento Continuo e Calibrazione (PDCA):* In linea con l'approccio #def("Agile"), le soglie sono soggette a revisione periodica. Al termine di ogni #def("Sprint"), i valori vengono analizzati rispetto alle prestazioni storiche del team; questo permette una ricalibrazione dinamica delle soglie nel #def("Piano di Qualifica"), rendendo gli obiettivi sempre sfidanti ma tecnicamente sostenibili (obiettivi *S.M.A.R.T.*).
 
 === Centralizzazione delle Metriche e Obiettivi
 
@@ -214,6 +210,7 @@ In particolare, ogni metrica qui esposta è corredata da:
 
 Ogni scostamento rilevato tra i valori misurati e le soglie qui definite viene analizzato durante le retrospettive di fine #def("Sprint"). Tali evidenze costituiscono la base oggettiva per l'attivazione di azioni correttive o per la ricalibrazione delle soglie stesse, garantendo che il processo di qualità evolva insieme alla maturità del team.
 
+#pagebreak()
 === Processi Primari: Fornitura e Sviluppo
 Questi processi definiscono le attività core per la realizzazione del software. Il monitoraggio si focalizza sul rispetto dei vincoli di tempo e budget (tramite la metodologia EVM) e sulla gestione rigorosa dell'ambito di progetto.
 
@@ -404,11 +401,6 @@ Skarab Group ha adottato un approccio di testing multilivello che copre:
 - *Test di Accettazione (TA)*.
 
 == Convenzioni di Nomenclatura
-I test sono identificati secondo il seguente schema:
-
-*Formato*: `[Tipologia]-[Gruppo].[Sottogruppo]`
-
-Ogni test è esplicitamente collegato ai *Casi d'Uso (UC)*  relativi per garantire copertura funzionale completa.
 
 == Test di Sistema
 Di seguito, viene riportata la tabella che definisce i #def("Test di Sistema") (TS) necessari per validare il comportamento descritto nei Casi d'Uso.
@@ -429,92 +421,208 @@ Di seguito, viene riportata la tabella che definisce i #def("Test di Sistema") (
       table.header([*ID Test*], [*Descrizione*], [*Tipo*], [*UC Riferimento*]),
 
       //GRUPPO UC1: REGISTRAZIONE
-      [TS-1.0], [Verifica procedura di registrazione completa con dati validi.], [Funzionale], [UC1],
-      [TS-1.1],
-      [Verifica validazione formato Nome: rifiuto di numeri e caratteri speciali non ammessi.],
-      [Validazione],
-      [UC1.1.1],
-
+      [TS-1], [Verifica procedura di registrazione completa con dati validi.], [Funzionale], [UC1],
+      [TS-1.1], [Verifica validazione formato Username: lunghezza e caratteri ammessi.], [Validazione], [UC1.1],
       [TS-1.2],
-      [Verifica validazione formato Cognome: rifiuto di numeri e caratteri speciali non ammessi.],
-      [Validazione],
-      [UC1.2.1],
-
-      [TS-1.3],
-      [Verifica unicità Username: tentativo di registrazione con username già esistente nel DB.],
+      [Verifica unicità Username: tentativo di registrazione con username già esistente.],
       [Sicurezza],
-      [UC1.3.2],
+      [UC1.1],
 
-      [TS-1.4], [Verifica validazione formato Username: lunghezza e caratteri non ammessi.], [Validazione], [UC1.3.1],
-      [TS-1.5],
-      [Verifica unicità Email: tentativo di registrazione con email già presente nel DB.],
-      [Sicurezza],
-      [UC1.4.2],
-
-      [TS-1.6], [Verifica validazione formato Email: sintassi non valida.], [Validazione], [UC1.4.1],
-      [TS-1.7], [Verifica complessità Password: mancato rispetto dei criteri di sicurezza.], [Sicurezza], [UC1.5.1],
+      [TS-1.3], [Verifica validazione formato Email: sintassi e dominio valido.], [Validazione], [UC1.2],
+      [TS-1.4], [Verifica unicità Email: tentativo di registrazione con email già presente.], [Sicurezza], [UC1.2],
+      [TS-1.5], [Verifica complessità Password: rispetto dei criteri di sicurezza.], [Sicurezza], [UC1.3],
 
       //GRUPPO UC2: AUTENTICAZIONE
-      [TS-2.0], [Verifica login con credenziali corrette.], [Funzionale], [UC2],
-      [TS-2.1], [Verifica gestione errore per Username non esistente.], [Sicurezza], [UC2.1.2],
-      [TS-2.2], [Verifica gestione errore per Password errata.], [Sicurezza], [UC2.2.2],
-      [TS-2.3],
-      [Verifica validazione formato input in fase di login (Username/Password malformati).],
-      [Validazione],
-      [UC2.1.1, UC2.2.1],
+      [TS-2], [Verifica login con credenziali corrette.], [Funzionale], [UC2],
+      [TS-2.1], [Verifica gestione errore per Username non esistente o errato.], [Sicurezza], [UC2.1],
+      [TS-2.2], [Verifica gestione errore per Password errata.], [Sicurezza], [UC2.2],
+      [TS-2.3], [Verifica validazione formato input in fase di login.], [Validazione], [UC2.1, UC2.2],
 
       //GRUPPO UC3: COLLEGAMENTO GITHUB
-      [TS-3.0], [Verifica flusso completo OAuth con GitHub.], [Integrazione], [UC3, UC3.2],
-
-      [TS-3.1], [Verifica rifiuto collegamento da parte dell'utente.], [Funzionale], [UC3.1.1],
-      [TS-3.2], [Verifica gestione errore ricezione codice mancante da GitHub.], [Integrazione], [UC3.2.1],
-      [TS-3.3], [Verifica gestione errore codice GitHub già associato ad altro utente.], [Sicurezza], [UC3.2.2],
+      [TS-3], [Verifica flusso completo OAuth con GitHub.], [Integrazione], [UC3],
+      [TS-3.1], [Verifica rifiuto collegamento da parte dell'utente.], [Funzionale], [UC3.1],
+      [TS-3.2], [Verifica gestione errore codice GitHub mancante o non valido.], [Integrazione], [UC3.2],
+      [TS-3.3], [Verifica gestione errore codice GitHub già associato ad altro utente.], [Sicurezza], [UC3.2],
 
       //GRUPPO UC4: RICHIESTA ANALISI
-      [TS-4.0], [Verifica invio richiesta analisi con URL valido e opzioni selezionate.], [Funzionale], [UC4],
+      [TS-4], [Verifica invio richiesta analisi con URL valido e opzioni selezionate.], [Funzionale], [UC4],
+      [TS-4.1], [Verifica validazione URL Repository: formato e dominio GitHub.], [Validazione], [UC4.1],
+      [TS-4.2], [Verifica accessibilità Repository: URL privato o inesistente.], [Integrazione], [UC4.1],
+      [TS-4.3], [Verifica obbligatorietà selezione aree di interesse.], [Validazione], [UC4.2],
+      [TS-4.4], [Verifica blocco analisi per report già up-to-date.], [Ottimizzazione], [UC4.3],
+      [TS-4.5], [Verifica blocco analisi concorrente già in corso.], [Stato], [UC4.3],
 
-      [TS-4.1], [Verifica validazione URL Repository: formato non valido.], [Validazione], [UC4.1.1],
-      [TS-4.2], [Verifica accessibilità Repository: URL privato o inesistente.], [Integrazione], [UC4.1.2],
+      //GRUPPO UC5: VISUALIZZAZIONE REPORT
+      [TS-5], [Verifica visualizzazione lista report e apertura dashboard di dettaglio.], [Funzionale], [UC5],
+      [TS-5.1], [Verifica gestione caso "Nessun report disponibile".], [Funzionale], [UC5.2],
+      [TS-5.2], [Verifica selezione dati specifici da visualizzare.], [Funzionale], [UC5.3],
+      [TS-5.3], [Verifica rendering completo report con tutti i dati selezionati.], [UI/UX], [UC5.4],
 
-      [TS-4.3],
-      [Verifica obbligatorietà selezione aree di interesse (Codice/Documentazione).],
-      [Validazione],
-      [UC4.2.1],
+      //GRUPPO UC6: FILTRO TEMPORALE
+      [TS-6], [Verifica filtro temporale sui report passati con intervallo valido.], [Funzionale], [UC6],
+      [TS-6.1], [Verifica errore per mancata selezione intervallo temporale.], [Validazione], [UC6.1],
+      [TS-6.2], [Verifica errore intervallo temporale incoerente.], [Validazione], [UC6.2],
+      [TS-6.3], [Verifica errore intervallo temporale troppo ampio.], [Validazione], [UC6.2],
+      [TS-6.4], [Verifica messaggio "Nessun report nel periodo selezionato".], [Funzionale], [UC6.2],
 
-      [TS-4.4],
-      [Verifica blocco analisi per report già "Up-to-date" (Hash commit invariato).],
-      [Ottimizzazione],
-      [UC4.3.1],
+      //GRUPPO UC7-UC8: VISUALIZZAZIONI COMPARATIVE
+      [TS-7], [Verifica rendering grafico comparativo tra report.], [UI/UX], [UC7],
+      [TS-7.1], [Verifica interazione con grafico per dettagli specifici.], [UI/UX], [UC7],
+      [TS-8], [Verifica rendering tabella comparativa con indicatori di variazione.], [UI/UX], [UC8],
 
-      [TS-4.5], [Verifica blocco analisi concorrente (Analisi già in corso sulla stessa repo).], [Stato], [UC4.3.2],
+      //GRUPPO UC9: ANALISI CODICE
+      [TS-9], [Verifica presenza sezioni Analisi Codice (Statica, Dipendenze, OWASP).], [Contenuto], [UC9],
+      [TS-9.1], [Verifica correttezza conteggio vulnerabilità totali.], [Logica], [UC9.4],
+      [TS-9.2], [Verifica visualizzazione analisi statica del codice.], [Contenuto], [UC9.1],
+      [TS-9.3], [Verifica visualizzazione analisi librerie e dipendenze.], [Contenuto], [UC9.2],
+      [TS-9.4], [Verifica visualizzazione report sicurezza OWASP.], [Contenuto], [UC9.3],
 
-      //GRUPPO UC5 - UC12: VISUALIZZAZIONE REPORT
-      [TS-5.0], [Verifica visualizzazione lista report e apertura dashboard di dettaglio.], [Funzionale], [UC5],
-      [TS-5.1], [Verifica gestione caso "Nessun report disponibile" per una repo.], [Funzionale], [UC5.2.1],
-      [TS-6.0], [Verifica filtro temporale sui report passati (Intervallo valido).], [Funzionale], [UC6],
-      [TS-6.1],
-      [Verifica errore filtro temporale: intervallo incoerente (Start > End) o troppo ampio.],
-      [Validazione],
-      [UC6.2.2, UC6.2.3],
+      //GRUPPO UC10: ANALISI DOCUMENTAZIONE
+      [TS-10], [Verifica presenza sezioni Analisi Documentazione.], [Contenuto], [UC10],
+      [TS-10.1], [Verifica rilevamento errori di spelling.], [Contenuto], [UC10.1],
+      [TS-10.2], [Verifica calcolo completezza documentazione.], [Logica], [UC10.2],
 
-      [TS-6.2], [Verifica messaggio "Nessun report nel periodo selezionato".], [Funzionale], [UC6.2.1],
-      [TS-7.0], [Verifica rendering grafico comparativo.], [UI/UX], [UC7],
-      [TS-8.0], [Verifica rendering tabella comparativa (Corrispondenza dati con il grafico).], [UI/UX], [UC8],
+      //GRUPPO UC11: VULNERABILITÀ TOTALI
+      [TS-11], [Verifica visualizzazione numero totale vulnerabilità repository.], [Contenuto], [UC11],
 
-      //DETTAGLI ANALISI (AGENTI)
-      [TS-9.0],
-      [Verifica presenza e contenuto sezioni Analisi Codice (Statica, Dipendenze, OWASP).],
-      [Contenuto],
-      [UC9],
+      //GRUPPO UC12: METADATI
+      [TS-12], [Verifica coerenza Metadati Report (data, commit, richiedente).], [Integrazione], [UC12],
+      [TS-12.1], [Verifica visualizzazione data report.], [Contenuto], [UC12.1],
+      [TS-12.2], [Verifica visualizzazione commit analizzati.], [Contenuto], [UC12.2],
+      [TS-12.3], [Verifica visualizzazione richiedente.], [Contenuto], [UC12.3],
 
-      [TS-9.1],
-      [Verifica conteggio vulnerabilità totali (Deve corrispondere alla somma delle vulnerabilità rilevate).],
-      [Logica],
-      [UC9.4],
+      //GRUPPO UC13: DISCONNESSIONE GITHUB
+      [TS-13], [Verifica disconnessione account GitHub con conferma.], [Funzionale], [UC13],
+      [TS-13.1], [Verifica richiesta conferma prima della disconnessione.], [Sicurezza], [UC13.1],
 
-      [TS-10.0], [Verifica presenza e contenuto sezioni Analisi Documentazione.], [Contenuto], [UC10],
+      //GRUPPO UC14: ESPORTAZIONE REPORT
+      [TS-14], [Verifica esportazione report in formati supportati.], [Funzionale], [UC14],
+      [TS-14.1], [Verifica errore per mancata selezione formato.], [Validazione], [UC14.1],
+      [TS-14.2], [Verifica generazione file dopo conferma.], [Funzionale], [UC14.2],
 
-      [TS-12.0], [Verifica coerenza Metadati Report.], [Integrazione], [UC12],
+      //GRUPPO UC15: MODIFICA PASSWORD
+      [TS-15], [Verifica modifica password con validazione corretta.], [Funzionale], [UC15],
+      [TS-15.1], [Verifica errore per password corrente mancante o errata.], [Sicurezza], [UC15.1],
+      [TS-15.2], [Verifica errore per nuova password non conforme.], [Validazione], [UC15.2],
+      [TS-15.3], [Verifica errore per nuova password uguale alla precedente.], [Validazione], [UC15.2],
+      [TS-15.4], [Verifica ricezione conferma modifica avvenuta.], [Funzionale], [UC15.4],
+
+      //GRUPPO UC16: REMEDIATION
+      [TS-16], [Verifica visualizzazione suggerimenti di remediation.], [Funzionale], [UC16],
+      [TS-16.1], [Verifica gestione caso "Nessuna issue identificata".], [Funzionale], [UC16.1],
+      [TS-16.2], [Verifica visualizzazione dettaglio singola issue.], [Contenuto], [UC16.2],
+
+      //GRUPPO UC17: CREAZIONE SANDBOX
+      [TS-17], [Verifica creazione ambiente sandbox per analisi.], [Integrazione], [UC17],
+      [TS-17.1], [Verifica gestione errore durante creazione sandbox.], [Integrazione], [UC17.1],
+
+      //GRUPPO UC18: LETTURA RICHIESTE ORCHESTRATORE
+      [TS-18], [Verifica lettura richieste utente da parte orchestratore.], [Integrazione], [UC18],
+      [TS-18.1], [Verifica esecuzione analisi completa quando richiesta.], [Funzionale], [UC18.1],
+      [TS-18.2], [Verifica processamento richieste specifiche su aree.], [Funzionale], [UC18.2],
+
+      //GRUPPO UC19: ANALISI VULNERABILITÀ DIPENDENZE
+      [TS-19], [Verifica analisi vulnerabilità dipendenze con remediation.], [Sicurezza], [UC19],
+      [TS-19.1], [Verifica accettazione remediation proposte.], [Funzionale], [UC19.1],
+      [TS-19.2], [Verifica rifiuto remediation proposte.], [Funzionale], [UC19.2],
+
+      //GRUPPO UC20: RILEVAMENTO SEGRETI
+      [TS-20], [Verifica rilevamento segreti e token esposti.], [Sicurezza], [UC20],
+      [TS-20.1], [Verifica rifiuto remediation segreti.], [Funzionale], [UC20.1],
+      [TS-20.2], [Verifica revoca automatica se integrata con provider.], [Integrazione], [UC20.2],
+      [TS-20.3], [Verifica visualizzazione risultati rilevamento.], [Contenuto], [UC20.3],
+
+      //GRUPPO UC21: CONFORMITÀ LICENZE
+      [TS-21], [Verifica conformità licenze dipendenze.], [Compliance], [UC21],
+      [TS-21.1], [Verifica integrazione con processo approvazione legale.], [Integrazione], [UC21.1],
+
+      //GRUPPO UC22: REVISIONE PR
+      [TS-22], [Verifica revisione PR automatizzata.], [Integrazione], [UC22],
+      [TS-22.1], [Verifica esecuzione test automatici.], [Funzionale], [UC22.1],
+      [TS-22.2], [Verifica suggerimenti modifica automatici (codemods).], [Funzionale], [UC22.2],
+
+      //GRUPPO UC23: MONITOR QUALITÀ
+      [TS-23], [Verifica monitor qualità codice con metriche.], [Qualità], [UC23],
+      [TS-23.1], [Verifica integrazione con tool metriche esterni.], [Integrazione], [UC23.1],
+      [TS-23.2], [Verifica suggerimenti KPI e obiettivi qualità.], [Qualità], [UC23.2],
+
+      //GRUPPO UC24: REFACTORING
+      [TS-24], [Verifica suggerimenti refactoring codice.], [Qualità], [UC24],
+      [TS-24.1], [Verifica impatto tramite test automatizzati.], [Qualità], [UC24.1],
+      [TS-24.2], [Verifica applicazione automatica sotto supervisione.], [Funzionale], [UC24.2],
+      [TS-24.3], [Verifica visualizzazione suggerimenti.], [Contenuto], [UC24.3],
+
+      //GRUPPO UC25: CHANGELOG
+      [TS-25], [Verifica generazione changelog e release notes.], [Funzionale], [UC25],
+      [TS-25.1], [Verifica rilevamento breaking changes.], [Funzionale], [UC25.1],
+      [TS-25.2], [Verifica pubblicazione automatica su GitHub Release.], [Integrazione], [UC25.2],
+      [TS-25.3], [Verifica visualizzazione e approvazione changelog.], [Funzionale], [UC25.3],
+
+      //GRUPPO UC26: TEST E COVERAGE
+      [TS-26], [Verifica analisi test e coverage.], [Qualità], [UC26],
+      [TS-26.1], [Verifica replay test intermittenti.], [Qualità], [UC26.1],
+      [TS-26.2], [Verifica suggerimenti per test addizionali.], [Qualità], [UC26.2],
+      [TS-26.3], [Verifica visualizzazione report test/coverage.], [Contenuto], [UC26.3],
+
+      //GRUPPO UC27: POLICY CI/CD
+      [TS-27], [Verifica applicazione policy CI/CD pre-merge.], [Compliance], [UC27],
+      [TS-27.1], [Verifica gestione eccezioni approvate manualmente.], [Compliance], [UC27.1],
+      [TS-27.2], [Verifica policy dinamiche per branch differenti.], [Compliance], [UC27.2],
+      [TS-27.3], [Verifica visualizzazione risultati policy.], [Contenuto], [UC27.3],
+
+      //GRUPPO UC28: REPORT PROGRAMMABILI
+      [TS-28], [Verifica generazione report programmabili e alert.], [Funzionale], [UC28],
+      [TS-28.1], [Verifica filtri e template report.], [Funzionale], [UC28.1],
+      [TS-28.2], [Verifica azioni automatiche su alert critici.], [Funzionale], [UC28.2],
+      [TS-28.3], [Verifica visualizzazione report programmati.], [Contenuto], [UC28.3],
+
+      //GRUPPO UC29: TOOL ESTERNI
+      [TS-29], [Verifica recupero e avvio tool esterni di analisi.], [Integrazione], [UC29],
+      [TS-29.1], [Verifica gestione tool esterno non disponibile.], [Integrazione], [UC29.1],
+      [TS-29.2], [Verifica richiesta analisi del codice a tool esterno.], [Integrazione], [UC29.2],
+      [TS-29.3], [Verifica richiesta analisi documentazione a tool esterno.], [Integrazione], [UC29.3],
+      [TS-29.4], [Verifica richiesta analisi OWASP a tool esterno.], [Integrazione], [UC29.4],
+
+      //GRUPPO UC30: GENERAZIONE REPORT FINALE
+      [TS-30], [Verifica generazione report finale completo.], [Integrazione], [UC30],
+      [TS-30.1], [Verifica integrazione analisi singole nel report.], [Integrazione], [UC30.1],
+
+      //GRUPPO UC31: TRASFERIMENTO REPORT
+      [TS-31], [Verifica trasferimento report a sistema frontend.], [Integrazione], [UC31],
+
+      //GRUPPO UC32: NOTIFICA UTENTE
+      [TS-32], [Verifica notifica utente disponibilità nuovo report.], [Funzionale], [UC32],
+
+      //GRUPPO UC34: NOTIFICA COMPLETAMENTO
+      [TS-34], [Verifica notifica completamento analisi al frontend.], [Integrazione], [UC34],
+      [TS-34.1], [Verifica retry invio messaggio completamento.], [Integrazione], [UC34.1],
+
+      //GRUPPO UC35: GESTIONE ERRORI
+      [TS-35], [Verifica gestione errore critico durante analisi.], [Integrazione], [UC35],
+      [TS-35.1], [Verifica retry invio messaggio fallimento.], [Integrazione], [UC35.1],
+
+      //GRUPPO UC36: SALVATAGGIO METADATI
+      [TS-36], [Verifica salvataggio metadati repository.], [Persistenza], [UC36],
+
+      //GRUPPO UC37: VERIFICA ESISTENZA REPOSITORY
+      [TS-37], [Verifica esistenza repository analizzata.], [Funzionale], [UC37],
+      [TS-37.1], [Verifica gestione caso nessuna repository analizzata.], [Funzionale], [UC37.1],
+
+      //GRUPPO UC38: SALVATAGGIO REPORT
+      [TS-38], [Verifica salvataggio report analisi nel database.], [Persistenza], [UC38],
+      [TS-38.1], [Verifica gestione errore durante salvataggio.], [Persistenza], [UC38.1],
+
+      //GRUPPO UC39: SALVATAGGIO METRICHE
+      [TS-39], [Verifica salvataggio metriche aggregate.], [Persistenza], [UC39],
+      [TS-39.1], [Verifica gestione errore durante salvataggio metriche.], [Persistenza], [UC39.1],
+
+      //GRUPPO UC40: INVIO CREDENZIALI
+      [TS-40], [Verifica invio credenziali al sistema backend.], [Integrazione], [UC40],
+      [TS-40.1], [Verifica gestione errore durante trasferimento.], [Integrazione], [UC40.1],
+
+      //GRUPPO UC41: OAUTH GITHUB
+      [TS-41], [Verifica gestione codice OAuth GitHub.], [Integrazione], [UC41],
+      [TS-41.1], [Verifica gestione errore durante scambio codice.], [Integrazione], [UC41.1],
     ),
   ),
   caption: [Tabella dei Test di Sistema],
@@ -525,7 +633,7 @@ Di seguito, viene riportata la tabella che definisce i #def("Test di Sistema") (
 #pagebreak()
 
 == Test di Unità
-In questa sezione vengono definiti i #def("Test di Unità") volti a verificare il corretto funzionamento delle singole componenti software.
+In questa sezione vengono definiti i #def("Test di Unità") volti a verificare il corretto funzionamento delle singole componenti software, basati sui requisiti funzionali identificati.
 
 #figure(
   block(
@@ -538,94 +646,402 @@ In questa sezione vengono definiti i #def("Test di Unità") volti a verificare i
       },
       columns: (1.3fr, 1.5fr, 3fr, 3fr),
       inset: 10pt,
-      table.header([*ID Test*], [*UC\ Riferimento*], [*Descrizione*], [*Risultato Atteso*]),
+      table.header([*ID Test*], [*Requisito\ Riferimento*], [*Descrizione*], [*Risultato Atteso*]),
 
-      // UC1: REGISTRAZIONE
+      // REGISTRAZIONE (FR1-FR20)
       [TU-1.1],
-      [UC1.1],
-      [Verifica funzione di normalizzazione nome: input con spazi iniziali e finali.],
-      [La stringa restituita non presenta spazi esterni.],
+      [FR1],
+      [Verifica rendering pagina di registrazione.],
+      [La pagina viene visualizzata correttamente con tutti i campi.],
 
       [TU-1.2],
-      [UC1.1.1],
-      [Verifica validatore Nome: input contenente caratteri numerici.],
-      [La funzione restituisce `false` e l'errore specifico.],
+      [FR3],
+      [Verifica inserimento username nel campo dedicato.],
+      [Il valore inserito viene accettato e memorizzato.],
 
       [TU-1.3],
-      [UC1.1.1],
-      [Verifica validatore Nome: input contenente simboli speciali non ammessi.],
-      [La funzione restituisce `false`.],
+      [FR6, FR7],
+      [Verifica validatore Username: lunghezza minima 4 e massima 20 caratteri.],
+      [La funzione restituisce `false` per valori fuori range.],
 
       [TU-1.4],
-      [UC1.3.1],
-      [Verifica validatore Username: lunghezza inferiore al minimo consentito.],
-      [La funzione restituisce `false`.],
+      [FR8],
+      [Verifica validatore Username: solo caratteri alfanumerici.],
+      [La funzione restituisce `false` per caratteri speciali.],
 
-      [TU-1.5], [UC1.4.1], [Verifica validatore Email: formato sintattico errato.], [La funzione restituisce `false`.],
+      [TU-1.5],
+      [FR9],
+      [Verifica messaggio errore per username non valido.],
+      [Il messaggio di errore viene visualizzato correttamente.],
 
       [TU-1.6],
-      [UC1.5.1],
-      [Verifica validatore Password: assenza di carattere maiuscolo o numero.],
-      [La funzione restituisce `false` indicando il criterio mancante.],
+      [FR10],
+      [Verifica controllo unicità username nel database.],
+      [La funzione restituisce `false` se username già esistente.],
 
-      // UC2: AUTENTICAZIONE
+      [TU-1.7],
+      [FR4],
+      [Verifica inserimento email nel campo dedicato.],
+      [Il valore inserito viene accettato e memorizzato.],
+
+      [TU-1.8],
+      [FR11, FR12],
+      [Verifica validatore Email: presenza '@' e dominio valido.],
+      [La funzione restituisce `false` per email malformate.],
+
+      [TU-1.9],
+      [FR13],
+      [Verifica messaggio errore per email non valida.],
+      [Il messaggio di errore viene visualizzato correttamente.],
+
+      [TU-1.10],
+      [FR14],
+      [Verifica controllo unicità email nel database.],
+      [La funzione restituisce `false` se email già esistente.],
+
+      [TU-1.11],
+      [FR5],
+      [Verifica inserimento password nel campo dedicato.],
+      [Il valore inserito viene accettato e memorizzato (mascherato).],
+
+      [TU-1.12],
+      [FR15],
+      [Verifica validatore Password: lunghezza minima 8 caratteri.],
+      [La funzione restituisce `false` per password troppo corte.],
+
+      [TU-1.13],
+      [FR16, FR17],
+      [Verifica validatore Password: presenza maiuscola e minuscola.],
+      [La funzione restituisce `false` se mancano lettere maiuscole o minuscole.],
+
+      [TU-1.14],
+      [FR18, FR19],
+      [Verifica validatore Password: presenza numero e carattere speciale.],
+      [La funzione restituisce `false` se mancano numeri o caratteri speciali.],
+
+      [TU-1.15],
+      [FR20],
+      [Verifica messaggio errore per password non conforme.],
+      [Il messaggio indica specificamente i criteri mancanti.],
+
+      [TU-1.16],
+      [FR2],
+      [Verifica invio richiesta registrazione tramite pulsante.],
+      [La richiesta viene inviata al backend con i dati corretti.],
+
+      // AUTENTICAZIONE (FR21-FR28)
       [TU-2.1],
-      [UC2.1.1],
-      [Verifica sanitizzazione input Username in fase di login.],
-      [Eventuali caratteri di escape pericolosi vengono rimossi.],
+      [FR21],
+      [Verifica rendering pagina di autenticazione.],
+      [La pagina viene visualizzata con campi username e password.],
 
-      [TU-2.2],
-      [UC2.2.1],
-      [Verifica gestione input vuoti su campi obbligatori.],
-      [La validazione blocca la richiesta prima dell'invio al server.],
+      [TU-2.2], [FR22], [Verifica inserimento username per autenticazione.], [Il valore inserito viene accettato.],
+      [TU-2.3],
+      [FR23],
+      [Verifica inserimento password per autenticazione.],
+      [Il valore inserito viene accettato (mascherato).],
 
-      // UC3: GITHUB
-      [TU-3.1],
-      [UC3.2.3],
-      [Verifica parser codice OAuth: gestione stringa vuota o null.],
-      [Il metodo solleva un'eccezione gestita senza effettuare chiamate esterne.],
+      [TU-2.4],
+      [FR24],
+      [Verifica validazione lunghezza username (4-20 caratteri).],
+      [La funzione restituisce `false` per valori fuori range.],
 
-      // UC4: ANALISI
-      [TU-4.1],
-      [UC4.1.1],
-      [Verifica validatore URL: input non appartenente al dominio github.com.],
-      [La funzione restituisce errore "Dominio non supportato".],
+      [TU-2.5],
+      [FR25],
+      [Verifica messaggio errore username non conforme.],
+      [Il messaggio di errore viene visualizzato.],
 
-      [TU-4.2],
-      [UC4.1.1],
-      [Verifica validatore URL: formato malformato o incompleto.],
-      [La funzione segnala l'URL come non valido.],
+      [TU-2.6],
+      [FR26],
+      [Verifica controllo esistenza username nel database.],
+      [La funzione restituisce `false` se username non esiste.],
 
+      [TU-2.7],
+      [FR27],
+      [Verifica messaggio errore password non conforme.],
+      [Il messaggio di errore viene visualizzato.],
+
+      [TU-2.8],
+      [FR28],
+      [Verifica controllo correttezza password.],
+      [La funzione verifica l'hash e restituisce il risultato corretto.],
+
+      // COLLEGAMENTO GITHUB (FR29-FR36)
+      [TU-3.1], [FR29], [Verifica accesso sezione collegamento GitHub.], [La sezione viene visualizzata correttamente.],
+      [TU-3.2],
+      [FR30],
+      [Verifica visualizzazione avviso redirect a GitHub.],
+      [L'avviso viene mostrato prima del redirect.],
+
+      [TU-3.3],
+      [FR31, FR32],
+      [Verifica gestione conferma/rifiuto collegamento.],
+      [Il sistema procede o annulla in base alla scelta.],
+
+      [TU-3.4],
+      [FR33],
+      [Verifica processo OAuth completo con GitHub.],
+      [Il codice viene ricevuto e processato correttamente.],
+
+      [TU-3.5],
+      [FR34],
+      [Verifica gestione errore codice GitHub non ricevuto.],
+      [Il messaggio di errore viene visualizzato.],
+
+      [TU-3.6],
+      [FR35],
+      [Verifica controllo codice già associato ad altro utente.],
+      [La funzione restituisce `false` se codice duplicato.],
+
+      [TU-3.7],
+      [FR36],
+      [Verifica validazione formato codice GitHub.],
+      [La funzione restituisce `false` per formato non valido.],
+
+      // RICHIESTA ANALISI (FR37-FR48)
+      [TU-4.1], [FR37], [Verifica accesso sezione richiesta analisi.], [La sezione viene visualizzata correttamente.],
+      [TU-4.2], [FR38], [Verifica inserimento URL repository nel campo.], [Il valore inserito viene accettato.],
       [TU-4.3],
-      [UC4.3.1],
-      [Verifica logica "Up-to-date": confronto hash commit identici.],
-      [La funzione restituisce `true`.],
+      [FR39, FR40],
+      [Verifica validatore URL: protocollo https e dominio github.com.],
+      [La funzione restituisce `false` per URL non validi.],
 
-      [TU-4.4],
-      [UC4.3.1],
-      [Verifica logica "Up-to-date": confronto hash commit differenti.],
-      [La funzione restituisce `false` (necessaria nuova analisi).],
+      [TU-4.4], [FR41], [Verifica messaggio errore URL non conforme.], [Il messaggio di errore viene visualizzato.],
+      [TU-4.5],
+      [FR42],
+      [Verifica controllo accessibilità repository.],
+      [La funzione verifica l'esistenza e l'accesso al repository.],
 
-      // UC5-12: REPORTING
-      [TU-6.1],
-      [UC6.2.2],
-      [Verifica validatore intervallo date: Data Inizio successiva a Data Fine.],
-      [La funzione restituisce errore di incoerenza temporale.],
+      [TU-4.6], [FR43], [Verifica messaggio errore URL mancante.], [Il messaggio viene mostrato se campo vuoto.],
+      [TU-4.7], [FR44], [Verifica selezione aree di interesse.], [Le aree selezionate vengono memorizzate.],
+      [TU-4.8], [FR45], [Verifica messaggio errore nessuna area selezionata.], [Il messaggio viene visualizzato.],
+      [TU-4.9], [FR46], [Verifica invio richiesta analisi tramite pulsante.], [La richiesta viene inviata al backend.],
+      [TU-4.10],
+      [FR47],
+      [Verifica controllo report up-to-date.],
+      [La funzione confronta hash commit e restituisce il risultato.],
 
+      [TU-4.11],
+      [FR48],
+      [Verifica controllo analisi in corso.],
+      [La funzione verifica lo stato e restituisce il risultato.],
+
+      // VISUALIZZAZIONE REPORT (FR49-FR56)
+      [TU-5.1],
+      [FR49],
+      [Verifica accesso sezione visualizzazione report.],
+      [La sezione viene visualizzata correttamente.],
+
+      [TU-5.2],
+      [FR50],
+      [Verifica rendering elenco report disponibili.],
+      [L'elenco viene popolato con i report esistenti.],
+
+      [TU-5.3], [FR51], [Verifica selezione report dall'elenco.], [Il report selezionato viene caricato.],
+      [TU-5.4],
+      [FR52],
+      [Verifica messaggio nessun report disponibile.],
+      [Il messaggio viene visualizzato se lista vuota.],
+
+      [TU-5.5], [FR53], [Verifica messaggio errore nessun report selezionato.], [Il messaggio viene mostrato.],
+      [TU-5.6],
+      [FR54],
+      [Verifica selezione dati specifici da visualizzare.],
+      [Le opzioni selezionate vengono memorizzate.],
+
+      [TU-5.7], [FR55], [Verifica messaggio errore nessun dato selezionato.], [Il messaggio viene visualizzato.],
+      [TU-5.8],
+      [FR56],
+      [Verifica rendering completo dettagli analisi.],
+      [Tutti i dati selezionati vengono visualizzati correttamente.],
+
+      // FILTRO TEMPORALE (FR57-FR64)
+      [TU-6.1], [FR57], [Verifica selezione intervallo temporale.], [L'intervallo viene memorizzato correttamente.],
+      [TU-6.2], [FR58], [Verifica conferma selezione intervallo.], [L'azione di conferma viene registrata.],
+      [TU-6.3],
+      [FR59],
+      [Verifica modifica intervallo dopo selezione.],
+      [Il nuovo intervallo sovrascrive il precedente.],
+
+      [TU-6.4], [FR60], [Verifica messaggio errore intervallo non selezionato.], [Il messaggio viene visualizzato.],
+      [TU-6.5], [FR61], [Verifica validazione intervallo temporale.], [La funzione verifica coerenza e ampiezza.],
+      [TU-6.6],
+      [FR62],
+      [Verifica messaggio nessun report nel periodo.],
+      [Il messaggio viene visualizzato se nessun risultato.],
+
+      [TU-6.7],
+      [FR63],
+      [Verifica controllo incoerenza intervallo (Start > End).],
+      [La funzione restituisce `false` per intervalli incoerenti.],
+
+      [TU-6.8],
+      [FR64],
+      [Verifica controllo ampiezza massima intervallo.],
+      [La funzione restituisce `false` se intervallo troppo ampio.],
+
+      // VISUALIZZAZIONI COMPARATIVE (FR65-FR68)
+      [TU-7.1], [FR65], [Verifica rendering grafico comparativo.], [Il grafico viene visualizzato con i dati corretti.],
+      [TU-7.2], [FR66], [Verifica interazione con punti dati grafico.], [I dettagli vengono mostrati al click/hover.],
+      [TU-7.3], [FR67], [Verifica rendering tabella comparativa.], [La tabella viene popolata correttamente.],
+      [TU-7.4],
+      [FR68],
+      [Verifica calcolo indicatori variazione.],
+      [Gli indicatori mostrano diff corretto rispetto report precedente.],
+
+      // ANALISI CODICE (FR69-FR73)
       [TU-9.1],
-      [UC9.4],
-      [Verifica calcolo totale vulnerabilità: somma corretta dei parziali per categoria.],
-      [Il valore restituito corrisponde alla somma aritmetica delle issue.],
+      [FR69],
+      [Verifica visualizzazione sezione analisi codice.],
+      [La sezione viene renderizzata correttamente.],
 
+      [TU-9.2], [FR70], [Verifica rendering report analisi statica.], [I dati dell'analisi statica vengono mostrati.],
+      [TU-9.3], [FR71], [Verifica rendering analisi librerie/dipendenze.], [L'elenco dipendenze viene visualizzato.],
+      [TU-9.4], [FR72], [Verifica rendering report sicurezza OWASP.], [I risultati OWASP vengono mostrati.],
+      [TU-9.5],
+      [FR73],
+      [Verifica calcolo totale vulnerabilità codice.],
+      [Il conteggio corrisponde alla somma delle vulnerabilità.],
+
+      // ANALISI DOCUMENTAZIONE (FR74-FR76)
       [TU-10.1],
-      [UC10.2],
-      [Verifica calcolo percentuale coverage documentazione.],
-      [Il calcolo restituisce il valore corretto arrotondato a due decimali.],
+      [FR74],
+      [Verifica visualizzazione sezione analisi documentazione.],
+      [La sezione viene renderizzata correttamente.],
 
-      [TU-12.1],
-      [UC12.1],
-      [Verifica formattazione data report: conversione timestamp in formato locale.],
-      [La data viene renderizzata nel formato "YYYY/MM/DD HH:mm".],
+      [TU-10.2], [FR75], [Verifica visualizzazione errori spelling.], [Gli errori rilevati vengono elencati.],
+      [TU-10.3],
+      [FR76],
+      [Verifica calcolo completezza documentazione.],
+      [La percentuale viene calcolata correttamente.],
+
+      // VULNERABILITÀ TOTALI (FR77)
+      [TU-11.1],
+      [FR77],
+      [Verifica visualizzazione vulnerabilità totali repository.],
+      [Il numero totale viene calcolato e mostrato.],
+
+      // METADATI (FR78-FR81)
+      [TU-12.1], [FR78], [Verifica visualizzazione area metadati.], [La sezione metadati viene renderizzata.],
+      [TU-12.2], [FR79], [Verifica formattazione data report.], [La data viene visualizzata nel formato corretto.],
+      [TU-12.3], [FR80], [Verifica visualizzazione commit analizzati.], [L'elenco commit viene mostrato.],
+      [TU-12.4], [FR81], [Verifica visualizzazione richiedente.], [Il nome utente richiedente viene mostrato.],
+
+      // DISCONNESSIONE GITHUB (FR82-FR84)
+      [TU-13.1],
+      [FR82],
+      [Verifica processo disconnessione account GitHub.],
+      [Il collegamento viene rimosso correttamente.],
+
+      [TU-13.2], [FR83], [Verifica azione pulsante Disconnetti.], [Il pulsante avvia il processo di disconnessione.],
+      [TU-13.3], [FR84], [Verifica conferma disconnessione.], [La conferma viene richiesta e processata.],
+
+      // ESPORTAZIONE REPORT (FR85-FR88)
+      [TU-14.1], [FR85], [Verifica processo esportazione report.], [Il report viene esportato correttamente.],
+      [TU-14.2], [FR86], [Verifica selezione formato esportazione.], [Il formato selezionato viene applicato.],
+      [TU-14.3], [FR87], [Verifica messaggio errore formato non selezionato.], [Il messaggio viene visualizzato.],
+      [TU-14.4], [FR88], [Verifica conferma esportazione.], [Il file viene generato dopo conferma.],
+
+      // MODIFICA PASSWORD (FR89-FR98)
+      [TU-15.1], [FR89], [Verifica accesso sezione modifica password.], [La sezione viene visualizzata.],
+      [TU-15.2], [FR90], [Verifica inserimento password corrente.], [Il valore inserito viene accettato (mascherato).],
+      [TU-15.3], [FR91], [Verifica messaggio errore password corrente mancante.], [Il messaggio viene visualizzato.],
+      [TU-15.4],
+      [FR92],
+      [Verifica controllo correttezza password corrente.],
+      [La funzione verifica l'hash correttamente.],
+
+      [TU-15.5], [FR93], [Verifica inserimento nuova password.], [Il valore inserito viene accettato (mascherato).],
+      [TU-15.6], [FR94], [Verifica messaggio errore nuova password mancante.], [Il messaggio viene visualizzato.],
+      [TU-15.7],
+      [FR95],
+      [Verifica validazione conformità nuova password.],
+      [La funzione applica tutti i criteri di sicurezza.],
+
+      [TU-15.8],
+      [FR96],
+      [Verifica controllo uguaglianza password nuova/precedente.],
+      [La funzione restituisce `false` se identiche.],
+
+      [TU-15.9], [FR97], [Verifica conferma modifica password.], [La password viene aggiornata nel database.],
+      [TU-15.10],
+      [FR98],
+      [Verifica messaggio conferma modifica avvenuta.],
+      [Il messaggio di successo viene visualizzato.],
+
+      // REMEDIATION (FR99-FR102)
+      [TU-16.1],
+      [FR99],
+      [Verifica visualizzazione suggerimenti remediation.],
+      [La sezione viene renderizzata correttamente.],
+
+      [TU-16.2], [FR100], [Verifica rendering lista issue identificate.], [L'elenco issue viene popolato.],
+      [TU-16.3],
+      [FR101],
+      [Verifica messaggio nessuna issue identificata.],
+      [Il messaggio viene visualizzato se lista vuota.],
+
+      [TU-16.4],
+      [FR102],
+      [Verifica visualizzazione dettaglio remediation.],
+      [I dettagli vengono mostrati correttamente.],
+
+      // ORCHESTRATORE (FR103-FR109)
+      [TU-17.1], [FR103], [Verifica creazione ambiente sandbox.], [L'ambiente viene creato correttamente via Docker.],
+      [TU-17.2],
+      [FR104],
+      [Verifica intercettazione errori creazione sandbox.],
+      [Gli errori vengono catturati e gestiti.],
+
+      [TU-17.3], [FR105], [Verifica comunicazione errori al frontend.], [Il messaggio di errore viene trasmesso.],
+      [TU-18.1], [FR106], [Verifica lettura richieste utente.], [Le richieste vengono parsate correttamente.],
+      [TU-18.2], [FR107], [Verifica esecuzione analisi completa.], [Tutti i moduli di analisi vengono attivati.],
+      [TU-18.3], [FR108], [Verifica processamento richieste specifiche.], [Solo i moduli richiesti vengono attivati.],
+      [TU-18.4], [FR109], [Verifica analisi completa per repository nuova.], [L'analisi completa viene forzata.],
+
+      // FUNZIONALITÀ AVANZATE (FR110-FR135)
+      [TU-19.1],
+      [FR110],
+      [Verifica analisi vulnerabilità dipendenze.],
+      [Le vulnerabilità vengono rilevate correttamente.],
+
+      [TU-19.2], [FR111], [Verifica accettazione remediation vulnerabilità.], [Le remediation vengono applicate.],
+      [TU-19.3], [FR112], [Verifica rifiuto remediation.], [Le remediation vengono scartate.],
+      [TU-20.1], [FR113], [Verifica rilevamento segreti e token.], [I segreti esposti vengono identificati.],
+      [TU-20.2], [FR114], [Verifica rifiuto remediation segreti.], [Le remediation vengono scartate.],
+      [TU-20.3], [FR115], [Verifica revoca automatica segreti.], [La revoca viene eseguita se integrazione attiva.],
+      [TU-20.4],
+      [FR116],
+      [Verifica visualizzazione risultati rilevamento.],
+      [I risultati vengono mostrati correttamente.],
+
+      [TU-24.1], [FR117], [Verifica suggerimenti refactoring.], [I suggerimenti vengono generati correttamente.],
+      [TU-24.2],
+      [FR118],
+      [Verifica applicazione automatica refactor.],
+      [Il refactor viene applicato sotto supervisione.],
+
+      [TU-24.3], [FR119], [Verifica visualizzazione suggerimenti refactoring.], [I suggerimenti vengono mostrati.],
+      [TU-25.1], [FR120], [Verifica generazione changelog.], [Il changelog viene creato correttamente.],
+      [TU-25.2], [FR121], [Verifica rilevamento breaking changes.], [Le breaking changes vengono segnalate.],
+      [TU-25.3], [FR122], [Verifica pubblicazione automatica GitHub Release.], [La release viene pubblicata.],
+      [TU-25.4],
+      [FR123],
+      [Verifica visualizzazione e approvazione changelog.],
+      [Il changelog può essere revisionato e approvato.],
+
+      [TU-26.1], [FR124], [Verifica analisi test e coverage.], [I dati di coverage vengono calcolati.],
+      [TU-26.2], [FR125], [Verifica riesecuzione test intermittenti.], [I test flaky vengono rieseguiti.],
+      [TU-26.3], [FR126], [Verifica suggerimenti test addizionali.], [I gap di coverage vengono identificati.],
+      [TU-26.4], [FR127], [Verifica visualizzazione report test/coverage.], [Il report viene mostrato correttamente.],
+      [TU-27.1], [FR128], [Verifica applicazione policy CI/CD.], [Le policy vengono verificate.],
+      [TU-27.2], [FR129], [Verifica gestione eccezioni manuali.], [Le eccezioni vengono processate.],
+      [TU-27.3], [FR130], [Verifica policy dinamiche per branch.], [Policy diverse vengono applicate per branch.],
+      [TU-27.4], [FR131], [Verifica visualizzazione risultati policy.], [I risultati vengono mostrati.],
+      [TU-28.1], [FR132], [Verifica generazione report programmabili.], [I report vengono generati automaticamente.],
+      [TU-28.2], [FR133], [Verifica configurazione filtri e template.], [Filtri e template vengono applicati.],
+      [TU-28.3], [FR134], [Verifica azioni automatiche su alert.], [Le azioni vengono eseguite.],
+      [TU-28.4], [FR135], [Verifica visualizzazione report programmati.], [I report vengono mostrati.],
     ),
   ),
   caption: [Tabella dei Test di Unità],
@@ -636,7 +1052,7 @@ In questa sezione vengono definiti i #def("Test di Unità") volti a verificare i
 #pagebreak()
 
 == Test di Accettazione
-In questa sezione vengono definiti i #def("Test di Accettazione"), volti a validare il sistema rispetto ai requisiti utente e agli scenari d'uso reali, inclusa la verifica della qualità dell'analisi AI.
+In questa sezione vengono definiti i #def("Test di Accettazione"), volti a validare il sistema rispetto ai requisiti utente e agli scenari d'uso reali.
 
 #figure(
   block(
@@ -650,88 +1066,6 @@ In questa sezione vengono definiti i #def("Test di Accettazione"), volti a valid
       columns: (1.3fr, 1.5fr, 3fr, 3fr),
       inset: 10pt,
       table.header([*ID Test*], [*UC\ Riferimento*], [*Descrizione*], [*Risultato Atteso*]),
-
-      // REGISTRAZIONE & LOGIN
-      [TA-1.0],
-      [UC1],
-      [Utente completa la registrazione con dati validi.],
-      [L'account viene creato, l'email di conferma inviata e l'utente reindirizzato al login.],
-
-      [TA-1.1],
-      [UC1.1.1],
-      [Utente tenta la registrazione con caratteri non ammessi nel nome.],
-      [Il sistema mostra un errore visuale e disabilita il tasto di conferma.],
-
-      [TA-2.0],
-      [UC2],
-      [Utente effettua il login con credenziali corrette.],
-      [L'utente accede alla dashboard e il token di sessione viene generato.],
-
-      [TA-2.1],
-      [UC2.2.2],
-      [Utente tenta il login con password errata.],
-      [Il sistema nega l'accesso mostrando un messaggio di errore generico.],
-
-      // GITHUB LINKING
-      [TA-3.0],
-      [UC3],
-      [Utente collega con successo l'account GitHub.],
-      [La dashboard mostra lo stato "Collegato" e l'avatar dell'utente GitHub.],
-
-      [TA-3.1],
-      [UC3.1.1],
-      [Utente rifiuta il collegamento durante il redirect.],
-      [L'operazione viene annullata e il sistema mostra un messaggio informativo.],
-
-      // ANALISI (CORE)
-      [TA-4.0],
-      [UC4],
-      [Utente richiede analisi di una repository pubblica valida.],
-      [L'analisi si avvia, mostrando lo stato di avanzamento/spinner.],
-
-      [TA-4.1],
-      [UC4.1.2],
-      [Utente inserisce URL di una repository privata non accessibile.],
-      [Il sistema termina immediatamente segnalando l'errore di accesso.],
-
-      [TA-4.2],
-      [UC4.3.1],
-      [Utente richiede analisi su repo già analizzata senza modifiche.],
-      [Il sistema notifica che il report è già aggiornato senza avviare l'analisi.],
-
-      // REPORT & AI QUALITY
-      [TA-5.0], [UC5], [Utente visualizza il report finale.], [Tutte le sezioni sono popolate e leggibili.],
-
-      [TA-9.0],
-      [UC9],
-      [Verifica qualità AI: Rilevamento vulnerabilità nota (es. SQL Injection).],
-      [Il report OWASP segnala correttamente la vulnerabilità presente nel codice di test.],
-
-      [TA-10.0],
-      [UC10],
-      [Verifica qualità AI: Rilevamento assenza documentazione.],
-      [L'agente segnala correttamente la bassa coverage su file privi di commenti.],
-
-      [TA-10.1],
-      [UC10.1],
-      [Verifica correzione spelling documentazione.],
-      [Gli errori di battitura presenti nei commenti vengono identificati e listati.],
-
-      // STORICO & CONFRONTO
-      [TA-6.0],
-      [UC6],
-      [Utente filtra i report per un intervallo temporale specifico.],
-      [La lista e i grafici mostrano solo i dati compresi nell'intervallo selezionato.],
-
-      [TA-7.0],
-      [UC7],
-      [Visualizzazione grafico comparativo tra analisi diverse.],
-      [Il grafico mostra l'evoluzione temporale delle metriche di qualità.],
-
-      [TA-12.0],
-      [UC12],
-      [Verifica correttezza metadati.],
-      [I dati visualizzati corrispondono esattamente all'ultimo commit su GitHub.],
     ),
   ),
   caption: [Tabella dei Test di Accettazione],
@@ -748,19 +1082,9 @@ Il cruscotto di valutazione assolve a due funzioni fondamentali:
 - *Monitoraggio Proattivo:* Consente di rilevare scostamenti rispetto alle soglie definite all'interno del _Piano di Qualifica_ stesso, evitando che criticità latenti si trasformino in blocchi operativi.
 - *Tracciabilità Storica:* Documenta l'evoluzione delle prestazioni del gruppo nel tempo, permettendo di identificare pattern ricorrenti e validare l'efficacia delle azioni correttive implementate.
 
-== Struttura delle Misurazioni
-Per ciascuna metrica viene fornita una rappresentazione grafica dell'andamento temporale accompagnata da un'analisi qualitativa. Tali misurazioni e i relativi obiettivi di qualità sono in linea con quanto redatto all'interno del #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/PdP.pdf")[#underline[*Piano di Progetto*]].
+È importante evidenziare che il periodo iniziale, dall'aggiudicazione fino all'avvio formale delle attività di progetto (_Sprint 1_), ha rappresentato una fase di "palestra" durante la quale il gruppo si è dedicato allo studio approfondito delle tecnologie necessarie, partecipando anche a sessioni di formazione organizzate dall'azienda proponente Var Group.
 
-Ogni grafico, quindi, è accompagnato da un commento interpretativo che collega le variazioni delle metriche con le cause organizzative, tecniche o procedurali che le hanno generate, garantendo che i dati non rimangano meri numeri ma si traducano in azioni concrete di miglioramento.
-
-Le misurazioni coprono il periodo che va dall'*aggiudicazione del capitolato* fino alla milestone *RTB* (06/02/2026).
-
-Per la fase di *Product Baseline* (PB) vengono fornite _stime previsionali_.
-Rispetto a quanto rilevato nella RTB, ci si attende un _incremento dell'efficienza_ e una maggiore aderenza alle tempistiche prefissate. La fase precedente, infatti, ha risentito dei rallentamenti dovuti alla concomitanza con la sessione d'esame.
-Con il superamento di tale periodo, la PB riflette una pianificazione più fluida e una gestione operativa che punta a stabilizzare i ritmi, ottimizzando i risultati.
-
-È importante evidenziare che il periodo iniziale, dall'aggiudicazione fino all'avvio formale delle attività di progetto, ha rappresentato una fase di "palestra" durante la quale il gruppo si è dedicato allo studio approfondito delle tecnologie necessarie, partecipando anche a sessioni di formazione organizzate dall'azienda proponente Var Group.
-
+#pagebreak()
 == Processi Primari: Fornitura e Sviluppo
 === Planned Value - Actual Cost - Earned Value (MPC02, MPC03 e MPC04)
 #image("../assets/graficiPdQ/grafico_pv_ac_ev.png", height: 50%)
@@ -770,6 +1094,8 @@ Tuttavia, la situazione ha subito una variazione significativa durante lo _Sprin
 
 #pagebreak()
 === Budget Variance - Schedule Variance (MPC05 e MPCO6)
+#image("../assets/graficiPdQ/grafico_bv_sv.png", height: 50%)
+Il grafico monitora la salute economica e temporale del progetto a partire dallo _Sprint 1_ durante il quale la _Schedule Variance_ (SV) mostra una leggera flessione. Quest'ultima si è accentuata nello _Sprint 2_, riflettendosi anche sulla _Budget Variance_ (BV).
 
 #pagebreak()
 === Cost Performance Index - Schedule Performance Index (MPC07 e MPC08)
@@ -806,7 +1132,7 @@ Dal grafico è possibile osservare la buona efficacia operativa dimostrata duran
 
 #TODO("Definire ulteriori problemi emersi durante lo sviluppo del progetto")
 === Introduzione
-Il miglioramento continuo risulta fondamentale per garantire la qualità del progetto #def("Code Guardian"). Seguendo il #def("Way of Working"), il team effettua retrospettive periodiche per identificare i colli di bottiglia operativi e implementare soluzioni correttive secondo il ciclo #def("PDCA"). Le valutazioni sono state suddivise in tre ambiti critici identificati durante lo sviluppo iniziale.
+Il miglioramento continuo risulta fondamentale per garantire la qualità del progetto #def("Code Guardian"). Seguendo il #def("Way of Working") definito nelle #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[*Norme di Progetto*], il team effettua retrospettive periodiche per identificare i colli di bottiglia operativi e implementare soluzioni correttive secondo il ciclo #def("PDCA"). Le valutazioni sono state suddivise in tre ambiti critici identificati durante lo sviluppo iniziale.
 
 ==== Valutazione Tecnologica
 L'adozione di nuovi strumenti ha richiesto una fase di adattamento per garantire che l'infrastruttura tecnologica supportasse, e non ostacolasse, la produttività.
