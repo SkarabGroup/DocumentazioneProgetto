@@ -219,7 +219,7 @@ Questi processi definiscono le attività core per la realizzazione del software.
   (
     // Misure Base
     [*MPC01*],
-    [Budget At Completion (BAC)],
+    [Budget at Completion (BAC)],
     [Preventivo],
     [Preventivo],
     [Preventivo],
@@ -260,7 +260,7 @@ Questi processi definiscono le attività core per la realizzazione del software.
     [$0.90 <= v <= 1.10$],
     [$1.00$],
     [*MPC09*],
-    [Estimate At Completion (EAC)],
+    [Estimate at Completion (EAC)],
     [$E A C = (B A C) / (C P I)$],
     [$<= B A C + 5%$],
     [$<= B A C$],
@@ -1093,7 +1093,7 @@ Dopo la fase iniziale, in cui le attività di formazione e setup sono state gest
 Tuttavia, la situazione ha subito una variazione significativa durante lo _Sprint 2_: a fronte di un incremento del _Planned Value_ (PV) e dell'_Actual Cost_ (AC), l'_Earned Value_ (EV) ha subito una flessione. Questo testimonia l'insorgere di inefficienze produttive e debito tecnico, legati alla necessità di ricalibrare task qualitativamente insufficienti che hanno rallentato la produzione.
 
 #pagebreak()
-=== Budget Variance - Schedule Variance (MPC05 e MPCO6)
+=== Budget Variance - Schedule Variance (MPC05 e MPC06)
 #image("../assets/graficiPdQ/grafico_bv_sv.png", height: 50%)
 Il grafico monitora la salute economica e temporale del progetto a partire dallo _Sprint 1_ durante il quale la _Schedule Variance_ (SV) mostra una leggera flessione. Quest'ultima si è accentuata nello _Sprint 2_, riflettendosi anche sulla _Budget Variance_ (BV).
 
@@ -1105,7 +1105,7 @@ Dal grafico è possibile notare come, inizialmente, lo _Schedule Performance Ind
 La situazione è peggiorata nel corso dello _Sprint 2_, durante il quale si è verificato un crollo dello _Schedule Performance Index_ (SPI) che segnala un ritardo critico rispetto alla pianificazione. La cattiva gestione temporale è in contrasto con il _Cost Performance Index_ (CPI) che si mantiene abbastanza stabile, confermando che il problema non è di natura economica ma organizzativa.
 
 #pagebreak()
-=== Estimate At Completion (MPC09)
+=== Estimate at Completion (MPC09)
 #image("../assets/graficiPdQ/grafico_eac.png", height: 50%)
 Dopo una fase iniziale di stabilità coincidente con il budget originale, è possibile notare come una gestione inefficiente delle risorse abbia spinto la previsione di spesa verso il limite massimo.
 
