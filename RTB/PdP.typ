@@ -159,7 +159,7 @@ I seguenti documenti hanno valore vincolante per la redazione del Piano di Proge
 - *Standard IEEE 1058-1998*: Standard for Software Project Management Plans. #linebreak()
   #link("https://ieeexplore.ieee.org/document/25325")
 
-==== Nota sull'adozione dello Standard IEEE 1058
+==== Nota sull'Adozione dello Standard IEEE 1058
 La redazione del presente documento aderisce alle linee guida dello standard IEEE 1058-1998. L'adozione di tale normativa garantisce che l'approccio gestionale copra sistematicamente ogni aspetto critico del ciclo di vita.
 In termini di tracciabilità, l'adesione si riflette in:
 - *Struttura:* L'indice dei contenuti mappa fedelmente la struttura proposta dallo standard per evitare lacune gestionali.
@@ -178,7 +178,7 @@ In termini di tracciabilità, l'adesione si riflette in:
 - *Standard IEEE 1058-1998*: Standard for Software Project Management Plans. #linebreak()
   Link: #link("https://ieeexplore.ieee.org/document/25325")
 
-==== Nota sull'adozione dello Standard IEEE 1058
+==== Nota sull'Adozione dello Standard IEEE 1058
 #link("PdQ.pdf")
 Il presente Piano di Progetto adotta come riferimento metodologico lo standard IEEE 1058-1998 (Standard for Software Project Management Plans). La scelta di questo riferimento nasce dalla volontà di adottare un approccio rigoroso nella gestione del lavoro, pur adattando i contenuti alle dimensioni e alle tempistiche del nostro caso studio.
 
@@ -219,7 +219,7 @@ $ R = P times I $
 
 I parametri $P$ e $I$ sono valutati su una scala discreta da 1 a 3.
 
-=== Motivazione della scelta metodologica
+=== Motivazione della Scelta Metodologica
 La scelta di una scala ridotta (1-3) rispetto a scale più estese (es. 1-5 o percentuali) è motivata dalla volontà di:
 - *Ridurre la soggettività:* in assenza di dati storici pregressi, una scala più ampia introdurrebbe un'eccessiva varianza nelle stime individuali. La tripartizione Basso/Medio/Alto forza una categorizzazione netta che facilita il decision-making.
 - *Supportare l'approccio Agile:* il metodo adottato permette una rivalutazione rapida dei rischi a ogni Sprint, evitando l'overhead burocratico di modelli statistici complessi non necessari per la dimensione del progetto.
@@ -278,13 +278,13 @@ La gestione dei rischi è una responsabilità condivisa, articolata come segue:
 
 - *Responsabile di Progetto*: supervisiona il processo di gestione dei rischi, valuta la criticità degli eventi e decide l’attivazione delle strategie di mitigazione o dei piani di contingenza;
 - *Team di Progetto*: contribuisce all’identificazione dei rischi e segnala tempestivamente l’insorgere di eventi critici o condizioni anomale;
-- *Stakeholder di riferimento*: vengono informati in caso di rischi ad alto impatto o di variazioni rilevanti rispetto al piano approvato.
+- *Stakeholder di Riferimento*: vengono informati in caso di rischi ad alto impatto o di variazioni rilevanti rispetto al piano approvato.
 
 == Gestione e Monitoraggio dei Rischi
 
 La gestione dei rischi non è limitata alla fase di avvio del progetto, ma costituisce un processo ciclico di controllo che accompagna l’intero ciclo di vita del sistema ed è integrato nelle attività di pianificazione e revisione degli Sprint.
 
-=== Procedura operativa
+=== Procedura Operativa
 
 Nel caso in cui un rischio si manifesti o emergano nuovi rischi non precedentemente previsti, il team applica la seguente procedura formale:
 
@@ -311,7 +311,7 @@ Nel caso in cui un rischio si manifesti o emergano nuovi rischi non precedenteme
 == Rischi Tecnologici (RT)
 Questa categoria raggruppa le criticità derivanti dalla natura innovativa dello stack tecnologico. L'adozione di architetture a Sistemi Multiagente e l'integrazione con #def[LLM] comportano un'intrinseca incertezza, dovuta alla natura non deterministica dei modelli e alla ripida curva di apprendimento.
 
-=== RT1: Inesperienza con tecnologie IA <RT1>
+=== RT1: Inesperienza con Tecnologie IA <RT1>
 #schedaRischio(
   "RT1",
   "Inesperienza con lo sviluppo di sistemi basati su IA",
@@ -323,7 +323,7 @@ Questa categoria raggruppa le criticità derivanti dalla natura innovativa dello
   "Alto",
 )
 
-=== RT2: Errata selezione delle tecnologie <RT2>
+=== RT2: Errata Selezione delle Tecnologie <RT2>
 #schedaRischio(
   "RT2",
   "Scelta di strumenti inadeguati o immaturi",
@@ -335,7 +335,7 @@ Questa categoria raggruppa le criticità derivanti dalla natura innovativa dello
   "Alto",
 )
 
-=== RT3: Difficoltà nella progettazione degli Agenti <RT3>
+=== RT3: Difficoltà nella Progettazione degli Agenti <RT3>
 #schedaRischio(
   "RT3",
   "Errori di modellazione dei flussi di ragionamento",
@@ -423,7 +423,7 @@ Questa categoria raggruppa le criticità derivanti dalla natura innovativa dello
 == Rischi Interpersonali (RI)
 Questa categoria analizza le criticità legate alle risorse umane. Essendo il team composto da studenti con impegni paralleli, la gestione della disponibilità e della comunicazione rappresenta un fattore critico.
 
-=== RI1: Impegni accademici concorrenti <RI1>
+=== RI1: Impegni Accademici Concorrenti <RI1>
 #schedaRischio(
   "RI1",
   "Sovrapposizione con esami e lavoro",
@@ -550,7 +550,7 @@ Questa categoria raggruppa le criticità legate alla pianificazione temporale, a
 
 #pagebreak()
 
-= Strategie di pianificazione del ciclo di vita
+= Strategie di Pianificazione del Ciclo di Vita
 In questa sezione viene descritta la #def[schedulazione] delle attività di progetto, necessaria per garantire il rispetto delle scadenze e la corretta allocazione delle risorse.
 
 Coerentemente con quanto emerso nell'analisi dei rischi (in particolare #link(<RCO1>)[#underline[RCO1]] e #link(<RT2>)[#underline[RT2]]), la pianificazione adotta un approccio basato sulla strategia del *#def[Rolling Wave Planning]*. Questo metodo prevede una pianificazione di dettaglio per le attività a breve termine (RTB) e una pianificazione strategica ad alto livello per le fasi successive (PB), che verrà raffinata progressivamente.
@@ -560,7 +560,7 @@ Il ciclo di vita è scandito da due #def[Milestone] principali che fungono da sp
 1. *Requirements and Technology Baseline (#def[RTB]):* Milestone a breve termine. Focus su consolidamento requisiti, documentazione normativa e validazione tecnologica (#def[PoC]).
 2. *Product Baseline (#def[PB]):* Milestone a lungo termine. Focus su sviluppo incrementale del prodotto (#def[MVP]), test di sistema e rilascio.
 
-== Pianificazione a breve termine (Verso la RTB)
+== Pianificazione a Breve Termine (Verso la RTB)
 Questa fase copre il periodo dall'avvio del progetto fino al colloquio per la RTB.
 L'obiettivo è duplice:
 1. *Documentale:* Formalizzare requisiti, processi e pianificazione.
@@ -589,13 +589,13 @@ La fase è suddivisa in 3 iterazioni (*Sprint*). Le date sono state definite ten
   caption: [Calendario degli Sprint pianificati per la fase RTB],
 )
 
-=== Strategia di rispetto delle scadenze
+=== Strategia di Rispetto delle Scadenze
 Per mitigare il rischio di ritardi (#link(<RCO1>)[#underline[RCO1]]), il gruppo ha adottato la strategia delle *Internal Review*.
 Ogni Sprint termina con una revisione interna fissata con un anticipo di *3 giorni* rispetto alla scadenza ufficiale. Questo margine (*Slack Time*) permette di:
 1. Assorbire imprevisti dell'ultimo minuto.
 2. Eseguire una revisione incrociata (Peer Review) di documenti e codice prima del rilascio.
 
-=== Dettaglio delle attività
+=== Dettaglio delle Attività
 La tabella seguente dettaglia il carico di lavoro pianificato.
 
 #show figure: set block(breakable: true)
@@ -709,7 +709,7 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
   caption: [Dettaglio attività pianificate per la fase RTB],
 )
 
-== Pianificazione a lungo termine (Verso la PB)
+== Pianificazione a Lungo Termine (Verso la PB)
 Superata la RTB, il progetto entrerà nella fase operativa volta al raggiungimento della *Product Baseline* (#def[PB]).
 La pianificazione di dettaglio (date e sprint) sarà formalizzata nel *Piano di Progetto v2.0.0*. Nonostante ciò, la strategia di sviluppo è già strutturata in 4 macro-fasi:
 
@@ -739,7 +739,7 @@ Fase dedicata alla Quality Assurance e alla consegna.
 In questa sezione viene presentata la stima definitiva dei costi e la pianificazione dell'allocazione delle risorse umane.
 Il preventivo è stato calcolato tenendo conto dei vincoli di budget e della scadenza finale di progetto fissata per il *21/03/2026*.
 
-== Evoluzione del preventivo rispetto alla candidatura
+== Evoluzione del Preventivo rispetto alla Candidatura
 Durante la fase di candidatura per il capitolato C2, il gruppo ha formalizzato la propria proposta economica tramite il documento *Preventivo costi ed impegno orario*. In tale sede, era stata ipotizzata una distribuzione oraria preliminare basata su una stima generica dei carichi di lavoro.
 
 Tuttavia, l'analisi approfondita dei requisiti normativi e l'avvio della fase operativa hanno evidenziato la necessità di un *ribilanciamento strategico delle risorse*.
@@ -830,7 +830,7 @@ Per questo motivo, oltre il *60%* del monte ore totale di *Amministratore* viene
   caption: [Preventivo di periodo per la fase RTB],
 )
 
-== Stima per la fase Product Baseline (PB)
+== Stima per la Fase Product Baseline (PB)
 Il budget residuo è focalizzato sullo sviluppo e verifica del prodotto. Le ore di Amministratore in questa fase sono ridotte alla sola manutenzione della documentazione, mentre aumentano notevolmente le ore di Progettazione e Programmazione per l'MVP.
 
 #figure(
@@ -864,7 +864,7 @@ Il budget residuo è focalizzato sullo sviluppo e verifica del prodotto. Le ore 
   caption: [Budget residuo stimato per la fase PB],
 )
 
-== Ripartizione oraria per membro
+== Ripartizione Oraria per Membro
 La seguente matrice dettaglia la distribuzione delle ore per ciascun componente, garantendo il rispetto del principio di rotazione dei ruoli.
 
 #figure(
@@ -915,11 +915,11 @@ La seguente matrice dettaglia la distribuzione delle ore per ciascun componente,
 )
 
 #pagebreak()
-= Monitoraggio e controllo: Preventivo e Consuntivo
+= Monitoraggio e Controllo: Preventivo e Consuntivo
 
 In questa sezione viene rendicontato l'avanzamento effettivo del progetto attraverso il confronto sistematico tra quanto pianificato (*Preventivo*) e quanto realmente realizzato (*Consuntivo*). Tale attività avviene al termine di ogni #def[Sprint] e permette di valutare la salute economica e temporale del progetto.
 
-== Metodologia di monitoraggio
+== Metodologia di Monitoraggio
 Per garantire un controllo rigoroso, il gruppo analizza i seguenti indicatori al termine di ogni iterazione:
 
 - *Ore Previste:* Ore pianificate nel preventivo di Sprint.
@@ -929,7 +929,7 @@ Per garantire un controllo rigoroso, il gruppo analizza i seguenti indicatori al
 
 L'analisi degli scostamenti (*Variance Analysis*) permette di individuare tempestivamente eventuali inefficienze, consentendo al Responsabile di attuare azioni correttive (es. riallocazione risorse) per rientrare nei vincoli di budget.
 
-=== Nota sulle attività preliminari (Periodo di Avviamento)
+=== Nota sulle Attività Preliminari (Periodo di Avviamento)
 Le attività svolte antecedentemente alla data di avvio ufficiale del primo Sprint (19/12/2025) sono state classificate come *investimento interno* e *auto-formazione*.
 
 In questa fase propedeutica ("Palestra"), il team ha dedicato una parte consistente delle risorse a:
@@ -944,7 +944,7 @@ Tali attività, seppur essenziali per la partenza, *non vengono rendicontate* ne
 === Sprint 1
 *Periodo:* dal 19/12/2025 al 03/01/2026
 
-==== Attività principali
+==== Attività Principali
 Le attività svolte nel periodo di riferimento si sono focalizzate sul consolidamento della base metodologica e sull'analisi analitica dei requisiti:
 
 - *Pianificazione e Standardizzazione:*
@@ -961,7 +961,7 @@ Le attività svolte nel periodo di riferimento si sono focalizzate sul consolida
 - *Gestione Operativa e Task Tracking:*
   - Configurazione dell'ambiente di lavoro e adozione di #def[Jira] come strumento di gestione per la rendicontazione puntuale delle task svolte dai singoli componenti del team, garantendo la tracciabilità dell'impegno profuso.
 #TODO("Verificare che i conti siano giusti a livello di monte ore")
-==== Prospetto consumo tempo (Preventivo)
+==== Prospetto Consumo Tempo (Preventivo)
 #sprint_table(
   (
     ([Basso Kevin], 0, 3, 7, 0, 0, 2),
@@ -975,7 +975,7 @@ Le attività svolte nel periodo di riferimento si sono focalizzate sul consolida
   [Prospetto orario preventivato per lo Sprint 1 (Totale: 61 ore)],
 )
 
-==== Consumo tempo e costi effettivi (Consuntivo)
+==== Consumo Tempo e Costi Effettivi (Consuntivo)
 Si nota una flessione nel monte ore totale dovuta alla pausa natalizia. Alcune attività di verifica sono slittate allo sprint successivo.
 
 #sprint_table(
@@ -992,21 +992,21 @@ Si nota una flessione nel monte ore totale dovuta alla pausa natalizia. Alcune a
 )
 
 #TODO("Aggiungere sottosezione - Rischi Rilevati")
-==== Analisi degli scostamenti
+==== Analisi degli Scostamenti
 In questo sprint sono state consumate *53 ore* a fronte delle *61 ore* preventivate (Delta: *-8 ore*).
 Il ritardo è fisiologico (periodo festivo). Le ore non lavorate sono state ripianificate nello Sprint 2 per il completamento dei documenti.
 
 ==== Retrospettiva dello Sprint 1
 
-===== Valutazione del periodo
+===== Valutazione del Periodo
 Il team esprime una generale soddisfazione per l'andamento del primo Sprint. L'organizzazione del lavoro ha beneficiato in modo determinante dell'adozione di #def[Jira] per il tracciamento delle attività: lo strumento si è rivelato fondamentale non solo per la distribuzione dei carichi di lavoro, ma anche per la precisione della rendicontazione oraria, permettendo una visibilità chiara del contributo di ogni singolo componente.
 
-===== Analisi delle attività e dei documenti
+===== Analisi delle Attività e dei Documenti
 - *Analisi dei Requisiti:* Rappresenta l'area di maggior sforzo profuso. Come evidenziato dalla mole oraria riportata nel consuntivo, il documento ha richiesto numerose iterazioni di riscrittura. Tale impegno è stato necessario per convergere verso uno standard qualitativo e formale in linea con le aspettative del docente cardine, garantendo una solida base per le approvazioni future.
 - *Stato dei Documenti:* Mentre l'Analisi è in fase avanzata, il *Piano di Progetto*, il *Piano di Qualifica* e le *Norme di Progetto* hanno raggiunto uno stadio embrionale soddisfacente. Tuttavia, si riconosce la necessità di un considerevole lavoro di raffinamento e completamento nei prossimi cicli.
 - *Gestione del Glossario:* Si segnala positivamente la partecipazione attiva di tutto il gruppo all'aggiornamento costante del Glossario, integrato fluidamente in ogni sessione lavorativa.
 
-===== Relazioni esterne e dinamiche di team
+===== Relazioni Esterne e Dinamiche di Team
 - *Comunicazione con l'Azienda:* Il rapporto con il referente esterno è proattivo e costruttivo. La fornitura puntuale di materiale di consultazione e i suggerimenti tecnici ricevuti hanno agevolato significativamente le scelte iniziali di progetto.
 - *Andamento del Team:* Il clima interno rimane positivo, ma l'analisi del consuntivo evidenzia un *divario significativo nel rendimento individuale*. Alcuni membri si sono distinti per un impegno orario e un contributo tecnico di rilievo, mentre altri hanno mantenuto un profilo più conservativo, limitandosi a interventi marginali. Questo aspetto richiederà una riflessione interna per bilanciare meglio le responsabilità nello Sprint successivo.
 
@@ -1024,14 +1024,14 @@ Il team esprime una generale soddisfazione per l'andamento del primo Sprint. L'o
 === Sprint 2
 *Periodo:* dal 03/01/2026 al 17/01/2026
 
-==== Informazioni generali
+==== Informazioni Generali
 Focus sul consolidamento della documentazione (versione per RTB) e accelerazione sull'Analisi dei Requisiti.
 Attività principali:
 - *Piano di Progetto:* Arricchimento sezione Rischi e conformità IEEE 1058.
 - *Analisi dei Requisiti:* Allocazione massiva risorse (5 membri) per definizione UC e Requisiti.
 - *Incontri:* Meeting con Prof. Cardin e VarGroup per validazione direzione.
 
-==== Prospetto consumo tempo (Preventivo)
+==== Prospetto Consumo Tempo (Preventivo)
 #TODO("questa frase sinceramente non mi piace molto (anche se l'ho scritta io :D) ~Suar .Anche qui, controllare gli orari")
 Pianificazione aggressiva per recuperare il delta dello Sprint 1.
 
@@ -1049,7 +1049,7 @@ Pianificazione aggressiva per recuperare il delta dello Sprint 1.
   [Prospetto orario preventivato per lo Sprint 2 (Totale: 61 ore)],
 )
 
-==== Consumo tempo e costi effettivi (Consuntivo)
+==== Consumo Tempo e Costi Effettivi (Consuntivo)
 Le attività di analisi hanno richiesto più tempo del previsto, assorbendo parte delle ore di verifica.
 
 #sprint_table(
@@ -1068,30 +1068,30 @@ Le attività di analisi hanno richiesto più tempo del previsto, assorbendo part
 
 ==== Retrospettiva dello Sprint 2
 
-===== Stato di avanzamento dei deliverable
+===== Stato di Avanzamento dei Deliverable
 Al termine del secondo Sprint, il progetto presenta un andamento dicotomico tra la gestione documentale e l'analisi tecnica:
 
 - *Documentazione di Gestione e Qualità:* Il #def[Piano di Progetto] (PdP), il #def[Piano di Qualifica] (PdQ) e le #def[Norme di Progetto] (NdP) sono in una fase ottimale. Ad esclusione dei diagrammi del PdQ e della pianificazione dello Sprint 3, i documenti sono considerati ufficiali e pronti per la revisione #def[RTB].
 - *Analisi dei Requisiti (AdR):* Il documento è stato oggetto di modifiche strutturalmente deboli e superficiali. Nonostante l'allocazione della maggioranza delle risorse (5 membri su 7), il risultato è giudicato insufficiente, causando un rallentamento critico che ha comportato il posticipo del #def[PoC] allo Sprint 3.
 
-===== Rapporti esterni e attività di allineamento
+===== Rapporti Esterni e Attività di Allineamento
 - *Allineamento Aziendale:* L'incontro con il proponente ha confermato la validità della direzione intrapresa. Gli interventi di notevole calibro suggeriti dall'azienda sono stati accolti con favore e hanno fornito spunti essenziali per l'evoluzione del prodotto.
 - *Consultazione Accademica:* Il ricevimento con il docente #members.cardin ha permesso di chiarire le ambiguità metodologiche relative all'AdR. Tali chiarimenti rendono le successive carenze del team ancora meno giustificabili sotto il profilo professionale.
 
-===== Analisi delle criticità interne e provvedimenti
+===== Analisi delle Criticità Interne e Provvedimenti
 In corrispondenza del verbale di fine Sprint, si è reso necessario un incontro di confronto interno volto ad analizzare le gravi inefficienze operative emerse:
 
 - *Qualità dell'apporto individuale:* È stata riscontrata una gestione dell'AdR "penosa" e priva di rigore. Le modifiche apportate sono risultate non strutturate, prive di riferimenti alle Norme di Progetto e prive di una reale utilità nel contesto della revisione imminente.
 - *Gestione del conflitto e rendimento:* È stato affrontato formalmente il tema del *mancato rispetto professionale* verso i membri del team che hanno sostenuto carichi di lavoro eccedenti per compensare le inerzie altrui. Il divario di rendimento tra chi ha operato proattivamente e chi si è limitato a interventi superficiali è stato messo a verbale come rischio primario per la stabilità del gruppo.
 - *Giustificazioni:* Durante la sessione, è stata richiesta una giustificazione esplicita per lo scarso rendimento. Il team ha stabilito che ogni attività futura non conforme agli standard definiti o priva di valore aggiunto non sarà conteggiata nel consuntivo orario.
 
-===== Obiettivi di recupero per lo Sprint 3
+===== Obiettivi di Recupero per lo Sprint 3
 L'obiettivo primario del prossimo ciclo sarà il recupero del ritardo accumulato sul #def[PoC] e la stabilizzazione definitiva dell'AdR. Non saranno tollerate ulteriori deviazioni metodologiche o contributi che non rispettino l'equità dello sforzo collettivo.
 
 == Sprint 3
 *Periodo:* dal 17/01/2026 al 31/01/2026
 
-==== Informazioni generali e attività da svolgere
+==== Informazioni Generali e Attività da Svolgere
 In questo secondo sprint, ...
 Le attività principali hanno riguardato:
 - *Piano di Progetto (PdP):*
@@ -1104,7 +1104,7 @@ Le attività principali hanno riguardato:
 == Sprint 3
 *Periodo:* dal 17/01/2026 al 31/01/2026
 
-==== Informazioni generali e attività da svolgere
+==== Informazioni Generali e Attività da Svolgere
 In questo secondo sprint, ...
 Le attività principali hanno riguardato:
 - *Piano di Progetto (PdP):*
@@ -1114,7 +1114,7 @@ Le attività principali hanno riguardato:
 - *Glossario:*
 - *Proof of Concept (PoC):*
 #pagebreak()
-==== Prospetto consumo tempo (Preventivo)
+==== Prospetto Consumo Tempo (Preventivo)
 La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
 
 #sprint_table(
@@ -1131,7 +1131,7 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 )
 
 
-==== Consumo tempo e costi effettivi (Consuntivo)
+==== Consumo Tempo e Costi Effettivi (Consuntivo)
 La tabella sottostante illustra le ore produttive effettivamente rendicontate.
 
 #sprint_table(
@@ -1148,7 +1148,7 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
   [Consuntivo orario effettivo per lo Sprint 3],
 )
 
-==== Analisi degli scostamenti e Risorse Rimanenti
+==== Analisi degli Scostamenti e Risorse Rimanenti
 In questo sprint sono state consumate *XX ore* a fronte delle *YY ore* preventivate (Delta: ...).
 // NOTA: Aggiorna i totali qui sopra in base alla somma delle tabelle (ora ci sono molti zeri nel consuntivo che mi hai passato)
 Il budget economico risparmiato viene reimmesso nel monte ore totale per le fasi successive.
