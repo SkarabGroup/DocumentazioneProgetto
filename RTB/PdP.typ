@@ -7,6 +7,12 @@
 #set heading(numbering: "1.1.1")
 #let history = (
   (
+    "2026/02/01",
+    "0.7.2",
+    "Rielaborazione sezione introduzione, analisi dei rischi, preventivo e monitoraggio",
+    members.suar,
+  ),
+  (
     "2026/01/16",
     "0.7.1",
     "Retrospettiva degli Sprint 1 e 2",
@@ -102,223 +108,112 @@
 = Introduzione
 
 == Contesto del Progetto
-Il presente documento descrive il #def[Piano di Progetto] relativo al progetto #def[Code Guardian], commissionato dall’azienda #def[Var Group] e realizzato dal gruppo di studenti #def[Skarab Group] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
+Il presente documento descrive il #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#piano-di-progetto")[#def[Piano di Progetto]] relativo al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]], commissionato dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
 
-L’obiettivo del progetto è lo sviluppo di una piattaforma ad #def[Agenti] per l’#def[audit] e la #def[remediation] automatizzata delle vulnerabilità presenti nei repository di codice sorgente, in conformità a quanto specificato nel #link(<capitolato>)[#underline[capitolato *C2*]].
-La piattaforma mira a supportare l’analisi statica del codice e l’individuazione di criticità di sicurezza, fornendo indicazioni di correzione mediante meccanismi automatizzati basati su modelli di linguaggio (#def[LLM]).
+L’obiettivo del progetto è lo sviluppo di una piattaforma ad #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] per l’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e la #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] automatizzata delle vulnerabilità presenti nei repository di codice sorgente, in conformità a quanto specificato nel #link(<capitolato>)[#underline[capitolato *C2*]].
+La piattaforma mira a supportare l’analisi statica del codice e l’individuazione di criticità di sicurezza, fornendo indicazioni di correzione mediante meccanismi automatizzati basati su modelli di linguaggio (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]).
 
 == Finalità del Documento
 Il Piano di Progetto definisce l’impostazione gestionale e operativa del progetto, specificando le attività previste, la pianificazione temporale, le risorse coinvolte e le modalità di controllo dell’avanzamento.
 
-Il documento costituisce il riferimento primario per il gruppo di lavoro e per gli #def[Stakeholder], perseguendo i seguenti obiettivi:
-- identificare, analizzare e gestire i rischi tecnici e organizzativi lungo l’intero #def[ciclo di vita del software] ;
-- definire la pianificazione temporale delle attività (#def[Schedulazione]) e le principali scadenze progettuali (#def[Milestone]);
+Il documento costituisce il riferimento primario per il gruppo di lavoro e per gli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#stakeholder")[#def[stakeholder]], perseguendo i seguenti obiettivi:
+- identificare, analizzare e gestire i rischi tecnici e organizzativi lungo l’intero #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#ciclo-di-vita-del-software")[#def[ciclo di vita del software]];
+- definire la pianificazione temporale delle attività (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#schedulazione")[#def[schedulazione]]) e le principali scadenze progettuali (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#milestone")[#def[milestone]]);
 - stimare i costi e allocare in modo coerente le risorse umane;
-- monitorare l’avanzamento del progetto mediante il confronto sistematico tra preventivo e consuntivo al termine di ogni #def[Sprint].
+- monitorare l’avanzamento del progetto mediante il confronto sistematico tra preventivo e consuntivo al termine di ogni #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#sprint")[#def[sprint]].
 
 == Prodotti Attesi
-I prodotti del progetto vengono rilasciati in modo incrementale in corrispondenza di due principali milestone: la *Revisione dei Requisiti e della Tecnologia* (RTB) e la *Revisione di Accettazione*, associata alla #def[Product Baseline] (PB).
+I prodotti del progetto vengono rilasciati in modo incrementale in corrispondenza di due principali #def[baseline]: la *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requirements-and-technology-baseline")[#def[Requirements and Technology Baseline]]* (RTB) e la *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#product-baseline")[#def[Product Baseline]]* (PB).
 
 === Revisione dei Requisiti e della Tecnologia (RTB)
-Il gruppo ha fissato come obiettivo per la candidatura alla milestone RTB la data del *05/02/2026*.
+Il gruppo ha fissato come obiettivo per la candidatura alla revisione RTB la data del *09/02/2026*.
 Entro tale scadenza, verranno rilasciati e sottoposti a verifica i seguenti artefatti:
 - *Documentazione di Baseline*:
   - Analisi dei Requisiti (versione consolidata);
   - Piano di Progetto (pianificazione di dettaglio fino alla RTB e pianificazione di alto livello fino alla PB);
   - Piano di Qualifica e Norme di Progetto (versioni approvate per l’avvio dello sviluppo);
   - Glossario.
-- *Proof of Concept (#def[PoC])*: prototipo software funzionante, focalizzato sulle funzionalità critiche del sistema, in particolare sui meccanismi di comunicazione tra Agenti e LLM, finalizzato a dimostrare la fattibilità tecnica della soluzione (Technology Baseline).
-- *Verbali*: documentazione delle decisioni e delle riunioni interne ed esterne rilevanti ai fini progettuali.
+- *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#proof-of-concept")[#def[Proof of Concept]] (PoC)*: prototipo software funzionante, focalizzato sulle funzionalità critiche del sistema, in particolare sui meccanismi di comunicazione tra agenti e LLM, finalizzato a dimostrare la fattibilità tecnica della soluzione.
+- *Verbali*: documentazione tracciata delle decisioni e delle riunioni interne ed esterne rilevanti ai fini progettuali.
 
 === Revisione di Accettazione (Product Baseline – PB)
-Il rilascio finale del progetto, corrispondente alla Product Baseline, è pianificato per la data ultima del *21/03/2026*. come preventivato nella #link("https://skarabgroup.github.io/DocumentazioneProgetto/candidatura/Proposta_di_Candidatura.pdf")[*Proposta di Candidatura*] al capitolato.
+Il rilascio finale del progetto, corrispondente alla Product Baseline, è pianificato per la data ultima del *21/03/2026*.
+La pianificazione è coerente con quanto preventivato nella #link("https://skarabgroup.github.io/DocumentazioneProgetto/candidatura/Proposta_di_Candidatura.pdf")[*Proposta di Candidatura*] al capitolato.
 Entro tale termine, il gruppo fornirà:
-- *Prodotto Software (#def[MVP])*: versione completa e funzionante del sistema, conforme ai requisiti funzionali e qualitativi approvati;
+- *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#minimum-viable-product")[#def[Minimum Viable Product]] (MVP)*: versione completa e funzionante del sistema, conforme ai requisiti funzionali e qualitativi approvati;
 - *Codice Sorgente*: intero codebase documentato e versionato nel repository ufficiale del progetto;
 - *Manualistica*:
   - *Manuale Utente*: guida all’utilizzo della piattaforma;
   - *Manuale Amministratore*: guida all’installazione, configurazione e manutenzione del sistema;
-- *Documentazione Finale*: versioni definitive di tutti i documenti normativi, gestionali e di supporto;
+- *Documentazione Finale*: versioni definitive ed approvate di tutti i documenti normativi, gestionali e di supporto;
 - *Consuntivo Finale*: analisi conclusiva di costi, tempi e qualità, comprensiva degli scostamenti rispetto al preventivo.
 
 == Glossario
-Al fine di prevenire ambiguità interpretative, è stato redatto un #def[Glossario] che definisce in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio utilizzati all’interno della documentazione.
-Le occorrenze dei termini presenti nel Glossario sono evidenziate nel testo mediante apposita formattazione.
+Al fine di prevenire ambiguità interpretative, è stato redatto un glossario che definisce in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio utilizzati all’interno della documentazione.
 
-Versione aggiornata del Glossario:
-#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario].
+Nel testo, *ogni termine evidenziato tramite sottolineatura*, qualora *non sia esplicitamente indicato come collegamento a un documento o a una sezione specifica*, rimanda alla voce corrispondente del Glossario pubblicato sul sito ufficiale del gruppo, consentendo al lettore di accedere direttamente alla definizione associata.
+
+La versione più recente del Glossario è disponibile al seguente link:
+#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario]].
+
 
 == Riferimenti
 
 === Riferimenti Normativi
 I seguenti documenti hanno valore vincolante per la redazione del Piano di Progetto e per lo svolgimento delle attività progettuali:
-- *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> #linebreak()
-  #link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")
-- *Norme di Progetto*: regole, convenzioni e standard di qualità adottati dal gruppo. #linebreak()
-  #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[Documento interno]
-- *Standard IEEE 1058-1998*: Standard for Software Project Management Plans. #linebreak()
-  #link("https://ieeexplore.ieee.org/document/25325")
 
-==== Nota sull'Adozione dello Standard IEEE 1058
-La redazione del presente documento aderisce alle linee guida dello standard IEEE 1058-1998. L'adozione di tale normativa garantisce che l'approccio gestionale copra sistematicamente ogni aspetto critico del ciclo di vita.
-In termini di tracciabilità, l'adesione si riflette in:
-- *Struttura:* L'indice dei contenuti mappa fedelmente la struttura proposta dallo standard per evitare lacune gestionali.
-- *Risk Management:* La sezione rischi formalizza le procedure di monitoraggio (probabilità/impatto/contingenza) come richiesto dalla norma.
-- *Controllo:* Il documento separa nettamente le stime (Preventivo) dalla rendicontazione (Consuntivo).
-// Specificare nelle norme di progetto in una sezione "Adozione Standard IEEE" il motivo della scelta
-=======
-- *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. #linebreak()
-  Link: #link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")
+- *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> #linebreak()
+  #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
+  (ultimo accesso: *31/01/2026*)
+
 - *Norme di Progetto*: regole, convenzioni e standard di qualità adottati dal gruppo. #linebreak()
-  Link: #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[Documento interno]
+  #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")] \
+  (versione: *v1.0.0*)
 
 === Riferimenti Informativi
-- *Dispense del corso di Ingegneria del Software – Gestione di progetto* #linebreak()
-  Link: #link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T04.pdf")
+- *Dispense del corso di Ingegneria del Software relative ai Processi di Ciclo di Vita del Software*. #linebreak()
+  #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T02.pdf")] \
+  (ultimo accesso: *31/01/2026*)
+
+- *Dispense del corso di Ingegneria del Software relative alla Gestione di Progetto*.    #linebreak()
+  #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T04.pdf")] \
+  (ultimo accesso: *31/01/2026*)
 - *Standard IEEE 1058-1998*: Standard for Software Project Management Plans. #linebreak()
-  Link: #link("https://ieeexplore.ieee.org/document/25325")
+  #underline[#link("https://ieeexplore.ieee.org/document/25325")] \
+  (ultimo accesso: *31/01/2026*)
 
-==== Nota sull'Adozione dello Standard IEEE 1058
-#link("PdQ.pdf")
-Il presente Piano di Progetto adotta come riferimento metodologico lo standard IEEE 1058-1998 (Standard for Software Project Management Plans). La scelta di questo riferimento nasce dalla volontà di adottare un approccio rigoroso nella gestione del lavoro, pur adattando i contenuti alle dimensioni e alle tempistiche del nostro caso studio.
+Le motivazioni e le modalità di applicazione dello standard IEEE 1058-1998 sono descritte in dettaglio nel documento *Norme di Progetto*, al quale si rimanda per gli aspetti metodologici e per la descrizione del grado di aderenza adottato.
 
-L'integrazione di tali linee guida si riflette nei seguenti aspetti chiave:
-
-- *Organizzazione Sistematica*: La struttura del documento ricalca la gerarchia proposta dallo standard, garantendo una copertura completa delle aree critiche (organizzazione, processi tecnici, vincoli gestionali) ed evitando lacune nella pianificazione.
-
-- *Analisi del Rischio*: In linea con le raccomandazioni IEEE, è stata formalizzata una procedura di monitoraggio basata su metriche di probabilità, impatto e piani di contingenza, elevando il controllo sulle incertezze di progetto.
-
-- *Logica di Tracciabilità*: Il documento è stato impostato per garantire una netta separazione tra la fase di pianificazione (Preventivo) e quella di monitoraggio operativo (Consuntivo), permettendo un’analisi oggettiva degli scostamenti in corso d’opera.
-
-- *Efficacia Operativa*: Alcuni moduli dello standard sono stati ottimizzati e accorpati per favorire la snellezza dei processi e la comunicazione diretta all'interno del team, mantenendo però inalterato il rigore dei flussi informativi previsti dalla norma.
 
 #pagebreak()
 = Analisi dei Rischi
-
-L’attività di gestione dei rischi è un processo iterativo, continuo e proattivo, finalizzato a supportare il conseguimento degli obiettivi del progetto #def[Code Guardian].
+L’attività di gestione dei rischi è un processo iterativo, continuo e proattivo, finalizzato a supportare il conseguimento degli obiettivi del progetto *Code Guardian*.
 Essa comprende l’identificazione, l’analisi, la pianificazione delle risposte e il monitoraggio degli eventi avversi che potrebbero compromettere il rispetto dei vincoli di *tempo*, *costo* e *qualità* del prodotto software.
 
-Il processo di analisi dei rischi viene eseguito:
-- all’avvio di ogni #def[Sprint] ;
-- in corrispondenza delle principali #def[Milestone] ;
+Il processo di gestione dei rischi viene eseguito:
+- all’avvio di ogni sprint;
+- in corrispondenza delle principali baseline;
 - in occasione di variazioni significative di requisiti, architettura o risorse.
 
 Ciò consente al #def[team di progetto] di adattare tempestivamente le strategie di mitigazione in funzione dell’evoluzione del contesto progettuale.
 
-== Metodologia di Analisi
+I rischi individuati vengono raggruppati in macro-categorie omogenee (tecnologiche, interpersonali e organizzative) al fine di facilitarne l’analisi e l’assegnazione delle responsabilità.
 
-Il team adotta un approccio *semi-quantitativo* per la valutazione dei rischi.
-Ogni rischio identificato viene descritto e valutato sulla base di due parametri fondamentali:
-
-- *Probabilità di accadimento (P)*: verosimiglianza con cui l’evento potrebbe verificarsi;
-- *Impatto (I)*: gravità delle conseguenze sul progetto qualora l’evento si manifesti.
-
-Il *Livello di Rischio (R)* è calcolato come:
-
-$ R = P times I $
-
-I parametri $P$ e $I$ sono valutati su una scala discreta da 1 a 3.
-
-=== Motivazione della Scelta Metodologica
-La scelta di una scala ridotta (1-3) rispetto a scale più estese (es. 1-5 o percentuali) è motivata dalla volontà di:
-- *Ridurre la soggettività:* in assenza di dati storici pregressi, una scala più ampia introdurrebbe un'eccessiva varianza nelle stime individuali. La tripartizione Basso/Medio/Alto forza una categorizzazione netta che facilita il decision-making.
-- *Supportare l'approccio Agile:* il metodo adottato permette una rivalutazione rapida dei rischi a ogni Sprint, evitando l'overhead burocratico di modelli statistici complessi non necessari per la dimensione del progetto.
-
-#figure(
-  table(
-    columns: (auto, 1fr, 1fr, 1fr),
-    inset: 12pt,
-    align: center + horizon,
-    stroke: 0.5pt + luma(200),
-
-    // Intestazione
-    table.cell(rowspan: 2, colspan: 1, align: horizon)[*Probabilità*],
-    table.cell(colspan: 3, fill: luma(240))[*Impatto*],
-    [Basso (1)], [Medio (2)], [Alto (3)],
-
-    // Riga 1
-    [*Bassa (1)*],
-    table.cell(fill: rgb("e6ffe6"))[1 (Basso)],
-    table.cell(fill: rgb("e6ffe6"))[2 (Basso)],
-    table.cell(fill: rgb("e6ffe6"))[3 (Basso)],
-
-    // Riga 2
-    [*Media (2)*],
-    table.cell(fill: rgb("e6ffe6"))[2 (Basso)],
-    table.cell(fill: rgb("fff5e6"))[*4 (Medio)*],
-    table.cell(fill: rgb("ffcccc"))[*6 (Alto)*],
-
-    // Riga 3
-    [*Alta (3)*],
-    table.cell(fill: rgb("e6ffe6"))[3 (Basso)],
-    table.cell(fill: rgb("ffcccc"))[*6 (Alto)*],
-    table.cell(fill: rgb("ffcccc"))[*9 (Critico)*],
-  ),
-  caption: [Matrice di Rischio: Visualizzazione delle soglie di intervento],
-)
-
-
-Sulla base del valore di $R$, i rischi vengono classificati per priorità come segue:
-
-- *Rischio Basso ($1–3$)*: livello di guardia. Il rischio è accettabile e soggetto al solo monitoraggio periodico;
-- *Rischio Medio ($4$)*: livello di attenzione. Richiede la definizione preventiva di un piano di mitigazione e un controllo frequente;
-- *Rischio Alto ($6–9$)*: livello critico. Richiede azioni preventive immediate per abbassare la probabilità e la predisposizione di piani di contingenza pronti all’uso.
-
-== Categorie di Rischio
-
-Per favorire l’analisi sistematica e l’assegnazione delle responsabilità, i rischi sono classificati nelle seguenti macro-categorie:
-
-- *RT (Rischi Tecnologici)*: criticità legate alle tecnologie adottate (es. #def[LLM], #def[Agenti]), strumenti di sviluppo, integrazioni e infrastruttura;
-- *RI (Rischi Interpersonali)*: problematiche relative al #def[team di progetto], quali disponibilità dei membri, comunicazione, coordinamento e gestione dei conflitti;
-- *RCO (Rischi di Costo e Organizzativi)*: rischi derivanti da stime non accurate, pianificazione temporale (#def[Schedulazione]), dipendenze esterne e vincoli organizzativi.
-
-== Ruoli e Responsabilità
-
-La gestione dei rischi è una responsabilità condivisa, articolata come segue:
-
-- *Responsabile di Progetto*: supervisiona il processo di gestione dei rischi, valuta la criticità degli eventi e decide l’attivazione delle strategie di mitigazione o dei piani di contingenza;
-- *Team di Progetto*: contribuisce all’identificazione dei rischi e segnala tempestivamente l’insorgere di eventi critici o condizioni anomale;
-- *Stakeholder di Riferimento*: vengono informati in caso di rischi ad alto impatto o di variazioni rilevanti rispetto al piano approvato.
-
-== Gestione e Monitoraggio dei Rischi
-
-La gestione dei rischi non è limitata alla fase di avvio del progetto, ma costituisce un processo ciclico di controllo che accompagna l’intero ciclo di vita del sistema ed è integrato nelle attività di pianificazione e revisione degli Sprint.
-
-=== Procedura Operativa
-
-Nel caso in cui un rischio si manifesti o emergano nuovi rischi non precedentemente previsti, il team applica la seguente procedura formale:
-
-+ *Rilevamento (Detection):*
-  Ogni membro del team segnala tempestivamente al *Responsabile di Progetto* l’insorgere di problematiche tecniche o organizzative, inclusi superamenti di soglie di allarme (ad esempio ritardi superiori al 20% rispetto alla pianificazione prevista).
-
-+ *Documentazione:*
-  L’evento viene descritto nel verbale della prima riunione utile e, qualora necessario, viene aperto o aggiornato un ticket sulla piattaforma di gestione delle attività (#def[GitHub] Projects).
-
-+ *Valutazione e Risposta:*
-  Il Responsabile di Progetto valuta la criticità del rischio e attiva la strategia di mitigazione o il piano di contingenza più appropriato, quali la riallocazione delle risorse, la revisione delle priorità o la riduzione dello scopo opzionale.
-
-+ *Rendicontazione (Consuntivo):*
-  Al termine dello #def[Sprint] o di una fase significativa del progetto (es. #def[RTB]), l’evento viene analizzato nel *Consuntivo di periodo* dello Sprint di riferimento, valutando:
-  - l’impatto effettivo su tempi, costi e qualità;
-  - l’efficacia delle contromisure adottate;
-  - la necessità di eventuali azioni correttive per gli Sprint successivi.
-
-+ *Aggiornamento delle Strategie:*
-  Le strategie di mitigazione vengono aggiornate e integrate nella pianificazione degli Sprint successivi, al fine di ridurre la probabilità o l’impatto di eventi analoghi futuri.
+Le modalità operative e i criteri metodologici adottati per l’analisi e la valutazione dei rischi sono definiti nel documento *Norme di Progetto*, al quale si rimanda per la descrizione dettagliata del processo di di gestione dei rischi.
 
 #pagebreak()
 
 == Rischi Tecnologici (RT)
-Questa categoria raggruppa le criticità derivanti dalla natura innovativa dello stack tecnologico. L'adozione di architetture a Sistemi Multiagente e l'integrazione con #def[LLM] comportano un'intrinseca incertezza, dovuta alla natura non deterministica dei modelli e alla ripida curva di apprendimento.
+Questa categoria raggruppa le criticità derivanti dalla natura innovativa dello stack tecnologico. L’adozione di architetture a sistemi multi-agente e l’integrazione con LLM comportano un’intrinseca incertezza, dovuta alla natura non deterministica dei modelli e alla ripida curva di apprendimento.
 
 === RT1: Inesperienza con Tecnologie IA <RT1>
 #schedaRischio(
   "RT1",
   "Inesperienza con lo sviluppo di sistemi basati su IA",
-  [Il team non ha esperienza pregressa nella creazione di applicazioni che integrano l'Intelligenza Artificiale. Questa mancanza di familiarità con i nuovi paradigmi di sviluppo può portare a una gestione imprecisa delle tempistiche e a ostacoli tecnici imprevisti che potrebbero rallentare l'intero progetto.],
-  [Il percorso accademico tradizionale non copre ancora in dettaglio le tecnologie generative e le logiche di orchestrazione degli agenti, creando un significativo divario tra le conoscenze teoriche del team e le competenze pratiche richieste.],
-  [Formazione interna e condivisione continua delle conoscenze tra i membri. Sviluppo di piccoli prototipi mirati: si tratta di configurazioni atomiche di agenti IA con task estremamente basilari e compiti circoscritti, utili a testare singole funzionalità prima della loro integrazione in architetture più complesse.],
-  [Semplificazione del sistema: se la complessità tecnologica dovesse rivelarsi eccessiva per le risorse disponibili, si ridurrà l'autonomia decisionale degli agenti in favore di flussi di lavoro più rigidi, deterministici e facilmente controllabili.],
+  [Il team non ha esperienza pregressa nello sviluppo di applicazioni che integrano sistemi di IA generativa e orchestrazione multi-agente. Tale gap può tradursi in stime temporali imprecise e in ostacoli tecnici non previsti, con impatto diretto sulle milestone.],
+  [Il percorso accademico non copre ancora in modo sistematico tecnologie generative, pattern di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agent-orchestration")[#def[agent orchestration]] e buone pratiche di valutazione dell’output. La distanza tra conoscenze teoriche e competenze operative aumenta la probabilità di iterazioni e rework.],
+  [Formazione interna continuativa e condivisione delle conoscenze tra i membri. Sviluppo di prototipi mirati e incrementali per validare singole funzionalità prima dell’integrazione nel sistema.],
+  [Riduzione della complessità architetturale e dell’autonomia degli agenti, privilegiando flussi di lavoro più deterministici e controllabili. Riprogettazione delle parti più critiche con obiettivi tecnici ridimensionati.],
   "Alta",
   "Alto",
 )
@@ -327,34 +222,34 @@ Questa categoria raggruppa le criticità derivanti dalla natura innovativa dello
 #schedaRischio(
   "RT2",
   "Scelta di strumenti inadeguati o immaturi",
-  [Data la vastità e la velocità di evoluzione del panorama IA, il team potrebbe compiere scelte tecnologiche errate (librerie, framework, linguaggi, servizi cloud), che si rivelano inadatte agli obiettivi del progetto o eccessivamente complesse da integrare.],
-  [La mancanza di standard consolidati e il fatto che queste tecnologie trattino temi mai affrontati nel percorso accademico rendono difficile per il team valutare correttamente la solidità di uno strumento prima di averlo utilizzato intensivamente.],
-  [Pianificazione di una fase di ricerca tecnologica approfondita e realizzazione di test comparativi. Progettazione modulare per isolare le dipendenze esterne, limitando l'impatto di un eventuale cambio di rotta.],
-  [Sostituzione del componente che si è rivelato una scelta errata. Accettazione di un debito tecnico controllato o creazione di soluzioni temporanee ("wrapper") per compensare le mancanze dello strumento scelto inizialmente.],
+  [Il team potrebbe selezionare librerie, framework o servizi non idonei ai requisiti del progetto o difficili da integrare in modo stabile. Una scelta errata può generare ritardi e vincoli tecnici che limitano la realizzazione dell’MVP.],
+  [La rapida evoluzione del panorama IA e l’assenza di standard tecnologici consolidati comportano l’adozione di strumenti ancora instabili, soggetti a modifiche incompatibili nel tempo. In assenza di esperienza pregressa, il team può non intercettare tempestivamente tali discontinuità evolutive, con conseguente difficoltà nel valutare ex ante affidabilità, manutenibilità e compatibilità delle tecnologie selezionate.],
+  [Fase di ricerca tecnologica con prototipazione comparativa e criteri di selezione espliciti. Progettazione modulare per isolare le dipendenze e ridurre l’impatto di un eventuale cambio di tecnologia.],
+  [Sostituzione del componente individuato come inadeguato e migrazione controllata. Introduzione di soluzioni temporanee o accettazione di debito tecnico limitato e tracciato.],
   "Media",
   "Alto",
 )
 
-=== RT3: Difficoltà nella Progettazione degli Agenti <RT3>
+=== RT3: Complessità nella Modellazione dei Flussi Decisionali <RT3>
 #schedaRischio(
   "RT3",
-  "Errori di modellazione dei flussi di ragionamento",
-  [La progettazione della logica con cui il sistema decide ed esegue le azioni è un compito complesso. Un errore in questa fase può portare il sistema a non completare i compiti o a eseguire operazioni cicliche infinite senza produrre risultati.],
-  [Programmare un sistema basato su decisioni autonome richiede un approccio molto diverso dalla programmazione tradizionale insegnata nei corsi universitari, aumentando la probabilità di errori di logica strutturale.],
-  [Studio dei modelli di ragionamento già validati dalla comunità scientifica. Revisione condivisa tra i membri del team di ogni schema decisionale prima di passare alla fase di sviluppo.],
-  [Semplificazione della logica: passaggio da un sistema in cui l'intelligenza artificiale decide autonomamente i passaggi da seguire a un sistema a tappe fisse e predefinite, dove l'IA si limita a eseguire compiti all'interno di un percorso rigido stabilito dagli sviluppatori.],
+  "Progettazione inefficace dei meccanismi decisionali degli agenti",
+  [Una modellazione non corretta dei flussi decisionali può portare il sistema a percorsi di esecuzione non convergenti, a condizioni di stallo o a risultati incoerenti rispetto agli obiettivi funzionali. Ciò riduce l’affidabilità delle funzionalità centrali e compromette la prevedibilità del comportamento del sistema.],
+  [La progettazione di sistemi multi-agente introduce una complessità intrinseca legata alla coordinazione tra componenti autonomi, alla gestione dello stato e alla definizione di criteri di terminazione. L’assenza di esperienza specifica in tali modelli aumenta la probabilità di strutture decisionali incomplete o ambigue.],
+  [Adozione di modelli di orchestrazione e schemi decisionali consolidati in letteratura. Formalizzazione esplicita dei flussi tramite diagrammi e revisione tecnica condivisa prima dell’implementazione. Definizione preventiva di guardrail, criteri di arresto e condizioni di fallback.],
+  [Riduzione del grado di autonomia decisionale degli agenti e riconduzione del sistema a pipeline deterministiche a stati finiti. Riprogettazione dei flussi privilegiando la stabilità e la verificabilità del comportamento rispetto alla complessità funzionale, con focus sull’MVP.],
   "Alta",
   "Medio",
 )
 
-=== RT4: Affidabilità dell'IA <RT4>
+=== RT4: Affidabilità dell’IA <RT4>
 #schedaRischio(
   "RT4",
   "Generazione di contenuti errati o fuorvianti",
-  [Il sistema potrebbe produrre suggerimenti che appaiono formalmente corretti ma risultano logicamente errati o basati su vulnerabilità inesistenti (#def[Allucinazione]). Tali errori compromettono l'utilità del prodotto e potrebbero indurre l'utente a correzioni superflue o dannose.],
-  [La natura probabilistica degli LLM implica che il modello predice sequenze di testo senza una reale comprensione semantica del codice. Questo divario cognitivo, unito alla difficoltà del team nel distinguere output validi da quelli errati in contesti complessi, eleva il rischio di inaffidabilità.],
-  [Utilizzo di tecniche di #def[Prompt Engineering] avanzate, per guidare il modello con esempi concreti. Integrazione di strumenti di #def[Analisi Statica] deterministici che agiscono come filtri di validazione prima di mostrare l'output all'utente.],
-  [Attivazione di un modello #def[Human-in-the-loop]: il sistema viene declassato da strumento di auto-correzione a sistema di supporto alle decisioni. L'IA si limita a segnalare potenziali criticità, delegando interamente la validazione e l'applicazione delle modifiche alla supervisione umana.],
+  [Il sistema potrebbe produrre suggerimenti formalmente plausibili ma logicamente errati o basati su vulnerabilità inesistenti (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#allucinazione")[#def[Allucinazione]]). Questo riduce l’utilità del prodotto e può indurre l’utente ad applicare modifiche superflue o dannose.],
+  [Gli LLM generano output probabilistici senza una reale comprensione semantica del contesto e del codice. La difficoltà nel discriminare output corretti da quelli errati, soprattutto in casi complessi, aumenta il rischio di risultati inaffidabili.],
+  [Utilizzo di tecniche di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#prompt-engineering")[#def[Prompt Engineering]] avanzate e contestualizzate. Integrazione di strumenti di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-statica")[#def[Analisi Statica]] come meccanismo deterministico di validazione prima della presentazione all’utente.],
+  [Adozione di un modello #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#human-in-the-loop")[#def[Human-in-the-loop]]: il sistema viene utilizzato come supporto decisionale e non come auto-remediation. L’applicazione delle modifiche resta vincolata a supervisione e conferma umana.],
   "Alta",
   "Medio",
 )
@@ -363,10 +258,10 @@ Questa categoria raggruppa le criticità derivanti dalla natura innovativa dello
 #schedaRischio(
   "RT5",
   "Saturazione del budget o blocco delle API",
-  [L'architettura multi-agente genera un traffico di dati elevato. Questo può portare all'esaurimento dei crediti disponibili o al blocco delle chiavi API per eccesso di richieste (Rate Limit), fermando lo sviluppo.],
-  [L'inesperienza nella gestione di flussi IA può portare a loop di chiamate ricorsive non previste, con conseguente spreco di risorse economiche in tempi brevissimi.],
-  [Implementazione di sistemi di caching per evitare chiamate ridondanti. Monitoraggio rigoroso dei costi tramite dashboard e utilizzo di modelli economici (small models) per lo sviluppo quotidiano.],
-  [Switch verso modelli Open Source eseguiti localmente (es. via Ollama). Sebbene meno performanti, garantiscono la continuità dello sviluppo senza costi variabili aggiuntivi.],
+  [L’uso di LLM in architettura multi-agente può generare un volume elevato di chiamate, con saturazione dei crediti o blocchi per rate limit. Ciò può rallentare o interrompere sviluppo e test, impattando direttamente la consegna dell’MVP.],
+  [La mancata ottimizzazione dei flussi può produrre chiamate ridondanti o ricorsive, con consumo anomalo di risorse in tempi brevi. L’inesperienza nel dimensionamento di prompt e cicli agentivi amplifica il rischio di costi non controllati.],
+  [Caching e deduplicazione delle richieste, oltre a limiti applicativi su numero di chiamate e profondità dei loop. Monitoraggio dei costi con dashboard e preferenza per modelli economici durante lo sviluppo.],
+  [Migrazione verso modelli open source eseguiti localmente o riduzione della componente LLM in fase di test. Rimodulazione delle funzionalità LLM per ridurre il numero di chiamate.],
   "Alta",
   "Medio",
 )
@@ -375,22 +270,22 @@ Questa categoria raggruppa le criticità derivanti dalla natura innovativa dello
 #schedaRischio(
   "RT6",
   "Esposizione involontaria di informazioni riservate",
-  [L'invio di porzioni di codice a servizi esterni per l'analisi potrebbe violare accordi di riservatezza o esporre segreti industriali del cliente. Esiste il pericolo che logiche proprietarie o dati sensibili escano dal controllo diretto del team di sviluppo.],
-  [Le condizioni d'uso di molti servizi di intelligenza artificiale sono complesse e spesso permettono ai fornitori di riutilizzare i dati ricevuti per migliorare i propri sistemi, rendendo tali informazioni potenzialmente accessibili a soggetti terzi in futuro.],
-  [Rimozione preventiva dal codice di ogni riferimento sensibile, come nomi propri, password o commenti riservati, prima dell'invio ai servizi esterni. Configurazione dei permessi per negare esplicitamente l'autorizzazione al riutilizzo dei dati per scopi di addestramento.],
-  [Blocco immediato del trasferimento dati verso l'esterno e passaggio all'utilizzo di modelli installati direttamente sui computer del team. Questa soluzione garantisce che nessun dato lasci mai l'ambiente di lavoro protetto.],
+  [L’invio di porzioni di codice a servizi esterni potrebbe esporre segreti industriali, logiche proprietarie o informazioni sensibili del proponente. Un incidente di riservatezza comprometterebbe la conformità agli accordi e la fiducia verso il prodotto.],
+  [Le policy dei provider IA possono prevedere trattamenti dei dati complessi e non immediati da interpretare. Errori di configurazione o scarsa consapevolezza delle clausole possono portare a un trasferimento dati non conforme.],
+  [Sanitizzazione preventiva dei contenuti e rimozione di riferimenti sensibili prima dell’invio. Configurazione esplicita delle opzioni di data retention e divieto di riutilizzo per training ove disponibile.],
+  [Blocco del trasferimento dati verso l’esterno e utilizzo esclusivo di modelli locali. Revisione del flusso per minimizzare o eliminare del tutto l’invio di codice ai servizi remoti.],
   "Bassa",
   "Alto",
 )
 
-=== RT7: Gestione dell'Infrastruttura <RT7>
+=== RT7: Gestione dell’Infrastruttura <RT7>
 #schedaRischio(
   "RT7",
   "Incongruenze tra ambiente di sviluppo e produzione",
-  [Le differenze di configurazione tra i computer dei singoli membri e l'ambiente cloud finale possono causare malfunzionamenti critici rilevabili solo in fase di rilascio.],
-  [La mancanza di figure specializzate nella gestione operativa (#def[DevOps]) nel team rende la configurazione dei server un compito soggetto a errori umani e sviste sistemistiche.],
-  [Uso rigoroso della #def[containerizzazione] (#def[Docker]) per garantire che ogni membro lavori in un ambiente identico a quello di produzione. Automazione del deployment.],
-  [Fallback su una dimostrazione locale completa: in caso di problemi insormontabili con il cloud, il sistema verrà presentato come applicazione standalone durante la demo.],
+  [Differenze di configurazione tra i dispositivi dei membri e l’ambiente di esecuzione finale possono causare bug e malfunzionamenti rilevati solo in fase avanzata. Questo aumenta il rischio di instabilità dell’MVP in prossimità del rilascio.],
+  [La mancanza di competenze #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#devops")[#def[DevOps]] dedicate rende più probabili errori di configurazione, dipendenze non dichiarate o divergenze tra versioni. L’assenza di un ambiente riproducibile accentua l’effetto “works on my machine”.],
+  [Standardizzazione tramite #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#containerizzazione")[#def[containerizzazione]] (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#docker")[#def[Docker]]) e definizione di procedure di setup riproducibili. Automazione dei controlli di build e dei test su #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#continuous-integration")[#def[pipeline CI]].],
+  [Esecuzione del sistema in un ambiente locale controllato e replicabile, documentato e condiviso con il proponente. Riduzione delle dipendenze dall’infrastruttura cloud fino alla stabilizzazione.],
   "Media",
   "Medio",
 )
@@ -399,10 +294,10 @@ Questa categoria raggruppa le criticità derivanti dalla natura innovativa dello
 #schedaRischio(
   "RT8",
   "Disallineamento delle interfacce di comunicazione",
-  [Il mancato rispetto dei "contratti" di scambio dati tra Frontend, Backend e moduli IA può rendere il sistema frammentato e inutilizzabile. Se i componenti non comunicano correttamente, l'intera applicazione perde la sua coerenza funzionale.],
-  [Lo sviluppo parallelo condotto da diversi membri del team, in assenza di una supervisione rigorosa sulle interfacce (API), facilita l'insorgere di incompatibilità tecniche che spesso emergono solo nelle fasi avanzate del progetto.],
-  [Definizione preventiva e formale delle specifiche di comunicazione. Utilizzo di test di integrazione automatizzati per intercettare eventuali discrepanze non appena il codice viene condiviso sul repository.],
-  [Sessioni di riallineamento intensivo: sospensione programmata dello sviluppo di nuove funzionalità per dedicare l'intero team alla risoluzione prioritaria dei conflitti di comunicazione e alla stabilizzazione dei collegamenti tra i moduli.],
+  [Interfacce incoerenti tra frontend, backend e moduli IA possono causare errori di integrazione e perdita di coerenza funzionale. Il sistema rischia di diventare frammentato e inutilizzabile nonostante i singoli componenti funzionino isolatamente.],
+  [Lo sviluppo parallelo e la mancanza di un controllo rigoroso sui contratti API favoriscono incompatibilità che emergono tardi. Versionamenti non sincronizzati e modifiche non comunicate amplificano i problemi di integrazione.],
+  [Definizione formale delle API e versionamento esplicito dei contratti. Introduzione di test di integrazione automatici eseguiti ad ogni merge sul repository.],
+  [Sprint di stabilizzazione dedicato alla risoluzione dei conflitti e all’allineamento delle interfacce. Congelamento temporaneo delle nuove feature fino al ripristino della coerenza end-to-end.],
   "Media",
   "Alto",
 )
@@ -411,10 +306,10 @@ Questa categoria raggruppa le criticità derivanti dalla natura innovativa dello
 #schedaRischio(
   "RT9",
   "Esecuzione di codice arbitrario non sicuro",
-  [Per analizzare il comportamento del software, il sistema potrebbe trovarsi a eseguire frammenti di codice caricati dall'utente che potrebbero contenere malware o script dannosi per il sistema ospite.],
-  [L'analisi dinamica richiede l'attivazione di processi che, se non correttamente isolati, hanno accesso alle risorse hardware e di rete della macchina.],
-  [Creazione di ambienti effimeri e isolati (Sandbox) privi di privilegi di rete o di root. Ogni analisi viene eseguita in un ambiente che viene distrutto subito dopo l'uso.],
-  [Degrado funzionale: disabilitazione totale della componente di esecuzione dinamica, limitando il sistema alla sola analisi statica del testo del codice.],
+  [L’analisi dinamica potrebbe richiedere l’esecuzione di codice fornito dall’utente, potenzialmente malevolo (malware, exploit, script dannosi). Un’esecuzione non isolata può compromettere la macchina ospite e la rete dell’ambiente di sviluppo.],
+  [Processi eseguiti con privilegi eccessivi o senza isolamento possono accedere a filesystem, rete o risorse di sistema. La complessità dell’isolamento e la mancanza di hardening aumentano il rischio di vulnerabilità operative.],
+  [Esecuzione in sandbox effimere con isolamento di rete e privilegi minimi, distrutte al termine dell’analisi. Policy restrittive su filesystem e limiti di risorse (CPU/RAM/tempo).],
+  [Disabilitazione della componente di analisi dinamica, limitando il sistema alla sola analisi statica. Rimodulazione dei requisiti per garantire sicurezza e continuità di consegna dell’MVP.],
   "Bassa",
   "Alto",
 )
@@ -427,22 +322,22 @@ Questa categoria analizza le criticità legate alle risorse umane. Essendo il te
 #schedaRischio(
   "RI1",
   "Sovrapposizione con esami e lavoro",
-  [I membri del team affrontano sessioni d'esame o impegni lavorativi che riducono drasticamente la capacità produttiva in finestre temporali specifiche.],
-  [La natura studentesca del team comporta cali di disponibilità fisiologici e prevedibili, ma difficili da quantificare con esattezza a priori.],
-  [Pianificazione con margini di tolleranza nei periodi d'esame. Calendario condiviso delle indisponibilità aggiornato settimanalmente.],
-  [Ridistribuzione dinamica dei task critici sui membri liberi. Ricorso al #def[Pair Programming] per accelerare il completamento dei task in ritardo.],
+  [Nei periodi di sessione d’esame o in presenza di impegni lavorativi, la capacità produttiva del team può ridursi in modo significativo. Questo può generare ritardi nei task critici e compromettere la regolarità della consegna incrementale.],
+  [La disponibilità dei membri è variabile e soggetta a picchi prevedibili ma difficili da quantificare con precisione. La sovrapposizione di più indisponibilità nello stesso sprint amplifica il rischio di slittamenti.],
+  [Pianificazione con buffer nelle settimane a rischio e calendario condiviso delle indisponibilità aggiornato con cadenza regolare. Prioritizzazione dei task critici in anticipo rispetto ai periodi di carico accademico.],
+  [Ridistribuzione dei task ad alta priorità sui membri disponibili e ricorso al #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#pair-programming")[#def[Pair Programming]] per accelerare il completamento. Riduzione temporanea dello scope dello sprint per preservare qualità e milestone.],
   "Alta", // P=3
   "Medio", // I=2 -> R=6 (Alto)
 )
 
-=== RI2: Assenza prolungata (#def[Bus Factor]) <RI2>
+=== RI2: Assenza prolungata (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#bus-factor")[#def[Bus Factor]]) <RI2>
 #schedaRischio(
   "RI2",
   "Indisponibilità improvvisa di un membro",
-  [Problemi di salute o personali gravi che impediscono il contributo per un periodo prolungato.],
-  [Eventi di forza maggiore imprevedibili.],
-  [Condivisione continua della conoscenza (no silos di competenza) per evitare che l'assenza di un singolo blocchi il lavoro (#def[Bus Factor] > 1). Documentazione aggiornata.],
-  [Riassegnazione immediata delle responsabilità. Al rientro, piano di reinserimento graduale supportato dal team.],
+  [Un membro potrebbe diventare indisponibile per un periodo prolungato a causa di motivi personali o di salute. L’assenza può rallentare attività chiave se la conoscenza è concentrata o se il ruolo era critico.],
+  [Eventi di forza maggiore sono intrinsecamente imprevedibili e non mitigabili in prevenzione assoluta. La concentrazione di competenze su un singolo componente riduce la resilienza organizzativa (bus factor basso).],
+  [Condivisione continua della conoscenza per evitare silos e mantenere Bus Factor > 1. Documentazione aggiornata e rotazione delle responsabilità sui componenti critici.],
+  [Riassegnazione immediata delle attività e riallineamento del piano di sprint. Definizione di un piano di reinserimento graduale al rientro, supportato dal team.],
   "Bassa", // P=1
   "Alto", // I=3 -> R=3 (Basso/Monitoraggio)
 )
@@ -451,10 +346,10 @@ Questa categoria analizza le criticità legate alle risorse umane. Essendo il te
 #schedaRischio(
   "RI3",
   "Abbandono definitivo di un membro",
-  [Ritiro formale dal corso o dal progetto, con perdita secca di capacità produttiva.],
-  [Valutazioni personali sulla sostenibilità del carico di studio o cause di forza maggiore.],
-  [Monitoraggio del clima interno per prevenire burnout. Rotazione dei ruoli per diffondere le competenze.],
-  [Riorganizzazione del team. Avvio immediato di un confronto con il proponente per negoziare una riduzione dello scopo (funzionalità opzionali) proporzionale alle risorse residue.],
+  [Un membro potrebbe ritirarsi definitivamente dal progetto o dal corso, riducendo la capacità produttiva complessiva. La perdita può richiedere la riallocazione dei ruoli e la revisione della pianificazione e dello scope.],
+  [Decisioni personali, carichi di studio non sostenibili o imprevisti possono portare all’abbandono. Se l’uscita coinvolge competenze specialistiche, l’impatto sul piano di lavoro aumenta.],
+  [Monitoraggio del clima interno e prevenzione del burnout tramite distribuzione equilibrata del carico. Rotazione dei ruoli e documentazione per rendere trasferibili le responsabilità.],
+  [Riorganizzazione delle attività e rinegoziazione dello scope con il proponente, privilegiando l’MVP e posticipando funzionalità opzionali. Consolidamento delle aree critiche e riduzione delle iniziative non essenziali.],
   "Bassa", // P=1
   "Alto", // I=3 -> R=3 (Basso/Monitoraggio)
 )
@@ -463,10 +358,10 @@ Questa categoria analizza le criticità legate alle risorse umane. Essendo il te
 #schedaRischio(
   "RI4",
   "Comunicazione inefficace e stallo decisionale",
-  [Divergenze su scelte tecniche o scarsa partecipazione possono generare un clima teso ("Storming"), bloccando il lavoro.],
-  [Team di pari senza gerarchia imposta. Comunicazione asincrona (chat) che favorisce fraintendimenti.],
-  [Meeting regolari per allineamento. Processo decisionale codificato: in caso di stallo tecnico, decide il Responsabile.],
-  [Intervento del Responsabile come mediatore. Escalation al Professore solo se il conflitto pregiudica la prosecuzione del progetto.],
+  [Divergenze su scelte tecniche o scarsa partecipazione possono generare una fase di conflitto (“#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#storming")[#def[Storming]]”) che rallenta le decisioni e blocca il lavoro. Il rischio si manifesta con aumento di attriti, ritardi e qualità decisionale ridotta.],
+  [Il team è composto da pari senza gerarchia imposta, e la comunicazione asincrona può favorire fraintendimenti. L’assenza di un processo decisionale chiaro rende più probabili stalli su scelte architetturali o di priorità.],
+  [Meeting regolari di allineamento e regole di comunicazione esplicite. Processo decisionale codificato: in caso di stallo tecnico, la decisione viene presa dal Responsabile sulla base delle alternative discusse.],
+  [Intervento del Responsabile come mediatore e, se necessario, riunione straordinaria per chiudere la decisione. Escalation al docente solo se il conflitto compromette in modo concreto il progresso del progetto.],
   "Media", // P=2
   "Medio", // I=2 -> R=4 (Medio)
 )
@@ -475,16 +370,15 @@ Questa categoria analizza le criticità legate alle risorse umane. Essendo il te
 #schedaRischio(
   "RI5",
   "Sbilanciamento produttivo tra membri",
-  [Divario significativo tra membri esperti e non, portando a sovraccarico dei primi e demotivazione dei secondi.],
-  [Background tecnici eterogenei e diverse velocità di apprendimento.],
-  [Pair Programming sistematico (Esperto + Junior) per il travaso di conoscenze. Code Review incrociata obbligatoria.],
-  [Assegnazione task graduata: compiti complessi agli esperti, task di supporto/testing ai meno esperti, garantendo comunque la rotazione sui ruoli tecnici.],
+  [Un divario significativo di competenze può portare a sovraccarico dei membri più esperti e a demotivazione dei meno esperti. Ciò riduce la produttività complessiva e aumenta il rischio di ritardi e rework.],
+  [Background eterogenei e diverse velocità di apprendimento generano una distribuzione non uniforme dei contributi. Se i task complessi restano sempre sugli stessi membri, il rischio di dipendenza e burnout aumenta.],
+  [Pair Programming sistematico (esperto + junior) e code review incrociata obbligatoria per favorire trasferimento di competenze. Pianificazione dei task con rotazione controllata delle aree tecniche.],
+  [Assegnazione graduata dei task: complessi agli esperti e di supporto/testing ai meno esperti, mantenendo però un percorso di crescita. Riallocazione delle attività in caso di colli di bottiglia persistenti.],
   "Alta", // P=3
   "Medio", // I=2 -> R=6 (Alto)
 )
 
 #pagebreak()
-
 == Rischi Costi e Organizzativi (RCO)
 Questa categoria raggruppa le criticità legate alla pianificazione temporale, al budget (ore-persona) e alla gestione degli stakeholder.
 
@@ -492,10 +386,10 @@ Questa categoria raggruppa le criticità legate alla pianificazione temporale, a
 #schedaRischio(
   "RCO1",
   "Sottostima della complessità dei task",
-  [Le stime ottimistiche portano a ritardi a cascata sul #def[Gantt].],
-  [Inesperienza su tecnologie #def[LLM] e #def[Optimism Bias] cognitivo.],
-  [Stime a tre punti (ottimistica, probabile, pessimistica) per i task critici. Scomposizione granulare delle attività.],
-  [Resource Leveling: spostamento risorse da attività non critiche. Taglio dello scopo: posticipare i requisiti opzionali alla fase successiva.],
+  [Stime eccessivamente ottimistiche possono produrre ritardi a cascata sul #def[Gantt] e sulle scadenze di sprint e milestone. Il rischio compromette la capacità di consegnare incrementi completi e verificabili entro i tempi previsti.],
+  [L’inesperienza su tecnologie LLM e bias cognitivi come #def[Optimism Bias] portano a sottovalutare incertezze e rework. La scarsa scomposizione delle attività rende più difficile intercettare deviazioni in anticipo.],
+  [Stime a tre punti per i task critici e scomposizione granulare delle attività per ridurre l’incertezza. Riesame delle stime in sprint planning usando dati di consuntivo degli sprint precedenti.],
+  [Resource leveling e riallocazione delle risorse dalle attività non critiche. Riduzione dello scope privilegiando l’MVP e posticipando requisiti opzionali.],
   "Alta", // P=3
   "Alto", // I=3 -> R=9 (Critico)
 )
@@ -503,11 +397,11 @@ Questa categoria raggruppa le criticità legate alla pianificazione temporale, a
 === RCO2: Scope Creep <RCO2>
 #schedaRischio(
   "RCO2",
-  "Instabilità dei requisiti e Gold Plating",
-  [Tendenza ad aggiungere feature non richieste o modifiche continue ai requisiti in corso d'opera.],
-  [Perfezionismo tecnico o comprensione ambigua dei bisogni iniziali.],
-  [Congelamento dei requisiti post-Analisi. Ogni modifica richiede approvazione formale dell'impatto (Change Request).],
-  [Rifiuto delle modifiche non bloccanti. Se la modifica è necessaria, negoziazione "Swap": si aggiunge X ma si rimuove Y di pari costo.],
+  "Instabilità dei requisiti e "+ link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#gold-plating")[#def[Gold Plating]],
+  [La tendenza ad aggiungere funzionalità non richieste o a modificare continuamente i requisiti può compromettere tempi e qualità. Lo scope creep riduce la prevedibilità del piano e mette a rischio la consegna dell’MVP entro la baseline.],
+  [Perfezionismo tecnico, entusiasmo progettuale o ambiguità iniziali possono portare a introdurre work non pianificato. In assenza di un processo di change management, le variazioni si accumulano senza valutazione d’impatto.],
+  [Congelamento dei requisiti dopo Analisi e gestione delle modifiche tramite Change Request con valutazione d’impatto. Prioritizzazione basata su valore e vincoli di milestone, con tracciamento esplicito delle decisioni.],
+  [Rifiuto delle modifiche non bloccanti e negoziazione “swap” per mantenere costante il carico di lavoro. Se necessario, ripianificazione dello sprint con taglio delle feature opzionali.],
   "Media", // P=2
   "Medio", // I=2 -> R=4 (Medio)
 )
@@ -516,10 +410,10 @@ Questa categoria raggruppa le criticità legate alla pianificazione temporale, a
 #schedaRischio(
   "RCO3",
   "Esaurimento ore preventivate per ruolo",
-  [Il consuntivo ore supera il preventivo, erodendo il budget residuo.],
-  [Inefficienze produttive o rework dovuto a bassa qualità iniziale.],
-  [Monitoraggio settimanale Dashboard Ore. Verifica scostamenti in ogni Sprint Review.],
-  [Riallocazione ore risparmiate da altri ruoli. Semplificazione tecnica per rientrare nel monte ore residuo.],
+  [Il consuntivo delle ore potrebbe superare il preventivo, erodendo il budget residuo per i ruoli e riducendo la capacità di completare le attività pianificate. Lo sforamento aumenta la probabilità di tagli tardivi o compressione delle verifiche.],
+  [Inefficienze produttive, rework dovuto a qualità iniziale insufficiente o stime errate possono accumularsi sprint dopo sprint. Se il monitoraggio è sporadico, lo scostamento viene individuato troppo tardi per intervenire in modo efficace.],
+  [Monitoraggio settimanale tramite dashboard ore e revisione degli scostamenti in Sprint Review. Analisi delle cause di rework e azioni correttive su processi, criteri di done e qualità.],
+  [Riallocazione delle ore risparmiate da altri ruoli e riduzione della complessità tecnica delle soluzioni. Rimodulazione dello scope privilegiando l’MVP e riducendo attività non essenziali.],
   "Media", // P=2
   "Medio", // I=2 -> R=4 (Medio)
 )
@@ -528,10 +422,10 @@ Questa categoria raggruppa le criticità legate alla pianificazione temporale, a
 #schedaRischio(
   "RCO4",
   "Ritardi nel feedback dal Proponente",
-  [Lentezza nelle risposte di #def[Var Group] su dubbi bloccanti o validazione #def[SAL].],
-  [Il proponente ha priorità aziendali che possono prevalere sul progetto didattico.],
-  [Meeting periodici fissi. Verbali immediati per formalizzare il silenzio-assenso.],
-  [Sollecito formale. Procedura di "Assunzione di Responsabilità": in assenza di risposta entro X giorni, il team procede con la scelta ritenuta migliore.],
+  [Ritardi nelle risposte del proponente su dubbi bloccanti o validazioni possono rallentare decisioni tecniche e avanzamento dei task critici. L’incertezza decisionale può generare rework se il team procede senza allineamento.],
+  [Le priorità aziendali possono prevalere sul progetto didattico, riducendo la disponibilità per revisioni tempestive. Canali informali o richieste non strutturate aumentano i tempi di risposta e la probabilità di incomprensioni.],
+  [Programmazione di meeting periodici fissi e produzione tempestiva di verbali che consolidano decisioni e azioni. Predisposizione di richieste puntuali con opzioni alternative e impatto stimato.],
+  [Sollecito formale e applicazione di una procedura di “Assunzione di Responsabilità”: se non arriva risposta entro 2/3 giorni, il team procede con la soluzione più coerente con requisiti e vincoli. Eventuale riallineamento successivo con gestione controllata del rework.],
   "Media", // P=2
   "Medio", // I=2 -> R=4 (Medio)
 )
@@ -540,34 +434,32 @@ Questa categoria raggruppa le criticità legate alla pianificazione temporale, a
 #schedaRischio(
   "RCO5",
   "Documentazione frammentata o non conforme",
-  [Disomogeneità stilistica e terminologica tra i vari documenti.],
-  [Redazione collaborativa parallela senza linee guida rigorose.],
-  [Template #def[Typst] vincolanti. Glossario centralizzato. Ruolo di Verificatore distinto dal Redattore.],
-  [Armonizzazione finale ("One Voice"): revisione globale di un singolo editor prima del rilascio.],
+  [Disomogeneità stilistica, terminologica o strutturale tra documenti può ridurre leggibilità e aumentare ambiguità interpretative. Incoerenze tra versioni possono inoltre generare non conformità alle norme interne e alle aspettative di revisione.],
+  [La redazione parallela da parte di più autori, senza controlli sistematici, porta facilmente a divergenze di formato e contenuto. Cambiamenti non propagati e uso non uniforme del glossario accentuano la frammentazione.],
+  [Uso di template #def[Typst] vincolanti e glossario centralizzato come riferimento terminologico. Ruolo di Verificatore distinto dal Redattore e checklist di conformità applicata a ogni rilascio.],
+  [Armonizzazione finale (“One Voice”): revisione globale effettuata da un singolo editor prima del rilascio. Correzione delle incoerenze e riallineamento dei riferimenti incrociati tra documenti.],
   "Media", // P=2
   "Basso", // I=1 -> R=2 (Basso)
 )
-
 #pagebreak()
 
-= Strategie di Pianificazione del Ciclo di Vita
-In questa sezione viene descritta la #def[schedulazione] delle attività di progetto, necessaria per garantire il rispetto delle scadenze e la corretta allocazione delle risorse.
+= Pianificazione del Ciclo di Vita
+In questa sezione viene descritta la schedulazione delle attività di progetto, necessaria per garantire il rispetto delle scadenze e la corretta allocazione delle risorse.
 
-Coerentemente con quanto emerso nell'analisi dei rischi (in particolare #link(<RCO1>)[#underline[RCO1]] e #link(<RT2>)[#underline[RT2]]), la pianificazione adotta un approccio basato sulla strategia del *#def[Rolling Wave Planning]*. Questo metodo prevede una pianificazione di dettaglio per le attività a breve termine (RTB) e una pianificazione strategica ad alto livello per le fasi successive (PB), che verrà raffinata progressivamente.
+Il ciclo di vita del progetto è scandito da due milestone principali, in corrispondenza delle quali vengono stabilite le seguenti baseline:
 
-Il ciclo di vita è scandito da due #def[Milestone] principali che fungono da spartiacque:
+1. *Requirements and Technology Baseline (#def[RTB]):* baseline iniziale, stabilita al termine della milestone di revisione, che sancisce il consolidamento dei requisiti, della documentazione normativa e la validazione tecnologica tramite Proof of Concept.
 
-1. *Requirements and Technology Baseline (#def[RTB]):* Milestone a breve termine. Focus su consolidamento requisiti, documentazione normativa e validazione tecnologica (#def[PoC]).
-2. *Product Baseline (#def[PB]):* Milestone a lungo termine. Focus su sviluppo incrementale del prodotto (#def[MVP]), test di sistema e rilascio.
+2. *Product Baseline (#def[PB]):* baseline finale, stabilita al termine della milestone di accettazione, che certifica il completamento del prodotto MVP, l’esecuzione dei test di sistema e il rilascio finale.
 
 == Pianificazione a Breve Termine (Verso la RTB)
 Questa fase copre il periodo dall'avvio del progetto fino al colloquio per la RTB.
 L'obiettivo è duplice:
 1. *Documentale:* Formalizzare requisiti, processi e pianificazione.
-2. *Tecnologico:* Mitigare i rischi tecnici critici (#link(<RT1>)[#underline[RT1]], #link(<RT2>)[#underline[RT2]]) tramite lo sviluppo del Proof of Concept.
+2. *Tecnologico:* Mitigare i rischi tecnici critici, a probabilità ed impatto elevati, tramite lo sviluppo del Proof of Concept.
 
 === Calendario degli Sprint (Fase RTB)
-La fase è suddivisa in 3 iterazioni (*Sprint*). Le date sono state definite tenendo conto della pausa natalizia e della sessione d'esami invernale.
+La fase è suddivisa in 4 iterazioni (*Sprint*). Le date sono state definite tenendo conto della pausa natalizia e della sessione d'esami invernale.
 
 #figure(
   table(
@@ -583,18 +475,14 @@ La fase è suddivisa in 3 iterazioni (*Sprint*). Le date sono state definite ten
     ),
     [*Sprint 1*], [19/12/2025], [03/01/2026],
     [*Sprint 2*], [03/01/2026], [17/01/2026],
-    [*Sprint 3*], [17/01/2026], [06/02/2026],
+    [*Sprint 3*], [17/01/2026], [31/01/2026],
+    [*Sprint 4*], [31/01/2026], [06/02/2026],
     // Esteso per coprire finitura PoC
   ),
   caption: [Calendario degli Sprint pianificati per la fase RTB],
 )
 
-=== Strategia di Rispetto delle Scadenze
-Per mitigare il rischio di ritardi (#link(<RCO1>)[#underline[RCO1]]), il gruppo ha adottato la strategia delle *Internal Review*.
-Ogni Sprint termina con una revisione interna fissata con un anticipo di *3 giorni* rispetto alla scadenza ufficiale. Questo margine (*Slack Time*) permette di:
-1. Assorbire imprevisti dell'ultimo minuto.
-2. Eseguire una revisione incrociata (Peer Review) di documenti e codice prima del rilascio.
-
+#TODO("Vedi tu Kevin se questo pezzo conviene tenerlo o rimuoverlo dal momento che metti le task atomiche di quello che bisogna fare nelle retrospettive.")
 === Dettaglio delle Attività
 La tabella seguente dettaglia il carico di lavoro pianificato.
 
@@ -710,53 +598,55 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
 )
 
 == Pianificazione a Lungo Termine (Verso la PB)
-Superata la RTB, il progetto entrerà nella fase operativa volta al raggiungimento della *Product Baseline* (#def[PB]).
+Superata la RTB, il progetto entrerà nella fase operativa volta al raggiungimento della *Product Baseline*.
 La pianificazione di dettaglio (date e sprint) sarà formalizzata nel *Piano di Progetto v2.0.0*. Nonostante ciò, la strategia di sviluppo è già strutturata in 4 macro-fasi:
 
-==== 1. Consolidamento Architetturale (Post-PoC)
+*1. Consolidamento Architetturale (Post-PoC)*
+
 Transizione dallo sviluppo sperimentale alla progettazione ingegneristica.
 - *Obiettivo:* Definire i blueprint definitivi del sistema basandosi sulle lezioni apprese dal PoC.
 - *Attività:* Analisi critica del prototipo, Technical Design (UML Classi/Sequenza), progettazione schema dati e setup CI/CD definitivo.
 
-==== 2. Sviluppo Core (#def[MVP])
+*2. Sviluppo Core (MVP)*
+
 Realizzazione del nucleo funzionale essenziale.
 - *Obiettivo:* Rilascio di un ambiente controllato e testabile che soddisfi i requisiti obbligatori.
-- *Attività:* Modulo di #def[analisi statica], integrazione Agenti-LLM, implementazione Sandboxing per la sicurezza (#link(<RT9>)[#underline[RT9]]).
+- *Attività:* Modulo di analisi statica, integrazione Agenti-LLM, implementazione sandboxing per la sicurezza (#link(<RT9>)[#underline[RT9]]).
 
-==== 3. Estensione e Ottimizzazione
+*3. Estensione e Ottimizzazione*
+
 Sviluppo funzionalità avanzate e UI finale.
 - *Obiettivo:* Copertura requisiti desiderabili e UX.
 - *Attività:* Modulo di Remediation automatica, Frontend (Dashboard), ottimizzazione costi API (#def[Caching] - #link(<RT5>)[#underline[RT5]]).
 
-==== 4. Validazione e Rilascio
+*4. Validazione e Rilascio*
+
 Fase dedicata alla Quality Assurance e alla consegna.
 - *Obiettivo:* Conformità totale ai requisiti e stabilità.
 - *Attività:* System Test intensivi, User Acceptance Test (UAT) con il proponente, Manualistica finale e chiusura metriche di qualità.
 
 #pagebreak()
-= Preventivo e Risorse
+= Preventivo e Allocazione delle Risorse
 
-In questa sezione viene presentata la stima definitiva dei costi e la pianificazione dell'allocazione delle risorse umane.
-Il preventivo è stato calcolato tenendo conto dei vincoli di budget e della scadenza finale di progetto fissata per il *21/03/2026*.
+In questa sezione viene presentato il preventivo consolidato dei costi e la pianificazione dell’allocazione delle risorse umane.
+Il preventivo è stato elaborato tenendo conto dei vincoli di budget e della scadenza finale di progetto fissata per il *21/03/2026*.
 
 == Evoluzione del Preventivo rispetto alla Candidatura
-Durante la fase di candidatura per il capitolato C2, il gruppo ha formalizzato la propria proposta economica tramite il documento *Preventivo costi ed impegno orario*. In tale sede, era stata ipotizzata una distribuzione oraria preliminare basata su una stima generica dei carichi di lavoro.
+Durante la candidatura per il capitolato C2, il gruppo ha formalizzato una prima stima economica tramite il documento *Preventivo costi ed impegno orario*, basata su una valutazione preliminare dei carichi di lavoro.
 
-Tuttavia, l'analisi approfondita dei requisiti normativi e l'avvio della fase operativa hanno evidenziato la necessità di un *ribilanciamento strategico delle risorse*.
-Il team ha rilevato che l'onere per la gestione dell'infrastruttura, la verifica dei processi e la manutenzione della documentazione era stato inizialmente sottostimato. Parallelamente, l'efficienza garantita dagli strumenti moderni (es. AI coding assistants) e la realizzazione anticipata del PoC hanno permesso di ottimizzare le fasi puramente tecniche.
+L’analisi approfondita dei requisiti normativi e l’avvio delle attività operative hanno tuttavia evidenziato la necessità di un *ribilanciamento strategico delle risorse*.
+In particolare, l’impegno richiesto per la gestione dell’infrastruttura documentale, la verifica dei processi e la manutenzione degli artefatti è risultato inizialmente sottostimato. Parallelamente, l’utilizzo di strumenti moderni di supporto allo sviluppo e la realizzazione anticipata del Proof of Concept hanno consentito un’ottimizzazione delle attività puramente tecniche.
 
-Le variazioni significative rispetto alla stima iniziale sono:
-- *Incremento Amministratore (+5 ore pro-capite):* Da 8h a *13h*. Necessario per garantire il rigore nella stesura delle Norme di Progetto, del Piano di Qualifica e la gestione del CI/CD documentale.
-- *Ottimizzazione Responsabile (-2 ore pro-capite):* Da 9h a *7h*. Riduzione ottenuta grazie a processi decisionali più snelli e meno burocratici.
-- *Rimodulazione Ruoli Tecnici (-3 ore pro-capite):* Le ore di Progettista sono state assestate a *17h* (da 18h), quelle di Analista a *12h* (da 13h) e quelle di Programmatore a *20h* (da 21h), trasferendo il budget risparmiato sulle attività di controllo e gestione.
+Le principali variazioni rispetto alla stima iniziale sono:
+- *Incremento Amministratore (+5 ore pro-capite):* da 8h a *13h*, necessario per garantire il rigore nella redazione delle Norme di Progetto, del Piano di Qualifica e nella gestione del flusso documentale.
+- *Ottimizzazione Responsabile (-2 ore pro-capite):* da 9h a *7h*, ottenuta grazie a processi decisionali più snelli e a una riduzione degli overhead organizzativi.
+- *Rimodulazione dei ruoli tecnici (-3 ore pro-capite):* le ore di Analista sono state assestate a *12h*, quelle di Progettista a *17h* e quelle di Programmatore a *20h*, trasferendo il budget risparmiato verso le attività di controllo e verifica.
 
-Tale rimodulazione ha comportato un'ulteriore riduzione del costo totale, sceso dai € 12.845,00 della candidatura agli attuali *€ 12.670,00*.
+Tale riallocazione ha comportato una riduzione del costo complessivo, passato dai € 12.845,00 stimati in candidatura agli attuali *€ 12.670,00*.
 
-== Preventivo Totale Definitivo
-Il gruppo è composto da *7 membri*. Ciascun componente si impegna a rendicontare un monte ore produttivo pari a *90 ore*, per un totale complessivo di *630 ore* di progetto.
-
-Di seguito è riportata la ripartizione totale delle ore per ruolo sull'intero ciclo di vita.
-
+== Preventivo Totale Consolidato
+Il gruppo di progetto è composto da *7 membri*.  
+Ciascun componente si impegna a rendicontare un monte ore produttivo pari a *90 ore*, per un totale complessivo di *630 ore*.
 
 #figure(
   table(
@@ -775,26 +665,22 @@ Di seguito è riportata la ripartizione totale delle ore per ruolo sull'intero c
 
     [Responsabile], [30 €/h], [49], [€ 1.470,00],
     [Amministratore], [20 €/h], [91], [€ 1.820,00],
-    // 13h/p
     [Analista], [25 €/h], [84], [€ 2.100,00],
-    // 12h/p
     [Progettista], [25 €/h], [119], [€ 2.975,00],
-    // 17h/p
     [Programmatore], [15 €/h], [140], [€ 2.100,00],
-    // 20h/p
     [Verificatore], [15 €/h], [147], [€ 2.205,00],
-    // 21h/p
 
     table.cell(colspan: 2, fill: luma(240))[*Totale*],
     table.cell(fill: luma(240))[*630*],
     table.cell(fill: luma(240))[*€ 12.670,00*],
   ),
-  caption: [Distribuzione totale delle ore e dei costi per ruolo (Definitiva)],
+  caption: [Distribuzione complessiva delle ore e dei costi per ruolo],
 )
 
-== Preventivo Fase RTB
-La prima fase del progetto (#def[RTB]) richiede un forte investimento nella strutturazione dei processi e nell'analisi.
-Per questo motivo, oltre il *60%* del monte ore totale di *Amministratore* viene allocato in questa fase per garantire la solidità delle Norme di Progetto e del Piano di Qualifica, supportato da un intenso lavoro di Analisi.
+== Preventivo per il Periodo verso la RTB
+Il periodo iniziale del progetto, orientato al raggiungimento della RTB, richiede un investimento rilevante nelle attività di analisi, strutturazione dei processi e verifica documentale.
+
+Per questo motivo, oltre il *60%* del monte ore complessivo del ruolo di *Amministratore* viene allocato in questo intervallo, al fine di garantire la solidità delle Norme di Progetto e del Piano di Qualifica, supportate da un intenso lavoro di Analisi.
 
 #figure(
   table(
@@ -806,32 +692,27 @@ Per questo motivo, oltre il *60%* del monte ore totale di *Amministratore* viene
 
     table.header(
       text(fill: white, weight: "bold")[Ruolo],
-      text(fill: white, weight: "bold")[Ore Previste (RTB)],
+      text(fill: white, weight: "bold")[Ore Allocate (RTB)],
       text(fill: white, weight: "bold")[Costo Parziale],
     ),
 
     [Responsabile], [21], [€ 420,00],
-    // Gestione avvio
     [Amministratore], [56], [€ 1.120,00],
-    // Setup e Norme (Forte carico)
     [Analista], [63], [€ 1.575,00],
-    // Analisi Requisiti
     [Progettista], [14], [€ 350,00],
-    // Architettura PoC
     [Programmatore], [21], [€ 315,00],
-    // Coding PoC
     [Verificatore], [42], [€ 630,00],
-    // Verifica documenti
 
-    table.cell(colspan: 1, fill: luma(240))[*Totale RTB*],
+    table.cell(fill: luma(240))[*Totale RTB*],
     table.cell(fill: luma(240))[*210*],
     table.cell(fill: luma(240))[*€ 4.410,00*],
   ),
-  caption: [Preventivo di periodo per la fase RTB],
+  caption: [Allocazione delle risorse nel periodo verso la RTB],
 )
 
-== Stima per la Fase Product Baseline (PB)
-Il budget residuo è focalizzato sullo sviluppo e verifica del prodotto. Le ore di Amministratore in questa fase sono ridotte alla sola manutenzione della documentazione, mentre aumentano notevolmente le ore di Progettazione e Programmazione per l'MVP.
+== Stima per il Periodo verso la Product Baseline (PB)
+Il budget residuo è orientato alle attività di sviluppo, integrazione e verifica del prodotto.
+In questo intervallo, le ore di *Amministratore* sono ridotte alla manutenzione della documentazione, mentre aumentano significativamente le ore di *Progettazione* e *Programmazione* necessarie alla realizzazione del MVP.
 
 #figure(
   table(
@@ -847,25 +728,22 @@ Il budget residuo è focalizzato sullo sviluppo e verifica del prodotto. Le ore 
       text(fill: white, weight: "bold")[Budget Residuo],
     ),
 
-    // Differenza: Totale - RTB
     [Responsabile], [28], [€ 1.050,00],
     [Amministratore], [35], [€ 700,00],
     [Analista], [21], [€ 525,00],
     [Progettista], [105], [€ 2.625,00],
-    // Sviluppo architettura finale
     [Programmatore], [119], [€ 1.785,00],
-    // Sviluppo MVP
     [Verificatore], [105], [€ 1.575,00],
 
-    table.cell(colspan: 1, fill: luma(240))[*Totale PB*],
+    table.cell(fill: luma(240))[*Totale PB*],
     table.cell(fill: luma(240))[*420*],
     table.cell(fill: luma(240))[*€ 8.260,00*],
   ),
-  caption: [Budget residuo stimato per la fase PB],
+  caption: [Allocazione delle risorse nel periodo verso la PB],
 )
 
 == Ripartizione Oraria per Membro
-La seguente matrice dettaglia la distribuzione delle ore per ciascun componente, garantendo il rispetto del principio di rotazione dei ruoli.
+La seguente matrice dettaglia la distribuzione delle ore per ciascun componente del team, garantendo il rispetto del principio di rotazione dei ruoli e un impegno complessivo uniforme.
 
 #figure(
   table(
@@ -879,19 +757,13 @@ La seguente matrice dettaglia la distribuzione delle ore per ciascun componente,
       text(fill: white, size: 9pt, weight: "bold")[Membro],
       text(fill: white, size: 8pt, weight: "bold")[Responsabile],
       text(fill: white, size: 8pt, weight: "bold")[Amministratore],
-      // 13h
       text(fill: white, size: 8pt, weight: "bold")[Analista],
-      // 12h
       text(fill: white, size: 8pt, weight: "bold")[Progettista],
-      // 17h
       text(fill: white, size: 8pt, weight: "bold")[Programmatore],
-      // 20h
       text(fill: white, size: 8pt, weight: "bold")[Verificatore],
-      // 21h
       text(fill: white, size: 9pt, weight: "bold")[Totale],
     ),
 
-    // Ripartizione Aggiornata (Somma riga: 90h)
     [#members.kevin], [7], [13], [12], [17], [20], [21], [*90*],
     [#members.berengan], [7], [13], [12], [17], [20], [21], [*90*],
     [#members.martinello], [7], [13], [12], [17], [20], [21], [*90*],
@@ -900,42 +772,29 @@ La seguente matrice dettaglia la distribuzione delle ore per ciascun componente,
     [#members.suar], [7], [13], [12], [17], [20], [21], [*90*],
     [#members.alice], [7], [13], [12], [17], [20], [21], [*90*],
 
-    table.cell(colspan: 1, fill: luma(240), align: left)[*Totale Ore*],
+    table.cell(fill: luma(240), align: left)[*Totale Ore*],
     table.cell(fill: luma(240))[*49*],
     table.cell(fill: luma(240))[*91*],
     table.cell(fill: luma(240))[*84*],
-    // Corretto (7*12)
     table.cell(fill: luma(240))[*119*],
-    // Corretto (7*17)
     table.cell(fill: luma(240))[*140*],
     table.cell(fill: luma(240))[*147*],
     table.cell(fill: luma(240))[*630*],
   ),
-  caption: [Matrice di ripartizione pianificata per membro],
+  caption: [Matrice di ripartizione oraria per membro],
 )
+
 
 #pagebreak()
 = Monitoraggio e Controllo: Preventivo e Consuntivo
-
-In questa sezione viene rendicontato l'avanzamento effettivo del progetto attraverso il confronto sistematico tra quanto pianificato (*Preventivo*) e quanto realmente realizzato (*Consuntivo*). Tale attività avviene al termine di ogni #def[Sprint] e permette di valutare la salute economica e temporale del progetto.
-
-== Metodologia di Monitoraggio
-Per garantire un controllo rigoroso, il gruppo analizza i seguenti indicatori al termine di ogni iterazione:
-
-- *Ore Previste:* Ore pianificate nel preventivo di Sprint.
-- *Ore Effettive:* Ore realmente impiegate e tracciate tramite #def[Jira].
-- *Differenza (Delta):* Variazione oraria ($"Effettive" - "Previste"$).
-- *Costo Effettivo:* Calcolato moltiplicando le ore effettive per la tariffa oraria del ruolo.
-
-L'analisi degli scostamenti (*Variance Analysis*) permette di individuare tempestivamente eventuali inefficienze, consentendo al Responsabile di attuare azioni correttive (es. riallocazione risorse) per rientrare nei vincoli di budget.
-
-=== Nota sulle Attività Preliminari (Periodo di Avviamento)
+In questa sezione viene rendicontato l'avanzamento effettivo del progetto attraverso il confronto sistematico tra quanto pianificato (*Preventivo*) e quanto realmente realizzato (*Consuntivo*). Tale attività avviene al termine di ogni sprint e permette di valutare la salute economica e temporale del progetto.
+== Nota sulle Attività Preliminari (Periodo di Avviamento)
 Le attività svolte antecedentemente alla data di avvio ufficiale del primo Sprint (19/12/2025) sono state classificate come *investimento interno* e *auto-formazione*.
 
 In questa fase propedeutica ("Palestra"), il team ha dedicato una parte consistente delle risorse a:
 - *Analisi critica dello stack tecnologico:* Studio approfondito delle tecnologie suggerite dal capitolato C2. I membri hanno redatto documenti di appunti pubblici e condivisi per analizzare le motivazioni tecniche della loro adozione e valutarne l'idoneità alla costruzione del progetto.
 - *Allineamento tecnico:* Gli esiti di tali ricerche sono stati oggetto di discussione collegiale, tracciata nei *verbali interni*, permettendo al gruppo di livellare le conoscenze e validare le scelte preliminari.
-- *Setup infrastrutturale:* Configurazione degli strumenti di supporto (es. Typst, GitHub Actions) e definizione delle norme di collaborazione.
+- *Setup infrastrutturale:* Configurazione degli strumenti di supporto (es. Typst, GitHub Actions, Jira) e definizione delle norme di collaborazione.
 
 Tali attività, seppur essenziali per la partenza, *non vengono rendicontate* nel monte ore di progetto. La rendicontazione economica ufficiale decorre dalla data di inizio dello Sprint 1.
 
@@ -945,22 +804,21 @@ Tali attività, seppur essenziali per la partenza, *non vengono rendicontate* ne
 *Periodo:* dal 19/12/2025 al 03/01/2026
 
 ==== Attività Principali
-Le attività svolte nel periodo di riferimento si sono focalizzate sul consolidamento della base metodologica e sull'analisi analitica dei requisiti:
+Le attività svolte nel periodo di riferimento si sono focalizzate sul consolidamento della base metodologica e sull'analisi dei requisiti:
 
 - *Pianificazione e Standardizzazione:*
   - Stesura delle bozze iniziali dei documenti cardine: #def[Norme di Progetto], #def[Piano di Progetto] e #def[Piano di Qualifica];
-  - Definizione di strutture templatizzate mediante l'uso di #def[Typst], finalizzate a ottimizzare l'efficienza di redazione e garantire la coerenza stilistica e strutturale della documentazione.
+  - Definizione di strutture templatizzate mediante l'uso di Typst, finalizzate a ottimizzare l'efficienza di redazione e garantire la coerenza stilistica e strutturale della documentazione.
 
 - *Analisi dei Requisiti:*
   - Attività intensiva di identificazione degli attori e modellazione sistematica dei casi d'uso primari e secondari.
 
 - *Qualità e Metriche:*
-  - Studio e selezione delle metriche di analisi per il #def[Piano di Qualifica];
+  - Studio e selezione delle metriche di analisi per il Piano di Qualifica;
   - Progettazione preliminare del cruscotto di valutazione per il monitoraggio degli indici di qualità di processo e di prodotto.
 
 - *Gestione Operativa e Task Tracking:*
-  - Configurazione dell'ambiente di lavoro e adozione di #def[Jira] come strumento di gestione per la rendicontazione puntuale delle task svolte dai singoli componenti del team, garantendo la tracciabilità dell'impegno profuso.
-#TODO("Verificare che i conti siano giusti a livello di monte ore")
+  - Configurazione dell'ambiente di lavoro e adozione di Jira come strumento di gestione per la rendicontazione puntuale delle task svolte dai singoli componenti del team, garantendo la tracciabilità dell'impegno profuso.
 ==== Prospetto Consumo Tempo (Preventivo)
 #sprint_table(
   (
@@ -991,24 +849,29 @@ Si nota una flessione nel monte ore totale dovuta alla pausa natalizia. Alcune a
   [Consuntivo orario effettivo per lo Sprint 1 (Totale: 53 ore)],
 )
 
-#TODO("Aggiungere sottosezione - Rischi Rilevati")
-==== Analisi degli Scostamenti
-In questo sprint sono state consumate *53 ore* a fronte delle *61 ore* preventivate (Delta: *-8 ore*).
-Il ritardo è fisiologico (periodo festivo). Le ore non lavorate sono state ripianificate nello Sprint 2 per il completamento dei documenti.
-
 ==== Retrospettiva dello Sprint 1
-
 ===== Valutazione del Periodo
-Il team esprime una generale soddisfazione per l'andamento del primo Sprint. L'organizzazione del lavoro ha beneficiato in modo determinante dell'adozione di #def[Jira] per il tracciamento delle attività: lo strumento si è rivelato fondamentale non solo per la distribuzione dei carichi di lavoro, ma anche per la precisione della rendicontazione oraria, permettendo una visibilità chiara del contributo di ogni singolo componente.
+Il primo Sprint ha registrato un andamento complessivamente positivo. Gli obiettivi principali di avvio del progetto sono stati raggiunti, nonostante una riduzione fisiologica dell’impegno orario dovuta al periodo festivo.
+===== Stato di Avanzamento dei Deliverable
+- *Documentazione di Gestione:* Le bozze iniziali del Piano di Progetto, delle Norme di Progetto e del Piano di Qualifica sono state redatte e strutturate secondo i template definiti.
+- *Analisi dei Requisiti:* L’attività ha richiesto un impegno significativo e iterativo, portando a una versione preliminare solida ma ancora suscettibile di affinamenti.
+- *Glossario:* Avviato correttamente e aggiornato in modo collaborativo dal team.
+===== Relazioni Esterne con l’Azienda e Dinamiche del Team
+- *Rapporti con l’Azienda:* La comunicazione con il proponente è risultata proattiva e costruttiva, con un supporto tecnico utile alle scelte iniziali.
+- *Dinamiche del Team:* Il clima interno è stato positivo. Tuttavia, l’analisi del consuntivo ha evidenziato una distribuzione non uniforme dell’impegno orario, che richiede attenzione per evitare squilibri futuri.
+===== Rischi Rilevati
+Nel corso dello Sprint si sono manifestati i seguenti rischi già censiti:
 
-===== Analisi delle Attività e dei Documenti
-- *Analisi dei Requisiti:* Rappresenta l'area di maggior sforzo profuso. Come evidenziato dalla mole oraria riportata nel consuntivo, il documento ha richiesto numerose iterazioni di riscrittura. Tale impegno è stato necessario per convergere verso uno standard qualitativo e formale in linea con le aspettative del docente cardine, garantendo una solida base per le approvazioni future.
-- *Stato dei Documenti:* Mentre l'Analisi è in fase avanzata, il *Piano di Progetto*, il *Piano di Qualifica* e le *Norme di Progetto* hanno raggiunto uno stadio embrionale soddisfacente. Tuttavia, si riconosce la necessità di un considerevole lavoro di raffinamento e completamento nei prossimi cicli.
-- *Gestione del Glossario:* Si segnala positivamente la partecipazione attiva di tutto il gruppo all'aggiornamento costante del Glossario, integrato fluidamente in ogni sessione lavorativa.
+- #link(<RI5>)[#underline[[RI5]]]: disomogeneità nel contributo individuale, evidenziata da una distribuzione non uniforme dell’impegno orario.
+- #link(<RCO5>)[#underline[[RCO5]]]: rischio di incoerenza documentale nelle prime bozze, dovuto all’avvio parallelo della redazione dei documenti normativi.
 
-===== Relazioni Esterne e Dinamiche di Team
-- *Comunicazione con l'Azienda:* Il rapporto con il referente esterno è proattivo e costruttivo. La fornitura puntuale di materiale di consultazione e i suggerimenti tecnici ricevuti hanno agevolato significativamente le scelte iniziali di progetto.
-- *Andamento del Team:* Il clima interno rimane positivo, ma l'analisi del consuntivo evidenzia un *divario significativo nel rendimento individuale*. Alcuni membri si sono distinti per un impegno orario e un contributo tecnico di rilievo, mentre altri hanno mantenuto un profilo più conservativo, limitandosi a interventi marginali. Questo aspetto richiederà una riflessione interna per bilanciare meglio le responsabilità nello Sprint successivo.
+Come azioni di mitigazione iniziali, il team ha avviato un monitoraggio più attento della distribuzione dei task e delle ore rendicontate e ha adottato template condivisi per garantire uniformità stilistica e strutturale della documentazione.
+
+===== Obiettivi di Recupero per lo Sprint Successivo
+Per lo Sprint 2 il team si pone i seguenti obiettivi:
+- completare il consolidamento della documentazione avviata;
+- rafforzare il coordinamento sulle attività di Analisi dei Requisiti;
+- riequilibrare la distribuzione dei carichi di lavoro tra i membri.
 
 #v(10pt)
 #block(
@@ -1032,9 +895,6 @@ Attività principali:
 - *Incontri:* Meeting con Prof. Cardin e VarGroup per validazione direzione.
 
 ==== Prospetto Consumo Tempo (Preventivo)
-#TODO("questa frase sinceramente non mi piace molto (anche se l'ho scritta io :D) ~Suar .Anche qui, controllare gli orari")
-Pianificazione aggressiva per recuperare il delta dello Sprint 1.
-
 #sprint_table(
   (
     // Formato: ("Nome", Resp, Amm, Anal, Prog, Cod, Ver)
@@ -1050,8 +910,6 @@ Pianificazione aggressiva per recuperare il delta dello Sprint 1.
 )
 
 ==== Consumo Tempo e Costi Effettivi (Consuntivo)
-Le attività di analisi hanno richiesto più tempo del previsto, assorbendo parte delle ore di verifica.
-
 #sprint_table(
   (
     // Formato: ("Nome", Resp, Amm, Anal, Prog, Cod, Ver)
@@ -1068,52 +926,68 @@ Le attività di analisi hanno richiesto più tempo del previsto, assorbendo part
 
 ==== Retrospettiva dello Sprint 2
 
+===== Valutazione del Periodo
+Il secondo Sprint ha evidenziato un andamento complessivamente critico. Sebbene la documentazione di gestione abbia raggiunto un buon livello di maturità, le attività di Analisi dei Requisiti non hanno prodotto i risultati attesi rispetto all’impegno allocato.
+
 ===== Stato di Avanzamento dei Deliverable
-Al termine del secondo Sprint, il progetto presenta un andamento dicotomico tra la gestione documentale e l'analisi tecnica:
+- *Documentazione di Gestione e Qualità:* Il Piano di Progetto, il Piano di Qualifica e le Norme di Progetto sono in uno stato avanzato e pronti per la revisione RTB, ad eccezione di alcuni elementi di dettaglio.
+- *Analisi dei Requisiti:* Il documento ha subito modifiche non pienamente efficaci, causando un rallentamento significativo e il posticipo dello sviluppo del Proof of Concept allo Sprint successivo.
 
-- *Documentazione di Gestione e Qualità:* Il #def[Piano di Progetto] (PdP), il #def[Piano di Qualifica] (PdQ) e le #def[Norme di Progetto] (NdP) sono in una fase ottimale. Ad esclusione dei diagrammi del PdQ e della pianificazione dello Sprint 3, i documenti sono considerati ufficiali e pronti per la revisione #def[RTB].
-- *Analisi dei Requisiti (AdR):* Il documento è stato oggetto di modifiche strutturalmente deboli e superficiali. Nonostante l'allocazione della maggioranza delle risorse (5 membri su 7), il risultato è giudicato insufficiente, causando un rallentamento critico che ha comportato il posticipo del #def[PoC] allo Sprint 3.
+===== Relazioni Esterne con l’Azienda e Dinamiche del Team
+- *Rapporti con l’Azienda:* Il confronto con il proponente ha confermato la validità dell’impostazione progettuale e fornito indicazioni di valore per l’evoluzione del prodotto.
+- *Consultazione Accademica:* L’incontro con il docente #members.cardin ha chiarito aspetti metodologici rilevanti per l’Analisi dei Requisiti, fornendo indicazioni utili per il recupero delle criticità emerse.
+- *Dinamiche del Team:* Sono emerse difficoltà di coordinamento e una disomogeneità nella qualità dei contributi, che hanno inciso sull’efficacia complessiva dello Sprint.
 
-===== Rapporti Esterni e Attività di Allineamento
-- *Allineamento Aziendale:* L'incontro con il proponente ha confermato la validità della direzione intrapresa. Gli interventi di notevole calibro suggeriti dall'azienda sono stati accolti con favore e hanno fornito spunti essenziali per l'evoluzione del prodotto.
-- *Consultazione Accademica:* Il ricevimento con il docente #members.cardin ha permesso di chiarire le ambiguità metodologiche relative all'AdR. Tali chiarimenti rendono le successive carenze del team ancora meno giustificabili sotto il profilo professionale.
+===== Rischi Rilevati
+Nel corso dello Sprint si sono concretizzati i seguenti rischi già censiti:
+- #link(<RI1>)[#underline[[RI1]]]: riduzione della disponibilità operativa di alcuni membri, con impatto sulla capacità produttiva complessiva.
+- #link(<RI4>)[#underline[[RI4]]]: difficoltà di coordinamento e comunicazione interna, che hanno rallentato il processo decisionale.
+- #link(<RI5>)[#underline[[RI5]]]: disomogeneità nella qualità e nell’efficacia dei contributi, con impatto diretto sull’Analisi dei Requisiti.
+- #link(<RCO5>)[#underline[[RCO5]]]: rischio di incoerenza documentale, emerso a seguito di modifiche non pienamente allineate agli standard definiti.
 
-===== Analisi delle Criticità Interne e Provvedimenti
-In corrispondenza del verbale di fine Sprint, si è reso necessario un incontro di confronto interno volto ad analizzare le gravi inefficienze operative emerse:
+In risposta, sono state pianificate azioni correttive coerenti con i piani di contingenza definiti, tra cui una riallocazione più mirata delle responsabilità, il rafforzamento delle attività di revisione incrociata e un controllo più stringente sull’aderenza alle Norme di Progetto.
 
-- *Qualità dell'apporto individuale:* È stata riscontrata una gestione dell'AdR "penosa" e priva di rigore. Le modifiche apportate sono risultate non strutturate, prive di riferimenti alle Norme di Progetto e prive di una reale utilità nel contesto della revisione imminente.
-- *Gestione del conflitto e rendimento:* È stato affrontato formalmente il tema del *mancato rispetto professionale* verso i membri del team che hanno sostenuto carichi di lavoro eccedenti per compensare le inerzie altrui. Il divario di rendimento tra chi ha operato proattivamente e chi si è limitato a interventi superficiali è stato messo a verbale come rischio primario per la stabilità del gruppo.
-- *Giustificazioni:* Durante la sessione, è stata richiesta una giustificazione esplicita per lo scarso rendimento. Il team ha stabilito che ogni attività futura non conforme agli standard definiti o priva di valore aggiunto non sarà conteggiata nel consuntivo orario.
 
-===== Obiettivi di Recupero per lo Sprint 3
-L'obiettivo primario del prossimo ciclo sarà il recupero del ritardo accumulato sul #def[PoC] e la stabilizzazione definitiva dell'AdR. Non saranno tollerate ulteriori deviazioni metodologiche o contributi che non rispettino l'equità dello sforzo collettivo.
+===== Obiettivi di Recupero per lo Sprint Successivo
+Per lo Sprint 3 il team individua come prioritari i seguenti obiettivi:
+- completare e stabilizzare definitivamente l’Analisi dei Requisiti;
+- avviare e completare lo sviluppo del Proof of Concept;
+- migliorare il coordinamento operativo e l’efficacia delle revisioni interne.
 
-== Sprint 3
+
+=== Sprint 3
 *Periodo:* dal 17/01/2026 al 31/01/2026
 
-==== Informazioni Generali e Attività da Svolgere
-In questo secondo sprint, ...
-Le attività principali hanno riguardato:
-- *Piano di Progetto (PdP):*
-- *Norme di Progetto (NdP):*
-- *Piano di Qualifica (PdQ):*
-- *Analisi dei Requisiti (AdR):*
-- *Glossario:*
-- *Proof of Concept (PoC):*
-#pagebreak()
-== Sprint 3
-*Periodo:* dal 17/01/2026 al 31/01/2026
+==== Attività Principali
+Le attività svolte nel periodo di riferimento si sono concentrate sulla chiusura e stabilizzazione degli artefatti normativi in vista della revisione RTB, nonché sull’avvio operativo del Proof of Concept.
 
-==== Informazioni Generali e Attività da Svolgere
-In questo secondo sprint, ...
-Le attività principali hanno riguardato:
+In particolare, lo Sprint ha riguardato:
+
 - *Piano di Progetto (PdP):*
+  - completamento delle sezioni di Pianificazione, Analisi dei Rischi e Monitoraggio;
+  - allineamento del documento agli standard IEEE 1058 e alle Norme di Progetto.
+
 - *Norme di Progetto (NdP):*
+  - consolidamento dei processi di gestione, verifica e versionamento;
+  - definizione finale delle regole di collaborazione e controllo qualità.
+
 - *Piano di Qualifica (PdQ):*
+  - definizione completa delle metriche di processo e di prodotto;
+  - formalizzazione delle strategie di verifica e validazione.
+
 - *Analisi dei Requisiti (AdR):*
+  - stabilizzazione del documento a seguito delle revisioni critiche emerse nello Sprint precedente;
+  - rimozione di ambiguità e riallineamento ai vincoli del capitolato.
+
 - *Glossario:*
+  - completamento e normalizzazione delle voci;
+  - verifica della coerenza terminologica trasversale ai documenti.
+
 - *Proof of Concept (PoC):*
-#pagebreak()
+  - avvio dello sviluppo del prototipo;
+  - implementazione delle componenti minime per validare la fattibilità tecnica delle interazioni Agente–LLM.
+
+
 ==== Prospetto Consumo Tempo (Preventivo)
 La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
 
@@ -1137,24 +1011,39 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
 #sprint_table(
   (
     // Formato: ("Nome", Resp, Amm, Anal, Prog, Cod, Ver)
-    ([Basso Kevin], 0, 0, 0, 0, 0, 0),
-    ([Berengan Riccardo], 0, 0, 0, 0, 0, 0),
-    ([Martinello Riccardo], 0, 0, 0, 0, 0, 0),
-    ([Sandu Antonio], 0, 0, 0, 0, 0, 0),
-    ([Sgreva Andrea], 0, 0, 0, 0, 0, 0),
-    ([Suar Alberto], 0, 0, 0, 0, 0, 0),
-    ([Zago Alice], 0, 0, 0, 0, 0, 0),
+    ([Basso Kevin], 7, 0, 0, 0, 4, 0),
+    ([Berengan Riccardo], 0, 0, 2, 0, 4, 0),
+    ([Martinello Riccardo], 0, 1, 0, 0, 0, 4),
+    ([Sandu Antonio], 0, 0, 5, 0, 0, 0),
+    ([Sgreva Andrea], 0, 0, 4, 0, 0, 0),
+    ([Suar Alberto], 0, 1, 0, 0, 4, 0),
+    ([Zago Alice], 0, 1, 3, 0, 0, 4),
   ),
   [Consuntivo orario effettivo per lo Sprint 3],
 )
 
-==== Analisi degli Scostamenti e Risorse Rimanenti
-In questo sprint sono state consumate *XX ore* a fronte delle *YY ore* preventivate (Delta: ...).
-// NOTA: Aggiorna i totali qui sopra in base alla somma delle tabelle (ora ci sono molti zeri nel consuntivo che mi hai passato)
-Il budget economico risparmiato viene reimmesso nel monte ore totale per le fasi successive.
+==== Retrospettiva dello Sprint 3
 
-==== Retrospettiva
-+ *Cosa ha funzionato:*
-+ *Criticità:*
-+ *Azioni Correttive:*
-#TODO("Aggiungerei anche una retrospettiva di fine baseline")
+===== Valutazione del Periodo
+Lo Sprint ha mostrato un andamento complessivamente controllato. Gli obiettivi di consolidamento documentale sono stati raggiunti e l’avvio del Proof of Concept è avvenuto in modo coerente con la pianificazione.
+
+===== Stato di Avanzamento dei Deliverable
+- *Documentazione Normativa:* PdP, NdP e PdQ risultano completi e allineati agli standard previsti per la revisione RTB.
+- *Analisi dei Requisiti:* stabilizzata e pronta per la valutazione formale.
+- *Proof of Concept:* avviato correttamente, con risultati preliminari utili alla validazione tecnologica.
+
+===== Dinamiche del Team e Coordinamento
+Il coordinamento interno è migliorato rispetto allo Sprint precedente. La distribuzione dei task è risultata più equilibrata e il processo di revisione ha beneficiato delle azioni correttive già introdotte.
+
+===== Rischi Rilevati
+Nel corso dello Sprint si sono manifestati i seguenti rischi già censiti:
+- #link(<RI4>)[#underline[[RI4]]]: necessità di ulteriore allineamento su alcune scelte tecniche;
+- #link(<RT3>)[#underline[[RT3]]]: complessità nella modellazione iniziale dei flussi decisionali del PoC.
+
+Le azioni di mitigazione pianificate sono state applicate tempestivamente, limitando l’impatto sui deliverable.
+
+===== Obiettivi per lo Sprint Successivo
+Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
+- completare il Proof of Concept in vista della revisione RTB;
+- rifinire eventuali osservazioni emerse in fase di pre-review;
+- preparare il materiale per la presentazione di revisione.

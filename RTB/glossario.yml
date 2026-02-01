@@ -6,11 +6,15 @@ A:
     alternative: Agenti
     descrizione: Componente sistema software autonomo che percepisce il proprio ambiente, prende decisioni e intraprende azioni in modo indipendente per raggiungere obiettivi specifici grazie all'utilizzo di intelligenza artificiale
 
+  Agent Orchestration:
+    descrizione: Coordinamento strutturato di più agenti software, volto a definire ruoli, flussi di esecuzione e regole di interazione, garantendo controllo, coerenza operativa e raggiungimento degli obiettivi del sistema.
+
   Agile:
     descrizione: Approccio alla gestione del progetto che privilegia iterazioni brevi, feedback continui e adattamento delle priorità in base al progresso e ai risultati ottenuti.
 
   Allucinazione:
     descrizione: Fenomeno in cui un modello di intelligenza artificiale genera informazioni false, imprecise o prive di fondamento logico, presentandole però in modo estremamente convincente e grammaticalmente corretto. Si verifica quando il sistema, invece di ammettere di non conoscere una risposta o di non poter eseguire un compito, "inventa" dati, fatti o frammenti di codice che sembrano verosimili ma non corrispondono alla realtà o alle istruzioni ricevute.
+  
   Amministratore:
     descrizione: Ruolo nel team di progetto responsabile della gestione della configurazione, documentazione e repository.
 
@@ -21,8 +25,8 @@ A:
     descrizione: Metodo di debugging che esamina il codice sorgente senza eseguirlo, al fine di individuare vulnerabilità di sicurezza, bug o violazioni di stile.
 
   Analista:
-    descrizione: Membro del team di sviluppo responsabile della raccolta e dell'analisi dei requisiti del sistema software, nonché della comunicazione con gli stakeholder per garantire che le esigenze siano comprese e documentate correttamente.
     alternative: Requirement Analyst, Analisti
+    descrizione: Membro del team di sviluppo responsabile della raccolta e dell'analisi dei requisiti del sistema software, nonché della comunicazione con gli stakeholder per garantire che le esigenze siano comprese e documentate correttamente.
 
   API: 
     acronimo: Application Programming Interface
@@ -43,6 +47,9 @@ B:
 
   Back-end:
     descrizione: Parte di un'applicazione o sistema che gestisce la logica di business, l'archiviazione dei dati e l'elaborazione delle richieste degli utenti, solitamente non visibile direttamente dagli utenti finali.
+
+  Baseline:
+    descrizione: insieme di artefatti di progetto approvati e congelati che funge da riferimento ufficiale per le attività successive; ogni modifica richiede una procedura di controllo formale.
 
   Big Design Up Front:
     acronimo: BDUF 
@@ -82,6 +89,12 @@ C:
 
   Containerizzazione:
     descrizione: Metodo di virtualizzazione a livello di sistema operativo che permette di eseguire applicazioni in ambienti isolati chiamati container (es. Docker), contenenti tutte le dipendenze necessarie.
+  
+  Continuous Integration:
+    acronimo: CI
+    alternative: pipeline CI
+    descrizione: Pratica di sviluppo che consiste nell’integrare frequentemente il codice in un repository condiviso, attivando verifiche automatiche per individuare precocemente errori e regressioni.
+  
   Coverage:
     alternative: Code Coverage
     descrizione: Misura che indica la percentuale di codice sorgente esguito durante i test automatizzati.
@@ -189,13 +202,13 @@ J:
     descrizione: Sistema di documentazione per JavaScript che permette di aggiungere commenti strutturati al codice per generare documentazione automatica.
 #K:
 L:
-  LLM:
-    acronimo: Large Language Model
+  Large Language Model:
+    acronimo: LLM
     descrizione: Modello di intelligenza artificiale progettato per comprendere e generare testo naturale, addestrato su grandi quantità di dati testuali.
 
 M:
-  MDP:
-    acronimo: Multi-Dealer Platform
+  Multi-Dealer Platform:
+    acronimo: MDP
     descrizione: Piattaforma che consente a più fornitori di servizi di offrire le loro soluzioni attraverso un'unica interfaccia, facilitando l'accesso e la gestione dei servizi.
   
   Milestone:
@@ -207,20 +220,20 @@ M:
   Monitoraggio:
     descrizione: Attività continua di raccolta e analisi dei dati di progetto per verificare che l'avanzamento sia allineato con quanto pianificato.
 
-  MPC:
-    acronimo: Multi-Party Computation
+  Multi-Party Computation:
+    acronimo: MPC
     descrizione: Tecnica crittografica che consente a più parti di calcolare una funzione comune sui loro dati privati senza rivelare tali dati tra di loro.
 
-  MPD:
-    acronimo: Multi-Party Data
+  Multi-Party Data:
+    acronimo: MPD
     descrizione: Dati condivisi tra più parti o entità, spesso utilizzati in contesti di collaborazione o analisi congiunta.
  
-  MPS:
-    acronimo: Modello di Processo per la Software Industry
+  Modello di Processo per la Software Industry:
+    acronimo: MPS
     descrizione: Modello di miglioramento dei processi specifico per l'industria del software, sviluppato in Italia, che aiuta le organizzazioni a ottimizzare le proprie attività e a migliorare la qualità del software prodotto.
   
-  MVP:
-    acronimo: Minimum Viable Product
+  Minimum Viable Product:
+    acronimo: MVP
     descrizione: Versione minima di un prodotto software che include solo le funzionalità essenziali per soddisfare i requisiti principali e permettere il rilascio sul mercato.
 N:
   Node.js:
@@ -247,8 +260,8 @@ P:
   Piano di Qualifica:
     descrizione: Documento strategico che definisce obiettivi, requisiti, processi e standard di qualità per guidare lo sviluppo di un prodotto software. Esso comprende tre elementi fondamentali, cioè il Piano della Qualità, il Controllo di Qualità e il Miglioramento continuo.
  
-  PMI:
-    acronimo: Project Management Institute
+  Project Management Institute:
+    acronimo: PMI
     descrizione: Organizzazione internazionale che promuove standard e best practices per la gestione di progetti.
   
   Predictive:
@@ -358,7 +371,8 @@ S:
   
   Stima: 
     descrizione: Valutazione approssimata dell'impegno, dei costi o delle dimensioni del software, utilizzata come base per la pianificazione.
-
+  Storming:
+    descrizione: Fase di sviluppo di un team in cui emergono conflitti e attriti interni dovuti a divergenze su ruoli, responsabilità e decisioni, che possono temporaneamente ridurre l’efficacia operativa.
   Sviluppatore software:
     alternative: software developer, sviluppatori software, sviluppatori
     descrizione: Persona che scrive, testa e mantiene il codice sorgente di applicazioni o sistemi software.
