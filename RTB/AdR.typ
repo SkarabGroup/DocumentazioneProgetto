@@ -13,11 +13,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.38.0"
+#let versione = "v0.39.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2026/02/01",
+    "0.39.0",
+    "Aggiunta Requisiti di Qualità e di Vincolo",
+    members.alice,
+  ),
   (
     "2026/01/27",
     "0.38.0",
@@ -58,7 +64,7 @@
     "2026/01/21",
     "0.34.0",
     "Aggiunta di sottocasi di UC29 e 30 e altri fix",
-    members.berengan
+    members.berengan,
   ),
   (
     "2026/01/19",
@@ -84,6 +90,7 @@
     "0.31.0",
     "Modifica UC19, 20 e da 24 a 29",
     members.martinello,
+    members.alice,
   ),
   (
     "2026/01/17",
@@ -120,18 +127,21 @@
     "0.26.0",
     "Aggiunta UC19-UC28 con relativi sotto casi d'uso",
     members.martinello,
+    members.alice,
   ),
   (
     "2026/01/15",
     "0.25.1",
     "Fix per UC17 e UC18",
     members.antonio,
+    members.alice,
   ),
   (
     "2026/01/15",
     "0.25.0",
     "UC17 e UC18",
     members.berengan,
+    members.alice,
   ),
   (
     "2026/01/14",
@@ -641,7 +651,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che l'email inserita non rispetta i vincoli di formato previsti dal Sistema 
+    - L'utente visualizza un messaggio di errore che indica che l'email inserita non rispetta i vincoli di formato previsti dal Sistema
   ],
   inclusioni: [
     - Nessuna
@@ -680,7 +690,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Utente non autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian 
+    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
     - L'utente ha inserito una password non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento della password
   ],
   post: [
@@ -712,7 +722,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   scenari: [
     - L'utente conferma la registrazione a Codeguardian
-    - Il Sistema verifica che lo username inserito non sia già censito nel Sistema CodeGuardian 
+    - Il Sistema verifica che lo username inserito non sia già censito nel Sistema CodeGuardian
     - Il Sistema verifica che l'email inserita non sia già censita nel Sistema CodeGuardian
     - Il Sistema crea un nuovo account CodeGuardian associato ai dati inseriti dall'utente
   ],
@@ -918,7 +928,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Un messaggio comunica all'utente che la procedura di autenticazione è stata completata con successo
   ],
   inclusioni: [
-    - Nessuna 
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC2.3.1>)[#underline[\[UC2.3.1\]]] // Username non censito nel Sistema
@@ -934,7 +944,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     - L'utente sta eseguendo la procedura di autenticazione a CodeGuardian
     - L'utente ha inserito un username conforme ai vincoli di formato #link(<UC2.1>)[#underline[\[UC2.1\]]]
-    - L'utente ha inserito una password conforme ai vincoli di formato #link(<UC2.2>)[#underline[\[UC2.2\]]] 
+    - L'utente ha inserito una password conforme ai vincoli di formato #link(<UC2.2>)[#underline[\[UC2.2\]]]
     - Lo username inserito non è censito nel Sistema
   ],
   post: [
@@ -989,7 +999,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente non ha collegato un account GitHub al sistema CodeGuardian
-    - L'utente si trova nella sezione di collegamento account GitHub in CodeGuardian 
+    - L'utente si trova nella sezione di collegamento account GitHub in CodeGuardian
   ],
   post: [
     - L'utente ha collegato con successo un account GitHub al proprio account CodeGuardian, abilitando la condivisione di informazioni tra i due sistemi
@@ -1018,7 +1028,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Utente autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di collegamento dell'account di CodeGuardian con l'account di GitHub 
+    - L'utente sta eseguendo la procedura di collegamento dell'account di CodeGuardian con l'account di GitHub
   ],
   post: [
     - L'utente ha confermato di essere consapevole che verrà rimandato a GitHub per l'autorizzazione
@@ -1041,8 +1051,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Utente autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di collegamento dell'account di CodeGuardian con l'account di GitHub 
-    - L'utente ha interagito con l'avviso di reindirizzamento a GitHub, rifiutando il collegamento 
+    - L'utente sta eseguendo la procedura di collegamento dell'account di CodeGuardian con l'account di GitHub
+    - L'utente ha interagito con l'avviso di reindirizzamento a GitHub, rifiutando il collegamento
   ],
   post: [
     - La procedura di collegamento account GitHub non viene finalizzata e il Sistema rimane nello stato di attesa di un nuovo tentativo
@@ -1064,7 +1074,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Utente autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di collegamento dell'account di CodeGuardian con l'account di GitHub 
+    - L'utente sta eseguendo la procedura di collegamento dell'account di CodeGuardian con l'account di GitHub
     - L'utente ha confermato di voler essere reindirizzato a GitHub #link(<UC3.1>)[#underline[\[UC3.1\]]]
     - L'utente ha completato la sezione di reindirizzamento a GitHub autorizzando GitHub a condividere le informazioni necessarie con CodeGuardian
     - Il sistema ha ricevuto il codice identificativo del profilo GitHub dell'utente
@@ -1093,7 +1103,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Utente autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di collegamento dell'account di CodeGuardian con l'account di GitHub 
+    - L'utente sta eseguendo la procedura di collegamento dell'account di CodeGuardian con l'account di GitHub
     - L'utente ha confermato di voler essere reindirizzato a GitHub #link(<UC3.1>)[#underline[\[UC3.1\]]]
     - L'utente ha completato la sezione di reindirizzamento a GitHub autorizzando GitHub a condividere le informazioni necessarie con CodeGuardian
     - Il sistema ha ricevuto il codice identificativo del profilo GitHub dell'utente in un formato non valido o non ha ricevuto alcun codice
@@ -1118,7 +1128,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Utente autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di collegamento dell'account di CodeGuardian con l'account di GitHub 
+    - L'utente sta eseguendo la procedura di collegamento dell'account di CodeGuardian con l'account di GitHub
     - L'utente ha confermato di voler essere reindirizzato a GitHub #link(<UC3.1>)[#underline[\[UC3.1\]]]
     - L'utente ha completato la sezione di reindirizzamento a GitHub autorizzando GitHub a condividere le informazioni necessarie con CodeGuardian
     - Il codice identificativo ricevuto da GitHub è già associato a un altro account CodeGuardian nel sistema
@@ -1144,7 +1154,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Utente autenticato",
   attori_secondari: "GitHub",
   pre: [
-    - L'utente sta eseguendo la procedura di collegamento dell'account di CodeGuardian con l'account di GitHub 
+    - L'utente sta eseguendo la procedura di collegamento dell'account di CodeGuardian con l'account di GitHub
     - L'utente ha confermato di voler essere reindirizzato a GitHub #link(<UC3.1>)[#underline[\[UC3.1\]]]
     - L'utente è stato reindirizzato a GitHub con successo
     - L'utente ha rifiutato di autorizzare GitHub a condividere le informazioni necessarie con CodeGuardian
@@ -1176,7 +1186,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - La richiesta di analisi del repository GitHub è stata correttamente inoltrata al Sistema
   ],
   scenari: [
-    - L'utente accede alla sezione dedicata alla richiesta di analisi di un repository GitHub    
+    - L'utente accede alla sezione dedicata alla richiesta di analisi di un repository GitHub
     - L'utente inserisce l'URL del repository GitHub da analizzare #link(<UC4.1>)[#underline[\[UC4.1\]]]
     - L'utente seleziona le aree di interesse per l’analisi #link(<UC4.2>)[#underline[\[UC4.2\]]]
     - L'utente conferma l'invio della richiesta di analisi #link(<UC4.3>)[#underline[\[UC4.3\]]]
@@ -1519,7 +1529,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   #useCaseDiagram("5_2", "UC5.2: Selezione report di analisi")
 ]
 
-#TODO("SAREBBE DA CAMBIARE QUESTA PARTE IN MODO CHE L'UTENTE POSSA SELEZIONARE I REPOSITORY A CUI SONO ASSOCIATI DEI REPORT, INVECE DI VEDERE TUTTI I REPOSITORY DELL'UTENTE, QUESTO SOTTOCASO DIVENTEREBBE 'LISTA VUOTA' O QUALCOSA DEL GENERE")
+#TODO(
+  "SAREBBE DA CAMBIARE QUESTA PARTE IN MODO CHE L'UTENTE POSSA SELEZIONARE I REPOSITORY A CUI SONO ASSOCIATI DEI REPORT, INVECE DI VEDERE TUTTI I REPOSITORY DELL'UTENTE, QUESTO SOTTOCASO DIVENTEREBBE 'LISTA VUOTA' O QUALCOSA DEL GENERE",
+)
 ===== UC5.2.1: Nessun report di analisi disponibile per il repository GitHub selezionato <UC5.2.1>
 #useCase(
   attore: UAA,
@@ -2803,7 +2815,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ===== UC18.2.1 Repository mai analizzato in precedenza <UC18.2.1>
 #useCase(
-  attore: "Orchestratore", 
+  attore: "Orchestratore",
   pre: [
     - L'utente ha fatto delle richieste specifiche in relazione alle aree del repository che ha interesse vengano analizzate #link(<UC18.2>)[#underline[\[UC18.2\]]]
     - Il repository non era mai stato analizzato in precedenza
@@ -3670,21 +3682,21 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     - Lo strumento di analisi del codice ha ricevuto correttamente #link(<UC29.1>)[#underline[\[UC29.1\]]]
   ],
-  post:[
-    - Lo strumento di analisi del codice comunica al sistema backend che il linguaggio non è supportato 
+  post: [
+    - Lo strumento di analisi del codice comunica al sistema backend che il linguaggio non è supportato
   ],
   scenari: [
     - Lo strumento di analisi del codice legge la richiesta del sistema backend
     - Lo struento di analis del codice rileva dei linguaggi non riconosciuti
     - Lo strumento di analis del codice comunica l'errore al sistema backend
   ],
-  inclusioni:[
+  inclusioni: [
     - Nessuna
   ],
   estensioni: [
     - Nessuna
   ],
-  trigger: "Viene richiesta l'analisi del codice"
+  trigger: "Viene richiesta l'analisi del codice",
 )[]
 
 ==== UC29.2 Richiesta di analisi della documentazione <UC29.2>
@@ -3694,7 +3706,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     - L'orchestratore ha istruito il Back-end sulla necessità di contattare lo strumento di analisi della documentazione
   ],
-  post:[
+  post: [
     - La documentazione viene passata correttamente allo strumento di analisi
   ],
   scenari: [
@@ -3702,13 +3714,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Il backend recupera la documentazione appropriata da passare allo strumento di analisi
     - Lo strumento di analisi riceve la documentazione
   ],
-  inclusioni:[
+  inclusioni: [
     - Nessuna
   ],
   estensioni: [
     - Nessuna
   ],
-  trigger: "Viene richiesta l'analisi della documentazione"
+  trigger: "Viene richiesta l'analisi della documentazione",
 )[]
 
 ==== UC29.3 Richiesta di analisi del rispetto degi standard OWASP <UC29.3>
@@ -3718,7 +3730,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     - L'orchestratore ha istruito il Back-end sulla necessità di contattare lo strumento di analisi degli standard OWASP
   ],
-  post:[
+  post: [
     - Lo strumento di analisi degli standard OWASP riceve l'applicazione da analizzare correttamente
   ],
   scenari: [
@@ -3726,7 +3738,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Il backend recupera correttamente l'applicazione da passare allo strumenti di anlisi degli standard OWASP
     - Lo strumento di analisi riceve correttamente l'applicazione e può procedere con l'analisi
   ],
-  inclusioni:[
+  inclusioni: [
     - Nessuna
   ],
   estensioni: [
@@ -3787,7 +3799,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     - Il sistema backend ha completato la parte di analisi richiesta
   ],
-  post:[
+  post: [
     - L'orchestratore ha preso in carico la nuova sezione del report di analisi
   ],
   scenari: [
@@ -3796,13 +3808,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'orchestratore integra la nuova sezione nel report corrente
     - L'orchestratore modifica il report segnalando che una sezione è avanti nell'analisi rispetto alle alte
   ],
-  inclusioni:[
+  inclusioni: [
     - Nessuna
   ],
   estensioni: [
     - Nessuna
   ],
-  trigger: "Viene completata l'analisi della repository"
+  trigger: "Viene completata l'analisi della repository",
 )[]
 
 === UC31 Trasferimento del report di analisi al sistema front-end <UC31>
@@ -4160,7 +4172,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Il sistema Back-end non riceve le credenziali a causa di un errore di comunicazione",
-)[] 
+)[]
 
 === UC41 Gestione del codice OAuth GitHub <UC41>
 #useCase(
@@ -4215,7 +4227,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 #TODO("Valutare con il gruppo l'UC41")
 
-#TODO("UC42 Validazione delle credenziali dell'utente. Sinceramente eliminerei questo UC perchè la validazione è già presente nelle inclusioni di UC1 e UC2")
+#TODO(
+  "UC42 Validazione delle credenziali dell'utente. Sinceramente eliminerei questo UC perchè la validazione è già presente nelle inclusioni di UC1 e UC2",
+)
 
 #pagebreak()
 
@@ -4301,7 +4315,7 @@ In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati
   [#FRx],
   [L'Utente deve ricevere un messaggio di errore se l'username è già censito],
   [#link(<UC1.4.1>)[#underline[\[UC1.4.1\]]]],
-  
+
   [#FRx],
   [L'Utente deve ricevere un messaggio di errore se l'email è già censita],
   [#link(<UC1.4.2>)[#underline[\[UC1.4.2\]]]],
@@ -4339,7 +4353,7 @@ In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati
   [#FRx],
   [L'Utente autenticato deve poter accedere alla sezione di collegamento account GitHub],
   [#link(<UC3>)[#underline[\[UC3\]]]],
-  
+
   [#FRx],
   [L'Utente deve poter completare l'autorizzazione tramite il reindirizzamento a GitHub e il successivo ritorno automatico all'applicazione per il recupero del codice identificativo],
   [#link(<UC3>)[#underline[\[UC3\]]]],
@@ -4357,7 +4371,7 @@ In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati
   [#FRx],
   [L'Utente deve ricevere un messaggio di errore se il codice GitHub non viene ricevuto],
   [#link(<UC3.2.1>)[#underline[\[UC3.2.1\]]]],
-  
+
   [#FRx],
   [L'Utente deve ricevere un messaggio di errore se il codice non è conforme al formato],
   [#link(<UC3.2.1>)[#underline[\[UC3.2.3\]]]],
@@ -4753,19 +4767,19 @@ In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati
   //UC29
 
   //UC30
-  
+
   //UC31
-  
+
   //UC32
-  
-  //UC33 
-  
+
+  //UC33
+
   //UC34
-  
+
   //UC35
-  
+
   //UC36
-  
+
   //UC37
 
   //UC38
@@ -4814,29 +4828,88 @@ In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati
 
   [#FRx],
   [L'Utente deve essere notificato se il sistema GitHub non da l'autorizzazione durante lo scambio del codice OAuth],
-  [#link(<UC41>)[#underline[\[UC41\]]], #link(<UC41.1>)[#underline[\[UC41.1\]]]],   
+  [#link(<UC41>)[#underline[\[UC41\]]], #link(<UC41.1>)[#underline[\[UC41.1\]]]],
 )
 
 #pagebreak()
 == Requisiti di Qualità (QR)
+I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente, ma sia anche manutenibile, performante e ben documentato.
 
 #table(
-  columns: (1fr, 3fr, 1fr),
+  columns: (1fr, 2.5fr, 1.5fr),
   inset: 10pt,
   stroke: 0.5pt + luma(200),
-  table.header([*ID*], [*Descrizione*], [*Rif.*]),
+  table.header([*ID*], [*Descrizione*], [*Fonti*]),
   fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
   align: (col, row) => (center, left, center).at(col) + horizon,
+
+  [#QRx],
+  [È necessario fornire un diagramma
+    architetturale completo che illustri la struttura multiagente e le interazioni tra componenti],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Obiettivi"],
+
+  [#QRx],
+  [Deve essere fornita documentazione tecnica esaustiva del sistema, includendo swagger API e documentazione descrittiva del progetto],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#QRx],
+  [Il codice prodotto deve raggiungere una copertura minima del 70% tramite Test di Unità automatizzati],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#QRx],
+  [L'applicativo deve essere creato seguendo principi di modularità per consentire l'aggiunta di nuovi agenti di analisi],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#QRx],
+  [Deve essere fornito un sistema di Bug Reporting strutturato per tracciare e gestire le anomalie riscontrate],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#QRx],
+  [È necessario utilizzare appositi sistemi di versionamento del codice],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#QRx],
+  [È necessario rispettare tutte le norme
+    presenti nelle #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[*Norme di Progetto*]],
+  [Interno],
 )
 
 #pagebreak()
 == Requisiti di Vincolo (VR)
 
 #table(
-  columns: (1fr, 3fr, 1fr),
+  columns: (1fr, 2.5fr, 1.5fr),
   inset: 10pt,
   stroke: 0.5pt + luma(200),
-  table.header([*ID*], [*Descrizione*], [*Rif.*]),
+  table.header([*ID*], [*Descrizione*], [*Fonti*]),
   fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
   align: (col, row) => (center, left, center).at(col) + horizon,
+
+  [#VRx],
+  [Il Backend e l'Orchestratore devono essere sviluppati utilizzando Node.js o Python],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
+
+  [#VRx],
+  [Il Frontend deve essere sviluppato utilizzando React.js],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
+
+  [#VRx],
+  [Il Database deve essere implementato utilizzando MongoDB o PostgreSQL],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
+
+  [#VRx],
+  [L'architettura deve essere ospitata su infrastruttura cloud AWS],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
+
+  [#VRx],
+  [Devono essere utilizzate GitHub Actions per implementare pipeline CI/CD],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
+
+  [#VRx],
+  [Il codice sorgente deve essere versionato utilizzando sistemi come Git o repository online],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#VRx],
+  [L'analisi di sicurezza deve essere conforme agli standard OWASP Top 10],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "OWASP"],
 )
