@@ -19,6 +19,12 @@
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
+    "2026/02/02",
+    "0.40.0",
+    "Fix e aggiunta diagrammi mancati UC1-3",
+    members.andrea,
+  ),
+  (
     "2026/02/01",
     "0.39.0",
     "Aggiunta Requisiti di Qualità e di Vincolo",
@@ -734,7 +740,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC1.4.2>)[#underline[\[UC1.4.2\]]] // Email già censita nel Sistema
   ],
   trigger: "L'utente interagisce con la sezione di conferma della registrazione a CodeGuardian",
-)[]
+)[
+  #useCaseDiagram("1_4", "UC1.4: Conferma registrazione")
+]
 
 ===== UC1.4.1: Username inserito già censito nel Sistema <UC1.4.1>
 #useCase(
@@ -839,7 +847,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[
   #useCaseDiagram("2_1", "UC2.1 - Inserimento username")
 ]
-#TODO("Cambiare diagrammi per UC2")
 
 ===== UC2.1.1: Username non conforme ai vincoli di formato <UC2.1.1>
 #useCase(
@@ -936,6 +943,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'utente conferma l'inserimento delle credenziali durante la procedura di autenticazione a CodeGuardian",
 )[
+  #useCaseDiagram("2_3", "UC2.3: Conferma delle credenziali")
 ]
 
 ===== UC2.3.1: Username non censito nel Sistema <UC2.3.1>
@@ -1096,7 +1104,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'utente conferma il collegamento e viene reindirizzato a GitHub",
 )[
-  #useCaseDiagram("3_2", "UC3.2 - Reindirizzamento a GitHub e ricezione codice identificativo")
+  #useCaseDiagram("3_2", "UC3.2 - Controllo processo di autorizzazione e collegamento account")
 ]
 
 ===== UC3.2.1: Codice GitHub non ricevuto o formato non valido <UC3.2.1>
