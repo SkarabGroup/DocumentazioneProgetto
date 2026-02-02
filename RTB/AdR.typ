@@ -13,11 +13,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.39.0"
+#let versione = "v0.42.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2026/02/03",
+    "0.42.0",
+    "Aggiunta diagrammi UC16-30",
+    members.andrea,
+  ),
   (
     "2026/02/02",
     "0.41.0",
@@ -2692,7 +2698,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 //USE CASE DEL BACKEND
 // UC17
-=== UC17 Creazione dell'ambiente sand box <UC17>
+=== UC17 Creazione dell'ambiente sandbox <UC17>
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -2715,9 +2721,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC17.1>)[#underline[\[UC17.1\]]]
   ],
   trigger: "Il sistema frontend comunica all'orchestratore la richiesta di avvio dell'analisi",
-)[]
+)[#useCaseDiagram("17", "UC17 - Creazione dell'ambiente sandbox")]
 
-==== UC17.1 Errore durante la creazione dell'ambiente sand box <UC17.1>
+==== UC17.1 Errore durante la creazione dell'ambiente sandbox <UC17.1>
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -2736,7 +2742,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Durante la creazione dell'ambiente sandbox si verifica un errore",
-)[]
+)[#useCaseDiagram("17_1", "UC17.1 - Errore durante la creazione dell'ambiente sandbox")]
 
 === UC17.1.1 Comunicazione dell'errore durante la creazione dell'ambiente sand box <UC17.1.1>
 #useCase(
@@ -2781,7 +2787,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "L'orchestratore, una volta lette le richieste e visionato il repository, decide come agire e come istruire gli agenti",
-)[]
+)[#useCaseDiagram("18", "UC18 - Lettura delle richieste dell'utente da parte dell'orchestratore")]
 
 ==== UC18.1 Richiesta di analisi completa <UC18.1>
 #useCase(
@@ -2825,7 +2831,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Il frontend deve comunicare al backend le richieste che dovranno essere prese in carico",
-)[]
+)[#useCaseDiagram("18_2", "UC18.2 - Richieste specifiche sull'analisi da parte del frontend")]
 
 ===== UC18.2.1 Repository mai analizzato in precedenza <UC18.2.1>
 #useCase(
@@ -2876,7 +2882,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC19.2>)[#underline[\[UC19.2\]]]
   ],
   trigger: "L'utente richiede l'analisi dipendenze o la analisi viene pianificata automaticamente",
-)[]
+)[#useCaseDiagram("19", "UC19 - Analisi vulnerabilità dipendenze")]
 ==== UC19.1 L'utente accetta la remediation proposta <UC19.1>
 #useCase(
   attore: UAA,
@@ -2940,15 +2946,14 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Il sistema prepara raccomandazioni e registra i risultati per revisione manuale o azioni automatiche
   ],
   inclusioni: [
-    - Nessuna
+    - #link(<UC20.3>)[#underline[\[UC20.3\]]] // Visualizzazione risultati
   ],
   estensioni: [
     - #link(<UC20.1>)[#underline[\[UC20.1\]]] // Verifica manuale dei falsi positivi
     - #link(<UC20.2>)[#underline[\[UC20.2\]]] // Esecuzione automatica di revoca se integrata con provider
-    - #link(<UC20.3>)[#underline[\[UC20.3\]]] // Visualizzazione risultati
   ],
   trigger: "L'utente avvia la scansione segreti o la scansione è parte di una pipeline CI",
-)[]
+)[#useCaseDiagram("20", "UC20 - Rilevamento segreti e token")]
 
 ==== UC20.1: L'utente rifiuta le remediation proposte <UC20.1>
 #useCase(
@@ -3036,7 +3041,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC21.1>)[#underline[\[UC21.1\]]] // Integrazione con processo di approvazione legale
   ],
   trigger: "Verifica pre-release o su richiesta del team di progetto",
-)[]
+)[#useCaseDiagram("21", "UC21 - Verifica conformità licenze")]
 
 ==== UC21.1: Integrazione con processo di approvazione legale <UC21.1>
 #useCase(
@@ -3081,7 +3086,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC22.2>)[#underline[\[UC22.2\]]] // Suggerimenti di modifica automatici (codemods)
   ],
   trigger: "Apertura o aggiornamento di una pull request",
-)[]
+)[#useCaseDiagram("22", "UC22 - Revisione PR automatizzata")]
 
 ==== UC22.1: Esecuzione test automatici <UC22.1>
 #useCase(
@@ -3148,7 +3153,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC23.2>)[#underline[\[UC23.2\]]] // Suggerimenti KPI e obiettivi qualità
   ],
   trigger: "Esecuzione pianificata o su richiesta",
-)[]
+)[#useCaseDiagram("23", "UC23 - Monitor qualità del codice")]
 
 
 ==== UC23.1: Integrazione con tool di metriche esterni <UC23.1>
@@ -3210,13 +3215,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   inclusioni: [
     - #link(<UC24.1>)[#underline[\[UC24.1\]]] // Verifica impatto tramite test automatizzati
+    - #link(<UC24.3>)[#underline[\[UC24.3\]]] // Visualizzazione suggerimenti
   ],
   estensioni: [
     - #link(<UC24.2>)[#underline[\[UC24.2\]]] // Applicazione automatica sotto supervisione
-    - #link(<UC24.3>)[#underline[\[UC24.3\]]] // Visualizzazione suggerimenti
   ],
   trigger: "Richiesta manuale o raccomandazione durante code review",
-)[]
+)[#useCaseDiagram("24", "UC24 - Suggerimenti di refactor")]
 
 //altro caso
 ==== UC24.1: Verifica impatto tramite test automatizzati <UC24.1>
@@ -3300,13 +3305,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   inclusioni: [
     - #link(<UC25.1>)[#underline[\[UC25.1\]]] // Rilevamento note di breaking change
+    - #link(<UC25.3>)[#underline[\[UC25.3\]]] // Visualizzazione e approvazione changelog
   ],
   estensioni: [
     - #link(<UC25.2>)[#underline[\[UC25.2\]]] // Pubblicazione automatica su GitHub Release
-    - #link(<UC25.3>)[#underline[\[UC25.3\]]] // Visualizzazione e approvazione changelog
   ],
   trigger: "Preparazione della release o su richiesta dell'amministratore",
-)[]
+)[#useCaseDiagram("25", "UC25 - Generazione changelog e release notes")]
 
 ==== UC25.1: Rilevamento note di breaking change <UC25.1>
 #useCase(
@@ -3389,13 +3394,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   inclusioni: [
     - #link(<UC26.1>)[#underline[\[UC26.1\]]] // Replay test intermittenti
+    - #link(<UC26.3>)[#underline[\[UC26.3\]]] // Visualizzazione report
   ],
   estensioni: [
     - #link(<UC26.2>)[#underline[\[UC26.2\]]] // Suggerimenti per test addizionali
-    - #link(<UC26.3>)[#underline[\[UC26.3\]]] // Visualizzazione report
   ],
   trigger: "Esecuzione pipeline CI o richiesta manuale del team di QA",
-)[]
+)[#useCaseDiagram("26", "UC26 - Analisi test e coverage")]
 
 ==== UC26.1: Replay test intermittenti <UC26.1>
 #useCase(
@@ -3478,13 +3483,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   inclusioni: [
     - #link(<UC27.1>)[#underline[\[UC27.1\]]] // Gestione eccezioni approvate manualmente
+    - #link(<UC27.3>)[#underline[\[UC27.3\]]] // Visualizzazione risultati policy
   ],
   estensioni: [
     - #link(<UC27.2>)[#underline[\[UC27.2\]]] // Policy dinamiche per branch differenti
-    - #link(<UC27.3>)[#underline[\[UC27.3\]]] // Visualizzazione risultati policy
   ],
   trigger: "Tentativo di merge su branch protetto",
-)[]
+)[#useCaseDiagram("27", "UC27 - Policy CI/CD pre-merge")]
 
 ==== UC27.1: Gestione eccezioni approvate manualmente <UC27.1>
 #useCase(
@@ -3567,13 +3572,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   inclusioni: [
     - #link(<UC28.1>)[#underline[\[UC28.1\]]] // Filtri e template report
+    - #link(<UC28.3>)[#underline[\[UC28.3\]]] // Visualizzazione report
   ],
   estensioni: [
     - #link(<UC28.2>)[#underline[\[UC28.2\]]] // Azioni automatiche su alert critici
-    - #link(<UC28.3>)[#underline[\[UC28.3\]]] // Visualizzazione report
   ],
   trigger: "Pianificazione temporale o evento di sistema che provoca l'alert",
-)[]
+)[#useCaseDiagram("28", "UC28 - Report programmabili e alert")]
 
 ==== UC28.1: Filtri e template report <UC28.1>
 #useCase(
@@ -3663,7 +3668,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC29.4>)[#underline[\[UC29.4\]]] // Gestione errore contatto tool
   ],
   trigger: "Comunicazione con tool esterni",
-)[]
+)[#useCaseDiagram("29", "UC29 - Recupero e avvio tool esterni di analisi")]
 
 ==== UC29.1 Richiesta di analisi del codice <UC29.1>
 #useCase(
@@ -3688,7 +3693,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC29.1.1>)[#underline[\[UC29.1.1\]]]
   ],
   trigger: "viene richiesta l'analisi del codice",
-)[]
+)[#useCaseDiagram("29_1", "UC29.1 - Richiesta di analisi del codice")]
 
 ===== UC29.1.1 Uno o più linguaggi presenti nella codebase non sono supportati dallo strumento di analisi <UC29.1.1>
 #useCase(
@@ -3737,7 +3742,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "Viene richiesta l'analisi della documentazione",
 )[]
 
-==== UC29.3 Richiesta di analisi del rispetto degi standard OWASP <UC29.3>
+==== UC29.3 Richiesta di analisi del rispetto degli standard OWASP <UC29.3>
 #useCase(
   attore: "Orchestratore",
   attori_secondari: "OWASP ZAP",
@@ -3805,7 +3810,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "Viene completata l'analisi della repository",
-)[]
+)[#useCaseDiagram("30", "UC30 - Generazione report finale")]
 
 ==== UC30.1 Integrazione delle nuove analisi singole <UC30.1>
 #useCase(
