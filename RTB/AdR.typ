@@ -20,8 +20,14 @@
 #let history = (
   (
     "2026/02/02",
+    "0.41.0",
+    "Fix e aggiunta diagrammi mancanti UC6, UC9, UC10, UC12, UC13, UC14, UC15",
+    members.andrea,
+  ),
+  (
+    "2026/02/02",
     "0.40.0",
-    "Fix e aggiunta diagrammi mancati UC1-3",
+    "Fix e aggiunta diagrammi mancanti UC1-3",
     members.andrea,
   ),
   (
@@ -1689,7 +1695,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC6.2>)[#underline[\[UC6.2\]]]
   ],
   trigger: "L'utente interagisce con la sezione di selezione dell'intervallo temporale per il confronto con i report passati durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian",
-)[]
+)[#useCaseDiagram("6", "UC6 - Scelta intervallo temporale per visualizzazione confronto con report passati")]
 
 ==== UC6.1: Nessun intervallo temporale selezionato <UC6.1>
 #useCase(
@@ -1751,7 +1757,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]
   ],
   trigger: "L'utente interagisce con la sezione di selezione dell'intervallo temporale per il confronto con i report passati durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian",
-)[]
+)[#useCaseDiagram("6_2", "UC6.2 - Intervallo temporale non valido")]
 
 ===== UC6.2.1: Nessun report di analisi disponibile nel periodo selezionato <UC6.2.1>
 #useCase(
@@ -2221,7 +2227,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "L'utente entra nella sezione Impostazioni > Account > GitHub dell'applicazione e disconnette il proprio account di GitHub dalla piattaforma CodeGuardian",
-)[]
+)[#useCaseDiagram("13", "UC13 - Disconnessione account GitHub da CodeGuardian")]
 
 ==== UC13.1: Selezione tasto Disconnetti <UC13.1>
 #useCase(
@@ -2245,7 +2251,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
   ],
   trigger: "L'untente seleziona e attiva il tasto Disconnetti per disconnettere il proprio account",
-)[]
+)[#useCaseDiagram("13_1", "UC13.1 - Selezione tasto Disconnetti")]
 
 ===== UC13.1.1: Conferma disconnessione account<UC13.1.1>
 #useCase(
@@ -2392,7 +2398,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "L'utente seleziona l'opzione Modifica Password nella sezione Impostazioni",
-)[]
+)[#useCaseDiagram("15", "UC15 - Modifica password profilo")]
 
 ==== UC15.1 Inserimento della password corrente <UC15.1>
 #useCase(
@@ -2415,7 +2421,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC15.1.2>)[#underline[\[UC15.1.2\]]]
   ],
   trigger: "L'utente interagisce con il form di modifica inserendo la password corrente nell'apposito campo",
-)[]
+)[#useCaseDiagram("15_1", "UC15.1 - Inserimento della password corrente")]
 
 ===== UC15.1.1 Password corrente non inserita <UC15.1.1>
 #useCase(
@@ -2481,7 +2487,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC15.2.3>)[#underline[\[UC15.2.3\]]]
   ],
   trigger: "L'utente interagisce con il form di modifica inserendo una nuova password",
-)[]
+)[#useCaseDiagram("15_2", "UC15.2 - Inserimento della nuova password")]
 
 ===== UC15.2.1 Nessuna nuova password inserita <UC15.2.1>
 #useCase(
