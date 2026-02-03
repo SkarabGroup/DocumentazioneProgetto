@@ -134,16 +134,16 @@ Per approfondimenti riguardanti gli attori coinvolti, le precondizioni, le postc
 
 ==== Requisiti
 I requisiti rappresentano le specifiche funzionali e non funzionali che il sistema deve soddisfare. Ogni requisito è classificato per garantire la tracciabilità rispetto alle fonti e ai casi d'uso associati. \
-Per la descrizione dei requisiti viene utilizzata la nomenclatura #strong("TipologiaRNumero") dove:
+Per la descrizione dei requisiti viene utilizzata la nomenclatura #strong("TipologiaRPrioritàNumero") dove:
 - *Tipologia*: indica il tipo di requisito. I valori possibili sono:
   - *F*: Requisito #strong("F")unzionale.
   - *Q*: Requisito di #strong("Q")ualità.
   - *C*: Requisito di #strong("V")incolo.
 - *R*: acronimo di Requisito.
 - *Priorità*: indica l'importanza del requisito. I valori possibili sono:
-  - *Ob*: #strong("O")bbligatorio.
-  - *De*: #strong("D")esiderabile.
-  - *Op*: #strong("O")referibile.
+  - *Ob*: Requisito #strong("Ob")bligatorio.
+  - *De*: Requisito #strong("De")siderabile.
+  - *Op*: Requisito #strong("Op")zionale.
 - *Numero*: numero progressivo univoco per ogni requisito all'interno della sua tipologia.
 
 Per approfondimenti riguardanti la descrizione dettagliata, la fonte e i casi d'uso associati a ciascun requisito, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti vx.y.z"). #TODO("Link al documento")
