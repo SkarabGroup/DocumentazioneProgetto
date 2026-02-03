@@ -11,19 +11,25 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.3.0"
-#set heading(numbering: "1,1,1")
+#let versione = "v0.4.0"
+#set heading(numbering: "1.1.1")
 
 #titlePage("Norme di Progetto", versione)
 #set page(numbering: "1", header: header("Norme di Progetto"), footer: footer())
 
 #let history = (
   (
+    "2026/02/03",
+    "0.4.0",
+    "Integrazioni a PdQ e Metriche",
+    members.alice,
+  ),
+  (
     "2026/01/15",
     "0.3.0",
     "Aggiunta prima versione sezione documenti",
     members.kevin,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/09",
@@ -38,7 +44,7 @@
     "Arricchimento con standard industriali, norme di codifica dettagliate e integrazioni progetto-specifiche",
     members.martinello,
     members.suar,
-    members.kevin
+    members.kevin,
   ),
   (
     "2025/12/28",
@@ -46,7 +52,7 @@
     "Rilascio iniziale con norme, processi e strumenti aggiornati",
     members.martinello,
     members.suar,
-    members.kevin
+    members.kevin,
   ),
   (
     "2025/12/20",
@@ -54,7 +60,7 @@
     "Prima bozza iniziale",
     members.martinello,
     members.suar,
-    members.kevin
+    members.kevin,
   ),
 )
 
@@ -83,18 +89,18 @@ Il progetto adotta standard industriali riconosciuti per garantire qualità, con
 
 - *IEEE 830 - Standard for Software Requirements Specifications*: Guida alla documentazione dei requisiti funzionali e non funzionali, inclusa la classificazione (obbligatori, desiderabili, opzionali) e l'uso di casi d'uso.
 
- -Ultimo accesso: 2026/01/02.
+  -Ultimo accesso: 2026/01/02.
 
 - *IEEE 1016 - Recommended Practice for Software Design Descriptions*: Fornisce linee guida per descrivere l'architettura software, inclusi diagrammi UML e design pattern (es. MVC, Singleton).
 
- -Ultimo accesso: 2026/01/02.
+  -Ultimo accesso: 2026/01/02.
 
 - *IEEE 829 - Standard for Software and System Test Documentation*: Definisce la struttura per piani di test, casi di test, procedure e report per unit, integration e system testing.
 
- -Ultimo accesso: 2026/01/02.
+  -Ultimo accesso: 2026/01/02.
 - *ISO/IEC 12207 - Software Life Cycle Processes*: Framework internazionale per processi di acquisizione, fornitura, sviluppo, operazione, manutenzione e disposal del software, supportando approcci iterativi e gestione del rischio.
 
- -Ultimo accesso: 2026/01/02.
+  -Ultimo accesso: 2026/01/02.
 
 Questi standard sono integrati nei processi di analisi, progettazione, verifica e documentazione per assicurare tracciabilità e qualità.
 
@@ -105,7 +111,7 @@ La fornitura é il processoadottato dal fornitore del prodotto finale, il quale 
 Tale processo comprende una fase iniziale di studio dei requisiti che il progetto dovrà soddisfare.
 Da questa analisi deriva il materiale necessario per avviare la contrattazione dei requisiti con il #def("proponente") e per comunicare una pianificazione preliminare delle attività, includendo una stima della data di consegna.
 Il processo di fornitura si compone di molte attività, tra cui:
-- Inizializzazione della fornitura 
+- Inizializzazione della fornitura
   - Momento in cui il fornitore analizza le richieste del proponente e valuta la sua capacità di soddisfarle.
 - Preparazione della proposta
   - Redazione della proposta tecnica ed economica in risposta al capitolato.
@@ -137,8 +143,8 @@ Documento che raccoglie e specifica i requisiti funzionali e non funzionali del 
 - Introduzione al progetto e obiettivi.
 - Lista degli attori coinvolti.
 - Lista dei casi d'uso.
- - Essi sono descitti in UCx.y.z. ...
-  - UC é un acronimo che sta per usecase, x indica il numero del caso d'uso, y,z e i numeri successivi sono i sotto casi d'uso, ovvvero inclusioni, composizioni o estensioni del caso d'uso principale.
+  - Essi sono descitti in UCx.y.z. ...
+    - UC é un acronimo che sta per usecase, x indica il numero del caso d'uso, y,z e i numeri successivi sono i sotto casi d'uso, ovvvero inclusioni, composizioni o estensioni del caso d'uso principale.
 - Lista dei requisiti funzionali e non funzionali, classificati in obbligatori, desiderabili e opzionali.
   #TODO("come sono acronimizzati i requisiti?")
 
@@ -153,6 +159,14 @@ Documento che descrive l'organizzazione del lavoro, le risorse, il modello di ci
 
 ==== PdQ - Piano di Qualifica
 Documento che definisce le strategie, le metodologie e le attività di #def("verifica") e #def("validazione") per garantire che i prodotti del progetto soddisfino i requisiti specificati. Include la definizione delle metriche di qualità, i piani di test e le procedure di controllo qualità.
+
+===== Nota sull'adozione dello Standard ISO/IEC 25010 e PDCA
+La redazione del Piano di Qualifica e la definizione delle metriche si ispirano alla famiglia di standard ISO/IEC 25010 (SQuaRE). Tale scelta garantisce una classificazione rigorosa delle caratteristiche di qualità del prodotto (es. Sicurezza, Affidabilità, Usabilità).
+Inoltre, l'adozione strutturale del ciclo /*#def[PDCA]*/ (Plan-Do-Check-Act) assicura che il processo di controllo qualità non sia statico, ma evolva:
+- *Plan:* Definizione delle metriche e delle soglie nel presente documento.
+- *Do:* Esecuzione delle misurazioni durante gli Sprint.
+- *Check:* Analisi degli scostamenti nei periodi di retrospettiva.
+- *Act:* Aggiornamento delle Norme di Progetto e ricalibrazione delle metriche per lo Sprint successivo.
 
 
 ==== Verbali delle Riunioni
@@ -196,31 +210,16 @@ Tutti i documenti devono avere un formato uniforme e professionale stutturato in
     stroke: none,
 
     // Header
-    text(white)[*Documento*],
-    text(white)[*Redattori*],
-    text(white)[*Destinatari*],
-    text(white)[*Uso*],
+    text(white)[*Documento*], text(white)[*Redattori*], text(white)[*Destinatari*], text(white)[*Uso*],
 
     // Rows
-    [Lettera di Presentazione],
-    [Responsabile],
-    [Proponente, #members.cardin, #members.tullio, Skarab Group],
-    [Esterno],
+    [Lettera di Presentazione], [Responsabile], [Proponente, #members.cardin, #members.tullio, Skarab Group], [Esterno],
 
-    [AdR – Analisi dei Requisiti],
-    [Analisti],
-    [Proponente, #members.cardin, #members.tullio, Skarab Group],
-    [Esterno],
+    [AdR – Analisi dei Requisiti], [Analisti], [Proponente, #members.cardin, #members.tullio, Skarab Group], [Esterno],
 
-    [Glossario],
-    [Tutti i membri del gruppo],
-    [Stakeholder interni ed esterni],
-    [Esterno],
+    [Glossario], [Tutti i membri del gruppo], [Stakeholder interni ed esterni], [Esterno],
 
-    [NdP – Norme di Progetto],
-    [Responsabili di processo],
-    [Skarab Group, #members.cardin, #members.tullio],
-    [Interno],
+    [NdP – Norme di Progetto], [Responsabili di processo], [Skarab Group, #members.cardin, #members.tullio], [Interno],
 
     [PdP – Piano di Progetto],
     [Project Manager],
@@ -248,38 +247,38 @@ Tale processo è conforme allo standard ISO/IEC 12207:1995 e garantisce un appro
 === Attività del Processo di Sviluppo
 
 Il processo comprende le seguenti macro-attività:
-==== Definizione del processo: 
+==== Definizione del processo:
 Selezione del ciclo di vita del software più idoneo in base alla complessità, agli obiettivi e ai vincoli del progetto.
 
-==== Analisi dei Requisiti: 
+==== Analisi dei Requisiti:
 Individuazione e formalizzazione delle esigenze dell’utente finale e dei vincoli imposti dal proponente, includendo funzionalità, requisiti di qualità e limitazioni progettuali.
 
-==== Progettazione dell’architettura di sistema: 
+==== Progettazione dell’architettura di sistema:
 identificazione delle componenti hardware e software necessarie a soddisfare i requisiti, garantendo la tracciabilità degli stessi.
 
-==== Analisi dei Requisiti Software: 
+==== Analisi dei Requisiti Software:
 studio di come il software risponde ai requisiti utente, includendo aspetti funzionali, prestazionali, di sicurezza e di interfaccia.
 
-==== Progettazione dell’architettura software: 
+==== Progettazione dell’architettura software:
 definizione della struttura complessiva del sistema software e delle relazioni tra le sue componenti, senza entrare nel dettaglio implementativo.
 
-==== Progettazione di dettaglio: 
+==== Progettazione di dettaglio:
 specifica delle singole unità software che compongono il sistema.
 
-==== Codifica e test delle unità: 
+==== Codifica e test delle unità:
 implementazione del codice sorgente e verifica del corretto funzionamento delle singole unità.
 
-==== Integrazione software: 
+==== Integrazione software:
 combinazione progressiva delle componenti software, supportata da test di integrazione.
 
-==== Test di qualifica del software: 
+==== Test di qualifica del software:
 verifica della conformità del prodotto agli obiettivi di qualità definiti.
 
-==== Integrazione e test di sistema: 
+==== Integrazione e test di sistema:
 assemblaggio del sistema completo e validazione del suo comportamento complessivo.
 Installazione: rilascio del software nell’ambiente concordato con il cliente.
 
-==== Supporto all’accettazione: 
+==== Supporto all’accettazione:
 assistenza al proponente durante la fase di verifica finale del prodotto.
 
 === Relazione con le Baseline di progetto
@@ -296,7 +295,7 @@ I Casi d’Uso sono identificati tramite una nomenclatura univoca che ne garanti
 - x è un numero intero che identifica il Caso d’Uso principale.
 - y, z e i numeri successivi sono numeri interi che identificano sotto-casi d’Uso, ovvero inclusioni, composizioni o estensioni del Caso d’Uso principale.
 
-I requisiti, invece< #TODO("come sono acronimizzati i requisiti?")> 
+I requisiti, invece< #TODO("come sono acronimizzati i requisiti?")>
 ==== Codifica
 
 La codifica ha come obiettivo l’implementazione fedele delle soluzioni progettate, nel rispetto degli standard di qualità definiti dal gruppo.
@@ -344,10 +343,10 @@ Ogni documento deve includere una sezione di cronologia delle versioni che ripor
 - Data della modifica.
 
 - Numero di versione
- - Il numero della versione deve seguire lo scema `x.y.z`, dove:
-   - `x`: Major version, incrementata per cambiamenti significativi o incompatibili.
-   - `y`: Minor version, incrementata per l'aggiunta di funzionalità mantenendo la compatibilità.
-   - `z`: Patch version, incrementata per correzioni di bug o modifiche minori.
+  - Il numero della versione deve seguire lo scema `x.y.z`, dove:
+    - `x`: Major version, incrementata per cambiamenti significativi o incompatibili.
+    - `y`: Minor version, incrementata per l'aggiunta di funzionalità mantenendo la compatibilità.
+    - `z`: Patch version, incrementata per correzioni di bug o modifiche minori.
 - Descrizione delle modifiche apportate.
 - Nomi dei redattori coinvolti.
 - Nomi dei verificatori coinvolti.
@@ -470,9 +469,9 @@ La seguente tebella riporterá tutti i ruoli presenti all'interno del progetto c
 
 #figure(
   table(
-    columns: (auto,auto),
+    columns: (auto, auto),
     stroke: 0.5pt + luma(200),
-    
+
     fill: (col, row) => if row == 0 {
       luma(62.75%)
     } else if calc.even(row) {
@@ -481,19 +480,19 @@ La seguente tebella riporterá tutti i ruoli presenti all'interno del progetto c
       none
     },
     [*Ruolo*], [*Responsabilità*],
-    
+
     [Responsabile],
     [Coordina e supervisiona l'intero progetto, garantendo il rispetto delle scadule e del budget. Rappresenta il team nei rapporti con il committente e gli stakeholder esterni. Pianifica le attività, assegna le risorse, monitora l'avanzamento attraverso metriche e indicatori, gestisce i rischi e le criticità. Approva i documenti ufficiali e autorizza le spese. Convoca e presiede le riunioni, facilita la comunicazione interna ed esterna, risolve conflitti e prende decisioni strategiche per il successo del progetto.],
-    
+
     [Amministratore],
     [Gestisce l'infrastruttura tecnica e organizzativa del progetto. Configura e mantiene gli strumenti di versionamento, continuous integration, issue tracking e documentazione. Amministra i repository, definisce workflow e convenzioni, monitora l'ambiente di sviluppo. Gestisce la documentazione di processo, redige le norme di progetto, mantiene aggiornato il piano di qualifica. Supporta il team nella risoluzione di problemi tecnici relativi all'ambiente di lavoro, garantisce backup e sicurezza dei dati, ottimizza i processi di automazione.],
-    
+
     [Verificatore],
     [Assicura la qualità dei prodotti attraverso attività di verifica sistematica. Controlla la conformità dei documenti alle norme redazionali e tipografiche, verifica la correttezza tecnica e la coerenza dei contenuti. Esegue review del codice secondo checklist predefinite, controlla il rispetto degli standard di programmazione. Verifica la tracciabilità tra requisiti, design e implementazione. Redige verbali di verifica, segnala anomalie e non conformità, propone azioni correttive. Monitora le metriche di qualità e valida i test eseguiti dai programmatori.],
-    
+
     [Analista],
     [Raccoglie, analizza e formalizza i requisiti del sistema attraverso l'interazione con committente e stakeholder. Studia il dominio applicativo, comprende le esigenze degli utenti, identifica vincoli e opportunità. Redige l'Analisi dei Requisiti classificando requisiti funzionali, di qualità, di vincolo e prestazionali. Definisce casi d'uso, scenari operativi e modelli del dominio. Mantiene la tracciabilità tra requisiti e fonti, gestisce l'evoluzione dei requisiti durante il progetto. Collabora con i progettisti per garantire la fattibilità tecnica delle soluzioni proposte.],
-    
+
     [Progettista],
     [Definisce l'architettura del sistema e il design dettagliato dei componenti software. Individua pattern architetturali appropriati, decompone il sistema in moduli, definisce interfacce e dipendenze. Specifica la struttura delle classi, i diagrammi di sequenza e collaborazione, le strutture dati e gli algoritmi principali. Redige la Specifica Tecnica e il Piano di Qualifica nella parte relativa ai test di integrazione e sistema. Effettua scelte tecnologiche motivate, considera aspetti di manutenibilità, estensibilità e performance. Fornisce ai programmatori le specifiche di dettaglio necessarie all'implementazione.],
 
@@ -543,7 +542,7 @@ La comunicazione interna del team avviene tramite varie piattaforme:
 Come giá riportato in precedenza, il gruppo utilizza diversi strumenti per supportare l'organizzazione del lavoro anche in modo totalmente asincrono:
 - Google calendar: Per la pianificazione delle riunioni esterne.
 - Scripts di automazione: Per automatizzare attività ripetitive e migliorare l'efficienza del lavoro.
- - queste comprendono, al momento del PoC: generazione glossario, sia in formato documento che in pagina web
+  - queste comprendono, al momento del PoC: generazione glossario, sia in formato documento che in pagina web
 - Repository GitHub: Per il versionamento del codice e la gestione della documentazione di progetto.
 
 ==== Creazione e gestione degli strumenti organizzativi
@@ -592,7 +591,7 @@ La seguente tabella riporta le fonti utilizzate per la formazione dei membri del
   table(
     columns: (auto, auto),
     stroke: 0.5pt + luma(200),
-    
+
     fill: (col, row) => if row == 0 {
       luma(62.75%)
     } else if calc.even(row) {
@@ -601,13 +600,13 @@ La seguente tabella riporta le fonti utilizzate per la formazione dei membri del
       none
     },
     [*Tecnologia*], [*Fonte di formazione*],
-    
+
     [Python], [Documentazione ufficiale Python, youtube tutorial],
     [Agenti AI], [Documentazione framework specifici, paper accademici, documentazione AWS],
     [AWS], [documentazione ufficiale AWS],
     [Git], [Documentazione ufficiale Git, guide interattive, corso di Metodi e tecnologie per lo sviluppo software],
     [Node.js], [Documentazione ufficiale Node.js, tutorial youtube],
-    [MongoDB], [documentazione ufficiale,]
+    [MongoDB], [documentazione ufficiale,],
   ),
   caption: [Tecnologie e fonti di formazione],
 )
@@ -617,35 +616,211 @@ Inoltre l'azienda proponente Var group ha tenuto delle lezioni specifiche per og
 = Metriche
 Il gruppo adotta un sistema di metriche per monitorare processi e prodotti.
 
+== Strategia di Definizione delle Soglie Metriche
+La determinazione delle soglie di accettabilità e ottimalità per le metriche adottate dal gruppo /*#def("Skarab Group")*/ non è un processo arbitrario, ma segue una strategia ingegneristica basata sui seguenti criteri:
+
+- *Adesione agli Standard Internazionali:* Per i processi di fornitura, il gruppo adotta il framework /*#def("Earned Value Management")*/ (EVM), utilizzando gli intervalli di confidenza standard del settore ($0.90 - 1.10$) per garantire la stabilità economica e temporale. Per la qualità del prodotto, le soglie sono calibrate sulle caratteristiche del modello /*#def("ISO/IEC 25010")*/.
+- *Analisi del Dominio e Benchmark:* Le metriche di supporto e sviluppo (es. /*#def("Gulpease Index"), #def("Complessità Ciclomatica")*/) sono tarate su benchmark di settore per lo sviluppo software moderno, garantendo che i requisiti di manutenibilità e sicurezza siano oggettivamente verificabili.
+- *Miglioramento Continuo e Calibrazione (PDCA):* In linea con l'approccio /*#def("Agile")*/, le soglie sono soggette a revisione periodica. Al termine di ogni /*#def("Sprint")*/, i valori vengono analizzati rispetto alle prestazioni storiche del team; questo permette una ricalibrazione dinamica delle soglie nel /*#def("Piano di Qualifica")*/, rendendo gli obiettivi sempre sfidanti ma tecnicamente sostenibili (obiettivi *S.M.A.R.T.*).
+
+== Nomenclatura delle Metriche
+La nomenclatura utilizzata per le metriche è la seguente:
+#align(center)[
+  `M[Tipo][##]`
+]
+
+dove:
+- `M` sta per Metrica
+- `Tipo` può assumere uno tra questi valori:
+  - `PC` ovvero Processo
+  - `PD` ovvero Prodotto
+- `##` è un numero progressivo crescente da 01.
+
+== Metriche di Qualità del Processo
+
+I processi vengono monitorati per garantire efficienza, efficacia e miglioramento continuo del _Way of Working_ adottato dal gruppo.
+
+=== Processi Primari
+==== Fornitura e Sviluppo
+#show figure: set block(breakable: true)
+
+#figure(
+  block(
+    breakable: true,
+    table(
+      columns: (auto, 1.5fr, 3fr),
+      inset: 8pt,
+      align: horizon,
+      fill: (x, y) => if y == 0 { luma(220) },
+      [*Codice*], [*Nome*], [*Descrizione*],
+
+      [MPC01], [Budget At Completion], [Budget totale preventivato per il progetto],
+
+      [MPC02], [Planned Value], [Valore del lavoro che si era pianificato di completare entro un determinato momento],
+
+      [MPC03], [Actual Cost], [Costo effettivamente sostenuto per il lavoro svolto fino a un determinato momento],
+
+      [MPC04], [Earned Value], [Valore del lavoro effettivamente completato],
+
+      [MPC05],
+      [Budget Variance],
+      [Differenza tra il budget totale e la stima del costo finale. Un valore positivo indica che si prevede di risparmiare budget],
+
+      [MPC06],
+      [Schedule Variance],
+      [Misura lo scostamento temporale: valori negativi indicano ritardi, positivi anticipi],
+
+      [MPC07],
+      [Cost Performance Index],
+      [Indice di efficienza economica del progetto. CPI = 1 indica perfetta aderenza al budget, < 1 sforamento, > 1 risparmio],
+
+      [MPC08],
+      [Schedule Performance Index],
+      [Indice di efficienza della schedulazione. SPI = 1 indica perfetta aderenza ai tempi, < 1 ritardo, > 1 anticipo],
+
+      [MPC09],
+      [Estimate At Completion],
+      [Stima del costo totale finale del progetto basata sulla performance attuale. Utilizza il CPI per proiettare il costo a completamento considerando l'efficienza dimostrata],
+    ),
+  ),
+  caption: [Metriche per il processo di Fornitura],
+)
+
 #figure(
   table(
-    columns: (3cm, 8cm, 4cm),
-    align: left + horizon,
-    stroke: 0.5pt,
-    fill: (col, row) => if row == 0 {
-      luma(62.75%)
-    } else if calc.even(row) {
-      luma(220)
-    } else {
-      none
-    },
-    [*ID*], [*Descrizione*], [*Soglia / Obiettivo*],
-    // Processo
-    [#def("MPC")1 (SV)], [Schedule Variance: differenza tra lavoro pianificato ed eseguito], [>= 0],
-    [#def("MPC")2 (BV)], [Budget Variance: differenza tra costo pianificato ed effettivo], [>= 0],
-    // Prodotto documentale
-    [#def("MPD")1 (Gulpease)],
-    [Indice di #def("Gulpease") per documenti in italiano],
-    [> 40 (accettabile)\ > 60 (buono)],
+    columns: (auto, 1.8fr, 2.5fr),
+    inset: 8pt,
+    align: horizon,
+    fill: (x, y) => if y == 0 { luma(220) },
+    [*Codice*], [*Nome*], [*Descrizione*],
 
-    [#def("MPD")2 (Ortografia)], [Numero di errori ortografici rilevati], [0],
-    // Software
-    [#def("MPS")1 (Coverage)], [#def("Code Coverage") (Unit Test)], [>= 80%],
-    [#def("MPS")2 (Req. Obb.)], [Percentuale soddisfacimento requisiti obbligatori], [100% al rilascio],
-    [#def("MPS")3 (Comprens.)], [#def("Complessità Ciclomatica") media delle funzioni], [<= 15],
+    [MPC10],
+    [Requirements Stability Index],
+    [Misura la volatilità dei requisiti. Indica la percentuale di requisiti che non hanno subito modifiche, aggiunte o cancellazioni rispetto alla baseline iniziale],
   ),
-  caption: [Tabella delle metriche di progetto],
+  caption: [Metriche per il processo di Sviluppo],
 )
+
+*Nota:* Valori bassi di RSI possono segnalare un'analisi iniziale insufficiente o cambiamenti significativi nelle esigenze degli _stakeholder_. Il monitoraggio è cruciale specialmente a seguito di revisioni correttive.
+
+=== Processi di Supporto
+==== Documentazione e Verifica
+
+#figure(
+  table(
+    columns: (auto, 1.8fr, 2.5fr),
+    inset: 8pt,
+    align: horizon,
+    fill: (x, y) => if y == 0 { luma(220) },
+    [*Codice*], [*Nome*], [*Descrizione*],
+
+    [MPC11],
+    [Indice di Gulpease],
+    [Indice di leggibilità. Valuta la complessità linguistica basandosi sulla lunghezza delle parole e delle frasi. Valori: ≥80 molto facile; 60-80 media difficoltà; 40-60 abbastanza difficile; < 40 molto difficile],
+
+    [MPC12], [Correttezza Ortografica], [Numero di errori ortografici rilevati nel documento],
+
+    [MPC13],
+    [Code Coverage],
+    [Percentuale di codice sorgente che viene eseguita durante il lancio della suite di test automatizzati. Indica il grado di copertura della verifica dinamica],
+
+    [MPC14],
+    [Test Success Rate],
+    [Percentuale di test automatizzati che superano con successo l'esecuzione. Un valore del 100% è necessario per garantire la stabilità del sistema prima di ogni rilascio],
+  ),
+  caption: [Metriche per il processo di Documentazione e Verifica],
+)
+
+*Rilevanza:* Il Test Success Rate deve rimanere costantemente al 100% per evitare regressioni e garantire l'affidabilità del _Software_.
+
+=== Processi Organizzativi
+
+#figure(
+  table(
+    columns: (auto, 1.8fr, 2.5fr),
+    inset: 8pt,
+    align: horizon,
+    fill: (x, y) => if y == 0 { luma(220) },
+    [*Codice*], [*Nome*], [*Descrizione*],
+
+    [MPC15],
+    [Metrics Satisfaction],
+    [Percentuale di metriche che rispettano le soglie di accettabilità. Fornisce una visione d'insieme sulla qualità complessiva dei processi adottati],
+
+    [MPC16],
+    [Sprint Goal Achievement],
+    [Percentuale degli obiettivi prefissati durante lo Sprint Planning che sono stati effettivamente raggiunti e validati al termine dello Sprint. Misura l'efficacia della pianificazione e dell'esecuzione],
+  ),
+  caption: [Metriche per i processi Organizzativi],
+)
+
+#pagebreak()
+
+== Metriche di Qualità del Prodotto
+La qualità del prodotto finale è intrinsecamente legata alla qualità dei processi che lo generano.
+
+=== Adeguatezza Funzionale e Affidabilità
+
+#figure(
+  table(
+    columns: (auto, 1.8fr, 2.5fr),
+    inset: 8pt,
+    align: horizon,
+    fill: (x, y) => if y == 0 { luma(220) },
+    [*Codice*], [*Nome*], [*Descrizione*],
+
+    [MPD01],
+    [Copertura Requisiti Obbligatori],
+    [Percentuale di requisiti obbligatori soddisfatti rispetto al totale dei requisiti obbligatori identificati. Questi requisiti sono vincolanti per l'accettazione del prodotto],
+
+    [MPD02],
+    [Failure Density],
+    [Misura la densità di errori nel software. Valori elevati indicano problemi di qualità del codice],
+
+    [MPD03], [Availability], [Percentuale di tempo in cui il sistema è operativo e disponibile all'uso],
+  ),
+  caption: [Metriche di Adeguatezza Funzionale e Affidabilità],
+)
+
+=== Manutenibilità e Sicurezza
+
+#figure(
+  table(
+    columns: (auto, 1.8fr, 2.5fr),
+    inset: 8pt,
+    align: horizon,
+    fill: (x, y) => if y == 0 { luma(220) },
+    [*Codice*], [*Nome*], [*Descrizione*],
+
+    [MPD04],
+    [Comment Density],
+    [Percentuale di linee di commento rispetto alle linee di codice. Una documentazione adeguata migliora la comprensibilità e facilita la manutenzione futura del codice],
+
+    [MPD05],
+    [Cyclomatic Complexity],
+    [Misura la complessità del codice contando i percorsi linearmente indipendenti. Valori elevati indicano codice difficile da testare e mantenere],
+
+    [MPD06],
+    [Coupling (Fan-out)],
+    [Numero di dipendenze esterne di un modulo. Misura il grado di accoppiamento tra componenti. Valori elevati riducono la modularità],
+
+    [MPD07],
+    [Vulnerability Detection],
+    [Numero di vulnerabilità di sicurezza critiche rilevate attraverso analisi statica e dinamica del codice],
+  ),
+  caption: [Metriche di Manutenibilità e Sicurezza],
+)
+
+== Struttura delle Misurazioni (Cruscotto di Valutazione)
+Per ciascuna metrica viene fornita una rappresentazione grafica dell'andamento temporale accompagnata da un'analisi qualitativa. Tali misurazioni e i relativi obiettivi di qualità sono in linea con quanto redatto all'interno del #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/PdP.pdf")[#underline[*Piano di Progetto*]].
+
+Ogni grafico, quindi, è accompagnato da un commento interpretativo che collega le variazioni delle metriche con le cause organizzative, tecniche o procedurali che le hanno generate, garantendo che i dati non rimangano meri numeri ma si traducano in azioni concrete di miglioramento.
+
+Le misurazioni coprono il periodo che va dall'*aggiudicazione del capitolato* fino alla milestone *RTB* (09/02/2026).
+
+Per la fase di *Product Baseline* (PB) vengono fornite _stime previsionali_.
+Rispetto a quanto rilevato nella RTB, ci si attende un _incremento dell'efficienza_ e una maggiore aderenza alle tempistiche prefissate. La fase precedente, infatti, ha risentito dei rallentamenti dovuti alla concomitanza con la sessione d'esame.
+Con il superamento di tale periodo, la PB riflette una pianificazione più fluida e una gestione operativa che punta a stabilizzare i ritmi, ottimizzando i risultati.
 
 == Strategie di Verifica
 - *Analisi Statica*: Review manuale del codice e uso di #def("linter") (#def("ESLint") per JS/TS, Pylint/Black per #def("Python")).
