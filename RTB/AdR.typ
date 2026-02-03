@@ -2701,6 +2701,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 === UC17 Creazione dell'ambiente sandbox <UC17>
 #useCase(
   attore: "Orchestratore",
+  attori_secondari: "Docker",
   pre: [
     - L'utente autenticato avanzato ha effettuato l'accesso al proprio profilo CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente autenticato avanzato ha effettuato la connessiono del proprio account di GitHub a CodeGuardian #link(<UC3>)[#underline[\[UC3\]]]
@@ -2726,6 +2727,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 ==== UC17.1 Errore durante la creazione dell'ambiente sandbox <UC17.1>
 #useCase(
   attore: "Orchestratore",
+  attori_secondari: "Docker",
   pre: [
     - Il sistema CodeGuardian ha accettato la richesta di analisi del repository
   ],
