@@ -72,7 +72,7 @@
       ),
       (
         "Redazione e verifica AdR",
-        members.antonio + ", " + members.andrea + ", " + members.berengan,
+        members.antonio + ", " + members.andrea + ", " + members.berengan + ", " + members.alice,
         "2026/02/09",
         "In avanzamento",
       )
