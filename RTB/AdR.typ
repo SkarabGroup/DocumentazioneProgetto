@@ -13,11 +13,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.42.1"
+#let versione = "v0.43.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2026/02/04",
+    "0.43.0",
+    "Classificazione Requisiti per priorità",
+    members.alice,
+  ),
   (
     "2026/02/04",
     "0.42.1",
@@ -571,7 +577,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
     [*Docker*],
     [Piattaforma di containerizzazione utilizzata per eseguire gli agenti in ambienti isolati e replicabili.],
-  
+
     [*GitHub*],
     [Piattaforma di hosting per lo sviluppo di software che fornisce servizi di controllo versione e collaborazione tramite repository Git.],
 
@@ -4287,18 +4293,22 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 = Requisiti di Sistema
 In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati da _Skarab Group_.
 
+Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ delle #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/PdP.pdf")[#underline[*Norme di Progetto*]].
+
 #let fr_counter = counter("FR")
-#let qr_counter = counter("QR")
-#let vr_counter = counter("VR")
+#let qr_ob_counter = counter("QROb")
+#let vr_ob_counter = counter("VROb")
 
-#let FRx = context [FR#fr_counter.step()#fr_counter.display()]
-#let QRx = context [QR#qr_counter.step()#qr_counter.display()]
-#let VRx = context [VR#vr_counter.step()#vr_counter.display()]
+#let FRObx = context [FROb#fr_counter.step()#fr_counter.display()]
+#let FRDex = context [FRDe#fr_counter.step()#fr_counter.display()]
+#let FROpx = context [FROp#fr_counter.step()#fr_counter.display()]
+#let QRObx = context [QROb#qr_ob_counter.step()#qr_ob_counter.display()]
+#let VRObx = context [VROb#vr_ob_counter.step()#vr_ob_counter.display()]
 
-//partono da 1
+// partono da 1
 #fr_counter.step()
-#qr_counter.step()
-#vr_counter.step()
+#qr_ob_counter.step()
+#vr_ob_counter.step()
 
 == Requisiti Funzionali (FR)
 
@@ -4311,432 +4321,438 @@ In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati
   align: (col, row) => (center, left, center).at(col) + horizon,
 
   // UC1
-  [#FRx],
+  [#FRObx],
   [L'Utente non autenticato deve poter visualizzare la pagina di registrazione],
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente non autenticato deve poter inserire l'username nel campo dedicato],
   [#link(<UC1>)[#underline[\[UC1\]]], #link(<UC1.1>)[#underline[\[UC1.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente non autenticato deve poter inserire l'email nel campo dedicato],
   [#link(<UC1>)[#underline[\[UC1\]]], #link(<UC1.2>)[#underline[\[UC1.2\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente non autenticato deve poter inserire la password nel campo dedicato],
   [#link(<UC1>)[#underline[\[UC1\]]], #link(<UC1.3>)[#underline[\[UC1.3\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente non autenticato deve poter inviare la richiesta di registrazione tramite pulsante di conferma],
   [#link(<UC1>)[#underline[\[UC1\]]], #link(<UC1.4>)[#underline[\[UC1.4\]]]],
 
-  [#FRx], [L'username deve avere una lunghezza minima di 4 caratteri], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
+  [#FRObx], [L'username deve avere una lunghezza minima di 4 caratteri], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
 
-  [#FRx], [L'username deve avere una lunghezza massima di 20 caratteri], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
+  [#FRObx], [L'username deve avere una lunghezza massima di 20 caratteri], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
 
-  [#FRx], [L'username deve contenere solo caratteri alfanumerici], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
+  [#FRObx], [L'username deve contenere solo caratteri alfanumerici], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se l'username non rispetta il formato],
   [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
 
-  [#FRx], [L'email deve contenere il carattere '\@'], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
+  [#FRObx], [L'email deve contenere il carattere '\@'], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
 
-  [#FRx], [L'email deve contenere un dominio valido], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
+  [#FRObx], [L'email deve contenere un dominio valido], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se l'email non rispetta il formato],
   [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
 
-  [#FRx], [La password deve avere una lunghezza minima di 8 caratteri], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+  [#FRObx], [La password deve avere una lunghezza minima di 8 caratteri], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
 
-  [#FRx], [La password deve contenere almeno una lettera maiuscola], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+  [#FRObx], [La password deve contenere almeno una lettera maiuscola], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
 
-  [#FRx], [La password deve contenere almeno una lettera minuscola], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+  [#FRObx], [La password deve contenere almeno una lettera minuscola], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
 
-  [#FRx], [La password deve contenere almeno un numero], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+  [#FRObx], [La password deve contenere almeno un numero], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
 
-  [#FRx], [La password deve contenere almeno un carattere speciale], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+  [#FRObx], [La password deve contenere almeno un carattere speciale], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se la password non rispetta i vincoli di formato],
   [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se l'username è già censito],
   [#link(<UC1.4.1>)[#underline[\[UC1.4.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se l'email è già censita],
   [#link(<UC1.4.2>)[#underline[\[UC1.4.2\]]]],
 
   // UC2
-  [#FRx],
+  [#FRObx],
   [L'Utente non autenticato deve poter visualizzare la pagina di autenticazione],
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente non autenticato deve poter inserire lo username per autenticarsi],
   [#link(<UC2>)[#underline[\[UC2\]]], #link(<UC2.1>)[#underline[\[UC2.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente non autenticato deve poter inserire la password per autenticarsi],
   [#link(<UC2>)[#underline[\[UC2\]]], #link(<UC2.2>)[#underline[\[UC2.2\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente non autenticato deve ricevere un messaggio di errore se l'username non è conforme ai vincoli],
   [#link(<UC2.1.1>)[#underline[\[UC2.1.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente non autenticato deve ricevere un messaggio di errore se la password non è conforme],
   [#link(<UC2.2.1>)[#underline[\[UC2.2.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente non autenticato deve ricevere un messaggio di errore se l'username non è censito],
   [#link(<UC2.3.1>)[#underline[\[UC2.3.2.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente registrato deve ricevere un messaggio di errore se la password non è corretta],
   [#link(<UC2.3.2>)[#underline[\[UC2.2.2\]]]],
 
   // UC3
-  [#FRx],
+  [#FRObx],
   [L'Utente autenticato deve poter accedere alla sezione di collegamento account GitHub],
   [#link(<UC3>)[#underline[\[UC3\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter completare l'autorizzazione tramite il reindirizzamento a GitHub e il successivo ritorno automatico all'applicazione per il recupero del codice identificativo],
   [#link(<UC3>)[#underline[\[UC3\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente autenticato deve visualizzare un avviso prima del redirect a GitHub],
   [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter confermare la volontà di procedere con il collegamento a GitHub],
   [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
 
-  [#FRx], [L'Utente deve poter rifiutare il collegamento a GitHub], [#link(<UC3.1.1>)[#underline[\[UC3.1.1\]]]],
+  [#FRObx], [L'Utente deve poter rifiutare il collegamento a GitHub], [#link(<UC3.1.1>)[#underline[\[UC3.1.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se il codice GitHub non viene ricevuto],
   [#link(<UC3.2.1>)[#underline[\[UC3.2.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se il codice non è conforme al formato],
   [#link(<UC3.2.1>)[#underline[\[UC3.2.3\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se il codice è già associato ad altro utente],
   [#link(<UC3.2.2>)[#underline[\[UC3.2.2\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di notifica di fallimento se la condivisione delle informazioni necessarie di GitHub è stato negato],
   [#link(<UC3.3>)[#underline[\[UC3.3\]]]],
 
   // UC4
-  [#FRx], [L'Utente deve poter accedere alla sezione di richiesta analisi], [#link(<UC4>)[#underline[\[UC4\]]]],
+  [#FRObx], [L'Utente deve poter accedere alla sezione di richiesta analisi], [#link(<UC4>)[#underline[\[UC4\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter inserire l'URL del repository GitHub nel campo dedicato],
   [#link(<UC4.1>)[#underline[\[UC4.1\]]]],
 
-  [#FRx], [L'URL deve iniziare con il protocollo 'https://'], [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
+  [#FRObx], [L'URL deve iniziare con il protocollo 'https://'], [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
 
-  [#FRx], [Il dominio dell'URL deve essere 'github.com'], [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
+  [#FRObx], [Il dominio dell'URL deve essere 'github.com'], [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se l'URL non è conforme ai vincoli di formato],
   [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se il repository non è accessibile o è inesistente],
   [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se non inserisce alcun URL],
   [#link(<UC4.1.3>)[#underline[\[UC4.1.3\]]]],
 
-  [#FRx], [L'Utente deve poter selezionare le aree di interesse per l'analisi], [#link(<UC4.2>)[#underline[\[UC4.2\]]]],
+  [#FRObx],
+  [L'Utente deve poter selezionare le aree di interesse per l'analisi],
+  [#link(<UC4.2>)[#underline[\[UC4.2\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se non seleziona alcuna area di interesse],
   [#link(<UC4.2.1>)[#underline[\[UC4.2.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'utente deve poter inviare la richiesta di analisi tramite pulsante di conferma],
   [#link(<UC4.3>)[#underline[\[UC4.3\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un avviso se l'ultimo report è già up-to-date],
   [#link(<UC4.3.1>)[#underline[\[UC4.3.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un avviso se un'analisi è già in elaborazione],
   [#link(<UC4.3.2>)[#underline[\[UC4.3.2\]]]],
 
   // UC5
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter accedere alla sezione di visualizzazione dei report di analisi],
   [#link(<UC5.1>)[#underline[\[UC5.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter visualizzare l'elenco dei report di analisi disponibili],
   [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter selezionare un report dall'elenco per consultarne i dettagli],
   [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un avviso se non ci sono report disponibili per il repository],
   [#link(<UC5.2.1>)[#underline[\[UC5.2.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se non seleziona alcun report],
   [#link(<UC5.2.2>)[#underline[\[UC5.2.2\]]]],
 
-  [#FRx], [L'Utente deve poter selezionare i dati specifici da visualizzare], [#link(<UC5.3>)[#underline[\[UC5.3\]]]],
+  [#FRObx], [L'Utente deve poter selezionare i dati specifici da visualizzare], [#link(<UC5.3>)[#underline[\[UC5.3\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se non seleziona alcun dato specifico],
   [#link(<UC5.3.1>)[#underline[\[UC5.3.1\]]]],
 
-  [#FRx], [L'Utente deve poter visualizzare i dettagli completi dell'analisi], [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
+  [#FRObx],
+  [L'Utente deve poter visualizzare i dettagli completi dell'analisi],
+  [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
 
   // UC6
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter selezionare un intervallo temporale per il confronto],
   [#link(<UC6>)[#underline[\[UC6\]]]],
 
-  [#FRx], [L'Utente deve poter confermare la selezione dell'intervallo temporale], [#link(<UC6>)[#underline[\[UC6\]]]],
+  [#FRObx],
+  [L'Utente deve poter confermare la selezione dell'intervallo temporale],
+  [#link(<UC6>)[#underline[\[UC6\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter modificare l'intervallo temporale dopo averlo selezionato],
   [#link(<UC6>)[#underline[\[UC6\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se tenta di confermare senza aver selezionato un intervallo temporale],
   [#link(<UC6.1>)[#underline[\[UC6.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se l'intervallo temporale non è valido],
   [#link(<UC6.2>)[#underline[\[UC6.2\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un avviso se non ci sono report nel periodo selezionato],
   [#link(<UC6.2.1>)[#underline[\[UC6.2.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se l'intervallo temporale è incoerente],
   [#link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se l'intervallo temporale è troppo ampio],
   [#link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]],
 
   // UC7
-  [#FRx], [L'Utente deve poter visualizzare un grafico comparativo tra report], [#link(<UC7>)[#underline[\[UC7\]]]],
+  [#FRObx], [L'Utente deve poter visualizzare un grafico comparativo tra report], [#link(<UC7>)[#underline[\[UC7\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter interagire con il grafico per visualizzare dettagli specifici di ciascun punto dati],
   [#link(<UC7>)[#underline[\[UC7\]]]],
 
   // UC8
-  [#FRx], [L'Utente deve poter visualizzare una tabella comparativa tra report], [#link(<UC8>)[#underline[\[UC8\]]]],
+  [#FRObx], [L'Utente deve poter visualizzare una tabella comparativa tra report], [#link(<UC8>)[#underline[\[UC8\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'utente, all'interno della tabella, deve poter visualizzare indicatori di variazione rispetto al report precedente],
   [#link(<UC8>)[#underline[\[UC8\]]]],
 
   //UC9
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter visualizzare la sezione del report di analisi relativa all'analisi del codice],
   [#link(<UC9>)[#underline[\[UC9\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter visualizzare il report di analisi statica del codice],
   [#link(<UC9>)[#underline[\[UC9\]]], #link(<UC9.1>)[#underline[\[UC9.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter visualizzare l'analisi delle librerie e dipendenze],
   [#link(<UC9>)[#underline[\[UC9\]]], #link(<UC9.2>)[#underline[\[UC9.2\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter visualizzare il report di analisi della sicurezza OWASP],
   [#link(<UC9>)[#underline[\[UC9\]]], #link(<UC9.3>)[#underline[\[UC9.3\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter visualizzare il numero totale di vulnerabilità del codice],
   [#link(<UC9>)[#underline[\[UC9\]]], #link(<UC9.4>)[#underline[\[UC9.4\]]]],
 
   //UC10
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter visualizzare la sezione del report di analisi relativa all'analisi della documentazione],
   [#link(<UC10>)[#underline[\[UC10\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter visualizzare gli errori di spelling nella documentazione],
   [#link(<UC10>)[#underline[\[UC10\]]], #link(<UC10.1>)[#underline[\[UC10.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter visualizzare la completezza della documentazione rispetto al codice],
   [#link(<UC10>)[#underline[\[UC10\]]], #link(<UC10.2>)[#underline[\[UC10.2\]]]],
 
   //UC11
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter visualizzare la sezione del report di analisi relativa al numero totale di vulnerabilità del repository],
   [#link(<UC11>)[#underline[\[UC11\]]]],
 
   //UC12
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter visualizzare l'area metadati di un report di analisi],
   [#link(<UC12>)[#underline[\[UC12\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter visualizzare la data del report di analisi],
   [#link(<UC12>)[#underline[\[UC12\]]], #link(<UC12.1>)[#underline[\[UC12.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter visualizzare i commit analizzati nel report],
   [#link(<UC12>)[#underline[\[UC12\]]], #link(<UC12.2>)[#underline[\[UC12.2\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter visualizzare il richiedente del report di analisi],
   [#link(<UC12>)[#underline[\[UC12\]]], #link(<UC12.3>)[#underline[\[UC12.3\]]]],
 
   //UC13
-  [#FRx], [L'Utente deve poter disconnettere il proprio account GitHub], [#link(<UC13>)[#underline[\[UC13\]]]],
+  [#FRObx], [L'Utente deve poter disconnettere il proprio account GitHub], [#link(<UC13>)[#underline[\[UC13\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve selezionare il tasto "Disconnetti" per avviare la procedura],
   [#link(<UC13>)[#underline[\[UC13\]]], #link(<UC13.1>)[#underline[\[UC13.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter confermare la disconnessione del proprio account GitHub],
   [#link(<UC13>)[#underline[\[UC13\]]], #link(<UC13.1.1>)[#underline[\[UC13.1.1\]]]],
 
   // UC14
-  [#FRx], [L'Utente deve poter esportare il report di analisi], [#link(<UC14>)[#underline[\[UC14\]]]],
+  [#FRDex], [L'Utente deve poter esportare il report di analisi], [#link(<UC14>)[#underline[\[UC14\]]]],
 
-  [#FRx],
+  [#FRDex],
   [L'Utente deve selezionare il formato di esportazione desiderato],
   [#link(<UC14>)[#underline[\[UC14\]]], #link(<UC14.1>)[#underline[\[UC14.1\]]]],
 
-  [#FRx],
+  [#FRDex],
   [L'Utente deve ricevere un messaggio di errore se non seleziona alcun formato],
   [#link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]],
 
-  [#FRx],
+  [#FRDex],
   [L'Utente deve poter confermare l'esportazione del report],
   [#link(<UC14>)[#underline[\[UC14\]]], #link(<UC14.2>)[#underline[\[UC14.2\]]]],
 
   // UC15
-  [#FRx], [L'Utente deve poter accedere alla sezione di modifica password], [#link(<UC15>)[#underline[\[UC15\]]]],
+  [#FRObx], [L'Utente deve poter accedere alla sezione di modifica password], [#link(<UC15>)[#underline[\[UC15\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'utente deve inserire la password corrente all'interno dell'apposito campo del form di modifica],
   [#link(<UC15>)[#underline[\[UC15\]]], #link(<UC15.1>)[#underline[\[UC15.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se non inserisce la password corrente],
   [#link(<UC15.1.1>)[#underline[\[UC15.1.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se la password corrente è errata],
   [#link(<UC15.1.2>)[#underline[\[UC15.1.2\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve inserire la nuova password nell'apposito campo del form di modifica],
   [#link(<UC15>)[#underline[\[UC15\]]], #link(<UC15.2>)[#underline[\[UC15.2\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se non inserisce la nuova password],
   [#link(<UC15.2.1>)[#underline[\[UC15.2.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se la nuova password non è conforme allo standard],
   [#link(<UC15.2.2>)[#underline[\[UC15.2.2\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se la nuova password è uguale alla precedente],
   [#link(<UC15.2.3>)[#underline[\[UC15.2.3\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter confermare la modifica della password tramite pulsante],
   [#link(<UC15>)[#underline[\[UC15\]]], #link(<UC15.3>)[#underline[\[UC15.3\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere conferma dell'avvenuta modifica della password],
   [#link(<UC15>)[#underline[\[UC15\]]], #link(<UC15.4>)[#underline[\[UC15.4\]]]],
 
   //UC16
-  [#FRx], [L'Utente deve poter visualizzare i suggerimenti di remediation], [#link(<UC16>)[#underline[\[UC16\]]]],
+  [#FRObx], [L'Utente deve poter visualizzare i suggerimenti di remediation], [#link(<UC16>)[#underline[\[UC16\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter visualizzare la lista delle issue identificate],
   [#link(<UC16>)[#underline[\[UC16\]]], #link(<UC16.1>)[#underline[\[UC16.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve ricevere un avviso se non ci sono issue identificate],
   [#link(<UC16.1.1>)[#underline[\[UC16.1.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter visualizzare il dettaglio di ogni suggerimento di remediation],
   [#link(<UC16>)[#underline[\[UC16\]]], #link(<UC16.2>)[#underline[\[UC16.2\]]]],
 
   //UC17
-  [#FRx], [L'Orchestratore deve creare l'ambiente sandbox per l'analisi], [#link(<UC17>)[#underline[\[UC17\]]]],
+  [#FRObx], [L'Orchestratore deve creare l'ambiente sandbox per l'analisi], [#link(<UC17>)[#underline[\[UC17\]]]],
 
-  [#FRx],
+  [#FRObx],
   [Gli errori verificatisi durante la creazione dell'ambiente sandbox devono essere intercettati],
   [#link(<UC17.1>)[#underline[\[UC17.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Orchestratore deve comunicare al frontend gli errori nella creazione del sandbox],
   [#link(<UC17.1.1>)[#underline[\[UC17.1.1\]]]],
 
   //UC18
-  [#FRx],
+  [#FRObx],
   [L'Orchestratore deve leggere le richieste dell'utente per configurare l'analisi],
   [#link(<UC18>)[#underline[\[UC18\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Orchestratore deve eseguire l'analisi completa se richiesta dall'utente],
   [#link(<UC18>)[#underline[\[UC18\]]], #link(<UC18.1>)[#underline[\[UC18.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Orchestratore deve processare le richieste specifiche dell'utente sulle aree da analizzare],
   [#link(<UC18>)[#underline[\[UC18\]]], #link(<UC18.2>)[#underline[\[UC18.2\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Orchestratore deve eseguire l'analisi completa se il repository non è mai stato analizzato],
   [#link(<UC18.2.1>)[#underline[\[UC18.2.1\]]]],
 
   //UC19
-  [#FRx], [Le vulnerabilità delle dipendenze devono essere analizzate], [#link(<UC19>)[#underline[\[UC19\]]]],
+  [#FRObx], [Le vulnerabilità delle dipendenze devono essere analizzate], [#link(<UC19>)[#underline[\[UC19\]]]],
 
-  [#FRx],
+  [#FRDex],
   [L'Utente deve poter accettare le remediation proposte per le vulnerabilità],
   [#link(<UC19>)[#underline[\[UC19\]]], #link(<UC19.1>)[#underline[\[UC19.1\]]]],
 
-  [#FRx],
+  [#FRDex],
   [L'Utente deve poter rifiutare le remediation proposte],
   [#link(<UC19>)[#underline[\[UC19\]]], #link(<UC19.2>)[#underline[\[UC19.2\]]]],
 
   //UC20
-  [#FRx], [Segreti e token esposti devono essere rilevati], [#link(<UC20>)[#underline[\[UC20\]]]],
+  [#FROpx], [Segreti e token esposti devono essere rilevati], [#link(<UC20>)[#underline[\[UC20\]]]],
 
-  [#FRx],
+  [#FROpx],
   [L'Utente deve poter rifiutare le remediation proposte per i segreti rilevati],
   [#link(<UC20>)[#underline[\[UC20\]]], #link(<UC20.1>)[#underline[\[UC20.1\]]]],
 
-  [#FRx],
+  [#FROpx],
   [La revoca automatica di segreti, se integrata con provider, deve poter essere eseguita],
   [#link(<UC20>)[#underline[\[UC20\]]], #link(<UC20.2>)[#underline[\[UC20.2\]]]],
 
-  [#FRx],
+  [#FROpx],
   [L'Utente deve poter visualizzare i risultati del rilevamento segreti],
   [#link(<UC20>)[#underline[\[UC20\]]], #link(<UC20.3>)[#underline[\[UC20.3\]]]],
 
@@ -4745,73 +4761,73 @@ In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati
   //UC23
 
   //UC24
-  [#FRx], [Deve essere suggerito refactoring del codice], [#link(<UC24>)[#underline[\[UC24\]]]],
+  [#FRObx], [Deve essere suggerito refactoring del codice], [#link(<UC24>)[#underline[\[UC24\]]]],
 
-  [#FRx],
+  [#FROpx],
   [I refactor devono poter essere applicati automaticamente sotto supervisione],
   [#link(<UC24>)[#underline[\[UC24\]]], #link(<UC24.2>)[#underline[\[UC24.2\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter visualizzare i suggerimenti di refactoring],
   [#link(<UC24>)[#underline[\[UC24\]]], #link(<UC24.3>)[#underline[\[UC24.3\]]]],
 
   //UC25
-  [#FRx], [Devono poter essere generati changelog e release notes], [#link(<UC25>)[#underline[\[UC25\]]]],
+  [#FROpx], [Devono poter essere generati changelog e release notes], [#link(<UC25>)[#underline[\[UC25\]]]],
 
-  [#FRx],
+  [#FROpx],
   [Le note di breaking change devono essere rilevate e segnalate],
   [#link(<UC25>)[#underline[\[UC25\]]], #link(<UC25.1>)[#underline[\[UC25.1\]]]],
 
-  [#FRx],
+  [#FROpx],
   [La pubblicazione su GitHub Release deve avvenire automaticamente],
   [#link(<UC25>)[#underline[\[UC25\]]], #link(<UC25.2>)[#underline[\[UC25.2\]]]],
 
-  [#FRx],
+  [#FROpx],
   [L'Utente deve poter visualizzare, modificare e approvare il changelog generato],
   [#link(<UC25>)[#underline[\[UC25\]]], #link(<UC25.3>)[#underline[\[UC25.3\]]]],
 
   //UC26
-  [#FRx], [I test e il coverage del codice devono essere analizzati], [#link(<UC26>)[#underline[\[UC26\]]]],
+  [#FRObx], [I test e il coverage del codice devono essere analizzati], [#link(<UC26>)[#underline[\[UC26\]]]],
 
-  [#FRx],
+  [#FROpx],
   [Devono poter essere rieseguiti test intermittenti per conferma],
   [#link(<UC26>)[#underline[\[UC26\]]], #link(<UC26.1>)[#underline[\[UC26.1\]]]],
 
-  [#FRx],
+  [#FRObx],
   [Devono essere suggeriti test addizionali per coprire gap di coverage],
   [#link(<UC26>)[#underline[\[UC26\]]], #link(<UC26.2>)[#underline[\[UC26.2\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve poter visualizzare il report di test e coverage],
   [#link(<UC26>)[#underline[\[UC26\]]], #link(<UC26.3>)[#underline[\[UC26.3\]]]],
 
   //UC27
-  [#FRx], [Devono poter essere applicate policy CI/CD pre-merge], [#link(<UC27>)[#underline[\[UC27\]]]],
+  [#FROpx], [Devono poter essere applicate policy CI/CD pre-merge], [#link(<UC27>)[#underline[\[UC27\]]]],
 
-  [#FRx],
+  [#FROpx],
   [Devono poter essere gestite eccezioni manuali alle policy],
   [#link(<UC27>)[#underline[\[UC27\]]], #link(<UC27.1>)[#underline[\[UC27.1\]]]],
 
-  [#FRx],
+  [#FROpx],
   [Devono poter essere applicate policy dinamiche per branch differenti],
   [#link(<UC27>)[#underline[\[UC27\]]], #link(<UC27.2>)[#underline[\[UC27.2\]]]],
 
-  [#FRx],
+  [#FROpx],
   [L'Utente deve poter visualizzare i risultati delle policy applicate],
   [#link(<UC27>)[#underline[\[UC27\]]], #link(<UC27.3>)[#underline[\[UC27.3\]]]],
 
   //UC28
-  [#FRx], [Devono poter essere generati report programmabili e inviati alert], [#link(<UC28>)[#underline[\[UC28\]]]],
+  [#FROpx], [Devono poter essere generati report programmabili e inviati alert], [#link(<UC28>)[#underline[\[UC28\]]]],
 
-  [#FRx],
+  [#FROpx],
   [L'Utente deve poter configurare filtri e template per i report],
   [#link(<UC28>)[#underline[\[UC28\]]], #link(<UC28.1>)[#underline[\[UC28.1\]]]],
 
-  [#FRx],
+  [#FROpx],
   [Devono poter essere eseguite azioni automatiche su alert critici],
   [#link(<UC28>)[#underline[\[UC28\]]], #link(<UC28.2>)[#underline[\[UC28.2\]]]],
 
-  [#FRx],
+  [#FROpx],
   [L'Utente deve poter visualizzare i report programmati generati],
   [#link(<UC28>)[#underline[\[UC28\]]], #link(<UC28.3>)[#underline[\[UC28.3\]]]],
 
@@ -4834,50 +4850,50 @@ In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati
   //UC37
 
   //UC38
-  [#FRx],
+  [#FRObx],
   [Il sistema Back-end deve permettere all'Orchestratore di richiedere il salvataggio del report di analisi],
   [#link(<UC38>)[#underline[\[UC38\]]]],
 
-  [#FRx],
+  [#FRObx],
   [Il sistema Back-end deve archiviare in modo permanente il report finale nel database],
   [#link(<UC38>)[#underline[\[UC38\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Orchestratore deve poter notificare al Front-end l'impossibilità di salvare il report in caso di errore interno],
   [#link(<UC38>)[#underline[\[UC38\]]], #link(<UC38.1>)[#underline[\[UC38.1\]]]],
 
   //UC39
-  [#FRx],
+  [#FRObx],
   [L'Orchestratore deve poter elaborare i dati dei singoli agenti per calcolare metriche statistiche globali],
   [#link(<UC39>)[#underline[\[UC39\]]]],
 
-  [#FRx],
+  [#FRObx],
   [Il sistema Back-end deve poter memorizzare le metriche aggregate per consentire la visualizzazione di grafici e tabelle],
   [#link(<UC39>)[#underline[\[UC39\]]]],
 
-  [#FRx],
+  [#FRObx],
   [Il sistema deve poter segnalare al Front-end il mancato aggiornamento delle metriche in caso di errore del Back-end],
   [#link(<UC39>)[#underline[\[UC39\]]], #link(<UC39.1>)[#underline[\[UC39.1\]]]],
 
   //UC40
-  [#FRx],
+  [#FRObx],
   [Il sistema Front-end deve poter trasmettere in modo sicuro le credenziali al sistema Back-end],
   [#link(<UC40>)[#underline[\[UC40\]]]],
 
-  [#FRx],
-  [l'Utente deve ricevere un messaggio di errore se il trasferimento delle credenziali non avviene],
+  [#FRObx],
+  [L'Utente deve ricevere un messaggio di errore se il trasferimento delle credenziali non avviene],
   [#link(<UC40>)[#underline[\[UC40\]]], #link(<UC40.1>)[#underline[\[UC40.1\]]]],
 
   //UC41
-  [#FRx],
+  [#FRObx],
   [Il sistema Front-end deve poter scambiare il codice OAuth GitHub con un token di accesso persistente],
   [#link(<UC41>)[#underline[\[UC41\]]]],
 
-  [#FRx],
+  [#FRObx],
   [Il sistema Back-end deve associare il token di accesso GitHub al profilo dell'utente nel database],
   [#link(<UC41>)[#underline[\[UC41\]]]],
 
-  [#FRx],
+  [#FRObx],
   [L'Utente deve essere notificato se il sistema GitHub non da l'autorizzazione durante lo scambio del codice OAuth],
   [#link(<UC41>)[#underline[\[UC41\]]], #link(<UC41.1>)[#underline[\[UC41.1\]]]],
 )
@@ -4894,32 +4910,32 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
   align: (col, row) => (center, left, center).at(col) + horizon,
 
-  [#QRx],
+  [#QRObx],
   [È necessario fornire un diagramma
     architetturale completo che illustri la struttura multiagente e le interazioni tra componenti],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Obiettivi"],
 
-  [#QRx],
+  [#QRObx],
   [Deve essere fornita documentazione tecnica esaustiva del sistema, includendo swagger API e documentazione descrittiva del progetto],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
-  [#QRx],
+  [#QRObx],
   [Il codice prodotto deve raggiungere una copertura minima del 70% tramite Test di Unità automatizzati],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
-  [#QRx],
+  [#QRObx],
   [L'applicativo deve essere creato seguendo principi di modularità per consentire l'aggiunta di nuovi agenti di analisi],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
-  [#QRx],
+  [#QRObx],
   [Deve essere fornito un sistema di Bug Reporting strutturato per tracciare e gestire le anomalie riscontrate],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
-  [#QRx],
+  [#QRObx],
   [È necessario utilizzare appositi sistemi di versionamento del codice],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
-  [#QRx],
+  [#QRObx],
   [È necessario rispettare tutte le norme
     presenti nelle #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[*Norme di Progetto*]],
   [Interno],
@@ -4936,31 +4952,31 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
   align: (col, row) => (center, left, center).at(col) + horizon,
 
-  [#VRx],
+  [#VRObx],
   [Il Backend e l'Orchestratore devono essere sviluppati utilizzando Node.js o Python],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
 
-  [#VRx],
+  [#VRObx],
   [Il Frontend deve essere sviluppato utilizzando React.js],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
 
-  [#VRx],
+  [#VRObx],
   [Il Database deve essere implementato utilizzando MongoDB o PostgreSQL],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
 
-  [#VRx],
+  [#VRObx],
   [L'architettura deve essere ospitata su infrastruttura cloud AWS],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
 
-  [#VRx],
+  [#VRObx],
   [Devono essere utilizzate GitHub Actions per implementare pipeline CI/CD],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
 
-  [#VRx],
+  [#VRObx],
   [Il codice sorgente deve essere versionato utilizzando sistemi come Git o repository online],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
-  [#VRx],
+  [#VRObx],
   [L'analisi di sicurezza deve essere conforme agli standard OWASP Top 10],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "OWASP"],
 )
