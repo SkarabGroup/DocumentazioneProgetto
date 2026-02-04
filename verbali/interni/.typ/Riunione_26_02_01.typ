@@ -7,7 +7,8 @@
       "2026-02-03",
       "1.0.0",
       "Prima stesura del documento",
-      members.antonio
+      members.antonio,
+      members.andrea
     ),
   ),
 
@@ -16,7 +17,7 @@
      #members.alice,
      #members.antonio,
      #members.andrea,
-     #members.martinello]
+     #members.martinello #v(0.3cm)]
   ),
 
   assenze: (
@@ -29,7 +30,7 @@
 
     = Ordine del giorno
     == Argomenti proposti
-    #let punto1 = "Discussione sul lavoro svolto riguardo il Proof of Concept (PoC) e la redazione dei documenti e la loro verifica in vista per la RTB"
+    #let punto1 = "Discussione sul lavoro svolto riguardo il Proof of Concept (PoC), la redazione dei documenti e la loro verifica in vista per la RTB"
     #let punto2 = "Pianificazione delle attività che seguiranno nel quarto sprint"
     + #punto1.
     + #punto2.
@@ -59,13 +60,13 @@
     = Azioni e responsabilità
     #tabellaAzioni((
       (
-        "Continuamento dello sviluppo PoC",
+        "Continuazione sviluppo PoC",
         members.kevin + ", " + members.suar + ", " + members.berengan + ", " + members.martinello,
         "2026/02/09",
         "In avanzamento",
       ),
       (
-        "Modifiche e revisione NdP, PdP, PdQ",
+        "Modifiche e revisione NdP, PdP e PdQ",
         members.andrea + ", " + members.andrea + ", " + members.suar + ", " + members.kevin + ", " + members.alice,
         "2026/02/09",
         "In stato di rifinitura",

@@ -7,7 +7,8 @@
       "2026-01-17",
       "1.0.0",
       "Prima stesura del documento",
-      members.kevin
+      members.kevin,
+      members.andrea
     ),
   ),
 
@@ -49,8 +50,8 @@
     === Punto 1: #punto1
     #puntoOdg(
       punto1,
-      "Un componente per ogni sotto team ha esposto il punto a cui si trova il proprio lavoro di redazione e verifica dei documenti di progetto per la RTB. La redazione dell'Analisi dei Requisiti procede con un ritmo inferiore rispetto a quanto pianificato, mentre PdP, PdQ e NdP risultano in fase di verifica, In seguito Zago Alice, ha mostrato al team i grafici per il PdQ",
-      decisione: "Il team ha deciso che PdP, PdQ e NdP abbiano solo bisogno di verifica, anche i grafici dl PdQ sono stati approvati. Per l'AdR, il team ha bisogno di svilupparlo ulteriormente nel prossimo sprint.",
+      "Un componente per ogni sottoteam ha esposto lo stato di avanzamento del proprio lavoro riguardo alle attività di redazione e verifica della documentazione per la RTB. La redazione dell'Analisi dei Requisiti procede con un ritmo inferiore rispetto a quanto pianificato, mentre PdP, PdQ e NdP risultano in fase di verifica. In seguito Zago Alice, ha mostrato al team i grafici per il PdQ",
+      decisione: "Il team ha deciso che PdP, PdQ e NdP necessitino solo di verifica. I grafici del PdQ sono stati approvati. Il team ha pianificato un ulteriore approfondimento dell'AdR durante il prossimo sprint",
     )
 
     === Punto 2: #punto2
