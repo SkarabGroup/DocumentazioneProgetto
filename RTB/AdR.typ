@@ -13,11 +13,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.42.0"
+#let versione = "v0.42.1"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2026/02/04",
+    "0.42.1",
+    "Sistemata la sezione Attori + immagini separate per Front-end e Back-end",
+    members.andrea,
+  ),
   (
     "2026/02/03",
     "0.42.0",
@@ -521,9 +527,18 @@ Di seguito sono elencati le componenti di un caso d'uso del sistema con relativa
 
 Di seguito sono elencati gli attori principali che interagiscono con il sistema software #def("Code Guardian"):
 
+- Lato Front-end:
+
 #figure(
-  image("../assets/Actors.png", width: 70%),
-  caption: [Attori del sistema CodeGuardian],
+  image("../assets/Attori_frontend.png", width: 70%),
+  caption: [Attori del sistema CodeGuardian lato Front-end],
+)
+
+- Lato Back-end:
+
+#figure(
+  image("../assets/Attori_backend.png", width: 70%),
+  caption: [Attori del sistema CodeGuardian lato Back-end],
 )
 #figure(
   table(
@@ -536,7 +551,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     inset: 10pt,
     table.header([*Attore*], [*Descrizione*]),
 
-    [*Utente non registrato*],
+    [*Utente non autenticato*],
     [Utente che non possiede un account CodeGuardian e desidera registrarsi per utilizzare il sistema.],
 
     [*Utente registrato*],
@@ -551,8 +566,23 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     [*Utente autenticato avanzato*],
     [Utente autenticato che ha collegato con successo il proprio account CodeGuardian ad un account GitHub e può usufruire di funzionalitá avanzate del sistema.],
 
-    [*Sistema GitHub*],
+    [*Orchestratore*],
+    [Agente responsabile della gestione e coordinamento delle attività degli altri agenti all'interno del sistema.],
+
+    [*Docker*],
+    [Piattaforma di containerizzazione utilizzata per eseguire gli agenti in ambienti isolati e replicabili.],
+  
+    [*GitHub*],
     [Piattaforma di hosting per lo sviluppo di software che fornisce servizi di controllo versione e collaborazione tramite repository Git.],
+
+    [*OWASP ZAP*],
+    [Strumento di analisi per le scansioni di sicurezza mirate a verificare la conformità del sistema agli standard OWASP],
+
+    [*SonarQube/Semgrep*],
+    [Strumenti di analisi statica del codice utilizzati per rilevare vulnerabilità, bug e problemi di qualità nel codice sorgente.],
+
+    [*OpenAI*],
+    [Servizio di intelligenza artificiale utilizzato per l'analisi semantica della documentazione e la generazione di suggerimenti avanzati di refactoring e remediation.],
   ),
   caption: [Attori principali del sistema CodeGuardian],
 )
