@@ -308,3 +308,7 @@ Per ogni riunione (interna o con esterni) viene redatto un *Verbale* che riporta
 - *Comunicazione*: #def("Slack"), #def("Telegram"), #def("Discord").
 - *Diagrammi*: Draw.io.
 - *Project Management*: #def("Jira").
+
+= Appendici
+== Standard per le date 
+Le date all'interno del progetto devono seguire il formato `AAAA/MM/GG` (es. 2025/12/31).

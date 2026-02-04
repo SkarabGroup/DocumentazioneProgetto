@@ -1,18 +1,4 @@
 :root {
-  --bg: #F9FAFB; 
-  --text: #1F1A1B;
-  --primary: #5E2129;       
-  --primary-dark: #3D151A;
-  --primary-light: #7D2E39;
-  --accent: #D4A373;
-  --accent-hover: #E9C46A; 
-  --accent-text: #5E2129;
-  --surface: #FFFFFF;
-  --shadow: rgba(94, 33, 41, 0.15); 
-  --shadow-strong: rgba(94, 33, 41, 0.4);
-}
-
-.dark-theme {
   --bg: #120B0D;
   --text: #EAE0E2;
   --primary: #8F323F;       
@@ -67,7 +53,7 @@ header h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--surface);
+  background-color: white;
 }
 
 .logo-circle img {

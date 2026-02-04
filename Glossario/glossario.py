@@ -117,7 +117,7 @@ def generate_html(yaml_file, output_file, version="v0.8.0"):
 
 if __name__ == "__main__":
     # Configura qui i path
-    YAML_FILE = "../RTB/glossario.yml"
+    YAML_FILE = "RTB/glossario.yml"
     OUTPUT_FILE = "glossario.html"
     VERSION = "v0.8.0"
     
@@ -128,4 +128,4 @@ if __name__ == "__main__":
     
     # Genera HTML
     generate_html(YAML_FILE, OUTPUT_FILE, VERSION)
-    print(f"\n✅ Fatto! Apri {OUTPUT_FILE} nel browser per testare.")
+    print(f"\nFatto! Apri {OUTPUT_FILE} nel browser per testare.")

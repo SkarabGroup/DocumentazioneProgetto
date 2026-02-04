@@ -5,7 +5,7 @@
   heading(level: 1)[Presenze]
 
   let presentiText = if type(presenti) == "list" { presenti.join(", ") } else { presenti }
-  let assentiText  = if type(assenti)  == "list" { assenti.join(", ") }  else { assenti }
+  let assentiText = if type(assenti) == "list" { assenti.join(", ") } else { assenti }
 
   grid(
     columns: (1.5fr, 0.5fr, 2fr),
@@ -97,8 +97,6 @@
 
 
   body
-
-  chiusuraVerbale("11:00", members.suar)
 }
 
 
