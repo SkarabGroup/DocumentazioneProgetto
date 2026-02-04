@@ -11,13 +11,19 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.3.0"
-#set heading(numbering: "1,1,1")
+#let versione = "v0.4.0"
+#set heading(numbering: "1.1.1")
 
 #titlePage("Norme di Progetto", versione)
 #set page(numbering: "1", header: header("Norme di Progetto"), footer: footer())
 
 #let history = (
+  (
+    "2026/02/04",
+    "0.4.0",
+    "Rielaborazione delle Norme di Progetto relative al Piano di Progetto",
+    members.suar,
+  ),
   (
     "2026/01/15",
     "0.3.0",
@@ -68,35 +74,64 @@
 
 = Introduzione
 
-== Scopo del documento
-Il presente documento definisce le norme, le convenzioni, gli strumenti e i processi che i membri del gruppo #def("Skarab Group") sono tenuti a rispettare durante l'intero ciclo di vita del progetto #def("Code Guardian"). L'obiettivo è garantire uniformità, qualità e manutenibilità dei prodotti realizzati, facilitando la collaborazione interna e la comunicazione con l'esterno.
+== Contesto del Progetto
+Il presente documento descrive le #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#piano-di-progetto")[#def[Norme di Progetto]] relativo al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]], commissionato dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
 
-== Scopo del prodotto
-#def("Code Guardian") è una piattaforma software progettata per l'analisi automatizzata della qualità del codice e della documentazione di #def("repository") #def("GitHub"). Il sistema mira a supportare sviluppatori e manager fornendo metriche dettagliate e feedback semantico tramite agenti intelligenti.
+L’obiettivo del progetto è lo sviluppo di una piattaforma ad #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] per l’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e la #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] automatizzata delle vulnerabilità presenti nei repository di codice sorgente, in conformità a quanto specificato nel #link(<capitolato>)[#underline[capitolato *C2*]].
+La piattaforma mira a supportare l’analisi statica del codice e l’individuazione di criticità di sicurezza, fornendo indicazioni di correzione mediante meccanismi automatizzati basati su modelli di linguaggio (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]).
+
+== Finalità del Documento
+Le Norme di Progetto definiscono il quadro di riferimento metodologico, organizzativo e tecnologico adottato per lo sviluppo del sistema software.
+
+Il documento ha valore vincolante per l’intero gruppo di lavoro e persegue i seguenti obiettivi:
+* stabilire un insieme di regole comuni e convenzioni condivise atte a garantire uniformità nello sviluppo del prodotto software;
+* individuare e descrivere gli strumenti, le tecnologie e gli ambienti di lavoro adottati dal gruppo;
+* formalizzare i processi operativi, organizzativi e di controllo applicati nel corso del progetto;
+* assicurare la coerenza delle attività progettuali con gli standard industriali e le buone pratiche di riferimento.
+
+Il rispetto delle norme definite nel presente documento è obbligatorio per tutti i membri del gruppo di lavoro e costituisce un requisito fondamentale per garantire qualità, tracciabilità e controllo dell’intero ciclo di sviluppo.
 
 == Glossario
-I termini tecnici o ambigui sono definiti nel glossario di progetto (`RTB/glossario.yml`).
-Nel testo, i termini importanti possono essere evidenziati utilizzando la macro `#def`, questo permette di rendere la parola un link al glossario presente nel sito del progetto.
+Al fine di prevenire ambiguità interpretative, è stato redatto un glossario che definisce in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio utilizzati all’interno della documentazione.
 
-== Standard Industriali e Riferimenti
-Il progetto adotta standard industriali riconosciuti per garantire qualità, conformità e best practices nel ciclo di vita del software. Di seguito i principali riferimenti:
+Nel testo, *ogni termine evidenziato tramite sottolineatura*, qualora *non sia esplicitamente indicato come collegamento a un documento o a una sezione specifica*, rimanda alla voce corrispondente del Glossario pubblicato sul sito ufficiale del gruppo, consentendo al lettore di accedere direttamente alla definizione associata.
 
-- *IEEE 830 - Standard for Software Requirements Specifications*: Guida alla documentazione dei requisiti funzionali e non funzionali, inclusa la classificazione (obbligatori, desiderabili, opzionali) e l'uso di casi d'uso.
+La versione più recente del Glossario è disponibile al seguente link:
+#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario]].
 
- -Ultimo accesso: 2026/01/02.
+== Riferimenti
 
-- *IEEE 1016 - Recommended Practice for Software Design Descriptions*: Fornisce linee guida per descrivere l'architettura software, inclusi diagrammi UML e design pattern (es. MVC, Singleton).
+=== Riferimenti Normativi
+I seguenti documenti hanno valore vincolante per la redazione del Piano di Progetto e per la definizione delle regole da rispettare durante il ciclo di vita del prodotto software:
 
- -Ultimo accesso: 2026/01/02.
+- *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> \
+  #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
+  (ultimo accesso: *04/02/2026*)
 
-- *IEEE 829 - Standard for Software and System Test Documentation*: Definisce la struttura per piani di test, casi di test, procedure e report per unit, integration e system testing.
+- *IEEE 829 – Standard for Software and System Test Documentation*: definizione della struttura dei  piani di test, casi di test, procedure e report. \
+  #underline[#link("https://ieeexplore.ieee.org/document/4578383")] \
+  (ultimo accesso: *04/02/2026*)
 
- -Ultimo accesso: 2026/01/02.
-- *ISO/IEC 12207 - Software Life Cycle Processes*: Framework internazionale per processi di acquisizione, fornitura, sviluppo, operazione, manutenzione e disposal del software, supportando approcci iterativi e gestione del rischio.
+- *IEEE 830 – Standard for Software Requirements Specifications*: guida alla redazione e classificazione dei requisiti funzionali e non funzionali.
+  #underline[#link("https://ieeexplore.ieee.org/document/720574")] \
+  (ultimo accesso: *04/02/2026*)
 
- -Ultimo accesso: 2026/01/02.
+- *IEEE 1016 – Recommended Practice for Software Design Descriptions*: linee guida per la descrizione dell’architettura software e dei principali design pattern.
+  #underline[#link("https://ieeexplore.ieee.org/document/741934")] \
+  (ultimo accesso: *04/02/2026*)
 
-Questi standard sono integrati nei processi di analisi, progettazione, verifica e documentazione per assicurare tracciabilità e qualità.
+- *ISO/IEC 12207:1995 – Software Life Cycle Processes*: framework internazionale per la gestione dei processi di sviluppo, manutenzione e dismissione del software.
+  #underline[#link("https://ieeexplore.ieee.org/document/8100771")] \
+  (ultimo accesso: *04/02/2026*)
+
+=== Riferimenti Informativi
+- *Dispense del corso di Ingegneria del Software relative ai Processi di Ciclo di Vita del Software*. \
+  #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T02.pdf")] \
+  (ultimo accesso: *31/01/2026*)
+
+- *Dispense del corso di Ingegneria del Software relative alla Gestione di Progetto*. \
+  #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T04.pdf")] \
+  (ultimo accesso: *31/01/2026*)
 
 = Processi Primari
 

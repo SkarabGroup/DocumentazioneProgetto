@@ -222,12 +222,18 @@ M:
     acronimo: MDP
     descrizione: Piattaforma che consente a più fornitori di servizi di offrire le loro soluzioni attraverso un'unica interfaccia, facilitando l'accesso e la gestione dei servizi.
   
+  Microsoft Teams:  
+    descrizione: Piattaforma di comunicazione e collaborazione sviluppata da Microsoft, che integra chat, videoconferenze, archiviazione di file e integrazione con altre applicazioni Microsoft 365.
+
   Milestone:
     descrizione: Punto di riferimento significativo nel ciclo di vita di un progetto, che indica il completamento di una fase importante o il raggiungimento di un obiettivo specifico.
 
   Mock:
     descrizione: Oggetto simulato che riproduce il comportamento di componenti reali (es. database, API esterne) in modo controllato, utilizzato durante i test software per isolare l'unità da verificare.
-
+  
+  MongoDB:
+    descrizione: Database NoSQL orientato ai documenti che utilizza un formato di dati simile a JSON per memorizzare le informazioni in modo flessibile e scalabile.
+  
   Monitoraggio:
     descrizione: Attività continua di raccolta e analisi dei dati di progetto per verificare che l'avanzamento sia allineato con quanto pianificato.
 
@@ -266,9 +272,11 @@ P:
     descrizione: Processo decisionale che definisce le azioni necessarie per raggiungere gli obiettivi del progetto, stabilendo sequenze logiche, tempistiche e allocazione delle risorse.
 
   Piano di Progetto:
+    acronimo: PdP
     descrizione: Documento che definisce gli obiettivi, le attività, le risorse, i tempi e i costi necessari per completare un progetto software con successo.
   
   Piano di Qualifica:
+    acronimo: PdQ
     descrizione: Documento strategico che definisce obiettivi, requisiti, processi e standard di qualità per guidare lo sviluppo di un prodotto software. Esso comprende tre elementi fondamentali, cioè il Piano della Qualità, il Controllo di Qualità e il Miglioramento continuo.
  
   Project Management Institute:
