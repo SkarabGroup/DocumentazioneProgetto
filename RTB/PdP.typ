@@ -11,12 +11,14 @@
     "0.7.2",
     "Rielaborazione sezione introduzione, analisi dei rischi, preventivo e monitoraggio",
     members.suar,
+    members.antonio
   ),
   (
     "2026/01/16",
     "0.7.1",
     "Retrospettiva degli Sprint 1 e 2",
     members.suar,
+    members.antonio
   ),
   (
     "2026/01/12",
@@ -123,7 +125,7 @@ Il documento costituisce il riferimento primario per il gruppo di lavoro e per g
 - monitorare l’avanzamento del progetto mediante il confronto sistematico tra preventivo e consuntivo al termine di ogni #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#sprint")[#def[sprint]].
 
 == Prodotti Attesi
-I prodotti del progetto vengono rilasciati in modo incrementale in corrispondenza di due principali #def[baseline]: la *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requirements-and-technology-baseline")[#def[Requirements and Technology Baseline]]* (RTB) e la *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#product-baseline")[#def[Product Baseline]]* (PB).
+I prodotti del progetto vengono rilasciati in modo incrementale in corrispondenza di due principali #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#baseline")[#def[baseline]]: la *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requirements-and-technology-baseline")[#def[Requirements and Technology Baseline]]* (RTB) e la *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#product-baseline")[#def[Product Baseline]]* (PB).
 
 === Revisione dei Requisiti e della Tecnologia (RTB)
 Il gruppo ha fissato come obiettivo per la candidatura alla revisione RTB la data del *09/02/2026*.
@@ -145,8 +147,7 @@ Entro tale termine, il gruppo fornirà:
 - *Manualistica*:
   - *Manuale Utente*: guida all’utilizzo della piattaforma;
   - *Manuale Amministratore*: guida all’installazione, configurazione e manutenzione del sistema;
-- *Documentazione Finale*: versioni definitive ed approvate di tutti i documenti normativi, gestionali e di supporto;
-- *Consuntivo Finale*: analisi conclusiva di costi, tempi e qualità, comprensiva degli scostamenti rispetto al preventivo.
+- *Documentazione Finale*: versioni definitive ed approvate di tutti i documenti normativi, gestionali e di supporto.
 
 == Glossario
 Al fine di prevenire ambiguità interpretative, è stato redatto un glossario che definisce in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio utilizzati all’interno della documentazione.
@@ -195,9 +196,9 @@ Il processo di gestione dei rischi viene eseguito:
 - in corrispondenza delle principali baseline;
 - in occasione di variazioni significative di requisiti, architettura o risorse.
 
-Ciò consente al #def[team di progetto] di adattare tempestivamente le strategie di mitigazione in funzione dell’evoluzione del contesto progettuale.
+Ciò consente al team del progetto di adattare tempestivamente le strategie di mitigazione in funzione dell’evoluzione del contesto progettuale.
 
-I rischi individuati vengono raggruppati in macro-categorie omogenee (tecnologiche, interpersonali e organizzative) al fine di facilitarne l’analisi e l’assegnazione delle responsabilità.
+I rischi individuati vengono raggruppati in macro-categorie (tecnologiche, interpersonali e organizzative) al fine di facilitarne l’analisi e l’assegnazione delle responsabilità.
 
 Le modalità operative e i criteri metodologici adottati per l’analisi e la valutazione dei rischi sono definiti nel documento *Norme di Progetto*, al quale si rimanda per la descrizione dettagliata del processo di di gestione dei rischi.
 
@@ -386,8 +387,8 @@ Questa categoria raggruppa le criticità legate alla pianificazione temporale, a
 #schedaRischio(
   "RCO1",
   "Sottostima della complessità dei task",
-  [Stime eccessivamente ottimistiche possono produrre ritardi a cascata sul #def[Gantt] e sulle scadenze di sprint e milestone. Il rischio compromette la capacità di consegnare incrementi completi e verificabili entro i tempi previsti.],
-  [L’inesperienza su tecnologie LLM e bias cognitivi come #def[Optimism Bias] portano a sottovalutare incertezze e rework. La scarsa scomposizione delle attività rende più difficile intercettare deviazioni in anticipo.],
+  [Stime eccessivamente ottimistiche possono produrre ritardi a cascata sul #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#Gantt")[#def[Gantt]] e sulle scadenze di sprint e milestone. Il rischio compromette la capacità di consegnare incrementi completi e verificabili entro i tempi previsti.],
+  [L’inesperienza su tecnologie LLM e bias cognitivi come #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#optimism-bias")[#def[Optimism Bias]] portano a sottovalutare incertezze e rework. La scarsa scomposizione delle attività rende più difficile intercettare deviazioni in anticipo.],
   [Stime a tre punti per i task critici e scomposizione granulare delle attività per ridurre l’incertezza. Riesame delle stime in sprint planning usando dati di consuntivo degli sprint precedenti.],
   [Resource leveling e riallocazione delle risorse dalle attività non critiche. Riduzione dello scope privilegiando l’MVP e posticipando requisiti opzionali.],
   "Alta", // P=3
@@ -436,8 +437,8 @@ Questa categoria raggruppa le criticità legate alla pianificazione temporale, a
   "Documentazione frammentata o non conforme",
   [Disomogeneità stilistica, terminologica o strutturale tra documenti può ridurre leggibilità e aumentare ambiguità interpretative. Incoerenze tra versioni possono inoltre generare non conformità alle norme interne e alle aspettative di revisione.],
   [La redazione parallela da parte di più autori, senza controlli sistematici, porta facilmente a divergenze di formato e contenuto. Cambiamenti non propagati e uso non uniforme del glossario accentuano la frammentazione.],
-  [Uso di template #def[Typst] vincolanti e glossario centralizzato come riferimento terminologico. Ruolo di Verificatore distinto dal Redattore e checklist di conformità applicata a ogni rilascio.],
-  [Armonizzazione finale (“One Voice”): revisione globale effettuata da un singolo editor prima del rilascio. Correzione delle incoerenze e riallineamento dei riferimenti incrociati tra documenti.],
+  [Uso di template #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#typst")[#def[Typst]] vincolanti e glossario centralizzato come riferimento terminologico. Ruolo di Verificatore distinto dal Redattore e checklist di conformità applicata a ogni rilascio.],
+  [Armonizzazione finale: revisione globale effettuata da un singolo editor prima del rilascio. Correzione delle incoerenze e riallineamento dei riferimenti incrociati tra documenti.],
   "Media", // P=2
   "Basso", // I=1 -> R=2 (Basso)
 )
@@ -448,9 +449,9 @@ In questa sezione viene descritta la schedulazione delle attività di progetto, 
 
 Il ciclo di vita del progetto è scandito da due milestone principali, in corrispondenza delle quali vengono stabilite le seguenti baseline:
 
-1. *Requirements and Technology Baseline (#def[RTB]):* baseline iniziale, stabilita al termine della milestone di revisione, che sancisce il consolidamento dei requisiti, della documentazione normativa e la validazione tecnologica tramite Proof of Concept.
+1. *Requirements and Technology Baseline (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requirements-and-technology-baseline")[#def[RTB]]):* baseline iniziale, stabilita al termine della milestone di revisione, che sancisce il consolidamento dei requisiti, della documentazione normativa e la validazione tecnologica tramite Proof of Concept.
 
-2. *Product Baseline (#def[PB]):* baseline finale, stabilita al termine della milestone di accettazione, che certifica il completamento del prodotto MVP, l’esecuzione dei test di sistema e il rilascio finale.
+2. *Product Baseline (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#product-baseline")[#def[PB]]):* baseline finale, stabilita al termine della milestone di accettazione, che certifica il completamento del prodotto MVP, l’esecuzione dei test di sistema e il rilascio finale.
 
 == Pianificazione a Breve Termine (Verso la RTB)
 Questa fase copre il periodo dall'avvio del progetto fino al colloquio per la RTB.
@@ -476,7 +477,7 @@ La fase è suddivisa in 4 iterazioni (*Sprint*). Le date sono state definite ten
     [*Sprint 1*], [19/12/2025], [03/01/2026],
     [*Sprint 2*], [03/01/2026], [17/01/2026],
     [*Sprint 3*], [17/01/2026], [31/01/2026],
-    [*Sprint 4*], [31/01/2026], [06/02/2026],
+    [*Sprint 4*], [31/01/2026], [09/02/2026],
     // Esteso per coprire finitura PoC
   ),
   caption: [Calendario degli Sprint pianificati per la fase RTB],
@@ -546,7 +547,7 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
     // Norme di Progetto
     [*Norme di Progetto*],
     [Codifica regole e processi:
-      - Setup strumenti (#def[Jira], #def[Slack]).
+      - Setup strumenti (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#jira")[#def[Jira]], #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#slack")[#def[Slack]]).
       - Definizione processi primari e di supporto.
       - Standard di codifica.
     ],
@@ -617,7 +618,7 @@ Realizzazione del nucleo funzionale essenziale.
 
 Sviluppo funzionalità avanzate e UI finale.
 - *Obiettivo:* Copertura requisiti desiderabili e UX.
-- *Attività:* Modulo di Remediation automatica, Frontend (Dashboard), ottimizzazione costi API (#def[Caching] - #link(<RT5>)[#underline[RT5]]).
+- *Attività:* Modulo di Remediation automatica, Frontend (Dashboard), ottimizzazione costi API (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#catching")[#def[Caching]] - #link(<RT5>)[#underline[RT5]]).
 
 *4. Validazione e Rilascio*
 
@@ -792,7 +793,7 @@ In questa sezione viene rendicontato l'avanzamento effettivo del progetto attrav
 Le attività svolte antecedentemente alla data di avvio ufficiale del primo Sprint (19/12/2025) sono state classificate come *investimento interno* e *auto-formazione*.
 
 In questa fase propedeutica ("Palestra"), il team ha dedicato una parte consistente delle risorse a:
-- *Analisi critica dello stack tecnologico:* Studio approfondito delle tecnologie suggerite dal capitolato C2. I membri hanno redatto documenti di appunti pubblici e condivisi per analizzare le motivazioni tecniche della loro adozione e valutarne l'idoneità alla costruzione del progetto.
+- *Analisi critica dello stack tecnologico:* Studio approfondito delle tecnologie suggerite dal capitolato C2. I membri hanno redatto documenti di appunti condivisi per analizzare le motivazioni tecniche della loro adozione e valutarne l'idoneità alla costruzione del progetto.
 - *Allineamento tecnico:* Gli esiti di tali ricerche sono stati oggetto di discussione collegiale, tracciata nei *verbali interni*, permettendo al gruppo di livellare le conoscenze e validare le scelte preliminari.
 - *Setup infrastrutturale:* Configurazione degli strumenti di supporto (es. Typst, GitHub Actions, Jira) e definizione delle norme di collaborazione.
 
@@ -807,7 +808,7 @@ Tali attività, seppur essenziali per la partenza, *non vengono rendicontate* ne
 Le attività svolte nel periodo di riferimento si sono focalizzate sul consolidamento della base metodologica e sull'analisi dei requisiti:
 
 - *Pianificazione e Standardizzazione:*
-  - Stesura delle bozze iniziali dei documenti cardine: #def[Norme di Progetto], #def[Piano di Progetto] e #def[Piano di Qualifica];
+  - Stesura delle bozze iniziali dei documenti cardine: #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#norme-di-progetto")[#def[Norme di Progetto]], #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#piano-di-progetto")[#def[Piano di Progetto]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#piano-di-qualifica")[#def[Piano di Qualifica]];
   - Definizione di strutture templatizzate mediante l'uso di Typst, finalizzate a ottimizzare l'efficienza di redazione e garantire la coerenza stilistica e strutturale della documentazione.
 
 - *Analisi dei Requisiti:*
@@ -887,9 +888,8 @@ Per lo Sprint 2 il team si pone i seguenti obiettivi:
 === Sprint 2
 *Periodo:* dal 03/01/2026 al 17/01/2026
 
-==== Informazioni Generali
-Focus sul consolidamento della documentazione (versione per RTB) e accelerazione sull'Analisi dei Requisiti.
-Attività principali:
+==== Attività principali
+Focus sul consolidamento della documentazione (versione per RTB) e accelerazione sull'Analisi dei Requisiti:
 - *Piano di Progetto:* Arricchimento sezione Rischi e conformità IEEE 1058.
 - *Analisi dei Requisiti:* Allocazione massiva risorse (5 membri) per definizione UC e Requisiti.
 - *Incontri:* Meeting con Prof. Cardin e VarGroup per validazione direzione.
@@ -953,7 +953,7 @@ Per lo Sprint 3 il team individua come prioritari i seguenti obiettivi:
 - completare e stabilizzare definitivamente l’Analisi dei Requisiti;
 - avviare e completare lo sviluppo del Proof of Concept;
 - migliorare il coordinamento operativo e l’efficacia delle revisioni interne.
-
+#pagebreak()
 
 === Sprint 3
 *Periodo:* dal 17/01/2026 al 31/01/2026

@@ -93,7 +93,7 @@ C:
   Continuous Integration:
     acronimo: CI
     alternative: pipeline CI
-    descrizione: Pratica di sviluppo che consiste nell’integrare frequentemente il codice in un repository condiviso, attivando verifiche automatiche per individuare precocemente errori e regressioni.
+    descrizione: Pratica di sviluppo che consiste nell'integrare frequentemente il codice in un repository condiviso, attivando verifiche automatiche per individuare precocemente errori e regressioni.
   
   Coverage:
     alternative: Code Coverage
