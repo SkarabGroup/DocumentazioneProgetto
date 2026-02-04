@@ -58,14 +58,14 @@
     #puntoOdg(
       punto2,
       "È stata condotta una retrospettiva sullo sprint 2, con particolare attenzione alle discrepanze nell'impegno orario tra i membri del team. In particolare si é discusso di come i membri singoli Basso Kevin e Suar Alberto abbiano dedicato un numero di ore significativamente superiore rispetto agli altri membri del team.",
-      decisione: "Sono state diminuite le ore di effettivo lavoro produttivo da parte di questi membri, mentre quelle di Basso Kevin e Alberto Suar sono state mantenute in quanto ritenute adeguate al lavoro svolto dal momento in cui la fase di verifica si é rivelata, in realtá, ri-stesura quasi completa dei documenti.",
+      decisione: "Sono state diminuite le ore di effettivo lavoro produttivo da parte di questi membri, mentre quelle di Basso Kevin e Alberto Suar sono state mantenute in quanto ritenute adeguate al lavoro svolto dal momento in cui la fase di verifica ha portato a una seguente modifica importante dei documenti.",
     )
 
     === Punto 3: #punto3
     #puntoOdg(
       punto3,
       "In previsione della candidatura per la RTB, è stata discussa la necessità di avviare lo sviluppo del Proof of Concept (PoC).",
-      decisione: "Ë stato deciso che verrá sviluppato l'agente per lo spell checking come PoC, quindi gestiione di orchestratore, agente spell checking, DB e interfaccia utente. Alcuni membri del gruppo si focalizzeranno sull'implementazione del PoC mentre altri si dedicheranno alla finalizzazione e alla verifica dei documenti restanti.",
+      decisione: "È stato deciso che verrá sviluppato l'agente per lo spell checking come PoC, quindi gestiione di orchestratore, agente spell checking, DB e interfaccia utente. Alcuni membri del gruppo si focalizzeranno sull'implementazione del PoC mentre altri si dedicheranno alla finalizzazione e alla verifica dei documenti restanti.",
     )
 
     === Punto 4: #punto4

@@ -67,7 +67,7 @@
       ),
       (
         "Modifiche e revisione NdP, PdP e PdQ",
-        members.andrea + ", " + members.andrea + ", " + members.suar + ", " + members.kevin + ", " + members.alice,
+        members.andrea + ", " + members.suar + ", " + members.kevin + ", " + members.alice,
         "2026/02/09",
         "In stato di rifinitura",
       ),
