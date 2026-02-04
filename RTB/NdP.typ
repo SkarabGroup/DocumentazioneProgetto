@@ -11,13 +11,19 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.4.0"
+#let versione = "v0.5.0"
 #set heading(numbering: "1.1.1")
 
 #titlePage("Norme di Progetto", versione)
 #set page(numbering: "1", header: header("Norme di Progetto"), footer: footer())
 
 #let history = (
+  (
+    "2026/02/04",
+    "0.5.0",
+    "Riscrittura delle sezioni relative all'AdR",
+    members.andrea,
+  ),
   (
     "2026/02/03",
     "0.4.0",
@@ -139,14 +145,14 @@ Il processo di fornitura si compone di molte attività, tra cui:
 In questa sezione si elencano tutti i documenti che #def("Skarab Group") produrrà durante il ciclo di vita del progetto #def("Code Guardian"). I documenti sono tutti scritti utilizzando il linguaggio #def("typst") per garantire una formattazione uniforme e professionale.
 
 ==== AdR - Analisi dei Requisiti
-Documento che raccoglie e specifica i requisiti funzionali e non funzionali del sistema software da sviluppare, basato sul capitolato fornito dal #def("Proponente"). Questo documento contiene:
+L’#def("Analisi dei Requisiti") è il documento che descrive in dettaglio i requisiti funzionali e non funzionali
+previsti dal progetto #def("Code Guardian"). Nel dettaglio il documento contiene un’analisi dettagliata delle
+funzionalità del sistema, degli attori coinvolti e le informazioni necessarie al tracciamento dei
+requisiti rispetto alle loro fonti. La struttura è la seguente:
 - Introduzione al progetto e obiettivi.
 - Lista degli attori coinvolti.
 - Lista dei casi d'uso.
-  - Essi sono descitti in UCx.y.z. ...
-    - UC é un acronimo che sta per usecase, x indica il numero del caso d'uso, y,z e i numeri successivi sono i sotto casi d'uso, ovvvero inclusioni, composizioni o estensioni del caso d'uso principale.
 - Lista dei requisiti funzionali e non funzionali, classificati in obbligatori, desiderabili e opzionali.
-  #TODO("come sono acronimizzati i requisiti?")
 
 ==== Glossario
 Documento che definisce i termini tecnici e specifici utilizzati nel progetto, per garantire una comprensione comune tra tutti i membri del team e gli stakeholder esterni. questo documento serve a fornire definizioni chiare e univoche per evitare ambiguità. Oltre che il documento in sé per s'é, il glossario é consultabile tramite una pagina nel sito web di Skarab Group. Questo permette interattivitá e link esterni all'interno di ogni documento che compone la documentazione di progetto. Per convenzione, un termine sará un link al glossario sul sito solo la prima volta che compare all'interno di un documento, assumento una lettura ordinata del documento stesso da parte del lettore.
@@ -286,16 +292,35 @@ assistenza al proponente durante la fase di verifica finale del prodotto.
 In relazione alle baseline previste dal progetto, (#def("RTB") e #def("PB")), le attività di sviluppo si piú significative sono:
 
 ==== Analisi dei Requisiti
+L'Analisi dei Requisiti costituisce una delle fasi più critiche e determinanti dell'intero ciclo di vita del software, assumendo un ruolo centrale durante la #def("Requirements and Technology Baseline") (#strong("RTB")). Questa attività non si limita alla semplice raccolta di informazioni, ma mira all’individuazione, allo studio e alla formalizzazione rigorosa di tutte le necessità che il sistema Code Guardian dovrà soddisfare per rispondere efficacemente alle richieste del proponente. \
+Svolgere un'analisi completa e corretta è fondamentale per fornire una base solida per le successive fasi di progettazione e codifica. I risultati di questa analisi sono documentati nel documento #strong("Analisi dei Requisiti vx.y.z"). #TODO("Link al documento")
 
-L’Analisi dei Requisiti rappresenta una fase centrale del progetto e ha lo scopo di identificare in modo completo e non ambiguo tutti i requisiti che il sistema deve soddisfare.
-Essa è documentata nell’apposito documento di Analisi dei Requisiti e costituisce il riferimento principale per le successive attività di progettazione, sviluppo e verifica.
+===== Casi d'Uso
+I #def("casi d'uso") rappresentano scenari specifici che descrivono come gli attori interagiscono con il sistema per raggiungere determinati obiettivi. Essi forniscono una visione chiara delle funzionalità richieste e aiutano a identificare i requisiti funzionali del sistema.
+Per la descrizione dei casi d'uso viene utilizzata la nomenclatura #strong("UCPrincipale.Secondario") dove:
+- *UC*: acronimo di Use Case (caso d'uso).
+- *Principale*: numero progressivo del caso d'uso principale, identifica un macro-scenario o una funzionalità atomica.
+- *Secondario*: numero progressivo del caso d'uso secondario, identifica varianti o estensioni del caso d'uso principale (sotto-casi).
+L’identificatore *Principale* è univoco a livello globale; non è quindi ammessa l’esistenza di due casi d’uso distinti con il medesimo valore principale. Il valore *Secondario* può invece essere ripetuto all'interno del documento, a patto che ciò non avvenga mai sotto lo stesso identificatore principale. Nel caso in cui un scenario secondario presenti a sua volta delle inclusioni o estensioni, la stringa *Principale.Secondario* assumerà il ruolo di radice per la nuova gerarchia, seguendo le medesime regole di progressione e unicità sopra descritte.
 
-I Casi d’Uso sono identificati tramite una nomenclatura univoca che ne garantisce la tracciabilità, la nomenclatura é la seguente: UCx.y.z, dove:
-- UC indica che si tratta di un Caso d’Uso.
-- x è un numero intero che identifica il Caso d’Uso principale.
-- y, z e i numeri successivi sono numeri interi che identificano sotto-casi d’Uso, ovvero inclusioni, composizioni o estensioni del Caso d’Uso principale.
+Per approfondimenti riguardanti gli attori coinvolti, le precondizioni, le postcondizioni e lo scenario principale degli eventi, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti vx.y.z"). #TODO("Link al documento")
 
-I requisiti, invece< #TODO("come sono acronimizzati i requisiti?")>
+===== Requisiti
+I requisiti rappresentano le specifiche funzionali e non funzionali che il sistema deve soddisfare. Ogni requisito è classificato per garantire la tracciabilità rispetto alle fonti e ai casi d'uso associati. \
+Per la descrizione dei requisiti viene utilizzata la nomenclatura #strong("TipologiaRPrioritàNumero") dove:
+- *Tipologia*: indica il tipo di requisito. I valori possibili sono:
+  - *F*: Requisito #strong("F")unzionale.
+  - *Q*: Requisito di #strong("Q")ualità.
+  - *C*: Requisito di #strong("V")incolo.
+- *R*: acronimo di Requisito.
+- *Priorità*: indica l'importanza del requisito. I valori possibili sono:
+  - *Ob*: Requisito #strong("Ob")bligatorio.
+  - *De*: Requisito #strong("De")siderabile.
+  - *Op*: Requisito #strong("Op")zionale.
+- *Numero*: numero progressivo univoco per ogni requisito all'interno della sua tipologia.
+
+Per approfondimenti riguardanti la descrizione dettagliata, la fonte e i casi d'uso associati a ciascun requisito, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti vx.y.z"). #TODO("Link al documento")
+
 ==== Codifica
 
 La codifica ha come obiettivo l’implementazione fedele delle soluzioni progettate, nel rispetto degli standard di qualità definiti dal gruppo.
