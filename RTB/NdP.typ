@@ -87,9 +87,9 @@
 = Introduzione
 
 == Contesto del Progetto
-Il presente documento descrive le #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#norme-di-progetto")[#def[Norme di Progetto]] relative al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]], proposto dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
+Il presente documento descrive le #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#norme-di-progetto")[#def[Norme di Progetto]] applicate al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]], proposto dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
 
-Il progetto ha come obiettivo lo sviluppo di una piattaforma software ad #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] finalizzata all’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e alla #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] automatizzata delle vulnerabilità presenti nei repository di codice sorgente. Il sistema è progettato in conformità ai requisiti e ai vincoli definiti nel #link(<capitolato>)[#underline[capitolato *C2*]].
+Il progetto ha come obiettivo lo sviluppo di una piattaforma software ad #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] finalizzata all’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e alla #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] automatizzata delle vulnerabilità presenti nei repository di codice sorgente. Il sistema è progettato in conformità ai requisiti e ai vincoli definiti nel #link(<capitolato>)[#underline[Capitolato *C2*]].
 La piattaforma supporta attività di analisi statica del codice sorgente e di individuazione delle principali criticità di sicurezza, fornendo suggerimenti di correzione attraverso meccanismi automatizzati basati su modelli di linguaggio di grandi dimensioni (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]).
 
 == Finalità del Documento
@@ -116,20 +116,12 @@ La versione più recente del Glossario è disponibile al seguente link:
 === Riferimenti Normativi
 I seguenti documenti hanno valore vincolante per la redazione delle Norme di Progetto e per la definizione delle regole da rispettare durante il ciclo di vita del prodotto software:
 
+- *Regolamento del Progetto Didattico*: Regole e vincoli del corso di Ingegneria del Software. \
+  #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/PD1.pdf")] \
+  (ultimo accesso: *04/02/2026*)
+
 - *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> \
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
-  (ultimo accesso: *04/02/2026*)
-
-- *IEEE 829 – Standard for Software and System Test Documentation*: definizione della struttura dei piani di test, casi di test, procedure e report. \
-  #underline[#link("https://ieeexplore.ieee.org/document/4578383")] \
-  (ultimo accesso: *04/02/2026*)
-
-- *IEEE 830 – Standard for Software Requirements Specifications*: guida alla redazione e classificazione dei requisiti funzionali e non funzionali. \
-  #underline[#link("https://ieeexplore.ieee.org/document/720574")] \
-  (ultimo accesso: *04/02/2026*)
-
-- *IEEE 1016 – Recommended Practice for Software Design Descriptions*: linee guida per la descrizione dell’architettura software e dei principali design pattern. \
-  #underline[#link("https://ieeexplore.ieee.org/document/741934")] \
   (ultimo accesso: *04/02/2026*)
 
 - *ISO/IEC/IEEE 12207 – Software Life Cycle Processes*<12207>: framework internazionale per la gestione dei processi di sviluppo, manutenzione e dismissione del software. \
@@ -145,6 +137,19 @@ I seguenti documenti hanno valore vincolante per la redazione delle Norme di Pro
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T04.pdf")] \
   (ultimo accesso: *04/02/2026*)
 
+- *IEEE 829 – Standard for Software and System Test Documentation*: definizione della struttura dei piani di test, casi di test, procedure e report. \
+  #underline[#link("https://ieeexplore.ieee.org/document/4578383")] \
+  (ultimo accesso: *04/02/2026*)
+
+- *IEEE 830 – Standard for Software Requirements Specifications*: guida alla redazione e classificazione dei requisiti funzionali e non funzionali. \
+  #underline[#link("https://ieeexplore.ieee.org/document/720574")] \
+  (ultimo accesso: *04/02/2026*)
+
+- *IEEE 1016 – Recommended Practice for Software Design Descriptions*: linee guida per la descrizione dell’architettura software e dei principali design pattern. \
+  #underline[#link("https://ieeexplore.ieee.org/document/741934")] \
+  (ultimo accesso: *04/02/2026*)
+
+
 #pagebreak()
 = Processi Primari
 In conformità allo standard #underline[#link(<12207>)[ISO/IEC/IEEE 12207]], il ciclo di vita di un sistema software è descritto attraverso un insieme strutturato di processi, ciascuno dei quali copre specifici ambiti di responsabilità e attività. Tra questi, i processi primari rappresentano il nucleo operativo del ciclo di vita e descrivono le interazioni fondamentali tra chi richiede il sistema, chi lo realizza e chi ne cura lo sviluppo tecnico.
@@ -159,15 +164,18 @@ I processi primari, come indicato nello standard sopracitato, sono:
 - Manutenzione (Maintenance).
 
 Nel contesto del presente progetto, sono considerati rilevanti principalmente i processi di Fornitura e Sviluppo, in quanto direttamente pertinenti alla natura didattica e contrattuale dell’iniziativa.
-= Processo di Fornitura
-== Descrizione del Processo
+
+
+== Processo di Fornitura
+
+=== Descrizione del Processo
 Il Processo di Fornitura definisce l’insieme delle attività svolte dal gruppo di lavoro in qualità di fornitore al fine di pianificare, coordinare e consegnare il prodotto software e la relativa documentazione in conformità ai requisiti stabiliti dal proponente.
 
-Nel contesto del progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]], il gruppo #def[Skarab Group] assume il ruolo di fornitore, mentre l’azienda #def[Var Group] ricopre il ruolo di proponente. Il #underline[#link(<capitolato>)[capitolato C2]] costituisce il riferimento contrattuale che disciplina requisiti, vincoli e obiettivi della fornitura.
+Nel contesto del progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]], il gruppo #def[Skarab Group] assume il ruolo di fornitore, mentre l’azienda #def[Var Group] ricopre il ruolo di proponente. Il #underline[#link(<capitolato>)[Capitolato C2]] costituisce il riferimento contrattuale che disciplina requisiti, vincoli e obiettivi della fornitura.
 
 Il processo di fornitura è responsabile della gestione complessiva del progetto dal punto di vista organizzativo e qualitativo e coordina le attività necessarie a garantire la conformità degli artefatti prodotti rispetto a quanto concordato.
 
-== Attività del Processo
+=== Attività del Processo
 Nel presente progetto, il processo di fornitura si articola nelle seguenti attività principali:
 
 - *Analisi e presa in carico dei requisiti* \
@@ -187,14 +195,14 @@ Nel presente progetto, il processo di fornitura si articola nelle seguenti attiv
 
 Nel contesto didattico del progetto, e in particolare nel periodo che conduce alla #underline(link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requirements-and-technology-baseline")[#def[RTB]]), tali attività si concretizzano prevalentemente nella redazione strutturata e nel controllo della documentazione di progetto, che rappresenta una componente essenziale della fornitura.
 
-== Prodotti del Processo
-Il processo di fornitura prevede la produzione e la gestione dei seguenti prodotti (artefatti documentali):
+=== Prodotti del Processo
+Ai fini delle presenti Norme di Progetto, il processo di fornitura disciplina in particolare la produzione e la gestione dei seguenti prodotti *documentali*:
 
 - *Norme di Progetto* \
   Documento che definisce le regole metodologiche, organizzative e tecniche adottate dal gruppo di lavoro durante l’intero ciclo di vita del progetto.
 
 - *Piano di Progetto* \
-  Documento che descrive l’organizzazione del lavoro, la pianificazione delle attività, l’allocazione delle risorse, la gestione dei rischi e le modalità di monitoraggio dell’avanzamento.
+  Documento che definisce l’organizzazione del lavoro, la pianificazione delle attività, l’allocazione delle risorse, la gestione dei rischi e le modalità di monitoraggio dell’avanzamento.
 
 - *Piano di Qualifica* \
   Documento che specifica i criteri di qualità del prodotto e della documentazione, nonché le attività di verifica e validazione previste.
@@ -202,31 +210,29 @@ Il processo di fornitura prevede la produzione e la gestione dei seguenti prodot
 - *Analisi dei Requisiti* \
   Documento che raccoglie e formalizza i requisiti funzionali e non funzionali del sistema, derivati dal Capitolato C2.
 
-
 - *Verbali di verifica e revisione* \
   Documenti che registrano esiti e decisioni delle attività di controllo e revisione svolte durante il progetto.
 
-== Procedure operative trasversali del Processo
-Le procedure operative trasversali disciplinano *quando* e *come* le attività del processo di fornitura vengono eseguite a livello di processo, indipendentemente dallo specifico documento coinvolto. Esse definiscono ruoli, passi operativi, criteri di controllo e output attesi, garantendo uniformità, tracciabilità e controllo dell’esecuzione del processo.
+=== Procedure Operative del Processo
+Le seguenti procedure sono vincolanti per l'esecuzione del processo di fornitura e regolano l'interazione con l'esterno.
 
-In particolare, il presente processo prevede procedure trasversali per:
-- avvio e presa in carico delle attività di progetto;
-- gestione di versionamento, approvazione e rilascio degli artefatti;
-- revisione interna e controllo qualità;
-- consegna degli artefatti e registrazione delle evidenze.
+==== Protocollo di Comunicazione
+Per garantire professionalità e tracciabilità nei confronti del Proponente (#def[Var Group]):
+- *Canale Ufficiale:* Le comunicazioni formali (consegne, richieste di chiarimento sui requisiti) avvengono esclusivamente tramite email istituzionale o incontri verbalizzati.
+- *Verbalizzazione:* Ogni incontro con il proponente deve produrre un verbale esterno entro *48 ore* lavorative dall'evento.
+- *Approvazione Verbali:* Il verbale si considera approvato se non pervengono richieste di rettifica entro 24 ore dalla sua pubblicazione/invio.
 
-== Norme di redazione e attuazione dei prodotti documentali
-Per ciascun prodotto documentale individuato, le Norme di Progetto definiscono:
-- le convenzioni di redazione e di struttura;
-- le modalità operative con cui vengono attuati gli elementi previsti dal documento (es. monitoraggio e rendicontazione nel Piano di Progetto);
-- i criteri minimi di qualità e tracciabilità.
-
-Le sezioni seguenti descrivono tali norme per i principali prodotti documentali del processo di fornitura.
+==== Procedura di Consegna
+In occasione delle scadenze ufficiali, il Responsabile di Progetto deve seguire questa checklist obbligatoria:
+1. *Verifica di Conformità:* Accertarsi che tutti i documenti siano nello stato *Approved* e che ogni artefatto in rilascio (documentale o software) soddisfi i criteri di verifica specifici definiti per esso nel Piano di Qualifica.
+2. *Consolidamento:* Generare i PDF definitivi dai sorgenti #def[Typst] congelati.
+3. *Tagging:* Creare una *Release* sul repository GitHub con il tag di versione corrispondente (es. `v1.0.0-RTB`).
+4. *Notifica:* Inviare comunicazione formale di avvenuta consegna al proponente indicando il link alla release note.
 
 === Piano di Progetto
 
-==== Nota sull’adozione dello standard IEEE 1058
-Il documento *Piano di Progetto* adotta come riferimento metodologico lo standard *IEEE 1058-1998 (Standard for Software Project Management Plans)*. Tale scelta riflette la volontà di applicare un approccio rigoroso e sistematico alla gestione del progetto, adattando i contenuti alle dimensioni, alla complessità e alle tempistiche del caso di studio considerato.
+==== Nota sull’Adozione dello Standard IEEE 1058
+Il documento *Piano di Progetto* adotta come riferimento metodologico lo standard #underline[#link("https://ieeexplore.ieee.org/document/741937")[*IEEE 1058-1998 (Standard for Software Project Management Plans)*]]. Tale scelta riflette la volontà di applicare un approccio rigoroso e sistematico alla gestione del progetto, adattando i contenuti alle dimensioni, alla complessità e alle tempistiche del caso di studio considerato.
 
 L’adozione dello standard garantisce una copertura completa degli aspetti critici del ciclo di vita del progetto e si traduce concretamente nei seguenti elementi chiave:
 
@@ -242,18 +248,27 @@ L’adozione dello standard garantisce una copertura completa degli aspetti crit
 - *Efficacia operativa:* \
   alcuni moduli previsti dallo standard sono stati ottimizzati e accorpati per migliorare la leggibilità e la comunicazione all’interno del team, mantenendo inalterati rigore metodologico e chiarezza dei flussi informativi richiesti dalla normativa.
 
-==== Definizione del documento
-Il Piano di Progetto è il documento che definisce l’organizzazione, la pianificazione e il controllo delle attività necessarie alla realizzazione del progetto software. Esso descrive la struttura delle attività, l’allocazione delle risorse, la pianificazione temporale, la gestione dei rischi e le modalità di monitoraggio dell’avanzamento del progetto.
+==== Definizione del Documento
+Il *Piano di Progetto* costituisce il riferimento gestionale vincolante per la conduzione del progetto e deve definire, in modo tracciabile e verificabile:
+- l’organizzazione del lavoro e le responsabilità operative;
+- la pianificazione temporale, incluse milestone e scadenze;
+- l’allocazione delle risorse e le stime di impegno;
+- la gestione dei rischi;
+- le modalità di monitoraggio e controllo dell’avanzamento.
 
-Il Piano di Progetto costituisce il riferimento operativo per la conduzione del progetto e supporta il coordinamento delle attività del gruppo di lavoro, garantendo la coerenza tra obiettivi, tempi e risorse disponibili.
+Il Piano di Progetto è utilizzato dal gruppo di lavoro come base per il coordinamento interno e per la rendicontazione dell’avanzamento, garantendo coerenza tra obiettivi, tempi e risorse disponibili.
 
-==== Elementi costituenti del documento
-Il Piano di Progetto è strutturato in una serie di elementi fondamentali che concorrono alla pianificazione, alla gestione e al controllo dell’intero progetto software. Ciascun elemento svolge un ruolo specifico e contribuisce a fornire una visione completa e coerente dell’organizzazione del lavoro, delle risorse impiegate e dell’andamento del progetto nel tempo.
+==== Elementi Costituenti del Documento
+Il Piano di Progetto deve includere almeno i seguenti elementi, ciascuno disciplinato da regole operative e criteri minimi di verifica:
+- Analisi dei Rischi;
+- Pianificazione del Ciclo di Vita del Software;
+- Preventivo ed Allocazione delle Risorse;
+- Monitoraggio e Controllo del Rendimento degli Sprint.
 
-Gli elementi costituenti del Piano di Progetto sono descritti di seguito.
+Gli elementi costituenti del Piano di Progetto sono normati di seguito.
 
 ===== Analisi dei Rischi
-L’analisi dei rischi ha lo scopo di individuare e valutare i principali fattori di rischio che possono compromettere il raggiungimento degli obiettivi di progetto. Essa comprende l’identificazione di rischi di natura tecnica, organizzativa e temporale, nonché la valutazione della loro probabilità di occorrenza e del potenziale impatto sul progetto.
+L’Analisi dei Rischi deve individuare e valutare i principali fattori di rischio che possono compromettere il raggiungimento degli obiettivi di progetto. Essa deve includere rischi di natura tecnica, organizzativa e temporale, nonché la valutazione della loro probabilità di occorrenza e del potenziale impatto sul progetto.
 
 ====== Metodologia di Analisi
 Il team adotta un approccio *semi-quantitativo* per la valutazione dei rischi. Ogni rischio identificato viene descritto e valutato sulla base di due parametri fondamentali:
@@ -304,71 +319,169 @@ Sulla base del valore di $R$, i rischi vengono classificati per priorità come s
 - *Rischio Medio ($4$):* livello di attenzione; richiede la definizione preventiva di una strategia di mitigazione e un controllo frequente;
 - *Rischio Alto ($6–9$):* livello critico; richiede azioni preventive tempestive e la predisposizione di piani di contingenza.
 
-====== Categorie di rischio
+In base al valore di $R$, si applicano le seguenti strategie vincolanti:
+- *Mitigazione (Preventiva):* Azioni da attuare *subito* per ridurre la Probabilità o l'Impatto (Obbligatoria per $R >= 4$).
+- *Contingenza (Reattiva):* Piano d'azione da attuare *solo se* il rischio si verifica (Obbligatoria per $R >= 6$).
+
+====== Categorie di Rischio
 Per favorire l’analisi sistematica e l’assegnazione delle responsabilità, i rischi sono classificati nelle seguenti macro-categorie:
 - *RT (Rischi Tecnologici):* criticità legate alle tecnologie adottate (es. #def[LLM], #def[Agenti]), agli strumenti di sviluppo, alle integrazioni e all’infrastruttura;
 - *RI (Rischi Interpersonali):* problematiche relative al #def[team di progetto], quali disponibilità dei membri, comunicazione, coordinamento e gestione dei conflitti;
 - *RCO (Rischi di Costo e Organizzativi):* rischi derivanti da stime non accurate, pianificazione temporale (#def[Schedulazione]), dipendenze esterne e vincoli organizzativi.
 
-====== Ruoli e responsabilità
+====== Ruoli e Responsabilità
 La gestione dei rischi è una responsabilità condivisa, articolata come segue:
 - *Responsabile di Progetto:* supervisiona il processo di gestione dei rischi, valuta la criticità degli eventi e decide l’attivazione delle strategie di mitigazione o dei piani di contingenza;
 - *Team di Progetto:* contribuisce all’identificazione dei rischi e segnala tempestivamente l’insorgere di eventi critici o condizioni anomale;
 - *Stakeholder di riferimento:* vengono informati in caso di rischi ad alto impatto o di variazioni rilevanti rispetto al piano approvato.
 
-====== Gestione e monitoraggio dei rischi
-La gestione dei rischi non è limitata alla fase di avvio del progetto, ma costituisce un processo ciclico di controllo che accompagna l’intero ciclo di vita del sistema ed è integrato nelle attività di pianificazione e revisione degli Sprint.
+====== Gestione e Monitoraggio dei Rischi
+La gestione dei rischi non è limitata alla fase di avvio del progetto, ma costituisce un processo ciclico di controllo che accompagna l’intero ciclo di vita.
 
-Nel caso in cui un rischio si manifesti o emergano nuovi rischi non precedentemente previsti, il team applica la seguente procedura operativa:
-+ *Rilevamento (Detection):* ogni membro del team segnala tempestivamente al *Responsabile di Progetto* l’insorgere di problematiche tecniche o organizzative, inclusi superamenti di soglie di allarme (ad esempio ritardi superiori al 20% rispetto alla pianificazione prevista).
-+ *Documentazione:* l’evento viene descritto nel verbale della prima riunione utile e, qualora necessario, viene aperto o aggiornato un ticket sulla piattaforma di gestione delle attività adottata dal team.
-+ *Valutazione e risposta:* il Responsabile di Progetto valuta la criticità del rischio e attiva la strategia di mitigazione o il piano di contingenza più appropriato, quali la riallocazione delle risorse, la revisione delle priorità o la riduzione dello scopo opzionale.
-+ *Rendicontazione (Consuntivo):* al termine dello #def[Sprint] o di una fase significativa del progetto (es. #def[RTB]), l’evento viene analizzato nel consuntivo del periodo di riferimento, valutando impatto effettivo su tempi, costi e qualità, efficacia delle contromisure e necessità di azioni correttive.
-+ *Aggiornamento delle strategie:* le strategie di mitigazione vengono aggiornate e integrate nella pianificazione degli Sprint successivi al fine di ridurre probabilità o impatto di eventi analoghi futuri.
+Nel caso in cui un rischio si manifesti o emergano nuovi rischi, il team applica la seguente procedura operativa:
++ *Rilevamento (Detection):* Ogni membro del team ha l'obbligo di segnalare al *Responsabile di Progetto* l’insorgere di problematiche tecniche o organizzative *entro il termine della giornata lavorativa* in cui vengono rilevate.
++ *Documentazione:* L’evento viene tracciato nel sistema di issue tracking e, se necessario, discusso nel primo meeting utile.
++ *Valutazione e Risposta:* Il Responsabile di Progetto valuta la criticità ($R$) e attiva la strategia di mitigazione o il piano di contingenza.
++ *Rendicontazione:* Al termine dello #def[Sprint], l’evento viene analizzato nel consuntivo per valutare l'efficacia delle contromisure.
++ *Aggiornamento:* Le strategie vengono aggiornate nel registro dei rischi per gli Sprint successivi.
 
-===== Pianificazione del ciclo di vita del software
-La pianificazione del ciclo di vita del software descrive l’organizzazione temporale del progetto e la suddivisione delle attività nelle diverse fasi previste. Essa definisce milestone, scadenze intermedie e sequenza delle attività necessarie alla realizzazione del prodotto software.
+====== Criteri di Verifica dell’Analisi dei Rischi
+L’elemento *Analisi dei Rischi* del Piano di Progetto è considerato conforme alle Norme di Progetto se risultano soddisfatte tutte le seguenti condizioni:
 
-Questo elemento consente di fornire una visione d’insieme dell’evoluzione del progetto e costituisce il riferimento per il monitoraggio dell’avanzamento delle attività.
+- [ ] ogni rischio è descritto in modo univoco e classificato in una delle categorie definite (RT, RI, RCO);
+- [ ] per ciascun rischio sono esplicitamente indicati i valori di *Probabilità (P)*, *Impatto (I)* e il corrispondente *Livello di Rischio (R)*;
+- [ ] per tutti i rischi classificati come *Medio* o *Alto* è definita almeno una strategia di mitigazione o un piano di contingenza;
+- [ ] lo stato dei rischi è aggiornato con cadenza coerente con la pianificazione degli Sprint;
+- [ ] l’insorgenza di nuovi rischi o la variazione significativa di rischi esistenti è tracciata nei verbali di progetto o negli strumenti di issue tracking adottati;
+- [ ] gli esiti delle attività di gestione dei rischi sono riportati nei consuntivi di Sprint o di fase (es. RTB).
 
-===== Preventivo ed allocazione delle risorse
-Il preventivo e l’allocazione delle risorse definiscono la distribuzione delle risorse disponibili, in particolare del tempo di lavoro, tra le diverse attività di progetto. Questo elemento include la stima dell’impegno richiesto per ciascuna attività e l’assegnazione delle responsabilità ai membri del gruppo di lavoro.
+Il mancato rispetto di una o più delle condizioni sopra elencate comporta la non conformità dell’elemento e richiede un’azione correttiva prima della validazione del documento.
 
-Il preventivo rappresenta una previsione iniziale dell’impegno complessivo e costituisce il riferimento per il confronto con i consuntivi rilevati durante l’esecuzione del progetto.
+===== Pianificazione del Ciclo di Vita del Software
+La pianificazione del ciclo di vita del software stabilisce l’organizzazione temporale del progetto e vincola la suddivisione delle attività nelle diverse fasi previste, definendo milestone, scadenze intermedie e relazioni di dipendenza tra le attività necessarie alla realizzazione del prodotto software.
 
-===== Monitoraggio e controllo
-Il monitoraggio e controllo dell’avanzamento ha lo scopo di verificare in modo sistematico l’andamento del progetto rispetto alla pianificazione definita. Tale attività si basa sulla suddivisione del lavoro in iterazioni (Sprint), per ciascuna delle quali sono definite in modo atomico le attività da svolgere.
+La pianificazione costituisce il riferimento formale per il coordinamento delle attività e per il monitoraggio dell’avanzamento del progetto, in relazione alla suddivisione in sprint.
 
-Per ogni Sprint vengono rilevati il preventivo orario e il consuntivo effettivo delle attività svolte, consentendo il confronto tra quanto pianificato e quanto realizzato. I dati raccolti sono utilizzati per valutare l’andamento generale del progetto, individuare eventuali scostamenti e supportare le decisioni di adattamento della pianificazione.
+====== Pianificazione in Corrispondenza della RTB
+In corrispondenza della *Requirements and Technology Baseline (RTB)*, la pianificazione del ciclo di vita del software prevede la definizione dettagliata delle attività da svolgere. Per ciascuna attività sono obbligatoriamente specificati la descrizione, il responsabile assegnato e lo stato di avanzamento, al fine di garantire un controllo puntuale delle attività di analisi e di impostazione tecnologica.
 
-Il monitoraggio include inoltre un’analisi retrospettiva dell’andamento dei prodotti e del team di lavoro, finalizzata al miglioramento continuo dell’organizzazione e dell’efficacia del processo di sviluppo.
+Al fine di assicurare la tracciabilità delle attività pianificate, ogni attività definita in questa fase deve corrispondere a una *task* registrata sullo strumento di issue tracking adottato dal team (#def[Jira]). Il Responsabile di Progetto, all’avvio di ogni Sprint, definisce e pianifica le task su Jira, assegnando a ciascuna una figura di riferimento del team e una scadenza temporale, così da consentire la verifica della coerenza tra quanto pianificato e quanto effettivamente svolto.
 
-====== Metodologia di monitoraggio
-Il progetto adotta un sistema di monitoraggio basato sul confronto sistematico tra valori pianificati (*Preventivo*) e valori effettivamente rendicontati (*Consuntivo*), con cadenza al termine di ogni Sprint.
+Le attività pianificate devono essere *atomiche*. Una task si definisce atomica se:
+- è eseguibile da un singolo membro del team;
+- non presenta dipendenze dirette *bloccanti* da altre attività; qualora una dipendenza sia inevitabile, essa deve essere esplicitata su Jira tramite collegamento alla task prerequisita (es. relazione *blocks/blocked-by*);
 
-Gli indicatori utilizzati sono:
-- *Ore previste:* ore pianificate nel preventivo di Sprint;
-- *Ore effettive:* ore realmente rendicontate dai membri del team;
-- *Scostamento (Delta):* differenza tra ore effettive e ore previste;
-- *Costo effettivo:* calcolato sulla base delle ore effettive e delle tariffe associate ai ruoli (ove applicabile).
+====== Pianificazione in Corrispondenza della PB
+Per le fasi successive del progetto, in particolare in prossimità della *Product Baseline (PB)*, la pianificazione adotta un livello di dettaglio più ampio e meno vincolante. In questa fase, la pianificazione si limita alla definizione delle macro-attività previste, evitando una scomposizione dettagliata in task operative.
 
-L’analisi degli scostamenti (*Variance Analysis*) costituisce lo strumento principale per l’individuazione tempestiva di inefficienze operative.
+Tale approccio è adottato con l’obiettivo di non formalizzare anticipatamente decisioni progettuali non ancora consolidate, preservando la flessibilità necessaria ad affrontare le scelte architetturali e implementative che emergeranno nel corso dello sviluppo.
 
-====== Strumenti di rendicontazione
-La rendicontazione oraria e il tracciamento delle attività avvengono tramite la piattaforma di issue tracking adottata dal team (es. #def[Jira]), che rappresenta la fonte primaria dei dati di consuntivo.
+La pianificazione a livello di Product Baseline garantisce comunque la tracciabilità delle principali attività attese, includendo, a titolo esemplificativo, l’analisi post *proof-of-concept*, la progettazione architetturale, la progettazione di dettaglio e le attività che convergono nello sviluppo del *Minimum Viable Product (MVP)*.
 
-Le modalità di utilizzo dello strumento includono:
-- associazione delle ore rendicontate alle singole task;
-- classificazione delle attività per ruolo;
-- aggiornamento periodico secondo le scadenze definite dal team.
+====== Criteri di Verifica della Pianificazione del Ciclo di Vita
+L’elemento *Pianificazione del Ciclo di Vita del Software* del Piano di Progetto è considerato conforme alle Norme di Progetto se risultano soddisfatte tutte le seguenti condizioni:
 
-====== Regole di rendicontazione
-Sono considerate rendicontabili esclusivamente le attività che:
-- rispettano gli standard definiti nelle Norme di Progetto;
-- producono artefatti verificabili o avanzamenti misurabili;
-- risultano coerenti con gli obiettivi dello Sprint.
++ Per la *Requirements and Technology Baseline (RTB)* tutte le attività pianificate risultano:
+  - [ ] descritte in modo univoco;
+  - [ ] assegnate a un responsabile identificabile;
+  - [ ] tracciate come task sullo strumento di issue tracking adottato;
+  - [ ] le attività pianificate in RTB risultano definite in modo atomico; eventuali dipendenze sono esplicitate e tracciate sullo strumento di issue tracking;
++ Per la *Product Baseline (PB)* sono definite le macro-attività previste, senza anticipare decisioni progettuali non ancora consolidate;
+  - [ ] le milestone e le scadenze risultano coerenti con la pianificazione degli Sprint;
+  - [ ] eventuali variazioni significative della pianificazione sono motivate e tracciate nei verbali di progetto o negli strumenti di gestione delle attività.
 
-Attività non conformi o prive di valore aggiunto possono essere escluse dal consuntivo su decisione del Responsabile di Progetto.
+Il mancato rispetto di una o più delle condizioni sopra elencate comporta la non conformità dell’elemento e richiede un aggiornamento del Piano di Progetto.
+
+===== Preventivo ed Allocazione delle Risorse
+Il Preventivo e l’Allocazione delle Risorse definiscono la distribuzione delle risorse disponibili tra le attività di progetto, con particolare riferimento all’impegno temporale richiesto e all’assegnazione delle responsabilità ai membri del gruppo di lavoro.
+
+Il preventivo costituisce una stima iniziale dell’impegno complessivo e rappresenta il riferimento formale per il confronto con i consuntivi rilevati durante l’esecuzione del progetto, al fine di supportare le attività di monitoraggio e controllo.
+
+====== Definizione della Baseline e Costi
+La determinazione del preventivo deve rispettare i seguenti criteri:
+- *Esclusione Auto-apprendimento:* il periodo antecedente al primo Sprint è classificato come auto-apprendimento e non concorre al calcolo dei costi rendicontabili;
+- *Gestione Variazioni:* eventuali scostamenti (in aumento o diminuzione) rispetto alle stime di candidatura devono essere documentati e motivati nei verbali di progetto o negli strumenti di issue tracking.
+
+> *Nota di Contesto (Analisi Preliminare):*
+> A seguito di un’analisi approfondita del lavoro svolto nel periodo di consolidamento, sono state formalmente definite le baseline di interesse. In conformità al Preventivo di candidatura, la distribuzione pro-capite dell’impegno orario rimane invariata. Tuttavia, il preventivo complessivo attuale riporta un lieve scostamento in diminuzione rispetto alle stime iniziali, determinando una riduzione del costo complessivo.
+
+====== Strategia di Allocazione per Fasi
+L’allocazione delle risorse deve adattarsi alla natura specifica della fase di progetto.
+
+1. *Fase RTB (Requirements and Technology Baseline):*
+   L’allocazione delle risorse deve prevedere un impiego significativo delle figure di *Amministratore* e *Analista*.
+   \
+   > *Motivazione:* scelta dettata dall’elevato impatto delle attività documentali previste in questa fase (definizione procedure, strumenti, requisiti), propedeutiche all’avvio della progettazione post-RTB.
+
+2. *Fase PB (Product Baseline):*
+   Il preventivo per questa fase è definito come *flessibile* e soggetto a revisione *rolling-wave*.
+   \
+   > *Motivazione:* nonostante la pianificazione accurata, la natura delle attività future e i rischi residui richiedono un margine di adattabilità. Il preventivo PB è definitivo rispetto allo stato attuale, ma deve essere riesaminato a cadenza almeno pari alla chiusura di ogni Sprint o al verificarsi di eventi significativi. Ogni revisione deve essere approvata dal Responsabile di Progetto e tracciata nei verbali o negli strumenti di gestione delle attività.
+
+====== Criteri di Verifica del Preventivo e dell’Allocazione delle Risorse
+L’elemento *Preventivo ed Allocazione delle Risorse* del Piano di Progetto è considerato conforme se:
+
+- [ ] è definito un preventivo iniziale coerente con le baseline di progetto individuate;
+- [ ] la distribuzione dell’impegno orario pro-capite è esplicitata e motivata;
+- [ ] per ciascuna baseline (RTB, PB) è indicata una ripartizione delle risorse coerente con la natura delle attività previste;
+- [ ] eventuali scostamenti rispetto al preventivo iniziale sono motivati e documentati;
+- [ ] il preventivo costituisce il riferimento per il confronto con i consuntivi di Sprint.
+
+In assenza di una o più delle condizioni sopra elencate, l’elemento non è considerato conforme e deve essere revisionato.
+
+===== Monitoraggio e Controllo del Rendimento degli Sprint
+Il Monitoraggio e Controllo del rendimento degli Sprint definisce le modalità con cui viene verificato in modo sistematico l’andamento del progetto rispetto alla pianificazione approvata. Tale attività è obbligatoriamente basata sulla suddivisione del lavoro in iterazioni temporali (*Sprint*), ciascuna caratterizzata da un insieme di attività definite in modo atomico e tracciabile.
+
+Per ogni Sprint devono essere rilevati e confrontati il *Preventivo di Sprint* e il *Consuntivo di Sprint*, al fine di valutare il grado di aderenza tra quanto pianificato e quanto effettivamente realizzato. I risultati di tale confronto costituiscono l’input principale per l’analisi dell’andamento complessivo del progetto e per l’eventuale aggiornamento della pianificazione.
+
+Il monitoraggio include inoltre una valutazione retrospettiva dello Sprint, finalizzata all’individuazione di criticità operative, al miglioramento continuo dei processi adottati e alla verifica della sostenibilità dell’organizzazione del lavoro del team.
+
+====== Metodologia di Monitoraggio del Rendimento dello Sprint
+Al termine di ogni Sprint, il rendimento deve essere descritto in modo strutturato e uniforme, includendo obbligatoriamente i seguenti elementi:
+
+- *Attività svolte:* elenco dettagliato delle attività completate nel periodo di riferimento, con indicazione delle task concluse ("Definition of Done");
+- *Analisi delle deviazioni:* confronto tra le attività pianificate e quelle effettivamente svolte, con evidenza delle cause principali di eventuali scostamenti (es. stime errate, problemi tecnici imprevisti);
+- *Rischi rilevati:* identificazione dei nuovi rischi emersi durante lo Sprint o aggiornamento dello stato dei rischi già noti, in conformità alle procedure definite nella sezione di Analisi dei Rischi;
+- *Azioni correttive e preventive:* decisioni adottate per mitigare i rischi rilevati o migliorare l’efficacia delle attività negli Sprint successivi.
+
+====== Preventivo e Consuntivo di Sprint
+Il *Preventivo di Sprint* è definito all’inizio dello Sprint sulla base delle attività assegnate a ciascun membro del team. Per ogni attività devono essere stimate le ore di lavoro previste, in coerenza con le responsabilità assegnate e con le competenze richieste.
+
+Il *Consuntivo di Sprint* è definito al termine dello Sprint sulla base delle attività effettivamente svolte e delle ore rendicontate per ciascuna task. La rendicontazione deve riflettere in modo accurato il lavoro realmente eseguito e costituisce una responsabilità individuale di ciascun membro del team.
+
+Il confronto tra preventivo e consuntivo consente di valutare l’efficacia della pianificazione, l’affidabilità delle stime e l’adeguatezza dell’organizzazione del lavoro adottata.
+
+====== Strumenti di Rendicontazione
+La rendicontazione delle attività e delle ore di lavoro è effettuata esclusivamente tramite lo strumento di issue tracking adottato dal team (#def[Jira]), che rappresenta la fonte ufficiale dei dati di consuntivo.
+
+Per ciascuna task devono essere obbligatoriamente indicati:
+- lo stato di avanzamento;
+- le ore rendicontate;
+- il membro del team responsabile dell’attività.
+
+L’aggiornamento dei dati deve avvenire con periodicità giornaliera e comunque *entro il termine della giornata lavorativa* in cui l'attività è stata svolta, per garantire la tempestività del controllo.
+
+====== Regole di Rendicontazione
+Sono considerate rendicontabili le attività che producono valore per il progetto. Al fine di garantire la veridicità dei dati, si applicano le seguenti regole:
+
+- *Attività Pianificate:* devono essere tracciate associandole alla task originale prevista nello Sprint;
+- *Attività Non Pianificate:* attività impreviste ma necessarie (es. bugfix urgenti, risoluzione problemi configurazione) devono essere obbligatoriamente tracciate creando una nuova task. L'esclusione di tali attività è vietata in quanto falserebbe il calcolo del costo reale del progetto.
+
+Attività non pertinenti agli obiettivi del progetto o svolte senza autorizzazione non possono essere rendicontate a carico del monte ore.
+
+====== Criteri di Verifica del Monitoraggio e Controllo degli Sprint
+L’elemento *Monitoraggio e Controllo del Rendimento degli Sprint* è considerato conforme se, per ogni Sprint:
+
+- [ ] è definito un Preventivo di Sprint basato sulle attività assegnate;
+- [ ] è redatto un Consuntivo di Sprint basato esclusivamente sui dati estratti da #def[Jira];
+- [ ] il confronto tra preventivo e consuntivo è esplicitato e gli scostamenti sono motivati;
+- [ ] tutte le ore lavorate (incluse le attività non pianificate) sono state tracciate;
+- [ ] sono identificati e aggiornati i rischi emersi durante lo Sprint;
+- [ ] sono riportate eventuali azioni correttive o preventive per lo Sprint successivo.
+
+La mancata rendicontazione di uno o più Sprint o l’assenza degli elementi sopra elencati comporta la non conformità dell’elemento.
+
+#TODO("Da qui in poi, non è più roba mia. | Suar")
 
 === Strumenti di supporto
 - *#def("GitHub")*: Per il versionamento del codice e la gestione del repository.
