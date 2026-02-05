@@ -11,7 +11,7 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.4.0"
+#let versione = "v0.6.0"
 #set heading(numbering: "1.1.1")
 
 #titlePage("Norme di Progetto", versione)
@@ -20,16 +20,28 @@
 #let history = (
   (
     "2026/02/04",
-    "0.4.0",
+    "0.6.0",
     "Rielaborazione delle Norme di Progetto relative al Piano di Progetto",
     members.suar,
+  ),
+  (
+    "2026/02/03",
+    "0.5.0",
+    "Riscrittura delle sezioni relative all'AdR",
+    members.andrea,
+  ),
+  (
+    "2026/02/03",
+    "0.4.0",
+    "Integrazioni a PdQ e Metriche",
+    members.alice,
   ),
   (
     "2026/01/15",
     "0.3.0",
     "Aggiunta prima versione sezione documenti",
     members.kevin,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/09",
@@ -44,7 +56,7 @@
     "Arricchimento con standard industriali, norme di codifica dettagliate e integrazioni progetto-specifiche",
     members.martinello,
     members.suar,
-    members.kevin
+    members.kevin,
   ),
   (
     "2025/12/28",
@@ -52,7 +64,7 @@
     "Rilascio iniziale con norme, processi e strumenti aggiornati",
     members.martinello,
     members.suar,
-    members.kevin
+    members.kevin,
   ),
   (
     "2025/12/20",
@@ -60,7 +72,7 @@
     "Prima bozza iniziale",
     members.martinello,
     members.suar,
-    members.kevin
+    members.kevin,
   ),
 )
 
@@ -75,19 +87,19 @@
 = Introduzione
 
 == Contesto del Progetto
-Il presente documento descrive le #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#piano-di-progetto")[#def[Norme di Progetto]] relativo al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]], commissionato dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
+Il presente documento descrive le #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#norme-di-progetto")[#def[Norme di Progetto]] relative al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]], proposto dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
 
-L’obiettivo del progetto è lo sviluppo di una piattaforma ad #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] per l’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e la #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] automatizzata delle vulnerabilità presenti nei repository di codice sorgente, in conformità a quanto specificato nel #link(<capitolato>)[#underline[capitolato *C2*]].
-La piattaforma mira a supportare l’analisi statica del codice e l’individuazione di criticità di sicurezza, fornendo indicazioni di correzione mediante meccanismi automatizzati basati su modelli di linguaggio (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]).
+Il progetto ha come obiettivo lo sviluppo di una piattaforma software ad #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] finalizzata all’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e alla #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] automatizzata delle vulnerabilità presenti nei repository di codice sorgente. Il sistema è progettato in conformità ai requisiti e ai vincoli definiti nel #link(<capitolato>)[#underline[capitolato *C2*]].
+La piattaforma supporta attività di analisi statica del codice sorgente e di individuazione delle principali criticità di sicurezza, fornendo suggerimenti di correzione attraverso meccanismi automatizzati basati su modelli di linguaggio di grandi dimensioni (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]).
 
 == Finalità del Documento
-Le Norme di Progetto definiscono il quadro di riferimento metodologico, organizzativo e tecnologico adottato per lo sviluppo del sistema software.
+Le Norme di Progetto stabiliscono il quadro di riferimento metodologico, organizzativo e tecnologico adottato per lo sviluppo del sistema software.
 
 Il documento ha valore vincolante per l’intero gruppo di lavoro e persegue i seguenti obiettivi:
-* stabilire un insieme di regole comuni e convenzioni condivise atte a garantire uniformità nello sviluppo del prodotto software;
-* individuare e descrivere gli strumenti, le tecnologie e gli ambienti di lavoro adottati dal gruppo;
-* formalizzare i processi operativi, organizzativi e di controllo applicati nel corso del progetto;
-* assicurare la coerenza delle attività progettuali con gli standard industriali e le buone pratiche di riferimento.
+- definire un insieme di regole comuni e convenzioni condivise al fine di garantire uniformità e coerenza nello sviluppo del prodotto software;
+- individuare e descrivere gli strumenti, le tecnologie e gli ambienti di lavoro adottati;
+- formalizzare i processi operativi, organizzativi e di controllo applicati durante l’intero ciclo di vita del progetto;
+- assicurare l’allineamento delle attività progettuali agli standard di riferimento e alle buone pratiche dell’ingegneria del software.
 
 Il rispetto delle norme definite nel presente documento è obbligatorio per tutti i membri del gruppo di lavoro e costituisce un requisito fondamentale per garantire qualità, tracciabilità e controllo dell’intero ciclo di sviluppo.
 
@@ -102,58 +114,261 @@ La versione più recente del Glossario è disponibile al seguente link:
 == Riferimenti
 
 === Riferimenti Normativi
-I seguenti documenti hanno valore vincolante per la redazione del Piano di Progetto e per la definizione delle regole da rispettare durante il ciclo di vita del prodotto software:
+I seguenti documenti hanno valore vincolante per la redazione delle Norme di Progetto e per la definizione delle regole da rispettare durante il ciclo di vita del prodotto software:
 
 - *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> \
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
   (ultimo accesso: *04/02/2026*)
 
-- *IEEE 829 – Standard for Software and System Test Documentation*: definizione della struttura dei  piani di test, casi di test, procedure e report. \
+- *IEEE 829 – Standard for Software and System Test Documentation*: definizione della struttura dei piani di test, casi di test, procedure e report. \
   #underline[#link("https://ieeexplore.ieee.org/document/4578383")] \
   (ultimo accesso: *04/02/2026*)
 
-- *IEEE 830 – Standard for Software Requirements Specifications*: guida alla redazione e classificazione dei requisiti funzionali e non funzionali.
+- *IEEE 830 – Standard for Software Requirements Specifications*: guida alla redazione e classificazione dei requisiti funzionali e non funzionali. \
   #underline[#link("https://ieeexplore.ieee.org/document/720574")] \
   (ultimo accesso: *04/02/2026*)
 
-- *IEEE 1016 – Recommended Practice for Software Design Descriptions*: linee guida per la descrizione dell’architettura software e dei principali design pattern.
+- *IEEE 1016 – Recommended Practice for Software Design Descriptions*: linee guida per la descrizione dell’architettura software e dei principali design pattern. \
   #underline[#link("https://ieeexplore.ieee.org/document/741934")] \
   (ultimo accesso: *04/02/2026*)
 
-- *ISO/IEC 12207:1995 – Software Life Cycle Processes*: framework internazionale per la gestione dei processi di sviluppo, manutenzione e dismissione del software.
+- *ISO/IEC/IEEE 12207 – Software Life Cycle Processes*<12207>: framework internazionale per la gestione dei processi di sviluppo, manutenzione e dismissione del software. \
   #underline[#link("https://ieeexplore.ieee.org/document/8100771")] \
   (ultimo accesso: *04/02/2026*)
 
 === Riferimenti Informativi
-- *Dispense del corso di Ingegneria del Software relative ai Processi di Ciclo di Vita del Software*. \
+- *Dispense del corso di Ingegneria del Software relative ai Processi di Ciclo di Vita del Software* \
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T02.pdf")] \
-  (ultimo accesso: *31/01/2026*)
+  (ultimo accesso: *04/02/2026*)
 
-- *Dispense del corso di Ingegneria del Software relative alla Gestione di Progetto*. \
+- *Dispense del corso di Ingegneria del Software relative alla Gestione di Progetto* \
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T04.pdf")] \
-  (ultimo accesso: *31/01/2026*)
+  (ultimo accesso: *04/02/2026*)
 
+#pagebreak()
 = Processi Primari
+In conformità allo standard #underline[#link(<12207>)[ISO/IEC/IEEE 12207]], il ciclo di vita di un sistema software è descritto attraverso un insieme strutturato di processi, ciascuno dei quali copre specifici ambiti di responsabilità e attività. Tra questi, i processi primari rappresentano il nucleo operativo del ciclo di vita e descrivono le interazioni fondamentali tra chi richiede il sistema, chi lo realizza e chi ne cura lo sviluppo tecnico.
 
-== Processo di Fornitura
-La fornitura é il processoadottato dal fornitore del prodotto finale, il quale scop è quello di acquisire i requisiti del cliente e fornire il prodotto conforme a tali requisiti.
-Tale processo comprende una fase iniziale di studio dei requisiti che il progetto dovrà soddisfare.
-Da questa analisi deriva il materiale necessario per avviare la contrattazione dei requisiti con il #def("proponente") e per comunicare una pianificazione preliminare delle attività, includendo una stima della data di consegna.
-Il processo di fornitura si compone di molte attività, tra cui:
-- Inizializzazione della fornitura 
-  - Momento in cui il fornitore analizza le richieste del proponente e valuta la sua capacità di soddisfarle.
-- Preparazione della proposta
-  - Redazione della proposta tecnica ed economica in risposta al capitolato.
-- Negoziazione e contrattazione
-  - Discussione e definizione dei termini contrattuali con il proponente.
-- Pianificazione della fornitura
-  - Viene stabilita l'organizzazione del lavoro, le risorse necessarie, il modello di ciclo di vita da adottare oltre che la valutazione dei rischi.
-- Esecuzione della fornitura
-  - Realizzazione del prodotto secondo i requisiti concordati.
-- Valutazione della fornitura
-  - Verifica della conformità del prodotto ai requisiti e alla qualità attesa, questo viene fatto mantenendosi in costante contatto con la proponente.
-- Consegna del prodotto
-  - Rilascio formale del prodotto al proponente, accompagnato dalla documentazione necessaria.
+I processi primari definiscono cosa viene fatto, da chi e con quale responsabilità contrattuale e operativa, indipendentemente dalle metodologie o dagli strumenti adottati. Essi costituiscono quindi il riferimento concettuale per l’organizzazione delle attività progettuali e per la distribuzione dei ruoli all’interno del progetto.
+
+I processi primari, come indicato nello standard sopracitato, sono:
+- Acquisizione (Acquisition);
+- Fornitura (Supply);
+- Sviluppo (Development);
+- Operazione (Operation);
+- Manutenzione (Maintenance).
+
+Nel contesto del presente progetto, sono considerati rilevanti principalmente i processi di Fornitura e Sviluppo, in quanto direttamente pertinenti alla natura didattica e contrattuale dell’iniziativa.
+= Processo di Fornitura
+== Descrizione del Processo
+Il Processo di Fornitura definisce l’insieme delle attività svolte dal gruppo di lavoro in qualità di fornitore al fine di pianificare, coordinare e consegnare il prodotto software e la relativa documentazione in conformità ai requisiti stabiliti dal proponente.
+
+Nel contesto del progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]], il gruppo #def[Skarab Group] assume il ruolo di fornitore, mentre l’azienda #def[Var Group] ricopre il ruolo di proponente. Il #underline[#link(<capitolato>)[capitolato C2]] costituisce il riferimento contrattuale che disciplina requisiti, vincoli e obiettivi della fornitura.
+
+Il processo di fornitura è responsabile della gestione complessiva del progetto dal punto di vista organizzativo e qualitativo e coordina le attività necessarie a garantire la conformità degli artefatti prodotti rispetto a quanto concordato.
+
+== Attività del Processo
+Nel presente progetto, il processo di fornitura si articola nelle seguenti attività principali:
+
+- *Analisi e presa in carico dei requisiti* \
+  Studio sistematico dei #underline(link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-funzionali")[#def[requisiti funzionali]]) e dei #underline(link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-non-funzionali")[#def[requisiti non funzionali]]) definiti nel Capitolato C2, finalizzato alla comprensione, classificazione e valutazione di fattibilità tecnica e organizzativa, nonché all’individuazione dei vincoli progettuali rilevanti.
+
+- *Pianificazione delle attività di progetto* \
+  Definizione della struttura delle attività necessarie allo sviluppo del progetto, assegnazione delle responsabilità all’interno del gruppo di lavoro, stima delle tempistiche e delle risorse disponibili e individuazione delle principali milestone di progetto.
+
+- *Produzione, gestione e verifica della documentazione* \
+  Redazione progressiva della documentazione di progetto secondo strutture e convenzioni condivise, gestione delle versioni dei documenti e verifica della loro completezza, coerenza e conformità alle Norme di Progetto e agli standard di riferimento.
+
+- *Monitoraggio dell’avanzamento e controllo della qualità della fornitura* \
+  Controllo periodico dello stato di avanzamento delle attività rispetto alla pianificazione definita, verifica del rispetto delle scadenze e valutazione della qualità degli artefatti prodotti mediante attività di revisione interna.
+
+- *Preparazione e consegna degli artefatti* \
+  Consolidamento degli artefatti prodotti, verifica finale della loro conformità ai requisiti stabiliti e predisposizione della documentazione necessaria alla consegna ufficiale prevista dalle scadenze di progetto.
+
+Nel contesto didattico del progetto, e in particolare nel periodo che conduce alla #underline(link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requirements-and-technology-baseline")[#def[RTB]]), tali attività si concretizzano prevalentemente nella redazione strutturata e nel controllo della documentazione di progetto, che rappresenta una componente essenziale della fornitura.
+
+== Prodotti del Processo
+Il processo di fornitura prevede la produzione e la gestione dei seguenti prodotti (artefatti documentali):
+
+- *Norme di Progetto* \
+  Documento che definisce le regole metodologiche, organizzative e tecniche adottate dal gruppo di lavoro durante l’intero ciclo di vita del progetto.
+
+- *Piano di Progetto* \
+  Documento che descrive l’organizzazione del lavoro, la pianificazione delle attività, l’allocazione delle risorse, la gestione dei rischi e le modalità di monitoraggio dell’avanzamento.
+
+- *Piano di Qualifica* \
+  Documento che specifica i criteri di qualità del prodotto e della documentazione, nonché le attività di verifica e validazione previste.
+
+- *Analisi dei Requisiti* \
+  Documento che raccoglie e formalizza i requisiti funzionali e non funzionali del sistema, derivati dal Capitolato C2.
+
+
+- *Verbali di verifica e revisione* \
+  Documenti che registrano esiti e decisioni delle attività di controllo e revisione svolte durante il progetto.
+
+== Procedure operative trasversali del Processo
+Le procedure operative trasversali disciplinano *quando* e *come* le attività del processo di fornitura vengono eseguite a livello di processo, indipendentemente dallo specifico documento coinvolto. Esse definiscono ruoli, passi operativi, criteri di controllo e output attesi, garantendo uniformità, tracciabilità e controllo dell’esecuzione del processo.
+
+In particolare, il presente processo prevede procedure trasversali per:
+- avvio e presa in carico delle attività di progetto;
+- gestione di versionamento, approvazione e rilascio degli artefatti;
+- revisione interna e controllo qualità;
+- consegna degli artefatti e registrazione delle evidenze.
+
+== Norme di redazione e attuazione dei prodotti documentali
+Per ciascun prodotto documentale individuato, le Norme di Progetto definiscono:
+- le convenzioni di redazione e di struttura;
+- le modalità operative con cui vengono attuati gli elementi previsti dal documento (es. monitoraggio e rendicontazione nel Piano di Progetto);
+- i criteri minimi di qualità e tracciabilità.
+
+Le sezioni seguenti descrivono tali norme per i principali prodotti documentali del processo di fornitura.
+
+=== Piano di Progetto
+
+==== Nota sull’adozione dello standard IEEE 1058
+Il documento *Piano di Progetto* adotta come riferimento metodologico lo standard *IEEE 1058-1998 (Standard for Software Project Management Plans)*. Tale scelta riflette la volontà di applicare un approccio rigoroso e sistematico alla gestione del progetto, adattando i contenuti alle dimensioni, alla complessità e alle tempistiche del caso di studio considerato.
+
+L’adozione dello standard garantisce una copertura completa degli aspetti critici del ciclo di vita del progetto e si traduce concretamente nei seguenti elementi chiave:
+
+- *Struttura e organizzazione sistematica:* \
+  l’indice e l’articolazione del documento ricalcano la gerarchia proposta dallo standard IEEE 1058, assicurando una pianificazione completa delle aree gestionali, organizzative e tecniche ed evitando lacune nella definizione delle responsabilità e dei processi.
+
+- *Analisi e gestione del rischio:* \
+  in conformità alle linee guida IEEE, è adottato un approccio di risk management basato su valutazioni di probabilità, impatto e strategie di mitigazione/contingenza, consentendo un monitoraggio strutturato delle principali incertezze di progetto.
+
+- *Tracciabilità e controllo:* \
+  il documento distingue in modo esplicito la fase di pianificazione (*Preventivo*) da quella di monitoraggio e rendicontazione (*Consuntivo*), permettendo un controllo oggettivo dell’avanzamento e l’analisi degli eventuali scostamenti rispetto alle stime iniziali.
+
+- *Efficacia operativa:* \
+  alcuni moduli previsti dallo standard sono stati ottimizzati e accorpati per migliorare la leggibilità e la comunicazione all’interno del team, mantenendo inalterati rigore metodologico e chiarezza dei flussi informativi richiesti dalla normativa.
+
+==== Definizione del documento
+Il Piano di Progetto è il documento che definisce l’organizzazione, la pianificazione e il controllo delle attività necessarie alla realizzazione del progetto software. Esso descrive la struttura delle attività, l’allocazione delle risorse, la pianificazione temporale, la gestione dei rischi e le modalità di monitoraggio dell’avanzamento del progetto.
+
+Il Piano di Progetto costituisce il riferimento operativo per la conduzione del progetto e supporta il coordinamento delle attività del gruppo di lavoro, garantendo la coerenza tra obiettivi, tempi e risorse disponibili.
+
+==== Elementi costituenti del documento
+Il Piano di Progetto è strutturato in una serie di elementi fondamentali che concorrono alla pianificazione, alla gestione e al controllo dell’intero progetto software. Ciascun elemento svolge un ruolo specifico e contribuisce a fornire una visione completa e coerente dell’organizzazione del lavoro, delle risorse impiegate e dell’andamento del progetto nel tempo.
+
+Gli elementi costituenti del Piano di Progetto sono descritti di seguito.
+
+===== Analisi dei Rischi
+L’analisi dei rischi ha lo scopo di individuare e valutare i principali fattori di rischio che possono compromettere il raggiungimento degli obiettivi di progetto. Essa comprende l’identificazione di rischi di natura tecnica, organizzativa e temporale, nonché la valutazione della loro probabilità di occorrenza e del potenziale impatto sul progetto.
+
+====== Metodologia di Analisi
+Il team adotta un approccio *semi-quantitativo* per la valutazione dei rischi. Ogni rischio identificato viene descritto e valutato sulla base di due parametri fondamentali:
+
+- *Probabilità di accadimento (P):* verosimiglianza con cui l’evento potrebbe verificarsi;
+- *Impatto (I):* gravità delle conseguenze sul progetto qualora l’evento si manifesti.
+
+Il *Livello di Rischio (R)* è calcolato come:
+$ R = P times I $
+
+I parametri $P$ e $I$ sono valutati su una scala discreta da 1 a 3.
+
+La scelta di una scala ridotta (1–3) rispetto a scale più estese (es. 1–5 o percentuali) è motivata dalla volontà di:
+- *ridurre la soggettività:* in assenza di dati storici pregressi, una scala più ampia introdurrebbe un’eccessiva varianza nelle stime individuali; la tripartizione Basso/Medio/Alto facilita una categorizzazione netta e supporta il decision-making;
+- *supportare l’approccio iterativo:* il metodo adottato permette una rivalutazione rapida dei rischi a ogni Sprint, evitando overhead non necessario rispetto alla dimensione del progetto.
+
+#figure(
+  table(
+    columns: (auto, 1fr, 1fr, 1fr),
+    inset: 12pt,
+    align: center + horizon,
+    stroke: 0.5pt + luma(200),
+
+    table.cell(rowspan: 2, colspan: 1, align: horizon)[*Probabilità*],
+    table.cell(colspan: 3, fill: luma(240))[*Impatto*],
+    [Basso (1)], [Medio (2)], [Alto (3)],
+
+    [*Bassa (1)*],
+    table.cell(fill: rgb("e6ffe6"))[1 (Basso)],
+    table.cell(fill: rgb("e6ffe6"))[2 (Basso)],
+    table.cell(fill: rgb("e6ffe6"))[3 (Basso)],
+
+    [*Media (2)*],
+    table.cell(fill: rgb("e6ffe6"))[2 (Basso)],
+    table.cell(fill: rgb("fff5e6"))[*4 (Medio)*],
+    table.cell(fill: rgb("ffcccc"))[*6 (Alto)*],
+
+    [*Alta (3)*],
+    table.cell(fill: rgb("e6ffe6"))[3 (Basso)],
+    table.cell(fill: rgb("ffcccc"))[*6 (Alto)*],
+    table.cell(fill: rgb("ffcccc"))[*9 (Critico)*],
+  ),
+  caption: [Matrice di Rischio: visualizzazione delle soglie di intervento],
+)
+
+Sulla base del valore di $R$, i rischi vengono classificati per priorità come segue:
+- *Rischio Basso ($1–3$):* livello di guardia; il rischio è accettabile e soggetto al solo monitoraggio periodico;
+- *Rischio Medio ($4$):* livello di attenzione; richiede la definizione preventiva di una strategia di mitigazione e un controllo frequente;
+- *Rischio Alto ($6–9$):* livello critico; richiede azioni preventive tempestive e la predisposizione di piani di contingenza.
+
+====== Categorie di rischio
+Per favorire l’analisi sistematica e l’assegnazione delle responsabilità, i rischi sono classificati nelle seguenti macro-categorie:
+- *RT (Rischi Tecnologici):* criticità legate alle tecnologie adottate (es. #def[LLM], #def[Agenti]), agli strumenti di sviluppo, alle integrazioni e all’infrastruttura;
+- *RI (Rischi Interpersonali):* problematiche relative al #def[team di progetto], quali disponibilità dei membri, comunicazione, coordinamento e gestione dei conflitti;
+- *RCO (Rischi di Costo e Organizzativi):* rischi derivanti da stime non accurate, pianificazione temporale (#def[Schedulazione]), dipendenze esterne e vincoli organizzativi.
+
+====== Ruoli e responsabilità
+La gestione dei rischi è una responsabilità condivisa, articolata come segue:
+- *Responsabile di Progetto:* supervisiona il processo di gestione dei rischi, valuta la criticità degli eventi e decide l’attivazione delle strategie di mitigazione o dei piani di contingenza;
+- *Team di Progetto:* contribuisce all’identificazione dei rischi e segnala tempestivamente l’insorgere di eventi critici o condizioni anomale;
+- *Stakeholder di riferimento:* vengono informati in caso di rischi ad alto impatto o di variazioni rilevanti rispetto al piano approvato.
+
+====== Gestione e monitoraggio dei rischi
+La gestione dei rischi non è limitata alla fase di avvio del progetto, ma costituisce un processo ciclico di controllo che accompagna l’intero ciclo di vita del sistema ed è integrato nelle attività di pianificazione e revisione degli Sprint.
+
+Nel caso in cui un rischio si manifesti o emergano nuovi rischi non precedentemente previsti, il team applica la seguente procedura operativa:
++ *Rilevamento (Detection):* ogni membro del team segnala tempestivamente al *Responsabile di Progetto* l’insorgere di problematiche tecniche o organizzative, inclusi superamenti di soglie di allarme (ad esempio ritardi superiori al 20% rispetto alla pianificazione prevista).
++ *Documentazione:* l’evento viene descritto nel verbale della prima riunione utile e, qualora necessario, viene aperto o aggiornato un ticket sulla piattaforma di gestione delle attività adottata dal team.
++ *Valutazione e risposta:* il Responsabile di Progetto valuta la criticità del rischio e attiva la strategia di mitigazione o il piano di contingenza più appropriato, quali la riallocazione delle risorse, la revisione delle priorità o la riduzione dello scopo opzionale.
++ *Rendicontazione (Consuntivo):* al termine dello #def[Sprint] o di una fase significativa del progetto (es. #def[RTB]), l’evento viene analizzato nel consuntivo del periodo di riferimento, valutando impatto effettivo su tempi, costi e qualità, efficacia delle contromisure e necessità di azioni correttive.
++ *Aggiornamento delle strategie:* le strategie di mitigazione vengono aggiornate e integrate nella pianificazione degli Sprint successivi al fine di ridurre probabilità o impatto di eventi analoghi futuri.
+
+===== Pianificazione del ciclo di vita del software
+La pianificazione del ciclo di vita del software descrive l’organizzazione temporale del progetto e la suddivisione delle attività nelle diverse fasi previste. Essa definisce milestone, scadenze intermedie e sequenza delle attività necessarie alla realizzazione del prodotto software.
+
+Questo elemento consente di fornire una visione d’insieme dell’evoluzione del progetto e costituisce il riferimento per il monitoraggio dell’avanzamento delle attività.
+
+===== Preventivo ed allocazione delle risorse
+Il preventivo e l’allocazione delle risorse definiscono la distribuzione delle risorse disponibili, in particolare del tempo di lavoro, tra le diverse attività di progetto. Questo elemento include la stima dell’impegno richiesto per ciascuna attività e l’assegnazione delle responsabilità ai membri del gruppo di lavoro.
+
+Il preventivo rappresenta una previsione iniziale dell’impegno complessivo e costituisce il riferimento per il confronto con i consuntivi rilevati durante l’esecuzione del progetto.
+
+===== Monitoraggio e controllo
+Il monitoraggio e controllo dell’avanzamento ha lo scopo di verificare in modo sistematico l’andamento del progetto rispetto alla pianificazione definita. Tale attività si basa sulla suddivisione del lavoro in iterazioni (Sprint), per ciascuna delle quali sono definite in modo atomico le attività da svolgere.
+
+Per ogni Sprint vengono rilevati il preventivo orario e il consuntivo effettivo delle attività svolte, consentendo il confronto tra quanto pianificato e quanto realizzato. I dati raccolti sono utilizzati per valutare l’andamento generale del progetto, individuare eventuali scostamenti e supportare le decisioni di adattamento della pianificazione.
+
+Il monitoraggio include inoltre un’analisi retrospettiva dell’andamento dei prodotti e del team di lavoro, finalizzata al miglioramento continuo dell’organizzazione e dell’efficacia del processo di sviluppo.
+
+====== Metodologia di monitoraggio
+Il progetto adotta un sistema di monitoraggio basato sul confronto sistematico tra valori pianificati (*Preventivo*) e valori effettivamente rendicontati (*Consuntivo*), con cadenza al termine di ogni Sprint.
+
+Gli indicatori utilizzati sono:
+- *Ore previste:* ore pianificate nel preventivo di Sprint;
+- *Ore effettive:* ore realmente rendicontate dai membri del team;
+- *Scostamento (Delta):* differenza tra ore effettive e ore previste;
+- *Costo effettivo:* calcolato sulla base delle ore effettive e delle tariffe associate ai ruoli (ove applicabile).
+
+L’analisi degli scostamenti (*Variance Analysis*) costituisce lo strumento principale per l’individuazione tempestiva di inefficienze operative.
+
+====== Strumenti di rendicontazione
+La rendicontazione oraria e il tracciamento delle attività avvengono tramite la piattaforma di issue tracking adottata dal team (es. #def[Jira]), che rappresenta la fonte primaria dei dati di consuntivo.
+
+Le modalità di utilizzo dello strumento includono:
+- associazione delle ore rendicontate alle singole task;
+- classificazione delle attività per ruolo;
+- aggiornamento periodico secondo le scadenze definite dal team.
+
+====== Regole di rendicontazione
+Sono considerate rendicontabili esclusivamente le attività che:
+- rispettano gli standard definiti nelle Norme di Progetto;
+- producono artefatti verificabili o avanzamenti misurabili;
+- risultano coerenti con gli obiettivi dello Sprint.
+
+Attività non conformi o prive di valore aggiunto possono essere escluse dal consuntivo su decisione del Responsabile di Progetto.
 
 === Strumenti di supporto
 - *#def("GitHub")*: Per il versionamento del codice e la gestione del repository.
@@ -168,14 +383,14 @@ Il processo di fornitura si compone di molte attività, tra cui:
 In questa sezione si elencano tutti i documenti che #def("Skarab Group") produrrà durante il ciclo di vita del progetto #def("Code Guardian"). I documenti sono tutti scritti utilizzando il linguaggio #def("typst") per garantire una formattazione uniforme e professionale.
 
 ==== AdR - Analisi dei Requisiti
-Documento che raccoglie e specifica i requisiti funzionali e non funzionali del sistema software da sviluppare, basato sul capitolato fornito dal #def("Proponente"). Questo documento contiene:
+L’#def("Analisi dei Requisiti") è il documento che descrive in dettaglio i requisiti funzionali e non funzionali
+previsti dal progetto #def("Code Guardian"). Nel dettaglio il documento contiene un’analisi dettagliata delle
+funzionalità del sistema, degli attori coinvolti e le informazioni necessarie al tracciamento dei
+requisiti rispetto alle loro fonti. La struttura è la seguente:
 - Introduzione al progetto e obiettivi.
 - Lista degli attori coinvolti.
 - Lista dei casi d'uso.
- - Essi sono descitti in UCx.y.z. ...
-  - UC é un acronimo che sta per usecase, x indica il numero del caso d'uso, y,z e i numeri successivi sono i sotto casi d'uso, ovvvero inclusioni, composizioni o estensioni del caso d'uso principale.
 - Lista dei requisiti funzionali e non funzionali, classificati in obbligatori, desiderabili e opzionali.
-  #TODO("come sono acronimizzati i requisiti?")
 
 ==== Glossario
 Documento che definisce i termini tecnici e specifici utilizzati nel progetto, per garantire una comprensione comune tra tutti i membri del team e gli stakeholder esterni. questo documento serve a fornire definizioni chiare e univoche per evitare ambiguità. Oltre che il documento in sé per s'é, il glossario é consultabile tramite una pagina nel sito web di Skarab Group. Questo permette interattivitá e link esterni all'interno di ogni documento che compone la documentazione di progetto. Per convenzione, un termine sará un link al glossario sul sito solo la prima volta che compare all'interno di un documento, assumento una lettura ordinata del documento stesso da parte del lettore.
@@ -188,6 +403,14 @@ Documento che descrive l'organizzazione del lavoro, le risorse, il modello di ci
 
 ==== PdQ - Piano di Qualifica
 Documento che definisce le strategie, le metodologie e le attività di #def("verifica") e #def("validazione") per garantire che i prodotti del progetto soddisfino i requisiti specificati. Include la definizione delle metriche di qualità, i piani di test e le procedure di controllo qualità.
+
+===== Nota sull'adozione dello Standard ISO/IEC 25010 e PDCA
+La redazione del Piano di Qualifica e la definizione delle metriche si ispirano alla famiglia di standard ISO/IEC 25010 (SQuaRE). Tale scelta garantisce una classificazione rigorosa delle caratteristiche di qualità del prodotto (es. Sicurezza, Affidabilità, Usabilità).
+Inoltre, l'adozione strutturale del ciclo /*#def[PDCA]*/ (Plan-Do-Check-Act) assicura che il processo di controllo qualità non sia statico, ma evolva:
+- *Plan:* Definizione delle metriche e delle soglie nel presente documento.
+- *Do:* Esecuzione delle misurazioni durante gli Sprint.
+- *Check:* Analisi degli scostamenti nei periodi di retrospettiva.
+- *Act:* Aggiornamento delle Norme di Progetto e ricalibrazione delle metriche per lo Sprint successivo.
 
 
 ==== Verbali delle Riunioni
@@ -231,31 +454,16 @@ Tutti i documenti devono avere un formato uniforme e professionale stutturato in
     stroke: none,
 
     // Header
-    text(white)[*Documento*],
-    text(white)[*Redattori*],
-    text(white)[*Destinatari*],
-    text(white)[*Uso*],
+    text(white)[*Documento*], text(white)[*Redattori*], text(white)[*Destinatari*], text(white)[*Uso*],
 
     // Rows
-    [Lettera di Presentazione],
-    [Responsabile],
-    [Proponente, #members.cardin, #members.tullio, Skarab Group],
-    [Esterno],
+    [Lettera di Presentazione], [Responsabile], [Proponente, #members.cardin, #members.tullio, Skarab Group], [Esterno],
 
-    [AdR – Analisi dei Requisiti],
-    [Analisti],
-    [Proponente, #members.cardin, #members.tullio, Skarab Group],
-    [Esterno],
+    [AdR – Analisi dei Requisiti], [Analisti], [Proponente, #members.cardin, #members.tullio, Skarab Group], [Esterno],
 
-    [Glossario],
-    [Tutti i membri del gruppo],
-    [Stakeholder interni ed esterni],
-    [Esterno],
+    [Glossario], [Tutti i membri del gruppo], [Stakeholder interni ed esterni], [Esterno],
 
-    [NdP – Norme di Progetto],
-    [Responsabili di processo],
-    [Skarab Group, #members.cardin, #members.tullio],
-    [Interno],
+    [NdP – Norme di Progetto], [Responsabili di processo], [Skarab Group, #members.cardin, #members.tullio], [Interno],
 
     [PdP – Piano di Progetto],
     [Project Manager],
@@ -283,38 +491,38 @@ Tale processo è conforme allo standard ISO/IEC 12207:1995 e garantisce un appro
 === Attività del Processo di Sviluppo
 
 Il processo comprende le seguenti macro-attività:
-==== Definizione del processo: 
+==== Definizione del processo:
 Selezione del ciclo di vita del software più idoneo in base alla complessità, agli obiettivi e ai vincoli del progetto.
 
-==== Analisi dei Requisiti: 
+==== Analisi dei Requisiti:
 Individuazione e formalizzazione delle esigenze dell’utente finale e dei vincoli imposti dal proponente, includendo funzionalità, requisiti di qualità e limitazioni progettuali.
 
-==== Progettazione dell’architettura di sistema: 
+==== Progettazione dell’architettura di sistema:
 identificazione delle componenti hardware e software necessarie a soddisfare i requisiti, garantendo la tracciabilità degli stessi.
 
-==== Analisi dei Requisiti Software: 
+==== Analisi dei Requisiti Software:
 studio di come il software risponde ai requisiti utente, includendo aspetti funzionali, prestazionali, di sicurezza e di interfaccia.
 
-==== Progettazione dell’architettura software: 
+==== Progettazione dell’architettura software:
 definizione della struttura complessiva del sistema software e delle relazioni tra le sue componenti, senza entrare nel dettaglio implementativo.
 
-==== Progettazione di dettaglio: 
+==== Progettazione di dettaglio:
 specifica delle singole unità software che compongono il sistema.
 
-==== Codifica e test delle unità: 
+==== Codifica e test delle unità:
 implementazione del codice sorgente e verifica del corretto funzionamento delle singole unità.
 
-==== Integrazione software: 
+==== Integrazione software:
 combinazione progressiva delle componenti software, supportata da test di integrazione.
 
-==== Test di qualifica del software: 
+==== Test di qualifica del software:
 verifica della conformità del prodotto agli obiettivi di qualità definiti.
 
-==== Integrazione e test di sistema: 
+==== Integrazione e test di sistema:
 assemblaggio del sistema completo e validazione del suo comportamento complessivo.
 Installazione: rilascio del software nell’ambiente concordato con il cliente.
 
-==== Supporto all’accettazione: 
+==== Supporto all’accettazione:
 assistenza al proponente durante la fase di verifica finale del prodotto.
 
 === Relazione con le Baseline di progetto
@@ -322,16 +530,35 @@ assistenza al proponente durante la fase di verifica finale del prodotto.
 In relazione alle baseline previste dal progetto, (#def("RTB") e #def("PB")), le attività di sviluppo si piú significative sono:
 
 ==== Analisi dei Requisiti
+L'Analisi dei Requisiti costituisce una delle fasi più critiche e determinanti dell'intero ciclo di vita del software, assumendo un ruolo centrale durante la #def("Requirements and Technology Baseline") (#strong("RTB")). Questa attività non si limita alla semplice raccolta di informazioni, ma mira all’individuazione, allo studio e alla formalizzazione rigorosa di tutte le necessità che il sistema Code Guardian dovrà soddisfare per rispondere efficacemente alle richieste del proponente. \
+Svolgere un'analisi completa e corretta è fondamentale per fornire una base solida per le successive fasi di progettazione e codifica. I risultati di questa analisi sono documentati nel documento #strong("Analisi dei Requisiti vx.y.z"). #TODO("Link al documento")
 
-L’Analisi dei Requisiti rappresenta una fase centrale del progetto e ha lo scopo di identificare in modo completo e non ambiguo tutti i requisiti che il sistema deve soddisfare.
-Essa è documentata nell’apposito documento di Analisi dei Requisiti e costituisce il riferimento principale per le successive attività di progettazione, sviluppo e verifica.
+===== Casi d'Uso
+I #def("casi d'uso") rappresentano scenari specifici che descrivono come gli attori interagiscono con il sistema per raggiungere determinati obiettivi. Essi forniscono una visione chiara delle funzionalità richieste e aiutano a identificare i requisiti funzionali del sistema.
+Per la descrizione dei casi d'uso viene utilizzata la nomenclatura #strong("UCPrincipale.Secondario") dove:
+- *UC*: acronimo di Use Case (caso d'uso).
+- *Principale*: numero progressivo del caso d'uso principale, identifica un macro-scenario o una funzionalità atomica.
+- *Secondario*: numero progressivo del caso d'uso secondario, identifica varianti o estensioni del caso d'uso principale (sotto-casi).
+L’identificatore *Principale* è univoco a livello globale; non è quindi ammessa l’esistenza di due casi d’uso distinti con il medesimo valore principale. Il valore *Secondario* può invece essere ripetuto all'interno del documento, a patto che ciò non avvenga mai sotto lo stesso identificatore principale. Nel caso in cui un scenario secondario presenti a sua volta delle inclusioni o estensioni, la stringa *Principale.Secondario* assumerà il ruolo di radice per la nuova gerarchia, seguendo le medesime regole di progressione e unicità sopra descritte.
 
-I Casi d’Uso sono identificati tramite una nomenclatura univoca che ne garantisce la tracciabilità, la nomenclatura é la seguente: UCx.y.z, dove:
-- UC indica che si tratta di un Caso d’Uso.
-- x è un numero intero che identifica il Caso d’Uso principale.
-- y, z e i numeri successivi sono numeri interi che identificano sotto-casi d’Uso, ovvero inclusioni, composizioni o estensioni del Caso d’Uso principale.
+Per approfondimenti riguardanti gli attori coinvolti, le precondizioni, le postcondizioni e lo scenario principale degli eventi, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti vx.y.z"). #TODO("Link al documento")
 
-I requisiti, invece< #TODO("come sono acronimizzati i requisiti?")> 
+===== Requisiti
+I requisiti rappresentano le specifiche funzionali e non funzionali che il sistema deve soddisfare. Ogni requisito è classificato per garantire la tracciabilità rispetto alle fonti e ai casi d'uso associati. \
+Per la descrizione dei requisiti viene utilizzata la nomenclatura #strong("TipologiaRPrioritàNumero") dove:
+- *Tipologia*: indica il tipo di requisito. I valori possibili sono:
+  - *F*: Requisito #strong("F")unzionale.
+  - *Q*: Requisito di #strong("Q")ualità.
+  - *C*: Requisito di #strong("V")incolo.
+- *R*: acronimo di Requisito.
+- *Priorità*: indica l'importanza del requisito. I valori possibili sono:
+  - *Ob*: Requisito #strong("Ob")bligatorio.
+  - *De*: Requisito #strong("De")siderabile.
+  - *Op*: Requisito #strong("Op")zionale.
+- *Numero*: numero progressivo univoco per ogni requisito all'interno della sua tipologia.
+
+Per approfondimenti riguardanti la descrizione dettagliata, la fonte e i casi d'uso associati a ciascun requisito, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti vx.y.z"). #TODO("Link al documento")
+
 ==== Codifica
 
 La codifica ha come obiettivo l’implementazione fedele delle soluzioni progettate, nel rispetto degli standard di qualità definiti dal gruppo.
@@ -379,10 +606,10 @@ Ogni documento deve includere una sezione di cronologia delle versioni che ripor
 - Data della modifica.
 
 - Numero di versione
- - Il numero della versione deve seguire lo scema `x.y.z`, dove:
-   - `x`: Major version, incrementata per cambiamenti significativi o incompatibili.
-   - `y`: Minor version, incrementata per l'aggiunta di funzionalità mantenendo la compatibilità.
-   - `z`: Patch version, incrementata per correzioni di bug o modifiche minori.
+  - Il numero della versione deve seguire lo scema `x.y.z`, dove:
+    - `x`: Major version, incrementata per cambiamenti significativi o incompatibili.
+    - `y`: Minor version, incrementata per l'aggiunta di funzionalità mantenendo la compatibilità.
+    - `z`: Patch version, incrementata per correzioni di bug o modifiche minori.
 - Descrizione delle modifiche apportate.
 - Nomi dei redattori coinvolti.
 - Nomi dei verificatori coinvolti.
@@ -505,9 +732,9 @@ La seguente tebella riporterá tutti i ruoli presenti all'interno del progetto c
 
 #figure(
   table(
-    columns: (auto,auto),
+    columns: (auto, auto),
     stroke: 0.5pt + luma(200),
-    
+
     fill: (col, row) => if row == 0 {
       luma(62.75%)
     } else if calc.even(row) {
@@ -516,19 +743,19 @@ La seguente tebella riporterá tutti i ruoli presenti all'interno del progetto c
       none
     },
     [*Ruolo*], [*Responsabilità*],
-    
+
     [Responsabile],
     [Coordina e supervisiona l'intero progetto, garantendo il rispetto delle scadule e del budget. Rappresenta il team nei rapporti con il committente e gli stakeholder esterni. Pianifica le attività, assegna le risorse, monitora l'avanzamento attraverso metriche e indicatori, gestisce i rischi e le criticità. Approva i documenti ufficiali e autorizza le spese. Convoca e presiede le riunioni, facilita la comunicazione interna ed esterna, risolve conflitti e prende decisioni strategiche per il successo del progetto.],
-    
+
     [Amministratore],
     [Gestisce l'infrastruttura tecnica e organizzativa del progetto. Configura e mantiene gli strumenti di versionamento, continuous integration, issue tracking e documentazione. Amministra i repository, definisce workflow e convenzioni, monitora l'ambiente di sviluppo. Gestisce la documentazione di processo, redige le norme di progetto, mantiene aggiornato il piano di qualifica. Supporta il team nella risoluzione di problemi tecnici relativi all'ambiente di lavoro, garantisce backup e sicurezza dei dati, ottimizza i processi di automazione.],
-    
+
     [Verificatore],
     [Assicura la qualità dei prodotti attraverso attività di verifica sistematica. Controlla la conformità dei documenti alle norme redazionali e tipografiche, verifica la correttezza tecnica e la coerenza dei contenuti. Esegue review del codice secondo checklist predefinite, controlla il rispetto degli standard di programmazione. Verifica la tracciabilità tra requisiti, design e implementazione. Redige verbali di verifica, segnala anomalie e non conformità, propone azioni correttive. Monitora le metriche di qualità e valida i test eseguiti dai programmatori.],
-    
+
     [Analista],
     [Raccoglie, analizza e formalizza i requisiti del sistema attraverso l'interazione con committente e stakeholder. Studia il dominio applicativo, comprende le esigenze degli utenti, identifica vincoli e opportunità. Redige l'Analisi dei Requisiti classificando requisiti funzionali, di qualità, di vincolo e prestazionali. Definisce casi d'uso, scenari operativi e modelli del dominio. Mantiene la tracciabilità tra requisiti e fonti, gestisce l'evoluzione dei requisiti durante il progetto. Collabora con i progettisti per garantire la fattibilità tecnica delle soluzioni proposte.],
-    
+
     [Progettista],
     [Definisce l'architettura del sistema e il design dettagliato dei componenti software. Individua pattern architetturali appropriati, decompone il sistema in moduli, definisce interfacce e dipendenze. Specifica la struttura delle classi, i diagrammi di sequenza e collaborazione, le strutture dati e gli algoritmi principali. Redige la Specifica Tecnica e il Piano di Qualifica nella parte relativa ai test di integrazione e sistema. Effettua scelte tecnologiche motivate, considera aspetti di manutenibilità, estensibilità e performance. Fornisce ai programmatori le specifiche di dettaglio necessarie all'implementazione.],
 
@@ -578,7 +805,7 @@ La comunicazione interna del team avviene tramite varie piattaforme:
 Come giá riportato in precedenza, il gruppo utilizza diversi strumenti per supportare l'organizzazione del lavoro anche in modo totalmente asincrono:
 - Google calendar: Per la pianificazione delle riunioni esterne.
 - Scripts di automazione: Per automatizzare attività ripetitive e migliorare l'efficienza del lavoro.
- - queste comprendono, al momento del PoC: generazione glossario, sia in formato documento che in pagina web
+  - queste comprendono, al momento del PoC: generazione glossario, sia in formato documento che in pagina web
 - Repository GitHub: Per il versionamento del codice e la gestione della documentazione di progetto.
 
 ==== Creazione e gestione degli strumenti organizzativi
@@ -627,7 +854,7 @@ La seguente tabella riporta le fonti utilizzate per la formazione dei membri del
   table(
     columns: (auto, auto),
     stroke: 0.5pt + luma(200),
-    
+
     fill: (col, row) => if row == 0 {
       luma(62.75%)
     } else if calc.even(row) {
@@ -636,13 +863,13 @@ La seguente tabella riporta le fonti utilizzate per la formazione dei membri del
       none
     },
     [*Tecnologia*], [*Fonte di formazione*],
-    
+
     [Python], [Documentazione ufficiale Python, youtube tutorial],
     [Agenti AI], [Documentazione framework specifici, paper accademici, documentazione AWS],
     [AWS], [documentazione ufficiale AWS],
     [Git], [Documentazione ufficiale Git, guide interattive, corso di Metodi e tecnologie per lo sviluppo software],
     [Node.js], [Documentazione ufficiale Node.js, tutorial youtube],
-    [MongoDB], [documentazione ufficiale,]
+    [MongoDB], [documentazione ufficiale,],
   ),
   caption: [Tecnologie e fonti di formazione],
 )
@@ -652,35 +879,211 @@ Inoltre l'azienda proponente Var group ha tenuto delle lezioni specifiche per og
 = Metriche
 Il gruppo adotta un sistema di metriche per monitorare processi e prodotti.
 
+== Strategia di Definizione delle Soglie Metriche
+La determinazione delle soglie di accettabilità e ottimalità per le metriche adottate dal gruppo /*#def("Skarab Group")*/ non è un processo arbitrario, ma segue una strategia ingegneristica basata sui seguenti criteri:
+
+- *Adesione agli Standard Internazionali:* Per i processi di fornitura, il gruppo adotta il framework /*#def("Earned Value Management")*/ (EVM), utilizzando gli intervalli di confidenza standard del settore ($0.90 - 1.10$) per garantire la stabilità economica e temporale. Per la qualità del prodotto, le soglie sono calibrate sulle caratteristiche del modello /*#def("ISO/IEC 25010")*/.
+- *Analisi del Dominio e Benchmark:* Le metriche di supporto e sviluppo (es. /*#def("Gulpease Index"), #def("Complessità Ciclomatica")*/) sono tarate su benchmark di settore per lo sviluppo software moderno, garantendo che i requisiti di manutenibilità e sicurezza siano oggettivamente verificabili.
+- *Miglioramento Continuo e Calibrazione (PDCA):* In linea con l'approccio /*#def("Agile")*/, le soglie sono soggette a revisione periodica. Al termine di ogni /*#def("Sprint")*/, i valori vengono analizzati rispetto alle prestazioni storiche del team; questo permette una ricalibrazione dinamica delle soglie nel /*#def("Piano di Qualifica")*/, rendendo gli obiettivi sempre sfidanti ma tecnicamente sostenibili (obiettivi *S.M.A.R.T.*).
+
+== Nomenclatura delle Metriche
+La nomenclatura utilizzata per le metriche è la seguente:
+#align(center)[
+  `M[Tipo][##]`
+]
+
+dove:
+- `M` sta per Metrica
+- `Tipo` può assumere uno tra questi valori:
+  - `PC` ovvero Processo
+  - `PD` ovvero Prodotto
+- `##` è un numero progressivo crescente da 01.
+
+== Metriche di Qualità del Processo
+
+I processi vengono monitorati per garantire efficienza, efficacia e miglioramento continuo del _Way of Working_ adottato dal gruppo.
+
+=== Processi Primari
+==== Fornitura e Sviluppo
+#show figure: set block(breakable: true)
+
+#figure(
+  block(
+    breakable: true,
+    table(
+      columns: (auto, 1.5fr, 3fr),
+      inset: 8pt,
+      align: horizon,
+      fill: (x, y) => if y == 0 { luma(220) },
+      [*Codice*], [*Nome*], [*Descrizione*],
+
+      [MPC01], [Budget At Completion], [Budget totale preventivato per il progetto],
+
+      [MPC02], [Planned Value], [Valore del lavoro che si era pianificato di completare entro un determinato momento],
+
+      [MPC03], [Actual Cost], [Costo effettivamente sostenuto per il lavoro svolto fino a un determinato momento],
+
+      [MPC04], [Earned Value], [Valore del lavoro effettivamente completato],
+
+      [MPC05],
+      [Budget Variance],
+      [Differenza tra il budget totale e la stima del costo finale. Un valore positivo indica che si prevede di risparmiare budget],
+
+      [MPC06],
+      [Schedule Variance],
+      [Misura lo scostamento temporale: valori negativi indicano ritardi, positivi anticipi],
+
+      [MPC07],
+      [Cost Performance Index],
+      [Indice di efficienza economica del progetto. CPI = 1 indica perfetta aderenza al budget, < 1 sforamento, > 1 risparmio],
+
+      [MPC08],
+      [Schedule Performance Index],
+      [Indice di efficienza della schedulazione. SPI = 1 indica perfetta aderenza ai tempi, < 1 ritardo, > 1 anticipo],
+
+      [MPC09],
+      [Estimate At Completion],
+      [Stima del costo totale finale del progetto basata sulla performance attuale. Utilizza il CPI per proiettare il costo a completamento considerando l'efficienza dimostrata],
+    ),
+  ),
+  caption: [Metriche per il processo di Fornitura],
+)
+
 #figure(
   table(
-    columns: (3cm, 8cm, 4cm),
-    align: left + horizon,
-    stroke: 0.5pt,
-    fill: (col, row) => if row == 0 {
-      luma(62.75%)
-    } else if calc.even(row) {
-      luma(220)
-    } else {
-      none
-    },
-    [*ID*], [*Descrizione*], [*Soglia / Obiettivo*],
-    // Processo
-    [#def("MPC")1 (SV)], [Schedule Variance: differenza tra lavoro pianificato ed eseguito], [>= 0],
-    [#def("MPC")2 (BV)], [Budget Variance: differenza tra costo pianificato ed effettivo], [>= 0],
-    // Prodotto documentale
-    [#def("MPD")1 (Gulpease)],
-    [Indice di #def("Gulpease") per documenti in italiano],
-    [> 40 (accettabile)\ > 60 (buono)],
+    columns: (auto, 1.8fr, 2.5fr),
+    inset: 8pt,
+    align: horizon,
+    fill: (x, y) => if y == 0 { luma(220) },
+    [*Codice*], [*Nome*], [*Descrizione*],
 
-    [#def("MPD")2 (Ortografia)], [Numero di errori ortografici rilevati], [0],
-    // Software
-    [#def("MPS")1 (Coverage)], [#def("Code Coverage") (Unit Test)], [>= 80%],
-    [#def("MPS")2 (Req. Obb.)], [Percentuale soddisfacimento requisiti obbligatori], [100% al rilascio],
-    [#def("MPS")3 (Comprens.)], [#def("Complessità Ciclomatica") media delle funzioni], [<= 15],
+    [MPC10],
+    [Requirements Stability Index],
+    [Misura la volatilità dei requisiti. Indica la percentuale di requisiti che non hanno subito modifiche, aggiunte o cancellazioni rispetto alla baseline iniziale],
   ),
-  caption: [Tabella delle metriche di progetto],
+  caption: [Metriche per il processo di Sviluppo],
 )
+
+*Nota:* Valori bassi di RSI possono segnalare un'analisi iniziale insufficiente o cambiamenti significativi nelle esigenze degli _stakeholder_. Il monitoraggio è cruciale specialmente a seguito di revisioni correttive.
+
+=== Processi di Supporto
+==== Documentazione e Verifica
+
+#figure(
+  table(
+    columns: (auto, 1.8fr, 2.5fr),
+    inset: 8pt,
+    align: horizon,
+    fill: (x, y) => if y == 0 { luma(220) },
+    [*Codice*], [*Nome*], [*Descrizione*],
+
+    [MPC11],
+    [Indice di Gulpease],
+    [Indice di leggibilità. Valuta la complessità linguistica basandosi sulla lunghezza delle parole e delle frasi. Valori: ≥80 molto facile; 60-80 media difficoltà; 40-60 abbastanza difficile; < 40 molto difficile],
+
+    [MPC12], [Correttezza Ortografica], [Numero di errori ortografici rilevati nel documento],
+
+    [MPC13],
+    [Code Coverage],
+    [Percentuale di codice sorgente che viene eseguita durante il lancio della suite di test automatizzati. Indica il grado di copertura della verifica dinamica],
+
+    [MPC14],
+    [Test Success Rate],
+    [Percentuale di test automatizzati che superano con successo l'esecuzione. Un valore del 100% è necessario per garantire la stabilità del sistema prima di ogni rilascio],
+  ),
+  caption: [Metriche per il processo di Documentazione e Verifica],
+)
+
+*Rilevanza:* Il Test Success Rate deve rimanere costantemente al 100% per evitare regressioni e garantire l'affidabilità del _Software_.
+
+=== Processi Organizzativi
+
+#figure(
+  table(
+    columns: (auto, 1.8fr, 2.5fr),
+    inset: 8pt,
+    align: horizon,
+    fill: (x, y) => if y == 0 { luma(220) },
+    [*Codice*], [*Nome*], [*Descrizione*],
+
+    [MPC15],
+    [Metrics Satisfaction],
+    [Percentuale di metriche che rispettano le soglie di accettabilità. Fornisce una visione d'insieme sulla qualità complessiva dei processi adottati],
+
+    [MPC16],
+    [Sprint Goal Achievement],
+    [Percentuale degli obiettivi prefissati durante lo Sprint Planning che sono stati effettivamente raggiunti e validati al termine dello Sprint. Misura l'efficacia della pianificazione e dell'esecuzione],
+  ),
+  caption: [Metriche per i processi Organizzativi],
+)
+
+#pagebreak()
+
+== Metriche di Qualità del Prodotto
+La qualità del prodotto finale è intrinsecamente legata alla qualità dei processi che lo generano.
+
+=== Adeguatezza Funzionale e Affidabilità
+
+#figure(
+  table(
+    columns: (auto, 1.8fr, 2.5fr),
+    inset: 8pt,
+    align: horizon,
+    fill: (x, y) => if y == 0 { luma(220) },
+    [*Codice*], [*Nome*], [*Descrizione*],
+
+    [MPD01],
+    [Copertura Requisiti Obbligatori],
+    [Percentuale di requisiti obbligatori soddisfatti rispetto al totale dei requisiti obbligatori identificati. Questi requisiti sono vincolanti per l'accettazione del prodotto],
+
+    [MPD02],
+    [Failure Density],
+    [Misura la densità di errori nel software. Valori elevati indicano problemi di qualità del codice],
+
+    [MPD03], [Availability], [Percentuale di tempo in cui il sistema è operativo e disponibile all'uso],
+  ),
+  caption: [Metriche di Adeguatezza Funzionale e Affidabilità],
+)
+
+=== Manutenibilità e Sicurezza
+
+#figure(
+  table(
+    columns: (auto, 1.8fr, 2.5fr),
+    inset: 8pt,
+    align: horizon,
+    fill: (x, y) => if y == 0 { luma(220) },
+    [*Codice*], [*Nome*], [*Descrizione*],
+
+    [MPD04],
+    [Comment Density],
+    [Percentuale di linee di commento rispetto alle linee di codice. Una documentazione adeguata migliora la comprensibilità e facilita la manutenzione futura del codice],
+
+    [MPD05],
+    [Cyclomatic Complexity],
+    [Misura la complessità del codice contando i percorsi linearmente indipendenti. Valori elevati indicano codice difficile da testare e mantenere],
+
+    [MPD06],
+    [Coupling (Fan-out)],
+    [Numero di dipendenze esterne di un modulo. Misura il grado di accoppiamento tra componenti. Valori elevati riducono la modularità],
+
+    [MPD07],
+    [Vulnerability Detection],
+    [Numero di vulnerabilità di sicurezza critiche rilevate attraverso analisi statica e dinamica del codice],
+  ),
+  caption: [Metriche di Manutenibilità e Sicurezza],
+)
+
+== Struttura delle Misurazioni (Cruscotto di Valutazione)
+Per ciascuna metrica viene fornita una rappresentazione grafica dell'andamento temporale accompagnata da un'analisi qualitativa. Tali misurazioni e i relativi obiettivi di qualità sono in linea con quanto redatto all'interno del #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/PdP.pdf")[#underline[*Piano di Progetto*]].
+
+Ogni grafico, quindi, è accompagnato da un commento interpretativo che collega le variazioni delle metriche con le cause organizzative, tecniche o procedurali che le hanno generate, garantendo che i dati non rimangano meri numeri ma si traducano in azioni concrete di miglioramento.
+
+Le misurazioni coprono il periodo che va dall'*aggiudicazione del capitolato* fino alla milestone *RTB* (09/02/2026).
+
+Per la fase di *Product Baseline* (PB) vengono fornite _stime previsionali_.
+Rispetto a quanto rilevato nella RTB, ci si attende un _incremento dell'efficienza_ e una maggiore aderenza alle tempistiche prefissate. La fase precedente, infatti, ha risentito dei rallentamenti dovuti alla concomitanza con la sessione d'esame.
+Con il superamento di tale periodo, la PB riflette una pianificazione più fluida e una gestione operativa che punta a stabilizzare i ritmi, ottimizzando i risultati.
 
 == Strategie di Verifica
 - *Analisi Statica*: Review manuale del codice e uso di #def("linter") (#def("ESLint") per JS/TS, Pylint/Black per #def("Python")).
