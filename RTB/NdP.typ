@@ -11,13 +11,19 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.6.0"
+#let versione = "v0.7.0"
 #set heading(numbering: "1.1.1")
 
 #titlePage("Norme di Progetto", versione)
 #set page(numbering: "1", header: header("Norme di Progetto"), footer: footer())
 
 #let history = (
+  (
+    "2026/02/07",
+    "0.7.0",
+    "Rielaborazione sezioni relative al Piano di Qualifica",
+    members.alice,
+  ),
   (
     "2026/02/04",
     "0.6.0",
@@ -409,14 +415,14 @@ La determinazione del preventivo deve rispettare i seguenti criteri:
 L’allocazione delle risorse deve adattarsi alla natura specifica della fase di progetto.
 
 1. *Fase RTB (Requirements and Technology Baseline):*
-   L’allocazione delle risorse deve prevedere un impiego significativo delle figure di *Amministratore* e *Analista*.
-   \
-   > *Motivazione:* scelta dettata dall’elevato impatto delle attività documentali previste in questa fase (definizione procedure, strumenti, requisiti), propedeutiche all’avvio della progettazione post-RTB.
+  L’allocazione delle risorse deve prevedere un impiego significativo delle figure di *Amministratore* e *Analista*.
+  \
+  > *Motivazione:* scelta dettata dall’elevato impatto delle attività documentali previste in questa fase (definizione procedure, strumenti, requisiti), propedeutiche all’avvio della progettazione post-RTB.
 
 2. *Fase PB (Product Baseline):*
-   Il preventivo per questa fase è definito come *flessibile* e soggetto a revisione *rolling-wave*.
-   \
-   > *Motivazione:* nonostante la pianificazione accurata, la natura delle attività future e i rischi residui richiedono un margine di adattabilità. Il preventivo PB è definitivo rispetto allo stato attuale, ma deve essere riesaminato a cadenza almeno pari alla chiusura di ogni Sprint o al verificarsi di eventi significativi. Ogni revisione deve essere approvata dal Responsabile di Progetto e tracciata nei verbali o negli strumenti di gestione delle attività.
+  Il preventivo per questa fase è definito come *flessibile* e soggetto a revisione *rolling-wave*.
+  \
+  > *Motivazione:* nonostante la pianificazione accurata, la natura delle attività future e i rischi residui richiedono un margine di adattabilità. Il preventivo PB è definitivo rispetto allo stato attuale, ma deve essere riesaminato a cadenza almeno pari alla chiusura di ogni Sprint o al verificarsi di eventi significativi. Ogni revisione deve essere approvata dal Responsabile di Progetto e tracciata nei verbali o negli strumenti di gestione delle attività.
 
 ====== Criteri di Verifica del Preventivo e dell’Allocazione delle Risorse
 L’elemento *Preventivo ed Allocazione delle Risorse* del Piano di Progetto è considerato conforme se:
@@ -492,10 +498,8 @@ La mancata rendicontazione di uno o più Sprint o l’assenza degli elementi sop
 - *gmail*: Per la comunicazione con il proponente.
 - *#def("Google calendar")*: Perta dei requisiti funzionali e non funzionali, classificati in obbliga la pianificazione delle riunioni e delle scadenze.
 - *#def("Microsoft Teams")*: Per le riunioni virtuali e la collaborazione in tempo reale.
-=== Documentazione del Progetto
-In questa sezione si elencano tutti i documenti che #def("Skarab Group") produrrà durante il ciclo di vita del progetto #def("Code Guardian"). I documenti sono tutti scritti utilizzando il linguaggio #def("typst") per garantire una formattazione uniforme e professionale.
 
-==== AdR - Analisi dei Requisiti
+=== AdR - Analisi dei Requisiti
 L’#def("Analisi dei Requisiti") è il documento che descrive in dettaglio i requisiti funzionali e non funzionali
 previsti dal progetto #def("Code Guardian"). Nel dettaglio il documento contiene un’analisi dettagliata delle
 funzionalità del sistema, degli attori coinvolti e le informazioni necessarie al tracciamento dei
@@ -505,19 +509,15 @@ requisiti rispetto alle loro fonti. La struttura è la seguente:
 - Lista dei casi d'uso.
 - Lista dei requisiti funzionali e non funzionali, classificati in obbligatori, desiderabili e opzionali.
 
-==== Glossario
+=== Glossario
 Documento che definisce i termini tecnici e specifici utilizzati nel progetto, per garantire una comprensione comune tra tutti i membri del team e gli stakeholder esterni. questo documento serve a fornire definizioni chiare e univoche per evitare ambiguità. Oltre che il documento in sé per s'é, il glossario é consultabile tramite una pagina nel sito web di Skarab Group. Questo permette interattivitá e link esterni all'interno di ogni documento che compone la documentazione di progetto. Per convenzione, un termine sará un link al glossario sul sito solo la prima volta che compare all'interno di un documento, assumento una lettura ordinata del documento stesso da parte del lettore.
 
-==== NdP - Norme di Progetto
+=== NdP - Norme di Progetto
 Documento che definisce il #def("WoW"),le norme, le convenzioni, gli strumenti e i processi che i membri del gruppo devono seguire durante il ciclo di vita del progetto.
 
-==== PdP - Piano di Progetto
-Documento che descrive l'organizzazione del lavoro, le risorse, il modello di ciclo di vita adottato, la pianificazione delle attività divise per #def("sprint") e la valutazione dei rischi associati al progetto. Inoltre, il PdP riporta attivamenre il monitoraggio del lavoro di ogni componente del gruppo, con l'obiettivo di garantire il rispetto delle tempistiche e le ore di lavoro previste per i vari ruoli.
+=== Piano di Qualifica
 
-==== PdQ - Piano di Qualifica
-Documento che definisce le strategie, le metodologie e le attività di #def("verifica") e #def("validazione") per garantire che i prodotti del progetto soddisfino i requisiti specificati. Include la definizione delle metriche di qualità, i piani di test e le procedure di controllo qualità.
-
-===== Nota sull'adozione dello Standard ISO/IEC 25010 e PDCA
+==== Nota sull'adozione dello Standard ISO/IEC 25010 e PDCA
 La redazione del Piano di Qualifica e la definizione delle metriche si ispirano alla famiglia di standard ISO/IEC 25010 (SQuaRE). Tale scelta garantisce una classificazione rigorosa delle caratteristiche di qualità del prodotto (es. Sicurezza, Affidabilità, Usabilità).
 Inoltre, l'adozione strutturale del ciclo /*#def[PDCA]*/ (Plan-Do-Check-Act) assicura che il processo di controllo qualità non sia statico, ma evolva:
 - *Plan:* Definizione delle metriche e delle soglie nel presente documento.
@@ -525,8 +525,23 @@ Inoltre, l'adozione strutturale del ciclo /*#def[PDCA]*/ (Plan-Do-Check-Act) ass
 - *Check:* Analisi degli scostamenti nei periodi di retrospettiva.
 - *Act:* Aggiornamento delle Norme di Progetto e ricalibrazione delle metriche per lo Sprint successivo.
 
+==== Definizione del Documento
+Il *Piano di Qualifica* costituisce il riferimento vincolante per la gestione della qualità nel progetto e deve definire, in modo tracciabile e verificabile:
+- le strategie di assicurazione qualità (Quality Assurance);
+- le attività di controllo qualità (Quality Control);
+- le procedure di validazione del prodotto;
+- i meccanismi di miglioramento continuo.
 
-==== Verbali delle Riunioni
+Il Piano di Qualifica è utilizzato dal gruppo di lavoro come base per le attività di #def("verifica") e #def("validazione"), garantendo la conformità del prodotto ai requisiti definiti.
+
+==== Elementi Costituenti del Documento
+Il Piano di Qualifica include i seguenti elementi:
+- Metriche di Qualità;
+- Metodi di Testing;
+- Cruscotto di Valutazione;
+- Automiglioramento.
+
+=== Verbali delle Riunioni
 Sono documenti che riportano in modo sintetico e chiaro i punti discussi durante le riunioni, con le decisioni prese e i compiti assegnati. Ogni verbale include:
 - Data, ora e luogo della riunione.
 - Elenco dei partecipanti.
@@ -538,7 +553,7 @@ I verbali possono essere di 2 tipi:
 - *Verbali Interni*: Riunioni tra i membri del gruppo per coordinare le attività di progetto.
 - *Verbali Esterni*: Riunioni con il #def("Proponente") esterni per discutere requisiti, progressi e feedback.
 
-==== Diario di bordo
+=== Diario di bordo
 Documento che permette un allineamento settimanale con il professor #members.tullio, in cui il redattiore riporta riporta:
 - Attività svolte durante la settimana.
 - Problemi incontrati e soluzioni adottate.
@@ -662,7 +677,7 @@ Per la descrizione dei requisiti viene utilizzata la nomenclatura #strong("Tipol
 - *Tipologia*: indica il tipo di requisito. I valori possibili sono:
   - *F*: Requisito #strong("F")unzionale.
   - *Q*: Requisito di #strong("Q")ualità.
-  - *C*: Requisito di #strong("V")incolo.
+  - *V*: Requisito di #strong("V")incolo.
 - *R*: acronimo di Requisito.
 - *Priorità*: indica l'importanza del requisito. I valori possibili sono:
   - *Ob*: Requisito #strong("Ob")bligatorio.
@@ -789,19 +804,33 @@ Questa analisi è realizzata tramite Test, che devono essere:
 
 L’automazione dei test è supportata dall’uso di driver, stub e logger per simulare e monitorare l’esecuzione del software.
 
-====== Tipologie di Test
-
 I test adottati nel progetto si suddividono nelle seguenti categorie:
 
-Test di Unità
+- Test di Unità
 
-Test di Integrazione
+- Test di Integrazione
 
-Test di Sistema
+- Test di Sistema
 
-Test di Regressione
+- Test di Regressione
+
+- Test di Accettazione
 
 Ogni test è identificato da una nomenclatura standard e possiede uno stato che ne indica il livello di implementazione o superamento.
+
+======= Nomenclatura dei Test
+La nomenclatura adottata per l'identificazione dei test segue uno schema gerarchico:
+#align(center)[`[Prefisso]-[Numero].[Sottonumero]`]
+
+dove:
+- *Prefisso del tipo di test:* identifica il livello di testing
+  - *TU:* Test di Unità.
+  - *TI:* Test di Integrazione (definiti durante PB).
+  - *TS:* Test di Sistema.
+  - *TR:* Test di Regressione (definiti durante PB).
+  - *TA:* Test di Accettazione.
+- *Numero progressivo:* identifica univocamente il test all'interno della categoria.
+- *Sottonumero:* per test derivati o sottocasi.
 
 ======= Test di Unità
 
@@ -816,9 +845,9 @@ Si distinguono in:
 I Test di Integrazione verificano la corretta interazione tra le unità.
 L’integrazione può avvenire secondo due strategie:
 
-Top-Down, partendo dalle componenti di livello più alto;
+- Top-Down, partendo dalle componenti di livello più alto;
 
-Bottom-Up, partendo dalle componenti di base.
+- Bottom-Up, partendo dalle componenti di base.
 
 ======= Test di Sistema
 I Test di Sistema valutano il comportamento del sistema nel suo complesso, verificandone la conformità ai requisiti e l’efficacia globale.
@@ -828,6 +857,8 @@ I Test di Sistema valutano il comportamento del sistema nel suo complesso, verif
 I Test di Regressione garantiscono che le modifiche apportate al sistema non reintroducano errori precedentemente risolti.
 In caso di correzione di un fault, l’intera suite di test viene rieseguita per assicurare la stabilità del sistema.
 
+======= Test di Accettazione:
+I Test di Accettazione rappresentano la verifica finale del prodotto rispetto alle aspettative degli _Stakeholder_. Essi confermano che tutte le funzionalità richieste siano implementate correttamente.
 
 === Validazione
 La Validazione ha l’obiettivo di accertare che il prodotto soddisfi le esigenze della proponente e le aspettative degli utenti finali, rispondendo alla domanda: "Did I build the right system?".
@@ -1024,7 +1055,7 @@ I processi vengono monitorati per garantire efficienza, efficacia e migliorament
   block(
     breakable: true,
     table(
-      columns: (auto, 1.5fr, 3fr),
+      columns: (auto, 1.8fr, 2.5fr),
       inset: 8pt,
       align: horizon,
       fill: (x, y) => if y == 0 { luma(220) },
@@ -1130,8 +1161,6 @@ I processi vengono monitorati per garantire efficienza, efficacia e migliorament
   caption: [Metriche per i processi Organizzativi],
 )
 
-#pagebreak()
-
 == Metriche di Qualità del Prodotto
 La qualità del prodotto finale è intrinsecamente legata alla qualità dei processi che lo generano.
 
@@ -1197,6 +1226,12 @@ Le misurazioni coprono il periodo che va dall'*aggiudicazione del capitolato* fi
 Per la fase di *Product Baseline* (PB) vengono fornite _stime previsionali_.
 Rispetto a quanto rilevato nella RTB, ci si attende un _incremento dell'efficienza_ e una maggiore aderenza alle tempistiche prefissate. La fase precedente, infatti, ha risentito dei rallentamenti dovuti alla concomitanza con la sessione d'esame.
 Con il superamento di tale periodo, la PB riflette una pianificazione più fluida e una gestione operativa che punta a stabilizzare i ritmi, ottimizzando i risultati.
+
+== Frequenza di Aggiornamento
+Il cruscotto viene aggiornato con cadenza di Sprint:
+- I dati vengono raccolti al termine di ogni Sprint.
+- L'analisi viene condotta durante la retrospettiva di Sprint.
+- Il Piano di Qualifica viene aggiornato per riflettere i nuovi valori.
 
 == Strategie di Verifica
 - *Analisi Statica*: Review manuale del codice e uso di #def("linter") (#def("ESLint") per JS/TS, Pylint/Black per #def("Python")).
