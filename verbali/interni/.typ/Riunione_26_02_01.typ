@@ -47,7 +47,7 @@
     #puntoOdg(
       punto1,
       "Ogni componente ha esposto il proprio lavoro svolto durante la settimana, il PoC procede a buon ritmo, PdP, NdP e PdQ hanno quasi raggiunto una versione stabile per la RTB, l'AdR ha ancora bisogno di modifiche prima di essere pronto",
-      decisione: "Sono stati discussi i punti cruciali, in modo da essere allineati per il lavoro a seguire",
+      decisione: "È stato approvato che PdP, NdP e PdQ sono prossimi alla versione stabile per la RTB, mentre l'AdR e PoC richiedono ulteriori modifiche prima della consegna.",
     )
 
     === Punto 2: #punto2
