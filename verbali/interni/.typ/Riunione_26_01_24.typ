@@ -8,6 +8,7 @@
       "1.0.0",
       "Prima stesura del documento",
       members.kevin,
+      members.antonio
     ),
   ),
 
@@ -46,15 +47,15 @@
     === Punto 1: #punto1
     #puntoOdg(
       punto1,
-      "Ogni componente ha esposto il proprio lavoro svolto durante la settimana, il PoC é in stato embrionale ma sta iniziando a prendere forma, i documenti PdP, NdP e PdQ sono in fase di revisione e l'AdR necessita di ulteriori modifiche",
-      decisione: "Si é concordato che la suddivisione dei ruoliu é corretta e che il lavoro procede secondo le aspettative",
+      "Ogni componente ha esposto il proprio lavoro svolto durante la settimana, il PoC è in stato embrionale ma sta iniziando a prendere forma, i documenti PdP, NdP e PdQ sono in fase di revisione e l'AdR necessita di ulteriori modifiche",
+      decisione: "Si è concordato che la suddivisione dei ruoli è corretta e che il lavoro procede secondo le aspettative. Si vuole continuare il lavoro allo stesso modo",
     )
 
     === Punto 2: #punto2
     #puntoOdg(
       punto2,
-      "I membri hanno discusso le difficoltá incontrate a causa della sessione di esami universitari in corso, che ha rallentato il progresso del lavoro",
-      decisione: "Si é notato l'effettivo rallentamento e si é stiamato lo stesso rallentamento per la settimana successiva. Questo porterá a meno lavoro svolto durante questo sprint, lavoro che andrá recuperato in seguito",
+      "I membri hanno discusso le difficoltà incontrate a causa della sessione di esami universitari in corso, che ha rallentato il progresso del lavoro",
+      decisione: "È stato notato l'effettivo rallentamento e si è stimato lo stesso rallentamento per la settimana successiva. Questo porterá a meno lavoro svolto durante questo sprint, lavoro che andrà recuperato in seguito",
     )
     
     = Azioni e responsabilità
