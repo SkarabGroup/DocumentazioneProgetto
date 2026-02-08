@@ -13,11 +13,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.43.0"
+#let versione = "v0.44.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2026/02/08",
+    "0.44.0",
+    "Aggiunto UC43, inclusi diagrammi e requisiti associati. Fix alle precondizioni, attori e diagrammi di UC1, UC2, UC4",
+    members.antonio
+  ),
   (
     "2026/02/04",
     "0.43.0",
@@ -546,6 +552,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   image("../assets/Attori_backend.png", width: 70%),
   caption: [Attori del sistema CodeGuardian lato Back-end],
 )
+#TODO("attenzione a inserire anche utente non registrato, eliminato autente registrato avanzato siccome non è mai stato usato in nessun caso d'uso")
 #figure(
   table(
     fill: (x, y) => if (y == 0) {
@@ -557,20 +564,17 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     inset: 10pt,
     table.header([*Attore*], [*Descrizione*]),
 
+    [*Utente non registrato*],
+    [Utente che non possiede le credenziali di un account CodeGuardian.],
+
     [*Utente non autenticato*],
-    [Utente che non possiede un account CodeGuardian e desidera registrarsi per utilizzare il sistema.],
-
-    [*Utente registrato*],
-    [Utente che ha completato la procedura di registrazione a CodeGuardian e possiede un account valido per accedere al sistema.],
-
-    [*Utente registrato avanzato*],
-    [Utente registrato che ha collegato con successo il proprio account CodeGuardian ad un account GitHub e può usufruire di funzionalitá avanzate del sistema.],
+    [Utente che ha completato con successo la procedura di registrazione e possiede credenziali a un account CodeGuardian ma che non ha effettuato la procedura di autenticazione.],
 
     [*Utente autenticato*],
-    [Utente che ha effettuato con successo l'accesso al proprio account CodeGuardian e può utilizzare le funzionalità del sistema.],
+    [Utente che ha completato con successo la procedurea di autenticazione a CodeGuardian e può utilizzare le funzionalità del sistema.],
 
     [*Utente autenticato avanzato*],
-    [Utente autenticato che ha collegato con successo il proprio account CodeGuardian ad un account GitHub e può usufruire di funzionalitá avanzate del sistema.],
+    [Utente autenticato che ha collegato con successo il proprio account CodeGuardian a un account GitHub e può usufruire di funzionalità avanzate del sistema.],
 
     [*Orchestratore*],
     [Agente responsabile della gestione e coordinamento delle attività degli altri agenti all'interno del sistema.],
@@ -597,10 +601,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 === UC1: Registrazione a CodeGuardian <UC1>
 #useCase(
-  attore: "Utente non autenticato",
+  attore: "Utente non registrato",
   pre: [
-    - Il sistema è attivo e funzionante
-    - L'utente seleziona la sezione di registrazione di CodeGuardian
+    - L'utente si trova nella sezione di registrazione
   ],
   post: [
     - L'utente ha completato con successo la registrazione e possiede le credenziali di un account CodeGuardian censito nel Sistema
@@ -627,7 +630,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ==== UC1.1: Inserimento username <UC1.1>
 #useCase(
-  attore: "Utente non autenticato",
+  attore: "Utente non registrato",
   pre: [
     - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
   ],
@@ -650,10 +653,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ===== UC1.1.1: Username non conforme ai vincoli di formato <UC1.1.1>
 #useCase(
-  attore: "Utente non autenticato",
+  attore: "Utente non registrato",
   pre: [
     - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
-    - L'utente ha inserito un username non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento dello username
+    - Lo username inserito non è conforme ai vincoli di formato previsti dal Sistema
   ],
   post: [
     - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
@@ -673,7 +676,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ==== UC1.2: Inserimento email <UC1.2>
 #useCase(
-  attore: "Utente non autenticato",
+  attore: "Utente non registrato",
   pre: [
     - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
   ],
@@ -696,10 +699,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ===== UC1.2.1: Email inserita non valida <UC1.2.1>
 #useCase(
-  attore: "Utente non autenticato",
+  attore: "Utente non registrato",
   pre: [
     - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
-    - L'utente ha inserito un'email non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento dell'email
+    - L'email inserita non è conforme ai vincoli di formato previsti dal Sistema
   ],
   post: [
     - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
@@ -719,7 +722,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ==== UC1.3: Inserimento password <UC1.3>
 #useCase(
-  attore: "Utente non autenticato",
+  attore: "Utente non registrato",
   pre: [
     - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
   ],
@@ -742,10 +745,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ===== UC1.3.1: Password inserita non conforme ai vincoli di formato <UC1.3.1>
 #useCase(
-  attore: "Utente non autenticato",
+  attore: "Utente non registrato",
   pre: [
     - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
-    - L'utente ha inserito una password non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento della password
+    - La password inserita non è conforme ai vincoli di formato previsti dal Sistema
   ],
   post: [
     - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
@@ -764,7 +767,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ==== UC1.4: Conferma registrazione <UC1.4>
 #useCase(
-  attore: "Utente non autenticato",
+  attore: "Utente non registrato",
   pre: [
     - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
     - L'utente ha inserito uno username conforme ai vincoli di formato previsti dal Sistema #link(<UC1.1>)[#underline[\[UC1.1\]]]
@@ -778,7 +781,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente conferma la registrazione a Codeguardian
     - Il Sistema verifica che lo username inserito non sia già censito nel Sistema CodeGuardian
     - Il Sistema verifica che l'email inserita non sia già censita nel Sistema CodeGuardian
-    - Il Sistema crea un nuovo account CodeGuardian associato ai dati inseriti dall'utente
+    - Il Sistema crea un nuovo account CodeGuardian associato ai dati inseriti dall'utente, notificando l'utente del successo
   ],
   inclusioni: [
     - Nessuna
@@ -789,12 +792,12 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'utente interagisce con la sezione di conferma della registrazione a CodeGuardian",
 )[
-  #useCaseDiagram("1_4", "UC1.4: Conferma registrazione")
+  #useCaseDiagram("1_4", "UC1.4 - Conferma registrazione")
 ]
 
 ===== UC1.4.1: Username inserito già censito nel Sistema <UC1.4.1>
 #useCase(
-  attore: "Utente non autenticato",
+  attore: "Utente non registrato",
   pre: [
     - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
     - L'utente ha inserito uno username conforme ai vincoli di formato previsti dal Sistema #link(<UC1.1>)[#underline[\[UC1.1\]]]
@@ -806,7 +809,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che l'username inserito non è disponibile //(per motivi di sicurezza, non viene specificato che l'username è già in uso)
+    - L'utente visualizza un messaggio di errore che indica che lo username inserito non è disponibile
   ],
   inclusioni: [
     - Nessuna
@@ -820,7 +823,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ===== UC1.4.2: Email inserita già censita nel Sistema <UC1.4.2>
 #useCase(
-  attore: "Utente non autenticato",
+  attore: "Utente non registrato",
   pre: [
     - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
     - L'utente ha inserito uno username conforme ai vincoli di formato previsti dal Sistema #link(<UC1.1>)[#underline[\[UC1.1\]]]
@@ -832,7 +835,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che l'email inserita non è disponibile //(per motivi di sicurezza, non viene specificato che l'email è già in uso)
+    - L'utente visualizza un messaggio di errore che indica che l'email inserita non è disponibile 
   ],
   inclusioni: [
     - Nessuna
@@ -849,8 +852,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Utente non autenticato",
   pre: [
-    - Il sistema è attivo e funzionante
-    - L'utente è sulla sezione di login di CodeGuardian
+    - L'utente si trova nella sezione di login di CodeGuardian
   ],
   post: [
     - L'utente è autenticato al Sistema CodeGuardian e può accedere alle funzionalità riservate agli utenti autenticati
@@ -901,7 +903,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Utente non autenticato",
   pre: [
     - L'utente sta eseguendo la procedura di autenticazione a CodeGuardian
-    - L'utente ha inserito un username non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento dello username
+    - Lo username inserito non è conforme ai vincoli di formato previsti dal Sistema
   ],
   post: [
     - La procedura di autenticazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
@@ -915,7 +917,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente conferma l'inserimento dell'username durante la procedura di autenticazione a CodeGuardian",
+  trigger: "L'utente ha inserito un username non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento dello username",
 )[
 ]
 
@@ -947,7 +949,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Utente non autenticato",
   pre: [
     - L'utente sta eseguendo la procedura di autenticazione a CodeGuardian
-    - L'utente ha inserito una password non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento della password
+    - La password non è conforme ai vincoli di formato previsti dal Sistema
   ],
   post: [
     - La procedura di autenticazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
@@ -961,7 +963,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente conferma l'inserimento della password durante la procedura di autenticazione a CodeGuardian",
+  trigger: "L'utente ha inserito una password non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento della password",
 )[
 ]
 
@@ -1016,7 +1018,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Lo username inserito non è censito nel Sistema",
+  trigger: "Lo username inserito non viene trovato nel Sistema",
 )[
 ]
 
@@ -1047,7 +1049,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[
 ]
 
-// nei requisiti non funzionali mettere il codice se non conforme ai vincoli allora qualcosa
 === UC3: Collegamento account GitHub con account CodeGuardian <UC3>
 #useCase(
   attore: "Utente autenticato",
@@ -1237,12 +1238,12 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub e ha abilitato la condivisione di informazioni #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente si trova nella sezione di richiesta di analisi di un repository GitHub 
   ],
   post: [
     - La richiesta di analisi del repository GitHub è stata correttamente inoltrata al Sistema
   ],
   scenari: [
-    - L'utente accede alla sezione dedicata alla richiesta di analisi di un repository GitHub
     - L'utente inserisce l'URL del repository GitHub da analizzare #link(<UC4.1>)[#underline[\[UC4.1\]]]
     - L'utente seleziona le aree di interesse per l’analisi #link(<UC4.2>)[#underline[\[UC4.2\]]]
     - L'utente conferma l'invio della richiesta di analisi #link(<UC4.3>)[#underline[\[UC4.3\]]]
@@ -1255,7 +1256,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente accede alla sezione di richiesta analisi repository GitHub in CodeGuardian",
+  trigger: "L'utente accede alla sezione dedicata per la richiesta di analisi di repository GitHub in CodeGuardian",
 )[
   #useCaseDiagram("4", "UC4 - Richiesta analisi repository GitHub")
 ]
@@ -1282,8 +1283,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC4.1.2>)[#underline[\[UC4.1.2\]]] // Repository GitHub non accessibile
     - #link(<UC4.1.3>)[#underline[\[UC4.1.3\]]] // Repository GitHub non inserito
   ],
-  trigger: "L'utente conferma l'inserimento dell'URL del repository GitHub
-            durante la procedura di richiesta analisi",
+  trigger: "L'utente interagisce con la sezione dell'inserimento dell'URL del repository GitHub durante la procedura di richiesta analisi repository GitHub",
 )[
   #useCaseDiagram("4_1", "UC4.1 - Inserimento URL repository GitHub")
 ]
@@ -1295,7 +1295,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub e ha abilitato la condivisione di informazioni #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
-    - L'utente ha inserito un URL non conforme ai vincoli di formato previsti per l'inserimento dell'URL del repository GitHub
+    - L'URL inserito non è conforme ai vincoli di formato previsti per l'inserimento dell'URL del repository GitHub
   ],
   post: [
     - La procedura di richiesta analisi non viene finalizzata e il Sistema
@@ -1311,8 +1311,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente conferma l'inserimento di un URL del repository GitHub
-            non conforme ai vincoli di formato",
+  trigger: "L'utente ha inserito un URL del repository GitHub non conforme ai vincoli di formato",
 )[]
 
 ===== UC4.1.2: Repository GitHub non accessibile <UC4.1.2>
@@ -1322,15 +1321,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub e ha abilitato la condivisione di informazioni #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
-    - L'utente ha inserito un URL del repository GitHub non accessibile
+    - L'URL del repository GitHub inserito non è accessibile
   ],
   post: [
-    - La procedura di richiesta analisi repository GitHub non viene finalizzata
-      e il Sistema rimane nello stato di inserimento dati
+    - La procedura di richiesta analisi repository GitHub non viene finalizzata e il Sistema rimane nello stato di inserimento dati
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che il repository GitHub
-      specificato non è accessibile per la procedura di richiesta analisi
+    - L'utente visualizza un messaggio di errore che indica che il repository GitHub specificato non è accessibile per la procedura di richiesta analisi
   ],
   inclusioni: [
     - Nessuna
@@ -1338,8 +1335,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente conferma l'inserimento dell'URL del repository GitHub non accessibile
-            durante la procedura di richiesta analisi",
+  trigger: "L'utente conferma l'inserimento dell'URL del repository GitHub non accessibile durante la procedura di richiesta analisi",
 )[]
 
 ===== UC4.1.3: Repository GitHub non inserito <UC4.1.3>
@@ -1365,7 +1361,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente conferma l'invio senza inserire alcun URL durante la procedura di richiesta analisi repository GitHub",
+  trigger: "L'utente termina senza inserire alcun URL durante la procedura di richiesta analisi repository GitHub",
 )[]
 
 ==== UC4.2: Selezione aree di interesse <UC4.2>
@@ -1375,15 +1371,12 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub e ha abilitato la condivisione di informazioni #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
-    - L'utente ha inserito un URL del repository GitHub
   ],
   post: [
-    - L'utente ha selezionato le aree di interesse del repository GitHub da analizzare,
-      specificando cosa includere tra test, sicurezza o documentazione
+    - L'utente ha selezionato le aree di interesse del repository GitHub da analizzare
   ],
   scenari: [
-    - L'utente seleziona le aree del repository GitHub da analizzare, indicando se includere
-      solo il codice o sia il codice che la documentazione
+    - L'utente seleziona le aree del repository GitHub da analizzare, specificando cosa includere tra test, sicurezza o documentazione
   ],
   inclusioni: [
     - Nessuna
@@ -1391,8 +1384,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - #link(<UC4.2.1>)[#underline[\[UC4.2.1\]]] // Nessuna area di interesse selezionata
   ],
-  trigger: "L'utente conferma la selezione delle aree del repository GitHub da analizzare
-            durante la procedura di richiesta analisi repository GitHub",
+  trigger: "L'utente interagisce con la sezione della selezione delle aree del repository GitHub da analizzare durante la procedura di richiesta analisi repository GitHub",
 )[
   #useCaseDiagram("4_2", "UC4.2: Selezione aree di interesse")
 ]
@@ -1404,15 +1396,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub e ha abilitato la condivisione di informazioni #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
-    - L'utente ha inserito un URL del repository GitHub
     - L'utente non ha selezionato alcuna area di interesse durante la selezione delle aree di interesse
   ],
   post: [
     - La procedura di richiesta analisi repository GitHub non viene finalizzata e il Sistema rimane nello stato di inserimento dati
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che deve essere selezionata almeno
-      un'area di interesse (codice o documentazione) per procedere con la richiesta di analisi del repository GitHub
+    - L'utente visualizza un messaggio di errore che indica che deve essere selezionata almeno un'area di interesse per procedere con la richiesta di analisi del repository GitHub
   ],
   inclusioni: [
     - Nessuna
@@ -1430,7 +1420,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
-    - L'utente ha inserito un URL del repository GitHub
+    - L'utente ha inserito un URL del repository GitHub #link(<UC4.1>)[#underline[\[UC4.1\]]]
     - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
   ],
   post: [
@@ -1453,7 +1443,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 ==== UC4.3.1: Ultimo report up-to-date <UC4.3.1>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: UAA,
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
@@ -1461,7 +1451,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente ha inserito un URL del repository GitHub corretto #link(<UC4.1>)[#underline[\[UC4.1\]]]
     - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
     - L'utente invia la richiesta di analisi al sistema
-    - Il sistema rileva che l'ultimo report di analisi del repository GitHub specificato è già aggiornato rispetto all'ultima modifica del repository stesso
+    - L'ultimo report di analisi del repository GitHub specificato è già aggiornato rispetto all'ultima modifica del repository stesso
   ],
   post: [
     - La procedura di richiesta analisi repository GitHub non viene finalizzata in quanto l'analisi risulta già aggiornata
@@ -1492,7 +1482,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Il sistema rileva che l'ultimo report di analisi del repository GitHub specificato è ancora in elaborazione
   ],
   post: [
-    - La procedura di richiesta analisi repository GitHub non viene finalizzata in quanto l'analisi è ancora in corso
+    - La procedura di richiesta analisi repository GitHub non viene finalizzata in quanto l'analisi precedente è ancora in corso
   ],
   scenari: [
     - L'utente visualizza un messaggio che indica che l'analisi del repository GitHub specificato è ancora in corso e non è possibile avviare una nuova analisi fino al completamento di quella in corso
@@ -4288,6 +4278,55 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   "UC42 Validazione delle credenziali dell'utente. Sinceramente eliminerei questo UC perchè la validazione è già presente nelle inclusioni di UC1 e UC2",
 )
 
+=== UC43 Visualizzazione ranking dei repository analizzati <UC43>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]] 
+  ],
+  post:[
+    - L'utente visualizza la lista dei repository analizzati ordinata per punteggio
+  ],
+  scenari: [
+    - Il Sistema recupera la lista dei repository analizzati dall'utente
+    - Il Sistema ordina i repository per punteggio di qualità complessiva
+    - Il Sistema mostra la lista ordinata all'utente
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC43.1>)[#underline[[UC43.1]]]
+  ],
+  trigger:"L'utente si sposta nella sezione di ranking dei repository",
+)[
+  #useCaseDiagram("43", "UC43 - Visualizzazione ranking dei repository analizzati")
+]
+
+=== UC43.1 Nessun repository analizzato <UC43.1>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]] 
+    - Non sono presenti repository analizzati associati all'utente
+  ],
+  post:[
+    - L'utente visualizza il messaggio di lista vuota
+  ],
+  scenari: [
+    - Il Sistema mostra all'utente un messaggio che lo invita ad analizzare delle repository per avere un ranking di queste
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger:"L'utente si sposta nella sezione di ranking dei repository senza aver mai analizzato una repository",
+)[]
+
 #pagebreak()
 
 = Requisiti di Sistema
@@ -4896,6 +4935,19 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#FRObx],
   [L'Utente deve essere notificato se il sistema GitHub non da l'autorizzazione durante lo scambio del codice OAuth],
   [#link(<UC41>)[#underline[\[UC41\]]], #link(<UC41.1>)[#underline[\[UC41.1\]]]],
+
+  //UC43
+  [#FROpx],
+  [Il sistema Front-end deve essere in grado di rappresentare correttamente la lista di tutti i repository analizzati],
+  [#link(<UC43>)[#underline[\[UC43\]]]],
+
+  [#FROpx],
+  [Il sistema Back-end deve riuscire a riconoscere correttamente il caso in cui un utente non abbia mai analizzato repository e comunicarlo al Front-end],
+  [#link(<UC43>)[#underline[\[UC43\]]], #link(<UC43.1>)[#underline[\[UC43.1\]]]],
+
+  [#FROpx],
+  [Il sistema Front-end deve essere in grado di comunicare che la lista è vuota nel caso in cui un utente non abbia mai analizzato repository],
+  [#link(<UC43>)[#underline[\[UC43\]]], #link(<UC43.1>)[#underline[\[UC43.1\]]]],
 )
 
 #pagebreak()
