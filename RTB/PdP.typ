@@ -833,7 +833,23 @@ Le attività svolte nel periodo di riferimento si sono focalizzate sul consolida
   ),
   [Prospetto orario preventivato per lo Sprint 1 (Totale: 61 ore)],
 )
+==== Prospetto Attivitá 
 
+#activity_table(
+  (
+    ("Stesura introduzione AdR", "-", "Amministratore", "0:10", "0:15","Completata"),
+    ("Stesura scopo del documento AdR", "-", "Amministratore", "0:05", "0:05","Completata"),
+    ("Stesura prospettiva del prodotto", "-", "Amministratore", "0:15", "0:15","Completata"),
+    ("Stesura funzioni del prodotto", "-", "Amministratore", "0:20", "0:25", "Completata"),
+    ("Stesura caratteristiche degli utenti", "-", "Analista", "0:15", "0:20", "Completata"),
+    ("Definizione attori dei casi d'uso", "-", "Analista", "0:10", "0:10", "Completata"),
+    ("Stesura UC1-12", "-", "Analista", "12:00", "10:00", "Completata"),
+    ("Inizio stesura sezione requisiti","-", "Analista", "3:00", "1:00", "Completata"),
+    ("Prima stesura NdP", "-", "Amministratore", "4:00", "3:00", "Completata")
+
+  ),
+  [Riassunto delle attivitá svolte durante lo Sprint 1]
+)
 ==== Consumo Tempo e Costi Effettivi (Consuntivo)
 Si nota una flessione nel monte ore totale dovuta alla pausa natalizia. Alcune attività di verifica sono slittate allo sprint successivo.
 
@@ -849,6 +865,7 @@ Si nota una flessione nel monte ore totale dovuta alla pausa natalizia. Alcune a
   ),
   [Consuntivo orario effettivo per lo Sprint 1 (Totale: 53 ore)],
 )
+
 
 ==== Retrospettiva dello Sprint 1
 ===== Valutazione del Periodo
@@ -909,6 +926,16 @@ Focus sul consolidamento della documentazione (versione per RTB) e accelerazione
   [Prospetto orario preventivato per lo Sprint 2 (Totale: 61 ore)],
 )
 
+==== Prospetto Attivitá
+#activity_table(
+  (
+    ("Stesura UC13-32","-", "Analista", "20:00", "15:00", "Completata"),
+    ("Stesura requisiti UC13-32","-", "Analista", "5:00", "2:00", "Completata"),
+    ("Ristesura NdP", "-", "Amministratore", "3:00", "4:00", "Completata")
+  ),
+  [Riassunto delle attivitá svolte durante lo Sprint 1]
+)
+
 ==== Consumo Tempo e Costi Effettivi (Consuntivo)
 #sprint_table(
   (
@@ -956,12 +983,10 @@ Per lo Sprint 3 il team individua come prioritari i seguenti obiettivi:
 #pagebreak()
 
 === Sprint 3
-*Periodo:* dal 17/01/2026 al 31/01/2026
+*Periodo:* dal 18/01/2026 al 31/01/2026
 
 ==== Attività Principali
 Le attività svolte nel periodo di riferimento si sono concentrate sulla chiusura e stabilizzazione degli artefatti normativi in vista della revisione RTB, nonché sull’avvio operativo del Proof of Concept.
-
-In particolare, lo Sprint ha riguardato:
 
 - *Piano di Progetto (PdP):*
   - completamento delle sezioni di Pianificazione, Analisi dei Rischi e Monitoraggio;
@@ -1004,6 +1029,15 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
   [Prospetto orario preventivato per lo Sprint 3],
 )
 
+==== Prospetto Attivitá
+#activity_table(
+  (
+    ("Stesura UC33-38","-", "Analista", "5:00", "2:00", "Completata"),
+    ("Stesura requisiti UC33-38","-", "Analista", "2:00", "1:00", "Completata"),
+    ("Aggiunta sezione a NdP", "-", "Amministratore", "1:00", "1:00", "Completata"),
+  ),
+  [Riassunto delle attivitá svolte durante lo Sprint 3]
+)
 
 ==== Consumo Tempo e Costi Effettivi (Consuntivo)
 La tabella sottostante illustra le ore produttive effettivamente rendicontate.

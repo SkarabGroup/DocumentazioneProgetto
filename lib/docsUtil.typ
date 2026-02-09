@@ -276,3 +276,49 @@
     caption: caption_text,
   )
 }
+
+
+#let activity_table(data, caption_text) = {
+  let table_body = ()
+
+  for row in data {
+    table_body.push(row.at(0))  // Attività
+    table_body.push(
+  if row.at(1) == "N/A" or row.at(1) == "-" or row.at(1) == "" {
+    [-]
+  } else {
+    link("https://jira/" + row.at(1), text(fill: rgb("#0366d6"))[#row.at(1)])
+  }
+)  // Jira Issue (come link)
+    table_body.push(row.at(2))  // Data Inizio
+    table_body.push(row.at(3))  // Data Fine
+    table_body.push(row.at(4))  // Ruoli Assegnati
+    table_body.push(row.at(5))  // Ore previste
+  }
+
+  // Rendering della figura
+  figure(
+    table(
+      fill: (col, row) => if row == 0 { luma(64%) } else { white },
+      columns: (auto, auto, auto, auto, auto, auto),
+      inset: 8pt,
+      align: (col, row) => if col == 0 { left + horizon } else { center + horizon },
+      stroke: 0.5pt + luma(200),
+      
+      // Header
+      table.header(
+        text(fill: white, weight: "bold")[Attività],
+        text(fill: white, weight: "bold")[Jira Issue],
+        text(fill: white, weight: "bold")[Ruoli Assegnati],
+        text(fill: white, weight: "bold")[Ore previste],
+        text(fill: white, weight: "bold")[Ore effettive],
+        text(fill: white, weight: "bold")[Stato di completamento],
+      ),
+
+      // Inserisco le celle generate dal loop
+      ..table_body,
+    ),
+    caption: caption_text,
+  )
+}
+
