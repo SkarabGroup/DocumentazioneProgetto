@@ -1513,21 +1513,22 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente accede alla sezione di visualizzazione dei report di analisi
   ],
   post: [
     - L'utente ha visualizzato il report di analisi del repository GitHub selezionato
   ],
   scenari: [
-    - L'utente accede alla sezione di visualizzazione dei report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    //- L'utente accede alla sezione di visualizzazione dei report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente seleziona un report di analisi relativo a un repository GitHub #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente seleziona i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
-    - L'utente visualizza il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente visualizza il report di analisi del repository GitHub richiesto //#link(<UC5.4>)[#underline[\[UC5.4\]]]
   ],
   inclusioni: [
-    - #link(<UC5.1>)[#underline[\[UC5.1\]]] // Accesso sezione visualizzazione report
+    //- #link(<UC5.1>)[#underline[\[UC5.1\]]] // Accesso sezione visualizzazione report
     - #link(<UC5.2>)[#underline[\[UC5.2\]]] // Selezione report di analisi
     - #link(<UC5.3>)[#underline[\[UC5.3\]]] // Selezione dati specifici
-    - #link(<UC5.4>)[#underline[\[UC5.4\]]] // Visualizzazione report
+    //- #link(<UC5.4>)[#underline[\[UC5.4\]]] // Visualizzazione report
   ],
   estensioni: [
     - Nessuna
@@ -1537,7 +1538,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   #useCaseDiagram("5", "UC5 - Visualizzazione report analisi repository GitHub")
 ]
 
-==== UC5.1: Accesso alla sezione di visualizzazione dei report di analisi <UC5.1>
+#TODO("Toglierei UC5.1 e UC5.4, in quanto non sono funzionalità a sé stanti ma semplicemente parti del flusso di visualizzazione dei report. L'UC5.1 potrebbe essere inserito come precondizione dell'UC5, mentre l'UC5.4 potrebbe essere semplicemente l'ultimo step dello scenario principale dell'UC5")
+
+/* ==== UC5.1: Accesso alla sezione di visualizzazione dei report di analisi <UC5.1>
 #useCase(
   attore: UAA,
   pre: [
@@ -1557,13 +1560,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "L'utente autenticato seleziona dal proprio account CodeGuardian la sezione dedicata ai report di analisi",
-)[]
+)[] */
 
 ==== UC5.2: Selezione report di analisi <UC5.2>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente si trova nella sezione di visualizzazione dei report di analisi del proprio account #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente si trova nella sezione di visualizzazione dei report di analisi del proprio account //#link(<UC5.1>)[#underline[\[UC5.1\]]]
   ],
   post: [
     - L'utente ha selezionato un report di analisi associato a un repository GitHub collegato al proprio account
@@ -1591,7 +1594,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente si trova nella sezione di visualizzazione dei report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente si trova nella sezione di visualizzazione dei report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
     // - Non ci sono repository da selezionare
     - Non esistono report di analisi associati al repository GitHub selezionato
   ],
@@ -1618,7 +1621,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente si trova nella sezione di visualizzazione dei report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente si trova nella sezione di visualizzazione dei report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
   ],
   post: [
     - L'utente rimane nella sezione di selezione dei report senza poter procedere
@@ -1641,7 +1644,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente si trova nella sezione di visualizzazione dei report #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente si trova nella sezione di visualizzazione dei report //#link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato un report di analisi #link(<UC5.2>)[#underline[\[UC5.2\]]]
   ],
   post: [
@@ -1666,7 +1669,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente si trova nella sezione di visualizzazione dei report #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente si trova nella sezione di visualizzazione dei report //#link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato un report di analisi #link(<UC5.2>)[#underline[\[UC5.2\]]]
   ],
   post: [
@@ -1690,7 +1693,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente si trova nella sezione di visualizzazione dei report #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente si trova nella sezione di visualizzazione dei report //#link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato un report di analisi #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente ha selezionato un insieme non vuoto di dati da visualizzare #link(<UC5.3>)[#underline[\[UC5.3\]]]
   ],
@@ -1715,7 +1718,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
     - L'utente ha selezionato il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
@@ -1744,7 +1747,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     //- L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     //- L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
     - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
@@ -1773,7 +1776,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     //- L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     //- L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
     - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
@@ -1804,7 +1807,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     //- L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     //- L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
     - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
@@ -1833,7 +1836,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     //- L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     //- L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
     - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
@@ -1862,7 +1865,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     //- L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     //- L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
     - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
@@ -1943,6 +1946,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: UAA,
   pre: [
     - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    #TODO("Riguarda dopo UC5")
   ],
   post: [
     - L'utente ha visualizzato la valutazione dell'analisi del codice repository GitHub
@@ -1973,7 +1977,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] già presente nell'UC9
     - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi statica del codice repository GitHub
   ],
   post: [
@@ -1995,7 +1999,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] già presente nell'UC9
     - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi librerie e dipendenze del codice repository GitHub
   ],
   post: [
@@ -2017,7 +2021,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] già presente nell'UC9
     - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della sicurezza OWASP del codice repository GitHub
   ],
   post: [
@@ -2039,7 +2043,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] già presente nell'UC9
     - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi delle vulnerabilità del codice repository GitHub
   ],
   post: [
@@ -2061,7 +2065,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] TOGLIEREI
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] TOGLIEREI (vedi uc5 prima)
+    #TODO("Riguarda dopo UC5")
     - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della documentazione repository GitHub
   ],
   post: [
@@ -2079,16 +2084,16 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi della documentazione repository GitHub",
+  trigger: "L'utente accede alla sezione relativa al report di analisi della documentazione repository GitHub",
 )[#useCaseDiagram("10", "UC10 - Visualizzazione report analisi della documentazione repository GitHub")]
 
 ==== UC10.1: Visualizzazione errori di spelling <UC10.1>
 #useCase(
   attore: UAA,
   pre: [
+    - L'utente è nella sezione relativa agli errori di spelling del report di analisi della documentazione repository GitHub
     //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
     //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della documentazione repository GitHub #link(<UC10>)[#underline[\[UC10\]]] GIA COMPRESI
-    #TODO("Rifare precondizioni")
   ],
   post: [
     - L'utente ha visualizzato il report di analisi degli errori di spelling della documentazione repository GitHub
@@ -2102,16 +2107,16 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi degli errori di spelling della documentazione repository GitHub",
+  trigger: "L'utente accede alla sezione relativa al report di analisi degli errori di spelling della documentazione repository GitHub",
 )[]
 
 ==== UC10.2: Visualizzazione completezza della documentazione nei confronti del codice <UC10.2>
 #useCase(
   attore: UAA,
   pre: [
+    - L'utente è nella sezione relativa alla completezza della documentazione nei confronti del codice del report di analisi della documentazione repository GitHub
     //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
     //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della documentazione repository GitHub #link(<UC10>)[#underline[\[UC10\]]]  GIA COMPRESI
-    #TODO("Rifare precondizioni")
   ],
   post: [
     - L'utente ha visualizzato il report di analisi della completezza della documentazione nei confronti del codice repository GitHub
@@ -2125,14 +2130,15 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi della completezza della documentazione nei confronti del codice repository GitHub",
+  trigger: "L'utente accede alla sezione relativa al report di analisi della completezza della documentazione nei confronti del codice repository GitHub",
 )[]
 
 === UC11: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi repository GitHub <UC11>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] (vedi prima uc5)
+    #TODO("Riguarda dopo UC5")
     - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al numero totale di vulnerabilità individuate nel report di analisi repository GitHub
   ],
   post: [
@@ -2147,14 +2153,15 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al numero totale di vulnerabilità individuate nel report di analisi repository GitHub",
+  trigger: "L'utente accede alla sezione relativa al numero totale di vulnerabilità individuate nel report di analisi repository GitHub",
 )[]
 
 === UC12: Visualizzazione area metadati di un report di analisi repository GitHub <UC12>
 #useCase(
   attore: UAA,
   pre: [
-    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] TOGLIEREI
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    #TODO("Riguarda dopo UC5")
     - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub
   ],
   post: [
@@ -2173,7 +2180,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa ai metadati del report di analisi repository GitHub",
+  trigger: "L'utente accede alla sezione relativa ai metadati del report di analisi repository GitHub",
 )[
   #useCaseDiagram("12", "UC12 - Visualizzazione area metadati di un report di analisi repository GitHub")
 ]
@@ -2184,7 +2191,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
     //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
-    #TODO("Rifare precondizioni")
+    - L'utente è nella sezione relativa alla data del report di analisi, all'interno dell'area metadati del report di analisi repository GitHub
   ],
   post: [
     - L'utente ha visualizzato la data del report di analisi repository GitHub
@@ -2198,7 +2205,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente visualizza la data nella sezione relativa ai metadati del report di analisi repository GitHub",
+  trigger: "L'utente accede alla sezione relativa alla data del report di analisi, all'interno dell'area metadati del report di analisi repository GitHub",
 )[]
 
 ==== UC12.2: Visualizzazione commit analizzati nel report di analisi repository GitHub <UC12.2>
@@ -2207,7 +2214,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
     //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
-    #TODO("Rifare precondizioni")
+    - L'utente è nella sezione relativa ai commit analizzati, all'interno dell'area metadati del report di analisi repository GitHub
   ],
   post: [
     - L'utente ha visualizzato i commit analizzati nel report di analisi repository GitHub
@@ -2221,7 +2228,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente visualizza i commit analizzati nella sezione relativa ai metadati del report di analisi repository GitHub",
+  trigger: "L'utente accede alla sezione relativa ai commit analizzati, all'interno dell'area metadati del report di analisi repository GitHub",
 )[]
 
 ==== UC12.3: Visualizzazione richiedente report di analisi repository GitHub <UC12.3>
@@ -2230,7 +2237,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
     //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
-    #TODO("Rifare precondizioni")
+    - L'utente è nella sezione relativa al richiedente del report di analisi, all'interno dell'area metadati del report di analisi repository GitHub
   ],
   post: [
     - L'utente ha visualizzato il richiedente del report di analisi repository GitHub
@@ -2244,7 +2251,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente visualizza il richiedente nella sezione relativa ai metadati del report di analisi repository GitHub",
+  trigger: "L'utente accede alla sezione relativa al richiedente del report di analisi, all'interno dell'area metadati del report di analisi repository GitHub",
 )[]
 
 === UC13: Disconnessione account GitHub da CodeGuardian<UC13>
@@ -4042,7 +4049,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L’utente si trova nella sezione di visualizzazione dei report (#link(<UC5.1>)[#underline[\[UC5.1\]]])
+    - L’utente si trova nella sezione di visualizzazione dei report (#link(<UC5>)[#underline[\[UC5\]]])
     - Il Front-end richiede all'Orchestratore di inviare i dati relativi alle repository analizzate dall'utente
   ],
   post: [
@@ -4067,7 +4074,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L’utente si trova nella sezione di visualizzazione dei report (#link(<UC5.1>)[#underline[\[UC5.1\]]])
+    - L’utente si trova nella sezione di visualizzazione dei report (#link(<UC5>)[#underline[\[UC5\]]])
     - Il Front-end richiede all'Orchestratore di inviare i dati relativi alle repository analizzate dall'utente #link(<UC37>)[#underline[\[UC37\]]]
     - Non sono presenti repository analizzate per l'utente
   ],
@@ -4536,7 +4543,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   // UC5
   [#FRObx],
   [L'Utente deve poter accedere alla sezione di visualizzazione dei report di analisi],
-  [#link(<UC5.1>)[#underline[\[UC5.1\]]]],
+  [#link(<UC5>)[#underline[\[UC5\]]]],
 
   [#FRObx],
   [L'Utente deve poter visualizzare l'elenco dei report di analisi disponibili],
