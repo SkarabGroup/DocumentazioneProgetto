@@ -13,11 +13,23 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.44.0"
+#let versione = "v0.44.2"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2026/02/10",
+    "0.44.2",
+    "Primo fix generale UC",
+    members.andrea
+  ),
+  (
+    "2026/02/09",
+    "0.44.1",
+    "Fix definizione attori",
+    members.andrea
+  ),
   (
     "2026/02/08",
     "0.44.0",
@@ -552,7 +564,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   image("../assets/Attori_backend.png", width: 70%),
   caption: [Attori del sistema CodeGuardian lato Back-end],
 )
-#TODO("attenzione a inserire anche utente non registrato, eliminato autente registrato avanzato siccome non è mai stato usato in nessun caso d'uso")
+
 #figure(
   table(
     fill: (x, y) => if (y == 0) {
@@ -577,24 +589,28 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     [Utente autenticato che ha collegato con successo il proprio account CodeGuardian a un account GitHub e può usufruire di funzionalità avanzate del sistema.],
 
     [*Orchestratore*],
-    [Agente responsabile della gestione e coordinamento delle attività degli altri agenti all'interno del sistema.],
+    [Componente che agisce sul sistema coordinando il flusso di analisi, gestendo gli ambienti di esecuzione e centralizzando la comunicazione con il Database e gli strumenti di analisi.],
 
     [*Docker*],
-    [Piattaforma di containerizzazione utilizzata per eseguire gli agenti in ambienti isolati e replicabili.],
+    [Servizio esterno di containerizzazione utilizzato per creare ambienti isolati (sandbox) in cui eseguire le analisi in sicurezza.],
 
     [*GitHub*],
-    [Piattaforma di hosting per lo sviluppo di software che fornisce servizi di controllo versione e collaborazione tramite repository Git.],
+    [Servizio esterno di hosting per lo sviluppo software che fornisce le API per l'accesso alle repository e ai dati di versione.],
 
     [*OWASP ZAP*],
-    [Strumento di analisi per le scansioni di sicurezza mirate a verificare la conformità del sistema agli standard OWASP],
+    [Servizio esterno per le scansioni di sicurezza mirate a verificare la conformità del sistema agli standard OWASP],
 
     [*SonarQube/Semgrep*],
-    [Strumenti di analisi statica del codice utilizzati per rilevare vulnerabilità, bug e problemi di qualità nel codice sorgente.],
+    [Servizio esterno incaricato dell'ispezione del codice sorgente per l'individuazione di vulnerabilità, bug e violazioni degli standard di qualità, fornendo all'Orchestratore i dati grezzi per il report.],
 
     [*OpenAI*],
-    [Servizio di intelligenza artificiale utilizzato per l'analisi semantica della documentazione e la generazione di suggerimenti avanzati di refactoring e remediation.],
+    [Servizio esterno che fornisce capacità di elaborazione del linguaggio naturale per analizzare il significato della documentazione e suggerire azioni di miglioramento (remediation).],
   ),
   caption: [Attori principali del sistema CodeGuardian],
+)
+
+#TODO(
+  "Controllare definizioni"
 )
 
 == Lista
@@ -1236,7 +1252,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Utente autenticato avanzato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub e ha abilitato la condivisione di informazioni #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente si trova nella sezione di richiesta di analisi di un repository GitHub 
   ],
@@ -1501,7 +1516,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
   ],
   post: [
@@ -2729,16 +2743,15 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Orchestratore",
   attori_secondari: "Docker",
   pre: [
-    - L'utente autenticato avanzato ha effettuato l'accesso al proprio profilo CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente autenticato avanzato ha effettuato la connessiono del proprio account di GitHub a CodeGuardian #link(<UC3>)[#underline[\[UC3\]]]
+    //- L'utente autenticato avanzato ha effettuato la connessiono del proprio account di GitHub a CodeGuardian #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente autenticato avanzato ha richiesto l'avvio dell'analisi del proprio repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
   ],
   post: [
     - L'ambiente sandbox è stato correttamente creato ed è pronto all'uso
   ],
   scenari: [
-    - Il frontend riceve la richiesta di analisi del repository
-    - Il frontend comunica all'orchestratore la richiesta di analisi del repository
+    - Il sistema Front-end riceve la richiesta di analisi del repository
+    - Il sistema Front-end comunica all'orchestratore la richiesta di analisi del repository
     - L'orchestratore avvia la creazione dell'ambiente sandbox tramite immagine docker
   ],
   inclusioni: [
@@ -2747,7 +2760,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - #link(<UC17.1>)[#underline[\[UC17.1\]]]
   ],
-  trigger: "Il sistema frontend comunica all'orchestratore la richiesta di avvio dell'analisi",
+  trigger: "Il sistema Front-end comunica all'orchestratore la richiesta di avvio dell'analisi",
 )[#useCaseDiagram("17", "UC17 - Creazione dell'ambiente sandbox")]
 
 ==== UC17.1 Errore durante la creazione dell'ambiente sandbox <UC17.1>
@@ -2779,10 +2792,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Viene rilevato un errore durante la creazione dell'ambiente sandbox #link(<UC17.1>)[#underline[\[UC17.1\]]]
   ],
   post: [
-    - L'ambiente sandbox non viene creato correttamente e ciò viene comunicato al frontend
+    - L'ambiente sandbox non viene creato correttamente e ciò viene comunicato al sistema Front-end
   ],
   scenari: [
-    - L'orchestratore comunica l'errore al frontend
+    - L'orchestratore comunica l'errore al sistema Front-end
   ],
   inclusioni: [
     - Nessuna
@@ -2797,7 +2810,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'utente autenticato avanzato ha richiesto l'analisi del proprio repository al sistema CodeGuardian #link(<UC4>)[#underline[\[UC4\]]]
+    //- L'utente autenticato avanzato ha richiesto l'analisi del proprio repository al sistema CodeGuardian #link(<UC4>)[#underline[\[UC4\]]]
     - L'ambiente sandbox é stato creato correttamente #link(<UC17>)[#underline[\[UC17\]]]
   ],
   post: [
@@ -2805,7 +2818,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   scenari: [
     - L'orchestratore legge le richieste dell'utente
-    - L'orchestratore notifica al backend i compiti da svolgere
+    - L'orchestratore notifica al sistema Back-end i compiti da svolgere
   ],
   inclusioni: [
     - #link(<UC18.1>)[#underline[\[UC18.1\]]]
@@ -2814,7 +2827,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'orchestratore, una volta lette le richieste e visionato il repository, decide come agire e come istruire gli agenti",
+  trigger: "L'orchestratore ha letto e interpretato correttamente le richieste dell'utente e ha visionato il repository",
 )[#useCaseDiagram("18", "UC18 - Lettura delle richieste dell'utente da parte dell'orchestratore")]
 
 ==== UC18.1 Richiesta di analisi completa <UC18.1>
@@ -2824,11 +2837,11 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Non ci sono state richieste specifiche da parte dell'utente
   ],
   post: [
-    - L'orchestratore istruisce gli agenti sullo svoglimento dell'analisi completa del repository
+    - L'orchestratore avvia l'analisi completa del repository
   ],
   scenari: [
-    - Il frontend comunica al backend che l'utente vuole svolgere un'analisi completa del proprio repository
-    - L'orchestratore istruisce gli agenti per un'analisi completa del repository
+    - Il sistema Front-end comunica all'orchestratore che l'utente vuole svolgere un'analisi completa del proprio repository
+    - L'orchestratore riceve la richiesta e avvia l'analisi completa del repository
   ],
   inclusioni: [
     - Nessuna
@@ -2836,7 +2849,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il frontend deve comunicare al backend la richiesta di analisi completa",
+  trigger: "Il sistema Front-end comunica all'orchestratore la richiesta di analisi completa",
 )[]
 ==== UC18.2 Richieste specifiche sull'analisi da parte del frontend <UC18.2>
 #useCase(
@@ -2845,12 +2858,12 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente ha fatto delle richieste specifiche
   ],
   post: [
-    - L'orchestratore istruisce gli agenti sui ruoli per l'analisi delle singole richieste dell'utente
+    - L'orchestratore avvia l'analisi specifica del repository in base alle richieste dell'utente
   ],
   scenari: [
-    - Il frontend comunica al backend le specifiche richieste dell'utente rispetto alle aree da analizzare
-    - L'orchestratore, prima di istruire gli agenti, controlla la pre esistenza del repository da analizzare nel database e la trova
-    - L'orchestratore, una volta compresa la richiesta, istruisce gli agenti
+    - Il sistema Front-end comunica all'orchestratore le specifiche richieste dell'utente rispetto alle aree da analizzare
+    - L'orchestratore controlla la pre-esistenza del repository da analizzare nel database
+    - L'orchestratore, una volta compresa la richiesta, avvia l'analisi specifica
   ],
   inclusioni: [
     - #link(<UC18.2.1>)[#underline[\[UC18.2.1\]]]
@@ -2858,7 +2871,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il frontend deve comunicare al backend le richieste che dovranno essere prese in carico",
+  trigger: "Il sistema Front-end comunica al sistema Back-end le richieste che dovranno essere prese in carico",
 )[#useCaseDiagram("18_2", "UC18.2 - Richieste specifiche sull'analisi da parte del frontend")]
 
 ===== UC18.2.1 Repository mai analizzato in precedenza <UC18.2.1>
@@ -2869,10 +2882,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Il repository non era mai stato analizzato in precedenza
   ],
   post: [
-    - L'orchestratore istruisce gli agenti come se fosse stata richiesta un'analisi completa
+    - L'orchestratore istruisce avvia un'analisi completa del repository
   ],
   scenari: [
-    - L'orchestratore prima di istruire gli agenti controlla la pre esistenza del repository da analizzare nel database e non la trova
+    - L'orchestratore controlla la pre-esistenza del repository da analizzare nel database e non la trova
     - L'orchestratore si comporta come se fosse stata richiesta l'analisi completa
   ],
   inclusioni: [
@@ -2881,7 +2894,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'orchestore non trova la repository nel database e si comporta come fosse stata richiesta l'analisi completa",
+  trigger: "L'orchestratore non trova la repository nel database",
 )[]
 
 /// USE CASE DELLE ANALISI
@@ -3676,16 +3689,16 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - Il BackEnd ha chiari i propri compiti rispetto alle richieste del FrontEnd realtive all'analisi #link(<UC17>)[#underline[\[UC18\]]]
+    - Il sistema Back-end ha chiari i propri compiti rispetto alle richieste del sistema Front-end realtive all'analisi #link(<UC17>)[#underline[\[UC18\]]]
   ],
   post: [
-    - Il BackEnd ha contattato corettamente i tool esterni di analisi
+    - L'orchestratore ha contattato corettamente i tool esterni di analisi
   ],
   scenari: [
-    - Il BackEnd legge le richieste del sistema FrontEnd e le interpreta correttamente
-    - Il BackEnd sceglie quali sono i tool esterni di analisi da interrogare
-    - Il BackEnd contatta i tool esterni
-    - Il BackEnd inserisce all'interno dei tool esterni i dati appropriati da analizzare
+    - L'orchestratore legge le richieste del sistema Front-end e le interpreta correttamente
+    - L'orchestratore sceglie quali sono i tool esterni di analisi da interrogare
+    - L'orchestratore contatta i tool esterni
+    - L'orchestratore inserisce all'interno dei tool esterni i dati appropriati da analizzare
   ],
   inclusioni: [
     - #link(<UC29.1>)[#underline[\[UC29.1\]]]
@@ -3703,14 +3716,14 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Orchestratore",
   attori_secondari: "SonarQube/Semgrep",
   pre: [
-    - L'orchestratore ha istruito il Back-end sulla necessità di contattare lo strumento di analisi del codice
+    - L'orchestratore ha istruito il sistema Back-end sulla necessità di contattare lo strumento di analisi del codice
   ],
   post: [
     - Lo strumento di analisi del codice ha ricevuto correttamente il codice da analizzare e può iniziare l'analisi
   ],
   scenari: [
-    - Il backend riceve istruzione del codice da analizzare da parte dell'orchestratore
-    - Il sistema backend recupera il codice da analizzare e contatta il tool di analisi
+    - L'orchestratore riceve l'istruzione del codice da analizzare
+    - L'orchestratore recupera il codice da analizzare e contatta il tool di analisi
     - Lo strumento di analisi del codice viene contattato e gli viene passato il codice da analizzare
     - Lo strumento di analisi del codice analizza il codice
   ],
@@ -3730,12 +3743,12 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Lo strumento di analisi del codice ha ricevuto correttamente #link(<UC29.1>)[#underline[\[UC29.1\]]]
   ],
   post: [
-    - Lo strumento di analisi del codice comunica al sistema backend che il linguaggio non è supportato
+    - Lo strumento di analisi del codice comunica al sistema Back-end che il linguaggio non è supportato
   ],
   scenari: [
-    - Lo strumento di analisi del codice legge la richiesta del sistema backend
-    - Lo struento di analis del codice rileva dei linguaggi non riconosciuti
-    - Lo strumento di analis del codice comunica l'errore al sistema backend
+    - Lo strumento di analisi del codice legge la richiesta del sistema Back-end
+    - Lo strumento di analisi del codice rileva dei linguaggi non riconosciuti
+    - Lo strumento di analisi del codice comunica l'errore al sistema Back-end
   ],
   inclusioni: [
     - Nessuna
@@ -3751,14 +3764,14 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Orchestratore",
   attori_secondari: "OpenAI",
   pre: [
-    - L'orchestratore ha istruito il Back-end sulla necessità di contattare lo strumento di analisi della documentazione
+    - L'orchestratore è stato istruito sulla necessità di contattare lo strumento di analisi della documentazione 
   ],
   post: [
     - La documentazione viene passata correttamente allo strumento di analisi
   ],
   scenari: [
-    - Il sistema backend riceve istruzione di analizzare la documentazione da parte dell'orchestratore
-    - Il backend recupera la documentazione appropriata da passare allo strumento di analisi
+    - L'orchestratore riceve istruzione di analizzare la documentazione
+    - L'orchestratore recupera la documentazione appropriata da passare allo strumento di analisi
     - Lo strumento di analisi riceve la documentazione
   ],
   inclusioni: [
@@ -3775,14 +3788,14 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Orchestratore",
   attori_secondari: "OWASP ZAP",
   pre: [
-    - L'orchestratore ha istruito il Back-end sulla necessità di contattare lo strumento di analisi degli standard OWASP
+    - L'orchestratore è stato istruito sulla necessità di contattare lo strumento di analisi degli standard OWASP
   ],
   post: [
     - Lo strumento di analisi degli standard OWASP riceve l'applicazione da analizzare correttamente
   ],
   scenari: [
-    - Il sistema backend riceve istruzione di analizzare l'applicazione rispetto agli standard OWASP da parte dell'orchestratore
-    - Il backend recupera correttamente l'applicazione da passare allo strumenti di anlisi degli standard OWASP
+    - L'orchestratore riceve istruzione di analizzare l'applicazione rispetto agli standard OWASP da parte dell'orchestratore
+    - L'orchestratore recupera correttamente l'applicazione da passare allo strumenti di anlisi degli standard OWASP
     - Lo strumento di analisi riceve correttamente l'applicazione e può procedere con l'analisi
   ],
   inclusioni: [
@@ -3798,15 +3811,15 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - Il BackEnd ha provato a contattare un tool esterno per l'analisi
+    - L'orchestratore ha provato a contattare un tool esterno per l'analisi
   ],
   post: [
-    - Il BackEnd trova un tool alternativo e lo contatta
+    - L'orchestratore trova un tool alternativo e lo contatta
   ],
   scenari: [
-    - Il BackEnd ha provato a contattare un tool esterno fallendo
-    - Il BackEnd cerca internamente un tool alternativo
-    - Il BackEnd contatta il tool alternativo
+    - L'orchestratore ha provato a contattare un tool esterno fallendo
+    - L'orchestratore cerca internamente un tool alternativo
+    - L'orchestratore contatta il tool alternativo
   ],
   inclusioni: [
     - Nessuna
@@ -3844,13 +3857,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - Il sistema backend ha completato la parte di analisi richiesta
+    - L'orchestratore ha completato la parte di analisi richiesta
   ],
   post: [
     - L'orchestratore ha preso in carico la nuova sezione del report di analisi
   ],
   scenari: [
-    - Il sistema backend ha finito la parte di analisi richiesta da parte dell'utente
+    - L'orchestratore ha finito la parte di analisi richiesta da parte dell'utente
     - L'orchestratore ha visualizzato la nuova sezione del report
     - L'orchestratore integra la nuova sezione nel report corrente
     - L'orchestratore modifica il report segnalando che una sezione è avanti nell'analisi rispetto alle alte
@@ -3871,12 +3884,12 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'orchestratore ha preso in carico il report di analisi #link(<UC30>)[#underline[\[UC30\]]]
   ],
   post: [
-    - Il sistema front-end può mostrare correttamente il report di analisi
+    - Il sistema Front-end può mostrare correttamente il report di analisi
   ],
   scenari: [
-    - L'orchestratore comunica al sistema front-end che il report di analisi è disponibile
-    - L'orchestratore invia il report di analisi al sistema front-end
-    - Il sistema front-end può ora mostrare il report di analisi
+    - L'orchestratore comunica al sistema Front-end che il report di analisi è disponibile
+    - L'orchestratore invia il report di analisi al sistema Front-end
+    - Il sistema Front-end può ora mostrare il report di analisi
   ],
   inclusioni: [
     - Nessuna
@@ -3884,21 +3897,21 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il report deve arrivare all'utente tramite il sistema front-end",
+  trigger: "Il report è in mano all'orchestratore e pronto per essere inviato al sistema Front-end",
 )[]
 
 === UC32 L'utente viene notificato della disponibilità di visualizzare il nuovo report id anlisi<UC32>
 #useCase(
   attore: UAA,
   pre: [
-    - Il sistema front-end ha ricevuto correttamente il report di analisi da parte dell'orchestratore #link(<UC31>)[#underline[\[UC31\]]]
+    - Il sistema Front-end ha ricevuto correttamente il report di analisi da parte dell'orchestratore #link(<UC31>)[#underline[\[UC31\]]]
   ],
   post: [
     - L'utente può visualizzare il report richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
   ],
   scenari: [
-    - Il sistema front-end ha ricevuto il report di analisi ed è pronto a mostrarlo
-    - Il sistema front-end notifica all'utente la disponibilità di visualizzazione del nuovo report di analisi
+    - Il sistema Front-end ha ricevuto il report di analisi ed è pronto a mostrarlo
+    - Il sistema Front-end notifica all'utente la disponibilità di visualizzazione del nuovo report di analisi
   ],
   inclusioni: [
     - Nessuna
@@ -3911,7 +3924,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 //spazio per quelli in mezzo
 
-=== UC34: Notifica completamento al frontend <UC34>
+=== UC34: Notifica completamento al Front-end <UC34>
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -3934,7 +3947,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'orchestratore ha completato l'analisi della repository",
 )[
-  #useCaseDiagram("34", "UC34 - Notifica completamento al frontend")
+  #useCaseDiagram("34", "UC34 - Notifica completamento al Front-end")
 ]
 
 ==== UC34.1: Nuovo tentativo di invio del messaggio di completamento <UC34.1>
@@ -4042,7 +4055,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente visualizza le repository per le quali sono stati svolte delle analisi
   ],
   scenari: [
-    //- L'Orchestratore interroga il Database per recuperare le informazioni richieste
     - L'Orchestratore invia al Front-end la lista delle repository analizzate
     - Il Front-end mostra all'utente la lista delle repository analizzate
   ],
@@ -4291,7 +4303,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   scenari: [
     - Il Sistema recupera la lista dei repository analizzati dall'utente
     - Il Sistema ordina i repository per punteggio di qualità complessiva
-    - Il Sistema mostra la lista ordinata all'utente
+    - Il Sistema Front-end mostra la lista ordinata all'utente
   ],
   inclusioni: [
     - Nessuna
