@@ -2328,6 +2328,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: UAA,
   pre: [
     - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    #TODO("Riguarda dopo UC5")
   ],
   post: [
     - L'utente ha esportato con successo il report di analisi nel formato selezionato
@@ -2668,8 +2669,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]] già presenti in UC16
+    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
+    - L'utente è nella sezione relativa alla visualizzazione delle issue identificate, all'interno della sezione dei suggerimenti di remediation del report di analisi repository GitHub
   ],
   post: [
     - L'utente visualizza la lista completa delle issue identificate nel repository analizzato
@@ -2690,8 +2692,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
     - L'analisi del repository non ha identificato alcuna issue
   ],
   post: [
@@ -2713,8 +2715,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
     - L'utente sta visualizzando la lista delle issue identificate #link(<UC16.1>)[#underline[\[UC16.1\]]]
   ],
   post: [
@@ -2760,7 +2762,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - #link(<UC17.1>)[#underline[\[UC17.1\]]]
   ],
-  trigger: "Il sistema Front-end comunica all'orchestratore la richiesta di avvio dell'analisi",
+  trigger: "L'orchestratore riceve dal sistema Front-end la richiesta di avvio dell'analisi",
 )[#useCaseDiagram("17", "UC17 - Creazione dell'ambiente sandbox")]
 
 ==== UC17.1 Errore durante la creazione dell'ambiente sandbox <UC17.1>
@@ -2789,7 +2791,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - Viene rilevato un errore durante la creazione dell'ambiente sandbox #link(<UC17.1>)[#underline[\[UC17.1\]]]
+    - Viene rilevato un errore durante la creazione dell'ambiente sandbox
   ],
   post: [
     - L'ambiente sandbox non viene creato correttamente e ciò viene comunicato al sistema Front-end
@@ -2850,13 +2852,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il sistema Front-end comunica all'orchestratore la richiesta di analisi completa",
+  trigger: "L'orchestratore riceve dal sistema Front-end la richiesta di analisi completa",
 )[]
 ==== UC18.2 Richieste specifiche sull'analisi da parte del frontend <UC18.2>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'utente ha fatto delle richieste specifiche
+    - L'utente ha fatto delle richieste specifiche sulle aree da analizzare del proprio repository
   ],
   post: [
     - L'orchestratore avvia l'analisi specifica del repository in base alle richieste dell'utente
@@ -2879,7 +2881,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'utente ha fatto delle richieste specifiche in relazione alle aree del repository che ha interesse vengano analizzate #link(<UC18.2>)[#underline[\[UC18.2\]]]
     - Il repository non era mai stato analizzato in precedenza
   ],
   post: [
@@ -2895,7 +2896,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'orchestratore non trova la repository nel database",
+  trigger: "L'orchestratore non ha trovato la repository nel database",
 )[]
 
 /// USE CASE DELLE ANALISI
@@ -2929,7 +2930,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha preso visione dell'analisi delle vulnerabilità #link(<UC19>)[#underline[\[UC19\]]]
+    - L'utente ha preso visione dell'analisi delle vulnerabilità
     - L'utente ha visualizzato le remediation proposte
   ],
   post: [
@@ -2947,18 +2948,19 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "Conferma delle remediation",
 )[]
+
 ==== UC19.2: L'utente rifiuta la remediation proposta <UC19.2>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha preso visione dell'analisi delle vulnerabilità #link(<UC19>)[#underline[\[UC19\]]]
+    - L'utente ha preso visione dell'analisi delle vulnerabilità
     - L'utente ha visualizzato le remediation proposte
   ],
   post: [
     - Le remediation proposte vengono scartate
   ],
   scenari: [
-    - L'utente visualiza le remediation proposte
+    - L'utente visualizza le remediation proposte
     - L'utente non accetta le remediation proposte
     - Le remediation vengono scartate
   ],
@@ -2970,7 +2972,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "Remediation proposte non accettate",
 )[]
-
 
 === UC20: Rilevamento segreti e token <UC20>
 #useCase(
@@ -3001,7 +3002,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - La scansione ha rilevato possibili segreti #link(<UC20>)[#underline[\[UC20\]]]
+    - La scansione ha rilevato possibili segreti
   ],
   post: [
     - L'utente rifiuta le remediation proposte
@@ -3044,7 +3045,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Il report dei possibili segreti è disponibile #link(<UC20>)[#underline[\[UC20\]]]
+    - Il report dei possibili segreti è disponibile
   ],
   post: [
     - L'utente visualizza l'elenco dei possibili segreti con dettagli e azioni
@@ -3089,7 +3090,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Licenze non compatibili rilevate #link(<UC21>)[#underline[\[UC21\]]]
+    - Licenze non compatibili rilevate
   ],
   post: [
     - Il processo di approvazione legale è integrato
@@ -3134,7 +3135,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - PR aperta #link(<UC22>)[#underline[\[UC22\]]]
+    - PR aperta
   ],
   post: [
     - Test automatici eseguiti
@@ -3155,7 +3156,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Problemi rilevati nella PR #link(<UC22>)[#underline[\[UC22\]]]
+    - Problemi rilevati nella PR
   ],
   post: [
     - Suggerimenti di modifica applicati automaticamente
@@ -3202,7 +3203,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Metriche calcolate #link(<UC23>)[#underline[\[UC23\]]]
+    - Metriche calcolate
   ],
   post: [
     - Integrazione con tool esterni completata
@@ -3223,7 +3224,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Metriche disponibili #link(<UC23>)[#underline[\[UC23\]]]
+    - Metriche disponibili
   ],
   post: [
     - Suggerimenti KPI forniti
@@ -3270,7 +3271,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Refactor suggeriti #link(<UC24>)[#underline[\[UC24\]]]
+    - Refactor suggeriti
   ],
   post: [
     - Impatto verificato tramite test
@@ -3291,7 +3292,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Refactor selezionati #link(<UC24>)[#underline[\[UC24\]]]
+    - Refactor selezionati
   ],
   post: [
     - Refactor applicati automaticamente
@@ -3312,7 +3313,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Elenco suggerimenti di refactor generato #link(<UC24>)[#underline[\[UC24\]]]
+    - Elenco suggerimenti di refactor generato
   ],
   post: [
     - L'utente visualizza i suggerimenti con snippet e azioni
@@ -3359,7 +3360,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Commit analizzati per changelog #link(<UC25>)[#underline[\[UC25\]]]
+    - Commit analizzati per changelog
   ],
   post: [
     - Note di breaking change rilevate
@@ -3380,7 +3381,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Changelog approvato #link(<UC25>)[#underline[\[UC25\]]]
+    - Changelog approvato
   ],
   post: [
     - Release pubblicata su GitHub
@@ -3401,7 +3402,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Changelog generato e disponibile #link(<UC25>)[#underline[\[UC25\]]]
+    - Changelog generato e disponibile
   ],
   post: [
     - L'utente visualizza la bozza del changelog, la modifica o la approva per pubblicazione
@@ -3448,7 +3449,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Test flakiness rilevata #link(<UC26>)[#underline[\[UC26\]]]
+    - Test flakiness rilevata
   ],
   post: [
     - Test intermittenti rieseguiti
@@ -3469,7 +3470,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Coverage analizzata #link(<UC26>)[#underline[\[UC26\]]]
+    - Coverage analizzata
   ],
   post: [
     - Suggerimenti per test aggiuntivi forniti
@@ -3490,7 +3491,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Report di test e coverage generato e disponibile #link(<UC26>)[#underline[\[UC26\]]]
+    - Report di test e coverage generato e disponibile
   ],
   post: [
     - L'utente visualizza il report dettagliato con gap e suggerimenti di test
@@ -3537,7 +3538,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Policy fallite #link(<UC27>)[#underline[\[UC27\]]]
+    - Policy fallite
   ],
   post: [
     - Eccezione approvata manualmente
@@ -3558,7 +3559,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Branch differenti configurati #link(<UC27>)[#underline[\[UC27\]]]
+    - Branch differenti configurati
   ],
   post: [
     - Policy applicate dinamicamente
@@ -3579,7 +3580,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Il tentativo di merge è stato valutato dal sistema e il report policy è disponibile #link(<UC27>)[#underline[\[UC27\]]]
+    - Il tentativo di merge è stato valutato dal sistema e il report policy è disponibile
   ],
   post: [
     - L'utente visualizza dettagli sulle policy fallite e le eccezioni proposte
@@ -3626,7 +3627,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Report configurato #link(<UC28>)[#underline[\[UC28\]]]
+    - Report configurato 
   ],
   post: [
     - Filtri e template applicati
@@ -3647,7 +3648,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Alert critico rilevato #link(<UC28>)[#underline[\[UC28\]]]
+    - Alert critico rilevato
   ],
   post: [
     - Azioni automatiche eseguite
@@ -3668,7 +3669,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Report programmabile generato e disponibile #link(<UC28>)[#underline[\[UC28\]]]
+    - Report programmabile generato e disponibile 
   ],
   post: [
     - L'utente visualizza report periodici, KPI e alert
@@ -3734,14 +3735,14 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - #link(<UC29.1.1>)[#underline[\[UC29.1.1\]]]
   ],
-  trigger: "viene richiesta l'analisi del codice",
+  trigger: "Viene richiesta l'analisi del codice",
 )[#useCaseDiagram("29_1", "UC29.1 - Richiesta di analisi del codice")]
 
 ===== UC29.1.1 Uno o più linguaggi presenti nella codebase non sono supportati dallo strumento di analisi <UC29.1.1>
 #useCase(
   attore: "SonarQube/Semgrep",
   pre: [
-    - Lo strumento di analisi del codice ha ricevuto correttamente #link(<UC29.1>)[#underline[\[UC29.1\]]]
+    - Lo strumento di analisi del codice ha ricevuto correttamente il codice da analizzare e ha iniziato l'analisi
   ],
   post: [
     - Lo strumento di analisi del codice comunica al sistema Back-end che il linguaggio non è supportato
@@ -3757,7 +3758,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Viene richiesta l'analisi del codice",
+  trigger: "Viene richiesta l'analisi del codice e sono presenti linguaggi non supportati",
 )[]
 
 ==== UC29.2 Richiesta di analisi della documentazione <UC29.2>
@@ -3909,6 +3910,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   post: [
     - L'utente può visualizzare il report richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    #TODO("Riguarda dopo UC5")
   ],
   scenari: [
     - Il sistema Front-end ha ricevuto il report di analisi ed è pronto a mostrarlo
@@ -3925,7 +3927,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 //spazio per quelli in mezzo
 
-=== UC34: Notifica completamento al Front-end <UC34>
+=== UC34: Notifica completamento dell'analisi della repository al Front-end <UC34>
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -3948,14 +3950,14 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'orchestratore ha completato l'analisi della repository",
 )[
-  #useCaseDiagram("34", "UC34 - Notifica completamento al Front-end")
+  #useCaseDiagram("34", "UC34 - Notifica completamento dell'analisi della repository al Front-end")
 ]
 
 ==== UC34.1: Nuovo tentativo di invio del messaggio di completamento <UC34.1>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'Orchestratore non riceve un ack dal Front-end dopo aver inviato la notifica di completamento dell'analisi #link(<UC34>)[#underline[\[UC34\]]]
+    - L'Orchestratore non riceve un ack dal Front-end dopo aver inviato la notifica di completamento dell'analisi
   ],
   post: [
     - L'Orchestratore ritenta l'invio della notifica di completamento dell'analisi al Front-end
@@ -3970,7 +3972,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'Orchestratore non riceve l'ack dal Front-end",
+  trigger: "L'Orchestratore non riceve l'ack di avvenuta ricezione della notifica di completamento dell'analisi dal Front-end",
 )[]
 
 === UC35: Gestione errore critico durante l'analisi <UC35>
@@ -4005,7 +4007,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'Orchestratore non riceve un ack dal Front-end dopo aver inviato la notifica di fallimento dell'analisi #link(<UC35>)[#underline[\[UC35\]]]
+    - L'Orchestratore non riceve un ack dal Front-end dopo aver inviato la notifica di fallimento dell'analisi
   ],
   post: [
     - L'Orchestratore ritenta l'invio della notifica di fallimento
@@ -4020,7 +4022,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'Orchestratore non riceve l'ack dal Front-end",
+  trigger: "L'Orchestratore non riceve l'ack di avvenuta ricezione della notifica di fallimento dell'analisi dal Front-end",
 )[]
 
 === UC36: Salvataggio metadati repository <UC36>
@@ -4075,7 +4077,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Orchestratore",
   pre: [
     - L’utente si trova nella sezione di visualizzazione dei report (#link(<UC5>)[#underline[\[UC5\]]])
-    - Il Front-end richiede all'Orchestratore di inviare i dati relativi alle repository analizzate dall'utente #link(<UC37>)[#underline[\[UC37\]]]
+    - Il Front-end richiede all'Orchestratore di inviare i dati relativi alle repository analizzate dall'utente
     - Non sono presenti repository analizzate per l'utente
   ],
   post: [
@@ -4123,7 +4125,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'orchestratore ha richiesto l'archiviazione del report #link(<UC38>)[#underline[[UC38]]]
+    - L'orchestratore ha richiesto l'archiviazione del report ma non avviene correttamente il processo di salvataggio 
   ],
   post: [
     - Il sistema Front-end è stato informato dall'orchestratore del fallimento del salvataggio
@@ -4170,7 +4172,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'orchestratore ha richiesto il salvataggio delle metriche aggregate #link(<UC39>)[#underline[[UC39]]]
+    - L'orchestratore ha richiesto il salvataggio delle metriche aggregate ma non avviene correttamente il processo di salvataggio 
   ],
   post: [
     - L'orchestratore viene informato dell'impossibilità di salvare le metriche per la dashboard
@@ -4216,7 +4218,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Utente non registrato",
   pre: [
-    - L'utente ha tentato l'invio delle credenziali #link(<UC40>)[#underline[[UC40]]]
+    - L'utente ha tentato l'invio delle credenziali ma non avviene correttamente il processo di salvataggio 
   ],
   post: [
     - Il sistema Back-end non acquisisce i dati e l'utente viene avvisato dell'impossibilità di procedere
