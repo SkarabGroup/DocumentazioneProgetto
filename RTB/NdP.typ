@@ -408,8 +408,8 @@ La determinazione del preventivo deve rispettare i seguenti criteri:
 - *Esclusione Auto-apprendimento:* il periodo antecedente al primo Sprint è classificato come auto-apprendimento e non concorre al calcolo dei costi rendicontabili;
 - *Gestione Variazioni:* eventuali scostamenti (in aumento o diminuzione) rispetto alle stime di candidatura devono essere documentati e motivati nei verbali di progetto o negli strumenti di issue tracking.
 
-> *Nota di Contesto (Analisi Preliminare):*
-> A seguito di un’analisi approfondita del lavoro svolto nel periodo di consolidamento, sono state formalmente definite le baseline di interesse. In conformità al Preventivo di candidatura, la distribuzione pro-capite dell’impegno orario rimane invariata. Tuttavia, il preventivo complessivo attuale riporta un lieve scostamento in diminuzione rispetto alle stime iniziali, determinando una riduzione del costo complessivo.
+*Nota di Contesto (Analisi Preliminare):*
+A seguito di un’analisi approfondita del lavoro svolto nel periodo di consolidamento, sono state formalmente definite le baseline di interesse. In conformità al Preventivo di candidatura, la distribuzione pro-capite dell’impegno orario rimane invariata. Tuttavia, il preventivo complessivo attuale riporta un lieve scostamento in diminuzione rispetto alle stime iniziali, determinando una riduzione del costo complessivo.
 
 ====== Strategia di Allocazione per Fasi
 L’allocazione delle risorse deve adattarsi alla natura specifica della fase di progetto.
@@ -417,12 +417,12 @@ L’allocazione delle risorse deve adattarsi alla natura specifica della fase di
 1. *Fase RTB (Requirements and Technology Baseline):*
   L’allocazione delle risorse deve prevedere un impiego significativo delle figure di *Amministratore* e *Analista*.
   \
-  > *Motivazione:* scelta dettata dall’elevato impatto delle attività documentali previste in questa fase (definizione procedure, strumenti, requisiti), propedeutiche all’avvio della progettazione post-RTB.
+  *Motivazione:* scelta dettata dall’elevato impatto delle attività documentali previste in questa fase (definizione procedure, strumenti, requisiti), propedeutiche all’avvio della progettazione post-RTB.
 
 2. *Fase PB (Product Baseline):*
   Il preventivo per questa fase è definito come *flessibile* e soggetto a revisione *rolling-wave*.
   \
-  > *Motivazione:* nonostante la pianificazione accurata, la natura delle attività future e i rischi residui richiedono un margine di adattabilità. Il preventivo PB è definitivo rispetto allo stato attuale, ma deve essere riesaminato a cadenza almeno pari alla chiusura di ogni Sprint o al verificarsi di eventi significativi. Ogni revisione deve essere approvata dal Responsabile di Progetto e tracciata nei verbali o negli strumenti di gestione delle attività.
+  *Motivazione:* nonostante la pianificazione accurata, la natura delle attività future e i rischi residui richiedono un margine di adattabilità. Il preventivo PB è definitivo rispetto allo stato attuale, ma deve essere riesaminato a cadenza almeno pari alla chiusura di ogni Sprint o al verificarsi di eventi significativi. Ogni revisione deve essere approvata dal Responsabile di Progetto e tracciata nei verbali o negli strumenti di gestione delle attività.
 
 ====== Criteri di Verifica del Preventivo e dell’Allocazione delle Risorse
 L’elemento *Preventivo ed Allocazione delle Risorse* del Piano di Progetto è considerato conforme se:
@@ -510,7 +510,36 @@ requisiti rispetto alle loro fonti. La struttura è la seguente:
 - Lista dei requisiti funzionali e non funzionali, classificati in obbligatori, desiderabili e opzionali.
 
 === Glossario
-Documento che definisce i termini tecnici e specifici utilizzati nel progetto, per garantire una comprensione comune tra tutti i membri del team e gli stakeholder esterni. questo documento serve a fornire definizioni chiare e univoche per evitare ambiguità. Oltre che il documento in sé per s'é, il glossario é consultabile tramite una pagina nel sito web di Skarab Group. Questo permette interattivitá e link esterni all'interno di ogni documento che compone la documentazione di progetto. Per convenzione, un termine sará un link al glossario sul sito solo la prima volta che compare all'interno di un documento, assumento una lettura ordinata del documento stesso da parte del lettore.
+==== Definizione del Documento
+Il *Glossario* costituisce il riferimento terminologico unico e vincolante per l'intero ciclo di vita del progetto. Esso ha lo scopo di definire il vocabolario controllato utilizzato trasversalmente nella documentazione di progetto e nelle comunicazioni ufficiali, eliminando ambiguità semantiche e garantendo uniformità comunicativa tra il gruppo di lavoro e gli stakeholder esterni.
+
+Il documento assolve alle seguenti funzioni:
+1. *Disambiguazione:* fornire definizioni univoche per termini che potrebbero avere significati diversi in contesti differenti.
+2. *Accessibilità:* rendere disponibile una base di conoscenza centralizzata, consultabile sia in formato documentale statico (PDF) sia come risorsa ipertestuale dinamica (pagina web).
+
+==== Elementi Costituenti del Documento
+Il Glossario deve essere organizzato in ordine alfabetico e deve includere obbligatoriamente le seguenti categorie di voci:
+- *Termini Tecnici:* parole chiave relative a tecnologie, framework e strumenti adottati.
+- *Acronimi e Abbreviazioni:* espansione completa delle sigle utilizzate e loro significato nel contesto del progetto.
+- *Concetti di Dominio:* definizioni specifiche del contesto applicativo *Code Guardian*.
+
+*Struttura della voce:*
+Per ogni termine, la definizione deve rispettare i seguenti criteri:
+- *Univocità:* una sola definizione per termine (evitare sinonimi duplicati; in caso di sinonimi, scegliere un termine principale e rimandare ad esso).
+- *Sintesi:* descrizione concisa, priva di ridondanze, focalizzata sugli aspetti utili al progetto.
+- *Contestualizzazione:* il significato deve essere riferito all’ambito del progetto e non generico.
+
+==== Criteri di Verifica del Glossario
+Il Glossario è considerato conforme se risultano soddisfatte tutte le seguenti condizioni:
+
+- [ ] ogni termine marcato come voce di Glossario nella documentazione (tramite sottolineatura o link/definizione) possiede una corrispondente definizione nel Glossario.
+- [ ] in ogni documento di progetto, la prima occorrenza di un termine presente nel Glossario è evidenziata e rimanda alla relativa definizione; occorrenze successive possono non essere linkate per preservare la leggibilità.
+- [ ] la versione web del Glossario è raggiungibile e ogni collegamento (anchor link) inserito nei documenti punta a una sezione esistente della pagina web.
+- [ ] le voci sono presentate in rigoroso ordine alfabetico (A–Z).
+- [ ] le definizioni non sono tautologiche: è vietato definire un termine esclusivamente ripetendo il termine stesso o usando una sua variante non informativa; eventuali rimandi ad altri termini sono ammessi solo se tali termini sono a loro volta definiti nel Glossario.
+
+In assenza di una o più delle condizioni sopra elencate, il Glossario non è considerato conforme e deve essere revisionato prima del rilascio ufficiale.
+
 
 === NdP - Norme di Progetto
 Documento che definisce il #def("WoW"),le norme, le convenzioni, gli strumenti e i processi che i membri del gruppo devono seguire durante il ciclo di vita del progetto.
