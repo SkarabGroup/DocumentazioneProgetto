@@ -13,11 +13,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.44.3"
+#let versione = "v0.44.4"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2026/02/10",
+    "0.44.4",
+    "Fix vari degli UC + fix specifici UC13-15",
+    members.andrea
+  ),
   (
     "2026/02/10",
     "0.44.3",
@@ -2055,7 +2061,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] TOGLIEREI
     - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della documentazione repository GitHub
   ],
   post: [
@@ -2080,8 +2086,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della documentazione repository GitHub #link(<UC10>)[#underline[\[UC10\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della documentazione repository GitHub #link(<UC10>)[#underline[\[UC10\]]] GIA COMPRESI
+    #TODO("Rifare precondizioni")
   ],
   post: [
     - L'utente ha visualizzato il report di analisi degli errori di spelling della documentazione repository GitHub
@@ -2102,8 +2109,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della documentazione repository GitHub #link(<UC10>)[#underline[\[UC10\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della documentazione repository GitHub #link(<UC10>)[#underline[\[UC10\]]]  GIA COMPRESI
+    #TODO("Rifare precondizioni")
   ],
   post: [
     - L'utente ha visualizzato il report di analisi della completezza della documentazione nei confronti del codice repository GitHub
@@ -2146,7 +2154,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] TOGLIEREI
     - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub
   ],
   post: [
@@ -2174,8 +2182,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
+    #TODO("Rifare precondizioni")
   ],
   post: [
     - L'utente ha visualizzato la data del report di analisi repository GitHub
@@ -2196,8 +2205,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
+    #TODO("Rifare precondizioni")
   ],
   post: [
     - L'utente ha visualizzato i commit analizzati nel report di analisi repository GitHub
@@ -2218,8 +2228,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
+    #TODO("Rifare precondizioni")
   ],
   post: [
     - L'utente ha visualizzato il richiedente del report di analisi repository GitHub
@@ -2242,7 +2253,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub
       #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha selezionato la sezione di disconnessione dell'account GitHub dal sistema CodeGuardian
+    - L'utente è nella sezione di disconnessione dell'account GitHub dal sistema CodeGuardian
   ],
   post: [
     - L'utente ha disconnesso con successo il proprio accont GitHub dalla piattaforma Codeguardian
@@ -2256,19 +2267,17 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente entra nella sezione Impostazioni > Account > GitHub dell'applicazione e disconnette il proprio account di GitHub dalla piattaforma CodeGuardian",
+  trigger: "L'utente entra nella sezione Impostazioni > Account > GitHub dell'applicazione",
 )[#useCaseDiagram("13", "UC13 - Disconnessione account GitHub da CodeGuardian")]
 
 ==== UC13.1: Selezione tasto Disconnetti <UC13.1>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha selezionato la sezione di disconnessione dell'account GitHub dal sistema CodeGuardian #link(<UC13>)[#underline[\[UC13\]]]
+    - L'utente ha selezionato la sezione di disconnessione dell'account GitHub dall'applicazione CodeGuardian
   ],
   post: [
-    - L'utente ha disconnesso con successo il proprio accont GitHub dalla piattaforma Codeguardian
+    - L'utente ha disconnesso con successo il proprio accont GitHub dall'applicazione Codeguardian
   ],
   scenari: [
     - L'utente seleziona il tasto "Disconnetti"
@@ -2280,16 +2289,16 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC13.1.1>)[#underline[\[UC13.1.1\]]]
 
   ],
-  trigger: "L'untente seleziona e attiva il tasto Disconnetti per disconnettere il proprio account",
+  trigger: "L'untente preme il tasto Disconnetti per disconnettere il proprio account",
 )[#useCaseDiagram("13_1", "UC13.1 - Selezione tasto Disconnetti")]
 
 ===== UC13.1.1: Conferma disconnessione account<UC13.1.1>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha selezionato la sezione di disconnessione dell'account GitHub dal sistema CodeGuardian #link(<UC13>)[#underline[\[UC13\]]]
-    - L'utente ha selezionato il tasto Disconnetti #link(<UC13.1>)[#underline[\[UC13.1\]]]
+    //- L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
+    //- L'utente ha selezionato la sezione di disconnessione dell'account GitHub dal sistema CodeGuardian #link(<UC13>)[#underline[\[UC13\]]]
+    - L'utente ha confermato la disconnessione del proprio account dall'applicazione CodeGuardian
   ],
   post: [
     - L'utente ha disconnesso con successo il proprio account di GitHub dalla piattaforma CodeGuardian
@@ -2328,15 +2337,14 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente interagisce con il pulsante di esportazione nella sezione di visualizzazione del report",
+  trigger: "L'utente sta visualizzando il report di analisi e interagisce con il pulsante di esportazione",
 )[#useCaseDiagram("14", "UC14 - Esportazione report di analisi repository GitHub")]
 
 ==== UC14.1: Selezione formato di esportazione <UC14.1>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente ha avviato la procedura di esportazione #link(<UC14>)[#underline[\[UC14\]]]
+    - L'utente si trova nella sezione formati all'interno della visualizzazione del report
   ],
   post: [
     - L'utente ha selezionato un formato valido per l'esportazione
@@ -2351,16 +2359,16 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - #link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]
   ],
-  trigger: "L'utente seleziona il formato dopo aver cliccato il pulsante di esportazione nella sezione di visualizzazione del report",
+  trigger: "L'utente ha interagito con il pulsante di esportazione del report di analisi",
 )[#useCaseDiagram("14_1", "UC14.1 - Selezione formato di esportazione")]
 
 ===== UC14.1.1: Nessun formato selezionato <UC14.1.1>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente sta eseguendo la procedura di esportazione #link(<UC14>)[#underline[\[UC14\]]]
-    - L'utente tenta di procedere senza selezionare un formato #link(<UC14.1>)[#underline[\[UC14.1\]]]
+    //- L'utente sta visualizzando il report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente sta eseguendo la procedura di esportazione #link(<UC14>)[#underline[\[UC14\]]]
+    - L'utente tenta di procedere senza selezionare un formato di esportazione nella sezione formati
   ],
   post: [
     - La procedura di esportazione non viene finalizzata
@@ -2381,8 +2389,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente sta eseguendo la procedura di esportazione #link(<UC14>)[#underline[\[UC14\]]]
+    //- L'utente sta visualizzando il report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente sta eseguendo la procedura di esportazione #link(<UC14>)[#underline[\[UC14\]]]
     - L'utente ha selezionato un formato di esportazione valido #link(<UC14.1>)[#underline[\[UC14.1\]]]
   ],
   post: [
@@ -2434,7 +2442,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente entra nella sezione Impostazioni > Modifica Password #link(<UC15>)[#underline[\[UC15\]]]
+    - L'utente è nella sezione di Modifica Password e si trova nel campo "password corrente"
   ],
   post: [
     - L'utente ha inserito correttamente la password corrente
@@ -2457,7 +2465,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente entra nella sezione Impostazioni > Modifica Password #link(<UC15>)[#underline[\[UC15\]]]
+    - L'utente è nella sezione di Modifica Password, si trova nel campo "password corrente" e non inserisce nulla
   ],
   post: [
     - L'utente non può procedere con la modifica della password
@@ -2478,7 +2486,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha inserito la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - L'utente ha inserito la password corrente sbagliata nell'apposito campo del form "password corrente"
   ],
   post: [
     - All'utente viene impedito di cambiare la propria password
@@ -2500,7 +2508,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - L'utente è nella sezione di Modifica Password e si trova nel campo "nuova password"
   ],
   post: [
     - L'utente ha inserito una nuova password valida
@@ -2523,7 +2531,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - L'utente è nella sezione di Modifica Password, si trova nel campo "nuova password" e non inserisce nulla
   ],
   post: [
     - L'utente non può procedere alla conferma della modifica password
@@ -2544,7 +2552,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - L'utente ha inserito la nuova password nell'apposito campo del form "nuova password" ma non segue lo standard adottato
   ],
   post: [
     - All'utente viene impedito di confermare la modifica della password
@@ -2565,7 +2573,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - L'utente ha inserito la nuova password nell'apposito campo del form "nuova password" ma è uguale alla password corrente
   ],
   post: [
     - All'utente viene impedito di confermare la modifica della password
