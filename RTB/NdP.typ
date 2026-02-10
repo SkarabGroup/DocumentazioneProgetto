@@ -487,18 +487,7 @@ L’elemento *Monitoraggio e Controllo del Rendimento degli Sprint* è considera
 
 La mancata rendicontazione di uno o più Sprint o l’assenza degli elementi sopra elencati comporta la non conformità dell’elemento.
 
-#TODO("Da qui in poi, non è più roba mia. | Suar")
-
-=== Strumenti di supporto
-- *#def("GitHub")*: Per il versionamento del codice e la gestione del repository.
-- *#def("Telegram")*, *#def("Discord")*: Per la comunicazione interna del team.
-- *#def("Draw.io")*: Per la creazione di diagrammi UML e altri schemi visivi.
-- *#def("Jira")*: Per la gestione delle attività e il monitoraggio del progresso.
-- *#def("VS Code")*: Per la scrittura del codice e la redazione dei documenti in #def("Typst").
-- *gmail*: Per la comunicazione con il proponente.
-- *#def("Google calendar")*: Perta dei requisiti funzionali e non funzionali, classificati in obbliga la pianificazione delle riunioni e delle scadenze.
-- *#def("Microsoft Teams")*: Per le riunioni virtuali e la collaborazione in tempo reale.
-
+#TODO("Definire NdP per AdR in conformità con gli standard dichiarati alla sezione Norme di Progetto")
 === AdR - Analisi dei Requisiti
 L’#def("Analisi dei Requisiti") è il documento che descrive in dettaglio i requisiti funzionali e non funzionali
 previsti dal progetto #def("Code Guardian"). Nel dettaglio il documento contiene un’analisi dettagliata delle
@@ -541,11 +530,80 @@ Il Glossario è considerato conforme se risultano soddisfatte tutte le seguenti 
 In assenza di una o più delle condizioni sopra elencate, il Glossario non è considerato conforme e deve essere revisionato prima del rilascio ufficiale.
 
 
-=== NdP - Norme di Progetto
-Documento che definisce il #def("WoW"),le norme, le convenzioni, gli strumenti e i processi che i membri del gruppo devono seguire durante il ciclo di vita del progetto.
+=== NdP – Norme di Progetto
+
+==== Definizione del Documento
+Le *Norme di Progetto (NdP)* costituiscono il documento normativo di riferimento che disciplina le modalità operative adottate dal gruppo di lavoro durante l’intero ciclo di vita del progetto.
+
+Le NdP definiscono in modo vincolante:
+- i *principi organizzativi* e il *Way of Working* (#def[WoW]) adottato dal team;
+- le *norme* e le *convenzioni* per la redazione della documentazione e per lo sviluppo del prodotto software;
+- gli *strumenti* e gli *ambienti di lavoro* utilizzati;
+- i *processi* e le *procedure operative* che regolano la pianificazione, l’esecuzione, il controllo e la verifica delle attività di progetto.
+
+Le Norme di Progetto si applicano a tutti i membri del gruppo di lavoro e hanno validità per l’intera durata del progetto. Il loro rispetto è obbligatorio e costituisce requisito necessario per garantire uniformità operativa, tracciabilità delle attività, qualità degli artefatti prodotti e conformità agli standard di riferimento adottati.
+
+==== Elementi Costituenti del Documento
+Le Norme di Progetto sono strutturate secondo la descrizione normativa dei macro-processi primari rilevanti per il progetto, in conformità allo standard ISO/IEC/IEEE 12207.
+
+In particolare, il documento disciplina:
+- il *Processo di Fornitura*;
+- il *Processo di Sviluppo*.
+
+Per ciascun macro-processo, le Norme di Progetto definiscono:
+- l’ambito di applicazione e gli obiettivi del processo;
+- i ruoli e le responsabilità coinvolte;
+- i documenti prodotti dal processo;
+- le regole di redazione, struttura e verifica dei documenti;
+- le procedure operative e gli strumenti adottati.
+
+===== Processo di Fornitura
+Il Processo di Fornitura disciplina la produzione, la gestione e la consegna dei documenti ufficiali di progetto.  
+Tali documenti costituiscono gli artefatti formali della fornitura e sono vincolanti ai fini della validazione delle milestone previste.
+
+I documenti di fornitura normati dalle presenti Norme di Progetto sono:
+- Piano di Progetto (PdP);
+- Piano di Qualifica (PdQ);
+- Analisi dei Requisiti (AdR);
+- Norme di Progetto (NdP);
+- Glossario.
+
+====== Piano di Progetto (PdP)
+Documento gestionale che definisce la pianificazione, l’organizzazione, l’allocazione delle risorse, la gestione dei rischi e il monitoraggio dell’avanzamento del progetto.
+
+====== Piano di Qualifica (PdQ)
+Documento che definisce i criteri di qualità del prodotto e del processo, nonché le attività di verifica e validazione applicate agli artefatti di progetto.
+
+====== Analisi dei Requisiti (AdR)
+Documento che raccoglie, classifica e formalizza i requisiti funzionali e non funzionali del sistema, derivati dal Capitolato e dalle successive analisi.
+
+====== Norme di Progetto (NdP)
+Documento normativo che definisce le regole, le convenzioni, i processi e gli strumenti che devono essere adottati dal gruppo di lavoro durante l’intero ciclo di vita del progetto.
+
+====== Glossario
+Documento terminologico che costituisce il riferimento unico e vincolante per la definizione dei termini tecnici, degli acronimi e dei concetti di dominio utilizzati nella documentazione e nel codice sorgente.
+
+===== Criteri di Verifica dei Documenti di Fornitura
+
+Un documento di fornitura è considerato conforme alle Norme di Progetto se risultano soddisfatte tutte le seguenti condizioni:
+
+- [ ] il documento è presente tra gli artefatti previsti dal Processo di Fornitura;
+- [ ] il documento rispetta la struttura, i contenuti e i criteri di verifica definiti nella propria sezione normativa dedicata;
+- [ ] il documento è redatto utilizzando le convenzioni tipografiche e stilistiche stabilite nelle NdP;
+- [ ] il documento risulta tracciabile rispetto agli altri artefatti di progetto (riferimenti incrociati coerenti);
+- [ ] il documento è stato sottoposto alle attività di verifica previste e risulta nello stato *Approved* al momento della consegna;
+- [ ] il documento adotta obbligatoriamente la seguente struttura minima:
+  - *Definizione del Documento*;
+  - *Elementi Costituenti del Documento*;
+  - *Descrizione degli Elementi*, con specifica delle sezioni e dei contenuti previsti;
+  - *Criteri di Verifica* degli elementi definiti.
+
+Il mancato rispetto di uno o più criteri di verifica specifici, inclusa la struttura minima obbligatoria, comporta automaticamente la non conformità del documento ai fini del Processo di Fornitura.
+
+#TODO("Avviata la stesura, manca Processo di Sviluppo, di Supporto e Organizzativi")
 
 === Piano di Qualifica
-
+#TODO("Definire descrizione dei singoli elementi e criteri di verifica")
 ==== Nota sull'adozione dello Standard ISO/IEC 25010 e PDCA
 La redazione del Piano di Qualifica e la definizione delle metriche si ispirano alla famiglia di standard ISO/IEC 25010 (SQuaRE). Tale scelta garantisce una classificazione rigorosa delle caratteristiche di qualità del prodotto (es. Sicurezza, Affidabilità, Usabilità).
 Inoltre, l'adozione strutturale del ciclo /*#def[PDCA]*/ (Plan-Do-Check-Act) assicura che il processo di controllo qualità non sia statico, ma evolva:
@@ -563,40 +621,63 @@ Il *Piano di Qualifica* costituisce il riferimento vincolante per la gestione de
 
 Il Piano di Qualifica è utilizzato dal gruppo di lavoro come base per le attività di #def("verifica") e #def("validazione"), garantendo la conformità del prodotto ai requisiti definiti.
 
-==== Elementi Costituenti del Documento
-Il Piano di Qualifica include i seguenti elementi:
-- Metriche di Qualità;
-- Metodi di Testing;
-- Cruscotto di Valutazione;
-- Automiglioramento.
-
 === Verbali delle Riunioni
-Sono documenti che riportano in modo sintetico e chiaro i punti discussi durante le riunioni, con le decisioni prese e i compiti assegnati. Ogni verbale include:
-- Data, ora e luogo della riunione.
-- Elenco dei partecipanti.
-- Ordine del giorno.
-- Sintesi delle discussioni.
-- Decisioni prese e azioni da intraprendere.
 
-I verbali possono essere di 2 tipi:
-- *Verbali Interni*: Riunioni tra i membri del gruppo per coordinare le attività di progetto.
-- *Verbali Esterni*: Riunioni con il #def("Proponente") esterni per discutere requisiti, progressi e feedback.
+==== Definizione del Documento
+I *Verbali delle Riunioni* sono documenti ufficiali che registrano in modo sintetico, chiaro e tracciabile lo svolgimento delle riunioni di progetto.  
+Essi hanno lo scopo di documentare le decisioni assunte, le informazioni condivise e le azioni concordate, costituendo evidenza formale delle attività di coordinamento e comunicazione.
 
-=== Diario di bordo
-Documento che permette un allineamento settimanale con il professor #members.tullio, in cui il redattiore riporta riporta:
-- Attività svolte durante la settimana.
-- Problemi incontrati e soluzioni adottate.
-- Pianificazione delle attività per la settimana successiva.
+==== Elementi Costituenti del Documento
+Ogni verbale deve includere obbligatoriamente i seguenti elementi:
 
+- *Data, ora e modalità/luogo* della riunione;
+- *Elenco dei partecipanti*;
+- *Ordine del giorno*;
+- *Sintesi delle discussioni*;
+- *Decisioni prese*;
+- *Azioni da intraprendere*, con eventuale assegnatario e scadenza.
 
-Tutti i documenti devono avere un formato uniforme e professionale stutturato in questo modo:
-- Prima pagina con logo e nome del team e versione attuale del documento.
-- Intestazioni e piè di pagina con titolo del documento e numero di pagina.
-- Indice automatico.
-- Indice delle tabelle (se presenti).
-- Contenuto.
+==== Tipologie di Verbale
+I verbali si distinguono in:
 
+- *Verbali Interni:* relativi a riunioni tra i membri del gruppo di lavoro, finalizzate al coordinamento delle attività di progetto;
+- *Verbali Esterni:* relativi a riunioni con il #def[Proponente] o altri stakeholder esterni, finalizzate alla discussione di requisiti, avanzamento dei lavori e feedback.
 
+==== Criteri di Verifica dei Verbali delle Riunioni
+Un *Verbale delle Riunioni* è considerato conforme alle Norme di Progetto se:
+
+- [ ] include tutti gli elementi costituenti obbligatori;
+- [ ] descrive in modo chiaro e non ambiguo decisioni e azioni concordate;
+- [ ] è redatto secondo le convenzioni tipografiche e strutturali definite nelle NdP;
+- [ ] è archiviato nel repository di progetto ed è tracciabile rispetto alla riunione a cui si riferisce.
+
+Il mancato rispetto di uno o più criteri comporta la non conformità del verbale.
+=== Diario di Bordo
+
+==== Definizione del Documento
+Il *Diario di Bordo* è un documento di monitoraggio a cadenza settimanale finalizzato all’allineamento sullo stato di avanzamento del progetto.  
+Esso consente di fornire una visione sintetica e continuativa delle attività svolte, delle criticità emerse e della pianificazione a breve termine.
+
+==== Elementi Costituenti del Documento
+Ogni Diario di Bordo deve includere obbligatoriamente i seguenti elementi:
+
+- *Periodo di riferimento*;
+- *Attività svolte* durante la settimana;
+- *Problemi riscontrati* e soluzioni adottate;
+- *Pianificazione delle attività* per la settimana successiva.
+
+==== Criteri di Verifica del Diario di Bordo
+Il *Diario di Bordo* è considerato conforme alle Norme di Progetto se:
+
+- [ ] copre un periodo temporale ben definito;
+- [ ] riporta in modo coerente le attività effettivamente svolte;
+- [ ] evidenzia eventuali problemi o criticità incontrate;
+- [ ] include una pianificazione realistica delle attività future;
+- [ ] è redatto secondo il formato e le convenzioni stabilite nelle NdP.
+
+In assenza di uno o più elementi obbligatori, il Diario di Bordo non è considerato conforme.
+
+#TODO("Spostare nella Introduzione questa tabella?")
 #figure(
   table(
     columns: (2fr, 2fr, 3fr, 1.5fr),
@@ -640,6 +721,10 @@ Tutti i documenti devono avere un formato uniforme e professionale stutturato in
   caption: [Tabella riepilogativa dei documenti di progetto],
 )
 
+
+#pagebreak()
+
+#TODO("Processo di Sviluppo è relativo al codice, non ai documenti")
 == Processo di Sviluppo
 
 Il Processo di Sviluppo adottato da Skarab Group definisce l’insieme delle attività necessarie alla realizzazione del prodotto software, dalla definizione dei requisiti fino alla consegna e accettazione del sistema finale.
