@@ -21,7 +21,7 @@
   (
     "2026/02/10",
     "0.44.3",
-    "Fix diagrammi UC1-16",
+    "Fix della posizione del sistema in tutti i diagrammi UC",
     members.andrea
   ),
   (
