@@ -837,30 +837,37 @@ Le attività svolte nel periodo di riferimento si sono focalizzate sul consolida
 
 #activity_table(
   (
-    ("Stabilita struttura repository e setup strumenti", "-", "Amministratore", "0:20", "0:30", "Completata"),
-    ("Stesura introduzione AdR", "-", "Amministratore", "0:10", "0:15","Completata"),
-    ("Stesura scopo del documento AdR", "-", "Amministratore", "0:05", "0:05","Completata"),
-    ("Stesura prospettiva del prodotto", "-", "Amministratore", "0:15", "0:15","Completata"),
-    ("Stesura funzioni del prodotto", "-", "Amministratore", "0:20", "0:25", "Completata"),
-    ("Stesura caratteristiche degli utenti", "-", "Analista", "0:15", "0:20", "Completata"),
-    ("Definizione attori dei casi d'uso", "-", "Analista", "0:10", "0:10", "Completata"),
-    ("Stesura UC1-12", "-", "Analista", "12:00", "10:00", "Completata"),
-    ("Inizio stesura sezione requisiti","-", "Analista", "3:00", "1:00", "Completata"),
-    ("Prima stesura NdP", "-", "Amministratore", "4:00", "3:00", "Completata"),
-    ("Stesura introduzione PdP", "-", "Amministratore", "0:10", "0:15", "Completata"),
-    ("Stesura sezione gestione rischi PdP", "-", "Amministratore", "0:20", "0:30", "Completata"),
-    ("Stesura sezione scopo PdP", "-", "Amministratore", "0:10", "0:15", "Completata"),
-    ("Stesura introduzione analisi dei rischi", "-", "Amministratore", "0:10", "0:15", "Completata"),
-    ("Aggiunta primi rischi PdP", "-", "Amministratore", "0:20", "0:30", "Completata"),
-    ("Stesura sezione pianificazione PdP", "-", "Amministratore", "0:20", "0:30", "Completata"),
-    ("Stesura introduzione PdQ", "-", "Amministratore", "0:10", "0:15", "Completata"),
-    ("Stesura scopo PdQ", "-", "Amministratore", "0:20", "0:30", "Completata"),
-    ("Stesura sezione qualità di processo PdQ", "-", "Amministratore", "0:20", "0:30", "Completata"),
-    ("Stesura sezione processi primari PdQ", "-", "Amministratore", "0:20", "0:30", "Completata"),
-    ("Stesura sezione processi secondari PdQ", "-", "Amministratore", "0:20", "0:30", "Completata"),
-    ("Stesura sezione processi organizzativi PdQ", "-", "Amministratore", "0:20", "0:30", "Completata"),
-    ("Stesura sezione qualitá di prodotto PdQ", "-", "Amministratore", "0:20", "0:30", "Completata"),
-    ("Stesura sezione automiglioramento PdQ", "-", "Amministratore", "0:20", "0:30", "Completata"),
+    ("Stabilita struttura repository e setup strumenti", "Amministratore", "0:20", "0:30", "Completata"),
+    ("Stesura introduzione AdR", "Amministratore", "0:10", "0:15","Completata"),
+    ("Stesura scopo del documento AdR", "Amministratore", "0:05", "0:05","Completata"),
+    ("Stesura prospettiva del prodotto", "Amministratore", "0:15", "0:15","Completata"),
+    ("Stesura funzioni del prodotto", "Amministratore", "0:20", "0:25", "Completata"),
+    ("Prima stesura NdP", "Amministratore", "4:00", "3:00", "Completata"),
+    ("Stesura introduzione PdP", "Amministratore", "0:10", "0:15", "Completata"),
+    ("Stesura sezione gestione rischi PdP", "Amministratore", "0:20", "0:30", "Completata"),
+    ("Stesura sezione scopo PdP", "Amministratore", "0:10", "0:15", "Completata"),
+    ("Stesura introduzione analisi dei rischi", "Amministratore", "0:10", "0:15", "Completata"),
+    ("Aggiunta primi rischi PdP", "Amministratore", "0:20", "0:30", "Completata"),
+    ("Stesura sezione pianificazione PdP", "Amministratore", "0:20", "0:30", "Completata"),
+    ("Stesura introduzione PdQ", "Amministratore", "0:10", "0:15", "Completata"),
+    ("Stesura scopo PdQ", "Amministratore", "0:20", "0:30", "Completata"),
+    ("Stesura sezione qualità di processo PdQ", "Amministratore", "0:20", "0:30", "Completata"),
+    ("Stesura sezione processi primari PdQ", "Amministratore", "0:20", "0:30", "Completata"),
+    ("Stesura sezione processi secondari PdQ", "Amministratore", "0:20", "0:30", "Completata"),
+    ("Stesura sezione processi organizzativi PdQ", "Amministratore", "0:20", "0:30", "Completata"),
+    ("Stesura sezione qualitá di prodotto PdQ", "Amministratore", "0:20", "0:30", "Completata"),
+    ("Stesura sezione automiglioramento PdQ", "Amministratore", "0:20", "0:30", "Completata"),
+    ("Stesura caratteristiche degli utenti", "Analista", "0:15", "0:20", "Completata"),
+    ("Definizione attori dei casi d'uso", "Analista", "0:10", "0:10", "Completata"),
+    ("Stesura UC1-12", "Analista", "12:00", "10:00", "Completata"),
+    ("Inizio stesura sezione requisiti","Analista", "3:00", "1:00", "Completata"),
+    ("Stesura verbale riunione prima settimana", "Responsabile","1:30","1:30","Completata"),
+    ("Stesura verbale riunione seconda settimana", "Responsabile","1:30","1:30","Completata"),
+    ("Verifica verbale riunione interna prima settimana", "Responsabile","0:15","0:15","Completata"),
+    ("Verifica verbale riunione interna seconda settimana", "Responsabile","0:15","0:15","Completata"),
+    ("Verifica AdR","Verificatore","4:00","4:00","Completata"),
+    ("Verifica PdP","Verificatore","4:00","4:00","Completata"),
+    ("Verifica NdP","Verificatore","4:00","4:00","Completata"),
   ),
   [Riassunto delle attivitá svolte durante lo Sprint 1]
 )
@@ -943,14 +950,14 @@ Focus sul consolidamento della documentazione (versione per RTB) e accelerazione
 ==== Prospetto Attivitá
 #activity_table(
   (
-    ("Stesura UC13-32","-", "Analista", "20:00", "15:00", "Completata"),
-    ("Stesura requisiti UC13-32","-", "Analista", "5:00", "2:00", "Completata"),
-    ("Ristesura NdP", "-", "Amministratore", "3:00", "4:00", "Completata"),
-    ("Ristesura PdP", "-", "Amministratore", "3:00", "4:00", "Completata"),
-    ("Aggiunta nuovi rischi PdP", "-", "Amministratore", "2:00", "3:00", "Completata"),
-    ("Aggiunta retrospettiva Sprint 1", "-", "Amministratore", "2:00", "3:00", "Completata"),
-    ("Aggiunta retrospettiva Sprint 2", "-", "Amministratore", "2:00", "3:00", "Completata"),
-    ("Revisione sezione automiglioramento PdQ", "-", "Amministratore", "2:00", "3:00", "Completata"),
+    ("Stesura UC13-32","Analista", "20:00", "15:00", "Completata"),
+    ("Stesura requisiti UC13-32","Analista", "5:00", "2:00", "Completata"),
+    ("Ristesura NdP", "Amministratore", "3:00", "4:00", "Completata"),
+    ("Ristesura PdP", "Amministratore", "3:00", "4:00", "Completata"),
+    ("Aggiunta nuovi rischi PdP", "Amministratore", "2:00", "3:00", "Completata"),
+    ("Aggiunta retrospettiva Sprint 1", "Amministratore", "2:00", "3:00", "Completata"),
+    ("Aggiunta retrospettiva Sprint 2", "Amministratore", "2:00", "3:00", "Completata"),
+    ("Revisione sezione automiglioramento PdQ", "Amministratore", "2:00", "3:00", "Completata"),
   ),
   [Riassunto delle attivitá svolte durante lo Sprint 2]
 )
@@ -958,8 +965,6 @@ Focus sul consolidamento della documentazione (versione per RTB) e accelerazione
 ==== Consumo Tempo e Costi Effettivi (Consuntivo)
 #sprint_table(
   (
-    ("Incontro con proponente", "-", "Responsabile", "1:00", "1:00", "Completata"),
-    ("Incontro con docente Cardin", "-", "Responsabile", "1:00", "1:00", "Completata"),
     // Formato: ("Nome", Resp, Amm, Anal, Prog, Cod, Ver)
     ([Basso Kevin], 0, 4, 0, 0, 0, 1),
     ([Berengan Riccardo], 0, 1, 4, 0, 0, 1),
@@ -1053,9 +1058,14 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 ==== Prospetto Attivitá
 #activity_table(
   (
-    ("Stesura UC33-38","-", "Analista", "5:00", "2:00", "Completata"),
-    ("Stesura requisiti UC33-38","-", "Analista", "2:00", "1:00", "Completata"),
-    ("Aggiunta sezione a NdP", "-", "Amministratore", "1:00", "1:00", "Completata"),
+    ("Stesura UC33-38","Analista", "5:00", "2:00", "Completata"),
+    ("Stesura requisiti UC33-38","Analista", "2:00", "1:00", "Completata"),
+    ("Aggiunta sezione a NdP", "Amministratore", "1:00", "1:00", "Completata"),
+    ("Parte Agenti PoC", "Programmatore","4:00","4:00","Completata"),
+    ("Parte Database PoC", "Programmatore","4:00","4:00","Completata"),
+    ("Parte Server PoC", "Programmatore","4:00","4:00","Completata"),
+    ("Parte FrontEnd PoC", "Programmatore","2:00","2:00","Completata"),
+
   ),
   [Riassunto delle attivitá svolte durante lo Sprint 3]
 )
