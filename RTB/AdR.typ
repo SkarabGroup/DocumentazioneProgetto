@@ -1252,6 +1252,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Utente autenticato avanzato",
   pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub e ha abilitato la condivisione di informazioni #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente si trova nella sezione di richiesta di analisi di un repository GitHub 
   ],
@@ -2744,6 +2745,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attori_secondari: "Docker",
   pre: [
     //- L'utente autenticato avanzato ha effettuato la connessiono del proprio account di GitHub a CodeGuardian #link(<UC3>)[#underline[\[UC3\]]]
+    #TODO("check precondizione tolta")
     - L'utente autenticato avanzato ha richiesto l'avvio dell'analisi del proprio repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
   ],
   post: [
@@ -2811,6 +2813,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Orchestratore",
   pre: [
     //- L'utente autenticato avanzato ha richiesto l'analisi del proprio repository al sistema CodeGuardian #link(<UC4>)[#underline[\[UC4\]]]
+    #TODO("check precondizione tolta")
     - L'ambiente sandbox é stato creato correttamente #link(<UC17>)[#underline[\[UC17\]]]
   ],
   post: [
