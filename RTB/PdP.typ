@@ -981,7 +981,8 @@ Focus sul consolidamento della documentazione (versione per RTB) e accelerazione
     ("Stesura verbale riunione prima settimana", "Responsabile","1:00","0:30","Completata"),
     ("Stesura verbale riunione seconda settimana", "Responsabile","1:00","0:30","Completata"),
     ("Stesura verbale riunione esterna", "Responsabile","1:00","0:30","Completata"),
-    ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile","3:00","4:30","Completata"),
+    ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile","2:30","4:00","Completata"),
+    ("Stesura diario di bordo", "Responsabile","0:30","0:30","Completata"),
   ),
   [Riassunto delle attivitá svolte durante lo Sprint 2]
 )
@@ -1104,9 +1105,11 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 
     ("Stesura verbale riunione prima settimana", "Responsabile","1:00","0:30","Completata"),
     ("Stesura verbale riunione seconda settimana", "Responsabile","1:00","0:30","Completata"),  
-    ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile","5:00","4:30","Completata"),
+    ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile","4:30","4:30","Completata"),
+    ("Stesura diario di bordo", "Responsabile","0:30","0:30","Completata"),
     ("Aggiunta task Jira", "Responsabile","0:30","0:30","Completata"),
     ("Sezione sprint 3 PdP", "Responsabile","0:30","1:00","Completata")
+
 
   ),
   [Riassunto delle attivitá svolte durante lo Sprint 3]
