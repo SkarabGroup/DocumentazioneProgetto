@@ -558,7 +558,7 @@ Per ciascun macro-processo, le Norme di Progetto definiscono:
 - le procedure operative e gli strumenti adottati.
 
 ===== Processo di Fornitura
-Il Processo di Fornitura disciplina la produzione, la gestione e la consegna dei documenti ufficiali di progetto.  
+Il Processo di Fornitura disciplina la produzione, la gestione e la consegna dei documenti ufficiali di progetto.
 Tali documenti costituiscono gli artefatti formali della fornitura e sono vincolanti ai fini della validazione delle milestone previste.
 
 I documenti di fornitura normati dalle presenti Norme di Progetto sono:
@@ -603,10 +603,10 @@ Il mancato rispetto di uno o più criteri di verifica specifici, inclusa la stru
 #TODO("Avviata la stesura, manca Processo di Sviluppo, di Supporto e Organizzativi")
 
 === Piano di Qualifica
-#TODO("Definire descrizione dei singoli elementi e criteri di verifica")
+
 ==== Nota sull'adozione dello Standard ISO/IEC 25010 e PDCA
-La redazione del Piano di Qualifica e la definizione delle metriche si ispirano alla famiglia di standard ISO/IEC 25010 (SQuaRE). Tale scelta garantisce una classificazione rigorosa delle caratteristiche di qualità del prodotto (es. Sicurezza, Affidabilità, Usabilità).
-Inoltre, l'adozione strutturale del ciclo /*#def[PDCA]*/ (Plan-Do-Check-Act) assicura che il processo di controllo qualità non sia statico, ma evolva:
+La redazione del Piano di Qualifica e la definizione delle metriche si ispirano alla famiglia di standard ISO/IEC 25010 (SQuaRE). Tale scelta garantisce una classificazione rigorosa delle caratteristiche di qualità del prodotto.
+Inoltre, l'adozione strutturale del ciclo /*#def("PDCA")*/ (Plan-Do-Check-Act) assicura che il processo di controllo qualità non sia statico, ma evolva:
 - *Plan:* Definizione delle metriche e delle soglie nel presente documento.
 - *Do:* Esecuzione delle misurazioni durante gli Sprint.
 - *Check:* Analisi degli scostamenti nei periodi di retrospettiva.
@@ -614,17 +614,298 @@ Inoltre, l'adozione strutturale del ciclo /*#def[PDCA]*/ (Plan-Do-Check-Act) ass
 
 ==== Definizione del Documento
 Il *Piano di Qualifica* costituisce il riferimento vincolante per la gestione della qualità nel progetto e deve definire, in modo tracciabile e verificabile:
-- le strategie di assicurazione qualità (Quality Assurance);
-- le attività di controllo qualità (Quality Control);
-- le procedure di validazione del prodotto;
+- le strategie di assicurazione qualità (_Quality Assurance_);
+- le attività di controllo qualità (_Quality Control_);
+- le metriche di processo e prodotto con relative soglie di accettabilità e ottimalità;
+- le procedure di verifica e validazione degli artefatti;
 - i meccanismi di miglioramento continuo.
 
-Il Piano di Qualifica è utilizzato dal gruppo di lavoro come base per le attività di #def("verifica") e #def("validazione"), garantendo la conformità del prodotto ai requisiti definiti.
+==== Elementi Costituenti del Documento
+Il Piano di Qualifica deve includere almeno i seguenti elementi, ciascuno disciplinato da regole operative e criteri minimi di verifica:
+
+- Qualità di Processo;
+- Qualità di Prodotto;
+- Metodi di Testing;
+- Cruscotto di Valutazione;
+- Automiglioramento.
+
+===== Qualità di Processo
+La sezione Qualità di Processo definisce l'insieme delle metriche utilizzate per monitorare e controllare i processi produttivi adottati dal gruppo durante l'intero ciclo di vita del progetto. Il monitoraggio dei processi è essenziale per garantire efficienza, efficacia e miglioramento continuo del _Way of Working_.
+
+====== Strategia di Definizione delle Soglie Metriche
+La determinazione delle soglie di accettabilità e ottimalità per le metriche adottate dal gruppo /*#def("Skarab Group")*/ non è un processo arbitrario, ma segue una strategia ingegneristica basata sui seguenti criteri:
+
+- *Adesione agli Standard Internazionali:* Per i processi di fornitura, il gruppo adotta il framework /*#def("Earned Value Management")*/ (EVM), utilizzando gli intervalli di confidenza standard del settore ($0.90 - 1.10$) per garantire la stabilità economica e temporale. Per la qualità del prodotto, le soglie sono calibrate sulle caratteristiche del modello /*#def("ISO/IEC 25010")*/.
+- *Analisi del Dominio e Benchmark:* Le metriche di supporto e sviluppo (es. /*#def("Gulpease Index"), #def("Complessità Ciclomatica")*/) sono tarate su benchmark di settore per lo sviluppo software moderno, garantendo che i requisiti di manutenibilità e sicurezza siano oggettivamente verificabili.
+- *Miglioramento Continuo e Calibrazione (PDCA):* In linea con l'approccio /*#def("Agile")*/, le soglie sono soggette a revisione periodica. Al termine di ogni /*#def("Sprint")*/, i valori vengono analizzati rispetto alle prestazioni storiche del team; questo permette una ricalibrazione dinamica delle soglie nel /*#def("Piano di Qualifica")*/, rendendo gli obiettivi sempre sfidanti ma tecnicamente sostenibili (obiettivi *S.M.A.R.T.*).
+
+====== Nomenclatura delle Metriche
+La nomenclatura utilizzata per le metriche di processo è la seguente:
+
+#align(center)[
+  `MPC##`
+]
+
+dove:
+- `M` sta per Metrica;
+- `PC` indica Processo;
+- `##` è un numero progressivo crescente da 01.
+
+====== Processi Primari
+======= Fornitura e Sviluppo
+#show figure: set block(breakable: true)
+
+#figure(
+  block(
+    breakable: true,
+    table(
+      columns: (auto, 1.8fr, 2.5fr),
+      inset: 8pt,
+      align: horizon,
+      fill: (x, y) => if y == 0 { luma(220) },
+      [*Codice*], [*Nome*], [*Descrizione*],
+
+      [MPC01], [Budget At Completion], [Budget totale preventivato per il progetto],
+
+      [MPC02], [Planned Value], [Valore del lavoro che si era pianificato di completare entro un determinato momento],
+
+      [MPC03], [Actual Cost], [Costo effettivamente sostenuto per il lavoro svolto fino a un determinato momento],
+
+      [MPC04], [Earned Value], [Valore del lavoro effettivamente completato],
+
+      [MPC05],
+      [Budget Variance],
+      [Differenza tra il budget totale e la stima del costo finale. Un valore positivo indica che si prevede di risparmiare budget],
+
+      [MPC06],
+      [Schedule Variance],
+      [Misura lo scostamento temporale: valori negativi indicano ritardi, positivi anticipi],
+
+      [MPC07],
+      [Cost Performance Index],
+      [Indice di efficienza economica del progetto. CPI = 1 indica perfetta aderenza al budget, < 1 sforamento, > 1 risparmio],
+
+      [MPC08],
+      [Schedule Performance Index],
+      [Indice di efficienza della schedulazione. SPI = 1 indica perfetta aderenza ai tempi, < 1 ritardo, > 1 anticipo],
+
+      [MPC09],
+      [Estimate At Completion],
+      [Stima del costo totale finale del progetto basata sulla performance attuale. Utilizza il CPI per proiettare il costo a completamento considerando l'efficienza dimostrata],
+    ),
+  ),
+  caption: [Metriche per il processo di Fornitura],
+)
+
+#figure(
+  table(
+    columns: (auto, 1.8fr, 2.5fr),
+    inset: 8pt,
+    align: horizon,
+    fill: (x, y) => if y == 0 { luma(220) },
+    [*Codice*], [*Nome*], [*Descrizione*],
+
+    [MPC10],
+    [Requirements Stability Index],
+    [Misura la volatilità dei requisiti. Indica la percentuale di requisiti che non hanno subito modifiche, aggiunte o cancellazioni rispetto alla baseline iniziale],
+  ),
+  caption: [Metriche per il processo di Sviluppo],
+)
+
+*Nota:* Valori bassi di RSI possono segnalare un'analisi iniziale insufficiente o cambiamenti significativi nelle esigenze degli _stakeholder_. Il monitoraggio è cruciale specialmente a seguito di revisioni correttive.
+
+====== Processi di Supporto
+======= Documentazione e Verifica
+
+#figure(
+  table(
+    columns: (auto, 1.8fr, 2.5fr),
+    inset: 8pt,
+    align: horizon,
+    fill: (x, y) => if y == 0 { luma(220) },
+    [*Codice*], [*Nome*], [*Descrizione*],
+
+    [MPC11],
+    [Indice di Gulpease],
+    [Indice di leggibilità. Valuta la complessità linguistica basandosi sulla lunghezza delle parole e delle frasi. Valori: ≥80 molto facile; 60-80 media difficoltà; 40-60 abbastanza difficile; < 40 molto difficile],
+
+    [MPC12], [Correttezza Ortografica], [Numero di errori ortografici rilevati nel documento],
+
+    [MPC13],
+    [Code Coverage],
+    [Percentuale di codice sorgente che viene eseguita durante il lancio della suite di test automatizzati. Indica il grado di copertura della verifica dinamica],
+
+    [MPC14],
+    [Test Success Rate],
+    [Percentuale di test automatizzati che superano con successo l'esecuzione. Un valore del 100% è necessario per garantire la stabilità del sistema prima di ogni rilascio],
+  ),
+  caption: [Metriche per il processo di Documentazione e Verifica],
+)
+
+*Rilevanza:* Il Test Success Rate deve rimanere costantemente al 100% per evitare regressioni e garantire l'affidabilità del _Software_.
+
+====== Processi Organizzativi
+
+#figure(
+  table(
+    columns: (auto, 1.8fr, 2.5fr),
+    inset: 8pt,
+    align: horizon,
+    fill: (x, y) => if y == 0 { luma(220) },
+    [*Codice*], [*Nome*], [*Descrizione*],
+
+    [MPC15],
+    [Metrics Satisfaction],
+    [Percentuale di metriche che rispettano le soglie di accettabilità. Fornisce una visione d'insieme sulla qualità complessiva dei processi adottati],
+
+    [MPC16],
+    [Sprint Goal Achievement],
+    [Percentuale degli obiettivi prefissati durante lo Sprint Planning che sono stati effettivamente raggiunti e validati al termine dello Sprint. Misura l'efficacia della pianificazione e dell'esecuzione],
+  ),
+  caption: [Metriche per i processi Organizzativi],
+)
+
+====== Criteri di Verifica della Qualità di Processo
+
+L'elemento *Qualità di Processo* del Piano di Qualifica è considerato conforme se risultano soddisfatte tutte le seguenti condizioni:
+
+- [ ] ogni metrica è identificata in modo univoco tramite codice (`MPC##`);
+- [ ] per ciascuna metrica sono definiti:
+  - formulazione matematica o descrizione operativa del calcolo;
+  - soglia di accettabilità;
+  - soglia di ottimalità;
+- [ ] le metriche sono classificate secondo i processi di riferimento (Primari, Supporto, Organizzativi);
+- [ ] le soglie adottate sono motivate in base a standard di settore, benchmark o analisi storiche;
+- [ ] i valori misurati sono confrontati con le soglie durante le retrospettive di Sprint;
+- [ ] gli scostamenti rilevati sono documentati e danno luogo ad azioni correttive tracciate.
+
+Il mancato rispetto di una o più delle condizioni sopra elencate comporta la non conformità dell'elemento e richiede un'azione correttiva prima della validazione del documento.
+
+===== Qualità del Prodotto
+La sezione Qualità di Prodotto definisce l'insieme delle metriche utilizzate per valutare il prodotto software rispetto ai requisiti definiti nell'Analisi dei Requisiti e alle caratteristiche intrinseche definite dallo standard ISO/IEC 25010.
+
+====== Nomenclatura delle Metriche
+La nomenclatura utilizzata per le metriche di prodotto è la seguente:
+
+#align(center)[
+  `MPD##`
+]
+
+dove:
+- `M` sta per Metrica;
+- `PD` indica Prodotto;
+- `##` è un numero progressivo crescente da 01.
+
+====== Adeguatezza Funzionale e Affidabilità
+
+#figure(
+  table(
+    columns: (auto, 1.8fr, 2.5fr),
+    inset: 8pt,
+    align: horizon,
+    fill: (x, y) => if y == 0 { luma(220) },
+    [*Codice*], [*Nome*], [*Descrizione*],
+
+    [MPD01],
+    [Copertura Requisiti Obbligatori],
+    [Percentuale di requisiti obbligatori soddisfatti rispetto al totale dei requisiti obbligatori identificati. Questi requisiti sono vincolanti per l'accettazione del prodotto],
+
+    [MPD02],
+    [Failure Density],
+    [Misura la densità di errori nel software. Valori elevati indicano problemi di qualità del codice],
+
+    [MPD03], [Availability], [Percentuale di tempo in cui il sistema è operativo e disponibile all'uso],
+  ),
+  caption: [Metriche di Adeguatezza Funzionale e Affidabilità],
+)
+
+====== Manutenibilità e Sicurezza
+
+#figure(
+  table(
+    columns: (auto, 1.8fr, 2.5fr),
+    inset: 8pt,
+    align: horizon,
+    fill: (x, y) => if y == 0 { luma(220) },
+    [*Codice*], [*Nome*], [*Descrizione*],
+
+    [MPD04],
+    [Comment Density],
+    [Percentuale di linee di commento rispetto alle linee di codice. Una documentazione adeguata migliora la comprensibilità e facilita la manutenzione futura del codice],
+
+    [MPD05],
+    [Cyclomatic Complexity],
+    [Misura la complessità del codice contando i percorsi linearmente indipendenti. Valori elevati indicano codice difficile da testare e mantenere],
+
+    [MPD06],
+    [Coupling (Fan-out)],
+    [Numero di dipendenze esterne di un modulo. Misura il grado di accoppiamento tra componenti. Valori elevati riducono la modularità],
+
+    [MPD07],
+    [Vulnerability Detection],
+    [Numero di vulnerabilità di sicurezza critiche rilevate attraverso analisi statica e dinamica del codice],
+  ),
+  caption: [Metriche di Manutenibilità e Sicurezza],
+)
+
+====== Criteri di Verifica della Qualità di Prodotto
+
+L'elemento *Qualità di Prodotto* del Piano di Qualifica è considerato conforme se risultano soddisfatte tutte le seguenti condizioni:
+
+- [ ] ogni metrica è identificata in modo univoco tramite codice (`MPD##`);
+- [ ] per ciascuna metrica sono definiti:
+  - formulazione matematica o descrizione operativa del calcolo;
+  - soglia di accettabilità;
+  - soglia di ottimalità;
+- [ ] le metriche sono riconducibili a caratteristiche del modello ISO/IEC 25010;
+- [ ] le soglie adottate sono motivate in base a standard di settore o analisi di benchmark;
+- [ ] i valori misurati sono tracciati e documentati nel Cruscotto di Valutazione;
+- [ ] gli scostamenti rispetto alle soglie sono analizzati e danno luogo ad azioni correttive.
+
+Il mancato rispetto di una o più delle condizioni sopra elencate comporta la non conformità dell'elemento.
+
+===== Cruscotto di Valutazione
+Nella sezione Cruscotto di Valutazione, per ciascuna metrica viene fornita una rappresentazione grafica dell'andamento temporale accompagnata da un'analisi qualitativa.
+
+Le misurazioni coprono il periodo che va dall'*aggiudicazione del capitolato* fino alla milestone *RTB*.
+
+Per la milestone *PB* vengono fornite _stime previsionali_.
+Rispetto a quanto rilevato nella RTB, ci si attende un _incremento dell'efficienza_ e una maggiore aderenza alle tempistiche prefissate. La fase precedente, infatti, ha risentito dei rallentamenti dovuti alla concomitanza con la sessione d'esame.
+Con il superamento di tale periodo, la PB riflette una pianificazione più fluida e una gestione operativa che punta a stabilizzare i ritmi, ottimizzando i risultati.
+
+====== Frequenza di Aggiornamento
+Il cruscotto viene aggiornato con cadenza di Sprint secondo la seguente procedura:
+- I dati vengono raccolti al termine di ogni Sprint.
+- L'analisi viene condotta durante la retrospettiva di Sprint.
+- Il Piano di Qualifica viene aggiornato per riflettere i nuovi valori misurati.
+
+====== Criteri di Verifica del Cruscotto di Valutazione
+L'elemento *Cruscotto di Valutazione* del Piano di Qualifica è considerato conforme se risultano soddisfatte tutte le seguenti condizioni:
+
+- [ ] per ciascuna metrica definita è presente una rappresentazione grafica dell'andamento temporale; // al momento solo Processo
+- [ ] ogni grafico è accompagnato da un'analisi qualitativa che interpreta i dati;
+- [ ] le soglie di accettabilità e ottimalità sono evidenziate graficamente;
+- [ ] il cruscotto è aggiornato con cadenza almeno pari alla chiusura di ogni Sprint;
+- [ ] gli scostamenti significativi sono documentati e motivati;
+
+Il mancato rispetto di una o più delle condizioni sopra elencate comporta la non conformità dell'elemento.
+
+===== Automiglioramento
+====== Finalità e Ambito di Applicazione
+
+L'automiglioramento ha lo scopo di:
+
+- identificare criticità operative, organizzative o tecniche emerse durante il progetto;
+- analizzare le cause profonde delle inefficienze rilevate;
+- definire e implementare azioni correttive o preventive;
+- valutare l'efficacia delle soluzioni adottate attraverso metriche oggettive.
+
+L'automiglioramento si applica a tutti i processi adottati dal gruppo e costituisce un'attività trasversale che accompagna l'intero ciclo di vita del progetto.
 
 === Verbali delle Riunioni
 
 ==== Definizione del Documento
-I *Verbali delle Riunioni* sono documenti ufficiali che registrano in modo sintetico, chiaro e tracciabile lo svolgimento delle riunioni di progetto.  
+I *Verbali delle Riunioni* sono documenti ufficiali che registrano in modo sintetico, chiaro e tracciabile lo svolgimento delle riunioni di progetto.
 Essi hanno lo scopo di documentare le decisioni assunte, le informazioni condivise e le azioni concordate, costituendo evidenza formale delle attività di coordinamento e comunicazione.
 
 ==== Elementi Costituenti del Documento
@@ -655,7 +936,7 @@ Il mancato rispetto di uno o più criteri comporta la non conformità del verbal
 === Diario di Bordo
 
 ==== Definizione del Documento
-Il *Diario di Bordo* è un documento di monitoraggio a cadenza settimanale finalizzato all’allineamento sullo stato di avanzamento del progetto.  
+Il *Diario di Bordo* è un documento di monitoraggio a cadenza settimanale finalizzato all’allineamento sullo stato di avanzamento del progetto.
 Esso consente di fornire una visione sintetica e continuativa delle attività svolte, delle criticità emerse e della pianificazione a breve termine.
 
 ==== Elementi Costituenti del Documento
@@ -875,11 +1156,10 @@ Tutti i prodotti del progetto sono soggetti a verifiche periodiche per garantire
 Dal momento in cui per poter portare un documento, o parte di esso nel branch principlale `develop`, esso deve essere stato verificato e approvato, la verifica viene implementata tramite il sistema di *pull request* di GitHub. Questo assicura che tutto il codice e la documentazione presenti nel ramo principale abbiano superato un processo di verifica e che, quindi, siano conformi agli standard di qualità stabiliti.
 
 ===== Verifica
-
 La Verifica rappresenta un processo fondamentale per Skarab Group e accompagna l’intero ciclo di vita del progetto (a.a. 2025/2026), con l’obiettivo di garantire la correttezza, la qualità e la conformità dei prodotti realizzati rispetto ai requisiti definiti.
 Tutte le informazioni relative agli esiti delle attività di verifica, incluse misurazioni e risultati dei test, sono documentate nel Piano di Qualifica.
-====== Verifica della Documentazione
 
+====== Verifica della Documentazione
 Nelle fasi iniziali del progetto, particolare attenzione è stata dedicata alla verifica della documentazione.
 Ogni documento, una volta redatto, viene sottoposto a verifica prima dell’integrazione nel ramo principale del repository.
 L’attività comprende:
@@ -1133,219 +1413,6 @@ La seguente tabella riporta le fonti utilizzate per la formazione dei membri del
 )
 
 Inoltre l'azienda proponente Var group ha tenuto delle lezioni specifiche per ognuna delle tecnologie necessarie allo sviluppo del progetto e ha dato disponibilitá per la risoluzione di dubbi e domande.
-
-= Metriche
-Il gruppo adotta un sistema di metriche per monitorare processi e prodotti.
-
-== Strategia di Definizione delle Soglie Metriche
-La determinazione delle soglie di accettabilità e ottimalità per le metriche adottate dal gruppo /*#def("Skarab Group")*/ non è un processo arbitrario, ma segue una strategia ingegneristica basata sui seguenti criteri:
-
-- *Adesione agli Standard Internazionali:* Per i processi di fornitura, il gruppo adotta il framework /*#def("Earned Value Management")*/ (EVM), utilizzando gli intervalli di confidenza standard del settore ($0.90 - 1.10$) per garantire la stabilità economica e temporale. Per la qualità del prodotto, le soglie sono calibrate sulle caratteristiche del modello /*#def("ISO/IEC 25010")*/.
-- *Analisi del Dominio e Benchmark:* Le metriche di supporto e sviluppo (es. /*#def("Gulpease Index"), #def("Complessità Ciclomatica")*/) sono tarate su benchmark di settore per lo sviluppo software moderno, garantendo che i requisiti di manutenibilità e sicurezza siano oggettivamente verificabili.
-- *Miglioramento Continuo e Calibrazione (PDCA):* In linea con l'approccio /*#def("Agile")*/, le soglie sono soggette a revisione periodica. Al termine di ogni /*#def("Sprint")*/, i valori vengono analizzati rispetto alle prestazioni storiche del team; questo permette una ricalibrazione dinamica delle soglie nel /*#def("Piano di Qualifica")*/, rendendo gli obiettivi sempre sfidanti ma tecnicamente sostenibili (obiettivi *S.M.A.R.T.*).
-
-== Nomenclatura delle Metriche
-La nomenclatura utilizzata per le metriche è la seguente:
-#align(center)[
-  `M[Tipo][##]`
-]
-
-dove:
-- `M` sta per Metrica
-- `Tipo` può assumere uno tra questi valori:
-  - `PC` ovvero Processo
-  - `PD` ovvero Prodotto
-- `##` è un numero progressivo crescente da 01.
-
-== Metriche di Qualità del Processo
-
-I processi vengono monitorati per garantire efficienza, efficacia e miglioramento continuo del _Way of Working_ adottato dal gruppo.
-
-=== Processi Primari
-==== Fornitura e Sviluppo
-#show figure: set block(breakable: true)
-
-#figure(
-  block(
-    breakable: true,
-    table(
-      columns: (auto, 1.8fr, 2.5fr),
-      inset: 8pt,
-      align: horizon,
-      fill: (x, y) => if y == 0 { luma(220) },
-      [*Codice*], [*Nome*], [*Descrizione*],
-
-      [MPC01], [Budget At Completion], [Budget totale preventivato per il progetto],
-
-      [MPC02], [Planned Value], [Valore del lavoro che si era pianificato di completare entro un determinato momento],
-
-      [MPC03], [Actual Cost], [Costo effettivamente sostenuto per il lavoro svolto fino a un determinato momento],
-
-      [MPC04], [Earned Value], [Valore del lavoro effettivamente completato],
-
-      [MPC05],
-      [Budget Variance],
-      [Differenza tra il budget totale e la stima del costo finale. Un valore positivo indica che si prevede di risparmiare budget],
-
-      [MPC06],
-      [Schedule Variance],
-      [Misura lo scostamento temporale: valori negativi indicano ritardi, positivi anticipi],
-
-      [MPC07],
-      [Cost Performance Index],
-      [Indice di efficienza economica del progetto. CPI = 1 indica perfetta aderenza al budget, < 1 sforamento, > 1 risparmio],
-
-      [MPC08],
-      [Schedule Performance Index],
-      [Indice di efficienza della schedulazione. SPI = 1 indica perfetta aderenza ai tempi, < 1 ritardo, > 1 anticipo],
-
-      [MPC09],
-      [Estimate At Completion],
-      [Stima del costo totale finale del progetto basata sulla performance attuale. Utilizza il CPI per proiettare il costo a completamento considerando l'efficienza dimostrata],
-    ),
-  ),
-  caption: [Metriche per il processo di Fornitura],
-)
-
-#figure(
-  table(
-    columns: (auto, 1.8fr, 2.5fr),
-    inset: 8pt,
-    align: horizon,
-    fill: (x, y) => if y == 0 { luma(220) },
-    [*Codice*], [*Nome*], [*Descrizione*],
-
-    [MPC10],
-    [Requirements Stability Index],
-    [Misura la volatilità dei requisiti. Indica la percentuale di requisiti che non hanno subito modifiche, aggiunte o cancellazioni rispetto alla baseline iniziale],
-  ),
-  caption: [Metriche per il processo di Sviluppo],
-)
-
-*Nota:* Valori bassi di RSI possono segnalare un'analisi iniziale insufficiente o cambiamenti significativi nelle esigenze degli _stakeholder_. Il monitoraggio è cruciale specialmente a seguito di revisioni correttive.
-
-=== Processi di Supporto
-==== Documentazione e Verifica
-
-#figure(
-  table(
-    columns: (auto, 1.8fr, 2.5fr),
-    inset: 8pt,
-    align: horizon,
-    fill: (x, y) => if y == 0 { luma(220) },
-    [*Codice*], [*Nome*], [*Descrizione*],
-
-    [MPC11],
-    [Indice di Gulpease],
-    [Indice di leggibilità. Valuta la complessità linguistica basandosi sulla lunghezza delle parole e delle frasi. Valori: ≥80 molto facile; 60-80 media difficoltà; 40-60 abbastanza difficile; < 40 molto difficile],
-
-    [MPC12], [Correttezza Ortografica], [Numero di errori ortografici rilevati nel documento],
-
-    [MPC13],
-    [Code Coverage],
-    [Percentuale di codice sorgente che viene eseguita durante il lancio della suite di test automatizzati. Indica il grado di copertura della verifica dinamica],
-
-    [MPC14],
-    [Test Success Rate],
-    [Percentuale di test automatizzati che superano con successo l'esecuzione. Un valore del 100% è necessario per garantire la stabilità del sistema prima di ogni rilascio],
-  ),
-  caption: [Metriche per il processo di Documentazione e Verifica],
-)
-
-*Rilevanza:* Il Test Success Rate deve rimanere costantemente al 100% per evitare regressioni e garantire l'affidabilità del _Software_.
-
-=== Processi Organizzativi
-
-#figure(
-  table(
-    columns: (auto, 1.8fr, 2.5fr),
-    inset: 8pt,
-    align: horizon,
-    fill: (x, y) => if y == 0 { luma(220) },
-    [*Codice*], [*Nome*], [*Descrizione*],
-
-    [MPC15],
-    [Metrics Satisfaction],
-    [Percentuale di metriche che rispettano le soglie di accettabilità. Fornisce una visione d'insieme sulla qualità complessiva dei processi adottati],
-
-    [MPC16],
-    [Sprint Goal Achievement],
-    [Percentuale degli obiettivi prefissati durante lo Sprint Planning che sono stati effettivamente raggiunti e validati al termine dello Sprint. Misura l'efficacia della pianificazione e dell'esecuzione],
-  ),
-  caption: [Metriche per i processi Organizzativi],
-)
-
-== Metriche di Qualità del Prodotto
-La qualità del prodotto finale è intrinsecamente legata alla qualità dei processi che lo generano.
-
-=== Adeguatezza Funzionale e Affidabilità
-
-#figure(
-  table(
-    columns: (auto, 1.8fr, 2.5fr),
-    inset: 8pt,
-    align: horizon,
-    fill: (x, y) => if y == 0 { luma(220) },
-    [*Codice*], [*Nome*], [*Descrizione*],
-
-    [MPD01],
-    [Copertura Requisiti Obbligatori],
-    [Percentuale di requisiti obbligatori soddisfatti rispetto al totale dei requisiti obbligatori identificati. Questi requisiti sono vincolanti per l'accettazione del prodotto],
-
-    [MPD02],
-    [Failure Density],
-    [Misura la densità di errori nel software. Valori elevati indicano problemi di qualità del codice],
-
-    [MPD03], [Availability], [Percentuale di tempo in cui il sistema è operativo e disponibile all'uso],
-  ),
-  caption: [Metriche di Adeguatezza Funzionale e Affidabilità],
-)
-
-=== Manutenibilità e Sicurezza
-
-#figure(
-  table(
-    columns: (auto, 1.8fr, 2.5fr),
-    inset: 8pt,
-    align: horizon,
-    fill: (x, y) => if y == 0 { luma(220) },
-    [*Codice*], [*Nome*], [*Descrizione*],
-
-    [MPD04],
-    [Comment Density],
-    [Percentuale di linee di commento rispetto alle linee di codice. Una documentazione adeguata migliora la comprensibilità e facilita la manutenzione futura del codice],
-
-    [MPD05],
-    [Cyclomatic Complexity],
-    [Misura la complessità del codice contando i percorsi linearmente indipendenti. Valori elevati indicano codice difficile da testare e mantenere],
-
-    [MPD06],
-    [Coupling (Fan-out)],
-    [Numero di dipendenze esterne di un modulo. Misura il grado di accoppiamento tra componenti. Valori elevati riducono la modularità],
-
-    [MPD07],
-    [Vulnerability Detection],
-    [Numero di vulnerabilità di sicurezza critiche rilevate attraverso analisi statica e dinamica del codice],
-  ),
-  caption: [Metriche di Manutenibilità e Sicurezza],
-)
-
-== Struttura delle Misurazioni (Cruscotto di Valutazione)
-Per ciascuna metrica viene fornita una rappresentazione grafica dell'andamento temporale accompagnata da un'analisi qualitativa. Tali misurazioni e i relativi obiettivi di qualità sono in linea con quanto redatto all'interno del #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/PdP.pdf")[#underline[*Piano di Progetto*]].
-
-Ogni grafico, quindi, è accompagnato da un commento interpretativo che collega le variazioni delle metriche con le cause organizzative, tecniche o procedurali che le hanno generate, garantendo che i dati non rimangano meri numeri ma si traducano in azioni concrete di miglioramento.
-
-Le misurazioni coprono il periodo che va dall'*aggiudicazione del capitolato* fino alla milestone *RTB* (09/02/2026).
-
-Per la fase di *Product Baseline* (PB) vengono fornite _stime previsionali_.
-Rispetto a quanto rilevato nella RTB, ci si attende un _incremento dell'efficienza_ e una maggiore aderenza alle tempistiche prefissate. La fase precedente, infatti, ha risentito dei rallentamenti dovuti alla concomitanza con la sessione d'esame.
-Con il superamento di tale periodo, la PB riflette una pianificazione più fluida e una gestione operativa che punta a stabilizzare i ritmi, ottimizzando i risultati.
-
-== Frequenza di Aggiornamento
-Il cruscotto viene aggiornato con cadenza di Sprint:
-- I dati vengono raccolti al termine di ogni Sprint.
-- L'analisi viene condotta durante la retrospettiva di Sprint.
-- Il Piano di Qualifica viene aggiornato per riflettere i nuovi valori.
 
 == Strategie di Verifica
 - *Analisi Statica*: Review manuale del codice e uso di #def("linter") (#def("ESLint") per JS/TS, Pylint/Black per #def("Python")).
