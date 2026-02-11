@@ -28,8 +28,8 @@ A:
     alternative: Requirement Analyst, Analisti
     descrizione: Membro del team di sviluppo responsabile della raccolta e dell'analisi dei requisiti del sistema software, nonché della comunicazione con gli stakeholder per garantire che le esigenze siano comprese e documentate correttamente.
 
-  API: 
-    acronimo: Application Programming Interface
+  Application Programming Interface: 
+    acronimo: API
     descrizione: Insieme di regole e protocolli che consentono a diverse applicazioni software di comunicare tra loro.
 
   API Contract:
@@ -109,6 +109,7 @@ D:
 
   DevOps:
     descrizione: Metodologia di sviluppo software che combina lo sviluppo (Dev) e le operazioni (Ops) per accorciare il ciclo di vita dello sviluppo e fornire rilasci continui di alta qualità.
+ 
   Diagrammi dei casi d'uso:
     descrizione: Rappresentazioni grafiche che illustrano le interazioni tra gli attori e il sistema, mostrando i casi d'uso e le relazioni tra di essi.
 
@@ -123,7 +124,7 @@ E:
     descrizione: Strumento di linting per JavaScript e TypeScript che aiuta a identificare e correggere errori di codice e mantenere uno stile consistente.
 
 F:
-  Front-end:
+  Frontend:
     descrizione: Parte di un'applicazione o sistema con cui gli utenti interagiscono direttamente, comprendente l'interfaccia utente e l'esperienza utente.
 
   Falsi negativi:
@@ -155,8 +156,8 @@ G:
     alternative: Team di progetto
     descrizione: Insieme delle persone assegnate al progetto che collaborano attivamente per realizzare gli obiettivi definiti nel Piano di Progetto.
 
-  GUI:
-    acronimo: Graphical User Interface
+  Graphical User Interface:
+    acronimo: GUI
     descrizione: Interfaccia utente grafica che consente agli utenti di interagire con un sistema attraverso elementi visivi come finestre, icone e menu.
 
   Gulpease:
@@ -165,12 +166,13 @@ G:
 H: 
   Human-in-the-loop:
     descrizione: Modello di interazione in cui l'essere umano gioca un ruolo attivo nel processo decisionale di un sistema di intelligenza artificiale, supervisionando, validando o correggendo i risultati prodotti.
+  
   Hybrid:
     descrizione: Approccio di gestione progetto che combina elementi predictive e adaptive per bilanciare flessibilità e struttura. 
 
 I:
-  IaC:
-    acronimo: Infrastructure as Code
+  Infrastructure as Code:
+    acronimo: IaC
     descrizione: Pratica di gestione e provisioning dell'infrastruttura informatica attraverso file di definizione leggibili dalla macchina, piuttosto che configurazioni hardware fisiche o strumenti interattivi.
   
   Incrementale:
@@ -244,8 +246,9 @@ N:
 O:
   Optimism Bias:
     descrizione: Bias cognitivo che porta a sottostimare la probabilità di eventi negativi e i tempi necessari per completare un compito, basandosi su scenari ideali (il cosiddetto "Happy Path") piuttosto che su dati storici o realistici.
-  OWASP:
-    acronimo: Open Web Application Security Project
+  
+  Open Web Application Security Project:
+    acronimo: OWASP
     descrizione: Organizzazione no-profit che si dedica a migliorare la sicurezza delle applicazioni web attraverso la creazione di risorse, strumenti e linee guida.
 P:
   Pair Programming: 
@@ -285,8 +288,9 @@ P:
   
   Prompt Engineering:
     descrizione: L'insieme delle tecniche e delle strategie utilizzate per progettare, scrivere e affinare le istruzioni fornite a un sistema di intelligenza artificiale
-  PoC:
-    acronimo: Proof of Concept
+  
+  Proof of Concept:
+    acronimo: PoC
     descrizione: Realizzazione preliminare e limitata di una funzionalità o di un sottosistema, sviluppata allo scopo di dimostrarne la fattibilità tecnica e validare le scelte architetturali critiche.
 
   Python:
@@ -330,10 +334,6 @@ R:
   Risorse umane:
     descrizione: L'insieme delle persone che compongono il team di progetto e contribuiscono con le proprie competenze tecniche alla realizzazione del prodotto.
 
-  Rischio:
-    alternative: Risk
-    descrizione: Evento incerto che, se si verifica, può avere un impatto positivo o negativo sugli obiettivi del progetto.
-  
   Rolling Wave Planning:
     descrizione: Tecnica di pianificazione iterativa in cui il lavoro da svolgere nel breve termine viene pianificato in dettaglio, mentre il lavoro previsto per il futuro è definito a un livello di astrazione superiore. I dettagli per le fasi successive vengono elaborati progressivamente man mano che l'orizzonte temporale si avvicina, permettendo di gestire l'incertezza e adattare il piano alle informazioni emergenti.
 S:
@@ -371,8 +371,10 @@ S:
   
   Stima: 
     descrizione: Valutazione approssimata dell'impegno, dei costi o delle dimensioni del software, utilizzata come base per la pianificazione.
+  
   Storming:
     descrizione: Fase di sviluppo di un team in cui emergono conflitti e attriti interni dovuti a divergenze su ruoli, responsabilità e decisioni, che possono temporaneamente ridurre l’efficacia operativa.
+  
   Sviluppatore software:
     alternative: software developer, sviluppatori software, sviluppatori
     descrizione: Persona che scrive, testa e mantiene il codice sorgente di applicazioni o sistemi software.
@@ -380,6 +382,7 @@ S:
 T:
   Task: 
     descrizione: Unità elementare di lavoro, tracciabile e assegnabile a un singolo membro del team, necessaria per il completamento di una funzionalità o di un obiettivo di progetto.
+  
   Telegram:
     descrizione: Servizio di messaggistica istantanea basato sul cloud.
 
