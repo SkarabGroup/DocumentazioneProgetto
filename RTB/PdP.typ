@@ -1082,25 +1082,31 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 ==== Prospetto Attivitá
 #activity_table(
   (
-    ("Stesura UC33-38","Analista", "5:00", "2:00", "Completata"),
-    ("Stesura requisiti UC33-38","Analista", "2:00", "1:00", "Completata"),
-    ("Aggiunta sezione a NdP", "Amministratore", "1:00", "1:00", "Completata"),
+    ("Stesura UC33-38","Analista", "8:00", "6:00", "Completata"),
+    ("Stesura requisiti UC33-38","Analista", "3:00", "2:00", "Completata"),
+    ("Controllo e correzione UC e requisiti", "Analista", "5:00", "4:00", "Completata"),
 
-    ("Orchestrator PoC", "Programmatore","2:00","4:00","Completata"),
-    ("SpellChecker PoC", "Programmatore","2:00","4:00","Completata"),
+    ("Aggiunta sezione a NdP", "Amministratore", "1:00", "1:30", "Completata"),
+    ("Revisione AdR", "Amministratore", "2:00", "1:30", "Completata"),
+
+    ("Orchestrator PoC", "Programmatore","2:00","2:30","Completata"),
+    ("SpellChecker PoC", "Programmatore","1:30","1:00","Completata"),
+    ("Creazione repo mock PoC", "Programmatore","0:30","0:30","Completata"),
     ("Parte Database PoC", "Programmatore","4:00","4:00","Completata"),
     ("Parte Server PoC", "Programmatore","4:00","4:00","Completata"),
-    ("Parte FrontEnd PoC", "Programmatore","2:00","2:00","Completata"),
 
     ("Verifica verbale riunione interna prima settimana", "Verificatore","0:15","0:30","Completata"),
     ("Verifica verbale riunione interna seconda settimana", "Verificatore","0:15","0:30","Completata"),
-    ("Verifica AdR","Verificatore","6:00","3:30","Completata"),
-    ("Verifica PdP","Verificatore","4:00","2:30","Completata"),
+    ("Verifica AdR","Verificatore","1:00","1:30","Completata"),
+    ("Verifica PdP","Verificatore","1:00","1:30","Completata"),
     ("Verifica NdP","Verificatore","1:30","1:00","Completata"),
+    ("Verifica PoC","Verificatore","4:00","3:30","Completata"),
 
     ("Stesura verbale riunione prima settimana", "Responsabile","1:00","0:30","Completata"),
     ("Stesura verbale riunione seconda settimana", "Responsabile","1:00","0:30","Completata"),  
-    ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile","3:00","4:30","Completata"),
+    ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile","5:00","4:30","Completata"),
+    ("Aggiunta task Jira", "Responsabile","0:30","0:30","Completata"),
+    ("Sezione sprint 3 PdP", "Responsabile","0:30","1:00","Completata")
 
   ),
   [Riassunto delle attivitá svolte durante lo Sprint 3]
