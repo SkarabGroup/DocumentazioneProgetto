@@ -9,7 +9,7 @@
   (
     "2026/02/11",
     "0.8.0",
-    "Aggiunte tabelle attivitá sprint 1,2,3",
+    "Aggiunte tabelle attivitá sprint 1,2,3, piccoli fix",
     members.kevin,
   ),
   (
@@ -158,7 +158,7 @@ Entro tale termine, il gruppo fornirà:
 == Glossario
 Al fine di prevenire ambiguità interpretative, è stato redatto un glossario che definisce in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio utilizzati all’interno della documentazione.
 
-Nel testo, *ogni termine evidenziato tramite sottolineatura*, qualora *non sia esplicitamente indicato come collegamento a un documento o a una sezione specifica*, rimanda alla voce corrispondente del Glossario pubblicato sul sito ufficiale del gruppo, consentendo al lettore di accedere direttamente alla definizione associata.
+Nel testo, *ogni termine evidenziato tramite una G come apice*, rimanda alla voce corrispondente del Glossario pubblicato sul sito ufficiale del gruppo, consentendo al lettore di accedere direttamente alla definizione associata.
 
 La versione più recente del Glossario è disponibile al seguente link:
 #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario]].
@@ -258,7 +258,7 @@ Questa categoria raggruppa le criticità derivanti dalla natura innovativa dello
   [Utilizzo di tecniche di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#prompt-engineering")[#def[Prompt Engineering]] avanzate e contestualizzate. Integrazione di strumenti di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-statica")[#def[Analisi Statica]] come meccanismo deterministico di validazione prima della presentazione all’utente.],
   [Adozione di un modello #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#human-in-the-loop")[#def[Human-in-the-loop]]: il sistema viene utilizzato come supporto decisionale e non come auto-remediation. L’applicazione delle modifiche resta vincolata a supervisione e conferma umana.],
   "Alta",
-  "Medio",
+  "Alto",
 )
 
 === RT5: Costi e Limiti di Utilizzo <RT5>
@@ -377,12 +377,12 @@ Questa categoria analizza le criticità legate alle risorse umane. Essendo il te
 #schedaRischio(
   "RI5",
   "Sbilanciamento produttivo tra membri",
-  [Un divario significativo di competenze può portare a sovraccarico dei membri più esperti e a demotivazione dei meno esperti. Ciò riduce la produttività complessiva e aumenta il rischio di ritardi e rework.],
+  [Un divario significativo di competenze o di impegno può portare a sovraccarico di alcuni membri. Ciò riduce la produttività complessiva e aumenta il rischio di ritardi e rework.],
   [Background eterogenei e diverse velocità di apprendimento generano una distribuzione non uniforme dei contributi. Se i task complessi restano sempre sugli stessi membri, il rischio di dipendenza e burnout aumenta.],
   [Pair Programming sistematico (esperto + junior) e code review incrociata obbligatoria per favorire trasferimento di competenze. Pianificazione dei task con rotazione controllata delle aree tecniche.],
   [Assegnazione graduata dei task: complessi agli esperti e di supporto/testing ai meno esperti, mantenendo però un percorso di crescita. Riallocazione delle attività in caso di colli di bottiglia persistenti.],
   "Alta", // P=3
-  "Medio", // I=2 -> R=6 (Alto)
+  "Alto", // I=3 -> R=9 (Molto Alto)
 )
 
 #pagebreak()
@@ -1155,6 +1155,7 @@ Il coordinamento interno è migliorato rispetto allo Sprint precedente. La distr
 Nel corso dello Sprint si sono manifestati i seguenti rischi già censiti:
 - #link(<RI4>)[#underline[[RI4]]]: necessità di ulteriore allineamento su alcune scelte tecniche;
 - #link(<RT3>)[#underline[[RT3]]]: complessità nella modellazione iniziale dei flussi decisionali del PoC.
+- #link(<RI5>)[#underline[[RI5]]]: disomogeneità nella qualità dei contributi.
 
 Le azioni di mitigazione pianificate sono state applicate tempestivamente, limitando l’impatto sui deliverable.
 
