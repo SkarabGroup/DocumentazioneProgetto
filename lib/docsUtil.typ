@@ -149,11 +149,8 @@
   if not found {
     panic("Parola non definita nel glossario: " + parola)
   } else {
-    // Normalizza il nome per la label (sostituisce spazi con trattini)
-    //let label_name = termine_originale.replace(" ", "-")
-    // Crea il link alla label del glossario
-    //link(label(label_name))[#parola#sub[G]]
-    underline(text(parola))
+    [#text(parola) #super[G]]
+
   }
 }
 

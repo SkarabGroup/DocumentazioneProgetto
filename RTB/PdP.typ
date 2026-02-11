@@ -7,6 +7,12 @@
 #set heading(numbering: "1.1.1")
 #let history = (
   (
+    "2026/02/11",
+    "0.8.0",
+    "Aggiunte tabelle attivitá sprint 1,2,3",
+    members.kevin,
+  ),
+  (
     "2026/02/01",
     "0.7.2",
     "Rielaborazione sezione introduzione, analisi dei rischi, preventivo e monitoraggio",
@@ -260,7 +266,7 @@ Questa categoria raggruppa le criticità derivanti dalla natura innovativa dello
   "RT5",
   "Saturazione del budget o blocco delle API",
   [L’uso di LLM in architettura multi-agente può generare un volume elevato di chiamate, con saturazione dei crediti o blocchi per rate limit. Ciò può rallentare o interrompere sviluppo e test, impattando direttamente la consegna dell’MVP.],
-  [La mancata ottimizzazione dei flussi può produrre chiamate ridondanti o ricorsive, con consumo anomalo di risorse in tempi brevi. L’inesperienza nel dimensionamento di prompt e cicli agentivi amplifica il rischio di costi non controllati.],
+  [La mancata ottimizzazione dei flussi può produrre chiamate ridondanti o ricorsive, con consumo anomalo di risorse in tempi brevi. L’inesperienza nel dimensionamento di prompt e cicli agentivi amplifica il rischio di costi non controllati, inoltre scelte di modelli AI costosi puó aumentare significativamente i costi operativi.],
   [Caching e deduplicazione delle richieste, oltre a limiti applicativi su numero di chiamate e profondità dei loop. Monitoraggio dei costi con dashboard e preferenza per modelli economici durante lo sviluppo.],
   [Migrazione verso modelli open source eseguiti localmente o riduzione della componente LLM in fase di test. Rimodulazione delle funzionalità LLM per ridurre il numero di chiamate.],
   "Alta",
@@ -477,7 +483,7 @@ La fase è suddivisa in 4 iterazioni (*Sprint*). Le date sono state definite ten
     [*Sprint 1*], [19/12/2025], [03/01/2026],
     [*Sprint 2*], [03/01/2026], [17/01/2026],
     [*Sprint 3*], [17/01/2026], [31/01/2026],
-    [*Sprint 4*], [31/01/2026], [09/02/2026],
+    [*Sprint 4*], [31/01/2026], [14/02/2026],
     // Esteso per coprire finitura PoC
   ),
   caption: [Calendario degli Sprint pianificati per la fase RTB],
@@ -1022,6 +1028,7 @@ Nel corso dello Sprint si sono concretizzati i seguenti rischi già censiti:
 - #link(<RI4>)[#underline[[RI4]]]: difficoltà di coordinamento e comunicazione interna, che hanno rallentato il processo decisionale.
 - #link(<RI5>)[#underline[[RI5]]]: disomogeneità nella qualità e nell’efficacia dei contributi, con impatto diretto sull’Analisi dei Requisiti.
 - #link(<RCO5>)[#underline[[RCO5]]]: rischio di incoerenza documentale, emerso a seguito di modifiche non pienamente allineate agli standard definiti.
+- #link(<RT6>)[#underline[[RT6]]]: Esposizioni credenziali AWS nei . env e .env example della directory PoC
 
 In risposta, sono state pianificate azioni correttive coerenti con i piani di contingenza definiti, tra cui una riallocazione più mirata delle responsabilità, il rafforzamento delle attività di revisione incrociata e un controllo più stringente sull’aderenza alle Norme di Progetto.
 
@@ -1109,7 +1116,6 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
     ("Stesura diario di bordo", "Responsabile","0:30","0:30","Completata"),
     ("Aggiunta task Jira", "Responsabile","0:30","0:30","Completata"),
     ("Sezione sprint 3 PdP", "Responsabile","0:30","1:00","Completata")
-
 
   ),
   [Riassunto delle attivitá svolte durante lo Sprint 3]
