@@ -1,6 +1,6 @@
 #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
-#let versione = "v0.7.1"
+#let versione = "v0.8.0"
 
 #titlePage("Piano di Progetto", versione)
 #set page(numbering: "1", header: header("Piano di Progetto"), footer: footer())
