@@ -959,12 +959,29 @@ Focus sul consolidamento della documentazione (versione per RTB) e accelerazione
   (
     ("Stesura UC13-32","Analista", "20:00", "15:00", "Completata"),
     ("Stesura requisiti UC13-32","Analista", "5:00", "2:00", "Completata"),
-    ("Ristesura NdP", "Amministratore", "3:00", "4:00", "Completata"),
-    ("Ristesura PdP", "Amministratore", "3:00", "4:00", "Completata"),
-    ("Aggiunta nuovi rischi PdP", "Amministratore", "2:00", "3:00", "Completata"),
-    ("Aggiunta retrospettiva Sprint 1", "Amministratore", "2:00", "3:00", "Completata"),
-    ("Aggiunta retrospettiva Sprint 2", "Amministratore", "2:00", "3:00", "Completata"),
-    ("Revisione sezione automiglioramento PdQ", "Amministratore", "2:00", "3:00", "Completata"),
+
+    ("Ristesura NdP", "Amministratore", "4:30", "4:00", "Completata"),
+
+    ("Ristesura PdP", "Amministratore", "5:00", "4:00", "Completata"),
+    ("Aggiunta nuovi rischi PdP", "Amministratore", "1:30", "3:00", "Completata"),
+
+    ("Aggiunta retrospettiva Sprint 1", "Amministratore", "0:15", "0:30", "Completata"),
+    ("Aggiunta retrospettiva Sprint 2", "Amministratore", "0:15", "0:30", "Completata"),
+    ("Revisione sezione automiglioramento PdQ", "Amministratore", "0:30", "3:00", "Completata"),
+
+    ("Verifica verbale riunione interna prima settimana", "Verificatore","0:15","0:30","Completata"),
+    ("Verifica verbale riunione interna seconda settimana", "Verificatore","0:15","0:30","Completata"),
+    ("Verifica AdR","Verificatore","6:00","3:30","Completata"),
+    ("Verifica PdP","Verificatore","4:00","2:30","Completata"),
+    ("Verifica NdP","Verificatore","1:30","1:00","Completata"),
+
+    ("Programmazione sezione agenti PoC", "Programmatore", "3:00", "0:00", "Rimandata a prossimo sprint"),
+    ("Programmazione sezione server PoC", "Programmatore", "3:00", "0:00", "Rimandata a prossimo sprint"),
+
+    ("Stesura verbale riunione prima settimana", "Responsabile","1:00","0:30","Completata"),
+    ("Stesura verbale riunione seconda settimana", "Responsabile","1:00","0:30","Completata"),
+    ("Stesura verbale riunione esterna", "Responsabile","1:00","0:30","Completata"),
+    ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile","3:00","4:30","Completata"),
   ),
   [Riassunto delle attivitá svolte durante lo Sprint 2]
 )
