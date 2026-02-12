@@ -7,6 +7,12 @@
 #set heading(numbering: "1.1.1")
 #let history = (
   (
+    "2026/02/12",
+    "0.9.0",
+    "Aggiunto Sprint 4",
+    members.antonio,
+  ),
+  (
     "2026/02/11",
     "0.8.0",
     "Aggiunte tabelle attivitá sprint 1,2,3, piccoli fix",
@@ -839,7 +845,7 @@ Le attività svolte nel periodo di riferimento si sono focalizzate sul consolida
   ),
   [Prospetto orario preventivato per lo Sprint 1 (Totale: 61 ore)],
 )
-==== Prospetto Attivitá 
+==== Prospetto Attività
 
 #activity_table(
   (
@@ -960,7 +966,7 @@ Focus sul consolidamento della documentazione (versione per RTB) e accelerazione
   [Prospetto orario preventivato per lo Sprint 2 (Totale: 61 ore)],
 )
 
-==== Prospetto Attivitá
+==== Prospetto Attività
 #activity_table(
   (
     ("Stesura UC13-32","Analista", "20:00", "15:00", "Completata"),
@@ -1087,7 +1093,7 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
   [Prospetto orario preventivato per lo Sprint 3],
 )
 
-==== Prospetto Attivitá
+==== Prospetto Attività
 #activity_table(
   (
     ("Stesura UC33-38","Analista", "8:00", "6:00", "Completata"),
@@ -1164,3 +1170,96 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
 - completare il Proof of Concept in vista della revisione RTB;
 - rifinire eventuali osservazioni emerse in fase di pre-review;
 - preparare il materiale per la presentazione di revisione.
+
+=== Sprint 4
+*Periodo:* dal 01/02/2026 al 14/02/2026
+
+==== Attività Principali
+Le attività svolte nel periodo di riferimento sono state incentrate sulla conclusioni di tutte le attività normative e tecnologiche a scopo di candidarsi alla revisione RTB.
+
+- *Piano di Progetto (PdP):*
+  - aggiunta della sezione prospetto attività per tutti gli sprint
+  - aggiunta del quarto sprint
+  - verifica generale del documento in prospettiva della RTB
+
+- *Norme di Progetto (NdP):*
+  - inserimento delle procedure adottate per la stesura della documentazione
+
+- *Piano di Qualifica (PdQ):*
+  - inserimento test di accettazione
+  - rielaborazione test di sistema
+
+- *Analisi dei Requisiti (AdR):*
+  - modifica alla struttura dei requisiti e inserimento dei requisiti mancanti
+  - inserimento dei casi d'uso mancanti e riscrittura di quelli malposti
+  - modifica alla struttura dei diagrammi dei casi d'uso e inserimento di quelli mancanti
+  - modifica alla parte di introduzione 
+
+- *Glossario:*
+  - aggiunta di altri termini e controllo dello standard per tutti i documenti
+
+- *Proof of Concept (PoC):*
+  - ultimazione della parte di backend
+  - ultimazione della parte di server
+  - ultimazione della parte di agenti
+  - ultimazione della parte di database
+  - ultimazione della parte di frontend 
+  - unificazione delle parti e verifica totale
+
+==== Prospetto Consumo Tempo (Preventivo)
+La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
+
+#sprint_table(
+  (
+    ([Basso Kevin], 0, 3, 0, 0, 4, 0),
+    ([Berengan Riccardo], 0, 0, 0, 0, 5, 1),
+    ([Martinello Riccardo], 0, 1, 0, 0, 5, 0),
+    ([Sandu Antonio], 7, 3, 4, 0, 0, 3),
+    ([Sgreva Andrea], 0, 2, 7, 0, 0, 0),
+    ([Suar Alberto], 0, 2, 2, 0, 2, 4),
+    ([Zago Alice], 0, 4, 3, 0, 0, 1),
+  ),
+  [Prospetto orario preventivato per lo Sprint 4],
+)
+
+==== Prospetto Attività
+#activity_table(
+  (
+    ("Inserimento requisiti di qualità e di vincolo", "Analista", "1:30", "1:30", "Completata"),
+    ("Aggiunta dei diagrammi mancanti", "Analista", "2:00", "2:00", "Completata"),
+    ("Modifica sezione degli attori", "Analista", "0:30", "0:30", "Completata"),
+    ("Inserimento della colonna della priorità dei requisiti","Analista", "1:30", "1:30", "Completata"),
+    ("Modifica UC1-4 e relativi diagrammi e requisiti", "Analista", "2:00", "2:00", "Completata"),
+    ("Modifica UC5 in UC divisi, relativo diagrammi e requisiti", "Analista", "1:00", "1:30", "Completata"),
+    ("Modifica UC6-8 e relativi diagrammi e requisiti", "Analista", "1:00", "1:00", "Completata"),
+    ("Modifica UC9-12 e relativi diagrammi e requisiti", "Analista", "2:00", "2:00", "Completata"),
+    ("Modifica UC13-15 e relativi diagrammi e requisiti", "Analista", "1:30", "1:30", "Completata"),
+    ("Aggiunta UC43 con relativi diagrammi e requisiti", "Analista", "0:30", "0:30", "Completata"),
+
+    ("Link al glossario aggiornati in AdR", "Amministratore", "2:00", "3:00", "Completata"),
+    ("Aggiunta tabella attività sprint 1,2,3 a PdP", "Amministratore", "3:00", "3:00", "Completata"),
+    ("Test di Accettazione e rielaborazione Test di Sistema", "Amministratore", "2:00", "2:00", "Completata"),
+    ("Integrazioni a PdQ e Metriche nel documento di NdP","Amministratore","1:30","1:30", "Completata"),
+    ("Rielaborazione delle sezioni di procedure applicata nella stesura di AdR, PdP, PdQ in NdP", "Amministratore", "6:00", "6:00", "Completata"),
+
+    ("Terminazione della parte server nel PoC", "Programmatore","1:00","1:00","Completata"),
+    ("Terminazione della parte Back-end nel PoC", "Programmatore","1:00","1:00","Completata"),
+    ("Terminazione della parte Front-end nel PoC", "Programmatore","5:00","5:00","Completata"),
+    ("Terminazione della parte database nel PoC", "Programmatore","5:00","5:00","Completata"),
+    ("Terminazione della parte agenti nel PoC", "Programmatore","4:00","4:00","Completata"),
+
+    ("Verifica verbale riunione interna prima settimana", "Verificatore","0:30","0:30","Completata"),
+    ("Verifica verbale riunione interna seconda settimana", "Verificatore","0:30","0:30","Completata"),
+    ("Verifica AdR","Verificatore","5:00","5:00","Completata"),
+    ("Verifica PdP","Verificatore","2:00","3:00","Completata"),
+    ("Verifica NdP","Verificatore","2:00","2:00","Completata"),
+    ("Verifica PoC","Verificatore","2:00","3:00","Completata"),
+
+    ("Stesura verbale riunione prima settimana", "Responsabile","1:00","1:00","Completata"),
+    ("Stesura verbale riunione seconda settimana", "Responsabile","1:00","1:00","Completata"),  
+    ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile","2:30","2:30","Completata"),
+    ("Aggiunta task Jira", "Responsabile","0:30","1:00","Completata"),
+    ("Aggiunto sprint 4 nel PdP", "Responsabile","1:30","1:30","Completata")
+  ),
+  [Riassunto delle attivitá svolte durante lo Sprint 4]
+)
