@@ -13,28 +13,34 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.44.4"
+#let versione = "v0.44.5"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
     "2026/02/10",
-    "0.44.4",
+    "0.44.5",
     "Fix vari degli UC + fix specifici UC13-15",
     members.andrea
   ),
   (
     "2026/02/10",
-    "0.44.3",
+    "0.44.4",
     "Fix della posizione del sistema in tutti i diagrammi UC",
     members.andrea
   ),
   (
     "2026/02/10",
-    "0.44.2",
+    "0.44.3",
     "Primo fix generale UC",
     members.andrea
+  ),
+  (
+    "2026/02/09",
+    "0.44.2",
+    "Sistemato formato dei link al glossario",
+    members.antonio,
   ),
   (
     "2026/02/09",
@@ -46,7 +52,7 @@
     "2026/02/08",
     "0.44.0",
     "Aggiunto UC43, inclusi diagrammi e requisiti associati. Fix alle precondizioni, attori e diagrammi di UC1, UC2, UC4",
-    members.antonio
+    members.antonio,
   ),
   (
     "2026/02/04",
@@ -418,13 +424,13 @@
 
 = Introduzione
 == Contesto del Progetto
-Il presente documento descrive il #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-dei-requisiti")[#def[Analisi dei Requisiti]] relativo al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]], commissionato dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
+Il presente documento descrive l'#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-dei-requisiti")[#def("Analisi dei Requisiti")] relativo al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def("Code Guardian")], commissionato dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def("Var Group")] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def("Skarab Group")] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
 
 Il progetto ha come obiettivo lo sviluppo di una piattaforma software ad #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] finalizzata all’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e alla #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] automatizzata delle vulnerabilità presenti nei repository di codice sorgente. Il sistema è progettato in conformità ai requisiti e ai vincoli definiti nel #link(<capitolato>)[#underline[Capitolato *C2*]].
 La piattaforma supporta attività di analisi statica del codice sorgente e di individuazione delle principali criticità di sicurezza, fornendo suggerimenti di correzione attraverso meccanismi automatizzati basati su modelli di linguaggio di grandi dimensioni (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]).
 
 == Finalità del Documento
-Il documento di *Analisi dei Requisiti* formalizza le specifiche del prodotto software, descrivendo in modo dettagliato le funzionalità, i vincoli e gli standard di qualità che il sistema #def[Code Guardian] deve soddisfare per rispondere alle esigenze del committente.
+Il documento di *Analisi dei Requisiti* formalizza le specifiche del prodotto software, descrivendo in modo dettagliato le funzionalità, i vincoli e gli standard di qualità che il sistema Code Guardian deve soddisfare per rispondere alle esigenze del committente.
 
 Il documento costituisce il riferimento primario per il gruppo di lavoro (#def[Skarab Group]) e per gli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#stakeholder")[#def[stakeholder]], perseguendo i seguenti obiettivi:
 - modellare le interazioni tra gli utenti e il sistema attraverso la definizione formale dei #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#caso-d-uso")[#def("casi d'uso")];
@@ -473,11 +479,11 @@ La versione più recente del Glossario è disponibile al seguente link:
 I seguenti documenti hanno valore vincolante per la redazione dell'Analisi dei Requisiti:
 - *Standard IEEE 830-1998* IEEE Recommended Practice for Software Requirements Specifications <830> \
   #underline[https://ieeexplore.ieee.org/document/720574] \
-  (ultimo accesso: 12/02/2026)
+  (ultimo accesso: *12/02/2026*)
 
 - *Standard IEEE 29148-2018* ISO/IEC/IEEE International Standard – Systems and software engineering – Life cycle processes – Requirements engineering <29148>\
   #underline[https://ieeexplore.ieee.org/document/8559686] \
-  (ultimo accesso: 12/02/2026)
+  (ultimo accesso: *12/02/2026*)
 
 - *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> \
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
@@ -487,17 +493,16 @@ I seguenti documenti hanno valore vincolante per la redazione dell'Analisi dei R
   #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")] \
   (versione: *v1.0.0*)
 === Riferimenti Informativi
-- *Dispense del corso di Ingegneria del Software sull'analisi dei requisiti* <dispense_AdR>\
+- *Dispense del Corso di Ingegneria del Software sull'Analisi dei Requisiti* <dispense_AdR>\
   #underline[https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T05.pdf] \
-  Ultimo accesso: 12/02/2026
-- *Dispense del corso di Ingegneria del Software sui casi d'uso* <dispense_UC>\
+  (ultimo accesso: *12/02/2026*)
+- *Dispense del Corso di Ingegneria del Software sui Casi d'Uso* <dispense_UC>\
   #underline[https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20Use%20Case.pdf] \
-  Ultimo accesso: 12/02/2026
+  (ultimo accesso: *12/02/2026*)
 
 
 #pagebreak()
-= Casi d'uso
-
+= Casi d'Uso
 == Introduzione
 In questa sezione sono descritti i casi d'uso principali del sistema, che illustrano le interazioni funzionali tra gli utenti (umani e software) e l'applicazione.
 
@@ -546,39 +551,39 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     [Piattaforma di hosting esterna. Interagisce con il sistema per fornire l'accesso al codice sorgente (via API o clone) e ai metadati dei repository.],
 
     [*Docker*],
-    [Servizio di containerizzazione utilizzato per istanziare ambienti isolati (#def[sandbox]) necessari all'esecuzione sicura degli strumenti di analisi statica.],
+    [Servizio di containerizzazione utilizzato per istanziare ambienti isolati necessari all'esecuzione sicura degli strumenti di analisi statica.],
 
-    [*Servizio LLM (OpenAI)*],
+    [*Servizio LLM*],
     [Servizio esterno di Intelligenza Artificiale interrogato per l'analisi semantica della documentazione e la generazione dei suggerimenti di remediation.],
 
     [*Strumenti di Analisi*],
-    [Insieme degli strumenti terzi (es. #def[OWASP ZAP], #def[SonarQube], #def[Semgrep]) invocati dal sistema per l'esecuzione verticale delle scansioni di sicurezza e qualità.],
+    [Insieme degli strumenti terzi invocati dal sistema per l'esecuzione verticale delle scansioni di sicurezza e qualità.],
   ),
   caption: [Definizione e gerarchia degli Attori],
 )
 
 == Lista
-
 === UC1: Registrazione a CodeGuardian <UC1>
 #useCase(
   attore: "Utente non registrato",
   pre: [
-    - L'utente si trova nella sezione di registrazione
+    - L'utente non possiede le credenziali di un account CodeGuardian.
+    - L'utente ha selezionato il comando di registrazione dalla pagina principale.
   ],
   post: [
-    - L'utente ha completato con successo la registrazione e possiede le credenziali di un account CodeGuardian censito nel Sistema
+    - L'utente visualizza un messaggio di conferma dell'avvenuta creazione dell'account CodeGuardian.
+    - L'utente possiede le credenziali di un account CodeGuardian abilitate nel sistema.
   ],
   scenari: [
-    - L'utente inserisce un username #link(<UC1.1>)[#underline[\[UC1.1\]]]
-    - L'utente inserisce una email di riferimento #link(<UC1.2>)[#underline[\[UC1.2\]]]
-    - L'utente inserisce una password #link(<UC1.3>)[#underline[\[UC1.3\]]]
-    - L'utente conferma la registrazione #link(<UC1.4>)[#underline[\[UC1.4\]]]
+    - L'utente inserisce un username conforme e disponibile #link(<UC1.1>)[#underline[\[UC1.1\]]]
+    - L'utente inserisce una email valida e disponibile #link(<UC1.2>)[#underline[\[UC1.2\]]]
+    - L'utente inserisce una password valida #link(<UC1.3>)[#underline[\[UC1.3\]]]
+    - L'utente seleziona il comando di conferma finale per completare la procedura.
   ],
   inclusioni: [
-    - #link(<UC1.1>)[#underline[\[UC1.1\]]] // Inserimento Username
-    - #link(<UC1.2>)[#underline[\[UC1.2\]]] // Inserimento Email
-    - #link(<UC1.3>)[#underline[\[UC1.3\]]] // Inserimento Password
-    - #link(<UC1.4>)[#underline[\[UC1.4\]]] // Conferma Registrazione
+    - #link(<UC1.1>)[#underline[\[UC1.1\]]]
+    - #link(<UC1.2>)[#underline[\[UC1.2\]]]
+    - #link(<UC1.3>)[#underline[\[UC1.3\]]]
   ],
   estensioni: [
     - Nessuna
@@ -592,240 +597,169 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente non registrato",
   pre: [
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
+    - L'utente sta eseguendo la procedura di registrazione #link(<UC1>)[#underline[\[UC1\]]].
+    - L'utente visualizza il campo di inserimento per lo username.
   ],
   post: [
-    - L'utente ha inserito un username idoneo alla procedura di registrazione
+    - L'utente ha inserito uno username conforme ai vincoli di formato e inutilizzato.
   ],
   scenari: [
-    - L'utente inserisce lo username per la procedura di registrazione
-  ],
-  inclusioni: [
-    - Nessuna
+    - L'utente digita lo username scelto per identificare il proprio profilo.
   ],
   estensioni: [
-    - #link(<UC1.1.1>)[#underline[\[UC1.1.1\]]] // Username non conforme ai vincoli di formato
+    - #link(<UC1.1.1>)[#underline[\[UC1.1.1\]]] // Errore formato
+    - #link(<UC1.1.2>)[#underline[\[UC1.1.2\]]] // Errore disponibilità
   ],
-  trigger: "L'utente interagisce con la sezione di inserimento dello username durante la procedura di registrazione a CodeGuardian",
+  trigger: "L'utente interagisce con il campo di inserimento dello username",
 )[
   #useCaseDiagram("1_1", "UC1.1 - Inserimento username")
 ]
 
-===== UC1.1.1: Username non conforme ai vincoli di formato <UC1.1.1>
+===== UC1.1.1: Visualizzazione errore username non conforme <UC1.1.1>
 #useCase(
   attore: "Utente non registrato",
   pre: [
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
-    - Lo username inserito non è conforme ai vincoli di formato previsti dal Sistema
+    - L'utente ha inserito lo username nella schermata di registrazione #link(<UC1.1>)[#underline[\[UC1.1\]]].
+    - Lo username digitato non rispetta i vincoli di formato richiesti.
   ],
   post: [
-    - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
+    - L'utente visualizza un avviso testuale indicante l'errore di formato.
+    - L'utente ha nuovamente accesso al campo di inserimento per digitare un altro username.
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che l'username inserito non rispetta i vincoli di formato previsti dal Sistema
+    - L'utente visualizza un messaggio di errore in corrispondenza del campo username che specifica la non conformità del formato.
   ],
-  inclusioni: [
-    - Nessuna
+  trigger: "L'utente digita un valore non conforme ai vincoli di formato",
+)[]
+
+===== UC1.1.2: Visualizzazione errore username già in uso <UC1.1.2>
+#useCase(
+  attore: "Utente non registrato",
+  pre: [
+    - L'utente ha inserito lo username nella schermata di registrazione #link(<UC1.1>)[#underline[\[UC1.1\]]].
+    - Lo username digitato risulta già associato a un account CodeGuardian esistente.
   ],
-  estensioni: [
-    - Nessuna
+  post: [
+    - L'utente visualizza un avviso testuale indicante l'indisponibilità dello username.
+    - L'utente ha nuovamente accesso al campo di inserimento per digitare un altro username.
   ],
-  trigger: "L'utente ha inserito un username non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento dell'username",
-)[
-]
+  scenari: [
+    - L'utente visualizza un messaggio di errore che segnala l'indisponibilità del nome utente scelto.
+  ],
+  trigger: "L'utente inserisce uno username che non risulta univoco",
+)[]
 
 ==== UC1.2: Inserimento email <UC1.2>
 #useCase(
   attore: "Utente non registrato",
   pre: [
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
+    - L'utente sta eseguendo la procedura di registrazione #link(<UC1>)[#underline[\[UC1\]]].
+    - L'utente visualizza il campo di inserimento per l'indirizzo email.
   ],
   post: [
-    - L'utente ha inserito un'email idonea alla procedura di registrazione
+    - L'utente ha inserito un'email valida e disponibile per la registrazione.
   ],
   scenari: [
-    - L'utente inserisce l'email per la procedura di registrazione
-  ],
-  inclusioni: [
-    - Nessuna
+    - L'utente inserisce l'email di riferimento per l'account.
   ],
   estensioni: [
-    - #link(<UC1.2.1>)[#underline[\[UC1.2.1\]]] // Email non conforme ai vincoli di formato
+    - #link(<UC1.2.1>)[#underline[\[UC1.2.1\]]] // Errore formato
+    - #link(<UC1.2.2>)[#underline[\[UC1.2.2\]]] // Errore disponibilità
   ],
-  trigger: "L'utente interagisce con la sezione di inserimento dell'email durante la procedura di registrazione a CodeGuardian",
+  trigger: "L'utente interagisce con il campo di inserimento dell'email",
 )[
   #useCaseDiagram("1_2", "UC1.2 - Inserimento email")
 ]
 
-===== UC1.2.1: Email inserita non valida <UC1.2.1>
+===== UC1.2.1: Visualizzazione errore email non valida <UC1.2.1>
 #useCase(
   attore: "Utente non registrato",
   pre: [
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
-    - L'email inserita non è conforme ai vincoli di formato previsti dal Sistema
+    - L'utente sta inserendo l'email nella schermata di registrazione #link(<UC1.2>)[#underline[\[UC1.2\]]].
+    - L'email inserita non rispetta i vincoli di formato previsti.
   ],
   post: [
-    - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
+    - L'utente visualizza un avviso testuale indicante l'errore di formato.
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che l'email inserita non rispetta i vincoli di formato previsti dal Sistema
+    - L'utente visualizza un messaggio di errore relativo alla non validità del formato email.
   ],
-  inclusioni: [
-    - Nessuna
+  trigger: "L'utente inserisce un'email non conforme ai vincoli di formato",
+)[]
+
+===== UC1.2.2: Visualizzazione errore email già in uso <UC1.2.2>
+#useCase(
+  attore: "Utente non registrato",
+  pre: [
+    - L'utente sta inserendo l'email nella schermata di registrazione #link(<UC1.2>)[#underline[\[UC1.2\]]].
+    - L'email inserita risulta già associata a un account esistente.
   ],
-  estensioni: [
-    - Nessuna
+  post: [
+    - L'utente visualizza un avviso testuale indicante che l'email è già registrata.
   ],
-  trigger: "L'utente ha inserito un'email non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento dell'email",
-)[
-]
+  scenari: [
+    - L'utente visualizza un messaggio di errore che segnala l'indisponibilità dell'email scelta.
+  ],
+  trigger: "L'utente inserisce un'email già presente nel sistema",
+)[]
 
 ==== UC1.3: Inserimento password <UC1.3>
 #useCase(
   attore: "Utente non registrato",
   pre: [
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
+    - L'utente sta eseguendo la procedura di registrazione #link(<UC1>)[#underline[\[UC1\]]].
+    - L'utente visualizza il campo per la password.
   ],
   post: [
-    - L'utente ha inserito una password idonea alla procedura di registrazione
+    - L'utente ha inserito una password conforme ai criteri di sicurezza.
   ],
   scenari: [
-    - L'utente inserisce la password per la procedura di registrazione
-  ],
-  inclusioni: [
-    - Nessuna
+    - L'utente inserisce la chiave d'accesso per il proprio account.
   ],
   estensioni: [
-    - #link(<UC1.3.1>)[#underline[\[UC1.3.1\]]] // Password non conforme ai vincoli di formato
+    - #link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]
   ],
-  trigger: "L'utente interagisce con la sezione di inserimento della password durante la procedura di registrazione a CodeGuardian",
+  trigger: "L'utente interagisce con il campo di inserimento della password",
 )[
   #useCaseDiagram("1_3", "UC1.3 - Inserimento password")
 ]
 
-===== UC1.3.1: Password inserita non conforme ai vincoli di formato <UC1.3.1>
+===== UC1.3.1: Visualizzazione errore password non conforme <UC1.3.1>
 #useCase(
   attore: "Utente non registrato",
   pre: [
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
-    - La password inserita non è conforme ai vincoli di formato previsti dal Sistema
+    - L'utente sta inserendo la password nella schermata di registrazione #link(<UC1.3>)[#underline[\[UC1.3\]]].
+    - La password inserita non rispetta i criteri di sicurezza richiesti.
   ],
   post: [
-    - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
+    - L'utente visualizza un avviso testuale indicante la non conformità della password.
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che la password inserita non rispetta i vincoli di formato previsti dal Sistema
+    - L'utente visualizza un messaggio di errore che specifica la debolezza della password.
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente ha inserito una password non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento della password",
+  trigger: "L'utente inserisce una password non conforme ai vincoli di formato",
 )[]
-
-==== UC1.4: Conferma registrazione <UC1.4>
-#useCase(
-  attore: "Utente non registrato",
-  pre: [
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
-    - L'utente ha inserito uno username conforme ai vincoli di formato previsti dal Sistema #link(<UC1.1>)[#underline[\[UC1.1\]]]
-    - L'utente ha inserito un'email conforme ai vincoli di formato previsti dal Sistema #link(<UC1.2>)[#underline[\[UC1.2\]]]
-    - L'utente ha inserito una password conforme ai vincoli di formato previsti dal Sistema #link(<UC1.3>)[#underline[\[UC1.3\]]]
-  ],
-  post: [
-    - L'utente ha completato con successo la registrazione e possiede le credenziali di un account CodeGuardian censito nel Sistema
-  ],
-  scenari: [
-    - L'utente conferma la registrazione a Codeguardian
-    - Il Sistema verifica che lo username inserito non sia già censito nel Sistema CodeGuardian
-    - Il Sistema verifica che l'email inserita non sia già censita nel Sistema CodeGuardian
-    - Il Sistema crea un nuovo account CodeGuardian associato ai dati inseriti dall'utente, notificando l'utente del successo
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC1.4.1>)[#underline[\[UC1.4.1\]]] // Username già censito nel Sistema
-    - #link(<UC1.4.2>)[#underline[\[UC1.4.2\]]] // Email già censita nel Sistema
-  ],
-  trigger: "L'utente interagisce con la sezione di conferma della registrazione a CodeGuardian",
-)[
-  #useCaseDiagram("1_4", "UC1.4 - Conferma registrazione")
-]
-
-===== UC1.4.1: Username inserito già censito nel Sistema <UC1.4.1>
-#useCase(
-  attore: "Utente non registrato",
-  pre: [
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
-    - L'utente ha inserito uno username conforme ai vincoli di formato previsti dal Sistema #link(<UC1.1>)[#underline[\[UC1.1\]]]
-    - L'utente ha inserito un'email conforme ai vincoli di formato previsti dal Sistema #link(<UC1.2>)[#underline[\[UC1.2\]]]
-    - L'utente ha inserito una password conforme ai vincoli di formato previsti dal Sistema #link(<UC1.3>)[#underline[\[UC1.3\]]]
-    - Lo username inserito è già censito nel Sistema CodeGuardian
-  ],
-  post: [
-    - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
-  ],
-  scenari: [
-    - L'utente visualizza un messaggio di errore che indica che lo username inserito non è disponibile
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Lo username inserito è già censito nel Sistema",
-)[
-]
-
-===== UC1.4.2: Email inserita già censita nel Sistema <UC1.4.2>
-#useCase(
-  attore: "Utente non registrato",
-  pre: [
-    - L'utente sta eseguendo la procedura di registrazione a CodeGuardian
-    - L'utente ha inserito uno username conforme ai vincoli di formato previsti dal Sistema #link(<UC1.1>)[#underline[\[UC1.1\]]]
-    - L'utente ha inserito un'email conforme ai vincoli di formato previsti dal Sistema #link(<UC1.2>)[#underline[\[UC1.2\]]]
-    - L'utente ha inserito una password conforme ai vincoli di formato previsti dal Sistema #link(<UC1.3>)[#underline[\[UC1.3\]]]
-    - L'email inserita è già censita nel Sistema CodeGuardian
-  ],
-  post: [
-    - La procedura di registrazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
-  ],
-  scenari: [
-    - L'utente visualizza un messaggio di errore che indica che l'email inserita non è disponibile 
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'email inserita è già censita nel Sistema",
-)[
-]
-
 
 === UC2: Autenticazione a CodeGuardian <UC2>
 #useCase(
   attore: "Utente non autenticato",
   pre: [
-    - L'utente si trova nella sezione di login di CodeGuardian
+    - L'utente possiede le credenziali di accesso a un account CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
+    - L'utente non ha l'autorizzazione ad usufruire delle funzionalità di CodeGuardian
+    - L'utente ha selezionato il comando di accesso alla sezione di login.
   ],
   post: [
-    - L'utente è autenticato al Sistema CodeGuardian e può accedere alle funzionalità riservate agli utenti autenticati
+    - L'utente visualizza la conferma di avvenuta autenticazione.
+    - L'utente ha accesso alle funzionalità riservate della piattaforma.
   ],
   scenari: [
-    - L'utente inserisce lo username #link(<UC2.1>)[#underline[\[UC2.1\]]]
-    - L'utente inserisce la password #link(<UC2.2>)[#underline[\[UC2.2\]]]
-    - L'utente conferma l'inserimento delle credenziali #link(<UC2.3>)[#underline[\[UC2.3\]]]
+    - L'utente inserisce uno username conforme e censito #link(<UC2.1>)[#underline[\[UC2.1\]]]
+    - L'utente inserisce la password conforme e associata allo username #link(<UC2.2>)[#underline[\[UC2.2\]]]
+    - L'utente seleziona il comando di conferma per finalizzare l'accesso.
   ],
   inclusioni: [
-    - #link(<UC2.1>)[#underline[\[UC2.1\]]] // Inserimento username
-    - #link(<UC2.2>)[#underline[\[UC2.2\]]] // Inserimento password
-    - #link(<UC2.3>)[#underline[\[UC2.3\]]] // Conferma delle credenziali
+    - #link(<UC2.1>)[#underline[\[UC2.1\]]]
+    - #link(<UC2.2>)[#underline[\[UC2.2\]]]
   ],
   estensioni: [
     - Nessuna
@@ -839,358 +773,245 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente non autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di autenticazione a CodeGuardian
+    - L'utente sta eseguendo la procedura di autenticazione #link(<UC2>)[#underline[\[UC2\]]].
+    - L'utente visualizza il campo di inserimento per lo username.
   ],
   post: [
-    - L'utente ha inserito un username conforme ai vincoli di formato
+    - L'utente ha inserito uno username conforme ai vincoli di formato.
+    - Lo username inserito corrisponde a un account CodeGuardian esistente.
   ],
   scenari: [
-    - L'utente inserisce un username per la procedura di autenticazione
-  ],
-  inclusioni: [
-    - Nessuna
+    - L'utente digita lo username nel campo dedicato.
   ],
   estensioni: [
-    - #link(<UC2.1.1>)[#underline[\[UC2.1.1\]]] // Username non conforme ai vincoli di formato
+    - #link(<UC2.1.1>)[#underline[\[UC2.1.1\]]] // Errore formato
+    - #link(<UC2.1.2>)[#underline[\[UC2.1.2\]]] // Username non esistente
   ],
-  trigger: "L'utente interagisce con la sezione di inserimento dell'username durante la procedura di autenticazione a CodeGuardian",
+  trigger: "L'utente interagisce con il campo di inserimento dello username",
 )[
   #useCaseDiagram("2_1", "UC2.1 - Inserimento username")
 ]
 
-===== UC2.1.1: Username non conforme ai vincoli di formato <UC2.1.1>
+===== UC2.1.1: Visualizzazione errore username non conforme <UC2.1.1>
 #useCase(
   attore: "Utente non autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di autenticazione a CodeGuardian
-    - Lo username inserito non è conforme ai vincoli di formato previsti dal Sistema
+    - L'utente sta inserendo lo username nella schermata di login #link(<UC2.1>)[#underline[\[UC2.1\]]].
+    - Lo username digitato non rispetta i vincoli di formato richiesti.
   ],
   post: [
-    - La procedura di autenticazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
+    - L'utente visualizza un avviso testuale indicante l'errore di formato.
+    - L'utente ha nuovamente accesso al campo per correggere lo username.
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che l'username inserito non rispetta i vincoli di formato previsti dal Sistema per la procedura di autenticazione
+    - L'utente visualizza un messaggio di errore in corrispondenza del campo username che specifica la non conformità del valore inserito.
   ],
-  inclusioni: [
-    - Nessuna
+  trigger: "L'utente inserisce un valore non conforme ai vincoli di formato",
+)[]
+
+===== UC2.1.2: Visualizzazione errore username non esistente <UC2.1.2>
+#useCase(
+  attore: "Utente non autenticato",
+  pre: [
+    - L'utente sta inserendo lo username nella schermata di login #link(<UC2.1>)[#underline[\[UC2.1\]]].
+    - Lo username digitato non corrisponde ad alcun account CodeGuardian censito.
   ],
-  estensioni: [
-    - Nessuna
+  post: [
+    - L'utente visualizza un avviso testuale indicante l'invalidità delle credenziali.
   ],
-  trigger: "L'utente ha inserito un username non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento dello username",
-)[
-]
+  scenari: [
+    - L'utente visualizza un messaggio di errore che segnala l'invalidità dello username inserito.
+  ],
+  trigger: "L'utente inserisce uno username non presente nel sistema",
+)[]
 
 ==== UC2.2: Inserimento password <UC2.2>
 #useCase(
   attore: "Utente non autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di autenticazione a CodeGuardian
+    - L'utente ha inserito uno username esistente e conforme #link(<UC2.1>)[#underline[\[UC2.1\]]].
+    - L'utente visualizza il campo di inserimento per la password.
   ],
   post: [
-    - L'utente ha inserito una password conforme ai vincoli di formato
+    - L'utente ha inserito una password conforme ai vincoli di formato.
+    - La password inserita corrisponde a quella associata allo username fornito.
   ],
   scenari: [
-    - L'utente inserisce una password per la procedura di autenticazione
-  ],
-  inclusioni: [
-    - Nessuna
+    - L'utente digita la chiave d'accesso nel campo dedicato.
   ],
   estensioni: [
-    - #link(<UC2.2.1>)[#underline[\[UC2.2.1\]]] // Password non conforme ai vincoli di formato
+    - #link(<UC2.2.1>)[#underline[\[UC2.2.1\]]] // Errore formato
+    - #link(<UC2.2.2>)[#underline[\[UC2.2.2\]]] // Errore password errata
   ],
-  trigger: "L'utente interagisce con la sezione di inserimento della password durante la procedura di autenticazione a CodeGuardian",
+  trigger: "L'utente interagisce con il campo di inserimento della password",
 )[
   #useCaseDiagram("2_2", "UC2.2 - Inserimento password")
 ]
 
-===== UC2.2.1: Password non conforme ai vincoli di formato <UC2.2.1>
+===== UC2.2.1: Visualizzazione errore password non conforme <UC2.2.1>
 #useCase(
   attore: "Utente non autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di autenticazione a CodeGuardian
-    - La password non è conforme ai vincoli di formato previsti dal Sistema
+    - L'utente sta inserendo la password nella schermata di login #link(<UC2.2>)[#underline[\[UC2.2\]]].
+    - La password digitata non rispetta i vincoli di formato previsti.
   ],
   post: [
-    - La procedura di autenticazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
+    - L'utente visualizza un avviso testuale indicante l'errore di formato.
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che la password inserita non rispetta i vincoli di formato previsti dal Sistema per la procedura di autenticazione
+    - L'utente visualizza un messaggio di errore che specifica la non conformità della password ai criteri di sistema.
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente ha inserito una password non conforme ai vincoli di formato previsti dal Sistema durante l'inserimento della password",
-)[
-]
+  trigger: "L'utente inserisce una password formalmente non valida",
+)[]
 
-==== UC2.3: Conferma delle credenziali <UC2.3>
+===== UC2.2.2: Visualizzazione errore password errata <UC2.2.2>
 #useCase(
   attore: "Utente non autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di autenticazione a CodeGuardian
-    - L'utente ha inserito un username conforme ai vincoli di formato #link(<UC2.1>)[#underline[\[UC2.1\]]]
-    - L'utente ha inserito una password conforme ai vincoli di formato #link(<UC2.2>)[#underline[\[UC2.2\]]]
+    - L'utente sta inserendo la password nella schermata di login #link(<UC2.2>)[#underline[\[UC2.2\]]].
+    - La password digitata non corrisponde a quella associata allo username fornito.
   ],
   post: [
-    - L'utente è autenticato al Sistema CodeGuardian
+    - L'utente visualizza un avviso testuale indicante l'invalidità delle credenziali.
   ],
   scenari: [
-    - L'utente conferma l'inserimento delle credenziali
-    - Il sistema verifica che l'username sia censito nel Sistema
-    - Il sistema verifica che la password corrisponda all'username inserito
-    - Un messaggio comunica all'utente che la procedura di autenticazione è stata completata con successo
+    - L'utente visualizza un messaggio di errore che segnala l'errata combinazione delle credenziali.
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC2.3.1>)[#underline[\[UC2.3.1\]]] // Username non censito nel Sistema
-    - #link(<UC2.3.2>)[#underline[\[UC2.3.2\]]] // Password non corretta
-  ],
-  trigger: "L'utente conferma l'inserimento delle credenziali durante la procedura di autenticazione a CodeGuardian",
-)[
-  #useCaseDiagram("2_3", "UC2.3: Conferma delle credenziali")
-]
+  trigger: "L'utente inserisce una password non corretta",
+)[]
 
-===== UC2.3.1: Username non censito nel Sistema <UC2.3.1>
-#useCase(
-  attore: "Utente non autenticato",
-  pre: [
-    - L'utente sta eseguendo la procedura di autenticazione a CodeGuardian
-    - L'utente ha inserito un username conforme ai vincoli di formato #link(<UC2.1>)[#underline[\[UC2.1\]]]
-    - L'utente ha inserito una password conforme ai vincoli di formato #link(<UC2.2>)[#underline[\[UC2.2\]]]
-    - Lo username inserito non è censito nel Sistema
-  ],
-  post: [
-    - La procedura di autenticazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
-  ],
-  scenari: [
-    - Il sistema non trova lo username inserito tra quelli censiti nel Sistema
-    - L'utente visualizza un messaggio di errore che indica che le credenziali inserite non sono valide per la procedura di autenticazione
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Lo username inserito non viene trovato nel Sistema",
-)[
-]
-
-===== UC2.3.2: Password non corretta <UC2.3.2>
-#useCase(
-  attore: "Utente non autenticato",
-  pre: [
-    - L'utente sta eseguendo la procedura di autenticazione a CodeGuardian
-    - L'utente ha inserito un username conforme ai vincoli di formato #link(<UC2.1>)[#underline[\[UC2.1\]]]
-    - L'utente ha inserito una password conforme ai vincoli di sistema #link(<UC2.2>)[#underline[\[UC2.2\]]]
-    - L'utente ha inserito un username censito nel Sistema
-    - La password inserita non corrisponde a quella associata all'username nel Sistema
-  ],
-  post: [
-    - La procedura di autenticazione non viene finalizzata e il Sistema rimane nello stato di inserimento dati
-  ],
-  scenari: [
-    - Il sistema rileva che la password inserita non corrisponde a quella associata all'username nel Sistema
-    - L'utente visualizza un messaggio di errore che indica che le credenziali inserite non sono valide per la procedura di autenticazione
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "La password inserita non corrisponde a quella associata all'username nel Sistema",
-)[
-]
-
-=== UC3: Collegamento account GitHub con account CodeGuardian <UC3>
+=== UC3: Collegamento account GitHub <UC3>
 #useCase(
   attore: "Utente autenticato",
   attori_secondari: "GitHub",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente non ha collegato un account GitHub al sistema CodeGuardian
-    - L'utente si trova nella sezione di collegamento account GitHub in CodeGuardian
+    - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]].
+    - L'utente non ha associato un account GitHub al proprio profilo CodeGuardian.
+    - L'utente ha selezionato la sezione dedicata alle integrazioni esterne.
   ],
   post: [
-    - L'utente ha collegato con successo un account GitHub al proprio account CodeGuardian, abilitando la condivisione di informazioni tra i due sistemi
+    - L'utente visualizza la conferma dell'avvenuto collegamento tra gli account.
+    - L'account GitHub risulta associato al profilo CodeGuardian dell'utente.
   ],
   scenari: [
-    - L'utente accede alla sezione dedicata al collegamento del proprio account GitHub
-    - L'utente visualizza l'avviso di reindirizzamento verso GitHub #link(<UC3.1>)[#underline[\[UC3.1\]]]
-    - L'utente viene reindirizzato a GitHub per completare l'autorizzazione
-    - L'utente autorizza GitHub a condividere le informazioni necessarie con CodeGuardian
-    - Il sistema controlla che il processo di autorizzazione sia andato a buon fine e associa gli account #link(<UC3.2>)[#underline[\[UC3.2\]]]
-    - Il sistema conferma all'utente il successo dell'operazione
+    - L'utente interagisce con l'avviso di reindirizzamento esterno #link(<UC3.1>)[#underline[\[UC3.1\]]]
+    - L'utente esegue le operazioni di autorizzazione sulla piattaforma esterna GitHub.
+    - L'utente visualizza l'esito della procedura di associazione #link(<UC3.2>)[#underline[\[UC3.2\]]]
   ],
   inclusioni: [
-    - #link(<UC3.1>)[#underline[\[UC3.1\]]] // Visualizzazione avviso redirect
-    - #link(<UC3.2>)[#underline[\[UC3.2\]]] // Controllo processo di autorizzazione
+    - #link(<UC3.1>)[#underline[\[UC3.1\]]]
+    - #link(<UC3.2>)[#underline[\[UC3.2\]]]
   ],
   estensioni: [
-    - #link(<UC3.3>)[#underline[\[UC3.3\]]] // L'utente rifiuta l'autorizzazione su GitHub
+    - Nessuna
   ],
-  trigger: "L'utente autenticato seleziona la sezione di collegamento account GitHub in CodeGuardian",
+  trigger: "L'utente richiede il collegamento del proprio account GitHub",
 )[
-  #useCaseDiagram("3", "UC3 - Collegamento account CodeGuardian con account GitHub")
+  #useCaseDiagram("3", "UC3 - Collegamento account GitHub")
 ]
 
-==== UC3.1: Visualizzazione avviso redirect <UC3.1>
+==== UC3.1: Interazione con avviso di reindirizzamento <UC3.1>
 #useCase(
   attore: "Utente autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di collegamento dell'account di CodeGuardian con l'account di GitHub
+    - L'utente ha avviato la procedura di collegamento account #link(<UC3>)[#underline[\[UC3\]]].
   ],
   post: [
-    - L'utente ha confermato di essere consapevole che verrà rimandato a GitHub per l'autorizzazione
+    - L'utente visualizza la pagina di autorizzazione sulla piattaforma esterna GitHub.
   ],
   scenari: [
-    - L'utente visualizza l'avviso di redirect verso GitHub
-  ],
-  inclusioni: [
-    - Nessuna
+    - L'utente visualizza un messaggio informativo relativo al trasferimento temporaneo su GitHub.
+    - L'utente seleziona il comando per procedere con il reindirizzamento.
   ],
   estensioni: [
-    - #link(<UC3.1.1>)[#underline[\[UC3.1.1\]]] // L’utente rifiuta il collegamento
+    - #link(<UC3.1.1>)[#underline[\[UC3.1.1\]]] // Rifiuto preventivo
   ],
-  trigger: "L'utente visualizza la sezione di collegamento account e interagisce con il messaggio di avviso",
-)[
-  #useCaseDiagram("3_1", "UC3.1 - Visualizzazione avviso redirect")
-]
+  trigger: "L'utente seleziona l'opzione di collegamento account GitHub",
+)[]
 
-===== UC3.1.1: Utente rifiuta il collegamento a GitHub <UC3.1.1>
+===== UC3.1.1: Visualizzazione annullamento reindirizzamento <UC3.1.1>
 #useCase(
   attore: "Utente autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di collegamento dell'account di CodeGuardian con l'account di GitHub
-    - L'utente ha interagito con l'avviso di reindirizzamento a GitHub, rifiutando il collegamento
+    - L'utente visualizza l'avviso di trasferimento a piattaforma esterna #link(<UC3.1>)[#underline[\[UC3.1\]]].
   ],
   post: [
-    - La procedura di collegamento account GitHub non viene finalizzata e il Sistema rimane nello stato di attesa di un nuovo tentativo
+    - L'utente visualizza nuovamente la sezione integrazioni di CodeGuardian senza essere reindirizzato.
   ],
   scenari: [
-    - L'utente visualizza un messaggio che indica che il collegamento degli accounts non è stato completato
+    - L'utente seleziona il comando per annullare l'operazione di collegamento.
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente seleziona l'opzione di annullamento nel messaggio di avviso",
-)[
-]
+  trigger: "L'utente rifiuta il reindirizzamento a GitHub",
+)[]
 
-==== UC3.2: Controllo processo di autorizzazione e collegamento account <UC3.2>
+==== UC3.2: Visualizzazione esito associazione account <UC3.2>
 #useCase(
   attore: "Utente autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di collegamento dell'account di CodeGuardian con l'account di GitHub
-    - L'utente ha confermato di voler essere reindirizzato a GitHub #link(<UC3.1>)[#underline[\[UC3.1\]]]
-    - L'utente ha completato la sezione di reindirizzamento a GitHub autorizzando GitHub a condividere le informazioni necessarie con CodeGuardian
-    - Il sistema ha ricevuto il codice identificativo del profilo GitHub dell'utente
+    - L'utente ha interagito con la piattaforma esterna GitHub a seguito del reindirizzamento #link(<UC3.1>)[#underline[\[UC3.1\]]].
+    - L'utente è tornato alla piattaforma CodeGuardian.
   ],
   post: [
-    - Il controllo del processo di autorizzazione è stato completato con successo e l'account GitHub è stato collegato all'account CodeGuardian dell'utente
+    - L'utente visualizza l'esito dell'operazione di associazione.
   ],
   scenari: [
-    - Il sistema riceve il codice identificativo valido del profilo GitHub dell'utente
-    - Il sistema verifica che il codice ricevuto non sia già associato a un altro account CodeGuardian nel sistema
-    - Il sistema collega l'account GitHub all'account CodeGuardian dell'utente
-  ],
-  inclusioni: [
-    - Nessuna
+    - L'utente visualizza un messaggio di conferma per l'avvenuta sincronizzazione tra l'account CodeGuardian e il profilo GitHub.
   ],
   estensioni: [
-    - #link(<UC3.2.1>)[#underline[\[UC3.2.1\]]] // Codice non ricevuto o formato non valido
-    - #link(<UC3.2.2>)[#underline[\[UC3.2.2\]]] // Codice già associato a un altro utente censito nel Sistema
+    - #link(<UC3.2.1>)[#underline[\[UC3.2.1\]]] // Errore tecnico/dati mancanti
+    - #link(<UC3.2.2>)[#underline[\[UC3.2.2\]]] // Account già in uso
+    - #link(<UC3.2.3>)[#underline[\[UC3.2.3\]]] // Rifiuto autorizzazione su GitHub
   ],
-  trigger: "L'utente conferma il collegamento e viene reindirizzato a GitHub",
-)[
-  #useCaseDiagram("3_2", "UC3.2 - Controllo processo di autorizzazione e collegamento account")
-]
+  trigger: "L'utente torna su CodeGuardian dopo l'interazione con GitHub",
+)[]
 
-===== UC3.2.1: Codice GitHub non ricevuto o formato non valido <UC3.2.1>
+===== UC3.2.1: Visualizzazione errore sincronizzazione fallita <UC3.2.1>
 #useCase(
   attore: "Utente autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di collegamento dell'account di CodeGuardian con l'account di GitHub
-    - L'utente ha confermato di voler essere reindirizzato a GitHub #link(<UC3.1>)[#underline[\[UC3.1\]]]
-    - L'utente ha completato la sezione di reindirizzamento a GitHub autorizzando GitHub a condividere le informazioni necessarie con CodeGuardian
-    - Il sistema ha ricevuto il codice identificativo del profilo GitHub dell'utente in un formato non valido o non ha ricevuto alcun codice
+    - L'utente è tornato su CodeGuardian a seguito della procedura esterna #link(<UC3.2>)[#underline[\[UC3.2\]]].
+    - I dati di autorizzazione necessari non sono stati ricevuti correttamente.
   ],
   post: [
-    - La procedura di collegamento account GitHub non viene finalizzata e il Sistema rimane nello stato di attesa di un nuovo tentativo
+    - L'utente visualizza un messaggio di errore che invita a ripetere la procedura.
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che non è stato possibile ricevere un codice valido da GitHub
+    - L'utente visualizza un avviso relativo al fallimento tecnico della comunicazione.
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Il sistema rileva che il codice ricevuto da GitHub è mancante o non conforme al formato previsto",
-)[
-]
+  trigger: "Mancata ricezione delle informazioni di autorizzazione da GitHub",
+)[]
 
-===== UC3.2.2: Codice già associato ad un altro utente censito nel Sistema <UC3.2.2>
+===== UC3.2.2: Visualizzazione errore account già associato <UC3.2.2>
 #useCase(
   attore: "Utente autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di collegamento dell'account di CodeGuardian con l'account di GitHub
-    - L'utente ha confermato di voler essere reindirizzato a GitHub #link(<UC3.1>)[#underline[\[UC3.1\]]]
-    - L'utente ha completato la sezione di reindirizzamento a GitHub autorizzando GitHub a condividere le informazioni necessarie con CodeGuardian
-    - Il codice identificativo ricevuto da GitHub è già associato a un altro account CodeGuardian nel sistema
+    - L'utente è tornato su CodeGuardian a seguito della procedura esterna #link(<UC3.2>)[#underline[\[UC3.2\]]].
+    - L'identificativo GitHub ricevuto risulta già collegato a un altro profilo CodeGuardian esistente.
   ],
   post: [
-    - La procedura di collegamento account GitHub non viene finalizzata e il Sistema rimane nello stato di attesa di un nuovo tentativo
+    - L'utente visualizza un avviso indicante che l'account GitHub è già associato a un altro utente.
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che l'account GitHub è già associato a un altro account CodeGuardian
+    - L'utente visualizza un messaggio di errore che specifica l'impossibilità di procedere con l'associazione.
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Il sistema rileva che l'account GitHub è già presente nel database associato a un altro account CodeGuardian",
-)[
-]
+  trigger: "L'account GitHub fornito è già presente nel database",
+)[]
 
-==== UC3.3: L'utente rifiuta l'autorizzazione su GitHub <UC3.3>
+===== UC3.2.3: Visualizzazione rifiuto autorizzazione esterna <UC3.2.3>
 #useCase(
   attore: "Utente autenticato",
-  attori_secondari: "GitHub",
   pre: [
-    - L'utente sta eseguendo la procedura di collegamento dell'account di CodeGuardian con l'account di GitHub
-    - L'utente ha confermato di voler essere reindirizzato a GitHub #link(<UC3.1>)[#underline[\[UC3.1\]]]
-    - L'utente è stato reindirizzato a GitHub con successo
-    - L'utente ha rifiutato di autorizzare GitHub a condividere le informazioni necessarie con CodeGuardian
+    - L'utente è tornato su CodeGuardian a seguito della procedura esterna #link(<UC3.2>)[#underline[\[UC3.2\]]].
+    - L'utente ha negato il consenso alla condivisione dei dati sulla piattaforma GitHub.
   ],
   post: [
-    - La procedura di collegamento account GitHub non viene finalizzata e il Sistema rimane nello stato di attesa di un nuovo tentativo
+    - L'utente visualizza un messaggio di avviso relativo al mancato consenso dell'autorizzazione.
   ],
   scenari: [
-    - L'utente visualizza un messaggio che indica che il collegamento degli accounts non è stato completato
+    - L'utente visualizza un avviso che informa che l'associazione non è avvenuta a causa del rifiuto espresso su GitHub.
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente rifiuta l'autorizzazione su GitHub durante la procedura di collegamento account",
-)[
-]
+  trigger: "L'utente nega i permessi sulla piattaforma GitHub",
+)[]
 
 === UC4: Richiesta analisi repository GitHub <UC4>
 #useCase(
@@ -1887,7 +1708,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza l'insieme di sezioni di valutazione dell'analisi del codice repository GitHub
     - L'utente visualizza il report di analisi statica del codice repository GitHub #link(<UC9.1>)[#underline[\[UC9.1\]]]
     - L'utente visualizza l'analisi delle librerie e dipendenze del codice repository GitHub #link(<UC9.2>)[#underline[\[UC9.2\]]]
-    - L'utente visualizza il report di analisi della sicurezza #def("OWASP") del codice repository GitHub #link(<UC9.3>)[#underline[\[UC9.3\]]]
+    - L'utente visualizza il report di analisi della sicurezza OWASP del codice repository GitHub #link(<UC9.3>)[#underline[\[UC9.3\]]]
     - L'utente visualizza il numero totale di vulnerabilità individuate nel report di analisi codice repository GitHub #link(<UC9.4>)[#underline[\[UC9.4\]]]
   ],
   inclusioni: [
@@ -1949,7 +1770,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi librerie e dipendenze del codice repository GitHub",
 )[]
 
-==== UC9.3: Visualizzazione report analisi della sicurezza #def("OWASP") del codice repository GitHub <UC9.3>
+==== UC9.3: Visualizzazione report analisi della sicurezza OWASP del codice repository GitHub <UC9.3>
 #useCase(
   attore: UAA,
   pre: [
@@ -2666,37 +2487,125 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente clicca sul pulsante di visualizzazione remediation relativo all'issue",
 )[]
 
-=== UCx: Accesso al profilo CodeGuardian
-=== UCx: Recupero password profilo Codeguardian
-
-//USE CASE DEL BACKEND
-// UC17
-=== UC17 Creazione dell'ambiente sandbox <UC17>
+//USE CASE DEL BACK-END
+=== UC17: Verifica accessibilità repository GitHub <UC17>
 #useCase(
   attore: "Orchestratore",
-  attori_secondari: "Docker",
+  attori_secondari: "GitHub",
   pre: [
-    //- L'utente autenticato avanzato ha effettuato la connessiono del proprio account di GitHub a CodeGuardian #link(<UC3>)[#underline[\[UC3\]]]
-    #TODO("check precondizione tolta")
-    - L'utente autenticato avanzato ha richiesto l'avvio dell'analisi del proprio repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
+    - L'orchestratore ha ricevuto una richiesta di analisi contenente un URL GitHub da parte di un utente autorizzato di CodeGuardian //UC di avvio analisi.
   ],
   post: [
-    - L'ambiente sandbox è stato correttamente creato ed è pronto all'uso
+    - L'accessibilità della repository è stata accertata e l'orchestratore dispone dei permessi di lettura per avviare la analisi.
   ],
   scenari: [
-    - Il sistema Front-end riceve la richiesta di analisi del repository
-    - Il sistema Front-end comunica all'orchestratore la richiesta di analisi del repository
-    - L'orchestratore avvia la creazione dell'ambiente sandbox tramite immagine docker
+    - L'orchestratore stabilisce una connessione con la piattaforma GitHub #link(<UC17.1>)[#underline[\[UC17.1\]]]
+    - L'orchestratore esegue la ricerca della repository per determinarne la disponibilità #link(<UC17.2>)[#underline[\[UC17.2\]]]
   ],
   inclusioni: [
-    - Nessuna
+    - #link(<UC17.1>)[#underline[\[UC17.1\]]]
+    - #link(<UC17.2>)[#underline[\[UC17.2\]]]
   ],
   estensioni: [
-    - #link(<UC17.1>)[#underline[\[UC17.1\]]]
+    - Nessuna
   ],
-  trigger: "L'orchestratore riceve dal sistema Front-end la richiesta di avvio dell'analisi",
-)[#useCaseDiagram("17", "UC17 - Creazione dell'ambiente sandbox")]
+  trigger: "L'Orchestratore riceve una richiesta di analisi di un repository esterno",
+)[
+  #useCaseDiagram("17", "UC17 - Verifica accessibilità repository")
+]
 
+==== UC17.1: Comunicazione con GitHub <UC17.1>
+#useCase(
+  attore: "Orchestratore",
+  attori_secondari: "GitHub",
+  pre: [
+    - L'Orchestratore ha avviato la procedura di verifica #link(<UC17>)[#underline[\[UC17\]]].
+  ],
+  post: [
+    - Il canale di comunicazione con la piattaforma esterna è stabilito correttamente.
+  ],
+  scenari: [
+    - L'Orchestratore interroga i servizi di GitHub per verificarne l'operatività.
+  ],
+  estensioni: [
+    - #link(<UC17.1.1>)[#underline[\[UC17.1.1\]]] // Mancata risposta
+  ],
+  trigger: "L'Orchestratore tenta di contattare GitHub",
+)[
+  #useCaseDiagram("17_1", "UC17.1 - Comunicazione con GitHub")
+]
+
+===== UC17.1.1: Errore di comunicazione con GitHub <UC17.1.1>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - L'Orchestratore ha tentato di contattare GitHub #link(<UC17.1>)[#underline[\[UC17.1\]]].
+    - Il servizio esterno non risponde o restituisce un errore di rete.
+  ],
+  post: [
+    - La procedura viene interrotta e l'errore di connessione viene tracciato.
+  ],
+  scenari: [
+    - L'Orchestratore rileva l'impossibilità di raggiungere i servizi esterni di GitHub.
+  ],
+  trigger: "Mancata risposta da parte di GitHub",
+)[]
+
+==== UC17.2: Ricerca della repository <UC17.2>
+#useCase(
+  attore: "Orchestratore",
+  attori_secondari: "GitHub",
+  pre: [
+    - La comunicazione con GitHub è stata stabilita con successo #link(<UC17.1>)[#underline[\[UC17.1\]]].
+  ],
+  post: [
+    - L'Orchestratore ha individuato la repository e ne ha convalidato l'accesso.
+  ],
+  scenari: [
+    - L'Orchestratore ricerca la repository come risorsa pubblica.
+  ],
+  estensioni: [
+    (UC17.2.1)
+  ],
+  trigger: "L'Orchestratore interroga GitHub per i metadati del repository",
+)[]
+
+==== UC17.2.1: Accesso a repository privata <UC17.2.1>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - La repository non risulta accessibile pubblicamente #link(<UC17.2>)[#underline[\[UC17.2\]]].
+  ],
+  post: [
+    - L'Orchestratore ha ottenuto l'accesso alla risorsa tramite credenziali autorizzate.
+  ],
+  scenari: [
+    - L'Orchestratore recupera le credenziali GitHub associate all'utente richiedente.
+    - L'Orchestratore utilizza, in alternativa, il token di accesso fornito per la sessione.
+  ],
+  estensioni: [
+    - #link(<UC17.2.1.1>)[#underline[\[UC17.2.1.1\]]] // Repository inaccessibile
+  ],
+  trigger: "La repository cercata richiede autorizzazione per l'accesso",
+)[]
+
+===== UC17.2.1.1: Repository inaccessibile <UC17.2.1.1>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - L'Orchestratore ha tentato l'accesso pubblico e privato (credenziali/token).
+    - Nessun metodo di autorizzazione ha fornito l'accesso alla risorsa.
+  ],
+  post: [
+    - La procedura di analisi viene annullata per mancanza di permessi.
+  ],
+  scenari: [
+    - L'Orchestratore rileva il diniego definitivo di accesso da parte di GitHub per la risorsa specificata.
+  ],
+  trigger: "Esaurimento dei tentativi di accesso autorizzato",
+)[]
+
+/*
 ==== UC17.1 Errore durante la creazione dell'ambiente sandbox <UC17.1>
 #useCase(
   attore: "Orchestratore",
@@ -2786,7 +2695,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'orchestratore riceve dal sistema Front-end la richiesta di analisi completa",
 )[]
-==== UC18.2 Richieste specifiche sull'analisi da parte del frontend <UC18.2>
+==== UC18.2 Richieste specifiche sull'analisi da parte del front-end <UC18.2>
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -2797,7 +2706,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - Il sistema Front-end comunica all'orchestratore le specifiche richieste dell'utente rispetto alle aree da analizzare
-    - L'orchestratore controlla la pre-esistenza del repository da analizzare nel database
+    - L'orchestratore controlla la pre-esistenza del repository da analizzare nel #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#database")[#def("Database")]
     - L'orchestratore, una volta compresa la richiesta, avvia l'analisi specifica
   ],
   inclusioni: [
@@ -2830,6 +2739,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'orchestratore non ha trovato la repository nel database",
 )[]
+*/
 
 /// USE CASE DELLE ANALISI
 === UC19: Analisi vulnerabilità dipendenze <UC19>
@@ -2983,7 +2893,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza l'elenco dei possibili segreti con dettagli e azioni
   ],
   scenari: [
-    - L'utente apre il pannello dei risultati; il frontend richiede il report al backend e mostra i dettagli con azioni suggerite
+    - L'utente apre il pannello dei risultati; il front-end richiede il report al back-end e mostra i dettagli con azioni suggerite
   ],
   inclusioni: [
     - Nessuna
@@ -3001,7 +2911,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Manifest delle dipendenze disponibile
   ],
   post: [
-    - L'utente riceve un report di compatibilità delle licenze e i rischi associati
+    - L'utente riceve un report di compatibilità delle licenze e i #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#rischio")[#def("Rischi")] associati
     - L'utente conferma le azioni consigliate
   ],
   scenari: [
@@ -3251,7 +3161,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza i suggerimenti con snippet e azioni
   ],
   scenari: [
-    - L'utente apre il pannello refactor; il frontend richiede i suggerimenti e mostra snippet con azioni possibili
+    - L'utente apre il pannello refactor; il front-end richiede i suggerimenti e mostra snippet con azioni possibili
   ],
   inclusioni: [
     - Nessuna
@@ -3352,7 +3262,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 )[
 ]
 
-=== UC26: Analisi test e coverage <UC26>
+=== UC26: Analisi test e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-coverage")[#def("Coverage")] <UC26>
 #useCase(
   attore: UAA,
   pre: [
@@ -3429,7 +3339,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza il report dettagliato con gap e suggerimenti di test
   ],
   scenari: [
-    - L'utente apre il pannello dei report; il frontend richiede il report al backend e mostra percentuali di coverage, test falliti e suggerimenti
+    - L'utente apre il pannello dei report; il front-end richiede il report al back-end e mostra percentuali di coverage, test falliti e suggerimenti
   ],
   inclusioni: [
     - Nessuna
@@ -3518,7 +3428,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza dettagli sulle policy fallite e le eccezioni proposte
   ],
   scenari: [
-    - L'utente apre il pannello merge; il frontend richiede il report policy e mostra info su fallimenti e possibili azioni
+    - L'utente apre il pannello merge; il front-end richiede il report policy e mostra info su fallimenti e possibili azioni
   ],
   inclusioni: [
     - Nessuna
@@ -3623,7 +3533,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - Il sistema Back-end ha chiari i propri compiti rispetto alle richieste del sistema Front-end realtive all'analisi #link(<UC17>)[#underline[\[UC18\]]]
+    - Il sistema Back-end ha chiari i propri compiti rispetto alle richieste del //sistema Front-end realtive all'analisi #link(<UC17>)[#underline[\[UC18\]]]
   ],
   post: [
     - L'orchestratore ha contattato corettamente i tool esterni di analisi
@@ -4308,93 +4218,109 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   // UC1
   [#FRObx],
-  [L'Utente non autenticato deve poter visualizzare la pagina di registrazione],
+  [Il Sistema deve consentire all'Utente non registrato l'accesso alla sezione di creazione account.],
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
   [#FRObx],
-  [L'Utente non autenticato deve poter inserire l'username nel campo dedicato],
-  [#link(<UC1>)[#underline[\[UC1\]]], #link(<UC1.1>)[#underline[\[UC1.1\]]]],
+  [Il Sistema deve consentire all'Utente non registrato l'immissione di un nome utente.],
+  [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
 
   [#FRObx],
-  [L'Utente non autenticato deve poter inserire l'email nel campo dedicato],
-  [#link(<UC1>)[#underline[\[UC1\]]], #link(<UC1.2>)[#underline[\[UC1.2\]]]],
-
-  [#FRObx],
-  [L'Utente non autenticato deve poter inserire la password nel campo dedicato],
-  [#link(<UC1>)[#underline[\[UC1\]]], #link(<UC1.3>)[#underline[\[UC1.3\]]]],
-
-  [#FRObx],
-  [L'Utente non autenticato deve poter inviare la richiesta di registrazione tramite pulsante di conferma],
-  [#link(<UC1>)[#underline[\[UC1\]]], #link(<UC1.4>)[#underline[\[UC1.4\]]]],
-
-  [#FRObx], [L'username deve avere una lunghezza minima di 4 caratteri], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
-
-  [#FRObx], [L'username deve avere una lunghezza massima di 20 caratteri], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
-
-  [#FRObx], [L'username deve contenere solo caratteri alfanumerici], [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
-
-  [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se l'username non rispetta il formato],
+  [Il Sistema deve inibire l'uso di username con lunghezza inferiore a 4 caratteri o superiore a 20.],
   [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
 
-  [#FRObx], [L'email deve contenere il carattere '\@'], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
-
-  [#FRObx], [L'email deve contenere un dominio valido], [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
+  [#FRObx],
+  [Il Sistema deve accettare esclusivamente caratteri alfanumerici per lo username.],
+  [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
 
   [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se l'email non rispetta il formato],
+  [L'Utente deve visualizzare un messaggio di errore se lo username non rispetta i vincoli di formato.],
+  [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
+
+  [#FRObx],
+  [Il Sistema deve verificare l'univocità dello username tra gli account già censiti.],
+  [#link(<UC1.1.2>)[#underline[\[UC1.1.2\]]]],
+
+  [#FRObx],
+  [L'Utente deve visualizzare un messaggio di errore se lo username inserito è già in uso.],
+  [#link(<UC1.1.2>)[#underline[\[UC1.1.2\]]]],
+
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente non registrato l'immissione di un indirizzo email.],
+  [#link(<UC1.2>)[#underline[\[UC1.2\]]]],
+
+  [#FRObx],
+  [Il Sistema deve validare la sintassi dell'email (presenza di '\@' e dominio valido).],
   [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
 
-  [#FRObx], [La password deve avere una lunghezza minima di 8 caratteri], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
-
-  [#FRObx], [La password deve contenere almeno una lettera maiuscola], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
-
-  [#FRObx], [La password deve contenere almeno una lettera minuscola], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
-
-  [#FRObx], [La password deve contenere almeno un numero], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
-
-  [#FRObx], [La password deve contenere almeno un carattere speciale], [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+  [#FRObx],
+  [L'Utente deve visualizzare un messaggio di errore se l'email non rispetta il formato standard.],
+  [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
 
   [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se la password non rispetta i vincoli di formato],
+  [Il Sistema deve verificare che l'email non sia già associata a un account esistente.],
+  [#link(<UC1.2.2>)[#underline[\[UC1.2.2\]]]],
+
+  [#FRObx],
+  [L'Utente deve visualizzare un messaggio di errore se l'email inserita è già in uso.],
+  [#link(<UC1.2.2>)[#underline[\[UC1.2.2\]]]],
+
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente non registrato l'immissione di una password.],
+  [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
+
+  [#FRObx],
+  [Il Sistema deve imporre criteri di sicurezza per la password (min. 8 caratteri, maiuscole, minuscole, numeri, caratteri speciali).],
   [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
 
   [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se l'username è già censito],
-  [#link(<UC1.4.1>)[#underline[\[UC1.4.1\]]]],
+  [L'Utente deve visualizzare un messaggio di errore se la password non soddisfa i criteri di sicurezza.],
+  [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
 
   [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se l'email è già censita],
-  [#link(<UC1.4.2>)[#underline[\[UC1.4.2\]]]],
+  [Il Sistema deve permettere la finalizzazione della registrazione previa validazione di tutti i campi.],
+  [#link(<UC1>)[#underline[\[UC1\]]]],
 
-  // UC2
+  // --- SEZIONE UC2: AUTENTICAZIONE ---
   [#FRObx],
-  [L'Utente non autenticato deve poter visualizzare la pagina di autenticazione],
+  [Il Sistema deve consentire all'Utente non autenticato l'accesso alla sezione di login.],
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
   [#FRObx],
-  [L'Utente non autenticato deve poter inserire lo username per autenticarsi],
-  [#link(<UC2>)[#underline[\[UC2\]]], #link(<UC2.1>)[#underline[\[UC2.1\]]]],
+  [Il Sistema deve garantire l'accesso alle funzionalità riservate a seguito di una corretta autenticazione.],
+  [#link(<UC2>)[#underline[\[UC2\]]]],
 
   [#FRObx],
-  [L'Utente non autenticato deve poter inserire la password per autenticarsi],
-  [#link(<UC2>)[#underline[\[UC2\]]], #link(<UC2.2>)[#underline[\[UC2.2\]]]],
+  [Il Sistema deve consentire l'immissione dello username per la procedura di autenticazione.],
+  [#link(<UC2.1>)[#underline[\[UC2.1\]]]],
 
   [#FRObx],
-  [L'Utente non autenticato deve ricevere un messaggio di errore se l'username non è conforme ai vincoli],
+  [L'Utente deve visualizzare un messaggio di errore se lo username inserito in fase di login non rispetta il formato previsto.],
   [#link(<UC2.1.1>)[#underline[\[UC2.1.1\]]]],
 
   [#FRObx],
-  [L'Utente non autenticato deve ricevere un messaggio di errore se la password non è conforme],
+  [Il Sistema deve verificare l'esistenza dello username inserito tra gli account censiti.],
+  [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
+
+  [#FRObx],
+  [L'Utente deve visualizzare un messaggio di errore generico se lo username inserito non viene trovato.],
+  [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
+
+  [#FRObx],
+  [Il Sistema deve consentire l'immissione della password per la procedura di autenticazione.],
+  [#link(<UC2.2>)[#underline[\[UC2.2\]]]],
+
+  [#FRObx],
+  [L'Utente deve visualizzare un messaggio di errore se la password inserita in fase di login non rispetta il formato previsto.],
   [#link(<UC2.2.1>)[#underline[\[UC2.2.1\]]]],
 
   [#FRObx],
-  [L'Utente non autenticato deve ricevere un messaggio di errore se l'username non è censito],
-  [#link(<UC2.3.1>)[#underline[\[UC2.3.2.1\]]]],
+  [Il Sistema deve verificare la corrispondenza tra la password inserita e quella associata allo username.],
+  [#link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]],
 
   [#FRObx],
-  [L'Utente registrato deve ricevere un messaggio di errore se la password non è corretta],
-  [#link(<UC2.3.2>)[#underline[\[UC2.2.2\]]]],
+  [L'Utente deve visualizzare un messaggio di errore generico se la password inserita è errata.],
+  [#link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]],
 
   // UC3
   [#FRObx],
@@ -4429,7 +4355,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   [#FRObx],
   [L'Utente deve ricevere un messaggio di notifica di fallimento se la condivisione delle informazioni necessarie di GitHub è stato negato],
-  [#link(<UC3.3>)[#underline[\[UC3.3\]]]],
+  [#link(<UC3.2.3>)[#underline[\[UC3.2.3\]]]],
 
   // UC4
   [#FRObx], [L'Utente deve poter accedere alla sezione di richiesta analisi], [#link(<UC4>)[#underline[\[UC4\]]]],
@@ -4689,17 +4615,18 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC16>)[#underline[\[UC16\]]], #link(<UC16.2>)[#underline[\[UC16.2\]]]],
 
   //UC17
-  [#FRObx], [L'Orchestratore deve creare l'ambiente sandbox per l'analisi], [#link(<UC17>)[#underline[\[UC17\]]]],
+  //[#FRObx], [L'Orchestratore deve creare l'ambiente sandbox per l'analisi], [#link//(<UC17>)[#underline[\[UC17\]]]],
 
   [#FRObx],
   [Gli errori verificatisi durante la creazione dell'ambiente sandbox devono essere intercettati],
   [#link(<UC17.1>)[#underline[\[UC17.1\]]]],
 
   [#FRObx],
-  [L'Orchestratore deve comunicare al frontend gli errori nella creazione del sandbox],
+  [L'Orchestratore deve comunicare al front-end gli errori nella creazione del sandbox],
   [#link(<UC17.1.1>)[#underline[\[UC17.1.1\]]]],
 
   //UC18
+  /*
   [#FRObx],
   [L'Orchestratore deve leggere le richieste dell'utente per configurare l'analisi],
   [#link(<UC18>)[#underline[\[UC18\]]]],
@@ -4715,7 +4642,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#FRObx],
   [L'Orchestratore deve eseguire l'analisi completa se il repository non è mai stato analizzato],
   [#link(<UC18.2.1>)[#underline[\[UC18.2.1\]]]],
-
+  */
   //UC19
   [#FRObx], [Le vulnerabilità delle dipendenze devono essere analizzate], [#link(<UC19>)[#underline[\[UC19\]]]],
 
@@ -4915,11 +4842,11 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Obiettivi"],
 
   [#QRObx],
-  [Deve essere fornita documentazione tecnica esaustiva del sistema, includendo swagger API e documentazione descrittiva del progetto],
+  [Deve essere fornita documentazione tecnica esaustiva del sistema, includendo swagger #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#application-programming-interface")[#def("Application Programming Interface")] (API) e documentazione descrittiva del progetto],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
   [#QRObx],
-  [Il codice prodotto deve raggiungere una copertura minima del 70% tramite Test di Unità automatizzati],
+  [Il codice prodotto deve raggiungere una copertura minima del 70% tramite #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#test-di-unita")[#def("Test di Unità")] automatizzati],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
   [#QRObx],
@@ -4952,11 +4879,11 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   align: (col, row) => (center, left, center).at(col) + horizon,
 
   [#VRObx],
-  [Il Backend e l'Orchestratore devono essere sviluppati utilizzando Node.js o Python],
+  [Il Back-end e l'Orchestratore devono essere sviluppati utilizzando #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#node.js")[#def("Node.js")] o #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#python")[#def("Python")]],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
 
   [#VRObx],
-  [Il Frontend deve essere sviluppato utilizzando React.js],
+  [Il Front-end deve essere sviluppato utilizzando #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#react")[#def("React")]],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
 
   [#VRObx],
@@ -4972,7 +4899,7 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
 
   [#VRObx],
-  [Il codice sorgente deve essere versionato utilizzando sistemi come Git o repository online],
+  [Il codice sorgente deve essere versionato utilizzando sistemi come #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#git")[#def("Git")] o repository online],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
   [#VRObx],
