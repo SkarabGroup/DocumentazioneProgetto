@@ -1260,9 +1260,32 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 )[
 ]
 
-=== UC5: Visualizzazione report analisi repository GitHub <UC5>
+=== UC5nuovo: Visualizzazione dei repository analizzati <UC5nuovo> #TODO("Sistema nomi")
 #useCase(
-  attore: UAA,
+  attore: "Utente avanzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
+  ],
+  post: [
+    - L'utente ha visualizzato tutti i repository analizzati
+  ],
+  scenari: [
+    - L'utente accede alla sezione di visualizzazione dei report di analisi legati ai repository GitHub associati al proprio account
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC5>)[#underline[\[UC5\]]]
+  ],
+  trigger: "L'utente avanzato accede alla funzionalità di visualizzazione dei report di analisi di CodeGuardian",
+)[
+]
+
+=== UC5: Visualizzazione singolo report analisi repository GitHub <UC5>
+#useCase(
+  attore: "Utente avanzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
@@ -1272,16 +1295,13 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente ha visualizzato il report di analisi del repository GitHub selezionato
   ],
   scenari: [
-    //- L'utente accede alla sezione di visualizzazione dei report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente seleziona un report di analisi relativo a un repository GitHub #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente seleziona i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
-    - L'utente visualizza il report di analisi del repository GitHub richiesto //#link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente visualizza il report di analisi del repository GitHub richiesto 
   ],
   inclusioni: [
-    //- #link(<UC5.1>)[#underline[\[UC5.1\]]] // Accesso sezione visualizzazione report
     - #link(<UC5.2>)[#underline[\[UC5.2\]]] // Selezione report di analisi
     - #link(<UC5.3>)[#underline[\[UC5.3\]]] // Selezione dati specifici
-    //- #link(<UC5.4>)[#underline[\[UC5.4\]]] // Visualizzazione report
   ],
   estensioni: [
     - Nessuna
@@ -1291,7 +1311,8 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   #useCaseDiagram("5", "UC5 - Visualizzazione report analisi repository GitHub")
 ]
 
-#TODO("Toglierei UC5.1 e UC5.4, in quanto non sono funzionalità a sé stanti ma semplicemente parti del flusso di visualizzazione dei report. L'UC5.1 potrebbe essere inserito come precondizione dell'UC5, mentre l'UC5.4 potrebbe essere semplicemente l'ultimo step dello scenario principale dell'UC5")
+#TODO("Togliere UC5.4 e sistemare riferimenti")
+#TODO("Check degli ex riferimenti UC5.1")
 
 /* ==== UC5.1: Accesso alla sezione di visualizzazione dei report di analisi <UC5.1>
 #useCase(
@@ -1442,7 +1463,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 )[]
 
 
-==== UC5.4: Visualizzazione report di analisi <UC5.4>
+==== UC5.4: Visualizzazione report di analisi <UC5.4>  #TODO("Va cancellato questo UC e sistemati i riferimenti")
 #useCase(
   attore: UAA,
   pre: [
