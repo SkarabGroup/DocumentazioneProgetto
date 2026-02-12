@@ -23,18 +23,21 @@
     "0.8.0",
     "Sistemazione sezione AdR con nuove sezioni e miglioramenti",
     members.andrea,
+    members.kevin,
   ),
   (
     "2026/02/07",
     "0.7.0",
     "Rielaborazione sezioni relative al Piano di Qualifica",
     members.alice,
+    members.kevin,
   ),
   (
     "2026/02/04",
     "0.6.0",
     "Rielaborazione delle Norme di Progetto relative al Piano di Progetto",
     members.suar,
+    members.kevin,
   ),
   (
     "2026/02/03",
@@ -225,6 +228,50 @@ Ai fini delle presenti Norme di Progetto, il processo di fornitura disciplina in
 - *Verbali di verifica e revisione* \
   Documenti che registrano esiti e decisioni delle attività di controllo e revisione svolte durante il progetto.
 
+
+#figure(
+  table(
+    columns: (2fr, 2fr, 3fr, 1.5fr),
+    align: horizon,
+    fill: (col, row) => if row == 0 {
+      luma(62.75%)
+    } else if calc.even(row) {
+      luma(220)
+    } else {
+      none
+    },
+    stroke: none,
+
+    // Header
+    text(white)[*Documento*], text(white)[*Redattori*], text(white)[*Destinatari*], text(white)[*Uso*],
+
+    // Rows
+    [Lettera di Presentazione], [Responsabile], [Proponente, #members.cardin, #members.tullio, Skarab Group], [Esterno],
+
+    [AdR – Analisi dei Requisiti], [Analisti], [Proponente, #members.cardin, #members.tullio, Skarab Group], [Esterno],
+
+    [Glossario], [Tutti i membri del gruppo], [Stakeholder interni ed esterni], [Esterno],
+
+    [NdP – Norme di Progetto], [Responsabili di processo], [Skarab Group, #members.cardin, #members.tullio], [Interno],
+
+    [PdP – Piano di Progetto],
+    [Project Manager],
+    [Proponente, #members.cardin, #members.tullio, Skarab Group],
+    [Esterno],
+
+    [PdQ – Piano di Qualifica],
+    [Responsabili Qualità],
+    [Skarab Group, #members.cardin, #members.tullio, Proponente],
+    [Esterno],
+
+    [Verbali delle Riunioni],
+    [Segretario della riunione],
+    [Proponente (se esterni), #members.cardin, #members.tullio, Skarab Group],
+    [Interno / Esterno],
+  ),
+  caption: [Tabella riepilogativa dei documenti di progetto],
+)
+
 === Procedure Operative del Processo
 Le seguenti procedure sono vincolanti per l'esecuzione del processo di fornitura e regolano l'interazione con l'esterno.
 
@@ -249,16 +296,16 @@ Il documento *Piano di Progetto* adotta come riferimento metodologico lo standar
 L’adozione dello standard garantisce una copertura completa degli aspetti critici del ciclo di vita del progetto e si traduce concretamente nei seguenti elementi chiave:
 
 - *Struttura e organizzazione sistematica:* \
-  l’indice e l’articolazione del documento ricalcano la gerarchia proposta dallo standard IEEE 1058, assicurando una pianificazione completa delle aree gestionali, organizzative e tecniche ed evitando lacune nella definizione delle responsabilità e dei processi.
+  L’indice e l’articolazione del documento ricalcano la gerarchia proposta dallo standard IEEE 1058, assicurando una pianificazione completa delle aree gestionali, organizzative e tecniche ed evitando lacune nella definizione delle responsabilità e dei processi.
 
 - *Analisi e gestione del rischio:* \
-  in conformità alle linee guida IEEE, è adottato un approccio di risk management basato su valutazioni di probabilità, impatto e strategie di mitigazione/contingenza, consentendo un monitoraggio strutturato delle principali incertezze di progetto.
+  In conformità alle linee guida IEEE, è adottato un approccio di risk management basato su valutazioni di probabilità, impatto e strategie di mitigazione/contingenza, consentendo un monitoraggio strutturato delle principali incertezze di progetto.
 
 - *Tracciabilità e controllo:* \
-  il documento distingue in modo esplicito la fase di pianificazione (*Preventivo*) da quella di monitoraggio e rendicontazione (*Consuntivo*), permettendo un controllo oggettivo dell’avanzamento e l’analisi degli eventuali scostamenti rispetto alle stime iniziali.
+  Il documento distingue in modo esplicito la fase di pianificazione (*Preventivo*) da quella di monitoraggio e rendicontazione (*Consuntivo*), permettendo un controllo oggettivo dell’avanzamento e l’analisi degli eventuali scostamenti rispetto alle stime iniziali.
 
 - *Efficacia operativa:* \
-  alcuni moduli previsti dallo standard sono stati ottimizzati e accorpati per migliorare la leggibilità e la comunicazione all’interno del team, mantenendo inalterati rigore metodologico e chiarezza dei flussi informativi richiesti dalla normativa.
+  Alcuni moduli previsti dallo standard sono stati ottimizzati e accorpati per migliorare la leggibilità e la comunicazione all’interno del team, mantenendo inalterati rigore metodologico e chiarezza dei flussi informativi richiesti dalla normativa.
 
 ==== Definizione del Documento
 Il *Piano di Progetto* costituisce il riferimento gestionale vincolante per la conduzione del progetto e deve definire, in modo tracciabile e verificabile:
@@ -360,12 +407,12 @@ Nel caso in cui un rischio si manifesti o emergano nuovi rischi, il team applica
 ====== Criteri di Verifica dell’Analisi dei Rischi
 L’elemento *Analisi dei Rischi* del Piano di Progetto è considerato conforme alle Norme di Progetto se risultano soddisfatte tutte le seguenti condizioni:
 
-- [ ] ogni rischio è descritto in modo univoco e classificato in una delle categorie definite (RT, RI, RCO);
-- [ ] per ciascun rischio sono esplicitamente indicati i valori di *Probabilità (P)*, *Impatto (I)* e il corrispondente *Livello di Rischio (R)*;
-- [ ] per tutti i rischi classificati come *Medio* o *Alto* è definita almeno una strategia di mitigazione o un piano di contingenza;
-- [ ] lo stato dei rischi è aggiornato con cadenza coerente con la pianificazione degli Sprint;
-- [ ] l’insorgenza di nuovi rischi o la variazione significativa di rischi esistenti è tracciata nei verbali di progetto o negli strumenti di issue tracking adottati;
-- [ ] gli esiti delle attività di gestione dei rischi sono riportati nei consuntivi di Sprint o di fase (es. RTB).
+- ogni rischio è descritto in modo univoco e classificato in una delle categorie definite (RT, RI, RCO)
+- per ciascun rischio sono esplicitamente indicati i valori di *Probabilità (P)*, *Impatto (I)* e il corrispondente *Livello di Rischio (R)*
+- per tutti i rischi classificati come *Medio* o *Alto* è definita almeno una strategia di mitigazione o un piano di contingenza
+- lo stato dei rischi è aggiornato con cadenza coerente con la pianificazione degli Sprint
+- l’insorgenza di nuovi rischi o la variazione significativa di rischi esistenti è tracciata nei verbali di progetto o negli strumenti di issue tracking adottati
+- gli esiti delle attività di gestione dei rischi sono riportati nei consuntivi di Sprint o di fase (es. RTB)
 
 Il mancato rispetto di una o più delle condizioni sopra elencate comporta la non conformità dell’elemento e richiede un’azione correttiva prima della validazione del documento.
 
@@ -493,7 +540,6 @@ L’elemento *Monitoraggio e Controllo del Rendimento degli Sprint* è considera
 
 La mancata rendicontazione di uno o più Sprint o l’assenza degli elementi sopra elencati comporta la non conformità dell’elemento.
 
-#TODO("Definire NdP per AdR in conformità con gli standard dichiarati alla sezione Norme di Progetto")
 === AdR - Analisi dei Requisiti
 ==== Standard di Riferimento
 Per la redazione del documento Analisi dei Requisiti, il gruppo adotta i seguenti standard internazionali, che garantiscono un approccio rigoroso e sistematico alla specifica delle necessità software:
@@ -994,49 +1040,6 @@ Il *Diario di Bordo* è considerato conforme alle Norme di Progetto se:
 
 In assenza di uno o più elementi obbligatori, il Diario di Bordo non è considerato conforme.
 
-#TODO("Spostare nella Introduzione questa tabella?")
-#figure(
-  table(
-    columns: (2fr, 2fr, 3fr, 1.5fr),
-    align: horizon,
-    fill: (col, row) => if row == 0 {
-      luma(62.75%)
-    } else if calc.even(row) {
-      luma(220)
-    } else {
-      none
-    },
-    stroke: none,
-
-    // Header
-    text(white)[*Documento*], text(white)[*Redattori*], text(white)[*Destinatari*], text(white)[*Uso*],
-
-    // Rows
-    [Lettera di Presentazione], [Responsabile], [Proponente, #members.cardin, #members.tullio, Skarab Group], [Esterno],
-
-    [AdR – Analisi dei Requisiti], [Analisti], [Proponente, #members.cardin, #members.tullio, Skarab Group], [Esterno],
-
-    [Glossario], [Tutti i membri del gruppo], [Stakeholder interni ed esterni], [Esterno],
-
-    [NdP – Norme di Progetto], [Responsabili di processo], [Skarab Group, #members.cardin, #members.tullio], [Interno],
-
-    [PdP – Piano di Progetto],
-    [Project Manager],
-    [Proponente, #members.cardin, #members.tullio, Skarab Group],
-    [Esterno],
-
-    [PdQ – Piano di Qualifica],
-    [Responsabili Qualità],
-    [Skarab Group, #members.cardin, #members.tullio, Proponente],
-    [Esterno],
-
-    [Verbali delle Riunioni],
-    [Segretario della riunione],
-    [Proponente (se esterni), #members.cardin, #members.tullio, Skarab Group],
-    [Interno / Esterno],
-  ),
-  caption: [Tabella riepilogativa dei documenti di progetto],
-)
 
 
 #pagebreak()
@@ -1090,7 +1093,7 @@ In relazione alle baseline previste dal progetto, (#def("RTB") e #def("PB")), le
 
 ==== Analisi dei Requisiti
 L'Analisi dei Requisiti costituisce una delle fasi più critiche e determinanti dell'intero ciclo di vita del software, assumendo un ruolo centrale durante la #def("Requirements and Technology Baseline") (#strong("RTB")). Questa attività non si limita alla semplice raccolta di informazioni, ma mira all’individuazione, allo studio e alla formalizzazione rigorosa di tutte le necessità che il sistema Code Guardian dovrà soddisfare per rispondere efficacemente alle richieste del proponente. \
-Svolgere un'analisi completa e corretta è fondamentale per fornire una base solida per le successive fasi di progettazione e codifica. I risultati di questa analisi sono documentati nel documento #strong("Analisi dei Requisiti vx.y.z"). #TODO("Link al documento")
+Svolgere un'analisi completa e corretta è fondamentale per fornire una base solida per le successive fasi di progettazione e codifica. I risultati di questa analisi sono documentati nel documento #strong("Analisi dei Requisiti Vx.y.z"). #TODO("Link al documento")
 
 ===== Casi d'Uso
 I #def("casi d'uso") rappresentano scenari specifici che descrivono come gli attori interagiscono con il sistema per raggiungere determinati obiettivi. Essi forniscono una visione chiara delle funzionalità richieste e aiutano a identificare i requisiti funzionali del sistema.
@@ -1100,7 +1103,7 @@ Per la descrizione dei casi d'uso viene utilizzata la nomenclatura #strong("UCPr
 - *Secondario*: numero progressivo del caso d'uso secondario, identifica varianti o estensioni del caso d'uso principale (sotto-casi).
 L’identificatore *Principale* è univoco a livello globale; non è quindi ammessa l’esistenza di due casi d’uso distinti con il medesimo valore principale. Il valore *Secondario* può invece essere ripetuto all'interno del documento, a patto che ciò non avvenga mai sotto lo stesso identificatore principale. Nel caso in cui un scenario secondario presenti a sua volta delle inclusioni o estensioni, la stringa *Principale.Secondario* assumerà il ruolo di radice per la nuova gerarchia, seguendo le medesime regole di progressione e unicità sopra descritte.
 
-Per approfondimenti riguardanti gli attori coinvolti, le precondizioni, le postcondizioni e lo scenario principale degli eventi, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti vx.y.z"). #TODO("Link al documento")
+Per approfondimenti riguardanti gli attori coinvolti, le precondizioni, le postcondizioni e lo scenario principale degli eventi, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti Vx.y.z"). #TODO("Link al documento")
 
 ===== Requisiti
 I requisiti rappresentano le specifiche funzionali e non funzionali che il sistema deve soddisfare. Ogni requisito è classificato per garantire la tracciabilità rispetto alle fonti e ai casi d'uso associati. \
@@ -1116,7 +1119,7 @@ Per la descrizione dei requisiti viene utilizzata la nomenclatura #strong("Tipol
   - *Op*: Requisito #strong("Op")zionale.
 - *Numero*: numero progressivo univoco per ogni requisito all'interno della sua tipologia.
 
-Per approfondimenti riguardanti la descrizione dettagliata, la fonte e i casi d'uso associati a ciascun requisito, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti vx.y.z"). #TODO("Link al documento")
+Per approfondimenti riguardanti la descrizione dettagliata, la fonte e i casi d'uso associati a ciascun requisito, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti Vx.y.z"). #TODO("Link al documento")
 
 ==== Codifica
 
@@ -1406,6 +1409,11 @@ La repository DocumentazioneProgetto é organizzata in questo modo:
 - verbali: Cartella che contiene tutti i verbali delle riunioni interne ed esterne.
 - website/: Cartella contenente i file sorgente del sito web di Skarab Group.
 
+Inoltre nella root della repository sono presenti alcuni file:
+- `README.md`: file di presentazione del progetto e guida all'utilizzo della repository.
+- `glosssario.html`: file HTML generato automaticamente che contiene il glossario dei termini tecnici utilizzati nel progetto, accessibile tramite il sito web.
+- `index.html`: file HTML che rappresenta la homepage del sito web di Skarab Group, con link ai documenti principali e al glossario.
+
 ====== Librerie .typ
 La cartella `lib/` contiene librerie di funzioni Typst che sono utilizzate in vari documenti del progetto per garantire coerenza e riusabilità del codice. Questa cartella é creata e gestita dall'amministratore del progetto, questo permette di avere un punto centrale dove vengono definite tutte le funzioni comuni, facilitando la manutenzione e l'aggiornamento delle stesse.
 
@@ -1469,3 +1477,5 @@ La validazione conferma che il prodotto soddisfi le esigenze degli utenti.
 - *#def("Test di Accettazione")*: Verifica finale con stakeholder per requisiti non funzionali (es. usabilità, prestazioni).
 - *Feedback Utente*: Raccolta di input durante demo o beta testing.
 - *Allineamento Obiettivi*: Verifica rispetto agli obiettivi di progetto (es. automazione analisi qualità repository).
+
+#TODO("Riscrivere in modo piú prolisso la verifica")
