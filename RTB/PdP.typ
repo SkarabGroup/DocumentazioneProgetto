@@ -15,7 +15,7 @@
   (
     "2026/02/11",
     "0.8.0",
-    "Aggiunte tabelle attivitá sprint 1,2,3, piccoli fix",
+    "Aggiunte tabelle attivitá sprint 1,2,3, piccoli fix e aggiunte spiegazioni delle discrepanze orarie tra consuntivo e preventivo",
     members.kevin,
   ),
   (
@@ -917,6 +917,16 @@ Il primo Sprint ha registrato un andamento complessivamente positivo. Gli obiett
 ===== Relazioni Esterne con l’Azienda e Dinamiche del Team
 - *Rapporti con l’Azienda:* La comunicazione con il proponente è risultata proattiva e costruttiva, con un supporto tecnico utile alle scelte iniziali.
 - *Dinamiche del Team:* Il clima interno è stato positivo. Tuttavia, l’analisi del consuntivo ha evidenziato una distribuzione non uniforme dell’impegno orario, che richiede attenzione per evitare squilibri futuri.
+
+===== Squilibri orari preventivati e reali
+- *Responsabile:* Preventivato 6h, Consuntivo 6h 
+- *Amministratore:* Preventivato 28h, Consuntivo 28h
+- *Analista:* Preventivato 15h, Consuntivo 11h 
+ - Questo poiché i membri che avrebbero dovuto ricoprire questo ruolo hanno dedicato più tempo alla stesura dei documenti di gestione piú che all'analisi dei requisiti, quindi hanno consumato ore da amministratore. Questo, tuttavia, non ha portato i membri coinvolti a sforare le ore preventivate in quanto il preventivo per questi membri era molto ottimistico sulla quantitá di tempo da dedicare al progetto per questo sprint.
+- *Progettista:* Preventivato 0h, Consuntivo 0h
+- *Programmatore:* Preventivato 0h, Consuntivo 0h
+- *Verificatore:* Preventivato 12h, Consuntivo 8h
+ - La verifica dei documenti si é dimostrata piú rapida del previsto.
 ===== Rischi Rilevati
 Nel corso dello Sprint si sono manifestati i seguenti rischi già censiti:
 
@@ -1027,6 +1037,18 @@ Il secondo Sprint ha evidenziato un andamento complessivamente critico. Sebbene 
 - *Rapporti con l’Azienda:* Il confronto con il proponente ha confermato la validità dell’impostazione progettuale e fornito indicazioni di valore per l’evoluzione del prodotto.
 - *Consultazione Accademica:* L’incontro con il docente #members.cardin ha chiarito aspetti metodologici rilevanti per l’Analisi dei Requisiti, fornendo indicazioni utili per il recupero delle criticità emerse.
 - *Dinamiche del Team:* Sono emerse difficoltà di coordinamento e una disomogeneità nella qualità dei contributi, che hanno inciso sull’efficacia complessiva dello Sprint.
+
+===== Squilibri orari preventivati e reali
+- *Responsabile:* Preventivato 6h, Consuntivo 6h 
+- *Amministratore:* Preventivato 12h, Consuntivo 13h
+ - L’impegno aggiuntivo è stato necessario per gestire le revisioni documentali e coordinare le attività di recupero.
+- *Analista:* Preventivato 25h, Consuntivo 17h 
+ - L'impegno dei vari membri é stato ridotto in vista della preparazione alla sessione di esami universitari in arrivo.
+- *Progettista:* Preventivato 0h, Consuntivo 0h
+- *Programmatore:* Preventivato 6h, Consuntivo 0h
+ - Per motivi di studio, le attività di programmazione sono state posticipate allo Sprint 3, con un impatto diretto sulla pianificazione complessiva del progetto.
+- *Verificatore:* Preventivato 12h, Consuntivo 8h
+ - La verifica dei documenti si é dimostrata piú rapida del previsto.
 
 ===== Rischi Rilevati
 Nel corso dello Sprint si sono concretizzati i seguenti rischi già censiti:
@@ -1157,6 +1179,16 @@ Lo Sprint ha mostrato un andamento complessivamente controllato. Gli obiettivi d
 ===== Dinamiche del Team e Coordinamento
 Il coordinamento interno è migliorato rispetto allo Sprint precedente. La distribuzione dei task è risultata più equilibrata e il processo di revisione ha beneficiato delle azioni correttive già introdotte.
 
+===== Squilibri orari preventivati e reali
+- *Responsabile:* Preventivato 7h, Consuntivo 7h 
+- *Amministratore:* Preventivato 3h, Consuntivo 3h
+- *Analista:* Preventivato 16h, Consuntivo 14h 
+ - Essendo questo sprint accavallato con la sessione di esami universitari, alcuni membri hanno dedicato meno tempo alla stesura dei documenti di analisi dei requisiti, nonostante fossero state giá risotte a preventivo, la riduzione era stata troppo ottimistica.
+- *Progettista:* Preventivato 0h, Consuntivo 0h
+- *Programmatore:* Preventivato 12h, Consuntivo 12h
+- *Verificatore:* Preventivato 8h, Consuntivo 8h
+ - Notando che gli sprint precedenti avevano richiesto meno ore da verificatore, per questo sprint ne sono state preventivate meno, trovando, finalmente, una stima più aderente alla realtá.
+ 
 ===== Rischi Rilevati
 Nel corso dello Sprint si sono manifestati i seguenti rischi già censiti:
 - #link(<RI4>)[#underline[[RI4]]]: necessità di ulteriore allineamento su alcune scelte tecniche;
