@@ -11,13 +11,19 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.7.0"
+#let versione = "v0.8.0"
 #set heading(numbering: "1.1.1")
 
 #titlePage("Norme di Progetto", versione)
 #set page(numbering: "1", header: header("Norme di Progetto"), footer: footer())
 
 #let history = (
+  (
+    "2026/02/11",
+    "0.8.0",
+    "Sistemazione sezione AdR con nuove sezioni e miglioramenti",
+    members.andrea,
+  ),
   (
     "2026/02/07",
     "0.7.0",
@@ -489,14 +495,44 @@ La mancata rendicontazione di uno o più Sprint o l’assenza degli elementi sop
 
 #TODO("Definire NdP per AdR in conformità con gli standard dichiarati alla sezione Norme di Progetto")
 === AdR - Analisi dei Requisiti
-L’#def("Analisi dei Requisiti") è il documento che descrive in dettaglio i requisiti funzionali e non funzionali
+==== Standard di Riferimento
+Per la redazione del documento Analisi dei Requisiti, il gruppo adotta i seguenti standard internazionali, che garantiscono un approccio rigoroso e sistematico alla specifica delle necessità software:
+- *IEEE 830-1998 (Recommended Practice for Software Requirements Specifications)*: standard di riferimento per la stesura di specifiche dei requisiti software, che definisce una struttura chiara e completa per la documentazione dei requisiti funzionali e non funzionali.
+
+- *ISO/IEC/IEEE 29148:2018 (Systems and Software Engineering — Life Cycle Processes — Requirements Engineering)*: standard che fornisce linee guida per l’ingegneria dei requisiti, inclusi processi di analisi, specifica e gestione dei requisiti.
+
+- *UML 2.5*: standard per la modellazione dei casi d’uso, che consente di rappresentare graficamente le interazioni tra attori e sistema, facilitando la comprensione e la tracciabilità dei requisiti funzionali.
+
+==== Definizione del Documento
+/* L’#def("Analisi dei Requisiti") è il documento che descrive in dettaglio i requisiti funzionali e non funzionali
 previsti dal progetto #def("Code Guardian"). Nel dettaglio il documento contiene un’analisi dettagliata delle
 funzionalità del sistema, degli attori coinvolti e le informazioni necessarie al tracciamento dei
-requisiti rispetto alle loro fonti. La struttura è la seguente:
-- Introduzione al progetto e obiettivi.
-- Lista degli attori coinvolti.
-- Lista dei casi d'uso.
-- Lista dei requisiti funzionali e non funzionali, classificati in obbligatori, desiderabili e opzionali.
+requisiti rispetto alle loro fonti. Il documento è utilizzato come riferimento principale per la progettazione e lo sviluppo del sistema, nonché per la verifica della conformità del prodotto finale rispetto alle esigenze espresse dal proponente. */
+L’#def("Analisi dei Requisiti") costituisce il riferimento tecnico vincolante per la formalizzazione rigorosa delle necessità e dei vincoli relativi al sistema *Code Guardian*. Il documento ha lo scopo di tradurre le esigenze espresse dal proponente in un insieme di specifiche formali, non ambigue e verificabili, che guidano l’intero processo di ingegnerizzazione del software. \
+Il documento deve definire, in modo tracciabile e verificabile:
+
+- *Perimetro del Sistema*: la delimitazione univoca dei confini d'azione del software, specificando le interazioni tra il sistema e gli attori esterni per eliminare ogni ambiguità sulle responsabilità operative;
+- *Specifiche Funzionali e Non Funzionali*: la scomposizione delle necessità di business in requisiti atomici e misurabili, che fungano da prerequisito obbligatorio per le successive fasi di progettazione e design;
+#TODO("Sistemare, fare questa parte meglio")
+
+L’Analisi dei Requisiti rappresenta la colonna portante della *Requirements and Technology Baseline* (*RTB*). Essa funge da ponte logico tra gli obiettivi strategici del Capitolato d'Appalto e l'implementazione tecnica, assicurando la tracciabilità di ogni scelta progettuale rispetto alle necessità approvate e documentate .
+
+==== Elementi Costituenti del Documento
+Il documento Analisi dei Requisiti deve essere organizzato in modo chiaro e strutturato, includendo obbligatoriamente i seguenti elementi:
+- *Introduzione e Prospettiva del Prodotto*: deve descrivere il contesto del sistema, le funzioni principali (suddivise in Test, Sicurezza e Documentazione) e le caratteristiche degli utenti finali.
+
+- *Casi d'Uso (Use Cases)*: rappresentano la fonte primaria dei requisiti funzionali. Ogni caso d'uso deve essere identificato univocamente e contenere:
+  - *Attori*: identificazione degli utenti o sistemi esterni (lato Front-end e Back-end);
+  - *Precondizioni* e Postcondizioni: stato del sistema prima e dopo l'esecuzione;
+  - *Scenario Principale*: sequenza ordinata di azioni;
+  - *Estensioni e Inclusioni*: per gestire flussi alternativi o comuni;
+  - *Trigger*: evento che innesca il caso d'uso.
+  - *Diagrammi UML*: rappresentazione grafica delle interazioni.
+
+- *Requisiti di Sistema*: classificazione dettagliata dei requisiti derivati dai casi d'uso o da fonti esterne (Capitolato, Verbali). Ogni requisito deve essere classificato per:
+  - *Priorità*: Obbligatorio, Desiderabile o Opzionale;
+  - *Tipologia*: Funzionale (FR), di Qualità (QR) o di Vincolo (VR);
+  - *Tracciabilità*: ogni requisito deve essere identificato da un codice univoco e riportare la fonte o il caso d'uso di riferimento per permetterne il monitoraggio durante tutto il ciclo di vita del progetto
 
 === Glossario
 ==== Definizione del Documento
