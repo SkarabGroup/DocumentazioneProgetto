@@ -19,6 +19,12 @@
 
 #let history = (
   (
+    "2026/02/13",
+    "0.9.0",
+    "Ampliamento sezioni Verifica e Validazione",
+    members.alice,
+  ),
+  (
     "2026/02/11",
     "0.8.1",
     "Ultimo fix/miglioramento sezione AdR",
@@ -1189,120 +1195,202 @@ Dal momento che SkarabGroup utilizza Jira per la gestione delle attività di pro
 Alla fine di ogni sprint, i documenti completati e verificati devono essere uniti nel ramo `develop` tramite pull request, seguendo la procedura di revisione stabilita. questo permette di iniziare lo sprint successivo con una base documentale aggiornata e approvata in quanto, la p[rima attivitá di ogni sprint é quella di fare un pull del develop sul branch del documento a cui si sta lavorando.
 
 == Qualifica
+Il processo di *Qualifica* garantisce che il prodotto software e la documentazione soddisfino gli standard di qualità definiti e i requisiti specificati. Tale processo si articola nelle attività di Verifica e Validazione, complementari ma distinte negli obiettivi.
+
+La Qualifica risponde a due domande fondamentali:
+- *Verifica*: _"Did I build the system right?"_ (Ho costruito correttamente il sistema?);
+- *Validazione*: _"Did I build the right system?"_ (Ho costruito il sistema giusto?).
 
 === Verifica
-La verifica ha l'obiettivo di accertare che i prodotti soddisfino i requisiti, ovvero di rispondere alla domanda: "Did I build the sistem right?".
+Il processo di Verifica ha come scopo accertare che quanto prodotto sia stato realizzato correttamente, in conformità con i requisiti e gli standard definiti.
 
-Tutti i prodotti del progetto sono soggetti a verifiche periodiche per garantire la conformità agli standard di qualità definiti nel Piano di Qualifica (#def("PdQ")).
+La Verifica è un'attività continua che accompagna l'intero ciclo di vita del progetto e si applica sia alla documentazione che al codice prodotto.
 
-==== Implementazione
-Dal momento in cui per poter portare un documento, o parte di esso nel branch principlale `develop`, esso deve essere stato verificato e approvato, la verifica viene implementata tramite il sistema di *pull request* di GitHub. Questo assicura che tutto il codice e la documentazione presenti nel ramo principale abbiano superato un processo di verifica e che, quindi, siano conformi agli standard di qualità stabiliti.
+Tutte le informazioni relative agli esiti di tale attività, incluse misurazioni e risultati dei test, devono essere documentate nel #underline[Piano di Qualifica].
 
-===== Verifica
-La Verifica rappresenta un processo fondamentale per Skarab Group e accompagna l’intero ciclo di vita del progetto (a.a. 2025/2026), con l’obiettivo di garantire la correttezza, la qualità e la conformità dei prodotti realizzati rispetto ai requisiti definiti.
-Tutte le informazioni relative agli esiti delle attività di verifica, incluse misurazioni e risultati dei test, sono documentate nel Piano di Qualifica.
+===== Obiettivi della Verifica
+Skarab Group identifica i seguenti obiettivi per il processo di Verifica:
 
-====== Verifica della Documentazione
-Nelle fasi iniziali del progetto, particolare attenzione è stata dedicata alla verifica della documentazione.
-Ogni documento, una volta redatto, viene sottoposto a verifica prima dell’integrazione nel ramo principale del repository.
-L’attività comprende:
-- controllo grammaticale e sintattico;
-- verifica della correttezza e coerenza dei contenuti.
-- Le modalità operative di redazione e verifica dei documenti sono descritte nelle regole di gestione dei branch e delle issue.
+- garantire che ogni artefatto prodotto sia conforme alle Norme di Progetto;
+- identificare e correggere tempestivamente difetti e anomalie;
+- fornire evidenze oggettive della qualità del prodotto;
+- supportare il miglioramento continuo dei processi attraverso il ciclo PDCA.
 
-====== Verifica del Codice
+==== Strumenti a supporto
+Questa sezione verrà ampliata durante lo svolgimento della _Product Baseline_ (PB).
 
-Le attività di verifica del codice saranno approfondite in modo più dettagliato una volta raggiunta la Requirements and Technology Baseline (RTB).
-In generale, la verifica del software si articola in due approcci complementari: Analisi Statica e Analisi Dinamica.
+Per il calcolo dell'indice di Gulpease è stato utilizzato il servizio #link("https://farfalla-project.org/readability_static/")[#underline[farfalla-project.org/readability_static/]].
+
+==== Attività proposte
+In conformità allo standard ISO/IEC/IECC 12207, il processo di Verifica si articola nelle seguenti attività:
+
+- *Implementazione del processo*: definizione delle criticità da analizzare, delle metodologie di verifica e degli strumenti da utilizzare.
+- *Attività di Verifica*: attività di controllo vero e proprio su:
+  - *Processi*: verifica dell'efficacia dei processi adottati;
+  - *Requisiti*: verifica di esaustività, consistenza e tracciabilità;
+  - *Progettazione*: verifica di efficacia rispetto ai requisiti;
+  - *Codice*: verifica del soddisfacimento dei requisiti implementativi;
+  - *Integrazione*: verifica della corretta interazione tra componenti;
+  - *Documentazione*: verifica di completezza, correttezza e conformità.
+
+==== Implementazione del processo
+Skarab Group ha stabilito che la principale necessità del progetto _Code Guardian_ è assicurare che il prodotto soddisfi le esigenze di *Var Group* attraverso verifiche sistematiche e rigorose.
+
+Per questo motivo, nessun documento o componente software può essere integrato nel branch principale del repository senza aver superato il processo di verifica.
+
+*Regola fondamentale*: il branch `main` contiene esclusivamente artefatti verificati e di qualità accertata.
+
+Le verifiche sono condotte attraverso il meccanismo delle _Pull Request_ su GitHub, che garantisce:
+- tracciabilità delle modifiche;
+- revisione da parte di un Verificatore;
+- discussione strutturata delle criticità;
+- approvazione formale prima dell'integrazione.
+
+Eventuali problematiche complesse non risolvibili singolarmente sono discusse in sede di riunione interna e documentate nei verbali.
+
+==== Attività di Verifica
+
+===== Verifica della Documentazione
+Nella prima fase del progetto, il processo di verifica si è focalizzato sulla qualità della *Documentazione* prodotta, adottando un approccio di revisione formale sistematica. Ogni documento, a seguito della stesura, segue un iter di approvazione obbligatorio prima di essere integrato nel _main branch_ del repository.
+
+L'attività si articola nei seguenti controlli:
+
+- *Analisi Linguistica*: verifica della correttezza grammaticale, sintattica e dell'ortografia, con particolare attenzione all'indice di leggibilità per garantire la fruibilità dei contenuti.
+- *Ispezione dei Contenuti*: verifica di esaustività, consistenza interna e coerenza rispetto agli obiettivi di fase.
+- *Conformità Normativa*: accertamento del rispetto dei template e delle convenzioni grafiche definite internamente.
+- *Gestione del Flusso*: le procedure operative di redazione, revisione e approvazione sono vincolate al sistema di _versioning_, seguendo le policy di gestione dei branch e delle issue per garantire la tracciabilità delle modifiche.
+
+===== Verifica del Codice
+Le metodologie di verifica del software verranno formalizzate e applicate in modo estensivo non appena raggiunta la _Requirements and Technology Baseline_ (RTB).
+
+In generale, la strategia di verifica adottata prevede l'integrazione di due approcci metodologici complementari: *Analisi Statica* e *Analisi Dinamica*.
 
 ====== Analisi Statica
+L'*Analisi Statica* comprende tutte le attività di verifica che non richiedono l'esecuzione dell'oggetto analizzato.
 
-L’Analisi Statica comprende tutte le attività di verifica che non richiedono l’esecuzione dell’oggetto analizzato.
-Essa si concentra sull’individuazione di errori sintattici, strutturali o concettuali, permettendo di prevenire problemi prima della fase di esecuzione.
+Si concentra sull'individuazione di errori sintattici, strutturali o concettuali attraverso l'ispezione del codice sorgente o della documentazione.
 
-Può essere svolta tramite:
-- metodi formali, basati su dimostrazioni matematiche;
-- metodi di lettura, più flessibili e applicabili alla documentazione e al codice.
+======= Tecniche di Analisi Statica
+L'Analisi Statica può essere realizzata mediante:
 
-Tra i metodi di lettura:
+*Metodi Formali:* basati su dimostrazioni matematiche della correttezza. Data la complessità e il costo elevato, Skarab Group riserva questi metodi solo a componenti critiche del sistema _Code Guardian_, dove è richiesta garanzia assoluta di correttezza.
 
-il Walkthrough, che prevede un’analisi completa e approfondita dell’oggetto, ma risulta costoso e poco automatizzabile;l’Ispezione, basata su checklist di controllo, meno esaustiva ma più efficiente e facilmente automatizzabile.
-Considerata l’elevata quantità di artefatti da verificare, Skarab Group privilegia l’ispezione.
+*Metodi di Lettura:*
+
+I metodi di lettura si suddividono in:
+
+- *Walkthrough*: analisi completa e approfondita dell'oggetto di verifica. Utile quando si è consapevoli dell'esistenza di un problema ma non si conosce natura o posizione. È un metodo costoso e difficilmente automatizzabile, pertanto viene applicato solo a componenti critiche o quando emergono problemi complessi non risolvibili con ispezione.
+
+- *Ispezione*: si basa su checklist di controllo predefinite per identificare categorie note di errori. Meno esaustiva del walkthrough ma più efficiente e facilmente automatizzabile.
+
+Data l'elevata quantità di artefatti da verificare nel progetto _Code Guardian_, Skarab Group privilegia l'*ispezione* in quanto:
+- permette la creazione di checklist riutilizzabili e standardizzate;
+- garantisce uniformità nei controlli;
+- riduce i tempi di verifica mantenendo l'efficacia.
 
 ====== Analisi Dinamica
+L'*Analisi Dinamica* prevede l'esecuzione dell'oggetto da verificare al fine di rilevare *failure* (comportamenti non conformi alle aspettative) e identificare i relativi *fault* (difetti nel codice che causano le failure).
 
-L’Analisi Dinamica prevede l’esecuzione dell’oggetto da verificare e si basa sull’identificazione delle failure, ossia comportamenti non conformi alle aspettative, al fine di individuare e correggere i relativi fault.
-Questa analisi è realizzata tramite Test, che devono essere:
-- ripetibili;
+L'Analisi Dinamica si realizza mediante *Test*, che devono possedere le seguenti caratteristiche:
 
-- indipendenti dall’ambiente di esecuzione;
+- *Ripetibili*: eseguibili multiple volte con risultati consistenti;
+- *Indipendenti*: non dipendenti dall'ordine di esecuzione o da altri test;
+- *Automatizzabili*: eseguibili automaticamente senza intervento manuale.
 
-- automatizzabili.
+L'automazione dei test è supportata da:
+- *Driver*: componenti che invocano il codice da testare quando non direttamente eseguibile;
+- *Stub*: componenti che simulano dipendenze non ancora implementate;
+- *Logger*: strumenti per registrare gli esiti dei test in formato strutturato e analizzabile.
 
-L’automazione dei test è supportata dall’uso di driver, stub e logger per simulare e monitorare l’esecuzione del software.
+Le principali tipologie di Test sono:
 
-I test adottati nel progetto si suddividono nelle seguenti categorie:
+- Test di Unità.
+- Test di Integrazione.
+- Test di Sistema.
+- Test di Regressione.
 
-- Test di Unità
-
-- Test di Integrazione
-
-- Test di Sistema
-
-- Test di Regressione
-
-- Test di Accettazione
-
-Ogni test è identificato da una nomenclatura standard e possiede uno stato che ne indica il livello di implementazione o superamento.
+La nomenclatura utilizzata per descrivere i Test, reperibili nel #underline[Piano di Qualifica], viene presentata di seguito.
 
 ======= Nomenclatura dei Test
-La nomenclatura adottata per l'identificazione dei test segue uno schema gerarchico:
+La nomenclatura adottata per l'identificazione dei Test segue uno schema gerarchico:
 #align(center)[`[Prefisso]-[Numero].[Sottonumero]`]
 
 dove:
-- *Prefisso del tipo di test:* identifica il livello di testing
+- *Prefisso:* identifica il tipo di test
   - *TU:* Test di Unità.
-  - *TI:* Test di Integrazione (definiti durante PB).
+  - *TI:* Test di Integrazione.
   - *TS:* Test di Sistema.
-  - *TR:* Test di Regressione (definiti durante PB).
+  - *TR:* Test di Regressione.
   - *TA:* Test di Accettazione.
-- *Numero progressivo:* identifica univocamente il test all'interno della categoria.
-- *Sottonumero:* per test derivati o sottocasi.
+- *Numero:* identificativo progressivo univoco del test all'interno della categoria.
+- *Sottonumero:* identifica varianti o sottocasi del test principale.
 
 ======= Test di Unità
+I *Test di Unità* verificano il corretto funzionamento delle singole unità software, ovvero componenti atomiche con responsabilità ben definita e testabile in isolamento.
 
-I Test di Unità verificano il corretto funzionamento delle singole unità software.
-Si distinguono in:
+I test di unità si suddividono in:
 
-- test funzionali (black-box), che analizzano input e output;
+- *Test funzionali (black-box)*: verificano input e output senza considerare la logica interna. Per ogni unità vengono testati:
+  - Valori non ammissibili inferiori al range valido;
+  - Valori limite inferiori del range valido;
+  - Valori centrali del range valido;
+  - Valori limite superiori del range valido;
+  - Valori non ammissibili superiori al range valido.
 
-- test strutturali, che verificano i percorsi logici e le istruzioni eseguite.
+- *Test strutturali (white-box)*: verificano i percorsi logici e la copertura delle istruzioni.
 
 ======= Test di Integrazione
-I Test di Integrazione verificano la corretta interazione tra le unità.
-L’integrazione può avvenire secondo due strategie:
+I *Test di Integrazione* verificano la corretta interazione tra unità software integrate tra loro, assicurando che le interfacce e i flussi di dati funzionino correttamente.
 
-- Top-Down, partendo dalle componenti di livello più alto;
+Strategie di integrazione adottate:
 
-- Bottom-Up, partendo dalle componenti di base.
+- *Top-Down*: partendo dalle componenti di livello superiore che hanno maggiori dipendenze, ovvero quelle che hanno maggiore responsabilità verso l'esterno del Sistema;
+
+- *Bottom-Up*: partendo dalle componenti di base con minori dipendenze, ovvero quelle con maggiore importanza all'interno del Sistema.
 
 ======= Test di Sistema
-I Test di Sistema valutano il comportamento del sistema nel suo complesso, verificandone la conformità ai requisiti e l’efficacia globale.
+I Test di Sistema valutano il comportamento del sistema nel suo complesso, verificandone la conformità ai requisiti definiti nell'Analisi dei Requisiti.
 
 ======= Test di Regressione
+Garantiscono che modifiche o correzioni al codice non introducano nuovi difetti o reintroducano difetti precedentemente risolti.
 
-I Test di Regressione garantiscono che le modifiche apportate al sistema non reintroducano errori precedentemente risolti.
-In caso di correzione di un fault, l’intera suite di test viene rieseguita per assicurare la stabilità del sistema.
-
-======= Test di Accettazione:
-I Test di Accettazione rappresentano la verifica finale del prodotto rispetto alle aspettative degli _Stakeholder_. Essi confermano che tutte le funzionalità richieste siano implementate correttamente.
+*Procedura dei Test di Regressione:*
+1. Viene identificato e corretto un difetto nel codice;
+2. Viene eseguito il test che aveva rilevato il difetto per verificarne la risoluzione;
+3. Viene eseguita l'intera suite di test di regressione;
+4. Si verifica che nessun test precedentemente superato sia ora fallito.
 
 === Validazione
-La Validazione ha l’obiettivo di accertare che il prodotto soddisfi le esigenze della proponente e le aspettative degli utenti finali, rispondendo alla domanda: "Did I build the right system?".
+Il processo di Validazione ha come scopo verificare che il prodotto _Code Guardian_ soddisfi le esigenze di Var Group e degli utenti finali, garantendo che il sistema realizzato sia effettivamente quello richiesto.
 
-==== Implementazione
+Mentre la Verifica si concentra sulla conformità tecnica alle specifiche, la Validazione si focalizza sulla conformità del prodotto alle aspettative e ai bisogni reali degli _stakeholder_.
 
-La validazione viene implementata attraverso test di accettazione e raccolta di feedback dagli utenti finali. Queste attività assicurano che il prodotto finale risponda alle esigenze e ai requisiti definiti all'inizio del progetto.
+==== Obiettivi della Validazione
+Skarab Group identifica i seguenti obiettivi per il processo di Validazione:
+
+- confermare che il sistema _Code Guardian_ implementi le funzionalità richieste da Var Group;
+- verificare che il sistema sia utilizzabile dagli utenti finali;
+- assicurare che il sistema risolva effettivamente i problemi di audit e remediation per cui è stato concepito;
+- ottenere l'accettazione formale del prodotto da parte della Proponente;
+- identificare eventuali gap tra le aspettative iniziali e la realizzazione finale.
+
+==== Attività previste
+In conformità allo standard ISO/IEC/IEEE 12207, il processo di Validazione si articola nelle seguenti attività:
+
+- *Implementazione del processo*: definizione delle strategie di validazione e degli strumenti necessari.
+- *Attività di Validazione*: esecuzione delle attività di validazione vera e propria.
+
+===== Implementazione del processo
+Skarab Group ha analizzato le esigenze di Var Group espresse nel capitolato C2 e ha racchiuso tutti i requisiti da soddisfare nell'*Analisi dei Requisiti*.
+
+Per garantire una validazione efficace, il team adotta le seguenti strategie:
+
+1. *Tracciamento sistematico dei requisiti*: ogni requisito è tracciato dalla sua definizione nell'Analisi dei Requisiti fino alla sua implementazione e validazione;
+
+2. *Test di Accettazione*: rappresentano la verifica finale del prodotto rispetto alle aspettative degli _Stakeholder_. Essi confermano che tutte le funzionalità richieste siano implementate correttamente.
+
+===== Attività di Validazione
+Skarab Group realizza la Validazione attraverso un approccio strutturato che combina tracciamento e testing. Il *tracciamento sistematico dei requisiti* mantiene collegamenti espliciti tra requisiti, implementazione e test, garantendo la copertura completa delle funzionalità. I *Test di Accettazione* simulano scenari d'uso reali, verificando criteri di successo oggettivi per ogni requisito.
 
 = Processi Organizzativi
 I porcessi organizzativi sono tutti quei processi di supporto che permettono al gruppo di lavorare in modo efficiente e coordinato.
@@ -1422,7 +1510,7 @@ Inoltre nella root della repository sono presenti alcuni file:
 La cartella `lib/` contiene librerie di funzioni Typst che sono utilizzate in vari documenti del progetto per garantire coerenza e riusabilità del codice. Questa cartella é creata e gestita dall'amministratore del progetto, questo permette di avere un punto centrale dove vengono definite tutte le funzioni comuni, facilitando la manutenzione e l'aggiornamento delle stesse.
 
 == Processo di miglioramento
-Il processo di miglioramento continuo è fondamentale per garantire che i prodotti del progetto soddisfino gli standard di qualità definiti e le aspettative degli stakeholder. QWuesto processo si articola in 3 fasi principali:
+Il processo di miglioramento continuo è fondamentale per garantire che i prodotti del progetto soddisfino gli standard di qualità definiti e le aspettative degli stakeholder. Questo processo si articola in 3 fasi principali:
 - Inizializzazione: Fase in cui vengono definiti i processi organizzativi che guideranno il lavoro del team.
 - Valutazione: Fase in cui vengono monitorati i processi e i prodotti attraverso metriche specifiche.
 - Miglioramento: Fase in cui vengono implementate azioni correttive basate sui risultati della valutazione.
