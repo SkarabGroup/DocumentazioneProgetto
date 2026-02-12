@@ -11,13 +11,19 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.8.0"
+#let versione = "v0.8.1"
 #set heading(numbering: "1.1.1")
 
 #titlePage("Norme di Progetto", versione)
 #set page(numbering: "1", header: header("Norme di Progetto"), footer: footer())
 
 #let history = (
+  (
+    "2026/02/11",
+    "0.8.1",
+    "Ultimo fix/miglioramento sezione AdR",
+    members.andrea,
+  ),
   (
     "2026/02/11",
     "0.8.0",
@@ -550,18 +556,16 @@ Per la redazione del documento Analisi dei Requisiti, il gruppo adotta i seguent
 - *UML 2.5*: standard per la modellazione dei casi d’uso, che consente di rappresentare graficamente le interazioni tra attori e sistema, facilitando la comprensione e la tracciabilità dei requisiti funzionali.
 
 ==== Definizione del Documento
-/* L’#def("Analisi dei Requisiti") è il documento che descrive in dettaglio i requisiti funzionali e non funzionali
-previsti dal progetto #def("Code Guardian"). Nel dettaglio il documento contiene un’analisi dettagliata delle
-funzionalità del sistema, degli attori coinvolti e le informazioni necessarie al tracciamento dei
-requisiti rispetto alle loro fonti. Il documento è utilizzato come riferimento principale per la progettazione e lo sviluppo del sistema, nonché per la verifica della conformità del prodotto finale rispetto alle esigenze espresse dal proponente. */
 L’#def("Analisi dei Requisiti") costituisce il riferimento tecnico vincolante per la formalizzazione rigorosa delle necessità e dei vincoli relativi al sistema *Code Guardian*. Il documento ha lo scopo di tradurre le esigenze espresse dal proponente in un insieme di specifiche formali, non ambigue e verificabili, che guidano l’intero processo di ingegnerizzazione del software. \
 Il documento deve definire, in modo tracciabile e verificabile:
 
 - *Perimetro del Sistema*: la delimitazione univoca dei confini d'azione del software, specificando le interazioni tra il sistema e gli attori esterni per eliminare ogni ambiguità sulle responsabilità operative;
-- *Specifiche Funzionali e Non Funzionali*: la scomposizione delle necessità di business in requisiti atomici e misurabili, che fungano da prerequisito obbligatorio per le successive fasi di progettazione e design;
-#TODO("Sistemare, fare questa parte meglio")
+- *Classificazione e Prioritizzazione delle Specifiche*: la scomposizione delle necessità del Capitolato in requisiti funzionali, di qualità (non funzionali) e di vincolo, necessari per l'analisi automatizzata di test, sicurezza e documentazione dei repository;
+- *Modellazione delle Interazioni (Casi d'Uso)*: la descrizione strutturata delle interazioni tra attori e sistema, supportata da diagrammi conformi allo standard UML 2.5, finalizzata alla validazione funzionale dei requisiti e al supporto delle attività di verifica;
+- *Tracciabilità dei Requisiti*: lo stabilimento di legami espliciti tra i requisiti, i casi d'uso e le fonti documentali (Capitolato, verbali di riunione), garantendo che ogni scelta implementativa sia giustificata e monitorabile;
+- *Criteri di Accettazione*: la fornitura della base informativa necessaria per le attività di Verifica e Validazione, definendo i requisiti minimi per l'accettazione del prodotto finale da parte del Proponente.
 
-L’Analisi dei Requisiti rappresenta la colonna portante della *Requirements and Technology Baseline* (*RTB*). Essa funge da ponte logico tra gli obiettivi strategici del Capitolato d'Appalto e l'implementazione tecnica, assicurando la tracciabilità di ogni scelta progettuale rispetto alle necessità approvate e documentate .
+L’Analisi dei Requisiti rappresenta la colonna portante della *Requirements and Technology Baseline* (*RTB*). Essa funge da ponte logico tra gli obiettivi strategici del Capitolato d'Appalto e l'implementazione tecnica, assicurando la tracciabilità di ogni scelta progettuale rispetto alle necessità approvate e documentate.
 
 ==== Elementi Costituenti del Documento
 Il documento Analisi dei Requisiti deve essere organizzato in modo chiaro e strutturato, includendo obbligatoriamente i seguenti elementi:
