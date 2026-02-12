@@ -416,93 +416,50 @@
 
 #pagebreak()
 
-#TODO("Da rielaborare")
 = Introduzione
 == Contesto del Progetto
 Il presente documento descrive il #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-dei-requisiti")[#def[Analisi dei Requisiti]] relativo al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]], commissionato dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
 
-L’obiettivo del progetto è lo sviluppo di una piattaforma ad #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] per l’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e la #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] automatizzata delle vulnerabilità presenti nei repository di codice sorgente, in conformità a quanto specificato nel #link(<capitolato>)[#underline[capitolato *C2*]].
-La piattaforma mira a supportare l’analisi statica del codice e l’individuazione di criticità di sicurezza, fornendo indicazioni di correzione mediante meccanismi automatizzati basati su modelli di linguaggio (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]).
+Il progetto ha come obiettivo lo sviluppo di una piattaforma software ad #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] finalizzata all’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e alla #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] automatizzata delle vulnerabilità presenti nei repository di codice sorgente. Il sistema è progettato in conformità ai requisiti e ai vincoli definiti nel #link(<capitolato>)[#underline[Capitolato *C2*]].
+La piattaforma supporta attività di analisi statica del codice sorgente e di individuazione delle principali criticità di sicurezza, fornendo suggerimenti di correzione attraverso meccanismi automatizzati basati su modelli di linguaggio di grandi dimensioni (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]).
 
 == Finalità del Documento
 Il documento di *Analisi dei Requisiti* formalizza le specifiche del prodotto software, descrivendo in modo dettagliato le funzionalità, i vincoli e gli standard di qualità che il sistema #def[Code Guardian] deve soddisfare per rispondere alle esigenze del committente.
 
 Il documento costituisce il riferimento primario per il gruppo di lavoro (#def[Skarab Group]) e per gli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#stakeholder")[#def[stakeholder]], perseguendo i seguenti obiettivi:
-- modellare le interazioni tra gli utenti (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#attore")[#def[attori]]) e il sistema attraverso la definizione formale dei #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#caso-d-uso")[#def[casi d'uso]];
+- modellare le interazioni tra gli utenti e il sistema attraverso la definizione formale dei #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#caso-d-uso")[#def("casi d'uso")];
 - individuare e dettagliare i requisiti di sistema, distinguendo tra #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisito-funzionale")[#def[requisiti funzionali]], #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisito-di-qualita")[#def[di qualità]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisito-di-vincolo")[#def[di vincolo]];
 - classificare i requisiti in base alla priorità negoziale e strategica (#def[obbligatori], #def[opzionali], #def[desiderabili]), fornendo una guida per la pianificazione dello sviluppo;
 - stabilire una base contrattuale verificabile per la validazione del prodotto finale rispetto a quanto concordato nel Capitolato e durante gli incontri con il proponente.
 
+== Scopo del Prodotto
+Il prodotto che #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] sviluppa è un #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#sistema-software")[#def[sistema software]] #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#sistema-multiagente")[#def[multiagente]] per l'analisi di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#repository")[#def[repository]] #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#github")[#def[GitHub]].
+Il sistema è progettato per essere modulare, scalabile e per operare in ambienti isolati, garantendo la sicurezza del sistema ospite durante l'esecuzione di codice non fidato.
 
-== Scopo del documento
-Il presente documento ha lo scopo di definire e analizzare i #def("requisiti funzionali") e i #def("requisiti non funzionali") del sistema software che #def("Skarab Group") intende sviluppare a supporto del progetto '#def("Code Guardian")' proposto dall'azienda #def("Var Group").
-Il documento descrive attentamente i #def("casi d'uso") del sistema, che sono la fonte dei #def("requisiti funzionali"), ovvero l'obiettivo finale dell'#def("analisi dei requisiti"). Per ogni #def("caso d'uso"), vengono specificati gli attori coinvolti, le precondizioni e postcondizioni, gli scenari principali, eventuali inclusioni ed estensioni, trigger oltre che i #def("diagrammi dei casi d'uso")
+L'obiettivo corrente è il rilascio di un #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#minimum-viable-product")[#def[MVP]] che dimostri l'efficacia dell'approccio a micro-agenti per la risoluzione automatica del debito tecnico.
 
-Questo documento si pone alla base di progettazione, implementazione e collaudo del #def("sistema software"), fornendo una chiara comprensione delle funzionalità richieste e delle aspettative degli stakeholder, garantendo che il sistema soddisfi le esigenze degli #def("utenti") finali.
+== Funzioni del Prodotto
+Le funzionalità del sistema sono suddivise in quattro macro-aree operative, accessibili tramite un'interfaccia web (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#gui")[#def[GUI]]):
 
-L'obiettivo stesso del documento identifica i suoi destinatari principali, che includono:
-- L' #strong("azienda committente") #def("Var Group"), che utilizzeranno questo documento per verificare che il sistema che verrá sviluppato soddisfi le loro esigenze e aspettative.
-- I #strong("team di sviluppo") #def("Skarab Group") ovvero #def("progettisti") e #def("programmatori"), che utilizzerà questo documento come guida per la progettazione e l'implementazione del sistema software.
-- I #strong("team di verificatori"), che utilizzeranno questo documento per garantire che il sistema soddisfi i requisiti specificati.
+- *Audit del Codice:* Esecuzione di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-statica")[#def[analisi statica]] per l'identificazione di errori a tempo di compilazione e verifica della presenza/copertura dei test unitari.
+- *Audit della Sicurezza:* Analisi delle dipendenze per l'individuazione di librerie obsolete o affette da vulnerabilità note e verifica della conformità agli standard #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#owasp")[#def[OWASP]].
+- *Audit della Documentazione:* Controllo della completezza e della coerenza semantica della documentazione tecnica rispetto al codice sorgente, effettuato tramite #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]].
+- *Remediation:* Generazione automatica di suggerimenti correttivi (snippet di codice o testo) per le criticità rilevate.
 
-== Classificazione dei Requisiti
+== Caratteristiche degli Utenti
+Il sistema è progettato per soddisfare le esigenze di diverse tipologie di utenti, con differenti livelli di competenza tecnica:
 
-Ogni Requisito individuato viene classificato secondo due criteri distinti: la *priorità* (importanza strategica) e la *tipologia* (natura tecnica).
+- *Sviluppatori Software:* Utenti tecnici che utilizzano il sistema per ottenere feedback immediato ("early feedback") sul proprio codice e applicare le correzioni suggerite.
+- *Manager IT:* Utenti con focus gestionale che utilizzano la dashboard per monitorare la qualità complessiva e la postura di sicurezza dei progetti aziendali.
+- *Consulenti Informatici:* Utenti esterni che utilizzano il tool per eseguire audit di terze parti su repository legacy o in fase di acquisizione.
 
-==== Classificazione per Priorità
-I Requisiti sono suddivisi in tre livelli di priorità, definiti in base alla loro criticità per il successo del progetto e per il rilascio del Sistema:
+== Limitazioni
+Lo sviluppo e l'operatività del sistema sono soggetti ai seguenti vincoli e limitazioni:
 
-- #strong("Obbligatori"): Requisiti vincolanti e indispensabili. Il mancato soddisfacimento di anche uno solo di questi requisiti rende il sistema non conforme agli obiettivi minimi del progetto (#def("MVP")).
-- #strong("Desiderabili"): Requisiti che apportano valore aggiunto al sistema. Sebbene la loro implementazione sia auspicabile, la loro eventuale omissione non compromette le funzionalità core del prodotto.
-- #strong("Opzionali"): Requisiti di importanza secondaria o funzionalità avanzate da implementare solo qualora le risorse e le tempistiche lo consentano. Sono candidati ideali per sviluppi futuri (versioni successive alla 1.0.0).
-
-==== Classificazione per Tipologia
-Seguendo la classificazione definita nelle #link(<R3>)[#underline[Dispense del corso di Ingegneria del Software sull'Analisi dei Requisiti]], i Requisiti sono stati suddivisi in 3 macro-categorie:
-- #strong("Requisiti Funzionali (FR)"): descrivono cosa il Sistema deve fare, inclusi i comportamenti, le reazioni a specifici input e le regole di validazione dei dati;
-- #strong("Requisiti di Qualità (QR)"): specificano caratteristiche come le prestazioni e la documentazione tecnica a corredo del _Software_;
-- #strong("Requisiti di Vincolo (VR)"): impongono limiti e condizioni di progetto, come l'utilizzo di tecnologie specifiche, standard o piattaforme;
-
-=== Fonte dei requisiti
-I requisiti sono stati identificati a partire dalle seguenti fonti:
-- #strong("Capitolato"): requisiti individuati nel capitolato fornito da #def("Var Group");
-- #strong("Interno"): requisiti individuati dal team di sviluppo #def("Skarab Group") durante le riunioni interne;
-- #strong("Esterno"): requisiti individuati durante gli incontri con l'azienda propontente #def("Var Group").
-- #strong("Piano di Qualifica"): requisiti necessari pre rispettare standard di qualità definiti nel documento di Piano di Qualifica;
-- #strong("Norme di Progetto"): requisiti necessari per rispettare le norme di progetto definite nel documento di Norme di Progetto;
-
-=== Descrizione dei Requisiti
-Ogni Requisito è identificato da un codice univoco, strutturato per garantirne la *piena tracciabilità* e facilitarne la gestione lungo l'intero ciclo di vita del progetto. Per ciascuno di essi vengono specificati: una descrizione concisa, la categoria tipologica di appartenenza e il relativo livello di priorità.
-
-/*In accordo con lo standard #link(<R2>)[#underline[ISO/IEC/IEEE International Standard - Systems and software engineering -- Life cycle
-  processes -- Requirements engineering]], i requisiti sono ulteriormente categorizzati in base alla loro natura tecnica:
-
-- #strong("Funzionali (FR)"): Descrivono i comportamenti specifici del sistema, le reazioni a input determinati e le regole di validazione dei dati ("cosa fa il sistema").
-- #strong("Usabilità (UR)"): Riguardano l'efficacia, l'efficienza e la soddisfazione dell'interazione utente, inclusi aspetti di accessibilità e feedback visivi.
-- #strong("Interfaccia (IR)"): Specificano le interazioni logiche e visive con l'utente (elementi UI) e le interfacce verso sistemi esterni (API, protocolli).
-- #strong("Logici del Database (LDR)"): Definiscono la struttura dei dati, le modalità di conservazione, i vincoli di integrità e le relazioni tra entità.
-- #strong("Vincoli di Design (DC)"): Limitazioni imposte da scelte tecnologiche obbligatorie, standard industriali, protocolli di comunicazione o normative specifiche.
-- #strong("Attributi del Software (SSA)"): Caratteristiche di qualità non funzionali critiche, con particolare focus su Sicurezza (cifratura, protezione dati), Affidabilità e Robustezza.*/
-
-== Prospettiva del prodotto
-Il prodotto che #def("Skarab Group") intende sviluppare è un #def("sistema software") #def("multiagente") per l'analisi di #def("repository") #def("GitHub"). Il sistema sarà progettato per essere modulare e scalabile, consentendo l'aggiunta di nuove funzionalità e agenti in futuro. Dal momento in cui l'obiettivo del #def("progetto") è lo sviluppo di un #def("MVP"), il sistema sarà sviluppato con un focus sulle funzionalità essenziali, garantendo al contempo una solida base per future espansioni.
-
-== Funzioni del prodotto
-Questa sezione descrive le principali funzionalitá che il prodotto dovrá fornire all'utilizzatore finale; esse sono suddivise in 3 sezioni principali, #emph("Test"), #emph("Sicurezza") e #emph("Documentazione").
-- Test:
-  - Analisi statica del codice sorgente per identificare potenziali errori a compile time.
-  - Controllo dei test unitari per valutare l'efficacia di questi.
-- Sicurezza:
-  - Analisi delle dipendenzanze per individuare librerie obsolete o vulnerabili.
-  - Verifica della conformità alle normative di sicurezza dello standard OWASP.
-- Documentazione:
-  - Verifica della completezza della documentazione del codice.
-  - Controllo della conformità agli standard di documentazione aziendali e non e delle best practice.
-  - Analisi semantica per garantire che la documentazione rifletta accuratamente il funzionamento del codice.
-L'#def("utente") potrá richiedere l'analisi di uno o piú #def("repository") #def("GitHub") specificando l'#def("URL") del repository e le aree di interesse (tutte, solo una parte o solo una). Il sistema genererà un report dettagliato con i risultati dell'analisi, evidenziando le aree di miglioramento e fornendo raccomandazioni per ottimizzare la qualitá del codice e della documentazione. L'interfaccia sará una #def("webapp") con una #def("GUI") intuitiva e user-friendly da cui l'utente potrá interagire con il sistema, richiedere analisi e visualizzare i report generati sottoforma di grafici e tabelle.
-
-== Caratteristiche degli utenti
-Gli #def("utenti") principali del sistema sono #def("sviluppatori software"), manager #def("IT") e #def("consulente informatico") che desiderano una valutazione sulla qualitá del codice e della documentazione nei loro progetti. Gli utenti avranno diversi livelli di competenza tecnica, pertanto l'interfaccia utente sará progettata per essere accessibile sia a utenti esperti che a quelli meno esperti.
-
+- *Connettività:* Il funzionamento richiede una connessione internet attiva per comunicare con le #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#api")[#def[API]] di GitHub e i provider LLM.
+- *Rate Limiting:* Le funzionalità di analisi semantica sono soggette ai limiti di frequenza e ai costi dei token imposti dai fornitori dei servizi LLM.
+- *Privacy (GDPR):* Il sistema opera in modalità "stateless" e non deve memorizzare in modo persistente il codice sorgente analizzato oltre il tempo strettamente necessario all'analisi.
+- *Ambito MVP:* Nella versione attuale, il supporto è limitato ai linguaggi di programmazione specificati nel Piano di Progetto; il supporto per ulteriori linguaggi è demandato a rilasci successivi.
 == Glossario
 Al fine di prevenire ambiguità interpretative, è stato redatto un glossario che definisce in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio utilizzati all’interno della documentazione.
 
@@ -514,11 +471,11 @@ La versione più recente del Glossario è disponibile al seguente link:
 == Riferimenti
 === Riferimenti Normativi
 I seguenti documenti hanno valore vincolante per la redazione dell'Analisi dei Requisiti:
-- *Standard IEEE 830-1998* IEEE Recommended Practice for Software Requirements Specifications \
+- *Standard IEEE 830-1998* IEEE Recommended Practice for Software Requirements Specifications <830> \
   #underline[https://ieeexplore.ieee.org/document/720574] \
   (ultimo accesso: 12/02/2026)
 
-- *Standard IEEE 29148-2018* ISO/IEC/IEEE International Standard – Systems and software engineering – Life cycle processes – Requirements engineering \
+- *Standard IEEE 29148-2018* ISO/IEC/IEEE International Standard – Systems and software engineering – Life cycle processes – Requirements engineering <29148>\
   #underline[https://ieeexplore.ieee.org/document/8559686] \
   (ultimo accesso: 12/02/2026)
 
@@ -526,133 +483,78 @@ I seguenti documenti hanno valore vincolante per la redazione dell'Analisi dei R
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
   (ultimo accesso: *12/02/2026*)
 
-- *Norme di Progetto*: regole, convenzioni e standard di qualità adottati dal gruppo. \
+- *Norme di Progetto*: regole, convenzioni e standard di qualità adottati dal gruppo. <NdP>\
   #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")] \
   (versione: *v1.0.0*)
 === Riferimenti Informativi
-- [R3] #strong("Dispense del corso di Ingegneria del Software sull'analisi dei requisiti") \
+- *Dispense del corso di Ingegneria del Software sull'analisi dei requisiti* <dispense_AdR>\
   #underline[https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T05.pdf] \
   Ultimo accesso: 12/02/2026
-- [R4] #strong("Dispense del corso di Ingegneria del Software sui casi d'uso") \
+- *Dispense del corso di Ingegneria del Software sui casi d'uso* <dispense_UC>\
   #underline[https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20Use%20Case.pdf] \
   Ultimo accesso: 12/02/2026
 
 
 #pagebreak()
-
 = Casi d'uso
+
 == Introduzione
-In questa sezione vengono descritti i #def("casi d'uso") principali del sistema software #def("Code Guardian").
-La definizione e la strutturazione dei casi d’uso sono state condotte in conformità alle linee guida e alle buone pratiche descritte negli standard IEEE per la specifica dei requisiti software #link(<R1>)[#underline[\[R1\]]] e per l’ingegneria dei requisiti #link(<R2>)[#underline[\[R2\]]], nonché facendo riferimento al materiale didattico adottato nel corso di Ingegneria del Software #link(<R3>)[#underline[\[R3\]]] #link(<R4>)[#underline[\[R4\]]].
+In questa sezione sono descritti i casi d'uso principali del sistema, che illustrano le interazioni funzionali tra gli utenti (umani e software) e l'applicazione.
 
-Ogni #def("caso d'uso") è descritto in modo dettagliato, includendo gli attori coinvolti, le precondizioni e postcondizioni, gli scenari principali, nonché eventuali inclusioni ed estensioni.
-Inoltre, per ciascun caso d’uso viene fornita una rappresentazione #def("UML") che illustra visivamente le interazioni tra gli attori e il sistema, al fine di migliorare la comprensione del comportamento funzionale del sistema.
+La specifica dei casi d'uso adotta il formato e le convenzioni di modellazione definite nel documento #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[#def[Norme di Progetto]]. Si rimanda a tale documento per la descrizione dettagliata della struttura dei campi (precondizioni, postcondizioni, scenari) e della sintassi #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#uml")[#def[UML]] utilizzata.
 
-
-Di seguito sono elencati le componenti di un caso d'uso del sistema con relativa descrizione:
-
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(62.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (2fr, 5fr),
-    inset: 10pt,
-    table.header([*Campo*], [*Descrizione*]),
-
-    [*Precondizioni*],
-    [Lista di elementi fondamentali affinché l'Attore possa compiere l'azione indicata dal caso d'uso],
-
-    [*Attori*],
-    [Sono esterni al Sistema e interagiscono attivamente con esso per compiere l'azione descritta dal Caso d'Uso],
-
-    [*Attori secondari*], [Sono attori che interagiscono con il sistema solo passivamente],
-
-    [*Postcondizioni*],
-    [Insieme delle modifiche allo stato interno del Sistema che risultano dall'esecuzione del Caso d'Uso da parte dell'Attore.],
-
-    [*Scenario principale*],
-    [Sequenza ordinata di azioni che l'Attore deve eseguire affinché il Caso d'Uso venga portato a termine con successo],
-
-    [*Inclusioni*],
-    [Elenco dei Casi d'Uso aggiuntivi che devono essere necessariamente eseguiti dall'Attore per completare il Caso d'Uso corrente.],
-
-    [*Estensioni*],
-    [Insieme dei Casi d'Uso opzionali che possono manifestarsi durante l'esecuzione del Caso d'Uso principale in presenza di determinate condizioni.],
-
-    [*Trigger*],
-    [Evento o condizione che induce l'Attore ad avviare il Caso d'Uso descritto; può non essere specificato qualora il Caso d'Uso sia attivato come inclusione di un altro Caso d'Uso.],
-  ),
-  caption: [Campi dei Casi d'Uso],
-)
-
-#pagebreak()
 == Attori
+Gli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#attore")[#def[attori]] rappresentano le entità che interagiscono con il sistema #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]]. Essi sono classificati in base al ruolo svolto nell'interazione:
 
-Di seguito sono elencati gli attori principali che interagiscono con il sistema software #def("Code Guardian"):
+- *Attori Primari:* Entità (umane o componenti software autonomi) che avviano le interazioni ("trigger") per raggiungere un obiettivo specifico.
+- *Attori Secondari:* Sistemi o servizi esterni che il sistema interroga o notifica per completare le funzionalità richieste.
 
-- Lato Front-end:
-
-#figure(
-  image("../assets/Attori_frontend.png", width: 70%),
-  caption: [Attori del sistema CodeGuardian lato Front-end],
-)
-
-- Lato Back-end:
-
-#figure(
-  image("../assets/Attori_backend.png", width: 70%),
-  caption: [Attori del sistema CodeGuardian lato Back-end],
-)
+Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 #figure(
   table(
-    fill: (x, y) => if (y == 0) {
-      luma(62.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (2fr, 5fr),
+    columns: (1fr, 3fr),
     inset: 10pt,
+    align: (col, row) => (if col == 0 { left } else { left }),
+    fill: (col, row) => if row == 0 { luma(240) } else { white },
+    stroke: 0.5pt + luma(200),
+    
     table.header([*Attore*], [*Descrizione*]),
 
-    [*Utente non registrato*],
-    [Utente che non possiede le credenziali di un account CodeGuardian.],
+    // SEZIONE 1: UMANI
+    table.cell(colspan: 2, fill: luma(250), [*Attori Primari (Utenti Umani)*]),
 
-    [*Utente non autenticato*],
-    [Utente che ha completato con successo la procedura di registrazione e possiede credenziali a un account CodeGuardian ma che non ha effettuato la procedura di autenticazione.],
+    [*Utente Non Autenticato*],
+    [Utente generico che accede alle funzionalità pubbliche della piattaforma (es. Home Page, Login, Registrazione) senza possedere o aver attivato una sessione valida.],
 
-    [*Utente autenticato*],
-    [Utente che ha completato con successo la procedurea di autenticazione a CodeGuardian e può utilizzare le funzionalità del sistema.],
+    [*Utente Autenticato*],
+    [Utente che ha completato con successo la procedura di autenticazione. Può configurare nuove analisi, consultare lo storico dei report e gestire il proprio profilo.],
 
-    [*Utente autenticato avanzato*],
-    [Utente autenticato che ha collegato con successo il proprio account CodeGuardian a un account GitHub e può usufruire di funzionalità avanzate del sistema.],
+    [*Utente Avanzato*],
+    [Specializzazione dell'Utente Autenticato che ha collegato il proprio account al provider #def[GitHub], abilitando l'accesso ai repository privati e funzionalità di integrazione avanzata.],
+
+    // SEZIONE 2: SISTEMI ATTIVI (ORCHESTRATORE)
+    table.cell(colspan: 2, fill: luma(250), [*Attori Primari (Sistemi Interni)*]),
 
     [*Orchestratore*],
-    [Componente che agisce sul sistema coordinando il flusso di analisi, gestendo gli ambienti di esecuzione e centralizzando la comunicazione con il Database e gli strumenti di analisi.],
+    [Componente software autonomo che agisce come attore sistemico. È responsabile dell'avvio e del coordinamento dei flussi di analisi automatizzati, della gestione degli ambienti di esecuzione  e della centralizzazione delle comunicazioni tra gli agenti e il database, senza richiedere intervento umano diretto durante l'elaborazione.],
 
-    [*Docker*],
-    [Servizio esterno di containerizzazione utilizzato per creare ambienti isolati (sandbox) in cui eseguire le analisi in sicurezza.],
+    // SEZIONE 3: SISTEMI ESTERNI
+    table.cell(colspan: 2, fill: luma(250), [*Attori Secondari (Sistemi Esterni)*]),
 
     [*GitHub*],
-    [Servizio esterno di hosting per lo sviluppo software che fornisce le API per l'accesso alle repository e ai dati di versione.],
+    [Piattaforma di hosting esterna. Interagisce con il sistema per fornire l'accesso al codice sorgente (via API o clone) e ai metadati dei repository.],
 
-    [*OWASP ZAP*],
-    [Servizio esterno per le scansioni di sicurezza mirate a verificare la conformità del sistema agli standard OWASP],
+    [*Docker*],
+    [Servizio di containerizzazione utilizzato per istanziare ambienti isolati (#def[sandbox]) necessari all'esecuzione sicura degli strumenti di analisi statica.],
 
-    [*SonarQube/Semgrep*],
-    [Servizio esterno incaricato dell'ispezione del codice sorgente per l'individuazione di vulnerabilità, bug e violazioni degli standard di qualità, fornendo all'Orchestratore i dati grezzi per il report.],
+    [*Servizio LLM (OpenAI)*],
+    [Servizio esterno di Intelligenza Artificiale interrogato per l'analisi semantica della documentazione e la generazione dei suggerimenti di remediation.],
 
-    [*OpenAI*],
-    [Servizio esterno che fornisce capacità di elaborazione del linguaggio naturale per analizzare il significato della documentazione e suggerire azioni di miglioramento (remediation).],
+    [*Strumenti di Analisi*],
+    [Insieme degli strumenti terzi (es. #def[OWASP ZAP], #def[SonarQube], #def[Semgrep]) invocati dal sistema per l'esecuzione verticale delle scansioni di sicurezza e qualità.],
   ),
-  caption: [Attori principali del sistema CodeGuardian],
-)
-
-#TODO(
-  "Controllare definizioni"
+  caption: [Definizione e gerarchia degli Attori],
 )
 
 == Lista
