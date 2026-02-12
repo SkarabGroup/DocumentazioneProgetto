@@ -13,16 +13,40 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.44.0"
+#let versione = "v0.44.5"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
+    "2026/02/10",
+    "0.44.5",
+    "Fix vari degli UC + fix specifici UC13-15",
+    members.andrea
+  ),
+  (
+    "2026/02/10",
+    "0.44.4",
+    "Fix della posizione del sistema in tutti i diagrammi UC",
+    members.andrea
+  ),
+  (
+    "2026/02/10",
+    "0.44.3",
+    "Primo fix generale UC",
+    members.andrea
+  ),
+  (
     "2026/02/09",
-    "0.44.1",
+    "0.44.2",
     "Sistemato formato dei link al glossario",
     members.antonio,
+  ),
+  (
+    "2026/02/09",
+    "0.44.1",
+    "Fix definizione attori",
+    members.andrea
   ),
   (
     "2026/02/08",
@@ -398,11 +422,27 @@
 
 #pagebreak()
 
+#TODO("Da rielaborare")
 = Introduzione
+== Contesto del Progetto
+Il presente documento descrive il #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-dei-requisiti")[#def("Analisi dei Requisiti")] relativo al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def("Code Guardian")], commissionato dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def("Var Group")] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def("Skarab Group")] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
+
+L’obiettivo del progetto è lo sviluppo di una piattaforma ad #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def("Agenti")] per l’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def("Audit")] e la #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def("Remediation")] automatizzata delle vulnerabilità presenti nei repository di codice sorgente, in conformità a quanto specificato nel #link(<capitolato>)[#underline[capitolato *C2*]].
+La piattaforma mira a supportare l’analisi statica del codice e l’individuazione di criticità di sicurezza, fornendo indicazioni di correzione mediante meccanismi automatizzati basati su modelli di linguaggio (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def("LLM")]).
+
+== Finalità del Documento
+Il documento di *Analisi dei Requisiti* formalizza le specifiche del prodotto software, descrivendo in modo dettagliato le funzionalità, i vincoli e gli standard di qualità che il sistema Code Guardian deve soddisfare per rispondere alle esigenze del committente.
+
+Il documento costituisce il riferimento primario per il gruppo di lavoro Skarab Group e per gli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#stakeholder")[#def("Stakeholder")], perseguendo i seguenti obiettivi:
+- modellare le interazioni tra gli utenti (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#attore")[#def("Attori")]) e il sistema attraverso la definizione formale dei #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#caso-duso")[#def("Casi d'uso")];
+- individuare e dettagliare i requisiti di sistema, distinguendo tra #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-funzionali")[#def("Requisiti Funzionali")], di qualità e di vincolo;
+- classificare i requisiti in base alla priorità negoziale e strategica (obbligatori, opzionali, desiderabili), fornendo una guida per la pianificazione dello sviluppo;
+- stabilire una base contrattuale verificabile per la validazione del prodotto finale rispetto a quanto concordato nel Capitolato e durante gli incontri con il proponente.
+
 
 == Scopo del documento
-Il presente documento ha lo scopo di definire e analizzare i #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-funzionali")[#def("Requisiti funzionali")] e i #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-non-funzionali")[#def("Requisiti non funzionali")] del #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#sistema-software")[#def("Sistema software")] che #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def("Skarab Group")] intende sviluppare a supporto del #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#progetto")[#def("Progetto")] '#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def("Code Guardian")]' proposto dall'azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def("Var Group")].
-Il documento descrive attentamente i #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#caso-duso")[#def("Casi d'uso")] del sistema, che sono la fonte dei Requisiti funzionali, ovvero l'obiettivo finale dell'#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-dei-reqisiti")[#def("Analisi dei requisiti")]. Per ogni caso d'uso vengono specificati gli attori coinvolti, le precondizioni e postcondizioni, gli scenari principali, eventuali inclusioni ed estensioni, trigger oltre che i 
+Il presente documento ha lo scopo di definire e analizzare i Requisiti funzionali e i #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-non-funzionali")[#def("Requisiti non funzionali")] del #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#sistema-software")[#def("Sistema software")] che Skarab Group intende sviluppare a supporto del #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#progetto")[#def("Progetto")] 'Code Guardian' proposto dall'azienda Var Group.
+Il documento descrive attentamente i casi d'uso del sistema, che sono la fonte dei Requisiti funzionali, ovvero l'obiettivo finale dell'Analisi dei Requisiti. Per ogni caso d'uso vengono specificati gli attori coinvolti, le precondizioni e postcondizioni, gli scenari principali, eventuali inclusioni ed estensioni, trigger oltre che i 
 #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#diagrammi-dei-casi-duso")[#def("Diagrammi dei casi d'uso")].
 
 Questo documento si pone alla base di progettazione, implementazione e collaudo del sistema software, fornendo una chiara comprensione delle funzionalità richieste e delle aspettative degli stakeholder, garantendo che il sistema soddisfi le esigenze degli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#utente")[#def("Utenti")] finali.
@@ -434,14 +474,14 @@ I requisiti sono stati identificati a partire dalle seguenti fonti:
 - #strong("Capitolato"): requisiti individuati nel capitolato fornito da Var Group;
 - #strong("Interno"): requisiti individuati dal team di sviluppo Skarab Group durante le riunioni interne;
 - #strong("Esterno"): requisiti individuati durante gli incontri con l'azienda propontente Var Group.
-- #strong("Piano di Qualifica"): requisiti necessari pre rispettare standard di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#qualita")[#def("Qualità")] definiti nel documento di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#piano-di -qualifica")[#def("Piano di Qualifica")];
+- #strong("Piano di Qualifica"): requisiti necessari pre rispettare standard di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#qualita")[#def("Qualità")] definiti nel documento di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#piano-di-qualifica")[#def("Piano di Qualifica")];
 - #strong("Norme di Progetto"): requisiti necessari per rispettare le #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#norme-di-progetto")[#def("Norme di progetto")] definite nel documento di Norme di Progetto;
 
 === Descrizione dei Requisiti
 Ogni Requisito è identificato da un codice univoco, strutturato per garantirne la *piena tracciabilità* e facilitarne la gestione lungo l'intero ciclo di vita del progetto. Per ciascuno di essi vengono specificati: una descrizione concisa, la categoria tipologica di appartenenza e il relativo livello di priorità.
 
 == Prospettiva del prodotto
-Il prodotto che Skarab Group intende sviluppare è un sistema software #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#multiagente")[#def("Multiagente")] per l'analisi di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#repository")[#def("Repository")] #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#github")[#def("GitHub")]. Il sistema sarà progettato per essere modulare e scalabile, consentendo l'aggiunta di nuove funzionalità e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def("Agenti")] in futuro. Dal momento in cui l'obiettivo del Progetto è lo sviluppo di un MVP, il sistema sarà sviluppato con un focus sulle funzionalità essenziali, garantendo al contempo una solida base per future espansioni.
+Il prodotto che Skarab Group intende sviluppare è un sistema software #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#multiagente")[#def("Multiagente")] per l'analisi di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#repository")[#def("Repository")] #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#github")[#def("GitHub")]. Il sistema sarà progettato per essere modulare e scalabile, consentendo l'aggiunta di nuove funzionalità e agenti in futuro. Dal momento in cui l'obiettivo del Progetto è lo sviluppo di un MVP, il sistema sarà sviluppato con un focus sulle funzionalità essenziali, garantendo al contempo una solida base per future espansioni.
 
 == Funzioni del prodotto
 Questa sezione descrive le principali funzionalitá che il prodotto dovrá fornire all'utilizzatore finale; esse sono suddivise in 3 sezioni principali, #emph("Test"), #emph("Sicurezza") e #emph("Documentazione").
@@ -460,25 +500,39 @@ L'utente potrà richiedere l'analisi di uno o più repository GitHub specificand
 == Caratteristiche degli utenti
 Gli utenti principali del sistema sono #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#sviluppatori-software")[#def("Sviluppatori software")], manager #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#information-technology")[#def("Information Technology")] (IT) e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#consulente-informatico")[#def("consulente informatico")] che desiderano una valutazione sulla qualità del codice e della documentazione nei loro progetti. Gli utenti avranno diversi livelli di competenza tecnica, pertanto l'interfaccia utente sará progettata per essere accessibile sia a utenti esperti che a quelli meno esperti.
 
-== Definizioni e Acronimi
-Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo documento sono elencati nel #strong("Glossario"), un documento separato fornito al lettore. Questo glossario serve a garantire una comprensione chiara e condivisa dei termini utilizzati nel contesto del progetto e del sistema software in sviluppo.
+== Glossario
+Al fine di prevenire ambiguità interpretative, è stato redatto un glossario che definisce in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio utilizzati all’interno della documentazione.
+
+Nel testo, *ogni termine evidenziato tramite una G come apice*, rimanda alla voce corrispondente del Glossario pubblicato sul sito ufficiale del gruppo, consentendo al lettore di accedere direttamente alla definizione associata.
+
+La versione più recente del Glossario è disponibile al seguente link:
+#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario]].
 
 == Riferimenti
-=== Riferimenti normativi
-- [R1] #strong("IEEE Recommended Practice for Software Requirements Specifications") \
+=== Riferimenti Normativi
+I seguenti documenti hanno valore vincolante per la redazione dell'Analisi dei Requisiti:
+- *Standard IEEE 830-1998* IEEE Recommended Practice for Software Requirements Specifications \
   #underline[https://ieeexplore.ieee.org/document/720574] \
-  Ultimo accesso: 22/12/2025 <R1>
-- [R2] #strong("ISO/IEC/IEEE International Standard – Systems and software engineering – Life cycle processes – Requirements engineering") \
-  #underline[https://ieeexplore.ieee.org/document/8559686] \
-  Ultimo accesso: 29/12/2025 <R2>
+  (ultimo accesso: 12/02/2026) <R1>
 
-=== Riferimenti organizzativi e didattici
+- *Standard IEEE 29148-2018* ISO/IEC/IEEE International Standard – Systems and software engineering – Life cycle processes – Requirements engineering \
+  #underline[https://ieeexplore.ieee.org/document/8559686] \
+  (ultimo accesso: 12/02/2026) <R2>
+
+- *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> \
+  #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
+  (ultimo accesso: *12/02/2026*)
+
+- *Norme di Progetto*: regole, convenzioni e standard di qualità adottati dal gruppo. \
+  #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")] \
+  (versione: *v1.0.0*)
+=== Riferimenti Informativi
 - [R3] #strong("Dispense del corso di Ingegneria del Software sull'analisi dei requisiti") \
   #underline[https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T05.pdf] \
-  Ultimo accesso: 22/12/2025 <R3>
+  Ultimo accesso: 12/02/2026 <R3>
 - [R4] #strong("Dispense del corso di Ingegneria del Software sui casi d'uso") \
   #underline[https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20Use%20Case.pdf] \
-  Ultimo accesso: 22/12/2025 <R4>
+  Ultimo accesso: 12/02/2026 <R4>
 
 
 #pagebreak()
@@ -549,7 +603,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   image("../assets/Attori_backend.png", width: 70%),
   caption: [Attori del sistema CodeGuardian lato Back-end],
 )
-#TODO("attenzione a inserire anche utente non registrato, eliminato autente registrato avanzato siccome non è mai stato usato in nessun caso d'uso")
+
 #figure(
   table(
     fill: (x, y) => if (y == 0) {
@@ -574,24 +628,28 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     [Utente autenticato che ha collegato con successo il proprio account CodeGuardian a un account GitHub e può usufruire di funzionalità avanzate del sistema.],
 
     [*Orchestratore*],
-    [Agente responsabile della gestione e coordinamento delle attività degli altri agenti all'interno del sistema.],
+    [Componente che agisce sul sistema coordinando il flusso di analisi, gestendo gli ambienti di esecuzione e centralizzando la comunicazione con il Database e gli strumenti di analisi.],
 
     [*Docker*],
-    [Piattaforma di containerizzazione utilizzata per eseguire gli agenti in ambienti isolati e replicabili.],
+    [Servizio esterno di containerizzazione utilizzato per creare ambienti isolati (sandbox) in cui eseguire le analisi in sicurezza.],
 
     [*GitHub*],
-    [Piattaforma di hosting per lo sviluppo di software che fornisce servizi di controllo versione e collaborazione tramite repository Git.],
+    [Servizio esterno di hosting per lo sviluppo software che fornisce le API per l'accesso alle repository e ai dati di versione.],
 
     [*OWASP ZAP*],
-    [Strumento di analisi per le scansioni di sicurezza mirate a verificare la conformità del sistema agli standard OWASP],
+    [Servizio esterno per le scansioni di sicurezza mirate a verificare la conformità del sistema agli standard OWASP],
 
     [*SonarQube/Semgrep*],
-    [Strumenti di analisi statica del codice utilizzati per rilevare vulnerabilità, bug e problemi di qualità nel codice sorgente.],
+    [Servizio esterno incaricato dell'ispezione del codice sorgente per l'individuazione di vulnerabilità, bug e violazioni degli standard di qualità, fornendo all'Orchestratore i dati grezzi per il report.],
 
     [*OpenAI*],
-    [Servizio di intelligenza artificiale utilizzato per l'analisi semantica della documentazione e la generazione di suggerimenti avanzati di refactoring e remediation.],
+    [Servizio esterno che fornisce capacità di elaborazione del linguaggio naturale per analizzare il significato della documentazione e suggerire azioni di miglioramento (remediation).],
   ),
   caption: [Attori principali del sistema CodeGuardian],
+)
+
+#TODO(
+  "Controllare definizioni"
 )
 
 == Lista
@@ -1262,8 +1320,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Utente autenticato avanzato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub e ha abilitato la condivisione di informazioni #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
   ],
   post: [
@@ -1289,8 +1345,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Utente autenticato avanzato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub e ha abilitato la condivisione di informazioni #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'URL inserito non è conforme ai vincoli di formato previsti per l'inserimento dell'URL del repository GitHub
   ],
@@ -1315,8 +1369,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Utente autenticato avanzato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub e ha abilitato la condivisione di informazioni #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'URL del repository GitHub inserito non è accessibile
   ],
@@ -1339,8 +1391,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Utente autenticato avanzato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub e ha abilitato la condivisione di informazioni #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'utente non ha inserito alcun URL del repository GitHub
   ],
@@ -1365,8 +1415,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Utente autenticato avanzato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub e ha abilitato la condivisione di informazioni #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
   ],
   post: [
@@ -1390,8 +1438,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Utente autenticato avanzato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub e ha abilitato la condivisione di informazioni #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'utente non ha selezionato alcuna area di interesse durante la selezione delle aree di interesse
   ],
@@ -1414,8 +1460,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Utente autenticato avanzato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'utente ha inserito un URL del repository GitHub #link(<UC4.1>)[#underline[\[UC4.1\]]]
     - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
@@ -1442,8 +1486,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'utente ha inserito un URL del repository GitHub corretto #link(<UC4.1>)[#underline[\[UC4.1\]]]
     - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
@@ -1470,8 +1512,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'utente ha inserito un URL del repository GitHub corretto #link(<UC4.1>)[#underline[\[UC4.1\]]]
     - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
@@ -1500,21 +1540,22 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente accede alla sezione di visualizzazione dei report di analisi
   ],
   post: [
     - L'utente ha visualizzato il report di analisi del repository GitHub selezionato
   ],
   scenari: [
-    - L'utente accede alla sezione di visualizzazione dei report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    //- L'utente accede alla sezione di visualizzazione dei report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente seleziona un report di analisi relativo a un repository GitHub #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente seleziona i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
-    - L'utente visualizza il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente visualizza il report di analisi del repository GitHub richiesto //#link(<UC5.4>)[#underline[\[UC5.4\]]]
   ],
   inclusioni: [
-    - #link(<UC5.1>)[#underline[\[UC5.1\]]] // Accesso sezione visualizzazione report
+    //- #link(<UC5.1>)[#underline[\[UC5.1\]]] // Accesso sezione visualizzazione report
     - #link(<UC5.2>)[#underline[\[UC5.2\]]] // Selezione report di analisi
     - #link(<UC5.3>)[#underline[\[UC5.3\]]] // Selezione dati specifici
-    - #link(<UC5.4>)[#underline[\[UC5.4\]]] // Visualizzazione report
+    //- #link(<UC5.4>)[#underline[\[UC5.4\]]] // Visualizzazione report
   ],
   estensioni: [
     - Nessuna
@@ -1524,12 +1565,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   #useCaseDiagram("5", "UC5 - Visualizzazione report analisi repository GitHub")
 ]
 
-==== UC5.1: Accesso alla sezione di visualizzazione dei report di analisi <UC5.1>
+#TODO("Toglierei UC5.1 e UC5.4, in quanto non sono funzionalità a sé stanti ma semplicemente parti del flusso di visualizzazione dei report. L'UC5.1 potrebbe essere inserito come precondizione dell'UC5, mentre l'UC5.4 potrebbe essere semplicemente l'ultimo step dello scenario principale dell'UC5")
+
+/* ==== UC5.1: Accesso alla sezione di visualizzazione dei report di analisi <UC5.1>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
+    #TODO("inserire precondizioni")
   ],
   post: [
     - L'utente visualizza la sezione del proprio account dedicata alla consultazione dei report di analisi dei repository GitHub
@@ -1545,13 +1587,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Nessuna
   ],
   trigger: "L'utente autenticato seleziona dal proprio account CodeGuardian la sezione dedicata ai report di analisi",
-)[]
+)[] */
 
 ==== UC5.2: Selezione report di analisi <UC5.2>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente si trova nella sezione di visualizzazione dei report di analisi del proprio account #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente si trova nella sezione di visualizzazione dei report di analisi del proprio account //#link(<UC5.1>)[#underline[\[UC5.1\]]]
   ],
   post: [
     - L'utente ha selezionato un report di analisi associato a un repository GitHub collegato al proprio account
@@ -1579,7 +1621,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente si trova nella sezione di visualizzazione dei report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente si trova nella sezione di visualizzazione dei report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
     // - Non ci sono repository da selezionare
     - Non esistono report di analisi associati al repository GitHub selezionato
   ],
@@ -1606,7 +1648,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente si trova nella sezione di visualizzazione dei report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente si trova nella sezione di visualizzazione dei report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
   ],
   post: [
     - L'utente rimane nella sezione di selezione dei report senza poter procedere
@@ -1629,7 +1671,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente si trova nella sezione di visualizzazione dei report #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente si trova nella sezione di visualizzazione dei report //#link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato un report di analisi #link(<UC5.2>)[#underline[\[UC5.2\]]]
   ],
   post: [
@@ -1654,7 +1696,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente si trova nella sezione di visualizzazione dei report #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente si trova nella sezione di visualizzazione dei report //#link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato un report di analisi #link(<UC5.2>)[#underline[\[UC5.2\]]]
   ],
   post: [
@@ -1678,7 +1720,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente si trova nella sezione di visualizzazione dei report #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente si trova nella sezione di visualizzazione dei report //#link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato un report di analisi #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente ha selezionato un insieme non vuoto di dati da visualizzare #link(<UC5.3>)[#underline[\[UC5.3\]]]
   ],
@@ -1703,7 +1745,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
     - L'utente ha selezionato il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
@@ -1730,10 +1772,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    //- L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    //- L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
     - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
@@ -1760,10 +1801,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    //- L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    //- L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
     - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
@@ -1792,10 +1832,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    //- L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    //- L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
     - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
@@ -1822,10 +1861,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    //- L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    //- L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
     - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
@@ -1852,10 +1890,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    //- L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    //- L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
     - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
     - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
@@ -1936,6 +1973,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: UAA,
   pre: [
     - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    #TODO("Riguarda dopo UC5")
   ],
   post: [
     - L'utente ha visualizzato la valutazione dell'analisi del codice repository GitHub
@@ -1966,7 +2004,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] già presente nell'UC9
     - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi statica del codice repository GitHub
   ],
   post: [
@@ -1988,7 +2026,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] già presente nell'UC9
     - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi librerie e dipendenze del codice repository GitHub
   ],
   post: [
@@ -2010,7 +2048,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] già presente nell'UC9
     - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della sicurezza OWASP del codice repository GitHub
   ],
   post: [
@@ -2032,7 +2070,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] già presente nell'UC9
     - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi delle vulnerabilità del codice repository GitHub
   ],
   post: [
@@ -2054,7 +2092,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] TOGLIEREI (vedi uc5 prima)
+    #TODO("Riguarda dopo UC5")
     - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della documentazione repository GitHub
   ],
   post: [
@@ -2072,15 +2111,16 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi della documentazione repository GitHub",
+  trigger: "L'utente accede alla sezione relativa al report di analisi della documentazione repository GitHub",
 )[#useCaseDiagram("10", "UC10 - Visualizzazione report analisi della documentazione repository GitHub")]
 
 ==== UC10.1: Visualizzazione errori di spelling <UC10.1>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della documentazione repository GitHub #link(<UC10>)[#underline[\[UC10\]]]
+    - L'utente è nella sezione relativa agli errori di spelling del report di analisi della documentazione repository GitHub
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della documentazione repository GitHub #link(<UC10>)[#underline[\[UC10\]]] GIA COMPRESI
   ],
   post: [
     - L'utente ha visualizzato il report di analisi degli errori di spelling della documentazione repository GitHub
@@ -2094,15 +2134,16 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi degli errori di spelling della documentazione repository GitHub",
+  trigger: "L'utente accede alla sezione relativa al report di analisi degli errori di spelling della documentazione repository GitHub",
 )[]
 
 ==== UC10.2: Visualizzazione completezza della documentazione nei confronti del codice <UC10.2>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della documentazione repository GitHub #link(<UC10>)[#underline[\[UC10\]]]
+    - L'utente è nella sezione relativa alla completezza della documentazione nei confronti del codice del report di analisi della documentazione repository GitHub
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della documentazione repository GitHub #link(<UC10>)[#underline[\[UC10\]]]  GIA COMPRESI
   ],
   post: [
     - L'utente ha visualizzato il report di analisi della completezza della documentazione nei confronti del codice repository GitHub
@@ -2116,14 +2157,15 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi della completezza della documentazione nei confronti del codice repository GitHub",
+  trigger: "L'utente accede alla sezione relativa al report di analisi della completezza della documentazione nei confronti del codice repository GitHub",
 )[]
 
 === UC11: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi repository GitHub <UC11>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] (vedi prima uc5)
+    #TODO("Riguarda dopo UC5")
     - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al numero totale di vulnerabilità individuate nel report di analisi repository GitHub
   ],
   post: [
@@ -2138,14 +2180,15 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al numero totale di vulnerabilità individuate nel report di analisi repository GitHub",
+  trigger: "L'utente accede alla sezione relativa al numero totale di vulnerabilità individuate nel report di analisi repository GitHub",
 )[]
 
 === UC12: Visualizzazione area metadati di un report di analisi repository GitHub <UC12>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    #TODO("Riguarda dopo UC5")
     - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub
   ],
   post: [
@@ -2164,7 +2207,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa ai metadati del report di analisi repository GitHub",
+  trigger: "L'utente accede alla sezione relativa ai metadati del report di analisi repository GitHub",
 )[
   #useCaseDiagram("12", "UC12 - Visualizzazione area metadati di un report di analisi repository GitHub")
 ]
@@ -2173,8 +2216,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
+    - L'utente è nella sezione relativa alla data del report di analisi, all'interno dell'area metadati del report di analisi repository GitHub
   ],
   post: [
     - L'utente ha visualizzato la data del report di analisi repository GitHub
@@ -2188,15 +2232,16 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente visualizza la data nella sezione relativa ai metadati del report di analisi repository GitHub",
+  trigger: "L'utente accede alla sezione relativa alla data del report di analisi, all'interno dell'area metadati del report di analisi repository GitHub",
 )[]
 
 ==== UC12.2: Visualizzazione commit analizzati nel report di analisi repository GitHub <UC12.2>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
+    - L'utente è nella sezione relativa ai commit analizzati, all'interno dell'area metadati del report di analisi repository GitHub
   ],
   post: [
     - L'utente ha visualizzato i commit analizzati nel report di analisi repository GitHub
@@ -2210,15 +2255,16 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente visualizza i commit analizzati nella sezione relativa ai metadati del report di analisi repository GitHub",
+  trigger: "L'utente accede alla sezione relativa ai commit analizzati, all'interno dell'area metadati del report di analisi repository GitHub",
 )[]
 
 ==== UC12.3: Visualizzazione richiedente report di analisi repository GitHub <UC12.3>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
+    - L'utente è nella sezione relativa al richiedente del report di analisi, all'interno dell'area metadati del report di analisi repository GitHub
   ],
   post: [
     - L'utente ha visualizzato il richiedente del report di analisi repository GitHub
@@ -2232,7 +2278,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente visualizza il richiedente nella sezione relativa ai metadati del report di analisi repository GitHub",
+  trigger: "L'utente accede alla sezione relativa al richiedente del report di analisi, all'interno dell'area metadati del report di analisi repository GitHub",
 )[]
 
 === UC13: Disconnessione account GitHub da CodeGuardian<UC13>
@@ -2241,7 +2287,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   pre: [
     - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub
       #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha selezionato la sezione di disconnessione dell'account GitHub dal sistema CodeGuardian
+    - L'utente è nella sezione di disconnessione dell'account GitHub dal sistema CodeGuardian
   ],
   post: [
     - L'utente ha disconnesso con successo il proprio accont GitHub dalla piattaforma Codeguardian
@@ -2255,19 +2301,17 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente entra nella sezione Impostazioni > Account > GitHub dell'applicazione e disconnette il proprio account di GitHub dalla piattaforma CodeGuardian",
+  trigger: "L'utente entra nella sezione Impostazioni > Account > GitHub dell'applicazione",
 )[#useCaseDiagram("13", "UC13 - Disconnessione account GitHub da CodeGuardian")]
 
 ==== UC13.1: Selezione tasto Disconnetti <UC13.1>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha selezionato la sezione di disconnessione dell'account GitHub dal sistema CodeGuardian #link(<UC13>)[#underline[\[UC13\]]]
+    - L'utente ha selezionato la sezione di disconnessione dell'account GitHub dall'applicazione CodeGuardian
   ],
   post: [
-    - L'utente ha disconnesso con successo il proprio accont GitHub dalla piattaforma Codeguardian
+    - L'utente ha disconnesso con successo il proprio accont GitHub dall'applicazione Codeguardian
   ],
   scenari: [
     - L'utente seleziona il tasto "Disconnetti"
@@ -2279,16 +2323,16 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - #link(<UC13.1.1>)[#underline[\[UC13.1.1\]]]
 
   ],
-  trigger: "L'untente seleziona e attiva il tasto Disconnetti per disconnettere il proprio account",
+  trigger: "L'untente preme il tasto Disconnetti per disconnettere il proprio account",
 )[#useCaseDiagram("13_1", "UC13.1 - Selezione tasto Disconnetti")]
 
 ===== UC13.1.1: Conferma disconnessione account<UC13.1.1>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha selezionato la sezione di disconnessione dell'account GitHub dal sistema CodeGuardian #link(<UC13>)[#underline[\[UC13\]]]
-    - L'utente ha selezionato il tasto Disconnetti #link(<UC13.1>)[#underline[\[UC13.1\]]]
+    //- L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
+    //- L'utente ha selezionato la sezione di disconnessione dell'account GitHub dal sistema CodeGuardian #link(<UC13>)[#underline[\[UC13\]]]
+    - L'utente ha confermato la disconnessione del proprio account dall'applicazione CodeGuardian
   ],
   post: [
     - L'utente ha disconnesso con successo il proprio account di GitHub dalla piattaforma CodeGuardian
@@ -2311,6 +2355,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: UAA,
   pre: [
     - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    #TODO("Riguarda dopo UC5")
   ],
   post: [
     - L'utente ha esportato con successo il report di analisi nel formato selezionato
@@ -2327,15 +2372,14 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente interagisce con il pulsante di esportazione nella sezione di visualizzazione del report",
+  trigger: "L'utente sta visualizzando il report di analisi e interagisce con il pulsante di esportazione",
 )[#useCaseDiagram("14", "UC14 - Esportazione report di analisi repository GitHub")]
 
 ==== UC14.1: Selezione formato di esportazione <UC14.1>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente ha avviato la procedura di esportazione #link(<UC14>)[#underline[\[UC14\]]]
+    - L'utente si trova nella sezione formati all'interno della visualizzazione del report
   ],
   post: [
     - L'utente ha selezionato un formato valido per l'esportazione
@@ -2350,16 +2394,16 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - #link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]
   ],
-  trigger: "L'utente seleziona il formato dopo aver cliccato il pulsante di esportazione nella sezione di visualizzazione del report",
+  trigger: "L'utente ha interagito con il pulsante di esportazione del report di analisi",
 )[#useCaseDiagram("14_1", "UC14.1 - Selezione formato di esportazione")]
 
 ===== UC14.1.1: Nessun formato selezionato <UC14.1.1>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente sta eseguendo la procedura di esportazione #link(<UC14>)[#underline[\[UC14\]]]
-    - L'utente tenta di procedere senza selezionare un formato #link(<UC14.1>)[#underline[\[UC14.1\]]]
+    //- L'utente sta visualizzando il report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente sta eseguendo la procedura di esportazione #link(<UC14>)[#underline[\[UC14\]]]
+    - L'utente tenta di procedere senza selezionare un formato di esportazione nella sezione formati
   ],
   post: [
     - La procedura di esportazione non viene finalizzata
@@ -2380,8 +2424,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente sta eseguendo la procedura di esportazione #link(<UC14>)[#underline[\[UC14\]]]
+    //- L'utente sta visualizzando il report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente sta eseguendo la procedura di esportazione #link(<UC14>)[#underline[\[UC14\]]]
     - L'utente ha selezionato un formato di esportazione valido #link(<UC14.1>)[#underline[\[UC14.1\]]]
   ],
   post: [
@@ -2433,7 +2477,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente entra nella sezione Impostazioni > Modifica Password #link(<UC15>)[#underline[\[UC15\]]]
+    - L'utente è nella sezione di Modifica Password e si trova nel campo "password corrente"
   ],
   post: [
     - L'utente ha inserito correttamente la password corrente
@@ -2456,7 +2500,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente entra nella sezione Impostazioni > Modifica Password #link(<UC15>)[#underline[\[UC15\]]]
+    - L'utente è nella sezione di Modifica Password, si trova nel campo "password corrente" e non inserisce nulla
   ],
   post: [
     - L'utente non può procedere con la modifica della password
@@ -2477,7 +2521,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha inserito la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - L'utente ha inserito la password corrente sbagliata nell'apposito campo del form "password corrente"
   ],
   post: [
     - All'utente viene impedito di cambiare la propria password
@@ -2499,7 +2543,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - L'utente è nella sezione di Modifica Password e si trova nel campo "nuova password"
   ],
   post: [
     - L'utente ha inserito una nuova password valida
@@ -2522,7 +2566,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - L'utente è nella sezione di Modifica Password, si trova nel campo "nuova password" e non inserisce nulla
   ],
   post: [
     - L'utente non può procedere alla conferma della modifica password
@@ -2543,7 +2587,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - L'utente ha inserito la nuova password nell'apposito campo del form "nuova password" ma non segue lo standard adottato
   ],
   post: [
     - All'utente viene impedito di confermare la modifica della password
@@ -2564,7 +2608,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - L'utente ha inserito la nuova password nell'apposito campo del form "nuova password" ma è uguale alla password corrente
   ],
   post: [
     - All'utente viene impedito di confermare la modifica della password
@@ -2652,8 +2696,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]] già presenti in UC16
+    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
+    - L'utente è nella sezione relativa alla visualizzazione delle issue identificate, all'interno della sezione dei suggerimenti di remediation del report di analisi repository GitHub
   ],
   post: [
     - L'utente visualizza la lista completa delle issue identificate nel repository analizzato
@@ -2674,8 +2719,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
     - L'analisi del repository non ha identificato alcuna issue
   ],
   post: [
@@ -2697,8 +2742,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
+    //- L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
     - L'utente sta visualizzando la lista delle issue identificate #link(<UC16.1>)[#underline[\[UC16.1\]]]
   ],
   post: [
@@ -2726,16 +2771,16 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Orchestratore",
   attori_secondari: "Docker",
   pre: [
-    - L'utente autenticato avanzato ha effettuato l'accesso al proprio profilo CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente autenticato avanzato ha effettuato la connessiono del proprio account di GitHub a CodeGuardian #link(<UC3>)[#underline[\[UC3\]]]
+    //- L'utente autenticato avanzato ha effettuato la connessiono del proprio account di GitHub a CodeGuardian #link(<UC3>)[#underline[\[UC3\]]]
+    #TODO("check precondizione tolta")
     - L'utente autenticato avanzato ha richiesto l'avvio dell'analisi del proprio repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
   ],
   post: [
     - L'ambiente sandbox è stato correttamente creato ed è pronto all'uso
   ],
   scenari: [
-    - Il front-end riceve la richiesta di analisi del repository
-    - Il front-end comunica all'orchestratore la richiesta di analisi del repository
+    - Il sistema Front-end riceve la richiesta di analisi del repository
+    - Il sistema Front-end comunica all'orchestratore la richiesta di analisi del repository
     - L'orchestratore avvia la creazione dell'ambiente sandbox tramite immagine docker
   ],
   inclusioni: [
@@ -2744,7 +2789,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - #link(<UC17.1>)[#underline[\[UC17.1\]]]
   ],
-  trigger: "Il sistema front-end comunica all'orchestratore la richiesta di avvio dell'analisi",
+  trigger: "L'orchestratore riceve dal sistema Front-end la richiesta di avvio dell'analisi",
 )[#useCaseDiagram("17", "UC17 - Creazione dell'ambiente sandbox")]
 
 ==== UC17.1 Errore durante la creazione dell'ambiente sandbox <UC17.1>
@@ -2773,13 +2818,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - Viene rilevato un errore durante la creazione dell'ambiente sandbox #link(<UC17.1>)[#underline[\[UC17.1\]]]
+    - Viene rilevato un errore durante la creazione dell'ambiente sandbox
   ],
   post: [
-    - L'ambiente sandbox non viene creato correttamente e ciò viene comunicato al front-end
+    - L'ambiente sandbox non viene creato correttamente e ciò viene comunicato al sistema Front-end
   ],
   scenari: [
-    - L'orchestratore comunica l'errore al front-end
+    - L'orchestratore comunica l'errore al sistema Front-end
   ],
   inclusioni: [
     - Nessuna
@@ -2794,7 +2839,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'utente autenticato avanzato ha richiesto l'analisi del proprio repository al sistema CodeGuardian #link(<UC4>)[#underline[\[UC4\]]]
+    //- L'utente autenticato avanzato ha richiesto l'analisi del proprio repository al sistema CodeGuardian #link(<UC4>)[#underline[\[UC4\]]]
+    #TODO("check precondizione tolta")
     - L'ambiente sandbox é stato creato correttamente #link(<UC17>)[#underline[\[UC17\]]]
   ],
   post: [
@@ -2802,7 +2848,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   scenari: [
     - L'orchestratore legge le richieste dell'utente
-    - L'orchestratore notifica al back-end i compiti da svolgere
+    - L'orchestratore notifica al sistema Back-end i compiti da svolgere
   ],
   inclusioni: [
     - #link(<UC18.1>)[#underline[\[UC18.1\]]]
@@ -2811,7 +2857,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'orchestratore, una volta lette le richieste e visionato il repository, decide come agire e come istruire gli agenti",
+  trigger: "L'orchestratore ha letto e interpretato correttamente le richieste dell'utente e ha visionato il repository",
 )[#useCaseDiagram("18", "UC18 - Lettura delle richieste dell'utente da parte dell'orchestratore")]
 
 ==== UC18.1 Richiesta di analisi completa <UC18.1>
@@ -2821,11 +2867,11 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Non ci sono state richieste specifiche da parte dell'utente
   ],
   post: [
-    - L'orchestratore istruisce gli agenti sullo svoglimento dell'analisi completa del repository
+    - L'orchestratore avvia l'analisi completa del repository
   ],
   scenari: [
-    - Il front-end comunica al back-end che l'utente vuole svolgere un'analisi completa del proprio repository
-    - L'orchestratore istruisce gli agenti per un'analisi completa del repository
+    - Il sistema Front-end comunica all'orchestratore che l'utente vuole svolgere un'analisi completa del proprio repository
+    - L'orchestratore riceve la richiesta e avvia l'analisi completa del repository
   ],
   inclusioni: [
     - Nessuna
@@ -2833,21 +2879,21 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il front-end deve comunicare al back-end la richiesta di analisi completa",
+  trigger: "L'orchestratore riceve dal sistema Front-end la richiesta di analisi completa",
 )[]
 ==== UC18.2 Richieste specifiche sull'analisi da parte del front-end <UC18.2>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'utente ha fatto delle richieste specifiche
+    - L'utente ha fatto delle richieste specifiche sulle aree da analizzare del proprio repository
   ],
   post: [
-    - L'orchestratore istruisce gli agenti sui ruoli per l'analisi delle singole richieste dell'utente
+    - L'orchestratore avvia l'analisi specifica del repository in base alle richieste dell'utente
   ],
   scenari: [
-    - Il front-end comunica al back-end le specifiche richieste dell'utente rispetto alle aree da analizzare
-    - L'orchestratore, prima di istruire gli agenti, controlla la pre esistenza del repository da analizzare nel #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#database")[#def("Database")] e la trova
-    - L'orchestratore, una volta compresa la richiesta, istruisce gli agenti
+    - Il sistema Front-end comunica all'orchestratore le specifiche richieste dell'utente rispetto alle aree da analizzare
+    - L'orchestratore controlla la pre-esistenza del repository da analizzare nel #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#database")[#def("Database")]
+    - L'orchestratore, una volta compresa la richiesta, avvia l'analisi specifica
   ],
   inclusioni: [
     - #link(<UC18.2.1>)[#underline[\[UC18.2.1\]]]
@@ -2855,21 +2901,20 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il front-end deve comunicare al back-end le richieste che dovranno essere prese in carico",
-)[#useCaseDiagram("18_2", "UC18.2 - Richieste specifiche sull'analisi da parte del front-end")]
+  trigger: "Il sistema Front-end comunica al sistema Back-end le richieste che dovranno essere prese in carico",
+)[#useCaseDiagram("18_2", "UC18.2 - Richieste specifiche sull'analisi da parte del frontend")]
 
 ===== UC18.2.1 Repository mai analizzato in precedenza <UC18.2.1>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'utente ha fatto delle richieste specifiche in relazione alle aree del repository che ha interesse vengano analizzate #link(<UC18.2>)[#underline[\[UC18.2\]]]
     - Il repository non era mai stato analizzato in precedenza
   ],
   post: [
-    - L'orchestratore istruisce gli agenti come se fosse stata richiesta un'analisi completa
+    - L'orchestratore istruisce avvia un'analisi completa del repository
   ],
   scenari: [
-    - L'orchestratore prima di istruire gli agenti controlla la pre esistenza del repository da analizzare nel database e non la trova
+    - L'orchestratore controlla la pre-esistenza del repository da analizzare nel database e non la trova
     - L'orchestratore si comporta come se fosse stata richiesta l'analisi completa
   ],
   inclusioni: [
@@ -2878,7 +2923,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'orchestore non trova la repository nel database e si comporta come fosse stata richiesta l'analisi completa",
+  trigger: "L'orchestratore non ha trovato la repository nel database",
 )[]
 
 /// USE CASE DELLE ANALISI
@@ -2912,7 +2957,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha preso visione dell'analisi delle vulnerabilità #link(<UC19>)[#underline[\[UC19\]]]
+    - L'utente ha preso visione dell'analisi delle vulnerabilità
     - L'utente ha visualizzato le remediation proposte
   ],
   post: [
@@ -2930,18 +2975,19 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "Conferma delle remediation",
 )[]
+
 ==== UC19.2: L'utente rifiuta la remediation proposta <UC19.2>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha preso visione dell'analisi delle vulnerabilità #link(<UC19>)[#underline[\[UC19\]]]
+    - L'utente ha preso visione dell'analisi delle vulnerabilità
     - L'utente ha visualizzato le remediation proposte
   ],
   post: [
     - Le remediation proposte vengono scartate
   ],
   scenari: [
-    - L'utente visualiza le remediation proposte
+    - L'utente visualizza le remediation proposte
     - L'utente non accetta le remediation proposte
     - Le remediation vengono scartate
   ],
@@ -2953,7 +2999,6 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "Remediation proposte non accettate",
 )[]
-
 
 === UC20: Rilevamento segreti e token <UC20>
 #useCase(
@@ -2984,7 +3029,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - La scansione ha rilevato possibili segreti #link(<UC20>)[#underline[\[UC20\]]]
+    - La scansione ha rilevato possibili segreti
   ],
   post: [
     - L'utente rifiuta le remediation proposte
@@ -3027,7 +3072,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Il report dei possibili segreti è disponibile #link(<UC20>)[#underline[\[UC20\]]]
+    - Il report dei possibili segreti è disponibile
   ],
   post: [
     - L'utente visualizza l'elenco dei possibili segreti con dettagli e azioni
@@ -3072,7 +3117,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Licenze non compatibili rilevate #link(<UC21>)[#underline[\[UC21\]]]
+    - Licenze non compatibili rilevate
   ],
   post: [
     - Il processo di approvazione legale è integrato
@@ -3117,7 +3162,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - PR aperta #link(<UC22>)[#underline[\[UC22\]]]
+    - PR aperta
   ],
   post: [
     - Test automatici eseguiti
@@ -3138,7 +3183,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Problemi rilevati nella PR #link(<UC22>)[#underline[\[UC22\]]]
+    - Problemi rilevati nella PR
   ],
   post: [
     - Suggerimenti di modifica applicati automaticamente
@@ -3185,7 +3230,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Metriche calcolate #link(<UC23>)[#underline[\[UC23\]]]
+    - Metriche calcolate
   ],
   post: [
     - Integrazione con tool esterni completata
@@ -3206,7 +3251,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Metriche disponibili #link(<UC23>)[#underline[\[UC23\]]]
+    - Metriche disponibili
   ],
   post: [
     - Suggerimenti KPI forniti
@@ -3253,7 +3298,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Refactor suggeriti #link(<UC24>)[#underline[\[UC24\]]]
+    - Refactor suggeriti
   ],
   post: [
     - Impatto verificato tramite test
@@ -3274,7 +3319,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Refactor selezionati #link(<UC24>)[#underline[\[UC24\]]]
+    - Refactor selezionati
   ],
   post: [
     - Refactor applicati automaticamente
@@ -3295,7 +3340,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Elenco suggerimenti di refactor generato #link(<UC24>)[#underline[\[UC24\]]]
+    - Elenco suggerimenti di refactor generato
   ],
   post: [
     - L'utente visualizza i suggerimenti con snippet e azioni
@@ -3342,7 +3387,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Commit analizzati per changelog #link(<UC25>)[#underline[\[UC25\]]]
+    - Commit analizzati per changelog
   ],
   post: [
     - Note di breaking change rilevate
@@ -3363,7 +3408,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Changelog approvato #link(<UC25>)[#underline[\[UC25\]]]
+    - Changelog approvato
   ],
   post: [
     - Release pubblicata su GitHub
@@ -3384,7 +3429,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Changelog generato e disponibile #link(<UC25>)[#underline[\[UC25\]]]
+    - Changelog generato e disponibile
   ],
   post: [
     - L'utente visualizza la bozza del changelog, la modifica o la approva per pubblicazione
@@ -3431,7 +3476,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Test flakiness rilevata #link(<UC26>)[#underline[\[UC26\]]]
+    - Test flakiness rilevata
   ],
   post: [
     - Test intermittenti rieseguiti
@@ -3452,7 +3497,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Coverage analizzata #link(<UC26>)[#underline[\[UC26\]]]
+    - Coverage analizzata
   ],
   post: [
     - Suggerimenti per test aggiuntivi forniti
@@ -3473,7 +3518,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Report di test e coverage generato e disponibile #link(<UC26>)[#underline[\[UC26\]]]
+    - Report di test e coverage generato e disponibile
   ],
   post: [
     - L'utente visualizza il report dettagliato con gap e suggerimenti di test
@@ -3520,7 +3565,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Policy fallite #link(<UC27>)[#underline[\[UC27\]]]
+    - Policy fallite
   ],
   post: [
     - Eccezione approvata manualmente
@@ -3541,7 +3586,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Branch differenti configurati #link(<UC27>)[#underline[\[UC27\]]]
+    - Branch differenti configurati
   ],
   post: [
     - Policy applicate dinamicamente
@@ -3562,7 +3607,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Il tentativo di merge è stato valutato dal sistema e il report policy è disponibile #link(<UC27>)[#underline[\[UC27\]]]
+    - Il tentativo di merge è stato valutato dal sistema e il report policy è disponibile
   ],
   post: [
     - L'utente visualizza dettagli sulle policy fallite e le eccezioni proposte
@@ -3609,7 +3654,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Report configurato #link(<UC28>)[#underline[\[UC28\]]]
+    - Report configurato 
   ],
   post: [
     - Filtri e template applicati
@@ -3630,7 +3675,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Alert critico rilevato #link(<UC28>)[#underline[\[UC28\]]]
+    - Alert critico rilevato
   ],
   post: [
     - Azioni automatiche eseguite
@@ -3651,7 +3696,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: UAA,
   pre: [
-    - Report programmabile generato e disponibile #link(<UC28>)[#underline[\[UC28\]]]
+    - Report programmabile generato e disponibile 
   ],
   post: [
     - L'utente visualizza report periodici, KPI e alert
@@ -3673,16 +3718,16 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - Il Back-end ha chiari i propri compiti rispetto alle richieste del Front-End realtive all'analisi #link(<UC17>)[#underline[\[UC18\]]]
+    - Il sistema Back-end ha chiari i propri compiti rispetto alle richieste del sistema Front-end realtive all'analisi #link(<UC17>)[#underline[\[UC18\]]]
   ],
   post: [
-    - Il Back-end ha contattato corettamente i tool esterni di analisi
+    - L'orchestratore ha contattato corettamente i tool esterni di analisi
   ],
   scenari: [
-    - Il Back-end legge le richieste del sistema Front-End e le interpreta correttamente
-    - Il Back-end sceglie quali sono i tool esterni di analisi da interrogare
-    - Il Back-end contatta i tool esterni
-    - Il Back-end inserisce all'interno dei tool esterni i dati appropriati da analizzare
+    - L'orchestratore legge le richieste del sistema Front-end e le interpreta correttamente
+    - L'orchestratore sceglie quali sono i tool esterni di analisi da interrogare
+    - L'orchestratore contatta i tool esterni
+    - L'orchestratore inserisce all'interno dei tool esterni i dati appropriati da analizzare
   ],
   inclusioni: [
     - #link(<UC29.1>)[#underline[\[UC29.1\]]]
@@ -3700,14 +3745,14 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Orchestratore",
   attori_secondari: "SonarQube/Semgrep",
   pre: [
-    - L'orchestratore ha istruito il Back-end sulla necessità di contattare lo strumento di analisi del codice
+    - L'orchestratore ha istruito il sistema Back-end sulla necessità di contattare lo strumento di analisi del codice
   ],
   post: [
     - Lo strumento di analisi del codice ha ricevuto correttamente il codice da analizzare e può iniziare l'analisi
   ],
   scenari: [
-    - Il back-end riceve istruzione del codice da analizzare da parte dell'orchestratore
-    - Il sistema back-end recupera il codice da analizzare e contatta il tool di analisi
+    - L'orchestratore riceve l'istruzione del codice da analizzare
+    - L'orchestratore recupera il codice da analizzare e contatta il tool di analisi
     - Lo strumento di analisi del codice viene contattato e gli viene passato il codice da analizzare
     - Lo strumento di analisi del codice analizza il codice
   ],
@@ -3717,22 +3762,22 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - #link(<UC29.1.1>)[#underline[\[UC29.1.1\]]]
   ],
-  trigger: "viene richiesta l'analisi del codice",
+  trigger: "Viene richiesta l'analisi del codice",
 )[#useCaseDiagram("29_1", "UC29.1 - Richiesta di analisi del codice")]
 
 ===== UC29.1.1 Uno o più linguaggi presenti nella codebase non sono supportati dallo strumento di analisi <UC29.1.1>
 #useCase(
   attore: "SonarQube/Semgrep",
   pre: [
-    - Lo strumento di analisi del codice ha ricevuto correttamente #link(<UC29.1>)[#underline[\[UC29.1\]]]
+    - Lo strumento di analisi del codice ha ricevuto correttamente il codice da analizzare e ha iniziato l'analisi
   ],
   post: [
-    - Lo strumento di analisi del codice comunica al sistema back-end che il linguaggio non è supportato
+    - Lo strumento di analisi del codice comunica al sistema Back-end che il linguaggio non è supportato
   ],
   scenari: [
-    - Lo strumento di analisi del codice legge la richiesta del sistema back-end
-    - Lo struento di analis del codice rileva dei linguaggi non riconosciuti
-    - Lo strumento di analis del codice comunica l'errore al sistema back-end
+    - Lo strumento di analisi del codice legge la richiesta del sistema Back-end
+    - Lo strumento di analisi del codice rileva dei linguaggi non riconosciuti
+    - Lo strumento di analisi del codice comunica l'errore al sistema Back-end
   ],
   inclusioni: [
     - Nessuna
@@ -3740,7 +3785,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Viene richiesta l'analisi del codice",
+  trigger: "Viene richiesta l'analisi del codice e sono presenti linguaggi non supportati",
 )[]
 
 ==== UC29.2 Richiesta di analisi della documentazione <UC29.2>
@@ -3748,14 +3793,14 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Orchestratore",
   attori_secondari: "OpenAI",
   pre: [
-    - L'orchestratore ha istruito il Back-end sulla necessità di contattare lo strumento di analisi della documentazione
+    - L'orchestratore è stato istruito sulla necessità di contattare lo strumento di analisi della documentazione 
   ],
   post: [
     - La documentazione viene passata correttamente allo strumento di analisi
   ],
   scenari: [
-    - Il sistema back-end riceve istruzione di analizzare la documentazione da parte dell'orchestratore
-    - Il back-end recupera la documentazione appropriata da passare allo strumento di analisi
+    - L'orchestratore riceve istruzione di analizzare la documentazione
+    - L'orchestratore recupera la documentazione appropriata da passare allo strumento di analisi
     - Lo strumento di analisi riceve la documentazione
   ],
   inclusioni: [
@@ -3772,14 +3817,14 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   attore: "Orchestratore",
   attori_secondari: "OWASP ZAP",
   pre: [
-    - L'orchestratore ha istruito il Back-end sulla necessità di contattare lo strumento di analisi degli standard OWASP
+    - L'orchestratore è stato istruito sulla necessità di contattare lo strumento di analisi degli standard OWASP
   ],
   post: [
     - Lo strumento di analisi degli standard OWASP riceve l'applicazione da analizzare correttamente
   ],
   scenari: [
-    - Il sistema back-end riceve istruzione di analizzare l'applicazione rispetto agli standard OWASP da parte dell'orchestratore
-    - Il back-end recupera correttamente l'applicazione da passare allo strumenti di anlisi degli standard OWASP
+    - L'orchestratore riceve istruzione di analizzare l'applicazione rispetto agli standard OWASP da parte dell'orchestratore
+    - L'orchestratore recupera correttamente l'applicazione da passare allo strumenti di anlisi degli standard OWASP
     - Lo strumento di analisi riceve correttamente l'applicazione e può procedere con l'analisi
   ],
   inclusioni: [
@@ -3795,15 +3840,15 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - Il Back-End ha provato a contattare un tool esterno per l'analisi
+    - L'orchestratore ha provato a contattare un tool esterno per l'analisi
   ],
   post: [
-    - Il Back-End trova un tool alternativo e lo contatta
+    - L'orchestratore trova un tool alternativo e lo contatta
   ],
   scenari: [
-    - Il Back-End ha provato a contattare un tool esterno fallendo
-    - Il Back-End cerca internamente un tool alternativo
-    - Il Back-End contatta il tool alternativo
+    - L'orchestratore ha provato a contattare un tool esterno fallendo
+    - L'orchestratore cerca internamente un tool alternativo
+    - L'orchestratore contatta il tool alternativo
   ],
   inclusioni: [
     - Nessuna
@@ -3841,13 +3886,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - Il sistema back-end ha completato la parte di analisi richiesta
+    - L'orchestratore ha completato la parte di analisi richiesta
   ],
   post: [
     - L'orchestratore ha preso in carico la nuova sezione del report di analisi
   ],
   scenari: [
-    - Il sistema back-end ha finito la parte di analisi richiesta da parte dell'utente
+    - L'orchestratore ha finito la parte di analisi richiesta da parte dell'utente
     - L'orchestratore ha visualizzato la nuova sezione del report
     - L'orchestratore integra la nuova sezione nel report corrente
     - L'orchestratore modifica il report segnalando che una sezione è avanti nell'analisi rispetto alle alte
@@ -3868,12 +3913,12 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'orchestratore ha preso in carico il report di analisi #link(<UC30>)[#underline[\[UC30\]]]
   ],
   post: [
-    - Il sistema front-end può mostrare correttamente il report di analisi
+    - Il sistema Front-end può mostrare correttamente il report di analisi
   ],
   scenari: [
-    - L'orchestratore comunica al sistema front-end che il report di analisi è disponibile
-    - L'orchestratore invia il report di analisi al sistema front-end
-    - Il sistema front-end può ora mostrare il report di analisi
+    - L'orchestratore comunica al sistema Front-end che il report di analisi è disponibile
+    - L'orchestratore invia il report di analisi al sistema Front-end
+    - Il sistema Front-end può ora mostrare il report di analisi
   ],
   inclusioni: [
     - Nessuna
@@ -3881,21 +3926,22 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il report deve arrivare all'utente tramite il sistema front-end",
+  trigger: "Il report è in mano all'orchestratore e pronto per essere inviato al sistema Front-end",
 )[]
 
 === UC32 L'utente viene notificato della disponibilità di visualizzare il nuovo report id anlisi<UC32>
 #useCase(
   attore: UAA,
   pre: [
-    - Il sistema front-end ha ricevuto correttamente il report di analisi da parte dell'orchestratore #link(<UC31>)[#underline[\[UC31\]]]
+    - Il sistema Front-end ha ricevuto correttamente il report di analisi da parte dell'orchestratore #link(<UC31>)[#underline[\[UC31\]]]
   ],
   post: [
     - L'utente può visualizzare il report richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    #TODO("Riguarda dopo UC5")
   ],
   scenari: [
-    - Il sistema front-end ha ricevuto il report di analisi ed è pronto a mostrarlo
-    - Il sistema front-end notifica all'utente la disponibilità di visualizzazione del nuovo report di analisi
+    - Il sistema Front-end ha ricevuto il report di analisi ed è pronto a mostrarlo
+    - Il sistema Front-end notifica all'utente la disponibilità di visualizzazione del nuovo report di analisi
   ],
   inclusioni: [
     - Nessuna
@@ -3908,7 +3954,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 //spazio per quelli in mezzo
 
-=== UC34: Notifica completamento al front-end <UC34>
+=== UC34: Notifica completamento dell'analisi della repository al Front-end <UC34>
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -3931,14 +3977,14 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'orchestratore ha completato l'analisi della repository",
 )[
-  #useCaseDiagram("34", "UC34 - Notifica completamento al front-end")
+  #useCaseDiagram("34", "UC34 - Notifica completamento dell'analisi della repository al Front-end")
 ]
 
 ==== UC34.1: Nuovo tentativo di invio del messaggio di completamento <UC34.1>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'Orchestratore non riceve un ack dal Front-end dopo aver inviato la notifica di completamento dell'analisi #link(<UC34>)[#underline[\[UC34\]]]
+    - L'Orchestratore non riceve un ack dal Front-end dopo aver inviato la notifica di completamento dell'analisi
   ],
   post: [
     - L'Orchestratore ritenta l'invio della notifica di completamento dell'analisi al Front-end
@@ -3953,7 +3999,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'Orchestratore non riceve l'ack dal Front-end",
+  trigger: "L'Orchestratore non riceve l'ack di avvenuta ricezione della notifica di completamento dell'analisi dal Front-end",
 )[]
 
 === UC35: Gestione errore critico durante l'analisi <UC35>
@@ -3988,7 +4034,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'Orchestratore non riceve un ack dal Front-end dopo aver inviato la notifica di fallimento dell'analisi #link(<UC35>)[#underline[\[UC35\]]]
+    - L'Orchestratore non riceve un ack dal Front-end dopo aver inviato la notifica di fallimento dell'analisi
   ],
   post: [
     - L'Orchestratore ritenta l'invio della notifica di fallimento
@@ -4003,7 +4049,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'Orchestratore non riceve l'ack dal Front-end",
+  trigger: "L'Orchestratore non riceve l'ack di avvenuta ricezione della notifica di fallimento dell'analisi dal Front-end",
 )[]
 
 === UC36: Salvataggio metadati repository <UC36>
@@ -4032,14 +4078,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L’utente si trova nella sezione di visualizzazione dei report (#link(<UC5.1>)[#underline[\[UC5.1\]]])
+    - L’utente si trova nella sezione di visualizzazione dei report (#link(<UC5>)[#underline[\[UC5\]]])
     - Il Front-end richiede all'Orchestratore di inviare i dati relativi alle repository analizzate dall'utente
   ],
   post: [
     - L'utente visualizza le repository per le quali sono stati svolte delle analisi
   ],
   scenari: [
-    //- L'Orchestratore interroga il Database per recuperare le informazioni richieste
     - L'Orchestratore invia al Front-end la lista delle repository analizzate
     - Il Front-end mostra all'utente la lista delle repository analizzate
   ],
@@ -4058,8 +4103,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L’utente si trova nella sezione di visualizzazione dei report (#link(<UC5.1>)[#underline[\[UC5.1\]]])
-    - Il Front-end richiede all'Orchestratore di inviare i dati relativi alle repository analizzate dall'utente #link(<UC37>)[#underline[\[UC37\]]]
+    - L’utente si trova nella sezione di visualizzazione dei report (#link(<UC5>)[#underline[\[UC5\]]])
+    - Il Front-end richiede all'Orchestratore di inviare i dati relativi alle repository analizzate dall'utente
     - Non sono presenti repository analizzate per l'utente
   ],
   post: [
@@ -4107,7 +4152,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'orchestratore ha richiesto l'archiviazione del report #link(<UC38>)[#underline[[UC38]]]
+    - L'orchestratore ha richiesto l'archiviazione del report ma non avviene correttamente il processo di salvataggio 
   ],
   post: [
     - Il sistema Front-end è stato informato dall'orchestratore del fallimento del salvataggio
@@ -4154,7 +4199,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'orchestratore ha richiesto il salvataggio delle metriche aggregate #link(<UC39>)[#underline[[UC39]]]
+    - L'orchestratore ha richiesto il salvataggio delle metriche aggregate ma non avviene correttamente il processo di salvataggio 
   ],
   post: [
     - L'orchestratore viene informato dell'impossibilità di salvare le metriche per la dashboard
@@ -4200,7 +4245,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Utente non registrato",
   pre: [
-    - L'utente ha tentato l'invio delle credenziali #link(<UC40>)[#underline[[UC40]]]
+    - L'utente ha tentato l'invio delle credenziali ma non avviene correttamente il processo di salvataggio 
   ],
   post: [
     - Il sistema Back-end non acquisisce i dati e l'utente viene avvisato dell'impossibilità di procedere
@@ -4288,7 +4333,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   scenari: [
     - Il Sistema recupera la lista dei repository analizzati dall'utente
     - Il Sistema ordina i repository per punteggio di qualità complessiva
-    - Il Sistema mostra la lista ordinata all'utente
+    - Il Sistema Front-end mostra la lista ordinata all'utente
   ],
   inclusioni: [
     - Nessuna
@@ -4527,7 +4572,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   // UC5
   [#FRObx],
   [L'Utente deve poter accedere alla sezione di visualizzazione dei report di analisi],
-  [#link(<UC5.1>)[#underline[\[UC5.1\]]]],
+  [#link(<UC5>)[#underline[\[UC5\]]]],
 
   [#FRObx],
   [L'Utente deve poter visualizzare l'elenco dei report di analisi disponibili],
