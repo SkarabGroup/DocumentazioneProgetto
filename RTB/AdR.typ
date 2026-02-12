@@ -19,10 +19,16 @@
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
+    "2026/02/09",
+    "0.44.1",
+    "Sistemato formato dei link al glossario",
+    members.antonio,
+  ),
+  (
     "2026/02/08",
     "0.44.0",
     "Aggiunto UC43, inclusi diagrammi e requisiti associati. Fix alle precondizioni, attori e diagrammi di UC1, UC2, UC4",
-    members.antonio
+    members.antonio,
   ),
   (
     "2026/02/04",
@@ -395,15 +401,16 @@
 = Introduzione
 
 == Scopo del documento
-Il presente documento ha lo scopo di definire e analizzare i #def("requisiti funzionali") e i #def("requisiti non funzionali") del sistema software che #def("Skarab Group") intende sviluppare a supporto del progetto '#def("Code Guardian")' proposto dall'azienda #def("Var Group").
-Il documento descrive attentamente i #def("casi d'uso") del sistema, che sono la fonte dei #def("requisiti funzionali"), ovvero l'obiettivo finale dell'#def("analisi dei requisiti"). Per ogni #def("caso d'uso"), vengono specificati gli attori coinvolti, le precondizioni e postcondizioni, gli scenari principali, eventuali inclusioni ed estensioni, trigger oltre che i #def("diagrammi dei casi d'uso")
+Il presente documento ha lo scopo di definire e analizzare i #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-funzionali")[#def("Requisiti funzionali")] e i #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-non-funzionali")[#def("Requisiti non funzionali")] del #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#sistema-software")[#def("Sistema software")] che #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def("Skarab Group")] intende sviluppare a supporto del #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#progetto")[#def("Progetto")] '#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def("Code Guardian")]' proposto dall'azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def("Var Group")].
+Il documento descrive attentamente i #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#caso-duso")[#def("Casi d'uso")] del sistema, che sono la fonte dei Requisiti funzionali, ovvero l'obiettivo finale dell'#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-dei-reqisiti")[#def("Analisi dei requisiti")]. Per ogni caso d'uso vengono specificati gli attori coinvolti, le precondizioni e postcondizioni, gli scenari principali, eventuali inclusioni ed estensioni, trigger oltre che i 
+#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#diagrammi-dei-casi-duso")[#def("Diagrammi dei casi d'uso")].
 
-Questo documento si pone alla base di progettazione, implementazione e collaudo del #def("sistema software"), fornendo una chiara comprensione delle funzionalità richieste e delle aspettative degli stakeholder, garantendo che il sistema soddisfi le esigenze degli #def("utenti") finali.
+Questo documento si pone alla base di progettazione, implementazione e collaudo del sistema software, fornendo una chiara comprensione delle funzionalità richieste e delle aspettative degli stakeholder, garantendo che il sistema soddisfi le esigenze degli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#utente")[#def("Utenti")] finali.
 
 L'obiettivo stesso del documento identifica i suoi destinatari principali, che includono:
-- L' #strong("azienda committente") #def("Var Group"), che utilizzeranno questo documento per verificare che il sistema che verrá sviluppato soddisfi le loro esigenze e aspettative.
-- I #strong("team di sviluppo") #def("Skarab Group") ovvero #def("progettisti") e #def("programmatori"), che utilizzerà questo documento come guida per la progettazione e l'implementazione del sistema software.
-- I #strong("team di verificatori"), che utilizzeranno questo documento per garantire che il sistema soddisfi i requisiti specificati.
+- L' #strong("azienda committente") Var Group, che utilizzeranno questo documento per verificare che il sistema che verrá sviluppato soddisfi le loro esigenze e aspettative.
+- I #strong("team di sviluppo") Skarab Group ovvero #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#progettisti")[#def("Progettisti")] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#programmatori")[#def("Programmatori")], che utilizzerà questo documento come guida per la progettazione e l'implementazione del sistema software.
+- I #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#verificatori")[#def("Verificatori")], che utilizzeranno questo documento per garantire che il sistema soddisfi i requisiti specificati.
 
 == Classificazione dei Requisiti
 
@@ -412,7 +419,7 @@ Ogni Requisito individuato viene classificato secondo due criteri distinti: la *
 ==== Classificazione per Priorità
 I Requisiti sono suddivisi in tre livelli di priorità, definiti in base alla loro criticità per il successo del progetto e per il rilascio del Sistema:
 
-- #strong("Obbligatori"): Requisiti vincolanti e indispensabili. Il mancato soddisfacimento di anche uno solo di questi requisiti rende il sistema non conforme agli obiettivi minimi del progetto (#def("MVP")).
+- #strong("Obbligatori"): Requisiti vincolanti e indispensabili. Il mancato soddisfacimento di anche uno solo di questi requisiti rende il sistema non conforme agli obiettivi minimi del progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#minimum-viable-product")[#def("Minimum Viable Product")] (MVP).
 - #strong("Desiderabili"): Requisiti che apportano valore aggiunto al sistema. Sebbene la loro implementazione sia auspicabile, la loro eventuale omissione non compromette le funzionalità core del prodotto.
 - #strong("Opzionali"): Requisiti di importanza secondaria o funzionalità avanzate da implementare solo qualora le risorse e le tempistiche lo consentano. Sono candidati ideali per sviluppi futuri (versioni successive alla 1.0.0).
 
@@ -424,27 +431,17 @@ Seguendo la classificazione definita nelle #link(<R3>)[#underline[Dispense del c
 
 === Fonte dei requisiti
 I requisiti sono stati identificati a partire dalle seguenti fonti:
-- #strong("Capitolato"): requisiti individuati nel capitolato fornito da #def("Var Group");
-- #strong("Interno"): requisiti individuati dal team di sviluppo #def("Skarab Group") durante le riunioni interne;
-- #strong("Esterno"): requisiti individuati durante gli incontri con l'azienda propontente #def("Var Group").
-- #strong("Piano di Qualifica"): requisiti necessari pre rispettare standard di qualità definiti nel documento di Piano di Qualifica;
-- #strong("Norme di Progetto"): requisiti necessari per rispettare le norme di progetto definite nel documento di Norme di Progetto;
+- #strong("Capitolato"): requisiti individuati nel capitolato fornito da Var Group;
+- #strong("Interno"): requisiti individuati dal team di sviluppo Skarab Group durante le riunioni interne;
+- #strong("Esterno"): requisiti individuati durante gli incontri con l'azienda propontente Var Group.
+- #strong("Piano di Qualifica"): requisiti necessari pre rispettare standard di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#qualita")[#def("Qualità")] definiti nel documento di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#piano-di -qualifica")[#def("Piano di Qualifica")];
+- #strong("Norme di Progetto"): requisiti necessari per rispettare le #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#norme-di-progetto")[#def("Norme di progetto")] definite nel documento di Norme di Progetto;
 
 === Descrizione dei Requisiti
 Ogni Requisito è identificato da un codice univoco, strutturato per garantirne la *piena tracciabilità* e facilitarne la gestione lungo l'intero ciclo di vita del progetto. Per ciascuno di essi vengono specificati: una descrizione concisa, la categoria tipologica di appartenenza e il relativo livello di priorità.
 
-/*In accordo con lo standard #link(<R2>)[#underline[ISO/IEC/IEEE International Standard - Systems and software engineering -- Life cycle
-  processes -- Requirements engineering]], i requisiti sono ulteriormente categorizzati in base alla loro natura tecnica:
-
-- #strong("Funzionali (FR)"): Descrivono i comportamenti specifici del sistema, le reazioni a input determinati e le regole di validazione dei dati ("cosa fa il sistema").
-- #strong("Usabilità (UR)"): Riguardano l'efficacia, l'efficienza e la soddisfazione dell'interazione utente, inclusi aspetti di accessibilità e feedback visivi.
-- #strong("Interfaccia (IR)"): Specificano le interazioni logiche e visive con l'utente (elementi UI) e le interfacce verso sistemi esterni (API, protocolli).
-- #strong("Logici del Database (LDR)"): Definiscono la struttura dei dati, le modalità di conservazione, i vincoli di integrità e le relazioni tra entità.
-- #strong("Vincoli di Design (DC)"): Limitazioni imposte da scelte tecnologiche obbligatorie, standard industriali, protocolli di comunicazione o normative specifiche.
-- #strong("Attributi del Software (SSA)"): Caratteristiche di qualità non funzionali critiche, con particolare focus su Sicurezza (cifratura, protezione dati), Affidabilità e Robustezza.*/
-
 == Prospettiva del prodotto
-Il prodotto che #def("Skarab Group") intende sviluppare è un #def("sistema software") #def("multiagente") per l'analisi di #def("repository") #def("GitHub"). Il sistema sarà progettato per essere modulare e scalabile, consentendo l'aggiunta di nuove funzionalità e agenti in futuro. Dal momento in cui l'obiettivo del #def("progetto") è lo sviluppo di un #def("MVP"), il sistema sarà sviluppato con un focus sulle funzionalità essenziali, garantendo al contempo una solida base per future espansioni.
+Il prodotto che Skarab Group intende sviluppare è un sistema software #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#multiagente")[#def("Multiagente")] per l'analisi di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#repository")[#def("Repository")] #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#github")[#def("GitHub")]. Il sistema sarà progettato per essere modulare e scalabile, consentendo l'aggiunta di nuove funzionalità e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def("Agenti")] in futuro. Dal momento in cui l'obiettivo del Progetto è lo sviluppo di un MVP, il sistema sarà sviluppato con un focus sulle funzionalità essenziali, garantendo al contempo una solida base per future espansioni.
 
 == Funzioni del prodotto
 Questa sezione descrive le principali funzionalitá che il prodotto dovrá fornire all'utilizzatore finale; esse sono suddivise in 3 sezioni principali, #emph("Test"), #emph("Sicurezza") e #emph("Documentazione").
@@ -453,15 +450,15 @@ Questa sezione descrive le principali funzionalitá che il prodotto dovrá forni
   - Controllo dei test unitari per valutare l'efficacia di questi.
 - Sicurezza:
   - Analisi delle dipendenzanze per individuare librerie obsolete o vulnerabili.
-  - Verifica della conformità alle normative di sicurezza dello standard OWASP.
+  - Verifica della conformità alle normative di sicurezza dello standard #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#open-web-application-security-project")[#def("Open Web Application Security Project")] (OWASP).
 - Documentazione:
   - Verifica della completezza della documentazione del codice.
   - Controllo della conformità agli standard di documentazione aziendali e non e delle best practice.
   - Analisi semantica per garantire che la documentazione rifletta accuratamente il funzionamento del codice.
-L'#def("utente") potrá richiedere l'analisi di uno o piú #def("repository") #def("GitHub") specificando l'#def("URL") del repository e le aree di interesse (tutte, solo una parte o solo una). Il sistema genererà un report dettagliato con i risultati dell'analisi, evidenziando le aree di miglioramento e fornendo raccomandazioni per ottimizzare la qualitá del codice e della documentazione. L'interfaccia sará una #def("webapp") con una #def("GUI") intuitiva e user-friendly da cui l'utente potrá interagire con il sistema, richiedere analisi e visualizzare i report generati sottoforma di grafici e tabelle.
+L'utente potrà richiedere l'analisi di uno o più repository GitHub specificando l'#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#uniform-resource-locator")[#def("Uniform Resource Locator")] (URL) del repository e le aree di interesse (tutte, solo una parte o solo una). Il sistema genererà un report dettagliato con i risultati dell'analisi, evidenziando le aree di miglioramento e fornendo raccomandazioni per ottimizzare la qualità del codice e della documentazione. L'interfaccia sará una #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#webapp")[#def("Webapp")] con una #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#graphical-user-interface")[#def("Graphical User Interface")] (GUI) intuitiva e user-friendly da cui l'utente potrá interagire con il sistema, richiedere analisi e visualizzare i report generati sottoforma di grafici e tabelle.
 
 == Caratteristiche degli utenti
-Gli #def("utenti") principali del sistema sono #def("sviluppatori software"), manager #def("IT") e #def("consulente informatico") che desiderano una valutazione sulla qualitá del codice e della documentazione nei loro progetti. Gli utenti avranno diversi livelli di competenza tecnica, pertanto l'interfaccia utente sará progettata per essere accessibile sia a utenti esperti che a quelli meno esperti.
+Gli utenti principali del sistema sono #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#sviluppatori-software")[#def("Sviluppatori software")], manager #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#information-technology")[#def("Information Technology")] (IT) e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#consulente-informatico")[#def("consulente informatico")] che desiderano una valutazione sulla qualità del codice e della documentazione nei loro progetti. Gli utenti avranno diversi livelli di competenza tecnica, pertanto l'interfaccia utente sará progettata per essere accessibile sia a utenti esperti che a quelli meno esperti.
 
 == Definizioni e Acronimi
 Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo documento sono elencati nel #strong("Glossario"), un documento separato fornito al lettore. Questo glossario serve a garantire una comprensione chiara e condivisa dei termini utilizzati nel contesto del progetto e del sistema software in sviluppo.
@@ -488,11 +485,11 @@ Tutte le definizioni e gli acronimi di termini tecnici utilizzati in questo docu
 
 = Casi d'uso
 == Introduzione
-In questa sezione vengono descritti i #def("casi d'uso") principali del sistema software #def("Code Guardian").
+In questa sezione vengono descritti i Casi d'uso principali del sistema software Code Guardian.
 La definizione e la strutturazione dei casi d’uso sono state condotte in conformità alle linee guida e alle buone pratiche descritte negli standard IEEE per la specifica dei requisiti software #link(<R1>)[#underline[\[R1\]]] e per l’ingegneria dei requisiti #link(<R2>)[#underline[\[R2\]]], nonché facendo riferimento al materiale didattico adottato nel corso di Ingegneria del Software #link(<R3>)[#underline[\[R3\]]] #link(<R4>)[#underline[\[R4\]]].
 
-Ogni #def("caso d'uso") è descritto in modo dettagliato, includendo gli attori coinvolti, le precondizioni e postcondizioni, gli scenari principali, nonché eventuali inclusioni ed estensioni.
-Inoltre, per ciascun caso d’uso viene fornita una rappresentazione #def("UML") che illustra visivamente le interazioni tra gli attori e il sistema, al fine di migliorare la comprensione del comportamento funzionale del sistema.
+Ogni caso d'uso è descritto in modo dettagliato, includendo gli attori coinvolti, le precondizioni e postcondizioni, gli scenari principali, nonché eventuali inclusioni ed estensioni.
+Inoltre, per ciascun caso d’uso viene fornita una rappresentazione #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#unified-modeling-language")[#def("Unified Modeling Language")] (UML) che illustra visivamente le interazioni tra gli attori e il sistema, al fine di migliorare la comprensione del comportamento funzionale del sistema.
 
 
 Di seguito sono elencati le componenti di un caso d'uso del sistema con relativa descrizione:
@@ -537,16 +534,16 @@ Di seguito sono elencati le componenti di un caso d'uso del sistema con relativa
 #pagebreak()
 == Attori
 
-Di seguito sono elencati gli attori principali che interagiscono con il sistema software #def("Code Guardian"):
+Di seguito sono elencati gli attori principali che interagiscono con il sistema software Code Guardian:
 
-- Lato Front-end:
+- Lato #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#front-end")[#def("Front-end")]:
 
 #figure(
   image("../assets/Attori_frontend.png", width: 70%),
   caption: [Attori del sistema CodeGuardian lato Front-end],
 )
 
-- Lato Back-end:
+- Lato #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#back-end")[#def("Back-end")]:
 
 #figure(
   image("../assets/Attori_backend.png", width: 70%),
@@ -1947,7 +1944,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente visualizza l'insieme di sezioni di valutazione dell'analisi del codice repository GitHub
     - L'utente visualizza il report di analisi statica del codice repository GitHub #link(<UC9.1>)[#underline[\[UC9.1\]]]
     - L'utente visualizza l'analisi delle librerie e dipendenze del codice repository GitHub #link(<UC9.2>)[#underline[\[UC9.2\]]]
-    - L'utente visualizza il report di analisi della sicurezza #def("OWASP") del codice repository GitHub #link(<UC9.3>)[#underline[\[UC9.3\]]]
+    - L'utente visualizza il report di analisi della sicurezza OWASP del codice repository GitHub #link(<UC9.3>)[#underline[\[UC9.3\]]]
     - L'utente visualizza il numero totale di vulnerabilità individuate nel report di analisi codice repository GitHub #link(<UC9.4>)[#underline[\[UC9.4\]]]
   ],
   inclusioni: [
@@ -2009,7 +2006,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi librerie e dipendenze del codice repository GitHub",
 )[]
 
-==== UC9.3: Visualizzazione report analisi della sicurezza #def("OWASP") del codice repository GitHub <UC9.3>
+==== UC9.3: Visualizzazione report analisi della sicurezza OWASP del codice repository GitHub <UC9.3>
 #useCase(
   attore: UAA,
   pre: [
@@ -2722,7 +2719,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 === UCx: Accesso al profilo CodeGuardian
 === UCx: Recupero password profilo Codeguardian
 
-//USE CASE DEL BACKEND
+//USE CASE DEL BACK-END
 // UC17
 === UC17 Creazione dell'ambiente sandbox <UC17>
 #useCase(
@@ -2737,8 +2734,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'ambiente sandbox è stato correttamente creato ed è pronto all'uso
   ],
   scenari: [
-    - Il frontend riceve la richiesta di analisi del repository
-    - Il frontend comunica all'orchestratore la richiesta di analisi del repository
+    - Il front-end riceve la richiesta di analisi del repository
+    - Il front-end comunica all'orchestratore la richiesta di analisi del repository
     - L'orchestratore avvia la creazione dell'ambiente sandbox tramite immagine docker
   ],
   inclusioni: [
@@ -2747,7 +2744,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - #link(<UC17.1>)[#underline[\[UC17.1\]]]
   ],
-  trigger: "Il sistema frontend comunica all'orchestratore la richiesta di avvio dell'analisi",
+  trigger: "Il sistema front-end comunica all'orchestratore la richiesta di avvio dell'analisi",
 )[#useCaseDiagram("17", "UC17 - Creazione dell'ambiente sandbox")]
 
 ==== UC17.1 Errore durante la creazione dell'ambiente sandbox <UC17.1>
@@ -2779,10 +2776,10 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Viene rilevato un errore durante la creazione dell'ambiente sandbox #link(<UC17.1>)[#underline[\[UC17.1\]]]
   ],
   post: [
-    - L'ambiente sandbox non viene creato correttamente e ciò viene comunicato al frontend
+    - L'ambiente sandbox non viene creato correttamente e ciò viene comunicato al front-end
   ],
   scenari: [
-    - L'orchestratore comunica l'errore al frontend
+    - L'orchestratore comunica l'errore al front-end
   ],
   inclusioni: [
     - Nessuna
@@ -2805,7 +2802,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   scenari: [
     - L'orchestratore legge le richieste dell'utente
-    - L'orchestratore notifica al backend i compiti da svolgere
+    - L'orchestratore notifica al back-end i compiti da svolgere
   ],
   inclusioni: [
     - #link(<UC18.1>)[#underline[\[UC18.1\]]]
@@ -2827,7 +2824,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'orchestratore istruisce gli agenti sullo svoglimento dell'analisi completa del repository
   ],
   scenari: [
-    - Il frontend comunica al backend che l'utente vuole svolgere un'analisi completa del proprio repository
+    - Il front-end comunica al back-end che l'utente vuole svolgere un'analisi completa del proprio repository
     - L'orchestratore istruisce gli agenti per un'analisi completa del repository
   ],
   inclusioni: [
@@ -2836,9 +2833,9 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il frontend deve comunicare al backend la richiesta di analisi completa",
+  trigger: "Il front-end deve comunicare al back-end la richiesta di analisi completa",
 )[]
-==== UC18.2 Richieste specifiche sull'analisi da parte del frontend <UC18.2>
+==== UC18.2 Richieste specifiche sull'analisi da parte del front-end <UC18.2>
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -2848,8 +2845,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'orchestratore istruisce gli agenti sui ruoli per l'analisi delle singole richieste dell'utente
   ],
   scenari: [
-    - Il frontend comunica al backend le specifiche richieste dell'utente rispetto alle aree da analizzare
-    - L'orchestratore, prima di istruire gli agenti, controlla la pre esistenza del repository da analizzare nel database e la trova
+    - Il front-end comunica al back-end le specifiche richieste dell'utente rispetto alle aree da analizzare
+    - L'orchestratore, prima di istruire gli agenti, controlla la pre esistenza del repository da analizzare nel #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#database")[#def("Database")] e la trova
     - L'orchestratore, una volta compresa la richiesta, istruisce gli agenti
   ],
   inclusioni: [
@@ -2858,8 +2855,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il frontend deve comunicare al backend le richieste che dovranno essere prese in carico",
-)[#useCaseDiagram("18_2", "UC18.2 - Richieste specifiche sull'analisi da parte del frontend")]
+  trigger: "Il front-end deve comunicare al back-end le richieste che dovranno essere prese in carico",
+)[#useCaseDiagram("18_2", "UC18.2 - Richieste specifiche sull'analisi da parte del front-end")]
 
 ===== UC18.2.1 Repository mai analizzato in precedenza <UC18.2.1>
 #useCase(
@@ -3036,7 +3033,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente visualizza l'elenco dei possibili segreti con dettagli e azioni
   ],
   scenari: [
-    - L'utente apre il pannello dei risultati; il frontend richiede il report al backend e mostra i dettagli con azioni suggerite
+    - L'utente apre il pannello dei risultati; il front-end richiede il report al back-end e mostra i dettagli con azioni suggerite
   ],
   inclusioni: [
     - Nessuna
@@ -3054,7 +3051,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Manifest delle dipendenze disponibile
   ],
   post: [
-    - L'utente riceve un report di compatibilità delle licenze e i rischi associati
+    - L'utente riceve un report di compatibilità delle licenze e i #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#rischio")[#def("Rischi")] associati
     - L'utente conferma le azioni consigliate
   ],
   scenari: [
@@ -3304,7 +3301,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente visualizza i suggerimenti con snippet e azioni
   ],
   scenari: [
-    - L'utente apre il pannello refactor; il frontend richiede i suggerimenti e mostra snippet con azioni possibili
+    - L'utente apre il pannello refactor; il front-end richiede i suggerimenti e mostra snippet con azioni possibili
   ],
   inclusioni: [
     - Nessuna
@@ -3405,7 +3402,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 )[
 ]
 
-=== UC26: Analisi test e coverage <UC26>
+=== UC26: Analisi test e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-coverage")[#def("Coverage")] <UC26>
 #useCase(
   attore: UAA,
   pre: [
@@ -3482,7 +3479,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente visualizza il report dettagliato con gap e suggerimenti di test
   ],
   scenari: [
-    - L'utente apre il pannello dei report; il frontend richiede il report al backend e mostra percentuali di coverage, test falliti e suggerimenti
+    - L'utente apre il pannello dei report; il front-end richiede il report al back-end e mostra percentuali di coverage, test falliti e suggerimenti
   ],
   inclusioni: [
     - Nessuna
@@ -3571,7 +3568,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - L'utente visualizza dettagli sulle policy fallite e le eccezioni proposte
   ],
   scenari: [
-    - L'utente apre il pannello merge; il frontend richiede il report policy e mostra info su fallimenti e possibili azioni
+    - L'utente apre il pannello merge; il front-end richiede il report policy e mostra info su fallimenti e possibili azioni
   ],
   inclusioni: [
     - Nessuna
@@ -3676,16 +3673,16 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - Il BackEnd ha chiari i propri compiti rispetto alle richieste del FrontEnd realtive all'analisi #link(<UC17>)[#underline[\[UC18\]]]
+    - Il Back-end ha chiari i propri compiti rispetto alle richieste del Front-End realtive all'analisi #link(<UC17>)[#underline[\[UC18\]]]
   ],
   post: [
-    - Il BackEnd ha contattato corettamente i tool esterni di analisi
+    - Il Back-end ha contattato corettamente i tool esterni di analisi
   ],
   scenari: [
-    - Il BackEnd legge le richieste del sistema FrontEnd e le interpreta correttamente
-    - Il BackEnd sceglie quali sono i tool esterni di analisi da interrogare
-    - Il BackEnd contatta i tool esterni
-    - Il BackEnd inserisce all'interno dei tool esterni i dati appropriati da analizzare
+    - Il Back-end legge le richieste del sistema Front-End e le interpreta correttamente
+    - Il Back-end sceglie quali sono i tool esterni di analisi da interrogare
+    - Il Back-end contatta i tool esterni
+    - Il Back-end inserisce all'interno dei tool esterni i dati appropriati da analizzare
   ],
   inclusioni: [
     - #link(<UC29.1>)[#underline[\[UC29.1\]]]
@@ -3709,8 +3706,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Lo strumento di analisi del codice ha ricevuto correttamente il codice da analizzare e può iniziare l'analisi
   ],
   scenari: [
-    - Il backend riceve istruzione del codice da analizzare da parte dell'orchestratore
-    - Il sistema backend recupera il codice da analizzare e contatta il tool di analisi
+    - Il back-end riceve istruzione del codice da analizzare da parte dell'orchestratore
+    - Il sistema back-end recupera il codice da analizzare e contatta il tool di analisi
     - Lo strumento di analisi del codice viene contattato e gli viene passato il codice da analizzare
     - Lo strumento di analisi del codice analizza il codice
   ],
@@ -3730,12 +3727,12 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Lo strumento di analisi del codice ha ricevuto correttamente #link(<UC29.1>)[#underline[\[UC29.1\]]]
   ],
   post: [
-    - Lo strumento di analisi del codice comunica al sistema backend che il linguaggio non è supportato
+    - Lo strumento di analisi del codice comunica al sistema back-end che il linguaggio non è supportato
   ],
   scenari: [
-    - Lo strumento di analisi del codice legge la richiesta del sistema backend
+    - Lo strumento di analisi del codice legge la richiesta del sistema back-end
     - Lo struento di analis del codice rileva dei linguaggi non riconosciuti
-    - Lo strumento di analis del codice comunica l'errore al sistema backend
+    - Lo strumento di analis del codice comunica l'errore al sistema back-end
   ],
   inclusioni: [
     - Nessuna
@@ -3757,8 +3754,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - La documentazione viene passata correttamente allo strumento di analisi
   ],
   scenari: [
-    - Il sistema backend riceve istruzione di analizzare la documentazione da parte dell'orchestratore
-    - Il backend recupera la documentazione appropriata da passare allo strumento di analisi
+    - Il sistema back-end riceve istruzione di analizzare la documentazione da parte dell'orchestratore
+    - Il back-end recupera la documentazione appropriata da passare allo strumento di analisi
     - Lo strumento di analisi riceve la documentazione
   ],
   inclusioni: [
@@ -3781,8 +3778,8 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
     - Lo strumento di analisi degli standard OWASP riceve l'applicazione da analizzare correttamente
   ],
   scenari: [
-    - Il sistema backend riceve istruzione di analizzare l'applicazione rispetto agli standard OWASP da parte dell'orchestratore
-    - Il backend recupera correttamente l'applicazione da passare allo strumenti di anlisi degli standard OWASP
+    - Il sistema back-end riceve istruzione di analizzare l'applicazione rispetto agli standard OWASP da parte dell'orchestratore
+    - Il back-end recupera correttamente l'applicazione da passare allo strumenti di anlisi degli standard OWASP
     - Lo strumento di analisi riceve correttamente l'applicazione e può procedere con l'analisi
   ],
   inclusioni: [
@@ -3798,15 +3795,15 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - Il BackEnd ha provato a contattare un tool esterno per l'analisi
+    - Il Back-End ha provato a contattare un tool esterno per l'analisi
   ],
   post: [
-    - Il BackEnd trova un tool alternativo e lo contatta
+    - Il Back-End trova un tool alternativo e lo contatta
   ],
   scenari: [
-    - Il BackEnd ha provato a contattare un tool esterno fallendo
-    - Il BackEnd cerca internamente un tool alternativo
-    - Il BackEnd contatta il tool alternativo
+    - Il Back-End ha provato a contattare un tool esterno fallendo
+    - Il Back-End cerca internamente un tool alternativo
+    - Il Back-End contatta il tool alternativo
   ],
   inclusioni: [
     - Nessuna
@@ -3844,13 +3841,13 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - Il sistema backend ha completato la parte di analisi richiesta
+    - Il sistema back-end ha completato la parte di analisi richiesta
   ],
   post: [
     - L'orchestratore ha preso in carico la nuova sezione del report di analisi
   ],
   scenari: [
-    - Il sistema backend ha finito la parte di analisi richiesta da parte dell'utente
+    - Il sistema back-end ha finito la parte di analisi richiesta da parte dell'utente
     - L'orchestratore ha visualizzato la nuova sezione del report
     - L'orchestratore integra la nuova sezione nel report corrente
     - L'orchestratore modifica il report segnalando che una sezione è avanti nell'analisi rispetto alle alte
@@ -3911,7 +3908,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
 
 //spazio per quelli in mezzo
 
-=== UC34: Notifica completamento al frontend <UC34>
+=== UC34: Notifica completamento al front-end <UC34>
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -3934,7 +3931,7 @@ Di seguito sono elencati gli attori principali che interagiscono con il sistema 
   ],
   trigger: "L'orchestratore ha completato l'analisi della repository",
 )[
-  #useCaseDiagram("34", "UC34 - Notifica completamento al frontend")
+  #useCaseDiagram("34", "UC34 - Notifica completamento al front-end")
 ]
 
 ==== UC34.1: Nuovo tentativo di invio del messaggio di completamento <UC34.1>
@@ -4749,7 +4746,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC17.1>)[#underline[\[UC17.1\]]]],
 
   [#FRObx],
-  [L'Orchestratore deve comunicare al frontend gli errori nella creazione del sandbox],
+  [L'Orchestratore deve comunicare al front-end gli errori nella creazione del sandbox],
   [#link(<UC17.1.1>)[#underline[\[UC17.1.1\]]]],
 
   //UC18
@@ -4968,11 +4965,11 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Obiettivi"],
 
   [#QRObx],
-  [Deve essere fornita documentazione tecnica esaustiva del sistema, includendo swagger API e documentazione descrittiva del progetto],
+  [Deve essere fornita documentazione tecnica esaustiva del sistema, includendo swagger #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#application-programming-interface")[#def("Application Programming Interface")] (API) e documentazione descrittiva del progetto],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
   [#QRObx],
-  [Il codice prodotto deve raggiungere una copertura minima del 70% tramite Test di Unità automatizzati],
+  [Il codice prodotto deve raggiungere una copertura minima del 70% tramite #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#test-di-unita")[#def("Test di Unità")] automatizzati],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
   [#QRObx],
@@ -5005,11 +5002,11 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   align: (col, row) => (center, left, center).at(col) + horizon,
 
   [#VRObx],
-  [Il Backend e l'Orchestratore devono essere sviluppati utilizzando Node.js o Python],
+  [Il Back-end e l'Orchestratore devono essere sviluppati utilizzando #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#node.js")[#def("Node.js")] o #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#python")[#def("Python")]],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
 
   [#VRObx],
-  [Il Frontend deve essere sviluppato utilizzando React.js],
+  [Il Front-end deve essere sviluppato utilizzando #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#react")[#def("React")]],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
 
   [#VRObx],
@@ -5025,7 +5022,7 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
 
   [#VRObx],
-  [Il codice sorgente deve essere versionato utilizzando sistemi come Git o repository online],
+  [Il codice sorgente deve essere versionato utilizzando sistemi come #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#git")[#def("Git")] o repository online],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
   [#VRObx],

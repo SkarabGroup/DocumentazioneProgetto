@@ -152,8 +152,24 @@
 #let def(parola) = {
   let yml = yaml("../RTB/glossario.yml")
 
-  if type(parola) == content {
+  // Decomposizione e concatenazione: scomponi in sottostringhe
+  if type(parola) == "array" {
+    // Se è un array, estrai testo da ogni elemento (alcuni potrebbero essere content)
+    // poi concatena il risultato
+    let result = parola.map(el => {
+      if type(el) == "content" {
+        el.text
+      } else {
+        str(el)
+      }
+    }).join("")
+    parola = result
+  } else if type(parola) == "content" {
+    // Se è content, estrai il testo
     parola = parola.text
+  } else if type(parola) != "string" {
+    // Se è altro tipo (number, bool, etc), converti a stringa
+    parola = str(parola)
   }
 
   let found = false
@@ -177,6 +193,16 @@
         }
       }
 
+      if "acronimo" in def {
+        let alt_list = def.acronimo.split(",").map(s => s.trim())
+        for alt in alt_list {
+          if lower(alt) == lower(parola) {
+            found = true
+            break
+          }
+        }
+      }
+
       if found { break }
     }
     if found { break }
@@ -186,10 +212,11 @@
   if not found {
     panic("Parola non definita nel glossario: " + parola)
   } else {
-    let term_id = term-to-id(parola)
-    let url = GLOSSARIO_URL + "#" + term_id
-    
-    link(url)[#underline(parola)]
+    // Normalizza il nome per la label (sostituisce spazi con trattini)
+    //let label_name = termine_originale.replace(" ", "-")
+    // Crea il link alla label del glossario
+    //link(label(label_name))[#parola#sub[G]]
+    underline(text(parola))
   }
 }
 
