@@ -4022,17 +4022,18 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Orchestratore",
   attori_secondari: "GitHub",
   pre: [
-    - L'utente ha collegato il suo account CodeGuardian a GitHub #link(<UC3>)[#underline[[UC3]]]
-    - Il sistema Front-end ha ricevuto il codice temporaneo di autorizzazione (OAuth Code)
+    - L'orchestratore dispone di un codice di autorizzazione temporaneo (OAuth Code)
+    //- L'utente ha collegato il suo account CodeGuardian a GitHub #link(<UC3>)[#underline[[UC3]]]
+    //- Il sistema Front-end ha ricevuto il codice temporaneo di autorizzazione (OAuth Code)
   ],
   post: [
-    - Il sistema Back-end ha ottenuto il token di accesso e lo ha associato al profilo dell'utente
+    - L'orchestratore ha ottenuto il token di accesso permanente e ha abilitato l'integrazione del profilo utente con GitHub
   ],
   scenari: [
-    - Il sistema Front-end comunica al sistema Back-end il codice ricevuto da GitHub
-    - L'orchestratore richiede al sistema GitHub lo scambio del codice con un token di accesso permanente
-    - Il sistema GitHub restituisce il token di accesso e le informazioni del profilo autorizzate
-    - Il sistema Back-end memorizza il token nel database associandolo all'utente
+    - L'orchestratore richiede alla piattaforma esterna GitHub la conversione del codice temporaneo in un token di accesso permanente
+    - L'orchestratore riceve il token di accesso e i relativi permessi di lettura/scrittura
+    - L'orchestratore associa le credenziali ottenute al profilo dell'utente
+    #TODO("Mettiamo un'unica azione generale del tipo 'l'orchestratore svolge tutta la procedura necessaria con la piattaforma GitHub'? anche se molto generale")
   ],
   inclusioni: [
     - Nessuna
@@ -4040,7 +4041,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - #link(<UC41.1>)[#underline[[UC41.1]]]
   ],
-  trigger: "Ricezione del codice di autorizzazione OAuth da parte del Front-end",
+  trigger: "L'orchestratore riceve un codice temporaneo di autorizzazione (OAuth Code)",
 )[
   #useCaseDiagram("41", "UC41 - Gestione del codice OAuth GitHub")
 ]
@@ -4050,14 +4051,17 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Orchestratore",
   attori_secondari: "GitHub",
   pre: [
-    - L'orchestratore ha tentato di scambiare il codice di autorizzazione con il sistema GitHub
+    - L'orchestratore ha tentato di scambiare il codice di autorizzazione con il sistema GitHub #link(<UC41>)[#underline[[UC41]]]
+    - La procedura di scambio del codice è fallita
+    
   ],
   post: [
-    - La procedura di collegamento viene interrotta e il sistema Front-end viene notificato dell'errore da parte dell'orchestratore
+    - L'orchestratore interrompe la procedura di collegamento con GitHub e comunica l'errore
   ],
   scenari: [
-    - Il sistema GitHub restituisce un errore (es. codice scaduto o non valido)
-    - L'orchestratore notifica il sistema Front-end del fallimento della procedura di collegamento
+    - Il sistema GitHub rifiuta lo scambio del codice (es. codice scaduto o non valido) o la connessione fallisce
+    //- Il sistema GitHub restituisce un errore (es. codice scaduto o non valido)
+    //- L'orchestratore notifica il sistema Front-end del fallimento della procedura di collegamento
   ],
   inclusioni: [
     - Nessuna
@@ -4067,12 +4071,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "Il sistema GitHub rifiuta lo scambio del codice o la connessione fallisce",
 )[]
-
-#TODO("Valutare con il gruppo l'UC41")
-
-#TODO(
-  "UC42 Validazione delle credenziali dell'utente. Sinceramente eliminerei questo UC perchè la validazione è già presente nelle inclusioni di UC1 e UC2",
-)
 
 === UC43 Visualizzazione ranking dei repository analizzati <UC43>
 #useCase(
