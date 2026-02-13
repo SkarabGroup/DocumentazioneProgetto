@@ -1526,17 +1526,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente conferma la visualizzazione del report dalla sezione dedicata del proprio account CodeGuardian",
 )[]
 
-
 === UC6: Scelta intervallo temporale per visualizzazione confronto con report passati <UC6>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
-    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
-    - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
-    - L'utente ha selezionato il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
-      durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian
-      #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5>)[#underline[\[UC5\]]]
+    - L'utente è nella sezione di modifica dell'intervallo temporale per il confronto con i report passati
   ],
   post: [
     - L'utente ha selezionato l'intervallo temporale per il confronto con i report passati
@@ -1550,29 +1545,25 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - #link(<UC6.1>)[#underline[\[UC6.1\]]]
     - #link(<UC6.2>)[#underline[\[UC6.2\]]]
+    - #link(<UC6.3>)[#underline[\[UC6.3\]]]
+    - #link(<UC6.4>)[#underline[\[UC6.4\]]]
   ],
   trigger: "L'utente interagisce con la sezione di selezione dell'intervallo temporale per il confronto con i report passati durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian",
 )[#useCaseDiagram("6", "UC6 - Scelta intervallo temporale per visualizzazione confronto con report passati")]
 
 ==== UC6.1: Nessun intervallo temporale selezionato <UC6.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
-    //- L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    //- L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
-    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
-    - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
-    - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
-      durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian
-      #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente è nella sezione di modifica dell'intervallo temporale per il confronto con i report passati #link(<UC6>)[#underline[\[UC6\]]]
+    - L'utente non ha selezionato alcun intervallo temporale 
   ],
   post: [
     - L'utente non può procedere con la selezione dell'intervallo temporale per il confronto con i report passati
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che deve essere selezionato un intervallo temporale
-      per poter procedere con il confronto con i report passati
+    - L'utente visualizza un messaggio di errore che indica che deve essere selezionato un intervallo temporale per poter procedere con il 
+     confronto con i report passati
   ],
   inclusioni: [
     - Nessuna
@@ -1580,60 +1571,22 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente interagisce con la sezione di selezione dell'intervallo temporale per il confronto con i report passati durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian",
+  trigger: "L'utente non inserisce alcun intervallo temporale e tenta di procedere con il confronto con i report passati",
 )[]
 
-==== UC6.2: Intervallo temporale non valido <UC6.2>
-#TODO("Porta su")
+===== UC6.2: Nessun report di analisi disponibile nel periodo selezionato <UC6.2>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
-    //- L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    //- L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
-    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
-    - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
-    - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
-      durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian
-      #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente è nella sezione di modifica dell'intervallo temporale per il confronto con i report passati #link(<UC6>)[#underline[\[UC6\]]]
+    - Non sono disponibili report di analisi nel periodo selezionato dall'utente
   ],
   post: [
     - L'utente non può procedere con la selezione dell'intervallo temporale per il confronto con i report passati
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che l'intervallo temporale selezionato non è valido
-      per poter procedere con il confronto con i report passati
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC6.2.1>)[#underline[\[UC6.2.1\]]]
-    - #link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]
-    - #link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]
-  ],
-  trigger: "L'utente interagisce con la sezione di selezione dell'intervallo temporale per il confronto con i report passati durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian",
-)[#useCaseDiagram("6_2", "UC6.2 - Intervallo temporale non valido")]
-
-===== UC6.2.1: Nessun report di analisi disponibile nel periodo selezionato <UC6.2.1>
-#useCase(
-  attore: UAA,
-  pre: [
-    //- L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    //- L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
-    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
-    - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
-    - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
-      durante la procedura  di visualizzazione del report di analisi repository GitHub a CodeGuardian
-      #link(<UC5.4>)[#underline[\[UC5.4\]]]
-  ],
-  post: [
-    - L'utente non può procedere con la selezione dell'intervallo temporale per il confronto con i report passati
-  ],
-  scenari: [
-    - L'utente visualizza un messaggio di errore che indica che non sono disponibili report di analisi
-      nel periodo selezionato per poter procedere con il confronto con i report passati
+    - L'utente visualizza un messaggio di errore che indica che non sono disponibili report di analisi 
+     nel periodo selezionato per poter procedere con il confronto con i report passati
   ],
   inclusioni: [
     - Nessuna
@@ -1641,21 +1594,15 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente interagisce con la sezione di selezione dell'intervallo temporale per il confronto con i report passati durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian",
+  trigger: "L'utente seleziona un intervallo temporale che non contiene report di analisi",
 )[]
 
-===== UC6.2.2: Intervallo temporale incoerente <UC6.2.2>
+===== UC6.3: Intervallo temporale incoerente <UC6.3>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
-    //- L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    //- L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
-    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
-    - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
-    - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
-      durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian
-      #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente è nella sezione di modifica dell'intervallo temporale per il confronto con i report passati #link(<UC6>)[#underline[\[UC6\]]]
+    - L'utente ha selezionato un intervallo temporale incoerente
   ],
   post: [
     - L'utente non può procedere con la selezione dell'intervallo temporale per il confronto con i report passati
@@ -1670,21 +1617,15 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente interagisce con la sezione di selezione dell'intervallo temporale per il confronto con i report passati durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian",
+  trigger: "L'utente seleziona un intervallo temporale incoerente",
 )[]
 
-===== UC6.2.3: Intervallo temporale troppo ampio <UC6.2.3>
+===== UC6.4: Intervallo temporale troppo ampio <UC6.4>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
-    //- L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    //- L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
-    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
-    - L'utente ha selezionato i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
-    - L'utente selezione il tasto per la modifica dell'intervallo temporale per il confronto con i report passati
-      durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian
-      #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente è nella sezione di modifica dell'intervallo temporale per il confronto con i report passati #link(<UC6>)[#underline[\[UC6\]]]
+    - L'utente ha selezionato un intervallo temporale troppo ampio
   ],
   post: [
     - L'utente non può procedere con la selezione dell'intervallo temporale per il confronto con i report passati
@@ -1699,7 +1640,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente interagisce con la sezione di selezione dell'intervallo temporale per il confronto con i report passati durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian",
+  trigger: "L'utente seleziona un intervallo temporale troppo ampio",
 )[]
 
 
@@ -4511,20 +4452,16 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC6.1>)[#underline[\[UC6.1\]]]],
 
   [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se l'intervallo temporale non è valido],
+  [L'Utente deve ricevere un avviso se non ci sono report nel periodo selezionato],
   [#link(<UC6.2>)[#underline[\[UC6.2\]]]],
 
   [#FRObx],
-  [L'Utente deve ricevere un avviso se non ci sono report nel periodo selezionato],
-  [#link(<UC6.2.1>)[#underline[\[UC6.2.1\]]]],
-
-  [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se l'intervallo temporale è incoerente],
-  [#link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]],
+  [#link(<UC6.3>)[#underline[\[UC6.3\]]]],
 
   [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se l'intervallo temporale è troppo ampio],
-  [#link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]],
+  [#link(<UC6.4>)[#underline[\[UC6.4\]]]],
 
   // UC7
   [#FRObx], [L'Utente deve poter visualizzare un grafico comparativo tra report], [#link(<UC7>)[#underline[\[UC7\]]]],
