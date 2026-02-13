@@ -2587,41 +2587,47 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha selezionato il repository da analizzare #link(<UC5.2>)[#underline[\[UC5.2\]]]
-    - Il repository ha manifest e/o lock file visibili
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente sta visualizzando un report di analisi #link(<UC6>)[#underline[\[UC6\]]]
   ],
   post: [
-    - L'utente visualizza il report delle librerie vulnerabili con suggerimenti di remediation
-    - L'utente può accettare le remediation proposte
+    - L'utente visualizza il report delle vulnerabilità rilevate con livelli di severità
+    - L'utente visualizza le remediation proposte per ciascuna vulnerabilità
+    - L'utente può accettare o rifiutare le remediation
   ],
   scenari: [
-    - L'utente richiede l'analisi delle dipendenze dal pannello del report
-    - L'analisi elenca le dipendenze e ne misura la severità
-    - Il sistema propone remediation (es. upgrade versione)
-    - L'utente accetta o rifuta le remediation
+    - L'utente accede al pannello report del repository
+    - L'utente seleziona l'analisi vulnerabilità dipendenze
+    - L'utente visualizza il report delle vulnerabilità rilevate
+    - L'utente esamina le remediation proposte
+    - L'utente accetta o rifiuta le remediation #link(<UC19.1>)[#underline[\[UC19.1\]]] #link(<UC19.2>)[#underline[\[UC19.2\]]]
   ],
   inclusioni: [
-    - Nessuna
+    - #link(<UC19.1>)[#underline[\[UC19.1\]]] // Accettazione remediation
+    - #link(<UC19.2>)[#underline[\[UC19.2\]]] // Rifiuto remediation
   ],
   estensioni: [
-    - #link(<UC19.1>)[#underline[\[UC19.1\]]]
-    - #link(<UC19.2>)[#underline[\[UC19.2\]]]
+    - Nessuna
   ],
-  trigger: "L'utente richiede l'analisi dipendenze o la analisi viene pianificata automaticamente",
+  trigger: "L'utente seleziona il comando di analisi vulnerabilità dipendenze dal pannello del report",
 )[#useCaseDiagram("19", "UC19 - Analisi vulnerabilità dipendenze")]
-==== UC19.1 L'utente accetta la remediation proposta <UC19.1>
+
+==== UC19.1: Accettazione remediation vulnerabilità dipendenze <UC19.1>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha preso visione dell'analisi delle vulnerabilità
-    - L'utente ha visualizzato le remediation proposte
+    - L'utente sta visualizzando il report di analisi vulnerabilità dipendenze #link(<UC19>)[#underline[\[UC19\]]]
+    - L'utente ha esaminato le remediation proposte
   ],
   post: [
-    - Le remediation proposte vengono integrate
+    - L'utente visualizza la conferma dell'applicazione delle remediation
+    - L'utente visualizza il riepilogo delle versioni aggiornate
   ],
   scenari: [
-    - L'utente accetta le remediation proposte
-    - Le remediation proposte vengono integrate
+    - L'utente esamina l'elenco delle remediation proposte
+    - L'utente seleziona le remediation che intende applicare
+    - L'utente conferma l'applicazione delle remediation selezionate
+    - L'utente visualizza la conferma dell'applicazione con l'elenco delle dipendenze aggiornate
   ],
   inclusioni: [
     - Nessuna
@@ -2629,23 +2635,24 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Conferma delle remediation",
+  trigger: "L'utente seleziona il comando di conferma per applicare le remediation proposte dal sistema di analisi vulnerabilità",
 )[]
 
-==== UC19.2: L'utente rifiuta la remediation proposta <UC19.2>
+==== UC19.2: Rifiuto remediation vulnerabilità dipendenze <UC19.2>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha preso visione dell'analisi delle vulnerabilità
-    - L'utente ha visualizzato le remediation proposte
+    - L'utente sta visualizzando il report di analisi vulnerabilità dipendenze #link(<UC19>)[#underline[\[UC19\]]]
+    - L'utente ha esaminato le remediation proposte
   ],
   post: [
-    - Le remediation proposte vengono scartate
+    - L'utente visualizza la conferma che nessuna modifica è stata applicata
+    - L'utente visualizza il report delle vulnerabilità senza modifiche
   ],
   scenari: [
-    - L'utente visualizza le remediation proposte
-    - L'utente non accetta le remediation proposte
-    - Le remediation vengono scartate
+    - L'utente esamina l'elenco delle remediation proposte
+    - L'utente seleziona il comando di rifiuto o chiude il pannello senza confermare
+    - L'utente visualizza la conferma che le remediation sono state scartate
   ],
   inclusioni: [
     - Nessuna
@@ -2653,46 +2660,53 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Remediation proposte non accettate",
+  trigger: "L'utente rifiuta le remediation proposte e chiude il pannello di analisi vulnerabilità dipendenze",
 )[]
 
 === UC20: Rilevamento segreti e token <UC20>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha selezionato il repository da analizzare #link(<UC5.2>)[#underline[\[UC5.2\]]]
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente si trova nella sezione di analisi sicurezza di un report #link(<UC10>)[#underline[\[UC10\]]]
   ],
   post: [
-    - Il sistema genera un report con i possibili segreti rilevati e raccomandazioni
+    - L'utente visualizza il report dei segreti rilevati con livelli di confidenza
+    - L'utente visualizza i dettagli di ciascun rilevamento
   ],
   scenari: [
-    - L'utente avvia la scansione per segreti
-    - Vengono segnalati file e commit sospetti contenenti possibili chiavi o token
-    - Il motore segnala pattern sospetti e classifica i risultati per confidenza
-    - Il sistema prepara raccomandazioni e registra i risultati per revisione manuale o azioni automatiche
+    - L'utente accede al pannello di analisi sicurezza
+    - L'utente seleziona la scansione segreti e token
+    - L'utente visualizza il report dei risultati #link(<UC20.3>)[#underline[\[UC20.3\]]]
+    - L'utente esamina i rilevamenti e marca eventuali falsi positivi #link(<UC20.1>)[#underline[\[UC20.1\]]]
+    - L'utente configura la revoca automatica per segreti confermati #link(<UC20.2>)[#underline[\[UC20.2\]]]
   ],
   inclusioni: [
-    - #link(<UC20.3>)[#underline[\[UC20.3\]]] // Visualizzazione risultati
+    - #link(<UC20.3>)[#underline[\[UC20.3\]]] // Visualizzazione report segreti rilevati
   ],
   estensioni: [
-    - #link(<UC20.1>)[#underline[\[UC20.1\]]] // Verifica manuale dei falsi positivi
-    - #link(<UC20.2>)[#underline[\[UC20.2\]]] // Esecuzione automatica di revoca se integrata con provider
+    - #link(<UC20.1>)[#underline[\[UC20.1\]]] // Marcatura falsi positivi
+    - #link(<UC20.2>)[#underline[\[UC20.2\]]] // Configurazione revoca automatica
   ],
-  trigger: "L'utente avvia la scansione segreti o la scansione è parte di una pipeline CI",
+  trigger: "L'utente seleziona il comando di scansione segreti e token dal pannello di analisi sicurezza",
 )[#useCaseDiagram("20", "UC20 - Rilevamento segreti e token")]
 
-==== UC20.1: L'utente rifiuta le remediation proposte <UC20.1>
+==== UC20.1: Marcatura falsi positivi rilevamento segreti <UC20.1>
 #useCase(
   attore: UAA,
   pre: [
-    - La scansione ha rilevato possibili segreti
+    - L'utente sta visualizzando il report di rilevamento segreti e token #link(<UC20>)[#underline[\[UC20\]]]
+    - L'utente ha esaminato i rilevamenti
   ],
   post: [
-    - L'utente rifiuta le remediation proposte
+    - L'utente visualizza la conferma della marcatura
+    - L'utente visualizza il report aggiornato senza i falsi positivi confermati
   ],
   scenari: [
-    - L'utente esamina i warning proposti
-    - L'utente ignora i warning proposti
+    - L'utente esamina l'elenco dei segreti rilevati nel report
+    - L'utente seleziona i rilevamenti da marcare come falsi positivi
+    - L'utente conferma la marcatura
+    - L'utente visualizza il report aggiornato senza i falsi positivi
   ],
   inclusioni: [
     - Nessuna
@@ -2700,20 +2714,26 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Rilevamento di possibili segreti",
+  trigger: "L'utente seleziona i rilevamenti da marcare come falsi positivi e conferma la marcatura",
 )[]
 
-==== UC20.2: Esecuzione automatica di revoca se integrata con provider <UC20.2>
+==== UC20.2: Configurazione revoca automatica segreti compromessi <UC20.2>
 #useCase(
   attore: UAA,
   pre: [
-    - Il sistema è integrato con il provider di segreti
+    - L'utente sta visualizzando il report di rilevamento segreti e token #link(<UC20>)[#underline[\[UC20\]]]
+    - L'utente ha esaminato i segreti rilevati
   ],
   post: [
-    - I segreti vengono revocati automaticamente
+    - L'utente visualizza la conferma dell'attivazione della revoca automatica
+    - L'utente visualizza lo stato aggiornato dei segreti revocati nel report
   ],
   scenari: [
-    - Il sistema revoca automaticamente i segreti compromessi
+    - L'utente esamina i segreti rilevati nel report
+    - L'utente seleziona i segreti per cui abilitare la revoca automatica
+    - L'utente accede alla sezione di configurazione revoca automatica
+    - L'utente conferma l'attivazione della revoca automatica
+    - L'utente visualizza la conferma dell'avvenuta revoca
   ],
   inclusioni: [
     - Nessuna
@@ -2721,20 +2741,26 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Conferma di segreti validi",
+  trigger: "L'utente seleziona i segreti compromessi e conferma l'attivazione della revoca automatica",
 )[]
 
-==== UC20.3: Visualizzazione risultati <UC20.3>
+==== UC20.3: Visualizzazione report segreti e token rilevati <UC20.3>
 #useCase(
   attore: UAA,
   pre: [
-    - Il report dei possibili segreti è disponibile
+    - L'utente ha richiesto la scansione segreti e token #link(<UC20>)[#underline[\[UC20\]]]
+    - L'utente si trova nella sezione di analisi sicurezza
   ],
   post: [
-    - L'utente visualizza l'elenco dei possibili segreti con dettagli e azioni
+    - L'utente visualizza il report completo dei segreti rilevati
+    - L'utente visualizza i dettagli di ciascun rilevamento
+    - L'utente ha accesso alle funzionalità di marcatura falsi positivi e configurazione revoca
   ],
   scenari: [
-    - L'utente apre il pannello dei risultati; il front-end richiede il report al back-end e mostra i dettagli con azioni suggerite
+    - L'utente apre il report segreti dal pannello analisi sicurezza
+    - L'utente visualizza l'elenco dei segreti rilevati
+    - L'utente esamina i dettagli di ciascun rilevamento
+    - L'utente marca eventuali falsi positivi #link(<UC20.1>)[#underline[\[UC20.1\]]]
   ],
   inclusioni: [
     - Nessuna
@@ -2742,225 +2768,107 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Apertura pannello risultati da parte dell'utente",
+  trigger: "L'utente seleziona il comando di visualizzazione report segreti dal pannello di analisi sicurezza",
 )[]
 
 === UC21: Verifica conformità licenze <UC21>
 #useCase(
   attore: UAA,
   pre: [
-    - Manifest delle dipendenze disponibile
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente si trova nella sezione di compliance e governance del pannello report
   ],
   post: [
-    - L'utente riceve un report di compatibilità delle licenze e i #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#rischio")[#def("Rischi")] associati
-    - L'utente conferma le azioni consigliate
+    - L'utente visualizza il report di compatibilità delle licenze con classificazione dei #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#rischio")[#def("Rischi")]
+    - L'utente visualizza le licenze non compatibili evidenziate
+    - L'utente può richiedere approvazione legale
   ],
   scenari: [
-    - L'utente richiede la verifica licenze prima di una release
-    - Il controllo segnala licenze non compatibili con la policy
-    - Il sistema propone azioni correttive e l'utente le accetta o le invia al team legale
+    - L'utente accede al pannello compliance
+    - L'utente seleziona la verifica conformità licenze
+    - L'utente visualizza il report delle licenze con classificazione dei #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#rischio")[#def("Rischi")]
+    - L'utente esamina le dipendenze problematiche
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC21.1>)[#underline[\[UC21.1\]]] // Integrazione con processo di approvazione legale
+    - Nessuna
   ],
-  trigger: "Verifica pre-release o su richiesta del team di progetto",
+  trigger: "L'utente seleziona il comando di verifica conformità licenze dal pannello compliance",
 )[#useCaseDiagram("21", "UC21 - Verifica conformità licenze")]
 
-==== UC21.1: Integrazione con processo di approvazione legale <UC21.1>
-#useCase(
-  attore: UAA,
-  pre: [
-    - Licenze non compatibili rilevate
-  ],
-  post: [
-    - Il processo di approvazione legale è integrato
-  ],
-  scenari: [
-    - L'utente invia al team legale per approvazione
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Rilevamento licenze non compatibili",
-)[]
-
-=== UC22: Revisione PR automatizzata <UC22>
-#useCase(
-  attore: UAA,
-  pre: [
-    - Pull request aperta nel repository collegato
-  ],
-  post: [
-    - L'utente riceve commenti automatici con checklist e suggerimenti
-    - L'utente applica le remediation proposte e conferma le modifiche
-  ],
-  scenari: [
-    - Alla creazione o aggiornamento della PR la pipeline esegue lint, security scan e test
-    - Vengono prodotti commenti sintetici e link alle remediation
-    - L'utente rivede i commenti, applica i cambiamenti e conferma
-  ],
-  inclusioni: [
-    - #link(<UC22.1>)[#underline[\[UC22.1\]]] // Esecuzione test automatici
-  ],
-  estensioni: [
-    - #link(<UC22.2>)[#underline[\[UC22.2\]]] // Suggerimenti di modifica automatici (codemods)
-  ],
-  trigger: "Apertura o aggiornamento di una pull request",
-)[#useCaseDiagram("22", "UC22 - Revisione PR automatizzata")]
-
-==== UC22.1: Esecuzione test automatici <UC22.1>
-#useCase(
-  attore: UAA,
-  pre: [
-    - PR aperta
-  ],
-  post: [
-    - Test automatici eseguiti
-  ],
-  scenari: [
-    - La pipeline esegue i test automaticamente
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Apertura PR",
-)[]
-
-==== UC22.2: Suggerimenti di modifica automatici (codemods) <UC22.2>
-#useCase(
-  attore: UAA,
-  pre: [
-    - Problemi rilevati nella PR
-  ],
-  post: [
-    - Suggerimenti di modifica applicati automaticamente
-  ],
-  scenari: [
-    - Il sistema applica codemods per fix automatici
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Rilevamento problemi correggibili",
-)[]
-
-//sni
 === UC23: Monitor qualità del codice <UC23>
 #useCase(
   attore: UAA,
   pre: [
-    - Storico commit disponibile nel repository
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha selezionato il report #link(<UC6>)[#underline[\[UC6\]]]
+    - L'utente si trova nella sezione di monitoraggio qualità del codice del pannello report
   ],
   post: [
-    - L'utente visualizza dashboard con metriche e trend
-    - L'utente accetta o pianifica remediation per regressioni critiche
+    - L'utente visualizza la dashboard con metriche di qualità del codice e trend storici
+    - L'utente visualizza le regressioni evidenziate
+    - L'utente può pianificare azioni correttive
   ],
   scenari: [
-    - Il sistema calcola metriche periodiche (complessità, duplicazioni, maintainability)
-    - Vengono generati trend e alert per regressioni
-    - L'utente definisce azioni di miglioramento e le approva
+    - L'utente accede al pannello monitoraggio qualità
+    - L'utente seleziona il comando di monitoraggio qualità
+    - L'utente visualizza la dashboard con metriche e trend
+    - L'utente esamina i suggerimenti di obiettivi qualità
+    - L'utente pianifica azioni correttive
   ],
   inclusioni: [
-    - #link(<UC23.1>)[#underline[\[UC23.1\]]] // Integrazione con tool di metriche esterni
+    - Nessuna
   ],
   estensioni: [
-    - #link(<UC23.2>)[#underline[\[UC23.2\]]] // Suggerimenti KPI e obiettivi qualità
+    - Nessuna
   ],
-  trigger: "Esecuzione pianificata o su richiesta",
+  trigger: "L'utente seleziona il comando di monitoraggio qualità codice dal pannello report",
 )[#useCaseDiagram("23", "UC23 - Monitor qualità del codice")]
 
-
-==== UC23.1: Integrazione con tool di metriche esterni <UC23.1>
-#useCase(
-  attore: UAA,
-  pre: [
-    - Metriche calcolate
-  ],
-  post: [
-    - Integrazione con tool esterni completata
-  ],
-  scenari: [
-    - Il sistema si collega a tool esterni per metriche aggiuntive
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Richiesta di metriche avanzate",
-)[]
-
-==== UC23.2: Suggerimenti KPI e obiettivi qualità <UC23.2>
-#useCase(
-  attore: UAA,
-  pre: [
-    - Metriche disponibili
-  ],
-  post: [
-    - Suggerimenti KPI forniti
-  ],
-  scenari: [
-    - Il sistema propone obiettivi di qualità basati sui KPI
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Analisi metriche completata",
-)[]
-
-//sni
 === UC24: Suggerimenti di refactor <UC24>
 #useCase(
   attore: UAA,
   pre: [
-    - Codice analizzato con metriche e code smells
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha selezionato il repository da analizzare #link(<UC4>)[#underline[\[UC4\]]]
+    - L'utente si trova nella sezione suggerimenti refactor del pannello report
   ],
   post: [
-    - L'utente riceve elenco di refactor consigliati con snippet
-    - L'utente applica e conferma le remediation suggerite
+    - L'utente visualizza i suggerimenti di refactor ordinati per priorità
+    - L'utente può applicare refactor manualmente o automaticamente
   ],
   scenari: [
-    - Analisi rileva hot-spot e suggerisce refactor
-    - L'utente sceglie le proposte da applicare e conferma
+    - L'utente accede alla sezione suggerimenti refactor
+    - L'utente seleziona i refactor da applicare
+    - L'utente applica i refactor automaticamente #link(<UC24.2>)[#underline[\[UC24.2\]]] o manualmente
   ],
   inclusioni: [
-    - #link(<UC24.1>)[#underline[\[UC24.1\]]] // Verifica impatto tramite test automatizzati
-    - #link(<UC24.3>)[#underline[\[UC24.3\]]] // Visualizzazione suggerimenti
   ],
   estensioni: [
-    - #link(<UC24.2>)[#underline[\[UC24.2\]]] // Applicazione automatica sotto supervisione
+    - #link(<UC24.2>)[#underline[\[UC24.2\]]] // Applicazione automatica
   ],
-  trigger: "Richiesta manuale o raccomandazione durante code review",
+  trigger: "L'utente seleziona il comando suggerimenti refactor dal pannello code quality",
 )[#useCaseDiagram("24", "UC24 - Suggerimenti di refactor")]
 
-//altro caso
-==== UC24.1: Verifica impatto tramite test automatizzati <UC24.1>
+==== UC24.2: Applicazione automatica refactor con supervisione <UC24.2>
 #useCase(
   attore: UAA,
   pre: [
-    - Refactor suggeriti
+    - L'utente sta visualizzando i suggerimenti di refactor #link(<UC24>)[#underline[\[UC24\]]]
+    - L'utente ha selezionato refactor da applicare
   ],
   post: [
-    - Impatto verificato tramite test
+    - L'utente visualizza il diff delle modifiche applicate
+    - L'utente può accettare definitivamente o effettuare rollback
   ],
   scenari: [
-    - Test automatici verificano l'impatto del refactor
+    - L'utente seleziona i refactor da applicare automaticamente
+    - L'utente visualizza la preview delle modifiche
+    - L'utente conferma l'applicazione
+    - L'utente esamina il diff delle modifiche applicate
+    - L'utente conferma definitivamente o esegue rollback
   ],
   inclusioni: [
     - Nessuna
@@ -2968,355 +2876,54 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Selezione di refactor da applicare",
+  trigger: "L'utente seleziona i refactor da applicare e conferma l'applicazione automatica con supervisione",
 )[]
 
-==== UC24.2: Applicazione automatica sotto supervisione <UC24.2>
-#useCase(
-  attore: UAA,
-  pre: [
-    - Refactor selezionati
-  ],
-  post: [
-    - Refactor applicati automaticamente
-  ],
-  scenari: [
-    - Il sistema applica il refactor sotto supervisione dell'utente
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Approvazione dell'utente",
-)[]
-
-==== UC24.3: Visualizzazione suggerimenti <UC24.3>
-#useCase(
-  attore: UAA,
-  pre: [
-    - Elenco suggerimenti di refactor generato
-  ],
-  post: [
-    - L'utente visualizza i suggerimenti con snippet e azioni
-  ],
-  scenari: [
-    - L'utente apre il pannello refactor; il front-end richiede i suggerimenti e mostra snippet con azioni possibili
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Apertura pannello suggerimenti da parte dell'utente",
-)[
-]
-
-=== UC25: Generazione changelog e release notes <UC25>
-#useCase(
-  attore: UAA,
-  pre: [
-    - Lista commit/issue tra due tag o date disponibile
-  ],
-  post: [
-    - Il sistema genera un changelog strutturato in formato markdown
-    - Il changelog è proposto come bozza per revisione e approvazione
-  ],
-  scenari: [
-    - Il motore raccoglie i commit e li raggruppa per tipo
-    - Il sistema genera automaticamente il testo proposto per le release notes
-    - L'utente rivede e approva o modifica il testo prima della pubblicazione
-  ],
-  inclusioni: [
-    - #link(<UC25.1>)[#underline[\[UC25.1\]]] // Rilevamento note di breaking change
-    - #link(<UC25.3>)[#underline[\[UC25.3\]]] // Visualizzazione e approvazione changelog
-  ],
-  estensioni: [
-    - #link(<UC25.2>)[#underline[\[UC25.2\]]] // Pubblicazione automatica su GitHub Release
-  ],
-  trigger: "Preparazione della release o su richiesta dell'amministratore",
-)[#useCaseDiagram("25", "UC25 - Generazione changelog e release notes")]
-
-==== UC25.1: Rilevamento note di breaking change <UC25.1>
-#useCase(
-  attore: UAA,
-  pre: [
-    - Commit analizzati per changelog
-  ],
-  post: [
-    - Note di breaking change rilevate
-  ],
-  scenari: [
-    - Il sistema identifica e segnala breaking changes
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Analisi commit",
-)[]
-
-==== UC25.2: Pubblicazione automatica su GitHub Release <UC25.2>
-#useCase(
-  attore: UAA,
-  pre: [
-    - Changelog approvato
-  ],
-  post: [
-    - Release pubblicata su GitHub
-  ],
-  scenari: [
-    - Il sistema pubblica automaticamente la release
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Approvazione del changelog",
-)[]
-
-==== UC25.3: Visualizzazione e approvazione changelog <UC25.3>
-#useCase(
-  attore: UAA,
-  pre: [
-    - Changelog generato e disponibile
-  ],
-  post: [
-    - L'utente visualizza la bozza del changelog, la modifica o la approva per pubblicazione
-  ],
-  scenari: [
-    - L'utente apre la bozza del changelog dal pannello release; il sistema mostra i dettagli e le proposte di testo
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Apertura bozza changelog da parte dell'utente",
-)[
-]
-
-=== UC26: Analisi test e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-coverage")[#def("Coverage")] <UC26>
-#useCase(
-  attore: UAA,
-  pre: [
-    - Suite di test eseguibile e ambiente di esecuzione configurato
-  ],
-  post: [
-    - Il sistema genera report di test e coverage con gap evidenziati e metriche aggregate
-    - Findings e gap sono registrati per pianificazione e remediation
-  ],
-  scenari: [
-    - Esecuzione della suite di test e raccolta coverage
-    - Identificazione di test flakiness e failure critici; aggregazione delle metriche
-    - Il sistema suggerisce test addizionali e propone azioni correttive
-  ],
-  inclusioni: [
-    - #link(<UC26.1>)[#underline[\[UC26.1\]]] // Replay test intermittenti
-    - #link(<UC26.3>)[#underline[\[UC26.3\]]] // Visualizzazione report
-  ],
-  estensioni: [
-    - #link(<UC26.2>)[#underline[\[UC26.2\]]] // Suggerimenti per test addizionali
-  ],
-  trigger: "Esecuzione pipeline CI o richiesta manuale del team di QA",
-)[#useCaseDiagram("26", "UC26 - Analisi test e coverage")]
-
-==== UC26.1: Replay test intermittenti <UC26.1>
-#useCase(
-  attore: UAA,
-  pre: [
-    - Test flakiness rilevata
-  ],
-  post: [
-    - Test intermittenti rieseguiti
-  ],
-  scenari: [
-    - Il sistema riesegue i test intermittenti per confermare
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Rilevamento flakiness",
-)[]
-
-==== UC26.2: Suggerimenti per test addizionali <UC26.2>
-#useCase(
-  attore: UAA,
-  pre: [
-    - Coverage analizzata
-  ],
-  post: [
-    - Suggerimenti per test aggiuntivi forniti
-  ],
-  scenari: [
-    - Il sistema propone test per coprire gap di coverage
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Analisi coverage completata",
-)[]
-
-==== UC26.3: Visualizzazione report <UC26.3>
-#useCase(
-  attore: UAA,
-  pre: [
-    - Report di test e coverage generato e disponibile
-  ],
-  post: [
-    - L'utente visualizza il report dettagliato con gap e suggerimenti di test
-  ],
-  scenari: [
-    - L'utente apre il pannello dei report; il front-end richiede il report al back-end e mostra percentuali di coverage, test falliti e suggerimenti
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Apertura pannello report da parte dell'utente",
-)[
-]
-
-=== UC27: Policy CI/CD pre-merge <UC27>
-#useCase(
-  attore: UAA,
-  pre: [
-    - Policy CI/CD definite e configurate
-  ],
-  post: [
-    - Merge bloccato fino al superamento delle policy
-    - L'utente applica remediation e riprova il merge
-  ],
-  scenari: [
-    - Alla richiesta di merge le policy vengono verificate automaticamente
-    - In caso di fallimento il sistema propone remediation
-    - L'utente accetta le remediation e riprova
-  ],
-  inclusioni: [
-    - #link(<UC27.1>)[#underline[\[UC27.1\]]] // Gestione eccezioni approvate manualmente
-    - #link(<UC27.3>)[#underline[\[UC27.3\]]] // Visualizzazione risultati policy
-  ],
-  estensioni: [
-    - #link(<UC27.2>)[#underline[\[UC27.2\]]] // Policy dinamiche per branch differenti
-  ],
-  trigger: "Tentativo di merge su branch protetto",
-)[#useCaseDiagram("27", "UC27 - Policy CI/CD pre-merge")]
-
-==== UC27.1: Gestione eccezioni approvate manualmente <UC27.1>
-#useCase(
-  attore: UAA,
-  pre: [
-    - Policy fallite
-  ],
-  post: [
-    - Eccezione approvata manualmente
-  ],
-  scenari: [
-    - L'utente richiede eccezione manuale per il merge
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Fallimento policy",
-)[]
-
-==== UC27.2: Policy dinamiche per branch differenti <UC27.2>
-#useCase(
-  attore: UAA,
-  pre: [
-    - Branch differenti configurati
-  ],
-  post: [
-    - Policy applicate dinamicamente
-  ],
-  scenari: [
-    - Il sistema applica policy specifiche per ciascun branch
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Merge su branch specifico",
-)[]
-
-==== UC27.3: Visualizzazione risultati policy <UC27.3>
-#useCase(
-  attore: UAA,
-  pre: [
-    - Il tentativo di merge è stato valutato dal sistema e il report policy è disponibile
-  ],
-  post: [
-    - L'utente visualizza dettagli sulle policy fallite e le eccezioni proposte
-  ],
-  scenari: [
-    - L'utente apre il pannello merge; il front-end richiede il report policy e mostra info su fallimenti e possibili azioni
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Apertura pannello merge da parte dell'utente",
-)[
-]
-
+#TODO("Funzionakità opzionale da risistemare")
 === UC28: Report programmabili e alert <UC28>
 #useCase(
   attore: UAA,
   pre: [
-    - Configurazione report e canali di notifica impostati
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha configurato report programmati e alert
   ],
   post: [
-    - Il sistema genera report periodici con KPI e alert su regressioni
-    - Gli alert vengono inviati sui canali configurati e gli eventi critici sono registrati per azioni successive
+    - L'utente riceve report periodici configurati
+    - L'utente riceve alert per soglie superate
   ],
   scenari: [
-    - La pianificazione o un evento di sistema attivano la generazione del report
-    - Il sistema elabora KPI e verifica soglie configurate
-    - In caso di alert critici il sistema lo notifica e propone azioni
+    - L'utente configura filtri e template report #link(<UC28.1>)[#underline[\[UC28.1\]]]
+    - L'utente riceve notifiche periodiche con report
+    - L'utente riceve alert per soglie superate
+    - L'utente visualizza il report dettagliato #link(<UC28.3>)[#underline[\[UC28.3\]]]
+    - L'utente configura azioni automatiche per alert critici #link(<UC28.2>)[#underline[\[UC28.2\]]]
   ],
   inclusioni: [
-    - #link(<UC28.1>)[#underline[\[UC28.1\]]] // Filtri e template report
-    - #link(<UC28.3>)[#underline[\[UC28.3\]]] // Visualizzazione report
+    - #link(<UC28.1>)[#underline[\[UC28.1\]]] // Configurazione filtri e template
+    - #link(<UC28.3>)[#underline[\[UC28.3\]]] // Visualizzazione report generato
   ],
   estensioni: [
     - #link(<UC28.2>)[#underline[\[UC28.2\]]] // Azioni automatiche su alert critici
   ],
-  trigger: "Pianificazione temporale o evento di sistema che provoca l'alert",
+  trigger: "Lo scheduler di sistema attiva generazione report in base a pianificazione configurata o evento trigger",
 )[#useCaseDiagram("28", "UC28 - Report programmabili e alert")]
 
-==== UC28.1: Filtri e template report <UC28.1>
+==== UC28.1: Configurazione filtri e template report personalizzati <UC28.1>
 #useCase(
   attore: UAA,
   pre: [
-    - Report configurato 
+    - L'utente sta creando un report programmato #link(<UC28>)[#underline[\[UC28\]]]
   ],
   post: [
-    - Filtri e template applicati
+    - L'utente ha salvato la configurazione del report
+    - L'utente visualizza l'anteprima del report
   ],
   scenari: [
-    - L'utente configura filtri e template per i report
+    - L'utente accede alla configurazione report
+    - L'utente seleziona i filtri da applicare
+    - L'utente sceglie il template di formattazione
+    - L'utente visualizza l'anteprima del report
+    - L'utente salva la configurazione
   ],
   inclusioni: [
     - Nessuna
@@ -3324,20 +2931,24 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Configurazione report",
+  trigger: "L'utente accede alla configurazione filtri e template durante creazione o modifica report programmato",
 )[]
 
-==== UC28.2: Azioni automatiche su alert critici <UC28.2>
+==== UC28.2: Esecuzione azioni automatiche su alert critici <UC28.2>
 #useCase(
   attore: UAA,
   pre: [
-    - Alert critico rilevato
+    - L'utente ha configurato azioni automatiche per alert critici #link(<UC28>)[#underline[\[UC28\]]]
   ],
   post: [
-    - Azioni automatiche eseguite
+    - L'utente riceve notifica delle azioni eseguite
+    - L'utente visualizza il log delle azioni automatiche
   ],
   scenari: [
-    - Il sistema esegue automaticamente azioni su alert critici
+    - L'utente configura le azioni automatiche per alert critici
+    - L'utente riceve notifica di alert critico
+    - L'utente visualizza le azioni automatiche eseguite
+    - L'utente intraprende remediation manuale
   ],
   inclusioni: [
     - Nessuna
@@ -3345,20 +2956,25 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Alert critico",
+  trigger: "Il sistema rileva alert critico durante generazione report e attiva azioni automatiche configurate",
 )[]
 
-==== UC28.3: Visualizzazione report <UC28.3>
+==== UC28.3: Visualizzazione report programmato generato <UC28.3>
 #useCase(
   attore: UAA,
   pre: [
-    - Report programmabile generato e disponibile 
+    - L'utente ha ricevuto notifica di nuovo report #link(<UC28>)[#underline[\[UC28\]]]
   ],
   post: [
-    - L'utente visualizza report periodici, KPI e alert
+    - L'utente visualizza il report completo
+    - L'utente può esportare o condividere il report
   ],
   scenari: [
-    - L'utente apre il pannello report
+    - L'utente riceve la notifica del report
+    - L'utente accede al report tramite link
+    - L'utente visualizza le sezioni del report
+    - L'utente esamina KPI, trend e alert
+    - L'utente esporta o condivide il report
   ],
   inclusioni: [
     - Nessuna
@@ -3366,7 +2982,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Apertura pannello report da parte dell'utente",
+  trigger: "L'utente accede al report programmato dalla notifica ricevuta o dalla sezione reports history",
 )[
 ]
 
@@ -4541,58 +4157,13 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   //UC24
   [#FRObx], [Deve essere suggerito refactoring del codice], [#link(<UC24>)[#underline[\[UC24\]]]],
 
+  [#FRObx],
+  [L'Utente deve poter visualizzare i suggerimenti di refactoring],
+  [#link(<UC24>)[#underline[\[UC24\]]]], 
+
   [#FROpx],
   [I refactor devono poter essere applicati automaticamente sotto supervisione],
   [#link(<UC24>)[#underline[\[UC24\]]], #link(<UC24.2>)[#underline[\[UC24.2\]]]],
-
-  [#FRObx],
-  [L'Utente deve poter visualizzare i suggerimenti di refactoring],
-  [#link(<UC24>)[#underline[\[UC24\]]], #link(<UC24.3>)[#underline[\[UC24.3\]]]],
-
-  //UC25
-  [#FROpx], [Devono poter essere generati changelog e release notes], [#link(<UC25>)[#underline[\[UC25\]]]],
-
-  [#FROpx],
-  [Le note di breaking change devono essere rilevate e segnalate],
-  [#link(<UC25>)[#underline[\[UC25\]]], #link(<UC25.1>)[#underline[\[UC25.1\]]]],
-
-  [#FROpx],
-  [La pubblicazione su GitHub Release deve avvenire automaticamente],
-  [#link(<UC25>)[#underline[\[UC25\]]], #link(<UC25.2>)[#underline[\[UC25.2\]]]],
-
-  [#FROpx],
-  [L'Utente deve poter visualizzare, modificare e approvare il changelog generato],
-  [#link(<UC25>)[#underline[\[UC25\]]], #link(<UC25.3>)[#underline[\[UC25.3\]]]],
-
-  //UC26
-  [#FRObx], [I test e il coverage del codice devono essere analizzati], [#link(<UC26>)[#underline[\[UC26\]]]],
-
-  [#FROpx],
-  [Devono poter essere rieseguiti test intermittenti per conferma],
-  [#link(<UC26>)[#underline[\[UC26\]]], #link(<UC26.1>)[#underline[\[UC26.1\]]]],
-
-  [#FRObx],
-  [Devono essere suggeriti test addizionali per coprire gap di coverage],
-  [#link(<UC26>)[#underline[\[UC26\]]], #link(<UC26.2>)[#underline[\[UC26.2\]]]],
-
-  [#FRObx],
-  [L'Utente deve poter visualizzare il report di test e coverage],
-  [#link(<UC26>)[#underline[\[UC26\]]], #link(<UC26.3>)[#underline[\[UC26.3\]]]],
-
-  //UC27
-  [#FROpx], [Devono poter essere applicate policy CI/CD pre-merge], [#link(<UC27>)[#underline[\[UC27\]]]],
-
-  [#FROpx],
-  [Devono poter essere gestite eccezioni manuali alle policy],
-  [#link(<UC27>)[#underline[\[UC27\]]], #link(<UC27.1>)[#underline[\[UC27.1\]]]],
-
-  [#FROpx],
-  [Devono poter essere applicate policy dinamiche per branch differenti],
-  [#link(<UC27>)[#underline[\[UC27\]]], #link(<UC27.2>)[#underline[\[UC27.2\]]]],
-
-  [#FROpx],
-  [L'Utente deve poter visualizzare i risultati delle policy applicate],
-  [#link(<UC27>)[#underline[\[UC27\]]], #link(<UC27.3>)[#underline[\[UC27.3\]]]],
 
   //UC28
   [#FROpx], [Devono poter essere generati report programmabili e inviati alert], [#link(<UC28>)[#underline[\[UC28\]]]],
