@@ -1290,6 +1290,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente accede alla sezione di visualizzazione dei report di analisi
+    - 
   ],
   post: [
     - L'utente ha visualizzato il report di analisi del repository GitHub selezionato
@@ -4816,7 +4817,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se il trasferimento delle credenziali non avviene],
-  [#link(<UC40>)[#underline[\[UC40\]]], #link(<UC40.1>)[#underline[\[UC40.1\]]]],
+  [#link(<UC40.1>)[#underline[\[UC40\]]], #link(<UC40.1>)[#underline[\[UC40.1\]]]],
 
   //UC41
   [#FRObx],
