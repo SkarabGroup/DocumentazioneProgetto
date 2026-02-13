@@ -1260,43 +1260,19 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 )[
 ]
 
-=== UC5nuovo: Visualizzazione dei repository analizzati <UC5nuovo> #TODO("Sistema nomi")
-#useCase(
-  attore: "Utente avanzato",
-  pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
-  ],
-  post: [
-    - L'utente ha visualizzato tutti i repository analizzati
-  ],
-  scenari: [
-    - L'utente accede alla sezione di visualizzazione dei report di analisi legati ai repository GitHub associati al proprio account
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC5>)[#underline[\[UC5\]]]
-  ],
-  trigger: "L'utente avanzato accede alla funzionalità di visualizzazione dei report di analisi di CodeGuardian",
-)[
-]
-
 === UC5: Visualizzazione singolo report analisi repository GitHub <UC5>
 #useCase(
-  attore: "Utente avanzato",
+  attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente accede alla sezione di visualizzazione dei report di analisi
-    - 
+    - L'utente ha almeno un report di analisi di un repository associato al proprio account
+    - L'utente ha selezionato un repository dalla lista dei repository analizzati associati al proprio account
   ],
   post: [
     - L'utente ha visualizzato il report di analisi del repository GitHub selezionato
   ],
   scenari: [
-    - L'utente seleziona un report di analisi relativo a un repository GitHub #link(<UC5.2>)[#underline[\[UC5.2\]]]
+    //- L'utente seleziona un report di analisi relativo a un repository GitHub #link(<UC5.2>)[#underline[\[UC5.2\]]]
     - L'utente seleziona i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
     - L'utente visualizza il report di analisi del repository GitHub richiesto 
   ],
@@ -1307,7 +1283,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente autenticato accede alla funzionalità di visualizzazione dei report di analisi di CodeGuardian",
+  trigger: "L'utente autorizzato accede alla funzionalità di visualizzazione del report di analisi di CodeGuardian",
 )[
   #useCaseDiagram("5", "UC5 - Visualizzazione report analisi repository GitHub")
 ]
@@ -1419,14 +1395,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente si trova nella sezione di visualizzazione dei report //#link(<UC5.1>)[#underline[\[UC5.1\]]]
-    - L'utente ha selezionato un report di analisi #link(<UC5.2>)[#underline[\[UC5.2\]]]
+    #TODO("Da fare")
   ],
   post: [
     - L'utente ha definito l’insieme di dati da visualizzare nel report di analisi
   ],
   scenari: [
-    - Il sistema presenta le opzioni di visualizzazione dei dati del report
     - L'utente seleziona uno o più dati di interesse
   ],
   inclusioni: [
@@ -1546,6 +1520,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 )[]
 
 ==== UC6.2: Intervallo temporale non valido <UC6.2>
+#TODO("Porta su")
 #useCase(
   attore: UAA,
   pre: [
@@ -1691,6 +1666,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 )[]
 
 === UC8: Visualizzazione tabella comparativa tra report di analisi repository GitHub <UC8>
+#TODO("Inglobare in UC7 e sistemare riferimenti")
 #useCase(
   attore: UAA,
   pre: [
@@ -3889,7 +3865,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'Orchestratore non riceve l'ack di avvenuta ricezione della notifica di fallimento dell'analisi dal Front-end",
 )[]
 
-=== UC36: Salvataggio metadati repository <UC36>
+=== UC36: Salvataggio metadati repository <UC36> #TODO("Probabile eliminazione")
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -3911,7 +3887,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'analisi è stata avviata con successo",
 )[]
 
-=== UC37: Verifica esistenza repository analizzata <UC37>
+=== UC37: Verifica esistenza repository analizzata <UC37> #TODO("Probabile eliminazione")
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -3960,7 +3936,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Nessuna repository analizzata trovata",
 )[]
 
-=== UC38 Salvataggio del report dell'analisi <UC38>
+=== UC38 Salvataggio del report dell'analisi <UC38> #TODO("Probabile eliminazione")
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -4007,7 +3983,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Il sistema Back-end fallisce la procedura di archiviazione",
 )[]
 
-=== UC39 Salvataggio delle metriche aggregate <UC39>
+=== UC39 Salvataggio delle metriche aggregate <UC39> #TODO("Probabile eliminazione")
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -4054,7 +4030,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Il sistema Back-end fallisce la procedura di archiviazione delle metriche",
 )[]
 
-=== UC40 Invio delle credenziali al sistema Back-end <UC40>
+=== UC40 Invio delle credenziali al sistema Back-end <UC40> #TODO("Probabile eliminazione")
 #useCase(
   attore: "Utente non registrato",
   pre: [
