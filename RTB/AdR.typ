@@ -3828,19 +3828,17 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'analisi è stata avviata con successo",
 )[]
 
-=== UC37: Verifica esistenza repository analizzata <UC37> #TODO("Probabile eliminazione")
+=== UC37: Verifica esistenza repository analizzati <UC37> 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L’utente si trova nella sezione di visualizzazione dei report (#link(<UC5>)[#underline[\[UC5\]]])
-    - Il Front-end richiede all'Orchestratore di inviare i dati relativi alle repository analizzate dall'utente
+    - L'orchestratore riceve una richiesta di visualizzazione dei repository analizzati
   ],
   post: [
-    - L'utente visualizza le repository per le quali sono stati svolte delle analisi
+    - L'orchiestratore ha verificato l'esistenza dei repository analizzati e restituite le informazioni relative ad essi
   ],
   scenari: [
-    - L'Orchestratore invia al Front-end la lista delle repository analizzate
-    - Il Front-end mostra all'utente la lista delle repository analizzate
+    - L'Orchestratore verifica l'esistenza dei repository analizzati
   ],
   inclusioni: [
     - Nessuna
@@ -3853,20 +3851,18 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   #useCaseDiagram("37", "UC37 - Verifica esistenza repository analizzata")
 ]
 
-==== UC37.1: Nessuna repository analizzata <UC37.1>
+==== UC37.1: Nessun repository analizzato <UC37.1>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L’utente si trova nella sezione di visualizzazione dei report (#link(<UC5>)[#underline[\[UC5\]]])
-    - Il Front-end richiede all'Orchestratore di inviare i dati relativi alle repository analizzate dall'utente
-    - Non sono presenti repository analizzate per l'utente
+    - L'orchestratore si trova nella verifica di esistenza dei repository analizzati #link(<UC37>)[#underline[\[UC37\]]]
+    - Non sono presenti repository analizzati
   ],
   post: [
-    - L'utente viene informato che non sono presenti repository analizzate
+    - L'orchestratore ha inviato un errore di mancata presenza di repository analizzati
   ],
   scenari: [
-    - L'Orchestratore invia al Front-end un messaggio di errore
-    - Il Front-end mostra all'utente il messaggio di errore
+    - L'orchestratore non trova nessun repository analizzato e procede con l'invio dell'errore
   ],
   inclusioni: [
     - Nessuna
@@ -3874,7 +3870,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Nessuna repository analizzata trovata",
+  trigger: "Nessun repository analizzato trovato",
 )[]
 
 === UC38 Salvataggio del report dell'analisi <UC38> #TODO("Probabile eliminazione")
