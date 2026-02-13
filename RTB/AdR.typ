@@ -3708,7 +3708,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'Orchestratore non riceve l'ack di avvenuta ricezione della notifica di fallimento dell'analisi dal Front-end",
 )[]
 
-=== UC36: Salvataggio metadati repository <UC36> #TODO("Probabile eliminazione")
+/* === UC36: Salvataggio metadati repository <UC36> #TODO("Probabile eliminazione")
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -3728,21 +3728,19 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "L'analisi è stata avviata con successo",
-)[]
+)[] */
 
-=== UC37: Verifica esistenza repository analizzata <UC37> #TODO("Probabile eliminazione")
+=== UC37: Verifica esistenza repository analizzati <UC37> 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L’utente si trova nella sezione di visualizzazione dei report (#link(<UC5>)[#underline[\[UC5\]]])
-    - Il Front-end richiede all'Orchestratore di inviare i dati relativi alle repository analizzate dall'utente
+    - L'orchestratore ha ricevuto una richiesta di visualizzazione dei repository analizzati
   ],
   post: [
-    - L'utente visualizza le repository per le quali sono stati svolte delle analisi
+    - L'orchestratore ha verificato l'esistenza dei repository analizzati e restituisce le informazioni relative ad essi
   ],
   scenari: [
-    - L'Orchestratore invia al Front-end la lista delle repository analizzate
-    - Il Front-end mostra all'utente la lista delle repository analizzate
+    - L'Orchestratore verifica l'esistenza dei repository analizzati
   ],
   inclusioni: [
     - Nessuna
@@ -3752,23 +3750,21 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "Richiesta di visualizzazione delle repository analizzate",
 )[
-  #useCaseDiagram("37", "UC37 - Verifica esistenza repository analizzata")
+  #useCaseDiagram("37", "UC37 - Verifica esistenza repository analizzati")
 ]
 
-==== UC37.1: Nessuna repository analizzata <UC37.1>
+==== UC37.1: Nessun repository analizzato <UC37.1>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L’utente si trova nella sezione di visualizzazione dei report (#link(<UC5>)[#underline[\[UC5\]]])
-    - Il Front-end richiede all'Orchestratore di inviare i dati relativi alle repository analizzate dall'utente
-    - Non sono presenti repository analizzate per l'utente
+    - L'orchestratore si trova nella verifica di esistenza dei repository analizzati #link(<UC37>)[#underline[\[UC37\]]]
+    - Non sono presenti repository analizzati
   ],
   post: [
-    - L'utente viene informato che non sono presenti repository analizzate
+    - L'orchestratore ha inviato un messaggio errore di mancata presenza di repository analizzati
   ],
   scenari: [
-    - L'Orchestratore invia al Front-end un messaggio di errore
-    - Il Front-end mostra all'utente il messaggio di errore
+    - L'orchestratore non trova nessun repository analizzato e procede con l'invio dell'errore
   ],
   inclusioni: [
     - Nessuna
@@ -3776,22 +3772,24 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Nessuna repository analizzata trovata",
+  trigger: "Nessun repository analizzato trovato",
 )[]
 
-=== UC38 Salvataggio del report dell'analisi <UC38> #TODO("Probabile eliminazione")
+=== UC38 Salvataggio del report dell'analisi <UC38> 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - Il report dell'analisi è stato completato e visualizzato dall'orchestratore #link(<UC30>)[#underline[[UC30]]]
+    - Il report dell'analisi è stato completato e è stato preso in carico dall'orchestratore #link(<UC30>)[#underline[[UC30]]]
   ],
   post: [
-    - Il report finale è archiviato nel database del sistema Back-end
+    - L'orchestratore ha archiviato correttamente il report dell'analisi
   ],
   scenari: [
-    - L'orchestratore invia una richiesta di persistenza al sistema Back-end
-    - Il sistema Back-end riceve i dati del report
-    - Il sistema Back-end memorizza il report nel database
+    - L'orchestratore ha avviato la procedura di salvataggio del report dell'analisi
+    #TODO("Servono altri passaggi/inclusioni o va bene così? (direi che non bisgona concentrarsi sul 'come')")
+    //- L'orchestratore invia una richiesta di persistenza al sistema Back-end
+    //- Il sistema Back-end riceve i dati del report
+    //- Il sistema Back-end memorizza il report nel database
   ],
   inclusioni: [
     - Nessuna
@@ -3799,7 +3797,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - #link(<UC38.1>)[#underline[[UC38.1]]]
   ],
-  trigger: "Il report finale è preso in carico dall'orchestratore",
+  trigger: "Il report di analisi finale è preso in carico dall'orchestratore",
 )[
   #useCaseDiagram("38", "UC38 - Salvataggio del report dell'analisi")
 ]
@@ -3808,14 +3806,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'orchestratore ha richiesto l'archiviazione del report ma non avviene correttamente il processo di salvataggio 
+    - L'orchestratore ha avviato l'archiviazione del report #link(<UC38>)[#underline[[UC38]]]
+    - Non avviene correttamente il processo di salvataggio e si genera un errore
   ],
   post: [
-    - Il sistema Front-end è stato informato dall'orchestratore del fallimento del salvataggio
+    - L'orchestratore comunica l'errore di mancato salvataggio del report
   ],
   scenari: [
-    - Il sistema Back-end riscontra un errore interno durante la persistenza dei dati
-    - L'orchestratore notifica il Front-end del mancato salvataggio
+    - L'orchestratore riscontra un errore interno o di connessione al database durante la procedura di salvataggio del report
+    //- Il sistema Back-end riscontra un errore interno durante la persistenza dei dati
+    //- L'orchestratore notifica il Front-end del mancato salvataggio
   ],
   inclusioni: [
     - Nessuna
@@ -3823,22 +3823,21 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il sistema Back-end fallisce la procedura di archiviazione",
+  trigger: "La procedura di salvataggio del report di analisi finale fallisce",
 )[]
 
-=== UC39 Salvataggio delle metriche aggregate <UC39> #TODO("Probabile eliminazione")
+=== UC39 Salvataggio delle metriche aggregate <UC39>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'analisi della repository è completata ed è stato generato il report finale #link(<UC30>)[#underline[[UC30]]]
+    - Il report dell'analisi è stato completato e è stato preso in carico dall'orchestratore #link(<UC30>)[#underline[[UC30]]]
   ],
   post: [
-    - Le metriche aggregate per la visualizzazione di grafici e tabelle sono salvate nel database dal sistema Back-end
+    - L'orchestratore ha archiviato correttamente le metriche aggregate per la visualizzazione di grafici e tabelle
   ],
   scenari: [
-    - L'orchestratore richiede al sistema Back-end la sintesi dei dati raccolti dalle diverse analisi
-    - L'orchestratore elabora i dati dei singoli report degli agenti per calcolare le metriche globali e le invia al Back-end
-    - Il sistema Back-end memorizza le metriche all'interno del database
+    //- L'orchestratore richiede al sistema Back-end la sintesi dei dati raccolti dalle diverse analisi
+    - L'orchestratore elabora i dati dei singoli report degli agenti per calcolare le metriche globali e avvia la procedura di salvataggio
   ],
   inclusioni: [
     - Nessuna
@@ -3846,7 +3845,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - #link(<UC39.1>)[#underline[[UC39.1]]]
   ],
-  trigger: "Il report finale viene generato e completato",
+  trigger: "Il report di analisi finale è preso in carico dall'orchestratore",
 )[
   #useCaseDiagram("39", "UC39 - Salvataggio delle metriche aggregate")
 ]
@@ -3855,14 +3854,15 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'orchestratore ha richiesto il salvataggio delle metriche aggregate ma non avviene correttamente il processo di salvataggio 
+    - L'orchestratore ha avviato la procedura di salvataggio delle metriche aggregate #link(<UC39>)[#underline[[UC39]]]
+    - Non avviene correttamente il processo di salvataggio e si genera un errore
   ],
   post: [
-    - L'orchestratore viene informato dell'impossibilità di salvare le metriche per la dashboard
+    //- L'orchestratore viene informato dell'impossibilità di salvare le metriche per la dashboard
+    - L'orchestratore comunica l'errore di mancato salvataggio delle metriche aggregate
   ],
   scenari: [
-    - Il sistema Back-end riscontra un errore interno o di connessione al database durante il salvataggio dei dati
-    - L'orchestratore notifica il sistema Front-end del mancato aggiornamento delle metriche
+    - L'orchestratore riscontra un errore interno o di connessione al database durante la procedura di salvataggio delle metriche aggregate
   ],
   inclusioni: [
     - Nessuna
@@ -3873,11 +3873,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Il sistema Back-end fallisce la procedura di archiviazione delle metriche",
 )[]
 
-=== UC40 Invio delle credenziali al sistema Back-end <UC40> #TODO("Probabile eliminazione")
+/* === UC40 Invio delle credenziali al sistema Back-end <UC40> #TODO("Probabile eliminazione")
 #useCase(
   attore: "Utente non registrato",
   pre: [
-    - L'utente ha compilato i campi necessari alla registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
+    - L'orchestratore ha ricevuto le credenziali dell'utente durante la sua registrazione #link(<UC1>)[#underline[\[UC1\]]]
   ],
   post: [
     - Il sistema Back-end ha ricevuto correttamente le credenziali per l'elaborazione
@@ -3892,7 +3892,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - #link(<UC40.1>)[#underline[\[UC40.1\]]]
   ],
-  trigger: "L'utente richiede la creazione di un nuovo account CodeGuardian",
+  trigger: "L'orchestratore riceve le credenziali dell'utente non registrato",
 )[
   #useCaseDiagram("40", "UC40 - Invio delle credenziali al sistema Back-end")
 ]
@@ -3917,24 +3917,25 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "Il sistema Back-end non riceve le credenziali a causa di un errore di comunicazione",
-)[]
+)[] */
 
 === UC41 Gestione del codice OAuth GitHub <UC41>
 #useCase(
   attore: "Orchestratore",
   attori_secondari: "GitHub",
   pre: [
-    - L'utente ha collegato il suo account CodeGuardian a GitHub #link(<UC3>)[#underline[[UC3]]]
-    - Il sistema Front-end ha ricevuto il codice temporaneo di autorizzazione (OAuth Code)
+    - L'orchestratore dispone di un codice di autorizzazione temporaneo (OAuth Code)
+    //- L'utente ha collegato il suo account CodeGuardian a GitHub #link(<UC3>)[#underline[[UC3]]]
+    //- Il sistema Front-end ha ricevuto il codice temporaneo di autorizzazione (OAuth Code)
   ],
   post: [
-    - Il sistema Back-end ha ottenuto il token di accesso e lo ha associato al profilo dell'utente
+    - L'orchestratore ha ottenuto il token di accesso permanente e ha abilitato l'integrazione del profilo utente con GitHub
   ],
   scenari: [
-    - Il sistema Front-end comunica al sistema Back-end il codice ricevuto da GitHub
-    - L'orchestratore richiede al sistema GitHub lo scambio del codice con un token di accesso permanente
-    - Il sistema GitHub restituisce il token di accesso e le informazioni del profilo autorizzate
-    - Il sistema Back-end memorizza il token nel database associandolo all'utente
+    - L'orchestratore richiede alla piattaforma esterna GitHub la conversione del codice temporaneo in un token di accesso permanente
+    - L'orchestratore riceve il token di accesso e i relativi permessi di lettura/scrittura
+    - L'orchestratore associa le credenziali ottenute al profilo dell'utente
+    #TODO("Mettiamo un'unica azione generale del tipo 'l'orchestratore svolge tutta la procedura necessaria con la piattaforma GitHub'? anche se molto generale")
   ],
   inclusioni: [
     - Nessuna
@@ -3942,7 +3943,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - #link(<UC41.1>)[#underline[[UC41.1]]]
   ],
-  trigger: "Ricezione del codice di autorizzazione OAuth da parte del Front-end",
+  trigger: "L'orchestratore riceve un codice temporaneo di autorizzazione (OAuth Code)",
 )[
   #useCaseDiagram("41", "UC41 - Gestione del codice OAuth GitHub")
 ]
@@ -3952,14 +3953,17 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Orchestratore",
   attori_secondari: "GitHub",
   pre: [
-    - L'orchestratore ha tentato di scambiare il codice di autorizzazione con il sistema GitHub
+    - L'orchestratore ha tentato di scambiare il codice di autorizzazione con il sistema GitHub #link(<UC41>)[#underline[[UC41]]]
+    - La procedura di scambio del codice è fallita
+    
   ],
   post: [
-    - La procedura di collegamento viene interrotta e il sistema Front-end viene notificato dell'errore da parte dell'orchestratore
+    - L'orchestratore interrompe la procedura di collegamento con GitHub e comunica l'errore
   ],
   scenari: [
-    - Il sistema GitHub restituisce un errore (es. codice scaduto o non valido)
-    - L'orchestratore notifica il sistema Front-end del fallimento della procedura di collegamento
+    - Il sistema GitHub rifiuta lo scambio del codice (es. codice scaduto o non valido) o la connessione fallisce
+    //- Il sistema GitHub restituisce un errore (es. codice scaduto o non valido)
+    //- L'orchestratore notifica il sistema Front-end del fallimento della procedura di collegamento
   ],
   inclusioni: [
     - Nessuna
@@ -3969,12 +3973,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "Il sistema GitHub rifiuta lo scambio del codice o la connessione fallisce",
 )[]
-
-#TODO("Valutare con il gruppo l'UC41")
-
-#TODO(
-  "UC42 Validazione delle credenziali dell'utente. Sinceramente eliminerei questo UC perchè la validazione è già presente nelle inclusioni di UC1 e UC2",
-)
 
 === UC43 Visualizzazione ranking dei repository analizzati <UC43>
 #useCase(
@@ -4656,13 +4654,13 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC39>)[#underline[\[UC39\]]], #link(<UC39.1>)[#underline[\[UC39.1\]]]],
 
   //UC40
-  [#FRObx],
+/*   [#FRObx],
   [Il sistema Front-end deve poter trasmettere in modo sicuro le credenziali al sistema Back-end],
   [#link(<UC40>)[#underline[\[UC40\]]]],
 
   [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se il trasferimento delle credenziali non avviene],
-  [#link(<UC40.1>)[#underline[\[UC40\]]], #link(<UC40.1>)[#underline[\[UC40.1\]]]],
+  [#link(<UC40.1>)[#underline[\[UC40\]]], #link(<UC40.1>)[#underline[\[UC40.1\]]]], */
 
   //UC41
   [#FRObx],
