@@ -3832,7 +3832,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'orchestratore riceve una richiesta di visualizzazione dei repository analizzati
+    - L'orchestratore ha ricevuto una richiesta di visualizzazione dei repository analizzati
   ],
   post: [
     - L'orchestratore ha verificato l'esistenza dei repository analizzati e restituisce le informazioni relative ad essi
@@ -3908,7 +3908,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Non avviene correttamente il processo di salvataggio e si genera un errore
   ],
   post: [
-    - L'orchestratore ha inviato un messaggio di errore di mancato salvataggio del report
+    - L'orchestratore comunica l'errore di mancato salvataggio del report
   ],
   scenari: [
     - L'orchestratore riscontra un errore interno o di connessione al database durante la procedura di salvataggio del report
@@ -3924,19 +3924,18 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "La procedura di salvataggio del report di analisi finale fallisce",
 )[]
 
-=== UC39 Salvataggio delle metriche aggregate <UC39> #TODO("Probabile eliminazione")
+=== UC39 Salvataggio delle metriche aggregate <UC39>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'analisi della repository è completata ed è stato generato il report finale #link(<UC30>)[#underline[[UC30]]]
+    - Il report dell'analisi è stato completato e è stato preso in carico dall'orchestratore #link(<UC30>)[#underline[[UC30]]]
   ],
   post: [
-    - Le metriche aggregate per la visualizzazione di grafici e tabelle sono salvate nel database dal sistema Back-end
+    - L'orchestratore ha archiviato correttamente le metriche aggregate per la visualizzazione di grafici e tabelle
   ],
   scenari: [
-    - L'orchestratore richiede al sistema Back-end la sintesi dei dati raccolti dalle diverse analisi
-    - L'orchestratore elabora i dati dei singoli report degli agenti per calcolare le metriche globali e le invia al Back-end
-    - Il sistema Back-end memorizza le metriche all'interno del database
+    //- L'orchestratore richiede al sistema Back-end la sintesi dei dati raccolti dalle diverse analisi
+    - L'orchestratore elabora i dati dei singoli report degli agenti per calcolare le metriche globali e avvia la procedura di salvataggio
   ],
   inclusioni: [
     - Nessuna
@@ -3944,7 +3943,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - #link(<UC39.1>)[#underline[[UC39.1]]]
   ],
-  trigger: "Il report finale viene generato e completato",
+  trigger: "Il report di analisi finale è preso in carico dall'orchestratore",
 )[
   #useCaseDiagram("39", "UC39 - Salvataggio delle metriche aggregate")
 ]
@@ -3953,14 +3952,15 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'orchestratore ha richiesto il salvataggio delle metriche aggregate ma non avviene correttamente il processo di salvataggio 
+    - L'orchestratore ha avviato la procedura di salvataggio delle metriche aggregate #link(<UC39>)[#underline[[UC39]]]
+    - Non avviene correttamente il processo di salvataggio e si genera un errore
   ],
   post: [
-    - L'orchestratore viene informato dell'impossibilità di salvare le metriche per la dashboard
+    //- L'orchestratore viene informato dell'impossibilità di salvare le metriche per la dashboard
+    - L'orchestratore comunica l'errore di mancato salvataggio delle metriche aggregate
   ],
   scenari: [
-    - Il sistema Back-end riscontra un errore interno o di connessione al database durante il salvataggio dei dati
-    - L'orchestratore notifica il sistema Front-end del mancato aggiornamento delle metriche
+    - L'orchestratore riscontra un errore interno o di connessione al database durante la procedura di salvataggio delle metriche aggregate
   ],
   inclusioni: [
     - Nessuna
@@ -3971,11 +3971,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Il sistema Back-end fallisce la procedura di archiviazione delle metriche",
 )[]
 
-=== UC40 Invio delle credenziali al sistema Back-end <UC40> #TODO("Probabile eliminazione")
+/* === UC40 Invio delle credenziali al sistema Back-end <UC40> #TODO("Probabile eliminazione")
 #useCase(
   attore: "Utente non registrato",
   pre: [
-    - L'utente ha compilato i campi necessari alla registrazione a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
+    - L'orchestratore ha ricevuto le credenziali dell'utente durante la sua registrazione #link(<UC1>)[#underline[\[UC1\]]]
   ],
   post: [
     - Il sistema Back-end ha ricevuto correttamente le credenziali per l'elaborazione
@@ -3990,7 +3990,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - #link(<UC40.1>)[#underline[\[UC40.1\]]]
   ],
-  trigger: "L'utente richiede la creazione di un nuovo account CodeGuardian",
+  trigger: "L'orchestratore riceve le credenziali dell'utente non registrato",
 )[
   #useCaseDiagram("40", "UC40 - Invio delle credenziali al sistema Back-end")
 ]
@@ -4015,7 +4015,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "Il sistema Back-end non riceve le credenziali a causa di un errore di comunicazione",
-)[]
+)[] */
 
 === UC41 Gestione del codice OAuth GitHub <UC41>
 #useCase(
@@ -4724,13 +4724,13 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC39>)[#underline[\[UC39\]]], #link(<UC39.1>)[#underline[\[UC39.1\]]]],
 
   //UC40
-  [#FRObx],
+/*   [#FRObx],
   [Il sistema Front-end deve poter trasmettere in modo sicuro le credenziali al sistema Back-end],
   [#link(<UC40>)[#underline[\[UC40\]]]],
 
   [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se il trasferimento delle credenziali non avviene],
-  [#link(<UC40.1>)[#underline[\[UC40\]]], #link(<UC40.1>)[#underline[\[UC40.1\]]]],
+  [#link(<UC40.1>)[#underline[\[UC40\]]], #link(<UC40.1>)[#underline[\[UC40.1\]]]], */
 
   //UC41
   [#FRObx],
