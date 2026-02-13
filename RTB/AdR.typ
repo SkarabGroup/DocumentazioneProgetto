@@ -2,8 +2,6 @@
 #import "../lib/variables.typ": *
 #import "../lib/useCaseUtil.typ": *
 
-#let UAA = "Utente autorizzato"
-
 //Note sul versionamento
 /*
   x.y.z
@@ -1183,7 +1181,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC4.3.1: Ultimo report up-to-date <UC4.3.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'utente ha inserito un URL del repository GitHub corretto #link(<UC4.1>)[#underline[\[UC4.1\]]]
@@ -1203,7 +1201,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC4.3.2: Ultimo report in elaborazione <UC4.3.2>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'utente ha inserito un URL del repository GitHub corretto #link(<UC4.1>)[#underline[\[UC4.1\]]]
@@ -1311,7 +1309,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC6.1: Selezione sezioni specifiche da visualizzare nel report <UC6.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente si trova nella sezione di visualizzazione dei report #link(<UC6>)[#underline[\[UC6\]]]
   ],
@@ -1331,7 +1329,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC6.1.1: Nessun dato specifico selezionato <UC6.1.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente si trova nella sezione di visualizzazione dei report #link(<UC6>)[#underline[\[UC6\]]]
     - L'utente ha provato a procedere senza selezionare alcuna sezione
@@ -1353,7 +1351,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC6.2: Visualizzazione area metadati di un report di analisi repository GitHub <UC6.2>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente ha selezionato le sezioni specifiche da visualizzare nel report #link(<UC6.1>)[#underline[\[UC6.1\]]] 
   ],
@@ -1377,7 +1375,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC6.2.1: Visualizzazione data report analisi repository GitHub <UC6.2.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente è all'interno dell'area metadati del report di analisi repository GitHub #link(<UC6.2>)[#underline[\[UC6.2\]]]
   ],
@@ -1392,7 +1390,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC6.2.2: Visualizzazione commit analizzato nel report di analisi repository GitHub <UC6.2.2>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente è all'interno dell'area metadati del report di analisi repository GitHub #link(<UC6.2>)[#underline[\[UC6.2\]]]
   ],
@@ -1407,7 +1405,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC6.2.3: Visualizzazione richiedente report di analisi repository GitHub <UC6.2.3>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente è all'interno dell'area metadati del report di analisi repository GitHub #link(<UC6.2>)[#underline[\[UC6.2\]]]
   ],
@@ -1422,7 +1420,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC6.3: Visualizzazione delle sezioni scelte del report di analisi <UC6.3> 
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente ha selezionato un insieme non vuoto di dati da visualizzare #link(<UC6.1>)[#underline[\[UC6.1\]]]
   ],
@@ -1529,18 +1527,17 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 )[]
 
 === UC8: Visualizzazione delle metriche comparative tra report di analisi di un repository <UC8>
-=== UC8: Visualizzazione grafico comparativo tra report di analisi repository GitHub 
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC6>)[#underline[\[UC6\]]]
     - L'utente ha selezionato l'intervallo temporale per il confronto con i report passati #link(<UC7>)[#underline[\[UC7\]]]
   ],
   post: [
-    - L'utente ha visualizzato il grafico comparativo tra report di analisi repository GitHub
+    - L'utente ha visualizzato le metriche comparative (grafico e tabella) tra report di analisi repository GitHub
   ],
   scenari: [
-    - L'utente visualizza il grafico comparativo tra report di analisi repository GitHub
+    - L'utente accede alla sezione di visualizzazione delle metriche comparative tra report di analisi repository GitHub
   ],
   inclusioni: [
     - Nessuna
@@ -1548,35 +1545,13 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente interagisce con la sezione di visualizzazione del grafico comparativo tra report di analisi repository GitHub durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian",
-)[]
-
-=== UC8: Visualizzazione tabella comparativa tra report di analisi repository GitHub
-#TODO("Inglobare in UC8 grafico e tabella e sistemare riferimenti")
-#useCase(
-  attore: UAA,
-  pre: [
-    - L'utente ha selezionato l'intervallo temporale per il confronto con i report passati #link(<UC7>)[#underline[\[UC7\]]]
-  ],
-  post: [
-    - L'utente ha visualizzato la tabella comparativa tra report di analisi repository GitHub
-  ],
-  scenari: [
-    - L'utente visualizza la tabella comparativa tra report di analisi repository GitHub
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente interagisce con la sezione di visualizzazione della tabella comparativa tra report di analisi repository GitHub durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian",
+  trigger: "L'utente richiede la visualizzazione delle metriche comparative tra report di analisi del repository",
 )[]
 
 #TODO("Sistemare diagrammi e requisiti per UC9-11")
 === UC9: Visualizzazione sezione analisi del codice del report selezionato <UC9>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente ha selezionato la sezione di codice tra le sezioni disponibili del report di analisi #link(<UC6.3>)[#underline[\[UC6.3\]]]
     - L'utente sta visualizzando la sezione di codice del report di analisi
@@ -1604,7 +1579,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC9.1: Visualizzazione sezione analisi statica del codice <UC9.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta visualizzando la sezione di codice del report di analisi
   ],
@@ -1619,7 +1594,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC9.2: Visualizzazione sezione test di unità del codice <UC9.2>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta visualizzando la sezione di codice del report di analisi
   ],
@@ -1634,7 +1609,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC9.3: Visualizzazione remediation individuate nella sezione di analisi del codice <UC9.3>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta visualizzando la sezione di codice del report di analisi
   ],
@@ -1652,7 +1627,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC9.3.1: Nessuna remediation individuata nella sezione di analisi del codice <UC9.3.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta visualizzando la sezione di codice del report di analisi
     - Il report non contiene alcuna remediation per tale sezione
@@ -1668,7 +1643,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC10: Visualizzazione sezione analisi della sicurezza del report selezionato <UC10>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente ha selezionato la sezione di sicurezza tra le sezioni disponibili del report di analisi #link(<UC6.3>)[#underline[\[UC6.3\]]]
     - L'utente sta visualizzando la sezione di sicurezza del report di analisi
@@ -1694,7 +1669,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC10.1: Visualizzazione sezione analisi delle librerie e dipendenze del codice <UC10.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta visualizzando la sezione di sicurezza del report di analisi
   ],
@@ -1709,7 +1684,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC10.2: Visualizzazione sezione analisi della sicurezza OWASP <UC10.2>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta visualizzando la sezione di sicurezza del report di analisi
   ],
@@ -1724,7 +1699,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC10.3: Visualizzazione remediation individuate nella sezione di sicurezza <UC10.3>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta visualizzando la sezione di codice del report di analisi
   ],
@@ -1742,7 +1717,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC10.3.1: Nessuna remediation individuata nella sezione di sicurezza <UC10.3.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta visualizzando la sezione di sicurezza del report di analisi
     - Il report non contiene alcuna remediation per tale sezione
@@ -1758,7 +1733,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC11: Visualizzazione sezione analisi della documentazione del report selezionato <UC11>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente ha selezionato la sezione di documentazione tra le sezioni disponibili del report di analisi #link(<UC6.3>)[#underline[\[UC6.3\]]]
     - L'utente sta visualizzando la sezione di documentazione del report di analisi
@@ -1784,7 +1759,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC11.1: Visualizzazione sezione errori di spelling <UC11.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta visualizzando la sezione di documentazione del report di analisi
   ],
@@ -1799,7 +1774,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC11.2: Visualizzazione completezza della documentazione nei confronti del codice <UC11.2>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta visualizzando la sezione di documentazione del report di analisi
   ],
@@ -1814,7 +1789,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC11.3: Visualizzazione remediation individuate nella sezione di documentazione <UC11.3>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta visualizzando la sezione di documentazione del report di analisi
   ],
@@ -1832,7 +1807,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC11.3.1: Nessuna remediation individuata nella sezione di documentazione <UC11.3.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta visualizzando la sezione di documentazione del report di analisi
     - Il report non contiene alcuna remediation per tale sezione
@@ -1850,7 +1825,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC13: Disconnessione account GitHub da CodeGuardian<UC13>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato con GitHub",
   pre: [
     - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub
       #link(<UC3>)[#underline[\[UC3\]]]
@@ -1873,7 +1848,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC13.1: Selezione tasto Disconnetti <UC13.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente ha selezionato la sezione di disconnessione dell'account GitHub dall'applicazione CodeGuardian
   ],
@@ -1895,7 +1870,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC13.1.1: Conferma disconnessione account<UC13.1.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     //- L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
     //- L'utente ha selezionato la sezione di disconnessione dell'account GitHub dal sistema CodeGuardian #link(<UC13>)[#underline[\[UC13\]]]
@@ -1919,7 +1894,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC14: Esportazione report di analisi repository GitHub <UC14>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
@@ -1943,7 +1918,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC14.1: Selezione formato di esportazione <UC14.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente si trova nella sezione formati all'interno della visualizzazione del report
   ],
@@ -1965,7 +1940,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC14.1.1: Nessun formato selezionato <UC14.1.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     //- L'utente sta visualizzando il report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]]
     //- L'utente sta eseguendo la procedura di esportazione #link(<UC14>)[#underline[\[UC14\]]]
@@ -1988,7 +1963,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC14.2: Conferma esportazione <UC14.2>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     //- L'utente sta visualizzando il report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]]
     //- L'utente sta eseguendo la procedura di esportazione #link(<UC14>)[#underline[\[UC14\]]]
@@ -2011,7 +1986,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC15: Modifica password profilo <UC15>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente vuole modificare la password del proprio account
@@ -2041,7 +2016,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC15.1 Inserimento della password corrente <UC15.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente è nella sezione di Modifica Password e si trova nel campo "password corrente"
   ],
@@ -2064,7 +2039,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC15.1.1 Password corrente non inserita <UC15.1.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente è nella sezione di Modifica Password, si trova nel campo "password corrente" e non inserisce nulla
   ],
@@ -2085,7 +2060,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC15.1.2 Password corrente errata <UC15.1.2>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente ha inserito la password corrente sbagliata nell'apposito campo del form "password corrente"
   ],
@@ -2107,7 +2082,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC15.2 Inserimento della nuova password <UC15.2>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente è nella sezione di Modifica Password e si trova nel campo "nuova password"
   ],
@@ -2130,7 +2105,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC15.2.1 Nessuna nuova password inserita <UC15.2.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente è nella sezione di Modifica Password, si trova nel campo "nuova password" e non inserisce nulla
   ],
@@ -2151,7 +2126,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC15.2.2 Nuova password non conforme allo standard adottato <UC15.2.2>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente ha inserito la nuova password nell'apposito campo del form "nuova password" ma non segue lo standard adottato
   ],
@@ -2172,7 +2147,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC15.2.3 Nuova password uguale alla precedente <UC15.2.3>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente ha inserito la nuova password nell'apposito campo del form "nuova password" ma è uguale alla password corrente
   ],
@@ -2193,7 +2168,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC15.3 Conferma modifica password <UC15.3>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
     - L'utente ha inserito una nuova password valida nell'apposito campo del form #link(<UC15.2>)[#underline[\[UC15.2\]]]
@@ -2215,7 +2190,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC15.4 Ricezione dell'avvenuta modifica password <UC15.4>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - La conferma della modifica password è andata a buon fine #link(<UC15.3>)[#underline[\[UC15.3\]]]
   ],
@@ -2237,7 +2212,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #TODO("Sistema qui in modo che le remediation siano distribuite nelle varie sezioni")
 === UC16: Visualizzazione suggerimenti di remediation <UC16>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     //- L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
     //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation
@@ -2261,7 +2236,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC16.1: Visualizzazione lista issue identificate <UC16.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     //- L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]] già presenti in UC16
     //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
@@ -2284,7 +2259,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC16.1.1: Nessuna issue identificata nel repository <UC16.1.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     //- L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
     //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
@@ -2307,7 +2282,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC16.2: Visualizzazione dettaglio suggerimento di remediation <UC16.2>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     //- L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
     //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
@@ -2585,7 +2560,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 /// USE CASE DELLE ANALISI
 === UC19: Analisi vulnerabilità dipendenze <UC19>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente sta visualizzando un report di analisi #link(<UC6>)[#underline[\[UC6\]]]
@@ -2614,7 +2589,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC19.1: Accettazione remediation vulnerabilità dipendenze <UC19.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta visualizzando il report di analisi vulnerabilità dipendenze #link(<UC19>)[#underline[\[UC19\]]]
     - L'utente ha esaminato le remediation proposte
@@ -2640,7 +2615,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC19.2: Rifiuto remediation vulnerabilità dipendenze <UC19.2>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta visualizzando il report di analisi vulnerabilità dipendenze #link(<UC19>)[#underline[\[UC19\]]]
     - L'utente ha esaminato le remediation proposte
@@ -2665,7 +2640,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC20: Rilevamento segreti e token <UC20>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente si trova nella sezione di analisi sicurezza di un report #link(<UC10>)[#underline[\[UC10\]]]
@@ -2693,7 +2668,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC20.1: Marcatura falsi positivi rilevamento segreti <UC20.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta visualizzando il report di rilevamento segreti e token #link(<UC20>)[#underline[\[UC20\]]]
     - L'utente ha esaminato i rilevamenti
@@ -2719,7 +2694,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC20.2: Configurazione revoca automatica segreti compromessi <UC20.2>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta visualizzando il report di rilevamento segreti e token #link(<UC20>)[#underline[\[UC20\]]]
     - L'utente ha esaminato i segreti rilevati
@@ -2746,7 +2721,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC20.3: Visualizzazione report segreti e token rilevati <UC20.3>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente ha richiesto la scansione segreti e token #link(<UC20>)[#underline[\[UC20\]]]
     - L'utente si trova nella sezione di analisi sicurezza
@@ -2773,7 +2748,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC21: Verifica conformità licenze <UC21>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente si trova nella sezione di compliance e governance del pannello report
@@ -2800,7 +2775,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC23: Monitor qualità del codice <UC23>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha selezionato il report #link(<UC6>)[#underline[\[UC6\]]]
@@ -2829,7 +2804,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC24: Suggerimenti di refactor <UC24>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha selezionato il repository da analizzare #link(<UC4>)[#underline[\[UC4\]]]
@@ -2854,7 +2829,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC24.2: Applicazione automatica refactor con supervisione <UC24.2>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta visualizzando i suggerimenti di refactor #link(<UC24>)[#underline[\[UC24\]]]
     - L'utente ha selezionato refactor da applicare
@@ -2882,7 +2857,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #TODO("Funzionakità opzionale da risistemare")
 === UC28: Report programmabili e alert <UC28>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha configurato report programmati e alert
@@ -2910,7 +2885,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC28.1: Configurazione filtri e template report personalizzati <UC28.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta creando un report programmato #link(<UC28>)[#underline[\[UC28\]]]
   ],
@@ -2936,7 +2911,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC28.2: Esecuzione azioni automatiche su alert critici <UC28.2>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente ha configurato azioni automatiche per alert critici #link(<UC28>)[#underline[\[UC28\]]]
   ],
@@ -2961,7 +2936,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC28.3: Visualizzazione report programmato generato <UC28.3>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente ha ricevuto notifica di nuovo report #link(<UC28>)[#underline[\[UC28\]]]
   ],
@@ -3203,7 +3178,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC32 L'utente viene notificato della disponibilità di visualizzare il nuovo report id anlisi<UC32>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - Il sistema Front-end ha ricevuto correttamente il report di analisi da parte dell'orchestratore #link(<UC31>)[#underline[\[UC31\]]]
   ],
@@ -3592,7 +3567,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC43 Visualizzazione ranking dei repository analizzati <UC43>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]] 
@@ -3618,7 +3593,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC43.1 Nessun repository analizzato <UC43.1>
 #useCase(
-  attore: UAA,
+  attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]] 
@@ -3950,17 +3925,18 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [L'Utente deve ricevere un messaggio di errore se l'intervallo temporale è troppo ampio],
   [#link(<UC7.4>)[#underline[\[UC7.4\]]]],
 
-  // UC8 (EX UC7)
+  // UC8
   [#FRObx], 
-  [L'Utente deve poter visualizzare un grafico comparativo tra report], 
+  [L'utente deve poter visualizzare un grafico comparativo per monitorare l'andamento delle metriche tra i diversi report selezionati.], 
   [#link(<UC8>)[#underline[\[UC8\]]]],
 
   [#FRObx],
-  [L'Utente deve poter interagire con il grafico per visualizzare dettagli specifici di ciascun punto dati],
+  [Il sistema deve permettere l'interazione con il grafico per visualizzare i dettagli puntuali di ogni analisi.],
   [#link(<UC8>)[#underline[\[UC8\]]]],
 
-  // UC8
-  [#FRObx], [L'Utente deve poter visualizzare una tabella comparativa tra report], [#link(<UC8>)[#underline[\[UC8\]]]],
+  [#FRObx], 
+  [L'utente deve poter visualizzare una tabella comparativa che riassuma i dati dei report selezionati per un confronto testuale.], 
+  [#link(<UC8>)[#underline[\[UC8\]]]],
 
   [#FRObx],
   [L'utente, all'interno della tabella, deve poter visualizzare indicatori di variazione rispetto al report precedente],
