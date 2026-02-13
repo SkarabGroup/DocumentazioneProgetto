@@ -11,7 +11,7 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.8.1"
+#let versione = "v0.9.0"
 #set heading(numbering: "1.1.1")
 
 #titlePage("Norme di Progetto", versione)
@@ -21,7 +21,7 @@
   (
     "2026/02/13",
     "0.9.0",
-    "Ampliamento sezioni Verifica e Validazione",
+    "Ampliamento sezioni Verifica e Validazione. Criteri di Verifica Processi di Supporto e Sviluppo",
     members.alice,
   ),
   (
@@ -692,7 +692,74 @@ Un documento di fornitura è considerato conforme alle Norme di Progetto se risu
 
 Il mancato rispetto di uno o più criteri di verifica specifici, inclusa la struttura minima obbligatoria, comporta automaticamente la non conformità del documento ai fini del Processo di Fornitura.
 
-#TODO("Avviata la stesura, manca Processo di Sviluppo, di Supporto e Organizzativi")
+===== Processo di Sviluppo
+Il Processo di Sviluppo disciplina la realizzazione tecnica del prodotto software e la produzione degli artefatti di progettazione e implementazione.
+
+Gli artefatti prodotti dal Processo di Sviluppo normati dalle presenti Norme di Progetto sono:
+- Codice sorgente;
+- Test;
+- Specifiche tecniche e documentazione di progettazione (quando applicabile).
+
+====== Codice Sorgente
+Il codice sorgente costituisce l'implementazione del sistema software e deve rispettare gli standard di codifica definiti nella sezione #underline[Processo di Sviluppo].
+
+====== Test
+I Test verificano la correttezza e la conformità del codice rispetto ai requisiti e devono seguire la nomenclatura e le tipologie definite nella sezione #underline[Qualifica].
+
+====== Criteri di Verifica del Processo di Sviluppo
+Il Processo di Sviluppo è considerato conforme alle Norme di Progetto se risultano soddisfatte tutte le seguenti condizioni:
+
+- [ ] il codice sorgente rispetta le convenzioni di nomenclatura definite;
+- [ ] ogni funzione/metodo è documentato con commenti che descrivono scopo, parametri e valore di ritorno;
+- [ ] il codice è organizzato in moduli e cartelle secondo la struttura definita;
+- [ ] non sono presenti funzioni lambda complesse;
+- [ ] ogni funzione ha una singola responsabilità (_Single Responsibility Principle_);
+- [ ] il codice che implementa requisiti include commenti di tracciabilità;
+- [ ] i test seguono la nomenclatura definita;
+- [ ] il codice è stato sottoposto a verifica secondo le procedure definite nella sezione #underline[Qualifica].
+
+Il mancato rispetto di uno o più criteri di verifica comporta la non conformità del processo e richiede azioni correttive prima dell'integrazione nel branch principale.
+
+===== Processi di Supporto
+I Processi di Supporto forniscono le attività trasversali necessarie a garantire la qualità e la tracciabilità del progetto.
+
+I processi di supporto normati dalle presenti Norme di Progetto sono:
+- Documentazione;
+- Qualifica (Verifica e Validazione).
+
+====== Processo di Documentazione
+Il Processo di Documentazione disciplina la produzione, gestione e versionamento di tutti i documenti di progetto.
+
+====== Processo di Qualifica
+Il Processo di Qualifica garantisce che il prodotto software e la documentazione soddisfino gli standard di qualità definiti attraverso le attività di Verifica e Validazione.
+
+====== Criteri di Verifica dei Processi di Supporto
+I Processi di Supporto sono considerati conformi alle Norme di Progetto se risultano soddisfatte tutte le seguenti condizioni:
+
+*Per il Processo di Documentazione:*
+
+- [ ] ogni documento è redatto in formato Typst e archiviato nel repository del progetto;
+- [ ] ogni documento segue il ciclo di vita definito: Creazione/Modifica → Verifica → Approvazione;
+- [ ] il versionamento segue lo schema `x.y.z` con le regole definite;
+- [ ] ogni documento include una tabella di cronologia delle versioni con data, versione, descrizione, redattori e verificatori;
+- [ ] ogni documento è associato a task su Jira per tracciabilità;
+- [ ] i documenti sono organizzati in cartelle secondo la struttura del repository definita;
+- [ ] il sistema di branching è rispettato;
+- [ ] il branch `develop` è protetto e richiede Pull Request con revisione;
+- [ ] nessun documento viene integrato in `main` senza aver superato la verifica;
+- [ ] ogni Pull Request è approvata da un Verificatore diverso dal redattore;
+
+*Per il Processo di Qualifica:*
+
+- [ ] tutte le attività di verifica e validazione sono documentate nel Piano di Qualifica;
+- [ ] ogni artefatto è sottoposto a verifica prima dell'integrazione in `main`;
+- [ ] i test seguono la nomenclatura e le tipologie definite;
+- [ ] le attività di validazione includono tracciamento requisiti e test di accettazione;
+- [ ] gli esiti di verifica e validazione sono tracciati e aggiornati nel Piano di Qualifica.
+
+Il mancato rispetto di uno o più criteri comporta la non conformità del processo e richiede azioni correttive.
+
+#TODO("Avviata la stesura, mancano Organizzativi")
 
 === Piano di Qualifica
 
@@ -1195,7 +1262,7 @@ Dal momento che SkarabGroup utilizza Jira per la gestione delle attività di pro
 Alla fine di ogni sprint, i documenti completati e verificati devono essere uniti nel ramo `develop` tramite pull request, seguendo la procedura di revisione stabilita. questo permette di iniziare lo sprint successivo con una base documentale aggiornata e approvata in quanto, la p[rima attivitá di ogni sprint é quella di fare un pull del develop sul branch del documento a cui si sta lavorando.
 
 == Qualifica
-Il processo di *Qualifica* garantisce che il prodotto software e la documentazione soddisfino gli standard di qualità definiti e i requisiti specificati. Tale processo si articola nelle attività di Verifica e Validazione, complementari ma distinte negli obiettivi.
+Il processo di *Qualifica* garantisce che il prodotto software e la documentazione soddisfino gli standard di qualità definiti e i requisiti specificati. Tale processo si articola nelle attività di _Verifica_ e _Validazione_, complementari ma distinte negli obiettivi.
 
 La Qualifica risponde a due domande fondamentali:
 - *Verifica*: _"Did I build the system right?"_ (Ho costruito correttamente il sistema?);
@@ -1287,6 +1354,12 @@ Data l'elevata quantità di artefatti da verificare nel progetto _Code Guardian_
 - permette la creazione di checklist riutilizzabili e standardizzate;
 - garantisce uniformità nei controlli;
 - riduce i tempi di verifica mantenendo l'efficacia.
+
+Il team applica l'analisi statica mediante:
+- *Review manuale del codice*.
+- *Strumenti automatici di linting*:
+  - ESLint per codice JavaScript/TypeScript;
+  - Pylint/Black per codice Python.
 
 ====== Analisi Dinamica
 L'*Analisi Dinamica* prevede l'esecuzione dell'oggetto da verificare al fine di rilevare *failure* (comportamenti non conformi alle aspettative) e identificare i relativi *fault* (difetti nel codice che causano le failure).
@@ -1550,24 +1623,3 @@ La seguente tabella riporta le fonti utilizzate per la formazione dei membri del
 
 Inoltre l'azienda proponente Var group ha tenuto delle lezioni specifiche per ognuna delle tecnologie necessarie allo sviluppo del progetto e ha dato disponibilitá per la risoluzione di dubbi e domande.
 
-== Strategie di Verifica
-- *Analisi Statica*: Review manuale del codice e uso di #def("linter") (#def("ESLint") per JS/TS, Pylint/Black per #def("Python")).
-- *Analisi Dinamica*: Esecuzione della suite di test.
-- *Test*:
-  - *Unit Test*: Verifica di singole unità di codice.
-  - *Integration Test*: Verifica delle interazioni tra moduli.
-  - *System Test*: Verifica del sistema completo rispetto ai requisiti.
-
-== Software Quality Assurance #def("SQA")
-La #def("SQA") monitora tutti i processi per garantire conformità agli standard (es. #def("ISO 9001"), #def("ISO 25010")). Include:
-- *Politiche*: Definizione di procedure per ogni fase (requisiti, design, testing).
-- *Audit*: Revisioni periodiche per identificare non conformità.
-- *Attività*: Review di documenti, controllo qualità codice, #def("Gestione Rischi").
-
-== Validazione
-La validazione conferma che il prodotto soddisfi le esigenze degli utenti.
-- *#def("Test di Accettazione")*: Verifica finale con stakeholder per requisiti non funzionali (es. usabilità, prestazioni).
-- *Feedback Utente*: Raccolta di input durante demo o beta testing.
-- *Allineamento Obiettivi*: Verifica rispetto agli obiettivi di progetto (es. automazione analisi qualità repository).
-
-#TODO("Riscrivere in modo piú prolisso la verifica")
