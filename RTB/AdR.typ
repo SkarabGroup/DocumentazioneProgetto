@@ -13,7 +13,7 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.44.5"
+#let versione = "v0.44.6"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
@@ -21,7 +21,7 @@
   (
     "2026/02/13",
     "0.44.6",
-    "Fix UC5",
+    "Fix UC5, UC9-11",
     members.antonio
   ),
   (
