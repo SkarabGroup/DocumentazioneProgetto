@@ -3806,7 +3806,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'Orchestratore non riceve l'ack di avvenuta ricezione della notifica di fallimento dell'analisi dal Front-end",
 )[]
 
-=== UC36: Salvataggio metadati repository <UC36> #TODO("Probabile eliminazione")
+/* === UC36: Salvataggio metadati repository <UC36> #TODO("Probabile eliminazione")
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -3826,7 +3826,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "L'analisi è stata avviata con successo",
-)[]
+)[] */
 
 === UC37: Verifica esistenza repository analizzati <UC37> 
 #useCase(
@@ -3835,7 +3835,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'orchestratore riceve una richiesta di visualizzazione dei repository analizzati
   ],
   post: [
-    - L'orchiestratore ha verificato l'esistenza dei repository analizzati e restituite le informazioni relative ad essi
+    - L'orchestratore ha verificato l'esistenza dei repository analizzati e restituisce le informazioni relative ad essi
   ],
   scenari: [
     - L'Orchestratore verifica l'esistenza dei repository analizzati
@@ -3848,7 +3848,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "Richiesta di visualizzazione delle repository analizzate",
 )[
-  #useCaseDiagram("37", "UC37 - Verifica esistenza repository analizzata")
+  #useCaseDiagram("37", "UC37 - Verifica esistenza repository analizzati")
 ]
 
 ==== UC37.1: Nessun repository analizzato <UC37.1>
@@ -3859,7 +3859,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Non sono presenti repository analizzati
   ],
   post: [
-    - L'orchestratore ha inviato un errore di mancata presenza di repository analizzati
+    - L'orchestratore ha inviato un messaggio errore di mancata presenza di repository analizzati
   ],
   scenari: [
     - L'orchestratore non trova nessun repository analizzato e procede con l'invio dell'errore
@@ -3873,19 +3873,21 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Nessun repository analizzato trovato",
 )[]
 
-=== UC38 Salvataggio del report dell'analisi <UC38> #TODO("Probabile eliminazione")
+=== UC38 Salvataggio del report dell'analisi <UC38> 
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - Il report dell'analisi è stato completato e visualizzato dall'orchestratore #link(<UC30>)[#underline[[UC30]]]
+    - Il report dell'analisi è stato completato e è stato preso in carico dall'orchestratore #link(<UC30>)[#underline[[UC30]]]
   ],
   post: [
-    - Il report finale è archiviato nel database del sistema Back-end
+    - L'orchestratore ha archiviato correttamente il report dell'analisi
   ],
   scenari: [
-    - L'orchestratore invia una richiesta di persistenza al sistema Back-end
-    - Il sistema Back-end riceve i dati del report
-    - Il sistema Back-end memorizza il report nel database
+    - L'orchestratore ha avviato la procedura di salvataggio del report dell'analisi
+    #TODO("Servono altri passaggi/inclusioni o va bene così? (direi che non bisgona concentrarsi sul 'come')")
+    //- L'orchestratore invia una richiesta di persistenza al sistema Back-end
+    //- Il sistema Back-end riceve i dati del report
+    //- Il sistema Back-end memorizza il report nel database
   ],
   inclusioni: [
     - Nessuna
@@ -3893,7 +3895,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - #link(<UC38.1>)[#underline[[UC38.1]]]
   ],
-  trigger: "Il report finale è preso in carico dall'orchestratore",
+  trigger: "Il report di analisi finale è preso in carico dall'orchestratore",
 )[
   #useCaseDiagram("38", "UC38 - Salvataggio del report dell'analisi")
 ]
@@ -3902,14 +3904,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'orchestratore ha richiesto l'archiviazione del report ma non avviene correttamente il processo di salvataggio 
+    - L'orchestratore ha avviato l'archiviazione del report #link(<UC38>)[#underline[[UC38]]]
+    - Non avviene correttamente il processo di salvataggio e si genera un errore
   ],
   post: [
-    - Il sistema Front-end è stato informato dall'orchestratore del fallimento del salvataggio
+    - L'orchestratore ha inviato un messaggio di errore di mancato salvataggio del report
   ],
   scenari: [
-    - Il sistema Back-end riscontra un errore interno durante la persistenza dei dati
-    - L'orchestratore notifica il Front-end del mancato salvataggio
+    - L'orchestratore riscontra un errore interno o di connessione al database durante la procedura di salvataggio del report
+    //- Il sistema Back-end riscontra un errore interno durante la persistenza dei dati
+    //- L'orchestratore notifica il Front-end del mancato salvataggio
   ],
   inclusioni: [
     - Nessuna
@@ -3917,7 +3921,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il sistema Back-end fallisce la procedura di archiviazione",
+  trigger: "La procedura di salvataggio del report di analisi finale fallisce",
 )[]
 
 === UC39 Salvataggio delle metriche aggregate <UC39> #TODO("Probabile eliminazione")
