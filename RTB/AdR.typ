@@ -2,7 +2,7 @@
 #import "../lib/variables.typ": *
 #import "../lib/useCaseUtil.typ": *
 
-#let UAA = "Utente autenticato avanzato"
+#let UAA = "Utente autorizzato"
 
 //Note sul versionamento
 /*
@@ -13,11 +13,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.44.5"
+#let versione = "v0.44.6"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2026/02/13",
+    "0.44.6",
+    "Fix UC5, UC9-11",
+    members.antonio
+  ),
   (
     "2026/02/10",
     "0.44.5",
@@ -341,7 +347,7 @@
   (
     "2025/12/24",
     "0.8.0",
-    "Correzioni minori ai casi d'uso UC 1.5.1, aggiunto UC5.5, aggiornamento numerazione UC 5.X, Aggiunta UC6",
+    "Correzioni minori ai casi d'uso UC 5.1, aggiunto UC5.5, aggiornamento numerazione UC 5.X, Aggiunta UC6",
     members.kevin,
     members.suar,
   ),
@@ -1013,12 +1019,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente nega i permessi sulla piattaforma GitHub",
 )[]
 
+#TODO("Forse serve specificare che il repository deve essere pubblico (dato che si inserisce solo il link")
 === UC4: Richiesta analisi repository GitHub <UC4>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub e ha abilitato la condivisione di informazioni #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente si trova nella sezione di richiesta di analisi di un repository GitHub 
   ],
   post: [
@@ -1044,7 +1050,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC4.1: Inserimento URL repository GitHub <UC4.1>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
   ],
@@ -1053,9 +1059,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente inserisce l'URL del repository GitHub da analizzare
-  ],
-  inclusioni: [
-    - Nessuna
   ],
   estensioni: [
     - #link(<UC4.1.1>)[#underline[\[UC4.1.1\]]] // URL repository GitHub non conforme
@@ -1069,7 +1072,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC4.1.1: URL repository GitHub non conforme ai vincoli di formato <UC4.1.1>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'URL inserito non è conforme ai vincoli di formato previsti per l'inserimento dell'URL del repository GitHub
@@ -1082,18 +1085,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza un messaggio di errore che indica che l'URL
       inserito non è valido per la procedura di analisi
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
   trigger: "L'utente ha inserito un URL del repository GitHub non conforme ai vincoli di formato",
 )[]
 
 ===== UC4.1.2: Repository GitHub non accessibile <UC4.1.2>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'URL del repository GitHub inserito non è accessibile
@@ -1104,18 +1101,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio di errore che indica che il repository GitHub specificato non è accessibile per la procedura di richiesta analisi
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
   trigger: "L'utente conferma l'inserimento dell'URL del repository GitHub non accessibile durante la procedura di richiesta analisi",
 )[]
 
 ===== UC4.1.3: Repository GitHub non inserito <UC4.1.3>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'utente non ha inserito alcun URL del repository GitHub
@@ -1128,18 +1119,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza un messaggio di errore che indica che deve essere inserito
       un URL del repository GitHub per procedere con la richiesta di analisi
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
   trigger: "L'utente termina senza inserire alcun URL durante la procedura di richiesta analisi repository GitHub",
 )[]
 
 ==== UC4.2: Selezione aree di interesse <UC4.2>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
   ],
@@ -1148,9 +1133,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente seleziona le aree del repository GitHub da analizzare, specificando cosa includere tra test, sicurezza o documentazione
-  ],
-  inclusioni: [
-    - Nessuna
   ],
   estensioni: [
     - #link(<UC4.2.1>)[#underline[\[UC4.2.1\]]] // Nessuna area di interesse selezionata
@@ -1162,7 +1144,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC4.2.1: Nessuna area di interesse selezionata <UC4.2.1>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'utente non ha selezionato alcuna area di interesse durante la selezione delle aree di interesse
@@ -1173,31 +1155,22 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio di errore che indica che deve essere selezionata almeno un'area di interesse per procedere con la richiesta di analisi del repository GitHub
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
   trigger: "L'utente conferma la selezione delle aree del repository GitHub da analizzare durante la procedura di richiesta analisi repository GitHub",
 )[]
 
 ==== UC4.3: Invio richiesta di analisi <UC4.3>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'utente ha inserito un URL del repository GitHub #link(<UC4.1>)[#underline[\[UC4.1\]]]
     - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
   ],
   post: [
-    - Il Sistema ha avviato l'analisi del repository GitHub specificato dall'utente
+    - L'utente inoltra la sua richiesta con successo
   ],
   scenari: [
-    - L'utente invia la richiesta di analisi al sistema
-  ],
-  inclusioni: [
-    - Nessuna
+    - L'utente invia la richiesta di analisi
   ],
   estensioni: [
     - #link(<UC4.3.1>)[#underline[\[UC4.3.1\]]]
@@ -1215,7 +1188,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'utente ha inserito un URL del repository GitHub corretto #link(<UC4.1>)[#underline[\[UC4.1\]]]
     - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
-    - L'utente invia la richiesta di analisi al sistema
+    - L'utente invia la richiesta di analisi
     - L'ultimo report di analisi del repository GitHub specificato è già aggiornato rispetto all'ultima modifica del repository stesso
   ],
   post: [
@@ -1224,13 +1197,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio che indica che l'analisi del repository GitHub specificato è già aggiornata e non è necessario avviare una nuova analisi
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Il sistema rileva che l'ultimo report di analisi del repository GitHub specificato è già aggiornato rispetto all'ultima modifica del repository stesso",
+  trigger: "L'ultimo report di analisi del repository GitHub specificato è già aggiornato rispetto all'ultima modifica del repository stesso",
 )[
 ]
 
@@ -1241,8 +1208,8 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'utente ha inserito un URL del repository GitHub corretto #link(<UC4.1>)[#underline[\[UC4.1\]]]
     - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
-    - L'utente invia la richiesta di analisi al sistema
-    - Il sistema rileva che l'ultimo report di analisi del repository GitHub specificato è ancora in elaborazione
+    - L'utente invia la richiesta di analisi
+    - L'ultimo report di analisi del repository GitHub specificato è ancora in elaborazione
   ],
   post: [
     - La procedura di richiesta analisi repository GitHub non viene finalizzata in quanto l'analisi precedente è ancora in corso
@@ -1250,183 +1217,130 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio che indica che l'analisi del repository GitHub specificato è ancora in corso e non è possibile avviare una nuova analisi fino al completamento di quella in corso
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Il sistema rileva che l'ultimo report di analisi del repository GitHub specificato è ancora in elaborazione",
+  trigger: "L'ultimo report di analisi del repository GitHub specificato è ancora in elaborazione",
 )[
 ]
 
-=== UC5: Visualizzazione singolo report analisi repository GitHub <UC5>
+#TODO("Controllare che il riferimento a UC5 negli altri casi d'uso sia corretto")
+=== UC5: Visualizzazione lista repository analizzati <UC5>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente si trova nella sezione dei repository analizzati
+  ],
+  post: [
+    - L'utente visualizza la lista dei repository
+  ],
+  scenari:[
+    - L'utente visualizza la lista di tutti i repository per i quali sono state svolte analisi
+    - Per ogni repository sono presenti le informazioni minime #link(<UC5.1>)[#underline[\[UC5.1\]]]
+  ],
+  inclusioni:[
+    - #link(<UC5.1>)[#underline[\[UC5.1\]]]
+  ],
+  estensioni:[
+    - #link(<UC5.2>)[#underline[\[UC5.2\]]] // Nessun repository analizzato
+  ],
+  trigger: "L'utente accede alla sezione dei repository analizzati",
+)[
+]
+
+==== UC5.1: Informazioni minime repository <UC5.1>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente si trova nella sezione di visualizzazione dei repository analizzati #link(<UC5>)[#underline[\[UC5\]]]
+  ],
+  post: [
+    - L'utente visualizza i dettagli minimi per i repository analizzati
+  ],
+  scenari:[
+    - L'utente visualizza le informazioni minime per l'identificazione del repository
+  ],
+  trigger: "L'utente accede alla sezione dei repository analizzati",
+)[
+]
+
+==== UC5.2: Nessun repository analizzato <UC5.2>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente si trova nella sezione di visualizzazione dei repository analizzati #link(<UC5>)[#underline[\[UC5\]]]
+    - Nessun repository è stato trovato
+  ],
+  post: [
+    - L'utente visualizza il messaggio di errore di lista vuota
+  ],
+  scenari:[
+    - L'utente viene avvisato che non sono state eseguite analisi per nessun repository
+  ],
+  trigger: "Non viene trovato nessun repository associato all'utente",
+)[
+]
+
+#TODO("Controllare che il riferimento negli altri casi d'uso che rimanda a UC6 sia corretto")
+=== UC6: Visualizzazione singolo report analisi repository GitHub <UC6>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha almeno un report di analisi di un repository associato al proprio account
-    - L'utente ha selezionato un repository dalla lista dei repository analizzati associati al proprio account
+    - L'utente ha selezionato un repository dalla lista dei repository analizzati associati al proprio account #link(<UC5>)[#underline[\[UC5\]]]
   ],
   post: [
     - L'utente ha visualizzato il report di analisi del repository GitHub selezionato
   ],
   scenari: [
-    //- L'utente seleziona un report di analisi relativo a un repository GitHub #link(<UC5.2>)[#underline[\[UC5.2\]]]
-    - L'utente seleziona i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
-    - L'utente visualizza il report di analisi del repository GitHub richiesto 
+    - L'utente seleziona le sezioni specifiche da visualizzare nel report #link(<UC6.1>)[#underline[\[UC6.1\]]]
+    - L'utente visualizza i metadati del report selezionato #link(<UC6.2>)[#underline[\[UC6.2\]]]
+    - L'utente visualizza le sezioni del report selezionate #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
   inclusioni: [
-    - #link(<UC5.2>)[#underline[\[UC5.2\]]] // Selezione report di analisi
-    - #link(<UC5.3>)[#underline[\[UC5.3\]]] // Selezione dati specifici
+    - #link(<UC6.1>)[#underline[\[UC6.1\]]] // Selezione sezioni specifiche
+    - #link(<UC6.2>)[#underline[\[UC6.2\]]] // Visualizzazione dei metadati
+    - #link(<UC6.3>)[#underline[\[UC6.3\]]] // Visualizzazione delle sezioni selezionate
   ],
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente autorizzato accede alla funzionalità di visualizzazione del report di analisi di CodeGuardian",
+  trigger: "L'utente autorizzato accede alla sezione di visualizzazione del report di analisi di CodeGuardian",
 )[
   #useCaseDiagram("5", "UC5 - Visualizzazione report analisi repository GitHub")
 ]
 
-#TODO("Togliere UC5.4 e sistemare riferimenti")
-#TODO("Check degli ex riferimenti UC5.1")
-
-/* ==== UC5.1: Accesso alla sezione di visualizzazione dei report di analisi <UC5.1>
+==== UC6.1: Selezione sezioni specifiche da visualizzare nel report <UC6.1>
 #useCase(
   attore: UAA,
   pre: [
-    #TODO("inserire precondizioni")
+    - L'utente si trova nella sezione di visualizzazione dei report #link(<UC6>)[#underline[\[UC6\]]]
   ],
   post: [
-    - L'utente visualizza la sezione del proprio account dedicata alla consultazione dei report di analisi dei repository GitHub
+    - L'utente ha definito l'insieme di sezioni da visualizzare nel report di analisi
   ],
   scenari: [
-    - L'utente accede alla propria area personale di CodeGuardian
-    - L'utente seleziona la sezione di visualizzazione dei report di analisi dei repository GitHub
-  ],
-  inclusioni: [
-    - Nessuna
+    - L'utente seleziona uno o più sezioni di interesse
   ],
   estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente autenticato seleziona dal proprio account CodeGuardian la sezione dedicata ai report di analisi",
-)[] */
-
-==== UC5.2: Selezione report di analisi <UC5.2>
-#useCase(
-  attore: UAA,
-  pre: [
-    - L'utente si trova nella sezione di visualizzazione dei report di analisi del proprio account //#link(<UC5.1>)[#underline[\[UC5.1\]]]
-  ],
-  post: [
-    - L'utente ha selezionato un report di analisi associato a un repository GitHub collegato al proprio account
-  ],
-  scenari: [
-    - Il sistema mostra l’elenco dei report di analisi disponibili per i repository GitHub dell’utente
-    - L'utente seleziona il report di analisi di interesse
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC5.2.1>)[#underline[\[UC5.2.1\]]]
-    - #link(<UC5.2.2>)[#underline[\[UC5.2.2\]]]
-  ],
-  trigger: "L'utente interagisce con l’elenco dei report di analisi nella sezione dedicata del proprio account",
-)[
-  #useCaseDiagram("5_2", "UC5.2: Selezione report di analisi")
-]
-
-#TODO(
-  "SAREBBE DA CAMBIARE QUESTA PARTE IN MODO CHE L'UTENTE POSSA SELEZIONARE I REPOSITORY A CUI SONO ASSOCIATI DEI REPORT, INVECE DI VEDERE TUTTI I REPOSITORY DELL'UTENTE, QUESTO SOTTOCASO DIVENTEREBBE 'LISTA VUOTA' O QUALCOSA DEL GENERE",
-)
-===== UC5.2.1: Nessun report di analisi disponibile per il repository GitHub selezionato <UC5.2.1>
-#useCase(
-  attore: UAA,
-  pre: [
-    - L'utente si trova nella sezione di visualizzazione dei report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
-    // - Non ci sono repository da selezionare
-    - Non esistono report di analisi associati al repository GitHub selezionato
-  ],
-  post: [
-    // - L'utente non può selezionare alcun report di analisi, gli viene mostrata un messaggio di avviso che lo rimanda alla sezione precedente in modo che possa effettuare un'analisi
-    - L'utente non può procedere alla visualizzazione di alcun report di analisi
-  ],
-  scenari: [
-    // - Il sistema mostra un elenco vuoto di report di analisi e un messaggio di avviso che invita l’utente a richiedere un’analisi per un repository GitHub
-    - Il sistema informa l’utente che non sono disponibili report di analisi per il repository selezionato
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  // trigger: "L'utente accede alla sezione di selezione dei report di analisi per un repository GitHub senza report disponibili",
-  trigger: "Il sistema rileva l’assenza di report di analisi per il repository selezionato dall’utente",
-)[]
-
-
-===== UC5.2.2: Nessun report selezionato <UC5.2.2>
-#useCase(
-  attore: UAA,
-  pre: [
-    - L'utente si trova nella sezione di visualizzazione dei report di analisi //#link(<UC5.1>)[#underline[\[UC5.1\]]]
-  ],
-  post: [
-    - L'utente rimane nella sezione di selezione dei report senza poter procedere
-  ],
-  scenari: [
-    - L'utente tenta di procedere senza selezionare nessun report
-    - Il sistema segnala all’utente che è necessario selezionare un report di analisi per proseguire
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente tenta di procedere senza selezionare alcun report di analisi",
-)[]
-
-
-==== UC5.3: Selezione dati specifici da visualizzare nel report <UC5.3>
-#useCase(
-  attore: UAA,
-  pre: [
-    #TODO("Da fare")
-  ],
-  post: [
-    - L'utente ha definito l’insieme di dati da visualizzare nel report di analisi
-  ],
-  scenari: [
-    - L'utente seleziona uno o più dati di interesse
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC5.3.1>)[#underline[\[UC5.3.1\]]]
+    - #link(<UC6.1.1>)[#underline[\[UC6.1.1\]]]
   ],
   trigger: "L'utente interagisce con le opzioni di configurazione del report nella sezione di visualizzazione",
 )[
   #useCaseDiagram("5_3", "UC5.3: Selezione dati specifici da visualizzare nel report")
 ]
 
-===== UC5.3.1: Nessun dato specifico selezionato <UC5.3.1>
+===== UC6.1.1: Nessun dato specifico selezionato <UC6.1.1>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente si trova nella sezione di visualizzazione dei report //#link(<UC5.1>)[#underline[\[UC5.1\]]]
-    - L'utente ha selezionato un report di analisi #link(<UC5.2>)[#underline[\[UC5.2\]]]
+    - L'utente si trova nella sezione di visualizzazione dei report #link(<UC6>)[#underline[\[UC6\]]]
+    - L'utente ha provato a procedere senza selezionare alcuna sezione
   ],
   post: [
     - L'utente non può procedere alla visualizzazione del report
   ],
   scenari: [
-    - L'utente tenta di procedere senza selezionare alcun dato da visualizzare
-    - Il sistema informa l’utente che è necessario selezionare almeno un dato da visualizzare
+    - L'utente riceve un messaggio di avviso che lo invita a selezionare almeno una sezione da visualizzare
   ],
   inclusioni: [
     - Nessuna
@@ -1434,39 +1348,98 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente tenta di visualizzare il report senza selezionare alcun dato",
+  trigger: "L'utente tenta di visualizzare il report senza selezionare alcuna sezione",
 )[]
 
-
-==== UC5.4: Visualizzazione report di analisi <UC5.4>  #TODO("Va cancellato questo UC e sistemati i riferimenti")
+==== UC6.2: Visualizzazione area metadati di un report di analisi repository GitHub <UC6.2>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente si trova nella sezione di visualizzazione dei report //#link(<UC5.1>)[#underline[\[UC5.1\]]]
-    - L'utente ha selezionato un report di analisi #link(<UC5.2>)[#underline[\[UC5.2\]]]
-    - L'utente ha selezionato un insieme non vuoto di dati da visualizzare #link(<UC5.3>)[#underline[\[UC5.3\]]]
+    - L'utente ha selezionato le sezioni specifiche da visualizzare nel report #link(<UC6.1>)[#underline[\[UC6.1\]]] 
   ],
   post: [
-    - L'utente visualizza, nella sezione del proprio account, il report di analisi del repository GitHub selezionato
+    - L'utente ha visualizzato l'area metadati del report di analisi repository GitHub
   ],
   scenari: [
-    - Il sistema genera la vista del report in base alle preferenze selezionate
-    - L'utente consulta il report di analisi nella sezione di visualizzazione del proprio account
+    - L'utente visualizza la data del report di analisi repository GitHub #link(<UC6.2.1>)[#underline[\[UC6.2.1\]]]
+    - L'utente visualizza i commit analizzati nel report di analisi repository GitHub #link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]
+    - L'utente visualizza il richiedente del report di analisi repository GitHub #link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]
   ],
   inclusioni: [
-    - Nessuna
+    - #link(<UC6.2.1>)[#underline[\[UC6.2.1\]]]
+    - #link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]
+    - #link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]
   ],
-  estensioni: [
-    - Nessuna
+  trigger: "L'utente accede alla sezione relativa ai metadati del report di analisi repository GitHub",
+)[
+  #useCaseDiagram("12", "UC12 - Visualizzazione area metadati di un report di analisi repository GitHub")
+]
+
+===== UC6.2.1: Visualizzazione data report analisi repository GitHub <UC6.2.1>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente è all'interno dell'area metadati del report di analisi repository GitHub #link(<UC6.2>)[#underline[\[UC6.2\]]]
   ],
-  trigger: "L'utente conferma la visualizzazione del report dalla sezione dedicata del proprio account CodeGuardian",
+  post: [
+    - L'utente ha visualizzato la data del report di analisi repository GitHub
+  ],
+  scenari: [
+    - L'utente visualizza la data del report di analisi repository GitHub
+  ],
+  trigger: "L'utente accede alla sezione metadati del report di analisi repository GitHub",
 )[]
 
-=== UC6: Scelta intervallo temporale per visualizzazione confronto con report passati <UC6>
+==== UC6.2.2: Visualizzazione commit analizzato nel report di analisi repository GitHub <UC6.2.2>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente è all'interno dell'area metadati del report di analisi repository GitHub #link(<UC6.2>)[#underline[\[UC6.2\]]]
+  ],
+  post: [
+    - L'utente ha visualizzato il commit analizzato nel report di analisi repository GitHub
+  ],
+  scenari: [
+    - L'utente visualizza il commit analizzato nel report di analisi repository GitHub
+  ],
+  trigger: "L'utente accede alla sezione metadati del report di analisi repository GitHub",
+)[]
+
+==== UC6.2.3: Visualizzazione richiedente report di analisi repository GitHub <UC6.2.3>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente è all'interno dell'area metadati del report di analisi repository GitHub #link(<UC6.2>)[#underline[\[UC6.2\]]]
+  ],
+  post: [
+    - L'utente ha visualizzato il richiedente del report di analisi repository GitHub
+  ],
+  scenari: [
+    - L'utente visualizza il richiedente del report di analisi repository GitHub
+  ],
+  trigger: "L'utente accede alla sezione metadati del report di analisi repository GitHub",
+)[]
+
+==== UC6.3: Visualizzazione delle sezioni scelte del report di analisi <UC6.3> 
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente ha selezionato un insieme non vuoto di dati da visualizzare #link(<UC6.1>)[#underline[\[UC6.1\]]]
+  ],
+  post: [
+    - L'utente visualizza le sezioni selezionate
+  ],
+  scenari: [
+    - L'utente visualizza il report in base alle preferenze selezionate
+  ],
+  trigger: "L'utente conferma le sezioni del report da visualizzare dalla sezione dedicata",
+)[]
+
+=== UC7: Scelta intervallo temporale per visualizzazione confronto con report passati <UC7>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC5>)[#underline[\[UC5\]]]
+    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC6>)[#underline[\[UC6\]]]
     - L'utente è nella sezione di modifica dell'intervallo temporale per il confronto con i report passati
   ],
   post: [
@@ -1479,19 +1452,19 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC6.1>)[#underline[\[UC6.1\]]]
-    - #link(<UC6.2>)[#underline[\[UC6.2\]]]
-    - #link(<UC6.3>)[#underline[\[UC6.3\]]]
-    - #link(<UC6.4>)[#underline[\[UC6.4\]]]
+    - #link(<UC7.1>)[#underline[\[UC7.1\]]]
+    - #link(<UC7.2>)[#underline[\[UC7.2\]]]
+    - #link(<UC7.3>)[#underline[\[UC7.3\]]]
+    - #link(<UC7.4>)[#underline[\[UC7.4\]]]
   ],
   trigger: "L'utente interagisce con la sezione di selezione dell'intervallo temporale per il confronto con i report passati durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian",
 )[#useCaseDiagram("6", "UC6 - Scelta intervallo temporale per visualizzazione confronto con report passati")]
 
-==== UC6.1: Nessun intervallo temporale selezionato <UC6.1>
+==== UC7.1: Nessun intervallo temporale selezionato <UC7.1>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    - L'utente è nella sezione di modifica dell'intervallo temporale per il confronto con i report passati #link(<UC6>)[#underline[\[UC6\]]]
+    - L'utente è nella sezione di modifica dell'intervallo temporale per il confronto con i report passati #link(<UC7>)[#underline[\[UC7\]]]
     - L'utente non ha selezionato alcun intervallo temporale 
   ],
   post: [
@@ -1501,20 +1474,14 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza un messaggio di errore che indica che deve essere selezionato un intervallo temporale per poter procedere con il 
      confronto con i report passati
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
   trigger: "L'utente non inserisce alcun intervallo temporale e tenta di procedere con il confronto con i report passati",
 )[]
 
-===== UC6.2: Nessun report di analisi disponibile nel periodo selezionato <UC6.2>
+===== UC7.2: Nessun report di analisi disponibile nel periodo selezionato <UC7.2>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    - L'utente è nella sezione di modifica dell'intervallo temporale per il confronto con i report passati #link(<UC6>)[#underline[\[UC6\]]]
+    - L'utente è nella sezione di modifica dell'intervallo temporale per il confronto con i report passati #link(<UC7>)[#underline[\[UC7\]]]
     - Non sono disponibili report di analisi nel periodo selezionato dall'utente
   ],
   post: [
@@ -1524,20 +1491,14 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza un messaggio di errore che indica che non sono disponibili report di analisi 
      nel periodo selezionato per poter procedere con il confronto con i report passati
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
   trigger: "L'utente seleziona un intervallo temporale che non contiene report di analisi",
 )[]
 
-===== UC6.3: Intervallo temporale incoerente <UC6.3>
+===== UC7.3: Intervallo temporale incoerente <UC7.3>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    - L'utente è nella sezione di modifica dell'intervallo temporale per il confronto con i report passati #link(<UC6>)[#underline[\[UC6\]]]
+    - L'utente è nella sezione di modifica dell'intervallo temporale per il confronto con i report passati #link(<UC7>)[#underline[\[UC7\]]]
     - L'utente ha selezionato un intervallo temporale incoerente
   ],
   post: [
@@ -1547,20 +1508,14 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza un messaggio di errore che indica che l'intervallo temporale selezionato non è coerente
       per poter procedere con il confronto con i report passati
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
   trigger: "L'utente seleziona un intervallo temporale incoerente",
 )[]
 
-===== UC6.4: Intervallo temporale troppo ampio <UC6.4>
+===== UC7.4: Intervallo temporale troppo ampio <UC7.4>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    - L'utente è nella sezione di modifica dell'intervallo temporale per il confronto con i report passati #link(<UC6>)[#underline[\[UC6\]]]
+    - L'utente è nella sezione di modifica dell'intervallo temporale per il confronto con i report passati #link(<UC7>)[#underline[\[UC7\]]]
     - L'utente ha selezionato un intervallo temporale troppo ampio
   ],
   post: [
@@ -1570,26 +1525,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza un messaggio di errore che indica che l'intervallo temporale selezionato è troppo ampio
       per poter procedere con il confronto con i report passati
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
   trigger: "L'utente seleziona un intervallo temporale troppo ampio",
 )[]
 
-
-=== UC7: Visualizzazione grafico comparativo tra report di analisi repository GitHub <UC7>
+=== UC8: Visualizzazione delle metriche comparative tra report di analisi di un repository <UC8>
+=== UC8: Visualizzazione grafico comparativo tra report di analisi repository GitHub 
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC5.2>)[#underline[\[UC5.2\]]]
-    - L'utente ha selezionato l'intervallo temporale per il confronto con i report passati
-      #link(<UC6>)[#underline[\[UC6\]]]
-    - L'utente ha selezionato il tasto per la visualizzazione del grafico comparativo tra report di analisi repository GitHub
-      durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian
-      #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC6>)[#underline[\[UC6\]]]
+    - L'utente ha selezionato l'intervallo temporale per il confronto con i report passati #link(<UC7>)[#underline[\[UC7\]]]
   ],
   post: [
     - L'utente ha visualizzato il grafico comparativo tra report di analisi repository GitHub
@@ -1606,15 +1551,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente interagisce con la sezione di visualizzazione del grafico comparativo tra report di analisi repository GitHub durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian",
 )[]
 
-=== UC8: Visualizzazione tabella comparativa tra report di analisi repository GitHub <UC8>
-#TODO("Inglobare in UC7 e sistemare riferimenti")
+=== UC8: Visualizzazione tabella comparativa tra report di analisi repository GitHub
+#TODO("Inglobare in UC8 grafico e tabella e sistemare riferimenti")
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente ha selezionato l'intervallo temporale per il confronto con i report passati
-      #link(<UC6>)[#underline[\[UC6\]]]
-    - L'utente seleziona il tasto per la visualizzazione del grafico comparativo tra report di analisi repository GitHub durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian
-      #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente ha selezionato l'intervallo temporale per il confronto con i report passati #link(<UC7>)[#underline[\[UC7\]]]
   ],
   post: [
     - L'utente ha visualizzato la tabella comparativa tra report di analisi repository GitHub
@@ -1631,320 +1573,280 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente interagisce con la sezione di visualizzazione della tabella comparativa tra report di analisi repository GitHub durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian",
 )[]
 
-
-
-=== UC9: Visualizzazione valutazione analisi del codice repository GitHub <UC9>
+#TODO("Sistemare diagrammi e requisiti per UC9-11")
+=== UC9: Visualizzazione sezione analisi del codice del report selezionato <UC9>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    #TODO("Riguarda dopo UC5")
+    - L'utente ha selezionato la sezione di codice tra le sezioni disponibili del report di analisi #link(<UC6.3>)[#underline[\[UC6.3\]]]
+    - L'utente sta visualizzando la sezione di codice del report di analisi
   ],
   post: [
-    - L'utente ha visualizzato la valutazione dell'analisi del codice repository GitHub
+    - L'utente ha visualizzato la sezione dell'analisi del codice del report
   ],
   scenari: [
-    - L'utente visualizza l'insieme di sezioni di valutazione dell'analisi del codice repository GitHub
-    - L'utente visualizza il report di analisi statica del codice repository GitHub #link(<UC9.1>)[#underline[\[UC9.1\]]]
-    - L'utente visualizza l'analisi delle librerie e dipendenze del codice repository GitHub #link(<UC9.2>)[#underline[\[UC9.2\]]]
-    - L'utente visualizza il report di analisi della sicurezza OWASP del codice repository GitHub #link(<UC9.3>)[#underline[\[UC9.3\]]]
-    - L'utente visualizza il numero totale di vulnerabilità individuate nel report di analisi codice repository GitHub #link(<UC9.4>)[#underline[\[UC9.4\]]]
+    - L'utente visualizza la parte di report dedicata all'analisi statica del codice #link(<UC9.1>)[#underline[\[UC9.1\]]]
+    - L'utente visualizza la parte di report dedicata alla copertura dei test di unità #link(<UC9.2>)[#underline[\[UC9.2\]]]
+    - L'utente visualizza il numero totale di vulnerabilità individuate nella sezione di analisi codice del report #link(<UC9.3>)[#underline[\[UC9.3\]]]
   ],
   inclusioni: [
     - #link(<UC9.1>)[#underline[\[UC9.1\]]]
     - #link(<UC9.2>)[#underline[\[UC9.2\]]]
     - #link(<UC9.3>)[#underline[\[UC9.3\]]]
-    - #link(<UC9.4>)[#underline[\[UC9.4\]]]
   ],
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa alla valutazione della copertura del codice repository GitHub",
+  trigger: "L'utente seleziona la sezione relativa al codice tra le opzioni selezionabili per la visualizzazione del report",
 )[
   #useCaseDiagram("9", "UC9 - Visualizzazione valutazione analisi del codice repository GitHub")
 ]
 
-
-==== UC9.1: Visualizzazione report analisi statica del codice repository GitHub <UC9.1>
+==== UC9.1: Visualizzazione sezione analisi statica del codice <UC9.1>
 #useCase(
   attore: UAA,
   pre: [
-    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] già presente nell'UC9
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi statica del codice repository GitHub
+    - L'utente sta visualizzando la sezione di codice del report di analisi
   ],
   post: [
-    - L'utente ha visualizzato il report di analisi statica del codice repository GitHub
+    - L'utente ha visualizzato la sezione di analisi statica del codice del report
   ],
   scenari: [
-    - L'utente visualizza il report di analisi statica del codice repository GitHub
+    - L'utente visualizza la sezione relativa all'analisi statica del codice
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi statica del codice repository GitHub",
+  trigger: "L'utente seleziona la sezione relativa al codice tra le opzioni selezionabili per la visualizzazione del report",
 )[]
 
-==== UC9.2: Visualizzazione analisi librerie e dipendenze del codice repository GitHub <UC9.2>
+==== UC9.2: Visualizzazione sezione test di unità del codice <UC9.2>
 #useCase(
   attore: UAA,
   pre: [
-    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] già presente nell'UC9
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi librerie e dipendenze del codice repository GitHub
+    - L'utente sta visualizzando la sezione di codice del report di analisi
   ],
   post: [
-    - L'utente ha visualizzato il report di analisi librerie e dipendenze del codice repository GitHub
+    - L'utente ha visualizzato la sezione di copertura dei test di unità del codice del report
   ],
   scenari: [
-    - L'utente visualizza il report di analisi librerie e dipendenze del codice repository GitHub
+    - L'utente visualizza la sezione relativa alla copertura dei test di unità del codice
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi librerie e dipendenze del codice repository GitHub",
+  trigger: "L'utente seleziona la sezione relativa al codice tra le opzioni selezionabili per la visualizzazione del report",
 )[]
 
-==== UC9.3: Visualizzazione report analisi della sicurezza OWASP del codice repository GitHub <UC9.3>
+==== UC9.3: Visualizzazione remediation individuate nella sezione di analisi del codice <UC9.3>
 #useCase(
   attore: UAA,
   pre: [
-    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] già presente nell'UC9
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della sicurezza OWASP del codice repository GitHub
+    - L'utente sta visualizzando la sezione di codice del report di analisi
   ],
   post: [
-    - L'utente ha visualizzato il report di analisi della sicurezza OWASP del codice repository GitHub
+    - L'utente ha visualizzato le remediation della sezione di codice del report
   ],
   scenari: [
-    - L'utente visualizza il report di analisi della sicurezza OWASP del codice repository GitHub
-  ],
-  inclusioni: [
-    - Nessuna
+    - L'utente visualizza le remediation trovate durante l'analisi della sezione di codice del report
   ],
   estensioni: [
-    - Nessuna
+    - #link(<UC9.3.1>)[#underline[\[UC9.3.1\]]]
   ],
-  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi della sicurezza OWASP del codice repository GitHub",
+  trigger: "L'utente seleziona la sezione relativa al codice tra le opzioni selezionabili per la visualizzazione del report",
 )[]
 
-==== UC9.4: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi codice repository GitHub <UC9.4>
+==== UC9.3.1: Nessuna remediation individuata nella sezione di analisi del codice <UC9.3.1>
 #useCase(
   attore: UAA,
   pre: [
-    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] già presente nell'UC9
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi delle vulnerabilità del codice repository GitHub
+    - L'utente sta visualizzando la sezione di codice del report di analisi
+    - Il report non contiene alcuna remediation per tale sezione
   ],
   post: [
-    - L'utente ha visualizzato il report di analisi delle vulnerabilità del codice repository GitHub
+    - L'utente ha visualizzato il messaggio di assenza di remediation per la sezione di codice del report di analisi
   ],
   scenari: [
-    - L'utente visualizza il report di analisi delle vulnerabilità del codice repository GitHub
+    - L'utente viene informato che non sono state trovati possibili miglioramenti per la sezione di codice del report di analisi
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa al report di analisi delle vulnerabilità del codice repository GitHub",
+  trigger: "Non sono presenti remediation per la sezione del codice del report",
 )[]
 
-=== UC10: Visualizzazione report analisi della documentazione repository GitHub <UC10>
+=== UC10: Visualizzazione sezione analisi della sicurezza del report selezionato <UC10>
 #useCase(
   attore: UAA,
   pre: [
-    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] TOGLIEREI (vedi uc5 prima)
-    #TODO("Riguarda dopo UC5")
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della documentazione repository GitHub
+    - L'utente ha selezionato la sezione di sicurezza tra le sezioni disponibili del report di analisi #link(<UC6.3>)[#underline[\[UC6.3\]]]
+    - L'utente sta visualizzando la sezione di sicurezza del report di analisi
   ],
   post: [
-    - L'utente ha visualizzato il report di analisi della documentazione repository GitHub
+    - L'utente ha visualizzato la sezione dell'analisi della sicurezza del report
   ],
   scenari: [
-    - L'utente visualizza l'insieme delle sezioni di analisi relative alla documentazione del repository GitHub selezionato
-    - L'utente visualizza il report di analisi degli errori di spelling #link(<UC10.1>)[#underline[\[UC10.1\]]]
-    - L'utente visualizza il report di analisi della completezza della documentazione nei confronti del codice del repository GitHub #link(<UC10.2>)[#underline[\[UC10.2\]]]
+    - L'utente visualizza la parte di report dedicata all'analisi delle librerie e dipendenze del codice #link(<UC10.1>)[#underline[\[UC10.1\]]]
+    - L'utente visualizza la parte di report dedicata alla conformità del repository con gli standard OWASP #link(<UC10.2>)[#underline[\[UC10.2\]]]
+    - L'utente visualizza il numero totale di vulnerabilità individuate nella sezione di sicurezza del report #link(<UC10.3>)[#underline[\[UC10.3\]]]
   ],
   inclusioni: [
     - #link(<UC10.1>)[#underline[\[UC10.1\]]]
     - #link(<UC10.2>)[#underline[\[UC10.2\]]]
+    - #link(<UC10.3>)[#underline[\[UC10.3\]]]
   ],
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente accede alla sezione relativa al report di analisi della documentazione repository GitHub",
+  trigger: "L'utente seleziona la sezione relativa alla sicurezza tra le opzioni selezionabili per la visualizzazione del report",
+)[]
+
+==== UC10.1: Visualizzazione sezione analisi delle librerie e dipendenze del codice <UC10.1>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando la sezione di sicurezza del report di analisi
+  ],
+  post: [
+    - L'utente ha visualizzato la sezione di analisi delle librerie e dipendenze del codice
+  ],
+  scenari: [
+    - L'utente visualizza la sezione relativa all'analisi delle librerie e dipendenze del codice
+  ],
+  trigger: "L'utente seleziona la sezione relativa alla sicurezza tra le opzioni selezionabili per la visualizzazione del report",
+)[]
+
+==== UC10.2: Visualizzazione sezione analisi della sicurezza OWASP <UC10.2>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando la sezione di sicurezza del report di analisi
+  ],
+  post: [
+    - L'utente ha visualizzato la sezione di conformità del repository con gli standard OWASP
+  ],
+  scenari: [
+    - L'utente visualizza la sezione relativa alla conformità del repository con gli standard OWASP
+  ],
+  trigger: "L'utente seleziona la sezione relativa alla sicurezza tra le opzioni selezionabili per la visualizzazione del report",
+)[]
+
+==== UC10.3: Visualizzazione remediation individuate nella sezione di sicurezza <UC10.3>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando la sezione di codice del report di analisi
+  ],
+  post: [
+    - L'utente ha visualizzato le remediation della sezione di sicurezza del report
+  ],
+  scenari: [
+    - L'utente visualizza le remediation trovate durante l'analisi della sezione di sicurezza del report
+  ],
+  estensioni: [
+    - #link(<UC10.3.1>)[#underline[\[UC10.3.1\]]]
+  ],
+  trigger: "L'utente seleziona la sezione relativa alla sicurezza tra le opzioni selezionabili per la visualizzazione del report",
+)[]
+
+==== UC10.3.1: Nessuna remediation individuata nella sezione di sicurezza <UC10.3.1>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente sta visualizzando la sezione di sicurezza del report di analisi
+    - Il report non contiene alcuna remediation per tale sezione
+  ],
+  post: [
+    - L'utente ha visualizzato il messaggio di assenza di remediation per la sezione di sicurezza del report di analisi
+  ],
+  scenari: [
+    - L'utente viene informato che non sono state trovati possibili miglioramenti per la sezione di sicurezza del report di analisi
+  ],
+  trigger: "Non sono presenti remediation per la sezione del sicurezza del report",
+)[]
+
+=== UC11: Visualizzazione sezione analisi della documentazione del report selezionato <UC11>
+#useCase(
+  attore: UAA,
+  pre: [
+    - L'utente ha selezionato la sezione di documentazione tra le sezioni disponibili del report di analisi #link(<UC6.3>)[#underline[\[UC6.3\]]]
+    - L'utente sta visualizzando la sezione di documentazione del report di analisi
+  ],
+  post: [
+    - L'utente ha visualizzato la sezione dell'analisi della documentazione del report
+  ],
+  scenari: [
+    - L'utente visualizza la parte di report dedicata agli errori di spelling #link(<UC11.1>)[#underline[\[UC11.1\]]]
+    - L'utente visualizza la parte di report dedicata alla completezza della documentazione nei confronti del codice del repository GitHub #link(<UC11.2>)[#underline[\[UC11.2\]]]
+    - L'utente visualizza il numero totale di vulnerabilità individuate nella sezione di documentazione del report #link(<UC11.3>)[#underline[\[UC11.3\]]]
+  ],
+  inclusioni: [
+    - #link(<UC11.1>)[#underline[\[UC11.1\]]]
+    - #link(<UC11.2>)[#underline[\[UC11.2\]]]
+    - #link(<UC11.3>)[#underline[\[UC11.3\]]]
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente seleziona la sezione relativa alla documentazione tra le opzioni selezionabili per la visualizzazione del report",
 )[#useCaseDiagram("10", "UC10 - Visualizzazione report analisi della documentazione repository GitHub")]
 
-==== UC10.1: Visualizzazione errori di spelling <UC10.1>
+==== UC11.1: Visualizzazione sezione errori di spelling <UC11.1>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente è nella sezione relativa agli errori di spelling del report di analisi della documentazione repository GitHub
-    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della documentazione repository GitHub #link(<UC10>)[#underline[\[UC10\]]] GIA COMPRESI
+    - L'utente sta visualizzando la sezione di documentazione del report di analisi
   ],
   post: [
-    - L'utente ha visualizzato il report di analisi degli errori di spelling della documentazione repository GitHub
+    - L'utente ha visualizzato la sezione di analisi degli errori di spelling della documentazione
   ],
   scenari: [
-    - L'utente visualizza il report di analisi degli errori di spelling della documentazione repository GitHub
+    - L'utente visualizza la sezione relativa agli errori di spelling della documentazione del repository GitHub
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente accede alla sezione relativa al report di analisi degli errori di spelling della documentazione repository GitHub",
+  trigger: "L'utente seleziona la sezione relativa alla documentazione tra le opzioni selezionabili per la visualizzazione del report",
 )[]
 
-==== UC10.2: Visualizzazione completezza della documentazione nei confronti del codice <UC10.2>
+==== UC11.2: Visualizzazione completezza della documentazione nei confronti del codice <UC11.2>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente è nella sezione relativa alla completezza della documentazione nei confronti del codice del report di analisi della documentazione repository GitHub
-    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al report di analisi della documentazione repository GitHub #link(<UC10>)[#underline[\[UC10\]]]  GIA COMPRESI
+    - L'utente sta visualizzando la sezione di documentazione del report di analisi
   ],
   post: [
-    - L'utente ha visualizzato il report di analisi della completezza della documentazione nei confronti del codice repository GitHub
+    - L'utente ha visualizzato la sezione di analisi della completezza della documentazione nei confronti del codice del repository GitHub 
   ],
   scenari: [
-    - L'utente visualizza il report di analisi della completezza della documentazione nei confronti del codice repository GitHub
+    - L'utente visualizza la sezione relativa alla completezza della documentazione nei confronti del codice del repository GitHub 
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente accede alla sezione relativa al report di analisi della completezza della documentazione nei confronti del codice repository GitHub",
+  trigger: "L'utente seleziona la sezione relativa alla documentazione tra le opzioni selezionabili per la visualizzazione del report",
 )[]
 
-=== UC11: Visualizzazione numero totale di vulnerabilità individuate nel report di analisi repository GitHub <UC11>
+==== UC11.3: Visualizzazione remediation individuate nella sezione di documentazione <UC11.3>
 #useCase(
   attore: UAA,
   pre: [
-    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]] (vedi prima uc5)
-    #TODO("Riguarda dopo UC5")
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa al numero totale di vulnerabilità individuate nel report di analisi repository GitHub
+    - L'utente sta visualizzando la sezione di documentazione del report di analisi
   ],
   post: [
-    - L'utente ha visualizzato il numero totale di vulnerabilità individuate nel report di analisi repository GitHub
+    - L'utente ha visualizzato le remediation della sezione di documentazione del report
   ],
   scenari: [
-    - L'utente visualizza il numero totale di vulnerabilità individuate nel report di analisi repository GitHub
-  ],
-  inclusioni: [
-    - Nessuna
+    - L'utente visualizza le remediation trovate durante l'analisi della sezione di documentazione del report
   ],
   estensioni: [
-    - Nessuna
+    - #link(<UC11.3.1>)[#underline[\[UC11.3.1\]]]
   ],
-  trigger: "L'utente accede alla sezione relativa al numero totale di vulnerabilità individuate nel report di analisi repository GitHub",
+  trigger: "L'utente seleziona la sezione relativa alla documentazione tra le opzioni selezionabili per la visualizzazione del report",
 )[]
 
-=== UC12: Visualizzazione area metadati di un report di analisi repository GitHub <UC12>
+==== UC11.3.1: Nessuna remediation individuata nella sezione di documentazione <UC11.3.1>
 #useCase(
   attore: UAA,
   pre: [
-    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    #TODO("Riguarda dopo UC5")
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub
+    - L'utente sta visualizzando la sezione di documentazione del report di analisi
+    - Il report non contiene alcuna remediation per tale sezione
   ],
   post: [
-    - L'utente ha visualizzato l'area metadati del report di analisi repository GitHub
+    - L'utente ha visualizzato il messaggio di assenza di remediation per la sezione di documentazione del report di analisi
   ],
   scenari: [
-    - L'utente visualizza la data del report di analisi repository GitHub #link(<UC12.1>)[#underline[\[UC12.1\]]]
-    - L'utente visualizza i commit analizzati nel report di analisi repository GitHub #link(<UC12.2>)[#underline[\[UC12.2\]]]
-    - L'utente visualizza il richiedente del report di analisi repository GitHub #link(<UC12.3>)[#underline[\[UC12.3\]]]
+    - L'utente viene informato che non sono state trovati possibili miglioramenti per la sezione di documentazione del report di analisi
   ],
-  inclusioni: [
-    - #link(<UC12.1>)[#underline[\[UC12.1\]]]
-    - #link(<UC12.2>)[#underline[\[UC12.2\]]]
-    - #link(<UC12.3>)[#underline[\[UC12.3\]]]
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente accede alla sezione relativa ai metadati del report di analisi repository GitHub",
-)[
-  #useCaseDiagram("12", "UC12 - Visualizzazione area metadati di un report di analisi repository GitHub")
-]
-
-==== UC12.1: Visualizzazione data report analisi repository GitHub <UC12.1>
-#useCase(
-  attore: UAA,
-  pre: [
-    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
-    - L'utente è nella sezione relativa alla data del report di analisi, all'interno dell'area metadati del report di analisi repository GitHub
-  ],
-  post: [
-    - L'utente ha visualizzato la data del report di analisi repository GitHub
-  ],
-  scenari: [
-    - L'utente visualizza la data del report di analisi repository GitHub
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente accede alla sezione relativa alla data del report di analisi, all'interno dell'area metadati del report di analisi repository GitHub",
+  trigger: "Non sono presenti remediation per la sezione del documentazione del report",
 )[]
 
-==== UC12.2: Visualizzazione commit analizzati nel report di analisi repository GitHub <UC12.2>
-#useCase(
-  attore: UAA,
-  pre: [
-    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
-    - L'utente è nella sezione relativa ai commit analizzati, all'interno dell'area metadati del report di analisi repository GitHub
-  ],
-  post: [
-    - L'utente ha visualizzato i commit analizzati nel report di analisi repository GitHub
-  ],
-  scenari: [
-    - L'utente visualizza i commit analizzati nel report di analisi repository GitHub
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente accede alla sezione relativa ai commit analizzati, all'interno dell'area metadati del report di analisi repository GitHub",
-)[]
-
-==== UC12.3: Visualizzazione richiedente report di analisi repository GitHub <UC12.3>
-#useCase(
-  attore: UAA,
-  pre: [
-    //- L'utente sta visualizzando il report di analisi del repository GitHub richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai metadati del report di analisi repository GitHub #link(<UC12>)[#underline[\[UC12\]]]
-    - L'utente è nella sezione relativa al richiedente del report di analisi, all'interno dell'area metadati del report di analisi repository GitHub
-  ],
-  post: [
-    - L'utente ha visualizzato il richiedente del report di analisi repository GitHub
-  ],
-  scenari: [
-    - L'utente visualizza il richiedente del report di analisi repository GitHub
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente accede alla sezione relativa al richiedente del report di analisi, all'interno dell'area metadati del report di analisi repository GitHub",
-)[]
+#TODO("Per coprire il buco creato dall'assorbimento di UC12 nelle sezioni precedenti, si può portare UC43 qui e renderlo il nuovo UC12")
 
 === UC13: Disconnessione account GitHub da CodeGuardian<UC13>
 #useCase(
@@ -2019,8 +1921,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    #TODO("Riguarda dopo UC5")
+    - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
   post: [
     - L'utente ha esportato con successo il report di analisi nel formato selezionato
@@ -2333,12 +2234,13 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente ha completato con successo la modifica della password",
 )[]
 
+#TODO("Sistema qui in modo che le remediation siano distribuite nelle varie sezioni")
 === UC16: Visualizzazione suggerimenti di remediation <UC16>
 #useCase(
   attore: UAA,
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    - L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation
+    //- L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation
   ],
   post: [
     - L'utente ha visualizzato la lista delle issue identificate e i relativi suggerimenti di remediation
@@ -3690,7 +3592,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Il sistema Front-end ha ricevuto correttamente il report di analisi da parte dell'orchestratore #link(<UC31>)[#underline[\[UC31\]]]
   ],
   post: [
-    - L'utente può visualizzare il report richiesto #link(<UC5.4>)[#underline[\[UC5.4\]]]
+    - L'utente può visualizzare il report richiesto #link(<UC6>)[#underline[\[UC6\]]]
     #TODO("Riguarda dopo UC5")
   ],
   scenari: [
@@ -4276,7 +4178,9 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [L'Utente deve poter confermare la volontà di procedere con il collegamento a GitHub],
   [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
 
-  [#FRObx], [L'Utente deve poter rifiutare il collegamento a GitHub], [#link(<UC3.1.1>)[#underline[\[UC3.1.1\]]]],
+  [#FRObx], 
+  [L'Utente deve poter rifiutare il collegamento a GitHub], 
+  [#link(<UC3.1.1>)[#underline[\[UC3.1.1\]]]],
 
   [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se il codice GitHub non viene ricevuto],
@@ -4295,15 +4199,21 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC3.2.3>)[#underline[\[UC3.2.3\]]]],
 
   // UC4
-  [#FRObx], [L'Utente deve poter accedere alla sezione di richiesta analisi], [#link(<UC4>)[#underline[\[UC4\]]]],
+  [#FRObx], 
+  [L'Utente deve poter accedere alla sezione di richiesta analisi], 
+  [#link(<UC4>)[#underline[\[UC4\]]]],
 
   [#FRObx],
   [L'Utente deve poter inserire l'URL del repository GitHub nel campo dedicato],
   [#link(<UC4.1>)[#underline[\[UC4.1\]]]],
 
-  [#FRObx], [L'URL deve iniziare con il protocollo 'https://'], [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
+  [#FRObx], 
+  [L'URL deve iniziare con il protocollo 'https://'], 
+  [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
 
-  [#FRObx], [Il dominio dell'URL deve essere 'github.com'], [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
+  [#FRObx], 
+  [Il dominio dell'URL deve essere 'github.com'], 
+  [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
 
   [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se l'URL non è conforme ai vincoli di formato],
@@ -4339,70 +4249,99 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   // UC5
   [#FRObx],
-  [L'Utente deve poter accedere alla sezione di visualizzazione dei report di analisi],
+  [L'Utente deve poter accedere alla sezione di visualizzazione dei repository analizzati],
   [#link(<UC5>)[#underline[\[UC5\]]]],
 
   [#FRObx],
-  [L'Utente deve poter visualizzare l'elenco dei report di analisi disponibili],
+  [L'Utente deve poter visualizzare l'elenco dei repository analizzati],
+  [#link(<UC5>)[#underline[\[UC5\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare nome e URL del repository],
+  [#link(<UC5.1>)[#underline[\[UC5.1\]]]],
+  
+  [#FROpx],
+  [L'Utente deve poter visualizzare la visibilità del repository],
+  [#link(<UC5.1>)[#underline[\[UC5.1\]]]],
+
+  [#FROpx],
+  [L'Utente deve poter visualizzare l'owner del repository],
+  [#link(<UC5.1>)[#underline[\[UC5.1\]]]],
+
+  [#FRObx],
+  [L'Utente deve ricevere un avviso se non ci sono repository analizzati da mostrare],
   [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
-
-  [#FRObx],
-  [L'Utente deve poter selezionare un report dall'elenco per consultarne i dettagli],
-  [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
-
-  [#FRObx],
-  [L'Utente deve ricevere un avviso se non ci sono report disponibili per il repository],
-  [#link(<UC5.2.1>)[#underline[\[UC5.2.1\]]]],
-
-  [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se non seleziona alcun report],
-  [#link(<UC5.2.2>)[#underline[\[UC5.2.2\]]]],
-
-  [#FRObx], [L'Utente deve poter selezionare i dati specifici da visualizzare], [#link(<UC5.3>)[#underline[\[UC5.3\]]]],
-
-  [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se non seleziona alcun dato specifico],
-  [#link(<UC5.3.1>)[#underline[\[UC5.3.1\]]]],
-
-  [#FRObx],
-  [L'Utente deve poter visualizzare i dettagli completi dell'analisi],
-  [#link(<UC5.4>)[#underline[\[UC5.4\]]]],
 
   // UC6
   [#FRObx],
-  [L'Utente deve poter selezionare un intervallo temporale per il confronto],
+  [L'Utente deve poter accedere alla sezione di visualizzazione dei report di analisi],
   [#link(<UC6>)[#underline[\[UC6\]]]],
 
-  [#FRObx],
-  [L'Utente deve poter confermare la selezione dell'intervallo temporale],
-  [#link(<UC6>)[#underline[\[UC6\]]]],
-
-  [#FRObx],
-  [L'Utente deve poter modificare l'intervallo temporale dopo averlo selezionato],
-  [#link(<UC6>)[#underline[\[UC6\]]]],
-
-  [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se tenta di confermare senza aver selezionato un intervallo temporale],
+  [#FRObx], 
+  [L'Utente deve poter selezionare le sezioni specifiche da visualizzare], 
   [#link(<UC6.1>)[#underline[\[UC6.1\]]]],
 
   [#FRObx],
-  [L'Utente deve ricevere un avviso se non ci sono report nel periodo selezionato],
+  [L'Utente deve ricevere un messaggio di errore se non seleziona alcuna sezione da visualizzare],
+  [#link(<UC6.1.1>)[#underline[\[UC6.1.1\]]]],
+  
+  [#FRObx],
+  [L'Utente deve poter visualizzare l'area metadati di un report di analisi],
   [#link(<UC6.2>)[#underline[\[UC6.2\]]]],
 
   [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se l'intervallo temporale è incoerente],
+  [L'Utente deve poter visualizzare la data del report di analisi],
+  [#link(<UC6.2>)[#underline[\[UC6.2\]]], #link(<UC6.2.1>)[#underline[\[UC6.2.1\]]]],
+
+  [#FRDex],
+  [L'Utente deve poter visualizzare il commit analizzato nel report],
+  [#link(<UC6.2>)[#underline[\[UC6.2\]]], #link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]],
+
+  [#FRDex],
+  [L'Utente deve poter visualizzare il richiedente del report di analisi],
+  [#link(<UC6.2>)[#underline[\[UC6.2\]]], #link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare le sezioni selezionate dell'analisi],
   [#link(<UC6.3>)[#underline[\[UC6.3\]]]],
+
+  // UC7
+  [#FRObx],
+  [L'Utente deve poter selezionare un intervallo temporale per il confronto],
+  [#link(<UC7>)[#underline[\[UC7\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter confermare la selezione dell'intervallo temporale],
+  [#link(<UC7>)[#underline[\[UC7\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter modificare l'intervallo temporale dopo averlo selezionato],
+  [#link(<UC7>)[#underline[\[UC7\]]]],
+
+  [#FRObx],
+  [L'Utente deve ricevere un messaggio di errore se tenta di confermare senza aver selezionato un intervallo temporale],
+  [#link(<UC7.1>)[#underline[\[UC7.1\]]]],
+
+  [#FRObx],
+  [L'Utente deve ricevere un avviso se non ci sono report nel periodo selezionato],
+  [#link(<UC7.2>)[#underline[\[UC7.2\]]]],
+
+  [#FRObx],
+  [L'Utente deve ricevere un messaggio di errore se l'intervallo temporale è incoerente],
+  [#link(<UC7.3>)[#underline[\[UC7.3\]]]],
 
   [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se l'intervallo temporale è troppo ampio],
-  [#link(<UC6.4>)[#underline[\[UC6.4\]]]],
+  [#link(<UC7.4>)[#underline[\[UC7.4\]]]],
 
-  // UC7
-  [#FRObx], [L'Utente deve poter visualizzare un grafico comparativo tra report], [#link(<UC7>)[#underline[\[UC7\]]]],
+  // UC8 (EX UC7)
+  [#FRObx], 
+  [L'Utente deve poter visualizzare un grafico comparativo tra report], 
+  [#link(<UC8>)[#underline[\[UC8\]]]],
 
   [#FRObx],
   [L'Utente deve poter interagire con il grafico per visualizzare dettagli specifici di ciascun punto dati],
-  [#link(<UC7>)[#underline[\[UC7\]]]],
+  [#link(<UC8>)[#underline[\[UC8\]]]],
 
   // UC8
   [#FRObx], [L'Utente deve poter visualizzare una tabella comparativa tra report], [#link(<UC8>)[#underline[\[UC8\]]]],
@@ -4417,55 +4356,48 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC9>)[#underline[\[UC9\]]]],
 
   [#FRObx],
-  [L'Utente deve poter visualizzare il report di analisi statica del codice],
+  [L'Utente deve poter visualizzare la sezione di analisi statica del codice],
   [#link(<UC9>)[#underline[\[UC9\]]], #link(<UC9.1>)[#underline[\[UC9.1\]]]],
-
+  
   [#FRObx],
-  [L'Utente deve poter visualizzare l'analisi delle librerie e dipendenze],
+  [L'Utente deve poter visualizzare il report di analisi statica del codice],
   [#link(<UC9>)[#underline[\[UC9\]]], #link(<UC9.2>)[#underline[\[UC9.2\]]]],
 
   [#FRObx],
-  [L'Utente deve poter visualizzare il report di analisi della sicurezza OWASP],
+  [L'Utente deve poter visualizzare la sezione di remediation per la sezione del codice],
   [#link(<UC9>)[#underline[\[UC9\]]], #link(<UC9.3>)[#underline[\[UC9.3\]]]],
 
   [#FRObx],
-  [L'Utente deve poter visualizzare il numero totale di vulnerabilità del codice],
-  [#link(<UC9>)[#underline[\[UC9\]]], #link(<UC9.4>)[#underline[\[UC9.4\]]]],
+  [L'Utente deve poter visualizzare il numero totale di remediation per la sezione del codice],
+  [#link(<UC9>)[#underline[\[UC9\]]], #link(<UC9.3>)[#underline[\[UC9.3\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare il messaggio di lista vuota nel caso non ci siano remediation per la sezione del codice],
+  [#link(<UC9>)[#underline[\[UC9\]]], #link(<UC9.3.1>)[#underline[\[UC9.3.1\]]]],
 
   //UC10
   [#FRObx],
-  [L'Utente deve poter visualizzare la sezione del report di analisi relativa all'analisi della documentazione],
-  [#link(<UC10>)[#underline[\[UC10\]]]],
-
-  [#FRObx],
-  [L'Utente deve poter visualizzare gli errori di spelling nella documentazione],
-  [#link(<UC10>)[#underline[\[UC10\]]], #link(<UC10.1>)[#underline[\[UC10.1\]]]],
-
-  [#FRObx],
-  [L'Utente deve poter visualizzare la completezza della documentazione rispetto al codice],
+  [L'Utente deve poter visualizzare l'analisi delle librerie e dipendenze],
   [#link(<UC10>)[#underline[\[UC10\]]], #link(<UC10.2>)[#underline[\[UC10.2\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare il report di analisi della sicurezza OWASP],
+  [#link(<UC10>)[#underline[\[UC10\]]], #link(<UC10.3>)[#underline[\[UC10.3\]]]],
 
   //UC11
   [#FRObx],
-  [L'Utente deve poter visualizzare la sezione del report di analisi relativa al numero totale di vulnerabilità del repository],
+  [L'Utente deve poter visualizzare la sezione del report di analisi relativa all'analisi della documentazione],
   [#link(<UC11>)[#underline[\[UC11\]]]],
 
+  [#FRObx],
+  [L'Utente deve poter visualizzare gli errori di spelling nella documentazione],
+  [#link(<UC11>)[#underline[\[UC11\]]], #link(<UC11.1>)[#underline[\[UC11.1\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare la completezza della documentazione rispetto al codice],
+  [#link(<UC11>)[#underline[\[UC11\]]], #link(<UC11.2>)[#underline[\[UC11.2\]]]],
+  
   //UC12
-  [#FRObx],
-  [L'Utente deve poter visualizzare l'area metadati di un report di analisi],
-  [#link(<UC12>)[#underline[\[UC12\]]]],
-
-  [#FRObx],
-  [L'Utente deve poter visualizzare la data del report di analisi],
-  [#link(<UC12>)[#underline[\[UC12\]]], #link(<UC12.1>)[#underline[\[UC12.1\]]]],
-
-  [#FRObx],
-  [L'Utente deve poter visualizzare i commit analizzati nel report],
-  [#link(<UC12>)[#underline[\[UC12\]]], #link(<UC12.2>)[#underline[\[UC12.2\]]]],
-
-  [#FRObx],
-  [L'Utente deve poter visualizzare il richiedente del report di analisi],
-  [#link(<UC12>)[#underline[\[UC12\]]], #link(<UC12.3>)[#underline[\[UC12.3\]]]],
 
   //UC13
   [#FRObx], [L'Utente deve poter disconnettere il proprio account GitHub], [#link(<UC13>)[#underline[\[UC13\]]]],
