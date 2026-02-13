@@ -2,7 +2,7 @@
 #import "../lib/variables.typ": *
 #import "../lib/useCaseUtil.typ": *
 
-#let UAA = "Utente autenticato avanzato"
+#let UAA = "Utente autorizzato"
 
 //Note sul versionamento
 /*
@@ -18,6 +18,12 @@
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2026/02/13",
+    "0.44.6",
+    "Fix UC5",
+    members.antonio
+  ),
   (
     "2026/02/10",
     "0.44.5",
@@ -1013,12 +1019,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente nega i permessi sulla piattaforma GitHub",
 )[]
 
+#TODO("Forse serve specificare che il repository deve essere pubblico (dato che si inserisce solo il link")
 === UC4: Richiesta analisi repository GitHub <UC4>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian ad un account GitHub e ha abilitato la condivisione di informazioni #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente si trova nella sezione di richiesta di analisi di un repository GitHub 
   ],
   post: [
@@ -1044,7 +1050,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC4.1: Inserimento URL repository GitHub <UC4.1>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
   ],
@@ -1069,7 +1075,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC4.1.1: URL repository GitHub non conforme ai vincoli di formato <UC4.1.1>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'URL inserito non è conforme ai vincoli di formato previsti per l'inserimento dell'URL del repository GitHub
@@ -1093,7 +1099,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC4.1.2: Repository GitHub non accessibile <UC4.1.2>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'URL del repository GitHub inserito non è accessibile
@@ -1115,7 +1121,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC4.1.3: Repository GitHub non inserito <UC4.1.3>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'utente non ha inserito alcun URL del repository GitHub
@@ -1139,7 +1145,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC4.2: Selezione aree di interesse <UC4.2>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
   ],
@@ -1162,7 +1168,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC4.2.1: Nessuna area di interesse selezionata <UC4.2.1>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'utente non ha selezionato alcuna area di interesse durante la selezione delle aree di interesse
@@ -1184,17 +1190,17 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC4.3: Invio richiesta di analisi <UC4.3>
 #useCase(
-  attore: "Utente autenticato avanzato",
+  attore: "Utente autorizzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'utente ha inserito un URL del repository GitHub #link(<UC4.1>)[#underline[\[UC4.1\]]]
     - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
   ],
   post: [
-    - Il Sistema ha avviato l'analisi del repository GitHub specificato dall'utente
+    - L'utente inoltra la sua richiesta con successo
   ],
   scenari: [
-    - L'utente invia la richiesta di analisi al sistema
+    - L'utente invia la richiesta di analisi
   ],
   inclusioni: [
     - Nessuna
@@ -1215,7 +1221,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'utente ha inserito un URL del repository GitHub corretto #link(<UC4.1>)[#underline[\[UC4.1\]]]
     - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
-    - L'utente invia la richiesta di analisi al sistema
+    - L'utente invia la richiesta di analisi
     - L'ultimo report di analisi del repository GitHub specificato è già aggiornato rispetto all'ultima modifica del repository stesso
   ],
   post: [
@@ -1230,7 +1236,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il sistema rileva che l'ultimo report di analisi del repository GitHub specificato è già aggiornato rispetto all'ultima modifica del repository stesso",
+  trigger: "L'ultimo report di analisi del repository GitHub specificato è già aggiornato rispetto all'ultima modifica del repository stesso",
 )[
 ]
 
@@ -1241,8 +1247,8 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
     - L'utente ha inserito un URL del repository GitHub corretto #link(<UC4.1>)[#underline[\[UC4.1\]]]
     - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
-    - L'utente invia la richiesta di analisi al sistema
-    - Il sistema rileva che l'ultimo report di analisi del repository GitHub specificato è ancora in elaborazione
+    - L'utente invia la richiesta di analisi
+    - L'ultimo report di analisi del repository GitHub specificato è ancora in elaborazione
   ],
   post: [
     - La procedura di richiesta analisi repository GitHub non viene finalizzata in quanto l'analisi precedente è ancora in corso
@@ -1256,29 +1262,87 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il sistema rileva che l'ultimo report di analisi del repository GitHub specificato è ancora in elaborazione",
+  trigger: "L'ultimo report di analisi del repository GitHub specificato è ancora in elaborazione",
 )[
 ]
 
-=== UC5: Visualizzazione singolo report analisi repository GitHub <UC5>
+#TODO("Inserire link qui sotto per rimandare a UC5")
+=== UC5: Visualizzazione lista repository analizzati 
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente si trova nella sezione dei repository analizzati
+  ],
+  post: [
+    - L'utente visualizza la lista dei repository
+  ],
+  scenari:[
+    - L'utente visualizza la lista di tutti i repository per i quali sono state svolte analisi
+    - Per ogni repository sono presenti le informazioni minime #link(<UC5.1>)[#underline[\[UC5.1\]]]
+  ],
+  inclusioni:[
+    - #link(<UC5.1>)[#underline[\[UC5.1\]]]
+  ],
+  estensioni:[
+    - #link(<UC5.2>)[#underline[\[UC5.2\]]] // Nessun repository analizzato
+  ],
+  trigger: "L'utente accede alla sezione dei repository analizzati",
+)[
+]
+
+==== UC5.1: Informazioni minime repository <UC5.1>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente si trova nella sezione di visualizzazione dei repository analizzati #link(<UC5>)[#underline[\[UC5\]]]
+  ],
+  post: [
+    - L'utente visualizza i dettagli minimi per i repository analizzati
+  ],
+  scenari:[
+    - L'utente visualizza le informazinoi minime per l'identificazione del repository
+  ],
+  trigger: "L'utente accede alla sezione dei repository analizzati",
+)[
+]
+
+==== UC5.1: Nessun repository analizzato
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente si trova nella sezione di visualizzazione dei repository analizzati #link(<UC5>)[#underline[\[UC5\]]]
+    - Nessun repository è stato trovato
+  ],
+  post: [
+    - L'utente visualizza il messaggio di errore di lista vuota
+  ],
+  scenari:[
+    - L'utente viene avvisato che non sono state eseguite analisi per nessun repository
+  ],
+  trigger: "Non viene trovato nessun repository associato all'utente",
+)[
+]
+
+=== UC6: Visualizzazione singolo report analisi repository GitHub <UC5>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha almeno un report di analisi di un repository associato al proprio account
-    - L'utente ha selezionato un repository dalla lista dei repository analizzati associati al proprio account
+    - L'utente ha selezionato un repository dalla lista dei repository analizzati associati al proprio account #link(<UC5>)[#underline[\[UC5\]]]
   ],
   post: [
     - L'utente ha visualizzato il report di analisi del repository GitHub selezionato
   ],
   scenari: [
-    //- L'utente seleziona un report di analisi relativo a un repository GitHub #link(<UC5.2>)[#underline[\[UC5.2\]]]
-    - L'utente seleziona i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
-    - L'utente visualizza il report di analisi del repository GitHub richiesto 
+    - L'utente seleziona le sezioni specifiche da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]]
+    - L'utente visualizza i metadati del report selezionato #link(<UC6.2>)[#underline[\[UC6.2\]]]
+    - L'utente visualizza le sezioni del report selezionate 
   ],
   inclusioni: [
-    - #link(<UC5.2>)[#underline[\[UC5.2\]]] // Selezione report di analisi
-    - #link(<UC5.3>)[#underline[\[UC5.3\]]] // Selezione dati specifici
+    - #link(<UC6.1>)[#underline[\[UC6.1\]]] // Selezione dati specifici
+    - #link(<UC6.2>)[#underline[\[UC6.2\]]] // Visualizzazione dei metadati
   ],
   estensioni: [
     - Nessuna
