@@ -1295,3 +1295,21 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
   ),
   [Riassunto delle attivitá svolte durante lo Sprint 4]
 )
+
+==== Consumo Tempo e Costi Effettivi (Consuntivo)
+La tabella sottostante illustra le ore produttive effettivamente rendicontate.
+
+#sprint_table(
+  (
+    ([Basso Kevin], 0, 3, 0, 0, 4, 0),
+    ([Berengan Riccardo], 0, 0, 0, 0, 5, 1),
+    ([Martinello Riccardo], 0, 1, 0, 0, 5, 0),
+    ([Sandu Antonio], 7, 3, 4, 0, 0, 3),
+    ([Sgreva Andrea], 0, 2, 7, 0, 0, 0),
+    ([Suar Alberto], 0, 2, 2, 0, 2, 4),
+    ([Zago Alice], 0, 4, 3, 0, 0, 1),
+  ),
+  [Consuntivo orario effettivo per lo Sprint 4],
+)
+
+==== Retrospettiva dello Sprint 4
