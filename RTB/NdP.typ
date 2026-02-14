@@ -11,13 +11,19 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.9.0"
+#let versione = "v0.10.0"
 #set heading(numbering: "1.1.1")
 
 #titlePage("Norme di Progetto", versione)
 #set page(numbering: "1", header: header("Norme di Progetto"), footer: footer())
 
 #let history = (
+  (
+    "2026/02/14",
+    "0.10.0",
+    "Riorganizzazione sezione Processo di Sviluppo",
+    members.alice,
+  ),
   (
     "2026/02/13",
     "0.9.0",
@@ -1121,55 +1127,103 @@ In assenza di uno o più elementi obbligatori, il Diario di Bordo non è conside
 
 #pagebreak()
 
-#TODO("Processo di Sviluppo è relativo al codice, non ai documenti")
-== Processo di Sviluppo
 
-Il Processo di Sviluppo adottato da Skarab Group definisce l’insieme delle attività necessarie alla realizzazione del prodotto software, dalla definizione dei requisiti fino alla consegna e accettazione del sistema finale.
-Tale processo è conforme allo standard ISO/IEC 12207:1995 e garantisce un approccio strutturato, tracciabile e orientato alla qualità.
+
+== Processo di Sviluppo
+Il Processo di Sviluppo adottato da Skarab Group definisce le attività necessarie all'analisi dei requisiti, alla progettazione, alla codifica, al testing e all'accettazione del prodotto Software _Code Guardian_.
+
+Tale processo è conforme allo standard ISO/IEC/IEEE 12207 e garantisce un approccio strutturato, tracciabile e orientato alla qualità durante l'intero ciclo di vita del progetto.
 
 === Attività del Processo di Sviluppo
+Il processo comprende le seguenti macro-attività, ciascuna delle quali contribuisce alla realizzazione del prodotto finale secondo standard qualitativi definiti.
 
-Il processo comprende le seguenti macro-attività:
-==== Definizione del processo:
-Selezione del ciclo di vita del software più idoneo in base alla complessità, agli obiettivi e ai vincoli del progetto.
+==== Implementazione del processo:
+Questa attività consiste nella selezione e definizione del *ciclo di vita* del Software più appropriato in base alla complessità, agli obiettivi e ai vincoli del progetto. Per _Code Guardian_, Skarab Group adotta un approccio che permette di:
+- sviluppare il prodotto in modo graduale;
+- rispondere rapidamente ai feedback della Proponente e agli apprendimenti derivanti dall'uso delle tecnologie;
+- mantenere alta la qualità del prodotto grazie a continue attività di verifica;
+- allineare lo sviluppo alle milestone RTB e PB definite dal corso.
 
 ==== Analisi dei Requisiti:
-Individuazione e formalizzazione delle esigenze dell’utente finale e dei vincoli imposti dal proponente, includendo funzionalità, requisiti di qualità e limitazioni progettuali.
+L'Analisi dei Requisiti costituisce il fondamento del progetto e consiste nell'individuazione e formalizzazione delle esigenze dell'utente finale relativamente alle funzionalità che il Software deve offrire. Questa attività si articola in:
+- *Studio del capitolato*: analisi approfondita del documento di capitolato per comprendere obiettivi, vincoli e aspettative della Proponente;
+- *Identificazione degli attori*: individuazione di tutti gli utenti che interagiranno con _Code Guardian_;
+- *Definizione dei casi d'uso*: modellazione delle interazioni tra attori e sistema attraverso diagrammi UML;
+- *Classificazione dei requisiti*: suddivisione in requisiti funzionali, di qualità e di vincolo, con assegnazione di priorità;
 
-==== Progettazione dell’architettura di sistema:
-identificazione delle componenti hardware e software necessarie a soddisfare i requisiti, garantendo la tracciabilità degli stessi.
+==== Progettazione dell'architettura di sistema:
+Questa attività identifica le componenti _Hardware_ e _Software_ necessarie a soddisfare i requisiti, garantendo la tracciabilità degli stessi.
+La progettazione architetturale garantisce separazione delle responsabilità, scalabilità e manutenibilità del sistema.
 
 ==== Analisi dei Requisiti Software:
-studio di come il software risponde ai requisiti utente, includendo aspetti funzionali, prestazionali, di sicurezza e di interfaccia.
+Questa attività approfondisce come il Software soddisfa concretamente i requisiti utente identificati, analizzando:
+- *Requisiti funzionali*: definizione dettagliata delle funzionalità che il sistema deve offrire;
+- *Requisiti prestazionali*: identificazione degli eventuali vincoli di performance;
+- *Requisiti di interfaccia*: specifica delle interfacce di ogni elemento Software;
+- *Requisiti di sicurezza*.
 
-==== Progettazione dell’architettura software:
-definizione della struttura complessiva del sistema software e delle relazioni tra le sue componenti, senza entrare nel dettaglio implementativo.
+==== Progettazione dell'architettura Software:
+Essa definisce la struttura portante del sistema e le interazioni tra le sue componenti, focalizzandosi sull'organizzazione d'insieme, senza soffermarsi sui dettagli della futura implementazione del codice.
 
 ==== Progettazione di dettaglio:
-specifica delle singole unità software che compongono il sistema.
+La progettazione di dettaglio specifica le singole unità Software, definendo:
+- *Classi e interfacce*: specifica dettagliata di attributi, metodi e relazioni;
+- *Strutture dati*: scelta delle strutture dati appropriate per ciascuna funzionalità;
+- *Algoritmi*: definizione degli algoritmi principali con analisi di complessità quando rilevante;
+- *Gestione degli errori*: strategia di gestione delle eccezioni a livello di singola unità;
 
-==== Codifica e test delle unità:
-implementazione del codice sorgente e verifica del corretto funzionamento delle singole unità.
+==== Codifica e testing del Software:
+Questa attività consiste nell'implementazione effettiva del codice sorgente seguendo le specifiche di dettaglio e nel testing delle singole unità Software, così da verificare il corretto funzionamento di ciascuna.
 
-==== Integrazione software:
-combinazione progressiva delle componenti software, supportata da test di integrazione.
+==== Integrazione Software:
+L'integrazione Software combina progressivamente le unità sviluppate in componenti più complessi. L'integrazione può seguire strategie:
+- *Bottom-up*: partendo dalle unità di base verso quelle di livello superiore;
+- *Top-down*: partendo dalle componenti di alto livello verso quelle di dettaglio;
+- *Incrementale*: integrando progressivamente nuove unità e verificando ad ogni passo.
 
-==== Test di qualifica del software:
-verifica della conformità del prodotto agli obiettivi di qualità definiti.
+Per ogni integrazione vengono eseguiti test specifici che verificano la corretta interazione tra le componenti integrate.
 
-==== Integrazione e test di sistema:
-assemblaggio del sistema completo e validazione del suo comportamento complessivo.
-Installazione: rilascio del software nell’ambiente concordato con il cliente.
+==== Test di qualifica del Software:
+I test di qualifica verificano che il Software soddisfi gli obiettivi di qualità definiti nel #underline[Piano di Qualifica].
 
-==== Supporto all’accettazione:
-assistenza al proponente durante la fase di verifica finale del prodotto.
+==== Integrazione e Test di sistema:
+Il sistema completo viene assemblato integrando tutte le componenti sviluppate e viene sottoposto a test che verificano:
+- *Scenari d'uso reali*: simulazione di casi d'uso completi dalla richiesta dell'utente alla generazione del risultato;
+- *Interazione tra componenti*: verifica che tutte le componenti collaborino correttamente;
+- *Robustezza*.
+
+==== Installazione
+L'installazione consiste nel rilascio del Software nell'ambiente di destinazione concordato con il cliente.
+
+==== Supporto all'accettazione:
+Il gruppo fornisce supporto alla Proponente durante la fase di accettazione del prodotto, assistendolo nella:
+- Verifica che tutte le funzionalità richieste siano implementate;
+- Esecuzione dei test di accettazione definiti;
+- Risoluzione di eventuali problematiche riscontrate.
 
 === Relazione con le Baseline di progetto
+Le attività del Processo di Sviluppo sono distribuite tra le due baseline principali del progetto in modo da garantire un avanzamento progressivo e controllato.
 
-In relazione alle baseline previste dal progetto, (#def("RTB") e #def("PB")), le attività di sviluppo si piú significative sono:
+==== Requirements and Technology Baseline (RTB)
+La #def("RTB") si concentra sulla definizione completa dei requisiti e sulla validazione delle tecnologie scelte. Le attività che il gruppo ritiene fondamentali sono:
 
-==== Analisi dei Requisiti
-L'Analisi dei Requisiti costituisce una delle fasi più critiche e determinanti dell'intero ciclo di vita del software, assumendo un ruolo centrale durante la #def("Requirements and Technology Baseline") (#strong("RTB")). Questa attività non si limita alla semplice raccolta di informazioni, ma mira all’individuazione, allo studio e alla formalizzazione rigorosa di tutte le necessità che il sistema Code Guardian dovrà soddisfare per rispondere efficacemente alle richieste del proponente. \
+- *Analisi dei Requisiti*: attività cardine della RTB;
+- *Proof of Concept (PoC)*;
+- *Definizione degli Standard*: consolidamento delle norme di codifica, delle convenzioni e degli strumenti di sviluppo documentati nelle presenti Norme di Progetto.
+
+==== Product Baseline (PB)
+La #def("PB") si concentra sulla realizzazione completa del prodotto Software. Le attività che il team ritiene fondamentali sono:
+
+- *Progettazione dell'Architettura*;
+- *Progettazione di Dettaglio*;
+- *Codifica*;
+- *Consolidamento del Prodotto*: finalizzazione del prodotto con tutte le funzionalità implementate, testate e documentate, pronto per la consegna finale e l'accettazione da parte della Proponente.
+
+Le sezioni relative a tali attività verranno aggiornate nel momento opportuno.
+
+=== Analisi dei Requisiti
+L'Analisi dei Requisiti costituisce una delle fasi più critiche e determinanti dell'intero ciclo di vita del Software, assumendo un ruolo centrale durante la #def("Requirements and Technology Baseline") (#strong("RTB")). Questa attività non si limita alla semplice raccolta di informazioni, ma mira all'individuazione, allo studio e alla formalizzazione rigorosa di tutte le necessità che il sistema _Code Guardian_ dovrà soddisfare per rispondere efficacemente alle richieste della Proponente.
+
 Svolgere un'analisi completa e corretta è fondamentale per fornire una base solida per le successive fasi di progettazione e codifica. I risultati di questa analisi sono documentati nel documento #strong("Analisi dei Requisiti Vx.y.z"). #TODO("Link al documento")
 
 ===== Casi d'Uso
@@ -1178,12 +1232,13 @@ Per la descrizione dei casi d'uso viene utilizzata la nomenclatura #strong("UCPr
 - *UC*: acronimo di Use Case (caso d'uso).
 - *Principale*: numero progressivo del caso d'uso principale, identifica un macro-scenario o una funzionalità atomica.
 - *Secondario*: numero progressivo del caso d'uso secondario, identifica varianti o estensioni del caso d'uso principale (sotto-casi).
-L’identificatore *Principale* è univoco a livello globale; non è quindi ammessa l’esistenza di due casi d’uso distinti con il medesimo valore principale. Il valore *Secondario* può invece essere ripetuto all'interno del documento, a patto che ciò non avvenga mai sotto lo stesso identificatore principale. Nel caso in cui un scenario secondario presenti a sua volta delle inclusioni o estensioni, la stringa *Principale.Secondario* assumerà il ruolo di radice per la nuova gerarchia, seguendo le medesime regole di progressione e unicità sopra descritte.
+L'identificatore *Principale* è univoco a livello globale; non è quindi ammessa l'esistenza di due casi d'uso distinti con il medesimo valore principale. Il valore *Secondario* può invece essere ripetuto all'interno del documento, a patto che ciò non avvenga mai sotto lo stesso identificatore principale. Nel caso in cui un scenario secondario presenti a sua volta delle inclusioni o estensioni, la stringa *Principale.Secondario* assumerà il ruolo di radice per la nuova gerarchia, seguendo le medesime regole di progressione e unicità sopra descritte.
 
 Per approfondimenti riguardanti gli attori coinvolti, le precondizioni, le postcondizioni e lo scenario principale degli eventi, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti Vx.y.z"). #TODO("Link al documento")
 
 ===== Requisiti
-I requisiti rappresentano le specifiche funzionali e non funzionali che il sistema deve soddisfare. Ogni requisito è classificato per garantire la tracciabilità rispetto alle fonti e ai casi d'uso associati. \
+I requisiti rappresentano le specifiche funzionali e non funzionali che il sistema deve soddisfare. Ogni requisito è classificato per garantire la tracciabilità rispetto alle fonti e ai casi d'uso associati.
+
 Per la descrizione dei requisiti viene utilizzata la nomenclatura #strong("TipologiaRPrioritàNumero") dove:
 - *Tipologia*: indica il tipo di requisito. I valori possibili sono:
   - *F*: Requisito #strong("F")unzionale.
@@ -1199,21 +1254,48 @@ Per la descrizione dei requisiti viene utilizzata la nomenclatura #strong("Tipol
 Per approfondimenti riguardanti la descrizione dettagliata, la fonte e i casi d'uso associati a ciascun requisito, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti Vx.y.z"). #TODO("Link al documento")
 
 ==== Codifica
+La codifica ha come obiettivo l'implementazione fedele delle soluzioni progettate, garantendo che ogni componente rispetti gli standard di qualità, sicurezza e manutenibilità definiti dal gruppo.
 
-La codifica ha come obiettivo l’implementazione fedele delle soluzioni progettate, nel rispetto degli standard di qualità definiti dal gruppo.
+Il progetto adotta un'architettura full-stack e multi-linguaggio, i cui componenti principali sono:
+- *#def("TypeScript")*: utilizzato per il frontend con React e per il backend con NestJS.
+- *#def("Python")*: impiegato per la logica degli Agenti, l'Orchestratore e gli script di analisi dati.
+- *#def("MongoDB")*: database utilizzato per la gestione flessibile dei dati tramite modelli definiti con Mongoose.
+- *#def("Node.js")*: ambiente di esecuzione per i servizi server-side e gli strumenti di build.
 
-I linguaggi di programmazione utilizzati per il progetto sono #def("TypeScript") per il frontend e gli script di automazione, #def("Python") e #def("Node.js") per il backend e gli agenti intelligenti e #def("MongoDB") per la gestione del database.
-
-Mentre per la documentazione viene utilizzato il linguaggio #def("Typst").
+Per la redazione della documentazione tecnica viene utilizzato il linguaggio di markup #def("Typst").
 
 ===== Convenzioni
-Per garantire uniformità e manutenibilità del codice, sono adottate delle convenzioni di codifica comuni a tutti i membri del gruppo. Queste convenzioni riguardano:
-- Nomenclatura di variabili, funzioni, classi e componenti, in particolare, si utilizza il `camelCase` per variabili e funzioni, e il `PascalCase` per classi e componenti.
-- Struttura e organizzazione del codice sorgente, con l’utilizzo di moduli e cartelle per separare le diverse funzionalità.
-- Commenti e documentazione del codice, ogni funzione deve possedere un commento che la descriva, i parametri in ingresso e il valore di ritorno.
-- Evitare funzioni lambda complesse e mantenere le funzioni con una singola responsabilità.
+Per garantire la massima coerenza stilistica e facilitare il lavoro collaborativo, Skarab Group adotta le seguenti convenzioni:
+
+- *Nomenclatura*:
+  - *Variabili e Funzioni*: Si utilizza il `camelCase`.
+  - *Componenti React e Classi*: Si utilizza il `PascalCase`.
+  - *Interfacce e Tipi*: Si utilizza il `PascalCase` con eventuale prefisso `I`.
+  - *File di logica*: Si utilizza il `kebab-case`.
+  - *Costanti e Variabili d'Ambiente*: Si utilizza lo `SCREAMING_SNAKE_CASE`.
+  - *Collezioni MongoDB*: Si utilizzano nomi in minuscolo e al plurale (es: `users`, `reports`).
+
+- *Struttura e Organizzazione del Codice*:
+  - *Modularità*: Ogni funzionalità deve essere isolata in moduli (NestJS) o componenti atomici (React).
+  - *Separazione dei Concern*: La logica di business deve essere separata dall'interfaccia utente e dall'accesso ai dati.
+
+- *Commenti e Documentazione*:
+  - È obbligatorio indicare la descrizione, i parametri e il tipo di ritorno di ogni funzione.
+
+- *Standard di Qualità e Stile*:
+  - *Single Responsibility*: Ogni funzione deve svolgere un'unica attività.
+  - *Automazione*: L'uso di Prettier (indentazione 2 spazi, apici singoli) e ESLint è obbligatorio e integrato nella pipeline di sviluppo.
+  - *Funzioni Lambda*: Le arrow functions sono incoraggiate per callback brevi, ma la logica complessa deve essere estratta in metodi nominati per favorire il debugging.
+
+- *Gestione Errori e Robustezza*:
+  - *Eccezioni*: Ogni chiamata asincrona deve essere protetta da blocchi `try-catch` con logging specifico degli errori per prevenire il crash dei servizi.
+
+
 
 #pagebreak()
+
+
+
 = Processi di Supporto
 
 == Documentazione
