@@ -11,11 +11,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.44.6"
+#let versione = "v0.44.7"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2026/02/13",
+    "0.44.7",
+    "Fix UC6, UC37-41",
+    members.andrea
+  ),
   (
     "2026/02/13",
     "0.44.6",
@@ -55,7 +61,7 @@
   (
     "2026/02/08",
     "0.44.0",
-    "Aggiunto UC43, inclusi diagrammi e requisiti associati. Fix alle precondizioni, attori e diagrammi di UC1, UC2, UC4",
+    "Aggiunto UC12, inclusi diagrammi e requisiti associati. Fix alle precondizioni, attori e diagrammi di UC1, UC2, UC4",
     members.antonio,
   ),
   (
@@ -1821,7 +1827,54 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Non sono presenti remediation per la sezione del documentazione del report",
 )[]
 
-#TODO("Per coprire il buco creato dall'assorbimento di UC12 nelle sezioni precedenti, si può portare UC43 qui e renderlo il nuovo UC12")
+=== UC12 Visualizzazione ranking dei repository analizzati <UC12>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]] 
+  ],
+  post:[
+    - L'utente visualizza la lista dei repository analizzati ordinata per punteggio
+  ],
+  scenari: [
+    - Il Sistema recupera la lista dei repository analizzati dall'utente
+    - Il Sistema ordina i repository per punteggio di qualità complessiva
+    - Il Sistema Front-end mostra la lista ordinata all'utente
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC12.1>)[#underline[[UC12.1]]]
+  ],
+  trigger:"L'utente si sposta nella sezione di ranking dei repository",
+)[
+  #useCaseDiagram("43", "UC12 - Visualizzazione ranking dei repository analizzati")
+]
+
+=== UC12.1 Nessun repository analizzato <UC12.1>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]] 
+    - Non sono presenti repository analizzati associati all'utente
+  ],
+  post:[
+    - L'utente visualizza il messaggio di lista vuota
+  ],
+  scenari: [
+    - Il Sistema mostra all'utente un messaggio che lo invita ad analizzare delle repository per avere un ranking di queste
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger:"L'utente si sposta nella sezione di ranking dei repository senza aver mai analizzato una repository",
+)[]
 
 === UC13: Disconnessione account GitHub da CodeGuardian<UC13>
 #useCase(
@@ -3427,7 +3480,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'orchestratore ha archiviato correttamente le metriche aggregate per la visualizzazione di grafici e tabelle
   ],
   scenari: [
-    //- L'orchestratore richiede al sistema Back-end la sintesi dei dati raccolti dalle diverse analisi
     - L'orchestratore elabora i dati dei singoli report degli agenti per calcolare le metriche globali e avvia la procedura di salvataggio
   ],
   inclusioni: [
@@ -3449,7 +3501,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Non avviene correttamente il processo di salvataggio e si genera un errore
   ],
   post: [
-    //- L'orchestratore viene informato dell'impossibilità di salvare le metriche per la dashboard
     - L'orchestratore comunica l'errore di mancato salvataggio delle metriche aggregate
   ],
   scenari: [
@@ -3464,7 +3515,58 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Il sistema Back-end fallisce la procedura di archiviazione delle metriche",
 )[]
 
-/* === UC40 Invio delle credenziali al sistema Back-end <UC40> #TODO("Probabile eliminazione")
+=== UC40 Gestione del codice OAuth GitHub <UC40>
+#useCase(
+  attore: "Orchestratore",
+  attori_secondari: "GitHub",
+  pre: [
+    - L'orchestratore dispone di un codice di autorizzazione temporaneo (OAuth Code)
+  ],
+  post: [
+    - L'orchestratore ha ottenuto il token di accesso permanente e ha abilitato l'integrazione del profilo utente con GitHub
+  ],
+  scenari: [
+    - L'orchestratore richiede alla piattaforma esterna GitHub la conversione del codice temporaneo in un token di accesso permanente
+    - L'orchestratore riceve il token di accesso e i relativi permessi di lettura/scrittura
+    - L'orchestratore associa le credenziali ottenute al profilo dell'utente
+    #TODO("Mettiamo un'unica azione generale del tipo 'l'orchestratore svolge tutta la procedura necessaria con la piattaforma GitHub'? anche se molto generale")
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC40.1>)[#underline[[UC40.1]]]
+  ],
+  trigger: "L'orchestratore riceve un codice temporaneo di autorizzazione (OAuth Code)",
+)[
+  #useCaseDiagram("41", "UC41 - Gestione del codice OAuth GitHub")
+]
+
+==== UC40.1 Errore durante lo scambio del codice OAuth GitHub <UC40.1>
+#useCase(
+  attore: "Orchestratore",
+  attori_secondari: "GitHub",
+  pre: [
+    - L'orchestratore ha tentato di scambiare il codice di autorizzazione con il sistema GitHub #link(<UC40>)[#underline[[UC40]]]
+    - La procedura di scambio del codice è fallita
+    
+  ],
+  post: [
+    - L'orchestratore interrompe la procedura di collegamento con GitHub e comunica l'errore
+  ],
+  scenari: [
+    - Il sistema GitHub rifiuta lo scambio del codice (es. codice scaduto o non valido) o la connessione fallisce
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Il sistema GitHub rifiuta lo scambio del codice o la connessione fallisce",
+)[]
+
+/* === UC40ex Invio delle credenziali al sistema Back-end <UC40> #TODO("Probabile eliminazione")
 #useCase(
   attore: "Utente non registrato",
   pre: [
@@ -3509,110 +3611,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "Il sistema Back-end non riceve le credenziali a causa di un errore di comunicazione",
 )[] */
-
-=== UC41 Gestione del codice OAuth GitHub <UC41>
-#useCase(
-  attore: "Orchestratore",
-  attori_secondari: "GitHub",
-  pre: [
-    - L'orchestratore dispone di un codice di autorizzazione temporaneo (OAuth Code)
-    //- L'utente ha collegato il suo account CodeGuardian a GitHub #link(<UC3>)[#underline[[UC3]]]
-    //- Il sistema Front-end ha ricevuto il codice temporaneo di autorizzazione (OAuth Code)
-  ],
-  post: [
-    - L'orchestratore ha ottenuto il token di accesso permanente e ha abilitato l'integrazione del profilo utente con GitHub
-  ],
-  scenari: [
-    - L'orchestratore richiede alla piattaforma esterna GitHub la conversione del codice temporaneo in un token di accesso permanente
-    - L'orchestratore riceve il token di accesso e i relativi permessi di lettura/scrittura
-    - L'orchestratore associa le credenziali ottenute al profilo dell'utente
-    #TODO("Mettiamo un'unica azione generale del tipo 'l'orchestratore svolge tutta la procedura necessaria con la piattaforma GitHub'? anche se molto generale")
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC41.1>)[#underline[[UC41.1]]]
-  ],
-  trigger: "L'orchestratore riceve un codice temporaneo di autorizzazione (OAuth Code)",
-)[
-  #useCaseDiagram("41", "UC41 - Gestione del codice OAuth GitHub")
-]
-
-==== UC41.1 Errore durante lo scambio del codice OAuth GitHub <UC41.1>
-#useCase(
-  attore: "Orchestratore",
-  attori_secondari: "GitHub",
-  pre: [
-    - L'orchestratore ha tentato di scambiare il codice di autorizzazione con il sistema GitHub #link(<UC41>)[#underline[[UC41]]]
-    - La procedura di scambio del codice è fallita
-    
-  ],
-  post: [
-    - L'orchestratore interrompe la procedura di collegamento con GitHub e comunica l'errore
-  ],
-  scenari: [
-    - Il sistema GitHub rifiuta lo scambio del codice (es. codice scaduto o non valido) o la connessione fallisce
-    //- Il sistema GitHub restituisce un errore (es. codice scaduto o non valido)
-    //- L'orchestratore notifica il sistema Front-end del fallimento della procedura di collegamento
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Il sistema GitHub rifiuta lo scambio del codice o la connessione fallisce",
-)[]
-
-=== UC43 Visualizzazione ranking dei repository analizzati <UC43>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]] 
-  ],
-  post:[
-    - L'utente visualizza la lista dei repository analizzati ordinata per punteggio
-  ],
-  scenari: [
-    - Il Sistema recupera la lista dei repository analizzati dall'utente
-    - Il Sistema ordina i repository per punteggio di qualità complessiva
-    - Il Sistema Front-end mostra la lista ordinata all'utente
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC43.1>)[#underline[[UC43.1]]]
-  ],
-  trigger:"L'utente si sposta nella sezione di ranking dei repository",
-)[
-  #useCaseDiagram("43", "UC43 - Visualizzazione ranking dei repository analizzati")
-]
-
-=== UC43.1 Nessun repository analizzato <UC43.1>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]] 
-    - Non sono presenti repository analizzati associati all'utente
-  ],
-  post:[
-    - L'utente visualizza il messaggio di lista vuota
-  ],
-  scenari: [
-    - Il Sistema mostra all'utente un messaggio che lo invita ad analizzare delle repository per avere un ranking di queste
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger:"L'utente si sposta nella sezione di ranking dei repository senza aver mai analizzato una repository",
-)[]
 
 #pagebreak()
 
@@ -3989,7 +3987,18 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [L'Utente deve poter visualizzare la completezza della documentazione rispetto al codice],
   [#link(<UC11>)[#underline[\[UC11\]]], #link(<UC11.2>)[#underline[\[UC11.2\]]]],
   
-  //UC12
+   //UC12
+  [#FROpx],
+  [Il sistema Front-end deve essere in grado di rappresentare correttamente la lista di tutti i repository analizzati],
+  [#link(<UC12>)[#underline[\[UC12\]]]],
+
+  [#FROpx],
+  [Il sistema Back-end deve riuscire a riconoscere correttamente il caso in cui un utente non abbia mai analizzato repository e comunicarlo al Front-end],
+  [#link(<UC12>)[#underline[\[UC12\]]], #link(<UC12.1>)[#underline[\[UC12.1\]]]],
+
+  [#FROpx],
+  [Il sistema Front-end deve essere in grado di comunicare che la lista è vuota nel caso in cui un utente non abbia mai analizzato repository],
+  [#link(<UC12>)[#underline[\[UC12\]]], #link(<UC12.1>)[#underline[\[UC12.1\]]]],
 
   //UC13
   [#FRObx], [L'Utente deve poter disconnettere il proprio account GitHub], [#link(<UC13>)[#underline[\[UC13\]]]],
@@ -4201,39 +4210,26 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC39>)[#underline[\[UC39\]]], #link(<UC39.1>)[#underline[\[UC39.1\]]]],
 
   //UC40
-/*   [#FRObx],
+  [#FRObx],
+  [Il sistema Front-end deve poter scambiare il codice OAuth GitHub con un token di accesso persistente],
+  [#link(<UC40>)[#underline[\[UC40\]]]],
+
+  [#FRObx],
+  [Il sistema Back-end deve associare il token di accesso GitHub al profilo dell'utente nel database],
+  [#link(<UC40>)[#underline[\[UC40\]]]],
+
+  [#FRObx],
+  [L'Utente deve essere notificato se il sistema GitHub non da l'autorizzazione durante lo scambio del codice OAuth],
+  [#link(<UC40>)[#underline[\[UC40\]]], #link(<UC40.1>)[#underline[\[UC40.1\]]]],
+
+    //UC40ex
+/*[#FRObx],
   [Il sistema Front-end deve poter trasmettere in modo sicuro le credenziali al sistema Back-end],
   [#link(<UC40>)[#underline[\[UC40\]]]],
 
   [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se il trasferimento delle credenziali non avviene],
   [#link(<UC40.1>)[#underline[\[UC40\]]], #link(<UC40.1>)[#underline[\[UC40.1\]]]], */
-
-  //UC41
-  [#FRObx],
-  [Il sistema Front-end deve poter scambiare il codice OAuth GitHub con un token di accesso persistente],
-  [#link(<UC41>)[#underline[\[UC41\]]]],
-
-  [#FRObx],
-  [Il sistema Back-end deve associare il token di accesso GitHub al profilo dell'utente nel database],
-  [#link(<UC41>)[#underline[\[UC41\]]]],
-
-  [#FRObx],
-  [L'Utente deve essere notificato se il sistema GitHub non da l'autorizzazione durante lo scambio del codice OAuth],
-  [#link(<UC41>)[#underline[\[UC41\]]], #link(<UC41.1>)[#underline[\[UC41.1\]]]],
-
-  //UC43
-  [#FROpx],
-  [Il sistema Front-end deve essere in grado di rappresentare correttamente la lista di tutti i repository analizzati],
-  [#link(<UC43>)[#underline[\[UC43\]]]],
-
-  [#FROpx],
-  [Il sistema Back-end deve riuscire a riconoscere correttamente il caso in cui un utente non abbia mai analizzato repository e comunicarlo al Front-end],
-  [#link(<UC43>)[#underline[\[UC43\]]], #link(<UC43.1>)[#underline[\[UC43.1\]]]],
-
-  [#FROpx],
-  [Il sistema Front-end deve essere in grado di comunicare che la lista è vuota nel caso in cui un utente non abbia mai analizzato repository],
-  [#link(<UC43>)[#underline[\[UC43\]]], #link(<UC43.1>)[#underline[\[UC43.1\]]]],
 )
 
 #pagebreak()
