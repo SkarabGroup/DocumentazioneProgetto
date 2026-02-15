@@ -11,11 +11,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.45"
+#let versione = "v0.45.1"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2026/02/15",
+    "0.45.1",
+    "Fix UC28-30, eliminazione UC31",
+    members.andrea,
+  ),
   (
     "2026/02/15",
     "0.45.0",
@@ -2995,7 +3001,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'orchestratore ha contattato ed avviato corettamente gli strumenti esterni di analisi
   ],
   scenari: [
-    //- L'orchestratore sceglie quali sono i tool esterni di analisi da interrogare
     - L'orchestratore richiede lo strumento esterno di analisi del codice #link(<UC29.1>)[#underline[\[UC29.1\]]]
     - L'orchestratore richiede lo strumento esterno di analisi della documentazione #link(<UC29.2>)[#underline[\[UC29.2\]]]
     - L'orchestratore richiede lo strumento esterno di analisi degli standard OWASP #link(<UC29.3>)[#underline[\[UC29.3\]]]
@@ -3005,7 +3010,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC29.1>)[#underline[\[UC29.1\]]]
     - #link(<UC29.2>)[#underline[\[UC29.2\]]]
     - #link(<UC29.3>)[#underline[\[UC29.3\]]]
-    #TODO("Sono inclusioni? Perchè se c'è una scelta di che strumenti di analisi utilizzare, non dovrebbe essere una inclusione.")
   ],
   estensioni: [
     - Nessuna
@@ -3108,26 +3112,26 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - Il sistema Back-end ha concluso con successo l'analisi della repository
+    - L'orchestratore ha recuperato ed avviato tutti gli strumenti di analisi #link(<UC29>)[#underline[\[UC29\]]]
   ],
   post: [
-    - L'orchestratore ha preso in carico il report di analisi
+    - L'orchestratore ha generato il report di analisi finale
   ],
   scenari: [
-    - Il sistema Back-end finisce la propria analisi
-    - Il sistema Back-end ha scritto il report finale
-    - L'orchestratore visualizza il report
+    - L'orchestratore riceve le varie analisi dagli strumenti di analisi e le unisce in un unico report
   ],
   inclusioni: [
-    - #link(<UC30.1>)[#underline[\[UC30.1\]]]
+    //- #link(<UC30.1>)[#underline[\[UC30.1\]]]
   ],
   estensioni: [
     - Nessuna
   ],
-  trigger: "Viene completata l'analisi della repository",
-)[#useCaseDiagram("30", "UC30 - Generazione report finale")]
+  trigger: "L'orchestratore riceve le analisi dei vari strumenti di analisi",
+)[//#useCaseDiagram("30", "UC30 - Generazione report finale")
+]
 
-==== UC30.1 Integrazione delle nuove analisi singole <UC30.1>
+#TODO("Guarda UC commentato, se d'accordo con eliminazione fallo (al massimo uc a parte ma non penso")
+/* ==== UC30.1 Integrazione delle nuove analisi singole <UC30.1>
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -3149,30 +3153,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "Viene completata l'analisi della repository",
-)[]
-
-=== UC31 Trasferimento del report di analisi al sistema front-end <UC31>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - L'orchestratore ha preso in carico il report di analisi #link(<UC30>)[#underline[\[UC30\]]]
-  ],
-  post: [
-    - Il sistema Front-end può mostrare correttamente il report di analisi
-  ],
-  scenari: [
-    - L'orchestratore comunica al sistema Front-end che il report di analisi è disponibile
-    - L'orchestratore invia il report di analisi al sistema Front-end
-    - Il sistema Front-end può ora mostrare il report di analisi
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Il report è in mano all'orchestratore e pronto per essere inviato al sistema Front-end",
-)[]
+)[] */
 
 === UC32 L'utente viene notificato della disponibilità di visualizzare il nuovo report di analisi<UC32>
 #useCase(
@@ -4269,10 +4250,6 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#FROpx],
   [Devono poter essere eseguite azioni automatiche su alert critici],
   [#link(<UC28>)[#underline[\[UC28\]]], #link(<UC28.2>)[#underline[\[UC28.2\]]]],
-
-/*   [#FROpx],
-  [L'Utente deve poter visualizzare i report programmati generati],
-  [#link(<UC28>)[#underline[\[UC28\]]], #link(<UC28.3>)[#underline[\[UC28.3\]]]], */
 
   //UC29
 
