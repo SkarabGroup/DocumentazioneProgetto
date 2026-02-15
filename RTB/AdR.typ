@@ -2871,76 +2871,66 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente seleziona i refactor da applicare e conferma l'applicazione automatica con supervisione",
 )[]
 
-#TODO("Funzionakità opzionale da risistemare")
 === UC28: Report programmabili e alert <UC28>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha configurato report programmati e alert
+    - L'utente è nella sezione report programmabili e alert
   ],
   post: [
-    - L'utente riceve report periodici configurati
-    - L'utente riceve alert per soglie superate
+    - L'utente ha configurato con sucesso i report periodici e gli alert
   ],
   scenari: [
-    - L'utente configura filtri e template report #link(<UC28.1>)[#underline[\[UC28.1\]]]
-    - L'utente riceve notifiche periodiche con report
-    - L'utente riceve alert per soglie superate
-    - L'utente visualizza il report dettagliato #link(<UC28.3>)[#underline[\[UC28.3\]]]
-    - L'utente configura azioni automatiche per alert critici #link(<UC28.2>)[#underline[\[UC28.2\]]]
+    - L'utente configura la periodicità dei report #link(<UC28.1>)[#underline[\[UC28.1\]]]
+    - L'utente configura le soglie per gli alert critici #link(<UC28.2>)[#underline[\[UC28.2\]]]
+    - L'utente conferma la sua configurazione per i report programmabili e gli alert
   ],
   inclusioni: [
-    - #link(<UC28.1>)[#underline[\[UC28.1\]]] // Configurazione filtri e template
-    - #link(<UC28.3>)[#underline[\[UC28.3\]]] // Visualizzazione report generato
+    - #link(<UC28.1>)[#underline[\[UC28.1\]]]
+    - #link(<UC28.2>)[#underline[\[UC28.2\]]]
   ],
   estensioni: [
-    - #link(<UC28.2>)[#underline[\[UC28.2\]]] // Azioni automatiche su alert critici
+    - Nessuna
   ],
-  trigger: "Lo scheduler di sistema attiva generazione report in base a pianificazione configurata o evento trigger",
+  trigger: "L'utente accede alla sezione report programmabili e alert",
 )[#useCaseDiagram("28", "UC28 - Report programmabili e alert")]
 
-==== UC28.1: Configurazione filtri e template report personalizzati <UC28.1>
+==== UC28.1: Configurazione periodicità dei report <UC28.1>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    - L'utente sta creando un report programmato #link(<UC28>)[#underline[\[UC28\]]]
+    - L'utente sta confiugurando i report programmabili e gli alert #link(<UC28>)[#underline[\[UC28\]]]
+    - L'utente è nella sezione per la configurazione della periodicità dei report
   ],
   post: [
-    - L'utente ha salvato la configurazione del report
-    - L'utente visualizza l'anteprima del report
+    - L'utente ha selezionato e confermato la periodicità dei report
   ],
   scenari: [
-    - L'utente accede alla configurazione report
-    - L'utente seleziona i filtri da applicare
-    - L'utente sceglie il template di formattazione
-    - L'utente visualizza l'anteprima del report
-    - L'utente salva la configurazione
+    - L'utente configura la periodicità dei report
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - Nessuna
+    - #link(<UC28.1.1>)[#underline[\[UC28.1.1\]]]
   ],
-  trigger: "L'utente accede alla configurazione filtri e template durante creazione o modifica report programmato",
+  trigger: "L'utente accede alla sezione per la configurazione della periodicità dei report",
 )[]
 
-==== UC28.2: Esecuzione azioni automatiche su alert critici <UC28.2>
+===== UC28.1.1: Nessuna periodicità selezionata <UC28.1.1>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    - L'utente ha configurato azioni automatiche per alert critici #link(<UC28>)[#underline[\[UC28\]]]
+    - L'utente sta confiugurando i report programmabili e gli alert #link(<UC28>)[#underline[\[UC28\]]]
+    - L'utente è nella sezione per la configurazione della periodicità dei report #link(<UC28.1>)[#underline[\[UC28.1\]]]
+    - L'utente non ha selezionato nessuna periodicità
   ],
   post: [
-    - L'utente riceve notifica delle azioni eseguite
-    - L'utente visualizza il log delle azioni automatiche
+    - L'utente non può procedere con la configurazione della periodicità dei report
   ],
   scenari: [
-    - L'utente configura le azioni automatiche per alert critici
-    - L'utente riceve notifica di alert critico
-    - L'utente visualizza le azioni automatiche eseguite
-    - L'utente intraprende remediation manuale
+    - L'utente visualizza un messaggio di errore che indica che deve essere selezionata almeno una periodicità per i report
   ],
   inclusioni: [
     - Nessuna
@@ -2948,25 +2938,44 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il sistema rileva alert critico durante generazione report e attiva azioni automatiche configurate",
+  trigger: "L'utente non inserisce alcuna periodicità e tenta di confermare la configurazione dei report",
 )[]
 
-==== UC28.3: Visualizzazione report programmato generato <UC28.3>
+==== UC28.2: Configurazione soglie per gli alert critici <UC28.2>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    - L'utente ha ricevuto notifica di nuovo report #link(<UC28>)[#underline[\[UC28\]]]
+    - L'utente sta confiugurando i report programmabili e gli alert #link(<UC28>)[#underline[\[UC28\]]]
+    - L'utente è nella sezione per la configurazione delle soglie per gli alert critici
   ],
   post: [
-    - L'utente visualizza il report completo
-    - L'utente può esportare o condividere il report
+    - L'utente ha selezionato e confermato le soglie per gli alert critici
   ],
   scenari: [
-    - L'utente riceve la notifica del report
-    - L'utente accede al report tramite link
-    - L'utente visualizza le sezioni del report
-    - L'utente esamina KPI, trend e alert
-    - L'utente esporta o condivide il report
+    - L'utente configura le soglie per gli alert critici
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC28.2.1>)[#underline[\[UC28.2.1\]]]
+  ],
+  trigger: "L'utente accede alla sezione per la configurazione delle soglie per gli alert critici",
+)[]
+
+===== UC28.2.1: Nessuna soglia selezionata <UC28.2.1>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente sta confiugurando i report programmabili e gli alert #link(<UC28>)[#underline[\[UC28\]]]
+    - L'utente è nella sezione per la configurazione delle soglie per gli alert critici #link(<UC28.1>)[#underline[\[UC28.1\]]]
+    - L'utente non ha selezionato nessuna soglia
+  ],
+  post: [
+    - L'utente non può procedere con la configurazione delle soglie per gli alert critici
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che indica che deve essere selezionata almeno una soglia per gli alert critici
   ],
   inclusioni: [
     - Nessuna
@@ -2974,9 +2983,8 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente accede al report programmato dalla notifica ricevuta o dalla sezione reports history",
-)[
-]
+  trigger: "L'utente non inserisce alcuna soglia e tenta di confermare la configurazione dei report",
+)[]
 
 === UC29 Recupero e avvio strumenti esterni di analisi <UC29>
 #useCase(
@@ -4308,9 +4316,9 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [Devono poter essere eseguite azioni automatiche su alert critici],
   [#link(<UC28>)[#underline[\[UC28\]]], #link(<UC28.2>)[#underline[\[UC28.2\]]]],
 
-  [#FROpx],
+/*   [#FROpx],
   [L'Utente deve poter visualizzare i report programmati generati],
-  [#link(<UC28>)[#underline[\[UC28\]]], #link(<UC28.3>)[#underline[\[UC28.3\]]]],
+  [#link(<UC28>)[#underline[\[UC28\]]], #link(<UC28.3>)[#underline[\[UC28.3\]]]], */
 
   //UC29
 
