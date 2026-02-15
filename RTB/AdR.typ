@@ -1926,9 +1926,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza il messaggio di lista vuota
   ],
   scenari: [
-    - L'utente visualizza un messaggio che lo invita ad analizzare delle repository per avere un ranking disponibile 
+    - L'utente visualizza un messaggio che lo invita ad analizzare dei repository per avere un ranking disponibile 
   ],
-  trigger:"L'utente si sposta nella sezione di ranking dei repository senza aver mai analizzato una repository",
+  trigger:"L'utente si sposta nella sezione di ranking dei repository senza aver mai analizzato un repository",
 )[]
 
 === UC13: Disconnessione account GitHub da CodeGuardian<UC13>
@@ -1943,18 +1943,19 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente ha disconnesso con successo il proprio accont GitHub dalla piattaforma Codeguardian
   ],
   scenari: [
-    - L'utente disconnette il proprio account GitHub dalla paiattaforma CodeGuardian
+    - L'utente conferma la disconnessione del proprio account GitHub dalla paiattaforma CodeGuardian
   ],
   inclusioni: [
-    - #link(<UC13.1>)[#underline[\[UC13.1\]]] // Conferma disconnessione
+    //- #link(<UC13.1>)[#underline[\[UC13.1\]]] // Conferma disconnessione
   ],
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente entra nella sezione Impostazioni > Account > GitHub dell'applicazione",
+  trigger: "L'utente entra nella sezione di disconnessione dell'account GitHub dal sistema CodeGuardian",
 )[#useCaseDiagram("13", "UC13 - Disconnessione account GitHub da CodeGuardian")]
 
-==== UC13.1: Selezione tasto Disconnetti <UC13.1>
+#TODO("Trovo inutili i sottocasi 13.1 e 13.1.1, se siete d'accordo eliminate commenti")
+/* ==== UC13.1: Selezione tasto Disconnetti <UC13.1>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
@@ -1998,7 +1999,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "L'utente seleziona e conferma la disconnessione del proprio account GitHub dalla piattaforma CodeGuardian",
-)[]
+)[] */
 
 === UC14: Esportazione report di analisi repository GitHub <UC14>
 #useCase(
@@ -2354,11 +2355,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'orchestratore ha ricevuto una richiesta di analisi contenente un URL GitHub da parte di un utente autorizzato di CodeGuardian //UC di avvio analisi.
   ],
   post: [
-    - L'accessibilità della repository è stata accertata e l'orchestratore dispone dei permessi di lettura per avviare la analisi.
+    - L'accessibilità del repository è stata accertata e l'orchestratore dispone dei permessi di lettura per avviare la analisi.
   ],
   scenari: [
     - L'orchestratore stabilisce una connessione con la piattaforma GitHub #link(<UC17.1>)[#underline[\[UC17.1\]]]
-    - L'orchestratore esegue la ricerca della repository per determinarne la disponibilità #link(<UC17.2>)[#underline[\[UC17.2\]]]
+    - L'orchestratore esegue la ricerca del repository per determinarne la disponibilità #link(<UC17.2>)[#underline[\[UC17.2\]]]
   ],
   inclusioni: [
     - #link(<UC17.1>)[#underline[\[UC17.1\]]]
@@ -2377,18 +2378,18 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Orchestratore",
   attori_secondari: "GitHub",
   pre: [
-    - L'Orchestratore ha avviato la procedura di verifica #link(<UC17>)[#underline[\[UC17\]]].
+    - L'orchestratore ha avviato la procedura di verifica #link(<UC17>)[#underline[\[UC17\]]].
   ],
   post: [
     - Il canale di comunicazione con la piattaforma esterna è stabilito correttamente.
   ],
   scenari: [
-    - L'Orchestratore interroga i servizi di GitHub per verificarne l'operatività.
+    - L'orchestratore interroga i servizi di GitHub per verificarne l'operatività.
   ],
   estensioni: [
     - #link(<UC17.1.1>)[#underline[\[UC17.1.1\]]] // Mancata risposta
   ],
-  trigger: "L'Orchestratore tenta di contattare GitHub",
+  trigger: "L'orchestratore tenta di contattare GitHub",
 )[
   #useCaseDiagram("17_1", "UC17.1 - Comunicazione con GitHub")
 ]
@@ -2397,19 +2398,19 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'Orchestratore ha tentato di contattare GitHub #link(<UC17.1>)[#underline[\[UC17.1\]]].
+    - L'orchestratore ha tentato di contattare GitHub #link(<UC17.1>)[#underline[\[UC17.1\]]].
     - Il servizio esterno non risponde o restituisce un errore di rete.
   ],
   post: [
     - La procedura viene interrotta e l'errore di connessione viene tracciato.
   ],
   scenari: [
-    - L'Orchestratore rileva l'impossibilità di raggiungere i servizi esterni di GitHub.
+    - L'orchestratore rileva l'impossibilità di raggiungere i servizi esterni di GitHub.
   ],
   trigger: "Mancata risposta da parte di GitHub",
 )[]
 
-==== UC17.2: Ricerca della repository <UC17.2>
+==== UC17.2: Ricerca del repository <UC17.2>
 #useCase(
   attore: "Orchestratore",
   attori_secondari: "GitHub",
@@ -2417,48 +2418,48 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - La comunicazione con GitHub è stata stabilita con successo #link(<UC17.1>)[#underline[\[UC17.1\]]].
   ],
   post: [
-    - L'Orchestratore ha individuato la repository e ne ha convalidato l'accesso.
+    - L'orchestratore ha individuato il repository e ne ha convalidato l'accesso.
   ],
   scenari: [
-    - L'Orchestratore ricerca la repository come risorsa pubblica.
+    - L'orchestratore ricerca il repository come risorsa pubblica.
   ],
   estensioni: [
     (UC17.2.1)
   ],
-  trigger: "L'Orchestratore interroga GitHub per i metadati del repository",
+  trigger: "L'orchestratore interroga GitHub per i metadati del repository",
 )[]
 
 ==== UC17.2.1: Accesso a repository privata <UC17.2.1>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - La repository non risulta accessibile pubblicamente #link(<UC17.2>)[#underline[\[UC17.2\]]].
+    - Il repository non risulta accessibile pubblicamente #link(<UC17.2>)[#underline[\[UC17.2\]]].
   ],
   post: [
-    - L'Orchestratore ha ottenuto l'accesso alla risorsa tramite credenziali autorizzate.
+    - L'orchestratore ha ottenuto l'accesso alla risorsa tramite credenziali autorizzate.
   ],
   scenari: [
-    - L'Orchestratore recupera le credenziali GitHub associate all'utente richiedente.
-    - L'Orchestratore utilizza, in alternativa, il token di accesso fornito per la sessione.
+    - L'orchestratore recupera le credenziali GitHub associate all'utente richiedente.
+    - L'orchestratore utilizza, in alternativa, il token di accesso fornito per la sessione.
   ],
   estensioni: [
     - #link(<UC17.2.1.1>)[#underline[\[UC17.2.1.1\]]] // Repository inaccessibile
   ],
-  trigger: "La repository cercata richiede autorizzazione per l'accesso",
+  trigger: "Il repository cercata richiede autorizzazione per l'accesso",
 )[]
 
 ===== UC17.2.1.1: Repository inaccessibile <UC17.2.1.1>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'Orchestratore ha tentato l'accesso pubblico e privato (credenziali/token).
+    - L'orchestratore ha tentato l'accesso pubblico e privato (credenziali/token).
     - Nessun metodo di autorizzazione ha fornito l'accesso alla risorsa.
   ],
   post: [
     - La procedura di analisi viene annullata per mancanza di permessi.
   ],
   scenari: [
-    - L'Orchestratore rileva il diniego definitivo di accesso da parte di GitHub per la risorsa specificata.
+    - L'orchestratore rileva il diniego definitivo di accesso da parte di GitHub per la risorsa specificata.
   ],
   trigger: "Esaurimento dei tentativi di accesso autorizzato",
 )[]
@@ -2669,7 +2670,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   post: [
     - L'utente visualizza il report dei segreti rilevati con livelli di confidenza
-    - L'utente visualizza i dettagli di ciascun rilevamento
+    //- L'utente visualizza i dettagli di ciascun rilevamento
   ],
   scenari: [
     - L'utente accede al pannello di analisi sicurezza
@@ -3160,7 +3161,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]].
-    - L'utente ha richiesto l'analisi della repository tramite la procedura di richiesta analisi #link(<UC4>)[#underline[\[UC4\]]].
+    - L'utente ha richiesto l'analisi del repository tramite la procedura di richiesta analisi #link(<UC4>)[#underline[\[UC4\]]].
   ],
   post: [
     - L'utente riceve una notifica che segnala la disponibilità del nuovo report di analisi.
@@ -3180,17 +3181,17 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 //spazio per quelli in mezzo
 
 
-=== UC34: Notifica completamento dell'analisi della repository <UC34>
+=== UC34: Notifica completamento dell'analisi del repository <UC34>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'Orchestratore ha completato l'elaborazione del report di analisi.
+    - L'orchestratore ha completato l'elaborazione del report di analisi.
   ],
   post: [
     - La notifica di completamento è stata inoltrata.
   ],
   scenari: [
-    - L'Orchestratore invia la notifica tramite il canale previsto.
+    - L'orchestratore invia la notifica tramite il canale previsto.
   ],
   inclusioni: [
     - Nessuna
@@ -3200,7 +3201,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "Completamento dell'elaborazione del report",
 )[
-  #useCaseDiagram("34", "UC34 - Notifica completamento dell'analisi della repository")
+  #useCaseDiagram("34", "UC34 - Notifica completamento dell'analisi del repository")
 ]
 
 
@@ -3211,7 +3212,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]].
-    - L'utente ha richiesto l'analisi della repository tramite la procedura di richiesta analisi #link(<UC4>)[#underline[\[UC4\]]].
+    - L'utente ha richiesto l'analisi del repository tramite la procedura di richiesta analisi #link(<UC4>)[#underline[\[UC4\]]].
   ],
   post: [
     - L'utente viene informato che l'analisi non è stata completata a causa di un errore critico.
@@ -3237,10 +3238,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]].
-    - L'utente ha richiesto l'analisi della repository tramite la procedura di richiesta analisi #link(<UC4>)[#underline[\[UC4\]]].
+    - L'utente ha richiesto l'analisi del repository tramite la procedura di richiesta analisi #link(<UC4>)[#underline[\[UC4\]]].
   ],
   post: [
-    - I metadati della repository sono stati salvati correttamente nel database.
+    - I metadati del repository sono stati salvati correttamente nel database.
   ],
   scenari: [
     - L'utente avvia (o conferma) la procedura di salvataggio metadati come parte della richiesta di analisi.
@@ -3265,7 +3266,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'orchestratore ha verificato l'esistenza dei repository analizzati e restituisce le informazioni relative ad essi
   ],
   scenari: [
-    - L'Orchestratore verifica l'esistenza dei repository analizzati
+    - L'orchestratore verifica l'esistenza dei repository analizzati
   ],
   inclusioni: [
     - Nessuna
@@ -3273,7 +3274,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - #link(<UC37.1>)[#underline[\[UC37.1\]]]
   ],
-  trigger: "Richiesta di visualizzazione delle repository analizzate",
+  trigger: "Richiesta di visualizzazione dei repository analizzati",
 )[
   #useCaseDiagram("37", "UC37 - Verifica esistenza repository analizzati")
 ]
@@ -4095,11 +4096,11 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   [#FRObx],
   [L'Utente deve selezionare il tasto "Disconnetti" per avviare la procedura],
-  [#link(<UC13>)[#underline[\[UC13\]]], #link(<UC13.1>)[#underline[\[UC13.1\]]]],
+  [#link(<UC13>)[#underline[\[UC13\]]], #link(<UC13>)[#underline[\[UC13\]]]],
 
   [#FRObx],
   [L'Utente deve poter confermare la disconnessione del proprio account GitHub],
-  [#link(<UC13>)[#underline[\[UC13\]]], #link(<UC13.1.1>)[#underline[\[UC13.1.1\]]]],
+  [#link(<UC13>)[#underline[\[UC13\]]], #link(<UC13>)[#underline[\[UC13\]]]],
 
   // UC14
   [#FRDex], [L'Utente deve poter esportare il report di analisi], [#link(<UC14>)[#underline[\[UC14\]]]],
