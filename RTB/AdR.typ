@@ -2097,8 +2097,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente ha modificato correttamente la propria password
   ],
   scenari: [
-    - L'utente entra nella sezione "Impostazioni"
-    - L'utente seleziona la sezione "Modifica Password"
+    - L'utente va nella sezione di modifica password
     - L'utente inserisce la password corrente nel primo campo del form di modifica #link(<UC15.1>)[#underline[\[UC15.1\]]]
     - L'utente inserisce la nuova password nel campo del form di modifica sottostante #link(<UC15.2>)[#underline[\[UC15.2\]]]
     - L'utente conferma la modifica della propria password #link(<UC15.3>)[#underline[\[UC15.3\]]]
@@ -2113,7 +2112,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente seleziona l'opzione Modifica Password nella sezione Impostazioni",
+  trigger: "L'utente seleziona l'opzione modifica password",
 )[#useCaseDiagram("15", "UC15 - Modifica password profilo")]
 
 ==== UC15.1 Inserimento della password corrente <UC15.1>
@@ -2968,7 +2967,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente autorizzato",
   pre: [
     - L'utente sta confiugurando i report programmabili e gli alert #link(<UC28>)[#underline[\[UC28\]]]
-    - L'utente è nella sezione per la configurazione delle soglie per gli alert critici #link(<UC28.1>)[#underline[\[UC28.1\]]]
+    - L'utente è nella sezione per la configurazione delle soglie per gli alert critici #link(<UC28.2>)[#underline[\[UC28.2\]]]
     - L'utente non ha selezionato nessuna soglia
   ],
   post: [
@@ -3195,9 +3194,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "L'analisi richiesta è stata completata",
-)[
-  #useCaseDiagram("32", "UC32 - Notifica disponibilità nuovo report di analisi")
-]
+)[]
 
 //spazio per quelli in mezzo
 
@@ -3275,9 +3272,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "Completamento della raccolta metadati durante l'analisi (UC29)",
-)[
-  #useCaseDiagram("36", "UC36 - Salvataggio metadati repository")
-]
+)[]
 
 === UC37: Verifica esistenza repository analizzati <UC37> 
 #useCase(
