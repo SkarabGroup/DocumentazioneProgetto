@@ -2978,47 +2978,47 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 )[
 ]
 
-=== UC29  Recupero e avvio tool esterni di analisi <UC29>
+=== UC29 Recupero e avvio strumenti esterni di analisi <UC29>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - Il sistema Back-end ha chiari i propri compiti rispetto alle richieste del //sistema Front-end realtive all'analisi #link(<UC17>)[#underline[\[UC18\]]]
+    -  L'orchestratore ha ricevuto una richiesta di analisi di un repository
   ],
   post: [
-    - L'orchestratore ha contattato corettamente i tool esterni di analisi
+    - L'orchestratore ha contattato ed avviato corettamente gli strumenti esterni di analisi
   ],
   scenari: [
-    - L'orchestratore legge le richieste del sistema Front-end e le interpreta correttamente
-    - L'orchestratore sceglie quali sono i tool esterni di analisi da interrogare
-    - L'orchestratore contatta i tool esterni
-    - L'orchestratore inserisce all'interno dei tool esterni i dati appropriati da analizzare
+    //- L'orchestratore sceglie quali sono i tool esterni di analisi da interrogare
+    - L'orchestratore richiede lo strumento esterno di analisi del codice #link(<UC29.1>)[#underline[\[UC29.1\]]]
+    - L'orchestratore richiede lo strumento esterno di analisi della documentazione #link(<UC29.2>)[#underline[\[UC29.2\]]]
+    - L'orchestratore richiede lo strumento esterno di analisi degli standard OWASP #link(<UC29.3>)[#underline[\[UC29.3\]]]
+    - L'orchestratore inserisce all'interno degli strumenti esterni i dati appropriati da analizzare e gli avvia
   ],
   inclusioni: [
     - #link(<UC29.1>)[#underline[\[UC29.1\]]]
     - #link(<UC29.2>)[#underline[\[UC29.2\]]]
     - #link(<UC29.3>)[#underline[\[UC29.3\]]]
+    #TODO("Sono inclusioni? Perchè se c'è una scelta di che strumenti di analisi utilizzare, non dovrebbe essere una inclusione.")
   ],
   estensioni: [
-    - #link(<UC29.4>)[#underline[\[UC29.4\]]] // Gestione errore contatto tool
+    - Nessuna
   ],
-  trigger: "Comunicazione con tool esterni",
-)[#useCaseDiagram("29", "UC29 - Recupero e avvio tool esterni di analisi")]
+  trigger: "Richiesta di analisi di un repository",
+)[#useCaseDiagram("29", "UC29 - Recupero e avvio strumenti esterni di analisi")]
 
 ==== UC29.1 Richiesta di analisi del codice <UC29.1>
 #useCase(
   attore: "Orchestratore",
-  attori_secondari: "SonarQube/Semgrep",
+  attori_secondari: "Strumenti di Analisi",
   pre: [
-    - L'orchestratore ha istruito il sistema Back-end sulla necessità di contattare lo strumento di analisi del codice
+    - L'orchestratore è nella fase di recupero degli strumenti di analisi #link(<UC29>)[#underline[\[UC29\]]]
+    - L'orchestratore contatta lo strumento di analisi del codice
   ],
   post: [
-    - Lo strumento di analisi del codice ha ricevuto correttamente il codice da analizzare e può iniziare l'analisi
+    - L'orchestratore ha avviato lo strumento di analisi del codice
   ],
   scenari: [
-    - L'orchestratore riceve l'istruzione del codice da analizzare
-    - L'orchestratore recupera il codice da analizzare e contatta il tool di analisi
-    - Lo strumento di analisi del codice viene contattato e gli viene passato il codice da analizzare
-    - Lo strumento di analisi del codice analizza il codice
+    - L'orchestratore invia il codice da anallizzare allo strumento di analisi del codice
   ],
   inclusioni: [
     - Nessuna
@@ -3031,17 +3031,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC29.1.1 Uno o più linguaggi presenti nella codebase non sono supportati dallo strumento di analisi <UC29.1.1>
 #useCase(
-  attore: "SonarQube/Semgrep",
+  attore: "Strumento di Analisi",
   pre: [
-    - Lo strumento di analisi del codice ha ricevuto correttamente il codice da analizzare e ha iniziato l'analisi
+    - Lo strumento di analisi del codice ha ricevuto correttamente il codice da analizzare dall'orchestratore  #link(<UC29.1>)[#underline[\[UC29.1\]]]
+    - Lo strumento di analisi del codice ha iniziato l'analisi
   ],
   post: [
-    - Lo strumento di analisi del codice comunica al sistema Back-end che il linguaggio non è supportato
+    - Lo strumento di analisi del codice comunica un messaggio di errore per mancato supporto di uno o piú linguaggio
   ],
   scenari: [
-    - Lo strumento di analisi del codice legge la richiesta del sistema Back-end
-    - Lo strumento di analisi del codice rileva dei linguaggi non riconosciuti
-    - Lo strumento di analisi del codice comunica l'errore al sistema Back-end
+    - Lo strumento di analisi del codice rileva dei linguaggi non supportati
   ],
   inclusioni: [
     - Nessuna
@@ -3049,23 +3048,22 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Viene richiesta l'analisi del codice e sono presenti linguaggi non supportati",
+  trigger: "Rilevato uno o piú linguaggi non supportati",
 )[]
 
 ==== UC29.2 Richiesta di analisi della documentazione <UC29.2>
 #useCase(
   attore: "Orchestratore",
-  attori_secondari: "OpenAI",
+  attori_secondari: "Servizio LLM",
   pre: [
-    - L'orchestratore è stato istruito sulla necessità di contattare lo strumento di analisi della documentazione 
+    - L' orchestratore è nella fase di recupero degli strumenti di analisi #link(<UC29>)[#underline[\[UC29\]]]
+    - L'orchestratore contatta lo strumento di analisi della documentazione, il servizio LLM
   ],
   post: [
-    - La documentazione viene passata correttamente allo strumento di analisi
+    - L'orchestratore ha avviato il servizio LLM come tool di analisi della documentazione
   ],
   scenari: [
-    - L'orchestratore riceve istruzione di analizzare la documentazione
-    - L'orchestratore recupera la documentazione appropriata da passare allo strumento di analisi
-    - Lo strumento di analisi riceve la documentazione
+    - L'orchestratore invia la documentazione da anallizzare al servizio LLM
   ],
   inclusioni: [
     - Nessuna
@@ -3079,17 +3077,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 ==== UC29.3 Richiesta di analisi del rispetto degli standard OWASP <UC29.3>
 #useCase(
   attore: "Orchestratore",
-  attori_secondari: "OWASP ZAP",
+  attori_secondari: "Strumenti di Analisi",
   pre: [
-    - L'orchestratore è stato istruito sulla necessità di contattare lo strumento di analisi degli standard OWASP
+    - L' orchestratore è nella fase di recupero degli strumenti di analisi #link(<UC29>)[#underline[\[UC29\]]]
+    - L'orchestratore contatta lo strumento di analisi del rispetto degli standard OWASP
   ],
   post: [
-    - Lo strumento di analisi degli standard OWASP riceve l'applicazione da analizzare correttamente
+    - L'orchestratore ha avviato lo strumento di analisi degli standard OWASP
   ],
   scenari: [
-    - L'orchestratore riceve istruzione di analizzare l'applicazione rispetto agli standard OWASP da parte dell'orchestratore
-    - L'orchestratore recupera correttamente l'applicazione da passare allo strumenti di anlisi degli standard OWASP
-    - Lo strumento di analisi riceve correttamente l'applicazione e può procedere con l'analisi
+    - L'orchestratore invia l'applicazione da analizzare allo strumento di analisi degli standard OWASP
   ],
   inclusioni: [
     - Nessuna
@@ -3097,30 +3094,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Richiesta di analisi del rispetto degli standard",
-)[]
-
-==== UC29.4 Impossibilità di contattare un tool <UC29.4>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - L'orchestratore ha provato a contattare un tool esterno per l'analisi
-  ],
-  post: [
-    - L'orchestratore trova un tool alternativo e lo contatta
-  ],
-  scenari: [
-    - L'orchestratore ha provato a contattare un tool esterno fallendo
-    - L'orchestratore cerca internamente un tool alternativo
-    - L'orchestratore contatta il tool alternativo
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Contatto con tool alternativo",
+  trigger: "Viene richiesta l'analisi del rispetto degli standard OWASP",
 )[]
 
 === UC30 Generazione del report finale <UC30>
@@ -3530,52 +3504,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "Il sistema GitHub rifiuta lo scambio del codice o la connessione fallisce",
 )[]
-
-/* === UC40ex Invio delle credenziali al sistema Back-end <UC40> #TODO("Probabile eliminazione")
-#useCase(
-  attore: "Utente non registrato",
-  pre: [
-    - L'orchestratore ha ricevuto le credenziali dell'utente durante la sua registrazione #link(<UC1>)[#underline[\[UC1\]]]
-  ],
-  post: [
-    - Il sistema Back-end ha ricevuto correttamente le credenziali per l'elaborazione
-  ],
-  scenari: [
-    - L'utente conferma l'invio delle proprie credenziali attraverso l'interfaccia di CodeGuardian
-    - Il sistema Front-end trasmette le credenziali al sistema Back-end
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC40.1>)[#underline[\[UC40.1\]]]
-  ],
-  trigger: "L'orchestratore riceve le credenziali dell'utente non registrato",
-)[
-  #useCaseDiagram("40", "UC40 - Invio delle credenziali al sistema Back-end")
-]
-
-==== UC40.1 Errore durante il trasferimento delle credenziali al Back-end <UC40.1>
-#useCase(
-  attore: "Utente non registrato",
-  pre: [
-    - L'utente ha tentato l'invio delle credenziali ma non avviene correttamente il processo di salvataggio 
-  ],
-  post: [
-    - Il sistema Back-end non acquisisce i dati e l'utente viene avvisato dell'impossibilità di procedere
-  ],
-  scenari: [
-    - Il sistema Front-end riscontra un errore di comunicazione interna o di rete durante il trasferimento dei dati al Back-end
-    - Il sistema Front-end mostra all'utente un messaggio di errore indicando il fallimento dell'operazione
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Il sistema Back-end non riceve le credenziali a causa di un errore di comunicazione",
-)[] */
 
 === UC41: Visualizzazione singola remediation di analisi del codice <UC41>
 #useCase(
