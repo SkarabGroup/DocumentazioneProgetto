@@ -3267,6 +3267,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 )[]
 
 === UC35: Gestione errore critico durante l'analisi <UC35>
+#TODO("La gestione dell'errore va bene come uc a parte o estensione magari di UC29?")
 #useCase(
   attore: "Orchestratore",
   pre: [
