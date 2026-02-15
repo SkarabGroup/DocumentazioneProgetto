@@ -3171,15 +3171,14 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    - Il sistema Front-end ha ricevuto correttamente il report di analisi da parte dell'orchestratore #link(<UC31>)[#underline[\[UC31\]]]
+    - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]].
+    - L'utente ha richiesto l'analisi della repository tramite la procedura di richiesta analisi #link(<UC4>)[#underline[\[UC4\]]].
   ],
   post: [
-    - L'utente può visualizzare il report richiesto #link(<UC6>)[#underline[\[UC6\]]]
-    #TODO("Riguarda dopo UC5")
+    - L'utente riceve una notifica che segnala la disponibilità del nuovo report di analisi.
   ],
   scenari: [
-    - Il sistema Front-end ha ricevuto il report di analisi ed è pronto a mostrarlo
-    - Il sistema Front-end notifica all'utente la disponibilità di visualizzazione del nuovo report di analisi
+    - L'utente riceve e prende atto della notifica relativa alla disponibilità del report.
   ],
   inclusioni: [
     - Nessuna
@@ -3187,122 +3186,79 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il report è pronto per la visualizzazione",
-)[]
+  trigger: "L'analisi richiesta è stata completata",
+)[
+  #useCaseDiagram("32", "UC32 - Notifica disponibilità nuovo report di analisi")
+]
 
 //spazio per quelli in mezzo
 
-=== UC34: Notifica completamento dell'analisi della repository al Front-end <UC34>
+
+=== UC34: Notifica completamento dell'analisi della repository <UC34>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'orchestratore ha ricevuto una richiesta di analisi dal Front-end #link(<UC4>)[#underline[\[UC4\]]]
-    - L'orchestratore ha iniziato l'analisi della repository #link(<UC29>)[#underline[\[UC29\]]]
-    - L'orchestratore ha concluso con successo l'analisi della repository
+    - L'Orchestratore ha completato l'elaborazione del report di analisi.
   ],
   post: [
-    - Il sistema Front-end è stato notificato del completamento dell'analisi
+    - La notifica di completamento è stata inoltrata.
   ],
   scenari: [
-    - L'orchestratore ha concluso l'analisi richiesta
-    - L'orchestratore invia una notifica al Front-end del completamento dell'analisi
+    - L'Orchestratore invia la notifica tramite il canale previsto.
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC34.1>)[#underline[\[UC34.1\]]]
+    - Nessuna
   ],
-  trigger: "L'orchestratore ha completato l'analisi della repository",
+  trigger: "Completamento dell'elaborazione del report",
 )[
-  #useCaseDiagram("34", "UC34 - Notifica completamento dell'analisi della repository al Front-end")
+  #useCaseDiagram("34", "UC34 - Notifica completamento dell'analisi della repository")
 ]
 
-==== UC34.1: Nuovo tentativo di invio del messaggio di completamento <UC34.1>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - L'Orchestratore non riceve un ack dal Front-end dopo aver inviato la notifica di completamento dell'analisi
-  ],
-  post: [
-    - L'Orchestratore ritenta l'invio della notifica di completamento dell'analisi al Front-end
-  ],
-  scenari: [
-    - L'Orchestratore non riceve l'ack di avvenuta ricezione della notifica di completamento dell'analisi
-    - L'Orchestratore ritenta l'invio della notifica al Front-end
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'Orchestratore non riceve l'ack di avvenuta ricezione della notifica di completamento dell'analisi dal Front-end",
-)[]
+
 
 === UC35: Gestione errore critico durante l'analisi <UC35>
 #TODO("La gestione dell'errore va bene come uc a parte o estensione magari di UC29?")
 #useCase(
-  attore: "Orchestratore",
+  attore: "Utente autorizzato",
   pre: [
-    - L'Orchestratore ha ricevuto una richiesta di analisi #link(<UC4>)[#underline[\[UC4\]]]
-    - L'Orchestratore ha avviato l'analisi della repository #link(<UC29>)[#underline[\[UC29\]]]
-    - L'Orchestratore riscontra un errore bloccante durante l'analisi
+    - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]].
+    - L'utente ha richiesto l'analisi della repository tramite la procedura di richiesta analisi #link(<UC4>)[#underline[\[UC4\]]].
   ],
   post: [
-    - Il Front-end viene notificato che l'analisi non è andata a buon fine
+    - L'utente viene informato che l'analisi non è stata completata a causa di un errore critico.
   ],
   scenari: [
-    - L'Orchestratore inizia l'analisi della repository
-    - Durante l'analisi si verifica un errore critico che blocca il processo
-    - L'Orchestratore cattura l'errore e prepara una notifica di fallimento
-    - L'Orchestratore invia la notifica al Front-end informandolo del fallimento dell'analisi
+    - L'utente riceve una notifica che segnala il fallimento dell'analisi.
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC35.1>)[#underline[\[UC35.1\]]]
+    - Nessuna
   ],
-  trigger: "Un errore critico blocca l'analisi della repository",
+  trigger: "L'utente riceve la notifica di un errore critico a seguito dell'analisi",
 )[
-  #useCaseDiagram("35", "UC35 - Gestione errore critico durante l'analisi")
+  #useCaseDiagram("35", "UC35 - Notifica errore critico durante l'analisi")
 ]
 
-==== UC35.1: Nuovo tentativo di invio del messaggio di fallimento <UC35.1>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - L'Orchestratore non riceve un ack dal Front-end dopo aver inviato la notifica di fallimento dell'analisi
-  ],
-  post: [
-    - L'Orchestratore ritenta l'invio della notifica di fallimento
-  ],
-  scenari: [
-    - L'Orchestratore non riceve l'ack di avvenuta ricezione della notifica di fallimento dell'analisi
-    - L'Orchestratore ritenta l'invio della notifica al Front-end
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'Orchestratore non riceve l'ack di avvenuta ricezione della notifica di fallimento dell'analisi dal Front-end",
-)[]
 
-/* === UC36: Salvataggio metadati repository <UC36> #TODO("Probabile eliminazione")
+
+=== UC36: Salvataggio metadati repository <UC36>
 #useCase(
-  attore: "Orchestratore",
+  attore: "Utente autorizzato",
   pre: [
-    - L'utente ha richiesto l'analisi di una repository #link(<UC4>)[#underline[\[UC4\]]]
-    - L'analisi è stata avviata e presa in carico dall'Orchestratore #link(<UC29>)[#underline[\[UC29\]]]
+    - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]].
+    - L'utente ha richiesto l'analisi della repository tramite la procedura di richiesta analisi #link(<UC4>)[#underline[\[UC4\]]].
   ],
   post: [
-    - I metadati della repository sono stati salvati nel database
+    - I metadati della repository sono stati salvati correttamente nel database.
   ],
   scenari: [
-    - L'Orchestratore manda al Database i metadati della repository selezionata dall'utente
+    - L'utente avvia (o conferma) la procedura di salvataggio metadati come parte della richiesta di analisi.
+    - Il sistema registra i metadati e conferma l'avvenuto salvataggio.
   ],
   inclusioni: [
     - Nessuna
@@ -3310,8 +3266,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'analisi è stata avviata con successo",
-)[] */
+  trigger: "Completamento della raccolta metadati durante l'analisi (UC29)",
+)[
+  #useCaseDiagram("36", "UC36 - Salvataggio metadati repository")
+]
 
 === UC37: Verifica esistenza repository analizzati <UC37> 
 #useCase(
@@ -3459,42 +3417,39 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Orchestratore",
   attori_secondari: "GitHub",
   pre: [
-    - L'orchestratore dispone di un codice di autorizzazione temporaneo (OAuth Code)
+    - L'Orchestratore dispone di un codice di autorizzazione temporaneo (OAuth Code).
   ],
   post: [
-    - L'orchestratore ha ottenuto il token di accesso permanente e ha abilitato l'integrazione del profilo utente con GitHub
+    - L'Orchestratore ha ottenuto il token di accesso e i relativi permessi necessari all'integrazione del profilo GitHub.
+    - Le credenziali/token sono state memorizzate in modo sicuro associandole ad un account.
   ],
   scenari: [
-    - L'orchestratore richiede alla piattaforma esterna GitHub la conversione del codice temporaneo in un token di accesso permanente
-    - L'orchestratore riceve il token di accesso e i relativi permessi di lettura/scrittura
-    - L'orchestratore associa le credenziali ottenute al profilo dell'utente
-    #TODO("Mettiamo un'unica azione generale del tipo 'l'orchestratore svolge tutta la procedura necessaria con la piattaforma GitHub'? anche se molto generale")
+    - L'Orchestratore invia a GitHub la richiesta di scambio del codice temporaneo per ottenere il token.
+    - GitHub risponde con un token di accesso valido e l'Orchestratore associa il token all'account utente.
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC40.1>)[#underline[[UC40.1]]]
+    - Nessuna
   ],
-  trigger: "L'orchestratore riceve un codice temporaneo di autorizzazione (OAuth Code)",
+  trigger: "L'Orchestratore riceve un codice temporaneo di autorizzazione (OAuth Code)",
 )[
-  #useCaseDiagram("41", "UC41 - Gestione del codice OAuth GitHub")
+  #useCaseDiagram("40", "UC40 - Gestione del codice OAuth GitHub")
 ]
 
-==== UC40.1 Errore durante lo scambio del codice OAuth GitHub <UC40.1>
+/* === UC40ex Invio delle credenziali al sistema Back-end <UC40> #TODO("Probabile eliminazione")
 #useCase(
-  attore: "Orchestratore",
-  attori_secondari: "GitHub",
+  attore: "Utente non registrato",
   pre: [
-    - L'orchestratore ha tentato di scambiare il codice di autorizzazione con il sistema GitHub #link(<UC40>)[#underline[[UC40]]]
-    - La procedura di scambio del codice è fallita
-    
+    - L'orchestratore ha ricevuto le credenziali dell'utente durante la sua registrazione #link(<UC1>)[#underline[\[UC1\]]]
   ],
   post: [
-    - L'orchestratore interrompe la procedura di collegamento con GitHub e comunica l'errore
+    - Il sistema Back-end ha ricevuto correttamente le credenziali per l'elaborazione
   ],
   scenari: [
-    - Il sistema GitHub rifiuta lo scambio del codice (es. codice scaduto o non valido) o la connessione fallisce
+    - L'utente conferma l'invio delle proprie credenziali attraverso l'interfaccia di CodeGuardian
+    - Il sistema Front-end trasmette le credenziali al sistema Back-end
   ],
   inclusioni: [
     - Nessuna
@@ -3502,8 +3457,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Il sistema GitHub rifiuta lo scambio del codice o la connessione fallisce",
-)[]
+  trigger: "L'orchestratore riceve le credenziali dell'utente non registrato",
+)[
+  #useCaseDiagram("40", "UC40 - Invio delle credenziali al sistema Back-end")
+]
+
+ */
 
 === UC41: Visualizzazione singola remediation di analisi del codice <UC41>
 #useCase(
@@ -4367,7 +4326,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   [#FRObx],
   [L'Utente deve essere notificato se il sistema GitHub non da l'autorizzazione durante lo scambio del codice OAuth],
-  [#link(<UC40>)[#underline[\[UC40\]]], #link(<UC40.1>)[#underline[\[UC40.1\]]]],
+  [#link(<UC40>)[#underline[\[UC40\]]]],
 
     //UC40ex
 /*[#FRObx],
