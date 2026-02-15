@@ -11,11 +11,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.44.7"
+#let versione = "v0.45"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2026/02/15",
+    "0.45.0",
+    "Modifica UC 16 e 19, aggiunta UC 41-46",
+    members.antonio,
+  ),
   (
     "2026/02/13",
     "0.44.7",
@@ -26,7 +32,7 @@
     "2026/02/13",
     "0.44.6",
     "Fix UC5, UC9-11",
-    members.antonio
+    members.antonio,
   ),
   (
     "2026/02/10",
@@ -1308,7 +1314,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente autorizzato accede alla sezione di visualizzazione del report di analisi di CodeGuardian",
+  trigger: "L'utente autorizzato sceglie un repository dalla lista di repository analizzati per visualizzarne i report di analisi",
 )[
   #useCaseDiagram("5", "UC5 - Visualizzazione report analisi repository GitHub")
 ]
@@ -1424,19 +1430,62 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente accede alla sezione metadati del report di analisi repository GitHub",
 )[]
 
-==== UC6.3: Visualizzazione delle sezioni scelte del report di analisi <UC6.3> 
+==== UC6.3: Visualizzazione sezione generica scelta del report di analisi <UC6.3> 
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    - L'utente ha selezionato un insieme non vuoto di dati da visualizzare #link(<UC6.1>)[#underline[\[UC6.1\]]]
+    - L'utente ha selezionato una generica sezione da visualizzare #link(<UC6.1>)[#underline[\[UC6.1\]]]
   ],
   post: [
-    - L'utente visualizza le sezioni selezionate
+    - L'utente visualizza la sezione selezionata
   ],
   scenari: [
-    - L'utente visualizza il report in base alle preferenze selezionate
+    - L'utente visualizza le informazioni specifiche della sezione scelta
+    - L'utente visualizza la lista delle remediation proposte per quella sezione #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
+  ],
+  inclusioni: [
+    - #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
+  ],
+  generalizzazione: [
+    - Questo caso d'uso funge da generalizzazione per i seguenti casi d'uso:
+    - Visualizzazione sezione analisi del codice #link(<UC9>)[#underline[\[UC9\]]]
+    - Visualizzazione sezione analisi della sicurezza #link(<UC10>)[#underline[\[UC10\]]]
+    - Visualizzazione sezione analisi della documentazione #link(<UC11>)[#underline[\[UC11\]]]
   ],
   trigger: "L'utente conferma le sezioni del report da visualizzare dalla sezione dedicata",
+)[]
+
+===== UC6.3.1 Visualizzazione lista remediation per sezione generica <UC6.3.1>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente ha selezionato una sezione da visualizzare #link(<UC6.1>)[#underline[\[UC6.1\]]]
+  ],
+  post: [
+    - L'utente visualizza la lista le remediation per la sezione selezionata
+  ],
+  scenari: [
+    - L'utente visualizza la lista le remediation proposte per la sezione scelta
+  ],
+  estensioni: [
+    - #link(<UC6.3.1.1>)[#underline[\[6.3.1.1\]]]
+  ],
+  trigger: "L'utente conferma le sezioni del report da visualizzare dalla sezione dedicata",
+)[]
+
+====== UC6.3.1.1 Nessuna remediation individuata per sezione generica <UC6.3.1.1>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - Il report non contiene alcuna remediation per la sezione selezionata
+  ],
+  post: [
+    - L'utente ha visualizzato il messaggio di assenza di remediation per la sezione selezionata
+  ],
+  scenari: [
+    - L'utente viene informato che non sono state trovati possibili miglioramenti per la sezione selezionata
+  ],
+  trigger: "Non sono presenti remediation per la sezione selezionata",
 )[]
 
 === UC7: Scelta intervallo temporale per visualizzazione confronto con report passati <UC7>
@@ -1568,7 +1617,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza la parte di report dedicata all'analisi statica del codice #link(<UC9.1>)[#underline[\[UC9.1\]]]
     - L'utente visualizza la parte di report dedicata alla copertura dei test di unità #link(<UC9.2>)[#underline[\[UC9.2\]]]
-    - L'utente visualizza il numero totale di vulnerabilità individuate nella sezione di analisi codice del report #link(<UC9.3>)[#underline[\[UC9.3\]]]
+    - L'utente visualizza il numero totale di remediation individuate nella sezione di analisi codice del report #link(<UC9.3>)[#underline[\[UC9.3\]]]
   ],
   inclusioni: [
     - #link(<UC9.1>)[#underline[\[UC9.1\]]]
@@ -1577,6 +1626,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   estensioni: [
     - Nessuna
+  ],
+  specializzazione: [
+    - Questo caso d'uso è una specializzazione del caso d'uso #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
   trigger: "L'utente seleziona la sezione relativa al codice tra le opzioni selezionabili per la visualizzazione del report",
 )[
@@ -1623,7 +1675,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente ha visualizzato le remediation della sezione di codice del report
   ],
   scenari: [
-    - L'utente visualizza le remediation trovate durante l'analisi della sezione di codice del report
+    - L'utente visualizza l'elenco di remediation trovate durante l'analisi della sezione di codice del report
   ],
   estensioni: [
     - #link(<UC9.3.1>)[#underline[\[UC9.3.1\]]]
@@ -1660,7 +1712,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza la parte di report dedicata all'analisi delle librerie e dipendenze del codice #link(<UC10.1>)[#underline[\[UC10.1\]]]
     - L'utente visualizza la parte di report dedicata alla conformità del repository con gli standard OWASP #link(<UC10.2>)[#underline[\[UC10.2\]]]
-    - L'utente visualizza il numero totale di vulnerabilità individuate nella sezione di sicurezza del report #link(<UC10.3>)[#underline[\[UC10.3\]]]
+    - L'utente visualizza il numero totale di remediation individuate nella sezione di sicurezza del report #link(<UC10.3>)[#underline[\[UC10.3\]]]
   ],
   inclusioni: [
     - #link(<UC10.1>)[#underline[\[UC10.1\]]]
@@ -1669,6 +1721,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   estensioni: [
     - Nessuna
+  ],
+  specializzazione: [
+    - Questo caso d'uso è una specializzazione del caso d'uso #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
   trigger: "L'utente seleziona la sezione relativa alla sicurezza tra le opzioni selezionabili per la visualizzazione del report",
 )[]
@@ -1710,7 +1765,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente sta visualizzando la sezione di codice del report di analisi
   ],
   post: [
-    - L'utente ha visualizzato le remediation della sezione di sicurezza del report
+    - L'utente ha visualizzato l'elenco di remediation della sezione di sicurezza del report
   ],
   scenari: [
     - L'utente visualizza le remediation trovate durante l'analisi della sezione di sicurezza del report
@@ -1750,7 +1805,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza la parte di report dedicata agli errori di spelling #link(<UC11.1>)[#underline[\[UC11.1\]]]
     - L'utente visualizza la parte di report dedicata alla completezza della documentazione nei confronti del codice del repository GitHub #link(<UC11.2>)[#underline[\[UC11.2\]]]
-    - L'utente visualizza il numero totale di vulnerabilità individuate nella sezione di documentazione del report #link(<UC11.3>)[#underline[\[UC11.3\]]]
+    - L'utente visualizza il numero totale di remediation individuate nella sezione di documentazione del report #link(<UC11.3>)[#underline[\[UC11.3\]]]
   ],
   inclusioni: [
     - #link(<UC11.1>)[#underline[\[UC11.1\]]]
@@ -1759,6 +1814,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   estensioni: [
     - Nessuna
+  ],
+  specializzazione: [
+    - Questo caso d'uso è una specializzazione del caso d'uso #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
   trigger: "L'utente seleziona la sezione relativa alla documentazione tra le opzioni selezionabili per la visualizzazione del report",
 )[#useCaseDiagram("10", "UC10 - Visualizzazione report analisi della documentazione repository GitHub")]
@@ -1800,7 +1858,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente sta visualizzando la sezione di documentazione del report di analisi
   ],
   post: [
-    - L'utente ha visualizzato le remediation della sezione di documentazione del report
+    - L'utente ha visualizzato l'elenco di remediation della sezione di documentazione del report
   ],
   scenari: [
     - L'utente visualizza le remediation trovate durante l'analisi della sezione di documentazione del report
@@ -1832,15 +1890,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]] 
   ],
   post:[
     - L'utente visualizza la lista dei repository analizzati ordinata per punteggio
   ],
   scenari: [
-    - Il Sistema recupera la lista dei repository analizzati dall'utente
-    - Il Sistema ordina i repository per punteggio di qualità complessiva
-    - Il Sistema Front-end mostra la lista ordinata all'utente
+    - L'utente visualizza la lista dei propri repository analizzati ordinata per punteggio
   ],
   inclusioni: [
     - Nessuna
@@ -1848,7 +1903,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - #link(<UC12.1>)[#underline[[UC12.1]]]
   ],
-  trigger:"L'utente si sposta nella sezione di ranking dei repository",
+  trigger:"L'utente si sposta nella sezione di ranking dei repository analizzati",
 )[
   #useCaseDiagram("43", "UC12 - Visualizzazione ranking dei repository analizzati")
 ]
@@ -1858,20 +1913,14 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]] 
+    - L'utente si trova nella sezione di visualizzazione del ranking dei repository  #link(<UC12>)[#underline[\[UC12\]]]
     - Non sono presenti repository analizzati associati all'utente
   ],
   post:[
     - L'utente visualizza il messaggio di lista vuota
   ],
   scenari: [
-    - Il Sistema mostra all'utente un messaggio che lo invita ad analizzare delle repository per avere un ranking di queste
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
+    - L'utente visualizza un messaggio che lo invita ad analizzare delle repository per avere un ranking disponibile 
   ],
   trigger:"L'utente si sposta nella sezione di ranking dei repository senza aver mai analizzato una repository",
 )[]
@@ -2121,7 +2170,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - All'utente viene impedito di cambiare la propria password
   ],
   scenari: [
-    - L'utene inserice una password corrente errata nel form
+    - L'utente inserice una password corrente errata nel form
     - L'utente visualizza un messaggio di errore che lo invita a modificare la password inserita perchè errata
   ],
   inclusioni: [
@@ -2263,98 +2312,33 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 )[]
 
 #TODO("Sistema qui in modo che le remediation siano distribuite nelle varie sezioni")
-=== UC16: Visualizzazione suggerimenti di remediation <UC16>
+=== UC16: Visualizzazione singola remediation di sezione generica <UC16>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    //- L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation
+    - L'utente sta visualizzando la lista delle remediation di una sezione selezionata #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
+    - L'utente seleziona una remediation specifica
   ],
   post: [
-    - L'utente ha visualizzato la lista delle issue identificate e i relativi suggerimenti di remediation
+    - L'utente ha visualizzato i dettagli della remediation
   ],
   scenari: [
-    - L'utente visualizza la lista delle issue identificate #link(<UC16.1>)[#underline[\[UC16.1\]]]
-    - L'utente visualizza i dettagli del suggerimento di remediation di un'issue specifica #link(<UC16.2>)[#underline[\[UC16.2\]]]
+    - L'utente visualizza i dettagli della remediation proposta
   ],
   inclusioni: [
-    - #link(<UC16.1>)[#underline[\[UC16.1\]]] // Visualizzazione lista issue identificate
-    - #link(<UC16.2>)[#underline[\[UC16.2\]]] // Visualizzazione dettaglio suggerimento di remediation
+    - Nessuna
   ],
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente visualizza, nella pagina del report di analisi del repository GitHub richiesto, la sezione relativa ai suggerimenti di remediation",
+  generalizzazione: [
+    - Questo caso d'uso funge da generalizzazione per i seguenti casi d'uso:
+    - Visualizzazione singola remediation per la sezione dell'analisi del codice #link(<UC41>)[#underline[\[UC41\]]]
+    - Visualizzazione singola remediation per la sezione dell'analisi della sicurezza #link(<UC42>)[#underline[\[UC42\]]]
+    - Visualizzazione singola remediation per la sezione dell'analisi della documentazione #link(<UC43>)[#underline[\[UC43\]]]
+  ],
+  trigger: "L'utente seleziona una remediation dalla lista proposta",
 )[#useCaseDiagram("16", "UC16 - Visualizzazione suggerimenti di remediation")]
-
-==== UC16.1: Visualizzazione lista issue identificate <UC16.1>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    //- L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]] già presenti in UC16
-    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
-    - L'utente è nella sezione relativa alla visualizzazione delle issue identificate, all'interno della sezione dei suggerimenti di remediation del report di analisi repository GitHub
-  ],
-  post: [
-    - L'utente visualizza la lista completa delle issue identificate nel repository analizzato
-  ],
-  scenari: [
-    - L'utente consulta la lista delle issue
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC16.1.1>)[#underline[\[UC16.1.1\]]]
-  ],
-  trigger: "L'utente accede alla sezione suggerimenti di remediation nel report di analisi",
-)[#useCaseDiagram("16_1", "UC16.1 - Visualizzazione lista issue identificate")]
-
-===== UC16.1.1: Nessuna issue identificata nel repository <UC16.1.1>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    //- L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
-    - L'analisi del repository non ha identificato alcuna issue
-  ],
-  post: [
-    - L'utente è informato che non sono state identificate issue nel repository analizzato
-  ],
-  scenari: [
-    - L'utente visualizza un messaggio che indica che l'analisi non ha identificato issue nel repository analizzato
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente accede alla sezione di visualizzazione delle issue per un repository privo di segnalazioni",
-)[]
-
-==== UC16.2: Visualizzazione dettaglio suggerimento di remediation <UC16.2>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    //- L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    //- L'utente ha selezionato, tra i dati specifici da visualizzare nel report #link(<UC5.3>)[#underline[\[UC5.3\]]], la sezione relativa ai suggerimenti di remediation #link(<UC16>)[#underline[\[UC16\]]]
-    - L'utente sta visualizzando la lista delle issue identificate #link(<UC16.1>)[#underline[\[UC16.1\]]]
-  ],
-  post: [
-    - L'utente visualizza il dettaglio completo del suggerimento di remediation
-  ],
-  scenari: [
-    - L'utente consulta il suggerimento di remediation
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente clicca sul pulsante di visualizzazione remediation relativo all'issue",
-)[]
 
 //USE CASE DEL BACK-END
 === UC17: Verifica accessibilità repository GitHub <UC17>
@@ -2611,84 +2595,64 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 */
 
 /// USE CASE DELLE ANALISI
-=== UC19: Analisi vulnerabilità dipendenze <UC19>
+=== UC19: Accettazione singola remediation generica <UC19>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente sta visualizzando un report di analisi #link(<UC6>)[#underline[\[UC6\]]]
+    - L'utente sta visualizzando una singola remediation generica #link(<UC16>)[#underline[\[UC16\]]]
   ],
   post: [
-    - L'utente visualizza il report delle vulnerabilità rilevate con livelli di severità
-    - L'utente visualizza le remediation proposte per ciascuna vulnerabilità
-    - L'utente può accettare o rifiutare le remediation
+    - La remediation viene automaticamente eseguita, applicando modifiche alla sezione specifica del repository di riferimento
+    - L'utente viene rimandato alla visualizzazione della singola remediation #link(<UC16>)[#underline[\[UC16\]]]
   ],
   scenari: [
-    - L'utente accede al pannello report del repository
-    - L'utente seleziona l'analisi vulnerabilità dipendenze
-    - L'utente visualizza il report delle vulnerabilità rilevate
-    - L'utente esamina le remediation proposte
-    - L'utente accetta o rifiuta le remediation #link(<UC19.1>)[#underline[\[UC19.1\]]] #link(<UC19.2>)[#underline[\[UC19.2\]]]
+    - L'utente accetta la remediation proposta dalla sezione di gestione della remediation
   ],
   inclusioni: [
-    - #link(<UC19.1>)[#underline[\[UC19.1\]]] // Accettazione remediation
-    - #link(<UC19.2>)[#underline[\[UC19.2\]]] // Rifiuto remediation
-  ],
-  estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente seleziona il comando di analisi vulnerabilità dipendenze dal pannello del report",
+  estensioni: [
+    - #link(<UC19.1>)[#underline[\[UC19.1\]]]
+    - #link(<UC19.2>)[#underline[\[UC19.2\]]]
+  ],
+  generalizzazione: [
+    - Questo caso d'uso funge da generalizzazione per i seguenti casi d'uso:
+    - Accettazione singola remediation per la sezione dell'analisi del codice #link(<UC44>)[#underline[\[UC44\]]]
+    - Accettazione singola remediation per la sezione dell'analisi della sicurezza #link(<UC45>)[#underline[\[UC45\]]]
+    - Accettazione singola remediation per la sezione dell'analisi della documentazione #link(<UC46>)[#underline[\[UC46\]]]
+  ],
+  trigger: "L'utente interagisce con la sezione di gestione della remediation e accetta la proposta di remediation",
 )[#useCaseDiagram("19", "UC19 - Analisi vulnerabilità dipendenze")]
 
-==== UC19.1: Accettazione remediation vulnerabilità dipendenze <UC19.1>
+==== UC19.1: Rifiuto di una singola remediation generica <UC19.1>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    - L'utente sta visualizzando il report di analisi vulnerabilità dipendenze #link(<UC19>)[#underline[\[UC19\]]]
-    - L'utente ha esaminato le remediation proposte
+    - L'utente sta interagendo con la sezione di gestione della remediation #link(<UC19>)[#underline[\[UC19\]]]
   ],
   post: [
-    - L'utente visualizza la conferma dell'applicazione delle remediation
-    - L'utente visualizza il riepilogo delle versioni aggiornate
+    - La remediation non viene applicata automaticamente
+    - L'utente viene rimandato alla visualizzazione della singola remediation #link(<UC16>)[#underline[\[UC16\]]]
   ],
   scenari: [
-    - L'utente esamina l'elenco delle remediation proposte
-    - L'utente seleziona le remediation che intende applicare
-    - L'utente conferma l'applicazione delle remediation selezionate
-    - L'utente visualizza la conferma dell'applicazione con l'elenco delle dipendenze aggiornate
+    - L'utente rifiuta la remediation proposta dalla sezione di gestione della remediation
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente seleziona il comando di conferma per applicare le remediation proposte dal sistema di analisi vulnerabilità",
+  trigger: "L'utente interagisce con la sezione di gestione della remediation e rifiuta la proposta di remediation",
 )[]
 
-==== UC19.2: Rifiuto remediation vulnerabilità dipendenze <UC19.2>
+==== UC19.2: Annullamento dell'operazione di gestione della remediation <UC19.2>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    - L'utente sta visualizzando il report di analisi vulnerabilità dipendenze #link(<UC19>)[#underline[\[UC19\]]]
-    - L'utente ha esaminato le remediation proposte
+    - L'utente sta interagendo con la sezione di gestione della remediation #link(<UC19>)[#underline[\[UC19\]]]
   ],
   post: [
-    - L'utente visualizza la conferma che nessuna modifica è stata applicata
-    - L'utente visualizza il report delle vulnerabilità senza modifiche
+    - L'utente viene rimandato alla visualizzazione della singola remediation #link(<UC16>)[#underline[\[UC16\]]]
   ],
   scenari: [
-    - L'utente esamina l'elenco delle remediation proposte
-    - L'utente seleziona il comando di rifiuto o chiude il pannello senza confermare
-    - L'utente visualizza la conferma che le remediation sono state scartate
+    - L'utente sceglie di annullare l'operazione, tornando alla sezione precedente
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente rifiuta le remediation proposte e chiude il pannello di analisi vulnerabilità dipendenze",
+  trigger: "L'utente annulla l'operazione di accettazione della remediation",
 )[]
 
 === UC20: Rilevamento segreti e token <UC20>
@@ -3229,7 +3193,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Il report è in mano all'orchestratore e pronto per essere inviato al sistema Front-end",
 )[]
 
-=== UC32 L'utente viene notificato della disponibilità di visualizzare il nuovo report id anlisi<UC32>
+=== UC32 L'utente viene notificato della disponibilità di visualizzare il nuovo report di analisi<UC32>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
@@ -3612,6 +3576,252 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Il sistema Back-end non riceve le credenziali a causa di un errore di comunicazione",
 )[] */
 
+=== UC41: Visualizzazione singola remediation di analisi del codice <UC41>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente sta visualizzando la lista delle remediation della sezione di analisi del codice #link(<UC9.3>)[#underline[\[UC9.3\]]]
+    - L'utente seleziona una remediation specifica dall'elenco
+  ],
+  post: [
+    - L'utente ha visualizzato i dettagli della remediation
+  ],
+  scenari: [
+    - L'utente visualizza i dettagli della remediation proposta
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  specializzazione: [
+    - Questo caso d'uso è una specializzazione del caso d'uso Visualizzazione singola remediation di sezione generica #link(<UC16>)[#underline[\[UC16\]]]
+  ],
+  trigger: "L'utente seleziona una remediation dalla lista proposta nella sezione di analisi del codice",
+)[]
+
+=== UC42: Visualizzazione singola remediation di analisi della sicurezza <UC42>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente sta visualizzando la lista delle remediation della sezione di analisi della sicurezza #link(<UC10.3>)[#underline[\[UC10.3\]]]
+    - L'utente seleziona una remediation specifica dall'elenco
+  ],
+  post: [
+    - L'utente ha visualizzato i dettagli della remediation
+  ],
+  scenari: [
+    - L'utente visualizza i dettagli della remediation proposta
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  specializzazione: [
+    - Questo caso d'uso è una specializzazione del caso d'uso Visualizzazione singola remediation di sezione generica #link(<UC16>)[#underline[\[UC16\]]]
+  ],
+  trigger: "L'utente seleziona una remediation dalla lista proposta nella sezione di analisi della sicurezza",
+)[]
+
+=== UC43: Visualizzazione singola remediation di analisi della documentazione <UC43>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente sta visualizzando la lista delle remediation della sezione di analisi della documentazione #link(<UC11.3>)[#underline[\[UC11.3\]]]
+    - L'utente seleziona una remediation specifica dall'elenco
+  ],
+  post: [
+    - L'utente ha visualizzato i dettagli della remediation
+  ],
+  scenari: [
+    - L'utente visualizza i dettagli della remediation proposta
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  specializzazione: [
+    - Questo caso d'uso è una specializzazione del caso d'uso Visualizzazione singola remediation di sezione generica #link(<UC16>)[#underline[\[UC16\]]]
+  ],
+  trigger: "L'utente seleziona una remediation dalla lista proposta nella sezione di analisi della documentazione",
+)[]
+
+=== UC44: Accettazione singola remediation di analisi del codice <UC44>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente sta visualizzando una singola remediation di analisi del codice #link(<UC41>)[#underline[\[UC41\]]]
+  ],
+  post: [
+    - La remediation viene automaticamente eseguita, applicando modifiche alla sezione interessata dall'analisi del codice del repository di riferimento 
+    - L'utente viene rimandato alla sezione di visualizzazione della singola remediation di analisi del codice #link(<UC41>)[#underline[\[UC41\]]]
+  ],
+  scenari: [
+    - L'utente accetta la remediation proposta dalla sezione di gestione della remediation di analisi del codice
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC44.1>)[#underline[\[UC44.1\]]]
+    - #link(<UC44.2>)[#underline[\[UC44.2\]]]
+  ],
+  specializzazione: [
+    - Questo caso d'uso è una specializzazione del caso d'uso Accettazione singola remediation #link(<UC19>)[#underline[\[UC19\]]]
+  ],
+  trigger: "L'utente interagisce con la sezione di gestione della remediation di analisi del codice e accetta la proposta di remediation",
+)[]
+
+==== UC44.1: Rifiuto di una singola remediation di analisi del codice <UC44.1>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente sta interagendo con la sezione di gestione della remediation di analisi del codice #link(<UC44>)[#underline[\[UC44\]]]
+  ],
+  post: [
+    - La remediation non viene applicata automaticamente
+    - L'utente viene rimandato alla visualizzazione della singola remediation di analisi del codice #link(<UC41>)[#underline[\[UC41\]]]
+  ],
+  scenari: [
+    - L'utente rifiuta la remediation proposta dalla sezione di gestione della remediation di analisi del codice
+  ],
+  trigger: "L'utente interagisce con la sezione di gestione della remediation e rifiuta la proposta di remediation di analisi del codice",
+)[]
+
+==== UC44.2: Annullamento dell'operazione di gestione della remediation di analisi del codice <UC44.2>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente sta interagendo con la sezione di gestione della remediation di analisi del codice #link(<UC44>)[#underline[\[UC44\]]]
+  ],
+  post: [
+    - L'utente viene rimandato alla visualizzazione della singola remediation di analisi del codice #link(<UC41>)[#underline[\[UC41\]]]
+  ],
+  scenari: [
+    - L'utente sceglie di annullare l'operazione, tornando alla sezione precedente
+  ],
+  trigger: "L'utente annulla l'operazione di accettazione della remediation di analisi del codice",
+)[]
+
+=== UC45: Accettazione singola remediation di analisi della sicurezza <UC45>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente sta visualizzando una singola remediation di analisi della sicurezza #link(<UC42>)[#underline[\[UC42\]]]
+  ],
+  post: [
+    - La remediation viene automaticamente eseguita, applicando modifiche alla sezione interessata dall'analisi della sicurezza del repository di riferimento 
+    - L'utente viene rimandato alla sezione di visualizzazione della singola remediation di analisi della sicurezza #link(<UC42>)[#underline[\[UC42\]]]
+  ],
+  scenari: [
+    - L'utente accetta la remediation proposta dalla sezione di gestione della remediation di analisi della sicurezza
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC45.1>)[#underline[\[UC45.1\]]]
+    - #link(<UC45.2>)[#underline[\[UC45.2\]]]
+  ],
+  specializzazione: [
+    - Questo caso d'uso è una specializzazione del caso d'uso Accettazione singola remediation #link(<UC19>)[#underline[\[UC19\]]]
+  ],
+  trigger: "L'utente interagisce con la sezione di gestione della remediation di analisi della sicurezza e accetta la proposta di remediation",
+)[]
+
+==== UC45.1: Rifiuto di una singola remediation di analisi della sicurezza <UC45.1>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente sta interagendo con la sezione di gestione della remediation di analisi della sicurezza #link(<UC45>)[#underline[\[UC45\]]]
+  ],
+  post: [
+    - La remediation non viene applicata automaticamente
+    - L'utente viene rimandato alla visualizzazione della singola remediation di analisi della sicurezza #link(<UC42>)[#underline[\[UC42\]]]
+  ],
+  scenari: [
+    - L'utente rifiuta la remediation proposta dalla sezione di gestione della remediation di analisi della sicurezza
+  ],
+  trigger: "L'utente interagisce con la sezione di gestione della remediation e rifiuta la proposta di remediation di analisi della sicurezza",
+)[]
+
+==== UC45.2: Annullamento dell'operazione di gestione della remediation di analisi della sicurezza <UC45.2>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente sta interagendo con la sezione di gestione della remediation di analisi della sicurezza #link(<UC45>)[#underline[\[UC45\]]]
+  ],
+  post: [
+    - L'utente viene rimandato alla visualizzazione della singola remediation di analisi della sicurezza #link(<UC42>)[#underline[\[UC42\]]]
+  ],
+  scenari: [
+    - L'utente sceglie di annullare l'operazione, tornando alla sezione precedente
+  ],
+  trigger: "L'utente annulla l'operazione di accettazione della remediation di analisi della sicurezza",
+)[]
+
+=== UC46: Accettazione singola remediation di analisi della documentazione <UC46>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente sta visualizzando una singola remediation di analisi della documentazione #link(<UC43>)[#underline[\[UC43\]]]
+  ],
+  post: [
+    - La remediation viene automaticamente eseguita, applicando modifiche alla sezione interessata dall'analisi della documentazione del repository di riferimento 
+    - L'utente viene rimandato alla sezione di visualizzazione della singola remediation di analisi della documentazione #link(<UC43>)[#underline[\[UC43\]]]
+  ],
+  scenari: [
+    - L'utente accetta la remediation proposta dalla sezione di gestione della remediation di analisi della documentazione
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC46.1>)[#underline[\[UC46.1\]]]
+    - #link(<UC46.2>)[#underline[\[UC46.2\]]]
+  ],
+  specializzazione: [
+    - Questo caso d'uso è una specializzazione del caso d'uso Accettazione singola remediation #link(<UC19>)[#underline[\[UC19\]]]
+  ],
+  trigger: "L'utente interagisce con la sezione di gestione della remediation di analisi della documentazione e accetta la proposta di remediation",
+)[]
+
+==== UC46.1: Rifiuto di una singola remediation di analisi della documentazione <UC46.1>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente sta interagendo con la sezione di gestione della remediation di analisi della documentazione #link(<UC46>)[#underline[\[UC46\]]]
+  ],
+  post: [
+    - La remediation non viene applicata automaticamente
+    - L'utente viene rimandato alla visualizzazione della singola remediation di analisi della documentazione #link(<UC43>)[#underline[\[UC43\]]]
+  ],
+  scenari: [
+    - L'utente rifiuta la remediation proposta dalla sezione di gestione della remediation di analisi della documentazione
+  ],
+  trigger: "L'utente interagisce con la sezione di gestione della remediation e rifiuta la proposta di remediation di analisi della documentazione",
+)[]
+
+==== UC46.2: Annullamento dell'operazione di gestione della remediation di analisi della documentazione <UC46.2>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente sta interagendo con la sezione di gestione della remediation di analisi della documentazione #link(<UC46>)[#underline[\[UC46\]]]
+  ],
+  post: [
+    - L'utente viene rimandato alla visualizzazione della singola remediation di analisi della documentazione #link(<UC43>)[#underline[\[UC43\]]]
+  ],
+  scenari: [
+    - L'utente sceglie di annullare l'operazione, tornando alla sezione precedente
+  ],
+  trigger: "L'utente annulla l'operazione di accettazione della remediation di analisi della documentazione",
+)[]
+
 #pagebreak()
 
 = Requisiti di Sistema
@@ -3709,7 +3919,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [Il Sistema deve permettere la finalizzazione della registrazione previa validazione di tutti i campi.],
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
-  // --- SEZIONE UC2: AUTENTICAZIONE ---
+  // UC2
   [#FRObx],
   [Il Sistema deve consentire all'Utente non autenticato l'accesso alla sezione di login.],
   [#link(<UC2>)[#underline[\[UC2\]]]],
@@ -3863,7 +4073,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   // UC6
   [#FRObx],
-  [L'Utente deve poter accedere alla sezione di visualizzazione dei report di analisi],
+  [L'Utente deve poter selezionare un repository dalla lista dei repository analizzati per visualizzare i report di analisi di tale repository],
   [#link(<UC6>)[#underline[\[UC6\]]]],
 
   [#FRObx], 
@@ -3993,6 +4203,14 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC12>)[#underline[\[UC12\]]]],
 
   [#FROpx],
+  [Il sistema Back-end deve essere in grado di passare solo e tutti i repository analizzati con relative metriche di comparazione al Front-end],
+  [#link(<UC12>)[#underline[\[UC12\]]], #link(<UC12.1>)[#underline[\[UC12.1\]]]],
+
+  [#FROpx],
+  [L'ordine in cui appaiono i repository deve essere coerente con il punteggio assegnato],
+  [#link(<UC12>)[#underline[\[UC12\]]], #link(<UC12.1>)[#underline[\[UC12.1\]]]],
+
+  [#FROpx],
   [Il sistema Back-end deve riuscire a riconoscere correttamente il caso in cui un utente non abbia mai analizzato repository e comunicarlo al Front-end],
   [#link(<UC12>)[#underline[\[UC12\]]], #link(<UC12.1>)[#underline[\[UC12.1\]]]],
 
@@ -4066,19 +4284,9 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC15>)[#underline[\[UC15\]]], #link(<UC15.4>)[#underline[\[UC15.4\]]]],
 
   //UC16
-  [#FRObx], [L'Utente deve poter visualizzare i suggerimenti di remediation], [#link(<UC16>)[#underline[\[UC16\]]]],
-
-  [#FRObx],
-  [L'Utente deve poter visualizzare la lista delle issue identificate],
-  [#link(<UC16>)[#underline[\[UC16\]]], #link(<UC16.1>)[#underline[\[UC16.1\]]]],
-
-  [#FRObx],
-  [L'Utente deve ricevere un avviso se non ci sono issue identificate],
-  [#link(<UC16.1.1>)[#underline[\[UC16.1.1\]]]],
-
-  [#FRObx],
-  [L'Utente deve poter visualizzare il dettaglio di ogni suggerimento di remediation],
-  [#link(<UC16>)[#underline[\[UC16\]]], #link(<UC16.2>)[#underline[\[UC16.2\]]]],
+  [#FRObx], 
+  [L'Utente deve poter visualizzare i dettagli di una singola remediation], 
+  [#link(<UC16>)[#underline[\[UC16\]]]],
 
   //UC17
   //[#FRObx], [L'Orchestratore deve creare l'ambiente sandbox per l'analisi], [#link//(<UC17>)[#underline[\[UC17\]]]],
@@ -4110,15 +4318,25 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC18.2.1>)[#underline[\[UC18.2.1\]]]],
   */
   //UC19
-  [#FRObx], [Le vulnerabilità delle dipendenze devono essere analizzate], [#link(<UC19>)[#underline[\[UC19\]]]],
+  [#FRDex],
+  [L'Utente deve poter interagire con la sezione di gestione di remediation],
+  [#link(<UC19>)[#underline[\[UC19\]]]],
+  
+  [#FRDex],
+  [L'Utente deve poter accettare la remediation proposta],
+  [#link(<UC19>)[#underline[\[UC19\]]]],
 
   [#FRDex],
-  [L'Utente deve poter accettare le remediation proposte per le vulnerabilità],
-  [#link(<UC19>)[#underline[\[UC19\]]], #link(<UC19.1>)[#underline[\[UC19.1\]]]],
+  [Il sistema deve modificare il repository coerentemente con quanto scritto nella remediation],
+  [#link(<UC19>)[#underline[\[UC19\]]]],
 
   [#FRDex],
-  [L'Utente deve poter rifiutare le remediation proposte],
-  [#link(<UC19>)[#underline[\[UC19\]]], #link(<UC19.2>)[#underline[\[UC19.2\]]]],
+  [L'Utente deve poter rifiutare la remediation proposta],
+  [#link(<UC19.1>)[#underline[\[UC19.1\]]]],
+
+  [#FRDex],
+  [L'Utente deve poter annullare l'operazione di accettazione di remediation],
+  [#link(<UC19.2>)[#underline[\[UC19.2\]]]],
 
   //UC20
   [#FROpx], [Segreti e token esposti devono essere rilevati], [#link(<UC20>)[#underline[\[UC20\]]]],
@@ -4230,6 +4448,85 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se il trasferimento delle credenziali non avviene],
   [#link(<UC40.1>)[#underline[\[UC40\]]], #link(<UC40.1>)[#underline[\[UC40.1\]]]], */
+
+  //UC41
+  [#FRObx],
+  [L'Utente deve poter visualizzare i dettagli di una singola remediation nella sezione di analisi del codice],
+  [#link(<UC41>)[#underline[\[UC41\]]]],
+
+  //UC42
+  [#FRObx],
+  [L'Utente deve poter visualizzare i dettagli di una singola remediation nella sezione di analisi della sicurezza],
+  [#link(<UC42>)[#underline[\[UC42\]]]],
+  
+  //UC43
+  [#FRObx],
+  [L'Utente deve poter visualizzare i dettagli di una singola remediation nella sezione di analisi della documentazione],
+  [#link(<UC43>)[#underline[\[UC43\]]]],
+
+  //UC44
+  [#FRDex],
+  [L'Utente deve poter interagire con la sezione di gestione di remediation di analisi del codice],
+  [#link(<UC44>)[#underline[\[UC44\]]]],
+  
+  [#FRDex],
+  [L'Utente deve poter accettare la remediation di analisi del codice proposta],
+  [#link(<UC44>)[#underline[\[UC44\]]]],
+
+  [#FRDex],
+  [Il sistema deve modificare il repository coerentemente con quanto scritto nella remediation di analisi del codice],
+  [#link(<UC44>)[#underline[\[UC44\]]]],
+
+  [#FRDex],
+  [L'Utente deve poter rifiutare la remediation di analisi del codice proposta],
+  [#link(<UC44.1>)[#underline[\[UC44.1\]]]],
+
+  [#FRDex],
+  [L'Utente deve poter annullare l'operazione di accettazione di remediation di analisi del codice],
+  [#link(<UC44.2>)[#underline[\[UC44.2\]]]],
+
+  //UC45
+  [#FRDex],
+  [L'Utente deve poter interagire con la sezione di gestione di remediation di analisi della sicurezza],
+  [#link(<UC45>)[#underline[\[UC45\]]]],
+  
+  [#FRDex],
+  [L'Utente deve poter accettare la remediation di analisi della sicurezza proposta],
+  [#link(<UC45>)[#underline[\[UC45\]]]],
+
+  [#FRDex],
+  [Il sistema deve modificare il repository coerentemente con quanto scritto nella remediation di analisi della sicurezza],
+  [#link(<UC45>)[#underline[\[UC45\]]]],
+
+  [#FRDex],
+  [L'Utente deve poter rifiutare la remediation di analisi della sicurezza proposta],
+  [#link(<UC45.1>)[#underline[\[UC45.1\]]]],
+
+  [#FRDex],
+  [L'Utente deve poter annullare l'operazione di accettazione di remediation di analisi della sicurezza],
+  [#link(<UC45.2>)[#underline[\[UC45.2\]]]],
+
+  //UC46
+  [#FRDex],
+  [L'Utente deve poter interagire con la sezione di gestione di remediation di analisi della documentazione],
+  [#link(<UC46>)[#underline[\[UC46\]]]],
+  
+  [#FRDex],
+  [L'Utente deve poter accettare la remediation di analisi della documentazione proposta],
+  [#link(<UC46>)[#underline[\[UC46\]]]],
+
+  [#FRDex],
+  [Il sistema deve modificare il repository coerentemente con quanto scritto nella remediation di analisi della documentazione],
+  [#link(<UC46>)[#underline[\[UC46\]]]],
+
+  [#FRDex],
+  [L'Utente deve poter rifiutare la remediation di analisi della documentazione proposta],
+  [#link(<UC46.1>)[#underline[\[UC46.1\]]]],
+
+  [#FRDex],
+  [L'Utente deve poter annullare l'operazione di accettazione di remediation di analisi della documentazione],
+  [#link(<UC46.2>)[#underline[\[UC46.2\]]]],
+
 )
 
 #pagebreak()
