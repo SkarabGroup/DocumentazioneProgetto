@@ -3402,14 +3402,14 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Orchestratore",
   attori_secondari: "GitHub",
   pre: [
-    - L'Orchestratore dispone di un codice di autorizzazione temporaneo (OAuth Code).
+    - L'orchestratore dispone di un codice di autorizzazione temporaneo (OAuth Code).
   ],
   post: [
-    - L'Orchestratore ha ottenuto il token di accesso e i relativi permessi necessari all'integrazione del profilo GitHub.
+    - L'orchestratore ha ottenuto il token di accesso e i relativi permessi necessari all'integrazione del profilo GitHub.
     - Le credenziali/token sono state memorizzate in modo sicuro associandole ad un account.
   ],
   scenari: [
-    - L'Orchestratore invia a GitHub la richiesta di scambio del codice temporaneo per ottenere il token.
+    - L'orchestratore invia a GitHub la richiesta di scambio del codice temporaneo per ottenere il token.
     - GitHub risponde con un token di accesso valido e l'Orchestratore associa il token all'account utente.
   ],
   inclusioni: [
@@ -3418,7 +3418,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'Orchestratore riceve un codice temporaneo di autorizzazione (OAuth Code)",
+  trigger: "L'orchestratore riceve un codice temporaneo di autorizzazione (OAuth Code)",
 )[
   #useCaseDiagram("40", "UC40 - Gestione del codice OAuth GitHub")
 ]
