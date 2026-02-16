@@ -5485,3 +5485,145 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   [L'analisi di sicurezza deve essere conforme agli standard OWASP Top 10],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "OWASP"],
 )
+
+= Tracciamento
+
+== Fonte - Requisiti
+#table(
+  columns: (1.5fr, 2.5fr),
+    inset: 10pt,
+    align: (col, row) => (if col == 0 { center } else { center }),
+    fill: (col, row) => if row == 0 { luma(240) } else { white },
+    stroke: 0.5pt + luma(200),
+    table.header([*Fonte*], [*Requisiti*]),
+
+  [Capitolato],
+  [],
+
+  [Incontro con il proponente],
+  [],
+
+  [Decisione interna],
+  [],
+
+  [UC1],
+  [],
+
+  [UC2],
+  [],
+
+  [UC3],
+  [],
+
+  [UC4],
+  [],
+
+  [UC5],
+  [],
+
+  [UC6],
+  [],
+
+  [UC7],
+  [],
+
+  [UC8],
+  [],
+
+  [UC9],
+  [],
+
+  [UC10],
+  [],
+
+  [UC11],
+  [],
+
+  [UC12],
+  [],
+
+  [UC13],
+  [],
+
+  [UC14],
+  [],
+
+  [UC15],
+  [],
+
+  [UC16],
+  [],
+
+  [UC17],
+  [],
+
+  [UC18],
+  [],
+
+  [UC19],
+  [],
+
+  [UC20],
+  [],
+
+  [UC21],
+  [],
+
+  [UC22],
+  [],
+
+  [UC23],
+  [],
+
+  [UC24],
+  [],
+
+  [UC25],
+  [],
+
+  [UC26],
+  [],
+
+  [UC27],
+  [],
+
+  [UC28],
+  [],
+
+  [UC29],
+  [],
+
+  [UC30],
+  [],
+
+  [UC31],
+  [],
+
+  [UC32],
+  [],
+
+  [UC33],
+  [],
+
+  [UC34],
+  [],
+
+  [UC35],
+  [],
+
+  [UC36],
+  [],
+
+  [UC37],
+  [],
+
+  [UC38],
+  [],
+
+  [UC39],
+  [],
+
+  [UC40],
+  [],
+
+)
