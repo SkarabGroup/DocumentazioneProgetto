@@ -1952,60 +1952,13 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente conferma la disconnessione del proprio account GitHub dalla paiattaforma CodeGuardian
   ],
   inclusioni: [
-    //- #link(<UC13.1>)[#underline[\[UC13.1\]]] // Conferma disconnessione
+    - Nessuna
   ],
   estensioni: [
     - Nessuna
   ],
   trigger: "L'utente entra nella sezione di disconnessione dell'account GitHub dal sistema CodeGuardian",
 )[#useCaseDiagram("13", "UC13 - Disconnessione account GitHub da CodeGuardian")]
-
-#TODO("Trovo inutili i sottocasi 13.1 e 13.1.1, se siete d'accordo eliminate commenti")
-/* ==== UC13.1: Selezione tasto Disconnetti <UC13.1>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente ha selezionato la sezione di disconnessione dell'account GitHub dall'applicazione CodeGuardian
-  ],
-  post: [
-    - L'utente ha disconnesso con successo il proprio accont GitHub dall'applicazione Codeguardian
-  ],
-  scenari: [
-    - L'utente seleziona il tasto "Disconnetti"
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC13.1.1>)[#underline[\[UC13.1.1\]]]
-
-  ],
-  trigger: "L'untente preme il tasto Disconnetti per disconnettere il proprio account",
-)[#useCaseDiagram("13_1", "UC13.1 - Selezione tasto Disconnetti")]
-
-===== UC13.1.1: Conferma disconnessione account<UC13.1.1>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    //- L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
-    //- L'utente ha selezionato la sezione di disconnessione dell'account GitHub dal sistema CodeGuardian #link(<UC13>)[#underline[\[UC13\]]]
-    - L'utente ha confermato la disconnessione del proprio account dall'applicazione CodeGuardian
-  ],
-  post: [
-    - L'utente ha disconnesso con successo il proprio account di GitHub dalla piattaforma CodeGuardian
-  ],
-  scenari: [
-    - L'utente visualizza il banner di conferma
-    - L'utente conferma la disconessione del proprio account
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente seleziona e conferma la disconnessione del proprio account GitHub dalla piattaforma CodeGuardian",
-)[] */
 
 === UC14: Esportazione report di analisi repository GitHub <UC14>
 #useCase(
@@ -2057,8 +2010,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    //- L'utente sta visualizzando il report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    //- L'utente sta eseguendo la procedura di esportazione #link(<UC14>)[#underline[\[UC14\]]]
     - L'utente tenta di procedere senza selezionare un formato di esportazione nella sezione formati
   ],
   post: [
@@ -2080,8 +2031,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    //- L'utente sta visualizzando il report di analisi #link(<UC5.4>)[#underline[\[UC5.4\]]]
-    //- L'utente sta eseguendo la procedura di esportazione #link(<UC14>)[#underline[\[UC14\]]]
     - L'utente ha selezionato un formato di esportazione valido #link(<UC14.1>)[#underline[\[UC14.1\]]]
   ],
   post: [
@@ -2470,143 +2419,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Esaurimento dei tentativi di accesso autorizzato",
 )[]
 
-/*
-==== UC17.1 Errore durante la creazione dell'ambiente sandbox <UC17.1>
-#useCase(
-  attore: "Orchestratore",
-  attori_secondari: "Docker",
-  pre: [
-    - Il sistema CodeGuardian ha accettato la richesta di analisi del repository
-  ],
-  post: [
-    - L'ambiente sand box non viene creato correttamente
-  ],
-  scenari: [
-    - Si verifica un errore durante la creazione dell'ambiente sandbox
-  ],
-  inclusioni: [
-    - #link(<UC17.1.1>)[#underline[\[UC17.1.1\]]]
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Durante la creazione dell'ambiente sandbox si verifica un errore",
-)[#useCaseDiagram("17_1", "UC17.1 - Errore durante la creazione dell'ambiente sandbox")]
+#TODO("1 buco da coprire")
 
-=== UC17.1.1 Comunicazione dell'errore durante la creazione dell'ambiente sand box <UC17.1.1>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - Viene rilevato un errore durante la creazione dell'ambiente sandbox
-  ],
-  post: [
-    - L'ambiente sandbox non viene creato correttamente e ciò viene comunicato al sistema Front-end
-  ],
-  scenari: [
-    - L'orchestratore comunica l'errore al sistema Front-end
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Durante la creazione dell'ambiente sandbox si verifica un errore",
-)[]
-
-=== UC18 Lettura delle richieste dell'utente da parte dell'orchestratore <UC18>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    //- L'utente autenticato avanzato ha richiesto l'analisi del proprio repository al sistema CodeGuardian #link(<UC4>)[#underline[\[UC4\]]]
-    #TODO("check precondizione tolta")
-    - L'ambiente sandbox é stato creato correttamente #link(<UC17>)[#underline[\[UC17\]]]
-  ],
-  post: [
-    - L'orchestratore ha letto e interpretato correttamente le richieste dell'utente
-  ],
-  scenari: [
-    - L'orchestratore legge le richieste dell'utente
-    - L'orchestratore notifica al sistema Back-end i compiti da svolgere
-  ],
-  inclusioni: [
-    - #link(<UC18.1>)[#underline[\[UC18.1\]]]
-    - #link(<UC18.2>)[#underline[\[UC18.2\]]]
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'orchestratore ha letto e interpretato correttamente le richieste dell'utente e ha visionato il repository",
-)[#useCaseDiagram("18", "UC18 - Lettura delle richieste dell'utente da parte dell'orchestratore")]
-
-==== UC18.1 Richiesta di analisi completa <UC18.1>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - Non ci sono state richieste specifiche da parte dell'utente
-  ],
-  post: [
-    - L'orchestratore avvia l'analisi completa del repository
-  ],
-  scenari: [
-    - Il sistema Front-end comunica all'orchestratore che l'utente vuole svolgere un'analisi completa del proprio repository
-    - L'orchestratore riceve la richiesta e avvia l'analisi completa del repository
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'orchestratore riceve dal sistema Front-end la richiesta di analisi completa",
-)[]
-==== UC18.2 Richieste specifiche sull'analisi da parte del front-end <UC18.2>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - L'utente ha fatto delle richieste specifiche sulle aree da analizzare del proprio repository
-  ],
-  post: [
-    - L'orchestratore avvia l'analisi specifica del repository in base alle richieste dell'utente
-  ],
-  scenari: [
-    - Il sistema Front-end comunica all'orchestratore le specifiche richieste dell'utente rispetto alle aree da analizzare
-    - L'orchestratore controlla la pre-esistenza del repository da analizzare nel #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#database")[#def("Database")]
-    - L'orchestratore, una volta compresa la richiesta, avvia l'analisi specifica
-  ],
-  inclusioni: [
-    - #link(<UC18.2.1>)[#underline[\[UC18.2.1\]]]
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Il sistema Front-end comunica al sistema Back-end le richieste che dovranno essere prese in carico",
-)[#useCaseDiagram("18_2", "UC18.2 - Richieste specifiche sull'analisi da parte del frontend")]
-
-===== UC18.2.1 Repository mai analizzato in precedenza <UC18.2.1>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - Il repository non era mai stato analizzato in precedenza
-  ],
-  post: [
-    - L'orchestratore istruisce avvia un'analisi completa del repository
-  ],
-  scenari: [
-    - L'orchestratore controlla la pre-esistenza del repository da analizzare nel database e non la trova
-    - L'orchestratore si comporta come se fosse stata richiesta l'analisi completa
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'orchestratore non ha trovato la repository nel database",
-)[]
-*/
-
-/// USE CASE DELLE ANALISI
+// USE CASE DELLE ANALISI
 === UC19: Accettazione singola remediation generica <UC19>
 #useCase(
   attore: "Utente autorizzato",
@@ -2676,7 +2491,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   post: [
     - L'utente visualizza il report dei segreti rilevati con livelli di confidenza
-    //- L'utente visualizza i dettagli di ciascun rilevamento
   ],
   scenari: [
     - L'utente accede al pannello di analisi sicurezza
@@ -2783,14 +2597,14 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente si trova nella sezione di compliance e governance del pannello report
   ],
   post: [
-    - L'utente visualizza il report di compatibilità delle licenze con classificazione dei #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#rischio")[#def("Rischi")]
+    - L'utente visualizza il report di compatibilità delle licenze con classificazione dei rischi
     - L'utente visualizza le licenze non compatibili evidenziate
     - L'utente può richiedere approvazione legale
   ],
   scenari: [
     - L'utente accede al pannello compliance
     - L'utente seleziona la verifica conformità licenze
-    - L'utente visualizza il report delle licenze con classificazione dei #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#rischio")[#def("Rischi")]
+    - L'utente visualizza il report delle licenze con classificazione dei rischi
     - L'utente esamina le dipendenze problematiche
   ],
   inclusioni: [
@@ -2801,6 +2615,8 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'utente seleziona il comando di verifica conformità licenze dal pannello compliance",
 )[#useCaseDiagram("21", "UC21 - Verifica conformità licenze")]
+
+#TODO("1 buco da coprire")
 
 === UC23: Monitor qualità del codice <UC23>
 #useCase(
@@ -2883,85 +2699,8 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente seleziona i refactor da applicare e conferma l'applicazione automatica con supervisione",
 )[]
 
-#TODO("Valutare cosa fare con il recupero password")
-/*=== UC25 Recupero password del profilo di CodeGuardian <UC25>
-#useCase(
-  attore: "Utente non autenticato",
-  pre: [
-    - L'utente è registrato a CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
-  ],
-  post:[
-    - L'utente ha ricevuto una email all'indirizzo di posta elettronica corrispondente all'account della credenziale inserita
-  ],
-  scenari:[
-    - L'utente inserisce l'username o l'email corrispondente al proprio account #link(<UC25.1>)[#underline[\[UC25.1\]]]
-    - L'utente conferma la procedura e visualizza un messaggio che lo invita a controllare il proprio indirizzo di posta elettronica
-  ],
-  inclusioni:[
-    - #link(<UC25.1>)[#underline[\[UC25.1\]]]
-  ],
-  estensioni:[
-    - Nessuna
-  ],
-  trigger: "L'utente accede alla sezione di recupero password dell'account",
-)[]
+#TODO("3 buchi da coprire")
 
-==== UC25.1: Inserimento credenziale per recupero password <UC25.1>
-#useCase(
-  attore: "Utente non autenticato",
-  pre: [
-    - L'utente sta eseguendo la procedura di recupero password #link(<UC25>)[#underline[\[UC25\]]]
-    - L'utente visualizza il campo di inserimento per lo username o l'email
-  ],
-  post: [
-    - L'utente ha inserito uno username o un'email conforme ai vincoli di formato
-    - Lo username o l'email inserita è associata a un account CodeGuardian esistente
-  ],
-  scenari: [
-    - L'utente digita uno username o una email nel campo dedicato.
-  ],
-  estensioni: [
-    - #link(<UC25.1.1>)[#underline[\[UC25.1.1\]]] // Errore formato
-    - #link(<UC25.1.2>)[#underline[\[UC25.1.2\]]] // Credenziale non esistente
-  ],
-  trigger: "L'utente interagisce con il campo di inserimento della credenziale per recupero password",
-)[]
-
-===== UC25.1.1: Visualizzazione errore credenziale non conforme <UC25.1.1>
-#useCase(
-  attore: "Utente non autenticato",
-  pre: [
-    - L'utente sta inserendo la credenziale richiesta per il recupero della password #link(<UC25.1>)[#underline[\[UC25.1\]]]
-    - La credenziale digitata non rispetta i vincoli di formato richiesti
-  ],
-  post: [
-    - L'utente visualizza un avviso testuale indicante l'errore di formato
-    - L'utente ha nuovamente accesso al campo per correggere la credenziale
-  ],
-  scenari: [
-    - L'utente visualizza un messaggio di errore in corrispondenza del campo della credenziale che specifica la non conformità del valore inserito
-  ],
-  trigger: "L'utente inserisce una credenziale non conforme ai vincoli di formato",
-)[]
-
-===== UC25.1.2: Visualizzazione errore crendenziale non esistente <UC25.1.2>
-#useCase(
-  attore: "Utente non autenticato",
-  pre: [
-    - L'utente sta inserendo la credenziale richiesta per il recupero della password #link(<UC25.1>)[#underline[\[UC25.1\]]]
-    - La credenziale digitata non è associata ad alcun account CodeGuardian censito
-  ],
-  post: [
-    - L'utente visualizza un avviso testuale indicante l'invalidità della credenziale
-  ],
-  scenari: [
-    - L'utente visualizza un messaggio di errore che segnala l'invalidità della credenziale inserita
-  ],
-  trigger: "L'utente inserisce una credenziale non associata ad alcun account censito nel sistema",
-)[]*/
-
-
-#TODO("Funzionakità opzionale da risistemare")
 === UC28: Report programmabili e alert <UC28>
 #useCase(
   attore: "Utente autorizzato",
@@ -3207,39 +2946,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'orchestratore riceve le varie analisi dagli strumenti di analisi e le unisce in un unico report
   ],
   inclusioni: [
-    //- #link(<UC30.1>)[#underline[\[UC30.1\]]]
+    - Nessuna
   ],
   estensioni: [
     - Nessuna
   ],
   trigger: "L'orchestratore riceve le analisi dei vari strumenti di analisi",
-)[//#useCaseDiagram("30", "UC30 - Generazione report finale")
+)[
 ]
 
-#TODO("Guarda UC commentato, se d'accordo con eliminazione fallo (al massimo uc a parte ma non penso")
-/* ==== UC30.1 Integrazione delle nuove analisi singole <UC30.1>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - L'orchestratore ha completato la parte di analisi richiesta
-  ],
-  post: [
-    - L'orchestratore ha preso in carico la nuova sezione del report di analisi
-  ],
-  scenari: [
-    - L'orchestratore ha finito la parte di analisi richiesta da parte dell'utente
-    - L'orchestratore ha visualizzato la nuova sezione del report
-    - L'orchestratore integra la nuova sezione nel report corrente
-    - L'orchestratore modifica il report segnalando che una sezione è avanti nell'analisi rispetto alle alte
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Viene completata l'analisi della repository",
-)[] */
+#TODO("1 buco da coprire")
 
 === UC32 L'utente viene notificato della disponibilità di visualizzare il nuovo report di analisi<UC32>
 #useCase(
@@ -3263,8 +2979,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'analisi richiesta è stata completata",
 )[]
 
-#TODO("Buco da coprire")
-
+#TODO("1 buco da coprire")
 
 === UC34: Notifica completamento dell'analisi del repository <UC34>
 #useCase(
@@ -3288,8 +3003,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 )[
   #useCaseDiagram("34", "UC34 - Notifica completamento dell'analisi del repository")
 ]
-
-
 
 === UC35: Gestione errore critico durante l'analisi <UC35>
 #TODO("La gestione dell'errore va bene come uc a parte o estensione magari di UC29?")
@@ -3315,8 +3028,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 )[
   #useCaseDiagram("35", "UC35 - Notifica errore critico durante l'analisi")
 ]
-
-
 
 === UC36: Salvataggio metadati repository <UC36>
 #useCase(
@@ -3425,8 +3136,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'orchestratore riscontra un errore interno o di connessione al database durante la procedura di salvataggio del report
-    //- Il sistema Back-end riscontra un errore interno durante la persistenza dei dati
-    //- L'orchestratore notifica il Front-end del mancato salvataggio
   ],
   inclusioni: [
     - Nessuna
@@ -3507,32 +3216,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 )[
   #useCaseDiagram("40", "UC40 - Gestione del codice OAuth GitHub")
 ]
-
-/* === UC40ex Invio delle credenziali al sistema Back-end <UC40> #TODO("Probabile eliminazione")
-#useCase(
-  attore: "Utente non registrato",
-  pre: [
-    - L'orchestratore ha ricevuto le credenziali dell'utente durante la sua registrazione #link(<UC1>)[#underline[\[UC1\]]]
-  ],
-  post: [
-    - Il sistema Back-end ha ricevuto correttamente le credenziali per l'elaborazione
-  ],
-  scenari: [
-    - L'utente conferma l'invio delle proprie credenziali attraverso l'interfaccia di CodeGuardian
-    - Il sistema Front-end trasmette le credenziali al sistema Back-end
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'orchestratore riceve le credenziali dell'utente non registrato",
-)[
-  #useCaseDiagram("40", "UC40 - Invio delle credenziali al sistema Back-end")
-]
-
- */
 
 === UC41: Visualizzazione singola remediation di analisi del codice <UC41>
 #useCase(
@@ -5622,7 +5305,7 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
 
   [UC39],
   [],
-
+  
   [UC40],
   [],
 
