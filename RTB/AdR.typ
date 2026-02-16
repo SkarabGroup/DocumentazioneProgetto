@@ -2419,7 +2419,142 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Esaurimento dei tentativi di accesso autorizzato",
 )[]
 
+/*
+==== UC17.1 Errore durante la creazione dell'ambiente sandbox <UC17.1>
+#useCase(
+  attore: "Orchestratore",
+  attori_secondari: "Docker",
+  pre: [
+    - Il sistema CodeGuardian ha accettato la richesta di analisi del repository
+  ],
+  post: [
+    - L'ambiente sand box non viene creato correttamente
+  ],
+  scenari: [
+    - Si verifica un errore durante la creazione dell'ambiente sandbox
+  ],
+  inclusioni: [
+    - #link(<UC17.1.1>)[#underline[\[UC17.1.1\]]]
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Durante la creazione dell'ambiente sandbox si verifica un errore",
+)[#useCaseDiagram("17_1", "UC17.1 - Errore durante la creazione dell'ambiente sandbox")]
+
+=== UC17.1.1 Comunicazione dell'errore durante la creazione dell'ambiente sand box <UC17.1.1>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - Viene rilevato un errore durante la creazione dell'ambiente sandbox
+  ],
+  post: [
+    - L'ambiente sandbox non viene creato correttamente e ciò viene comunicato al sistema Front-end
+  ],
+  scenari: [
+    - L'orchestratore comunica l'errore al sistema Front-end
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Durante la creazione dell'ambiente sandbox si verifica un errore",
+)[]
+
+=== UC18 Lettura delle richieste dell'utente da parte dell'orchestratore <UC18>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    //- L'utente autenticato avanzato ha richiesto l'analisi del proprio repository al sistema CodeGuardian #link(<UC4>)[#underline[\[UC4\]]]
+    #TODO("check precondizione tolta")
+    - L'ambiente sandbox é stato creato correttamente #link(<UC17>)[#underline[\[UC17\]]]
+  ],
+  post: [
+    - L'orchestratore ha letto e interpretato correttamente le richieste dell'utente
+  ],
+  scenari: [
+    - L'orchestratore legge le richieste dell'utente
+    - L'orchestratore notifica al sistema Back-end i compiti da svolgere
+  ],
+  inclusioni: [
+    - #link(<UC18.1>)[#underline[\[UC18.1\]]]
+    - #link(<UC18.2>)[#underline[\[UC18.2\]]]
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'orchestratore ha letto e interpretato correttamente le richieste dell'utente e ha visionato il repository",
+)[#useCaseDiagram("18", "UC18 - Lettura delle richieste dell'utente da parte dell'orchestratore")]
 #TODO("1 buco da coprire")
+
+==== UC18.1 Richiesta di analisi completa <UC18.1>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - Non ci sono state richieste specifiche da parte dell'utente
+  ],
+  post: [
+    - L'orchestratore avvia l'analisi completa del repository
+  ],
+  scenari: [
+    - Il sistema Front-end comunica all'orchestratore che l'utente vuole svolgere un'analisi completa del proprio repository
+    - L'orchestratore riceve la richiesta e avvia l'analisi completa del repository
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'orchestratore riceve dal sistema Front-end la richiesta di analisi completa",
+)[]
+==== UC18.2 Richieste specifiche sull'analisi da parte del front-end <UC18.2>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - L'utente ha fatto delle richieste specifiche sulle aree da analizzare del proprio repository
+  ],
+  post: [
+    - L'orchestratore avvia l'analisi specifica del repository in base alle richieste dell'utente
+  ],
+  scenari: [
+    - Il sistema Front-end comunica all'orchestratore le specifiche richieste dell'utente rispetto alle aree da analizzare
+    - L'orchestratore controlla la pre-esistenza del repository da analizzare nel #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#database")[#def("Database")]
+    - L'orchestratore, una volta compresa la richiesta, avvia l'analisi specifica
+  ],
+  inclusioni: [
+    - #link(<UC18.2.1>)[#underline[\[UC18.2.1\]]]
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Il sistema Front-end comunica al sistema Back-end le richieste che dovranno essere prese in carico",
+)[#useCaseDiagram("18_2", "UC18.2 - Richieste specifiche sull'analisi da parte del frontend")]
+
+===== UC18.2.1 Repository mai analizzato in precedenza <UC18.2.1>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - Il repository non era mai stato analizzato in precedenza
+  ],
+  post: [
+    - L'orchestratore istruisce avvia un'analisi completa del repository
+  ],
+  scenari: [
+    - L'orchestratore controlla la pre-esistenza del repository da analizzare nel database e non la trova
+    - L'orchestratore si comporta come se fosse stata richiesta l'analisi completa
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'orchestratore non ha trovato la repository nel database",
+)[]
+*/
 
 // USE CASE DELLE ANALISI
 === UC19: Accettazione singola remediation generica <UC19>
