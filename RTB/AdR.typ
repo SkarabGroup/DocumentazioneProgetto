@@ -4225,10 +4225,37 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#FROpx],
   [L'Utente deve poter visualizzare i risultati del rilevamento segreti],
   [#link(<UC20>)[#underline[\[UC20\]]], #link(<UC20.3>)[#underline[\[UC20.3\]]]],
-
+  
   //UC21
+  [#FROpx],
+  [L'utente deve poter accedere alla sezione di compilance e geovernance del pannello report],
+  [#link(<UC21>)[#underline[\[UC21\]]]],
+
+  [#FROpx],
+  [L'utente deve poter selezionare la verifica alla conformità delle licenze],
+  [#link(<UC21>)[#underline[\[UC21\]]]],  
+
+  [#FROpx],
+  [L'utente deve poter visualizzare il report di compatibilità delle licenze],
+  [#link(<UC21>)[#underline[\[UC21\]]]],
+
   //UC22
   //UC23
+  [#FROpx],
+  [L'utente deve poter accedere al pannello di monitoraggio di qualità del codice],
+  [#link(<UC23>)[#underline[\[UC23\]]]],
+
+  [#FROpx],
+  [L'utente deve poter selezionare il comando di monitoraggio di qualità],
+  [#link(<UC23>)[#underline[\[UC23\]]]],
+
+  [#FROpx],
+  [L'utente deve poter visuallizare la _dashboard_ con metriche e _trend_],
+  [#link(<UC23>)[#underline[\[UC23\]]]],
+
+  [#FROpx],
+  [L'utente deve poter visualizzare le regressioni evidenziate],
+  [#link(<UC23>)[#underline[\[UC23\]]]],
 
   //UC24
   [#FRObx], [Deve essere suggerito refactoring del codice], [#link(<UC24>)[#underline[\[UC24\]]]],
