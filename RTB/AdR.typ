@@ -454,7 +454,8 @@
 == Contesto del Progetto
 Il presente documento descrive l'#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-dei-requisiti")[#def("Analisi dei Requisiti")] relativo al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def("Code Guardian")], commissionato dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def("Var Group")] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def("Skarab Group")] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
 
-Il progetto ha come obiettivo lo sviluppo di una piattaforma software ad #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] finalizzata all’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e alla #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] automatizzata delle vulnerabilità presenti nei repository di codice sorgente. Il sistema è progettato in conformità ai requisiti e ai vincoli definiti nel #link(<capitolato>)[#underline[Capitolato *C2*]].
+Il progetto ha come obiettivo la realizzazione di un sistema per l'automazione dei processi di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] delle vulnerabilità del software. L'architettura si basa sul paradigma degli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] software intelligenti, operanti su repository di codice sorgente. La conformità del sistema è vincolata ai requisiti definiti nel #link(<capitolato>)[#underline[Capitolato *C2*]].
+
 La piattaforma supporta attività di analisi statica del codice sorgente e di individuazione delle principali criticità di sicurezza, fornendo suggerimenti di correzione attraverso meccanismi automatizzati basati su modelli di linguaggio di grandi dimensioni (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]).
 
 == Finalità del Documento
@@ -464,7 +465,7 @@ Il documento costituisce il riferimento primario per il gruppo di lavoro (#def[S
 - modellare le interazioni tra gli utenti e il sistema attraverso la definizione formale dei #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#caso-d-uso")[#def("casi d'uso")];
 - individuare e dettagliare i requisiti di sistema, distinguendo tra #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisito-funzionale")[#def[requisiti funzionali]], #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisito-di-qualita")[#def[di qualità]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisito-di-vincolo")[#def[di vincolo]];
 - classificare i requisiti in base alla priorità negoziale e strategica (#def[obbligatori], #def[opzionali], #def[desiderabili]), fornendo una guida per la pianificazione dello sviluppo;
-- stabilire una base contrattuale verificabile per la validazione del prodotto finale rispetto a quanto concordato nel Capitolato e durante gli incontri con il proponente.
+- definire i criteri di accettazione del prodotto, stabilendo una base contrattuale oggettiva per le attività di verifica e validazione finale rispetto a quanto concordato con il proponente.
 
 == Scopo del Prodotto
 Il prodotto che #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] sviluppa è un #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#sistema-software")[#def[sistema software]] #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#sistema-multiagente")[#def[multiagente]] per l'analisi di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#repository")[#def[repository]] #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#github")[#def[GitHub]].
@@ -490,10 +491,10 @@ Il sistema è progettato per soddisfare le esigenze di diverse tipologie di uten
 == Limitazioni
 Lo sviluppo e l'operatività del sistema sono soggetti ai seguenti vincoli e limitazioni:
 
-- *Connettività:* Il funzionamento richiede una connessione internet attiva per comunicare con le #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#api")[#def[API]] di GitHub e i provider LLM.
-- *Rate Limiting:* Le funzionalità di analisi semantica sono soggette ai limiti di frequenza e ai costi dei token imposti dai fornitori dei servizi LLM.
-- *Privacy (GDPR):* Il sistema opera in modalità "stateless" e non deve memorizzare in modo persistente il codice sorgente analizzato oltre il tempo strettamente necessario all'analisi.
-- *Ambito MVP:* Nella versione attuale, il supporto è limitato ai linguaggi di programmazione specificati nel Piano di Progetto; il supporto per ulteriori linguaggi è demandato a rilasci successivi.
+- *Disponibilità dei Servizi Terzi:* La piena operatività dipende dalla raggiungibilità delle #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#application-programming-interface")[#def[API]] di GitHub e dei provider LLM.
+- *Vincoli di Esecuzione (Quota):* Le analisi semantiche sono soggette ai limiti di throughput e al modello di costo (token-based) dei fornitori LLM.
+- *Trattamento Dati e Riservatezza:* Il sistema deve operare in modalità "stateless" per il codice sorgente; la persistenza dei dati analizzati è limitata alla durata della sessione di analisi, in conformità alle normative vigenti sul trattamento dei dati.
+- *Perimetro Tecnologico (MVP):* Il supporto è circoscritto ai linguaggi di programmazione e ai framework definiti nel Piano di Progetto; l'estensibilità ad altri ecosistemi è prevista come requisito opzionale o futuro.
 == Glossario
 Al fine di prevenire ambiguità interpretative, è stato redatto un glossario che definisce in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio utilizzati all’interno della documentazione.
 
@@ -534,13 +535,13 @@ I seguenti documenti hanno valore vincolante per la redazione dell'Analisi dei R
 == Introduzione
 In questa sezione sono descritti i casi d'uso principali del sistema, che illustrano le interazioni funzionali tra gli utenti (umani e software) e l'applicazione.
 
-La specifica dei casi d'uso adotta il formato e le convenzioni di modellazione definite nel documento #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[#def[Norme di Progetto]]. Si rimanda a tale documento per la descrizione dettagliata della struttura dei campi (precondizioni, postcondizioni, scenari) e della sintassi #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#uml")[#def[UML]] utilizzata.
+La specifica dei casi d'uso adotta il formato e le convenzioni di modellazione definite nel documento #link(<NdP>)[Norme di Progetto]. Si rimanda a tale documento per la descrizione dettagliata della struttura dei campi (precondizioni, postcondizioni, scenari) e della sintassi #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#uml")[#def[UML]] utilizzata.
 
 == Attori
 Gli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#attore")[#def[attori]] rappresentano le entità che interagiscono con il sistema #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]]. Essi sono classificati in base al ruolo svolto nell'interazione:
 
-- *Attori Primari:* Entità (umane o componenti software autonomi) che avviano le interazioni ("trigger") per raggiungere un obiettivo specifico.
-- *Attori Secondari:* Sistemi o servizi esterni che il sistema interroga o notifica per completare le funzionalità richieste.
+- *Attori Primari:* Entità che attivano una funzionalità del sistema per raggiungere uno scopo (User Goal). Possono essere utenti umani o processi di sistema autonomi.
+- *Attori Secondari:* Sistemi, servizi o entità esterne con cui il sistema interagisce per completare un caso d'uso, ma che non ne scatenano l'esecuzione.
 
 Di seguito vengono definiti i ruoli identificati nell'analisi.
 
@@ -570,7 +571,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     table.cell(colspan: 2, fill: luma(250), [*Attori Primari (Sistemi Interni)*]),
 
     [*Orchestratore*],
-    [Componente software autonomo che agisce come attore sistemico. È responsabile dell'avvio e del coordinamento dei flussi di analisi automatizzati, della gestione degli ambienti di esecuzione  e della centralizzazione delle comunicazioni tra gli agenti e il database, senza richiedere intervento umano diretto durante l'elaborazione.],
+    [Attore di sistema interno che opera come entità autonoma. Agisce da coordinatore dei flussi di lavoro, gestendo in modo proattivo l'interazione con i servizi esterni (AWS, LLM) e la distribuzione dei compiti agli agenti, operando indipendentemente dalle interazioni dirette dell'utente sulla GUI.],
 
     // SEZIONE 3: SISTEMI ESTERNI
     table.cell(colspan: 2, fill: luma(250), [*Attori Secondari (Sistemi Esterni)*]),
@@ -578,14 +579,14 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     [*GitHub*],
     [Piattaforma di hosting esterna. Interagisce con il sistema per fornire l'accesso al codice sorgente (via API o clone) e ai metadati dei repository.],
 
-    [*Docker*],
-    [Servizio di containerizzazione utilizzato per istanziare ambienti isolati necessari all'esecuzione sicura degli strumenti di analisi statica.],
+    [*Servizi AWS*],
+    [Infrastruttura cloud esterna di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#amazon-web-service")[#def[Amazon Web Service]] utilizzata dal sistema come ambiente di calcolo e storage per l'esecuzione delle analisi intensive.],
 
     [*Servizio LLM*],
     [Servizio esterno di Intelligenza Artificiale interrogato per l'analisi semantica della documentazione e la generazione dei suggerimenti di remediation.],
 
     [*Strumenti di Analisi*],
-    [Insieme degli strumenti terzi invocati dal sistema per l'esecuzione verticale delle scansioni di sicurezza e qualità.],
+    [Insieme degli strumenti terzi invocati dal sistema per l'esecuzione verticale delle scansioni di sicurezza e qualità del codice.],
   ),
   caption: [Definizione e gerarchia degli Attori],
 )
@@ -596,17 +597,17 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente non registrato",
   pre: [
     - L'utente non possiede le credenziali di un account CodeGuardian
-    - L'utente ha selezionato il comando di registrazione dalla pagina principale
+    - L'utente ha visualizzato la sezione dedicata alla creazione di un nuovo profilo CodeGuardian
   ],
   post: [
-    - L'utente ha ricevuto un messaggio di conferma dell'avvenuta creazione dell'account CodeGuardian
-    - L'utente possiede delle credenziali valide di un account CodeGuardian
+    - L'utente visualizza la conferma dell'avvenuta creazione dell'account CodeGuardian
+    - L'utente dispone di credenziali valide di un account CodeGuardian per l'accesso alla piattaforma
   ],
   scenari: [
-    - L'utente inserisce un username conforme e disponibile #link(<UC1.1>)[#underline[\[UC1.1\]]]
-    - L'utente inserisce una email valida e disponibile #link(<UC1.2>)[#underline[\[UC1.2\]]]
-    - L'utente inserisce una password valida #link(<UC1.3>)[#underline[\[UC1.3\]]]
-    - L'utente seleziona il comando di conferma finale per completare la procedura
+    - L'utente inserisce un username identificativo #link(<UC1.1>)[#underline[\[UC1.1\]]]
+    - L'utente inserisce una email di contatto #link(<UC1.2>)[#underline[\[UC1.2\]]]
+    - L'utente inserisce una password sicura #link(<UC1.3>)[#underline[\[UC1.3\]]]
+    - L'utente impartisce il comando di conferma finale per completare la procedura
   ],
   inclusioni: [
     - #link(<UC1.1>)[#underline[\[UC1.1\]]]
@@ -614,31 +615,46 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC1.3>)[#underline[\[UC1.3\]]]
   ],
   estensioni: [
-    - #link(<UC1.4>)[#underline[\[UC1.4\]]] // Conferma procedura con campi mancanti 
+    - #link(<UC1.0.1>)[#underline[\[UC1.0.1\]]] 
   ],
-  trigger: "L'utente accede alla sezione di registrazione a CodeGuardian",
+  trigger: "L'utente seleziona la funzione di registrazione utente",
 )[
   #useCaseDiagram("1", "UC1 - Registrazione")
 ]
+
+==== UC1.0.1: Visualizzazione errore campi non inseriti <UC1.0.1>
+#useCase(
+  attore: "Utente non registrato",
+  pre: [
+    - L'utente sta visualizzando il modulo di registrazione #link(<UC1>)[#underline[\[UC1\]]]
+  ],
+  post: [
+    - L'utente visualizza un messaggio circa il mancato inserimento dei dati obbligatori
+    - L'utente ha la possibilità di completare i campi mancanti nel modulo
+  ],
+  scenari: [
+    - L'utente visualizza un avviso che segnala l'incompletezza delle informazioni fornite
+  ],
+  trigger: "L'utente impartisce il comando di conferma senza aver inserito tutti i dati richiesti",
+)[]
 
 ==== UC1.1: Inserimento username <UC1.1>
 #useCase(
   attore: "Utente non registrato",
   pre: [
-    - L'utente sta eseguendo la procedura di registrazione #link(<UC1>)[#underline[\[UC1\]]]
-    - L'utente visualizza il campo di inserimento per lo username
+    - L'utente sta visualizzando il modulo di registrazione #link(<UC1>)[#underline[\[UC1\]]]
   ],
   post: [
-    - L'utente ha inserito uno username conforme ai vincoli di formato e inutilizzato
+    - Il campo relativo all'username risulta popolato con un valore accettato
   ],
   scenari: [
-    - L'utente digita lo username scelto per identificare il proprio profilo
+    - L'utente fornisce l'identificativo scelto per la propria registrazione
   ],
   estensioni: [
     - #link(<UC1.1.1>)[#underline[\[UC1.1.1\]]] // Errore formato
     - #link(<UC1.1.2>)[#underline[\[UC1.1.2\]]] // Errore disponibilità
   ],
-  trigger: "L'utente interagisce con il campo di inserimento dello username",
+  trigger: "L'utente seleziona il campo di input dello username",
 )[
   #useCaseDiagram("1_1", "UC1.1 - Inserimento username")
 ]
@@ -647,17 +663,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente non registrato",
   pre: [
-    - L'utente ha inserito lo username nella schermata di registrazione #link(<UC1.1>)[#underline[\[UC1.1\]]]
-    - Lo username digitato non rispetta i vincoli di formato richiesti
+    - L'utente ha popolato il campo username #link(<UC1.1>)[#underline[\[UC1.1\]]]
   ],
   post: [
-    - L'utente ha ricevuto un avviso testuale indicante l'errore di formato
-    - L'utente ha nuovamente accesso al campo di inserimento per digitare un altro username
+    - L'utente visualizza un messaggio circa la non conformità dell'username inserito
+    - L'utente ha la possibilità di fornire un nuovo valore per l'identificativo
   ],
   scenari: [
     - L'utente visualizza un messaggio di errore in corrispondenza del campo username che specifica la non conformità del formato
   ],
-  trigger: "L'utente digita un valore non conforme ai vincoli di formato",
+  trigger: "L'utente tenta di procedere con l'inserimento di un valore non conforme per l'username",
 )[]
 
 ===== UC1.1.2: Visualizzazione errore username già in uso <UC1.1.2>
@@ -668,8 +683,8 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Lo username digitato risulta già associato a un account CodeGuardian esistente
   ],
   post: [
-    - L'utente ha ricevuto un avviso testuale indicante l'indisponibilità dello username
-    - L'utente ha nuovamente accesso al campo di inserimento per digitare un altro username
+    - L'utente visualizza un messaggio circa la non disponibilità dell'username inserito
+    - L'utente ha la possibilità di fornire un nuovo valore per l'identificativo
   ],
   scenari: [
     - L'utente visualizza un messaggio di errore che segnala l'indisponibilità del nome utente scelto
@@ -681,20 +696,19 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente non registrato",
   pre: [
-    - L'utente sta eseguendo la procedura di registrazione #link(<UC1>)[#underline[\[UC1\]]]
-    - L'utente visualizza il campo di inserimento per l'indirizzo email
+    - L'utente sta visualizzando il modulo di registrazione #link(<UC1>)[#underline[\[UC1\]]]
   ],
   post: [
-    - L'utente ha inserito un'email valida e disponibile per la registrazione
+    - Il campo relativo all'email risulta popolato con un valore accettato
   ],
   scenari: [
-    - L'utente inserisce l'email di riferimento per l'account
+    - L'utente inserisce l'indirizzo email di contatto per il proprio profilo
   ],
   estensioni: [
     - #link(<UC1.2.1>)[#underline[\[UC1.2.1\]]] // Errore formato
     - #link(<UC1.2.2>)[#underline[\[UC1.2.2\]]] // Errore disponibilità
   ],
-  trigger: "L'utente interagisce con il campo di inserimento dell'email",
+  trigger: "L'utente seleziona il campo di input dell'email",
 )[
   #useCaseDiagram("1_2", "UC1.2 - Inserimento email")
 ]
@@ -703,29 +717,28 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente non registrato",
   pre: [
-    - L'utente sta inserendo l'email nella schermata di registrazione #link(<UC1.2>)[#underline[\[UC1.2\]]]
-    - L'email inserita non rispetta i vincoli di formato previsti
+    - L'utente ha inserito un valore nel campo email #link(<UC1.2>)[#underline[\[UC1.2\]]]
   ],
   post: [
-    - L'utente ha ricevuto un avviso testuale indicante l'errore di formato
-    - L'utente ha nuovamente accesso al campo di inserimento per digitare un'altra email
+    - L'utente visualizza un messaggio circa la non validità dell'email inserita
+    - L'utente ha la possibilità di fornire un nuovo valore per l'email
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore relativo alla non validità del formato email
+    - L'utente visualizza un messaggio di errore in corrispondenza del campo email che specifica la non conformità del formato
   ],
-  trigger: "L'utente inserisce un'email non conforme ai vincoli di formato",
+  trigger: "L'utente tenta di procedere con l'inserimento di un valore non conforme per l'email",
 )[]
 
 ===== UC1.2.2: Visualizzazione errore email già in uso <UC1.2.2>
 #useCase(
   attore: "Utente non registrato",
   pre: [
-    - L'utente sta inserendo l'email nella schermata di registrazione #link(<UC1.2>)[#underline[\[UC1.2\]]]
+    - L'utente ha inserito un indirizzo email nel modulo di registrazione #link(<UC1.2>)[#underline[\[UC1.2\]]]
     - L'email inserita risulta già associata a un account esistente
   ],
   post: [
-    - L'utente ha ricevuto un avviso testuale indicante che l'email è già registrata
-    - L'utente ha nuovamente accesso al campo di inserimento per digitare un'altra email
+    - L'utente visualizza un messaggio circa l'indisponibilità dell'email inserita
+    - L'utente ha la possibilità di fornire un nuovo valore per l'email
   ],
   scenari: [
     - L'utente visualizza un messaggio di errore che segnala l'indisponibilità dell'email scelta
@@ -737,11 +750,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente non registrato",
   pre: [
-    - L'utente sta eseguendo la procedura di registrazione #link(<UC1>)[#underline[\[UC1\]]]
-    - L'utente visualizza il campo per la password
+    - L'utente sta visualizzando il modulo di registrazione #link(<UC1>)[#underline[\[UC1\]]]
   ],
   post: [
-    - L'utente ha inserito una password conforme ai criteri di sicurezza
+    - Il campo relativo alla password risulta popolato con un valore accettato
   ],
   scenari: [
     - L'utente inserisce la chiave d'accesso per il proprio account
@@ -749,7 +761,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - #link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]
   ],
-  trigger: "L'utente interagisce con il campo di inserimento della password",
+  trigger: "L'utente seleziona il campo di input della password",
 )[
   #useCaseDiagram("1_3", "UC1.3 - Inserimento password")
 ]
@@ -758,74 +770,70 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente non registrato",
   pre: [
-    - L'utente sta inserendo la password nella schermata di registrazione #link(<UC1.3>)[#underline[\[UC1.3\]]]
-    - La password inserita non rispetta i criteri di sicurezza richiesti
+    - L'utente ha inserito una password nel modulo di registrazione #link(<UC1.3>)[#underline[\[UC1.3\]]]
   ],
   post: [
-    - L'utente ha ricevuto un avviso testuale indicante la non conformità della password
-    - L'utente ha nuovamente accesso al campo di inserimento per digitare un'altra password
+    - L'utente visualizza un messaggio circa la non conformità della password inserita
+    - L'utente ha la possibilità di fornire un nuovo valore per la password
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che specifica la debolezza della password
+    - L'utente visualizza un messaggio di errore che specifica i requisiti di sicurezza non soddisfatti
   ],
-  trigger: "L'utente inserisce una password non conforme ai vincoli di formato",
-)[]
-
-==== UC1.4: Visualizzazione errore campi non inseriti <UC1.4>
-#useCase(
-  attore: "Utente non registrato",
-  pre: [
-    - L'utente sta eseguendo la procedura di registrazione #link(<UC1>)[#underline[\[UC1\]]].
-    - L'utente ha confermato senza inserire tutti i campi richiesti
-  ],
-  post: [
-    - L'utente ha ricevuto un avviso testuale indicante il mancato inserimento dei dati
-    - L'utente ha nuovamente accesso al form di registrazione per digitare le credenziali mancanti
-  ],
-  scenari: [
-    - L'utente visualizza un messaggio di errore di mancato inserimento dati nel form della registrazione
-  ],
-  trigger: "L'utente conferma la procedura senza aver inserito tutti i campi richiesti",
+  trigger: "L'utente tenta di procedere con l'inserimento di una password non conforme ai criteri di sicurezza",
 )[]
 
 === UC2: Autenticazione a CodeGuardian <UC2>
 #useCase(
   attore: "Utente non autenticato",
   pre: [
-    - L'utente possiede le credenziali di accesso a un account CodeGuardian #link(<UC1>)[#underline[\[UC1\]]]
-    - L'utente ha selezionato il comando di accesso alla sezione di login
+    - L'utente dispone di credenziali valide registrate nel sistema #link(<UC1>)[#underline[\[UC1\]]]
+    - L'utente visualizza la sezione di accesso (Login)
   ],
   post: [
-    - L'utente ha ricevuto la conferma di avvenuta autenticazione
+    - L'utente visualizza la conferma di avvenuta autenticazione
     - L'utente ha accesso alle funzionalità riservate della piattaforma
   ],
   scenari: [
-    - L'utente inserisce uno username conforme e censito #link(<UC2.1>)[#underline[\[UC2.1\]]]
-    - L'utente inserisce la password conforme e associata allo username #link(<UC2.2>)[#underline[\[UC2.2\]]]
-    - L'utente seleziona il comando di conferma per finalizzare l'accesso
+    - L'utente fornisce lo username identificativo #link(<UC2.1>)[#underline[\[UC2.1\]]]
+    - L'utente fornisce la chiave d'accesso associata #link(<UC2.2>)[#underline[\[UC2.2\]]]
+    - L'utente impartisce il comando di conferma per finalizzare l'accesso
   ],
   inclusioni: [
     - #link(<UC2.1>)[#underline[\[UC2.1\]]]
     - #link(<UC2.2>)[#underline[\[UC2.2\]]]
   ],
   estensioni: [
-    - #link(<UC2.3>)[#underline[\[UC2.3\]]] // Conferma procedura con campi mancanti 
+    - #link(<UC2.0.1>)[#underline[\[UC2.0.1\]]] 
   ],
-  trigger: "L'utente accede alla sezione di autenticazione di CodeGuardian",
+  trigger: "L'utente seleziona la funzione di login",
 )[
   #useCaseDiagram("2", "UC2 - Autenticazione")
 ]
+
+==== UC2.0.1: Visualizzazione errore campi non inseriti <UC2.0.1>
+#useCase(
+  attore: "Utente non autenticato",
+  pre: [
+    - L'utente sta visualizzando il modulo di autenticazione #link(<UC2>)[#underline[\[UC2\]]]
+  ],
+  post: [
+    - L'utente visualizza un messaggio circa il mancato inserimento dei dati obbligatori
+    - L'utente ha la possibilità di completare i campi mancanti
+  ],
+  scenari: [
+    - L'utente visualizza un avviso che segnala l'incompletezza delle informazioni fornite per l'accesso
+  ],
+  trigger: "L'utente impartisce il comando di conferma senza aver inserito tutte le credenziali",
+)[]
 
 ==== UC2.1: Inserimento username <UC2.1>
 #useCase(
   attore: "Utente non autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di autenticazione #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente visualizza il campo di inserimento per lo username
+    - L'utente sta visualizzando il modulo di autenticazione #link(<UC2>)[#underline[\[UC2\]]]
   ],
   post: [
-    - L'utente ha inserito uno username conforme ai vincoli di formato
-    - Lo username inserito corrisponde a un account CodeGuardian esistente
+    - Il campo relativo all'username risulta popolato con un valore accettato
   ],
   scenari: [
     - L'utente digita lo username nel campo dedicato
@@ -834,7 +842,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC2.1.1>)[#underline[\[UC2.1.1\]]] // Errore formato
     - #link(<UC2.1.2>)[#underline[\[UC2.1.2\]]] // Username non esistente
   ],
-  trigger: "L'utente interagisce con il campo di inserimento dello username",
+  trigger: "L'utente seleziona il campo di input dello username",
 )[
   #useCaseDiagram("2_1", "UC2.1 - Inserimento username")
 ]
@@ -843,55 +851,51 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente non autenticato",
   pre: [
-    - L'utente sta inserendo lo username nella schermata di login #link(<UC2.1>)[#underline[\[UC2.1\]]]
-    - Lo username digitato non rispetta i vincoli di formato richiesti
+    - L'utente ha inserito un valore nel campo username #link(<UC2.1>)[#underline[\[UC2.1\]]]
   ],
   post: [
-    - L'utente ha ricevuto un avviso testuale indicante l'errore di formato
-    - L'utente ha nuovamente accesso al campo per correggere lo username
+    - L'utente visualizza un messaggio circa la non conformità dell'username inserito
+    - L'utente ha la possibilità di fornire un nuovo valore per l'identificativo
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore in corrispondenza del campo username che specifica la non conformità del valore inserito
+    - L'utente visualizza un messaggio di errore in corrispondenza del campo username che specifica la non conformità del formato
   ],
-  trigger: "L'utente inserisce un valore non conforme ai vincoli di formato",
+  trigger: "L'utente tenta di procedere con un valore non conforme ai vincoli di formato",
 )[]
 
 ===== UC2.1.2: Visualizzazione errore username non esistente <UC2.1.2>
 #useCase(
   attore: "Utente non autenticato",
   pre: [
-    - L'utente sta inserendo lo username nella schermata di login #link(<UC2.1>)[#underline[\[UC2.1\]]]
-    - Lo username digitato non corrisponde ad alcun account CodeGuardian censito
+    - L'utente ha inserito uno username non presente nel sistema #link(<UC2.1>)[#underline[\[UC2.1\]]]
   ],
   post: [
-    - L'utente ha ricevuto un avviso testuale indicante l'invalidità delle credenziali
-    - L'utente ha nuovamente accesso al campo per correggere lo username
+    - L'utente visualizza un messaggio circa l'invalidità delle credenziali fornite
+    - L'utente ha la possibilità di fornire un nuovo valore per l'identificativo
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che segnala l'invalidità dello username inserito
+    - L'utente visualizza un messaggio di errore che segnala l'inesistenza dell'identificativo inserito
   ],
-  trigger: "L'utente inserisce uno username non presente nel sistema",
+  trigger: "L'utente tenta di autenticarsi con uno username non censito",
 )[]
 
 ==== UC2.2: Inserimento password <UC2.2>
 #useCase(
   attore: "Utente non autenticato",
   pre: [
-    - L'utente ha inserito uno username esistente e conforme #link(<UC2.1>)[#underline[\[UC2.1\]]]
-    - L'utente visualizza il campo di inserimento per la password
+    - L'utente sta visualizzando il modulo di autenticazione #link(<UC2>)[#underline[\[UC2\]]]
   ],
   post: [
-    - L'utente ha inserito una password conforme ai vincoli di formato
-    - La password inserita corrisponde a quella associata allo username fornito
+    - Il campo relativo alla password risulta popolato con un valore accettato
   ],
   scenari: [
     - L'utente digita la chiave d'accesso nel campo dedicato
   ],
   estensioni: [
     - #link(<UC2.2.1>)[#underline[\[UC2.2.1\]]] // Errore formato
-    - #link(<UC2.2.2>)[#underline[\[UC2.2.2\]]] // Errore password errata
+    - #link(<UC2.2.2>)[#underline[\[UC2.2.2\]]] // Password errata
   ],
-  trigger: "L'utente interagisce con il campo di inserimento della password",
+  trigger: "L'utente seleziona il campo di input della password",
 )[
   #useCaseDiagram("2_2", "UC2.2 - Inserimento password")
 ]
@@ -900,367 +904,319 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente non autenticato",
   pre: [
-    - L'utente sta inserendo la password nella schermata di login #link(<UC2.2>)[#underline[\[UC2.2\]]]
-    - La password digitata non rispetta i vincoli di formato previsti
+    - L'utente ha inserito una password nel campo dedicato #link(<UC2.2>)[#underline[\[UC2.2\]]]
   ],
   post: [
-    - L'utente ha ricevuto un avviso testuale indicante l'errore di formato
-    - L'utente ha nuovamente accesso al campo per correggere la password
+    - L'utente visualizza un messaggio circa la non conformità della password
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che specifica la non conformità della password ai criteri di sistema
+    - L'utente visualizza un messaggio di errore che specifica il mancato rispetto dei criteri di sistema
   ],
-  trigger: "L'utente inserisce una password formalmente non valida",
+  trigger: "L'utente tenta di procedere con una password formalmente non valida",
 )[]
 
 ===== UC2.2.2: Visualizzazione errore password errata <UC2.2.2>
 #useCase(
   attore: "Utente non autenticato",
   pre: [
-    - L'utente sta inserendo la password nella schermata di login #link(<UC2.2>)[#underline[\[UC2.2\]]]
-    - La password digitata non corrisponde a quella associata allo username fornito
+    - L'utente ha inserito una password non corrispondente a quella registrata #link(<UC2.2>)[#underline[\[UC2.2\]]]
   ],
   post: [
-    - L'utente ha ricevuto un avviso testuale indicante l'invalidità delle credenziali
-    - L'utente ha nuovamente accesso al campo per correggere la password
+    - L'utente visualizza un messaggio circa l'errata combinazione delle credenziali
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che segnala l'errata combinazione delle credenziali
+    - L'utente visualizza un messaggio di errore che segnala l'invalidità della chiave d'accesso
   ],
-  trigger: "L'utente inserisce una password non corretta",
-)[]
-
-==== UC2.3 Visualizzazione errore campi non inseriti <UC2.3>
-#useCase(
-  attore: "Utente non autenticato",
-  pre: [
-    - L'utente sta eseguendo la procedura di autenticazione #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha confermato senza inserire tutti i campi richiesti
-  ],
-  post: [
-    - L'utente ha ricevuto un avviso testuale indicante il mancato inserimento dei dati
-    - L'utente ha nuovamente accesso al form di autenticazione per digitare le credenziali mancanti
-  ],
-  scenari: [
-    - L'utente visualizza un messaggio di errore di mancato inserimento dati nel form di autenticazione
-  ],
-  trigger: "L'utente conferma la procedura senza aver inserito tutti i campi richiesti",
+  trigger: "L'utente tenta di procedere con una password errata",
 )[]
 
 === UC3: Collegamento account GitHub <UC3>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   attori_secondari: "GitHub",
   pre: [
-    - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente non ha associato un account GitHub al proprio profilo CodeGuardian
-    - L'utente ha selezionato la sezione dedicata al collegamento con un profilo GitHub
+    - L'utente dispone di una sessione attiva nel sistema #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente non ha associato un profilo GitHub al proprio account
+    - L'utente visualizza la sezione relativa alle integrazioni esterne
   ],
   post: [
-    - L'utente ha ricevuto la conferma dell'avvenuto collegamento tra gli account
-    - L'account GitHub risulta associato al profilo CodeGuardian dell'utente
+    - L'utente visualizza la conferma dell'avvenuta associazione tra i profili
+    - L'utente risulta autorizzato dal sistema all'interazione con i propri repository GitHub
   ],
   scenari: [
-    - L'utente interagisce con l'avviso di reindirizzamento esterno #link(<UC3.1>)[#underline[\[UC3.1\]]]
-    - L'utente esegue le operazioni di autorizzazione sulla piattaforma esterna GitHub
-    - L'utente visualizza l'esito della procedura di associazione #link(<UC3.2>)[#underline[\[UC3.2\]]]
+    - L'utente interagisce con la notifica di reindirizzamento esterno #link(<UC3.1>)[#underline[\[UC3.1\]]]
+    - L'utente effettua le operazioni di autorizzazione sulla piattaforma GitHub
+    - L'utente visualizza l'esito della procedura di sincronizzazione #link(<UC3.2>)[#underline[\[UC3.2\]]]
   ],
   inclusioni: [
     - #link(<UC3.1>)[#underline[\[UC3.1\]]]
     - #link(<UC3.2>)[#underline[\[UC3.2\]]]
   ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente richiede il collegamento del proprio account GitHub",
+  trigger: "L'utente richiede l'integrazione del proprio profilo con GitHub",
 )[
   #useCaseDiagram("3", "UC3 - Collegamento account GitHub")
 ]
 
 ==== UC3.1: Interazione con avviso di reindirizzamento <UC3.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente ha avviato la procedura di collegamento account #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha richiesto il collegamento del proprio profilo GitHub #link(<UC3>)[#underline[\[UC3\]]]
   ],
   post: [
-    - L'utente visualizza la pagina di autorizzazione sulla piattaforma esterna GitHub
+    - L'utente viene trasferito alla piattaforma esterna GitHub per le operazioni di autorizzazione
   ],
   scenari: [
-    - L'utente visualizza un messaggio informativo relativo al trasferimento temporaneo su GitHub
-    - L'utente seleziona il comando per procedere con il reindirizzamento
+    - L'utente visualizza l'avviso di trasferimento temporaneo su un dominio esterno
+    - L'utente impartisce il comando di conferma per procedere con il reindirizzamento
   ],
   estensioni: [
-    - #link(<UC3.1.1>)[#underline[\[UC3.1.1\]]] // Rifiuto preventivo
+    - #link(<UC3.1.1>)[#underline[\[UC3.1.1\]]] 
   ],
-  trigger: "L'utente seleziona l'opzione di collegamento account GitHub",
+  trigger: "L'utente seleziona la funzione di integrazione con GitHub",
 )[]
 
 ===== UC3.1.1: Visualizzazione annullamento reindirizzamento <UC3.1.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
     - L'utente visualizza l'avviso di trasferimento a piattaforma esterna #link(<UC3.1>)[#underline[\[UC3.1\]]]
   ],
   post: [
-    - L'utente visualizza nuovamente la sezione integrazioni di CodeGuardian senza essere reindirizzato
+    - L'utente visualizza nuovamente la sezione dedicata alle integrazioni di CodeGuardian
+    - La procedura di collegamento risulta annullata
   ],
   scenari: [
-    - L'utente seleziona il comando per annullare l'operazione di collegamento
+    - L'utente annulla l'operazione di collegamento
   ],
-  trigger: "L'utente rifiuta il reindirizzamento a GitHub",
+  trigger: "L'utente sceglie di non procedere verso la piattaforma esterna",
 )[]
 
 ==== UC3.2: Visualizzazione esito associazione account <UC3.2>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente ha interagito con la piattaforma esterna GitHub a seguito del reindirizzamento #link(<UC3.1>)[#underline[\[UC3.1\]]]
+    - L'utente ha completato l'interazione con la piattaforma esterna GitHub #link(<UC3.1>)[#underline[\[UC3.1\]]]
     - L'utente è tornato alla piattaforma CodeGuardian
   ],
   post: [
-    - L'utente ha ricevuto un messaggio riguardante l'esito dell'operazione di associazione
+    - L'utente visualizza l'esito della procedura di associazione
   ],
   scenari: [
-    - L'utente visualizza un messaggio di conferma per l'avvenuta sincronizzazione tra l'account CodeGuardian e il profilo GitHub
+    - L'utente visualizza la conferma dell'avvenuta sincronizzazione tra l'account CodeGuardian e il profilo GitHub
   ],
   estensioni: [
-    - #link(<UC3.2.1>)[#underline[\[UC3.2.1\]]] // Errore tecnico/dati mancanti
-    - #link(<UC3.2.2>)[#underline[\[UC3.2.2\]]] // Account già in uso
-    - #link(<UC3.2.3>)[#underline[\[UC3.2.3\]]] // Rifiuto autorizzazione su GitHub
+    - #link(<UC3.2.1>)[#underline[\[UC3.2.1\]]] // Errore tecnico
+    - #link(<UC3.2.2>)[#underline[\[UC3.2.2\]]] // Già in uso
+    - #link(<UC3.2.3>)[#underline[\[UC3.2.3\]]] // Rifiuto autorizzazione
   ],
-  trigger: "L'utente torna su CodeGuardian dopo l'interazione con GitHub",
+  trigger: "L'utente riaccede a CodeGuardian dopo l'interazione con GitHub",
 )[]
 
 ===== UC3.2.1: Visualizzazione errore sincronizzazione fallita <UC3.2.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
     - L'utente è tornato su CodeGuardian a seguito della procedura esterna #link(<UC3.2>)[#underline[\[UC3.2\]]]
-    - I dati di autorizzazione necessari non sono stati ricevuti correttamente
   ],
   post: [
-    - L'utente ha ricevuto un messaggio di errore che invita a ripetere la procedura
+    - L'utente visualizza un messaggio di errore circa il fallimento della sincronizzazione
+    - L'utente ha la possibilità di ripetere la procedura
   ],
   scenari: [
-    - L'utente visualizza un avviso relativo al fallimento tecnico della comunicazione
+    - L'utente visualizza un avviso relativo all'impossibilità tecnica di completare l'operazione
   ],
-  trigger: "Mancata ricezione delle informazioni di autorizzazione da GitHub",
+  trigger: "Il sistema rileva un'anomalia nel completamento della procedura di associazione",
 )[]
 
 ===== UC3.2.2: Visualizzazione errore account già associato <UC3.2.2>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
     - L'utente è tornato su CodeGuardian a seguito della procedura esterna #link(<UC3.2>)[#underline[\[UC3.2\]]]
-    - L'identificativo GitHub ricevuto risulta già collegato a un altro profilo CodeGuardian esistente
   ],
   post: [
-    - L'utente ha ricevuto un avviso indicante che l'account GitHub è già associato a un altro utente
+    - L'utente visualizza un messaggio circa l'indisponibilità dell'account GitHub scelto
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che specifica l'impossibilità di procedere con l'associazione
+    - L'utente visualizza un messaggio di errore che specifica l'impossibilità di procedere poiché il profilo GitHub risulta già collegato
   ],
-  trigger: "L'account GitHub fornito è già associato a un altro account CodeGuardian",
+  trigger: "L'utente tenta di associare un account GitHub già in uso presso un altro profilo",
 )[]
 
 ===== UC3.2.3: Visualizzazione rifiuto autorizzazione esterna <UC3.2.3>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
     - L'utente è tornato su CodeGuardian a seguito della procedura esterna #link(<UC3.2>)[#underline[\[UC3.2\]]]
-    - L'utente ha negato il consenso alla condivisione dei dati sulla piattaforma GitHub
   ],
   post: [
-    - L'utente ha ricevuto un messaggio di avviso relativo al mancato consenso dell'autorizzazione
+    - L'utente visualizza un avviso circa il mancato rilascio delle autorizzazioni
   ],
   scenari: [
-    - L'utente visualizza un avviso che informa che l'associazione non è avvenuta a causa del rifiuto espresso su GitHub
+    - L'utente visualizza un avviso che informa del mancato collegamento a causa del rifiuto espresso su GitHub
   ],
-  trigger: "L'utente nega i permessi sulla piattaforma GitHub",
+  trigger: "L'utente nega il consenso alla condivisione dei dati sulla piattaforma esterna",
 )[]
 
 === UC4: Richiesta analisi repository GitHub <UC4>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente si trova nella sezione di richiesta di analisi di un repository GitHub 
+    - L'utente risulta autorizzato all'interazione con i propri repository #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente visualizza la sezione di configurazione dell'analisi
   ],
   post: [
-    - La richiesta di analisi del repository GitHub è stata completata con successo
+    - L'utente visualizza la conferma di presa in carico della richiesta di analisi
   ],
   scenari: [
-    - L'utente inserisce l'URL del repository GitHub da analizzare #link(<UC4.1>)[#underline[\[UC4.1\]]]
-    - L'utente seleziona le aree di interesse per l'analisi #link(<UC4.2>)[#underline[\[UC4.2\]]]
-    - L'utente conferma l'invio della richiesta di analisi 
+    - L'utente fornisce l'URL del repository GitHub da analizzare #link(<UC4.1>)[#underline[\[UC4.1\]]]
+    - L'utente seleziona le aree di interesse per l'audit #link(<UC4.2>)[#underline[\[UC4.2\]]]
+    - L'utente impartisce il comando di conferma per l'invio della richiesta
   ],
   inclusioni: [
-    - #link(<UC4.1>)[#underline[\[UC4.1\]]] // Inserimento URL repository GitHub
-    - #link(<UC4.2>)[#underline[\[UC4.2\]]] // Selezione aree di interesse
-    - #link(<UC4.3>)[#underline[\[UC4.3\]]] // Invio richiesta di analisi
+    - #link(<UC4.1>)[#underline[\[UC4.1\]]]
+    - #link(<UC4.2>)[#underline[\[UC4.2\]]]
   ],
   estensioni: [
-    - #link(<UC4.3>)[#underline[\[UC4.3\]]] // Ultimo report up-to-date
+    - #link(<UC4.3>)[#underline[\[UC4.3\]]] // Report già aggiornato
     - #link(<UC4.4>)[#underline[\[UC4.4\]]] // Analisi in corso
   ],
-  trigger: "L'utente accede alla sezione dedicata per la richiesta di analisi di repository GitHub in CodeGuardian",
+  trigger: "L'utente seleziona la funzione di nuova analisi repository",
 )[
   #useCaseDiagram("4", "UC4 - Richiesta analisi repository GitHub")
 ]
 
 ==== UC4.1: Inserimento URL repository GitHub <UC4.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
+    - L'utente sta visualizzando il modulo di richiesta analisi #link(<UC4>)[#underline[\[UC4\]]]
   ],
   post: [
-    - L'URL del repository GitHub inserito dall'utente è idoneo alla procedura di analisi
+    - Il campo relativo all'URL del repository risulta popolato con un valore accettato
   ],
   scenari: [
-    - L'utente inserisce l'URL del repository GitHub da analizzare
+    - L'utente inserisce l'URL del repository GitHub oggetto dell'analisi
   ],
   estensioni: [
-    - #link(<UC4.1.1>)[#underline[\[UC4.1.1\]]] // URL repository GitHub non conforme
-    - #link(<UC4.1.2>)[#underline[\[UC4.1.2\]]] // Repository GitHub non accessibile
-    - #link(<UC4.1.3>)[#underline[\[UC4.1.3\]]] // URL repository GitHub non inserito
+    - #link(<UC4.1.1>)[#underline[\[UC4.1.1\]]] // URL non conforme
+    - #link(<UC4.1.2>)[#underline[\[UC4.1.2\]]] // Repository non accessibile
+    - #link(<UC4.1.3>)[#underline[\[UC4.1.3\]]] // URL non inserito
   ],
-  trigger: "L'utente interagisce con la sezione dell'inserimento dell'URL del repository GitHub durante la procedura di richiesta analisi repository GitHub",
+  trigger: "L'utente seleziona il campo di input dell'URL",
 )[
   #useCaseDiagram("4_1", "UC4.1 - Inserimento URL repository GitHub")
 ]
 
-===== UC4.1.1: URL repository GitHub non conforme ai vincoli di formato <UC4.1.1>
+===== UC4.1.1: Visualizzazione errore URL non conforme <UC4.1.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
-    - L'URL inserito non è conforme ai vincoli di formato previsti per l'inserimento dell'URL del repository GitHub
+    - L'utente ha inserito un valore nel campo URL #link(<UC4.1>)[#underline[\[UC4.1\]]]
   ],
   post: [
-    - L'utente ha ricevuto il messaggio di errore relativo all'URL non valido
-    - La procedura di richiesta analisi non viene finalizzata 
-    - L'utente ha nuovamente accesso all'inserimento dell'URL
+    - L'utente visualizza un avviso circa la non conformità del formato dell'URL
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che l'URL inserito non è valido per la procedura di analisi
+    - L'utente visualizza un messaggio di errore che specifica l'invalidità sintattica dell'URL
   ],
-  trigger: "L'utente ha inserito un URL del repository GitHub non conforme ai vincoli di formato",
+  trigger: "L'utente tenta di procedere con un URL formalmente non valido",
 )[]
 
-===== UC4.1.2: Repository GitHub non accessibile <UC4.1.2>
+===== UC4.1.2: Visualizzazione errore repository non accessibile <UC4.1.2>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
-    - Il repository GitHub collegato all'URL inserito non è accessibile
+    - L'utente ha inserito un URL nel modulo #link(<UC4.1>)[#underline[\[UC4.1\]]]
   ],
   post: [
-    - L'utente ha ricevuto il messaggio di errore relativo al repository non accessiibile 
-    - La procedura di richiesta analisi non viene finalizzata 
-    - L'utente ha nuovamente accesso all'inserimento dell'URL
+    - L'utente visualizza un avviso circa l'impossibilità di accedere al repository indicato
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che il repository GitHub specificato non è accessibile per la procedura di richiesta analisi
+    - L'utente visualizza un messaggio di errore relativo all'inesistenza o all'inaccessibilità del repository
   ],
-  trigger: "L'utente conferma l'inserimento dell'URL del repository GitHub non accessibile durante la procedura di richiesta analisi",
+  trigger: "Il sistema rileva l'inaccessibilità della risorsa remota specificata",
 )[]
 
-===== UC4.1.3: URL repository GitHub non inserito <UC4.1.3>
+===== UC4.1.3: Visualizzazione errore URL non inserito <UC4.1.3>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
-    - L'utente non ha inserito alcun URL del repository GitHub
+    - L'utente sta interagendo con il campo URL #link(<UC4.1>)[#underline[\[UC4.1\]]]
   ],
   post: [
-    - L'utente ha ricevuto il messaggio di errore relativo al mancato inserimento dell'URL
-    - La procedura di richiesta analisi repository GitHub non viene finalizzata
-    - L'utente ha nuovamente accesso all'inserimento dell'URL
+    - L'utente visualizza un avviso circa il mancato inserimento dell'URL obbligatorio
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che deve essere inserito un URL del repository GitHub per procedere con la richiesta di analisi
+    - L'utente visualizza la segnalazione di errore specifica per il campo vuoto
   ],
-  trigger: "L'utente conferma senza inserire alcun URL durante la procedura di richiesta analisi repository GitHub",
+  trigger: "L'utente tenta di confermare senza aver popolato il campo URL",
 )[]
 
 ==== UC4.2: Selezione aree di interesse <UC4.2>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
+    - L'utente sta visualizzando il modulo di richiesta analisi #link(<UC4>)[#underline[\[UC4\]]]
   ],
   post: [
-    - L'utente ha selezionato le aree di interesse del repository GitHub da analizzare
+    - Le preferenze sulle aree del repository da analizzare risultano impostate
   ],
   scenari: [
-    - L'utente seleziona le sezioni del repository GitHub da analizzare, specificando cosa includere tra test, sicurezza o documentazione
+    - L'utente seleziona le tipologie di controllo (test, sicurezza o documentazione)
   ],
   estensioni: [
-    - #link(<UC4.2.1>)[#underline[\[UC4.2.1\]]] // Nessuna area di interesse selezionata
+    - #link(<UC4.2.1>)[#underline[\[UC4.2.1\]]] // Nessuna area selezionata
   ],
-  trigger: "L'utente interagisce con la sezione della selezione delle aree del repository GitHub da analizzare durante la procedura di richiesta analisi repository GitHub",
+  trigger: "L'utente interagisce con le opzioni di configurazione dell'audit",
 )[
-  #useCaseDiagram("4_2", "UC4.2: Selezione aree di interesse")
+  #useCaseDiagram("4_2", "UC4.2 - Selezione aree di interesse")
 ]
 
-===== UC4.2.1: Nessuna area di interesse selezionata <UC4.2.1>
+===== UC4.2.1: Visualizzazione errore nessuna area selezionata <UC4.2.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
-    - L'utente non ha selezionato alcuna area di interesse durante la selezione delle aree di interesse
+    - L'utente sta interagendo con la selezione delle aree #link(<UC4.2>)[#underline[\[UC4.2\]]]
   ],
   post: [
-    - L'utente ha ricevuto il messaggio di errore che indica la necessità di selezionare almeno un'area di interesse
-    - La procedura di richiesta analisi repository GitHub non viene finalizzata
-    - L'utente ha nuovamente accesso all'inserimento dell'URL
+    - L'utente visualizza un avviso circa la necessità di selezionare almeno un'area
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che deve essere selezionata almeno un'area di interesse per procedere con la richiesta di analisi del repository GitHub
+    - L'utente visualizza un messaggio di errore che segnala la mancata scelta delle aree di interesse
   ],
-  trigger: "L'utente conferma la selezione delle aree del repository GitHub da analizzare durante la procedura di richiesta analisi repository GitHub",
+  trigger: "L'utente tenta di confermare senza aver selezionato alcuna area di analisi",
 )[]
 
-==== UC4.3: Ultimo report up-to-date <UC4.3>
+==== UC4.3: Visualizzazione informativa report aggiornato <UC4.3>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
-    - L'utente ha inserito un URL del repository GitHub corretto #link(<UC4.1>)[#underline[\[UC4.1\]]]
-    - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
-    - L'utente invia la richiesta di analisi
-    - L'ultimo report di analisi del repository GitHub specificato è già aggiornato rispetto all'ultima modifica del repository stesso
+    - L'utente ha inviato una richiesta di analisi #link(<UC4>)[#underline[\[UC4\]]]
   ],
   post: [
-    - L'utente ha ricevuto il messaggio di report già aggiornato 
-    - La procedura di richiesta analisi repository GitHub non viene finalizzata in quanto l'analisi risulta già aggiornata
+    - L'utente visualizza l'informativa che indica la presenza di un report già aggiornato
   ],
   scenari: [
-    - L'utente visualizza un messaggio che indica che l'analisi del repository GitHub specificato è già aggiornata e non è necessario avviare una nuova analisi
+    - L'utente visualizza un messaggio che segnala l'inutilità di una nuova analisi per coerenza dei dati
   ],
-  trigger: "L'ultimo report di analisi del repository GitHub specificato è già aggiornato rispetto all'ultima modifica del repository stesso",
+  trigger: "L'utente tenta di avviare un'analisi per un repository il cui stato coincide con l'ultimo report generato",
 )[]
 
-==== UC4.4: Analisi in corso <UC4.4>
+==== UC4.4: Visualizzazione informativa analisi in corso <UC4.4>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
-    - L'utente ha inserito un URL del repository GitHub corretto #link(<UC4.1>)[#underline[\[UC4.1\]]]
-    - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
-    - L'utente invia la richiesta di analisi
-    - L'ultima analisi del repository GitHub specificato è ancora in elaborazione
+    - L'utente ha inviato una richiesta di analisi #link(<UC4>)[#underline[\[UC4\]]]
   ],
   post: [
-    - L'utente ha ricevuto il messaggio di analisi in corso 
-    - La procedura di richiesta analisi repository GitHub non viene finalizzata in quanto l'analisi precedente è ancora in corso
+    - L'utente visualizza l'avviso di analisi già pendente per il medesimo repository
   ],
   scenari: [
-    - L'utente visualizza un messaggio che indica che l'analisi del repository GitHub specificato è ancora in corso e non è possibile avviare una nuova analisi fino al completamento di quella in corso
+    - L'utente visualizza un messaggio circa l'impossibilità di avviare un nuovo audit simultaneo
   ],
-  trigger: "L'utente invia una richiesta di analisi mentre un'altra analisi per lo stesso repository è ancora in corso",
+  trigger: "L'utente tenta di avviare un'analisi mentre un'altra elaborazione è già attiva sul medesimo repository",
 )[]
 
 === UC5: Visualizzazione lista repository analizzati <UC5>
@@ -4260,248 +4216,240 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
   align: (col, row) => (center, left, center).at(col) + horizon,
 
-  // UC1
+  // --- REGISTRAZIONE (UC1) ---
   [#FRObx],
-  [Il Sistema deve consentire all'Utente non registrato l'accesso alla sezione di creazione account],
+  [Il Sistema deve consentire all'Utente non registrato l'accesso alla sezione di creazione account.],
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
   [#FRObx],
-  [Il Sistema deve consentire all'Utente non registrato l'immissione di un nome utente],
+  [Il Sistema deve permettere la finalizzazione della registrazione solo a seguito della validazione positiva di tutti i campi obbligatori.],
+  [#link(<UC1>)[#underline[\[UC1\]]]],
+
+  [#FRObx],
+  [Il Sistema deve persistere le credenziali dell'utente a seguito del completamento della procedura di registrazione.],
+  [#link(<UC1>)[#underline[\[UC1\]]]],
+  
+  // --- CAMPI MANCANTI (UC1.0.1) ---
+  [#FRObx],
+  [Il Sistema deve rilevare il tentativo di invio del modulo di registrazione in presenza di campi obbligatori vuoti.],
+  [#link(<UC1.0.1>)[#underline[\[UC1.0.1\]]]],
+
+  [#FRObx],
+  [Il Sistema deve inibire la registrazione in caso di dati obbligatori mancanti.],
+  [#link(<UC1.0.1>)[#underline[\[UC1.0.1\]]]],
+
+  [#FRObx],
+  [Il Sistema deve notificare l'utente indicando specificamente quali dati obbligatori non sono stati inseriti.],
+  [#link(<UC1.0.1>)[#underline[\[UC1.0.1\]]]],
+  
+  // --- USERNAME (UC1.1) ---
+  [#FRObx],
+  [Il Sistema deve consentire l'immissione di un nome utente.],
   [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
 
   [#FRObx],
-  [Il Sistema deve inibire l'uso di username con lunghezza inferiore a 4 caratteri o superiore a 20],
+  [Il Sistema deve validare che lo username abbia una lunghezza compresa tra 4 e 20 caratteri.],
   [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
 
   [#FRObx],
-  [Il Sistema deve accettare esclusivamente caratteri alfanumerici per lo username],
+  [Il Sistema deve validare che lo username contenga esclusivamente caratteri alfanumerici.],
   [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
 
   [#FRObx],
-  [L'Utente deve visualizzare un messaggio di errore se lo username non rispetta i vincoli di formato],
+  [Il Sistema deve notificare l'utente qualora lo username non rispetti i vincoli di formato definiti.],
   [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
 
   [#FRObx],
-  [Il Sistema deve verificare l'univocità dello username tra gli account già censiti],
+  [Il Sistema deve verificare l'univocità dello username rispetto agli account esistenti nel database.],
   [#link(<UC1.1.2>)[#underline[\[UC1.1.2\]]]],
 
   [#FRObx],
-  [L'Utente deve visualizzare un messaggio di errore se lo username inserito è già in uso],
+  [Il Sistema deve notificare l'utente qualora lo username inserito risulti già associato a un account esistente.],
   [#link(<UC1.1.2>)[#underline[\[UC1.1.2\]]]],
 
+  // --- EMAIL (UC1.2) ---
   [#FRObx],
-  [Il Sistema deve consentire all'Utente non registrato l'immissione di un indirizzo email],
+  [Il Sistema deve consentire l'immissione di un indirizzo email.],
   [#link(<UC1.2>)[#underline[\[UC1.2\]]]],
 
   [#FRObx],
-  [Il Sistema deve validare la sintassi dell'email (presenza di '\@' e dominio valido)],
+  [Il Sistema deve validare la conformità sintattica dell'indirizzo email secondo gli standard RFC.],
   [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
 
   [#FRObx],
-  [L'Utente deve visualizzare un messaggio di errore se l'email non rispetta il formato standard],
+  [Il Sistema deve notificare l'utente qualora l'email fornita non sia sintatticamente valida.],
   [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
 
   [#FRObx],
-  [Il Sistema deve verificare che l'email non sia già associata a un account esistente],
+  [Il Sistema deve verificare l'univocità dell'indirizzo email all'interno della piattaforma.],
   [#link(<UC1.2.2>)[#underline[\[UC1.2.2\]]]],
 
   [#FRObx],
-  [L'Utente deve visualizzare un messaggio di errore se l'email inserita è già in uso],
+  [Il Sistema deve notificare l'utente qualora l'email inserita risulti già registrata.],
   [#link(<UC1.2.2>)[#underline[\[UC1.2.2\]]]],
 
+  // --- PASSWORD (UC1.3) ---
   [#FRObx],
-  [Il Sistema deve consentire all'Utente non registrato l'immissione di una password],
+  [Il Sistema deve consentire l'immissione di una chiave di accesso.],
   [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
 
   [#FRObx],
-  [Il Sistema deve imporre criteri di sicurezza per la password (min. 8 caratteri, maiuscole, minuscole, numeri, caratteri speciali)],
+  [Il Sistema deve imporre criteri di complessità per la password: minimo 8 caratteri, inclusione di lettere maiuscole, minuscole, numeri e caratteri speciali.],
   [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
 
   [#FRObx],
-  [L'Utente deve visualizzare un messaggio di errore se la password non soddisfa i criteri di sicurezza],
+  [Il Sistema deve notificare l'utente qualora la password inserita non soddisfi i requisiti minimi di sicurezza.],
   [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
 
+  // --- AUTENTICAZIONE (UC2) ---
   [#FRObx],
-  [Il Sistema deve permettere la finalizzazione della registrazione previa validazione di tutti i campi],
-  [#link(<UC1>)[#underline[\[UC1\]]]],
-
-  [#FRObx],
-  [Il Sistema deve riconoscere il tentativo di conferma senza l'avvenuto inserimento di tutte le credenziali necessarie nel form di registrazione],
-  [#link(<UC1.4>)[#underline[\[UC1.4\]]]],
-
-  [#FRObx],
-  [Il Sistema deve bloccare il tentativo di registrazione avvenuto senza l'inserimento di tutte le credenziali necessarie nel form di registrazione],
-  [#link(<UC1.4>)[#underline[\[UC1.4\]]]],
-
-  [#FRObx],
-  [Il Sistema deve mostrare un messaggio d'errore a schermo],
-  [#link(<UC1.4>)[#underline[\[UC1.4\]]]],
-
-  // UC2
-  [#FRObx],
-  [Il Sistema deve consentire all'Utente non autenticato l'accesso alla sezione di login],
+  [Il Sistema deve consentire all'Utente non autenticato l'accesso alla sezione di autenticazione (Login).],
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
   [#FRObx],
-  [Il Sistema deve garantire l'accesso alle funzionalità riservate a seguito di una corretta autenticazione],
+  [Il Sistema deve garantire l'accesso alle funzionalità riservate esclusivamente a seguito di una corretta validazione delle credenziali.],
   [#link(<UC2>)[#underline[\[UC2\]]]],
+  
+  // --- GESTIONE CAMPI MANCANTI (UC2.0.1) ---
+  [#FRObx],
+  [Il Sistema deve rilevare il tentativo di autenticazione in presenza di campi obbligatori non compilati.],
+  [#link(<UC2.0.1>)[#underline[\[UC2.0.1\]]]],
 
   [#FRObx],
-  [Il Sistema deve consentire l'immissione dello username per la procedura di autenticazione],
+  [Il Sistema deve inibire l'accesso alla piattaforma qualora le credenziali nel modulo di autenticazione siano incomplete.],
+  [#link(<UC2.0.1>)[#underline[\[UC2.0.1\]]]],
+
+  [#FRObx],
+  [Il Sistema deve mostrare un avviso indicante il mancato inserimento di uno o più dati obbligatori.],
+  [#link(<UC2.0.1>)[#underline[\[UC2.0.1\]]]],
+  
+  [#FRObx],
+  [Il Sistema deve consentire l'immissione dell'identificativo (username) per la procedura di autenticazione.],
   [#link(<UC2.1>)[#underline[\[UC2.1\]]]],
 
   [#FRObx],
-  [L'Utente deve visualizzare un messaggio di errore se lo username inserito in fase di login non rispetta il formato previsto],
+  [Il Sistema deve notificare l'utente qualora l'identificativo inserito non rispetti il formato previsto.],
   [#link(<UC2.1.1>)[#underline[\[UC2.1.1\]]]],
 
   [#FRObx],
-  [Il Sistema deve verificare l'esistenza dello username inserito tra gli account censiti],
+  [Il Sistema deve verificare la presenza dell'identificativo tra gli account registrati.],
   [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
 
   [#FRObx],
-  [L'Utente deve visualizzare un messaggio di errore generico se lo username inserito non viene trovato],
+  [Il Sistema deve mostrare un messaggio di errore a seguito dell'inserimento di un identificativo non presente a sistema.],
   [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
 
   [#FRObx],
-  [Il Sistema deve consentire l'immissione della password per la procedura di autenticazione],
+  [Il Sistema deve consentire l'immissione della chiave di accesso (password) per la procedura di autenticazione.],
   [#link(<UC2.2>)[#underline[\[UC2.2\]]]],
 
   [#FRObx],
-  [L'Utente deve visualizzare un messaggio di errore se la password inserita in fase di login non rispetta il formato previsto],
+  [Il Sistema deve notificare l'utente qualora la password inserita non rispetti il formato previsto.],
   [#link(<UC2.2.1>)[#underline[\[UC2.2.1\]]]],
 
   [#FRObx],
-  [Il Sistema deve verificare la corrispondenza tra la password inserita e quella associata allo username],
+  [Il Sistema deve verificare la corrispondenza tra la password fornita e quella associata all'identificativo inserito.],
   [#link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]],
 
   [#FRObx],
-  [L'Utente deve visualizzare un messaggio di errore generico se la password inserita è errata],
+  [Il Sistema deve mostrare un messaggio di errore qualora la password inserita risulti errata.],
   [#link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]],
-  
-  [#FRObx],
-  [Il Sistema deve riconoscere il tentativo di conferma senza l'avvenuto inserimento di tutte le credenziali necessarie nel form di autenticazione],
-  [#link(<UC2.3>)[#underline[\[UC2.3\]]]],
 
+// --- INTEGRAZIONE GITHUB (UC3) ---
   [#FRObx],
-  [Il Sistema deve bloccare il tentativo di autenticazione avvenuto senza l'inserimento di tutte le credenziali necessarie nel form di autenticazione],
-  [#link(<UC2.3>)[#underline[\[UC2.3\]]]],
-
-  [#FRObx],
-  [Il Sistema deve mostrare un messaggio d'errore a schermo],
-  [#link(<UC2.3>)[#underline[\[UC2.3\]]]],
-
-  // UC3
-  [#FRObx],
-  [L'Utente autenticato deve poter accedere alla sezione di collegamento account GitHub],
+  [Il Sistema deve consentire all'Utente Autenticato l'accesso alla sezione dedicata al collegamento del profilo GitHub.],
   [#link(<UC3>)[#underline[\[UC3\]]]],
 
   [#FRObx],
-  [L'Utente deve poter completare l'autorizzazione tramite il reindirizzamento a GitHub e il successivo ritorno automatico all'applicazione per il recupero del codice identificativo],
+  [Il Sistema deve gestire il flusso di autorizzazione tramite reindirizzamento alla piattaforma GitHub e il successivo ritorno all'applicazione.],
   [#link(<UC3>)[#underline[\[UC3\]]]],
 
   [#FRObx],
-  [L'Utente autenticato deve visualizzare un avviso prima del redirect a GitHub],
+  [Il Sistema deve autorizzare l'utente all'interazione con i propri repository a seguito del completamento con successo della procedura.],
+  [#link(<UC3>)[#underline[\[UC3\]]]],
+
+  [#FRObx],
+  [Il Sistema deve mostrare un avviso informativo prima di procedere al reindirizzamento verso il dominio esterno.],
   [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
 
   [#FRObx],
-  [L'Utente deve poter confermare la volontà di procedere con il collegamento a GitHub],
-  [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
-
-  [#FRObx], 
-  [L'Utente deve poter rifiutare il collegamento a GitHub], 
-  [#link(<UC3.1.1>)[#underline[\[UC3.1.1\]]]],
+  [Il Sistema deve consentire all'utente di confermare o annullare la volontà di procedere con il collegamento esterno.],
+  [#link(<UC3.1>)[#underline[\[UC3.1\]]], #link(<UC3.1.1>)[#underline[\[UC3.1.1\]]]],
 
   [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se il codice GitHub non viene ricevuto],
+  [Il Sistema deve notificare l'utente qualora la procedura di sincronizzazione fallisca per anomalie tecniche nella ricezione dei dati.],
   [#link(<UC3.2.1>)[#underline[\[UC3.2.1\]]]],
 
   [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se il codice non è conforme al formato],
-  [#link(<UC3.2.1>)[#underline[\[UC3.2.3\]]]],
-
-  [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se il codice è già associato ad altro utente],
+  [Il Sistema deve inibire il collegamento qualora il profilo GitHub risulti già associato a un altro account CodeGuardian.],
   [#link(<UC3.2.2>)[#underline[\[UC3.2.2\]]]],
 
   [#FRObx],
-  [L'Utente deve ricevere un messaggio di notifica di fallimento se la condivisione delle informazioni necessarie di GitHub è stato negato],
+  [Il Sistema deve mostrare un messaggio di errore specifico qualora l'utente neghi il consenso alla condivisione dei dati su GitHub.],
   [#link(<UC3.2.3>)[#underline[\[UC3.2.3\]]]],
 
-  // UC4
-  [#FRObx], 
-  [L'Utente deve poter accedere alla sezione di richiesta analisi], 
+// --- RICHIESTA ANALISI REPOSITORY (UC4) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autenticato l'accesso alla sezione di configurazione dell'analisi.],
   [#link(<UC4>)[#underline[\[UC4\]]]],
 
   [#FRObx],
-  [L'utente deve poter visualizzare correttamente il campo di inserimento dell'URL],
-  [#link(<UC4>)[#underline[\[UC4\]]]],
-  
-  [#FRObx],
-  [L'utente deve poter visualizzare correttamente il campo di selezione delle sezioni di interesse],
-  [#link(<UC4>)[#underline[\[UC4\]]]],
-  
-  [#FRObx],
-  [L'utente deve poter visualizzare correttamente il pulsante di conferma],
-  [#link(<UC4>)[#underline[\[UC4\]]]],
-  
-  [#FRObx],
-  [L'utente deve poter inviare la richiesta di analisi tramite pulsante di conferma],
+  [Il Sistema deve predisporre un modulo per l'immissione dell'URL del repository, la selezione delle aree di interesse e l'invio della richiesta.],
   [#link(<UC4>)[#underline[\[UC4\]]]],
 
   [#FRObx],
-  [L'Utente deve poter inserire l'URL del repository GitHub nel campo dedicato],
+  [Il Sistema deve permettere l'inoltro della richiesta di analisi solo a seguito della validazione positiva di tutti i parametri obbligatori.],
+  [#link(<UC4>)[#underline[\[UC4\]]]],
+
+  // --- VALIDAZIONE URL (UC4.1) ---
+  [#FRObx],
+  [Il Sistema deve consentire l'immissione dell'URL del repository GitHub da analizzare.],
   [#link(<UC4.1>)[#underline[\[UC4.1\]]]],
 
-  [#FRObx], 
-  [L'URL deve iniziare con il protocollo 'https://'], 
-  [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
-
-  [#FRObx], 
-  [Il dominio dell'URL deve essere 'github.com'], 
+  [#FRObx],
+  [Il Sistema deve validare che l'URL inserito utilizzi il protocollo 'https://' e appartenga al dominio 'github.com'.],
   [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
 
   [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se l'URL non è conforme ai vincoli di formato],
+  [Il Sistema deve notificare l'utente qualora l'URL inserito non rispetti i vincoli di formato previsti.],
   [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
 
   [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se il repository non è accessibile o è inesistente],
+  [Il Sistema deve verificare l'accessibilità pubblica o tramite autorizzazione del repository indicato dall'URL.],
   [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
 
   [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se non inserisce alcun URL],
-  [#link(<UC4.1.3>)[#underline[\[UC4.1.3\]]]],
+  [Il Sistema deve notificare l'utente qualora il repository risulti inesistente o non accessibile.],
+  [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
 
   [#FRObx],
-  [L'Utente deve poter selezionare le sezioni di interesse per l'analisi],
+  [Il Sistema deve inibire la procedura di analisi e notificare l'utente qualora il campo URL non venga compilato.],
+  [#link(<UC4.1.3>)[#underline[\[UC4.1.3\]]]],
+
+  // --- SELEZIONE AREE (UC4.2) ---
+  [#FRObx],
+  [Il Sistema deve consentire la selezione di una o più aree di interesse tra test, sicurezza e documentazione.],
   [#link(<UC4.2>)[#underline[\[UC4.2\]]]],
 
   [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se non seleziona alcuna sezione di interesse],
+  [Il Sistema deve inibire la procedura di analisi e notificare l'utente qualora non venga selezionata almeno un'area di interesse.],
   [#link(<UC4.2.1>)[#underline[\[UC4.2.1\]]]],
 
+  // --- CONTROLLI DI STATO (UC4.3 - UC4.4) ---
   [#FRObx],
-  [Il sistema deve riconoscere se un report è up-to-date per il repository di cui è richiesta l'analisi],
+  [Il Sistema deve verificare se l'ultimo report generato per il repository sia coerente con l'ultimo commit effettuato su GitHub.],
   [#link(<UC4.3>)[#underline[\[UC4.3\]]]],
 
   [#FRObx],
-  [Il sistema deve bloccare la richiesta di analisi],
+  [Il Sistema deve inibire l'avvio di una nuova analisi e informare l'utente se il report esistente risulta già aggiornato.],
   [#link(<UC4.3>)[#underline[\[UC4.3\]]]],
 
   [#FRObx],
-  [L'Utente deve ricevere un avviso se l'ultimo report è già up-to-date],
-  [#link(<UC4.3>)[#underline[\[UC4.3\]]]],
-
-  [#FRObx],
-  [Il sistema deve riconoscere se un'analisi per lo stesso repository è già in elaborazione all'invio della richiesta di analisi],
+  [Il Sistema deve verificare la presenza di processi di analisi già attivi per il repository specificato.],
   [#link(<UC4.4>)[#underline[\[UC4.4\]]]],
 
   [#FRObx],
-  [Il sistema deve bloccare la richiesta di analisi],
-  [#link(<UC4.4>)[#underline[\[UC4.4\]]]],
-
-  [#FRObx],
-  [L'Utente deve ricevere un avviso se un'analisi è già in elaborazione],
+  [Il Sistema deve impedire l'invio di una nuova richiesta e notificare l'utente se un'analisi è già in fase di elaborazione.],
   [#link(<UC4.4>)[#underline[\[UC4.4\]]]],
 
   // UC5

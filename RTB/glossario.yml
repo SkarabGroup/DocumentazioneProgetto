@@ -10,6 +10,9 @@ A:
     descrizione: Filosofia di sviluppo software che privilegia la consegna frequente di software funzionante, la collaborazione costante con il cliente e la capacità di rispondere ai cambiamenti piuttosto che seguire un piano rigido.
   Allucinazione:
     descrizione: Fenomeno per cui un modello di intelligenza artificiale genera output sintatticamente corretti e plausibili ma fattualmente errati o privi di riscontro nella base di conoscenza o nel contesto fornito.
+  Amazon Web Service:
+    acronimo: AWS
+    descrizione: Ecosistema di servizi cloud che fornisce l'infrastruttura computazionale e di storage per il sistema. Consente l'esecuzione di task intensivi in ambienti isolati e la gestione dinamica delle risorse, garantendo la scalabilità necessaria alle operazioni di analisi e la persistenza dei dati non sensibili.
   Amministratore:
     descrizione: Ruolo nel team di progetto responsabile della gestione della configurazione, della documentazione e del mantenimento dei repository.
   Analisi dei requisiti:

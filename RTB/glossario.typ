@@ -8,6 +8,12 @@
 #set page(numbering: "1", header: header("Glossario"), footer: footer())
 #let history = (
   (
+    "2026/02/17",
+    "0.11.0",
+    "Revisionati tutti i termini",
+    members.suar
+  )
+  (
     "2026/01/12",
     "0.10.0",
     "Aggiunti termini Docker e Gantt",
