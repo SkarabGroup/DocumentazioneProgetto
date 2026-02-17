@@ -145,7 +145,7 @@
   (
     "2026/01/24",
     "0.36.0",
-    "Modifica dei casi d'uso UC38, UC40 e UC40.1 e aggiunta di UC38.1, UC39, UC39.1, UC41 e UC41.1",
+    "Modifica dei casi d'uso UC38, UC40 e UC40.1 e aggiunta di UC38.1, UC31, UC31.1, UC41 e UC41.1",
     members.andrea,
   ),
   (
@@ -182,7 +182,7 @@
   (
     "2026/01/17",
     "0.31.0",
-    "Modifica UC19, 20 e da 24 a 29",
+    "Modifica UC18, 20 e da 24 a 29",
     members.martinello,
     members.alice,
   ),
@@ -219,7 +219,7 @@
   (
     "2026/01/15",
     "0.26.0",
-    "Aggiunta UC19-UC28 con relativi sotto casi d'uso",
+    "Aggiunta UC18-UC28 con relativi sotto casi d'uso",
     members.martinello,
     members.alice,
   ),
@@ -570,7 +570,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     table.cell(colspan: 2, fill: luma(250), [*Attori Primari (Sistemi Interni)*]),
 
     [*Orchestratore*],
-    [Componente software autonomo che agisce come attore sistemico. È responsabile dell'avvio e del coordinamento dei flussi di analisi automatizzati, della gestione degli ambienti di esecuzione  e della centralizzazione delle comunicazioni tra gli agenti e il database, senza richiedere intervento umano diretto durante l'elaborazione.],
+    [Componente software autonomo che agisce come attore sistemico. È responsabile dell'avvio e del coordinamento dei flussi di analisi automatizzati, della gestione degli ambienti di esecuzione  e della centralizzazione delle comunicazioni tra gli agenti e il sistema di persistenza, senza richiedere intervento umano diretto durante l'elaborazione.],
 
     // SEZIONE 3: SISTEMI ESTERNI
     table.cell(colspan: 2, fill: luma(250), [*Attori Secondari (Sistemi Esterni)*]),
@@ -1754,6 +1754,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC10.1>)[#underline[\[UC10.1\]]]
     - #link(<UC10.2>)[#underline[\[UC10.2\]]]
     - #link(<UC10.3>)[#underline[\[UC10.3\]]]
+    - #link(<UC10.4>)[#underline[\[UC10.4\]]]
   ],
   estensioni: [
     - Nessuna
@@ -1827,6 +1828,29 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "Non sono presenti remediation per la sezione del sicurezza del report",
 )[]
+
+==== UC10.4: Visualizzazzione di segreti e token <UC10.4>
+#useCase(
+  attore: "Utente autorizzato",
+  pre: [
+    - L'utente si trova nella sezione di analisi sicurezza di un report #link(<UC10>)[#underline[\[UC10\]]]
+    - L'utente visualizza la sotto sezione del report relativa a segreti e token
+  ],
+  post: [
+    - L'utente può visualizzare i segreti ed i token rilevati durante l'analisi
+  ],
+  scenari: [
+    - 
+  ],
+  inclusioni:[
+
+  ],
+  estensioni:[
+
+  ],
+  trigger:""
+)[
+]
 
 === UC11: Visualizzazione sezione analisi della documentazione del report selezionato <UC11>
 #useCase(
@@ -2107,7 +2131,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC15.1.1>)[#underline[\[UC15.1.1 \]]]
+    - #link(<UC15.1.1>)[#underline[\[UC15.1.1\]]]
     - #link(<UC15.1.2>)[#underline[\[UC15.1.2\]]]
   ],
   trigger: "L'utente interagisce con il form di modifica inserendo la password corrente nell'apposito campo",
@@ -2432,153 +2456,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Esaurimento dei tentativi di accesso autorizzato",
 )[]
 
-/*
-==== UC17.1 Errore durante la creazione dell'ambiente sandbox <UC17.1>
-#useCase(
-  attore: "Orchestratore",
-  attori_secondari: "Docker",
-  pre: [
-    - Il sistema CodeGuardian ha accettato la richesta di analisi del repository
-  ],
-  post: [
-    - L'ambiente sand box non viene creato correttamente
-  ],
-  scenari: [
-    - Si verifica un errore durante la creazione dell'ambiente sandbox
-  ],
-  inclusioni: [
-    - #link(<UC17.1.1>)[#underline[\[UC17.1.1\]]]
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Durante la creazione dell'ambiente sandbox si verifica un errore",
-)[#useCaseDiagram("17_1", "UC17.1 - Errore durante la creazione dell'ambiente sandbox")]
-
-=== UC17.1.1 Comunicazione dell'errore durante la creazione dell'ambiente sand box <UC17.1.1>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - Viene rilevato un errore durante la creazione dell'ambiente sandbox
-  ],
-  post: [
-    - L'ambiente sandbox non viene creato correttamente e ciò viene comunicato al sistema Front-end
-  ],
-  scenari: [
-    - L'orchestratore comunica l'errore al sistema Front-end
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Durante la creazione dell'ambiente sandbox si verifica un errore",
-)[]
-
-=== UC18 Lettura delle richieste dell'utente da parte dell'orchestratore <UC18>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    //- L'utente autenticato avanzato ha richiesto l'analisi del proprio repository al sistema CodeGuardian #link(<UC4>)[#underline[\[UC4\]]]
-    #TODO("check precondizione tolta")
-    - L'ambiente sandbox é stato creato correttamente #link(<UC17>)[#underline[\[UC17\]]]
-  ],
-  post: [
-    - L'orchestratore ha letto e interpretato correttamente le richieste dell'utente
-  ],
-  scenari: [
-    - L'orchestratore legge le richieste dell'utente
-    - L'orchestratore notifica al sistema Back-end i compiti da svolgere
-  ],
-  inclusioni: [
-    - #link(<UC18.1>)[#underline[\[UC18.1\]]]
-    - #link(<UC18.2>)[#underline[\[UC18.2\]]]
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'orchestratore ha letto e interpretato correttamente le richieste dell'utente e ha visionato il repository",
-)[#useCaseDiagram("18", "UC18 - Lettura delle richieste dell'utente da parte dell'orchestratore")]
-#TODO("1 buco da coprire")
-
-==== UC18.1 Richiesta di analisi completa <UC18.1>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - Non ci sono state richieste specifiche da parte dell'utente
-  ],
-  post: [
-    - L'orchestratore avvia l'analisi completa del repository
-  ],
-  scenari: [
-    - Il sistema Front-end comunica all'orchestratore che l'utente vuole svolgere un'analisi completa del proprio repository
-    - L'orchestratore riceve la richiesta e avvia l'analisi completa del repository
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'orchestratore riceve dal sistema Front-end la richiesta di analisi completa",
-)[]
-==== UC18.2 Richieste specifiche sull'analisi da parte del front-end <UC18.2>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - L'utente ha fatto delle richieste specifiche sulle aree da analizzare del proprio repository
-  ],
-  post: [
-    - L'orchestratore avvia l'analisi specifica del repository in base alle richieste dell'utente
-  ],
-  scenari: [
-    - Il sistema Front-end comunica all'orchestratore le specifiche richieste dell'utente rispetto alle aree da analizzare
-    - L'orchestratore controlla la pre-esistenza del repository da analizzare nel #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#database")[#def("Database")]
-    - L'orchestratore, una volta compresa la richiesta, avvia l'analisi specifica
-  ],
-  inclusioni: [
-    - #link(<UC18.2.1>)[#underline[\[UC18.2.1\]]]
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Il sistema Front-end comunica al sistema Back-end le richieste che dovranno essere prese in carico",
-)[#useCaseDiagram("18_2", "UC18.2 - Richieste specifiche sull'analisi da parte del frontend")]
-
-===== UC18.2.1 Repository mai analizzato in precedenza <UC18.2.1>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - Il repository non era mai stato analizzato in precedenza
-  ],
-  post: [
-    - L'orchestratore istruisce avvia un'analisi completa del repository
-  ],
-  scenari: [
-    - L'orchestratore controlla la pre-esistenza del repository da analizzare nel database e non la trova
-    - L'orchestratore si comporta come se fosse stata richiesta l'analisi completa
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'orchestratore non ha trovato la repository nel database",
-)[]
-*/
-
 // USE CASE DELLE ANALISI
-=== UC19: Accettazione singola remediation generica <UC19>
+=== UC18: Accettazione singola remediation generica <UC18>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    - L'utente sta visualizzando una singola remediation generica #link(<UC16>)[#underline[\[UC16\]]]
+    - L'utente sta visualizzando una singola remediation #link(<UC16>)[#underline[\[UC16\]]]
   ],
   post: [
     - La remediation viene automaticamente eseguita, applicando modifiche alla sezione specifica del repository di riferimento
-    - L'utente viene rimandato alla visualizzazione della singola remediation #link(<UC16>)[#underline[\[UC16\]]]
+    - L'utente visualizza la remediation appena eseguita #link(<UC16>)[#underline[\[UC16\]]]
   ],
   scenari: [
     - L'utente accetta la remediation proposta dalla sezione di gestione della remediation
@@ -2587,19 +2474,18 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC19.1>)[#underline[\[UC19.1\]]]
-    - #link(<UC19.2>)[#underline[\[UC19.2\]]]
+    - Nessuna
   ],
-  generalizzazione: [
-    - Questo caso d'uso funge da generalizzazione per i seguenti casi d'uso:
-    - Accettazione singola remediation per la sezione dell'analisi del codice #link(<UC44>)[#underline[\[UC44\]]]
-    - Accettazione singola remediation per la sezione dell'analisi della sicurezza #link(<UC45>)[#underline[\[UC45\]]]
-    - Accettazione singola remediation per la sezione dell'analisi della documentazione #link(<UC46>)[#underline[\[UC46\]]]
+  trigger: [L'utente interagisce con la sezione di gestione della remediation e accetta la proposta di remediation],
+  generalizzazione: [\
+    Questo caso d'uso é la generalizzazione dei seguenti casi d'uso:
+    - Accettazione singola remediation per la sezione di analisi del codice #link(<UC44>)[#underline[\[UC44\]]]
+    - Accettazione singola remediation per la sezione di analisi della sicurezza #link(<UC45>)[#underline[\[UC45\]]]
+    - Accettazione singola remediation per la sezione di analisi della documentazione #link(<UC46>)[#underline[\[UC46\]]]
   ],
-  trigger: "L'utente interagisce con la sezione di gestione della remediation e accetta la proposta di remediation",
-)[#useCaseDiagram("19", "UC19 - Analisi vulnerabilità dipendenze")]
+)[#useCaseDiagram("18", "UC18 - Analisi vulnerabilità dipendenze")]
 
-==== UC19.1: Rifiuto di una singola remediation generica <UC19.1>
+==== UC19: Rifiuto di una singola remediation generica <UC19>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
@@ -2615,35 +2501,21 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente interagisce con la sezione di gestione della remediation e rifiuta la proposta di remediation",
 )[]
 
-==== UC19.2: Annullamento dell'operazione di gestione della remediation <UC19.2>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente sta interagendo con la sezione di gestione della remediation #link(<UC19>)[#underline[\[UC19\]]]
-  ],
-  post: [
-    - L'utente viene rimandato alla visualizzazione della singola remediation #link(<UC16>)[#underline[\[UC16\]]]
-  ],
-  scenari: [
-    - L'utente sceglie di annullare l'operazione, tornando alla sezione precedente
-  ],
-  trigger: "L'utente annulla l'operazione di accettazione della remediation",
-)[]
-
+#TODO("rivedere da mettere con uc10")
 === UC20: Rilevamento segreti e token <UC20>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente si trova nella sezione di analisi sicurezza di un report #link(<UC10>)[#underline[\[UC10\]]]
+    - L'utente visualizza la sotto sezione del report relativa a segreti e token
   ],
   post: [
-    - L'utente visualizza il report dei segreti rilevati con livelli di confidenza
+    - Il report dei segreti rilevati con livelli di confidenza viene visualizato
   ],
   scenari: [
-    - L'utente accede al pannello di analisi sicurezza
-    - L'utente seleziona la scansione segreti e token
-    - L'utente visualizza il report dei risultati #link(<UC20.3>)[#underline[\[UC20.3\]]]
+    - L'utente
+   - L'utente visualizza il report dei risultati #link(<UC20.3>)[#underline[\[UC20.3\]]]
     - L'utente esamina i rilevamenti e marca eventuali falsi positivi #link(<UC20.1>)[#underline[\[UC20.1\]]]
     - L'utente configura la revoca automatica per segreti confermati #link(<UC20.2>)[#underline[\[UC20.2\]]]
   ],
@@ -2657,7 +2529,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente seleziona il comando di scansione segreti e token dal pannello di analisi sicurezza",
 )[#useCaseDiagram("20", "UC20 - Rilevamento segreti e token")]
 
-==== UC20.1: Marcatura falsi positivi rilevamento segreti <UC20.1>
+==== UC20.1: Marcatura dei falsi positivi durante il rilevamento dei segreti <UC20.1>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
@@ -2719,13 +2591,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   post: [
     - L'utente visualizza il report completo dei segreti rilevati
-    - L'utente visualizza i dettagli di ciascun rilevamento
     - L'utente ha accesso alle funzionalità di marcatura falsi positivi e configurazione revoca
   ],
   scenari: [
     - L'utente apre il report segreti dal pannello analisi sicurezza
     - L'utente visualizza l'elenco dei segreti rilevati
-    - L'utente esamina i dettagli di ciascun rilevamento
     - L'utente marca eventuali falsi positivi #link(<UC20.1>)[#underline[\[UC20.1\]]]
   ],
   inclusioni: [
@@ -2737,6 +2607,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente seleziona il comando di visualizzazione report segreti dal pannello di analisi sicurezza",
 )[]
 
+#TODO("da rivedere con uc6/10")
 === UC21: Verifica conformità licenze <UC21>
 #useCase(
   attore: "Utente autorizzato",
@@ -2745,9 +2616,8 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente si trova nella sezione di compliance e governance del pannello report
   ],
   post: [
-    - L'utente visualizza il report di compatibilità delle licenze con classificazione dei rischi
-    - L'utente visualizza le licenze non compatibili evidenziate
-    - L'utente può richiedere approvazione legale
+    - L'utente può visualizzare il report di compatibilità delle licenze con classificazione dei rischi
+    - L'utente può visualizzare le licenze non compatibili evidenziate
   ],
   scenari: [
     - L'utente accede al pannello compliance
@@ -2775,12 +2645,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente si trova nella sezione di monitoraggio qualità del codice del pannello report
   ],
   post: [
-    - L'utente visualizza la dashboard con metriche di qualità del codice e trend storici
-    - L'utente visualizza le regressioni evidenziate
-    - L'utente può pianificare azioni correttive
+    - L'utente può visualizzare la dashboard con metriche di qualità del codice e trend storici
+    - L'utente può visualizzare le regressioni evidenziate
   ],
   scenari: [
-    - L'utente accede al pannello monitoraggio qualità
     - L'utente seleziona il comando di monitoraggio qualità
     - L'utente visualizza la dashboard con metriche e trend
     - L'utente esamina i suggerimenti di obiettivi qualità
@@ -2795,6 +2663,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente seleziona il comando di monitoraggio qualità codice dal pannello report",
 )[#useCaseDiagram("23", "UC23 - Monitor qualità del codice")]
 
+#TODO("rivedere con uc report (da 6 a 10)")
 === UC24: Suggerimenti di refactor <UC24>
 #useCase(
   attore: "Utente autorizzato",
@@ -2847,8 +2716,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente seleziona i refactor da applicare e conferma l'applicazione automatica con supervisione",
 )[]
 
-#TODO("3 buchi da coprire")
-
+#TODO("3 buchi da coprire (grande buco)")
 === UC28: Report programmabili e alert <UC28>
 #useCase(
   attore: "Utente autorizzato",
@@ -2878,7 +2746,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    - L'utente sta confiugurando i report programmabili e gli alert #link(<UC28>)[#underline[\[UC28\]]]
     - L'utente è nella sezione per la configurazione della periodicità dei report
   ],
   post: [
@@ -2900,7 +2767,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    - L'utente sta confiugurando i report programmabili e gli alert #link(<UC28>)[#underline[\[UC28\]]]
     - L'utente è nella sezione per la configurazione della periodicità dei report #link(<UC28.1>)[#underline[\[UC28.1\]]]
     - L'utente non ha selezionato nessuna periodicità
   ],
@@ -2965,13 +2831,14 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 )[]
 
 === UC29 Recupero e avvio strumenti esterni di analisi <UC29>
+#TODO("deve avere come precondizione la richiesta di analisi di un repository, da inserire come postcondizione in un UC di avvio analisi")
 #useCase(
   attore: "Orchestratore",
   pre: [
-    -  L'orchestratore ha ricevuto una richiesta di analisi di un repository
+    -  L'orchestratore ha ricevuto una richiesta di analisi di un repository #link
   ],
   post: [
-    - L'orchestratore ha contattato ed avviato corettamente gli strumenti esterni di analisi
+    - L'orchestratore ha contattato ed avviato correttamente gli strumenti esterni di analisi
   ],
   scenari: [
     - L'orchestratore richiede lo strumento esterno di analisi del codice #link(<UC29.1>)[#underline[\[UC29.1\]]]
@@ -3081,17 +2948,42 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Viene richiesta l'analisi del rispetto degli standard OWASP",
 )[]
 
-=== UC30 Generazione del report finale <UC30>
+#TODO("UC precondizione AWS va")
+
+=== UC30 Salvataggio stato analisi nel sistema di persistenza <UC30>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'orchestratore ha recuperato ed avviato tutti gli strumenti di analisi #link(<UC29>)[#underline[\[UC29\]]]
+    - L'orchestratore ha avviato gli strumenti esterni di analisi #link(<UC29>)[#underline[\[UC29\]]]
   ],
   post: [
-    - L'orchestratore ha generato il report di analisi finale
+    - L'orchestratore ha salvato lo stato dell'analisi come `pending` nel sistema di persistenza, associandolo alla repository e all'utente che ha richiesto l'analisi
   ],
   scenari: [
-    - L'orchestratore riceve le varie analisi dagli strumenti di analisi e le unisce in un unico report
+    - L'orchestratore registra nel sistema di persistenza lo stato dell'analisi, associandolo alla repository e all'utente che ha richiesto l'analisi
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC30.1>)[#underline[\[UC30.1\]]]
+  ],
+  trigger: "L'orchestratore ha avviato gli strumenti esterni di analisi",
+)[#useCaseDiagram("30", "UC30 - Salvataggio stato analisi nel sistema di persistenza")]
+
+
+=== UC30.1 Errore durante il salvataggio dello stato dell'analisi nel sistema di persistenza <UC30.1>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - L'orchestratore ha avviato gli strumenti esterni di analisi #link(<UC29>)[#underline[\[UC29\]]]
+  ],
+  post: [
+    - L'orchestratore ha notificato l'utente dell'errore riscontrato durante il salvataggio dello stato dell'analisi nel sistema di persistenza
+  ],
+  scenari: [
+    - L'orchestratore rileva un errore durante il processo di salvataggio dello stato dell'analisi nel sistema di persistenza
+    - L'orchestratore registra l'errore e notifica l'utente del problema riscontrato durante il salvataggio dello stato dell'analisi nel sistema di persistenza
   ],
   inclusioni: [
     - Nessuna
@@ -3099,24 +2991,136 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
+  trigger: "L'orchestratore ha avviato gli strumenti esterni di analisi",
+)[#useCaseDiagram("30", "UC30.1 - Errore durante il salvataggio dello stato dell'analisi nel sistema di persistenza")]
+
+
+=== UC31 Recupero dei risultati dagli strumenti di analisi <UC31>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - L'orchestratore ha avviato gli strumenti esterni di analisi #link(<UC29>)[#underline[\[UC29\]]]
+  ],
+  post: [
+    - L'orchestratore ha recuperato i risultati da tutti gli strumenti di analisi
+  ], 
+  scenari: [
+    - L'orchestratore attende il completamento dell'analisi da parte degli strumenti esterni
+    - L'orchestratore riceve i risultati da ciascuno strumento di analisi
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC31.1>)[#underline[\[UC31.1\]]]
+  ],
+  trigger: "Gli strumenti esterni di analisi completano le loro operazioni e inviano i risultati all'orchestratore",
+)[#useCaseDiagram("30", "UC31 - Recupero dei risultati dagli strumenti di analisi")]
+
+=== UC31.1 Uno o più strumenti di analisi non rispondono o restituiscono un errore <UC31.1>
+#useCase(
+  attore: "Strumenti di Analisi",
+  pre: [
+    - L'orchestratore ha avviato gli strumenti esterni di analisi #link(<UC29>)[#underline[\[UC29\]]]
+    - Uno o più strumenti di analisi non rispondono entro un tempo prestabilito o restituiscono un errore
+  ],
+  post: [
+    - L'orchestratore registra l'errore e procede con i risultati disponibili dagli altri strumenti di analisi
+    - L'orchestratore notifica l'utente del problema riscontrato con lo strumento di analisi non funzionante
+  ],
+  scenari: [
+    - L'orchestratore rileva la mancata risposta o l'errore da parte dello strumento di analisi
+    - L'orchestratore registra l'errore e continua a recuperare i risultati dagli altri strumenti di analisi
+    - L'orchestratore invia una notifica all'utente informandolo del problema riscontrato con lo strumento di analisi non funzionante
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Uno o più strumenti di analisi non rispondono o restituiscono un errore",
+)[
+]
+
+=== UC32 Generazione del report finale <UC32>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - L'orchestratore ha recuperato i risultati da tutti gli strumenti di analisi #link(<UC31>)[#underline[\[UC31\]]]
+  ],
+  post: [
+    - L'orchestratore ha generato il report di analisi finale
+  ],
+  scenari: [
+    - L'orchestratore riceve le varie analisi dagli strumenti di analisi e le elabora per generare il report finale
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna 
+  ],
   trigger: "L'orchestratore riceve le analisi dei vari strumenti di analisi",
 )[
 ]
 
-#TODO("1 buco da coprire")
-
-=== UC32 L'utente viene notificato della disponibilità di visualizzare il nuovo report di analisi<UC32>
+=== UC33 Salvataggio di un report <UC33>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Orchestratore",
   pre: [
-    - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]].
-    - L'utente ha richiesto l'analisi del repository tramite la procedura di richiesta analisi #link(<UC4>)[#underline[\[UC4\]]].
+    - Il report dell'analisi è stato generato #link(<UC32>)[#underline[\[UC32\]]]
+  ],
+  post: [
+    - L'orchestratore ha archiviato correttamente il report di analisi nel sistema di persistenza
+  ],
+  scenari: [
+    - L'orchestratore salva il report di analisi finale nel sistema di persistenza, associandolo alla repository e all'utente che ha richiesto l'analisi
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC33.1>)[#underline[\[UC33.1\]]]
+  ],
+  trigger: "La procedura di generazione del report di analisi è stata completata con successo",
+)[
+]
+
+==== UC33.1 Errore durante il salvataggio del report <UC33.1>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - L'orchestratore ha avviato la procedura di salvataggio del report #link(<UC33>)[#underline[\[UC33\]]]
+    - Non avviene correttamente il processo di salvataggio e si genera un errore
+  ],
+  post: [
+    - L'orchestratore ha comunicato l'errore di mancato salvataggio del report all'utente
+  ],
+  scenari: [
+    - L'orchestratore riscontra un errore interno o di connessione al sistema di persistenza durante la procedura di salvataggio del report
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'orchestratore riscontra un errore durante la procedura di salvataggio del report di analisi",
+)[
+]
+
+=== UC34 L'utente viene notificato della disponibilità di visualizzare il nuovo report di analisi<UC34>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    -L'analisi richiesta è stata salvata correttamente nel sistema di persistenza #link(<UC33>)[#underline[\[UC33\]]]
   ],
   post: [
     - L'utente riceve una notifica che segnala la disponibilità del nuovo report di analisi.
   ],
   scenari: [
-    - L'utente riceve e prende atto della notifica relativa alla disponibilità del report.
+    - L'orchestratore invia una notifica all'utente che segnala la disponibilità del nuovo report di analisi.
   ],
   inclusioni: [
     - Nessuna
@@ -3125,7 +3129,8 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "L'analisi richiesta è stata completata",
-)[]
+)[
+]
 
 #TODO("1 buco da coprire")
 
@@ -3185,7 +3190,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente ha richiesto l'analisi del repository tramite la procedura di richiesta analisi #link(<UC4>)[#underline[\[UC4\]]].
   ],
   post: [
-    - I metadati del repository sono stati salvati correttamente nel database.
+    - I metadati del repository sono stati salvati correttamente nel sistema di persistenza.
   ],
   scenari: [
     - L'utente avvia (o conferma) la procedura di salvataggio metadati come parte della richiesta di analisi.
@@ -3249,7 +3254,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - Il report dell'analisi è stato completato e è stato preso in carico dall'orchestratore #link(<UC30>)[#underline[[UC30]]]
+    - Il report dell'analisi è stato completato e è stato preso in carico dall'orchestratore #link(<UC33>)[#underline[[UC33]]]
   ],
   post: [
     - L'orchestratore ha archiviato correttamente il report dell'analisi
@@ -3259,7 +3264,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     #TODO("Servono altri passaggi/inclusioni o va bene così? (direi che non bisgona concentrarsi sul 'come')")
     //- L'orchestratore invia una richiesta di persistenza al sistema Back-end
     //- Il sistema Back-end riceve i dati del report
-    //- Il sistema Back-end memorizza il report nel database
+    //- Il sistema Back-end memorizza il report nel sistema di persistenza
   ],
   inclusioni: [
     - Nessuna
@@ -3283,7 +3288,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'orchestratore comunica l'errore di mancato salvataggio del report
   ],
   scenari: [
-    - L'orchestratore riscontra un errore interno o di connessione al database durante la procedura di salvataggio del report
+    - L'orchestratore riscontra un errore interno o di connessione al sistema di persistenza durante la procedura di salvataggio del report
   ],
   inclusioni: [
     - Nessuna
@@ -3294,50 +3299,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "La procedura di salvataggio del report di analisi finale fallisce",
 )[]
 
-=== UC39 Salvataggio delle metriche aggregate <UC39>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - Il report dell'analisi è stato completato e è stato preso in carico dall'orchestratore #link(<UC30>)[#underline[[UC30]]]
-  ],
-  post: [
-    - L'orchestratore ha archiviato correttamente le metriche aggregate per la visualizzazione di grafici e tabelle
-  ],
-  scenari: [
-    - L'orchestratore elabora i dati dei singoli report degli agenti per calcolare le metriche globali e avvia la procedura di salvataggio
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC39.1>)[#underline[[UC39.1]]]
-  ],
-  trigger: "Il report di analisi finale è preso in carico dall'orchestratore",
-)[
-  #useCaseDiagram("39", "UC39 - Salvataggio delle metriche aggregate")
-]
-
-==== UC39.1 Errore durante il salvataggio delle metriche aggregate <UC39.1>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - L'orchestratore ha avviato la procedura di salvataggio delle metriche aggregate #link(<UC39>)[#underline[[UC39]]]
-    - Non avviene correttamente il processo di salvataggio e si genera un errore
-  ],
-  post: [
-    - L'orchestratore comunica l'errore di mancato salvataggio delle metriche aggregate
-  ],
-  scenari: [
-    - L'orchestratore riscontra un errore interno o di connessione al database durante la procedura di salvataggio delle metriche aggregate
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Il sistema Back-end fallisce la procedura di archiviazione delle metriche",
-)[]
 
 === UC40 Gestione del codice OAuth GitHub <UC40>
 #useCase(
@@ -3461,7 +3422,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC44.2>)[#underline[\[UC44.2\]]]
   ],
   specializzazione: [
-    - Questo caso d'uso è una specializzazione del caso d'uso Accettazione singola remediation #link(<UC19>)[#underline[\[UC19\]]]
+    - Questo caso d'uso è una specializzazione del caso d'uso Accettazione singola remediation #link(<UC18>)[#underline[\[UC18\]]]
   ],
   trigger: "L'utente interagisce con la sezione di gestione della remediation di analisi del codice e accetta la proposta di remediation",
 )[]
@@ -3518,7 +3479,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC45.2>)[#underline[\[UC45.2\]]]
   ],
   specializzazione: [
-    - Questo caso d'uso è una specializzazione del caso d'uso Accettazione singola remediation #link(<UC19>)[#underline[\[UC19\]]]
+    - Questo caso d'uso è una specializzazione del caso d'uso Accettazione singola remediation #link(<UC18>)[#underline[\[UC18\]]]
   ],
   trigger: "L'utente interagisce con la sezione di gestione della remediation di analisi della sicurezza e accetta la proposta di remediation",
 )[]
@@ -3575,7 +3536,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC46.2>)[#underline[\[UC46.2\]]]
   ],
   specializzazione: [
-    - Questo caso d'uso è una specializzazione del caso d'uso Accettazione singola remediation #link(<UC19>)[#underline[\[UC19\]]]
+    - Questo caso d'uso è una specializzazione del caso d'uso Accettazione singola remediation #link(<UC18>)[#underline[\[UC18\]]]
   ],
   trigger: "L'utente interagisce con la sezione di gestione della remediation di analisi della documentazione e accetta la proposta di remediation",
 )[]
@@ -4821,26 +4782,22 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC18.2.1>)[#underline[\[UC18.2.1\]]]],
   */
 
-  //UC19
+  //UC18
   [#FRDex],
   [L'Utente deve poter interagire con la sezione di gestione di remediation],
-  [#link(<UC19>)[#underline[\[UC19\]]]],
+  [#link(<UC18>)[#underline[\[UC18\]]]],
   
   [#FRDex],
   [L'Utente deve poter accettare la remediation proposta],
-  [#link(<UC19>)[#underline[\[UC19\]]]],
+  [#link(<UC18>)[#underline[\[UC18\]]]],
 
   [#FRDex],
   [Il sistema deve modificare il repository coerentemente con quanto scritto nella remediation],
-  [#link(<UC19>)[#underline[\[UC19\]]]],
+  [#link(<UC18>)[#underline[\[UC18\]]]],
 
   [#FRDex],
   [L'Utente deve poter rifiutare la remediation proposta],
-  [#link(<UC19.1>)[#underline[\[UC19.1\]]]],
-
-  [#FRDex],
-  [L'Utente deve poter annullare l'operazione di accettazione di remediation],
-  [#link(<UC19.2>)[#underline[\[UC19.2\]]]],
+  [#link(<UC19>)[#underline[\[UC19\]]]],
 
   //UC20
   [#FROpx], 
@@ -4918,7 +4875,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   //UC29
 
-  //UC30
+  //UC33
 
   //UC31
 
@@ -4940,25 +4897,25 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC38>)[#underline[\[UC38\]]]],
 
   [#FRObx],
-  [Il sistema Back-end deve archiviare in modo permanente il report finale nel database],
+  [Il sistema Back-end deve archiviare in modo permanente il report finale nel sistema di persistenza],
   [#link(<UC38>)[#underline[\[UC38\]]]],
 
   [#FRObx],
   [L'Orchestratore deve poter notificare al Front-end l'impossibilità di salvare il report in caso di errore interno],
   [#link(<UC38.1>)[#underline[\[UC38.1\]]]],
 
-  //UC39
+  //UC31
   [#FRObx],
   [L'Orchestratore deve poter elaborare i dati dei singoli agenti per calcolare metriche statistiche globali],
-  [#link(<UC39>)[#underline[\[UC39\]]]],
+  [#link(<UC31>)[#underline[\[UC31\]]]],
 
   [#FRObx],
   [Il sistema Back-end deve poter memorizzare le metriche aggregate per consentire la visualizzazione di grafici e tabelle],
-  [#link(<UC39>)[#underline[\[UC39\]]]],
+  [#link(<UC31>)[#underline[\[UC31\]]]],
 
   [#FRObx],
   [Il sistema deve poter segnalare al Front-end il mancato aggiornamento delle metriche in caso di errore del Back-end],
-  [#link(<UC39.1>)[#underline[\[UC39.1\]]]],
+  [],//#link(<UC31.2>)[#underline[\[UC31.2\]]]],
 
   //UC40
   [#FRObx],
@@ -4966,7 +4923,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC40>)[#underline[\[UC40\]]]],
 
   [#FRObx],
-  [Il sistema Back-end deve associare il token di accesso GitHub al profilo dell'utente nel database],
+  [Il sistema Back-end deve associare il token di accesso GitHub al profilo dell'utente nel sistema di persistenza],
   [#link(<UC40>)[#underline[\[UC40\]]]],
 
   [#FRObx],
@@ -5396,7 +5353,7 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
 
   [#VRObx],
-  [Il Database deve essere implementato utilizzando MongoDB o PostgreSQL],
+  [Il sistema di persistenza deve essere implementato utilizzando MongoDB o PostgreSQL],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
 
   [#VRObx],
@@ -5420,12 +5377,13 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
 
 == Fonte - Requisiti
 #table(
-  columns: (1.5fr, 2.5fr),
-    inset: 10pt,
-    align: (col, row) => (if col == 0 { center } else { center }),
-    fill: (col, row) => if row == 0 { luma(240) } else { white },
-    stroke: 0.5pt + luma(200),
-    table.header([*Fonte*], [*Requisiti*]),
+  columns: (1fr, 2fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*Fonte*], [*Requisiti*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, left, center).at(col) + horizon,
+
 
   [Capitolato],
   [],
@@ -5490,7 +5448,7 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   [UC18],
   [],
 
-  [UC19],
+  [UC18],
   [],
 
   [UC20],
@@ -5523,7 +5481,7 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   [UC29],
   [],
 
-  [UC30],
+  [UC31],
   [],
 
   [UC31],
@@ -5550,10 +5508,10 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   [UC38],
   [],
 
-  [UC39],
+  [UC31],
   [],
   
   [UC40],
   [],
 
-)
+)a
