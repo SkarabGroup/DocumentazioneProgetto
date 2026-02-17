@@ -4483,15 +4483,15 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   [#FRObx],
   [L'Utente deve poter visualizzare la data del report di analisi],
-  [#link(<UC6.2>)[#underline[\[UC6.2\]]], #link(<UC6.2.1>)[#underline[\[UC6.2.1\]]]],
+  [#link(<UC6.2.1>)[#underline[\[UC6.2.1\]]]],
 
   [#FRDex],
   [L'Utente deve poter visualizzare il commit analizzato nel report],
-  [#link(<UC6.2>)[#underline[\[UC6.2\]]], #link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]],
+  [#link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]],
 
   [#FRDex],
   [L'Utente deve poter visualizzare il richiedente del report di analisi],
-  [#link(<UC6.2>)[#underline[\[UC6.2\]]], #link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]],
+  [#link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]],
 
   [#FRObx],
   [L'Utente deve poter visualizzare le sezioni selezionate dell'analisi],
@@ -4550,32 +4550,32 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   [#FRObx],
   [L'Utente deve poter visualizzare la sezione di analisi statica del codice],
-  [#link(<UC9>)[#underline[\[UC9\]]], #link(<UC9.1>)[#underline[\[UC9.1\]]]],
+  [#link(<UC9.1>)[#underline[\[UC9.1\]]]],
   
   [#FRObx],
   [L'Utente deve poter visualizzare il report di analisi statica del codice],
-  [#link(<UC9>)[#underline[\[UC9\]]], #link(<UC9.2>)[#underline[\[UC9.2\]]]],
+  [#link(<UC9.2>)[#underline[\[UC9.2\]]]],
 
   [#FRObx],
   [L'Utente deve poter visualizzare la sezione di remediation per la sezione del codice],
-  [#link(<UC9>)[#underline[\[UC9\]]], #link(<UC9.3>)[#underline[\[UC9.3\]]]],
+  [#link(<UC9.3>)[#underline[\[UC9.3\]]]],
 
   [#FRObx],
   [L'Utente deve poter visualizzare il numero totale di remediation per la sezione del codice],
-  [#link(<UC9>)[#underline[\[UC9\]]], #link(<UC9.3>)[#underline[\[UC9.3\]]]],
+  [#link(<UC9.3>)[#underline[\[UC9.3\]]]],
 
   [#FRObx],
   [L'Utente deve poter visualizzare il messaggio di lista vuota nel caso non ci siano remediation per la sezione del codice],
-  [#link(<UC9>)[#underline[\[UC9\]]], #link(<UC9.3.1>)[#underline[\[UC9.3.1\]]]],
+  [#link(<UC9.3.1>)[#underline[\[UC9.3.1\]]]],
 
   //UC10
   [#FRObx],
   [L'Utente deve poter visualizzare l'analisi delle librerie e dipendenze],
-  [#link(<UC10>)[#underline[\[UC10\]]], #link(<UC10.2>)[#underline[\[UC10.2\]]]],
+  [#link(<UC10.2>)[#underline[\[UC10.2\]]]],
 
   [#FRObx],
   [L'Utente deve poter visualizzare il report di analisi della sicurezza OWASP],
-  [#link(<UC10>)[#underline[\[UC10\]]], #link(<UC10.3>)[#underline[\[UC10.3\]]]],
+  [#link(<UC10.3>)[#underline[\[UC10.3\]]]],
 
   //UC11
   [#FRObx],
@@ -4584,50 +4584,54 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   [#FRObx],
   [L'Utente deve poter visualizzare gli errori di spelling nella documentazione],
-  [#link(<UC11>)[#underline[\[UC11\]]], #link(<UC11.1>)[#underline[\[UC11.1\]]]],
+  [#link(<UC11.1>)[#underline[\[UC11.1\]]]],
 
   [#FRObx],
   [L'Utente deve poter visualizzare la completezza della documentazione rispetto al codice],
-  [#link(<UC11>)[#underline[\[UC11\]]], #link(<UC11.2>)[#underline[\[UC11.2\]]]],
+  [#link(<UC11.2>)[#underline[\[UC11.2\]]]],
   
-   //UC12
+  //UC12
   [#FROpx],
   [Il sistema Front-end deve essere in grado di rappresentare correttamente la lista di tutti i repository analizzati],
   [#link(<UC12>)[#underline[\[UC12\]]]],
 
   [#FROpx],
   [Il sistema Back-end deve essere in grado di passare solo e tutti i repository analizzati con relative metriche di comparazione al Front-end],
-  [#link(<UC12>)[#underline[\[UC12\]]], #link(<UC12.1>)[#underline[\[UC12.1\]]]],
+  [#link(<UC12.1>)[#underline[\[UC12.1\]]]],
 
   [#FROpx],
   [L'ordine in cui appaiono i repository deve essere coerente con il punteggio assegnato],
-  [#link(<UC12>)[#underline[\[UC12\]]], #link(<UC12.1>)[#underline[\[UC12.1\]]]],
+  [#link(<UC12.1>)[#underline[\[UC12.1\]]]],
 
   [#FROpx],
   [Il sistema Back-end deve riuscire a riconoscere correttamente il caso in cui un utente non abbia mai analizzato repository e comunicarlo al Front-end],
-  [#link(<UC12>)[#underline[\[UC12\]]], #link(<UC12.1>)[#underline[\[UC12.1\]]]],
+  [#link(<UC12.1>)[#underline[\[UC12.1\]]]],
 
   [#FROpx],
   [Il sistema Front-end deve essere in grado di comunicare che la lista è vuota nel caso in cui un utente non abbia mai analizzato repository],
-  [#link(<UC12>)[#underline[\[UC12\]]], #link(<UC12.1>)[#underline[\[UC12.1\]]]],
+  [#link(<UC12.1>)[#underline[\[UC12.1\]]]],
 
   //UC13
-  [#FRObx], [L'Utente deve poter disconnettere il proprio account GitHub], [#link(<UC13>)[#underline[\[UC13\]]]],
+  [#FRObx], 
+  [L'Utente deve poter disconnettere il proprio account GitHub], 
+  [#link(<UC13>)[#underline[\[UC13\]]]],
 
   [#FRObx],
   [L'Utente deve selezionare il tasto "Disconnetti" per avviare la procedura],
-  [#link(<UC13>)[#underline[\[UC13\]]], #link(<UC13>)[#underline[\[UC13\]]]],
+  [#link(<UC13>)[#underline[\[UC13\]]]],
 
   [#FRObx],
   [L'Utente deve poter confermare la disconnessione del proprio account GitHub],
-  [#link(<UC13>)[#underline[\[UC13\]]], #link(<UC13>)[#underline[\[UC13\]]]],
+  [#link(<UC13>)[#underline[\[UC13\]]]],
 
   // UC14
-  [#FRDex], [L'Utente deve poter esportare il report di analisi], [#link(<UC14>)[#underline[\[UC14\]]]],
+  [#FRDex],
+  [L'Utente deve poter esportare il report di analisi], 
+  [#link(<UC14>)[#underline[\[UC14\]]]],
 
   [#FRDex],
   [L'Utente deve selezionare il formato di esportazione desiderato],
-  [#link(<UC14>)[#underline[\[UC14\]]], #link(<UC14.1>)[#underline[\[UC14.1\]]]],
+  [#link(<UC14.1>)[#underline[\[UC14.1\]]]],
 
   [#FRDex],
   [L'Utente deve ricevere un messaggio di errore se non seleziona alcun formato],
@@ -4635,14 +4639,16 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   [#FRDex],
   [L'Utente deve poter confermare l'esportazione del report],
-  [#link(<UC14>)[#underline[\[UC14\]]], #link(<UC14.2>)[#underline[\[UC14.2\]]]],
+  [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 
   // UC15
-  [#FRObx], [L'Utente deve poter accedere alla sezione di modifica password], [#link(<UC15>)[#underline[\[UC15\]]]],
+  [#FRObx], 
+  [L'Utente deve poter accedere alla sezione di modifica password], 
+  [#link(<UC15>)[#underline[\[UC15\]]]],
 
   [#FRObx],
   [L'utente deve inserire la password corrente all'interno dell'apposito campo del form di modifica],
-  [#link(<UC15>)[#underline[\[UC15\]]], #link(<UC15.1>)[#underline[\[UC15.1\]]]],
+  [#link(<UC15.1>)[#underline[\[UC15.1\]]]],
 
   [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se non inserisce la password corrente],
@@ -4654,7 +4660,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   [#FRObx],
   [L'Utente deve inserire la nuova password nell'apposito campo del form di modifica],
-  [#link(<UC15>)[#underline[\[UC15\]]], #link(<UC15.2>)[#underline[\[UC15.2\]]]],
+  [#link(<UC15.2>)[#underline[\[UC15.2\]]]],
 
   [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se non inserisce la nuova password],
@@ -4670,11 +4676,11 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   [#FRObx],
   [L'Utente deve poter confermare la modifica della password tramite pulsante],
-  [#link(<UC15>)[#underline[\[UC15\]]], #link(<UC15.3>)[#underline[\[UC15.3\]]]],
+  [#link(<UC15.3>)[#underline[\[UC15.3\]]]],
 
   [#FRObx],
   [L'Utente deve ricevere conferma dell'avvenuta modifica della password],
-  [#link(<UC15>)[#underline[\[UC15\]]], #link(<UC15.4>)[#underline[\[UC15.4\]]]],
+  [#link(<UC15.4>)[#underline[\[UC15.4\]]]],
 
   //UC16
   [#FRObx], 
@@ -4682,7 +4688,9 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC16>)[#underline[\[UC16\]]]],
 
   //UC17
-  //[#FRObx], [L'Orchestratore deve creare l'ambiente sandbox per l'analisi], [#link//(<UC17>)[#underline[\[UC17\]]]],
+  //[#FRObx], 
+  //[L'Orchestratore deve creare l'ambiente sandbox per l'analisi], 
+  //[#link//(<UC17>)[#underline[\[UC17\]]]],
 
   [#FRObx],
   [Gli errori verificatisi durante la creazione dell'ambiente sandbox devono essere intercettati],
@@ -4700,16 +4708,17 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   [#FRObx],
   [L'Orchestratore deve eseguire l'analisi completa se richiesta dall'utente],
-  [#link(<UC18>)[#underline[\[UC18\]]], #link(<UC18.1>)[#underline[\[UC18.1\]]]],
+  [#link(<UC18.1>)[#underline[\[UC18.1\]]]],
 
   [#FRObx],
   [L'Orchestratore deve processare le richieste specifiche dell'utente sulle aree da analizzare],
-  [#link(<UC18>)[#underline[\[UC18\]]], #link(<UC18.2>)[#underline[\[UC18.2\]]]],
+  [#link(<UC18.2>)[#underline[\[UC18.2\]]]],
 
   [#FRObx],
   [L'Orchestratore deve eseguire l'analisi completa se il repository non è mai stato analizzato],
   [#link(<UC18.2.1>)[#underline[\[UC18.2.1\]]]],
   */
+
   //UC19
   [#FRDex],
   [L'Utente deve poter interagire con la sezione di gestione di remediation],
@@ -4732,19 +4741,21 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC19.2>)[#underline[\[UC19.2\]]]],
 
   //UC20
-  [#FROpx], [Segreti e token esposti devono essere rilevati], [#link(<UC20>)[#underline[\[UC20\]]]],
+  [#FROpx], 
+  [Segreti e token esposti devono essere rilevati], 
+  [#link(<UC20>)[#underline[\[UC20\]]]],
 
   [#FROpx],
   [L'Utente deve poter rifiutare le remediation proposte per i segreti rilevati],
-  [#link(<UC20>)[#underline[\[UC20\]]], #link(<UC20.1>)[#underline[\[UC20.1\]]]],
+  [#link(<UC20.1>)[#underline[\[UC20.1\]]]],
 
   [#FROpx],
   [La revoca automatica di segreti, se integrata con provider, deve poter essere eseguita],
-  [#link(<UC20>)[#underline[\[UC20\]]], #link(<UC20.2>)[#underline[\[UC20.2\]]]],
+  [#link(<UC20.2>)[#underline[\[UC20.2\]]]],
 
   [#FROpx],
   [L'Utente deve poter visualizzare i risultati del rilevamento segreti],
-  [#link(<UC20>)[#underline[\[UC20\]]], #link(<UC20.3>)[#underline[\[UC20.3\]]]],
+  [#link(<UC20.3>)[#underline[\[UC20.3\]]]],
   
   //UC21
   [#FROpx],
@@ -4778,7 +4789,9 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC23>)[#underline[\[UC23\]]]],
 
   //UC24
-  [#FRObx], [Deve essere suggerito refactoring del codice], [#link(<UC24>)[#underline[\[UC24\]]]],
+  [#FRObx], 
+  [Deve essere suggerito refactoring del codice], 
+  [#link(<UC24>)[#underline[\[UC24\]]]],
 
   [#FRObx],
   [L'Utente deve poter visualizzare i suggerimenti di refactoring],
@@ -4786,23 +4799,20 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   [#FROpx],
   [I refactor devono poter essere applicati automaticamente sotto supervisione],
-  [#link(<UC24>)[#underline[\[UC24\]]], #link(<UC24.2>)[#underline[\[UC24.2\]]]],
-
-  //UC25 
-  /*[#FRDex],
-  [L'utente deve poter ricevere la mail di recupero password associata al proprio account code-guardian],
-  [#link(<UC25>)[#underline[\[UC25\]]]],*/
+  [#link(<UC24.2>)[#underline[\[UC24.2\]]]],
 
   //UC28
-  [#FROpx], [Devono poter essere generati report programmabili e inviati alert], [#link(<UC28>)[#underline[\[UC28\]]]],
+  [#FROpx], 
+  [Devono poter essere generati report programmabili e inviati alert], 
+  [#link(<UC28>)[#underline[\[UC28\]]]],
 
   [#FROpx],
   [L'Utente deve poter configurare filtri e template per i report],
-  [#link(<UC28>)[#underline[\[UC28\]]], #link(<UC28.1>)[#underline[\[UC28.1\]]]],
+  [#link(<UC28.1>)[#underline[\[UC28.1\]]]],
 
   [#FROpx],
   [Devono poter essere eseguite azioni automatiche su alert critici],
-  [#link(<UC28>)[#underline[\[UC28\]]], #link(<UC28.2>)[#underline[\[UC28.2\]]]],
+  [#link(<UC28.2>)[#underline[\[UC28.2\]]]],
 
   //UC29
 
@@ -4833,7 +4843,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   [#FRObx],
   [L'Orchestratore deve poter notificare al Front-end l'impossibilità di salvare il report in caso di errore interno],
-  [#link(<UC38>)[#underline[\[UC38\]]], #link(<UC38.1>)[#underline[\[UC38.1\]]]],
+  [#link(<UC38.1>)[#underline[\[UC38.1\]]]],
 
   //UC39
   [#FRObx],
@@ -4846,7 +4856,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   [#FRObx],
   [Il sistema deve poter segnalare al Front-end il mancato aggiornamento delle metriche in caso di errore del Back-end],
-  [#link(<UC39>)[#underline[\[UC39\]]], #link(<UC39.1>)[#underline[\[UC39.1\]]]],
+  [#link(<UC39.1>)[#underline[\[UC39.1\]]]],
 
   //UC40
   [#FRObx],
@@ -4868,7 +4878,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se il trasferimento delle credenziali non avviene],
-  [#link(<UC40.1>)[#underline[\[UC40\]]], #link(<UC40.1>)[#underline[\[UC40.1\]]]], */
+  [#link(<UC40.1>)[#underline[\[UC40.1\]]]], */
 
   //UC41
   [#FRObx],
