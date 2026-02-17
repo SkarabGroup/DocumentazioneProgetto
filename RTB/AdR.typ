@@ -1043,7 +1043,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente nega i permessi sulla piattaforma GitHub",
 )[]
 
-#TODO("Eliminare UC4.3 e inserire le estensioni nell'UC principale")
 === UC4: Richiesta analisi repository GitHub <UC4>
 #useCase(
   attore: "Utente autorizzato",
@@ -1057,7 +1056,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente inserisce l'URL del repository GitHub da analizzare #link(<UC4.1>)[#underline[\[UC4.1\]]]
     - L'utente seleziona le aree di interesse per l’analisi #link(<UC4.2>)[#underline[\[UC4.2\]]]
-    - L'utente conferma l'invio della richiesta di analisi #link(<UC4.3>)[#underline[\[UC4.3\]]]
+    - L'utente conferma l'invio della richiesta di analisi 
   ],
   inclusioni: [
     - #link(<UC4.1>)[#underline[\[UC4.1\]]] // Inserimento URL repository GitHub
@@ -1065,7 +1064,8 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC4.3>)[#underline[\[UC4.3\]]] // Invio richiesta di analisi
   ],
   estensioni: [
-    - Nessuna
+    - #link(<UC4.3>)[#underline[\[UC4.3\]]] // Ultimo report up-to-date
+    - #link(<UC4.4>)[#underline[\[UC4.4\]]] // Ultimo report in elaborazione
   ],
   trigger: "L'utente accede alla sezione dedicata per la richiesta di analisi di repository GitHub in CodeGuardian",
 )[
@@ -1181,34 +1181,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente conferma la selezione delle aree del repository GitHub da analizzare durante la procedura di richiesta analisi repository GitHub",
 )[]
 
-==== UC4.3: Invio richiesta di analisi <UC4.3>
+==== UC4.3: Ultimo report up-to-date <UC4.3>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
-    - L'utente ha inserito un URL del repository GitHub #link(<UC4.1>)[#underline[\[UC4.1\]]]
-    - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
-  ],
-  post: [
-    - L'utente inoltra la sua richiesta con successo
-  ],
-  scenari: [
-    - L'utente invia la richiesta di analisi
-  ],
-  estensioni: [
-    - #link(<UC4.3.1>)[#underline[\[UC4.3.1\]]]
-    - #link(<UC4.3.2>)[#underline[\[UC4.3.2\]]]
-  ],
-  trigger: "L'utente interagisce con la sezione di invio della richiesta di analisi durante la procedura di richiesta analisi repository GitHub a CodeGuardian",
-)[
-  #useCaseDiagram("4_3", "UC4.3: Invio richiesta di analisi")
-]
-
-===== UC4.3.1: Ultimo report up-to-date <UC4.3.1>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
+    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
     - L'utente ha inserito un URL del repository GitHub corretto #link(<UC4.1>)[#underline[\[UC4.1\]]]
     - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
     - L'utente invia la richiesta di analisi
@@ -1221,14 +1198,13 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza un messaggio che indica che l'analisi del repository GitHub specificato è già aggiornata e non è necessario avviare una nuova analisi
   ],
   trigger: "L'ultimo report di analisi del repository GitHub specificato è già aggiornato rispetto all'ultima modifica del repository stesso",
-)[
-]
+)[]
 
-===== UC4.3.2: Ultimo report in elaborazione <UC4.3.2>
+==== UC4.4: Ultimo report in elaborazione <UC4.4>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub
+    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub #link(<UC4>)[#underline[\[UC4\]]]
     - L'utente ha inserito un URL del repository GitHub corretto #link(<UC4.1>)[#underline[\[UC4.1\]]]
     - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC4.2>)[#underline[\[UC4.2\]]]
     - L'utente invia la richiesta di analisi
@@ -1241,8 +1217,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza un messaggio che indica che l'analisi del repository GitHub specificato è ancora in corso e non è possibile avviare una nuova analisi fino al completamento di quella in corso
   ],
   trigger: "L'ultimo report di analisi del repository GitHub specificato è ancora in elaborazione",
-)[
-]
+)[]
 
 === UC5: Visualizzazione lista repository analizzati <UC5>
 #useCase(
@@ -1815,7 +1790,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente ha visualizzato la sezione dell'analisi della documentazione del report
   ],
   scenari: [
-    - L'utente visualizza la parte di report dedicata agli errori di spelling #link(<UC11.1>)[#underline[\[UC11.1\]]]
+    - L'utente visualizza la parte di report dedicata agli errori di sintassi #link(<UC11.1>)[#underline[\[UC11.1\]]]
     - L'utente visualizza la parte di report dedicata alla completezza della documentazione nei confronti del codice del repository GitHub #link(<UC11.2>)[#underline[\[UC11.2\]]]
     - L'utente visualizza il numero totale di remediation individuate nella sezione di documentazione del report #link(<UC11.3>)[#underline[\[UC11.3\]]]
   ],
@@ -1833,17 +1808,17 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente seleziona la sezione relativa alla documentazione tra le opzioni selezionabili per la visualizzazione del report",
 )[#useCaseDiagram("10", "UC10 - Visualizzazione report analisi della documentazione repository GitHub")]
 
-==== UC11.1: Visualizzazione sezione errori di spelling <UC11.1>
+==== UC11.1: Visualizzazione sezione errori di sintassi <UC11.1>
 #useCase(
   attore: "Utente autorizzato",
   pre: [
     - L'utente sta visualizzando la sezione di documentazione del report di analisi
   ],
   post: [
-    - L'utente ha visualizzato la sezione di analisi degli errori di spelling della documentazione
+    - L'utente ha visualizzato la sezione di analisi degli errori di sintassi della documentazione
   ],
   scenari: [
-    - L'utente visualizza la sezione relativa agli errori di spelling della documentazione del repository GitHub
+    - L'utente visualizza la sezione relativa agli errori di sintassi della documentazione del repository GitHub
   ],
   trigger: "L'utente seleziona la sezione relativa alla documentazione tra le opzioni selezionabili per la visualizzazione del report",
 )[]
@@ -3605,7 +3580,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato il proprio account GitHub #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente ha accesso a repository privati su GitHub
-    - L'utente si trova nella serzione di richiesta di analisi di un repository GitHub
+    - L'utente si trova nella sezione di richiesta di analisi di un repository GitHub
   ],
   post: [
     - La richiesta di analisi del repository GitHub privato a cui si ha accesso è stata completata con successo
@@ -4396,6 +4371,22 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC4>)[#underline[\[UC4\]]]],
 
   [#FRObx],
+  [L'utente deve poter visualizzare correttamente il campo di inserimento dell'URL],
+  [#link(<UC4>)[#underline[\[UC4\]]]],
+  
+  [#FRObx],
+  [L'utente deve poter visualizzare correttamente il campo di selezione delle sezioni di interesse],
+  [#link(<UC4>)[#underline[\[UC4\]]]],
+  
+  [#FRObx],
+  [L'utente deve poter visualizzare correttamente il pulsante di conferma],
+  [#link(<UC4>)[#underline[\[UC4\]]]],
+  
+  [#FRObx],
+  [L'utente deve poter inviare la richiesta di analisi tramite pulsante di conferma],
+  [#link(<UC4>)[#underline[\[UC4\]]]],
+
+  [#FRObx],
   [L'Utente deve poter inserire l'URL del repository GitHub nel campo dedicato],
   [#link(<UC4.1>)[#underline[\[UC4.1\]]]],
 
@@ -4420,24 +4411,20 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC4.1.3>)[#underline[\[UC4.1.3\]]]],
 
   [#FRObx],
-  [L'Utente deve poter selezionare le aree di interesse per l'analisi],
+  [L'Utente deve poter selezionare le sezioni di interesse per l'analisi],
   [#link(<UC4.2>)[#underline[\[UC4.2\]]]],
 
   [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se non seleziona alcuna area di interesse],
+  [L'Utente deve ricevere un messaggio di errore se non seleziona alcuna sezione di interesse],
   [#link(<UC4.2.1>)[#underline[\[UC4.2.1\]]]],
 
   [#FRObx],
-  [L'utente deve poter inviare la richiesta di analisi tramite pulsante di conferma],
+  [L'Utente deve ricevere un avviso se l'ultimo report è già up-to-date],
   [#link(<UC4.3>)[#underline[\[UC4.3\]]]],
 
   [#FRObx],
-  [L'Utente deve ricevere un avviso se l'ultimo report è già up-to-date],
-  [#link(<UC4.3.1>)[#underline[\[UC4.3.1\]]]],
-
-  [#FRObx],
   [L'Utente deve ricevere un avviso se un'analisi è già in elaborazione],
-  [#link(<UC4.3.2>)[#underline[\[UC4.3.2\]]]],
+  [#link(<UC4.4>)[#underline[\[UC4.4\]]]],
 
   // UC5
   [#FRObx],
@@ -4545,7 +4532,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   //UC9
   [#FRObx],
-  [L'Utente deve poter visualizzare la sezione del report di analisi relativa all'analisi del codice],
+  [L'Utente deve poter visualizzare la sezione del report relativa all'analisi del codice],
   [#link(<UC9>)[#underline[\[UC9\]]]],
 
   [#FRObx],
@@ -4553,42 +4540,58 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC9.1>)[#underline[\[UC9.1\]]]],
   
   [#FRObx],
-  [L'Utente deve poter visualizzare il report di analisi statica del codice],
+  [L'Utente deve poter visualizzare la sezione di copertura dei test di unità],
   [#link(<UC9.2>)[#underline[\[UC9.2\]]]],
 
   [#FRObx],
-  [L'Utente deve poter visualizzare la sezione di remediation per la sezione del codice],
+  [L'Utente deve poter visualizzare la sezione di lista di remediation per la sezione del codice],
   [#link(<UC9.3>)[#underline[\[UC9.3\]]]],
 
   [#FRObx],
-  [L'Utente deve poter visualizzare il numero totale di remediation per la sezione del codice],
-  [#link(<UC9.3>)[#underline[\[UC9.3\]]]],
-
-  [#FRObx],
-  [L'Utente deve poter visualizzare il messaggio di lista vuota nel caso non ci siano remediation per la sezione del codice],
+  [L'Utente deve poter visualizzare il messaggio di lista vuota nel caso non siano state individuate remediation per la sezione del codice],
   [#link(<UC9.3.1>)[#underline[\[UC9.3.1\]]]],
 
   //UC10
   [#FRObx],
-  [L'Utente deve poter visualizzare l'analisi delle librerie e dipendenze],
+  [L'Utente deve poter visualizzare la sezione del report relativa all'analisi della sicurezza],
+  [#link(<UC10>)[#underline[\[UC10\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare la sezione di analisi delle librerie e dipendenze del codice],
+  [#link(<UC10.1>)[#underline[\[UC10.1\]]]],
+  
+  [#FRObx],
+  [L'Utente deve poter visualizzare la sezione di conformità del repository con gli standard OWASP],
   [#link(<UC10.2>)[#underline[\[UC10.2\]]]],
 
   [#FRObx],
-  [L'Utente deve poter visualizzare il report di analisi della sicurezza OWASP],
+  [L'Utente deve poter visualizzare la sezione di lista di remediation per la sezione della sicurezza],
   [#link(<UC10.3>)[#underline[\[UC10.3\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare il messaggio di lista vuota nel caso non siano state individuate remediation per la sezione della sicurezza],
+  [#link(<UC10.3.1>)[#underline[\[UC10.3.1\]]]],
 
   //UC11
   [#FRObx],
-  [L'Utente deve poter visualizzare la sezione del report di analisi relativa all'analisi della documentazione],
+  [L'Utente deve poter visualizzare la sezione del report relativa all'analisi della documentazione],
   [#link(<UC11>)[#underline[\[UC11\]]]],
 
   [#FRObx],
-  [L'Utente deve poter visualizzare gli errori di spelling nella documentazione],
+  [L'Utente deve poter visualizzare la sezione di errori di sintassi],
   [#link(<UC11.1>)[#underline[\[UC11.1\]]]],
+  
+  [#FRObx],
+  [L'Utente deve poter visualizzare la sezione di completezza della documentazione nei confronti del codice del repository GitHub],
+  [#link(<UC11.2>)[#underline[\[UC11.2\]]]],
 
   [#FRObx],
-  [L'Utente deve poter visualizzare la completezza della documentazione rispetto al codice],
-  [#link(<UC11.2>)[#underline[\[UC11.2\]]]],
+  [L'Utente deve poter visualizzare la sezione di lista di remediation per la sezione della documentazione],
+  [#link(<UC11.3>)[#underline[\[UC11.3\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare il messaggio di lista vuota nel caso non siano state individuate remediation per la sezione della documentazione],
+  [#link(<UC11.3.1>)[#underline[\[UC11.3.1\]]]],
   
   //UC12
   [#FROpx],
