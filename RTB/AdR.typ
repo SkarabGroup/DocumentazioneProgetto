@@ -1275,7 +1275,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari:[
     - L'utente visualizza la lista di tutti i repository per i quali sono state svolte analisi
-    - Per ogni repository sono presenti le informazioni minime #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - Ogni elemento della lista presenta le informazioni identificative #link(<UC5.1>)[#underline[\[UC5.1\]]]
   ],
   inclusioni:[
     - #link(<UC5.1>)[#underline[\[UC5.1\]]]
@@ -1311,12 +1311,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessun repository è stato trovato
   ],
   post: [
-    - L'utente visualizza il messaggio di errore di lista vuota
+    - L'utente visualizza il messaggio di lista vuota
   ],
   scenari:[
     - L'utente viene avvisato che non sono state eseguite analisi per nessun repository
   ],
-  trigger: "Non viene trovato nessun repository associato all'utente",
+  trigger: "L'utente accede alla sezione di repository analizzati",
 )[
 ]
 
@@ -1327,10 +1327,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha almeno un report di analisi di un repository associato al proprio account
-    - L'utente ha selezionato un repository dalla lista dei repository analizzati associati al proprio account #link(<UC5>)[#underline[\[UC5\]]]
+    - L'utente visualizza la lista dei repository analizzati associati al proprio account#link(<UC5>)[#underline[\[UC5\]]]
+    - L'utente seleziona un elemento della lista dei repository analizzati
   ],
   post: [
-    - L'utente ha visualizzato il report di analisi del repository GitHub selezionato
+    - L'utente ha visualizza il report di analisi del repository GitHub selezionato
   ],
   scenari: [
     - L'utente seleziona le sezioni specifiche da visualizzare nel report #link(<UC6.1>)[#underline[\[UC6.1\]]]
@@ -1379,6 +1380,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   post: [
     - L'utente non può procedere alla visualizzazione del report
+    - L'utente può nuovamente interagire con la selezione delle sezioni di report da visualizzare
   ],
   scenari: [
     - L'utente riceve un messaggio di avviso che lo invita a selezionare almeno una sezione da visualizzare
@@ -1552,7 +1554,8 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente non ha selezionato alcun intervallo temporale 
   ],
   post: [
-    - L'utente non può procedere con la selezione dell'intervallo temporale per il confronto con i report passati
+    - L'utente non può procedere con la visualizzazione dell'intervallo temporale per il confronto con i report passati
+    - L'utente può nuovamente interagire con la selezione dell'intervallo temporale  
   ],
   scenari: [
     - L'utente visualizza un messaggio di errore che indica che deve essere selezionato un intervallo temporale per poter procedere con il 
@@ -1570,6 +1573,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   post: [
     - L'utente non può procedere con la selezione dell'intervallo temporale per il confronto con i report passati
+    - L'utente può nuovamente interagire con la selezione dell'intervallo temporale  
   ],
   scenari: [
     - L'utente visualizza un messaggio di errore che indica che non sono disponibili report di analisi 
@@ -1587,6 +1591,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   post: [
     - L'utente non può procedere con la selezione dell'intervallo temporale per il confronto con i report passati
+    - L'utente può nuovamente interagire con la selezione dell'intervallo temporale  
   ],
   scenari: [
     - L'utente visualizza un messaggio di errore che indica che l'intervallo temporale selezionato non è coerente
@@ -1719,7 +1724,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente autorizzato",
   pre: [
     - L'utente sta visualizzando la sezione di codice del report di analisi
-    - Il report non contiene alcuna remediation per tale sezione
+    - Il report non contiene alcuna remediation per tale sezione#link(<UC6.3.1.1>)[#underline[\[UC6.3.1.1\]]]
   ],
   post: [
     - L'utente ha visualizzato il messaggio di assenza di remediation per la sezione di codice del report di analisi
@@ -2033,15 +2038,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   post: [
     - La procedura di esportazione non viene finalizzata
+    - L'utente può nuovamente interagire con la sezione di esportazione del report
   ],
   scenari: [
     - L'utente visualizza un messaggio di errore che indica la necessità di selezionare un formato
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
   ],
   trigger: "L'utente conferma l'esportazione del report di analisi senza aver selezionato alcun formato valido",
 )[]
@@ -2057,12 +2057,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente conferma l'avvio della procedura di generazione del file
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
   ],
   trigger: "L'utente conferma l'esportazione del report di analisi dopo aver selezionato un formato valido",
 )[]
@@ -4520,19 +4514,12 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC5>)[#underline[\[UC5\]]]],
 
   [#FRObx],
-  [L'Utente deve poter visualizzare nome e URL del repository],
+  [L'Utente deve poter visualizzare le informazioni identificative per ogni elemento nella lista],
   [#link(<UC5.1>)[#underline[\[UC5.1\]]]],
   
-  [#FROpx],
-  [L'Utente deve poter visualizzare la visibilità del repository],
-  [#link(<UC5.1>)[#underline[\[UC5.1\]]]],
-
-  [#FROpx],
-  [L'Utente deve poter visualizzare l'owner del repository],
-  [#link(<UC5.1>)[#underline[\[UC5.1\]]]],
 
   [#FRObx],
-  [L'Utente deve ricevere un avviso se non ci sono repository analizzati da mostrare],
+  [L'Utente deve poter visuallizzare un avviso se non ci sono repository analizzati da mostrare],
   [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
 
   // UC6
@@ -4567,6 +4554,14 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#FRObx],
   [L'Utente deve poter visualizzare le sezioni selezionate dell'analisi],
   [#link(<UC6.3>)[#underline[\[UC6.3\]]]],
+
+  [#FRObx],
+  [L'utente deve poter visualizzare la lista delle remediation proposte per una generica sezione del report],
+  [#link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]],
+
+  [#FRObx],
+  [L'utente deve poter visualizzare un messaggio di assenza di remediation proposte per la sezione],
+  [#link(<UC6.3.1.1>)[#underline[\[UC6.3.1.1\]]]],
 
   // UC7
   [#FRObx],
@@ -4717,7 +4712,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC14>)[#underline[\[UC14\]]]],
 
   [#FRDex],
-  [L'Utente deve selezionare il formato di esportazione desiderato],
+  [L'Utente deve poter selezionare il formato di esportazione desiderato],
   [#link(<UC14.1>)[#underline[\[UC14.1\]]]],
 
   [#FRDex],
@@ -4775,17 +4770,37 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC16>)[#underline[\[UC16\]]]],
 
   //UC17
-  //[#FRObx], 
-  //[L'Orchestratore deve creare l'ambiente sandbox per l'analisi], 
-  //[#link//(<UC17>)[#underline[\[UC17\]]]],
+  [#FRObx],
+  [Il sistema deve essere in grado di prendere in carico la richiesta di verifica dell'accessibilità della repository],
+  [#link(<UC17>)[#underline[\[UC17\]]]],
 
   [#FRObx],
-  [Gli errori verificatisi durante la creazione dell'ambiente sandbox devono essere intercettati],
+  [Il sistema deve essere in grado di stabilire la connessione con GitHub],
+  [#link(<UC17>)[#underline[\[UC17\]]])],
+
+  [#FRObx],
+  [Il sistema deve poter avviare la procedura di verifica],
   [#link(<UC17.1>)[#underline[\[UC17.1\]]]],
 
   [#FRObx],
-  [L'Orchestratore deve comunicare al front-end gli errori nella creazione del sandbox],
+  [Il sistema deve essere in grado di rilevare l'eventuale errore di comunicazione con GitHub],
   [#link(<UC17.1.1>)[#underline[\[UC17.1.1\]]]],
+
+  [#FRObx],
+  [Il sistema deve essere in grado di cercare il repository],
+  [#link(<UC17.2>)[#underline[\[UC17.2\]]]],
+
+  [#FRObx],
+  [Il sistema deve essere in grado di trovare il repository],
+  [#link(<UC17.2>)[#underline[\[UC17.2\]]]],
+
+  [#FRObx],
+  [Il sistema deve essere in grado di trovare il repository tramite token in caso esso sia privato],
+  [#link(<UC17.2.1>)[#underline[\[UC17.2.1\]]]],
+
+  [#FRObx],
+  [Il sistema deve rilevare e comunicare un errore in caso non ci sia stato modo di accedere al repository],
+  [#link(<UC17.2.1.1>)[#underline[\[UC17.2.1.1\]]]],
 
   //UC18
   /*
