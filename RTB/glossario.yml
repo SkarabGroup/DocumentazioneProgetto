@@ -74,6 +74,8 @@ C:
   Code Coverage:
     alternative: Coverage
     descrizione: Metrica che indica la percentuale di codice sorgente effettivamente eseguita durante l'esecuzione della suite di test automatizzati.
+  Codebase:
+    descrizione: Insieme completo di codice sorgente, risorse e configurazioni che costituiscono un'applicazione software o un sistema.
 D:
   Database:
     descrizione: Sistema organizzato per la memorizzazione, la gestione e il recupero efficiente di grandi quantità di dati strutturati o non strutturati.
