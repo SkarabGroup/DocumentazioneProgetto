@@ -2129,7 +2129,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente seleziona una remediation specifica
   ],
   post: [
-    - L'utente ha visualizzato i dettagli della remediation
+    - L'utente ha visualizzato i dettagli della remediation e lo stato di essa
   ],
   scenari: [
     - L'utente visualizza i dettagli della remediation proposta
@@ -3042,7 +3042,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   specializzazione: [
-    - Questo caso d'uso è una specializzazione del caso d'uso Visualizzazione singola remediation riguardante l'sezione generica #link(<UC16>)[#underline[\[UC16\]]]
+    - #link(<UC16>)[#underline[\[UC16\]]]
   ],
   trigger: "L'utente seleziona una remediation dalla lista proposta nella sezione di analisi della documentazione",
 )[]
@@ -4505,6 +4505,116 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#FRObx],
   [Il token deve essere associato correttamente all'account utente],
   [#link(<UC28>)[#underline[\[UC28\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare titolo della remediation del codice],
+  [#link(<UC29>)[#underline[\[UC29\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare la descrizione della remediation del codice],
+  [#link(<UC29>)[#underline[\[UC29\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare il tipo di criticità affrontata dalla remediation del codice],
+  [#link(<UC29>)[#underline[\[UC29\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare la severity della criticità affrontata dalla remediation del codice],
+  [#link(<UC29>)[#underline[\[UC29\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare titolo della remediation della sicurezza],
+  [#link(<UC30>)[#underline[\[UC30\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare la descrizione della remediation della sicurezza],
+  [#link(<UC30>)[#underline[\[UC30\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare il tipo di criticità affrontata dalla remediation della sicurezza],
+  [#link(<UC30>)[#underline[\[UC30\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare la severity della criticità affrontata dalla remediation della sicurezza],
+  [#link(<UC30>)[#underline[\[UC30\]]]],
+
+
+  //UC30
+  [#FRObx],
+  [L'Utente deve poter visualizzare titolo della remediation della documentazione],
+  [#link(<UC31>)[#underline[\[UC31\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare la descrizione della remediation della documentazione],
+  [#link(<UC31>)[#underline[\[UC31\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare il tipo di criticità affrontata dalla remediation della documentazione],
+  [#link(<UC31>)[#underline[\[UC31\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare la severity della criticità affrontata dalla remediation della documentazione],
+  [#link(<UC31>)[#underline[\[UC31\]]]],
+
+  //UC32
+  [#FRObx],
+  [L'Utente deve poter visualizzare il codice correttivo proposto per la remediation del codice],
+  [#link(<UC32>)[#underline[\[UC32\]]] #link(<UC33>)[#underline[\[UC33\]]]],
+
+  [#FRObx],
+  [Il sistema deve visualizzare un'anteprima delle modifiche che verranno apportate al repository],
+  [#link(<UC32>)[#underline[\[UC32\]]] #link(<UC33>)[#underline[\[UC33\]]]],
+
+  [#FRObx],
+  [Il sistema deve permettere all'utente di confermare le modifiche che verranno apportate al repository],
+  [#link(<UC32>)[#underline[\[UC32\]]] #link(<UC34>)[#underline[\[UC34\]]] #link(<UC36>)[#underline[\[UC36\]]]],
+
+  [#FRObx],
+  [L'Utente deve ricevere una conferma dell'applicazione della remediation del codice],
+  [#link(<UC32>)[#underline[\[UC32\]]]],
+
+  [#FRObx],
+  [L'Utente deve ricevere una conferma della non applicazione della remediation del codice],
+  [#link(<UC33>)[#underline[\[UC33\]]]],
+
+  //UC34
+  [#FRObx],
+  [L'Utente deve poter visualizzare il codice correttivo proposto per la remediation della sicurezza],
+  [#link(<UC34>)[#underline[\[UC34\]]]],
+
+  [#FRObx],
+  [Il sistema deve visualizzare un'anteprima delle modifiche che verranno apportate al repository per la remediation della sicurezza],
+  [#link(<UC34>)[#underline[\[UC34\]]]],
+
+  [#FRObx],
+  [Il sistema deve permettere all'utente di rifiutare le modifiche che verranno apportate al repository],
+  [#link(<UC34>)[#underline[\[UC34\]]] #link(<UC35>)[#underline[\[UC35\]]] #link(<UC37>)[#underline[\[UC37\]]]],
+
+  [#FRObx],
+  [L'Utente deve ricevere una conferma dell'applicazione della remediation della sicurezza],
+  [#link(<UC34>)[#underline[\[UC34\]]]],
+
+  //UC34 - UC35
+  [#FRObx],
+  [L'Utente deve poter rifiutare le remediation della sicurezza proposte],
+  [#link(<UC35>)[#underline[\[UC35\]]]],
+
+  //UC36 - UC37
+  [#FRObx],
+  [L'Utente deve poter visualizzare il testo correttivo proposto per la remediation della documentazione],
+  [#link(<UC36>)[#underline[\[UC36\]]]],
+
+  [#FRObx],
+  [Il sistema deve visualizzare un'anteprima delle modifiche che verranno apportate al repository per la remediation della documentazione],
+  [#link(<UC36>)[#underline[\[UC36\]]]],
+
+  [#FRObx],
+  [L'Utente deve ricevere una conferma della non applicazione della remediation della documentazione],
+  [#link(<UC37>)[#underline[\[UC37\]]]],
+
+
+  //UC37
+  
 
   //UC29
 
