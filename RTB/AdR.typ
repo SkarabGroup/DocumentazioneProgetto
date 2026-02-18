@@ -1645,557 +1645,473 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Il processo di analisi non rileva criticità nell'area del codice sorgente",
 )[]
 
-=== UC10: Visualizzazione sezione analisi della sicurezza del report selezionato <UC10>
+=== UC10: Visualizzazione sezione analisi della sicurezza <UC10>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente ha selezionato la sezione di sicurezza tra le sezioni disponibili del report di analisi #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
-    - L'utente sta visualizzando la sezione di sicurezza del report di analisi
+    - L'utente ha incluso l'area "Sicurezza" nei filtri di visualizzazione del report #link(<UC6.1>)[#underline[\[UC6.1\]]]
   ],
   post: [
-    - L'utente ha visualizzato la sezione dell'analisi della sicurezza del report
+    - L'utente visualizza i dettagli relativi alla sicurezza delle dipendenze e alla conformità OWASP
   ],
   scenari: [
-    - L'utente visualizza la parte di report dedicata all'analisi delle librerie e dipendenze del codice #link(<UC10.1>)[#underline[\[UC10.1\]]]
-    - L'utente visualizza la parte di report dedicata alla conformità del repository con gli standard OWASP #link(<UC10.2>)[#underline[\[UC10.2\]]]
-    - L'utente visualizza il numero totale di remediation individuate nella sezione di sicurezza del report #link(<UC10.3>)[#underline[\[UC10.3\]]]
+    - L'utente visualizza l'audit sulle librerie e dipendenze del codice #link(<UC10.1>)[#underline[\[UC10.1\]]]
+    - L'utente visualizza i rilievi sulla conformità agli standard OWASP #link(<UC10.2>)[#underline[\[UC10.2\]]]
+    - L'utente visualizza il riepilogo delle remediation per l'area sicurezza #link(<UC10.3>)[#underline[\[UC10.3\]]]
   ],
   inclusioni: [
     - #link(<UC10.1>)[#underline[\[UC10.1\]]]
     - #link(<UC10.2>)[#underline[\[UC10.2\]]]
     - #link(<UC10.3>)[#underline[\[UC10.3\]]]
   ],
-  estensioni: [
-    - Nessuna
-  ],
   specializzazione: [
     - Questo caso d'uso è una specializzazione del caso d'uso #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
-  trigger: "L'utente seleziona la sezione relativa alla sicurezza tra le opzioni selezionabili per la visualizzazione del report",
+  trigger: "L'utente accede all'area dedicata alla sicurezza nel report di analisi",
 )[]
 
-==== UC10.1: Visualizzazione sezione analisi delle librerie e dipendenze del codice <UC10.1>
+==== UC10.1: Visualizzazione sezione analisi librerie e dipendenze <UC10.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta visualizzando la sezione di sicurezza del report di analisi
+    - L'utente visualizza la sezione analisi della sicurezza #link(<UC10>)[#underline[\[UC10\]]]
   ],
   post: [
-    - L'utente ha visualizzato la sezione di analisi delle librerie e dipendenze del codice
+    - L'utente ha visualizzato le vulnerabilità note (CVE) rilevate nelle dipendenze del progetto
   ],
   scenari: [
-    - L'utente visualizza la sezione relativa all'analisi delle librerie e dipendenze del codice
+    - Il sistema espone l'elenco delle librerie obsolete o affette da criticità di sicurezza
   ],
-  trigger: "L'utente seleziona la sezione relativa alla sicurezza tra le opzioni selezionabili per la visualizzazione del report",
+  trigger: "L'utente consulta i dati relativi alle dipendenze del codice",
 )[]
 
-==== UC10.2: Visualizzazione sezione analisi della sicurezza OWASP <UC10.2>
+==== UC10.2: Visualizzazione sezione analisi sicurezza OWASP <UC10.2>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta visualizzando la sezione di sicurezza del report di analisi
+    - L'utente visualizza la sezione analisi della sicurezza #link(<UC10>)[#underline[\[UC10\]]]
   ],
   post: [
-    - L'utente ha visualizzato la sezione di conformità del repository con gli standard OWASP
+    - L'utente ha visualizzato i rilievi di conformità basati sulla Top 10 OWASP
   ],
   scenari: [
-    - L'utente visualizza la sezione relativa alla conformità del repository con gli standard OWASP
+    - Il sistema espone le potenziali minacce identificate secondo gli standard di sicurezza internazionali
   ],
-  trigger: "L'utente seleziona la sezione relativa alla sicurezza tra le opzioni selezionabili per la visualizzazione del report",
+  trigger: "L'utente consulta i dati di conformità OWASP",
 )[]
 
-==== UC10.3: Visualizzazione remediation individuate nella sezione di sicurezza <UC10.3>
+==== UC10.3: Visualizzazione remediation sezione sicurezza <UC10.3>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta visualizzando la sezione di codice del report di analisi
+    - L'utente visualizza la sezione analisi della sicurezza #link(<UC10>)[#underline[\[UC10\]]]
   ],
   post: [
-    - L'utente ha visualizzato l'elenco di remediation della sezione di sicurezza del report
+    - L'utente visualizza le proposte di risoluzione per le vulnerabilità identificate
   ],
   scenari: [
-    - L'utente visualizza le remediation trovate durante l'analisi della sezione di sicurezza del report
+    - L'utente visualizza l'elenco delle azioni correttive per la sicurezza #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
   ],
   estensioni: [
     - #link(<UC10.3.1>)[#underline[\[UC10.3.1\]]]
   ],
-  trigger: "L'utente seleziona la sezione relativa alla sicurezza tra le opzioni selezionabili per la visualizzazione del report",
+  trigger: "L'utente accede alla lista delle azioni correttive per la sicurezza",
 )[]
 
-===== UC10.3.1: Nessuna remediation individuata nella sezione di sicurezza <UC10.3.1>
+===== UC10.3.1: Visualizzazione informativa assenza remediation sicurezza <UC10.3.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta visualizzando la sezione di sicurezza del report di analisi
-    - Il report non contiene alcuna remediation per tale sezione
+    - L'utente sta consultando le remediation della sicurezza #link(<UC10.3>)[#underline[\[UC10.3\]]]
   ],
   post: [
-    - L'utente ha visualizzato il messaggio di assenza di remediation per la sezione di sicurezza del report di analisi
+    - L'utente visualizza l'esito positivo sulla robustezza del repository
   ],
   scenari: [
-    - L'utente viene informato che non sono state trovati possibili miglioramenti per la sezione di sicurezza del report di analisi
+    - Il sistema informa l'utente che non sono state individuate minacce che richiedano interventi correttivi
   ],
-  trigger: "Non sono presenti remediation per la sezione del sicurezza del report",
+  trigger: "Il processo di analisi non rileva vulnerabilità nell'area sicurezza",
 )[]
 
-=== UC11: Visualizzazione sezione analisi della documentazione del report selezionato <UC11>
+=== UC11: Visualizzazione sezione analisi della documentazione <UC11>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente ha selezionato la sezione di documentazione tra le sezioni disponibili del report di analisi #link(<UC6.3>)[#underline[\[UC6.3\]]]
-    - L'utente sta visualizzando la sezione di documentazione del report di analisi
+    - L'utente visualizza il dettaglio di un report di analisi #link(<UC6>)[#underline[\[UC6\]]]
+    - L'area "Documentazione" è stata selezionata per la visualizzazione #link(<UC6.1>)[#underline[\[UC6.1\]]]
   ],
   post: [
-    - L'utente ha visualizzato la sezione dell'analisi della documentazione del report
+    - L'utente visualizza i dettagli analitici relativi alla qualità della documentazione
   ],
   scenari: [
-    - L'utente visualizza la parte di report dedicata agli errori di sintassi #link(<UC11.1>)[#underline[\[UC11.1\]]]
-    - L'utente visualizza la parte di report dedicata alla completezza della documentazione nei confronti del codice del repository GitHub #link(<UC11.2>)[#underline[\[UC11.2\]]]
-    - L'utente visualizza il numero totale di remediation individuate nella sezione di documentazione del report #link(<UC11.3>)[#underline[\[UC11.3\]]]
+    - L'utente visualizza i rilievi sugli errori sintattici rilevati #link(<UC11.1>)[#underline[\[UC11.1\]]]
+    - L'utente visualizza le metriche di completezza documentale #link(<UC11.2>)[#underline[\[UC11.2\]]]
+    - L'utente visualizza l'elenco delle remediation per la documentazione #link(<UC11.3>)[#underline[\[UC11.3\]]]
   ],
   inclusioni: [
     - #link(<UC11.1>)[#underline[\[UC11.1\]]]
     - #link(<UC11.2>)[#underline[\[UC11.2\]]]
     - #link(<UC11.3>)[#underline[\[UC11.3\]]]
   ],
-  estensioni: [
-    - Nessuna
-  ],
   specializzazione: [
     - Questo caso d'uso è una specializzazione del caso d'uso #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
-  trigger: "L'utente seleziona la sezione relativa alla documentazione tra le opzioni selezionabili per la visualizzazione del report",
-)[#useCaseDiagram("10", "UC10 - Visualizzazione report analisi della documentazione repository GitHub")]
+  trigger: "L'utente richiede la consultazione dei dati relativi alla documentazione del progetto",
+)[
+  //#useCaseDiagram("11", "UC11 - Analisi della documentazione")
+]
 
 ==== UC11.1: Visualizzazione sezione errori di sintassi <UC11.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta visualizzando la sezione di documentazione del report di analisi
+    - L'utente visualizza la sezione analisi della documentazione #link(<UC11>)[#underline[\[UC11\]]]
   ],
   post: [
-    - L'utente ha visualizzato la sezione di analisi degli errori di sintassi della documentazione
+    - L'utente ha preso visione delle incongruenze sintattiche
   ],
   scenari: [
-    - L'utente visualizza la sezione relativa agli errori di sintassi della documentazione del repository GitHub
+    - Il sistema espone il dettaglio degli errori formali individuati nei file di testo
   ],
-  trigger: "L'utente seleziona la sezione relativa alla documentazione tra le opzioni selezionabili per la visualizzazione del report",
+  trigger: "L'utente consulta i risultati dell'analisi sintattica dei file",
 )[]
 
-==== UC11.2: Visualizzazione completezza della documentazione nei confronti del codice <UC11.2>
+==== UC11.2: Visualizzazione completezza della documentazione <UC11.2>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta visualizzando la sezione di documentazione del report di analisi
+    - L'utente visualizza la sezione analisi della documentazione #link(<UC11>)[#underline[\[UC11\]]]
   ],
   post: [
-    - L'utente ha visualizzato la sezione di analisi della completezza della documentazione nei confronti del codice del repository GitHub 
+    - L'utente visualizza il rapporto tra codice sorgente e documentazione esistente
   ],
   scenari: [
-    - L'utente visualizza la sezione relativa alla completezza della documentazione nei confronti del codice del repository GitHub 
+    - Il sistema espone le percentuali di copertura descrittiva degli elementi del repository
   ],
-  trigger: "L'utente seleziona la sezione relativa alla documentazione tra le opzioni selezionabili per la visualizzazione del report",
+  trigger: "L'utente consulta il grado di esaustività della documentazione",
 )[]
 
-==== UC11.3: Visualizzazione remediation individuate nella sezione di documentazione <UC11.3>
+==== UC11.3: Visualizzazione remediation sezione documentazione <UC11.3>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta visualizzando la sezione di documentazione del report di analisi
+    - L'utente visualizza la sezione analisi della documentazione #link(<UC11>)[#underline[\[UC11\]]]
   ],
   post: [
-    - L'utente ha visualizzato l'elenco di remediation della sezione di documentazione del report
+    - L'utente visualizza le proposte correttive per la documentazione
   ],
   scenari: [
-    - L'utente visualizza le remediation trovate durante l'analisi della sezione di documentazione del report
+    - L'utente visualizza l'elenco dei suggerimenti di miglioramento #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
   ],
   estensioni: [
     - #link(<UC11.3.1>)[#underline[\[UC11.3.1\]]]
   ],
-  trigger: "L'utente seleziona la sezione relativa alla documentazione tra le opzioni selezionabili per la visualizzazione del report",
+  trigger: "L'utente accede ai suggerimenti correttivi per l'area documentale",
 )[]
 
-===== UC11.3.1: Nessuna remediation individuata nella sezione di documentazione <UC11.3.1>
+===== UC11.3.1: Visualizzazione informativa assenza remediation documentazione <UC11.3.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta visualizzando la sezione di documentazione del report di analisi
-    - Il report non contiene alcuna remediation per tale sezione
+    - L'utente consulta l'area delle remediation per la documentazione #link(<UC11.3>)[#underline[\[UC11.3\]]]
   ],
   post: [
-    - L'utente ha visualizzato il messaggio di assenza di remediation per la sezione di documentazione del report di analisi
+    - L'utente visualizza un riscontro positivo sull'integrità documentale
   ],
   scenari: [
-    - L'utente viene informato che non sono state trovati possibili miglioramenti per la sezione di documentazione del report di analisi
+    - Il sistema informa l'utente che non sono stati individuati errori o mancanze nell'area
   ],
-  trigger: "Non sono presenti remediation per la sezione del documentazione del report",
+  trigger: "L'analisi non rileva criticità documentali nel repository",
 )[]
 
-=== UC12 Visualizzazione ranking dei repository analizzati <UC12>
+=== UC12: Visualizzazione ranking dei repository analizzati <UC12>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha eseguito l'autenticazione al sistema #link(<UC2>)[#underline[\[UC2\]]]
   ],
-  post:[
-    - L'utente visualizza la lista dei repository analizzati ordinata per punteggio
+  post: [
+    - L'utente visualizza la graduatoria dei progetti ordinata per punteggio di qualità
   ],
   scenari: [
-    - L'utente visualizza la lista dei propri repository analizzati ordinata per punteggio
-  ],
-  inclusioni: [
-    - Nessuna
+    - Il sistema espone la lista dei repository analizzati ordinati in base al punteggio globale calcolato
   ],
   estensioni: [
-    - #link(<UC12.1>)[#underline[[UC12.1]]]
+    - #link(<UC12.1>)[#underline[\[UC12.1\]]]
   ],
-  trigger:"L'utente si sposta nella sezione di ranking dei repository analizzati",
+  trigger: "L'utente richiede la consultazione della classifica globale dei propri repository",
 )[
-  #useCaseDiagram("43", "UC12 - Visualizzazione ranking dei repository analizzati")
+  #useCaseDiagram("12", "UC12 - Ranking dei repository analizzati")
 ]
 
-==== UC12.1 Nessun repository analizzato <UC12.1>
+==== UC12.1: Visualizzazione informativa assenza dati per ranking <UC12.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente si trova nella sezione di visualizzazione del ranking dei repository  #link(<UC12>)[#underline[\[UC12\]]]
-    - Non sono presenti repository analizzati associati all'utente
+    - L'utente accede alla sezione di ranking #link(<UC12>)[#underline[\[UC12\]]]
+    - Non esistono repository analizzati associati all'account
   ],
-  post:[
-    - L'utente visualizza il messaggio di lista vuota
+  post: [
+    - L'utente visualizza un messaggio che segnala l'assenza di dati per popolare la classifica
   ],
   scenari: [
-    - L'utente visualizza un messaggio che lo invita ad analizzare dei repository per avere un ranking disponibile 
+    - Il sistema inibisce la lista e suggerisce l'avvio di una prima analisi
   ],
-  trigger:"L'utente si sposta nella sezione di ranking dei repository senza aver mai analizzato un repository",
+  trigger: "L'utente accede alla sezione ranking senza dati storici disponibili",
 )[]
 
-=== UC13: Disconnessione account GitHub da CodeGuardian<UC13>
+=== UC13: Disconnessione account GitHub da CodeGuardian <UC13>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
-    - L'utente ha collegato con successo il proprio account CodeGuardian a un account GitHub
-      #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente è nella sezione di disconnessione dell'account GitHub dal sistema CodeGuardian
+    - L'utente ha precedentemente collegato un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
   ],
   post: [
-    - L'utente ha disconnesso con successo il proprio accont GitHub dalla piattaforma Codeguardian
+    - Il sistema revoca i token di accesso e rimuove l'associazione con il profilo GitHub
   ],
   scenari: [
-    - L'utente conferma la disconnessione del proprio account GitHub dalla paiattaforma CodeGuardian
+    - L'utente conferma la volontà di rimuovere l'integrazione con GitHub tramite comando dedicato
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente entra nella sezione di disconnessione dell'account GitHub dal sistema CodeGuardian",
-)[#useCaseDiagram("13", "UC13 - Disconnessione account GitHub da CodeGuardian")]
+  trigger: "L'utente richiede la rimozione del collegamento con il provider esterno GitHub",
+)[#useCaseDiagram("13", "UC13 - Disconnessione account GitHub")]
 
-=== UC14: Esportazione report di analisi repository GitHub <UC14>
+=== UC14: Esportazione report di analisi <UC14>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta visualizzando il report di analisi del repository GitHub #link(<UC6.3>)[#underline[\[UC6.3\]]]
+    - L'utente visualizza un report di analisi #link(<UC6>)[#underline[\[UC6\]]]
   ],
   post: [
-    - L'utente ha esportato con successo il report di analisi nel formato selezionato
+    - Il sistema genera e rende disponibile al download il file nel formato richiesto
   ],
   scenari: [
-    - L'utente seleziona il pulsante "Esporta Report" nella pagina di visualizzazione del report
-    - L'utente seleziona il formato di esportazione desiderato #link(<UC14.1>)[#underline[\[UC14.1\]]]
-    - L'utente conferma l'esportazione #link(<UC14.2>)[#underline[\[UC14.2\]]]
+    - L'utente seleziona il formato desiderato per l'esportazione #link(<UC14.1>)[#underline[\[UC14.1\]]]
+    - L'utente conferma la richiesta di generazione del file #link(<UC14.2>)[#underline[\[UC14.2\]]]
   ],
   inclusioni: [
-    - #link(<UC14.1>)[#underline[\[UC14.1\]]] // Selezione formato di esportazione
-    - #link(<UC14.2>)[#underline[\[UC14.2\]]] // Conferma esportazione
+    - #link(<UC14.1>)[#underline[\[UC14.1\]]]
+    - #link(<UC14.2>)[#underline[\[UC14.2\]]]
   ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente sta visualizzando il report di analisi e interagisce con il pulsante di esportazione",
-)[#useCaseDiagram("14", "UC14 - Esportazione report di analisi repository GitHub")]
+  trigger: "L'utente richiede la versione scaricabile del report di analisi",
+)[#useCaseDiagram("14", "UC14 - Esportazione report")]
 
 ==== UC14.1: Selezione formato di esportazione <UC14.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente si trova nella sezione formati all'interno della visualizzazione del report
+    - L'utente ha avviato la procedura di esportazione #link(<UC14>)[#underline[\[UC14\]]]
   ],
   post: [
-    - L'utente ha selezionato un formato valido per l'esportazione
+    - Il formato di output risulta correttamente impostato
   ],
   scenari: [
-    - L'utente visualizza la lista dei formati di esportazione disponibili
-    - L'utente seleziona il formato desiderato
-  ],
-  inclusioni: [
-    - Nessuna
+    - L'utente seleziona una tra le opzioni disponibili (es. PDF, JSON)
   ],
   estensioni: [
     - #link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]
   ],
-  trigger: "L'utente ha interagito con il pulsante di esportazione del report di analisi",
-)[#useCaseDiagram("14_1", "UC14.1 - Selezione formato di esportazione")]
+  trigger: "L'utente interagisce con il selettore dei formati di esportazione",
+)[]
 
-===== UC14.1.1: Nessun formato selezionato <UC14.1.1>
+===== UC14.1.1: Visualizzazione errore formato mancante <UC14.1.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente tenta di procedere senza selezionare un formato di esportazione nella sezione formati
+    - L'utente tenta di confermare l'esportazione senza aver selezionato un formato
   ],
   post: [
-    - La procedura di esportazione non viene finalizzata
-    - L'utente può nuovamente interagire con la sezione di esportazione del report
+    - Il sistema inibisce la generazione del file e richiede la selezione di un formato
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica la necessità di selezionare un formato
+    - L'utente visualizza un messaggio di avviso circa l'obbligatorietà della scelta del formato
   ],
-  trigger: "L'utente conferma l'esportazione del report di analisi senza aver selezionato alcun formato valido",
+  trigger: "Mancata selezione del formato durante la conferma di esportazione",
 )[]
 
 ==== UC14.2: Conferma esportazione <UC14.2>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente ha selezionato un formato di esportazione valido #link(<UC14.1>)[#underline[\[UC14.1\]]]
+    - Un formato valido è stato selezionato #link(<UC14.1>)[#underline[\[UC14.1\]]]
   ],
   post: [
-    - L'utente ha completato la richiesta di generazione del file di esportazione
+    - Il sistema avvia il processo di parsing dei dati e creazione del file
   ],
   scenari: [
-    - L'utente conferma l'avvio della procedura di generazione del file
+    - L'utente attiva il comando di finalizzazione dell'esportazione
   ],
-  trigger: "L'utente conferma l'esportazione del report di analisi dopo aver selezionato un formato valido",
+  trigger: "L'utente conferma l'operazione di download del report",
 )[]
 
 === UC15: Modifica password profilo <UC15>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente vuole modificare la password del proprio account
+    - L'utente è autenticato e visualizza l'area gestione profilo #link(<UC2>)[#underline[\[UC2\]]]
   ],
   post: [
-    - L'utente ha modificato correttamente la propria password
+    - La password memorizzata nel sistema viene aggiornata con il nuovo valore cifrato
   ],
   scenari: [
-    - L'utente va nella sezione di modifica password
-    - L'utente inserisce la password corrente nel primo campo del form di modifica #link(<UC15.1>)[#underline[\[UC15.1\]]]
-    - L'utente inserisce la nuova password nel campo del form di modifica sottostante #link(<UC15.2>)[#underline[\[UC15.2\]]]
-    - L'utente conferma la modifica della propria password #link(<UC15.3>)[#underline[\[UC15.3\]]]
-    - L'utente riceve la conferma dell'avvenuta modifica della propria password #link(<UC15.4>)[#underline[\[UC15.4\]]]
+    - L'utente inserisce la password attuale #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - L'utente definisce la nuova password #link(<UC15.2>)[#underline[\[UC15.2\]]]
+    - L'utente conferma la modifica #link(<UC15.3>)[#underline[\[UC15.3\]]]
+    - L'utente riceve notifica del successo dell'operazione #link(<UC15.4>)[#underline[\[UC15.4\]]]
   ],
   inclusioni: [
-    - #link(<UC15.1>)[#underline[\[UC15.1\]]] // Inserimento password corrente
-    - #link(<UC15.2>)[#underline[\[UC15.2\]]] // Inserimento nuova password
-    - #link(<UC15.3>)[#underline[\[UC15.3\]]] // Conferma modifica password
-    - #link(<UC15.4>)[#underline[\[UC15.4\]]] // Ricezione avvenuta modifica
+    - #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - #link(<UC15.2>)[#underline[\[UC15.2\]]]
+    - #link(<UC15.3>)[#underline[\[UC15.3\]]]
+    - #link(<UC15.4>)[#underline[\[UC15.4\]]]
   ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente seleziona l'opzione modifica password",
-)[#useCaseDiagram("15", "UC15 - Modifica password profilo")]
+  trigger: "L'utente richiede il cambio delle credenziali di accesso",
+)[#useCaseDiagram("15", "UC15 - Modifica password")]
 
-==== UC15.1 Inserimento della password corrente <UC15.1>
+==== UC15.1: Inserimento password corrente <UC15.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente è nella sezione di Modifica Password e si trova nel campo "password corrente"
+    - L'utente visualizza il modulo di modifica password #link(<UC15>)[#underline[\[UC15\]]]
   ],
   post: [
-    - L'utente ha inserito correttamente la password corrente
+    - La password attuale viene verificata a sistema
   ],
   scenari: [
-    - L'utente clicca sul campo password corrente
-    - L'utente digita la password corrente
-  ],
-  inclusioni: [
-    - Nessuna
+    - L'utente digita la chiave di accesso attualmente in uso
   ],
   estensioni: [
-    - #link(<UC15.1.1>)[#underline[\[UC15.1.1 \]]]
+    - #link(<UC15.1.1>)[#underline[\[UC15.1.1\]]]
     - #link(<UC15.1.2>)[#underline[\[UC15.1.2\]]]
   ],
-  trigger: "L'utente interagisce con il form di modifica inserendo la password corrente nell'apposito campo",
-)[#useCaseDiagram("15_1", "UC15.1 - Inserimento della password corrente")]
-
-===== UC15.1.1 Password corrente non inserita <UC15.1.1>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente è nella sezione di Modifica Password, si trova nel campo "password corrente" e non inserisce nulla
-  ],
-  post: [
-    - L'utente non può procedere con la modifica della password
-  ],
-  scenari: [
-    - L'utente visualizza un messaggio di errore che lo invita ad inserire la password corrente
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente tenta di confermare senza aver inserito la password corrente",
+  trigger: "L'utente interagisce con il campo di input della password corrente",
 )[]
 
-===== UC15.1.2 Password corrente errata <UC15.1.2>
+===== UC15.1.1: Visualizzazione errore password corrente mancante <UC15.1.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente ha inserito la password corrente sbagliata nell'apposito campo del form "password corrente"
+    - Il campo password corrente non risulta popolato durante la conferma
   ],
   post: [
-    - All'utente viene impedito di cambiare la propria password
+    - Il sistema segnala l'obbligatorietà del campo
   ],
   scenari: [
-    - L'utente inserice una password corrente errata nel form
-    - L'utente visualizza un messaggio di errore che lo invita a modificare la password inserita perchè errata
+    - L'utente visualizza un avviso di mancato inserimento
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente interagisce con il form di modifica inserendo una password corrente errata",
+  trigger: "Conferma del modulo con campo password attuale vuoto",
 )[]
 
-==== UC15.2 Inserimento della nuova password <UC15.2>
+===== UC15.1.2: Visualizzazione errore password corrente errata <UC15.1.2>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente è nella sezione di Modifica Password e si trova nel campo "nuova password"
+    - La password inserita non corrisponde a quella persistita nel DB
   ],
   post: [
-    - L'utente ha inserito una nuova password valida
+    - Il sistema inibisce la modifica per motivi di sicurezza
   ],
   scenari: [
-    - L'utente inserisce la nuova password all'interno del form di modifica
+    - L'utente visualizza un messaggio di errore relativo alle credenziali errate
   ],
-  inclusioni: [
-    - Nessuna
+  trigger: "Inserimento di una chiave di accesso attuale non valida",
+)[]
+
+==== UC15.2: Inserimento nuova password <UC15.2>
+#useCase(
+  attore: "Utente Autenticato",
+  pre: [
+    - L'utente si trova nel campo di inserimento nuova password #link(<UC15>)[#underline[\[UC15\]]]
+  ],
+  post: [
+    - Il nuovo valore proposto rispetta i criteri di sicurezza
+  ],
+  scenari: [
+    - L'utente definisce una nuova chiave di accesso conforme agli standard
   ],
   estensioni: [
     - #link(<UC15.2.1>)[#underline[\[UC15.2.1\]]]
     - #link(<UC15.2.2>)[#underline[\[UC15.2.2\]]]
     - #link(<UC15.2.3>)[#underline[\[UC15.2.3\]]]
   ],
-  trigger: "L'utente interagisce con il form di modifica inserendo una nuova password",
-)[#useCaseDiagram("15_2", "UC15.2 - Inserimento della nuova password")]
-
-===== UC15.2.1 Nessuna nuova password inserita <UC15.2.1>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente è nella sezione di Modifica Password, si trova nel campo "nuova password" e non inserisce nulla
-  ],
-  post: [
-    - L'utente non può procedere alla conferma della modifica password
-  ],
-  scenari: [
-    - L'utente visualizza un messaggio di errore che lo invita ad inserire una nuova password prima di confermare
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente tenta di confermare senza aver inserito una nuova password",
+  trigger: "L'utente popola il campo relativo alla nuova chiave di accesso",
 )[]
 
-===== UC15.2.2 Nuova password non conforme allo standard adottato <UC15.2.2>
+===== UC15.2.1: Visualizzazione errore nuova password mancante <UC15.2.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente ha inserito la nuova password nell'apposito campo del form "nuova password" ma non segue lo standard adottato
+    - Il campo nuova password è vuoto durante la conferma
   ],
   post: [
-    - All'utente viene impedito di confermare la modifica della password
+    - Il sistema richiede l'inserimento di un nuovo valore
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica i requisiti necessari affinché la password sia conforme
+    - L'utente visualizza un messaggio di avviso circa la necessità di una nuova password
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente interagisce con il form di modifica inserendo una nuova password non conforme allo standard",
+  trigger: "Tentativo di conferma senza definizione della nuova credenziale",
 )[]
 
-===== UC15.2.3 Nuova password uguale alla precedente <UC15.2.3>
+===== UC15.2.2: Visualizzazione errore password non conforme <UC15.2.2>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente ha inserito la nuova password nell'apposito campo del form "nuova password" ma è uguale alla password corrente
+    - La nuova password non rispetta i criteri di complessità
   ],
   post: [
-    - All'utente viene impedito di confermare la modifica della password
+    - Il sistema segnala i requisiti di sicurezza non soddisfatti
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che lo informa dell'uguaglianza
+    - L'utente visualizza l'elenco dei criteri (lunghezza, caratteri speciali) mancanti
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente inserisce una nuova password uguale a quella corrente",
+  trigger: "Inserimento di una nuova password debole",
 )[]
 
-==== UC15.3 Conferma modifica password <UC15.3>
+===== UC15.2.3: Visualizzazione errore password identica alla precedente <UC15.2.3>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente ha iserito correttamente la password corrente nell'apposito campo del form #link(<UC15.1>)[#underline[\[UC15.1\]]]
-    - L'utente ha inserito una nuova password valida nell'apposito campo del form #link(<UC15.2>)[#underline[\[UC15.2\]]]
+    - La nuova password inserita è uguale a quella attualmente in uso
   ],
   post: [
-    - L'utente conferma correttamente la modifica della propria password
+    - Il sistema richiede la scelta di una password differente
   ],
   scenari: [
-    - L'utente clicca sul pulsante di conferma
+    - L'utente viene informato che la nuova password non può coincidere con la vecchia
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente interagisce con il tasto di conferma di modifica della password",
+  trigger: "Reinserimento della stessa credenziale già attiva",
 )[]
 
-==== UC15.4 Ricezione dell'avvenuta modifica password <UC15.4>
+==== UC15.3: Conferma modifica password <UC15.3>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - La conferma della modifica password è andata a buon fine #link(<UC15.3>)[#underline[\[UC15.3\]]]
+    - L'utente ha inserito la password corrente valida #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - L'utente ha inserito una nuova password conforme agli standard #link(<UC15.2>)[#underline[\[UC15.2\]]]
   ],
   post: [
-    - L'utente è informato del successo dell'operazione
+    - Il sistema avvia la procedura di aggiornamento delle credenziali nel database
   ],
   scenari: [
-    - L'utente visualizza un messaggio di avvenuta modifica
+    - L'utente interagisce con il comando di conferma per finalizzare la variazione della chiave di accesso
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente ha completato con successo la modifica della password",
+  trigger: "L'utente richiede la sottomissione del modulo di modifica password",
 )[]
 
-#TODO("Sistema qui in modo che le remediation siano distribuite nelle varie sezioni")
+==== UC15.4: Notifica avvenuta modifica password <UC15.4>
+#useCase(
+  attore: "Utente Autenticato",
+  pre: [
+    - La procedura di aggiornamento delle credenziali è stata completata con successo #link(<UC15.3>)[#underline[\[UC15.3\]]]
+  ],
+  post: [
+    - L'utente ha preso visione dell'esito positivo dell'operazione
+  ],
+  scenari: [
+    - Il sistema espone un messaggio di conferma per segnalare l'avvenuto cambio password
+  ],
+  trigger: "Il sistema conferma la persistenza della nuova chiave di accesso",
+)[]
+
 === UC16: Visualizzazione singola remediation di sezione generica <UC16>
 #useCase(
   attore: "Utente autorizzato",
@@ -4441,138 +4357,138 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [Il Sistema deve mostrare un'informativa di esito positivo qualora non risultino remediation necessarie per l'area del codice sorgente.], 
   [#link(<UC9.3.1>)[#underline[\[UC9.3.1\]]]],
 
-  //UC10
+  // --- ANALISI DELLA SICUREZZA (UC10) ---
   [#FRObx],
-  [L'Utente deve poter visualizzare la sezione del report relativa all'analisi della sicurezza],
+  [Il Sistema deve consentire la visualizzazione della sezione del report dedicata alla sicurezza del repository.],
   [#link(<UC10>)[#underline[\[UC10\]]]],
 
   [#FRObx],
-  [L'Utente deve poter visualizzare la sezione di analisi delle librerie e dipendenze del codice],
+  [Il Sistema deve esporre i risultati dell'analisi delle librerie, indicando dipendenze obsolete o affette da vulnerabilità note (CVE).],
   [#link(<UC10.1>)[#underline[\[UC10.1\]]]],
-  
+
   [#FRObx],
-  [L'Utente deve poter visualizzare la sezione di conformità del repository con gli standard OWASP],
+  [Il Sistema deve mostrare i rilievi di conformità rispetto agli standard di sicurezza OWASP.],
   [#link(<UC10.2>)[#underline[\[UC10.2\]]]],
 
   [#FRObx],
-  [L'Utente deve poter visualizzare la sezione di lista di remediation per la sezione della sicurezza],
+  [Il Sistema deve presentare l'elenco delle azioni correttive (remediation) specifiche per le vulnerabilità rilevate.],
   [#link(<UC10.3>)[#underline[\[UC10.3\]]]],
 
   [#FRObx],
-  [L'Utente deve poter visualizzare il messaggio di lista vuota nel caso non siano state individuate remediation per la sezione della sicurezza],
+  [Il Sistema deve mostrare un'informativa di esito positivo qualora non risultino minacce alla sicurezza che richiedano remediation.],
   [#link(<UC10.3.1>)[#underline[\[UC10.3.1\]]]],
 
-  //UC11
+// --- ANALISI DELLA DOCUMENTAZIONE (UC11) ---
   [#FRObx],
-  [L'Utente deve poter visualizzare la sezione del report relativa all'analisi della documentazione],
+  [Il Sistema deve consentire la visualizzazione della sezione del report dedicata alla qualità della documentazione.],
   [#link(<UC11>)[#underline[\[UC11\]]]],
 
   [#FRObx],
-  [L'Utente deve poter visualizzare la sezione di errori di sintassi],
+  [Il Sistema deve esporre gli errori sintattici rilevati nei file di documentazione (es. Markdown malformato o link interrotti).],
   [#link(<UC11.1>)[#underline[\[UC11.1\]]]],
-  
+
   [#FRObx],
-  [L'Utente deve poter visualizzare la sezione di completezza della documentazione nei confronti del codice del repository GitHub],
+  [Il Sistema deve mostrare le metriche di completezza della documentazione in relazione alle interfacce e alle componenti del codice.],
   [#link(<UC11.2>)[#underline[\[UC11.2\]]]],
 
   [#FRObx],
-  [L'Utente deve poter visualizzare la sezione di lista di remediation per la sezione della documentazione],
+  [Il Sistema deve presentare l'elenco delle azioni correttive (remediation) per il miglioramento della documentazione.],
   [#link(<UC11.3>)[#underline[\[UC11.3\]]]],
 
   [#FRObx],
-  [L'Utente deve poter visualizzare il messaggio di lista vuota nel caso non siano state individuate remediation per la sezione della documentazione],
+  [Il Sistema deve mostrare un'informativa di esito positivo qualora la documentazione risulti completa e priva di errori.],
   [#link(<UC11.3.1>)[#underline[\[UC11.3.1\]]]],
-  
-  //UC12
-  [#FROpx],
-  [Il sistema Front-end deve essere in grado di rappresentare correttamente la lista di tutti i repository analizzati],
+
+  // --- RANKING REPOSITORY (UC12) ---
+  [#FRObx],
+  [Il Sistema deve generare una graduatoria dei repository analizzati associati all'Utente Autenticato.],
   [#link(<UC12>)[#underline[\[UC12\]]]],
 
-  [#FROpx],
-  [Il sistema Back-end deve essere in grado di passare solo e tutti i repository analizzati con relative metriche di comparazione al Front-end],
+  [#FRObx],
+  [Il Sistema deve ordinare i repository in modo decrescente in base al punteggio di qualità globale ottenuto.],
+  [#link(<UC12>)[#underline[\[UC12\]]]],
+
+  [#FRObx],
+  [Il Sistema deve esporre, per ogni elemento del ranking, il punteggio calcolato e le relative metriche di sintesi.],
+  [#link(<UC12>)[#underline[\[UC12\]]]],
+
+  [#FRObx],
+  [Il Sistema deve inibire la visualizzazione della classifica e mostrare un avviso specifico qualora l'utente non abbia analisi concluse.],
   [#link(<UC12.1>)[#underline[\[UC12.1\]]]],
 
-  [#FROpx],
-  [L'ordine in cui appaiono i repository deve essere coerente con il punteggio assegnato],
-  [#link(<UC12.1>)[#underline[\[UC12.1\]]]],
-
-  [#FROpx],
-  [Il sistema Back-end deve riuscire a riconoscere correttamente il caso in cui un utente non abbia mai analizzato repository e comunicarlo al Front-end],
-  [#link(<UC12.1>)[#underline[\[UC12.1\]]]],
-
-  [#FROpx],
-  [Il sistema Front-end deve essere in grado di comunicare che la lista è vuota nel caso in cui un utente non abbia mai analizzato repository],
-  [#link(<UC12.1>)[#underline[\[UC12.1\]]]],
-
-  //UC13
+  // --- DISCONNESSIONE GITHUB (UC13) ---
   [#FRObx], 
-  [L'Utente deve poter disconnettere il proprio account GitHub], 
+  [Il Sistema deve consentire all'Utente Avanzato l'accesso alla sezione per la rimozione del collegamento con l'account GitHub.], 
   [#link(<UC13>)[#underline[\[UC13\]]]],
 
-  [#FRObx],
-  [L'Utente deve selezionare il tasto "Disconnetti" per avviare la procedura],
+  [#FRObx], 
+  [Il Sistema deve predisporre un comando di conferma per la finalizzazione della disconnessione dell'account GitHub.], 
   [#link(<UC13>)[#underline[\[UC13\]]]],
 
-  [#FRObx],
-  [L'Utente deve poter confermare la disconnessione del proprio account GitHub],
+  [#FRObx], 
+  [Il Sistema deve revocare i token di accesso e rimuovere l'associazione tra il profilo utente e l'identità GitHub a seguito della conferma.], 
   [#link(<UC13>)[#underline[\[UC13\]]]],
 
-  // UC14
-  [#FRDex],
-  [L'Utente deve poter esportare il report di analisi], 
+  // --- ESPORTAZIONE REPORT (UC14) ---
+  [#FRDex], 
+  [Il Sistema deve consentire l'avvio della procedura di esportazione dei dati del report di analisi tramite comando dedicato.], 
   [#link(<UC14>)[#underline[\[UC14\]]]],
 
-  [#FRDex],
-  [L'Utente deve poter selezionare il formato di esportazione desiderato],
+  [#FRDex], 
+  [Il Sistema deve permettere la selezione di un formato di output valido (es. PDF, JSON) per il file di esportazione.], 
   [#link(<UC14.1>)[#underline[\[UC14.1\]]]],
 
-  [#FRDex],
-  [L'Utente deve ricevere un messaggio di errore se non seleziona alcun formato],
+  [#FRDex], 
+  [Il Sistema deve mostrare un'informativa di errore e inibire la generazione del file qualora l'utente non selezioni alcun formato.], 
   [#link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]],
 
-  [#FRDex],
-  [L'Utente deve poter confermare l'esportazione del report],
+  [#FRDex], 
+  [Il Sistema deve predisporre un comando di conferma finale per l'attivazione del processo di generazione e download del report.], 
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 
-  // UC15
+  [#FRDex], 
+  [Il Sistema deve eseguire il parsing dei dati analitici e produrre un documento coerente con il formato selezionato dall'utente.], 
+  [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
+
+  // --- MODIFICA PASSWORD (UC15) ---
   [#FRObx], 
-  [L'Utente deve poter accedere alla sezione di modifica password], 
+  [Il Sistema deve consentire all'Utente Autenticato l'accesso alla sezione dedicata alla modifica della chiave di accesso.], 
   [#link(<UC15>)[#underline[\[UC15\]]]],
 
-  [#FRObx],
-  [L'utente deve inserire la password corrente all'interno dell'apposito campo del form di modifica],
+  [#FRObx], 
+  [Il Sistema deve permettere l'immissione della password attualmente in uso per finalità di verifica della titolarità.], 
   [#link(<UC15.1>)[#underline[\[UC15.1\]]]],
 
-  [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se non inserisce la password corrente],
+  [#FRObx], 
+  [Il Sistema deve segnalare l'obbligatorietà del campo e impedire la modifica qualora la password corrente non venga inserita.], 
   [#link(<UC15.1.1>)[#underline[\[UC15.1.1\]]]],
 
-  [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se la password corrente è errata],
+  [#FRObx], 
+  [Il Sistema deve inibire la procedura di aggiornamento e notificare l'utente qualora la password attuale inserita sia errata.], 
   [#link(<UC15.1.2>)[#underline[\[UC15.1.2\]]]],
 
-  [#FRObx],
-  [L'Utente deve inserire la nuova password nell'apposito campo del form di modifica],
+  [#FRObx], 
+  [Il Sistema deve consentire l'immissione di una nuova chiave di accesso.], 
   [#link(<UC15.2>)[#underline[\[UC15.2\]]]],
 
-  [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se non inserisce la nuova password],
+  [#FRObx], 
+  [Il Sistema deve rilevare e segnalare il mancato inserimento della nuova password durante la fase di conferma.], 
   [#link(<UC15.2.1>)[#underline[\[UC15.2.1\]]]],
 
-  [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se la nuova password non è conforme allo standard],
+  [#FRObx], 
+  [Il Sistema deve validare che la nuova password rispetti i criteri di complessità (lunghezza, caratteri speciali, numeri) stabiliti.], 
   [#link(<UC15.2.2>)[#underline[\[UC15.2.2\]]]],
 
-  [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se la nuova password è uguale alla precedente],
+  [#FRObx], 
+  [Il Sistema deve verificare che la nuova password sia differente da quella attualmente attiva e segnalare l'eventuale identità.], 
   [#link(<UC15.2.3>)[#underline[\[UC15.2.3\]]]],
 
-  [#FRObx],
-  [L'Utente deve poter confermare la modifica della password tramite pulsante],
+  [#FRObx], 
+  [Il Sistema deve predisporre un comando di conferma per l'invio della richiesta di aggiornamento delle credenziali.], 
   [#link(<UC15.3>)[#underline[\[UC15.3\]]]],
 
-  [#FRObx],
-  [L'Utente deve ricevere conferma dell'avvenuta modifica della password],
+  [#FRObx], 
+  [Il Sistema deve mostrare un messaggio di feedback esplicito a seguito della corretta persistenza della nuova password.], 
   [#link(<UC15.4>)[#underline[\[UC15.4\]]]],
 
   //UC16
