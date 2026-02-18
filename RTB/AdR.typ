@@ -2525,7 +2525,8 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "Richiesta di analisi di un repository",
-)[#useCaseDiagram("29", "UC21 - Avvio analisi")]
+)[#useCaseDiagram("21", "UC21 - Avvio analisi")]
+#TODO("Da aggiungere passaggio : orchestratore `prende` i file dal serrvizio esterno?")
 
 ==== UC21.1 Richiesta di clonazione del repository <UC21.1>
 #useCase(
@@ -2539,6 +2540,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'orchestratore contatta il servizio incaricato della clonazione della repository
+    - L'orchestratore trasmette l'URL della repository da clonare e l'eventuale token al servizio per la clonazione
   ],
   inclusioni: [
     - Nessuna
@@ -2579,7 +2581,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'orchestratore ha contattato lo strumento di analisi del codice#link(<UC21>)[#underline[\[UC21\]]]
   ],
   post: [
-    - L'orchestratore ha inviato i file da analizzare allo strumento di analisi del codice
+    - L'orchestratore ha trasmesso i file da analizzare allo strumento di analisi del codice
   ],
   scenari: [
     - L'orchestratore invia i file da analizzare allo strumento di analisi del codice
@@ -2619,12 +2621,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 ==== UC21.3 Richiesta di analisi della documentazione <UC21.3>
 #useCase(
   attore: "Orchestratore",
-  attori_secondari: "Servizio LLM",
+  attori_secondari: "Servizio LLM",//sicuri sia solo LLM?
   pre: [
     - L' orchestratore ha contattato lo strumento di analisi della documentazione #link(<UC21>)[#underline[\[UC21\]]]
   ],
   post: [
-    - L'orchestratore ha inviato la codebase da analizzare allo strumento di analisi della documentazione
+    - L'orchestratore ha trasmesso la codebase da analizzare allo strumento di analisi della documentazione
   ],
   scenari: [
     - L'orchestratore invia la codebase da analizzare all'agente
@@ -2646,7 +2648,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'orchestratore ha contattato lo strumento di analisi degli standard OWASP #link(<UC21>)[#underline[\[UC21\]]]
   ],
   post: [
-    - L'orchestratore ha inviato la codebase da analizzare allo strumento di analisi degli standard OWASP
+    - L'orchestratore ha trasmesso la codebase da analizzare allo strumento di analisi degli standard OWASP
   ],
   scenari: [
     - L'orchestratore invia la #def[codebase] da analizzare allo strumento di analisi degli standard OWASP
@@ -2784,10 +2786,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Il report dell'analisi è stato generato #link(<UC24>)[#underline[\[UC24\]]]
   ],
   post: [
-    - L'orchestratore ha archiviato correttamente il report di analisi nel sistema di persistenza
+    - L'orchestratore ha archiviato correttamente il report di analisi nel sistema di persistenza con lo stato aggiornato a `completed`
   ],
   scenari: [
-    - L'orchestratore salva il report di analisi finale nel sistema di persistenza, associandolo alla repository e all'utente che ha richiesto l'analisi
+    - L'orchestratore salva il report di analisi finale nel sistema di persistenza, associandolo alla repository e all'utente che ha richiesto l'analisi con lo stato aggiornato a `completed`
   ], 
   inclusioni: [
     - Nessuna
@@ -2900,7 +2902,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente non riceve la notifica di completamento dell'analisi
   ],
   post: [
-    - L'utente non è informato della disponibilità del nuovo report di analisi e non può accedere al report tramite la sezione apposita.
+    - L'utente non è informato della disponibilità del nuovo report di analisi ma può comunque accedere al report tramite la sezione apposita.
   ],
   scenari: [
     - L'orchestratore invia la notifica tramite il canale previsto.
@@ -4367,9 +4369,144 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [All'utente deve essere impedito di non inserire un valore di soglia per gli alert critici],
   [#link(<UC20.2.1>)[#underline[\[UC20.2.1\]]]],
 
+  //UC21
+  [#FRObx],
+  [Il sistema deve poter avviare il processo di analisi contattando i servizi per la clonazione del repository],
+  [#link(<UC21>)[#underline[\[UC21\]]]],
 
+  [#FRObx],
+  [Il sistema deve poter avviare il processo di analisi contattando i servizi per l'analisi della documentazione],
+  [#link(<UC21>)[#underline[\[UC21\]]]],
+
+  [#FRObx],
+  [Il sistema deve poter avviare il processo di analisi contattando i servizi per l'analisi degli standard OWASP],
+  [#link(<UC21>)[#underline[\[UC21\]]]],
 
   //UC21
+  [#FRObx],
+  [Il sistema deve poter richiedere la clonazione del repository ad un servizio AWS ceh gestirá la clonazione],
+  [#link(<UC21.1>)[#underline[\[UC21.1\]]]],
+
+  [#FRObx],
+  [Il sistema deve gestire gli errori durante la richiesta di clonazione di un repository],
+  [#link(<UC21.1.1>)[#underline[\[UC21.1.1\]]]],
+
+  [#FRObx],
+  [Il sistema deve poter richiedere l'analisi del codice ad uno strumento di analisi esterno],
+  [#link(<UC21.2>)[#underline[\[UC21.2\]]]],
+
+  [#FRObx],
+  [Il sistema deve poter trasmettere dei file ad uno strumento di analisi del codice esterno],
+  [#link(<UC21.2>)[#underline[\[UC21.2\]]]],
+
+  [#FRObx],
+  [Il sistema deve poter richiedere l'analisi della documentazione ad uno strumento di analisi esterno],
+  [#link(<UC21.3>)[#underline[\[UC21.3\]]]],
+
+  [#FRObx],
+  [Il sistema deve trasmettere dei file o l'intera codebase ad uno strumento di analisi della documentazione esterno],
+  [#link(<UC21.3>)[#underline[\[UC21.3\]]]],
+
+  [#FRObx],
+  [Il sistema deve poter richiedere l'analisi degli standard OWASP ad uno strumento di analisi esterno],
+  [#link(<UC21.4>)[#underline[\[UC21.4\]]]],
+
+  [#FRObx],
+  [Il sistema deve trasmettere dei file o l'intera codebase ad uno strumento di analisi degli standard OWASP esterno],
+  [#link(<UC21.4>)[#underline[\[UC21.4\]]]],
+
+  //UC22
+  [#FRObx],
+  [Il sistema deve salvare lo stato dell'analisi come "pending" nel sistema di persistenza],
+  [#link(<UC22>)[#underline[\[UC22\]]]],
+
+  [#FRObx],
+  [Il sistema deve associare lo stato dell'analisi al repository e all'utente richiedente],
+  [#link(<UC22>)[#underline[\[UC22\]]]],
+
+  [#FRObx],
+  [Il sistema deve notificare l'utente qualora si verifichi un errore durante il salvataggio dello stato nel sistema di persistenza],
+  [#link(<UC22.1>)[#underline[\[UC22.1\]]]],
+
+  //UC23
+  [#FRObx],
+  [Il sistema deve attendere il completamento dell'elaborazione da parte di tutti gli strumenti di analisi],
+  [#link(<UC23>)[#underline[\[UC23\]]]],
+
+  [#FRObx],
+  [Il sistema deve poter recuperare i risultati da ciascuno strumento di analisi],
+  [#link(<UC23>)[#underline[\[UC23\]]]],
+
+  [#FRObx],
+  [Il sistema deve gestire il fallimento di uno o più strumenti di analisi notificando l'utente],
+  [#link(<UC23.1>)[#underline[\[UC23.1\]]]],
+
+  [#FRObx],
+  [Il sistema deve continuare con i risultati disponibili anche se uno strumento fallisce],
+  [#link(<UC23.1>)[#underline[\[UC23.1\]]]],
+
+  //UC24
+  [#FRObx],
+  [Il sistema deve generare un report complessivo aggregando i risultati di tutti gli strumenti],
+  [#link(<UC24>)[#underline[\[UC24\]]]],
+
+  [#FRObx],
+  [Il report deve contenere tutte le metriche e le criticità rilevate dalle diverse analisi],
+  [#link(<UC24>)[#underline[\[UC24\]]]],
+
+  //UC25
+  [#FRObx],
+  [Il sistema deve persistere il report finale nel sistema di persistenza con lo stato "completed"],
+  [#link(<UC25>)[#underline[\[UC25\]]]],
+
+  [#FRObx],
+  [Il report deve essere associato correttamente al repository e all'utente richiedente],
+  [#link(<UC25>)[#underline[\[UC25\]]]],
+
+  [#FRObx],
+  [Il sistema deve notificare l'utente qualora si verifichi un errore durante il salvataggio del report],
+  [#link(<UC25.1>)[#underline[\[UC25.1\]]]],
+
+  //UC26
+  [#FRObx],
+  [Il sistema deve inviare una notifica all'utente al completamento dell'analisi],
+  [#link(<UC26>)[#underline[\[UC26\]]]],
+
+  [#FRObx],
+  [La notifica deve contenere l'indicazione della disponibilità del nuovo report],
+  [#link(<UC26>)[#underline[\[UC26\]]]],
+
+  [#FRObx],
+  [Il sistema deve gestire l'eventuale fallimento dell'invio della notifica],
+  [#link(<UC26.1>)[#underline[\[UC26.1\]]]],
+
+  //UC27
+  [#FRObx],
+  [L'Utente deve ricevere la notifica di completamento dell'analisi],
+  [#link(<UC27>)[#underline[\[UC27\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter accedere al report tramite la sezione dedicata dopo la ricezione della notifica],
+  [#link(<UC27>)[#underline[\[UC27\]]]],
+
+  [#FRObx],
+  [Il sistema deve permettere all'utente di visualizzare il report anche nel caso in cui la notifica non venga ricevuta],
+  [#link(<UC27.1>)[#underline[\[UC27.1\]]]],
+
+  //UC28
+  [#FRObx],
+  [Il sistema deve scambiare il codice OAuth temporaneo con un token di accesso persistente],
+  [#link(<UC28>)[#underline[\[UC28\]]]],
+
+  [#FRObx],
+  [Il token di accesso deve essere memorizzato in modo cifrato nel sistema di persistenza],
+  [#link(<UC28>)[#underline[\[UC28\]]]],
+
+  [#FRObx],
+  [Il token deve essere associato correttamente all'account utente],
+  [#link(<UC28>)[#underline[\[UC28\]]]],
+
+  //UC29
 
   //UC25
 
@@ -4391,7 +4528,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   // 
   /*
   [#FRObx],
-  [Il sistema Back-end deve permettere all'Orchestratore di richiedere il salvataggio del report di analisi],
+  [Il sistema Back-end deve permettere alIl sistema di richiedere il salvataggio del report di analisi],
   [#link(<UC36>)[#underline[\[UC36\]]]],
 
   [#FRObx],
@@ -4399,12 +4536,12 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC36>)[#underline[\[UC36\]]]],
 
   [#FRObx],
-  [L'Orchestratore deve poter notificare al Front-end l'impossibilità di salvare il report in caso di errore interno],
+  [Il sistema deve poter notificare al Front-end l'impossibilità di salvare il report in caso di errore interno],
   [#link(<UC36.1>)[#underline[\[UC36.1\]]]],
   */
   //UC23
   [#FRObx],
-  [L'Orchestratore deve poter elaborare i dati dei singoli agenti per calcolare metriche statistiche globali],
+  [Il sistema deve poter elaborare i dati dei singoli agenti per calcolare metriche statistiche globali],
   [#link(<UC23>)[#underline[\[UC23\]]]],
 
   [#FRObx],
