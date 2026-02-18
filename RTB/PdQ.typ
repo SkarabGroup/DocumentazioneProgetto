@@ -1465,7 +1465,19 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TA-7], [Verificare che l'accesso alle funzionalità di audit sia interdetto agli utenti che non hanno completato con successo l'integrazione con GitHub.],
 
       [TA-8], [Verificare che il sistema protegga i dati di sessione e i token GitHub tramite cifratura e protocolli di comunicazione sicuri (HTTPS).],
-    )
+      
+      [TA-9], [Verificare che l'utente possa visualizzare correttamente lo storico globale dei repository analizzati, identificando chiaramente i progetti tramite i metadati esposti.],
+
+      [TA-10], [Verificare che l'utente possa navigare nel dettaglio di un singolo report, filtrando le sezioni di interesse (Codice, Sicurezza, Documentazione) e visualizzando i relativi metadati di audit.],
+
+      [TA-11], [Verificare che il sistema presenti chiaramente le criticità rilevate e le relative remediation suggerite, distinguendo i casi di conformità (esito positivo).],
+
+      [TA-12], [Verificare che l'utente possa impostare un intervallo temporale valido per generare un confronto storico tra le metriche di diversi report.],
+
+      [TA-13], [Verificare che il sistema generi visualizzazioni grafiche e tabelle comparative coerenti, evidenziando i trend di miglioramento o peggioramento delle metriche del codice.],
+
+      [TA-14], [Verificare che l'analisi della qualità del codice esponga correttamente i dati di analisi statica (bug/smell) e le percentuali di copertura dei test di unità.],
+)
   )
 )
 
