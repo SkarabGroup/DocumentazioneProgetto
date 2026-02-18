@@ -2634,10 +2634,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente è nella sezione report programmabili e alert
+    - L'utente si trova nella sezione report programmabili e alert
   ],
   post: [
-    - L'utente ha configurato con sucesso i report periodici e gli alert
+    - L'utente ha configurato con successo i report periodici e gli alert
   ],
   scenari: [
     - L'utente configura la periodicità dei report #link(<UC28.1>)[#underline[\[UC28.1\]]]
@@ -2658,6 +2658,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente autorizzato",
   pre: [
+    - L'utente sta configurando i report programmabili e gli alert #link(<UC28>)[#underline[\[UC28\]]]
     - L'utente è nella sezione per la configurazione della periodicità dei report
   ],
   post: [
@@ -2724,7 +2725,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente autorizzato",
   pre: [
     - L'utente sta confiugurando i report programmabili e gli alert #link(<UC28>)[#underline[\[UC28\]]]
-    - L'utente è nella sezione per la configurazione delle soglie per gli alert critici #link(<UC28.2>)[#underline[\[UC28.2\]]]
+    - L'utente si trova nella sezione per la configurazione delle soglie per gli alert critici #link(<UC28.2>)[#underline[\[UC28.2\]]]
     - L'utente non ha selezionato nessuna soglia
   ],
   post: [
