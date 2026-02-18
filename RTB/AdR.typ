@@ -1096,6 +1096,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC4.0.2>)[#underline[\[UC4.0.2\]]] // Analisi in corso
   ],
   trigger: "L'utente seleziona la funzione di nuova analisi repository",
+  generalizzazione: [
+    - #link(<UC38>)[#underline[\[UC38\]]] // Richiesta analisi repository pubblico
+  ],
 )[
   #useCaseDiagram("4", "UC4 - Richiesta analisi repository GitHub")
 ]
@@ -2726,7 +2729,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Gli strumenti esterni di analisi completano le loro operazioni e inviano i risultati all'orchestratore",
 )[#useCaseDiagram("30", "UC23 - Recupero dei risultati dagli strumenti di analisi")]
 
-=== UC23.1 Uno o più strumenti di analisi non rispondono o restituiscono un errore <UC23.1>
+==== UC23.1 Uno o più strumenti di analisi non rispondono o restituiscono un errore <UC23.1>
 #useCase(
   attore: "Strumenti di Analisi",
   pre: [
@@ -2841,7 +2844,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 )[
 ]
 
-=== UC26.1 Errore durante l'invio della notifica di completamento dell'analisi <UC26.1>
+==== UC26.1 Errore durante l'invio della notifica di completamento dell'analisi <UC26.1>
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -2889,7 +2892,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 ]
 #TODO("trigger da rivedere(35 E 35.1)")
 
-=== UC27.1: Notifica completamento analisi non ricevuta <UC27.1>
+==== UC27.1: Notifica completamento analisi non ricevuta <UC27.1>
 #useCase(
   attore: "Utente autenticato",
   pre: [
@@ -3067,7 +3070,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente accetta la proposta di remediation riguardante l'analisi del codice",
 )[]
 
-==== UC33: Rifiuto di una singola remediation riguardante l'analisi del codice <UC33>
+=== UC33: Rifiuto di una singola remediation riguardante l'analisi del codice <UC33>
 #useCase(
   attore: "Utente Autorizzato",
   pre: [
@@ -3109,7 +3112,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente interagisce con la sezione di gestione della remediation riguardante l'analisi della sicurezza e accetta la proposta di remediation",
 )[]
 
-==== UC35: Rifiuto di una singola remediation riguardante l'analisi della sicurezza <UC35>
+=== UC35: Rifiuto di una singola remediation riguardante l'analisi della sicurezza <UC35>
 #useCase(
   attore: "Utente Autorizzato",
   pre: [
@@ -3152,7 +3155,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente accetta la proposta di remediation riguardante l'analisi della documentazione",
 )[]
 
-==== UC37: Rifiuto di una singola remediation riguardante l'analisi della documentazione <UC37>
+=== UC37: Rifiuto di una singola remediation riguardante l'analisi della documentazione <UC37>
 #useCase(
   attore: "Utente Autorizzato",
   pre: [
@@ -3170,35 +3173,36 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     [#underline[\[UC19\]]]
 )[]
 
-#TODO("Controllo UC a seguire")
-=== UC51: Richiesta analisi repository GitHub privato a cui si ha accesso <UC51>
+=== UC38: Richiesta analisi repository GitHub privato a cui si ha accesso <UC38>
 #useCase(
   attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato il proprio account GitHub #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha accesso a repository privati su GitHub
-    - L'utente si trova nella sezione di richiesta di analisi di un repository GitHub
+    - L'utente risulta autorizzato all'interazione con i repository privati non propri#link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente visualizza la sezione di configurazione dell'analisi
   ],
   post: [
     - La richiesta di analisi del repository GitHub privato a cui si ha accesso è stata completata con successo
   ],
   scenari: [
-    - L'utente inserisce l'URL del repository GitHub privato da analizzare #link(<UC51.1>)[#underline[\[UC51.1\]]]
-    - L'utente seleziona le aree di interesse per l'analisi #link(<UC51.2>)[#underline[\[UC51.2\]]]
+    - L'utente inserisce l'URL del repository GitHub privato da analizzare #link(<UC4.1>)[#underline[\[UC4.1\]]]
+    - L'utente seleziona le aree di interesse per l'analisi #link(<UC4.2>)[#underline[\[UC4.2\]]]
     - L'utente conferma l'invio della richiesta di analisi
   ],
   inclusioni: [
-    - #link(<UC51.1>)[#underline[\[UC51.1\]]]
-    - #link(<UC51.2>)[#underline[\[UC51.2\]]]
+    - #link(<UC4.1>)[#underline[\[UC4.1\]]]
+    - #link(<UC4.2>)[#underline[\[UC4.2\]]]
   ],
   estensioni: [
-    - #link(<UC51.3>)[#underline[\[UC51.3\]]] // Ultimo report up-to-date
-    - #link(<UC51.4>)[#underline[\[UC51.4\]]] // Ultimo report in elaborazione
+    - #link(<UC4.0.1>)[#underline[\[UC4.0.1\]]] // Ultimo report up-to-date
+    - #link(<UC4.0.2>)[#underline[\[UC4.0.2\]]] // Ultimo report in elaborazione
   ],
-  trigger: "L'utente accede alla sezione dedicata per la richiesta di analisi di repository GitHub in CodeGuardian",
+  trigger: "L'utente seleziona la funzione di nuova analisi repository",
+  specializzazione: [
+    - #link(<UC4>)[#underline[\[UC4\]]]
+  ]
 )[]
 
+/* SONO inclusi in UC4-5
 ==== UC51.1: Inserimento URL repository GitHub privato per l'analisi <UC51.1>
 #useCase(
   attore: "Utente Autorizzato con GitHub",
@@ -3338,6 +3342,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'ultimo report di analisi del repository GitHub specificato è ancora in elaborazione",
 )[]
+
 
 === UC60: Visualizzazione dei propri repository privati inseriti <UC60>
 #useCase(
@@ -3503,12 +3508,36 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'utente conferma l'inserimento dell'URL di un repository GitHub già presente nel sistema durante la procedura di inserimento di un proprio repository privato",
 )[]
+*/
+=== UC60 <UC60>
+
+=== UC53: Visualizzazione della lista di utenti CodeGuardian che hanno accesso alla visualizzazione dei report di un repository di cui si è richiesta l'analisi <UC53>
+#useCase(
+  attore: "Utente Autorizzato con GitHub",
+  pre: [
+    - L'utente ha collegato il proprio account GitHub #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente ha inserito almeno un repository privato nella lista dei propri repository privati #TODO
+    - L'utente ha selezionato un repository dalla lista dei propri repository privati #link(<UC60>)[#underline[\[UC60\]]]
+  ],
+  post: [
+    - L'utente visualizza la lista degli utenti che hanno accesso a un repository privato di cui egli è proprietario
+  ],
+  scenari: [
+    - L'utente visualizza la lista degli utenti che hanno permesso di fare analisi e visualizzare report di un repository privato di cui egli è proprietario
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC53.1>)[#underline[\[UC53.1\]]]
+  ],
+  trigger: "L'utente accede a un specifico repository privato dalla lista dei propri repository privati",
+)[]
 
 === UC52: Rimozione di un proprio repository privato dalla lista dei propri repository privati <UC52>
 #useCase(
   attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato il proprio account GitHub #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente visualizza la lista dei propri repository privati inseriti #link(<UC60>)[#underline[\[UC60\]]]
     - L'utente ha inserito almeno un repository privato nella lista dei propri repository privati
@@ -3566,29 +3595,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente rifiuta la rimozione del repository dall'avviso di conferma della rimozione",
 )[]
 
-=== UC53: Visualizzazione della lista di utenti CodeGuardian che hanno accesso a un repository privato di cui si è proprietari <UC53>
-#useCase(
-  attore: "Utente Autorizzato con GitHub",
-  pre: [
-    - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha collegato il proprio account GitHub #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente ha inserito almeno un repository privato nella lista dei propri repository privati
-    - L'utente ha selezionato un repository dalla lista dei propri repository privati #link(<UC60>)[#underline[\[UC60\]]]
-  ],
-  post: [
-    - L'utente visualizza la lista degli utenti che hanno accesso a un repository privato di cui egli è proprietario
-  ],
-  scenari: [
-    - L'utente visualizza la lista degli utenti che hanno permesso di fare analisi e visualizzare report di un repository privato di cui egli è proprietario
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC53.1>)[#underline[\[UC53.1\]]]
-  ],
-  trigger: "L'utente accede a un specifico repository privato dalla lista dei propri repository privati",
-)[]
 
 ==== UC53.1: Nessun utente presente <UC53.1>
 #useCase(
