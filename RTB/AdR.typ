@@ -558,6 +558,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     // SEZIONE 1: UMANI
     table.cell(colspan: 2, fill: luma(250), [*Attori Primari (Utenti Umani)*]),
 
+    [*Utente non Registrato*],
+    [Soggetto sprovvisto di un'identità digitale all'interno della piattaforma. Tale attore è autorizzato esclusivamente alla fruizione dei contenuti pubblici e all'esecuzione della procedura di creazione di un nuovo profilo utente.],
+
     [*Utente Non Autenticato*],
     [Utente generico che accede alle funzionalità pubbliche della piattaforma (es. Home Page, Login, Registrazione) senza possedere o aver attivato una sessione valida.],
 
@@ -594,7 +597,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 == Lista
 === UC1: Registrazione a CodeGuardian <UC1>
 #useCase(
-  attore: "Utente non registrato",
+  attore: "Utente non Registrato",
   pre: [
     - L'utente non possiede le credenziali di un account CodeGuardian
     - L'utente ha visualizzato la sezione dedicata alla creazione di un nuovo profilo CodeGuardian
@@ -624,7 +627,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC1.0.1: Visualizzazione errore campi non inseriti <UC1.0.1>
 #useCase(
-  attore: "Utente non registrato",
+  attore: "Utente non Registrato",
   pre: [
     - L'utente sta visualizzando il modulo di registrazione #link(<UC1>)[#underline[\[UC1\]]]
   ],
@@ -640,7 +643,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC1.1: Inserimento username <UC1.1>
 #useCase(
-  attore: "Utente non registrato",
+  attore: "Utente non Registrato",
   pre: [
     - L'utente sta visualizzando il modulo di registrazione #link(<UC1>)[#underline[\[UC1\]]]
   ],
@@ -661,7 +664,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC1.1.1: Visualizzazione errore username non conforme <UC1.1.1>
 #useCase(
-  attore: "Utente non registrato",
+  attore: "Utente non Registrato",
   pre: [
     - L'utente ha popolato il campo username #link(<UC1.1>)[#underline[\[UC1.1\]]]
   ],
@@ -677,7 +680,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC1.1.2: Visualizzazione errore username già in uso <UC1.1.2>
 #useCase(
-  attore: "Utente non registrato",
+  attore: "Utente non Registrato",
   pre: [
     - L'utente ha inserito lo username nella schermata di registrazione #link(<UC1.1>)[#underline[\[UC1.1\]]]
     - Lo username digitato risulta già associato a un account CodeGuardian esistente
@@ -694,7 +697,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC1.2: Inserimento email <UC1.2>
 #useCase(
-  attore: "Utente non registrato",
+  attore: "Utente non Registrato",
   pre: [
     - L'utente sta visualizzando il modulo di registrazione #link(<UC1>)[#underline[\[UC1\]]]
   ],
@@ -715,7 +718,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC1.2.1: Visualizzazione errore email non valida <UC1.2.1>
 #useCase(
-  attore: "Utente non registrato",
+  attore: "Utente non Registrato",
   pre: [
     - L'utente ha inserito un valore nel campo email #link(<UC1.2>)[#underline[\[UC1.2\]]]
   ],
@@ -731,7 +734,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC1.2.2: Visualizzazione errore email già in uso <UC1.2.2>
 #useCase(
-  attore: "Utente non registrato",
+  attore: "Utente non Registrato",
   pre: [
     - L'utente ha inserito un indirizzo email nel modulo di registrazione #link(<UC1.2>)[#underline[\[UC1.2\]]]
     - L'email inserita risulta già associata a un account esistente
@@ -748,7 +751,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC1.3: Inserimento password <UC1.3>
 #useCase(
-  attore: "Utente non registrato",
+  attore: "Utente non Registrato",
   pre: [
     - L'utente sta visualizzando il modulo di registrazione #link(<UC1>)[#underline[\[UC1\]]]
   ],
@@ -768,7 +771,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC1.3.1: Visualizzazione errore password non conforme <UC1.3.1>
 #useCase(
-  attore: "Utente non registrato",
+  attore: "Utente non Registrato",
   pre: [
     - L'utente ha inserito una password nel modulo di registrazione #link(<UC1.3>)[#underline[\[UC1.3\]]]
   ],
@@ -784,7 +787,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC2: Autenticazione a CodeGuardian <UC2>
 #useCase(
-  attore: "Utente non autenticato",
+  attore: "Utente non Autenticato",
   pre: [
     - L'utente dispone di credenziali valide registrate nel sistema #link(<UC1>)[#underline[\[UC1\]]]
     - L'utente visualizza la sezione di accesso (Login)
@@ -812,7 +815,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC2.0.1: Visualizzazione errore campi non inseriti <UC2.0.1>
 #useCase(
-  attore: "Utente non autenticato",
+  attore: "Utente non Autenticato",
   pre: [
     - L'utente sta visualizzando il modulo di autenticazione #link(<UC2>)[#underline[\[UC2\]]]
   ],
@@ -828,7 +831,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC2.1: Inserimento username <UC2.1>
 #useCase(
-  attore: "Utente non autenticato",
+  attore: "Utente non Autenticato",
   pre: [
     - L'utente sta visualizzando il modulo di autenticazione #link(<UC2>)[#underline[\[UC2\]]]
   ],
@@ -849,7 +852,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC2.1.1: Visualizzazione errore username non conforme <UC2.1.1>
 #useCase(
-  attore: "Utente non autenticato",
+  attore: "Utente non Autenticato",
   pre: [
     - L'utente ha inserito un valore nel campo username #link(<UC2.1>)[#underline[\[UC2.1\]]]
   ],
@@ -865,7 +868,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC2.1.2: Visualizzazione errore username non esistente <UC2.1.2>
 #useCase(
-  attore: "Utente non autenticato",
+  attore: "Utente non Autenticato",
   pre: [
     - L'utente ha inserito uno username non presente nel sistema #link(<UC2.1>)[#underline[\[UC2.1\]]]
   ],
@@ -881,7 +884,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC2.2: Inserimento password <UC2.2>
 #useCase(
-  attore: "Utente non autenticato",
+  attore: "Utente non Autenticato",
   pre: [
     - L'utente sta visualizzando il modulo di autenticazione #link(<UC2>)[#underline[\[UC2\]]]
   ],
@@ -902,7 +905,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC2.2.1: Visualizzazione errore password non conforme <UC2.2.1>
 #useCase(
-  attore: "Utente non autenticato",
+  attore: "Utente non Autenticato",
   pre: [
     - L'utente ha inserito una password nel campo dedicato #link(<UC2.2>)[#underline[\[UC2.2\]]]
   ],
@@ -917,7 +920,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC2.2.2: Visualizzazione errore password errata <UC2.2.2>
 #useCase(
-  attore: "Utente non autenticato",
+  attore: "Utente non Autenticato",
   pre: [
     - L'utente ha inserito una password non corrispondente a quella registrata #link(<UC2.2>)[#underline[\[UC2.2\]]]
   ],
@@ -1079,8 +1082,8 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC4.2>)[#underline[\[UC4.2\]]]
   ],
   estensioni: [
-    - #link(<UC4.3>)[#underline[\[UC4.3\]]] // Report già aggiornato
-    - #link(<UC4.4>)[#underline[\[UC4.4\]]] // Analisi in corso
+    - #link(<UC4.0.1>)[#underline[\[UC4.0.1\]]] // Report già aggiornato
+    - #link(<UC4.0.2>)[#underline[\[UC4.0.2\]]] // Analisi in corso
   ],
   trigger: "L'utente seleziona la funzione di nuova analisi repository",
 )[
@@ -1164,7 +1167,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Le preferenze sulle aree del repository da analizzare risultano impostate
   ],
   scenari: [
-    - L'utente seleziona le tipologie di controllo (test, sicurezza o documentazione)
+    - L'utente seleziona le informazioni della repository di suo interesse (test, sicurezza o documentazione)
   ],
   estensioni: [
     - #link(<UC4.2.1>)[#underline[\[UC4.2.1\]]] // Nessuna area selezionata
@@ -1189,7 +1192,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente tenta di confermare senza aver selezionato alcuna area di analisi",
 )[]
 
-==== UC4.3: Visualizzazione informativa report aggiornato <UC4.3>
+==== UC4.0.1: Visualizzazione informativa report aggiornato <UC4.0.1>
 #useCase(
   attore: "Utente Autenticato",
   pre: [
@@ -1204,7 +1207,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente tenta di avviare un'analisi per un repository il cui stato coincide con l'ultimo report generato",
 )[]
 
-==== UC4.4: Visualizzazione informativa analisi in corso <UC4.4>
+==== UC4.0.2: Visualizzazione informativa analisi in corso <UC4.0.2>
 #useCase(
   attore: "Utente Autenticato",
   pre: [
@@ -1221,260 +1224,234 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC5: Visualizzazione lista repository analizzati <UC5>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente si trova nella sezione dei repository analizzati
+    - L'utente dispone di una sessione attiva nel sistema #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente visualizza la sezione dedicata ai risultati delle analisi
   ],
   post: [
-    - L'utente visualizza la lista dei repository
+    - L'utente visualizza l'elenco dei repository per i quali è stato generato almeno un report
   ],
-  scenari:[
-    - L'utente visualizza la lista di tutti i repository per i quali sono state svolte analisi
-    - Ogni elemento della lista presenta le informazioni identificative #link(<UC5.1>)[#underline[\[UC5.1\]]]
+  scenari: [
+    - L'utente visualizza la lista dei progetti sottoposti a scansione
+    - Ogni elemento della lista espone i dati identificativi del repository #link(<UC5.1>)[#underline[\[UC5.1\]]]
   ],
-  inclusioni:[
+  inclusioni: [
     - #link(<UC5.1>)[#underline[\[UC5.1\]]]
   ],
-  estensioni:[
-    - #link(<UC5.2>)[#underline[\[UC5.2\]]] // Nessun repository analizzato
+  estensioni: [
+    - #link(<UC5.0.1>)[#underline[\[UC5.0.1\]]] // Lista vuota
   ],
-  trigger: "L'utente accede alla sezione dei repository analizzati",
+  trigger: "L'utente seleziona la funzione di visualizzazione storico analisi",
 )[
+  #useCaseDiagram("5", "UC5 - Visualizzazione lista repository")
 ]
 
-==== UC5.1: Informazioni minime repository <UC5.1>
+==== UC5.0.1: Visualizzazione informativa lista repository vuota <UC5.0.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
-    - L'utente si trova nella sezione di visualizzazione dei repository analizzati #link(<UC5>)[#underline[\[UC5\]]]
+    - L'utente ha richiesto la visualizzazione della lista dei repository analizzati #link(<UC5>)[#underline[\[UC5\]]]
   ],
   post: [
-    - L'utente visualizza i dettagli minimi per i repository analizzati
-  ],
-  scenari:[
-    - L'utente visualizza le informazioni minime per l'identificazione del repository
-  ],
-  trigger: "L'utente accede alla sezione dei repository analizzati",
-)[
-]
-
-==== UC5.2: Nessun repository analizzato <UC5.2>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente si trova nella sezione di visualizzazione dei repository analizzati #link(<UC5>)[#underline[\[UC5\]]]
-    - Nessun repository è stato trovato
-  ],
-  post: [
-    - L'utente visualizza il messaggio di lista vuota
-  ],
-  scenari:[
-    - L'utente viene avvisato che non sono state eseguite analisi per nessun repository
-  ],
-  trigger: "L'utente accede alla sezione di repository analizzati",
-)[
-]
-
-#TODO("Controllare che il riferimento negli altri casi d'uso che rimanda a UC6 sia corretto")
-=== UC6: Visualizzazione singolo report analisi repository GitHub <UC6>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha almeno un report di analisi di un repository associato al proprio account
-    - L'utente visualizza la lista dei repository analizzati associati al proprio account#link(<UC5>)[#underline[\[UC5\]]]
-    - L'utente seleziona un elemento della lista dei repository analizzati
-  ],
-  post: [
-    - L'utente ha visualizza il report di analisi del repository GitHub selezionato
+    - L'utente visualizza un messaggio informativo circa l'assenza di repository nella lista
   ],
   scenari: [
-    - L'utente seleziona le sezioni specifiche da visualizzare nel report #link(<UC6.1>)[#underline[\[UC6.1\]]]
-    - L'utente visualizza i metadati del report selezionato #link(<UC6.2>)[#underline[\[UC6.2\]]]
-    - L'utente visualizza le sezioni del report selezionate #link(<UC6.3>)[#underline[\[UC6.3\]]]
+    - L'utente viene avvisato che non è stata ancora richiesta l'analisi di alcun repository
   ],
-  inclusioni: [
-    - #link(<UC6.1>)[#underline[\[UC6.1\]]] // Selezione sezioni specifiche
-    - #link(<UC6.2>)[#underline[\[UC6.2\]]] // Visualizzazione dei metadati
-    - #link(<UC6.3>)[#underline[\[UC6.3\]]] // Visualizzazione delle sezioni selezionate
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente autorizzato sceglie un repository dalla lista di repository analizzati per visualizzarne i report di analisi",
-)[
-  #useCaseDiagram("5", "UC5 - Visualizzazione report analisi repository GitHub")
-]
-
-==== UC6.1: Selezione sezioni specifiche da visualizzare nel report <UC6.1>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente si trova nella sezione di visualizzazione dei report #link(<UC6>)[#underline[\[UC6\]]]
-  ],
-  post: [
-    - L'utente ha definito l'insieme di sezioni da visualizzare nel report di analisi
-  ],
-  scenari: [
-    - L'utente seleziona uno o più sezioni di interesse
-  ],
-  estensioni: [
-    - #link(<UC6.1.1>)[#underline[\[UC6.1.1\]]]
-  ],
-  trigger: "L'utente interagisce con le opzioni di configurazione del report nella sezione di visualizzazione",
-)[
-  #useCaseDiagram("5_3", "UC5.3: Selezione dati specifici da visualizzare nel report")
-]
-
-===== UC6.1.1: Nessun dato specifico selezionato <UC6.1.1>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente si trova nella sezione di visualizzazione dei report #link(<UC6>)[#underline[\[UC6\]]]
-    - L'utente ha provato a procedere senza selezionare alcuna sezione
-  ],
-  post: [
-    - L'utente non può procedere alla visualizzazione del report
-    - L'utente può nuovamente interagire con la selezione delle sezioni di report da visualizzare
-  ],
-  scenari: [
-    - L'utente riceve un messaggio di avviso che lo invita a selezionare almeno una sezione da visualizzare
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente tenta di visualizzare il report senza selezionare alcuna sezione",
+  trigger: "L'utente accede alla sezione in assenza di repository censiti a sistema",
 )[]
 
-==== UC6.2: Visualizzazione area metadati di un report di analisi repository GitHub <UC6.2>
+==== UC5.1: Visualizzazione informazioni identificative repository <UC5.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
-    - L'utente ha selezionato le sezioni specifiche da visualizzare nel report #link(<UC6.1>)[#underline[\[UC6.1\]]] 
+    - L'utente sta visualizzando la lista dei repository analizzati #link(<UC5>)[#underline[\[UC5\]]]
   ],
   post: [
-    - L'utente ha visualizzato l'area metadati del report di analisi repository GitHub
+    - L'utente dispone dei dati necessari per distinguere i diversi repository in elenco
   ],
   scenari: [
-    - L'utente visualizza la data del report di analisi repository GitHub #link(<UC6.2.1>)[#underline[\[UC6.2.1\]]]
-    - L'utente visualizza i commit analizzati nel report di analisi repository GitHub #link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]
-    - L'utente visualizza il richiedente del report di analisi repository GitHub #link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]
+    - L'utente visualizza nome del repository, URL di riferimento e data dell'ultima analisi eseguita per ogni repository presente nella lista
+  ],
+  trigger: "L'utente accede alla schermata di riepilogo dei repository",
+)[]
+
+=== UC6: Visualizzazione report di analisi repository <UC6>
+#useCase(
+  attore: "Utente Autenticato",
+  pre: [
+    - L'utente visualizza la lista dei repository analizzati #link(<UC5>)[#underline[\[UC5\]]]
+    - L'utente seleziona un repository dall'elenco
+  ],
+  post: [
+    - L'utente visualizza il contenuto dettagliato del report di analisi selezionato
+  ],
+  scenari: [
+    - L'utente seleziona le sezioni specifiche dell'audit da consultare #link(<UC6.1>)[#underline[\[UC6.1\]]]
+    - L'utente visualizza i metadati generali del report #link(<UC6.2>)[#underline[\[UC6.2\]]]
+    - L'utente visualizza le informazioni analitiche delle sezioni scelte #link(<UC6.3>)[#underline[\[UC6.3\]]]
+  ],
+  inclusioni: [
+    - #link(<UC6.1>)[#underline[\[UC6.1\]]]
+    - #link(<UC6.2>)[#underline[\[UC6.2\]]]
+    - #link(<UC6.3>)[#underline[\[UC6.3\]]]
+  ],
+  trigger: "L'utente richiede la consultazione dei dettagli di un repository analizzato",
+)[
+  #useCaseDiagram("6", "UC6 - Visualizzazione report di analisi")
+]
+
+==== UC6.1: Selezione sezioni del report <UC6.1>
+#useCase(
+  attore: "Utente Autenticato",
+  pre: [
+    - L'utente si trova nella schermata di dettaglio del report #link(<UC6>)[#underline[\[UC6\]]]
+  ],
+  post: [
+    - Le preferenze di visualizzazione per il report corrente risultano impostate
+  ],
+  scenari: [
+    - L'utente seleziona o deseleziona le aree dell'analisi (Codice, Sicurezza, Documentazione) da mostrare a video
+  ],
+  estensioni: [
+    - #link(<UC6.0.1>)[#underline[\[UC6.0.1\]]] // Nessuna sezione selezionata
+  ],
+  trigger: "L'utente interagisce con i filtri di visualizzazione del report",
+)[]
+
+===== UC6.0.1: Visualizzazione informativa nessuna sezione selezionata <UC6.0.1>
+#useCase(
+  attore: "Utente Autenticato",
+  pre: [
+    - L'utente interagisce con la selezione delle sezioni #link(<UC6.1>)[#underline[\[UC6.1\]]]
+  ],
+  post: [
+    - L'utente visualizza un avviso circa la necessità di selezionare almeno un'area per popolare il report
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio che inibisce il rendering dei dati analitici fino alla selezione di un'area
+  ],
+  trigger: "L'utente deseleziona tutte le aree di visualizzazione del report",
+)[]
+
+==== UC6.2: Visualizzazione metadati del report <UC6.2>
+#useCase(
+  attore: "Utente Autenticato",
+  pre: [
+    - L'utente visualizza il dettaglio di un report di analisi #link(<UC6>)[#underline[\[UC6\]]]
+  ],
+  post: [
+    - L'utente visualizza le informazioni di contesto dell'analisi
+  ],
+  scenari: [
+    - L'utente visualizza la data di esecuzione del report #link(<UC6.2.1>)[#underline[\[UC6.2.1\]]]
+    - L'utente visualizza l'identificativo del commit analizzato #link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]
+    - L'utente visualizza il profilo del richiedente dell'analisi #link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]
   ],
   inclusioni: [
     - #link(<UC6.2.1>)[#underline[\[UC6.2.1\]]]
     - #link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]
     - #link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]
   ],
-  trigger: "L'utente accede alla sezione relativa ai metadati del report di analisi repository GitHub",
-)[
-  #useCaseDiagram("12", "UC12 - Visualizzazione area metadati di un report di analisi repository GitHub")
-]
-
-===== UC6.2.1: Visualizzazione data report analisi repository GitHub <UC6.2.1>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente è all'interno dell'area metadati del report di analisi repository GitHub #link(<UC6.2>)[#underline[\[UC6.2\]]]
-  ],
-  post: [
-    - L'utente ha visualizzato la data del report di analisi repository GitHub
-  ],
-  scenari: [
-    - L'utente visualizza la data del report di analisi repository GitHub
-  ],
-  trigger: "L'utente accede alla sezione metadati del report di analisi repository GitHub",
+  trigger: "L'utente accede alla testata del report di analisi",
 )[]
 
-===== UC6.2.2: Visualizzazione commit analizzato nel report di analisi repository GitHub <UC6.2.2>
+===== UC6.2.1: Visualizzazione data report <UC6.2.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente è all'interno dell'area metadati del report di analisi repository GitHub #link(<UC6.2>)[#underline[\[UC6.2\]]]
+    - L'utente visualizza l'area metadati del report #link(<UC6.2>)[#underline[\[UC6.2\]]]
   ],
   post: [
-    - L'utente ha visualizzato il commit analizzato nel report di analisi repository GitHub
+    - L'utente ha preso visione della data e dell'ora di generazione del report
   ],
   scenari: [
-    - L'utente visualizza il commit analizzato nel report di analisi repository GitHub
+    - Il sistema espone il timestamp relativo al completamento dell'analisi
   ],
-  trigger: "L'utente accede alla sezione metadati del report di analisi repository GitHub",
+  trigger: "L'utente consulta le informazioni cronologiche del report",
 )[]
 
-===== UC6.2.3: Visualizzazione richiedente report di analisi repository GitHub <UC6.2.3>
+===== UC6.2.2: Visualizzazione commit analizzato <UC6.2.2>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente è all'interno dell'area metadati del report di analisi repository GitHub #link(<UC6.2>)[#underline[\[UC6.2\]]]
+    - L'utente visualizza l'area metadati del report #link(<UC6.2>)[#underline[\[UC6.2\]]]
   ],
   post: [
-    - L'utente ha visualizzato il richiedente del report di analisi repository GitHub
+    - L'utente identifica univocamente la versione del codice sorgente analizzata
   ],
   scenari: [
-    - L'utente visualizza il richiedente del report di analisi repository GitHub
+    - Il sistema espone l'hash o il riferimento abbreviato del commit GitHub analizzato
   ],
-  trigger: "L'utente accede alla sezione metadati del report di analisi repository GitHub",
+  trigger: "L'utente consulta il riferimento alla versione del repository",
 )[]
 
-==== UC6.3: Visualizzazione sezione generica scelta del report di analisi <UC6.3> 
+===== UC6.2.3: Visualizzazione richiedente report <UC6.2.3>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente ha selezionato una generica sezione da visualizzare #link(<UC6.1>)[#underline[\[UC6.1\]]]
+    - L'utente visualizza l'area metadati del report #link(<UC6.2>)[#underline[\[UC6.2\]]]
   ],
   post: [
-    - L'utente visualizza la sezione selezionata
+    - L'utente visualizza l'identità del profilo che ha originato la richiesta di analisi
   ],
   scenari: [
-    - L'utente visualizza le informazioni specifiche della sezione scelta
-    - L'utente visualizza la lista delle remediation proposte per quella sezione #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
+    - Il sistema espone lo username dell'Utente Autenticato che ha avviato il processo di audit
+  ],
+  trigger: "L'utente consulta la paternità della richiesta di analisi",
+)[]
+
+==== UC6.3: Visualizzazione sezioni analitiche e remediation <UC6.3>
+#useCase(
+  attore: "Utente Autenticato",
+  pre: [
+    - L'utente ha selezionato almeno una sezione da visualizzare #link(<UC6.1>)[#underline[\[UC6.1\]]]
+  ],
+  post: [
+    - L'utente visualizza i risultati tecnici dell'analisi per le aree scelte
+  ],
+  scenari: [
+    - L'utente visualizza le metriche e le criticità relative alla sezione consultata
+    - L'utente visualizza l'elenco dei suggerimenti di risoluzione (remediation) #link(<UC6.3.1>)[#underline[\[6.3.1\]]]
   ],
   inclusioni: [
-    - #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
+    - #link(<UC6.3.1>)[#underline[\[6.3.1\]]]
   ],
-  generalizzazione: [
-    - Questo caso d'uso funge da generalizzazione per i seguenti casi d'uso:
-    - Visualizzazione sezione analisi del codice #link(<UC9>)[#underline[\[UC9\]]]
-    - Visualizzazione sezione analisi della sicurezza #link(<UC10>)[#underline[\[UC10\]]]
-    - Visualizzazione sezione analisi della documentazione #link(<UC11>)[#underline[\[UC11\]]]
-  ],
-  trigger: "L'utente conferma le sezioni del report da visualizzare dalla sezione dedicata",
+  trigger: "L'utente scorre i risultati dell'analisi",
 )[]
 
-===== UC6.3.1 Visualizzazione lista remediation per sezione generica <UC6.3.1>
+===== UC6.3.1: Visualizzazione lista remediation <UC6.3.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente ha selezionato una sezione da visualizzare #link(<UC6.1>)[#underline[\[UC6.1\]]]
+    - L'utente visualizza una sezione del report contenente criticità #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
   post: [
-    - L'utente visualizza la lista le remediation per la sezione selezionata
+    - L'utente visualizza l'elenco delle azioni correttive proposte
   ],
   scenari: [
-    - L'utente visualizza la lista le remediation proposte per la sezione scelta
+    - L'utente visualizza la lista delle remediation suggerite dal sistema per migliorare il codice o la sicurezza
   ],
   estensioni: [
-    - #link(<UC6.3.1.1>)[#underline[\[6.3.1.1\]]]
+    - #link(<UC6.3.1.1>)[#underline[\[6.3.1.1\]]] // Nessuna remediation
   ],
-  trigger: "L'utente conferma le sezioni del report da visualizzare dalla sezione dedicata",
+  trigger: "L'utente consulta l'area dedicata ai miglioramenti per una sezione",
 )[]
 
-====== UC6.3.1.1 Nessuna remediation individuata per sezione generica <UC6.3.1.1>
+====== UC6.3.1.1: Visualizzazione messaggio assenza criticità <UC6.3.1.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - Il report non contiene alcuna remediation per la sezione selezionata
+    - L'utente sta visualizzando la sezione delle remediation #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
   ],
   post: [
-    - L'utente ha visualizzato il messaggio di assenza di remediation per la sezione selezionata
+    - L'utente visualizza un messaggio informativo circa l'assenza di miglioramenti necessari
   ],
   scenari: [
-    - L'utente viene informato che non sono state trovati possibili miglioramenti per la sezione selezionata
+    - L'utente viene informato che la sezione analizzata rispetta tutti gli standard e non richiede interventi
   ],
-  trigger: "Non sono presenti remediation per la sezione selezionata",
+  trigger: "Il sistema non individua criticità o suggerimenti per la sezione selezionata",
 )[]
 
 === UC7: Scelta intervallo temporale per visualizzazione confronto con report passati <UC7>
@@ -1600,8 +1577,8 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    - L'utente ha selezionato la sezione di codice tra le sezioni disponibili del report di analisi #link(<UC6.3>)[#underline[\[UC6.3\]]]
-    - L'utente sta visualizzando la sezione di codice del report di analisi
+    - L'utente ha selezionato la sezione di codice tra le sezioni disponibili del report di analisi
+    - L'utente sta visualizzando la sezione di codice del report di analisi #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
   ],
   post: [
     - L'utente ha visualizzato la sezione dell'analisi del codice del report
@@ -1618,9 +1595,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   estensioni: [
     - Nessuna
-  ],
-  specializzazione: [
-    - Questo caso d'uso è una specializzazione del caso d'uso #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
   trigger: "L'utente seleziona la sezione relativa al codice tra le opzioni selezionabili per la visualizzazione del report",
 )[
@@ -1695,7 +1669,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente autorizzato",
   pre: [
-    - L'utente ha selezionato la sezione di sicurezza tra le sezioni disponibili del report di analisi #link(<UC6.3>)[#underline[\[UC6.3\]]]
+    - L'utente ha selezionato la sezione di sicurezza tra le sezioni disponibili del report di analisi #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
     - L'utente sta visualizzando la sezione di sicurezza del report di analisi
   ],
   post: [
@@ -4228,7 +4202,11 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#FRObx],
   [Il Sistema deve persistere le credenziali dell'utente a seguito del completamento della procedura di registrazione.],
   [#link(<UC1>)[#underline[\[UC1\]]]],
-  
+
+  [#FRObx],
+  [Il Sistema deve memorizzare le chiavi di accesso esclusivamente in forma cifrata tramite algoritmi di hashing sicuri e l'utilizzo di salt.],
+  [#link(<UC1>)[#underline[\[UC1\]]]],
+
   // --- CAMPI MANCANTI (UC1.0.1) ---
   [#FRObx],
   [Il Sistema deve rilevare il tentativo di invio del modulo di registrazione in presenza di campi obbligatori vuoti.],
@@ -4310,6 +4288,14 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [Il Sistema deve garantire l'accesso alle funzionalità riservate esclusivamente a seguito di una corretta validazione delle credenziali.],
   [#link(<UC2>)[#underline[\[UC2\]]]],
   
+  [#FRObx],
+  [Il Sistema deve utilizzare protocolli di comunicazione sicuri (HTTPS) per il trasferimento delle credenziali durante il login.],
+  [#link(<UC2>)[#underline[\[UC2\]]]],
+
+  [#FRObx],
+  [Il Sistema deve implementare meccanismi di rate limiting o lockout temporaneo a seguito di ripetuti tentativi di autenticazione falliti.],
+  [#link(<UC2>)[#underline[\[UC2\]]]],
+  
   // --- GESTIONE CAMPI MANCANTI (UC2.0.1) ---
   [#FRObx],
   [Il Sistema deve rilevare il tentativo di autenticazione in presenza di campi obbligatori non compilati.],
@@ -4355,7 +4341,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [Il Sistema deve mostrare un messaggio di errore qualora la password inserita risulti errata.],
   [#link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]],
 
-// --- INTEGRAZIONE GITHUB (UC3) ---
+  // --- INTEGRAZIONE GITHUB (UC3) ---
   [#FRObx],
   [Il Sistema deve consentire all'Utente Autenticato l'accesso alla sezione dedicata al collegamento del profilo GitHub.],
   [#link(<UC3>)[#underline[\[UC3\]]]],
@@ -4367,7 +4353,14 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#FRObx],
   [Il Sistema deve autorizzare l'utente all'interazione con i propri repository a seguito del completamento con successo della procedura.],
   [#link(<UC3>)[#underline[\[UC3\]]]],
+  
+  [#FRObx],
+  [Il Sistema deve memorizzare i token di accesso ottenuti da GitHub esclusivamente in forma cifrata all'interno del database.],
+  [#link(<UC3>)[#underline[\[UC3\]]]],
 
+  [#FRObx],
+  [Il Sistema deve garantire che i token di accesso siano associati univocamente alla sessione dell'utente che ha effettuato il collegamento.],
+  [#link(<UC3>)[#underline[\[UC3\]]]],
   [#FRObx],
   [Il Sistema deve mostrare un avviso informativo prima di procedere al reindirizzamento verso il dominio esterno.],
   [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
@@ -4388,7 +4381,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [Il Sistema deve mostrare un messaggio di errore specifico qualora l'utente neghi il consenso alla condivisione dei dati su GitHub.],
   [#link(<UC3.2.3>)[#underline[\[UC3.2.3\]]]],
 
-// --- RICHIESTA ANALISI REPOSITORY (UC4) ---
+  // --- RICHIESTA ANALISI REPOSITORY (UC4) ---
   [#FRObx],
   [Il Sistema deve consentire all'Utente Autenticato l'accesso alla sezione di configurazione dell'analisi.],
   [#link(<UC4>)[#underline[\[UC4\]]]],
@@ -4399,6 +4392,14 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   [#FRObx],
   [Il Sistema deve permettere l'inoltro della richiesta di analisi solo a seguito della validazione positiva di tutti i parametri obbligatori.],
+  [#link(<UC4>)[#underline[\[UC4\]]]],
+
+  [#FRObx],
+  [Il Sistema deve validare lato server la titolarità dell'utente sul repository GitHub prima di avviare l'analisi.],
+  [#link(<UC4>)[#underline[\[UC4\]]]],
+
+  [#FRObx],
+  [Il Sistema deve assegnare un identificativo univoco a ogni richiesta di analisi per garantirne la tracciabilità.],
   [#link(<UC4>)[#underline[\[UC4\]]]],
 
   // --- VALIDAZIONE URL (UC4.1) ---
@@ -4435,80 +4436,81 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [Il Sistema deve inibire la procedura di analisi e notificare l'utente qualora non venga selezionata almeno un'area di interesse.],
   [#link(<UC4.2.1>)[#underline[\[UC4.2.1\]]]],
 
-  // --- CONTROLLI DI STATO (UC4.3 - UC4.4) ---
+  // --- CONTROLLI DI STATO (UC4.0.1 - UC4.0.2) ---
   [#FRObx],
   [Il Sistema deve verificare se l'ultimo report generato per il repository sia coerente con l'ultimo commit effettuato su GitHub.],
-  [#link(<UC4.3>)[#underline[\[UC4.3\]]]],
+  [#link(<UC4.0.1>)[#underline[\[UC4.0.1\]]]],
 
   [#FRObx],
   [Il Sistema deve inibire l'avvio di una nuova analisi e informare l'utente se il report esistente risulta già aggiornato.],
-  [#link(<UC4.3>)[#underline[\[UC4.3\]]]],
+  [#link(<UC4.0.1>)[#underline[\[UC4.0.1\]]]],
 
   [#FRObx],
   [Il Sistema deve verificare la presenza di processi di analisi già attivi per il repository specificato.],
-  [#link(<UC4.4>)[#underline[\[UC4.4\]]]],
+  [#link(<UC4.0.2>)[#underline[\[UC4.0.2\]]]],
 
   [#FRObx],
   [Il Sistema deve impedire l'invio di una nuova richiesta e notificare l'utente se un'analisi è già in fase di elaborazione.],
-  [#link(<UC4.4>)[#underline[\[UC4.4\]]]],
+  [#link(<UC4.0.2>)[#underline[\[UC4.0.2\]]]],
 
-  // UC5
+  // --- VISUALIZZAZIONE LISTA REPOSITORY (UC5) ---
   [#FRObx],
-  [L'Utente deve poter accedere alla sezione di visualizzazione dei repository analizzati],
+  [Il Sistema deve consentire all'Utente Autenticato l'accesso alla sezione riepilogativa dei repository analizzati.],
   [#link(<UC5>)[#underline[\[UC5\]]]],
 
   [#FRObx],
-  [L'Utente deve poter visualizzare l'elenco dei repository analizzati],
+  [Il Sistema deve mostrare l'elenco di tutti i repository per i quali è stata completata almeno una procedura di analisi.],
   [#link(<UC5>)[#underline[\[UC5\]]]],
-
-  [#FRObx],
-  [L'Utente deve poter visualizzare le informazioni identificative per ogni elemento nella lista],
-  [#link(<UC5.1>)[#underline[\[UC5.1\]]]],
   
-
   [#FRObx],
-  [L'Utente deve poter visuallizzare un avviso se non ci sono repository analizzati da mostrare],
-  [#link(<UC5.2>)[#underline[\[UC5.2\]]]],
-
-  // UC6
+  [Il Sistema deve inibire la visualizzazione della tabella e mostrare un'informativa specifica qualora non risultino repository analizzati a sistema.],
+  [#link(<UC5.0.1>)[#underline[\[UC5.0.1\]]]],
+  
   [#FRObx],
-  [L'Utente deve poter selezionare un repository dalla lista dei repository analizzati per visualizzare i report di analisi di tale repository],
+  [Il Sistema deve esporre, per ogni elemento della lista, i metadati identificativi: nome del repository, URL di riferimento e data dell'ultima analisi.],
+  [#link(<UC5.1>)[#underline[\[UC5.1\]]]],
+
+// --- VISUALIZZAZIONE REPORT (UC6) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autenticato la selezione di un repository dalla lista per consultarne i report di dettaglio.],
   [#link(<UC6>)[#underline[\[UC6\]]]],
 
-  [#FRObx], 
-  [L'Utente deve poter selezionare le sezioni specifiche da visualizzare], 
+  [#FRObx],
+  [Il Sistema deve permettere la selezione e la deselezione delle sezioni analitiche (Codice, Sicurezza, Documentazione) da includere nella visualizzazione.],
   [#link(<UC6.1>)[#underline[\[UC6.1\]]]],
 
   [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se non seleziona alcuna sezione da visualizzare],
-  [#link(<UC6.1.1>)[#underline[\[UC6.1.1\]]]],
+  [Il Sistema deve inibire il rendering dei risultati e mostrare un avviso informativo qualora non venga selezionata alcuna sezione del report.],
+  [#link(<UC6.0.1>)[#underline[\[UC6.0.1\]]]],
   
+  // --- METADATI (UC6.2) ---
   [#FRObx],
-  [L'Utente deve poter visualizzare l'area metadati di un report di analisi],
+  [Il Sistema deve esporre una sezione dedicata ai metadati di contesto per ogni report di analisi selezionato.],
   [#link(<UC6.2>)[#underline[\[UC6.2\]]]],
 
   [#FRObx],
-  [L'Utente deve poter visualizzare la data del report di analisi],
+  [Il Sistema deve mostrare il timestamp (data e ora) relativo al completamento dell'attività di audit.],
   [#link(<UC6.2.1>)[#underline[\[UC6.2.1\]]]],
 
-  [#FRDex],
-  [L'Utente deve poter visualizzare il commit analizzato nel report],
+  [#FRObx],
+  [Il Sistema deve visualizzare l'identificativo univoco (hash) del commit GitHub oggetto dell'analisi.],
   [#link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]],
 
-  [#FRDex],
-  [L'Utente deve poter visualizzare il richiedente del report di analisi],
+  [#FRObx],
+  [Il Sistema deve indicare lo username dell'Utente Autenticato che ha sottomesso la richiesta di analisi.],
   [#link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]],
 
+  // --- ANALISI E REMEDIATION (UC6.3) ---
   [#FRObx],
-  [L'Utente deve poter visualizzare le sezioni selezionate dell'analisi],
+  [Il Sistema deve mostrare i risultati tecnici, le metriche e le criticità rilevate per le sezioni selezionate dall'utente.],
   [#link(<UC6.3>)[#underline[\[UC6.3\]]]],
 
   [#FRObx],
-  [L'utente deve poter visualizzare la lista delle remediation proposte per una generica sezione del report],
+  [Il Sistema deve presentare, per ogni criticità individuata, una lista di azioni correttive (remediation) suggerite.],
   [#link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]],
 
   [#FRObx],
-  [L'utente deve poter visualizzare un messaggio di assenza di remediation proposte per la sezione],
+  [Il Sistema deve notificare l'utente con un messaggio di esito positivo qualora non vengano individuate criticità o necessità di miglioramento per la sezione consultata.],
   [#link(<UC6.3.1.1>)[#underline[\[UC6.3.1.1\]]]],
 
   // UC7
