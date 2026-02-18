@@ -790,7 +790,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente non Autenticato",
   pre: [
     - L'utente dispone di credenziali valide registrate nel sistema #link(<UC1>)[#underline[\[UC1\]]]
-    - L'utente visualizza la sezione di accesso (Login)
+    - L'utente visualizza la sezione di accesso
   ],
   post: [
     - L'utente visualizza la conferma di avvenuta autenticazione
@@ -977,7 +977,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC3.1.1>)[#underline[\[UC3.1.1\]]] 
   ],
   trigger: "L'utente seleziona la funzione di integrazione con GitHub",
-)[]
+)[
+  #useCaseDiagram("3_1", "UC3.1 - Collegamento account GitHub")
+]
 
 ===== UC3.1.1: Visualizzazione annullamento reindirizzamento <UC3.1.1>
 #useCase(
@@ -1014,7 +1016,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC3.2.3>)[#underline[\[UC3.2.3\]]] // Rifiuto autorizzazione
   ],
   trigger: "L'utente riaccede a CodeGuardian dopo l'interazione con GitHub",
-)[]
+)[
+  #useCaseDiagram("3_2", "UC3.2 - Collegamento account GitHub")
+]
 
 ===== UC3.2.1: Visualizzazione errore sincronizzazione fallita <UC3.2.1>
 #useCase(
@@ -1281,8 +1285,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente Autenticato",
   pre: [
-    - L'utente visualizza la lista dei repository analizzati #link(<UC5>)[#underline[\[UC5\]]]
-    - L'utente seleziona un repository dall'elenco
+    - L'utente seleziona un repository dalla lista dei repository analizzati #link(<UC5>)[#underline[\[UC5\]]]
   ],
   post: [
     - L'utente visualizza il contenuto dettagliato del report di analisi selezionato
@@ -1454,215 +1457,192 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Il sistema non individua criticità o suggerimenti per la sezione selezionata",
 )[]
 
-=== UC7: Scelta intervallo temporale per visualizzazione confronto con report passati <UC7>
+=== UC7: Selezione intervallo temporale per confronto report <UC7>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente ha effettuato l'accesso alla sezione di visualizzazione del report di analisi #link(<UC6>)[#underline[\[UC6\]]]
-    - L'utente è nella sezione di modifica dell'intervallo temporale per il confronto con i report passati
+    - L'utente visualizza il dettaglio di un report di analisi #link(<UC6>)[#underline[\[UC6\]]]
+    - L'utente accede alla funzione di confronto storico
   ],
   post: [
-    - L'utente ha selezionato l'intervallo temporale per il confronto con i report passati
+    - Il sistema imposta l'intervallo temporale per il recupero dei dati di confronto
+    - L'utente visualizza la comparazione tra il report attuale e quelli del periodo scelto
   ],
   scenari: [
-    - L'utente seleziona l'intervallo temporale per il confronto con i report passati
-  ],
-  inclusioni: [
-    - Nessuna
+    - L'utente definisce i limiti temporali (data inizio e data fine) per la generazione del confronto
   ],
   estensioni: [
-    - #link(<UC7.1>)[#underline[\[UC7.1\]]]
-    - #link(<UC7.2>)[#underline[\[UC7.2\]]]
-    - #link(<UC7.3>)[#underline[\[UC7.3\]]]
-    - #link(<UC7.4>)[#underline[\[UC7.4\]]]
+    - #link(<UC7.0.1>)[#underline[\[UC7.0.1\]]] // Nessun intervallo selezionato
+    - #link(<UC7.0.2>)[#underline[\[UC7.0.2\]]] // Nessun report disponibile
+    - #link(<UC7.0.3>)[#underline[\[UC7.0.3\]]] // Intervallo incoerente
+    - #link(<UC7.0.4>)[#underline[\[UC7.0.4\]]] // Intervallo troppo ampio
   ],
-  trigger: "L'utente interagisce con la sezione di selezione dell'intervallo temporale per il confronto con i report passati durante la procedura di visualizzazione del report di analisi repository GitHub a CodeGuardian",
-)[#useCaseDiagram("6", "UC6 - Scelta intervallo temporale per visualizzazione confronto con report passati")]
+  trigger: "L'utente richiede la modifica del periodo temporale per l'analisi comparativa",
+)[
+  //#useCaseDiagram("7", "UC7 - Selezione intervallo temporale")
+]
 
-==== UC7.1: Nessun intervallo temporale selezionato <UC7.1>
+==== UC7.0.1: Visualizzazione errore intervallo non inserito <UC7.0.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente è nella sezione di modifica dell'intervallo temporale per il confronto con i report passati #link(<UC7>)[#underline[\[UC7\]]]
-    - L'utente non ha selezionato alcun intervallo temporale 
+    - L'utente interagisce con i selettori di data #link(<UC7>)[#underline[\[UC7\]]]
   ],
   post: [
-    - L'utente non può procedere con la visualizzazione dell'intervallo temporale per il confronto con i report passati
-    - L'utente può nuovamente interagire con la selezione dell'intervallo temporale  
+    - L'utente visualizza un avviso circa la necessità di popolare i campi data
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che deve essere selezionato un intervallo temporale per poter procedere con il 
-     confronto con i report passati
+    - L'utente visualizza un messaggio di errore che segnala la mancanza dei parametri temporali obbligatori
   ],
-  trigger: "L'utente non inserisce alcun intervallo temporale e tenta di procedere con il confronto con i report passati",
+  trigger: "L'utente tenta di confermare il confronto senza aver definito l'intervallo",
 )[]
 
-==== UC7.2: Nessun report di analisi disponibile nel periodo selezionato <UC7.2>
+==== UC7.0.2: Visualizzazione informativa assenza report nel periodo <UC7.0.2>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente è nella sezione di modifica dell'intervallo temporale per il confronto con i report passati #link(<UC7>)[#underline[\[UC7\]]]
-    - Non sono disponibili report di analisi nel periodo selezionato dall'utente
+    - L'utente ha definito un intervallo temporale #link(<UC7>)[#underline[\[UC7\]]]
   ],
   post: [
-    - L'utente non può procedere con la selezione dell'intervallo temporale per il confronto con i report passati
-    - L'utente può nuovamente interagire con la selezione dell'intervallo temporale  
+    - L'utente visualizza un messaggio circa l'assenza di analisi storiche nel periodo indicato
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che non sono disponibili report di analisi 
-     nel periodo selezionato per poter procedere con il confronto con i report passati
+    - L'utente viene informato che non esistono report archiviati coerenti con le date selezionate
   ],
-  trigger: "L'utente seleziona un intervallo temporale che non contiene report di analisi",
+  trigger: "L'utente seleziona un periodo in cui non sono state effettuate analisi",
 )[]
 
-==== UC7.3: Intervallo temporale incoerente <UC7.3>
+==== UC7.0.3: Visualizzazione errore intervallo incoerente <UC7.0.3>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente è nella sezione di modifica dell'intervallo temporale per il confronto con i report passati #link(<UC7>)[#underline[\[UC7\]]]
-    - L'utente ha selezionato un intervallo temporale incoerente
+    - L'utente ha impostato le date di inizio e fine #link(<UC7>)[#underline[\[UC7\]]]
   ],
   post: [
-    - L'utente non può procedere con la selezione dell'intervallo temporale per il confronto con i report passati
-    - L'utente può nuovamente interagire con la selezione dell'intervallo temporale  
+    - L'utente visualizza un avviso relativo all'ordine cronologico errato delle date
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che l'intervallo temporale selezionato non è coerente
-      per poter procedere con il confronto con i report passati
+    - L'utente visualizza un messaggio di errore che segnala come la data di inizio sia successiva a quella di fine
   ],
-  trigger: "L'utente seleziona un intervallo temporale incoerente",
+  trigger: "L'utente inserisce limiti temporali logicamente invertiti",
 )[]
 
-==== UC7.4: Intervallo temporale troppo ampio <UC7.4>
+==== UC7.0.4: Visualizzazione errore intervallo troppo ampio <UC7.0.4>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente è nella sezione di modifica dell'intervallo temporale per il confronto con i report passati #link(<UC7>)[#underline[\[UC7\]]]
-    - L'utente ha selezionato un intervallo temporale troppo ampio
+    - L'utente ha definito un intervallo temporale #link(<UC7>)[#underline[\[UC7\]]]
   ],
   post: [
-    - L'utente non può procedere con la selezione dell'intervallo temporale per il confronto con i report passati
+    - L'utente visualizza un avviso circa il superamento del limite massimo di interrogazione
   ],
   scenari: [
-    - L'utente visualizza un messaggio di errore che indica che l'intervallo temporale selezionato è troppo ampio
-      per poter procedere con il confronto con i report passati
+    - L'utente visualizza un messaggio che segnala l'impossibilità di elaborare confronti su periodi eccessivamente estesi (es. oltre 12 mesi)
   ],
-  trigger: "L'utente seleziona un intervallo temporale troppo ampio",
+  trigger: "L'utente seleziona un intervallo che eccede i vincoli di sistema",
 )[]
 
-=== UC8: Visualizzazione delle metriche comparative tra report di analisi di un repository <UC8>
+=== UC8: Visualizzazione metriche comparative tra report <UC8>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente ha selezionato il report di analisi del repository GitHub di interesse #link(<UC6>)[#underline[\[UC6\]]]
-    - L'utente ha selezionato l'intervallo temporale per il confronto con i report passati #link(<UC7>)[#underline[\[UC7\]]]
+    - L'utente ha definito l'intervallo temporale per il confronto storico #link(<UC7>)[#underline[\[UC7\]]]
   ],
   post: [
-    - L'utente ha visualizzato le metriche comparative (grafico e tabella) tra report di analisi repository GitHub
+    - L'utente visualizza la comparazione analitica tra i report del periodo selezionato
   ],
   scenari: [
-    - L'utente accede alla sezione di visualizzazione delle metriche comparative tra report di analisi repository GitHub
+    - L'utente visualizza l'andamento delle metriche tramite rappresentazioni grafiche
+    - L'utente consulta i dati comparativi in formato tabellare
   ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente richiede la visualizzazione delle metriche comparative tra report di analisi del repository",
+  trigger: "L'utente richiede la generazione della vista comparativa",
 )[]
 
-#TODO("Sistemare diagrammi e requisiti per UC9-11")
-=== UC9: Visualizzazione sezione analisi del codice del report selezionato <UC9>
+=== UC9: Visualizzazione sezione analisi del codice <UC9>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente ha selezionato la sezione di codice tra le sezioni disponibili del report di analisi
-    - L'utente sta visualizzando la sezione di codice del report di analisi #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
+    - L'utente ha incluso l'area "Codice" nei filtri di visualizzazione del report #link(<UC6.1>)[#underline[\[UC6.1\]]]
   ],
   post: [
-    - L'utente ha visualizzato la sezione dell'analisi del codice del report
+    - L'utente visualizza i dettagli tecnici relativi all'analisi statica e alla copertura del codice
   ],
   scenari: [
-    - L'utente visualizza la parte di report dedicata all'analisi statica del codice #link(<UC9.1>)[#underline[\[UC9.1\]]]
-    - L'utente visualizza la parte di report dedicata alla copertura dei test di unità #link(<UC9.2>)[#underline[\[UC9.2\]]]
-    - L'utente visualizza il numero totale di remediation individuate nella sezione di analisi codice del report #link(<UC9.3>)[#underline[\[UC9.3\]]]
+    - L'utente visualizza i risultati dell'analisi statica del codice #link(<UC9.1>)[#underline[\[UC9.1\]]]
+    - L'utente visualizza le metriche sulla copertura dei test di unità #link(<UC9.2>)[#underline[\[UC9.2\]]]
+    - L'utente visualizza il riepilogo delle remediation per l'area codice #link(<UC9.3>)[#underline[\[UC9.3\]]]
   ],
   inclusioni: [
     - #link(<UC9.1>)[#underline[\[UC9.1\]]]
     - #link(<UC9.2>)[#underline[\[UC9.2\]]]
     - #link(<UC9.3>)[#underline[\[UC9.3\]]]
   ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente seleziona la sezione relativa al codice tra le opzioni selezionabili per la visualizzazione del report",
+  trigger: "L'utente accede all'area dedicata all'analisi del codice sorgente nel report",
 )[
-  #useCaseDiagram("9", "UC9 - Visualizzazione valutazione analisi del codice repository GitHub")
+  #useCaseDiagram("9", "UC9 - Analisi del codice")
 ]
 
 ==== UC9.1: Visualizzazione sezione analisi statica del codice <UC9.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta visualizzando la sezione di codice del report di analisi
+    - L'utente visualizza la sezione analisi del codice #link(<UC9>)[#underline[\[UC9\]]]
   ],
   post: [
-    - L'utente ha visualizzato la sezione di analisi statica del codice del report
+    - L'utente ha preso visione dei bug, vulnerabilità e code smell rilevati tramite analisi statica
   ],
   scenari: [
-    - L'utente visualizza la sezione relativa all'analisi statica del codice
+    - Il sistema espone il dettaglio tecnico dei rilievi emersi dall'analisi del codice
   ],
-  trigger: "L'utente seleziona la sezione relativa al codice tra le opzioni selezionabili per la visualizzazione del report",
+  trigger: "L'utente consulta i dati di analisi statica",
 )[]
 
-==== UC9.2: Visualizzazione sezione test di unità del codice <UC9.2>
+==== UC9.2: Visualizzazione sezione test di unità <UC9.2>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta visualizzando la sezione di codice del report di analisi
+    - L'utente visualizza la sezione analisi del codice #link(<UC9>)[#underline[\[UC9\]]]
   ],
   post: [
-    - L'utente ha visualizzato la sezione di copertura dei test di unità del codice del report
+    - L'utente visualizza le percentuali di copertura e l'esito dei test di unità
   ],
   scenari: [
-    - L'utente visualizza la sezione relativa alla copertura dei test di unità del codice
+    - Il sistema espone le metriche relative alla qualità e quantità dei test eseguiti sul repository
   ],
-  trigger: "L'utente seleziona la sezione relativa al codice tra le opzioni selezionabili per la visualizzazione del report",
+  trigger: "L'utente consulta i dati di copertura test",
 )[]
 
-==== UC9.3: Visualizzazione remediation individuate nella sezione di analisi del codice <UC9.3>
+==== UC9.3: Visualizzazione remediation sezione codice <UC9.3>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta visualizzando la sezione di codice del report di analisi
+    - L'utente visualizza la sezione analisi del codice #link(<UC9>)[#underline[\[UC9\]]]
   ],
   post: [
-    - L'utente ha visualizzato le remediation della sezione di codice del report
+    - L'utente visualizza le proposte di miglioramento specifiche per il codice analizzato
   ],
   scenari: [
-    - L'utente visualizza l'elenco di remediation trovate durante l'analisi della sezione di codice del report
+    - L'utente visualizza l'elenco dei suggerimenti correttivi per i difetti del codice #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
   ],
   estensioni: [
-    - #link(<UC9.3.1>)[#underline[\[UC9.3.1\]]]
+    - #link(<UC9.3.1>)[#underline[\[UC9.3.1\]]] // Nessuna remediation codice
   ],
-  trigger: "L'utente seleziona la sezione relativa al codice tra le opzioni selezionabili per la visualizzazione del report",
+  trigger: "L'utente accede alla lista delle azioni correttive per il codice",
 )[]
 
-===== UC9.3.1: Nessuna remediation individuata nella sezione di analisi del codice <UC9.3.1>
+===== UC9.3.1: Visualizzazione informativa assenza remediation codice <UC9.3.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autenticato",
   pre: [
-    - L'utente sta visualizzando la sezione di codice del report di analisi
-    - Il report non contiene alcuna remediation per tale sezione#link(<UC6.3.1.1>)[#underline[\[UC6.3.1.1\]]]
+    - L'utente sta consultando le remediation del codice #link(<UC9.3>)[#underline[\[UC9.3\]]]
   ],
   post: [
-    - L'utente ha visualizzato il messaggio di assenza di remediation per la sezione di codice del report di analisi
+    - L'utente visualizza l'esito positivo sulla qualità del codice
   ],
   scenari: [
-    - L'utente viene informato che non sono state trovati possibili miglioramenti per la sezione di codice del report di analisi
+    - Il sistema informa l'utente che non sono stati individuati difetti che richiedano remediation nell'area codice
   ],
-  trigger: "Non sono presenti remediation per la sezione del codice del report",
+  trigger: "Il processo di analisi non rileva criticità nell'area del codice sorgente",
 )[]
 
 === UC10: Visualizzazione sezione analisi della sicurezza del report selezionato <UC10>
@@ -4190,394 +4170,275 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
   align: (col, row) => (center, left, center).at(col) + horizon,
 
-  // --- REGISTRAZIONE (UC1) ---
-  [#FRObx],
-  [Il Sistema deve consentire all'Utente non registrato l'accesso alla sezione di creazione account.],
+// --- REGISTRAZIONE (UC1) ---
+  [#FRObx], 
+  [Il Sistema deve consentire all'Utente non registrato l'accesso alla sezione di creazione account.], 
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
-  [#FRObx],
-  [Il Sistema deve permettere la finalizzazione della registrazione solo a seguito della validazione positiva di tutti i campi obbligatori.],
+  [#FRObx], 
+  [Il Sistema deve predisporre un comando di conferma per l'invio del modulo di registrazione.], 
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
-  [#FRObx],
-  [Il Sistema deve persistere le credenziali dell'utente a seguito del completamento della procedura di registrazione.],
+  [#FRObx], 
+  [Il Sistema deve permettere la finalizzazione della registrazione solo a seguito della validazione positiva di tutti i campi obbligatori.], 
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
-  [#FRObx],
-  [Il Sistema deve memorizzare le chiavi di accesso esclusivamente in forma cifrata tramite algoritmi di hashing sicuri e l'utilizzo di salt.],
+  [#FRObx], 
+  [Il Sistema deve persistere le credenziali dell'utente a seguito del completamento della procedura.], 
+  [#link(<UC1>)[#underline[\[UC1\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve memorizzare le chiavi di accesso esclusivamente in forma cifrata tramite algoritmi di hashing sicuri e l'utilizzo di salt.], 
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
   // --- CAMPI MANCANTI (UC1.0.1) ---
-  [#FRObx],
-  [Il Sistema deve rilevare il tentativo di invio del modulo di registrazione in presenza di campi obbligatori vuoti.],
+  [#FRObx], 
+  [Il Sistema deve rilevare il tentativo di invio del modulo di registrazione in presenza di campi obbligatori vuoti.], 
   [#link(<UC1.0.1>)[#underline[\[UC1.0.1\]]]],
 
-  [#FRObx],
-  [Il Sistema deve inibire la registrazione in caso di dati obbligatori mancanti.],
+  [#FRObx], 
+  [Il Sistema deve inibire la registrazione e notificare l'utente indicando specificamente quali dati obbligatori non sono stati inseriti.], 
   [#link(<UC1.0.1>)[#underline[\[UC1.0.1\]]]],
 
-  [#FRObx],
-  [Il Sistema deve notificare l'utente indicando specificamente quali dati obbligatori non sono stati inseriti.],
-  [#link(<UC1.0.1>)[#underline[\[UC1.0.1\]]]],
-  
-  // --- USERNAME (UC1.1) ---
-  [#FRObx],
-  [Il Sistema deve consentire l'immissione di un nome utente.],
-  [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
-
-  [#FRObx],
-  [Il Sistema deve validare che lo username abbia una lunghezza compresa tra 4 e 20 caratteri.],
+  // --- DETTAGLI INPUT (UC1.1 - UC1.3) ---
+  [#FRObx], 
+  [Il Sistema deve consentire l'immissione di uno username alfanumerico con lunghezza compresa tra 4 e 20 caratteri.], 
   [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
 
-  [#FRObx],
-  [Il Sistema deve validare che lo username contenga esclusivamente caratteri alfanumerici.],
-  [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
-
-  [#FRObx],
-  [Il Sistema deve notificare l'utente qualora lo username non rispetti i vincoli di formato definiti.],
-  [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
-
-  [#FRObx],
-  [Il Sistema deve verificare l'univocità dello username rispetto agli account esistenti nel database.],
+  [#FRObx], 
+  [Il Sistema deve verificare l'univocità dello username rispetto agli account esistenti nel database.], 
   [#link(<UC1.1.2>)[#underline[\[UC1.1.2\]]]],
 
-  [#FRObx],
-  [Il Sistema deve notificare l'utente qualora lo username inserito risulti già associato a un account esistente.],
-  [#link(<UC1.1.2>)[#underline[\[UC1.1.2\]]]],
-
-  // --- EMAIL (UC1.2) ---
-  [#FRObx],
-  [Il Sistema deve consentire l'immissione di un indirizzo email.],
-  [#link(<UC1.2>)[#underline[\[UC1.2\]]]],
-
-  [#FRObx],
-  [Il Sistema deve validare la conformità sintattica dell'indirizzo email secondo gli standard RFC.],
+  [#FRObx], 
+  [Il Sistema deve consentire l'immissione di un indirizzo email conforme agli standard sintattici RFC.], 
   [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
 
-  [#FRObx],
-  [Il Sistema deve notificare l'utente qualora l'email fornita non sia sintatticamente valida.],
-  [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
-
-  [#FRObx],
-  [Il Sistema deve verificare l'univocità dell'indirizzo email all'interno della piattaforma.],
+  [#FRObx], 
+  [Il Sistema deve verificare l'univocità dell'indirizzo email all'interno della piattaforma.], 
   [#link(<UC1.2.2>)[#underline[\[UC1.2.2\]]]],
 
-  [#FRObx],
-  [Il Sistema deve notificare l'utente qualora l'email inserita risulti già registrata.],
-  [#link(<UC1.2.2>)[#underline[\[UC1.2.2\]]]],
-
-  // --- PASSWORD (UC1.3) ---
-  [#FRObx],
-  [Il Sistema deve consentire l'immissione di una chiave di accesso.],
-  [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
-
-  [#FRObx],
-  [Il Sistema deve imporre criteri di complessità per la password: minimo 8 caratteri, inclusione di lettere maiuscole, minuscole, numeri e caratteri speciali.],
-  [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
-
-  [#FRObx],
-  [Il Sistema deve notificare l'utente qualora la password inserita non soddisfi i requisiti minimi di sicurezza.],
+  [#FRObx], 
+  [Il Sistema deve consentire l'immissione di una password conforme ai criteri di complessità e sicurezza stabiliti.], 
   [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
 
   // --- AUTENTICAZIONE (UC2) ---
-  [#FRObx],
-  [Il Sistema deve consentire all'Utente non autenticato l'accesso alla sezione di autenticazione (Login).],
+  [#FRObx], 
+  [Il Sistema deve consentire all'Utente non autenticato l'accesso alla sezione di autenticazione (Login).], 
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
-  [#FRObx],
-  [Il Sistema deve garantire l'accesso alle funzionalità riservate esclusivamente a seguito di una corretta validazione delle credenziali.],
-  [#link(<UC2>)[#underline[\[UC2\]]]],
-  
-  [#FRObx],
-  [Il Sistema deve utilizzare protocolli di comunicazione sicuri (HTTPS) per il trasferimento delle credenziali durante il login.],
+  [#FRObx], 
+  [Il Sistema deve predisporre un comando di conferma per finalizzare la procedura di accesso.], 
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
-  [#FRObx],
-  [Il Sistema deve implementare meccanismi di rate limiting o lockout temporaneo a seguito di ripetuti tentativi di autenticazione falliti.],
+  [#FRObx], 
+  [Il Sistema deve garantire l'accesso alle funzionalità riservate esclusivamente a seguito di una corretta validazione delle credenziali.], 
   [#link(<UC2>)[#underline[\[UC2\]]]],
-  
-  // --- GESTIONE CAMPI MANCANTI (UC2.0.1) ---
-  [#FRObx],
-  [Il Sistema deve rilevare il tentativo di autenticazione in presenza di campi obbligatori non compilati.],
+
+  [#FRObx], 
+  [Il Sistema deve utilizzare protocolli di comunicazione sicuri (HTTPS) per il trasferimento delle credenziali durante il login.], 
+  [#link(<UC2>)[#underline[\[UC2\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve implementare meccanismi di rate limiting o lockout temporaneo a seguito di ripetuti tentativi di autenticazione falliti.], 
+  [#link(<UC2>)[#underline[\[UC2\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve rilevare campi incompleti nel login e inibire l'accesso notificando l'utente tramite avviso specifico.], 
   [#link(<UC2.0.1>)[#underline[\[UC2.0.1\]]]],
 
-  [#FRObx],
-  [Il Sistema deve inibire l'accesso alla piattaforma qualora le credenziali nel modulo di autenticazione siano incomplete.],
-  [#link(<UC2.0.1>)[#underline[\[UC2.0.1\]]]],
-
-  [#FRObx],
-  [Il Sistema deve mostrare un avviso indicante il mancato inserimento di uno o più dati obbligatori.],
-  [#link(<UC2.0.1>)[#underline[\[UC2.0.1\]]]],
-  
-  [#FRObx],
-  [Il Sistema deve consentire l'immissione dell'identificativo (username) per la procedura di autenticazione.],
-  [#link(<UC2.1>)[#underline[\[UC2.1\]]]],
-
-  [#FRObx],
-  [Il Sistema deve notificare l'utente qualora l'identificativo inserito non rispetti il formato previsto.],
-  [#link(<UC2.1.1>)[#underline[\[UC2.1.1\]]]],
-
-  [#FRObx],
-  [Il Sistema deve verificare la presenza dell'identificativo tra gli account registrati.],
+  [#FRObx], 
+  [Il Sistema deve notificare l'utente qualora l'identificativo (username) inserito non risulti censito nel sistema.], 
   [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
 
-  [#FRObx],
-  [Il Sistema deve mostrare un messaggio di errore a seguito dell'inserimento di un identificativo non presente a sistema.],
-  [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
-
-  [#FRObx],
-  [Il Sistema deve consentire l'immissione della chiave di accesso (password) per la procedura di autenticazione.],
-  [#link(<UC2.2>)[#underline[\[UC2.2\]]]],
-
-  [#FRObx],
-  [Il Sistema deve notificare l'utente qualora la password inserita non rispetti il formato previsto.],
-  [#link(<UC2.2.1>)[#underline[\[UC2.2.1\]]]],
-
-  [#FRObx],
-  [Il Sistema deve verificare la corrispondenza tra la password fornita e quella associata all'identificativo inserito.],
-  [#link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]],
-
-  [#FRObx],
-  [Il Sistema deve mostrare un messaggio di errore qualora la password inserita risulti errata.],
+  [#FRObx], 
+  [Il Sistema deve notificare l'utente qualora la password inserita non corrisponda a quella registrata.], 
   [#link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]],
 
   // --- INTEGRAZIONE GITHUB (UC3) ---
-  [#FRObx],
-  [Il Sistema deve consentire all'Utente Autenticato l'accesso alla sezione dedicata al collegamento del profilo GitHub.],
+  [#FRObx], 
+  [Il Sistema deve consentire all'Utente Autenticato l'accesso alla sezione dedicata al collegamento del profilo GitHub.], 
   [#link(<UC3>)[#underline[\[UC3\]]]],
 
-  [#FRObx],
-  [Il Sistema deve gestire il flusso di autorizzazione tramite reindirizzamento alla piattaforma GitHub e il successivo ritorno all'applicazione.],
-  [#link(<UC3>)[#underline[\[UC3\]]]],
-
-  [#FRObx],
-  [Il Sistema deve autorizzare l'utente all'interazione con i propri repository a seguito del completamento con successo della procedura.],
-  [#link(<UC3>)[#underline[\[UC3\]]]],
-  
-  [#FRObx],
-  [Il Sistema deve memorizzare i token di accesso ottenuti da GitHub esclusivamente in forma cifrata all'interno del database.],
-  [#link(<UC3>)[#underline[\[UC3\]]]],
-
-  [#FRObx],
-  [Il Sistema deve garantire che i token di accesso siano associati univocamente alla sessione dell'utente che ha effettuato il collegamento.],
-  [#link(<UC3>)[#underline[\[UC3\]]]],
-  [#FRObx],
-  [Il Sistema deve mostrare un avviso informativo prima di procedere al reindirizzamento verso il dominio esterno.],
+  [#FRObx], 
+  [Il Sistema deve mostrare un avviso informativo obbligatorio prima di procedere al reindirizzamento verso il dominio esterno.], 
   [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
 
-  [#FRObx],
-  [Il Sistema deve consentire all'utente di confermare o annullare la volontà di procedere con il collegamento esterno.],
-  [#link(<UC3.1>)[#underline[\[UC3.1\]]], #link(<UC3.1.1>)[#underline[\[UC3.1.1\]]]],
+  [#FRObx], 
+  [Il Sistema deve consentire all'utente di confermare la volontà di procedere con il collegamento esterno.], 
+  [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
 
-  [#FRObx],
-  [Il Sistema deve notificare l'utente qualora la procedura di sincronizzazione fallisca per anomalie tecniche nella ricezione dei dati.],
+  [#FRObx], 
+  [Il Sistema deve consentire all'utente di annullare il reindirizzamento tornando alla sezione integrazioni.], 
+  [#link(<UC3.1.1>)[#underline[\[UC3.1.1\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve autorizzare l'interazione con i repository dell'utente dopo il completamento con successo dell'associazione.], 
+  [#link(<UC3>)[#underline[\[UC3\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve memorizzare i token di accesso ottenuti da GitHub esclusivamente in forma cifrata all'interno del database.], 
+  [#link(<UC3>)[#underline[\[UC3\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve notificare l'utente qualora la procedura di sincronizzazione fallisca per anomalie tecniche nella ricezione dei dati.], 
   [#link(<UC3.2.1>)[#underline[\[UC3.2.1\]]]],
 
-  [#FRObx],
-  [Il Sistema deve inibire il collegamento qualora il profilo GitHub risulti già associato a un altro account CodeGuardian.],
+  [#FRObx], 
+  [Il Sistema deve inibire il collegamento qualora il profilo GitHub risulti già associato a un altro account CodeGuardian.], 
   [#link(<UC3.2.2>)[#underline[\[UC3.2.2\]]]],
 
-  [#FRObx],
-  [Il Sistema deve mostrare un messaggio di errore specifico qualora l'utente neghi il consenso alla condivisione dei dati su GitHub.],
+  [#FRObx], 
+  [Il Sistema deve mostrare un messaggio di errore specifico qualora l'utente neghi il consenso alla condivisione dei dati su GitHub.], 
   [#link(<UC3.2.3>)[#underline[\[UC3.2.3\]]]],
 
-  // --- RICHIESTA ANALISI REPOSITORY (UC4) ---
-  [#FRObx],
-  [Il Sistema deve consentire all'Utente Autenticato l'accesso alla sezione di configurazione dell'analisi.],
+  // --- RICHIESTA ANALISI (UC4) ---
+  [#FRObx], 
+  [Il Sistema deve consentire l'accesso alla sezione di configurazione dell'analisi e l'immissione dell'URL del repository.], 
   [#link(<UC4>)[#underline[\[UC4\]]]],
 
-  [#FRObx],
-  [Il Sistema deve predisporre un modulo per l'immissione dell'URL del repository, la selezione delle aree di interesse e l'invio della richiesta.],
-  [#link(<UC4>)[#underline[\[UC4\]]]],
-
-  [#FRObx],
-  [Il Sistema deve permettere l'inoltro della richiesta di analisi solo a seguito della validazione positiva di tutti i parametri obbligatori.],
-  [#link(<UC4>)[#underline[\[UC4\]]]],
-
-  [#FRObx],
-  [Il Sistema deve validare lato server la titolarità dell'utente sul repository GitHub prima di avviare l'analisi.],
-  [#link(<UC4>)[#underline[\[UC4\]]]],
-
-  [#FRObx],
-  [Il Sistema deve assegnare un identificativo univoco a ogni richiesta di analisi per garantirne la tracciabilità.],
-  [#link(<UC4>)[#underline[\[UC4\]]]],
-
-  // --- VALIDAZIONE URL (UC4.1) ---
-  [#FRObx],
-  [Il Sistema deve consentire l'immissione dell'URL del repository GitHub da analizzare.],
-  [#link(<UC4.1>)[#underline[\[UC4.1\]]]],
-
-  [#FRObx],
-  [Il Sistema deve validare che l'URL inserito utilizzi il protocollo 'https://' e appartenga al dominio 'github.com'.],
+  [#FRObx], 
+  [Il Sistema deve validare che l'URL del repository GitHub inserito utilizzi il protocollo 'https://' e il dominio 'github.com'.], 
   [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
 
-  [#FRObx],
-  [Il Sistema deve notificare l'utente qualora l'URL inserito non rispetti i vincoli di formato previsti.],
-  [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
-
-  [#FRObx],
-  [Il Sistema deve verificare l'accessibilità pubblica o tramite autorizzazione del repository indicato dall'URL.],
+  [#FRObx], 
+  [Il Sistema deve inibire l'invio della richiesta e notificare l'utente qualora il repository risulti inesistente o non accessibile.], 
   [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
 
-  [#FRObx],
-  [Il Sistema deve notificare l'utente qualora il repository risulti inesistente o non accessibile.],
-  [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
-
-  [#FRObx],
-  [Il Sistema deve inibire la procedura di analisi e notificare l'utente qualora il campo URL non venga compilato.],
+  [#FRObx], 
+  [Il Sistema deve inibire la procedura di analisi e notificare l'utente qualora il campo URL non venga compilato.], 
   [#link(<UC4.1.3>)[#underline[\[UC4.1.3\]]]],
 
-  // --- SELEZIONE AREE (UC4.2) ---
-  [#FRObx],
-  [Il Sistema deve consentire la selezione di una o più aree di interesse tra test, sicurezza e documentazione.],
+  [#FRObx], 
+  [Il Sistema deve permettere la selezione multipla delle aree di interesse tra test, sicurezza e documentazione.], 
   [#link(<UC4.2>)[#underline[\[UC4.2\]]]],
 
-  [#FRObx],
-  [Il Sistema deve inibire la procedura di analisi e notificare l'utente qualora non venga selezionata almeno un'area di interesse.],
+  [#FRObx], 
+  [Il Sistema deve inibire la richiesta di analisi qualora non venga selezionata almeno un'area di interesse.], 
   [#link(<UC4.2.1>)[#underline[\[UC4.2.1\]]]],
 
-  // --- CONTROLLI DI STATO (UC4.0.1 - UC4.0.2) ---
-  [#FRObx],
-  [Il Sistema deve verificare se l'ultimo report generato per il repository sia coerente con l'ultimo commit effettuato su GitHub.],
+  [#FRObx], 
+  [Il Sistema deve validare lato server la titolarità dell'utente sul repository GitHub prima di avviare l'analisi.], 
+  [#link(<UC4>)[#underline[\[UC4\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve impedire l'avvio di una nuova analisi e informare l'utente se il report esistente risulta già aggiornato.], 
   [#link(<UC4.0.1>)[#underline[\[UC4.0.1\]]]],
 
-  [#FRObx],
-  [Il Sistema deve inibire l'avvio di una nuova analisi e informare l'utente se il report esistente risulta già aggiornato.],
-  [#link(<UC4.0.1>)[#underline[\[UC4.0.1\]]]],
-
-  [#FRObx],
-  [Il Sistema deve verificare la presenza di processi di analisi già attivi per il repository specificato.],
+  [#FRObx], 
+  [Il Sistema deve impedire l'invio di una nuova richiesta se un'analisi per il medesimo repository è già in fase di elaborazione.], 
   [#link(<UC4.0.2>)[#underline[\[UC4.0.2\]]]],
 
-  [#FRObx],
-  [Il Sistema deve impedire l'invio di una nuova richiesta e notificare l'utente se un'analisi è già in fase di elaborazione.],
-  [#link(<UC4.0.2>)[#underline[\[UC4.0.2\]]]],
-
-  // --- VISUALIZZAZIONE LISTA REPOSITORY (UC5) ---
-  [#FRObx],
-  [Il Sistema deve consentire all'Utente Autenticato l'accesso alla sezione riepilogativa dei repository analizzati.],
+  // --- VISUALIZZAZIONE LISTA (UC5) ---
+  [#FRObx], 
+  [Il Sistema deve consentire la navigazione verso la sezione riepilogativa dei repository analizzati.], 
   [#link(<UC5>)[#underline[\[UC5\]]]],
 
-  [#FRObx],
-  [Il Sistema deve mostrare l'elenco di tutti i repository per i quali è stata completata almeno una procedura di analisi.],
-  [#link(<UC5>)[#underline[\[UC5\]]]],
-  
-  [#FRObx],
-  [Il Sistema deve inibire la visualizzazione della tabella e mostrare un'informativa specifica qualora non risultino repository analizzati a sistema.],
-  [#link(<UC5.0.1>)[#underline[\[UC5.0.1\]]]],
-  
-  [#FRObx],
-  [Il Sistema deve esporre, per ogni elemento della lista, i metadati identificativi: nome del repository, URL di riferimento e data dell'ultima analisi.],
+  [#FRObx], 
+  [Il Sistema deve esporre per ogni elemento della lista: nome del repository, URL di riferimento e data dell'ultima analisi.], 
   [#link(<UC5.1>)[#underline[\[UC5.1\]]]],
 
-// --- VISUALIZZAZIONE REPORT (UC6) ---
-  [#FRObx],
-  [Il Sistema deve consentire all'Utente Autenticato la selezione di un repository dalla lista per consultarne i report di dettaglio.],
+  [#FRObx], 
+  [Il Sistema deve inibire la visualizzazione della tabella e mostrare un'informativa specifica qualora non risultino repository analizzati.], 
+  [#link(<UC5.0.1>)[#underline[\[UC5.0.1\]]]],
+
+  // --- VISUALIZZAZIONE REPORT (UC6) ---
+  [#FRObx], 
+  [Il Sistema deve consentire la selezione di un repository dalla lista per aprirne il report di dettaglio.], 
   [#link(<UC6>)[#underline[\[UC6\]]]],
 
-  [#FRObx],
-  [Il Sistema deve permettere la selezione e la deselezione delle sezioni analitiche (Codice, Sicurezza, Documentazione) da includere nella visualizzazione.],
+  [#FRObx], 
+  [Il Sistema deve permettere di filtrare la visualizzazione delle aree analitiche (Codice, Sicurezza, Documentazione).], 
   [#link(<UC6.1>)[#underline[\[UC6.1\]]]],
 
-  [#FRObx],
-  [Il Sistema deve inibire il rendering dei risultati e mostrare un avviso informativo qualora non venga selezionata alcuna sezione del report.],
+  [#FRObx], 
+  [Il Sistema deve inibire il rendering dei risultati e mostrare un avviso informativo se nessuna area è selezionata.], 
   [#link(<UC6.0.1>)[#underline[\[UC6.0.1\]]]],
-  
-  // --- METADATI (UC6.2) ---
-  [#FRObx],
-  [Il Sistema deve esporre una sezione dedicata ai metadati di contesto per ogni report di analisi selezionato.],
-  [#link(<UC6.2>)[#underline[\[UC6.2\]]]],
 
-  [#FRObx],
-  [Il Sistema deve mostrare il timestamp (data e ora) relativo al completamento dell'attività di audit.],
+  [#FRObx], 
+  [Il Sistema deve esporre il timestamp (data e ora) relativo al completamento dell'attività di audit.], 
   [#link(<UC6.2.1>)[#underline[\[UC6.2.1\]]]],
 
-  [#FRObx],
-  [Il Sistema deve visualizzare l'identificativo univoco (hash) del commit GitHub oggetto dell'analisi.],
+  [#FRObx], 
+  [Il Sistema deve visualizzare l'identificativo univoco (hash) del commit GitHub oggetto dell'analisi.], 
   [#link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]],
 
-  [#FRObx],
-  [Il Sistema deve indicare lo username dell'Utente Autenticato che ha sottomesso la richiesta di analisi.],
+  [#FRObx], 
+  [Il Sistema deve indicare lo username dell'Utente Autenticato che ha sottomesso la richiesta di analisi.], 
   [#link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]],
 
-  // --- ANALISI E REMEDIATION (UC6.3) ---
-  [#FRObx],
-  [Il Sistema deve mostrare i risultati tecnici, le metriche e le criticità rilevate per le sezioni selezionate dall'utente.],
+  [#FRObx], 
+  [Il Sistema deve esporre metriche tecniche e criticità rilevate per le sezioni selezionate dall'utente.], 
   [#link(<UC6.3>)[#underline[\[UC6.3\]]]],
 
-  [#FRObx],
-  [Il Sistema deve presentare, per ogni criticità individuata, una lista di azioni correttive (remediation) suggerite.],
+  [#FRObx], 
+  [Il Sistema deve presentare la lista delle azioni correttive (remediation) suggerite per i difetti individuati.], 
   [#link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]],
 
-  [#FRObx],
-  [Il Sistema deve notificare l'utente con un messaggio di esito positivo qualora non vengano individuate criticità o necessità di miglioramento per la sezione consultata.],
+  [#FRObx], 
+  [Il Sistema deve mostrare un messaggio di esito positivo (assenza di criticità) qualora non risultino remediation necessarie.], 
   [#link(<UC6.3.1.1>)[#underline[\[UC6.3.1.1\]]]],
 
-  // UC7
-  [#FRObx],
-  [L'Utente deve poter selezionare un intervallo temporale per il confronto],
+  // --- CONFRONTO STORICO (UC7) ---
+  [#FRObx], 
+  [Il Sistema deve consentire la selezione di un intervallo temporale (data inizio e data fine) per l'analisi comparativa.], 
   [#link(<UC7>)[#underline[\[UC7\]]]],
 
-  [#FRObx],
-  [L'Utente deve poter confermare la selezione dell'intervallo temporale],
+  [#FRObx], 
+  [Il Sistema deve predisporre un comando di conferma per aggiornare la vista di confronto tra i report selezionati.], 
   [#link(<UC7>)[#underline[\[UC7\]]]],
 
-  [#FRObx],
-  [L'Utente deve poter modificare l'intervallo temporale dopo averlo selezionato],
-  [#link(<UC7>)[#underline[\[UC7\]]]],
+  [#FRObx], 
+  [Il Sistema deve notificare l'utente tramite avviso qualora i campi relativi all'intervallo temporale non siano popolati.], 
+  [#link(<UC7.0.1>)[#underline[\[UC7.0.1\]]]],
 
-  [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se tenta di confermare senza aver selezionato un intervallo temporale],
-  [#link(<UC7.1>)[#underline[\[UC7.1\]]]],
+  [#FRObx], 
+  [Il Sistema deve mostrare un'informativa specifica qualora non risultino report archiviati all'interno del periodo selezionato.], 
+  [#link(<UC7.0.2>)[#underline[\[UC7.0.2\]]]],
 
-  [#FRObx],
-  [L'Utente deve ricevere un avviso se non ci sono report nel periodo selezionato],
-  [#link(<UC7.2>)[#underline[\[UC7.2\]]]],
+  [#FRObx], 
+  [Il Sistema deve validare la coerenza cronologica dell'intervallo, segnalando come errore una data di inizio successiva a quella di fine.], 
+  [#link(<UC7.0.3>)[#underline[\[UC7.0.3\]]]],
 
-  [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se l'intervallo temporale è incoerente],
-  [#link(<UC7.3>)[#underline[\[UC7.3\]]]],
+  [#FRObx], 
+  [Il Sistema deve inibire la richiesta se l'intervallo temporale selezionato eccede l'ampiezza massima prevista.], 
+  [#link(<UC7.0.4>)[#underline[\[UC7.0.4\]]]],
 
-  [#FRObx],
-  [L'Utente deve ricevere un messaggio di errore se l'intervallo temporale è troppo ampio],
-  [#link(<UC7.4>)[#underline[\[UC7.4\]]]],
-
-  // UC8
+  // --- METRICHE COMPARATIVE (UC8) ---
   [#FRDex], 
-  [L'utente deve poter visualizzare un grafico comparativo per monitorare l'andamento delle metriche tra i diversi report selezionati.], 
-  [#link(<UC8>)[#underline[\[UC8\]]]],
-
-  [#FRDex],
-  [Il sistema deve permettere l'interazione con il grafico per visualizzare i dettagli puntuali di ogni analisi.],
+  [Il Sistema deve generare rappresentazioni grafiche per monitorare l'andamento delle metriche tra i report inclusi nell'intervallo temporale.], 
   [#link(<UC8>)[#underline[\[UC8\]]]],
 
   [#FRDex], 
-  [L'utente deve poter visualizzare una tabella comparativa che riassuma i dati dei report selezionati per un confronto testuale.], 
+  [Il Sistema deve permettere l'interazione con gli elementi del grafico per l'esposizione dei dati puntuali relativi a ogni singola analisi.], 
   [#link(<UC8>)[#underline[\[UC8\]]]],
 
-  [#FRDex],
-  [L'utente, all'interno della tabella, deve poter visualizzare indicatori di variazione rispetto al report precedente],
+  [#FRDex], 
+  [Il Sistema deve predisporre una tabella comparativa per il confronto testuale dei dati estratti dai report selezionati.], 
   [#link(<UC8>)[#underline[\[UC8\]]]],
 
-  //UC9
-  [#FRObx],
-  [L'Utente deve poter visualizzare la sezione del report relativa all'analisi del codice],
+  [#FRDex], 
+  [Il Sistema deve calcolare e visualizzare, all'interno della tabella, gli indicatori di variazione (trend) rispetto all'analisi cronologicamente precedente.], 
+  [#link(<UC8>)[#underline[\[UC8\]]]],
+
+  // --- ANALISI DEL CODICE (UC9) ---
+  [#FRObx], 
+  [Il Sistema deve consentire la visualizzazione della sezione del report dedicata alla qualità del codice sorgente.], 
   [#link(<UC9>)[#underline[\[UC9\]]]],
 
-  [#FRObx],
-  [L'Utente deve poter visualizzare la sezione di analisi statica del codice],
+  [#FRObx], 
+  [Il Sistema deve esporre i risultati dell'analisi statica, specificando bug, vulnerabilità sintattiche e code smell rilevati.], 
   [#link(<UC9.1>)[#underline[\[UC9.1\]]]],
-  
-  [#FRObx],
-  [L'Utente deve poter visualizzare la sezione di copertura dei test di unità],
+
+  [#FRObx], 
+  [Il Sistema deve esporre le metriche di copertura dei test di unità e l'esito complessivo delle suite di test eseguite.], 
   [#link(<UC9.2>)[#underline[\[UC9.2\]]]],
 
-  [#FRObx],
-  [L'Utente deve poter visualizzare la sezione di lista di remediation per la sezione del codice],
+  [#FRObx], 
+  [Il Sistema deve presentare l'elenco delle azioni correttive (remediation) specifiche per i difetti del codice individuati.], 
   [#link(<UC9.3>)[#underline[\[UC9.3\]]]],
 
-  [#FRObx],
-  [L'Utente deve poter visualizzare il messaggio di lista vuota nel caso non siano state individuate remediation per la sezione del codice],
+  [#FRObx], 
+  [Il Sistema deve mostrare un'informativa di esito positivo qualora non risultino remediation necessarie per l'area del codice sorgente.], 
   [#link(<UC9.3.1>)[#underline[\[UC9.3.1\]]]],
 
   //UC10
