@@ -11,12 +11,8 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-<<<<<<< HEAD
-#let versione = "v0.3.0"
-=======
 #let versione = "v0.8.0"
 #set heading(numbering: "1.1.1")
->>>>>>> NdP
 
 #titlePage("Norme di Progetto", versione)
 #set page(numbering: "1", header: header("Norme di Progetto"), footer: footer())

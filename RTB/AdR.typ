@@ -2154,7 +2154,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Orchestratore",
   attori_secondari: "GitHub",
   pre: [
-    - L'orchestratore ha ricevuto una richiesta di analisi contenente un URL GitHub da parte di un utente Autorizzato di CodeGuardian //UC di avvio analisi.
+    - L'orchestratore ha ricevuto una richiesta di analisi contenente un URL GitHub da parte di un utente Autorizzato di CodeGuardian #link(<UC21>)[#underline[\[UC21\]]]
   ],
   post: [
     - L'accessibilità del repository è stata accertata e l'orchestratore dispone dei permessi di lettura per avviare la analisi.
@@ -4230,9 +4230,6 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [Il Sistema deve mostrare un messaggio di feedback esplicito a seguito della corretta persistenza della nuova password.], 
   [#link(<UC15.4>)[#underline[\[UC15.4\]]]],
   
-  TODO("Ho chiuso la tabella solamente per mantenere i requisiti da UC1 a UC15")
-)
-  /*
   //UC16
   [#FRObx], 
   [L'Utente deve poter visualizzare i dettagli di una singola remediation], 
@@ -4248,7 +4245,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC17>)[#underline[\[UC17\]]])],
 
   [#FRObx],
-  [Il sistema deve poter avviare la procedura di verifica],
+  [Il sistema deve poter avviare la procedura di verifica dell'accessibilitá di un repository da parte di un account GitHub specifico],
   [#link(<UC17.1>)[#underline[\[UC17.1\]]]],
 
   [#FRObx],
@@ -4260,10 +4257,6 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC17.2>)[#underline[\[UC17.2\]]]],
 
   [#FRObx],
-  [Il sistema deve essere in grado di trovare il repository],
-  [#link(<UC17.2>)[#underline[\[UC17.2\]]]],
-
-  [#FRObx],
   [Il sistema deve essere in grado di trovare il repository tramite token in caso esso sia privato],
   [#link(<UC17.2.1>)[#underline[\[UC17.2.1\]]]],
 
@@ -4271,6 +4264,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [Il sistema deve rilevare e comunicare un errore in caso non ci sia stato modo di accedere al repository],
   [#link(<UC17.2.1.1>)[#underline[\[UC17.2.1.1\]]]],
 
+  [#TODO("Requisiti commentati")],[],[],
   //UC18
   /*
   [#FRObx],
@@ -4292,8 +4286,8 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   //UC18
   [#FRDex],
-  [L'Utente deve poter interagire con la sezione di gestione di remediation],
-  [#link(<UC18>)[#underline[\[UC18\]]]],
+  [L'Utente deve poter interagire con la sezione di visualizzazione delle remediation],
+  [#link(<UC18>)[#underline[\[UC18\]]] #link(<UC19>)[#underline[\[UC19\]]]],
   
   [#FRDex],
   [L'Utente deve poter accettare la remediation proposta],
@@ -4338,7 +4332,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#FROpx],
   [L'utente deve poter visualizzare le regressioni evidenziate],
   [#link(<UC23>)[#underline[\[UC23\]]]],
-*/
+
   //UC20
   [#FRObx], 
   [Deve essere suggerito refactoring del codice], 
@@ -4350,20 +4344,30 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   [#FROpx],
   [I refactor devono poter essere applicati automaticamente sotto supervisione],
-  [#link(<UC20.1>)[#underline[\[UC20.2\]]]],
-
+  [#link(<UC20.1>)[#underline[\[UC20.1\]]]],
+*/
   //UC20
   [#FROpx], 
-  [Devono poter essere generati report programmabili e inviati alert], 
+  [Devono poter essere programmati dei report periodici di una specifica repository], 
   [#link(<UC20>)[#underline[\[UC20\]]]],
 
   [#FROpx],
-  [L'Utente deve poter configurare filtri e template per i report],
+  [L'Utente deve poter configurare la periodicitá dei report periodici],
   [#link(<UC20.1>)[#underline[\[UC20.1\]]]],
 
   [#FROpx],
-  [Devono poter essere eseguite azioni automatiche su alert critici],
+  [All'utente deve essere impedito di non inserire un valore di periodicità per i report periodici],
+  [#link(<UC20.1.1>)[#underline[\[UC20.1.1\]]]],
+
+  [#FROpx],
+  [L'utente deve poter configurare delle soglie per gli alert critici],
   [#link(<UC20.2>)[#underline[\[UC20.2\]]]],
+  
+  [#FROpx],
+  [All'utente deve essere impedito di non inserire un valore di soglia per gli alert critici],
+  [#link(<UC20.2.1>)[#underline[\[UC20.2.1\]]]],
+
+
 
   //UC21
 
@@ -4502,7 +4506,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#FRDex],
   [Il sistema deve modificare il repository coerentemente con quanto scritto nella remediation riguardante l'analisi della documentazione],
   //[#link(<UC34>)[#underline[\[UC34\]]]],
-
+)/*
   [#FRDex],
   [L'Utente deve poter rifiutare la remediation riguardante l'analisi della documentazione proposta],
   [#link(<UC34.1>)[#underline[\[UC34.1\]]]],
@@ -4783,7 +4787,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC55.1.1>)[#underline[\[UC55.1.1\]]]],
   
 )
-
+*/
 #pagebreak()
 == Requisiti di Qualità (QR)
 I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente, ma sia anche manutenibile, performante e ben documentato.
@@ -5008,4 +5012,4 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   [UC28],
   [],
 
-)*/
+)
