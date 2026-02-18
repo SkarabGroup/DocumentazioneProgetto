@@ -2484,7 +2484,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
 )[#useCaseDiagram("18", "UC18 - Analisi vulnerabilità dipendenze")]
 
-==== UC19: Rifiuto di una singola remediation generica <UC19>
+=== UC19: Rifiuto di una singola remediation generica <UC19>
 #useCase(
   attore: "Utente Autorizzato",
   pre: [
@@ -2630,7 +2630,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'utente ha rifiutato il refactoring proposto",
 )[]
-
+/*
 #TODO("28 e 29 da controllare")
 === UC28: Report programmabili e alert <UC28>
 #useCase(
@@ -2745,23 +2745,25 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'utente non inserisce alcuna soglia e tenta di confermare la configurazione dei report",
 )[]
-
+*/
 === UC29 Avvio analisi <UC29>
 #useCase(
   attore: "Orchestratore",
+  attori_secondari: "Servizio AWS",
   pre: [
     - L'orchestratore ha verificato l'accessibilità del repository #link(<UC17>)[#underline[\[UC17\]]]
   ],
   post: [
-    - L'orchestratore ha contattato ed avviato correttamente gli strumenti esterni di analisi
+    - L'orchestratore ha avviato correttamente l'analisi tramite gli strumenti esterni di analisi
   ],
   scenari: [
     - L'orchestratore clona il repository da analizzare #link(<UC29.1>)[#underline[\[UC29.1\]]]
-    - L'orchestratore richiede lo strumento esterno di analisi del codice #link(<UC29.2>)[#underline[\[UC29.2\]]]
-    - L'orchestratore richiede lo strumento esterno di analisi della documentazione #link(<UC29.3>)[#underline[\[UC29.3\]]]
-    - L'orchestratore richiede lo strumento esterno di analisi degli standard OWASP #link(<UC29.4>)[#underline[\[UC29.4\]]]
+    - L'orchestratore richiede l'analisi allo strumento esterno per l'analisi del codice #link(<UC29.2>)[#underline[\[UC29.2\]]]
+    - L'orchestratore richiede l'analisi allo strumento esterno per l'analisi della documentazione #link(<UC29.3>)[#underline[\[UC29.3\]]]
+    - L'orchestratore richiede l'analisi allo strumento esterno per l'analisi degli standard OWASP #link(<UC29.4>)[#underline[\[UC29.4\]]]
   ],
   inclusioni: [
+    - #link(<UC29.1>)[#underline[\[UC29.1\]]]
     - #link(<UC29.2>)[#underline[\[UC29.2\]]]
     - #link(<UC29.3>)[#underline[\[UC29.3\]]]
     - #link(<UC29.4>)[#underline[\[UC29.4\]]]
@@ -2772,18 +2774,18 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Richiesta di analisi di un repository",
 )[#useCaseDiagram("29", "UC29 - Avvio analisi")]
 
-==== UC29.1 Clonazione del repository <UC29.1>
+==== UC29.1 Richiesta di clonazione del repository <UC29.1>
 #useCase(
   attore: "Orchestratore",
-  attori_secondari: "GitHub",
+  attori_secondari: "Servizio AWS, Strumenti di Analisi",
   pre: [
     - L'orchestratore ha verificato l'accessibilità del repository #link(<UC17>)[#underline[\[UC17\]]]
   ],
   post: [
-    - L'orchestratore ha clonato correttamente il repository da analizzare in un ambiente di sandbox
+    - L'orchestratore ha richiesto la clonazione del repository da analizzare al servizio AWS specifico
   ],
   scenari: [
-    - L'orchestratore utilizza le API di GitHub per clonare il repository localmente
+    - L'orchestratore contatta il servizio incaricato della clonazione della repository
   ],
   inclusioni: [
     - Nessuna
@@ -2791,20 +2793,21 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - #link(<UC29.1.1>)[#underline[\[UC29.1.1\]]]
   ],
-  trigger: "L'orchestratore inizia la procedura di analisi dopo aver verificato l'accessibilità del repository",
+  trigger: "L'orchestratore ha iniziato la procedura di analisi",
 )[]
 
-===== UC29.1.1 Errore durante la clonazione del repository <UC29.1.1>
+===== UC29.1.1 Errore durante la richiesta di clonazione del repository <UC29.1.1>
 #useCase(
   attore: "Orchestratore",
+  attori_secondari: "Servizio AWS",
   pre: [
     - L'orchestratore ha verificato l'accessibilità del repository #link(<UC17>)[#underline[\[UC17\]]]
   ],
   post: [
-    - L'orchestratore non é riuscito a clonare il repository e notifica l'utente
+    - Il servizio AWS non é riuscito a clonare il repository e notifica l'orchestratore dell'errore riscontrato
   ],
   scenari: [
-    - L'orchestratore riceve un errore durante la clonazione del repository
+    - L'orchestratore riceve un errore durante la richiesta di clonazione del repository
   ],
   inclusioni: [
     - Nessuna
@@ -2812,7 +2815,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Errore durante la clonazione del repository",
+  trigger: "Errore durante la richiesta di clonazione del repository",
 )[]
 
 ==== UC29.2 Richiesta di analisi del codice <UC29.2>
@@ -2820,10 +2823,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Orchestratore",
   attori_secondari: "Strumenti di Analisi",
   pre: [
-    - L'orchestratore è nella fase di recupero degli strumenti di analisi #link(<UC29>)[#underline[\[UC29\]]]
+    - L'orchestratore ha contattato lo strumento di analisi del codice#link(<UC29>)[#underline[\[UC29\]]]
   ],
   post: [
-    - L'orchestratore ha avviato lo strumento di analisi del codice
+    - L'orchestratore ha inviato i file da analizzare allo strumento di analisi del codice
   ],
   scenari: [
     - L'orchestratore invia i file da analizzare allo strumento di analisi del codice
@@ -2832,11 +2835,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC29.2.1>)[#underline[\[UC29.2.1\]]]
+    - Nessuna
   ],
   trigger: "Viene richiesta l'analisi del codice",
 )[#useCaseDiagram("29_1", "UC29.2 - Richiesta di analisi del codice")]
 
+/*
 ===== UC29.2.1 Uno o più linguaggi presenti nella codebase non sono supportati dallo strumento di analisi <UC29.2.1>
 #useCase(
   attore: "Orchestratore",
@@ -2858,16 +2862,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "Rilevato uno o piú linguaggi non supportati",
 )[]
-
+*/
 ==== UC29.3 Richiesta di analisi della documentazione <UC29.3>
 #useCase(
   attore: "Orchestratore",
   attori_secondari: "Servizio LLM",
   pre: [
-    - L' orchestratore è nella fase di recupero degli strumenti di analisi #link(<UC29>)[#underline[\[UC29\]]]
+    - L' orchestratore ha contattato lo strumento di analisi della documentazione #link(<UC29>)[#underline[\[UC29\]]]
   ],
   post: [
-    - L'orchestratore ha avviato l'agente che possiede i tool per l'analisi della documentazione
+    - L'orchestratore ha inviato la codebase da analizzare allo strumento di analisi della documentazione
   ],
   scenari: [
     - L'orchestratore invia la codebase da analizzare all'agente
@@ -2886,10 +2890,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Orchestratore",
   attori_secondari: "Strumenti di Analisi",
   pre: [
-    - L' orchestratore è nella fase di recupero degli strumenti di analisi #link(<UC29>)[#underline[\[UC29\]]]
+    - L'orchestratore ha contattato lo strumento di analisi degli standard OWASP #link(<UC29>)[#underline[\[UC29\]]]
   ],
   post: [
-    - L'orchestratore ha avviato lo strumento di analisi degli standard OWASP
+    - L'orchestratore ha inviato la codebase da analizzare allo strumento di analisi degli standard OWASP
   ],
   scenari: [
     - L'orchestratore invia la #def[codebase] da analizzare allo strumento di analisi degli standard OWASP
@@ -3350,7 +3354,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   specializzazione: [
-    [#underline[\[UC18\]]]
+    #link(<UC18>)[#underline[\[UC18\]]]
   ],
   trigger: "L'utente interagisce con la sezione di gestione della remediation riguardante l'analisi della sicurezza e accetta la proposta di remediation",
 )[]
@@ -3416,6 +3420,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     [#underline[\[UC19\]]]
 )[]
 
+#TODO("Controllo UC a seguire")
 === UC51: Richiesta analisi repository GitHub privato a cui si ha accesso <UC51>
 #useCase(
   attore: "Utente Autorizzato con GitHub",
