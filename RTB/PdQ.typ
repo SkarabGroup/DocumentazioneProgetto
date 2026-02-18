@@ -390,143 +390,92 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       inset: 10pt,
       table.header([*ID Test*], [*Descrizione*], [*UC Riferimento*]),
 
-      // --- REGISTRAZIONE (UC1) ---
+    // --- REGISTRAZIONE (UC1) ---
       [TS-1], [Verificare la corretta creazione di un account CodeGuardian a seguito dell'inserimento di dati validi.], [UC1],
-
       [TS-1.1], [Verificare la validazione dello username rispetto ai vincoli di formato (alfanumerico, 4-20 caratteri).], [UC1.1.1],
-
       [TS-1.2], [Verificare l'inibizione della registrazione in caso di username già associato a un account esistente.], [UC1.1.2],
-
       [TS-1.3], [Verificare la validazione sintattica dell'indirizzo email secondo gli standard previsti.], [UC1.2.1],
-
       [TS-1.4], [Verificare l'inibizione della registrazione in caso di email già associata a un account esistente.], [UC1.2.2],
-
       [TS-1.5], [Verificare la validazione della password rispetto ai criteri di complessità (sicurezza).], [UC1.3.1],
-
       [TS-1.6], [Verificare la segnalazione di errore in caso di invio del modulo con campi obbligatori vuoti.], [UC1.0.1],
 
       // --- AUTENTICAZIONE (UC2) ---
       [TS-2], [Verificare l'accesso alle funzionalità riservate tramite inserimento di credenziali corrette.], [UC2],
-
       [TS-2.1], [Verificare la validazione del formato delle credenziali in fase di login.], [UC2.1.1, UC2.2.1],
-
       [TS-2.2], [Verificare la segnalazione di errore per identificativo (username) non presente a sistema.], [UC2.1.2],
-
       [TS-2.3], [Verificare la segnalazione di errore in caso di password non corrispondente all'identificativo fornito.], [UC2.2.2],
-
       [TS-2.4], [Verificare l'inibizione dell'accesso in caso di modulo di login incompleto.], [UC2.0.1],
 
       // --- COLLEGAMENTO GITHUB (UC3) ---
       [TS-3], [Verificare il corretto completamento del flusso di autorizzazione OAuth con GitHub.], [UC3],
-
       [TS-3.1], [Verificare l'annullamento della procedura a seguito del rifiuto del reindirizzamento esterno.], [UC3.1.1],
-
       [TS-3.2], [Verificare la gestione degli errori tecnici durante lo scambio dei parametri di autorizzazione.], [UC3.2.1],
-
       [TS-3.3], [Verificare l'inibizione del collegamento se il profilo GitHub risulta già associato a un altro utente.], [UC3.2.2],
-
       [TS-3.4], [Verificare la gestione del mancato consenso dell'utente sulla piattaforma GitHub.], [UC3.2.3],
 
       // --- RICHIESTA ANALISI (UC4) ---
       [TS-4], [Verificare la corretta presa in carico di una richiesta di analisi per un repository GitHub.], [UC4],
-
       [TS-4.1], [Verificare la validazione sintattica dell'URL del repository (protocollo e dominio).], [UC4.1.1],
-
       [TS-4.2], [Verificare la segnalazione di errore in caso di repository inesistente o non accessibile.], [UC4.1.2],
-
       [TS-4.3], [Verificare l'inibizione della richiesta se il campo URL risulta vuoto.], [UC4.1.3],
-
       [TS-4.4], [Verificare l'inibizione della richiesta se non viene selezionata almeno un'area di interesse.], [UC4.2.1],
-
       [TS-4.5], [Verificare la visualizzazione dell'informativa se l'analisi risulta già aggiornata rispetto ai dati remoti.], [UC4.0.1],
-
       [TS-4.6], [Verificare la visualizzazione dell'informativa se esiste un'analisi già pendente per lo stesso repository.], [UC4.0.2],
      
       // --- VISUALIZZAZIONE LISTA (UC5) ---
-      [TS-5], [UC5], 
-      [Verifica navigazione e visualizzazione dell'elenco repository analizzati.], 
-      [Il sistema espone la lista corretta dei repository con metadati (Nome, URL, Data).],
-
-      [TS-5.0.1], [UC5.0.1], 
-      [Verifica comportamento in assenza di repository analizzati a sistema.], 
-      [La tabella è inibita e viene mostrata l'informativa di "lista vuota".],
+      [TS-5], [Verificare la navigazione e la corretta visualizzazione dell'elenco dei repository analizzati.], [UC5, UC5.1],
+      [TS-5.1], [Verificare la visualizzazione dell'informativa "lista vuota" in assenza di repository analizzati.], [UC5.0.1],
 
       // --- VISUALIZZAZIONE REPORT (UC6) ---
-      [TS-6], [UC6], 
-      [Verifica apertura del dettaglio report a seguito di selezione dalla lista.], 
-      [Il sistema carica correttamente la dashboard di dettaglio del report specifico.],
-
-      [TS-6.1], [UC6.1], 
-      [Verifica funzionamento dei filtri di visualizzazione aree (Codice, Sicurezza, Doc).], 
-      [Il sistema aggiorna dinamicamente le sezioni visibili in base alla selezione.],
-
-      [TS-6.0.1], [UC6.0.1], 
-      [Verifica inibizione rendering se non viene selezionata alcuna area.], 
-      [Viene mostrato l'avviso informativo che invita a selezionare almeno un'area.],
-
-      [TS-6.2.1], [UC6.2.1], 
-      [Verifica esposizione corretta del timestamp di audit.], 
-      [Il campo data/ora del report è popolato e formattato correttamente.],
-
-      [TS-6.2.2], [UC6.2.2], 
-      [Verifica visualizzazione hash commit GitHub analizzato.], 
-      [Il sistema espone l'identificativo univoco corretto della versione analizzata.],
-
-      [TS-6.2.3], [UC6.2.3], 
-      [Verifica visualizzazione username del richiedente analisi.], 
-      [Viene mostrato correttamente l'identificativo dell'utente che ha avviato l'audit.],
-
-      [TS-6.3.1.1], [UC6.3.1.1], 
-      [Verifica visualizzazione esito positivo in assenza di criticità.], 
-      [Viene mostrato il messaggio di assenza di remediation necessarie.],
+      [TS-6], [Verificare il caricamento della dashboard di dettaglio a seguito della selezione di un report.], [UC6],
+      [TS-6.1], [Verificare l'aggiornamento dinamico delle sezioni visibili tramite i filtri (Codice, Sicurezza, Doc).], [UC6.1],
+      [TS-6.2], [Verificare l'inibizione del rendering e la notifica se non viene selezionata alcuna area.], [UC6.0.1],
+      [TS-6.3], [Verificare l'esposizione corretta dei metadati di audit (timestamp, hash commit, richiedente).], [UC6.2.1, UC6.2.2, UC6.2.3],
+      [TS-6.4], [Verificare la visualizzazione del messaggio di assenza di criticità se non vi sono remediation.], [UC6.3.1.1],
 
       // --- CONFRONTO STORICO (UC7) ---
-      [TS-7], [UC7], 
-      [Verifica selezione e conferma di un intervallo temporale per il confronto.], 
-      [Il sistema accetta i limiti temporali e aggiorna la vista comparativa.],
-
-      [TS-7.0.1], [UC7.0.1], 
-      [Verifica invio confronto con campi temporali non popolati.], 
-      [Il sistema inibisce l'azione e notifica la mancanza di parametri.],
-
-      [TS-7.0.2], [UC7.0.2], 
-      [Verifica risposta del sistema se non esistono report nel periodo scelto.], 
-      [Viene mostrata l'informativa specifica di assenza dati storici.],
-
-      [TS-7.0.3], [UC7.0.3], 
-      [Verifica inserimento intervallo con Data Inizio > Data Fine.], 
-      [Il sistema segnala l'errore di coerenza cronologica.],
-
-      [TS-7.0.4], [UC7.0.4], 
-      [Verifica inserimento intervallo eccedente i 12 mesi.], 
-      [La richiesta è inibita e viene segnalato il superamento dell'ampiezza massima.],
+      [TS-7], [Verificare la generazione della vista comparativa previo inserimento di un intervallo valido.], [UC7],
+      [TS-7.1], [Verificare la segnalazione di errore in caso di invio con campi temporali incompleti.], [UC7.0.1],
+      [TS-7.2], [Verificare la segnalazione di assenza dati se non vi sono report nel periodo scelto.], [UC7.0.2],
+      [TS-7.3], [Verificare la segnalazione di errore in caso di data inizio successiva alla data fine.], [UC7.0.3],
+      [TS-7.4], [Verificare l'inibizione della richiesta se l'intervallo supera l'ampiezza massima (12 mesi).], [UC7.0.4],
 
       // --- METRICHE COMPARATIVE (UC8) ---
-      [TS-8], [UC8], 
-      [Verifica generazione grafici di andamento e tabelle comparative.], 
-      [I grafici e le tabelle vengono renderizzati con i dati coerenti del periodo.],
-
-      [TS-8.1], [UC8], 
-      [Verifica interazione con punti dati del grafico comparativo.], 
-      [Al click/hover vengono esposti i dettagli puntuali della specifica analisi.],
-
-      [TS-8.2], [UC8], 
-      [Verifica calcolo e visualizzazione trend di variazione in tabella.], 
-      [La tabella mostra correttamente gli indicatori di trend rispetto al report precedente.],
+      [TS-8], [Verificare la corretta generazione dei grafici di andamento e della tabella comparativa.], [UC8],
+      [TS-8.1], [Verificare l'esposizione dei dati puntuali all'interazione (click/hover) con il grafico.], [UC8],
+      [TS-8.2], [Verificare il calcolo e la visualizzazione degli indicatori di trend in tabella.], [UC8],
 
       // --- ANALISI DEL CODICE (UC9) ---
-      [TS-9.1], [UC9.1], 
-      [Verifica visualizzazione risultati analisi statica (bug, smell, vuln).], 
-      [Tutti i rilievi tecnici dell'analisi statica sono esposti correttamente.],
+      [TS-9.1], [Verificare l'esposizione dei rilievi di analisi statica (bug, smell, vulnerabilità).], [UC9.1],
+      [TS-9.2], [Verificare la visualizzazione delle metriche di copertura dei test di unità.], [UC9.2],
+      [TS-9.3], [Verificare la visualizzazione dell'informativa di esito positivo per l'area codice.], [UC9.3.1],
 
-      [TS-9.2], [UC9.2], 
-      [Verifica esposizione metriche copertura test di unità.], 
-      [Le percentuali di copertura e l'esito dei test sono visualizzati correttamente.],
+      // --- ANALISI SICUREZZA (UC10) ---
+      [TS-10.1], [Verificare l'esposizione delle vulnerabilità delle librerie e conformità OWASP.], [UC10.1, UC10.2],
+      [TS-10.2], [Verificare la visualizzazione dell'informativa di assenza criticità di sicurezza.], [UC10.3.1],
 
-      [TS-9.3.1], [UC9.3.1], 
-      [Verifica informativa assenza remediation nell'area codice.], 
-      [Viene visualizzato l'esito positivo specifico per la qualità del codice.],
-    ),
+      // --- ANALISI DOCUMENTAZIONE (UC11) ---
+      [TS-11.1], [Verificare la visualizzazione degli errori sintattici e della completezza documentale.], [UC11.1, UC11.2],
+      [TS-11.2], [Verificare la visualizzazione dell'informativa di assenza criticità documentali.], [UC11.3.1],
+
+      // --- RANKING (UC12) ---
+      [TS-12], [Verificare la generazione della graduatoria ordinata per punteggio di qualità globale.], [UC12],
+      [TS-12.1], [Verificare la segnalazione di assenza dati se l'utente non ha mai effettuato analisi.], [UC12.1],
+
+      // --- DISCONNESSIONE GITHUB (UC13) ---
+      [TS-13], [Verificare l'effettiva revoca dell'associazione e dei token dell'account GitHub.], [UC13],
+
+      // --- ESPORTAZIONE (UC14) ---
+      [TS-14], [Verificare il corretto download del report nel formato selezionato (PDF/JSON).], [UC14, UC14.2],
+      [TS-14.1], [Verificare la segnalazione di errore se l'utente non seleziona alcun formato.], [UC14.1.1],
+
+      // --- MODIFICA PASSWORD (UC15) ---
+      [TS-15.1], [Verificare la segnalazione di errore in caso di password corrente omessa.], [UC15.1.1],
+      [TS-15.2], [Verificare la segnalazione di errore in caso di password corrente errata.], [UC15.1.2],
+      [TS-15.3], [Verificare la segnalazione di errore se la nuova password è assente o non conforme.], [UC15.2.1, UC15.2.2],
+      [TS-15.4], [Verificare la segnalazione di errore se la nuova password coincide con la precedente.], [UC15.2.3],
+      [TS-15.5], [Verificare la corretta persistenza e la notifica di successo post-modifica.], [UC15.3, UC15.4],
+    )
   ),
   caption: [Tabella dei Test di Sistema],
   kind: table,
@@ -907,7 +856,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
 #pagebreak()
 
 == Test di Unità
-
+#TODO("Verificare la numerazione e corrispondenza Requisito/Test")
 #figure(
   block(
     breakable: true,
@@ -921,8 +870,8 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       inset: 10pt,
       align: horizon,
       table.header([*ID Test*], [*Requisito*], [*Descrizione Test*], [*Risultato Atteso*]),
-
-// --- REGISTRAZIONE (UC1) ---
+      
+      // --- REGISTRAZIONE (UC1) ---
       [TU-1.1], [FROb1], [Verifica rendering del componente di creazione account.], [Caricamento corretto del modulo di registrazione.],
       [TU-1.2], [FROb2], [Verifica del metodo di validazione globale pre-invio.], [Blocco della procedura in caso di parametri non validi.],
       [TU-1.3], [FROb3], [Verifica della logica di persistenza dei dati utente nel DB.], [Le credenziali vengono scritte correttamente nel database.],
@@ -1028,7 +977,35 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TU-9.2], [FROb83], [Verifica parser risultati analisi statica.], [Bug, vulnerabilità e code smell identificati.],
       [TU-9.3], [FROb84], [Controllo calcolo percentuale copertura test.], [Valore normalizzato 0-100% calcolato correttamente.],
       [TU-9.4], [FROb85], [Verifica mappatura remediation per area codice.], [Soluzioni visualizzate coerentemente con i bug.],
-      [TU-9.5], [FROb86], [Controllo informativa "Code Clean".], [Esito positivo mostrato se non ci sono remediation.],    ),
+      [TU-9.5], [FROb86], [Controllo informativa "Code Clean".], [Esito positivo mostrato se non ci sono remediation.], 
+    
+      // --- ANALISI SICUREZZA (UC10) ---
+      [TU-10.1], [FROb87], [Verifica del parser per vulnerabilità CVE nelle dipendenze.], [Identificazione corretta di librerie obsolete dal JSON di audit.],
+      [TU-10.2], [FROb88], [Verifica del mappatore di conformità OWASP Top 10.], [Associazione corretta tra vulnerabilità e categoria OWASP.],
+      [TU-10.3], [FROb89], [Validazione logica "Security esito positivo".], [Restituisce stato "Safe" se il contatore CVE è pari a zero.],
+
+      // --- ANALISI DOCUMENTAZIONE (UC11) ---
+      [TU-11.1], [FROb90], [Verifica rilevamento link interrotti (broken links).], [Identifica URL malformati o non raggiungibili nella doc.],
+      [TU-11.2], [FROb91], [Calcolo della percentuale di copertura documentale.], [Rapporto coerente tra entry del codice e blocchi di documentazione.],
+      [TU-11.3], [FROb92], [Verifica mappatura remediation per area documentazione.], [Suggerimenti di miglioramento visualizzati correttamente.],
+      [TU-11.4], [FROb93], [Controllo informativa "Doc Clean".], [Esito positivo mostrato in assenza di criticità documentali.],
+
+      // --- RANKING (UC12) ---
+      [TU-12.1], [FROb94], [Algoritmo di ordinamento decrescente del ranking.], [La lista viene ordinata correttamente dal punteggio più alto al più basso.],
+      [TU-12.2], [FROb95], [Verifica del calcolo del punteggio di qualità globale.], [Il punteggio finale è la media pesata dei punteggi di sezione.],
+
+      // --- DISCONNESSIONE GITHUB (UC13) ---
+      [TU-13.1], [FROb96], [Verifica della funzione di revoca token OAuth.], [Il token viene rimosso correttamente dallo stato di sessione.],
+
+      // --- ESPORTAZIONE (UC14) ---
+      [TU-14.1], [FRDe5], [Validazione formato di esportazione supportato.], [Accetta esclusivamente PDF o JSON come input validi.],
+      [TU-14.2], [FRDe6], [Verifica del modulo di generazione file (parsing).], [I dati del report vengono mappati senza perdite nel file di output.],
+
+      // --- MODIFICA PASSWORD (UC15) ---
+      [TU-15.1], [FROb97], [Confronto hash tra password inserita e password DB.], [Restituisce true solo se i due hash corrispondono.],
+      [TU-15.2], [FROb98], [Validatore criteri complessità nuova password.], [Rigetto di password che non includono caratteri speciali o numeri.],
+      [TU-15.3], [FROb99], [Controllo eterogeneità (Vecchia Password != Nuova).], [Restituisce errore se il nuovo hash è identico al precedente.],
+    ),
   ),
   caption: [Tabella dei Test di Unità],
   kind: table,
@@ -1477,6 +1454,18 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TA-13], [Verificare che il sistema generi visualizzazioni grafiche e tabelle comparative coerenti, evidenziando i trend di miglioramento o peggioramento delle metriche del codice.],
 
       [TA-14], [Verificare che l'analisi della qualità del codice esponga correttamente i dati di analisi statica (bug/smell) e le percentuali di copertura dei test di unità.],
+
+      [TA-15], [Verificare che l'analisi della sicurezza esponga correttamente le vulnerabilità delle librerie (CVE) e i rilievi di conformità agli standard OWASP.],
+
+      [TA-16], [Verificare che l'analisi della documentazione identifichi correttamente gli errori di sintassi e il grado di completezza rispetto al codice sorgente.],
+
+      [TA-17], [Verificare che l'utente possa consultare il ranking dei repository ordinati per punteggio di qualità globale, ricevendo un'informativa corretta in assenza di dati.],
+
+      [TA-18], [Verificare che l'utente possa disconnettere l'account GitHub dal profilo CodeGuardian, con conseguente revoca delle autorizzazioni e dei token.],
+
+      [TA-19], [Verificare che l'utente possa esportare i report di analisi in formati standard (PDF/JSON), garantendo la selezione obbligatoria del formato.],
+
+      [TA-20], [Verificare che l'utente possa modificare la propria password di accesso previa validazione della credenziale attuale e rispetto dei criteri di sicurezza.],
 )
   )
 )
