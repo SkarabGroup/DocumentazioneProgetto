@@ -121,7 +121,7 @@
   (
     "2026/01/27",
     "0.38.0",
-    "Aggiunta dei requisiti funzionali UC38-UC41",
+    "Aggiunta dei requisiti funzionali UC36-UC41",
     members.andrea,
   ),
   (
@@ -139,13 +139,13 @@
   (
     "2026/01/24",
     "0.37.0",
-    "Inserimento diagrammi per UC38-41",
+    "Inserimento diagrammi per UC36-41",
     members.andrea,
   ),
   (
     "2026/01/24",
     "0.36.0",
-    "Modifica dei casi d'uso UC38, UC40 e UC40.1 e aggiunta di UC38.1, UC39, UC39.1, UC41 e UC41.1",
+    "Modifica dei casi d'uso UC36, UC40 e UC40.1 e aggiunta di UC36.1, UC31, UC31.1, UC41 e UC41.1",
     members.andrea,
   ),
   (
@@ -182,7 +182,7 @@
   (
     "2026/01/17",
     "0.31.0",
-    "Modifica UC19, 20 e da 24 a 29",
+    "Modifica UC18, 20 e da 24 a 29",
     members.martinello,
     members.alice,
   ),
@@ -201,7 +201,7 @@
   (
     "2026/01/16",
     "0.29.0",
-    "Aggiunta UC38, UC40, UC40.1, UC41",
+    "Aggiunta UC36, UC40, UC40.1, UC41",
     members.andrea,
   ),
   (
@@ -219,7 +219,7 @@
   (
     "2026/01/15",
     "0.26.0",
-    "Aggiunta UC19-UC28 con relativi sotto casi d'uso",
+    "Aggiunta UC18-UC28 con relativi sotto casi d'uso",
     members.martinello,
     members.alice,
   ),
@@ -574,7 +574,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     table.cell(colspan: 2, fill: luma(250), [*Attori Primari (Sistemi Interni)*]),
 
     [*Orchestratore*],
-    [Attore di sistema interno che opera come entità autonoma. Agisce da coordinatore dei flussi di lavoro, gestendo in modo proattivo l'interazione con i servizi esterni (AWS, LLM) e la distribuzione dei compiti agli agenti, operando indipendentemente dalle interazioni dirette dell'utente sulla GUI.],
+    [Componente software autonomo che agisce come attore sistemico. È responsabile dell'avvio e del coordinamento dei flussi di analisi automatizzati, della gestione degli ambienti di esecuzione  e della centralizzazione delle comunicazioni tra gli agenti e il sistema di persistenza, senza richiedere intervento umano diretto durante l'elaborazione.],
 
     // SEZIONE 3: SISTEMI ESTERNI
     table.cell(colspan: 2, fill: luma(250), [*Attori Secondari (Sistemi Esterni)*]),
@@ -935,7 +935,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC3: Collegamento account GitHub <UC3>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   attori_secondari: "GitHub",
   pre: [
     - L'utente dispone di una sessione attiva nel sistema #link(<UC2>)[#underline[\[UC2\]]]
@@ -962,7 +962,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC3.1: Interazione con avviso di reindirizzamento <UC3.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente ha richiesto il collegamento del proprio profilo GitHub #link(<UC3>)[#underline[\[UC3\]]]
   ],
@@ -983,7 +983,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC3.1.1: Visualizzazione annullamento reindirizzamento <UC3.1.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza l'avviso di trasferimento a piattaforma esterna #link(<UC3.1>)[#underline[\[UC3.1\]]]
   ],
@@ -999,7 +999,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC3.2: Visualizzazione esito associazione account <UC3.2>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente ha completato l'interazione con la piattaforma esterna GitHub #link(<UC3.1>)[#underline[\[UC3.1\]]]
     - L'utente è tornato alla piattaforma CodeGuardian
@@ -1022,7 +1022,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC3.2.1: Visualizzazione errore sincronizzazione fallita <UC3.2.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente è tornato su CodeGuardian a seguito della procedura esterna #link(<UC3.2>)[#underline[\[UC3.2\]]]
   ],
@@ -1038,7 +1038,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC3.2.2: Visualizzazione errore account già associato <UC3.2.2>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente è tornato su CodeGuardian a seguito della procedura esterna #link(<UC3.2>)[#underline[\[UC3.2\]]]
   ],
@@ -1053,7 +1053,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC3.2.3: Visualizzazione rifiuto autorizzazione esterna <UC3.2.3>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente è tornato su CodeGuardian a seguito della procedura esterna #link(<UC3.2>)[#underline[\[UC3.2\]]]
   ],
@@ -1068,7 +1068,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC4: Richiesta analisi repository GitHub <UC4>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente risulta autorizzato all'interazione con i propri repository #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente visualizza la sezione di configurazione dell'analisi
@@ -1096,7 +1096,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC4.1: Inserimento URL repository GitHub <UC4.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente sta visualizzando il modulo di richiesta analisi #link(<UC4>)[#underline[\[UC4\]]]
   ],
@@ -1118,7 +1118,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC4.1.1: Visualizzazione errore URL non conforme <UC4.1.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente ha inserito un valore nel campo URL #link(<UC4.1>)[#underline[\[UC4.1\]]]
   ],
@@ -1133,7 +1133,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC4.1.2: Visualizzazione errore repository non accessibile <UC4.1.2>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente ha inserito un URL nel modulo #link(<UC4.1>)[#underline[\[UC4.1\]]]
   ],
@@ -1148,7 +1148,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC4.1.3: Visualizzazione errore URL non inserito <UC4.1.3>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente sta interagendo con il campo URL #link(<UC4.1>)[#underline[\[UC4.1\]]]
   ],
@@ -1163,7 +1163,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC4.2: Selezione aree di interesse <UC4.2>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente sta visualizzando il modulo di richiesta analisi #link(<UC4>)[#underline[\[UC4\]]]
   ],
@@ -1183,7 +1183,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC4.2.1: Visualizzazione errore nessuna area selezionata <UC4.2.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente sta interagendo con la selezione delle aree #link(<UC4.2>)[#underline[\[UC4.2\]]]
   ],
@@ -1198,7 +1198,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC4.0.1: Visualizzazione informativa report aggiornato <UC4.0.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente ha inviato una richiesta di analisi #link(<UC4>)[#underline[\[UC4\]]]
   ],
@@ -1213,7 +1213,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC4.0.2: Visualizzazione informativa analisi in corso <UC4.0.2>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente ha inviato una richiesta di analisi #link(<UC4>)[#underline[\[UC4\]]]
   ],
@@ -1484,7 +1484,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC7.0.1: Visualizzazione errore intervallo non inserito <UC7.0.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente interagisce con i selettori di data #link(<UC7>)[#underline[\[UC7\]]]
   ],
@@ -1499,7 +1499,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC7.0.2: Visualizzazione informativa assenza report nel periodo <UC7.0.2>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente ha definito un intervallo temporale #link(<UC7>)[#underline[\[UC7\]]]
   ],
@@ -1514,7 +1514,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC7.0.3: Visualizzazione errore intervallo incoerente <UC7.0.3>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente ha impostato le date di inizio e fine #link(<UC7>)[#underline[\[UC7\]]]
   ],
@@ -1529,7 +1529,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC7.0.4: Visualizzazione errore intervallo troppo ampio <UC7.0.4>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente ha definito un intervallo temporale #link(<UC7>)[#underline[\[UC7\]]]
   ],
@@ -1544,7 +1544,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC8: Visualizzazione metriche comparative tra report <UC8>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente ha definito l'intervallo temporale per il confronto storico #link(<UC7>)[#underline[\[UC7\]]]
   ],
@@ -1560,7 +1560,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC9: Visualizzazione sezione analisi del codice <UC9>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente ha incluso l'area "Codice" nei filtri di visualizzazione del report #link(<UC6.1>)[#underline[\[UC6.1\]]]
   ],
@@ -1584,7 +1584,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC9.1: Visualizzazione sezione analisi statica del codice <UC9.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza la sezione analisi del codice #link(<UC9>)[#underline[\[UC9\]]]
   ],
@@ -1599,7 +1599,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC9.2: Visualizzazione sezione test di unità <UC9.2>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza la sezione analisi del codice #link(<UC9>)[#underline[\[UC9\]]]
   ],
@@ -1614,7 +1614,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC9.3: Visualizzazione remediation sezione codice <UC9.3>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza la sezione analisi del codice #link(<UC9>)[#underline[\[UC9\]]]
   ],
@@ -1632,7 +1632,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC9.3.1: Visualizzazione informativa assenza remediation codice <UC9.3.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente sta consultando le remediation del codice #link(<UC9.3>)[#underline[\[UC9.3\]]]
   ],
@@ -1647,7 +1647,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC10: Visualizzazione sezione analisi della sicurezza <UC10>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente ha incluso l'area "Sicurezza" nei filtri di visualizzazione del report #link(<UC6.1>)[#underline[\[UC6.1\]]]
   ],
@@ -1672,7 +1672,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC10.1: Visualizzazione sezione analisi librerie e dipendenze <UC10.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza la sezione analisi della sicurezza #link(<UC10>)[#underline[\[UC10\]]]
   ],
@@ -1687,7 +1687,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC10.2: Visualizzazione sezione analisi sicurezza OWASP <UC10.2>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza la sezione analisi della sicurezza #link(<UC10>)[#underline[\[UC10\]]]
   ],
@@ -1702,7 +1702,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC10.3: Visualizzazione remediation sezione sicurezza <UC10.3>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza la sezione analisi della sicurezza #link(<UC10>)[#underline[\[UC10\]]]
   ],
@@ -1720,7 +1720,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC10.3.1: Visualizzazione informativa assenza remediation sicurezza <UC10.3.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente sta consultando le remediation della sicurezza #link(<UC10.3>)[#underline[\[UC10.3\]]]
   ],
@@ -1763,7 +1763,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC11.1: Visualizzazione sezione errori di sintassi <UC11.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza la sezione analisi della documentazione #link(<UC11>)[#underline[\[UC11\]]]
   ],
@@ -1778,7 +1778,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC11.2: Visualizzazione completezza della documentazione <UC11.2>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza la sezione analisi della documentazione #link(<UC11>)[#underline[\[UC11\]]]
   ],
@@ -1793,7 +1793,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC11.3: Visualizzazione remediation sezione documentazione <UC11.3>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza la sezione analisi della documentazione #link(<UC11>)[#underline[\[UC11\]]]
   ],
@@ -1811,7 +1811,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC11.3.1: Visualizzazione informativa assenza remediation documentazione <UC11.3.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente consulta l'area delle remediation per la documentazione #link(<UC11.3>)[#underline[\[UC11.3\]]]
   ],
@@ -1826,7 +1826,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC12: Visualizzazione ranking dei repository analizzati <UC12>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente ha eseguito l'autenticazione al sistema #link(<UC2>)[#underline[\[UC2\]]]
   ],
@@ -1846,7 +1846,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC12.1: Visualizzazione informativa assenza dati per ranking <UC12.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente accede alla sezione di ranking #link(<UC12>)[#underline[\[UC12\]]]
     - Non esistono repository analizzati associati all'account
@@ -1862,7 +1862,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC13: Disconnessione account GitHub da CodeGuardian <UC13>
 #useCase(
-  attore: "Utente Avanzato",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
     - L'utente ha precedentemente collegato un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
   ],
@@ -1877,7 +1877,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC14: Esportazione report di analisi <UC14>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza un report di analisi #link(<UC6>)[#underline[\[UC6\]]]
   ],
@@ -1897,7 +1897,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC14.1: Selezione formato di esportazione <UC14.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente ha avviato la procedura di esportazione #link(<UC14>)[#underline[\[UC14\]]]
   ],
@@ -1915,7 +1915,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC14.1.1: Visualizzazione errore formato mancante <UC14.1.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente tenta di confermare l'esportazione senza aver selezionato un formato
   ],
@@ -1930,7 +1930,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC14.2: Conferma esportazione <UC14.2>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - Un formato valido è stato selezionato #link(<UC14.1>)[#underline[\[UC14.1\]]]
   ],
@@ -1945,7 +1945,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC15: Modifica password profilo <UC15>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente è autenticato e visualizza l'area gestione profilo #link(<UC2>)[#underline[\[UC2\]]]
   ],
@@ -1969,7 +1969,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC15.1: Inserimento password corrente <UC15.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza il modulo di modifica password #link(<UC15>)[#underline[\[UC15\]]]
   ],
@@ -1988,7 +1988,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC15.1.1: Visualizzazione errore password corrente mancante <UC15.1.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - Il campo password corrente non risulta popolato durante la conferma
   ],
@@ -2003,7 +2003,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC15.1.2: Visualizzazione errore password corrente errata <UC15.1.2>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - La password inserita non corrisponde a quella persistita nel DB
   ],
@@ -2038,7 +2038,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC15.2.1: Visualizzazione errore nuova password mancante <UC15.2.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - Il campo nuova password è vuoto durante la conferma
   ],
@@ -2053,7 +2053,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC15.2.2: Visualizzazione errore password non conforme <UC15.2.2>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - La nuova password non rispetta i criteri di complessità
   ],
@@ -2068,7 +2068,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC15.2.3: Visualizzazione errore password identica alla precedente <UC15.2.3>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - La nuova password inserita è uguale a quella attualmente in uso
   ],
@@ -2083,7 +2083,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC15.3: Conferma modifica password <UC15.3>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente ha inserito la password corrente valida #link(<UC15.1>)[#underline[\[UC15.1\]]]
     - L'utente ha inserito una nuova password conforme agli standard #link(<UC15.2>)[#underline[\[UC15.2\]]]
@@ -2114,9 +2114,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC16: Visualizzazione singola remediation di sezione generica <UC16>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
-    - L'utente sta visualizzando la lista delle remediation di una sezione selezionata #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
+    - L'utente sta visualizzando la lista delle remediation riguardante l'una sezione selezionata #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
     - L'utente seleziona una remediation specifica
   ],
   post: [
@@ -2132,10 +2132,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   generalizzazione: [
-    - Questo caso d'uso funge da generalizzazione per i seguenti casi d'uso:
-    - Visualizzazione singola remediation per la sezione dell'analisi del codice #link(<UC41>)[#underline[\[UC41\]]]
-    - Visualizzazione singola remediation per la sezione dell'analisi della sicurezza #link(<UC42>)[#underline[\[UC42\]]]
-    - Visualizzazione singola remediation per la sezione dell'analisi della documentazione #link(<UC43>)[#underline[\[UC43\]]]
+    - #link(<UC41>)[#underline[\[UC41\]]]
+    - #link(<UC42>)[#underline[\[UC42\]]]
+    - #link(<UC43>)[#underline[\[UC43\]]]
   ],
   trigger: "L'utente seleziona una remediation dalla lista proposta",
 )[#useCaseDiagram("16", "UC16 - Visualizzazione suggerimenti di remediation")]
@@ -2146,7 +2145,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Orchestratore",
   attori_secondari: "GitHub",
   pre: [
-    - L'orchestratore ha ricevuto una richiesta di analisi contenente un URL GitHub da parte di un utente autorizzato di CodeGuardian //UC di avvio analisi.
+    - L'orchestratore ha ricevuto una richiesta di analisi contenente un URL GitHub da parte di un utente Autorizzato di CodeGuardian //UC di avvio analisi.
   ],
   post: [
     - L'accessibilità del repository è stata accertata e l'orchestratore dispone dei permessi di lettura per avviare la analisi.
@@ -2258,322 +2257,67 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Esaurimento dei tentativi di accesso autorizzato",
 )[]
 
-/*
-==== UC17.1 Errore durante la creazione dell'ambiente sandbox <UC17.1>
-#useCase(
-  attore: "Orchestratore",
-  attori_secondari: "Docker",
-  pre: [
-    - Il sistema CodeGuardian ha accettato la richesta di analisi del repository
-  ],
-  post: [
-    - L'ambiente sand box non viene creato correttamente
-  ],
-  scenari: [
-    - Si verifica un errore durante la creazione dell'ambiente sandbox
-  ],
-  inclusioni: [
-    - #link(<UC17.1.1>)[#underline[\[UC17.1.1\]]]
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Durante la creazione dell'ambiente sandbox si verifica un errore",
-)[#useCaseDiagram("17_1", "UC17.1 - Errore durante la creazione dell'ambiente sandbox")]
-
-=== UC17.1.1 Comunicazione dell'errore durante la creazione dell'ambiente sand box <UC17.1.1>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - Viene rilevato un errore durante la creazione dell'ambiente sandbox
-  ],
-  post: [
-    - L'ambiente sandbox non viene creato correttamente e ciò viene comunicato al sistema Front-end
-  ],
-  scenari: [
-    - L'orchestratore comunica l'errore al sistema Front-end
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Durante la creazione dell'ambiente sandbox si verifica un errore",
-)[]
-
-=== UC18 Lettura delle richieste dell'utente da parte dell'orchestratore <UC18>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    //- L'utente autenticato avanzato ha richiesto l'analisi del proprio repository al sistema CodeGuardian #link(<UC4>)[#underline[\[UC4\]]]
-    #TODO("check precondizione tolta")
-    - L'ambiente sandbox é stato creato correttamente #link(<UC17>)[#underline[\[UC17\]]]
-  ],
-  post: [
-    - L'orchestratore ha letto e interpretato correttamente le richieste dell'utente
-  ],
-  scenari: [
-    - L'orchestratore legge le richieste dell'utente
-    - L'orchestratore notifica al sistema Back-end i compiti da svolgere
-  ],
-  inclusioni: [
-    - #link(<UC18.1>)[#underline[\[UC18.1\]]]
-    - #link(<UC18.2>)[#underline[\[UC18.2\]]]
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'orchestratore ha letto e interpretato correttamente le richieste dell'utente e ha visionato il repository",
-)[#useCaseDiagram("18", "UC18 - Lettura delle richieste dell'utente da parte dell'orchestratore")]
-#TODO("1 buco da coprire")
-
-==== UC18.1 Richiesta di analisi completa <UC18.1>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - Non ci sono state richieste specifiche da parte dell'utente
-  ],
-  post: [
-    - L'orchestratore avvia l'analisi completa del repository
-  ],
-  scenari: [
-    - Il sistema Front-end comunica all'orchestratore che l'utente vuole svolgere un'analisi completa del proprio repository
-    - L'orchestratore riceve la richiesta e avvia l'analisi completa del repository
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'orchestratore riceve dal sistema Front-end la richiesta di analisi completa",
-)[]
-==== UC18.2 Richieste specifiche sull'analisi da parte del front-end <UC18.2>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - L'utente ha fatto delle richieste specifiche sulle aree da analizzare del proprio repository
-  ],
-  post: [
-    - L'orchestratore avvia l'analisi specifica del repository in base alle richieste dell'utente
-  ],
-  scenari: [
-    - Il sistema Front-end comunica all'orchestratore le specifiche richieste dell'utente rispetto alle aree da analizzare
-    - L'orchestratore controlla la pre-esistenza del repository da analizzare nel #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#database")[#def("Database")]
-    - L'orchestratore, una volta compresa la richiesta, avvia l'analisi specifica
-  ],
-  inclusioni: [
-    - #link(<UC18.2.1>)[#underline[\[UC18.2.1\]]]
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Il sistema Front-end comunica al sistema Back-end le richieste che dovranno essere prese in carico",
-)[#useCaseDiagram("18_2", "UC18.2 - Richieste specifiche sull'analisi da parte del frontend")]
-
-===== UC18.2.1 Repository mai analizzato in precedenza <UC18.2.1>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - Il repository non era mai stato analizzato in precedenza
-  ],
-  post: [
-    - L'orchestratore istruisce avvia un'analisi completa del repository
-  ],
-  scenari: [
-    - L'orchestratore controlla la pre-esistenza del repository da analizzare nel database e non la trova
-    - L'orchestratore si comporta come se fosse stata richiesta l'analisi completa
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'orchestratore non ha trovato la repository nel database",
-)[]
-*/
-
 // USE CASE DELLE ANALISI
-=== UC19: Accettazione singola remediation generica <UC19>
+=== UC18: Accettazione singola remediation generica <UC18>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
-    - L'utente sta visualizzando una singola remediation generica #link(<UC16>)[#underline[\[UC16\]]]
+    - L'utente sta visualizzando una singola remediation #link(<UC16>)[#underline[\[UC16\]]]
   ],
   post: [
     - La remediation viene automaticamente eseguita, applicando modifiche alla sezione specifica del repository di riferimento
-    - L'utente viene rimandato alla visualizzazione della singola remediation #link(<UC16>)[#underline[\[UC16\]]]
+    - L'utente visualizza la remediation appena eseguita #link(<UC16>)[#underline[\[UC16\]]]
   ],
   scenari: [
-    - L'utente accetta la remediation proposta dalla sezione di gestione della remediation
+    - L'utente accetta la remediation proposta
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC19.1>)[#underline[\[UC19.1\]]]
-    - #link(<UC19.2>)[#underline[\[UC19.2\]]]
+    - Nessuna
   ],
+  trigger: [L'utente accetta la proposta di remediation],
+  generalizzazione: [\
+    - #link(<UC44>)[#underline[\[UC44\]]]
+    - #link(<UC46>)[#underline[\[UC46\]]]
+    - #link(<UC48>)[#underline[\[UC48\]]]
+  ],
+)[#useCaseDiagram("18", "UC18 - Analisi vulnerabilità dipendenze")]
+
+=== UC19: Rifiuto di una singola remediation generica <UC19>
+#useCase(
+  attore: "Utente Autorizzato",
+  pre: [
+    - L'utente sta visualizzando una singola remediation #link(<UC16>)[#underline[\[UC16\]]]
+  ],
+  post: [
+    - La remediation non viene applicata 
+    - L'utente viene rimandato alla visualizzazione della singola remediation #link(<UC16>)[#underline[\[UC16\]]]
+  ],
+  scenari: [
+    - L'utente rifiuta la remediation proposta
+  ],
+  trigger: "L'utente rifiuta la proposta di remediation",
   generalizzazione: [
-    - Questo caso d'uso funge da generalizzazione per i seguenti casi d'uso:
-    - Accettazione singola remediation per la sezione dell'analisi del codice #link(<UC44>)[#underline[\[UC44\]]]
-    - Accettazione singola remediation per la sezione dell'analisi della sicurezza #link(<UC45>)[#underline[\[UC45\]]]
-    - Accettazione singola remediation per la sezione dell'analisi della documentazione #link(<UC46>)[#underline[\[UC46\]]]
+    - #link(<UC45>)[#underline[\[UC45\]]]
+    - //#link(<UC49>)[#underline[\[UC49\]]]
+    - #link(<UC49>)[#underline[\[UC49\]]]
   ],
-  trigger: "L'utente interagisce con la sezione di gestione della remediation e accetta la proposta di remediation",
-)[#useCaseDiagram("19", "UC19 - Analisi vulnerabilità dipendenze")]
-
-==== UC19.1: Rifiuto di una singola remediation generica <UC19.1>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente sta interagendo con la sezione di gestione della remediation #link(<UC19>)[#underline[\[UC19\]]]
-  ],
-  post: [
-    - La remediation non viene applicata automaticamente
-    - L'utente viene rimandato alla visualizzazione della singola remediation #link(<UC16>)[#underline[\[UC16\]]]
-  ],
-  scenari: [
-    - L'utente rifiuta la remediation proposta dalla sezione di gestione della remediation
-  ],
-  trigger: "L'utente interagisce con la sezione di gestione della remediation e rifiuta la proposta di remediation",
 )[]
 
-==== UC19.2: Annullamento dell'operazione di gestione della remediation <UC19.2>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente sta interagendo con la sezione di gestione della remediation #link(<UC19>)[#underline[\[UC19\]]]
-  ],
-  post: [
-    - L'utente viene rimandato alla visualizzazione della singola remediation #link(<UC16>)[#underline[\[UC16\]]]
-  ],
-  scenari: [
-    - L'utente sceglie di annullare l'operazione, tornando alla sezione precedente
-  ],
-  trigger: "L'utente annulla l'operazione di accettazione della remediation",
-)[]
 
-=== UC20: Rilevamento segreti e token <UC20>
+#TODO("da rivedere")
+/*=== UC21: Verifica conformità licenze <UC21>
 #useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente si trova nella sezione di analisi sicurezza di un report #link(<UC10>)[#underline[\[UC10\]]]
-  ],
-  post: [
-    - L'utente visualizza il report dei segreti rilevati con livelli di confidenza
-  ],
-  scenari: [
-    - L'utente accede al pannello di analisi sicurezza
-    - L'utente seleziona la scansione segreti e token
-    - L'utente visualizza il report dei risultati #link(<UC20.3>)[#underline[\[UC20.3\]]]
-    - L'utente esamina i rilevamenti e marca eventuali falsi positivi #link(<UC20.1>)[#underline[\[UC20.1\]]]
-    - L'utente configura la revoca automatica per segreti confermati #link(<UC20.2>)[#underline[\[UC20.2\]]]
-  ],
-  inclusioni: [
-    - #link(<UC20.3>)[#underline[\[UC20.3\]]] // Visualizzazione report segreti rilevati
-  ],
-  estensioni: [
-    - #link(<UC20.1>)[#underline[\[UC20.1\]]] // Marcatura falsi positivi
-    - #link(<UC20.2>)[#underline[\[UC20.2\]]] // Configurazione revoca automatica
-  ],
-  trigger: "L'utente seleziona il comando di scansione segreti e token dal pannello di analisi sicurezza",
-)[#useCaseDiagram("20", "UC20 - Rilevamento segreti e token")]
-
-==== UC20.1: Marcatura falsi positivi rilevamento segreti <UC20.1>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente sta visualizzando il report di rilevamento segreti e token #link(<UC20>)[#underline[\[UC20\]]]
-    - L'utente ha esaminato i rilevamenti
-  ],
-  post: [
-    - L'utente visualizza la conferma della marcatura
-    - L'utente visualizza il report aggiornato senza i falsi positivi confermati
-  ],
-  scenari: [
-    - L'utente esamina l'elenco dei segreti rilevati nel report
-    - L'utente seleziona i rilevamenti da marcare come falsi positivi
-    - L'utente conferma la marcatura
-    - L'utente visualizza il report aggiornato senza i falsi positivi
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente seleziona i rilevamenti da marcare come falsi positivi e conferma la marcatura",
-)[]
-
-==== UC20.2: Configurazione revoca automatica segreti compromessi <UC20.2>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente sta visualizzando il report di rilevamento segreti e token #link(<UC20>)[#underline[\[UC20\]]]
-    - L'utente ha esaminato i segreti rilevati
-  ],
-  post: [
-    - L'utente visualizza la conferma dell'attivazione della revoca automatica
-    - L'utente visualizza lo stato aggiornato dei segreti revocati nel report
-  ],
-  scenari: [
-    - L'utente esamina i segreti rilevati nel report
-    - L'utente seleziona i segreti per cui abilitare la revoca automatica
-    - L'utente accede alla sezione di configurazione revoca automatica
-    - L'utente conferma l'attivazione della revoca automatica
-    - L'utente visualizza la conferma dell'avvenuta revoca
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente seleziona i segreti compromessi e conferma l'attivazione della revoca automatica",
-)[]
-
-==== UC20.3: Visualizzazione report segreti e token rilevati <UC20.3>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente ha richiesto la scansione segreti e token #link(<UC20>)[#underline[\[UC20\]]]
-    - L'utente si trova nella sezione di analisi sicurezza
-  ],
-  post: [
-    - L'utente visualizza il report completo dei segreti rilevati
-    - L'utente visualizza i dettagli di ciascun rilevamento
-    - L'utente ha accesso alle funzionalità di marcatura falsi positivi e configurazione revoca
-  ],
-  scenari: [
-    - L'utente apre il report segreti dal pannello analisi sicurezza
-    - L'utente visualizza l'elenco dei segreti rilevati
-    - L'utente esamina i dettagli di ciascun rilevamento
-    - L'utente marca eventuali falsi positivi #link(<UC20.1>)[#underline[\[UC20.1\]]]
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente seleziona il comando di visualizzazione report segreti dal pannello di analisi sicurezza",
-)[]
-
-=== UC21: Verifica conformità licenze <UC21>
-#useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente si trova nella sezione di compliance e governance del pannello report
   ],
   post: [
-    - L'utente visualizza il report di compatibilità delle licenze con classificazione dei rischi
-    - L'utente visualizza le licenze non compatibili evidenziate
-    - L'utente può richiedere approvazione legale
+    - L'utente può visualizzare il report di compatibilità delle licenze con classificazione dei rischi
+    - L'utente può visualizzare le licenze non compatibili evidenziate
   ],
   scenari: [
     - L'utente accede al pannello compliance
@@ -2594,19 +2338,17 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC23: Monitor qualità del codice <UC23>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha selezionato il report #link(<UC6>)[#underline[\[UC6\]]]
     - L'utente si trova nella sezione di monitoraggio qualità del codice del pannello report
   ],
   post: [
-    - L'utente visualizza la dashboard con metriche di qualità del codice e trend storici
-    - L'utente visualizza le regressioni evidenziate
-    - L'utente può pianificare azioni correttive
+    - L'utente può visualizzare la dashboard con metriche di qualità del codice e trend storici
+    - L'utente può visualizzare le regressioni evidenziate
   ],
   scenari: [
-    - L'utente accede al pannello monitoraggio qualità
     - L'utente seleziona il comando di monitoraggio qualità
     - L'utente visualizza la dashboard con metriche e trend
     - L'utente esamina i suggerimenti di obiettivi qualità
@@ -2620,10 +2362,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'utente seleziona il comando di monitoraggio qualità codice dal pannello report",
 )[#useCaseDiagram("23", "UC23 - Monitor qualità del codice")]
-
+*/
+#TODO("rivedere con uc report (da 6 a 10)")
 === UC24: Suggerimenti di refactor <UC24>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha selezionato il repository da analizzare #link(<UC4>)[#underline[\[UC4\]]]
@@ -2636,33 +2379,28 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente accede alla sezione suggerimenti refactor
     - L'utente seleziona i refactor da applicare
-    - L'utente applica i refactor automaticamente #link(<UC24.2>)[#underline[\[UC24.2\]]] o manualmente
   ],
   inclusioni: [
   ],
   estensioni: [
-    - #link(<UC24.2>)[#underline[\[UC24.2\]]] // Applicazione automatica
+    - #link(<UC24.1>)[#underline[\[UC24.2\]]] // Applicazione automatica
   ],
   trigger: "L'utente seleziona il comando suggerimenti refactor dal pannello code quality",
 )[#useCaseDiagram("24", "UC24 - Suggerimenti di refactor")]
 
-==== UC24.2: Applicazione automatica refactor con supervisione <UC24.2>
+==== UC24.1: Conferma di applicazione dei reafctor <UC24.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
-    - L'utente sta visualizzando i suggerimenti di refactor #link(<UC24>)[#underline[\[UC24\]]]
-    - L'utente ha selezionato refactor da applicare
+    - L'utente sta visualizzando i suggerimenti di refactoring #link(<UC24>)[#underline[\[UC24\]]]
   ],
   post: [
-    - L'utente visualizza il diff delle modifiche applicate
-    - L'utente può accettare definitivamente o effettuare rollback
+    - Il refactoring vengono appplicati correttamente
   ],
   scenari: [
-    - L'utente seleziona i refactor da applicare automaticamente
-    - L'utente visualizza la preview delle modifiche
-    - L'utente conferma l'applicazione
-    - L'utente esamina il diff delle modifiche applicate
-    - L'utente conferma definitivamente o esegue rollback
+    - L'utente visualizza il diff delle modifiche applicate
+    - L'utente ha accettato definitivamente o eseguito il rollback
+    - L'utente conferma definitivamente il refactoring proposto
   ],
   inclusioni: [
     - Nessuna
@@ -2670,20 +2408,40 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente seleziona i refactor da applicare e conferma l'applicazione automatica con supervisione",
+  trigger: "L'utente conferma l'applicazione automatica",
 )[]
 
-#TODO("3 buchi da coprire")
-
-=== UC28: Report programmabili e alert <UC28>
+===== UC24.2: Conferma dei refactor proposti <UC24.1.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente è nella sezione report programmabili e alert
+    - L'utente sta visualizzando i suggerimenti di refactoring #link(<UC24>)[#underline[\[UC24\]]]
   ],
   post: [
-    - L'utente ha configurato con sucesso i report periodici e gli alert
+    - Il refactoring proposto non viene applicato
+  ],
+  scenari: [
+    - L'utente rifiuta il refactoring proposto
+  ],
+  inclusioni:[
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente ha rifiutato il refactoring proposto",
+)[]
+/*
+#TODO("28 e 29 da controllare")
+=== UC28: Report programmabili e alert <UC28>
+#useCase(
+  attore: "Utente Autorizzato",
+  pre: [
+    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente si trova nella sezione report programmabili e alert
+  ],
+  post: [
+    - L'utente ha configurato con successo i report periodici e gli alert
   ],
   scenari: [
     - L'utente configura la periodicità dei report #link(<UC28.1>)[#underline[\[UC28.1\]]]
@@ -2702,9 +2460,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC28.1: Configurazione periodicità dei report <UC28.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
-    - L'utente sta confiugurando i report programmabili e gli alert #link(<UC28>)[#underline[\[UC28\]]]
+    - L'utente sta configurando i report programmabili e gli alert #link(<UC28>)[#underline[\[UC28\]]]
     - L'utente è nella sezione per la configurazione della periodicità dei report
   ],
   post: [
@@ -2724,9 +2482,8 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC28.1.1: Nessuna periodicità selezionata <UC28.1.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
-    - L'utente sta confiugurando i report programmabili e gli alert #link(<UC28>)[#underline[\[UC28\]]]
     - L'utente è nella sezione per la configurazione della periodicità dei report #link(<UC28.1>)[#underline[\[UC28.1\]]]
     - L'utente non ha selezionato nessuna periodicità
   ],
@@ -2747,7 +2504,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC28.2: Configurazione soglie per gli alert critici <UC28.2>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente sta confiugurando i report programmabili e gli alert #link(<UC28>)[#underline[\[UC28\]]]
     - L'utente è nella sezione per la configurazione delle soglie per gli alert critici
@@ -2769,10 +2526,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC28.2.1: Nessuna soglia selezionata <UC28.2.1>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente sta confiugurando i report programmabili e gli alert #link(<UC28>)[#underline[\[UC28\]]]
-    - L'utente è nella sezione per la configurazione delle soglie per gli alert critici #link(<UC28.2>)[#underline[\[UC28.2\]]]
+    - L'utente si trova nella sezione per la configurazione delle soglie per gli alert critici #link(<UC28.2>)[#underline[\[UC28.2\]]]
     - L'utente non ha selezionato nessuna soglia
   ],
   post: [
@@ -2789,46 +2546,47 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'utente non inserisce alcuna soglia e tenta di confermare la configurazione dei report",
 )[]
-
-=== UC29 Recupero e avvio strumenti esterni di analisi <UC29>
+*/
+=== UC29 Avvio analisi <UC29>
 #useCase(
   attore: "Orchestratore",
+  attori_secondari: "Servizio AWS",
   pre: [
-    -  L'orchestratore ha ricevuto una richiesta di analisi di un repository
+    - L'orchestratore ha verificato l'accessibilità del repository #link(<UC17>)[#underline[\[UC17\]]]
   ],
   post: [
-    - L'orchestratore ha contattato ed avviato corettamente gli strumenti esterni di analisi
+    - L'orchestratore ha avviato correttamente l'analisi tramite gli strumenti esterni di analisi
   ],
   scenari: [
-    - L'orchestratore richiede lo strumento esterno di analisi del codice #link(<UC29.1>)[#underline[\[UC29.1\]]]
-    - L'orchestratore richiede lo strumento esterno di analisi della documentazione #link(<UC29.2>)[#underline[\[UC29.2\]]]
-    - L'orchestratore richiede lo strumento esterno di analisi degli standard OWASP #link(<UC29.3>)[#underline[\[UC29.3\]]]
-    - L'orchestratore inserisce all'interno degli strumenti esterni i dati appropriati da analizzare e gli avvia
+    - L'orchestratore clona il repository da analizzare #link(<UC29.1>)[#underline[\[UC29.1\]]]
+    - L'orchestratore richiede l'analisi allo strumento esterno per l'analisi del codice #link(<UC29.2>)[#underline[\[UC29.2\]]]
+    - L'orchestratore richiede l'analisi allo strumento esterno per l'analisi della documentazione #link(<UC29.3>)[#underline[\[UC29.3\]]]
+    - L'orchestratore richiede l'analisi allo strumento esterno per l'analisi degli standard OWASP #link(<UC29.4>)[#underline[\[UC29.4\]]]
   ],
   inclusioni: [
     - #link(<UC29.1>)[#underline[\[UC29.1\]]]
     - #link(<UC29.2>)[#underline[\[UC29.2\]]]
     - #link(<UC29.3>)[#underline[\[UC29.3\]]]
+    - #link(<UC29.4>)[#underline[\[UC29.4\]]]
   ],
   estensioni: [
     - Nessuna
   ],
   trigger: "Richiesta di analisi di un repository",
-)[#useCaseDiagram("29", "UC29 - Recupero e avvio strumenti esterni di analisi")]
+)[#useCaseDiagram("29", "UC29 - Avvio analisi")]
 
-==== UC29.1 Richiesta di analisi del codice <UC29.1>
+==== UC29.1 Richiesta di clonazione del repository <UC29.1>
 #useCase(
   attore: "Orchestratore",
-  attori_secondari: "Strumenti di Analisi",
+  attori_secondari: "Servizio AWS, Strumenti di Analisi",
   pre: [
-    - L'orchestratore è nella fase di recupero degli strumenti di analisi #link(<UC29>)[#underline[\[UC29\]]]
-    - L'orchestratore contatta lo strumento di analisi del codice
+    - L'orchestratore ha verificato l'accessibilità del repository #link(<UC17>)[#underline[\[UC17\]]]
   ],
   post: [
-    - L'orchestratore ha avviato lo strumento di analisi del codice
+    - L'orchestratore ha richiesto la clonazione del repository da analizzare al servizio AWS specifico
   ],
   scenari: [
-    - L'orchestratore invia il codice da anallizzare allo strumento di analisi del codice
+    - L'orchestratore contatta il servizio incaricato della clonazione della repository
   ],
   inclusioni: [
     - Nessuna
@@ -2836,18 +2594,63 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - #link(<UC29.1.1>)[#underline[\[UC29.1.1\]]]
   ],
-  trigger: "Viene richiesta l'analisi del codice",
-)[#useCaseDiagram("29_1", "UC29.1 - Richiesta di analisi del codice")]
+  trigger: "L'orchestratore ha iniziato la procedura di analisi",
+)[]
 
-===== UC29.1.1 Uno o più linguaggi presenti nella codebase non sono supportati dallo strumento di analisi <UC29.1.1>
+===== UC29.1.1 Errore durante la richiesta di clonazione del repository <UC29.1.1>
 #useCase(
-  attore: "Strumento di Analisi",
+  attore: "Orchestratore",
+  attori_secondari: "Servizio AWS",
   pre: [
-    - Lo strumento di analisi del codice ha ricevuto correttamente il codice da analizzare dall'orchestratore  #link(<UC29.1>)[#underline[\[UC29.1\]]]
-    - Lo strumento di analisi del codice ha iniziato l'analisi
+    - L'orchestratore ha verificato l'accessibilità del repository #link(<UC17>)[#underline[\[UC17\]]]
   ],
   post: [
-    - Lo strumento di analisi del codice comunica un messaggio di errore per mancato supporto di uno o piú linguaggio
+    - Il servizio AWS non é riuscito a clonare il repository e notifica l'orchestratore dell'errore riscontrato
+  ],
+  scenari: [
+    - L'orchestratore riceve un errore durante la richiesta di clonazione del repository
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Errore durante la richiesta di clonazione del repository",
+)[]
+
+==== UC29.2 Richiesta di analisi del codice <UC29.2>
+#useCase(
+  attore: "Orchestratore",
+  attori_secondari: "Strumenti di Analisi",
+  pre: [
+    - L'orchestratore ha contattato lo strumento di analisi del codice#link(<UC29>)[#underline[\[UC29\]]]
+  ],
+  post: [
+    - L'orchestratore ha inviato i file da analizzare allo strumento di analisi del codice
+  ],
+  scenari: [
+    - L'orchestratore invia i file da analizzare allo strumento di analisi del codice
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Viene richiesta l'analisi del codice",
+)[#useCaseDiagram("29_1", "UC29.2 - Richiesta di analisi del codice")]
+
+/*
+===== UC29.2.1 Uno o più linguaggi presenti nella codebase non sono supportati dallo strumento di analisi <UC29.2.1>
+#useCase(
+  attore: "Orchestratore",
+  attori_secondari: "Strumenti di Analisi",
+  pre: [
+    - Lo strumento di analisi del codice ha ricevuto correttamente il codice da analizzare dall'orchestratore  #link(<UC29.2>)[#underline[\[UC29.2\]]]
+  ],
+  post: [
+    - L' orchestratore notifica l'utente dell'errore riscontrato riguardo alla presenza di linguaggi non supportati
   ],
   scenari: [
     - Lo strumento di analisi del codice rileva dei linguaggi non supportati
@@ -2860,20 +2663,19 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "Rilevato uno o piú linguaggi non supportati",
 )[]
-
-==== UC29.2 Richiesta di analisi della documentazione <UC29.2>
+*/
+==== UC29.3 Richiesta di analisi della documentazione <UC29.3>
 #useCase(
   attore: "Orchestratore",
   attori_secondari: "Servizio LLM",
   pre: [
-    - L' orchestratore è nella fase di recupero degli strumenti di analisi #link(<UC29>)[#underline[\[UC29\]]]
-    - L'orchestratore contatta lo strumento di analisi della documentazione, il servizio LLM
+    - L' orchestratore ha contattato lo strumento di analisi della documentazione #link(<UC29>)[#underline[\[UC29\]]]
   ],
   post: [
-    - L'orchestratore ha avviato il servizio LLM come tool di analisi della documentazione
+    - L'orchestratore ha inviato la codebase da analizzare allo strumento di analisi della documentazione
   ],
   scenari: [
-    - L'orchestratore invia la documentazione da anallizzare al servizio LLM
+    - L'orchestratore invia la codebase da analizzare all'agente
   ],
   inclusioni: [
     - Nessuna
@@ -2884,19 +2686,18 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Viene richiesta l'analisi della documentazione",
 )[]
 
-==== UC29.3 Richiesta di analisi del rispetto degli standard OWASP <UC29.3>
+==== UC29.4 Richiesta di analisi del rispetto degli standard OWASP <UC29.4>
 #useCase(
   attore: "Orchestratore",
   attori_secondari: "Strumenti di Analisi",
   pre: [
-    - L' orchestratore è nella fase di recupero degli strumenti di analisi #link(<UC29>)[#underline[\[UC29\]]]
-    - L'orchestratore contatta lo strumento di analisi del rispetto degli standard OWASP
+    - L'orchestratore ha contattato lo strumento di analisi degli standard OWASP #link(<UC29>)[#underline[\[UC29\]]]
   ],
   post: [
-    - L'orchestratore ha avviato lo strumento di analisi degli standard OWASP
+    - L'orchestratore ha inviato la codebase da analizzare allo strumento di analisi degli standard OWASP
   ],
   scenari: [
-    - L'orchestratore invia l'applicazione da analizzare allo strumento di analisi degli standard OWASP
+    - L'orchestratore invia la #def[codebase] da analizzare allo strumento di analisi degli standard OWASP
   ],
   inclusioni: [
     - Nessuna
@@ -2904,68 +2705,160 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Viene richiesta l'analisi del rispetto degli standard OWASP",
+  trigger: "Viene richiesta l'analisi rispetto degli standard OWASP",
 )[]
 
-=== UC30 Generazione del report finale <UC30>
+#TODO("UC precondizione AWS va!")
+
+=== UC30 Salvataggio stato analisi nel sistema di persistenza <UC30>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'orchestratore ha recuperato ed avviato tutti gli strumenti di analisi #link(<UC29>)[#underline[\[UC29\]]]
+    - L'orchestratore ha avviato gli strumenti esterni di analisi #link(<UC29>)[#underline[\[UC29\]]]
+  ],
+  post: [
+    - L'orchestratore ha salvato lo stato dell'analisi come `pending` nel sistema di persistenza, associandolo alla repository e all'utente che ha richiesto l'analisi
+  ],
+  scenari: [
+    - L'orchestratore registra nel sistema di persistenza lo stato dell'analisi, associandolo alla repository e all'utente che ha richiesto l'analisi
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC30.1>)[#underline[\[UC30.1\]]]
+  ],
+  trigger: "L'orchestratore ha avviato gli strumenti esterni di analisi",
+)[#useCaseDiagram("30", "UC30 - Salvataggio stato analisi nel sistema di persistenza")]
+
+
+=== UC30.1 Errore durante il salvataggio dello stato dell'analisi nel sistema di persistenza <UC30.1>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - L'orchestratore ha avviato gli strumenti esterni di analisi #link(<UC29>)[#underline[\[UC29\]]]
+  ],
+  post: [
+    - L'orchestratore ha notificato l'utente dell'errore riscontrato durante il salvataggio dello stato dell'analisi nel sistema di persistenza
+  ],
+  scenari: [
+    - L'orchestratore rileva un errore durante il processo di salvataggio dello stato dell'analisi nel sistema di persistenza
+    - L'orchestratore registra l'errore e notifica l'utente del problema riscontrato durante il salvataggio dello stato dell'analisi nel sistema di persistenza
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'orchestratore ha avviato gli strumenti esterni di analisi",
+)[#useCaseDiagram("30", "UC30.1 - Errore durante il salvataggio dello stato dell'analisi nel sistema di persistenza")]
+
+
+=== UC31 Recupero dei risultati dagli strumenti di analisi <UC31>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - L'orchestratore ha avviato gli strumenti esterni di analisi #link(<UC29>)[#underline[\[UC29\]]]
+  ],
+  post: [
+    - L'orchestratore ha recuperato i risultati da tutti gli strumenti di analisi
+  ], 
+  scenari: [
+    - L'orchestratore attende il completamento dell'analisi da parte degli strumenti esterni
+    - L'orchestratore riceve i risultati da ciascuno strumento di analisi
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC31.1>)[#underline[\[UC31.1\]]]
+  ],
+  trigger: "Gli strumenti esterni di analisi completano le loro operazioni e inviano i risultati all'orchestratore",
+)[#useCaseDiagram("30", "UC31 - Recupero dei risultati dagli strumenti di analisi")]
+
+=== UC31.1 Uno o più strumenti di analisi non rispondono o restituiscono un errore <UC31.1>
+#useCase(
+  attore: "Strumenti di Analisi",
+  pre: [
+    - L'orchestratore ha avviato gli strumenti esterni di analisi #link(<UC29>)[#underline[\[UC29\]]]
+    - Uno o più strumenti di analisi non rispondono entro un tempo prestabilito o restituiscono un errore
+  ],
+  post: [
+    - L'orchestratore registra l'errore e procede con i risultati disponibili dagli altri strumenti di analisi
+    - L'orchestratore notifica l'utente del problema riscontrato con lo strumento di analisi non funzionante
+  ],
+  scenari: [
+    - L'orchestratore rileva la mancata risposta o l'errore da parte dello strumento di analisi
+    - L'orchestratore registra l'errore e continua a recuperare i risultati dagli altri strumenti di analisi
+    - L'orchestratore invia una notifica all'utente informandolo del problema riscontrato con lo strumento di analisi non funzionante
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Uno o più strumenti di analisi non rispondono o restituiscono un errore",
+)[
+]
+
+=== UC32 Generazione del report finale <UC32>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - L'orchestratore ha recuperato i risultati da tutti gli strumenti di analisi #link(<UC31>)[#underline[\[UC31\]]]
   ],
   post: [
     - L'orchestratore ha generato il report di analisi finale
   ],
   scenari: [
-    - L'orchestratore riceve le varie analisi dagli strumenti di analisi e le unisce in un unico report
+    - L'orchestratore riceve le varie analisi dagli strumenti di analisi e le elabora per generare il report finale
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - Nessuna
+    - Nessuna 
   ],
   trigger: "L'orchestratore riceve le analisi dei vari strumenti di analisi",
 )[
 ]
 
-#TODO("1 buco da coprire")
-
-=== UC32 L'utente viene notificato della disponibilità di visualizzare il nuovo report di analisi<UC32>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]].
-    - L'utente ha richiesto l'analisi del repository tramite la procedura di richiesta analisi #link(<UC4>)[#underline[\[UC4\]]].
-  ],
-  post: [
-    - L'utente riceve una notifica che segnala la disponibilità del nuovo report di analisi.
-  ],
-  scenari: [
-    - L'utente riceve e prende atto della notifica relativa alla disponibilità del report.
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'analisi richiesta è stata completata",
-)[]
-
-#TODO("1 buco da coprire")
-
-=== UC34: Notifica completamento dell'analisi del repository <UC34>
+=== UC33 Salvataggio di un report <UC33>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'orchestratore ha completato l'elaborazione del report di analisi.
+    - Il report dell'analisi è stato generato #link(<UC32>)[#underline[\[UC32\]]]
   ],
   post: [
-    - La notifica di completamento è stata inoltrata.
+    - L'orchestratore ha archiviato correttamente il report di analisi nel sistema di persistenza
   ],
   scenari: [
-    - L'orchestratore invia la notifica tramite il canale previsto.
+    - L'orchestratore salva il report di analisi finale nel sistema di persistenza, associandolo alla repository e all'utente che ha richiesto l'analisi
+  ], 
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC33.1>)[#underline[\[UC33.1\]]]
+  ],
+  trigger: "La procedura di generazione del report di analisi è stata completata con successo",
+)[
+]
+
+==== UC33.1 Errore durante il salvataggio del report <UC33.1>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - L'orchestratore ha avviato la procedura di salvataggio del report #link(<UC33>)[#underline[\[UC33\]]]
+    - Non avviene correttamente il processo di salvataggio e si genera un errore
+  ],
+  post: [
+    - L'orchestratore ha comunicato l'errore di mancato salvataggio del report all'utente
+  ],
+  scenari: [
+    - L'orchestratore riscontra un errore interno o di connessione al sistema di persistenza durante la procedura di salvataggio del report
   ],
   inclusioni: [
     - Nessuna
@@ -2973,15 +2866,110 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "Completamento dell'elaborazione del report",
+  trigger: "L'orchestratore riscontra un errore durante la procedura di salvataggio del report di analisi",
 )[
-  #useCaseDiagram("34", "UC34 - Notifica completamento dell'analisi del repository")
 ]
 
+=== UC34 Invio notifica completamento dell'analisi del repository <UC34>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    -L'analisi richiesta è stata salvata correttamente nel sistema di persistenza #link(<UC33>)[#underline[\[UC33\]]]
+  ],
+  post: [
+    - La notifica che segnala la disponibilità del nuovo report di analisi è stata inviata all'utente.
+  ],
+  scenari: [
+    - L'orchestratore invia una notifica all'utente che segnala la disponibilità del nuovo report di analisi.
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC34.1>)[#underline[\[UC34.1\]]] 
+  ],
+  trigger: "L'analisi richiesta è stata completata",
+)[
+]
+
+=== UC34.1 Errore durante l'invio della notifica di completamento dell'analisi <UC34.1>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - L'analisi richiesta è stata salvata correttamente nel sistema di persistenza #link(<UC33>)[#underline[\[UC33\]]]
+  ],
+  post: [
+    - L'utente non riceve la notifica di completamento dell'analisi e non è informato della disponibilità del nuovo report di analisi.
+  ],
+  scenari: [
+    - L'orchestratore riscontra un errore interno o di connessione durante il processo di invio della notifica di completamento dell'analisi
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'orchestratore riscontra un errore durante il processo di invio della notifica di completamento dell'analisi",
+)[
+]
+
+
+=== UC35: Ricezione notifica completamento analisi <UC35>
+#useCase(
+  attore: "Utente autenticato",
+  pre: [
+    - L'orchestratore ha notificato il completamento dell'analisi all'utente. #link(<UC34>)[#underline[\[UC34\]]]
+  ],
+  post: [
+    - L'utente riceve la notifica di completamento dell'analisi e può visualizzare il report di analisi tramite la sezione apposita.
+  ],
+  scenari: [
+    - L'orchestratore invia la notifica all'utente.
+    - L'utente riceve la notifica.
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC35.1>)[#underline[\[UC35.1\]]] // Notifica non ricevuta
+  ],
+  trigger: "L'orchestratore ha completato l'analisi e ha inviato la notifica all'utente",
+)[
+  #useCaseDiagram("35", "UC35 - Ricezione notifica completamento dell'analisi del repository")
+]
+#TODO("trigger da rivedere(35 E 35.1)")
+
+=== UC35.1: Notifica completamento analisi non ricevuta <UC35.1>
+#useCase(
+  attore: "Utente autenticato",
+  pre: [
+    - L'orchestratore ha notificato il completamento dell'analisi all'utente #link(<UC34>)[#underline[\[UC34\]]]
+    - L'utente non riceve la notifica di completamento dell'analisi
+  ],
+  post: [
+    - L'utente non è informato della disponibilità del nuovo report di analisi e non può accedere al report tramite la sezione apposita.
+  ],
+  scenari: [
+    - L'orchestratore invia la notifica tramite il canale previsto.
+    - A causa di un errore tecnico o di un problema di connessione, l'utente non riceve la notifica.
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'orchestratore ha completato l'analisi e ha inviato la notifica all'utente",
+)[]
+
+
+#TODO("BOH... cioé ho fatto le estensioni")
+/*
 === UC35: Gestione errore critico durante l'analisi <UC35>
 #TODO("La gestione dell'errore va bene come uc a parte o estensione magari di UC29?")
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]].
     - L'utente ha richiesto l'analisi del repository tramite la procedura di richiesta analisi #link(<UC4>)[#underline[\[UC4\]]].
@@ -3002,168 +2990,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 )[
   #useCaseDiagram("35", "UC35 - Notifica errore critico durante l'analisi")
 ]
+*/
 
-=== UC36: Salvataggio metadati repository <UC36>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]].
-    - L'utente ha richiesto l'analisi del repository tramite la procedura di richiesta analisi #link(<UC4>)[#underline[\[UC4\]]].
-  ],
-  post: [
-    - I metadati del repository sono stati salvati correttamente nel database.
-  ],
-  scenari: [
-    - L'utente avvia (o conferma) la procedura di salvataggio metadati come parte della richiesta di analisi.
-    - Il sistema registra i metadati e conferma l'avvenuto salvataggio.
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Completamento della raccolta metadati durante l'analisi (UC29)",
-)[]
 
-=== UC37: Verifica esistenza repository analizzati <UC37> 
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - L'orchestratore ha ricevuto una richiesta di visualizzazione dei repository analizzati
-  ],
-  post: [
-    - L'orchestratore ha verificato l'esistenza dei repository analizzati e restituisce le informazioni relative ad essi
-  ],
-  scenari: [
-    - L'orchestratore verifica l'esistenza dei repository analizzati
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC37.1>)[#underline[\[UC37.1\]]]
-  ],
-  trigger: "Richiesta di visualizzazione dei repository analizzati",
-)[
-  #useCaseDiagram("37", "UC37 - Verifica esistenza repository analizzati")
-]
-
-==== UC37.1: Nessun repository analizzato <UC37.1>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - L'orchestratore si trova nella verifica di esistenza dei repository analizzati #link(<UC37>)[#underline[\[UC37\]]]
-    - Non sono presenti repository analizzati
-  ],
-  post: [
-    - L'orchestratore ha inviato un messaggio errore di mancata presenza di repository analizzati
-  ],
-  scenari: [
-    - L'orchestratore non trova nessun repository analizzato e procede con l'invio dell'errore
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Nessun repository analizzato trovato",
-)[]
-
-=== UC38 Salvataggio del report dell'analisi <UC38> 
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - Il report dell'analisi è stato completato e è stato preso in carico dall'orchestratore #link(<UC30>)[#underline[[UC30]]]
-  ],
-  post: [
-    - L'orchestratore ha archiviato correttamente il report dell'analisi
-  ],
-  scenari: [
-    - L'orchestratore ha avviato la procedura di salvataggio del report dell'analisi
-    #TODO("Servono altri passaggi/inclusioni o va bene così? (direi che non bisgona concentrarsi sul 'come')")
-    //- L'orchestratore invia una richiesta di persistenza al sistema Back-end
-    //- Il sistema Back-end riceve i dati del report
-    //- Il sistema Back-end memorizza il report nel database
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC38.1>)[#underline[[UC38.1]]]
-  ],
-  trigger: "Il report di analisi finale è preso in carico dall'orchestratore",
-)[
-  #useCaseDiagram("38", "UC38 - Salvataggio del report dell'analisi")
-]
-
-==== UC38.1 Errore durante il salvataggio del report <UC38.1>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - L'orchestratore ha avviato l'archiviazione del report #link(<UC38>)[#underline[[UC38]]]
-    - Non avviene correttamente il processo di salvataggio e si genera un errore
-  ],
-  post: [
-    - L'orchestratore comunica l'errore di mancato salvataggio del report
-  ],
-  scenari: [
-    - L'orchestratore riscontra un errore interno o di connessione al database durante la procedura di salvataggio del report
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "La procedura di salvataggio del report di analisi finale fallisce",
-)[]
-
-=== UC39 Salvataggio delle metriche aggregate <UC39>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - Il report dell'analisi è stato completato e è stato preso in carico dall'orchestratore #link(<UC30>)[#underline[[UC30]]]
-  ],
-  post: [
-    - L'orchestratore ha archiviato correttamente le metriche aggregate per la visualizzazione di grafici e tabelle
-  ],
-  scenari: [
-    - L'orchestratore elabora i dati dei singoli report degli agenti per calcolare le metriche globali e avvia la procedura di salvataggio
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC39.1>)[#underline[[UC39.1]]]
-  ],
-  trigger: "Il report di analisi finale è preso in carico dall'orchestratore",
-)[
-  #useCaseDiagram("39", "UC39 - Salvataggio delle metriche aggregate")
-]
-
-==== UC39.1 Errore durante il salvataggio delle metriche aggregate <UC39.1>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - L'orchestratore ha avviato la procedura di salvataggio delle metriche aggregate #link(<UC39>)[#underline[[UC39]]]
-    - Non avviene correttamente il processo di salvataggio e si genera un errore
-  ],
-  post: [
-    - L'orchestratore comunica l'errore di mancato salvataggio delle metriche aggregate
-  ],
-  scenari: [
-    - L'orchestratore riscontra un errore interno o di connessione al database durante la procedura di salvataggio delle metriche aggregate
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Il sistema Back-end fallisce la procedura di archiviazione delle metriche",
-)[]
 
 === UC40 Gestione del codice OAuth GitHub <UC40>
 #useCase(
@@ -3190,13 +3019,13 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 )[
   #useCaseDiagram("40", "UC40 - Gestione del codice OAuth GitHub")
 ]
+#TODO("estensioni UC40...puó fallire?")
 
-=== UC41: Visualizzazione singola remediation di analisi del codice <UC41>
+=== UC41: Visualizzazione singola remediation riguardante il codice <UC41>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente sta visualizzando la lista delle remediation della sezione di analisi del codice #link(<UC9.3>)[#underline[\[UC9.3\]]]
-    - L'utente seleziona una remediation specifica dall'elenco
   ],
   post: [
     - L'utente ha visualizzato i dettagli della remediation
@@ -3211,17 +3040,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   specializzazione: [
-    - Questo caso d'uso è una specializzazione del caso d'uso Visualizzazione singola remediation di sezione generica #link(<UC16>)[#underline[\[UC16\]]]
+    - #link(<UC16>)[#underline[\[UC16\]]]
   ],
   trigger: "L'utente seleziona una remediation dalla lista proposta nella sezione di analisi del codice",
 )[]
 
-=== UC42: Visualizzazione singola remediation di analisi della sicurezza <UC42>
+=== UC42: Visualizzazione singola remediation riguardante l'analisi della sicurezza <UC42>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente sta visualizzando la lista delle remediation della sezione di analisi della sicurezza #link(<UC10.3>)[#underline[\[UC10.3\]]]
-    - L'utente seleziona una remediation specifica dall'elenco
   ],
   post: [
     - L'utente ha visualizzato i dettagli della remediation
@@ -3236,17 +3064,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   specializzazione: [
-    - Questo caso d'uso è una specializzazione del caso d'uso Visualizzazione singola remediation di sezione generica #link(<UC16>)[#underline[\[UC16\]]]
+    - #link(<UC16>)[#underline[\[UC16\]]]
   ],
   trigger: "L'utente seleziona una remediation dalla lista proposta nella sezione di analisi della sicurezza",
 )[]
 
-=== UC43: Visualizzazione singola remediation di analisi della documentazione <UC43>
+=== UC43: Visualizzazione singola remediation riguardante l'analisi della documentazione <UC43>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente sta visualizzando la lista delle remediation della sezione di analisi della documentazione #link(<UC11.3>)[#underline[\[UC11.3\]]]
-    - L'utente seleziona una remediation specifica dall'elenco
   ],
   post: [
     - L'utente ha visualizzato i dettagli della remediation
@@ -3261,185 +3088,143 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   specializzazione: [
-    - Questo caso d'uso è una specializzazione del caso d'uso Visualizzazione singola remediation di sezione generica #link(<UC16>)[#underline[\[UC16\]]]
+    - Questo caso d'uso è una specializzazione del caso d'uso Visualizzazione singola remediation riguardante l'sezione generica #link(<UC16>)[#underline[\[UC16\]]]
   ],
   trigger: "L'utente seleziona una remediation dalla lista proposta nella sezione di analisi della documentazione",
 )[]
 
-=== UC44: Accettazione singola remediation di analisi del codice <UC44>
+=== UC44: Accettazione singola remediation riguardante l'analisi del codice <UC44>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
-    - L'utente sta visualizzando una singola remediation di analisi del codice #link(<UC41>)[#underline[\[UC41\]]]
+    - L'utente sta visualizzando una singola remediation riguardante analisi del codice #link(<UC41>)[#underline[\[UC41\]]]
   ],
   post: [
     - La remediation viene automaticamente eseguita, applicando modifiche alla sezione interessata dall'analisi del codice del repository di riferimento 
-    - L'utente viene rimandato alla sezione di visualizzazione della singola remediation di analisi del codice #link(<UC41>)[#underline[\[UC41\]]]
+    - L'utente visualizza la remediation appena eseguita #link(<UC41>)[#underline[\[UC41\]]]
   ],
   scenari: [
-    - L'utente accetta la remediation proposta dalla sezione di gestione della remediation di analisi del codice
+    - L'utente accetta la remediation proposta riguardante l'analisi del codice
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC44.1>)[#underline[\[UC44.1\]]]
-    - #link(<UC44.2>)[#underline[\[UC44.2\]]]
+    - Nessuna 
   ],
   specializzazione: [
-    - Questo caso d'uso è una specializzazione del caso d'uso Accettazione singola remediation #link(<UC19>)[#underline[\[UC19\]]]
+    - #link(<UC18>)[#underline[\[UC18\]]]
   ],
-  trigger: "L'utente interagisce con la sezione di gestione della remediation di analisi del codice e accetta la proposta di remediation",
+  trigger: "L'utente accetta la proposta di remediation riguardante l'analisi del codice",
 )[]
 
-==== UC44.1: Rifiuto di una singola remediation di analisi del codice <UC44.1>
+==== UC45: Rifiuto di una singola remediation riguardante l'analisi del codice <UC45>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
-    - L'utente sta interagendo con la sezione di gestione della remediation di analisi del codice #link(<UC44>)[#underline[\[UC44\]]]
+     L'utente sta visualizzando una singola remediation riguardante analisi del codice #link(<UC41>)[#underline[\[UC41\]]]
   ],
   post: [
-    - La remediation non viene applicata automaticamente
-    - L'utente viene rimandato alla visualizzazione della singola remediation di analisi del codice #link(<UC41>)[#underline[\[UC41\]]]
+    - La remediation non viene applicata
+    - L'utente visualizza la remediation appena rifiutata #link(<UC41>)[#underline[\[UC41\]]]
   ],
   scenari: [
-    - L'utente rifiuta la remediation proposta dalla sezione di gestione della remediation di analisi del codice
+    - L'utente rifiuta la remediation proposta riguardante l'analisi del codice
   ],
-  trigger: "L'utente interagisce con la sezione di gestione della remediation e rifiuta la proposta di remediation di analisi del codice",
+  trigger: "L'utente rifiuta la proposta di remediation riguardante l'analisi del codice",
 )[]
 
-==== UC44.2: Annullamento dell'operazione di gestione della remediation di analisi del codice <UC44.2>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente sta interagendo con la sezione di gestione della remediation di analisi del codice #link(<UC44>)[#underline[\[UC44\]]]
-  ],
-  post: [
-    - L'utente viene rimandato alla visualizzazione della singola remediation di analisi del codice #link(<UC41>)[#underline[\[UC41\]]]
-  ],
-  scenari: [
-    - L'utente sceglie di annullare l'operazione, tornando alla sezione precedente
-  ],
-  trigger: "L'utente annulla l'operazione di accettazione della remediation di analisi del codice",
-)[]
 
-=== UC45: Accettazione singola remediation di analisi della sicurezza <UC45>
+=== UC46: Accettazione singola remediation riguardante l'analisi della sicurezza <UC46>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
-    - L'utente sta visualizzando una singola remediation di analisi della sicurezza #link(<UC42>)[#underline[\[UC42\]]]
+    - L'utente sta visualizzando una singola remediation riguardante l'analisi della sicurezza #link(<UC42>)[#underline[\[UC42\]]]
   ],
   post: [
-    - La remediation viene automaticamente eseguita, applicando modifiche alla sezione interessata dall'analisi della sicurezza del repository di riferimento 
-    - L'utente viene rimandato alla sezione di visualizzazione della singola remediation di analisi della sicurezza #link(<UC42>)[#underline[\[UC42\]]]
+    - La remediation viene automaticamente eseguita, applicando modifiche alla sezione specifica del repository di riferimento
+    - L'utente visualizza la remediation appena eseguita #link(<UC42>)[#underline[\[UC42\]]]
   ],
   scenari: [
-    - L'utente accetta la remediation proposta dalla sezione di gestione della remediation di analisi della sicurezza
+    - L'utente accetta la remediation proposta riguardante l'analisi della sicurezza
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC45.1>)[#underline[\[UC45.1\]]]
-    - #link(<UC45.2>)[#underline[\[UC45.2\]]]
+    - Nessuna
   ],
   specializzazione: [
-    - Questo caso d'uso è una specializzazione del caso d'uso Accettazione singola remediation #link(<UC19>)[#underline[\[UC19\]]]
+    #link(<UC18>)[#underline[\[UC18\]]]
   ],
-  trigger: "L'utente interagisce con la sezione di gestione della remediation di analisi della sicurezza e accetta la proposta di remediation",
+  trigger: "L'utente interagisce con la sezione di gestione della remediation riguardante l'analisi della sicurezza e accetta la proposta di remediation",
 )[]
 
-==== UC45.1: Rifiuto di una singola remediation di analisi della sicurezza <UC45.1>
+==== UC47: Rifiuto di una singola remediation riguardante l'analisi della sicurezza <UC47>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
-    - L'utente sta interagendo con la sezione di gestione della remediation di analisi della sicurezza #link(<UC45>)[#underline[\[UC45\]]]
+    - L'utente sta visualizzando una singola remediation riguardante l'analisi della sicurezza #link(<UC42>)[#underline[\[UC42\]]]
   ],
   post: [
-    - La remediation non viene applicata automaticamente
-    - L'utente viene rimandato alla visualizzazione della singola remediation di analisi della sicurezza #link(<UC42>)[#underline[\[UC42\]]]
+    - La remediation non viene applicata 
+    - L'utente visualizza la remediation appena rifiutata #link(<UC42>)[#underline[\[UC42\]]]
   ],
   scenari: [
-    - L'utente rifiuta la remediation proposta dalla sezione di gestione della remediation di analisi della sicurezza
+    - L'utente rifiuta la remediation proposta riguardante l'analisi della sicurezza
   ],
-  trigger: "L'utente interagisce con la sezione di gestione della remediation e rifiuta la proposta di remediation di analisi della sicurezza",
+  trigger: "L'utente rifiuta la proposta di remediation riguardante l'analisi della sicurezza",
+  specializzazione:
+    [#underline[\[UC19\]]]
 )[]
 
-==== UC45.2: Annullamento dell'operazione di gestione della remediation di analisi della sicurezza <UC45.2>
+=== UC48: Accettazione singola remediation riguardante l'analisi della documentazione <UC48>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
-    - L'utente sta interagendo con la sezione di gestione della remediation di analisi della sicurezza #link(<UC45>)[#underline[\[UC45\]]]
+    - L'utente sta visualizzando una singola remediation riguardante l'analisi della documentazione #link(<UC43>)[#underline[\[UC43\]]]
   ],
   post: [
-    - L'utente viene rimandato alla visualizzazione della singola remediation di analisi della sicurezza #link(<UC42>)[#underline[\[UC42\]]]
+    - La remediation viene automaticamente eseguita, applicando modifiche alla sezione specifica del repository di riferimento 
+    - L'utente visualizza la remediation appena eseguita #link(<UC43>)[#underline[\[UC43\]]]
   ],
   scenari: [
-    - L'utente sceglie di annullare l'operazione, tornando alla sezione precedente
-  ],
-  trigger: "L'utente annulla l'operazione di accettazione della remediation di analisi della sicurezza",
-)[]
-
-=== UC46: Accettazione singola remediation di analisi della documentazione <UC46>
-#useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente sta visualizzando una singola remediation di analisi della documentazione #link(<UC43>)[#underline[\[UC43\]]]
-  ],
-  post: [
-    - La remediation viene automaticamente eseguita, applicando modifiche alla sezione interessata dall'analisi della documentazione del repository di riferimento 
-    - L'utente viene rimandato alla sezione di visualizzazione della singola remediation di analisi della documentazione #link(<UC43>)[#underline[\[UC43\]]]
-  ],
-  scenari: [
-    - L'utente accetta la remediation proposta dalla sezione di gestione della remediation di analisi della documentazione
+    - L'utente accetta la remediation proposta riguardante l'analisi della documentazione
   ],
   inclusioni: [
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC46.1>)[#underline[\[UC46.1\]]]
-    - #link(<UC46.2>)[#underline[\[UC46.2\]]]
+    - Nessuna
   ],
   specializzazione: [
-    - Questo caso d'uso è una specializzazione del caso d'uso Accettazione singola remediation #link(<UC19>)[#underline[\[UC19\]]]
+    [#underline[\[UC18\]]]
   ],
-  trigger: "L'utente interagisce con la sezione di gestione della remediation di analisi della documentazione e accetta la proposta di remediation",
+  trigger: "L'utente accetta la proposta di remediation riguardante l'analisi della documentazione",
 )[]
 
-==== UC46.1: Rifiuto di una singola remediation di analisi della documentazione <UC46.1>
+==== UC49: Rifiuto di una singola remediation riguardante l'analisi della documentazione <UC49>
 #useCase(
-  attore: "Utente autorizzato",
+  attore: "Utente Autorizzato",
   pre: [
-    - L'utente sta interagendo con la sezione di gestione della remediation di analisi della documentazione #link(<UC46>)[#underline[\[UC46\]]]
+    - L'utente sta interagendo con la sezione di gestione della remediation riguardante l'analisi della documentazione #link(<UC43>)[#underline[\[UC43\]]]
   ],
   post: [
-    - La remediation non viene applicata automaticamente
-    - L'utente viene rimandato alla visualizzazione della singola remediation di analisi della documentazione #link(<UC43>)[#underline[\[UC43\]]]
+    - La remediation non viene applicata 
+    - L'utente visualizza la remediation appena rifiutata #link(<UC43>)[#underline[\[UC43\]]]
   ],
   scenari: [
-    - L'utente rifiuta la remediation proposta dalla sezione di gestione della remediation di analisi della documentazione
+    - L'utente rifiuta la remediation proposta  riguardante l'analisi della documentazione
   ],
-  trigger: "L'utente interagisce con la sezione di gestione della remediation e rifiuta la proposta di remediation di analisi della documentazione",
+  trigger: "L'utente rifiuta la proposta di remediation riguardante l'analisi della documentazione",
+  specializzazione:
+    [#underline[\[UC19\]]]
 )[]
 
-==== UC46.2: Annullamento dell'operazione di gestione della remediation di analisi della documentazione <UC46.2>
+#TODO("Controllo UC a seguire")
+=== UC51: Richiesta analisi repository GitHub privato a cui si ha accesso <UC51>
 #useCase(
-  attore: "Utente autorizzato",
-  pre: [
-    - L'utente sta interagendo con la sezione di gestione della remediation di analisi della documentazione #link(<UC46>)[#underline[\[UC46\]]]
-  ],
-  post: [
-    - L'utente viene rimandato alla visualizzazione della singola remediation di analisi della documentazione #link(<UC43>)[#underline[\[UC43\]]]
-  ],
-  scenari: [
-    - L'utente sceglie di annullare l'operazione, tornando alla sezione precedente
-  ],
-  trigger: "L'utente annulla l'operazione di accettazione della remediation di analisi della documentazione",
-)[]
-
-=== UC47: Richiesta analisi repository GitHub privato a cui si ha accesso <UC47>
-#useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
     - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato il proprio account GitHub #link(<UC3>)[#underline[\[UC3\]]]
@@ -3450,26 +3235,26 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - La richiesta di analisi del repository GitHub privato a cui si ha accesso è stata completata con successo
   ],
   scenari: [
-    - L'utente inserisce l'URL del repository GitHub privato da analizzare #link(<UC47.1>)[#underline[\[UC47.1\]]]
-    - L'utente seleziona le aree di interesse per l'analisi #link(<UC47.2>)[#underline[\[UC47.2\]]]
+    - L'utente inserisce l'URL del repository GitHub privato da analizzare #link(<UC51.1>)[#underline[\[UC51.1\]]]
+    - L'utente seleziona le aree di interesse per l'analisi #link(<UC51.2>)[#underline[\[UC51.2\]]]
     - L'utente conferma l'invio della richiesta di analisi
   ],
   inclusioni: [
-    - #link(<UC47.1>)[#underline[\[UC47.1\]]]
-    - #link(<UC47.2>)[#underline[\[UC47.2\]]]
+    - #link(<UC51.1>)[#underline[\[UC51.1\]]]
+    - #link(<UC51.2>)[#underline[\[UC51.2\]]]
   ],
   estensioni: [
-    - #link(<UC47.3>)[#underline[\[UC47.3\]]] // Ultimo report up-to-date
-    - #link(<UC47.4>)[#underline[\[UC47.4\]]] // Ultimo report in elaborazione
+    - #link(<UC51.3>)[#underline[\[UC51.3\]]] // Ultimo report up-to-date
+    - #link(<UC51.4>)[#underline[\[UC51.4\]]] // Ultimo report in elaborazione
   ],
   trigger: "L'utente accede alla sezione dedicata per la richiesta di analisi di repository GitHub in CodeGuardian",
 )[]
 
-==== UC47.1: Inserimento URL repository GitHub privato per l'analisi <UC47.1>
+==== UC51.1: Inserimento URL repository GitHub privato per l'analisi <UC51.1>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato #link(<UC47>)[#underline[\[UC47\]]]
+    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato //#link(<UC51>)[#underline[\[UC51\]]]
   ],
   post: [
     - L'URL del repository GitHub privato inserito dall'utente è idoneo alla procedura di analisi
@@ -3478,18 +3263,18 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente inserisce l'URL del repository GitHub privato da analizzare
   ],
   estensioni: [
-    - #link(<UC47.1.1>)[#underline[\[UC47.1.1\]]] // URL repository GitHub privato non conforme
-    - #link(<UC47.1.2>)[#underline[\[UC47.1.2\]]] // Repository GitHub privato non accessibile
-    - #link(<UC47.1.3>)[#underline[\[UC47.1.3\]]] // URL repository GitHub privato non inserito
+    - #link(<UC51.1.1>)[#underline[\[UC51.1.1\]]] // URL repository GitHub privato non conforme
+    - #link(<UC51.1.2>)[#underline[\[UC51.1.2\]]] // Repository GitHub privato non accessibile
+    - #link(<UC51.1.3>)[#underline[\[UC51.1.3\]]] // URL repository GitHub privato non inserito
   ],
   trigger: "L'utente interagisce con la sezione dell'inserimento dell'URL del repository GitHub durante la procedura di richiesta analisi repository GitHub privato",
 )[]
 
-===== UC47.1.1: URL repository GitHub non conforme ai vincoli di formato <UC47.1.1>
+===== UC51.1.1: URL repository GitHub non conforme ai vincoli di formato <UC51.1.1>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato #link(<UC47>)[#underline[\[UC47\]]]
+    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato //#link(<UC51>)[#underline[\[UC51\]]]
     - L'URL inserito non è conforme ai vincoli di formato previsti per l'inserimento dell'URL del repository GitHub
   ],
   post: [
@@ -3501,11 +3286,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente ha inserito un URL del repository GitHub non conforme ai vincoli di formato",
 )[]
 
-===== UC47.1.2: Repository GitHub non accessibile <UC47.1.2>
+===== UC51.1.2: Repository GitHub non accessibile <UC51.1.2>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato #link(<UC47>)[#underline[\[UC47\]]]
+    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato //#link(<UC51>)[#underline[\[UC51\]]]
     - Il repository GitHub associato all'URL inserito non è accessibile
   ],
   post: [
@@ -3517,11 +3302,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente conferma l'inserimento dell'URL del repository GitHub non accessibile durante la procedura di richiesta analisi",
 )[]
 
-===== UC47.1.3: URL repository GitHub non inserito <UC47.1.3>
+===== UC51.1.3: URL repository GitHub non inserito <UC51.1.3>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato #link(<UC47>)[#underline[\[UC47\]]]
+    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato //#link(<UC51>)[#underline[\[UC51\]]]
     - L'utente non ha inserito alcun URL del repository GitHub
   ],
   post: [
@@ -3533,11 +3318,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente termina senza inserire alcun URL durante la procedura di richiesta analisi repository GitHub",
 )[]
 
-==== UC47.2: Selezione aree di interesse <UC47.2>
+==== UC51.2: Selezione aree di interesse <UC51.2>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato #link(<UC47>)[#underline[\[UC47\]]]
+    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato //#link(<UC51>)[#underline[\[UC51\]]]
   ],
   post: [
     - L'utente ha selezionato le aree di interesse del repository GitHub da analizzare
@@ -3546,16 +3331,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente seleziona le aree del repository GitHub da analizzare, specificando cosa includere tra test, sicurezza o documentazione
   ],
   estensioni: [
-    - #link(<UC47.2.1>)[#underline[\[UC47.2.1\]]] // Nessuna area di interesse selezionata
+    - #link(<UC51.2.1>)[#underline[\[UC51.2.1\]]] // Nessuna area di interesse selezionata
   ],
   trigger: "L'utente interagisce con la sezione della selezione delle aree del repository GitHub da analizzare durante la procedura di richiesta analisi repository GitHub privato",
 )[]
 
-===== UC47.2.1: Nessuna area di interesse selezionata <UC47.2.1>
+===== UC51.2.1: Nessuna area di interesse selezionata <UC51.2.1>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato #link(<UC47>)[#underline[\[UC47\]]]
+    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato //#link(<UC51>)[#underline[\[UC51\]]]
     - L'utente non ha selezionato alcuna area di interesse durante la selezione delle aree di interesse
   ],
   post: [
@@ -3567,13 +3352,13 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente conferma la selezione delle aree del repository GitHub da analizzare durante la procedura di richiesta analisi repository GitHub privato",
 )[]
 
-==== UC47.3: Ultimo repost up-to-date <UC47.3>
+==== UC51.3: Ultimo repost up-to-date <UC51.3>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato #link(<UC47>)[#underline[\[UC47\]]]
-    - L'utente ha inserito un URL del repository GitHub #link(<UC47.1>)[#underline[\[UC47.1\]]]
-    - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC47.2>)[#underline[\[UC47.2\]]]
+    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato //#link(<UC51>)[#underline[\[UC51\]]]
+    - L'utente ha inserito un URL del repository GitHub #link(<UC51.1>)[#underline[\[UC51.1\]]]
+    - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC51.2>)[#underline[\[UC51.2\]]]
     - L'utente ha inviato la richiesta di analisi
     - L'ultimo report di analisi del repository GitHub specificato è già aggiornato rispetto all'ultima modifica del repository stesso
   ],
@@ -3586,13 +3371,13 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'ultimo report di analisi del repository GitHub specificato è già aggiornato rispetto all'ultima modifica del repository stesso",
 )[]
 
-==== UC47.4: Ultimo report in elaborazione <UC47.4>
+==== UC51.4: Ultimo report in elaborazione <UC51.4>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato #link(<UC47>)[#underline[\[UC47\]]]
-    - L'utente ha inserito un URL del repository GitHub corretto #link(<UC47.1>)[#underline[\[UC47.1\]]]
-    - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC47.2>)[#underline[\[UC47.2\]]]
+    - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato //#link(<UC51>)[#underline[\[UC51\]]]
+    - L'utente ha inserito un URL del repository GitHub corretto #link(<UC51.1>)[#underline[\[UC51.1\]]]
+    - L'utente ha selezionato almeno un'area di interesse durante la selezione delle aree di interesse #link(<UC51.2>)[#underline[\[UC51.2\]]]
     - L'utente invia la richiesta di analisi
     - L'ultimo report di analisi del repository GitHub specificato è ancora in elaborazione
   ],
@@ -3605,9 +3390,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'ultimo report di analisi del repository GitHub specificato è ancora in elaborazione",
 )[]
 
-=== UC48: Visualizzazione dei propri repository privati inseriti <UC48>
+=== UC60: Visualizzazione dei propri repository privati inseriti <UC60>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
     - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato il proprio account GitHub #link(<UC3>)[#underline[\[UC3\]]]
@@ -3618,22 +3403,22 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza la lista di tutti i repository privati di cui è proprietario che ha inserito nella piattaforma
-    - Per ogni repository sono presenti le informazioni minime #link(<UC48.1>)[#underline[\[UC48.1\]]]
+    - Per ogni repository sono presenti le informazioni minime #link(<UC60.1>)[#underline[\[UC60.1\]]]
   ],
   inclusioni: [
-    - #link(<UC48.1>)[#underline[\[UC48.1\]]]
+    - #link(<UC60.1>)[#underline[\[UC60.1\]]]
   ],
   estensioni: [
-    - #link(<UC48.2>)[#underline[\[UC48.2\]]] // Nessun repository inserito
+    - #link(<UC60.2>)[#underline[\[UC60.2\]]] // Nessun repository inserito
   ],
   trigger: "L'utente accede alla sezione dei propri repository privati inseriti",
 )[]
 
-==== UC48.1: Informazioni minime repository privati inseriti <UC48.1>
+==== UC60.1: Informazioni minime repository privati inseriti <UC60.1>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente si trova nella sezione di visualizzazione dei propri repository privati inseriti #link(<UC48>)[#underline[\[UC48\]]]
+    - L'utente si trova nella sezione di visualizzazione dei propri repository privati inseriti #link(<UC60>)[#underline[\[UC60\]]]
   ],
   post: [
     - L'utente visualizza i dettagli minimi per i repository privati inseriti
@@ -3644,11 +3429,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente accede alla sezione dei propri repository privati inseriti",
 )[]
 
-==== UC48.2: Nessun repository inserito <UC48.2>
+==== UC60.2: Nessun repository inserito <UC60.2>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente si trova nella sezione di visualizzazione dei propri repository privati inseriti #link(<UC48>)[#underline[\[UC48\]]]
+    - L'utente si trova nella sezione di visualizzazione dei propri repository privati inseriti #link(<UC60>)[#underline[\[UC60\]]]
     - Nessun repository è stato trovato
   ],
   post: [
@@ -3660,9 +3445,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Non viene trovato nessun repository privato di cui l'utente è proprietario",
 )[]
 
-=== UC49: Inserimento di un proprio repository privato nel sistema CodeGuardian <UC49>
+=== UC51: Inserimento di un proprio repository privato nel sistema CodeGuardian <UC51>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
     - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato il proprio account GitHub #link(<UC3>)[#underline[\[UC3\]]]
@@ -3673,7 +3458,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Il repository privato è stato aggiunto al sistema CodeGuardian
   ],
   scenari: [
-    - L'utente inserisce un URL di un repository privato di sua proprietà #link(<UC49.1>)[#underline[\[UC49.1\]]]
+    - L'utente inserisce un URL di un repository privato di sua proprietà #link(<UC51.1>)[#underline[\[UC49.1\]]]
     - L'utente conferma l'inserimento
   ],
   inclusioni: [
@@ -3687,7 +3472,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC49.1: Inserimento URL repository GitHub privato di cui si è proprietario <UC49.1>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
     - L'utente sta eseguendo la procedura di inserimento di un repository privato di cui si è proprietario nel sistema CodeGuardian #link(<UC49>)[#underline[\[UC49\]]]
   ],
@@ -3708,7 +3493,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC49.1.1: URL repository GitHub non conforme ai vincoli di formato <UC49.1.1>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
     - L'utente sta eseguendo la procedura di inserimento di un repository privato di cui si è proprietario nel sistema CodeGuardian #link(<UC49>)[#underline[\[UC49\]]]
     - L'URL inserito non è conforme ai vincoli di formato previsti per l'inserimento dell'URL del repository GitHub
@@ -3724,7 +3509,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC49.1.2: Repository GitHub non accessibile <UC49.1.2>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
     - L'utente sta eseguendo la procedura di inserimento di un repository privato di cui si è proprietario nel sistema CodeGuardian #link(<UC49>)[#underline[\[UC49\]]]
     - Il repository GitHub associato all'URL inserito non è accessibile
@@ -3740,7 +3525,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC49.1.3: URL repository GitHub non inserito <UC49.1.3>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
     - L'utente sta eseguendo la procedura di inserimento di un repository privato di cui si è proprietario nel sistema CodeGuardian #link(<UC49>)[#underline[\[UC49\]]]
     - L'utente non ha inserito alcun URL del repository GitHub
@@ -3756,7 +3541,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC49.1.4: Repository GitHub già presente nel sistema <UC49.1.4>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
     - L'utente sta eseguendo la procedura di inserimento di un repository privato di cui si è proprietario nel sistema CodeGuardian #link(<UC49>)[#underline[\[UC49\]]]
     - L'utente ha inserito un URL corrispondente a un repository GitHub già presente nel sistema
@@ -3770,13 +3555,13 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente conferma l'inserimento dell'URL di un repository GitHub già presente nel sistema durante la procedura di inserimento di un proprio repository privato",
 )[]
 
-=== UC50: Rimozione di un proprio repository privato dalla lista dei propri repository privati <UC50>
+=== UC52: Rimozione di un proprio repository privato dalla lista dei propri repository privati <UC52>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
     - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato il proprio account GitHub #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente visualizza la lista dei propri repository privati inseriti #link(<UC48>)[#underline[\[UC48\]]]
+    - L'utente visualizza la lista dei propri repository privati inseriti #link(<UC60>)[#underline[\[UC60\]]]
     - L'utente ha inserito almeno un repository privato nella lista dei propri repository privati
     - L'utente ha selezionato un repository dalla lista
     - L'utente si trova nella sezione di eliminazione del repository
@@ -3787,10 +3572,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente seleziona l'opzione di rimozione del repository dalla lista
-    - L'utente visualizza l'avviso di conferma della rimozione #link(<UC50.1>)[#underline[\[UC50.1\]]]
+    - L'utente visualizza l'avviso di conferma della rimozione #link(<UC52.1>)[#underline[\[UC52.1\]]]
   ],
   inclusioni: [
-    - #link(<UC50.1>)[#underline[\[UC50.1\]]]
+    - #link(<UC52.1>)[#underline[\[UC52.1\]]]
   ],
   estensioni: [
     - Nessuna
@@ -3798,11 +3583,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente sceglie un repository dalla lista dei propri repository privati e accede alla sezione di eliminazione",
 )[]
 
-==== UC50.1: Conferma della rimozione di un proprio repository privato dalla lista dei propri repository privati <UC50.1>
+==== UC52.1: Conferma della rimozione di un proprio repository privato dalla lista dei propri repository privati <UC52.1>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente sta eseguendo la procedura di rimozione di un proprio repository privato #link(<UC50>)[#underline[\[UC50\]]]
+    - L'utente sta eseguendo la procedura di rimozione di un proprio repository privato #link(<UC52>)[#underline[\[UC52\]]]
   ],
   post: [
     - L'utente ha confermato la rimozione del repository
@@ -3811,16 +3596,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente conferma la rimozione del repository dalla lista
   ],
   estensioni: [
-    - #link(<UC50.1.1>)[#underline[\[UC50.1.1\]]]
+    - #link(<UC52.1.1>)[#underline[\[UC52.1.1\]]]
   ],
   trigger: "L'utente seleziona l'opzione di rimozione del repository dalla lista dei propri repository privati",
 )[]
 
-===== UC50.1.1: Rifiuto della rimozione di un proprio repository privato dalla lista dei propri repository privati <UC50.1.1>
+===== UC52.1.1: Rifiuto della rimozione di un proprio repository privato dalla lista dei propri repository privati <UC52.1.1>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente sta eseguendo la procedura di rimozione di un proprio repository privato #link(<UC50>)[#underline[\[UC50\]]]
+    - L'utente sta eseguendo la procedura di rimozione di un proprio repository privato #link(<UC52>)[#underline[\[UC52\]]]
   ],
   post: [
     - L'utente ha rifiutato la rimozione del repository
@@ -3832,14 +3617,14 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente rifiuta la rimozione del repository dall'avviso di conferma della rimozione",
 )[]
 
-=== UC51: Visualizzazione della lista di utenti CodeGuardian che hanno accesso a un repository privato di cui si è proprietari <UC51>
+=== UC53: Visualizzazione della lista di utenti CodeGuardian che hanno accesso a un repository privato di cui si è proprietari <UC53>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
     - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato il proprio account GitHub #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente ha inserito almeno un repository privato nella lista dei propri repository privati
-    - L'utente ha selezionato un repository dalla lista dei propri repository privati #link(<UC48>)[#underline[\[UC48\]]]
+    - L'utente ha selezionato un repository dalla lista dei propri repository privati #link(<UC60>)[#underline[\[UC60\]]]
   ],
   post: [
     - L'utente visualizza la lista degli utenti che hanno accesso a un repository privato di cui egli è proprietario
@@ -3851,19 +3636,19 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC51.1>)[#underline[\[UC51.1\]]]
+    - #link(<UC53.1>)[#underline[\[UC53.1\]]]
   ],
   trigger: "L'utente accede a un specifico repository privato dalla lista dei propri repository privati",
 )[]
 
-==== UC51.1: Nessun utente presente <UC51.1>
+==== UC53.1: Nessun utente presente <UC53.1>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
     - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato il proprio account GitHub #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente ha inserito almeno un repository privato nella lista dei propri repository privati
-    - L'utente ha selezionato un repository dalla lista dei propri repository privati #link(<UC48>)[#underline[\[UC48\]]]
+    - L'utente ha selezionato un repository dalla lista dei propri repository privati #link(<UC60>)[#underline[\[UC60\]]]
     - Nessun altro utente CodeGuardian ha accesso a quel repository
   ],
   post: [
@@ -3875,13 +3660,13 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente accede a uno specifico repository privato dalla lista dei propri repository privati e nessun altro utente ha accesso a quel repository",
 )[]
 
-=== UC52: Aggiunta di un utente alla lista di utenti CodeGuardian che hanno accesso a un repository privato di cui si è proprietari <UC52>
+=== UC54: Aggiunta di un utente alla lista di utenti CodeGuardian che hanno accesso a un repository privato di cui si è proprietari <UC54>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
     - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato il proprio account GitHub #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente sta visualizzando la lista di utenti CodeGuardian che hanno accesso a un repository privato di cui egli è proprietario #link(<UC51>)[#underline[\[UC51\]]]
+    - L'utente sta visualizzando la lista di utenti CodeGuardian che hanno accesso a un repository privato di cui egli è proprietario #link(<UC53>)[#underline[\[UC53\]]]
     - L'utente si trova nella sezione per aggiungere un nuovo utente
   ],
   post: [
@@ -3889,11 +3674,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza l'utente inserito nella lista
   ],
   scenari: [
-    - L'utente inserisce lo username o l'email di un utente CodeGuardian #link(<UC52.1>)[#underline[\[UC52.1\]]]
+    - L'utente inserisce lo username o l'email di un utente CodeGuardian #link(<UC54.1>)[#underline[\[UC54.1\]]]
     - L'utente conferma l'inserimento
   ],
   inclusioni: [
-    - #link(<UC52.1>)[#underline[\[UC52.1\]]]
+    - #link(<UC54.1>)[#underline[\[UC54.1\]]]
   ],
   estensioni: [
     - Nessuna
@@ -3901,11 +3686,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente accede alla sezione di aggiunta di un utente alla lista coloro che hanno accesso a un suo repository privato",
 )[]
 
-==== UC52.1: Inserimento della credenziale per l'aggiunta di un utente alla lista di utenti che hanno accesso a un repository privato <UC52.1>
+==== UC54.1: Inserimento della credenziale per l'aggiunta di un utente alla lista di utenti che hanno accesso a un repository privato <UC54.1>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente sta eseguendo la procedura di aggiunta di un utente alla lista di utenti CodeGuardian che hanno accesso a un repository privato di cui egli è proprietario #link(<UC52>)[#underline[\[UC51\]]]
+    - L'utente sta eseguendo la procedura di aggiunta di un utente alla lista di utenti CodeGuardian che hanno accesso a un repository privato di cui egli è proprietario #link(<UC54>)[#underline[\[UC53\]]]
     - L'utente visualizza il campo di inserimento per lo username o l'email
   ],
   post: [
@@ -3916,19 +3701,19 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente digita uno username o un'email nel campo dedicato.
   ],
   estensioni: [
-    - #link(<UC52.1.1>)[#underline[\[UC52.1.1\]]] // Errore formato
-    - #link(<UC52.1.2>)[#underline[\[UC52.1.2\]]] // Credenziale non esistente
-    - #link(<UC52.1.3>)[#underline[\[UC52.1.3\]]] // Utente già inserito
-    - #link(<UC52.1.4>)[#underline[\[UC52.1.4\]]] // Credenziale non inserita
+    - #link(<UC54.1.1>)[#underline[\[UC54.1.1\]]] // Errore formato
+    - #link(<UC54.1.2>)[#underline[\[UC54.1.2\]]] // Credenziale non esistente
+    - #link(<UC54.1.3>)[#underline[\[UC54.1.3\]]] // Utente già inserito
+    - #link(<UC54.1.4>)[#underline[\[UC54.1.4\]]] // Credenziale non inserita
   ],
   trigger: "L'utente interagisce con il campo di inserimento dell'aggiunta di un utente alla lista",
 )[]
 
-===== UC52.1.1: Visualizzazione errore credenziale non conforme <UC52.1.1>
+===== UC54.1.1: Visualizzazione errore credenziale non conforme <UC54.1.1>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente sta inserendo la credenziale richiesta per il recupero della password #link(<UC52.1>)[#underline[\[UC52.1\]]]
+    - L'utente sta inserendo la credenziale richiesta per il recupero della password #link(<UC54.1>)[#underline[\[UC54.1\]]]
     - La credenziale digitata non rispetta i vincoli di formato richiesti
   ],
   post: [
@@ -3941,11 +3726,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente inserisce una credenziale non conforme ai vincoli di formato",
 )[]
 
-===== UC52.1.2: Visualizzazione errore credenziale non associata a nessun utente <UC52.1.2>
+===== UC54.1.2: Visualizzazione errore credenziale non associata a nessun utente <UC54.1.2>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente sta inserendo la credenziale richiesta per il recupero della password #link(<UC52.1>)[#underline[\[UC52.1\]]]
+    - L'utente sta inserendo la credenziale richiesta per il recupero della password #link(<UC54.1>)[#underline[\[UC54.1\]]]
     - La credenziale digitata non è associata ad alcun utente CodeGuardian censito
   ],
   post: [
@@ -3958,11 +3743,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente inserisce una credenziale non associata ad alcun utente CodeGuardian",
 )[]
 
-===== UC52.1.3: Visualizzazione errore utente già inserito <UC52.1.3>
+===== UC54.1.3: Visualizzazione errore utente già inserito <UC54.1.3>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente sta inserendo la credenziale richiesta per il recupero della password #link(<UC52.1>)[#underline[\[UC52.1\]]]
+    - L'utente sta inserendo la credenziale richiesta per il recupero della password #link(<UC54.1>)[#underline[\[UC54.1\]]]
     - La credenziale digitata è associata a un utente CodeGuardian già presente nella lista
   ],
   post: [
@@ -3975,11 +3760,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente inserisce una credenziale associata a un utente già presente nella lista",
 )[] 
 
-===== UC52.1.4: Visualizzazione errore credenziale non inserita <UC52.1.4>
+===== UC54.1.4: Visualizzazione errore credenziale non inserita <UC54.1.4>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente sta inserendo la credenziale richiesta per il recupero della password #link(<UC52.1>)[#underline[\[UC52.1\]]]
+    - L'utente sta inserendo la credenziale richiesta per il recupero della password #link(<UC54.1>)[#underline[\[UC54.1\]]]
     - L'utente non ha inserito alcuna credenziale
   ],
   post: [
@@ -3992,13 +3777,13 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente tenta di procedere senza inserire alcuna credenziale",
 )[] 
 
-=== UC53: Rimozione di un utente alla lista di utenti CodeGuardian che hanno accesso a un repository privato di cui si è proprietari <UC53>
+=== UC55: Rimozione di un utente alla lista di utenti CodeGuardian che hanno accesso a un repository privato di cui si è proprietari <UC55>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
     - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato il proprio account GitHub #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente sta visualizzando la lista di utenti CodeGuardian che hanno accesso a un repository privato di cui egli è proprietario #link(<UC51>)[#underline[\[UC51\]]]
+    - L'utente sta visualizzando la lista di utenti CodeGuardian che hanno accesso a un repository privato di cui egli è proprietario #link(<UC53>)[#underline[\[UC53\]]]
     - L'utente ha inserito almeno un altro utente che ha accesso a un repository privato di cui egli è proprietario
     - L'utente ha selezionato un utente dalla lista
     - L'utente si trova nella sezione di rimozione di un utente 
@@ -4009,10 +3794,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente seleziona l'opzione di rimozione dell'utente dalla lista
-    - L'utente visualizza l'avviso di conferma della rimozione #link(<UC53.1>)[#underline[\[UC53.1\]]]
+    - L'utente visualizza l'avviso di conferma della rimozione #link(<UC55.1>)[#underline[\[UC55.1\]]]
   ],
   inclusioni: [
-    - #link(<UC53.1>)[#underline[\[UC53.1\]]]
+    - #link(<UC55.1>)[#underline[\[UC55.1\]]]
   ],
   estensioni: [
     - Nessuna
@@ -4020,11 +3805,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente sceglie un utente dalla lista degli utenti che hanno accesso a un suo repository privato e accede alla sezione di rimozione",
 )[]
 
-==== UC53.1: Conferma della rimozione di un utente dalla lista di utenti CodeGuardian che hanno accesso a un repository privato di cui si è proprietari <UC53.1>
+==== UC55.1: Conferma della rimozione di un utente dalla lista di utenti CodeGuardian che hanno accesso a un repository privato di cui si è proprietari <UC55.1>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente sta eseguendo la procedura di rimozione di un utente dalla lista di utenti CodeGuardian che hanno accesso a un suo repository privato #link(<UC53>)[#underline[\[UC53\]]]
+    - L'utente sta eseguendo la procedura di rimozione di un utente dalla lista di utenti CodeGuardian che hanno accesso a un suo repository privato #link(<UC55>)[#underline[\[UC55\]]]
   ],
   post: [
     - L'utente ha confermato la rimozione dell'utente selezionato
@@ -4033,16 +3818,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente conferma la rimozione dell'utente CodeGuardian selezionato dalla lista
   ],
   estensioni: [ 
-    - #link(<UC53.1.1>)[#underline[\[UC53.1.1\]]]
+    - #link(<UC55.1.1>)[#underline[\[UC55.1.1\]]]
   ],
   trigger: "L'utente seleziona l'opzione di rimozione di un utente dalla lista degli utenti CodeGuardian che hanno accesso a un suo repository privato",
 )[]
 
-===== UC53.1.1: Rifiuto della rimozione di un utente dalla lista di utenti CodeGuardian che hanno accesso a un repository privato di cui si è proprietari <UC53.1.1>
+===== UC55.1.1: Rifiuto della rimozione di un utente dalla lista di utenti CodeGuardian che hanno accesso a un repository privato di cui si è proprietari <UC55.1.1>
 #useCase(
-  attore: "Utente autorizzato con GitHub",
+  attore: "Utente Autorizzato con GitHub",
   pre: [
-    - L'utente sta eseguendo la procedura di rimozione di un utente dalla lista di utenti CodeGuardian che hanno accesso a un suo repository privato #link(<UC53>)[#underline[\[UC53\]]]
+    - L'utente sta eseguendo la procedura di rimozione di un utente dalla lista di utenti CodeGuardian che hanno accesso a un suo repository privato #link(<UC55>)[#underline[\[UC55\]]]
   ],
   post: [
     - L'utente ha rifiutato la rimozione dell'utente selezionato
@@ -4077,7 +3862,6 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 #vr_ob_counter.step()
 
 == Requisiti Funzionali (FR)
-
 #table(
   columns: (1fr, 3fr, 1fr),
   inset: 10pt,
@@ -4490,7 +4274,10 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#FRObx], 
   [Il Sistema deve mostrare un messaggio di feedback esplicito a seguito della corretta persistenza della nuova password.], 
   [#link(<UC15.4>)[#underline[\[UC15.4\]]]],
-
+  
+  TODO("Ho chiuso la tabella solamente per mantenere i requisiti da UC1 a UC15")
+)
+  /*
   //UC16
   [#FRObx], 
   [L'Utente deve poter visualizzare i dettagli di una singola remediation], 
@@ -4548,46 +4335,26 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC18.2.1>)[#underline[\[UC18.2.1\]]]],
   */
 
-  //UC19
+  //UC18
   [#FRDex],
   [L'Utente deve poter interagire con la sezione di gestione di remediation],
-  [#link(<UC19>)[#underline[\[UC19\]]]],
+  [#link(<UC18>)[#underline[\[UC18\]]]],
   
   [#FRDex],
   [L'Utente deve poter accettare la remediation proposta],
-  [#link(<UC19>)[#underline[\[UC19\]]]],
+  [#link(<UC18>)[#underline[\[UC18\]]]],
 
   [#FRDex],
   [Il sistema deve modificare il repository coerentemente con quanto scritto nella remediation],
-  [#link(<UC19>)[#underline[\[UC19\]]]],
+  [#link(<UC18>)[#underline[\[UC18\]]]],
 
   [#FRDex],
   [L'Utente deve poter rifiutare la remediation proposta],
-  [#link(<UC19.1>)[#underline[\[UC19.1\]]]],
+  [#link(<UC19>)[#underline[\[UC19\]]]],
 
-  [#FRDex],
-  [L'Utente deve poter annullare l'operazione di accettazione di remediation],
-  [#link(<UC19.2>)[#underline[\[UC19.2\]]]],
-
-  //UC20
-  [#FROpx], 
-  [Segreti e token esposti devono essere rilevati], 
-  [#link(<UC20>)[#underline[\[UC20\]]]],
-
-  [#FROpx],
-  [L'Utente deve poter rifiutare le remediation proposte per i segreti rilevati],
-  [#link(<UC20.1>)[#underline[\[UC20.1\]]]],
-
-  [#FROpx],
-  [La revoca automatica di segreti, se integrata con provider, deve poter essere eseguita],
-  [#link(<UC20.2>)[#underline[\[UC20.2\]]]],
-
-  [#FROpx],
-  [L'Utente deve poter visualizzare i risultati del rilevamento segreti],
-  [#link(<UC20.3>)[#underline[\[UC20.3\]]]],
   
   //UC21
-  [#FROpx],
+  /*[#FROpx],
   [L'utente deve poter accedere alla sezione di compilance e geovernance del pannello report],
   [#link(<UC21>)[#underline[\[UC21\]]]],
 
@@ -4616,7 +4383,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#FROpx],
   [L'utente deve poter visualizzare le regressioni evidenziate],
   [#link(<UC23>)[#underline[\[UC23\]]]],
-
+*/
   //UC24
   [#FRObx], 
   [Deve essere suggerito refactoring del codice], 
@@ -4628,7 +4395,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   [#FROpx],
   [I refactor devono poter essere applicati automaticamente sotto supervisione],
-  [#link(<UC24.2>)[#underline[\[UC24.2\]]]],
+  [#link(<UC24.1>)[#underline[\[UC24.2\]]]],
 
   //UC28
   [#FROpx], 
@@ -4645,7 +4412,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   //UC29
 
-  //UC30
+  //UC33
 
   //UC31
 
@@ -4661,31 +4428,33 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   //UC37
 
-  //UC38
+  //UC36
+  // 
+  /*
   [#FRObx],
   [Il sistema Back-end deve permettere all'Orchestratore di richiedere il salvataggio del report di analisi],
-  [#link(<UC38>)[#underline[\[UC38\]]]],
+  [#link(<UC36>)[#underline[\[UC36\]]]],
 
   [#FRObx],
-  [Il sistema Back-end deve archiviare in modo permanente il report finale nel database],
-  [#link(<UC38>)[#underline[\[UC38\]]]],
+  [Il sistema Back-end deve archiviare in modo permanente il report finale nel sistema di persistenza],
+  [#link(<UC36>)[#underline[\[UC36\]]]],
 
   [#FRObx],
   [L'Orchestratore deve poter notificare al Front-end l'impossibilità di salvare il report in caso di errore interno],
-  [#link(<UC38.1>)[#underline[\[UC38.1\]]]],
-
-  //UC39
+  [#link(<UC36.1>)[#underline[\[UC36.1\]]]],
+  */
+  //UC31
   [#FRObx],
   [L'Orchestratore deve poter elaborare i dati dei singoli agenti per calcolare metriche statistiche globali],
-  [#link(<UC39>)[#underline[\[UC39\]]]],
+  [#link(<UC31>)[#underline[\[UC31\]]]],
 
   [#FRObx],
   [Il sistema Back-end deve poter memorizzare le metriche aggregate per consentire la visualizzazione di grafici e tabelle],
-  [#link(<UC39>)[#underline[\[UC39\]]]],
+  [#link(<UC31>)[#underline[\[UC31\]]]],
 
   [#FRObx],
   [Il sistema deve poter segnalare al Front-end il mancato aggiornamento delle metriche in caso di errore del Back-end],
-  [#link(<UC39.1>)[#underline[\[UC39.1\]]]],
+  [],//#link(<UC31.2>)[#underline[\[UC31.2\]]]],
 
   //UC40
   [#FRObx],
@@ -4693,7 +4462,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC40>)[#underline[\[UC40\]]]],
 
   [#FRObx],
-  [Il sistema Back-end deve associare il token di accesso GitHub al profilo dell'utente nel database],
+  [Il sistema Back-end deve associare il token di accesso GitHub al profilo dell'utente nel sistema di persistenza],
   [#link(<UC40>)[#underline[\[UC40\]]]],
 
   [#FRObx],
@@ -4726,148 +4495,148 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   //UC44
   [#FRDex],
-  [L'Utente deve poter interagire con la sezione di gestione di remediation di analisi del codice],
+  [L'Utente deve poter interagire con la sezione di gestione di remediation riguardante l'analisi del codice],
   [#link(<UC44>)[#underline[\[UC44\]]]],
   
   [#FRDex],
-  [L'Utente deve poter accettare la remediation di analisi del codice proposta],
+  [L'Utente deve poter accettare la remediation riguardante l'analisi del codice proposta],
   [#link(<UC44>)[#underline[\[UC44\]]]],
 
   [#FRDex],
-  [Il sistema deve modificare il repository coerentemente con quanto scritto nella remediation di analisi del codice],
+  [Il sistema deve modificare il repository coerentemente con quanto scritto nella remediation riguardante l'analisi del codice],
   [#link(<UC44>)[#underline[\[UC44\]]]],
 
   [#FRDex],
-  [L'Utente deve poter rifiutare la remediation di analisi del codice proposta],
-  [#link(<UC44.1>)[#underline[\[UC44.1\]]]],
+  [L'Utente deve poter rifiutare la remediation riguardante l'analisi del codice proposta],
+  //[#link(<UC44.1>)[#underline[\[UC44.1\]]]],
 
   [#FRDex],
-  [L'Utente deve poter annullare l'operazione di accettazione di remediation di analisi del codice],
-  [#link(<UC44.2>)[#underline[\[UC44.2\]]]],
+  [L'Utente deve poter annullare l'operazione di accettazione di remediation riguardante l'analisi del codice],
+  //[#link(<UC44.2>)[#underline[\[UC44.2\]]]],
 
   //UC45
   [#FRDex],
-  [L'Utente deve poter interagire con la sezione di gestione di remediation di analisi della sicurezza],
+  [L'Utente deve poter interagire con la sezione di gestione di remediation riguardante l'analisi della sicurezza],
   [#link(<UC45>)[#underline[\[UC45\]]]],
   
   [#FRDex],
-  [L'Utente deve poter accettare la remediation di analisi della sicurezza proposta],
+  [L'Utente deve poter accettare la remediation riguardante l'analisi della sicurezza proposta],
   [#link(<UC45>)[#underline[\[UC45\]]]],
 
   [#FRDex],
-  [Il sistema deve modificare il repository coerentemente con quanto scritto nella remediation di analisi della sicurezza],
+  [Il sistema deve modificare il repository coerentemente con quanto scritto nella remediation riguardante l'analisi della sicurezza],
   [#link(<UC45>)[#underline[\[UC45\]]]],
 
   [#FRDex],
-  [L'Utente deve poter rifiutare la remediation di analisi della sicurezza proposta],
-  [#link(<UC45.1>)[#underline[\[UC45.1\]]]],
+  [L'Utente deve poter rifiutare la remediation riguardante l'analisi della sicurezza proposta],
+  //[#link(<UC45.1>)[#underline[\[UC45.1\]]]],
 
   [#FRDex],
-  [L'Utente deve poter annullare l'operazione di accettazione di remediation di analisi della sicurezza],
-  [#link(<UC45.2>)[#underline[\[UC45.2\]]]],
+  [L'Utente deve poter annullare l'operazione di accettazione di remediation riguardante l'analisi della sicurezza],
+  //[#link(<UC45.2>)[#underline[\[UC45.2\]]]],
 
   //UC46
   [#FRDex],
-  [L'Utente deve poter interagire con la sezione di gestione di remediation di analisi della documentazione],
-  [#link(<UC46>)[#underline[\[UC46\]]]],
+  [L'Utente deve poter interagire con la sezione di gestione di remediation riguardante l'analisi della documentazione],
+  //[#link(<UC46>)[#underline[\[UC46\]]]],
   
   [#FRDex],
-  [L'Utente deve poter accettare la remediation di analisi della documentazione proposta],
-  [#link(<UC46>)[#underline[\[UC46\]]]],
+  [L'Utente deve poter accettare la remediation riguardante l'analisi della documentazione proposta],
+  //[#link(<UC46>)[#underline[\[UC46\]]]],
 
   [#FRDex],
-  [Il sistema deve modificare il repository coerentemente con quanto scritto nella remediation di analisi della documentazione],
-  [#link(<UC46>)[#underline[\[UC46\]]]],
+  [Il sistema deve modificare il repository coerentemente con quanto scritto nella remediation riguardante l'analisi della documentazione],
+  //[#link(<UC46>)[#underline[\[UC46\]]]],
 
   [#FRDex],
-  [L'Utente deve poter rifiutare la remediation di analisi della documentazione proposta],
+  [L'Utente deve poter rifiutare la remediation riguardante l'analisi della documentazione proposta],
   [#link(<UC46.1>)[#underline[\[UC46.1\]]]],
 
   [#FRDex],
-  [L'Utente deve poter annullare l'operazione di accettazione di remediation di analisi della documentazione],
+  [L'Utente deve poter annullare l'operazione di accettazione di remediation riguardante l'analisi della documentazione],
   [#link(<UC46.2>)[#underline[\[UC46.2\]]]],
 
-  //UC47
+  //UC49
   [#FRObx], 
   [L'Utente deve poter accedere alla sezione di richiesta analisi], 
-  [#link(<UC47>)[#underline[\[UC47\]]]],
+  //[#link(<UC49>)[#underline[\[UC49\]]]],
   
   [#FRObx],
   [L'utente deve poter visualizzare correttamente il campo di inserimento dell'URL],
-  [#link(<UC47>)[#underline[\[UC47\]]]],
+  //[#link(<UC49>)[#underline[\[UC49\]]]],
   
   [#FRObx],
   [L'utente deve poter visualizzare correttamente il campo di selezione delle sezioni di interesse],
-  [#link(<UC47>)[#underline[\[UC47\]]]],
+  //[#link(<UC49>)[#underline[\[UC49\]]]],
 
   [#FRObx],
   [L'utente deve poter visualizzare correttamente il pulsante di conferma],
-  [#link(<UC47>)[#underline[\[UC47\]]]],
+  //[#link(<UC49>)[#underline[\[UC49\]]]],
 
   [#FRObx],
   [L'utente deve poter inviare la richiesta di analisi tramite il pulsante di conferma],
-  [#link(<UC47>)[#underline[\[UC47\]]]],
+  //[#link(<UC49>)[#underline[\[UC49\]]]],
 
   [#FRObx],
   [L'Utente deve poter inserire l'URL del repository GitHub nel campo dedicato],
-  [#link(<UC47.1>)[#underline[\[UC47.1\]]]],
+  [#link(<UC49.1>)[#underline[\[UC49.1\]]]],
 
   [#FRObx], 
   [L'URL deve iniziare con il protocollo 'https://'], 
-  [#link(<UC47.1.1>)[#underline[\[UC47.1.1\]]]],
+  [#link(<UC49.1.1>)[#underline[\[UC49.1.1\]]]],
 
   [#FRObx], 
   [Il dominio dell'URL deve essere 'github.com'], 
-  [#link(<UC47.1.1>)[#underline[\[UC47.1.1\]]]],
+  [#link(<UC49.1.1>)[#underline[\[UC49.1.1\]]]],
 
   [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se l'URL non è conforme ai vincoli di formato],
-  [#link(<UC47.1.1>)[#underline[\[UC47.1.1\]]]],
+  [#link(<UC49.1.1>)[#underline[\[UC49.1.1\]]]],
 
   [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se il repository non è accessibile o è inesistente],
-  [#link(<UC47.1.2>)[#underline[\[UC47.1.2\]]]],
+  [#link(<UC49.1.2>)[#underline[\[UC49.1.2\]]]],
 
   [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se non inserisce alcun URL],
-  [#link(<UC47.1.3>)[#underline[\[UC47.1.3\]]]],
+  [#link(<UC49.1.3>)[#underline[\[UC49.1.3\]]]],
 
   [#FRObx],
   [L'Utente deve poter selezionare le sezioni di interesse per l'analisi],
-  [#link(<UC47.2>)[#underline[\[UC47.2\]]]],
+  [#link(<UC49.2>)[#underline[\[UC49.2\]]]],
 
   [#FRObx],
   [L'Utente deve ricevere un messaggio di errore se nessuna area di interesse è selezionata],
-  [#link(<UC47.2.1>)[#underline[\[UC47.2.1\]]]],
+  [#link(<UC49.2.1>)[#underline[\[UC49.2.1\]]]],
 
   [#FRObx],
   [L'Utente deve ricevere un avviso se l'ultimo report è già up-to-date],
-  [#link(<UC47.3>)[#underline[\[UC47.3\]]]],
+  [#link(<UC49.3>)[#underline[\[UC49.3\]]]],
 
   [#FRObx],
   [L'Utente deve ricevere un avviso se un'analisi è già in elaborazione],
-  [#link(<UC47.4>)[#underline[\[UC47.4\]]]],
+  [#link(<UC49.4>)[#underline[\[UC49.4\]]]],
 
-  // UC48 
+  // UC60 
   [#FRObx],
   [L'Utente deve poter accedere alla sezione di visualizzazione dei propri repository privati],
-  [#link(<UC48>)[#underline[\[UC48\]]]],
+  [#link(<UC60>)[#underline[\[UC60\]]]],
 
   [#FRObx],
   [Il sistema deve mostrare correttamente tutti i repository privati che l'utente ha inserito],
-  [#link(<UC48>)[#underline[\[UC48\]]]],
+  [#link(<UC60>)[#underline[\[UC60\]]]],
 
   [#FRObx],
   [L'Utente deve poter visualizzare nome e URL dei repository],
-  [#link(<UC48.1>)[#underline[\[UC48.1\]]]],
+  [#link(<UC60.1>)[#underline[\[UC60.1\]]]],
   
   [#FRObx],
   [L'Utente deve ricevere un avviso se non ci sono repository inseriti da mostrare],
-  [#link(<UC48.2>)[#underline[\[UC48.2\]]]],
+  [#link(<UC60.2>)[#underline[\[UC60.2\]]]],
 
   [#FRObx],
   [Il sistema deve riconoscere il caso in cui non ci siano repository inseriti da mostrare],
-  [#link(<UC48.2>)[#underline[\[UC48.2\]]]],
+  [#link(<UC60.2>)[#underline[\[UC60.2\]]]],
 
   // UC49
   [#FRObx],
@@ -4918,145 +4687,145 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [L'utente deve ricevere un messaggio d'errore nel caso inserisca un URL associato a un repository già presente nella lista],
   [#link(<UC49.1.4>)[#underline[\[UC49.1.4\]]]],
   
-  // UC50
+  // UC52
   [#FRObx],
   [L'Utente deve poter visualizzare la sezione di rimozione di un repository privato dalla lista],
-  [#link(<UC50>)[#underline[\[UC50\]]]],
+  [#link(<UC52>)[#underline[\[UC52\]]]],
 
   [#FRObx],
   [L'Utente deve poter interagire con l'opzione di rimozione di un repository privato dalla lista],
-  [#link(<UC50>)[#underline[\[UC50\]]]],
+  [#link(<UC52>)[#underline[\[UC52\]]]],
 
   [#FRObx],
   [L'Utente deve poter visualizzare il messaggio di successo di rimozione di un repository privato dalla lista],
-  [#link(<UC50>)[#underline[\[UC50\]]]],
+  [#link(<UC52>)[#underline[\[UC52\]]]],
 
   [#FRObx],
   [Il repository deve essere eliminato correttamente dalla lista, in modo che l'utente non lo visualizzi più],
-  [#link(<UC50>)[#underline[\[UC50\]]]],
+  [#link(<UC52>)[#underline[\[UC52\]]]],
 
   [#FRObx],
   [L'Utente deve poter confermare la rimozione di un repository],
-  [#link(<UC50.1>)[#underline[\[UC50.1\]]]],
-
-  [#FRObx],
-  [L'Utente deve poter rifiutare la rimozione di un repository],
-  [#link(<UC50.1.1>)[#underline[\[UC50.1.1\]]]],
-  
-  // UC51
-  [#FRObx],
-  [L'Utente deve poter accedere alla sezione di visualizzazione degli utenti CodeGuardian inseriti per repository privato],
-  [#link(<UC51>)[#underline[\[UC51\]]]],
-
-  [#FRObx],
-  [Il sistema deve mostrare correttamente tutti gli utenti CodeGuardian che l'utente ha inserito],
-  [#link(<UC51>)[#underline[\[UC51\]]]],
-
-  [#FRObx],
-  [L'Utente deve poter visualizzare lo username di ogni utente inserito],
-  [#link(<UC51>)[#underline[\[UC51\]]]],
-  
-  [#FRDex],
-  [L'Utente deve poter visualizzare l'email di ogni utente inserito],
-  [#link(<UC51>)[#underline[\[UC51\]]]],
-
-  [#FRObx],
-  [L'Utente deve ricevere un avviso se non ci sono utenti CodeGuardian inseriti da mostrare],
-  [#link(<UC51.1>)[#underline[\[UC51.1\]]]],
-
-  [#FRObx],
-  [Il sistema deve riconoscere il caso in cui non ci siano utenti CodeGuardian inseriti da mostrare],
-  [#link(<UC51.1>)[#underline[\[UC51.1\]]]],
-  
-  // UC52
-  [#FRObx],
-  [L'Utente deve poter visualizzare la sezione di inserimento di utenti CodeGuardian alla lista degli utenti che hanno accesso a un suo repository privato],
-  [#link(<UC52>)[#underline[\[UC52\]]]],
-
-  [#FRObx],
-  [L'Utente deve poter visualizzare il campo di inserimento della credenziale],
-  [#link(<UC52>)[#underline[\[UC52\]]]],
-  
-  [#FRObx],
-  [L'Utente deve poter confermare l'inserimento dell'utente CodeGuardian],
-  [#link(<UC52>)[#underline[\[UC52\]]]],
-
-  [#FRObx],
-  [L'utente CodeGuardian inserito deve ottenere i permessi per visualizzare i report riguardanti il repository nel quale è stato inserito],
-  [#link(<UC52>)[#underline[\[UC52\]]]],
-
-  [#FRObx],
-  [L'utente CodeGuardian inserito deve ottenere i permessi per richiedere analisi riguardanti il repository nel quale è stato inserito],
-  [#link(<UC52>)[#underline[\[UC52\]]]],
-
-  [#FRObx],
-  [L'Utente deve poter interagire con il campo di inserimento della credenziale],
   [#link(<UC52.1>)[#underline[\[UC52.1\]]]],
 
   [#FRObx],
-  [Il sistema deve essere in grado di riconoscere uno username non conforme ai vincoli di formato],
+  [L'Utente deve poter rifiutare la rimozione di un repository],
   [#link(<UC52.1.1>)[#underline[\[UC52.1.1\]]]],
-
-  [#FRObx],
-  [Il sistema deve essere in grado di riconoscere un'email non conforme ai vincoli di formato],
-  [#link(<UC52.1.1>)[#underline[\[UC52.1.1\]]]],
-
-  [#FRObx],
-  [L'utente deve ricevere un messaggio d'errore nel caso inserisca una credenziale non conforme],
-  [#link(<UC52.1.1>)[#underline[\[UC52.1.1\]]]],
-  
-  [#FRObx],
-  [Il sistema deve essere in grado di riconoscere una credenziale non esistente],
-  [#link(<UC52.1.2>)[#underline[\[UC52.1.2\]]]],
-  
-  [#FRObx],
-  [L'utente deve ricevere un messaggio d'errore nel caso inserisca una credenziale non esistente],
-  [#link(<UC52.1.2>)[#underline[\[UC52.1.2\]]]],
-  
-  [#FRObx],
-  [Il sistema deve essere in grado di riconoscere una credenziale riferita a un utente già inserito],
-  [#link(<UC52.1.3>)[#underline[\[UC52.1.3\]]]],
-  
-  [#FRObx],
-  [L'utente deve ricevere un messaggio d'errore nel caso inserisca una credenziale associata a un'utente già inserito],
-  [#link(<UC52.1.3>)[#underline[\[UC52.1.3\]]]],
-
-  [#FRObx],
-  [Il sistema deve essere in grado di riconoscere la mancanza dell'inserimento della credenziale],
-  [#link(<UC52.1.4>)[#underline[\[UC52.1.4\]]]],
-  
-  [#FRObx],
-  [L'utente deve ricevere un messaggio d'errore nel caso non inserisca la credenziale],
-  [#link(<UC52.1.4>)[#underline[\[UC52.1.4\]]]],
   
   // UC53
   [#FRObx],
-  [L'Utente deve poter visualizzare la sezione di rimozione di un utente CodeGuardian dalla lista],
+  [L'Utente deve poter accedere alla sezione di visualizzazione degli utenti CodeGuardian inseriti per repository privato],
   [#link(<UC53>)[#underline[\[UC53\]]]],
 
   [#FRObx],
-  [L'Utente deve poter interagire con l'opzione di rimozione di un utente CodeGuardian dalla lista],
+  [Il sistema deve mostrare correttamente tutti gli utenti CodeGuardian che l'utente ha inserito],
   [#link(<UC53>)[#underline[\[UC53\]]]],
 
   [#FRObx],
-  [L'Utente deve poter visualizzare il messaggio di successo di rimozione di un utente CodeGuardian dalla lista],
+  [L'Utente deve poter visualizzare lo username di ogni utente inserito],
+  [#link(<UC53>)[#underline[\[UC53\]]]],
+  
+  [#FRDex],
+  [L'Utente deve poter visualizzare l'email di ogni utente inserito],
   [#link(<UC53>)[#underline[\[UC53\]]]],
 
   [#FRObx],
-  [L'utente CodeGuardian deve essere eliminato correttamente dalla lista, in modo che l'utente non lo visualizzi più],
-  [#link(<UC53>)[#underline[\[UC53\]]]],
-
-  [#FRObx],
-  [L'utente CodeGuardian eliminato deve essere revocato di tutti i permessi riguardanti il repository dal quale è stato rimosso],
-  [#link(<UC53>)[#underline[\[UC53\]]]],
-
-  [#FRObx],
-  [L'Utente deve poter confermare la rimozione di un utente CodeGuardian],
+  [L'Utente deve ricevere un avviso se non ci sono utenti CodeGuardian inseriti da mostrare],
   [#link(<UC53.1>)[#underline[\[UC53.1\]]]],
 
   [#FRObx],
+  [Il sistema deve riconoscere il caso in cui non ci siano utenti CodeGuardian inseriti da mostrare],
+  [#link(<UC53.1>)[#underline[\[UC53.1\]]]],
+  
+  // UC54
+  [#FRObx],
+  [L'Utente deve poter visualizzare la sezione di inserimento di utenti CodeGuardian alla lista degli utenti che hanno accesso a un suo repository privato],
+  [#link(<UC54>)[#underline[\[UC54\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare il campo di inserimento della credenziale],
+  [#link(<UC54>)[#underline[\[UC54\]]]],
+  
+  [#FRObx],
+  [L'Utente deve poter confermare l'inserimento dell'utente CodeGuardian],
+  [#link(<UC54>)[#underline[\[UC54\]]]],
+
+  [#FRObx],
+  [L'utente CodeGuardian inserito deve ottenere i permessi per visualizzare i report riguardanti il repository nel quale è stato inserito],
+  [#link(<UC54>)[#underline[\[UC54\]]]],
+
+  [#FRObx],
+  [L'utente CodeGuardian inserito deve ottenere i permessi per richiedere analisi riguardanti il repository nel quale è stato inserito],
+  [#link(<UC54>)[#underline[\[UC54\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter interagire con il campo di inserimento della credenziale],
+  [#link(<UC54.1>)[#underline[\[UC54.1\]]]],
+
+  [#FRObx],
+  [Il sistema deve essere in grado di riconoscere uno username non conforme ai vincoli di formato],
+  [#link(<UC54.1.1>)[#underline[\[UC54.1.1\]]]],
+
+  [#FRObx],
+  [Il sistema deve essere in grado di riconoscere un'email non conforme ai vincoli di formato],
+  [#link(<UC54.1.1>)[#underline[\[UC54.1.1\]]]],
+
+  [#FRObx],
+  [L'utente deve ricevere un messaggio d'errore nel caso inserisca una credenziale non conforme],
+  [#link(<UC54.1.1>)[#underline[\[UC54.1.1\]]]],
+  
+  [#FRObx],
+  [Il sistema deve essere in grado di riconoscere una credenziale non esistente],
+  [#link(<UC54.1.2>)[#underline[\[UC54.1.2\]]]],
+  
+  [#FRObx],
+  [L'utente deve ricevere un messaggio d'errore nel caso inserisca una credenziale non esistente],
+  [#link(<UC54.1.2>)[#underline[\[UC54.1.2\]]]],
+  
+  [#FRObx],
+  [Il sistema deve essere in grado di riconoscere una credenziale riferita a un utente già inserito],
+  [#link(<UC54.1.3>)[#underline[\[UC54.1.3\]]]],
+  
+  [#FRObx],
+  [L'utente deve ricevere un messaggio d'errore nel caso inserisca una credenziale associata a un'utente già inserito],
+  [#link(<UC54.1.3>)[#underline[\[UC54.1.3\]]]],
+
+  [#FRObx],
+  [Il sistema deve essere in grado di riconoscere la mancanza dell'inserimento della credenziale],
+  [#link(<UC54.1.4>)[#underline[\[UC54.1.4\]]]],
+  
+  [#FRObx],
+  [L'utente deve ricevere un messaggio d'errore nel caso non inserisca la credenziale],
+  [#link(<UC54.1.4>)[#underline[\[UC54.1.4\]]]],
+  
+  // UC55
+  [#FRObx],
+  [L'Utente deve poter visualizzare la sezione di rimozione di un utente CodeGuardian dalla lista],
+  [#link(<UC55>)[#underline[\[UC55\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter interagire con l'opzione di rimozione di un utente CodeGuardian dalla lista],
+  [#link(<UC55>)[#underline[\[UC55\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter visualizzare il messaggio di successo di rimozione di un utente CodeGuardian dalla lista],
+  [#link(<UC55>)[#underline[\[UC55\]]]],
+
+  [#FRObx],
+  [L'utente CodeGuardian deve essere eliminato correttamente dalla lista, in modo che l'utente non lo visualizzi più],
+  [#link(<UC55>)[#underline[\[UC55\]]]],
+
+  [#FRObx],
+  [L'utente CodeGuardian eliminato deve essere revocato di tutti i permessi riguardanti il repository dal quale è stato rimosso],
+  [#link(<UC55>)[#underline[\[UC55\]]]],
+
+  [#FRObx],
+  [L'Utente deve poter confermare la rimozione di un utente CodeGuardian],
+  [#link(<UC55.1>)[#underline[\[UC55.1\]]]],
+
+  [#FRObx],
   [L'Utente deve poter rifiutare la rimozione di un utente CodeGuardian],
-  [#link(<UC53.1.1>)[#underline[\[UC53.1.1\]]]],
+  [#link(<UC55.1.1>)[#underline[\[UC55.1.1\]]]],
   
 )
 
@@ -5123,7 +4892,7 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
 
   [#VRObx],
-  [Il Database deve essere implementato utilizzando MongoDB o PostgreSQL],
+  [Il sistema di persistenza deve essere implementato utilizzando MongoDB o PostgreSQL],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
 
   [#VRObx],
@@ -5147,12 +4916,13 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
 
 == Fonte - Requisiti
 #table(
-  columns: (1.5fr, 2.5fr),
-    inset: 10pt,
-    align: (col, row) => (if col == 0 { center } else { center }),
-    fill: (col, row) => if row == 0 { luma(240) } else { white },
-    stroke: 0.5pt + luma(200),
-    table.header([*Fonte*], [*Requisiti*]),
+  columns: (1fr, 2fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*Fonte*], [*Requisiti*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, left, center).at(col) + horizon,
+
 
   [Capitolato],
   [],
@@ -5217,7 +4987,7 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   [UC18],
   [],
 
-  [UC19],
+  [UC18],
   [],
 
   [UC20],
@@ -5250,7 +5020,7 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   [UC29],
   [],
 
-  [UC30],
+  [UC31],
   [],
 
   [UC31],
@@ -5274,13 +5044,13 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   [UC37],
   [],
 
-  [UC38],
+  [UC36],
   [],
 
-  [UC39],
+  [UC31],
   [],
   
   [UC40],
   [],
 
-)
+)*/
