@@ -1321,7 +1321,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC6.0.1>)[#underline[\[UC6.0.1\]]] // Nessuna sezione selezionata
   ],
   trigger: "L'utente interagisce con i filtri di visualizzazione del report",
-)[]
+)[
+  #useCaseDiagram("6_1", "UC6.1 - Selezione sezioni del report")
+]
 
 ===== UC6.0.1: Visualizzazione informativa nessuna sezione selezionata <UC6.0.1>
 #useCase(
@@ -1358,7 +1360,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]
   ],
   trigger: "L'utente accede alla testata del report di analisi",
-)[]
+)[
+  #useCaseDiagram("6_2", "UC6.2 - Visualizzazione metadati del report")
+]
 
 ===== UC6.2.1: Visualizzazione data report <UC6.2.1>
 #useCase(
@@ -1422,7 +1426,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC6.3.1>)[#underline[\[6.3.1\]]]
   ],
   trigger: "L'utente scorre i risultati dell'analisi",
-)[]
+)[
+  #useCaseDiagram("6_3", "UC6.3 - Visualizzazione sezioni analitiche e remediation")
+]
 
 ===== UC6.3.1: Visualizzazione lista remediation <UC6.3.1>
 #useCase(
@@ -1440,7 +1446,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC6.3.1.1>)[#underline[\[6.3.1.1\]]] // Nessuna remediation
   ],
   trigger: "L'utente consulta l'area dedicata ai miglioramenti per una sezione",
-)[]
+)[
+  #useCaseDiagram("6_3_1", "UC6.3.1 - Visualizzazione lista remediation")
+]
 
 ====== UC6.3.1.1: Visualizzazione messaggio assenza criticità <UC6.3.1.1>
 #useCase(
@@ -1479,7 +1487,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'utente richiede la modifica del periodo temporale per l'analisi comparativa",
 )[
-  //#useCaseDiagram("7", "UC7 - Selezione intervallo temporale")
+  #useCaseDiagram("7", "UC7 - Selezione intervallo temporale per confronto report")
 ]
 
 ==== UC7.0.1: Visualizzazione errore intervallo non inserito <UC7.0.1>
@@ -1628,7 +1636,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC9.3.1>)[#underline[\[UC9.3.1\]]] // Nessuna remediation codice
   ],
   trigger: "L'utente accede alla lista delle azioni correttive per il codice",
-)[]
+)[
+  #useCaseDiagram("9_3", "UC9.3 - Visualizzazione remediation sezione codice")
+]
 
 ===== UC9.3.1: Visualizzazione informativa assenza remediation codice <UC9.3.1>
 #useCase(
@@ -1668,7 +1678,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Questo caso d'uso è una specializzazione del caso d'uso #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
   trigger: "L'utente accede all'area dedicata alla sicurezza nel report di analisi",
-)[]
+)[
+  #useCaseDiagram("10", "UC10 - Visualizzazione sezione analisi della sicurezza")
+]
 
 ==== UC10.1: Visualizzazione sezione analisi librerie e dipendenze <UC10.1>
 #useCase(
@@ -1716,7 +1728,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC10.3.1>)[#underline[\[UC10.3.1\]]]
   ],
   trigger: "L'utente accede alla lista delle azioni correttive per la sicurezza",
-)[]
+)[
+  #useCaseDiagram("10_3", "UC10.3 - Visualizzazione remediation sezione sicurezza")
+]
 
 ===== UC10.3.1: Visualizzazione informativa assenza remediation sicurezza <UC10.3.1>
 #useCase(
@@ -1758,7 +1772,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'utente richiede la consultazione dei dati relativi alla documentazione del progetto",
 )[
-  //#useCaseDiagram("11", "UC11 - Analisi della documentazione")
+  #useCaseDiagram("11", "UC11 - Visualizzazione sezione analisi della documentazione")
 ]
 
 ==== UC11.1: Visualizzazione sezione errori di sintassi <UC11.1>
@@ -1807,7 +1821,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC11.3.1>)[#underline[\[UC11.3.1\]]]
   ],
   trigger: "L'utente accede ai suggerimenti correttivi per l'area documentale",
-)[]
+)[
+  #useCaseDiagram("11_3", "UC11.3 - Visualizzazione remediation sezione documentazione")
+]
 
 ===== UC11.3.1: Visualizzazione informativa assenza remediation documentazione <UC11.3.1>
 #useCase(
@@ -1873,7 +1889,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente conferma la volontà di rimuovere l'integrazione con GitHub tramite comando dedicato
   ],
   trigger: "L'utente richiede la rimozione del collegamento con il provider esterno GitHub",
-)[#useCaseDiagram("13", "UC13 - Disconnessione account GitHub")]
+)[]
 
 === UC14: Esportazione report di analisi <UC14>
 #useCase(
@@ -1911,7 +1927,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]
   ],
   trigger: "L'utente interagisce con il selettore dei formati di esportazione",
-)[]
+)[
+  #useCaseDiagram("14_1", "UC14.1 - Selezione formato di esportazione")
+]
 
 ===== UC14.1.1: Visualizzazione errore formato mancante <UC14.1.1>
 #useCase(
@@ -1984,7 +2002,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC15.1.2>)[#underline[\[UC15.1.2\]]]
   ],
   trigger: "L'utente interagisce con il campo di input della password corrente",
-)[]
+)[
+  #useCaseDiagram("15_1", "UC15.1 - Inserimento password corrente")
+]
 
 ===== UC15.1.1: Visualizzazione errore password corrente mancante <UC15.1.1>
 #useCase(
@@ -2034,7 +2054,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC15.2.3>)[#underline[\[UC15.2.3\]]]
   ],
   trigger: "L'utente popola il campo relativo alla nuova chiave di accesso",
-)[]
+)[
+  #useCaseDiagram("15_2", "UC15.2 - Inserimento nuova password")
+]
 
 ===== UC15.2.1: Visualizzazione errore nuova password mancante <UC15.2.1>
 #useCase(
