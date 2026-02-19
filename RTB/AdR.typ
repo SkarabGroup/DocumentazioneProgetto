@@ -570,11 +570,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     [*Utente Non Autenticato*],
     [Utente generico che accede alle funzionalità pubbliche della piattaforma (es. Home Page, Login, Registrazione) senza possedere o aver attivato una sessione valida.],
 
-    [*Utente Autenticato*],
+    [*Utente Autorizzato*],
     [Utente che ha completato con successo la procedura di autenticazione. Può configurare nuove analisi, consultare lo storico dei report e gestire il proprio profilo.],
 
     [*Utente Avanzato*],
-    [Specializzazione dell'Utente Autenticato che ha collegato il proprio account al provider #def[GitHub], abilitando l'accesso ai repository privati e funzionalità di integrazione avanzata.],
+    [Specializzazione dell'Utente Autorizzato che ha collegato il proprio account al provider #def[GitHub], abilitando l'accesso ai repository privati e funzionalità di integrazione avanzata.],
 
     // SEZIONE 2: SISTEMI ATTIVI (ORCHESTRATORE)
     table.cell(colspan: 2, fill: luma(250), [*Attori Primari (Sistemi Interni)*]),
@@ -1292,7 +1292,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC6: Visualizzazione report di analisi repository <UC6>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente seleziona un repository dalla lista dei repository analizzati #link(<UC5>)[#underline[\[UC5\]]]
   ],
@@ -1316,7 +1316,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC6.1: Selezione sezioni del report <UC6.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente si trova nella schermata di dettaglio del report #link(<UC6>)[#underline[\[UC6\]]]
   ],
@@ -1327,14 +1327,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente seleziona o deseleziona le aree dell'analisi (Codice, Sicurezza, Documentazione) da mostrare a video
   ],
   estensioni: [
-    - #link(<UC6.0.1>)[#underline[\[UC6.0.1\]]] // Nessuna sezione selezionata
+    - #link(<UC6.1.1>)[#underline[\[UC6.1.1\]]] // Nessuna sezione selezionata
   ],
   trigger: "L'utente interagisce con i filtri di visualizzazione del report",
-)[]
+)[
+  #useCaseDiagram("6_1", "UC6.1 - Selezione sezioni del report")
+]
 
-===== UC6.0.1: Visualizzazione informativa nessuna sezione selezionata <UC6.0.1>
+===== UC6.1.1: Visualizzazione informativa nessuna sezione selezionata <UC6.1.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente interagisce con la selezione delle sezioni #link(<UC6.1>)[#underline[\[UC6.1\]]]
   ],
@@ -1349,7 +1351,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC6.2: Visualizzazione metadati del report <UC6.2>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza il dettaglio di un report di analisi #link(<UC6>)[#underline[\[UC6\]]]
   ],
@@ -1371,7 +1373,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC6.2.1: Visualizzazione data report <UC6.2.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza l'area metadati del report #link(<UC6.2>)[#underline[\[UC6.2\]]]
   ],
@@ -1386,7 +1388,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC6.2.2: Visualizzazione commit analizzato <UC6.2.2>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza l'area metadati del report #link(<UC6.2>)[#underline[\[UC6.2\]]]
   ],
@@ -1401,7 +1403,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC6.2.3: Visualizzazione richiedente report <UC6.2.3>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza l'area metadati del report #link(<UC6.2>)[#underline[\[UC6.2\]]]
   ],
@@ -1409,14 +1411,14 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza l'identità del profilo che ha originato la richiesta di analisi
   ],
   scenari: [
-    - Il sistema espone lo username dell'Utente Autenticato che ha avviato il processo di audit
+    - Il sistema espone lo username dell'Utente Autorizzato che ha avviato il processo di audit
   ],
   trigger: "L'utente consulta la paternità della richiesta di analisi",
 )[]
 
 ==== UC6.3: Visualizzazione sezioni analitiche e remediation <UC6.3>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente ha selezionato almeno una sezione da visualizzare #link(<UC6.1>)[#underline[\[UC6.1\]]]
   ],
@@ -1435,7 +1437,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC6.3.1: Visualizzazione lista remediation <UC6.3.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza una sezione del report contenente criticità #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
@@ -1453,7 +1455,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ====== UC6.3.1.1: Visualizzazione messaggio assenza criticità <UC6.3.1.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente sta visualizzando la sezione delle remediation #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
   ],
@@ -1468,7 +1470,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC7: Selezione intervallo temporale per confronto report <UC7>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza il dettaglio di un report di analisi #link(<UC6>)[#underline[\[UC6\]]]
     - L'utente accede alla funzione di confronto storico
@@ -1744,7 +1746,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC11: Visualizzazione sezione analisi della documentazione <UC11>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza il dettaglio di un report di analisi #link(<UC6>)[#underline[\[UC6\]]]
     - L'area "Documentazione" è stata selezionata per la visualizzazione #link(<UC6.1>)[#underline[\[UC6.1\]]]
@@ -1871,7 +1873,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC13: Disconnessione account GitHub da CodeGuardian <UC13>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente ha precedentemente collegato un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
   ],
@@ -2027,7 +2029,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC15.2: Inserimento nuova password <UC15.2>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente si trova nel campo di inserimento nuova password #link(<UC15>)[#underline[\[UC15\]]]
   ],
@@ -2108,7 +2110,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC15.4: Notifica avvenuta modifica password <UC15.4>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - La procedura di aggiornamento delle credenziali è stata completata con successo #link(<UC15.3>)[#underline[\[UC15.3\]]]
   ],
@@ -2310,7 +2312,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente rifiuta la proposta di remediation",
   generalizzazione: [
     - #link(<UC33>)[#underline[\[UC33\]]]
-    - //#link(<UC37>)[#underline[\[UC37\]]]
+    - #link(<UC35>)[#underline[\[UC35\]]]
     - #link(<UC37>)[#underline[\[UC37\]]]
   ],
 )[]
@@ -2499,6 +2501,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'utente non inserisce alcuna soglia e tenta di confermare la configurazione dei report",
 )[]
+
 === UC21 Avvio analisi <UC21>
 #useCase(
   attore: "Orchestratore",
@@ -2871,7 +2874,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC27: Ricezione notifica completamento analisi <UC27>
 #useCase(
-  attore: "Utente autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'orchestratore ha notificato il completamento dell'analisi all'utente. #link(<UC26>)[#underline[\[UC26\]]]
   ],
@@ -2896,7 +2899,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC27.1: Notifica completamento analisi non ricevuta <UC27.1>
 #useCase(
-  attore: "Utente autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'orchestratore ha notificato il completamento dell'analisi all'utente #link(<UC26>)[#underline[\[UC26\]]]
     - L'utente non riceve la notifica di completamento dell'analisi
@@ -3177,7 +3180,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC38: Richiesta analisi repository GitHub privato a cui si ha accesso <UC38>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente risulta autorizzato all'interazione con i repository privati non propri#link(<UC3>)[#underline[\[UC3\]]]
     - L'utente visualizza la sezione di configurazione dell'analisi
@@ -3207,7 +3210,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 /* SONO inclusi in UC4-5
 ==== UC51.1: Inserimento URL repository GitHub privato per l'analisi <UC51.1>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato //#link(<UC51>)[#underline[\[UC51\]]]
   ],
@@ -3227,7 +3230,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC51.1.1: URL repository GitHub non conforme ai vincoli di formato <UC51.1.1>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato //#link(<UC51>)[#underline[\[UC51\]]]
     - L'URL inserito non è conforme ai vincoli di formato previsti per l'inserimento dell'URL del repository GitHub
@@ -3243,7 +3246,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC51.1.2: Repository GitHub non accessibile <UC51.1.2>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato //#link(<UC51>)[#underline[\[UC51\]]]
     - Il repository GitHub associato all'URL inserito non è accessibile
@@ -3259,7 +3262,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC51.1.3: URL repository GitHub non inserito <UC51.1.3>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato //#link(<UC51>)[#underline[\[UC51\]]]
     - L'utente non ha inserito alcun URL del repository GitHub
@@ -3275,7 +3278,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC51.2: Selezione aree di interesse <UC51.2>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato //#link(<UC51>)[#underline[\[UC51\]]]
   ],
@@ -3293,7 +3296,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC51.2.1: Nessuna area di interesse selezionata <UC51.2.1>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato //#link(<UC51>)[#underline[\[UC51\]]]
     - L'utente non ha selezionato alcuna area di interesse durante la selezione delle aree di interesse
@@ -3309,7 +3312,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC51.3: Ultimo repost up-to-date <UC51.3>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato //#link(<UC51>)[#underline[\[UC51\]]]
     - L'utente ha inserito un URL del repository GitHub #link(<UC51.1>)[#underline[\[UC51.1\]]]
@@ -3328,7 +3331,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC51.4: Ultimo report in elaborazione <UC51.4>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta eseguendo la procedura di richiesta analisi di un repository GitHub privato //#link(<UC51>)[#underline[\[UC51\]]]
     - L'utente ha inserito un URL del repository GitHub corretto #link(<UC51.1>)[#underline[\[UC51.1\]]]
@@ -3348,7 +3351,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC60: Visualizzazione dei propri repository privati inseriti <UC60>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato il proprio account GitHub #link(<UC3>)[#underline[\[UC3\]]]
@@ -3372,7 +3375,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC60.1: Informazioni minime repository privati inseriti <UC60.1>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente si trova nella sezione di visualizzazione dei propri repository privati inseriti #link(<UC60>)[#underline[\[UC60\]]]
   ],
@@ -3387,7 +3390,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC60.2: Nessun repository inserito <UC60.2>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente si trova nella sezione di visualizzazione dei propri repository privati inseriti #link(<UC60>)[#underline[\[UC60\]]]
     - Nessun repository è stato trovato
@@ -3403,7 +3406,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC51: Inserimento di un proprio repository privato nel sistema CodeGuardian <UC51>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato il proprio account GitHub #link(<UC3>)[#underline[\[UC3\]]]
@@ -3428,7 +3431,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC37.1: Inserimento URL repository GitHub privato di cui si è proprietario <UC37.1>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta eseguendo la procedura di inserimento di un repository privato di cui si è proprietario nel sistema CodeGuardian #link(<UC37>)[#underline[\[UC37\]]]
   ],
@@ -3449,7 +3452,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC37.1.1: URL repository GitHub non conforme ai vincoli di formato <UC37.1.1>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta eseguendo la procedura di inserimento di un repository privato di cui si è proprietario nel sistema CodeGuardian #link(<UC37>)[#underline[\[UC37\]]]
     - L'URL inserito non è conforme ai vincoli di formato previsti per l'inserimento dell'URL del repository GitHub
@@ -3465,7 +3468,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC37.1.2: Repository GitHub non accessibile <UC37.1.2>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta eseguendo la procedura di inserimento di un repository privato di cui si è proprietario nel sistema CodeGuardian #link(<UC37>)[#underline[\[UC37\]]]
     - Il repository GitHub associato all'URL inserito non è accessibile
@@ -3481,7 +3484,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC37.1.3: URL repository GitHub non inserito <UC37.1.3>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta eseguendo la procedura di inserimento di un repository privato di cui si è proprietario nel sistema CodeGuardian #link(<UC37>)[#underline[\[UC37\]]]
     - L'utente non ha inserito alcun URL del repository GitHub
@@ -3497,7 +3500,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC37.1.4: Repository GitHub già presente nel sistema <UC37.1.4>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta eseguendo la procedura di inserimento di un repository privato di cui si è proprietario nel sistema CodeGuardian #link(<UC37>)[#underline[\[UC37\]]]
     - L'utente ha inserito un URL corrispondente a un repository GitHub già presente nel sistema
@@ -3515,7 +3518,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC53: Visualizzazione della lista di utenti CodeGuardian che hanno accesso alla visualizzazione dei report di un repository di cui si è richiesta l'analisi <UC53>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente ha collegato il proprio account GitHub #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente ha inserito almeno un repository privato nella lista dei propri repository privati #TODO
@@ -3538,7 +3541,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC52: Rimozione di un proprio repository privato dalla lista dei propri repository privati <UC52>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente ha collegato il proprio account GitHub #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente visualizza la lista dei propri repository privati inseriti #link(<UC60>)[#underline[\[UC60\]]]
@@ -3565,7 +3568,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC52.1: Conferma della rimozione di un proprio repository privato dalla lista dei propri repository privati <UC52.1>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta eseguendo la procedura di rimozione di un proprio repository privato #link(<UC52>)[#underline[\[UC52\]]]
   ],
@@ -3583,7 +3586,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC52.1.1: Rifiuto della rimozione di un proprio repository privato dalla lista dei propri repository privati <UC52.1.1>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta eseguendo la procedura di rimozione di un proprio repository privato #link(<UC52>)[#underline[\[UC52\]]]
   ],
@@ -3600,7 +3603,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC53.1: Nessun utente presente <UC53.1>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato il proprio account GitHub #link(<UC3>)[#underline[\[UC3\]]]
@@ -3619,7 +3622,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC54: Aggiunta di un utente alla lista di utenti CodeGuardian che hanno accesso a un repository privato di cui si è proprietari <UC54>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato il proprio account GitHub #link(<UC3>)[#underline[\[UC3\]]]
@@ -3645,7 +3648,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC54.1: Inserimento della credenziale per l'aggiunta di un utente alla lista di utenti che hanno accesso a un repository privato <UC54.1>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta eseguendo la procedura di aggiunta di un utente alla lista di utenti CodeGuardian che hanno accesso a un repository privato di cui egli è proprietario #link(<UC54>)[#underline[\[UC53\]]]
     - L'utente visualizza il campo di inserimento per lo username o l'email
@@ -3668,7 +3671,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC54.1.1: Visualizzazione errore credenziale non conforme <UC54.1.1>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta inserendo la credenziale richiesta per il recupero della password #link(<UC54.1>)[#underline[\[UC54.1\]]]
     - La credenziale digitata non rispetta i vincoli di formato richiesti
@@ -3685,7 +3688,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC54.1.2: Visualizzazione errore credenziale non associata a nessun utente <UC54.1.2>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta inserendo la credenziale richiesta per il recupero della password #link(<UC54.1>)[#underline[\[UC54.1\]]]
     - La credenziale digitata non è associata ad alcun utente CodeGuardian censito
@@ -3702,7 +3705,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC54.1.3: Visualizzazione errore utente già inserito <UC54.1.3>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta inserendo la credenziale richiesta per il recupero della password #link(<UC54.1>)[#underline[\[UC54.1\]]]
     - La credenziale digitata è associata a un utente CodeGuardian già presente nella lista
@@ -3719,7 +3722,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC54.1.4: Visualizzazione errore credenziale non inserita <UC54.1.4>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta inserendo la credenziale richiesta per il recupero della password #link(<UC54.1>)[#underline[\[UC54.1\]]]
     - L'utente non ha inserito alcuna credenziale
@@ -3736,7 +3739,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC55: Rimozione di un utente alla lista di utenti CodeGuardian che hanno accesso a un repository privato di cui si è proprietari <UC55>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente è autenticato a CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente ha collegato il proprio account GitHub #link(<UC3>)[#underline[\[UC3\]]]
@@ -3764,7 +3767,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC55.1: Conferma della rimozione di un utente dalla lista di utenti CodeGuardian che hanno accesso a un repository privato di cui si è proprietari <UC55.1>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta eseguendo la procedura di rimozione di un utente dalla lista di utenti CodeGuardian che hanno accesso a un suo repository privato #link(<UC55>)[#underline[\[UC55\]]]
   ],
@@ -3782,7 +3785,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ===== UC55.1.1: Rifiuto della rimozione di un utente dalla lista di utenti CodeGuardian che hanno accesso a un repository privato di cui si è proprietari <UC55.1.1>
 #useCase(
-  attore: "Utente Autorizzato con GitHub",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta eseguendo la procedura di rimozione di un utente dalla lista di utenti CodeGuardian che hanno accesso a un suo repository privato #link(<UC55>)[#underline[\[UC55\]]]
   ],
@@ -3913,7 +3916,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   // --- INTEGRAZIONE GITHUB (UC3) ---
   [#FRObx], 
-  [Il Sistema deve consentire all'Utente Autenticato l'accesso alla sezione dedicata al collegamento del profilo GitHub.], 
+  [Il Sistema deve consentire all'Utente Autorizzato l'accesso alla sezione dedicata al collegamento del profilo GitHub.], 
   [#link(<UC3>)[#underline[\[UC3\]]]],
 
   [#FRObx], 
@@ -4009,7 +4012,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   [#FRObx], 
   [Il Sistema deve inibire il rendering dei risultati e mostrare un avviso informativo se nessuna area è selezionata.], 
-  [#link(<UC6.0.1>)[#underline[\[UC6.0.1\]]]],
+  [#link(<UC6.1.1>)[#underline[\[UC6.1.1\]]]],
 
   [#FRObx], 
   [Il Sistema deve esporre il timestamp (data e ora) relativo al completamento dell'attività di audit.], 
@@ -4020,7 +4023,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]],
 
   [#FRObx], 
-  [Il Sistema deve indicare lo username dell'Utente Autenticato che ha sottomesso la richiesta di analisi.], 
+  [Il Sistema deve indicare lo username dell'Utente Autorizzato che ha sottomesso la richiesta di analisi.], 
   [#link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]],
 
   [#FRObx], 
@@ -4142,7 +4145,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   // --- RANKING REPOSITORY (UC12) ---
   [#FRObx],
-  [Il Sistema deve generare una graduatoria dei repository analizzati associati all'Utente Autenticato.],
+  [Il Sistema deve generare una graduatoria dei repository analizzati associati all'Utente Autorizzato.],
   [#link(<UC12>)[#underline[\[UC12\]]]],
 
   [#FRObx],
@@ -4193,7 +4196,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   // --- MODIFICA PASSWORD (UC15) ---
   [#FRObx], 
-  [Il Sistema deve consentire all'Utente Autenticato l'accesso alla sezione dedicata alla modifica della chiave di accesso.], 
+  [Il Sistema deve consentire all'Utente Autorizzato l'accesso alla sezione dedicata alla modifica della chiave di accesso.], 
   [#link(<UC15>)[#underline[\[UC15\]]]],
 
   [#FRObx], 
