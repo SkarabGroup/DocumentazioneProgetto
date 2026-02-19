@@ -4075,7 +4075,19 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#FRObx], 
   [Il Sistema deve consentire l'accesso alla sezione di configurazione dell'analisi e l'immissione dell'URL del repository.], 
   [#link(<UC4>)[#underline[\[UC4\]]]],
+/*
+  [#FRObx], 
+  [Il Sistema deve validare che l'URL del repository GitHub inserito utilizzi il protocollo 'https://' e il dominio 'github.com'.], 
+  [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
 
+  [#FRObx], 
+  [Il Sistema deve inibire l'invio della richiesta e notificare l'utente qualora il repository risulti inesistente o non accessibile.], 
+  [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve inibire la procedura di analisi e notificare l'utente qualora il campo URL non venga compilato.], 
+  [#link(<UC4.1.3>)[#underline[\[UC4.1.3\]]]],
+*/
   [#FRObx], 
   [Il Sistema deve permettere la selezione multipla delle aree di interesse tra test, sicurezza e documentazione.], 
   [#link(<UC4.2>)[#underline[\[UC4.2\]]]],
