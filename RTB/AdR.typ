@@ -1,3 +1,4 @@
+
 #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
 #import "../lib/useCaseUtil.typ": *
@@ -1077,18 +1078,17 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente Autorizzato",
   pre: [
     - L'utente risulta autorizzato all'interazione con i propri repository #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente accede alla collezione di report di una repository #link(<UC20>)[#underline[\[UC20\]]]
     - L'utente visualizza la sezione di configurazione dell'analisi
   ],
   post: [
     - L'utente visualizza la conferma di presa in carico della richiesta di analisi
   ],
   scenari: [
-    - L'utente fornisce l'URL del repository GitHub da analizzare #link(<UC4.1>)[#underline[\[UC4.1\]]]
     - L'utente seleziona le aree di interesse per l'audit #link(<UC4.2>)[#underline[\[UC4.2\]]]
     - L'utente impartisce il comando di conferma per l'invio della richiesta
   ],
   inclusioni: [
-    - #link(<UC4.1>)[#underline[\[UC4.1\]]]
     - #link(<UC4.2>)[#underline[\[UC4.2\]]]
   ],
   estensioni: [
@@ -1097,78 +1097,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'utente seleziona la funzione di nuova analisi repository",
   generalizzazione: [
-    - #link(<UC38>)[#underline[\[UC38\]]] // Richiesta analisi repository pubblico
+    //- #link(<UC38>)[#underline[\[UC38\]]] // Richiesta analisi repository pubblico
   ],
 )[
   #useCaseDiagram("4", "UC4 - Richiesta analisi repository GitHub")
 ]
-
-==== UC4.1: Inserimento URL repository GitHub <UC4.1>
-#useCase(
-  attore: "Utente Autorizzato",
-  pre: [
-    - L'utente sta visualizzando il modulo di richiesta analisi #link(<UC4>)[#underline[\[UC4\]]]
-  ],
-  post: [
-    - Il campo relativo all'URL del repository risulta popolato con un valore accettato
-  ],
-  scenari: [
-    - L'utente inserisce l'URL del repository GitHub oggetto dell'analisi
-  ],
-  estensioni: [
-    - #link(<UC4.1.1>)[#underline[\[UC4.1.1\]]] // URL non conforme
-    - #link(<UC4.1.2>)[#underline[\[UC4.1.2\]]] // Repository non accessibile
-    - #link(<UC4.1.3>)[#underline[\[UC4.1.3\]]] // URL non inserito
-  ],
-  trigger: "L'utente seleziona il campo di input dell'URL",
-)[
-  #useCaseDiagram("4_1", "UC4.1 - Inserimento URL repository GitHub")
-]
-
-===== UC4.1.1: Visualizzazione errore URL non conforme <UC4.1.1>
-#useCase(
-  attore: "Utente Autorizzato",
-  pre: [
-    - L'utente ha inserito un valore nel campo URL #link(<UC4.1>)[#underline[\[UC4.1\]]]
-  ],
-  post: [
-    - L'utente visualizza un avviso circa la non conformità del formato dell'URL
-  ],
-  scenari: [
-    - L'utente visualizza un messaggio di errore che specifica l'invalidità sintattica dell'URL
-  ],
-  trigger: "L'utente tenta di procedere con un URL formalmente non valido",
-)[]
-
-===== UC4.1.2: Visualizzazione errore repository non accessibile <UC4.1.2>
-#useCase(
-  attore: "Utente Autorizzato",
-  pre: [
-    - L'utente ha inserito un URL nel modulo #link(<UC4.1>)[#underline[\[UC4.1\]]]
-  ],
-  post: [
-    - L'utente visualizza un avviso circa l'impossibilità di accedere al repository indicato
-  ],
-  scenari: [
-    - L'utente visualizza un messaggio di errore relativo all'inesistenza o all'inaccessibilità del repository
-  ],
-  trigger: "Il sistema rileva l'inaccessibilità della risorsa remota specificata",
-)[]
-
-===== UC4.1.3: Visualizzazione errore URL non inserito <UC4.1.3>
-#useCase(
-  attore: "Utente Autorizzato",
-  pre: [
-    - L'utente sta interagendo con il campo URL #link(<UC4.1>)[#underline[\[UC4.1\]]]
-  ],
-  post: [
-    - L'utente visualizza un avviso circa il mancato inserimento dell'URL obbligatorio
-  ],
-  scenari: [
-    - L'utente visualizza la segnalazione di errore specifica per il campo vuoto
-  ],
-  trigger: "L'utente tenta di confermare senza aver popolato il campo URL",
-)[]
 
 ==== UC4.2: Selezione aree di interesse <UC4.2>
 #useCase(
@@ -2151,11 +2084,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente Autorizzato",
   pre: [
-    - L'utente sta visualizzando la lista delle remediation riguardante l'una sezione selezionata #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
+    - L'utente sta visualizzando la lista delle remediation #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
     - L'utente seleziona una remediation specifica
   ],
   post: [
-    - L'utente ha visualizzato i dettagli della remediation e lo stato di essa
+    - L'utente ha visualizzato i dettagli della remediation
   ],
   scenari: [
     - L'utente visualizza i dettagli della remediation proposta
@@ -2180,7 +2113,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Orchestratore",
   attori_secondari: "GitHub",
   pre: [
-    - L'orchestratore ha ricevuto una richiesta di analisi contenente un URL GitHub da parte di un utente Autorizzato di CodeGuardian #link(<UC21>)[#underline[\[UC21\]]]
+    - L'orchestratore recupera l'URL di riferimento dai metadati della collezione di report di analisi #link(<UC4>)[#underline[\[UC4\]]]
   ],
   post: [
     - L'accessibilità del repository è stata accertata e l'orchestratore dispone dei permessi di lettura per avviare la analisi
@@ -2226,11 +2159,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'orchestratore ha tentato di contattare GitHub #link(<UC17.1>)[#underline[\[UC17.1\]]]
+    - L'orchestratore sta tentato di contattare GitHub per verificare la sua operatività #link(<UC17.1>)[#underline[\[UC17.1\]]]
     - Il servizio esterno non risponde o restituisce un errore di rete
   ],
   post: [
-    - La procedura viene interrotta e l'errore di connessione viene tracciato
+    - La procedura viene interrotta
   ],
   scenari: [
     - L'orchestratore rileva l'impossibilità di raggiungere i servizi esterni di GitHub
@@ -2254,7 +2187,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - #link(<UC17.2.1>)[#underline[\[UC17.2.1\]]] // Accesso a repository privato
   ],
-  trigger: "L'orchestratore interroga GitHub per i metadati del repository",
+  trigger: "L'orchestratore interroga GitHub per recuperare i metadati del repository",
 )[
   #useCaseDiagram("17_2", "UC17.2 - Ricerca del repository")
 ]
@@ -2275,7 +2208,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - #link(<UC17.2.1.1>)[#underline[\[UC17.2.1.1\]]] // Repository inaccessibile
   ],
-  trigger: "Il repository cercato richiede autorizzazione per l'accesso",
+  trigger: "La ricerca pubblica del repository ha dato esito negativo",
 )[
   // #useCaseDiagram("17_2_1", "UC17.2.1 - Accesso a repository privato")
 ]
@@ -2284,7 +2217,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'orchestratore ha tentato l'accesso pubblico e privato (credenziali/token)
+    - L'orchestratore ha tentato l'accesso pubblico e privato (credenziali/token)#link(<UC17.2.1>)[#underline[\[UC17.2.1\]]]
     - Nessun metodo di autorizzazione ha fornito l'accesso alla risorsa
   ],
   post: [
@@ -2303,8 +2236,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente sta visualizzando una singola remediation #link(<UC16>)[#underline[\[UC16\]]]
   ],
   post: [
-    - La remediation viene automaticamente eseguita, applicando modifiche alla sezione specifica del repository di riferimento
-    - L'utente visualizza la remediation appena eseguita #link(<UC16>)[#underline[\[UC16\]]]
+    - La procedura di applicazione della remediation è stata avviata con successo
   ],
   scenari: [
     - L'utente accetta la remediation proposta
@@ -2332,8 +2264,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente sta visualizzando una singola remediation #link(<UC16>)[#underline[\[UC16\]]]
   ],
   post: [
-    - La remediation non viene applicata 
-    - L'utente viene rimandato alla visualizzazione della singola remediation #link(<UC16>)[#underline[\[UC16\]]]
+    - La remediation non viene applicata e viene rimossa tra quelle proposte
   ],
   scenari: [
     - L'utente rifiuta la remediation proposta
@@ -2417,8 +2348,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'utente ha rifiutato il refactoring proposto",
 )[]
-*/
-#TODO("28 e 29 da controllare")
+
 === UC20: Report programmabili e alert <UC20>
 #useCase(
   attore: "Utente Autorizzato",
@@ -2538,6 +2468,151 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'utente non inserisce alcuna soglia e tenta di confermare la configurazione dei report",
 )[]
+*/
+
+=== UC20: Creazione raccolta report di analisi <UC20>
+#useCase(
+  attore: "Utente Autorizzato",
+  pre: [
+    - L'utente dispone di una sessione attiva nel sistema #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente accede alla sezione relativa alla aggiunta di raccolte di analisi di repository di GitHub
+  ],
+  post: [
+    - La collezione di report di analisi per una particolare repository è stata creata con successo e risulta disponibile per la consultazione
+  ],
+  scenari: [
+    - L'utente inserisce il nome con cui identificare la collezione di report 
+    - L'utente inserisce l'URL di riferimento
+    - L'utente inserisce  
+  ],
+  inclusioni: [
+    #link(<UC20.1>)[#underline[\[UC20.1\]]] //nome
+    #link(<UC20.2>)[#underline[\[UC20.2\]]] //URL
+    #link(<UC20.3>)[#underline[\[UC20.3\]]] //descrizione
+  ],
+)[]
+
+==== UC20.1: Inserimento nome raccolta di report <UC20.1>
+#useCase(
+  attore: "Utente Autorizzato",
+  pre: [
+    - L'utente sta visualizzando il modulo di creazione nuova raccolta #link(<UC20>)[#underline[\[UC20\]]]
+  ],
+  post: [
+    - Il campo relativo al nome risulta popolato con un valore accettato
+  ],
+  scenari: [
+    - L'utente inserisce il nome con cui identificare la raccolta di report
+  ],
+  estensioni: [
+    - #link(<UC20.1.1>)[#underline[\[UC20.1.1\]]] // Nome non conform
+  ],
+  trigger: "L'utente seleziona il campo di input del nome",
+)[
+  //#useCaseDiagram("20_1", "UC20.2 - Inserimento URL repository GitHub")
+]
+
+===== UC20.1.1: Visualizzazione errore nome non conforme <UC20.1.1>
+#useCase(
+  attore: "Utente Autorizzato",
+  pre: [
+    - L'utente ha inserito un nome nel modulo di creazione nuova raccolta #link(<UC20.1>)[#underline[\[UC20.1\]]]
+  ],
+  post: [
+    - L'utente visualizza un messaggio circa la non conformità del nome inserito
+    - L'utente ha la possibilità di fornire un nuovo valore per il nome
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore in corrispondenza del campo nome che specifica la non conformità del formato
+  ],
+  trigger: "L'utente tenta di procedere con l'inserimento di un nome non conforme ai criteri di formato",
+)[]
+
+==== UC20.2: Inserimento URL repository GitHub <UC20.2>
+#useCase(
+  attore: "Utente Autorizzato",
+  pre: [
+    - L'utente sta visualizzando il modulo di creazione nuova raccolta #link(<UC20>)[#underline[\[UC20\]]]
+  ],
+  post: [
+    - Il campo relativo all'URL del repository risulta popolato con un valore accettato
+  ],
+  scenari: [
+    - L'utente inserisce l'URL del repository GitHub oggetto dell'analisi
+  ],
+  estensioni: [
+    - #link(<UC20.2.1>)[#underline[\[UC20.2.1\]]] // URL non conforme
+    - #link(<UC20.2.2>)[#underline[\[UC20.2.2\]]] // Repository non accessibile
+    - #link(<UC20.2.3>)[#underline[\[UC20.2.3\]]] // URL non inserito
+  ],
+  trigger: "L'utente seleziona il campo di input dell'URL",
+)[
+  //#useCaseDiagram("20_1", "UC20.2 - Inserimento URL repository GitHub")
+]
+
+===== UC20.2.1: Visualizzazione errore URL non conforme <UC20.2.1>
+#useCase(
+  attore: "Utente Autorizzato",
+  pre: [
+    - L'utente ha inserito un valore nel campo URL #link(<UC20.2>)[#underline[\[UC20.2\]]]
+  ],
+  post: [
+    - L'utente visualizza un avviso circa la non conformità del formato dell'URL
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore che specifica l'invalidità sintattica dell'URL
+  ],
+  trigger: "L'utente tenta di procedere con un URL formalmente non valido",
+)[]
+
+===== UC20.2.2: Visualizzazione errore repository non accessibile <UC20.2.2>
+#useCase(
+  attore: "Utente Autorizzato",
+  pre: [
+    - L'utente ha inserito un URL nel modulo #link(<UC20.2>)[#underline[\[UC20.2\]]]
+  ],
+  post: [
+    - L'utente visualizza un avviso circa l'impossibilità di accedere al repository indicato
+  ],
+  scenari: [
+    - L'utente visualizza un messaggio di errore relativo all'inesistenza o all'inaccessibilità del repository
+  ],
+  trigger: "Il sistema rileva l'inaccessibilità della risorsa remota specificata",
+)[]
+
+===== UC20.2.3: Visualizzazione errore URL non inserito <UC20.2.3>
+#useCase(
+  attore: "Utente Autorizzato",
+  pre: [
+    - L'utente sta interagendo con il campo URL #link(<UC20.2>)[#underline[\[UC20.2\]]]
+  ],
+  post: [
+    - L'utente visualizza un avviso circa il mancato inserimento dell'URL obbligatorio
+  ],
+  scenari: [
+    - L'utente visualizza la segnalazione di errore specifica per il campo vuoto
+  ],
+  trigger: "L'utente tenta di confermare senza aver popolato il campo URL",
+)[]
+
+==== UC20.3: Inserimento descrizione della raccolta di report <UC20.3>
+#useCase(
+  attore: "Utente Autorizzato",
+  pre: [
+    - L'utente sta visualizzando il modulo di creazione nuova raccolta #link(<UC20>)[#underline[\[UC20\]]]
+  ],
+  post: [
+    - Il campo relativo alla descrizione della raccolta di report risulta popolato con un valore accettato
+  ],
+  scenari: [
+    - L'utente inserisce una descrizione per la raccolta di report di analisi
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente seleziona il campo di input della descrizione",
+)[]
+
 
 === UC21 Avvio analisi <UC21>
 #useCase(
@@ -3222,6 +3297,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     [#underline[\[UC19\]]]
 )[]
 
+/*
 === UC38: Richiesta analisi repository GitHub privato a cui si ha accesso <UC38>
 #useCase(
   attore: "Utente Avanzato",
@@ -3250,7 +3326,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC4>)[#underline[\[UC4\]]]
   ]
 )[]
-
+*/
 /* SONO inclusi in UC4-5
 ==== UC51.1: Inserimento URL repository GitHub privato per l'analisi <UC51.1>
 #useCase(
@@ -3999,18 +4075,6 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#FRObx], 
   [Il Sistema deve consentire l'accesso alla sezione di configurazione dell'analisi e l'immissione dell'URL del repository.], 
   [#link(<UC4>)[#underline[\[UC4\]]]],
-
-  [#FRObx], 
-  [Il Sistema deve validare che l'URL del repository GitHub inserito utilizzi il protocollo 'https://' e il dominio 'github.com'.], 
-  [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
-
-  [#FRObx], 
-  [Il Sistema deve inibire l'invio della richiesta e notificare l'utente qualora il repository risulti inesistente o non accessibile.], 
-  [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
-
-  [#FRObx], 
-  [Il Sistema deve inibire la procedura di analisi e notificare l'utente qualora il campo URL non venga compilato.], 
-  [#link(<UC4.1.3>)[#underline[\[UC4.1.3\]]]],
 
   [#FRObx], 
   [Il Sistema deve permettere la selezione multipla delle aree di interesse tra test, sicurezza e documentazione.], 
