@@ -1369,7 +1369,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]
   ],
   trigger: "L'utente accede alla testata del report di analisi",
-)[]
+)[
+  #useCaseDiagram("6_2", "UC6.2 - Visualizzazione metadati del report")
+]
 
 ===== UC6.2.1: Visualizzazione data report <UC6.2.1>
 #useCase(
@@ -1433,7 +1435,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC6.3.1>)[#underline[\[6.3.1\]]]
   ],
   trigger: "L'utente scorre i risultati dell'analisi",
-)[]
+)[
+  #useCaseDiagram("6_3", "UC6.3 - Visualizzazione sezioni analitiche e remediation")
+]
 
 ===== UC6.3.1: Visualizzazione lista remediation <UC6.3.1>
 #useCase(
@@ -1451,7 +1455,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC6.3.1.1>)[#underline[\[6.3.1.1\]]] // Nessuna remediation
   ],
   trigger: "L'utente consulta l'area dedicata ai miglioramenti per una sezione",
-)[]
+)[
+  #useCaseDiagram("6_3_1", "UC6.3.1 - Visualizzazione lista remediation")
+]
 
 ====== UC6.3.1.1: Visualizzazione messaggio assenza criticità <UC6.3.1.1>
 #useCase(
@@ -1490,7 +1496,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'utente richiede la modifica del periodo temporale per l'analisi comparativa",
 )[
-  //#useCaseDiagram("7", "UC7 - Selezione intervallo temporale")
+  #useCaseDiagram("7", "UC7 - Selezione intervallo temporale")
 ]
 
 ==== UC7.0.1: Visualizzazione errore intervallo non inserito <UC7.0.1>
@@ -1590,7 +1596,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'utente accede all'area dedicata all'analisi del codice sorgente nel report",
 )[
-  #useCaseDiagram("9", "UC9 - Analisi del codice")
+  #useCaseDiagram("9", "UC9 - Visualizzazione sezione analisi del codice")
 ]
 
 ==== UC9.1: Visualizzazione sezione analisi statica del codice <UC9.1>
@@ -1639,7 +1645,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC9.3.1>)[#underline[\[UC9.3.1\]]] // Nessuna remediation codice
   ],
   trigger: "L'utente accede alla lista delle azioni correttive per il codice",
-)[]
+)[
+  #useCaseDiagram("9_3", "UC9.3 - Visualizzazione remediation sezione codice")
+]
 
 ===== UC9.3.1: Visualizzazione informativa assenza remediation codice <UC9.3.1>
 #useCase(
@@ -1679,7 +1687,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Questo caso d'uso è una specializzazione del caso d'uso #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
   trigger: "L'utente accede all'area dedicata alla sicurezza nel report di analisi",
-)[]
+)[
+  #useCaseDiagram("10", "UC10 - Visualizzazione sezione analisi della sicurezza")
+]
 
 ==== UC10.1: Visualizzazione sezione analisi librerie e dipendenze <UC10.1>
 #useCase(
@@ -1727,7 +1737,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC10.3.1>)[#underline[\[UC10.3.1\]]]
   ],
   trigger: "L'utente accede alla lista delle azioni correttive per la sicurezza",
-)[]
+)[
+  #useCaseDiagram("10_3", "UC10.3 - Visualizzazione remediation sezione sicurezza")
+]
 
 ===== UC10.3.1: Visualizzazione informativa assenza remediation sicurezza <UC10.3.1>
 #useCase(
@@ -1769,7 +1781,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'utente richiede la consultazione dei dati relativi alla documentazione del progetto",
 )[
-  //#useCaseDiagram("11", "UC11 - Analisi della documentazione")
+  #useCaseDiagram("11", "UC11 - Visualizzazione sezione analisi della documentazione")
 ]
 
 ==== UC11.1: Visualizzazione sezione errori di sintassi <UC11.1>
@@ -1818,7 +1830,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC11.3.1>)[#underline[\[UC11.3.1\]]]
   ],
   trigger: "L'utente accede ai suggerimenti correttivi per l'area documentale",
-)[]
+)[
+  #useCaseDiagram("11_3", "UC11.3 - Visualizzazione remediation sezione documentazione")
+]
 
 ===== UC11.3.1: Visualizzazione informativa assenza remediation documentazione <UC11.3.1>
 #useCase(
@@ -1852,7 +1866,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'utente richiede la consultazione della classifica globale dei propri repository",
 )[
-  #useCaseDiagram("12", "UC12 - Ranking dei repository analizzati")
+  #useCaseDiagram("12", "UC12 - Visualizzazione ranking dei repository analizzati")
 ]
 
 ==== UC12.1: Visualizzazione informativa assenza dati per ranking <UC12.1>
@@ -1884,7 +1898,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente conferma la volontà di rimuovere l'integrazione con GitHub tramite comando dedicato
   ],
   trigger: "L'utente richiede la rimozione del collegamento con il provider esterno GitHub",
-)[#useCaseDiagram("13", "UC13 - Disconnessione account GitHub")]
+)[]
 
 === UC14: Esportazione report di analisi <UC14>
 #useCase(
@@ -1904,7 +1918,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC14.2>)[#underline[\[UC14.2\]]]
   ],
   trigger: "L'utente richiede la versione scaricabile del report di analisi",
-)[#useCaseDiagram("14", "UC14 - Esportazione report")]
+)[
+  #useCaseDiagram("14", "UC14 - Esportazione report")
+]
 
 ==== UC14.1: Selezione formato di esportazione <UC14.1>
 #useCase(
@@ -1922,7 +1938,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]
   ],
   trigger: "L'utente interagisce con il selettore dei formati di esportazione",
-)[]
+)[
+  #useCaseDiagram("14_1", "UC14.1 - Selezione formato di esportazione")
+]
 
 ===== UC14.1.1: Visualizzazione errore formato mancante <UC14.1.1>
 #useCase(
@@ -1976,7 +1994,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC15.4>)[#underline[\[UC15.4\]]]
   ],
   trigger: "L'utente richiede il cambio delle credenziali di accesso",
-)[#useCaseDiagram("15", "UC15 - Modifica password")]
+)[
+  #useCaseDiagram("15", "UC15 - Modifica password")
+]
 
 ==== UC15.1: Inserimento password corrente <UC15.1>
 #useCase(
@@ -1995,7 +2015,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC15.1.2>)[#underline[\[UC15.1.2\]]]
   ],
   trigger: "L'utente interagisce con il campo di input della password corrente",
-)[]
+)[
+  #useCaseDiagram("15_1", "UC15.1 - Inserimento password corrente")
+]
 
 ===== UC15.1.1: Visualizzazione errore password corrente mancante <UC15.1.1>
 #useCase(
@@ -2045,7 +2067,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC15.2.3>)[#underline[\[UC15.2.3\]]]
   ],
   trigger: "L'utente popola il campo relativo alla nuova chiave di accesso",
-)[]
+)[
+  #useCaseDiagram("15_2", "UC15.2 - Inserimento nuova password")
+]
 
 ===== UC15.2.1: Visualizzazione errore nuova password mancante <UC15.2.1>
 #useCase(
@@ -2148,7 +2172,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC31>)[#underline[\[UC31\]]]
   ],
   trigger: "L'utente seleziona una remediation dalla lista proposta",
-)[#useCaseDiagram("16", "UC16 - Visualizzazione suggerimenti di remediation")]
+)[#useCaseDiagram("16", "UC16 - Visualizzazione singola remediation di sezione generica")]
 
 //USE CASE DEL BACK-END
 === UC17: Verifica accessibilità repository GitHub <UC17>
@@ -2159,7 +2183,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'orchestratore ha ricevuto una richiesta di analisi contenente un URL GitHub da parte di un utente Autorizzato di CodeGuardian #link(<UC21>)[#underline[\[UC21\]]]
   ],
   post: [
-    - L'accessibilità del repository è stata accertata e l'orchestratore dispone dei permessi di lettura per avviare la analisi.
+    - L'accessibilità del repository è stata accertata e l'orchestratore dispone dei permessi di lettura per avviare la analisi
   ],
   scenari: [
     - L'orchestratore stabilisce una connessione con la piattaforma GitHub #link(<UC17.1>)[#underline[\[UC17.1\]]]
@@ -2182,13 +2206,13 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Orchestratore",
   attori_secondari: "GitHub",
   pre: [
-    - L'orchestratore ha avviato la procedura di verifica #link(<UC17>)[#underline[\[UC17\]]].
+    - L'orchestratore ha avviato la procedura di verifica #link(<UC17>)[#underline[\[UC17\]]]
   ],
   post: [
-    - Il canale di comunicazione con la piattaforma esterna è stabilito correttamente.
+    - Il canale di comunicazione con la piattaforma esterna è stabilito correttamente
   ],
   scenari: [
-    - L'orchestratore interroga i servizi di GitHub per verificarne l'operatività.
+    - L'orchestratore interroga i servizi di GitHub per verificarne l'operatività
   ],
   estensioni: [
     - #link(<UC17.1.1>)[#underline[\[UC17.1.1\]]] // Mancata risposta
@@ -2202,14 +2226,14 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'orchestratore ha tentato di contattare GitHub #link(<UC17.1>)[#underline[\[UC17.1\]]].
-    - Il servizio esterno non risponde o restituisce un errore di rete.
+    - L'orchestratore ha tentato di contattare GitHub #link(<UC17.1>)[#underline[\[UC17.1\]]]
+    - Il servizio esterno non risponde o restituisce un errore di rete
   ],
   post: [
-    - La procedura viene interrotta e l'errore di connessione viene tracciato.
+    - La procedura viene interrotta e l'errore di connessione viene tracciato
   ],
   scenari: [
-    - L'orchestratore rileva l'impossibilità di raggiungere i servizi esterni di GitHub.
+    - L'orchestratore rileva l'impossibilità di raggiungere i servizi esterni di GitHub
   ],
   trigger: "Mancata risposta da parte di GitHub",
 )[]
@@ -2219,56 +2243,59 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Orchestratore",
   attori_secondari: "GitHub",
   pre: [
-    - La comunicazione con GitHub è stata stabilita con successo #link(<UC17.1>)[#underline[\[UC17.1\]]].
+    - La comunicazione con GitHub è stata stabilita con successo #link(<UC17.1>)[#underline[\[UC17.1\]]]
   ],
   post: [
-    - L'orchestratore ha individuato il repository e ne ha convalidato l'accesso.
+    - L'orchestratore ha individuato il repository e ne ha convalidato l'accesso
   ],
   scenari: [
-    - L'orchestratore ricerca il repository come risorsa pubblica.
+    - L'orchestratore ricerca il repository come risorsa pubblica
   ],
   estensioni: [
-    (UC17.2.1)
+    - #link(<UC17.2.1>)[#underline[\[UC17.2.1\]]] // Accesso a repository privato
   ],
   trigger: "L'orchestratore interroga GitHub per i metadati del repository",
-)[]
+)[
+  #useCaseDiagram("17_2", "UC17.2 - Ricerca del repository")
+]
 
-==== UC17.2.1: Accesso a repository privata <UC17.2.1>
+==== UC17.2.1: Accesso a repository privato <UC17.2.1>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - Il repository non risulta accessibile pubblicamente #link(<UC17.2>)[#underline[\[UC17.2\]]].
+    - Il repository non risulta accessibile pubblicamente #link(<UC17.2>)[#underline[\[UC17.2\]]]
   ],
   post: [
-    - L'orchestratore ha ottenuto l'accesso alla risorsa tramite credenziali autorizzate.
+    - L'orchestratore ha ottenuto l'accesso alla risorsa tramite credenziali autorizzate
   ],
   scenari: [
-    - L'orchestratore recupera le credenziali GitHub associate all'utente richiedente.
-    - L'orchestratore utilizza, in alternativa, il token di accesso fornito per la sessione.
+    - L'orchestratore recupera le credenziali GitHub associate all'utente richiedente
+    - L'orchestratore utilizza, in alternativa, il token di accesso fornito per la sessione
   ],
   estensioni: [
     - #link(<UC17.2.1.1>)[#underline[\[UC17.2.1.1\]]] // Repository inaccessibile
   ],
-  trigger: "Il repository cercata richiede autorizzazione per l'accesso",
-)[]
+  trigger: "Il repository cercato richiede autorizzazione per l'accesso",
+)[
+  // #useCaseDiagram("17_2_1", "UC17.2.1 - Accesso a repository privato")
+]
 
 ===== UC17.2.1.1: Repository inaccessibile <UC17.2.1.1>
 #useCase(
   attore: "Orchestratore",
   pre: [
-    - L'orchestratore ha tentato l'accesso pubblico e privato (credenziali/token).
-    - Nessun metodo di autorizzazione ha fornito l'accesso alla risorsa.
+    - L'orchestratore ha tentato l'accesso pubblico e privato (credenziali/token)
+    - Nessun metodo di autorizzazione ha fornito l'accesso alla risorsa
   ],
   post: [
-    - La procedura di analisi viene annullata per mancanza di permessi.
+    - La procedura di analisi viene annullata per mancanza di permessi
   ],
   scenari: [
-    - L'orchestratore rileva il diniego definitivo di accesso da parte di GitHub per la risorsa specificata.
+    - L'orchestratore rileva il diniego definitivo di accesso da parte di GitHub per la risorsa specificata
   ],
   trigger: "Esaurimento dei tentativi di accesso autorizzato",
 )[]
 
-// USE CASE DELLE ANALISI
 === UC18: Accettazione singola remediation generica <UC18>
 #useCase(
   attore: "Utente Autorizzato",
@@ -2294,7 +2321,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC34>)[#underline[\[UC34\]]]
     - #link(<UC36>)[#underline[\[UC36\]]]
   ],
-)[#useCaseDiagram("18", "UC18 - Analisi vulnerabilità dipendenze")]
+)[
+  #useCaseDiagram("18", "UC18 - Accettazione singola remediation generica")
+]
 
 === UC19: Rifiuto di una singola remediation generica <UC19>
 #useCase(
@@ -2315,7 +2344,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC35>)[#underline[\[UC35\]]]
     - #link(<UC37>)[#underline[\[UC37\]]]
   ],
-)[]
+)[
+  #useCaseDiagram("19", "UC19 - Rifiuto di una singola remediation generica")
+]
 
 #TODO("Il refactoring é una remdiation, va infondo (circa 43-49) in quanto specializzazione di 18 e/o 19")
 /*
@@ -2411,7 +2442,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "L'utente accede alla sezione report programmabili e alert",
-)[#useCaseDiagram("28", "UC20 - Report programmabili e alert")]
+)[
+  #useCaseDiagram("20", "UC20 - Report programmabili e alert")
+]
 
 ==== UC20.1: Configurazione periodicità dei report <UC20.1>
 #useCase(
@@ -2433,7 +2466,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC20.1.1>)[#underline[\[UC20.1.1\]]]
   ],
   trigger: "L'utente accede alla sezione per la configurazione della periodicità dei report",
-)[]
+)[
+  #useCaseDiagram("20_1", "UC20.1 - Configurazione periodicità dei report")
+]
 
 ===== UC20.1.1: Nessuna periodicità selezionata <UC20.1.1>
 #useCase(
@@ -2477,7 +2512,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC20.2.1>)[#underline[\[UC20.2.1\]]]
   ],
   trigger: "L'utente accede alla sezione per la configurazione delle soglie per gli alert critici",
-)[]
+)[
+  #useCaseDiagram("20_2", "UC20.2 - Configurazione soglie per gli alert critici")
+]
 
 ===== UC20.2.1: Nessuna soglia selezionata <UC20.2.1>
 #useCase(
@@ -2528,7 +2565,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "Richiesta di analisi di un repository",
-)[#useCaseDiagram("21", "UC21 - Avvio analisi")]
+)[
+  #useCaseDiagram("21", "UC21 - Avvio analisi")
+]
 #TODO("Da aggiungere passaggio : orchestratore `prende` i file dal serrvizio esterno?")
 
 ==== UC21.1 Richiesta di clonazione del repository <UC21.1>
@@ -2552,7 +2591,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC21.1.1>)[#underline[\[UC21.1.1\]]]
   ],
   trigger: "L'orchestratore ha iniziato la procedura di analisi",
-)[]
+)[
+  #useCaseDiagram("21_1", "UC21.1 - Richiesta di clonazione del repository")
+]
 
 ===== UC21.1.1 Errore durante la richiesta di clonazione del repository <UC21.1.1>
 #useCase(
@@ -2715,6 +2756,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 === UC23 Recupero dei risultati dagli strumenti di analisi <UC23>
 #useCase(
   attore: "Orchestratore",
+  attori_secondari: "Strumenti di Analisi",
   pre: [
     - L'orchestratore ha avviato gli strumenti esterni di analisi #link(<UC21>)[#underline[\[UC21\]]]
   ],
@@ -2732,11 +2774,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC23.1>)[#underline[\[UC23.1\]]]
   ],
   trigger: "Gli strumenti esterni di analisi completano le loro operazioni e inviano i risultati all'orchestratore",
-)[#useCaseDiagram("30", "UC23 - Recupero dei risultati dagli strumenti di analisi")]
+)[#useCaseDiagram("23", "UC23 - Recupero dei risultati dagli strumenti di analisi")]
 
 ==== UC23.1 Uno o più strumenti di analisi non rispondono o restituiscono un errore <UC23.1>
 #useCase(
-  attore: "Strumenti di Analisi",
+  attore: "Orchestratore",
+  attori_secondari: "Strumenti di Analisi",
   pre: [
     - L'orchestratore ha avviato gli strumenti esterni di analisi #link(<UC21>)[#underline[\[UC21\]]]
     - Uno o più strumenti di analisi non rispondono entro un tempo prestabilito o restituiscono un errore
@@ -2802,6 +2845,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "La procedura di generazione del report di analisi è stata completata con successo",
 )[
+  #useCaseDiagram("25", "UC25 - Salvataggio di un report")
 ]
 
 ==== UC25.1 Errore durante il salvataggio del report <UC25.1>
@@ -2831,7 +2875,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Orchestratore",
   pre: [
-    -L'analisi richiesta è stata salvata correttamente nel sistema di persistenza #link(<UC25>)[#underline[\[UC25\]]]
+    - L'analisi richiesta è stata salvata correttamente nel sistema di persistenza #link(<UC25>)[#underline[\[UC25\]]]
   ],
   post: [
     - La notifica che segnala la disponibilità del nuovo report di analisi è stata inviata all'utente.
@@ -2847,6 +2891,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'analisi richiesta è stata completata",
 )[
+  #useCaseDiagram("26", "UC26 - Invio notifica completamento dell'analisi del repository")
 ]
 
 ==== UC26.1 Errore durante l'invio della notifica di completamento dell'analisi <UC26.1>
@@ -2949,8 +2994,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 ]
 */
 
-
-
 === UC28 Gestione del codice OAuth GitHub <UC28>
 #useCase(
   attore: "Orchestratore",
@@ -2978,7 +3021,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 ]
 #TODO("estensioni UC28...puó fallire?")
 
-=== UC29: Visualizzazione singola remediation riguardante il codice <UC29>
+=== UC29: Visualizzazione singola remediation riguardante l'analisi del codice <UC29>
 #useCase(
   attore: "Utente Autorizzato",
   pre: [
@@ -3130,9 +3173,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente rifiuta la remediation proposta riguardante l'analisi della sicurezza
   ],
+  specializzazione:[
+    #link(<UC19>)[#underline[\[UC19\]]]
+  ],
   trigger: "L'utente rifiuta la proposta di remediation riguardante l'analisi della sicurezza",
-  specializzazione:
-    [#underline[\[UC19\]]]
 )[]
 
 === UC36: Accettazione singola remediation riguardante l'analisi della documentazione <UC36>
