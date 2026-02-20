@@ -11,13 +11,19 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.10.0"
+#let versione = "v0.10.1"
 #set heading(numbering: "1.1.1")
 
 #titlePage("Norme di Progetto", versione)
 #set page(numbering: "1", header: header("Norme di Progetto"), footer: footer())
 
 #let history = (
+  (
+    "2026/02/20",
+    "0.10.1",
+    "Fix sezione AdR in processo di fornitura",
+    members.andrea,
+  ),
   (
     "2026/02/14",
     "0.10.0",
@@ -581,9 +587,18 @@ L’Analisi dei Requisiti rappresenta la colonna portante della *Requirements an
 
 ==== Elementi Costituenti del Documento
 Il documento Analisi dei Requisiti deve essere organizzato in modo chiaro e strutturato, includendo obbligatoriamente i seguenti elementi:
-- *Introduzione e Prospettiva del Prodotto*: deve descrivere il contesto del sistema, le funzioni principali (suddivise in Test, Sicurezza e Documentazione) e le caratteristiche degli utenti finali.
+- *Casi d'Uso*: descrive le interazioni tra gli attori e il sistema, fornendo una visione chiara delle funzionalità richieste e aiutando a identificare i requisiti funzionali del sistema.
+- *Requisiti*: descrive le specifiche funzionali, di qualità e di vincolo, che il sistema deve soddisfare per soddisfare le necessità del Capitolato.
 
-- *Casi d'Uso (Use Cases)*: rappresentano la fonte primaria dei requisiti funzionali. Ogni caso d'uso deve essere identificato univocamente e contenere:
+===== Casi d'Uso
+I #def("casi d'uso") rappresentano scenari specifici che descrivono come gli attori interagiscono con il sistema per raggiungere determinati obiettivi. Essi forniscono una visione chiara delle funzionalità richieste e aiutano a identificare i requisiti funzionali del sistema.
+Per la descrizione dei casi d'uso viene utilizzata la nomenclatura #strong("UCPrincipale.Secondario") dove:
+- *UC*: acronimo di Use Case (caso d'uso).
+- *Principale*: numero progressivo del caso d'uso principale, identifica un macro-scenario o una funzionalità atomica.
+- *Secondario*: numero progressivo del caso d'uso secondario, identifica varianti o estensioni del caso d'uso principale (sotto-casi).
+L'identificatore *Principale* è univoco a livello globale; non è quindi ammessa l'esistenza di due casi d'uso distinti con il medesimo valore principale. Il valore *Secondario* può invece essere ripetuto all'interno del documento, a patto che ciò non avvenga mai sotto lo stesso identificatore principale. Nel caso in cui un scenario secondario presenti a sua volta delle inclusioni o estensioni, la stringa *Principale.Secondario* assumerà il ruolo di radice per la nuova gerarchia, seguendo le medesime regole di progressione e unicità sopra descritte.
+
+Ogni caso d'uso deve essere identificato univocamente e contenere:
   - *Attori*: identificazione degli utenti o sistemi esterni (lato Front-end e Back-end);
   - *Precondizioni* e Postcondizioni: stato del sistema prima e dopo l'esecuzione;
   - *Scenario Principale*: sequenza ordinata di azioni;
@@ -591,10 +606,27 @@ Il documento Analisi dei Requisiti deve essere organizzato in modo chiaro e stru
   - *Trigger*: evento che innesca il caso d'uso.
   - *Diagrammi UML*: rappresentazione grafica delle interazioni.
 
-- *Requisiti di Sistema*: classificazione dettagliata dei requisiti derivati dai casi d'uso o da fonti esterne (Capitolato, Verbali). Ogni requisito deve essere classificato per:
-  - *Priorità*: Obbligatorio, Desiderabile o Opzionale;
-  - *Tipologia*: Funzionale (FR), di Qualità (QR) o di Vincolo (VR);
-  - *Tracciabilità*: ogni requisito deve essere identificato da un codice univoco e riportare la fonte o il caso d'uso di riferimento per permetterne il monitoraggio durante tutto il ciclo di vita del progetto
+Per approfondimenti riguardanti gli attori coinvolti, le precondizioni, le postcondizioni e lo scenario principale degli eventi, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti Vx.y.z"). #TODO("Link al documento")
+
+===== Requisiti
+I requisiti rappresentano le specifiche funzionali e non funzionali che il sistema deve soddisfare. Ogni requisito è classificato per garantire la tracciabilità rispetto alle fonti e ai casi d'uso associati.
+
+Per la descrizione dei requisiti viene utilizzata la nomenclatura #strong("TipologiaRPrioritàNumero") dove:
+- *Tipologia*: indica il tipo di requisito. I valori possibili sono:
+  - *F*: Requisito #strong("F")unzionale.
+  - *Q*: Requisito di #strong("Q")ualità.
+  - *V*: Requisito di #strong("V")incolo.
+- *R*: acronimo di Requisito.
+- *Priorità*: indica l'importanza del requisito. I valori possibili sono:
+  - *Ob*: Requisito #strong("Ob")bligatorio.
+  - *De*: Requisito #strong("De")siderabile.
+  - *Op*: Requisito #strong("Op")zionale.
+- *Numero*: numero progressivo univoco per ogni requisito all'interno della sua tipologia.
+Poi viene riportata la fonte o il caso d'uso di riferimento per permettere il monitoraggio durante tutto il ciclo di vita del progetto.
+
+Altra sezione presente è il tracciamento, che fornisce un sistema di tracciamento esplicito tra i requisiti, i casi d'uso e le fonti documentali, garantendo che ogni scelta implementativa sia giustificata e monitorabile.
+
+Per approfondimenti riguardanti la descrizione dettagliata, la fonte e i casi d'uso associati a ciascun requisito, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti Vx.y.z"). #TODO("Link al documento")
 
 === Glossario
 ==== Definizione del Documento
@@ -1226,7 +1258,7 @@ L'Analisi dei Requisiti costituisce una delle fasi più critiche e determinanti 
 
 Svolgere un'analisi completa e corretta è fondamentale per fornire una base solida per le successive fasi di progettazione e codifica. I risultati di questa analisi sono documentati nel documento #strong("Analisi dei Requisiti Vx.y.z"). #TODO("Link al documento")
 
-===== Casi d'Uso
+/* ===== Casi d'Uso
 I #def("casi d'uso") rappresentano scenari specifici che descrivono come gli attori interagiscono con il sistema per raggiungere determinati obiettivi. Essi forniscono una visione chiara delle funzionalità richieste e aiutano a identificare i requisiti funzionali del sistema.
 Per la descrizione dei casi d'uso viene utilizzata la nomenclatura #strong("UCPrincipale.Secondario") dove:
 - *UC*: acronimo di Use Case (caso d'uso).
@@ -1251,9 +1283,9 @@ Per la descrizione dei requisiti viene utilizzata la nomenclatura #strong("Tipol
   - *Op*: Requisito #strong("Op")zionale.
 - *Numero*: numero progressivo univoco per ogni requisito all'interno della sua tipologia.
 
-Per approfondimenti riguardanti la descrizione dettagliata, la fonte e i casi d'uso associati a ciascun requisito, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti Vx.y.z"). #TODO("Link al documento")
+Per approfondimenti riguardanti la descrizione dettagliata, la fonte e i casi d'uso associati a ciascun requisito, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti Vx.y.z"). #TODO("Link al documento") */
 
-==== Codifica
+=== Codifica
 La codifica ha come obiettivo l'implementazione fedele delle soluzioni progettate, garantendo che ogni componente rispetti gli standard di qualità, sicurezza e manutenibilità definiti dal gruppo.
 
 Il progetto adotta un'architettura full-stack e multi-linguaggio, i cui componenti principali sono:
