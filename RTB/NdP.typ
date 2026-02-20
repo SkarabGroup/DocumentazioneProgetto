@@ -11,13 +11,19 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.10.1"
+#let versione = "v0.11.0"
 #set heading(numbering: "1.1.1")
 
 #titlePage("Norme di Progetto", versione)
 #set page(numbering: "1", header: header("Norme di Progetto"), footer: footer())
 
 #let history = (
+  (
+    "2026/02/21",
+    "0.11.0",
+    "Rielaborazione Processi di Supporto e Organizzativi",
+    members.alice,
+  ),
   (
     "2026/02/20",
     "0.10.1",
@@ -599,12 +605,12 @@ Per la descrizione dei casi d'uso viene utilizzata la nomenclatura #strong("UCPr
 L'identificatore *Principale* è univoco a livello globale; non è quindi ammessa l'esistenza di due casi d'uso distinti con il medesimo valore principale. Il valore *Secondario* può invece essere ripetuto all'interno del documento, a patto che ciò non avvenga mai sotto lo stesso identificatore principale. Nel caso in cui un scenario secondario presenti a sua volta delle inclusioni o estensioni, la stringa *Principale.Secondario* assumerà il ruolo di radice per la nuova gerarchia, seguendo le medesime regole di progressione e unicità sopra descritte.
 
 Ogni caso d'uso deve essere identificato univocamente e contenere:
-  - *Attori*: identificazione degli utenti o sistemi esterni (lato Front-end e Back-end);
-  - *Precondizioni* e Postcondizioni: stato del sistema prima e dopo l'esecuzione;
-  - *Scenario Principale*: sequenza ordinata di azioni;
-  - *Estensioni e Inclusioni*: per gestire flussi alternativi o comuni;
-  - *Trigger*: evento che innesca il caso d'uso.
-  - *Diagrammi UML*: rappresentazione grafica delle interazioni.
+- *Attori*: identificazione degli utenti o sistemi esterni (lato Front-end e Back-end);
+- *Precondizioni* e Postcondizioni: stato del sistema prima e dopo l'esecuzione;
+- *Scenario Principale*: sequenza ordinata di azioni;
+- *Estensioni e Inclusioni*: per gestire flussi alternativi o comuni;
+- *Trigger*: evento che innesca il caso d'uso.
+- *Diagrammi UML*: rappresentazione grafica delle interazioni.
 
 Per approfondimenti riguardanti gli attori coinvolti, le precondizioni, le postcondizioni e lo scenario principale degli eventi, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti Vx.y.z"). #TODO("Link al documento")
 
@@ -713,7 +719,7 @@ Documento normativo che definisce le regole, le convenzioni, i processi e gli st
 ====== Glossario
 Documento terminologico che costituisce il riferimento unico e vincolante per la definizione dei termini tecnici, degli acronimi e dei concetti di dominio utilizzati nella documentazione e nel codice sorgente.
 
-===== Criteri di Verifica dei Documenti di Fornitura
+====== Criteri di Verifica dei Documenti di Fornitura
 
 Un documento di fornitura è considerato conforme alle Norme di Progetto se risultano soddisfatte tutte le seguenti condizioni:
 
@@ -735,8 +741,7 @@ Il Processo di Sviluppo disciplina la realizzazione tecnica del prodotto softwar
 
 Gli artefatti prodotti dal Processo di Sviluppo normati dalle presenti Norme di Progetto sono:
 - Codice sorgente;
-- Test;
-- Specifiche tecniche e documentazione di progettazione (quando applicabile).
+- Test.
 
 ====== Codice Sorgente
 Il codice sorgente costituisce l'implementazione del sistema software e deve rispettare gli standard di codifica definiti nella sezione #underline[Processo di Sviluppo].
@@ -774,7 +779,7 @@ Il Processo di Qualifica garantisce che il prodotto software e la documentazione
 ====== Criteri di Verifica dei Processi di Supporto
 I Processi di Supporto sono considerati conformi alle Norme di Progetto se risultano soddisfatte tutte le seguenti condizioni:
 
-*Per il Processo di Documentazione:*
+*Per il Processo di Documentazione*
 
 - [ ] ogni documento è redatto in formato Typst e archiviato nel repository del progetto;
 - [ ] ogni documento segue il ciclo di vita definito: Creazione/Modifica → Verifica → Approvazione;
@@ -787,7 +792,7 @@ I Processi di Supporto sono considerati conformi alle Norme di Progetto se risul
 - [ ] nessun documento viene integrato in `main` senza aver superato la verifica;
 - [ ] ogni Pull Request è approvata da un Verificatore diverso dal redattore;
 
-*Per il Processo di Qualifica:*
+*Per il Processo di Qualifica*
 
 - [ ] tutte le attività di verifica e validazione sono documentate nel Piano di Qualifica;
 - [ ] ogni artefatto è sottoposto a verifica prima dell'integrazione in `main`;
@@ -797,7 +802,64 @@ I Processi di Supporto sono considerati conformi alle Norme di Progetto se risul
 
 Il mancato rispetto di uno o più criteri comporta la non conformità del processo e richiede azioni correttive.
 
-#TODO("Avviata la stesura, mancano Organizzativi")
+===== Processi Organizzativi
+I Processi Organizzativi disciplinano l'insieme delle attività trasversali che garantiscono
+il corretto funzionamento del team e la coerenza operativa del progetto durante l'intero ciclo di vita.
+
+I processi organizzativi normati dalle presenti Norme di Progetto sono:
+- Gestione dei Processi;
+- Infrastruttura;
+- Processo di Miglioramento;
+- Processo di Formazione.
+
+====== Gestione dei Processi
+La Gestione dei Processi definisce i ruoli del team, le responsabilità operative, le
+modalità di pianificazione e assegnazione delle attività e i meccanismi di coordinamento
+interno ed esterno.
+
+====== Infrastruttura
+Il Processo di Infrastruttura definisce gli strumenti e gli ambienti di lavoro adottati dal team per lo svolgimento delle attività di progetto.
+
+====== Processo di Miglioramento
+Il Processo di Miglioramento garantisce che i processi adottati vengano periodicamente
+valutati e migliorati.
+
+====== Processo di Formazione
+Il Processo di Formazione garantisce che tutti i membri del team acquisiscano le competenze necessarie alle tecnologie adottate nel progetto _Code Guardian_.
+
+====== Criteri di Verifica dei Processi Organizzativi
+I Processi Organizzativi sono considerati conformi alle Norme di Progetto se risultano
+soddisfatte tutte le seguenti condizioni:
+
+*Per la Gestione dei Processi*
+
+- [ ] tutti i ruoli attivi sono definiti con responsabilità esplicite e non ambigue;
+- [ ] ogni Sprint è avviato con task definiti su Jira, assegnati e stimati;
+- [ ] ogni Sprint è concluso con una retrospettiva documentata;
+- [ ] le riunioni interne si tengono con cadenza almeno settimanale e producono un verbale;
+- [ ] le riunioni esterne con Var Group producono un verbale entro 48 ore lavorative;
+- [ ] i canali di comunicazione ufficiali sono rispettati secondo gli scopi definiti.
+
+*Per l'Infrastruttura*
+
+- [ ] tutti gli strumenti elencati sono operativi e accessibili a tutti i membri del team;
+- [ ] il repository GitHub rispetta la struttura di cartelle definita nelle NdP;
+- [ ] le branch protection rules su `develop` e `main` sono attive e rispettate;
+- [ ] Jira è configurato con backlog, Sprint board e workflow definiti;
+- [ ] gli script di automazione sono funzionanti e documentati.
+
+*Per il Processo di Miglioramento*
+
+- [ ] al termine di ogni Sprint è condotta una retrospettiva con analisi delle metriche;
+- [ ] le azioni correttive identificate sono tracciate su Jira con responsabile e scadenza;
+- [ ] le modifiche alle NdP derivanti da azioni di miglioramento sono approvate dal Responsabile.
+
+*Per il Processo di Formazione*
+
+- [ ] ogni membro ha accesso alle risorse formative identificate per le tecnologie del progetto;
+- [ ] le ore di formazione sono tenute distinte da quelle rendicontabili di progetto.
+
+Il mancato rispetto di una o più condizioni comporta la non conformità del processo e richiede un'azione correttiva.
 
 === Piano di Qualifica
 
@@ -1061,6 +1123,9 @@ L'elemento *Qualità di Prodotto* del Piano di Qualifica è considerato conforme
 
 Il mancato rispetto di una o più delle condizioni sopra elencate comporta la non conformità dell'elemento.
 
+===== Metodi di Testing
+Questa sezione del Piano di Qualifica elenca le metodologie di testing adottate per garantire la qualità del prodotto. I dettagli operativi riguardanti le procedure, le tipologie di test e le relative nomenclature sono approfonditi normativamente nella sezione #link(<verifica>)[*3.2.1 Verifica*] delle presenti Norme di Progetto.
+
 ===== Cruscotto di Valutazione
 Nella sezione Cruscotto di Valutazione, per ciascuna metrica viene fornita una rappresentazione grafica dell'andamento temporale accompagnata da un'analisi qualitativa.
 
@@ -1322,58 +1387,112 @@ Per garantire la massima coerenza stilistica e facilitare il lavoro collaborativ
 - *Gestione Errori e Robustezza*:
   - *Eccezioni*: Ogni chiamata asincrona deve essere protetta da blocchi `try-catch` con logging specifico degli errori per prevenire il crash dei servizi.
 
-
+*Nota di avanzamento*: Si prevede che questa sezione venga approfondita ed estesa durante la fase di sviluppo verso la _Product Baseline_ (PB), per includere specificità tecniche necessarie al completamento del _Minimum Viable Product_.
 
 #pagebreak()
 
 
 
 = Processi di Supporto
+In conformità allo standard #link(<12207>)[ISO/IEC/IEEE 12207], i Processi di Supporto
+comprendono le attività trasversali che accompagnano l'intero ciclo di vita del progetto,
+garantendo la qualità, la tracciabilità e la verificabilità degli artefatti prodotti.
+
+Nel contesto del progetto _Code Guardian_, Skarab Group ha identificato i seguenti Processi di Supporto rilevanti:
+- Documentazione;
+- Qualifica (Verifica e Validazione).
 
 == Documentazione
-Il ciclo di vita dei documenti prevede:
-1. *Creazione/Modifica*: Redazione o aggiornamento del contenuto in formato source (#def("Typst")).
-2. *Verifica*: Controllo di conformità (ortografia, stile, contenuti) da parte di un membro diverso dal redattore.
-3. *Approvazione*: Validazione finale per il rilascio.
+Il processo di documentazione è trasversale a tutti i processi primari e di supporto: i suoi
+artefatti costituiscono la memoria del progetto e il mezzo principale per garantire tracciabilità, verificabilità e comunicazione uniforme tra i membri del gruppo e gli stakeholder esterni.
+
+Nel contesto di #def[Skarab Group], il processo di documentazione disciplina la pianificazione, lo sviluppo, la produzione, la revisione e la manutenzione di tutti i
+documenti ufficiali del progetto _Code Guardian_.
+
+=== Ciclo di Vita dei Documenti
+Ogni documento segue obbligatoriamente il seguente ciclo di vita:
+
++ *Creazione / Modifica*: redazione o aggiornamento del contenuto in formato sorgente (#def[Typst]). L'attività deve essere tracciata da una task su #def[Jira].
++ *Verifica*: controllo di conformità (ortografia, stile, contenuti, rispetto delle NdP) da parte di un membro del team diverso dal redattore.
++ *Approvazione*: validazione finale da parte del #def[Responsabile di Progetto] per il rilascio ufficiale.
 
 === Strumenti di Redazione
-- *#def("Visual Studio Code")*: Editor principale per la scrittura dei documenti.
-- *#def("Typst")*: Linguaggio di markup utilizzato per la formattazione dei documenti. Questo linguaggio permette di creare documenti con una struttura chiara e professionale, facilitando la gestione di elementi come intestazioni, tabelle, figure e riferimenti incrociati. Inoltre, si possono creare funzioni personalizzate per automatizzare parti della formattazione.
-- *#def("Tinymist")*: Estensione per #def("VS Code") che fornisce supporto e preview per Typst
 
-=== Gestione della Configurazione
-Utilizzo di *#def("Git")* come sistema di controllo versione.
+- *#def[Visual Studio Code]*: editor principale per la scrittura dei documenti.
+- *#def[Typst]*: linguaggio di markup utilizzato per la formattazione di tutti i documenti di progetto. Consente la creazione di documenti strutturati, la gestione di tabelle, figure, riferimenti incrociati e la definizione di funzioni riutilizzabili. I template comuni sono centralizzati nella cartella `lib/` del repository.
+- *#def[Tinymist]*: estensione per VS Code che fornisce anteprima in tempo reale e supporto per la scrittura in Typst.
 
-=== Branching Strategy
-- `main`: Ramo stabile, contenente le versioni rilasciate o pronte al rilascio.
-- `develop`: Ramo di integrazione principale.
-- `feature/nome-feature`: Rami per lo sviluppo di nuove funzionalità.
-- `fix/nome-fix`: Rami per la correzione di bug.
-- 'acronimo-documento': Rami dedicati alla redazione dei documenti (es. `NdP`, `PdP`, `PdQ`, `AdR`).
+=== Struttura dei Documenti
+Tutti i documenti ufficiali devono rispettare la struttura minima seguente:
 
-Il ramo `develop` é protetto, questo vuol dire che ogni modifica deve essere effettuata tramite *pull request* e sottoposta a revisione da parte di almeno un membro del gruppo diverso dal redattore prima di essere unita.
-Questo assicura che ogni documento sia verificato prima di entrare nel branch.
+- *Pagina di copertina*, contenente: nome del documento e versione.
+- *Registro delle modifiche*, con data, versione, descrizione della modifica e nomi di redattori e verificatori.
+- *Indice dei contenuti*, generato automaticamente.
+- *Corpo del documento*, organizzato in sezioni e sottosezioni numerate.
+- Ogni pagina (eccetto la copertina) deve riportare un header con nome del gruppo e titolo del documento, e un footer con numero di pagina.
 
-=== Datazione e versionamento documenti
-Ogni documento deve includere una sezione di cronologia delle versioni che riporta:
-- Data della modifica.
+=== Gestione della Configurazione e Versionamento
 
-- Numero di versione
-  - Il numero della versione deve seguire lo scema `x.y.z`, dove:
-    - `x`: Major version, incrementata per cambiamenti significativi o incompatibili.
-    - `y`: Minor version, incrementata per l'aggiunta di funzionalità mantenendo la compatibilità.
-    - `z`: Patch version, incrementata per correzioni di bug o modifiche minori.
-- Descrizione delle modifiche apportate.
-- Nomi dei redattori coinvolti.
-- Nomi dei verificatori coinvolti.
+==== Sistema di Versioning
+Ogni documento adotta il seguente schema di versionamento semantico:
 
-=== Configurazione dei Documenti
-Tutti i documenti devono essere archiviati nel repository GitHub del progetto, organizzati in cartelle in base a Quale sezione del progetto appartengono, se appartengono al sito, ad una baseline specifica o ad altro.
-Ogni documento deve essere salvato in formato source (#def("Typst")) per permettere modifiche future e versionamento.
+#align(center)[`x.y.z`]
 
-Dal momento che SkarabGroup utilizza Jira per la gestione delle attività di progetto, ogni documento deve essere associato all'attività corrispondente in Jira . Questo facilita il tracciamento delle modifiche e la gestione delle responsabilità durante i vari sprint.
+dove:
+- `x` (*Major*): incrementato solo all'approvazione formale del documento da parte del Responsabile;
+- `y` (*Minor*): incrementato al completamento di una modifica sostanziale, dopo la verifica;
+- `z` (*Patch*): incrementato per modifiche minori (correzioni ortografiche, aggiustamenti di forma).
 
-Alla fine di ogni sprint, i documenti completati e verificati devono essere uniti nel ramo `develop` tramite pull request, seguendo la procedura di revisione stabilita. questo permette di iniziare lo sprint successivo con una base documentale aggiornata e approvata in quanto, la p[rima attivitá di ogni sprint é quella di fare un pull del develop sul branch del documento a cui si sta lavorando.
+Il changelog deve essere aggiornato ad ogni incremento di versione.
+
+==== Branching Strategy
+La gestione del codice sorgente segue la seguente struttura di branch:
+
+- `main`: branch stabile, contenente esclusivamente documenti approvati o verificati.
+- `develop`: branch di integrazione principale, protetto — ogni modifica richiede Pull Request con revisione obbligatoria da parte di almeno un membro diverso dal redattore.
+- `feature/nome-feature`: branch per lo sviluppo di nuove funzionalità software.
+- `fix/nome-fix`: branch per la correzione di bug.
+- `acronimo-documento` (es. `NdP`, `PdP`, `AdR`): branch dedicati alla redazione o aggiornamento di specifici documenti.
+
+*Regola fondamentale*: il branch `main` contiene esclusivamente artefatti verificati.
+Il branch `develop` è protetto e richiede Pull Request approvata da un Verificatore diverso dal redattore prima di qualsiasi integrazione.
+
+==== Denominazione dei File
+La denominazione dei file sorgente Typst segue lo schema:
+
+#align(center)[`SIGLA.typ`]
+
+dove `SIGLA` identifica il tipo di documento (es. `NdP`, `PdP`, `PdQ`, `AdR`).
+
+Le date all'interno dei documenti sono scritte nel formato `AAAA/MM/GG`.
+
+==== Repository GitHub - Struttura delle Cartelle
+La repository `DocumentazioneProgetto` è organizzata come segue:
+
+- `.github/`: Cartella contenente le configurazioni specifiche di GitHub.
+- `assets/`: risorse multimediali utilizzate nei documenti.
+- `diarioDiBordo/`: diari di bordo settimanali.
+- `Glossario/`: sorgenti e infrastruttura per la versione web del glossario.
+- `lib/`: librerie di funzioni Typst riutilizzabili tra i vari documenti.
+- `RTB/`: documenti relativi alla *Requirements and Technology Baseline*.
+- `verbali/`: verbali di riunioni interne ed esterne.
+- `website/`: sorgenti del sito web di Skarab Group.
+
+Nella root della repository si trovano inoltre:
+- `README.md`: presentazione del progetto e guida all'uso del repository.
+- `glossario.html`: glossario in formato web, generato automaticamente.
+- `index.html`: homepage del sito web di Skarab Group.
+
+===== Librerie Typst (`lib/`)
+La cartella `lib/` contiene i file di funzioni Typst condivise tra i documenti. La gestione
+di questa cartella è responsabilità dell'Amministratore di Progetto, che garantisce coerenza, aggiornamento e documentazione delle funzioni disponibili. I documenti
+importano le librerie necessarie tramite `#import "../lib/..."`.
+
+=== Tracciabilità delle Attività Documentali
+Ogni attività documentale (redazione, verifica, aggiornamento) deve essere associata a
+una task su #def[Jira] con descrizione, assegnatario e scadenza.
+Al termine di ogni Sprint, i documenti completati e verificati vengono integrati nel branch
+`develop` tramite Pull Request, avviando lo Sprint successivo con una base documentale aggiornata.
 
 == Qualifica
 Il processo di *Qualifica* garantisce che il prodotto software e la documentazione soddisfino gli standard di qualità definiti e i requisiti specificati. Tale processo si articola nelle attività di _Verifica_ e _Validazione_, complementari ma distinte negli obiettivi.
@@ -1382,14 +1501,14 @@ La Qualifica risponde a due domande fondamentali:
 - *Verifica*: _"Did I build the system right?"_ (Ho costruito correttamente il sistema?);
 - *Validazione*: _"Did I build the right system?"_ (Ho costruito il sistema giusto?).
 
-=== Verifica
+=== Verifica <verifica>
 Il processo di Verifica ha come scopo accertare che quanto prodotto sia stato realizzato correttamente, in conformità con i requisiti e gli standard definiti.
 
 La Verifica è un'attività continua che accompagna l'intero ciclo di vita del progetto e si applica sia alla documentazione che al codice prodotto.
 
 Tutte le informazioni relative agli esiti di tale attività, incluse misurazioni e risultati dei test, devono essere documentate nel #underline[Piano di Qualifica].
 
-===== Obiettivi della Verifica
+==== Obiettivi della Verifica
 Skarab Group identifica i seguenti obiettivi per il processo di Verifica:
 
 - garantire che ogni artefatto prodotto sia conforme alle Norme di Progetto;
@@ -1580,160 +1699,268 @@ Per garantire una validazione efficace, il team adotta le seguenti strategie:
 Skarab Group realizza la Validazione attraverso un approccio strutturato che combina tracciamento e testing. Il *tracciamento sistematico dei requisiti* mantiene collegamenti espliciti tra requisiti, implementazione e test, garantendo la copertura completa delle funzionalità. I *Test di Accettazione* simulano scenari d'uso reali, verificando criteri di successo oggettivi per ogni requisito.
 
 = Processi Organizzativi
-I porcessi organizzativi sono tutti quei processi di supporto che permettono al gruppo di lavorare in modo efficiente e coordinato.
-La gestione dei processi organizzativi include la definizione di ruoli, responsabilità, comunicazione e gestione delle riunioni.
+In conformità allo standard #link(<12207>)[ISO/IEC/IEEE 12207], i Processi Organizzativi
+costituiscono l'insieme delle attività trasversali che garantiscono il corretto andamento del
+progetto dal punto di vista gestionale, infrastrutturale e della crescita professionale del team.
 
-== Ruoli
-La seguente tebella riporterá tutti i ruoli presenti all'interno del progetto con le relative responsabilitá.
+Nel contesto del progetto _Code Guardian_, Skarab Group ha identificato i seguenti Processi Organizzativi rilevanti:
+- Gestione dei Processi;
+- Infrastruttura;
+- Processo di Miglioramento;
+- Processo di Formazione.
+
+== Gestione dei Processi
+Il processo di Gestione dei Processi ha l'obiettivo di definire e coordinare le attività del
+progetto, assegnare responsabilità, pianificare le risorse temporali ed economiche e garantire una comunicazione interna ed esterna efficace e continua.
+
+=== Ruoli di Progetto
+La seguente tabella riporta tutti i ruoli presenti all'interno del progetto _Code Guardian_ con le relative responsabilità.
 
 #figure(
   table(
-    columns: (auto, auto),
-    stroke: 0.5pt + luma(200),
+    columns: (auto, 1fr),
+    inset: 8pt,
+    align: horizon,
+    fill: (x, y) => if y == 0 { luma(220) },
 
-    fill: (col, row) => if row == 0 {
-      luma(62.75%)
-    } else if calc.even(row) {
-      luma(220)
-    } else {
-      none
-    },
     [*Ruolo*], [*Responsabilità*],
 
-    [Responsabile],
-    [Coordina e supervisiona l'intero progetto, garantendo il rispetto delle scadule e del budget. Rappresenta il team nei rapporti con il committente e gli stakeholder esterni. Pianifica le attività, assegna le risorse, monitora l'avanzamento attraverso metriche e indicatori, gestisce i rischi e le criticità. Approva i documenti ufficiali e autorizza le spese. Convoca e presiede le riunioni, facilita la comunicazione interna ed esterna, risolve conflitti e prende decisioni strategiche per il successo del progetto.],
+    [Responsabile \ di Progetto],
+    [Coordina e supervisiona l'intero progetto garantendo il rispetto delle scadenze e del budget.
+      Rappresenta Skarab Group nei rapporti con Var Group, con i docenti Prof. Cardin e Prof. Vardanega
+      e con gli altri stakeholder esterni. Pianifica le attività su Jira, assegna le risorse ai membri del
+      team, monitora l'avanzamento attraverso metriche e indicatori (EVM), gestisce i rischi e le
+      criticità. Approva i documenti ufficiali e autorizza eventuali variazioni al piano. Convoca e
+      presiede le riunioni interne; redige e invia le comunicazioni formali via email.],
 
     [Amministratore],
-    [Gestisce l'infrastruttura tecnica e organizzativa del progetto. Configura e mantiene gli strumenti di versionamento, continuous integration, issue tracking e documentazione. Amministra i repository, definisce workflow e convenzioni, monitora l'ambiente di sviluppo. Gestisce la documentazione di processo, redige le norme di progetto, mantiene aggiornato il piano di qualifica. Supporta il team nella risoluzione di problemi tecnici relativi all'ambiente di lavoro, garantisce backup e sicurezza dei dati, ottimizza i processi di automazione.],
+    [Gestisce l'infrastruttura tecnica e organizzativa del progetto. Configura e mantiene gli strumenti
+      di versionamento (Git/GitHub), il sistema di issue tracking (Jira) e gli ambienti di sviluppo. Definisce il workflow di branching e le convenzioni di commit. Gestisce i template di documento, redige e mantiene aggiornate le Norme di Progetto. Garantisce backup e sicurezza dei dati e risolve tempestivamente
+      problemi legati all'infrastruttura.],
 
     [Verificatore],
-    [Assicura la qualità dei prodotti attraverso attività di verifica sistematica. Controlla la conformità dei documenti alle norme redazionali e tipografiche, verifica la correttezza tecnica e la coerenza dei contenuti. Esegue review del codice secondo checklist predefinite, controlla il rispetto degli standard di programmazione. Verifica la tracciabilità tra requisiti, design e implementazione. Redige verbali di verifica, segnala anomalie e non conformità, propone azioni correttive. Monitora le metriche di qualità e valida i test eseguiti dai programmatori.],
+    [Assicura la qualità degli artefatti prodotti attraverso attività di verifica sistematica. Controlla
+      la conformità dei documenti alle norme redazionali e tipografiche definite nelle NdP, la correttezza
+      tecnica e la coerenza dei contenuti. Esegue review del codice sorgente secondo checklist
+      predefinite, verifica il rispetto degli standard di codifica. Redige gli esiti di verifica nelle
+      Pull Request su GitHub, segnala non conformità e propone azioni correttive. Monitora le metriche di qualità.],
 
     [Analista],
-    [Raccoglie, analizza e formalizza i requisiti del sistema attraverso l'interazione con committente e stakeholder. Studia il dominio applicativo, comprende le esigenze degli utenti, identifica vincoli e opportunità. Redige l'Analisi dei Requisiti classificando requisiti funzionali, di qualità, di vincolo e prestazionali. Definisce casi d'uso, scenari operativi e modelli del dominio. Mantiene la tracciabilità tra requisiti e fonti, gestisce l'evoluzione dei requisiti durante il progetto. Collabora con i progettisti per garantire la fattibilità tecnica delle soluzioni proposte.],
+    [Raccoglie, analizza e formalizza i requisiti del sistema _Code Guardian_ attraverso l'interazione con il committente e gli stakeholder. Identifica attori, casi d'uso, requisiti funzionali,
+      di qualità e di vincolo, classificandoli secondo le norme definite nelle NdP. Redige e mantiene
+      il documento Analisi dei Requisiti. Garantisce la tracciabilità tra requisiti e fonti. Collabora con i progettisti per verificare la fattibilità
+      tecnica delle soluzioni proposte.],
 
     [Progettista],
-    [Definisce l'architettura del sistema e il design dettagliato dei componenti software. Individua pattern architetturali appropriati, decompone il sistema in moduli, definisce interfacce e dipendenze. Specifica la struttura delle classi, i diagrammi di sequenza e collaborazione, le strutture dati e gli algoritmi principali. Redige la Specifica Tecnica e il Piano di Qualifica nella parte relativa ai test di integrazione e sistema. Effettua scelte tecnologiche motivate, considera aspetti di manutenibilità, estensibilità e performance. Fornisce ai programmatori le specifiche di dettaglio necessarie all'implementazione.],
+    [Definisce l'architettura del sistema e il design dettagliato dei componenti software. Individua pattern architetturali appropriati, decompone il sistema in moduli, definisce interfacce e dipendenze tra componenti. Specifica la struttura delle classi, i diagrammi di sequenza e collaborazione, le strutture dati e gli algoritmi principali. Redige la Specifica Tecnica. Effettua scelte tecnologiche motivate, con attenzione a manutenibilità, estensibilità e sicurezza. Fornisce ai programmatori le specifiche di dettaglio necessarie all'implementazione.],
 
     [Programmatore],
-    [Implementa il codice seguendo le specifiche fornite dai progettisti e rispettando gli standard di codifica definiti. Scrive codice pulito, manutenibile e ben documentato. Sviluppa unit test per verificare la correttezza delle singole unità software, garantendo un'adeguata code coverage. Gestisce le dipendenze, utilizza strumenti di build automation, integra librerie esterne. Documenta il codice con commenti significativi e mantiene aggiornata la documentazione tecnica. Esegue debugging e risolve difetti segnalati, ottimizza le performance quando necessario. Collabora con verificatori e progettisti per migliorare continuamente la qualità del software.],
+    [Implementa il codice seguendo le specifiche fornite dai progettisti e rispettando gli standard di codifica definiti nelle NdP. Scrive codice pulito, manutenibile e ben documentato. Sviluppa unit test per verificare la correttezza delle singole unità software, garantendo un'adeguata code coverage. Gestisce le dipendenze, utilizza strumenti di build automation e integra librerie esterne. Documenta il codice con commenti significativi e mantiene aggiornata la documentazione tecnica. Esegue debugging, risolve difetti segnalati e ottimizza le performance quando necessario. Collabora con verificatori e progettisti per migliorare la qualità del software.],
   ),
   caption: [Ruoli di progetto e relative responsabilità],
 )
 
-=== Gestione dei task e allineamento
-La gestione dei task avviene tramite *#def("Jira")*, dove ogni membro del gruppo ha accesso alle proprie attività assegnate.
-Ogni task include una descrizione dettagliata, una stima del tempo necessario per il completamento e una scadenza.
-I membri del gruppo sono responsabili di aggiornare lo stato dei propri task in #def("Jira"), segnalando eventuali impedimenti o ritardi.
-Per garantire un allineamento costante, si tengono riunioni settimanali di team in cui si discutono i progressi, si risolvono problemi e si pianificano le attività future.
+=== Rotazione dei Ruoli
+Ogni membro di Skarab Group ricopre ruoli differenti nel corso del progetto, garantendo la
+rotazione ciclica prevista dalla struttura didattica del corso. La distribuzione dei ruoli per
+ciascuno Sprint è pianificata dal Responsabile di Progetto all'inizio dello Sprint e tracciata nel Piano di Progetto.
 
-==== Riunioni di allineamento
-===== Interne
-Le riunioni di allineamento si tengono settimanalmente e hanno lo scopo di:
-- Condividere lo stato di avanzamento delle attività.
-- Identificare e risolvere eventuali ostacoli o problemi.
-- Pianificare le attività per la settimana successiva.
-Le riunioni vengono svolte du Discord e permettono al Responsabile di Progetto di monitorare l'andamento del lavoro e di garantire che tutti i membri del team siano allineati sugli obiettivi comuni.
+=== Gestione dei Task e Pianificazione Operativa
 
-===== esterne
-Le riunioni esterne si tengono con il #def("Proponente") e altri stakeholder per:
-- Presentare lo stato di avanzamento del progetto.
-- Discutere requisiti, feedback e modifiche.
-- Allineare le aspettative e pianificare le prossime fasi.
-é compito del Responsabile di Progetto organizzare e condurre queste riunioni, assicurando una comunicazione efficace tra il team di sviluppo e gli stakeholder esterni.
+==== Strumento di Issue Tracking: Jira
+La gestione operativa dei task avviene esclusivamente tramite #def[Jira], che costituisce la
+fonte ufficiale di dati per il monitoraggio dell'avanzamento e per la rendicontazione delle
+ore. Ogni membro del gruppo ha accesso alle proprie attività assegnate.
 
-===== Verbale
-Per ogni riunione, interna o esterna, viene redatto un verbale che riporta:
-- Data, ora, luogo e partecipanti.
-- Ordine del giorno.
-- Riassunto delle discussioni.
-- Decisioni prese e task assegnati.
+Ogni task su Jira deve includere obbligatoriamente:
+- descrizione chiara e univoca dell'attività;
+- assegnatario responsabile;
+- stima delle ore previste;
+- scadenza temporale;
+- collegamento allo Sprint di riferimento.
 
-==== Comunicazione diretta
-La comunicazione interna del team avviene tramite varie piattaforme:
-- #def("Whatsapp"): Per comunicazioni rapide e urgenti, tramite un gruppo dedicato, utilizzato per aggiornamenti veloci e coordinamento immediato giornalmente.
-- #def("Telegram"): Per discussioni più strutturate e condivisione di file, utilizzato per comunicazioni di gruppo e condivisione di documenti importanti.
-- #def("Discord"): Per riunioni virtuali e collaborazione in tempo reale, utilizzato per meeting settimanali e sessioni di lavoro condivise.
-- Email: Per comunicazioni formali e invio di documenti ufficiali, utilizzato per comunicazioni con il proponente e con i professori ed é gestito principalmente dal Responsabile di Progetto.
-- #def("Jira"): Per la gestione delle attività e il monitoraggio del progresso, utilizzato per assegnare task, tracciare lo stato di avanzamento e gestire le scadenze.
+I task devono essere definiti in modo *atomico* (eseguibili da un singolo membro, senza
+dipendenze bloccanti non esplicitate).
 
-==== Strumenti di supporto all'organizzazione
-Come giá riportato in precedenza, il gruppo utilizza diversi strumenti per supportare l'organizzazione del lavoro anche in modo totalmente asincrono:
-- Google calendar: Per la pianificazione delle riunioni esterne.
-- Scripts di automazione: Per automatizzare attività ripetitive e migliorare l'efficienza del lavoro.
-  - queste comprendono, al momento del PoC: generazione glossario, sia in formato documento che in pagina web
-- Repository GitHub: Per il versionamento del codice e la gestione della documentazione di progetto.
+L'aggiornamento dello stato dei task (ore rendicontate, avanzamento) è responsabilità
+individuale di ciascun membro, il quale deve segnalare eventuali impedimenti o ritardi.
 
-==== Creazione e gestione degli strumenti organizzativi
-La creazione e gestione degli strumenti organizzativi è responsabilità dell'Amministratore di Progetto, che si occupa di:
-- Configurare e mantenere gli strumenti di comunicazione e gestione delle attività.
-- Assicurare che tutti i membri del team abbiano accesso agli strumenti necessari.
-- Monitorare l'utilizzo degli strumenti e proporre miglioramenti o cambiamenti se necessario.
+=== Coordinamento: Riunioni e Comunicazioni
 
-===== Repository GitHub
-L'Amministratore di Progetto è responsabile della gestione del repository GitHub, che include:
-- Creazione e organizzazione delle cartelle per i documenti di progetto.
-- Definizione delle regole di branching e delle convenzioni di commit.
-- Monitoraggio delle pull request e delle revisioni del codice.
-- Assicurare che la documentazione sia aggiornata e accessibile a tutti i membri del team.
+==== Riunioni Interne
+Le riunioni interne si tengono con cadenza settimanale e hanno lo scopo di:
+- condividere lo stato di avanzamento delle attività;
+- pianificare le attività della settimana successiva;
+- identificare e risolvere impedimenti o problemi aperti;
+- gestire l'eventuale rotazione dei ruoli.
 
-La repository DocumentazioneProgetto é organizzata in questo modo:
-- .github/: Cartella contenente le configurazioni specifiche di GitHub, come azioni automatizzate e modelli di issue.
-- .github/workflows/: Contiene i file di configurazione per le GitHub Actions utilizzate nel progetto.
-- assets/: Cartella per le risorse multimediali utilizzate nei documenti (immagini, grafici, ecc.).
-- diarioDiBordo/: Contiene il diario di bordo del progetto.
-- Glossario/: Contiene l'infrastruttura necessaria per l'html del glossario dei termini tecnici utilizzati nel progetto.
-- lib/: Cartella che contiene tutti i file che copntengono le funzioni utilizzate nbei vari documenti typst.
-- RTB/: Cartella dedicata alla Requirements and Technology Baseline, contenente tutti i documenti relativi a questa fase del progetto.
-- verbali: Cartella che contiene tutti i verbali delle riunioni interne ed esterne.
-- website/: Cartella contenente i file sorgente del sito web di Skarab Group.
+Le riunioni interne si svolgono in modalità virtuale tramite *#def[Discord]* e permettono ai membri del team di allinearsi sugli obiettivi comuni.
+Ogni riunione deve produrre un verbale interno, redatto dal Responsabile di Progetto.
 
-Inoltre nella root della repository sono presenti alcuni file:
-- `README.md`: file di presentazione del progetto e guida all'utilizzo della repository.
-- `glosssario.html`: file HTML generato automaticamente che contiene il glossario dei termini tecnici utilizzati nel progetto, accessibile tramite il sito web.
-- `index.html`: file HTML che rappresenta la homepage del sito web di Skarab Group, con link ai documenti principali e al glossario.
+==== Riunioni Esterne
+Le riunioni esterne, organizzate dal Responsabile di Progetto, si tengono con il #def[Proponente] Var Group, quando necessario per:
+- presentare lo stato di avanzamento del progetto;
+- discutere requisiti, feedback e modifiche;
+- allineare le aspettative e pianificare le fasi successive.
 
-====== Librerie .typ
-La cartella `lib/` contiene librerie di funzioni Typst che sono utilizzate in vari documenti del progetto per garantire coerenza e riusabilità del codice. Questa cartella é creata e gestita dall'amministratore del progetto, questo permette di avere un punto centrale dove vengono definite tutte le funzioni comuni, facilitando la manutenzione e l'aggiornamento delle stesse.
+Le comunicazioni per la convocazione avvengono tramite email del gruppo.
+Le riunioni si svolgono in presenza o in modalità virtuale secondo quanto concordato con il Proponente. Ogni riunione esterna deve produrre un verbale esterno, da condividere
+con Var Group.
 
-== Processo di miglioramento
-Il processo di miglioramento continuo è fondamentale per garantire che i prodotti del progetto soddisfino gli standard di qualità definiti e le aspettative degli stakeholder. Questo processo si articola in 3 fasi principali:
-- Inizializzazione: Fase in cui vengono definiti i processi organizzativi che guideranno il lavoro del team.
-- Valutazione: Fase in cui vengono monitorati i processi e i prodotti attraverso metriche specifiche.
-- Miglioramento: Fase in cui vengono implementate azioni correttive basate sui risultati della valutazione.
-
-== Processo di formazione
-Il processo di formazione è progettato per garantire che tutti i membri del team abbiano le competenze necessarie per svolgere efficacemente i propri ruoli all'interno del progetto. Questo processo include:
-- Identificazione delle competenze chiave richieste per ogni ruolo.
-- Pianificazione di sessioni di formazione e workshop.
-- Monitoraggio del progresso formativo e valutazione delle competenze acquisite.
-Le ore svolte per formazione non sono rendicontate in quanto non fanno parte del lavoro di progetto vero e proprio ma della parte di 'palestra' che il corso universitario vuole fornire agli studenti.
-La seguente tabella riporta le fonti utilizzate per la formazione dei membri del gruppo in base alla tecnologia studiata.
-
+==== Canali di Comunicazione
+La comunicazione interna del team avviene attraverso le seguenti piattaforme, ognuna adottata per uno scopo specifico:
 
 #figure(
   table(
-    columns: (auto, auto),
-    stroke: 0.5pt + luma(200),
+    columns: (auto, 1fr, auto),
+    inset: 8pt,
+    align: horizon,
+    fill: (x, y) => if y == 0 { luma(220) },
 
-    fill: (col, row) => if row == 0 {
-      luma(62.75%)
-    } else if calc.even(row) {
-      luma(220)
-    } else {
-      none
-    },
-    [*Tecnologia*], [*Fonte di formazione*],
+    [*Strumento*], [*Utilizzo*], [*Tipo*],
 
-    [Python], [Documentazione ufficiale Python, youtube tutorial],
-    [Agenti AI], [Documentazione framework specifici, paper accademici, documentazione AWS],
-    [AWS], [documentazione ufficiale AWS],
-    [Git], [Documentazione ufficiale Git, guide interattive, corso di Metodi e tecnologie per lo sviluppo software],
-    [Node.js], [Documentazione ufficiale Node.js, tutorial youtube],
-    [MongoDB], [documentazione ufficiale,],
+    [#def[WhatsApp]], [Comunicazioni rapide e urgenti, aggiornamenti quotidiani di breve durata.], [Asincrono],
+    [#def[Telegram]], [Discussioni più strutturate, condivisione di file e link, coordinamento di gruppo.], [Asincrono],
+    [#def[Discord]],
+    [Riunioni virtuali settimanali, sessioni di lavoro condivise, discussione di criticità complesse.],
+    [Sincrono],
+
+    [Email],
+    [Comunicazioni formali con Var Group, Prof. Cardin e Prof. Vardanega. Gestita dal Responsabile di Progetto.],
+    [Formale],
+
+    [#def[Jira]],
+    [Assegnazione e tracciamento task, monitoraggio avanzamento Sprint, gestione delle scadenze.],
+    [Asincrono],
+  ),
+  caption: [Canali di comunicazione del team],
+)
+
+== Infrastruttura
+Il Processo di Infrastruttura è responsabile della creazione, configurazione e manutenzione
+di tutti gli strumenti e gli ambienti necessari allo svolgimento delle attività di progetto.
+La gestione dell'infrastruttura è di competenza dell'Amministratore di Progetto.
+
+=== Strumenti Adottati
+Il gruppo utilizza diversi strumenti per supportare l'organizzazione del lavoro. Oltre a quelli già citati, vengono utilizzati i seguenti:
+
+#figure(
+  table(
+    columns: (auto, 1fr),
+    inset: 8pt,
+    align: horizon,
+    fill: (x, y) => if y == 0 { luma(220) },
+
+    [*Strumento*], [*Utilizzo nel progetto*],
+
+    [#def[Git]],
+    [Sistema di controllo versione distribuito per la gestione del codice sorgente e della documentazione. Strumento base per il versionamento di tutti gli artefatti del progetto.],
+
+    [GitHub],
+    [Hosting remoto dei repository Git. Utilizzato per la sincronizzazione del lavoro tra i membri, la gestione delle Pull Request, la code review e le issue.],
+
+    [Google Calendar],
+    [Calendario condiviso per la pianificazione e il promemoria delle riunioni esterne con Var Group e delle scadenze di progetto. Gestito dal Responsabile.],
+
+    [Script di automazione],
+    [Script sviluppati internamente per automatizzare attività ripetitive: generazione del Glossario (formati PDF e HTML), compilazione dei documenti Typst, aggiornamento del sito web del gruppo.],
+  ),
+  caption: [Strumenti dell'infrastruttura di progetto],
+)
+
+=== Configurazione dei Principali Strumenti
+
+==== GitHub - Struttura del Repository
+Il repository `DocumentazioneProgetto` è strutturato secondo quanto descritto nella sezione *Documentazione* del presente documento. L'Amministratore è responsabile di:
+- definire e applicare le regole di protezione dei branch (`develop` e `main`);
+- configurare le GitHub Actions per il deploy del sito web;
+
+==== Script di Automazione
+Gli script di automazione attualmente in uso includono:
+- *Generazione Glossario*: genera automaticamente il file `glossario.html` e il PDF del Glossario a partire dal sorgente Typst.
+- *Compilazione documenti*: compila tutti i sorgenti Typst modificati e aggiorna il sito web del gruppo sul branch `main`.
+
+L'Amministratore è responsabile dello sviluppo, del mantenimento e della documentazione
+di tali script.
+
+=== Manutenzione dell'Infrastruttura
+L'Amministratore monitora il corretto funzionamento di tutti gli strumenti e si impegna ad aggiornarne le configurazioni qualora emergano malfunzionamenti o necessità
+evolutive. Eventuali problemi bloccanti sull'infrastruttura devono essere segnalati al Responsabile di Progetto e tracciati su Jira.
+
+== Processo di Miglioramento
+Il processo di miglioramento è fondamentale per garantire che i prodotti del progetto soddisfino gli standard di qualità definiti e le aspettative degli stakeholder.
+
+=== Attività Previste
+Il processo si articola in tre fasi:
+
++ *Inizializzazione*: definizione dei processi organizzativi che guidano il lavoro del team, documentati nelle presenti Norme di Progetto.
++ *Valutazione*: monitoraggio continuo dei processi attraverso le metriche definite nel _Piano di Qualifica_. La valutazione avviene con cadenza di Sprint durante la retrospettiva.
++ *Miglioramento*: identificazione delle criticità, definizione di azioni correttive o preventive e aggiornamento delle Norme di Progetto e del Piano di Qualifica per recepire i miglioramenti.
+
+=== Procedura di Miglioramento
+Al termine di ogni Sprint, durante la retrospettiva, il team:
+- analizza i valori delle metriche di processo rispetto alle soglie definite nel PdQ;
+- identifica processi o attività che hanno mostrato inefficienze o non conformità;
+- definisce azioni correttive concrete con responsabile e scadenza, tracciate su Jira;
+- aggiorna le NdP o il PdQ per recepire i cambiamenti approvati.
+
+Le modifiche alle Norme di Progetto derivanti da azioni di miglioramento devono essere approvate dal Responsabile di Progetto.
+
+== Processo di formazione
+Il processo di formazione ha lo scopo di garantire che tutti i membri del team abbiano le competenze necessarie per svolgere efficacemente i propri ruoli all'interno del progetto.
+
+Questo processo include:
+- identificazione delle competenze chiave richieste per ogni ruolo.
+- pianificazione di sessioni di formazione e workshop.
+- monitoraggio del progresso formativo e valutazione delle competenze acquisite.
+
+=== Competenze Richieste
+A seguito dell'analisi del Capitolato C2 e delle tecnologie scelte, le competenze
+identificate come necessarie al completamento del progetto sono:
+
+#figure(
+  table(
+    columns: (auto, 1fr),
+    inset: 8pt,
+    align: horizon,
+    fill: (x, y) => if y == 0 { luma(220) },
+
+    [*Tecnologia / Ambito*], [*Fonte di formazione*],
+
+    [#def[TypeScript] e React], [Documentazione ufficiale TypeScript e React.],
+
+    [NestJS], [Documentazione ufficiale NestJS; guide e tutorial specifici sul framework.],
+
+    [#def[Python] (Agenti AI / Orchestratore)],
+    [Documentazione ufficiale Python; documentazione dei framework per agenti AI; documentazione AWS Bedrock/OpenAI per LLM.],
+
+    [#def[MongoDB] e Mongoose], [Documentazione ufficiale MongoDB e Mongoose.],
+
+    [#def[Node.js]], [Documentazione ufficiale Node.js; tutorial su piattaforme online.],
+
+    [#def[Git] e GitHub], [Documentazione ufficiale Git.],
+
+    [#def[Typst]], [Documentazione ufficiale Typst; template e funzioni del repository interno.],
+
+    [Agenti AI e #def[LLM]],
+    [Documentazione framework specifici; documentazione Var Group fornita nelle sessioni di formazione dedicate.],
+
+    [AWS], [Documentazione ufficiale AWS; materiale fornito da Var Group durante le sessioni di formazione.],
   ),
   caption: [Tecnologie e fonti di formazione],
 )
 
-Inoltre l'azienda proponente Var group ha tenuto delle lezioni specifiche per ognuna delle tecnologie necessarie allo sviluppo del progetto e ha dato disponibilitá per la risoluzione di dubbi e domande.
+=== Supporto del Proponente
+Var Group ha messo a disposizione del team sessioni di formazione dedicate sulle
+tecnologie necessarie allo sviluppo del progetto e rimane disponibile per la risoluzione
+di dubbi e domande tramite i canali di comunicazione concordati.
+
+=== Nota sulle Ore di Formazione
+Le ore dedicate alla formazione personale *non sono rendicontabili* nel monte ore di progetto, in quanto rientrano nella parte di apprendimento individuale prevista dal corso universitario.
+
+=== Spazi per la Formazione
+Nel corso degli Sprint, i membri del team potranno dedicare tempo alla formazione personale nelle fasi di attività a peso minore, senza che ciò comprometta il rispetto degli
+obiettivi di Sprint. Il Responsabile di Progetto può, qualora lo ritenga necessario, pianificare periodi dedicati esplicitamente all'approfondimento tecnologico, specialmente
+in preparazione alle fasi di progettazione e sviluppo verso la _Product Baseline_ (PB).
+
 
