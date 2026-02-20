@@ -588,7 +588,7 @@ L’Analisi dei Requisiti rappresenta la colonna portante della *Requirements an
 ==== Elementi Costituenti del Documento
 Il documento Analisi dei Requisiti deve essere organizzato in modo chiaro e strutturato, includendo obbligatoriamente i seguenti elementi:
 - *Casi d'Uso*: descrive le interazioni tra gli attori e il sistema, fornendo una visione chiara delle funzionalità richieste e aiutando a identificare i requisiti funzionali del sistema.
-- *Requisiti*: descrive le specifiche funzionali, di qualità e di vincolo, che il sistema deve soddisfare per soddisfare le necessità del Capitolato.
+- *Requisiti di Sistema*: descrive le specifiche funzionali, di qualità e di vincolo, che il sistema deve soddisfare per soddisfare le necessità del Capitolato.
 
 ===== Casi d'Uso
 I #def("casi d'uso") rappresentano scenari specifici che descrivono come gli attori interagiscono con il sistema per raggiungere determinati obiettivi. Essi forniscono una visione chiara delle funzionalità richieste e aiutano a identificare i requisiti funzionali del sistema.
@@ -608,7 +608,7 @@ Ogni caso d'uso deve essere identificato univocamente e contenere:
 
 Per approfondimenti riguardanti gli attori coinvolti, le precondizioni, le postcondizioni e lo scenario principale degli eventi, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti Vx.y.z"). #TODO("Link al documento")
 
-===== Requisiti
+===== Requisiti di Sistema
 I requisiti rappresentano le specifiche funzionali e non funzionali che il sistema deve soddisfare. Ogni requisito è classificato per garantire la tracciabilità rispetto alle fonti e ai casi d'uso associati.
 
 Per la descrizione dei requisiti viene utilizzata la nomenclatura #strong("TipologiaRPrioritàNumero") dove:
