@@ -1417,7 +1417,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente accede alla funzione di confronto storico
   ],
   post: [
-    - Il sistema imposta l'intervallo temporale per il recupero dei dati di confronto
+    - L'utente imposta l'intervallo temporale per il recupero dei dati di confronto
     - L'utente visualizza la comparazione tra il report attuale e quelli del periodo scelto
   ],
   scenari: [
@@ -1489,7 +1489,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza un avviso circa il superamento del limite massimo di interrogazione
   ],
   scenari: [
-    - L'utente visualizza un messaggio che segnala l'impossibilità di elaborare confronti su periodi eccessivamente estesi (es. oltre 12 mesi)
+    - L'utente visualizza un messaggio che segnala l'impossibilità di elaborare confronti su periodi eccessivamente estesi
   ],
   trigger: "L'utente seleziona un intervallo che eccede i vincoli di sistema",
 )[]
@@ -1529,6 +1529,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC9.2>)[#underline[\[UC9.2\]]]
     - #link(<UC9.3>)[#underline[\[UC9.3\]]]
   ],
+  specializzazione: [
+    - #link(<UC6.3>)[#underline[\[UC6.3\]]]
+  ],
   trigger: "L'utente accede all'area dedicata all'analisi del codice sorgente nel report",
 )[
   #useCaseDiagram("9", "UC9 - Visualizzazione sezione analisi del codice")
@@ -1544,7 +1547,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente ha preso visione dei bug, vulnerabilità e code smell rilevati tramite analisi statica
   ],
   scenari: [
-    - Il sistema espone il dettaglio tecnico dei rilievi emersi dall'analisi del codice
+    - L'utente visualizza il dettaglio tecnico dei rilievi emersi dall'analisi del codice
   ],
   trigger: "L'utente consulta i dati di analisi statica",
 )[]
@@ -1556,10 +1559,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza la sezione analisi del codice #link(<UC9>)[#underline[\[UC9\]]]
   ],
   post: [
-    - L'utente visualizza le percentuali di copertura e l'esito dei test di unità
+    - L'utente ha preso visione delle percentuali di copertura e l'esito dei test di unità
   ],
   scenari: [
-    - Il sistema espone le metriche relative alla qualità e quantità dei test eseguiti sul repository
+    - L'utente visualizza le metriche relative alla qualità e quantità dei test eseguiti sul repository
   ],
   trigger: "L'utente consulta i dati di copertura test",
 )[]
@@ -1571,7 +1574,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza la sezione analisi del codice #link(<UC9>)[#underline[\[UC9\]]]
   ],
   post: [
-    - L'utente visualizza le proposte di miglioramento specifiche per il codice analizzato
+    - L'utente ha preso visione delle proposte di miglioramento specifiche per il codice analizzato
   ],
   scenari: [
     - L'utente visualizza l'elenco dei suggerimenti correttivi per i difetti del codice #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
@@ -1619,7 +1622,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC10.3>)[#underline[\[UC10.3\]]]
   ],
   specializzazione: [
-    - Questo caso d'uso è una specializzazione del caso d'uso #link(<UC6.3>)[#underline[\[UC6.3\]]]
+    - #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
   trigger: "L'utente accede all'area dedicata alla sicurezza nel report di analisi",
 )[
@@ -1633,7 +1636,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza la sezione analisi della sicurezza #link(<UC10>)[#underline[\[UC10\]]]
   ],
   post: [
-    - L'utente ha visualizzato le vulnerabilità note (CVE) rilevate nelle dipendenze del progetto
+    - L'utente ha visualizzato le vulnerabilità note (CVE) rilevate nelle dipendenze del repository
   ],
   scenari: [
     - L'utente visualizza l'elenco delle librerie obsolete o affette da criticità di sicurezza
@@ -1663,7 +1666,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza la sezione analisi della sicurezza #link(<UC10>)[#underline[\[UC10\]]]
   ],
   post: [
-    - L'utente visualizza le proposte di risoluzione per le vulnerabilità identificate
+    - L'utente ha visualizzato le proposte di risoluzione per le vulnerabilità identificate
   ],
   scenari: [
     - L'utente visualizza l'elenco delle azioni correttive per la sicurezza #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
@@ -1712,7 +1715,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC11.3>)[#underline[\[UC11.3\]]]
   ],
   specializzazione: [
-    - Questo caso d'uso è una specializzazione del caso d'uso #link(<UC6.3>)[#underline[\[UC6.3\]]]
+    - #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
   trigger: "L'utente richiede la consultazione dei dati relativi alla documentazione del progetto",
 )[
