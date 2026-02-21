@@ -568,7 +568,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     [*Utente non Registrato*],
     [Soggetto sprovvisto di un'identità digitale all'interno della piattaforma. Tale attore è autorizzato esclusivamente alla fruizione dei contenuti pubblici e all'esecuzione della procedura di creazione di un nuovo profilo utente.],
 
-    [*Utente Non Autenticato*],
+    [*Utente non Autenticato*],
     [Utente generico che accede alle funzionalità pubbliche della piattaforma (es. Home Page, Login, Registrazione) senza possedere o aver attivato una sessione valida.],
 
     [*Utente Autorizzato*],
@@ -699,7 +699,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio di errore che segnala l'indisponibilità del nome utente scelto
   ],
-  trigger: "L'utente inserisce uno username che non risulta univoco",
+  trigger: "L'utente inserisce un username che non risulta univoco",
 )[]
 
 ==== UC1.2: Inserimento email <UC1.2>
@@ -877,7 +877,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente non Autenticato",
   pre: [
-    - L'utente ha inserito uno username non presente nel sistema #link(<UC2.1>)[#underline[\[UC2.1\]]]
+    - L'utente ha inserito un username non presente nel sistema #link(<UC2.1>)[#underline[\[UC2.1\]]]
   ],
   post: [
     - L'utente visualizza un messaggio circa l'invalidità delle credenziali fornite
@@ -886,7 +886,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio di errore che segnala l'inesistenza dell'identificativo inserito
   ],
-  trigger: "L'utente tenta di autenticarsi con uno username non censito",
+  trigger: "L'utente tenta di autenticarsi con un username non censito",
 )[]
 
 ==== UC2.2: Inserimento password <UC2.2>
@@ -1095,10 +1095,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC4.0.1>)[#underline[\[UC4.0.1\]]] // Report già aggiornato
     - #link(<UC4.0.2>)[#underline[\[UC4.0.2\]]] // Analisi in corso
   ],
-  trigger: "L'utente seleziona la funzione di nuova analisi repository",
-  generalizzazione: [
-    //- #link(<UC38>)[#underline[\[UC38\]]] // Richiesta analisi repository pubblico
-  ],
+  trigger: "L'utente seleziona la funzione di nuova analisi del repository",
 )[
   #useCaseDiagram("4", "UC4 - Richiesta analisi repository GitHub")
 ]
@@ -1143,7 +1140,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Le preferenze sulle aree del repository da analizzare risultano impostate
   ],
   scenari: [
-    - L'utente seleziona le informazioni della repository di suo interesse (test, sicurezza o documentazione)
+    - L'utente seleziona le informazioni del repository di suo interesse (test, sicurezza o documentazione)
   ],
   estensioni: [
     - #link(<UC4.1.1>)[#underline[\[UC4.1.1\]]] // Nessuna area selezionata
@@ -1173,13 +1170,13 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente Autorizzato",
   pre: [
     - L'utente dispone di una sessione attiva nel sistema #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente visualizza la sezione dedicata ai risultati delle analisi
+    - L'utente accede alla sezione dedicata ai repository analizzati
   ],
   post: [
     - L'utente visualizza l'elenco dei repository per i quali è stato generato almeno un report
   ],
   scenari: [
-    - L'utente visualizza la lista dei progetti sottoposti a scansione
+    - L'utente visualizza la lista dei repository sottoposti a scansione
     - Ogni elemento della lista espone i dati identificativi del repository #link(<UC5.1>)[#underline[\[UC5.1\]]]
   ],
   inclusioni: [
@@ -1381,13 +1378,13 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente Autorizzato",
   pre: [
-    - L'utente visualizza una sezione del report contenente criticità #link(<UC6.3>)[#underline[\[UC6.3\]]]
+    - L'utente visualizza una sezione analitica del report #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
   post: [
     - L'utente visualizza l'elenco delle azioni correttive proposte
   ],
   scenari: [
-    - L'utente visualizza la lista delle remediation suggerite dal sistema per migliorare il codice o la sicurezza
+    - L'utente visualizza la lista delle remediation suggerite
   ],
   estensioni: [
     - #link(<UC6.3.1.1>)[#underline[\[6.3.1.1\]]] // Nessuna remediation
@@ -1397,7 +1394,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   #useCaseDiagram("6_3_1", "UC6.3.1 - Visualizzazione lista remediation")
 ]
 
-====== UC6.3.1.1: Visualizzazione messaggio assenza criticità <UC6.3.1.1>
+===== UC6.3.1.1: Visualizzazione messaggio assenza criticità <UC6.3.1.1>
 #useCase(
   attore: "Utente Autorizzato",
   pre: [
@@ -2191,7 +2188,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   #useCaseDiagram("17_2", "UC17.2 - Ricerca del repository")
 ]
 
-==== UC17.2.1: Accesso a repository privato <UC17.2.1>
+===== UC17.2.1: Accesso a repository privato <UC17.2.1>
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -3686,7 +3683,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   // --- DETTAGLI INPUT (UC1.1 - UC1.3) ---
   [#FRObx], 
-  [Il Sistema deve consentire l'immissione di uno username alfanumerico con lunghezza compresa tra 4 e 20 caratteri.], 
+  [Il Sistema deve consentire l'immissione di un username alfanumerico con lunghezza compresa tra 4 e 20 caratteri.], 
   [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
 
   [#FRObx], 
@@ -4797,7 +4794,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC54.1>)[#underline[\[UC54.1\]]]],
 
   [#FRObx],
-  [Il sistema deve essere in grado di riconoscere uno username non conforme ai vincoli di formato],
+  [Il sistema deve essere in grado di riconoscere un username non conforme ai vincoli di formato],
   [#link(<UC54.1.1>)[#underline[\[UC54.1.1\]]]],
 
   [#FRObx],
@@ -4944,147 +4941,4 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   [#VRObx],
   [L'analisi di sicurezza deve essere conforme agli standard OWASP Top 10],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "OWASP"],
-)
-
-= Tracciamento
-
-== Fonte - Requisiti
-#table(
-  columns: (1fr, 2fr),
-  inset: 10pt,
-  stroke: 0.5pt + luma(200),
-  table.header([*Fonte*], [*Requisiti*]),
-  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
-  align: (col, row) => (center, left, center).at(col) + horizon,
-
-
-  [Capitolato],
-  [],
-
-  [Incontro con il proponente],
-  [],
-
-  [Decisione interna],
-  [],
-
-  [UC1],
-  [],
-
-  [UC2],
-  [],
-
-  [UC3],
-  [],
-
-  [UC4],
-  [],
-
-  [UC5],
-  [],
-
-  [UC6],
-  [],
-
-  [UC7],
-  [],
-
-  [UC8],
-  [],
-
-  [UC9],
-  [],
-
-  [UC10],
-  [],
-
-  [UC11],
-  [],
-
-  [UC12],
-  [],
-
-  [UC13],
-  [],
-
-  [UC14],
-  [],
-
-  [UC15],
-  [],
-
-  [UC16],
-  [],
-
-  [UC17],
-  [],
-
-  [UC18],
-  [],
-
-  [UC18],
-  [],
-
-  [UC20],
-  [],
-
-  [UC21],
-  [],
-
-  [UC22],
-  [],
-
-  [UC23],
-  [],
-
-  [UC20],
-  [],
-
-  [UC25],
-  [],
-
-  [UC26],
-  [],
-
-  [UC27],
-  [],
-
-  [UC20],
-  [],
-
-  [UC21],
-  [],
-
-  [UC23],
-  [],
-
-  [UC23],
-  [],
-
-  [UC24],
-  [],
-
-  [UC25],
-  [],
-
-  [UC26],
-  [],
-
-  [UC27],
-  [],
-
-  [UC36],
-  [],
-
-  [UC37],
-  [],
-
-  [UC36],
-  [],
-
-  [UC23],
-  [],
-  
-  [UC28],
-  [],
-
 )
