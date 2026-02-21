@@ -624,6 +624,8 @@ Per la descrizione dei requisiti viene utilizzata la nomenclatura #strong("Tipol
 - *Numero*: numero progressivo univoco per ogni requisito all'interno della sua tipologia.
 Poi viene riportata la fonte o il caso d'uso di riferimento per permettere il monitoraggio durante tutto il ciclo di vita del progetto.
 
+Altra sezione presente è il tracciamento, che fornisce un sistema di tracciamento esplicito tra i requisiti, i casi d'uso e le fonti documentali, garantendo che ogni scelta implementativa sia giustificata e monitorabile.
+
 Per approfondimenti riguardanti la descrizione dettagliata, la fonte e i casi d'uso associati a ciascun requisito, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti Vx.y.z"). #TODO("Link al documento")
 
 === Glossario
