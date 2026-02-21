@@ -1078,7 +1078,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente Autorizzato",
   pre: [
     - L'utente risulta autorizzato all'interazione con i propri repository #link(<UC3>)[#underline[\[UC3\]]]
-    - L'utente accede alla collezione di report di una repository #link(<UC20>)[#underline[\[UC20\]]]
+    - L'utente accede alla collezione di report di un repository #link(<UC20>)[#underline[\[UC20\]]]
     - L'utente visualizza la sezione di configurazione dell'analisi
   ],
   post: [
@@ -2459,7 +2459,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "L'utente non inserisce alcuna soglia e tenta di confermare la configurazione dei report",
 )[]
 */
-
+#TODO("Scenario non completo, trigger mancante")
 === UC20: Creazione raccolta report di analisi <UC20>
 #useCase(
   attore: "Utente Autorizzato",
@@ -4066,7 +4066,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   //UC17
   [#FRObx],
-  [Il sistema deve essere in grado di prendere in carico la richiesta di verifica dell'accessibilità della repository],
+  [Il sistema deve essere in grado di prendere in carico la richiesta di verifica dell'accessibilità del repository],
   [#link(<UC17>)[#underline[\[UC17\]]]],
 
   [#FRObx],
@@ -4177,7 +4177,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 */
   //UC20
   [#FROpx], 
-  [Devono poter essere programmati dei report periodici di una specifica repository], 
+  [Devono poter essere programmati dei report periodici di uno specifico repository], 
   [#link(<UC20>)[#underline[\[UC20\]]]],
 
   [#FROpx],
