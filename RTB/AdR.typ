@@ -1532,7 +1532,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   specializzazione: [
     - #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
-  trigger: "L'utente accede all'area dedicata all'analisi del codice sorgente nel report",
+  trigger: "L'utente accede all'area dedicata all'analisi del codice nel report di analisi",
 )[
   #useCaseDiagram("9", "UC9 - Visualizzazione sezione analisi del codice")
 ]
@@ -1577,7 +1577,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente ha preso visione delle proposte di miglioramento specifiche per il codice analizzato
   ],
   scenari: [
-    - L'utente visualizza l'elenco dei suggerimenti correttivi per i difetti del codice #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
+    - L'utente visualizza l'elenco dei suggerimenti correttivi per i difetti del codice
   ],
   estensioni: [
     - #link(<UC9.3.1>)[#underline[\[UC9.3.1\]]] // Nessuna remediation codice
@@ -1624,7 +1624,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   specializzazione: [
     - #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
-  trigger: "L'utente accede all'area dedicata alla sicurezza nel report di analisi",
+  trigger: "L'utente accede all'area dedicata all'analisi della sicurezza nel report di analisi",
 )[
   #useCaseDiagram("10", "UC10 - Visualizzazione sezione analisi della sicurezza")
 ]
@@ -1669,7 +1669,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente ha visualizzato le proposte di risoluzione per le vulnerabilità identificate
   ],
   scenari: [
-    - L'utente visualizza l'elenco delle azioni correttive per la sicurezza #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
+    - L'utente visualizza l'elenco delle azioni correttive per la sicurezza
   ],
   estensioni: [
     - #link(<UC10.3.1>)[#underline[\[UC10.3.1\]]]
@@ -1689,7 +1689,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza l'esito positivo sulla robustezza del repository
   ],
   scenari: [
-    - L'utente viene informato del fatto che non sono state individuate minacce che richiedano interventi correttivi
+    - L'utente viene informato del fatto che non sono stati individuati difetti che richiedano remediation nell'area sicurezza
   ],
   trigger: "Il processo di analisi non rileva vulnerabilità nell'area sicurezza",
 )[]
@@ -1698,7 +1698,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente Autorizzato",
   pre: [
-    - L'utente visualizza il dettaglio di un report di analisi #link(<UC6>)[#underline[\[UC6\]]]
     - L'area "Documentazione" è stata selezionata per la visualizzazione #link(<UC6.1>)[#underline[\[UC6.1\]]]
   ],
   post: [
@@ -1717,7 +1716,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   specializzazione: [
     - #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
-  trigger: "L'utente richiede la consultazione dei dati relativi alla documentazione del progetto",
+  trigger: "L'utente accede all'area dedicata all'analisi della documentazione nel report di analisi",
 )[
   #useCaseDiagram("11", "UC11 - Visualizzazione sezione analisi della documentazione")
 ]
@@ -1732,7 +1731,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente ha preso visione delle incongruenze sintattiche
   ],
   scenari: [
-    - Il sistema espone il dettaglio degli errori formali individuati nei file di testo
+    - L'utente visualizza il dettaglio degli errori formali individuati nei file di testo
   ],
   trigger: "L'utente consulta i risultati dell'analisi sintattica dei file",
 )[]
@@ -1744,10 +1743,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza la sezione analisi della documentazione #link(<UC11>)[#underline[\[UC11\]]]
   ],
   post: [
-    - L'utente visualizza il rapporto tra codice sorgente e documentazione esistente
+    - L'utente ha visualizzato il rapporto tra codice sorgente e documentazione esistente
   ],
   scenari: [
-    - Il sistema espone le percentuali di copertura descrittiva degli elementi del repository
+    - L'utente visualizza le percentuali di copertura descrittiva degli elementi del repository
   ],
   trigger: "L'utente consulta il grado di esaustività della documentazione",
 )[]
@@ -1759,10 +1758,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza la sezione analisi della documentazione #link(<UC11>)[#underline[\[UC11\]]]
   ],
   post: [
-    - L'utente visualizza le proposte correttive per la documentazione
+    - L'utente ha visualizzato le proposte correttive per la documentazione
   ],
   scenari: [
-    - L'utente visualizza l'elenco dei suggerimenti di miglioramento #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]
+    - L'utente visualizza l'elenco dei suggerimenti di miglioramento riguardanti la documentazione
   ],
   estensioni: [
     - #link(<UC11.3.1>)[#underline[\[UC11.3.1\]]]
@@ -1782,7 +1781,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza un riscontro positivo sull'integrità documentale
   ],
   scenari: [
-    - Il sistema informa l'utente che non sono stati individuati errori o mancanze nell'area
+    - L'utente viene informato del fatto che non sono stati individuati difetti che richiedano remediation nell'area documentazione
   ],
   trigger: "L'analisi non rileva criticità documentali nel repository",
 )[]
@@ -1794,10 +1793,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente ha eseguito l'autenticazione al sistema #link(<UC2>)[#underline[\[UC2\]]]
   ],
   post: [
-    - L'utente visualizza la graduatoria dei progetti ordinata per punteggio di qualità
+    - L'utente ha visualizzato la graduatoria dei repository ordinata per punteggio di qualità
   ],
   scenari: [
-    - Il sistema espone la lista dei repository analizzati ordinati in base al punteggio globale calcolato
+    - L'utente visualizza la lista dei repository analizzati ordinati in base al punteggio globale calcolato
   ],
   estensioni: [
     - #link(<UC12.1>)[#underline[\[UC12.1\]]]
@@ -1815,10 +1814,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Non esistono repository analizzati associati all'account
   ],
   post: [
-    - L'utente visualizza un messaggio che segnala l'assenza di dati per popolare la classifica
+    - L'utente ha ricevuto un messaggio di errore che segnala l'assenza di dati per popolare la classifica
   ],
   scenari: [
-    - Il sistema inibisce la lista e suggerisce l'avvio di una prima analisi
+    - L'utente visualizza un messaggio che gli suggerisce l'avvio di una prima analisi
   ],
   trigger: "L'utente accede alla sezione ranking senza dati storici disponibili",
 )[]
@@ -1830,7 +1829,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente ha precedentemente collegato un account GitHub #link(<UC3>)[#underline[\[UC3\]]]
   ],
   post: [
-    - Il sistema revoca i token di accesso e rimuove l'associazione con il profilo GitHub
+    - L'utente visualizza un messaggio di conferma della disconnessione dell'account GitHub
   ],
   scenari: [
     - L'utente conferma la volontà di rimuovere l'integrazione con GitHub tramite comando dedicato
@@ -1845,7 +1844,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza un report di analisi #link(<UC6>)[#underline[\[UC6\]]]
   ],
   post: [
-    - Il sistema genera e rende disponibile al download il file nel formato richiesto
+    - L'utente visualizza il file nel formato richiesto disponibile al download
   ],
   scenari: [
     - L'utente seleziona il formato desiderato per l'esportazione #link(<UC14.1>)[#underline[\[UC14.1\]]]
@@ -1870,7 +1869,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Il formato di output risulta correttamente impostato
   ],
   scenari: [
-    - L'utente seleziona una tra le opzioni disponibili (es. PDF, JSON)
+    - L'utente seleziona un formato tra le opzioni disponibili
   ],
   estensioni: [
     - #link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]
@@ -1887,7 +1886,8 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente tenta di confermare l'esportazione senza aver selezionato un formato
   ],
   post: [
-    - Il sistema inibisce la generazione del file e richiede la selezione di un formato
+    - L'utente ha ricevuto il messaggio d'errore di mancato inserimento del formato
+    - L'utente ha nuovamente la possibilità di selezionare un formato 
   ],
   scenari: [
     - L'utente visualizza un messaggio di avviso circa l'obbligatorietà della scelta del formato
