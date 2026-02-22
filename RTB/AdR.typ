@@ -2206,7 +2206,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Un formato valido è stato selezionato #link(<UC14.1>)[#underline[\[UC14.1\]]]
   ],
   post: [
-    - Il sistema avvia il processo di parsing dei dati e creazione del file
+    - L'utente viene notificato dell'avvio del processo di parsing dei dati e creazione del file
   ],
   scenari: [
     - L'utente attiva il comando di finalizzazione dell'esportazione
