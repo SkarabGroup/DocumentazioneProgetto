@@ -12,7 +12,7 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.46"
+#let versione = "v0.47.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
@@ -45,7 +45,7 @@
     "2026/02/13",
     "0.44.7",
     "Fix UC6, UC37-41",
-    members.andrea
+    members.andrea,
   ),
   (
     "2026/02/13",
@@ -57,19 +57,19 @@
     "2026/02/10",
     "0.44.5",
     "Fix vari degli UC + fix specifici UC13-15",
-    members.andrea
+    members.andrea,
   ),
   (
     "2026/02/10",
     "0.44.4",
     "Fix della posizione del sistema in tutti i diagrammi UC",
-    members.andrea
+    members.andrea,
   ),
   (
     "2026/02/10",
     "0.44.3",
     "Primo fix generale UC",
-    members.andrea
+    members.andrea,
   ),
   (
     "2026/02/09",
@@ -81,7 +81,7 @@
     "2026/02/09",
     "0.44.1",
     "Fix definizione attori",
-    members.andrea
+    members.andrea,
   ),
   (
     "2026/02/08",
@@ -559,7 +559,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     align: (col, row) => (if col == 0 { left } else { left }),
     fill: (col, row) => if row == 0 { luma(240) } else { white },
     stroke: 0.5pt + luma(200),
-    
+
     table.header([*Attore*], [*Descrizione*]),
 
     // SEZIONE 1: UMANI
@@ -625,7 +625,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC1.3>)[#underline[\[UC1.3\]]]
   ],
   estensioni: [
-    - #link(<UC1.0.1>)[#underline[\[UC1.0.1\]]] 
+    - #link(<UC1.0.1>)[#underline[\[UC1.0.1\]]]
   ],
   trigger: "L'utente seleziona la funzione di registrazione utente",
 )[
@@ -858,7 +858,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC2.2>)[#underline[\[UC2.2\]]]
   ],
   estensioni: [
-    - #link(<UC2.0.1>)[#underline[\[UC2.0.1\]]] 
+    - #link(<UC2.0.1>)[#underline[\[UC2.0.1\]]]
   ],
   trigger: "L'utente seleziona la funzione di login",
 )[
@@ -900,7 +900,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente digita lo username nel campo dedicato
   ],
   inclusioni: [
-    - Nessuna 
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC2.1.1>)[#underline[\[UC2.1.1\]]] // Errore formato
@@ -1068,7 +1068,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC3.1.1>)[#underline[\[UC3.1.1\]]] 
+    - #link(<UC3.1.1>)[#underline[\[UC3.1.1\]]]
   ],
   trigger: "L'utente seleziona la funzione di integrazione con GitHub",
 )[
@@ -1246,7 +1246,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio circa l'impossibilità di avviare un nuovo audit simultaneo
   ],
-    inclusioni: [
+  inclusioni: [
     - Nessuna
   ],
   estensioni: [
@@ -1290,7 +1290,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio di errore che segnala la mancata scelta delle aree di interesse
   ],
-    inclusioni: [
+  inclusioni: [
     - Nessuna
   ],
   estensioni: [
@@ -1422,7 +1422,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente seleziona o deseleziona le aree dell'analisi (Codice, Sicurezza, Documentazione) da mostrare a video
   ],
   inclusioni: [
-    - Nessuna 
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC6.1.1>)[#underline[\[UC6.1.1\]]] // Nessuna sezione selezionata
@@ -1677,7 +1677,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente viene informato che non esistono report archiviati coerenti con le date selezionate
   ],
-    inclusioni: [
+  inclusioni: [
     - Nessuna
   ],
   estensioni: [
@@ -1698,7 +1698,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio di errore che segnala come la data di inizio sia successiva a quella di fine
   ],
-    inclusioni: [
+  inclusioni: [
     - Nessuna
   ],
   estensioni: [
@@ -1719,7 +1719,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio che segnala l'impossibilità di elaborare confronti su periodi eccessivamente estesi
   ],
-    inclusioni: [
+  inclusioni: [
     - Nessuna
   ],
   estensioni: [
@@ -2219,7 +2219,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   post: [
     - L'utente ha ricevuto il messaggio d'errore di mancato inserimento del formato
-    - L'utente ha nuovamente la possibilità di selezionare un formato 
+    - L'utente ha nuovamente la possibilità di selezionare un formato
   ],
   scenari: [
     - L'utente visualizza un messaggio di avviso circa l'obbligatorietà della scelta del formato
@@ -3105,7 +3105,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   post: [
     - L'orchestratore ha ottenuto tutte le informazioni prodotte dagli strumenti per comporre il report
-  ], 
+  ],
   scenari: [
     - L'orchestratore controlla se gli strumenti hanno finito il lavoro #link(<UC23.1>)[#underline[\[UC23.1\]]]
     - L'orchestratore raccoglie i dati e i risultati dell'analisi #link(<UC23.2>)[#underline[\[UC23.2\]]]
@@ -3188,7 +3188,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   estensioni: [
-    - Nessuna 
+    - Nessuna
   ],
   trigger: "Disponibilità della totalità (o della quota parziale valida) dei risultati degli strumenti di analisi",
 )[
@@ -3206,7 +3206,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'orchestratore provvede alla scrittura del report nel sistema di persistenza, associandolo al repository e al profilo dell'utente richiedente
     - L'orchestratore aggiorna i metadati dell'analisi per riflettere il completamento della procedura
-  ], 
+  ],
   inclusioni: [
     - Nessuna
   ],
@@ -3256,7 +3256,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC26.0.1>)[#underline[\[UC26.0.1\]]] 
+    - #link(<UC26.0.1>)[#underline[\[UC26.0.1\]]]
   ],
   trigger: "Avvenuto aggiornamento dello stato dell'analisi a 'completed' nel sistema di persistenza",
 )[
@@ -3766,7 +3766,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'utente richiede l'inserimento di un repository privato personale nel sistema",
 )[
-  //#useCaseDiagram("40", "UC40 - Inserimento repository privato")
+  #useCaseDiagram("40", "UC40 - Inserimento repository privato")
 ]
 
 ==== UC40.0.1: Visualizzazione errore repository già presente <UC40.0.1>
@@ -3810,7 +3810,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC41.0.1>)[#underline[\[UC41.0.1\]]]
   ],
   trigger: "L'utente accede alla sezione dedicata alla gestione dei propri repository",
-)[]
+)[
+  #useCaseDiagram("41", "UC41 - Visualizzazione catalogo repository privati inseriti")
+]
 
 ==== UC41.0.1: Visualizzazione informativa catalogo vuoto <UC41.0.1>
 #useCase(
@@ -3853,7 +3855,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "L'utente richiede l'eliminazione di un repository dal catalogo personale",
-)[]
+)[
+  #useCaseDiagram("42", "UC42 - Rimozione di un proprio repository privato")
+]
 
 ==== UC42.1: Conferma rimozione repository <UC42.1>
 #useCase(
@@ -3874,7 +3878,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC42.1.1>)[#underline[\[UC42.1.1\]]]
   ],
   trigger: "Visualizzazione dell'avviso di conferma eliminazione risorsa",
-)[]
+)[
+  #useCaseDiagram("42_1", "UC42.1 - Conferma rimozione repository")
+]
 
 ===== UC42.1.1: Annullamento rimozione repository <UC42.1.1>
 #useCase(
@@ -3917,7 +3923,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC43.0.1>)[#underline[\[UC43.0.1\]]]
   ],
   trigger: "L'utente richiede il dettaglio delle autorizzazioni per una risorsa specifica",
-)[]
+)[
+  #useCaseDiagram("43", "UC43 - Gestione permessi di accesso al repository privato")
+]
 
 ==== UC43.0.1: Visualizzazione informativa assenza utenti autorizzati <UC43.0.1>
 #useCase(
@@ -3960,7 +3968,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "L'utente richiede l'estensione dei permessi di accesso a un altro utente della piattaforma",
-)[]
+)[
+  #useCaseDiagram("44", "UC44 - Aggiunta utente autorizzato")
+]
 
 ==== UC44.1: Inserimento credenziale utente da autorizzare <UC44.1>
 #useCase(
@@ -3985,7 +3995,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC44.1.4>)[#underline[\[UC44.1.4\]]]
   ],
   trigger: "L'utente interagisce con il campo di ricerca profili per l'assegnazione dei permessi",
-)[]
+)[
+  #useCaseDiagram("44_1", "UC44.1 - Inserimento credenziale utente da autorizzare")
+]
 
 ===== UC44.1.1: Visualizzazione errore formato identificativo non valido <UC44.1.1>
 #useCase(
@@ -4091,7 +4103,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "L'utente richiede l'eliminazione di un profilo dalla lista degli autorizzati",
-)[]
+)[
+  #useCaseDiagram("45", "UC45 - Rimozione utente autorizzato")
+]
 
 ==== UC45.1: Conferma revoca autorizzazione <UC45.1>
 #useCase(
@@ -4135,7 +4149,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "L'utente richiede l'eliminazione di una collezione di report dal proprio profilo",
-)[]
+)[
+  #useCaseDiagram("46", "UC46 - Rimozione di una raccolta di report")
+]
 
 ==== UC46.1: Conferma rimozione raccolta <UC46.1>
 #useCase(
@@ -4156,7 +4172,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC46.1.1>)[#underline[\[UC46.1.1\]]]
   ],
   trigger: "Visualizzazione dell'avviso di conferma rimozione collezione",
-)[]
+)[
+  #useCaseDiagram("46_1", "UC46 - Conferma rimozione raccolta")
+]
 
 ===== UC46.1.1: Annullamento rimozione raccolta <UC46.1.1>
 #useCase(
@@ -4203,7 +4221,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "L'utente richiede la chiusura permanente del proprio account CodeGuardian",
-)[]
+)[
+  #useCaseDiagram("47", "UC47 - Cancellazione profilo CodeGuardian")
+]
 
 ==== UC47.1: Conferma definitiva cancellazione profilo <UC47.1>
 #useCase(
@@ -4258,440 +4278,439 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   align: (col, row) => (center, left, center).at(col) + horizon,
 
   // --- REGISTRAZIONE (UC1) ---
-  [#FRObx], 
-  [Il Sistema deve consentire all'Utente non registrato l'accesso alla sezione di creazione account.], 
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente non registrato l'accesso alla sezione di creazione account.],
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve predisporre un comando di conferma per l'invio del modulo di registrazione.], 
+  [#FRObx],
+  [Il Sistema deve predisporre un comando di conferma per l'invio del modulo di registrazione.],
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve eseguire la validazione completa dei campi obbligatori (presenza, formato, conformità ai vincoli e univocità) al momento dell'invio del modulo di registrazione.], 
+  [#FRObx],
+  [Il Sistema deve eseguire la validazione completa dei campi obbligatori (presenza, formato, conformità ai vincoli e univocità) al momento dell'invio del modulo di registrazione.],
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve permettere la finalizzazione della registrazione solo a seguito della validazione positiva di tutti i campi obbligatori.], 
+  [#FRObx],
+  [Il Sistema deve permettere la finalizzazione della registrazione solo a seguito della validazione positiva di tutti i campi obbligatori.],
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve creare e memorizzare un record account che includa almeno username, email, hash della password e salt associato a seguito di registrazione completata con esito positivo.], 
+  [#FRObx],
+  [Il Sistema deve creare e memorizzare un record account che includa almeno username, email, hash della password e salt associato a seguito di registrazione completata con esito positivo.],
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve memorizzare le chiavi di accesso esclusivamente in forma cifrata tramite un algoritmo di hashing sicuro e generare un salt univoco per ciascun account.], 
+  [#FRObx],
+  [Il Sistema deve memorizzare le chiavi di accesso esclusivamente in forma cifrata tramite un algoritmo di hashing sicuro e generare un salt univoco per ciascun account.],
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve garantire l'atomicità della procedura di registrazione: in caso di fallimento della persistenza, nessun record parziale deve essere mantenuto nel database.], 
+  [#FRObx],
+  [Il Sistema deve garantire l'atomicità della procedura di registrazione: in caso di fallimento della persistenza, nessun record parziale deve essere mantenuto nel database.],
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve visualizzare un messaggio di conferma esplicito a seguito della creazione corretta dell'account CodeGuardian.], 
+  [#FRObx],
+  [Il Sistema deve visualizzare un messaggio di conferma esplicito a seguito della creazione corretta dell'account CodeGuardian.],
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
   // --- CAMPI OBBLIGATORI MANCANTI (UC1.0.1) ---
-  [#FRObx], 
-  [Il Sistema deve rilevare il tentativo di invio del modulo di registrazione in presenza di campi obbligatori vuoti.], 
+  [#FRObx],
+  [Il Sistema deve rilevare il tentativo di invio del modulo di registrazione in presenza di campi obbligatori vuoti.],
   [#link(<UC1.0.1>)[#underline[\[UC1.0.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve inibire la registrazione e notificare l'utente indicando specificamente quali dati obbligatori non sono stati inseriti.], 
+  [#FRObx],
+  [Il Sistema deve inibire la registrazione e notificare l'utente indicando specificamente quali dati obbligatori non sono stati inseriti.],
   [#link(<UC1.0.1>)[#underline[\[UC1.0.1\]]]],
 
   // --- USERNAME (UC1.1 + ESTENSIONI) ---
-  [#FRObx], 
-  [Il Sistema deve consentire l'immissione di un username alfanumerico con lunghezza compresa tra 4 e 20 caratteri.], 
+  [#FRObx],
+  [Il Sistema deve consentire l'immissione di un username alfanumerico con lunghezza compresa tra 4 e 20 caratteri.],
   [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve verificare l'univocità dello username rispetto agli account esistenti nel database.], 
+  [#FRObx],
+  [Il Sistema deve verificare l'univocità dello username rispetto agli account esistenti nel database.],
   [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve imporre vincoli di unicità lato persistenza su username per prevenire registrazioni duplicate anche in presenza di richieste concorrenti.], 
+  [#FRObx],
+  [Il Sistema deve imporre vincoli di unicità lato persistenza su username per prevenire registrazioni duplicate anche in presenza di richieste concorrenti.],
   [#link(<UC1.1.2>)[#underline[\[UC1.1.2\]]]],
 
-  [#FRObx], 
-  [In caso di violazione del vincolo di unicità in fase di persistenza, il Sistema deve annullare la registrazione e notificare l'utente con il messaggio previsto per username già in uso.], 
+  [#FRObx],
+  [In caso di violazione del vincolo di unicità in fase di persistenza, il Sistema deve annullare la registrazione e notificare l'utente con il messaggio previsto per username già in uso.],
   [#link(<UC1.1.2>)[#underline[\[UC1.1.2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora lo username inserito non rispetti i vincoli sintattici previsti.], 
+  [#FRObx],
+  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora lo username inserito non rispetti i vincoli sintattici previsti.],
   [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
 
   // --- EMAIL (UC1.2 + ESTENSIONI) ---
-  [#FRObx], 
-  [Il Sistema deve consentire l'immissione di un indirizzo email conforme allo standard RFC 5322.], 
+  [#FRObx],
+  [Il Sistema deve consentire l'immissione di un indirizzo email conforme allo standard RFC 5322.],
   [#link(<UC1.2>)[#underline[\[UC1.2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve rifiutare indirizzi email contenenti spazi o privi del carattere "@".], 
+  [#FRObx],
+  [Il Sistema deve rifiutare indirizzi email contenenti spazi o privi del carattere "@".],
   [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve verificare l'univocità dell'indirizzo email rispetto agli account esistenti nel database.], 
+  [#FRObx],
+  [Il Sistema deve verificare l'univocità dell'indirizzo email rispetto agli account esistenti nel database.],
   [#link(<UC1.2>)[#underline[\[UC1.2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve imporre vincoli di unicità lato persistenza su indirizzo email per prevenire registrazioni duplicate.], 
+  [#FRObx],
+  [Il Sistema deve imporre vincoli di unicità lato persistenza su indirizzo email per prevenire registrazioni duplicate.],
   [#link(<UC1.2.2>)[#underline[\[UC1.2.2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora l'indirizzo email inserito non sia conforme ai requisiti sintattici.], 
+  [#FRObx],
+  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora l'indirizzo email inserito non sia conforme ai requisiti sintattici.],
   [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
 
   // --- PASSWORD (UC1.3 + ESTENSIONE) ---
-  [#FRObx], 
-  [Il Sistema deve accettare una password solo se di lunghezza pari o superiore ad 8 caratteri.], 
+  [#FRObx],
+  [Il Sistema deve accettare una password solo se di lunghezza pari o superiore ad 8 caratteri.],
   [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve accettare una password solo se include almeno una lettera maiuscola, una lettera minuscola, una cifra e un carattere speciale.], 
+  [#FRObx],
+  [Il Sistema deve accettare una password solo se include almeno una lettera maiuscola, una lettera minuscola, una cifra e un carattere speciale.],
   [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve rifiutare password che coincidono con lo username o che contengono lo username come sottostringa.], 
+  [#FRObx],
+  [Il Sistema deve rifiutare password che coincidono con lo username o che contengono lo username come sottostringa.],
   [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio che specifichi i requisiti di sicurezza non soddisfatti.], 
+  [#FRObx],
+  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio che specifichi i requisiti di sicurezza non soddisfatti.],
   [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
 
   // --- AUTENTICAZIONE (UC2) ---
-  [#FRObx], 
-  [Il Sistema deve consentire all'Utente non autenticato l'accesso alla sezione di autenticazione (Login).], 
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente non autenticato l'accesso alla sezione di autenticazione (Login).],
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve predisporre un comando di conferma per finalizzare la procedura di accesso.], 
+  [#FRObx],
+  [Il Sistema deve predisporre un comando di conferma per finalizzare la procedura di accesso.],
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve eseguire la validazione completa delle credenziali (presenza, formato e corrispondenza) al momento dell'invio del modulo.], 
+  [#FRObx],
+  [Il Sistema deve eseguire la validazione completa delle credenziali (presenza, formato e corrispondenza) al momento dell'invio del modulo.],
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve garantire l'accesso alle funzionalità riservate esclusivamente a seguito di una corretta validazione delle credenziali.], 
+  [#FRObx],
+  [Il Sistema deve garantire l'accesso alle funzionalità riservate esclusivamente a seguito di una corretta validazione delle credenziali.],
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve reindirizzare l'Utente verso la dashboard principale a seguito di autenticazione avvenuta con successo.], 
+  [#FRObx],
+  [Il Sistema deve reindirizzare l'Utente verso la dashboard principale a seguito di autenticazione avvenuta con successo.],
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve utilizzare protocolli di comunicazione sicuri (HTTPS) per il trasferimento delle credenziali durante il login.], 
+  [#FRObx],
+  [Il Sistema deve utilizzare protocolli di comunicazione sicuri (HTTPS) per il trasferimento delle credenziali durante il login.],
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve utilizzare lo username fornito per recuperare dalla persistenza il record account associato.], 
+  [#FRObx],
+  [Il Sistema deve utilizzare lo username fornito per recuperare dalla persistenza il record account associato.],
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve verificare la password inserita confrontando l'hash calcolato con l'hash memorizzato tramite la medesima funzione di hashing e salt.], 
+  [#FRObx],
+  [Il Sistema deve verificare la password inserita confrontando l'hash calcolato con l'hash memorizzato tramite la medesima funzione di hashing e salt.],
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve implementare meccanismi di rate limiting o lockout temporaneo a seguito di ripetuti tentativi di autenticazione falliti.], 
+  [#FRObx],
+  [Il Sistema deve implementare meccanismi di rate limiting o lockout temporaneo a seguito di ripetuti tentativi di autenticazione falliti.],
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve visualizzare un indicatore di caricamento (spinner) durante la validazione delle credenziali per prevenire invii multipli.], 
+  [#FRObx],
+  [Il Sistema deve visualizzare un indicatore di caricamento (spinner) durante la validazione delle credenziali per prevenire invii multipli.],
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve rilevare campi incompleti nel login e inibire l'accesso notificando l'utente tramite avviso specifico.], 
+  [#FRObx],
+  [Il Sistema deve rilevare campi incompleti nel login e inibire l'accesso notificando l'utente tramite avviso specifico.],
   [#link(<UC2.0.1>)[#underline[\[UC2.0.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora lo username inserito non rispetti i vincoli sintattici.], 
+  [#FRObx],
+  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora lo username inserito non rispetti i vincoli sintattici.],
   [#link(<UC2.1.1>)[#underline[\[UC2.1.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve notificare l'utente qualora l'identificativo (username) inserito non risulti censito nel sistema.], 
+  [#FRObx],
+  [Il Sistema deve notificare l'utente qualora l'identificativo (username) inserito non risulti censito nel sistema.],
   [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora la password inserita non sia formalmente conforme.], 
+  [#FRObx],
+  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora la password inserita non sia formalmente conforme.],
   [#link(<UC2.2.1>)[#underline[\[UC2.2.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve notificare l'utente qualora la password inserita non corrisponda a quella registrata.], 
+  [#FRObx],
+  [Il Sistema deve notificare l'utente qualora la password inserita non corrisponda a quella registrata.],
   [#link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]],
 
   // --- INTEGRAZIONE GITHUB (UC3) ---
-  [#FRObx], 
-  [Il Sistema deve consentire all'Utente Autorizzato l'accesso alla sezione dedicata al collegamento del profilo GitHub.], 
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato l'accesso alla sezione dedicata al collegamento del profilo GitHub.],
   [#link(<UC3>)[#underline[\[UC3\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve impedire l'avvio della procedura di collegamento qualora un profilo GitHub risulti già associato all'account CodeGuardian dell'utente.], 
+  [#FRObx],
+  [Il Sistema deve impedire l'avvio della procedura di collegamento qualora un profilo GitHub risulti già associato all'account CodeGuardian dell'utente.],
   [#link(<UC3>)[#underline[\[UC3\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve utilizzare un parametro di stato (state) per prevenire attacchi di tipo Cross-Site Request Forgery (CSRF) durante il flusso OAuth2.], 
+  [#FRObx],
+  [Il Sistema deve utilizzare un parametro di stato (state) per prevenire attacchi di tipo Cross-Site Request Forgery (CSRF) durante il flusso OAuth2.],
   [#link(<UC3>)[#underline[\[UC3\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve memorizzare i token di accesso ottenuti da GitHub esclusivamente in forma cifrata tramite algoritmi di crittografia forte (es. AES-256).], 
+  [#FRObx],
+  [Il Sistema deve memorizzare i token di accesso ottenuti da GitHub esclusivamente in forma cifrata tramite algoritmi di crittografia forte (es. AES-256).],
   [#link(<UC3>)[#underline[\[UC3\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve evitare la persistenza di token o associazioni qualora la procedura di collegamento non termini con esito positivo.], 
+  [#FRObx],
+  [Il Sistema deve evitare la persistenza di token o associazioni qualora la procedura di collegamento non termini con esito positivo.],
   [#link(<UC3>)[#underline[\[UC3\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve mostrare un avviso informativo obbligatorio prima di procedere al reindirizzamento verso il dominio esterno GitHub.], 
+  [#FRObx],
+  [Il Sistema deve mostrare un avviso informativo obbligatorio prima di procedere al reindirizzamento verso il dominio esterno GitHub.],
   [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve consentire all'utente di annullare il reindirizzamento, ripristinando lo stato della sezione integrazioni senza alcuna modifica.], 
+  [#FRObx],
+  [Il Sistema deve consentire all'utente di annullare il reindirizzamento, ripristinando lo stato della sezione integrazioni senza alcuna modifica.],
   [#link(<UC3.1.1>)[#underline[\[UC3.1.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve elaborare l'esito della procedura di collegamento al ritorno dell'utente su CodeGuardian e visualizzare un messaggio di esito.], 
+  [#FRObx],
+  [Il Sistema deve elaborare l'esito della procedura di collegamento al ritorno dell'utente su CodeGuardian e visualizzare un messaggio di esito.],
   [#link(<UC3.2>)[#underline[\[UC3.2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve gestire i timeout nelle chiamate verso le API di GitHub durante lo scambio del token, notificando l'utente del fallimento temporaneo.], 
+  [#FRObx],
+  [Il Sistema deve gestire i timeout nelle chiamate verso le API di GitHub durante lo scambio del token, notificando l'utente del fallimento temporaneo.],
   [#link(<UC3.2.1>)[#underline[\[UC3.2.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve inibire il collegamento qualora il profilo GitHub risulti già associato a un altro account CodeGuardian.], 
+  [#FRObx],
+  [Il Sistema deve inibire il collegamento qualora il profilo GitHub risulti già associato a un altro account CodeGuardian.],
   [#link(<UC3.2.2>)[#underline[\[UC3.2.2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve mostrare un messaggio di errore specifico qualora l'utente neghi il consenso alla condivisione dei dati su GitHub.], 
+  [#FRObx],
+  [Il Sistema deve mostrare un messaggio di errore specifico qualora l'utente neghi il consenso alla condivisione dei dati su GitHub.],
   [#link(<UC3.2.3>)[#underline[\[UC3.2.3\]]]],
 
   // --- RICHIESTA ANALISI (UC4) ---
-  [#FRObx], 
-  [Il Sistema deve consentire l'immissione dell'URL del repository GitHub nel modulo di richiesta analisi.], 
+  [#FRObx],
+  [Il Sistema deve consentire l'immissione dell'URL del repository GitHub nel modulo di richiesta analisi.],
   [#link(<UC4>)[#underline[\[UC4\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve validare che l'URL del repository GitHub inserito utilizzi il protocollo "https://" e punti al dominio "github.com".], 
+  [#FRObx],
+  [Il Sistema deve validare che l'URL del repository GitHub inserito utilizzi il protocollo "https://" e punti al dominio "github.com".],
   [#link(<UC4>)[#underline[\[UC4\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve verificare la dimensione del repository tramite API GitHub e inibire l'analisi qualora questa superi i limiti tecnici prestabiliti.], 
+  [#FRObx],
+  [Il Sistema deve verificare la dimensione del repository tramite API GitHub e inibire l'analisi qualora questa superi i limiti tecnici prestabiliti.],
   [#link(<UC4>)[#underline[\[UC4\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve impedire l'avvio di una nuova analisi e informare l'utente se il report esistente risulta già aggiornato.], 
+  [#FRObx],
+  [Il Sistema deve impedire l'avvio di una nuova analisi e informare l'utente se il report esistente risulta già aggiornato.],
   [#link(<UC4.0.1>)[#underline[\[UC4.0.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve disabilitare il comando di conferma dell'invio a seguito della pressione dell'utente per prevenire richieste duplicate.], 
+  [#FRObx],
+  [Il Sistema deve disabilitare il comando di conferma dell'invio a seguito della pressione dell'utente per prevenire richieste duplicate.],
   [#link(<UC4>)[#underline[\[UC4\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve impedire l'invio di una nuova richiesta se un'analisi per il medesimo repository è già in fase di elaborazione.], 
+  [#FRObx],
+  [Il Sistema deve impedire l'invio di una nuova richiesta se un'analisi per il medesimo repository è già in fase di elaborazione.],
   [#link(<UC4.0.2>)[#underline[\[UC4.0.2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve inibire la richiesta di analisi qualora non venga selezionata almeno un'area di interesse.], 
+  [#FRObx],
+  [Il Sistema deve inibire la richiesta di analisi qualora non venga selezionata almeno un'area di interesse.],
   [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
 
   // --- VISUALIZZAZIONE LISTA (UC5) ---
-  [#FRObx], 
-  [Il Sistema deve ordinare l'elenco dei repository analizzati in ordine decrescente rispetto alla data dell'ultima analisi disponibile.], 
+  [#FRObx],
+  [Il Sistema deve ordinare l'elenco dei repository analizzati in ordine decrescente rispetto alla data dell'ultima analisi disponibile.],
   [#link(<UC5>)[#underline[\[UC5\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve esporre per ogni elemento della lista: nome del repository, URL di riferimento e data dell'ultima analisi.], 
+  [#FRObx],
+  [Il Sistema deve esporre per ogni elemento della lista: nome del repository, URL di riferimento e data dell'ultima analisi.],
   [#link(<UC5.1>)[#underline[\[UC5.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve inibire la visualizzazione della lista e mostrare un'informativa specifica qualora non risultino repository analizzati.], 
+  [#FRObx],
+  [Il Sistema deve inibire la visualizzazione della lista e mostrare un'informativa specifica qualora non risultino repository analizzati.],
   [#link(<UC5.0.1>)[#underline[\[UC5.0.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve inibire il rendering della lista e mostrare una notifica di errore qualora i servizi di persistenza non siano raggiungibili.], 
+  [#FRObx],
+  [Il Sistema deve inibire il rendering della lista e mostrare una notifica di errore qualora i servizi di persistenza non siano raggiungibili.],
   [#link(<UC5.0.2>)[#underline[\[UC5.0.2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve fornire un comando di aggiornamento (Refresh) per consentire un nuovo tentativo di caricamento in caso di errore tecnico.], 
+  [#FRObx],
+  [Il Sistema deve fornire un comando di aggiornamento (Refresh) per consentire un nuovo tentativo di caricamento in caso di errore tecnico.],
   [#link(<UC5.0.2>)[#underline[\[UC5.0.2\]]]],
-
 
   // --- VISUALIZZAZIONE REPORT (UC6) ---
-  [#FRObx], 
-  [Il Sistema deve consentire la selezione di un repository dalla lista per il recupero del report di dettaglio associato.], 
+  [#FRObx],
+  [Il Sistema deve consentire la selezione di un repository dalla lista per il recupero del report di dettaglio associato.],
   [#link(<UC6>)[#underline[\[UC6\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve validare lato server che il report richiesto appartenga al repository associato all'account dell'Utente Autorizzato prima del rendering.], 
+  [#FRObx],
+  [Il Sistema deve validare lato server che il report richiesto appartenga al repository associato all'account dell'Utente Autorizzato prima del rendering.],
   [#link(<UC6>)[#underline[\[UC6\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve inibire il rendering e mostrare un errore di autorizzazione qualora l'utente tenti di accedere a un report di un repository non associato al proprio profilo.], 
+  [#FRObx],
+  [Il Sistema deve inibire il rendering e mostrare un errore di autorizzazione qualora l'utente tenti di accedere a un report di un repository non associato al proprio profilo.],
   [#link(<UC6>)[#underline[\[UC6\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve gestire i timeout nel recupero dei dati analitici dalla persistenza, notificando l'utente in caso di indisponibilità temporanea del report.], 
+  [#FRObx],
+  [Il Sistema deve gestire i timeout nel recupero dei dati analitici dalla persistenza, notificando l'utente in caso di indisponibilità temporanea del report.],
   [#link(<UC6>)[#underline[\[UC6\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve permettere la selezione o deselezione dinamica delle aree analitiche (Codice, Sicurezza, Documentazione) tramite interfaccia utente.], 
+  [#FRObx],
+  [Il Sistema deve permettere la selezione o deselezione dinamica delle aree analitiche (Codice, Sicurezza, Documentazione) tramite interfaccia utente.],
   [#link(<UC6.1>)[#underline[\[UC6.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve aggiornare dinamicamente il contenuto a video in base ai filtri applicati senza richiedere il ricaricamento dell'intera pagina.], 
+  [#FRObx],
+  [Il Sistema deve aggiornare dinamicamente il contenuto a video in base ai filtri applicati senza richiedere il ricaricamento dell'intera pagina.],
   [#link(<UC6.1>)[#underline[\[UC6.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve inibire la visualizzazione delle aree analitiche e mostrare un avviso informativo qualora non risulti selezionata alcuna area nei filtri.], 
+  [#FRObx],
+  [Il Sistema deve inibire la visualizzazione delle aree analitiche e mostrare un avviso informativo qualora non risulti selezionata alcuna area nei filtri.],
   [#link(<UC6.1.1>)[#underline[\[UC6.1.1\]]]],
 
   // --- METADATI (UC6.2) ---
-  [#FRObx], 
-  [Il Sistema deve esporre i metadati identificativi del report recuperati in fase di caricamento.], 
+  [#FRObx],
+  [Il Sistema deve esporre i metadati identificativi del report recuperati in fase di caricamento.],
   [#link(<UC6.2>)[#underline[\[UC6.2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve esporre il timestamp (data e ora ISO 8601) relativo alla generazione del report.], 
+  [#FRObx],
+  [Il Sistema deve esporre il timestamp (data e ora ISO 8601) relativo alla generazione del report.],
   [#link(<UC6.2.1>)[#underline[\[UC6.2.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve visualizzare l'identificativo SHA del commit GitHub analizzato, fornendo un link diretto al commit sulla piattaforma esterna.], 
+  [#FRObx],
+  [Il Sistema deve visualizzare l'identificativo SHA del commit GitHub analizzato, fornendo un link diretto al commit sulla piattaforma esterna.],
   [#link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve esporre lo username o l'identificativo dell'account che ha originato la scansione.], 
+  [#FRObx],
+  [Il Sistema deve esporre lo username o l'identificativo dell'account che ha originato la scansione.],
   [#link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]],
 
   // --- RISULTATI E REMEDIATION (UC6.3) ---
-  [#FRObx], 
-  [Il Sistema deve presentare le metriche tecniche aggregate (es. punteggi di qualità, numero bug, vulnerabilità) per ogni sezione attiva.], 
+  [#FRObx],
+  [Il Sistema deve presentare le metriche tecniche aggregate (es. punteggi di qualità, numero bug, vulnerabilità) per ogni sezione attiva.],
   [#link(<UC6.3>)[#underline[\[UC6.3\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve caricare e visualizzare la lista delle azioni correttive (remediation) associate univocamente alle criticità rilevate nel report.], 
+  [#FRObx],
+  [Il Sistema deve caricare e visualizzare la lista delle azioni correttive (remediation) associate univocamente alle criticità rilevate nel report.],
   [#link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve consentire l'espansione dei dettagli di ogni singola remediation per la visualizzazione della proposta di risoluzione tecnica.], 
+  [#FRObx],
+  [Il Sistema deve consentire l'espansione dei dettagli di ogni singola remediation per la visualizzazione della proposta di risoluzione tecnica.],
   [#link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve visualizzare un messaggio di conferma esito positivo (badge "Clean" o simile) qualora il motore di analisi non rilevi criticità nella sezione.], 
+  [#FRObx],
+  [Il Sistema deve visualizzare un messaggio di conferma esito positivo (badge "Clean" o simile) qualora il motore di analisi non rilevi criticità nella sezione.],
   [#link(<UC6.3.1.1>)[#underline[\[UC6.3.1.1\]]]],
 
   // --- SELEZIONE INTERVALLO TEMPORALE (UC7) ---
-  [#FRObx], 
-  [Il Sistema deve consentire la selezione di un intervallo temporale tramite input di data (inizio e fine) per l'estrazione dei report storici dal database.], 
+  [#FRObx],
+  [Il Sistema deve consentire la selezione di un intervallo temporale tramite input di data (inizio e fine) per l'estrazione dei report storici dal database.],
   [#link(<UC7>)[#underline[\[UC7\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve predisporre un comando di conferma per l'invio della richiesta di confronto dei dati.], 
+  [#FRObx],
+  [Il Sistema deve predisporre un comando di conferma per l'invio della richiesta di confronto dei dati.],
   [#link(<UC7>)[#underline[\[UC7\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve inibire il caricamento dei dati e visualizzare un avviso specifico qualora i campi relativi alle date non risultino popolati.], 
+  [#FRObx],
+  [Il Sistema deve inibire il caricamento dei dati e visualizzare un avviso specifico qualora i campi relativi alle date non risultino popolati.],
   [#link(<UC7.0.1>)[#underline[\[UC7.0.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve impedire l'invio della richiesta qualora la data di inizio sia cronologicamente successiva alla data di fine, segnalando l'errore di coerenza.], 
+  [#FRObx],
+  [Il Sistema deve impedire l'invio della richiesta qualora la data di inizio sia cronologicamente successiva alla data di fine, segnalando l'errore di coerenza.],
   [#link(<UC7.0.3>)[#underline[\[UC7.0.3\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve limitare l'ampiezza dell'intervallo temporale a un massimo di 12 mesi solari, inibendo la richiesta e notificando l'utente in caso di superamento.], 
+  [#FRObx],
+  [Il Sistema deve limitare l'ampiezza dell'intervallo temporale a un massimo di 12 mesi solari, inibendo la richiesta e notificando l'utente in caso di superamento.],
   [#link(<UC7.0.4>)[#underline[\[UC7.0.4\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve gestire l'assenza di dati nel periodo selezionato visualizzando un'informativa di "Nessun report trovato" senza interrompere la sessione utente.], 
+  [#FRObx],
+  [Il Sistema deve gestire l'assenza di dati nel periodo selezionato visualizzando un'informativa di "Nessun report trovato" senza interrompere la sessione utente.],
   [#link(<UC7.0.2>)[#underline[\[UC7.0.2\]]]],
 
   // --- VISUALIZZAZIONE METRICHE COMPARATIVE (UC8) ---
-  [#FRDex], 
-  [Il Sistema deve generare rappresentazioni grafiche dinamiche (es. grafici a linee o istogrammi) per illustrare l'evoluzione temporale delle metriche analitiche.], 
+  [#FRDex],
+  [Il Sistema deve generare rappresentazioni grafiche dinamiche (es. grafici a linee o istogrammi) per illustrare l'evoluzione temporale delle metriche analitiche.],
   [#link(<UC8>)[#underline[\[UC8\]]]],
 
-  [#FRDex], 
-  [Il Sistema deve abilitare tooltips informativi al passaggio del cursore (hover) sui punti dati dei grafici per mostrare i valori esatti e l'hash del commit associato.], 
+  [#FRDex],
+  [Il Sistema deve abilitare tooltips informativi al passaggio del cursore (hover) sui punti dati dei grafici per mostrare i valori esatti e l'hash del commit associato.],
   [#link(<UC8>)[#underline[\[UC8\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve presentare una tabella comparativa che elenchi i report selezionati in ordine cronologico crescente.], 
+  [#FRObx],
+  [Il Sistema deve presentare una tabella comparativa che elenchi i report selezionati in ordine cronologico crescente.],
   [#link(<UC8>)[#underline[\[UC8\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve calcolare e visualizzare gli indicatori di variazione (trend incrementali o decrementali) tra ogni analisi e quella immediatamente precedente.], 
+  [#FRObx],
+  [Il Sistema deve calcolare e visualizzare gli indicatori di variazione (trend incrementali o decrementali) tra ogni analisi e quella immediatamente precedente.],
   [#link(<UC8>)[#underline[\[UC8\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve garantire l'allineamento dei dati tra la vista grafica e la vista tabellare, effettuando una singola operazione di fetch atomica per l'intero intervallo.], 
+  [#FRObx],
+  [Il Sistema deve garantire l'allineamento dei dati tra la vista grafica e la vista tabellare, effettuando una singola operazione di fetch atomica per l'intero intervallo.],
   [#link(<UC8>)[#underline[\[UC8\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve gestire eventuali errori di rendering dei grafici (es. mancanza di librerie client-side) mostrando in alternativa i dati grezzi in formato tabellare.], 
+  [#FRObx],
+  [Il Sistema deve gestire eventuali errori di rendering dei grafici (es. mancanza di librerie client-side) mostrando in alternativa i dati grezzi in formato tabellare.],
   [#link(<UC8>)[#underline[\[UC8\]]]],
 
   // --- ANALISI DEL CODICE (UC9) ---
-  [#FRObx], 
-  [Il Sistema deve caricare e visualizzare i dati relativi alla sezione "Codice" esclusivamente se l'area risulta attiva nei filtri di visualizzazione del report.], 
+  [#FRObx],
+  [Il Sistema deve caricare e visualizzare i dati relativi alla sezione "Codice" esclusivamente se l'area risulta attiva nei filtri di visualizzazione del report.],
   [#link(<UC9>)[#underline[\[UC9\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve esporre i risultati dell'analisi statica (bug, code smell) indicando per ogni rilievo la gravità e la posizione nel file sorgente.], 
+  [#FRObx],
+  [Il Sistema deve esporre i risultati dell'analisi statica (bug, code smell) indicando per ogni rilievo la gravità e la posizione nel file sorgente.],
   [#link(<UC9.1>)[#underline[\[UC9.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve esporre la percentuale di copertura dei test (Code Coverage) e il rapporto tra test superati e falliti rispetto al totale eseguito.], 
+  [#FRObx],
+  [Il Sistema deve esporre la percentuale di copertura dei test (Code Coverage) e il rapporto tra test superati e falliti rispetto al totale eseguito.],
   [#link(<UC9.2>)[#underline[\[UC9.2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve presentare la lista delle remediation specifiche per il codice, permettendo la navigazione verso il dettaglio della singola azione.], 
+  [#FRObx],
+  [Il Sistema deve presentare la lista delle remediation specifiche per il codice, permettendo la navigazione verso il dettaglio della singola azione.],
   [#link(<UC9.3>)[#underline[\[UC9.3\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve visualizzare un'informativa di "Codice Conforme" qualora non siano rilevati bug o violazioni degli standard qualitativi.], 
+  [#FRObx],
+  [Il Sistema deve visualizzare un'informativa di "Codice Conforme" qualora non siano rilevati bug o violazioni degli standard qualitativi.],
   [#link(<UC9.3.1>)[#underline[\[UC9.3.1\]]]],
 
   // --- ANALISI DELLA SICUREZZA (UC10) ---
-  [#FRObx], 
-  [Il Sistema deve caricare i dati della sezione "Sicurezza" in modo asincrono rispetto alle altre sezioni per ottimizzare i tempi di risposta.], 
+  [#FRObx],
+  [Il Sistema deve caricare i dati della sezione "Sicurezza" in modo asincrono rispetto alle altre sezioni per ottimizzare i tempi di risposta.],
   [#link(<UC10>)[#underline[\[UC10\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve esporre l'elenco delle dipendenze vulnerabili indicando il codice CVE, il grado di severità (CVSS) e la versione sicura consigliata.], 
+  [#FRObx],
+  [Il Sistema deve esporre l'elenco delle dipendenze vulnerabili indicando il codice CVE, il grado di severità (CVSS) e la versione sicura consigliata.],
   [#link(<UC10.1>)[#underline[\[UC10.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve mappare i rilievi di sicurezza rispetto alle categorie della Top 10 OWASP per facilitare la valutazione della conformità.], 
+  [#FRObx],
+  [Il Sistema deve mappare i rilievi di sicurezza rispetto alle categorie della Top 10 OWASP per facilitare la valutazione della conformità.],
   [#link(<UC10.2>)[#underline[\[UC10.2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve presentare le remediation di sicurezza, ordinandole prioritariamente in base alla criticità della vulnerabilità associata.], 
+  [#FRObx],
+  [Il Sistema deve presentare le remediation di sicurezza, ordinandole prioritariamente in base alla criticità della vulnerabilità associata.],
   [#link(<UC10.3>)[#underline[\[UC10.3\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve visualizzare un'informativa di "Repository Sicuro" qualora non siano rilevate vulnerabilità note nelle dipendenze o nel codice.], 
+  [#FRObx],
+  [Il Sistema deve visualizzare un'informativa di "Repository Sicuro" qualora non siano rilevate vulnerabilità note nelle dipendenze o nel codice.],
   [#link(<UC10.3.1>)[#underline[\[UC10.3.1\]]]],
 
   // --- ANALISI DELLA DOCUMENTAZIONE (UC11) ---
-  [#FRObx], 
-  [Il Sistema deve caricare e visualizzare i dati della sezione "Documentazione" analizzando la presenza e la sintassi dei file Markdown e testuali.], 
+  [#FRObx],
+  [Il Sistema deve caricare e visualizzare i dati della sezione "Documentazione" analizzando la presenza e la sintassi dei file Markdown e testuali.],
   [#link(<UC11>)[#underline[\[UC11\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve segnalare gli errori sintattici e i link interrotti individuati all'interno della documentazione del repository.], 
+  [#FRObx],
+  [Il Sistema deve segnalare gli errori sintattici e i link interrotti individuati all'interno della documentazione del repository.],
   [#link(<UC11.1>)[#underline[\[UC11.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve calcolare e mostrare un indice di completezza documentale basato sulla copertura delle interfacce pubbliche descritte.], 
+  [#FRObx],
+  [Il Sistema deve calcolare e mostrare un indice di completezza documentale basato sulla copertura delle interfacce pubbliche descritte.],
   [#link(<UC11.2>)[#underline[\[UC11.2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve esporre suggerimenti testuali per l'integrazione delle parti di documentazione mancanti o incomplete.], 
+  [#FRObx],
+  [Il Sistema deve esporre suggerimenti testuali per l'integrazione delle parti di documentazione mancanti o incomplete.],
   [#link(<UC11.3>)[#underline[\[UC11.3\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve visualizzare un'informativa di "Documentazione Completa" qualora non siano rilevati errori o mancanze informative.], 
+  [#FRObx],
+  [Il Sistema deve visualizzare un'informativa di "Documentazione Completa" qualora non siano rilevati errori o mancanze informative.],
   [#link(<UC11.3.1>)[#underline[\[UC11.3.1\]]]],
 
-// --- RANKING REPOSITORY (UC12) ---
+  // --- RANKING REPOSITORY (UC12) ---
   [#FRObx],
   [Il Sistema deve calcolare un punteggio di qualità globale (0-100) per ogni repository analizzato, basandosi sulle metriche pesate di codice, sicurezza e documentazione.],
   [#link(<UC12>)[#underline[\[UC12\]]]],
@@ -4726,71 +4745,70 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC13>)[#underline[\[UC13\]]]],
 
   // --- ESPORTAZIONE REPORT (UC14) ---
-  [#FRDex], 
-  [Il Sistema deve rendere disponibile il file generato tramite un link di download], 
+  [#FRDex],
+  [Il Sistema deve rendere disponibile il file generato tramite un link di download],
   [#link(<UC14>)[#underline[\[UC14\]]]],
-  
-  [#FRDex], 
-  [Il Sistema deve consentire l'esportazione dei report nei formati PDF (per consultazione) e JSON (per interoperabilità dati).], 
+
+  [#FRDex],
+  [Il Sistema deve consentire l'esportazione dei report nei formati PDF (per consultazione) e JSON (per interoperabilità dati).],
   [#link(<UC14.1>)[#underline[\[UC14.1\]]]],
 
-  [#FRDex], 
-  [Il Sistema deve inibire l'invio della richiesta di generazione file qualora l'utente non selezioni formalmente uno dei formati previsti.], 
+  [#FRDex],
+  [Il Sistema deve inibire l'invio della richiesta di generazione file qualora l'utente non selezioni formalmente uno dei formati previsti.],
   [#link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]],
 
-  [#FRDex], 
-  [Il Sistema deve generare il documento includendo i metadati del report (timestamp, commit hash) e i risultati delle sezioni effettivamente analizzate.], 
+  [#FRDex],
+  [Il Sistema deve generare il documento includendo i metadati del report (timestamp, commit hash) e i risultati delle sezioni effettivamente analizzate.],
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 
-  [#FRDex], 
-  [Il Sistema deve gestire il processo di generazione del file asincronamente per evitare il blocco dell'interfaccia utente durante il parsing di report voluminosi.], 
+  [#FRDex],
+  [Il Sistema deve gestire il processo di generazione del file asincronamente per evitare il blocco dell'interfaccia utente durante il parsing di report voluminosi.],
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
-
 
   // --- MODIFICA PASSWORD (UC15) ---
-  [#FRObx], 
-  [Il Sistema deve consentire all'Utente Autorizzato l'accesso alla sezione dedicata alla modifica della chiave di accesso.], 
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato l'accesso alla sezione dedicata alla modifica della chiave di accesso.],
   [#link(<UC15>)[#underline[\[UC15\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve richiedere l'immissione della password attualmente in uso e validarne la corrispondenza con l'hash memorizzato prima di procedere alla variazione.], 
+  [#FRObx],
+  [Il Sistema deve richiedere l'immissione della password attualmente in uso e validarne la corrispondenza con l'hash memorizzato prima di procedere alla variazione.],
   [#link(<UC15.1>)[#underline[\[UC15.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve inibire la procedura e mostrare un errore specifico qualora la password corrente non venga inserita o risulti errata.], 
+  [#FRObx],
+  [Il Sistema deve inibire la procedura e mostrare un errore specifico qualora la password corrente non venga inserita o risulti errata.],
   [#link(<UC15.1.1>)[#underline[\[UC15.1.1\]]], #link(<UC15.1.2>)[#underline[\[UC15.1.2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve validare che la nuova password rispetti i vincoli di complessità stabiliti per la registrazione iniziale.], 
+  [#FRObx],
+  [Il Sistema deve validare che la nuova password rispetti i vincoli di complessità stabiliti per la registrazione iniziale.],
   [#link(<UC15.2.2>)[#underline[\[UC15.2.2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve confrontare l'hash della nuova password con quello attuale e impedire la modifica qualora i valori coincidano.], 
+  [#FRObx],
+  [Il Sistema deve confrontare l'hash della nuova password con quello attuale e impedire la modifica qualora i valori coincidano.],
   [#link(<UC15.2.3>)[#underline[\[UC15.2.3\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve aggiornare la password nella persistenza esclusivamente tramite un nuovo processo di hashing sicuro e generazione di un nuovo salt univoco.], 
+  [#FRObx],
+  [Il Sistema deve aggiornare la password nella persistenza esclusivamente tramite un nuovo processo di hashing sicuro e generazione di un nuovo salt univoco.],
   [#link(<UC15>)[#underline[\[UC15\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve inviare una notifica email automatica all'indirizzo associato al profilo a seguito dell'avvenuta modifica delle credenziali.], 
+  [#FRObx],
+  [Il Sistema deve inviare una notifica email automatica all'indirizzo associato al profilo a seguito dell'avvenuta modifica delle credenziali.],
   [#link(<UC15.4>)[#underline[\[UC15.4\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve invalidare tutte le sessioni attive dell'utente (ad eccezione di quella corrente) a seguito del cambio password avvenuto con successo.], 
+  [#FRObx],
+  [Il Sistema deve invalidare tutte le sessioni attive dell'utente (ad eccezione di quella corrente) a seguito del cambio password avvenuto con successo.],
   [#link(<UC15.4>)[#underline[\[UC15.4\]]]],
 
   // --- VISUALIZZAZIONE REMEDIATION (UC16) ---
-  [#FRObx], 
-  [Il Sistema deve consentire la visualizzazione dei dettagli tecnici di una specifica remediation selezionata dall'utente.], 
+  [#FRObx],
+  [Il Sistema deve consentire la visualizzazione dei dettagli tecnici di una specifica remediation selezionata dall'utente.],
   [#link(<UC16>)[#underline[\[UC16\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve esporre per ogni remediation: descrizione del difetto, snippet di codice interessato (se applicabile), grado di severità e proposta di risoluzione.], 
+  [#FRObx],
+  [Il Sistema deve esporre per ogni remediation: descrizione del difetto, snippet di codice interessato (se applicabile), grado di severità e proposta di risoluzione.],
   [#link(<UC16>)[#underline[\[UC16\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve includere riferimenti o link a documentazione esterna (es. CWE, OWASP) qualora la remediation riguardi una vulnerabilità di sicurezza nota.], 
+  [#FRObx],
+  [Il Sistema deve includere riferimenti o link a documentazione esterna (es. CWE, OWASP) qualora la remediation riguardi una vulnerabilità di sicurezza nota.],
   [#link(<UC16>)[#underline[\[UC16\]]]],
 
   // --- VERIFICA ACCESSIBILITÀ REPOSITORY (UC17) ---
@@ -4888,7 +4906,9 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   // --- DISPATCHING ANALISI (UC21.2 - UC21.4) ---
   [#FRObx],
   [L'Orchestratore deve inoltrare la codebase o i file specifici agli strumenti di analisi esterna (Codice, Sicurezza, Documentazione) tramite protocolli di trasferimento sicuri.],
-  [#link(<UC21.2>)[#underline[\[UC21.2\]]] #link(<UC21.3>)[#underline[\[UC21.3\]]] #link(<UC21.4>)[#underline[\[UC21.4\]]]],
+  [#link(<UC21.2>)[#underline[\[UC21.2\]]] #link(<UC21.3>)[#underline[\[UC21.3\]]] #link(
+      <UC21.4>,
+    )[#underline[\[UC21.4\]]]],
 
   // --- PERSISTENZA STATO (UC22) ---
   [#FRObx],
@@ -4910,7 +4930,6 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#FRObx],
   [Il Sistema deve registrare nei log di audit ogni fallimento di persistenza dello stato, includendo lo stack trace dell'errore per finalità diagnostiche.],
   [#link(<UC22.0.1>)[#underline[\[UC22.0.1\]]]],
-
 
   // --- RECUPERO RISULTATI (UC23) ---
   [#FRObx],
@@ -4939,309 +4958,309 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   //UC24
   // --- GENERAZIONE DEL REPORT (UC24) ---
-  [#FRObx], 
-  [Il Sistema deve unificare i dati provenienti dai diversi strumenti (codice, sicurezza, documentazione) in un unico documento di sintesi.], 
+  [#FRObx],
+  [Il Sistema deve unificare i dati provenienti dai diversi strumenti (codice, sicurezza, documentazione) in un unico documento di sintesi.],
   [#link(<UC24>)[#underline[\[UC24\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve convertire i diversi formati dei dati ricevuti dagli strumenti esterni in un modello standard comune.], 
+  [#FRObx],
+  [Il Sistema deve convertire i diversi formati dei dati ricevuti dagli strumenti esterni in un modello standard comune.],
   [#link(<UC24>)[#underline[\[UC24\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve verificare che il report finale contenga tutte le informazioni essenziali (risultati, data, versione del codice) prima di procedere al salvataggio.], 
+  [#FRObx],
+  [Il Sistema deve verificare che il report finale contenga tutte le informazioni essenziali (risultati, data, versione del codice) prima di procedere al salvataggio.],
   [#link(<UC24>)[#underline[\[UC24\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve calcolare i punteggi di riepilogo generali basandosi sui singoli risultati ottenuti nelle varie aree analizzate.], 
+  [#FRObx],
+  [Il Sistema deve calcolare i punteggi di riepilogo generali basandosi sui singoli risultati ottenuti nelle varie aree analizzate.],
   [#link(<UC24>)[#underline[\[UC24\]]]],
 
   // --- SALVATAGGIO E CONCLUSIONE (UC25) ---
-  [#FRObx], 
-  [Il Sistema deve archiviare il report in modo permanente, collegandolo correttamente al repository dell'utente.], 
+  [#FRObx],
+  [Il Sistema deve archiviare il report in modo permanente, collegandolo correttamente al repository dell'utente.],
   [#link(<UC25>)[#underline[\[UC25\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve modificare lo stato dell'analisi in "Completato" solo dopo aver confermato che il salvataggio dei dati è andato a buon fine.], 
+  [#FRObx],
+  [Il Sistema deve modificare lo stato dell'analisi in "Completato" solo dopo aver confermato che il salvataggio dei dati è andato a buon fine.],
   [#link(<UC25>)[#underline[\[UC25\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve informare l'utente con un messaggio di errore se un problema tecnico impedisce il salvataggio definitivo del report.], 
+  [#FRObx],
+  [Il Sistema deve informare l'utente con un messaggio di errore se un problema tecnico impedisce il salvataggio definitivo del report.],
   [#link(<UC25.0.1>)[#underline[\[UC25.0.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve tenere traccia internamente dei motivi del fallimento del salvataggio per permettere controlli tecnici successivi.], 
+  [#FRObx],
+  [Il Sistema deve tenere traccia internamente dei motivi del fallimento del salvataggio per permettere controlli tecnici successivi.],
   [#link(<UC25.0.1>)[#underline[\[UC25.0.1\]]]],
 
-  [#FRObx], 
-  [In caso di errore nel salvataggio, il Sistema deve tentare di mantenere una copia temporanea del report per evitare la perdita totale dei dati elaborati.], 
+  [#FRObx],
+  [In caso di errore nel salvataggio, il Sistema deve tentare di mantenere una copia temporanea del report per evitare la perdita totale dei dati elaborati.],
   [#link(<UC25.0.1>)[#underline[\[UC25.0.1\]]]],
 
   // --- NOTIFICA COMPLETAMENTO (UC26) ---
-  [#FRObx], 
-  [Il Sistema deve generare automaticamente un avviso per l'utente non appena il report di analisi è pronto e salvato correttamente.], 
+  [#FRObx],
+  [Il Sistema deve generare automaticamente un avviso per l'utente non appena il report di analisi è pronto e salvato correttamente.],
   [#link(<UC26>)[#underline[\[UC26\]]]],
 
-  [#FRObx], 
-  [La notifica inviata deve contenere un link o un pulsante che permetta all'utente di accedere direttamente alla visualizzazione del report.], 
+  [#FRObx],
+  [La notifica inviata deve contenere un link o un pulsante che permetta all'utente di accedere direttamente alla visualizzazione del report.],
   [#link(<UC26>)[#underline[\[UC26\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve includere nella notifica informazioni di base per identificare l'analisi, come il nome del repository e la data di esecuzione.], 
+  [#FRObx],
+  [Il Sistema deve includere nella notifica informazioni di base per identificare l'analisi, come il nome del repository e la data di esecuzione.],
   [#link(<UC26>)[#underline[\[UC26\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve garantire che l'invio della notifica non interferisca con lo stato dell'analisi: se la notifica fallisce, il report deve comunque rimanere disponibile.], 
+  [#FRObx],
+  [Il Sistema deve garantire che l'invio della notifica non interferisca con lo stato dell'analisi: se la notifica fallisce, il report deve comunque rimanere disponibile.],
   [#link(<UC26.0.1>)[#underline[\[UC26.0.1\]]]],
 
-  [#FRObx], 
-  [In caso di errore nell'invio del messaggio (es. email non raggiungibile), il Sistema deve segnare l'anomalia nei registri interni per permettere verifiche tecniche.], 
+  [#FRObx],
+  [In caso di errore nell'invio del messaggio (es. email non raggiungibile), il Sistema deve segnare l'anomalia nei registri interni per permettere verifiche tecniche.],
   [#link(<UC26.0.1>)[#underline[\[UC26.0.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve tentare nuovamente l'invio della notifica per un numero limitato di volte in caso di problemi temporanei di rete.], 
+  [#FRObx],
+  [Il Sistema deve tentare nuovamente l'invio della notifica per un numero limitato di volte in caso di problemi temporanei di rete.],
   [#link(<UC26.0.1>)[#underline[\[UC26.0.1\]]]],
 
-// --- RICEZIONE NOTIFICHE (UC27 - UC28) ---
-  [#FRObx], 
-  [Il Sistema deve consegnare la notifica di fine analisi attraverso i canali scelti dall'utente (es. email o notifiche app).], 
+  // --- RICEZIONE NOTIFICHE (UC27 - UC28) ---
+  [#FRObx],
+  [Il Sistema deve consegnare la notifica di fine analisi attraverso i canali scelti dall'utente (es. email o notifiche app).],
   [#link(<UC27>)[#underline[\[UC27\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve mostrare i dettagli dell'analisi (nome progetto e ora) direttamente nell'avviso ricevuto dall'utente.], 
+  [#FRObx],
+  [Il Sistema deve mostrare i dettagli dell'analisi (nome progetto e ora) direttamente nell'avviso ricevuto dall'utente.],
   [#link(<UC27>)[#underline[\[UC27\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve garantire che l'utente possa consultare i risultati nella propria area personale anche se la notifica via email non viene recapitata.], 
+  [#FRObx],
+  [Il Sistema deve garantire che l'utente possa consultare i risultati nella propria area personale anche se la notifica via email non viene recapitata.],
   [#link(<UC27.0.1>)[#underline[\[UC27.0.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve inviare un avviso immediato se un'analisi si interrompe per un errore imprevisto, spiegandone brevemente il motivo.], 
+  [#FRObx],
+  [Il Sistema deve inviare un avviso immediato se un'analisi si interrompe per un errore imprevisto, spiegandone brevemente il motivo.],
   [#link(<UC28>)[#underline[\[UC28\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve contrassegnare l'analisi come "Fallita" nella lista dei progetti dell'utente se il processo non può essere completato.], 
+  [#FRObx],
+  [Il Sistema deve contrassegnare l'analisi come "Fallita" nella lista dei progetti dell'utente se il processo non può essere completato.],
   [#link(<UC28>)[#underline[\[UC28\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve rendere visibili le cause del fallimento all'interno della dashboard, indipendentemente dall'invio o dalla ricezione dell'avviso di errore.], 
+  [#FRObx],
+  [Il Sistema deve rendere visibili le cause del fallimento all'interno della dashboard, indipendentemente dall'invio o dalla ricezione dell'avviso di errore.],
   [#link(<UC28.0.1>)[#underline[\[UC28.0.1\]]]],
 
   // --- GESTIONE ACCESSO GITHUB (UC29) ---
-  [#FRObx], 
-  [Il Sistema deve trasformare il codice provvisorio fornito da GitHub in una chiave di accesso permanente per poter leggere i repository.], 
+  [#FRObx],
+  [Il Sistema deve trasformare il codice provvisorio fornito da GitHub in una chiave di accesso permanente per poter leggere i repository.],
   [#link(<UC29>)[#underline[\[UC29\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve proteggere la chiave di accesso di GitHub nascondendola tramite cifratura prima di salvarla nei propri archivi.], 
+  [#FRObx],
+  [Il Sistema deve proteggere la chiave di accesso di GitHub nascondendola tramite cifratura prima di salvarla nei propri archivi.],
   [#link(<UC29>)[#underline[\[UC29\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve collegare la chiave di GitHub in modo esclusivo al profilo dell'utente che ha autorizzato l'operazione.], 
+  [#FRObx],
+  [Il Sistema deve collegare la chiave di GitHub in modo esclusivo al profilo dell'utente che ha autorizzato l'operazione.],
   [#link(<UC29>)[#underline[\[UC29\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve annullare il collegamento e chiedere all'utente di rifare la procedura se la chiave provvisoria risulta scaduta o non valida.], 
+  [#FRObx],
+  [Il Sistema deve annullare il collegamento e chiedere all'utente di rifare la procedura se la chiave provvisoria risulta scaduta o non valida.],
   [#link(<UC29.0.1>)[#underline[\[UC29.0.1\]]]],
 
   // --- VISUALIZZAZIONE REMEDIATION CODICE (UC30) ---
-  [#FRObx], 
-  [Il Sistema deve consentire all'Utente Autorizzato la visualizzazione del dettaglio di una singola remediation relativa all'analisi del codice.], 
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato la visualizzazione del dettaglio di una singola remediation relativa all'analisi del codice.],
   [#link(<UC30>)[#underline[\[UC30\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve includere nel dettaglio della remediation del codice il titolo, la descrizione, la tipologia di criticità e il livello di severità.], 
+  [#FRObx],
+  [Il Sistema deve includere nel dettaglio della remediation del codice il titolo, la descrizione, la tipologia di criticità e il livello di severità.],
   [#link(<UC30>)[#underline[\[UC30\]]]],
 
   // --- VISUALIZZAZIONE REMEDIATION SICUREZZA (UC31) ---
-  [#FRObx], 
-  [Il Sistema deve consentire all'Utente Autorizzato la visualizzazione del dettaglio di una singola remediation relativa all'analisi della sicurezza.], 
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato la visualizzazione del dettaglio di una singola remediation relativa all'analisi della sicurezza.],
   [#link(<UC31>)[#underline[\[UC31\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve includere nel dettaglio della remediation di sicurezza il titolo, la descrizione, la tipologia di vulnerabilità e il livello di severità.], 
+  [#FRObx],
+  [Il Sistema deve includere nel dettaglio della remediation di sicurezza il titolo, la descrizione, la tipologia di vulnerabilità e il livello di severità.],
   [#link(<UC31>)[#underline[\[UC31\]]]],
 
   // --- VISUALIZZAZIONE REMEDIATION DOCUMENTAZIONE (UC32) ---
-  [#FRObx], 
-  [Il Sistema deve consentire all'Utente Autorizzato la visualizzazione del dettaglio di una singola remediation relativa all'analisi della documentazione.], 
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato la visualizzazione del dettaglio di una singola remediation relativa all'analisi della documentazione.],
   [#link(<UC32>)[#underline[\[UC32\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve includere nel dettaglio della remediation documentale il titolo, la descrizione e la tipologia di rilievo documentale.], 
+  [#FRObx],
+  [Il Sistema deve includere nel dettaglio della remediation documentale il titolo, la descrizione e la tipologia di rilievo documentale.],
   [#link(<UC32>)[#underline[\[UC32\]]]],
 
   // --- ACCETTAZIONE REMEDIATION CODICE (UC33 + ESTENSIONE) ---
-  [#FRObx], 
-  [Il Sistema deve consentire all'Utente Autorizzato di accettare una remediation relativa all'analisi del codice.], 
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato di accettare una remediation relativa all'analisi del codice.],
   [#link(<UC33>)[#underline[\[UC33\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve applicare automaticamente alla codebase le modifiche previste dalla remediation del codice accettata.], 
+  [#FRObx],
+  [Il Sistema deve applicare automaticamente alla codebase le modifiche previste dalla remediation del codice accettata.],
   [#link(<UC33>)[#underline[\[UC33\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve aggiornare lo stato della remediation del codice come "eseguita" nella dashboard a seguito dell'applicazione riuscita.], 
+  [#FRObx],
+  [Il Sistema deve aggiornare lo stato della remediation del codice come "eseguita" nella dashboard a seguito dell'applicazione riuscita.],
   [#link(<UC33>)[#underline[\[UC33\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve gestire errori durante l'applicazione della remediation del codice notificando il fallimento all'utente e mantenendo invariata la codebase.], 
+  [#FRObx],
+  [Il Sistema deve gestire errori durante l'applicazione della remediation del codice notificando il fallimento all'utente e mantenendo invariata la codebase.],
   [#link(<UC33.0.1>)[#underline[\[UC33.0.1\]]]],
 
   // --- RIFIUTO REMEDIATION CODICE (UC34) ---
-  [#FRObx], 
-  [Il Sistema deve consentire all'Utente Autorizzato di rifiutare una remediation relativa all'analisi del codice.], 
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato di rifiutare una remediation relativa all'analisi del codice.],
   [#link(<UC34>)[#underline[\[UC34\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve aggiornare lo stato della remediation del codice come "rifiutata" nella dashboard senza apportare modifiche al repository.], 
+  [#FRObx],
+  [Il Sistema deve aggiornare lo stato della remediation del codice come "rifiutata" nella dashboard senza apportare modifiche al repository.],
   [#link(<UC34>)[#underline[\[UC34\]]]],
 
   // --- ACCETTAZIONE REMEDIATION SICUREZZA (UC35 + ESTENSIONE) ---
-  [#FRObx], 
-  [Il Sistema deve consentire all'Utente Autorizzato di accettare una remediation relativa all'analisi della sicurezza.], 
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato di accettare una remediation relativa all'analisi della sicurezza.],
   [#link(<UC35>)[#underline[\[UC35\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve applicare le patch o le configurazioni di sicurezza previste dalla remediation di sicurezza accettata.], 
+  [#FRObx],
+  [Il Sistema deve applicare le patch o le configurazioni di sicurezza previste dalla remediation di sicurezza accettata.],
   [#link(<UC35>)[#underline[\[UC35\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve aggiornare lo stato della remediation di sicurezza come "eseguita" nella dashboard a seguito dell'applicazione riuscita.], 
+  [#FRObx],
+  [Il Sistema deve aggiornare lo stato della remediation di sicurezza come "eseguita" nella dashboard a seguito dell'applicazione riuscita.],
   [#link(<UC35>)[#underline[\[UC35\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve gestire errori durante l'applicazione della remediation di sicurezza notificando il fallimento all'utente.], 
+  [#FRObx],
+  [Il Sistema deve gestire errori durante l'applicazione della remediation di sicurezza notificando il fallimento all'utente.],
   [#link(<UC35.0.1>)[#underline[\[UC35.0.1\]]]],
 
   // --- RIFIUTO REMEDIATION SICUREZZA (UC36) ---
-  [#FRObx], 
-  [Il Sistema deve consentire all'Utente Autorizzato di rifiutare una remediation relativa all'analisi della sicurezza.], 
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato di rifiutare una remediation relativa all'analisi della sicurezza.],
   [#link(<UC36>)[#underline[\[UC36\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve aggiornare lo stato della remediation di sicurezza come "rifiutata" nella dashboard senza modificare il repository.], 
+  [#FRObx],
+  [Il Sistema deve aggiornare lo stato della remediation di sicurezza come "rifiutata" nella dashboard senza modificare il repository.],
   [#link(<UC36>)[#underline[\[UC36\]]]],
 
   // --- ACCETTAZIONE REMEDIATION DOCUMENTAZIONE (UC37 + ESTENSIONE) ---
-  [#FRObx], 
-  [Il Sistema deve consentire all'Utente Autorizzato di accettare una remediation relativa all'analisi della documentazione.], 
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato di accettare una remediation relativa all'analisi della documentazione.],
   [#link(<UC37>)[#underline[\[UC37\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve applicare automaticamente ai file documentali le modifiche previste dalla remediation documentale accettata.], 
+  [#FRObx],
+  [Il Sistema deve applicare automaticamente ai file documentali le modifiche previste dalla remediation documentale accettata.],
   [#link(<UC37>)[#underline[\[UC37\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve aggiornare lo stato della remediation documentale come "eseguita" nella dashboard a seguito dell'applicazione riuscita.], 
+  [#FRObx],
+  [Il Sistema deve aggiornare lo stato della remediation documentale come "eseguita" nella dashboard a seguito dell'applicazione riuscita.],
   [#link(<UC37>)[#underline[\[UC37\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve gestire errori durante l'applicazione della remediation documentale notificando il fallimento all'utente.], 
+  [#FRObx],
+  [Il Sistema deve gestire errori durante l'applicazione della remediation documentale notificando il fallimento all'utente.],
   [#link(<UC37.0.1>)[#underline[\[UC37.0.1\]]]],
 
-// --- RIFIUTO REMEDIATION DOCUMENTAZIONE (UC38) ---
-  [#FRObx], 
-  [Il Sistema deve consentire all'Utente Autorizzato la visualizzazione del dettaglio di una singola remediation relativa all'analisi della documentazione.], 
+  // --- RIFIUTO REMEDIATION DOCUMENTAZIONE (UC38) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato la visualizzazione del dettaglio di una singola remediation relativa all'analisi della documentazione.],
   [#link(<UC38>)[#underline[\[UC38\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve consentire all'Utente Autorizzato di rifiutare una remediation relativa all'analisi della documentazione.], 
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato di rifiutare una remediation relativa all'analisi della documentazione.],
   [#link(<UC38>)[#underline[\[UC38\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve aggiornare lo stato della remediation documentale come "rifiutata" nella dashboard a seguito del rifiuto confermato dall'utente.], 
+  [#FRObx],
+  [Il Sistema deve aggiornare lo stato della remediation documentale come "rifiutata" nella dashboard a seguito del rifiuto confermato dall'utente.],
   [#link(<UC38>)[#underline[\[UC38\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve garantire che il rifiuto di una remediation documentale non comporti alcuna modifica ai file sorgente o di documentazione del repository.], 
+  [#FRObx],
+  [Il Sistema deve garantire che il rifiuto di una remediation documentale non comporti alcuna modifica ai file sorgente o di documentazione del repository.],
   [#link(<UC38>)[#underline[\[UC38\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve rimuovere la remediation rifiutata dalla lista delle azioni pendenti dell'area "Documentazione" o marcarla visivamente come scartata.], 
+  [#FRObx],
+  [Il Sistema deve rimuovere la remediation rifiutata dalla lista delle azioni pendenti dell'area "Documentazione" o marcarla visivamente come scartata.],
   [#link(<UC38>)[#underline[\[UC38\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve mostrare all'Utente Autorizzato una conferma visiva dell'avvenuto rifiuto della proposta correttiva.], 
+  [#FRObx],
+  [Il Sistema deve mostrare all'Utente Autorizzato una conferma visiva dell'avvenuto rifiuto della proposta correttiva.],
   [#link(<UC38>)[#underline[\[UC38\]]]],
 
   // --- ANALISI REPOSITORY PRIVATI (UC39) ---
-  [#FRObx], 
-  [Il Sistema deve consentire all'Utente Avanzato di richiedere un'analisi per un repository GitHub privato a condizione che l'integrazione GitHub sia attiva.], 
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Avanzato di richiedere un'analisi per un repository GitHub privato a condizione che l'integrazione GitHub sia attiva.],
   [#link(<UC39>)[#underline[\[UC39\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve validare la presenza di un'integrazione GitHub valida prima di accettare la richiesta di analisi per una risorsa privata.], 
+  [#FRObx],
+  [Il Sistema deve validare la presenza di un'integrazione GitHub valida prima di accettare la richiesta di analisi per una risorsa privata.],
   [#link(<UC39>)[#underline[\[UC39\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve inibire la richiesta di analisi privata se l'utente non seleziona almeno un'area di interesse (Codice, Sicurezza, Documentazione).], 
+  [#FRObx],
+  [Il Sistema deve inibire la richiesta di analisi privata se l'utente non seleziona almeno un'area di interesse (Codice, Sicurezza, Documentazione).],
   [#link(<UC39>)[#underline[\[UC39\]]]],
 
   // --- CATALOGO REPOSITORY PRIVATI (UC40, UC41, UC42) ---
-  [#FRObx], 
-  [Il Sistema deve consentire all'Utente Avanzato di inserire l'URL di un repository privato di sua proprietà nel proprio catalogo personale.], 
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Avanzato di inserire l'URL di un repository privato di sua proprietà nel proprio catalogo personale.],
   [#link(<UC40>)[#underline[\[UC40\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve impedire l'inserimento di un URL repository già presente nel catalogo personale dell'Utente Avanzato, notificando la duplicazione.], 
+  [#FRObx],
+  [Il Sistema deve impedire l'inserimento di un URL repository già presente nel catalogo personale dell'Utente Avanzato, notificando la duplicazione.],
   [#link(<UC40.0.1>)[#underline[\[UC40.0.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve esporre all'Utente Avanzato la lista dei repository privati registrati, includendo per ciascuno il nome e l'URL della risorsa.], 
+  [#FRObx],
+  [Il Sistema deve esporre all'Utente Avanzato la lista dei repository privati registrati, includendo per ciascuno il nome e l'URL della risorsa.],
   [#link(<UC41>)[#underline[\[UC41\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve visualizzare un'informativa specifica che suggerisce l'inserimento della prima risorsa qualora il catalogo privato risulti vuoto.], 
+  [#FRObx],
+  [Il Sistema deve visualizzare un'informativa specifica che suggerisce l'inserimento della prima risorsa qualora il catalogo privato risulti vuoto.],
   [#link(<UC41.0.1>)[#underline[\[UC41.0.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve consentire la rimozione di un repository dal catalogo privato previa conferma esplicita dell'utente.], 
+  [#FRObx],
+  [Il Sistema deve consentire la rimozione di un repository dal catalogo privato previa conferma esplicita dell'utente.],
   [#link(<UC42.1>)[#underline[\[UC42.1\]]]],
 
-  [#FRObx], 
-  [In caso di annullamento della procedura di rimozione, il Sistema deve garantire l'integrità del catalogo mantenendo la risorsa selezionata.], 
+  [#FRObx],
+  [In caso di annullamento della procedura di rimozione, il Sistema deve garantire l'integrità del catalogo mantenendo la risorsa selezionata.],
   [#link(<UC42.1.1>)[#underline[\[UC42.1.1\]]]],
 
   // --- GESTIONE PERMESSI TERZI (UC43, UC44, UC45) ---
-  [#FRObx], 
-  [Il Sistema deve mostrare all'Utente Avanzato l'elenco dei profili autorizzati alla consultazione dei report per un repository privato selezionato.], 
+  [#FRObx],
+  [Il Sistema deve mostrare all'Utente Avanzato l'elenco dei profili autorizzati alla consultazione dei report per un repository privato selezionato.],
   [#link(<UC43>)[#underline[\[UC43\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve informare l'utente proprietario qualora l'accesso ai report di un repository privato sia limitato esclusivamente al suo profilo.], 
+  [#FRObx],
+  [Il Sistema deve informare l'utente proprietario qualora l'accesso ai report di un repository privato sia limitato esclusivamente al suo profilo.],
   [#link(<UC43.0.1>)[#underline[\[UC43.0.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve consentire l'aggiunta di un utente autorizzato tramite l'inserimento dello username o dell'indirizzo email del profilo destinatario.], 
+  [#FRObx],
+  [Il Sistema deve consentire l'aggiunta di un utente autorizzato tramite l'inserimento dello username o dell'indirizzo email del profilo destinatario.],
   [#link(<UC44.1>)[#underline[\[UC44.1\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve validare che l'identificativo inserito corrisponda a un profilo effettivamente registrato nella piattaforma.], 
+  [#FRObx],
+  [Il Sistema deve validare che l'identificativo inserito corrisponda a un profilo effettivamente registrato nella piattaforma.],
   [#link(<UC44.1.2>)[#underline[\[UC44.1.2\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve impedire l'autorizzazione multipla del medesimo profilo per lo stesso repository privato.], 
+  [#FRObx],
+  [Il Sistema deve impedire l'autorizzazione multipla del medesimo profilo per lo stesso repository privato.],
   [#link(<UC44.1.3>)[#underline[\[UC44.1.3\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve consentire la revoca dei permessi di consultazione per un utente precedentemente autorizzato a seguito di conferma del proprietario.], 
+  [#FRObx],
+  [Il Sistema deve consentire la revoca dei permessi di consultazione per un utente precedentemente autorizzato a seguito di conferma del proprietario.],
   [#link(<UC45.1>)[#underline[\[UC45.1\]]]],
 
   // --- GESTIONE RACCOLTE E PROFILO (UC46, UC47) ---
-  [#FRObx], 
-  [Il Sistema deve consentire la rimozione di una raccolta di report senza che questo comporti l'eliminazione dei singoli report di analisi in essa contenuti.], 
+  [#FRObx],
+  [Il Sistema deve consentire la rimozione di una raccolta di report senza che questo comporti l'eliminazione dei singoli report di analisi in essa contenuti.],
   [#link(<UC46>)[#underline[\[UC46\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve richiedere l'inserimento della password attuale come verifica di identità obbligatoria prima di avviare la cancellazione dell'account.], 
+  [#FRObx],
+  [Il Sistema deve richiedere l'inserimento della password attuale come verifica di identità obbligatoria prima di avviare la cancellazione dell'account.],
   [#link(<UC47>)[#underline[\[UC47\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve mostrare un avviso di irreversibilità prima della cancellazione definitiva del profilo, consentendo l'annullamento dell'operazione.], 
+  [#FRObx],
+  [Il Sistema deve mostrare un avviso di irreversibilità prima della cancellazione definitiva del profilo, consentendo l'annullamento dell'operazione.],
   [#link(<UC47.1>)[#underline[\[UC47.1\]]]],
 
-  [#FRObx], 
-  [A seguito della cancellazione del profilo, il Sistema deve rimuovere i dati personali e le associazioni OAuth, invalidando ogni credenziale di accesso precedente.], 
+  [#FRObx],
+  [A seguito della cancellazione del profilo, il Sistema deve rimuovere i dati personali e le associazioni OAuth, invalidando ogni credenziale di accesso precedente.],
   [#link(<UC47>)[#underline[\[UC47\]]]],
 )
 
