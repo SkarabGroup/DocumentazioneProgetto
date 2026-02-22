@@ -202,6 +202,8 @@ M:
     acronimo: MVP
     descrizione: Versione del prodotto con caratteristiche appena sufficienti per essere utilizzabile dai primi clienti e fornire feedback per lo sviluppo futuro.
 N:
+  NestJS: 
+    descrizione: Framework open-source per lo sviluppo di applicazioni back-end scalabili e manutenibili in ambiente Node.js. Scritto in TypeScript, utilizza un'architettura modulare e supporta nativamente design pattern come la Dependency Injection
   Node.js:
     descrizione: Ambiente di esecuzione JavaScript basato sul motore V8 di Chrome che permette l'esecuzione di codice JavaScript lato server per costruire applicazioni scalabili.
   Norme di Progetto:
