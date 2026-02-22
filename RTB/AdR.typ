@@ -645,6 +645,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un avviso che segnala l'incompletezza delle informazioni fornite
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente impartisce il comando di conferma senza aver inserito tutti i dati richiesti",
 )[]
 
@@ -659,6 +665,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente fornisce l'identificativo scelto per la propria registrazione
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC1.1.1>)[#underline[\[UC1.1.1\]]] // Errore formato
@@ -682,6 +691,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio di errore in corrispondenza del campo username che specifica la non conformità del formato
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente tenta di procedere con l'inserimento di un valore non conforme per l'username",
 )[]
 
@@ -699,6 +714,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio di errore che segnala l'indisponibilità del nome utente scelto
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente inserisce un username che non risulta univoco",
 )[]
 
@@ -713,6 +734,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente inserisce l'indirizzo email di contatto per il proprio profilo
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC1.2.1>)[#underline[\[UC1.2.1\]]] // Errore formato
@@ -736,6 +760,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio di errore in corrispondenza del campo email che specifica la non conformità del formato
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente tenta di procedere con l'inserimento di un valore non conforme per l'email",
 )[]
 
@@ -753,6 +783,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio di errore che segnala l'indisponibilità dell'email scelta
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente inserisce un'email già presente nel sistema",
 )[]
 
@@ -767,6 +803,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente inserisce la chiave d'accesso per il proprio account
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]
@@ -788,6 +827,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza un messaggio di errore che specifica i requisiti di sicurezza non soddisfatti
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "L'utente tenta di procedere con l'inserimento di una password non conforme ai criteri di sicurezza",
 )[]
@@ -833,6 +878,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un avviso che segnala l'incompletezza delle informazioni fornite per l'accesso
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente impartisce il comando di conferma senza aver inserito tutte le credenziali",
 )[]
 
@@ -847,6 +898,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente digita lo username nel campo dedicato
+  ],
+  inclusioni: [
+    - Nessuna 
   ],
   estensioni: [
     - #link(<UC2.1.1>)[#underline[\[UC2.1.1\]]] // Errore formato
@@ -870,6 +924,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio di errore in corrispondenza del campo username che specifica la non conformità del formato
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente tenta di procedere con un valore non conforme ai vincoli di formato",
 )[]
 
@@ -886,6 +946,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio di errore che segnala l'inesistenza dell'identificativo inserito
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente tenta di autenticarsi con un username non censito",
 )[]
 
@@ -894,12 +960,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente non Autenticato",
   pre: [
     - L'utente sta visualizzando il modulo di autenticazione #link(<UC2>)[#underline[\[UC2\]]]
+    - L'utente ha inserito l'identificativo con il quale si è registrato #link(<UC2.1>)[#underline[\[UC2.1\]]]
   ],
   post: [
     - Il campo relativo alla password risulta popolato con un valore accettato
   ],
   scenari: [
     - L'utente digita la chiave d'accesso nel campo dedicato
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC2.2.1>)[#underline[\[UC2.2.1\]]] // Errore formato
@@ -922,6 +992,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio di errore che specifica il mancato rispetto dei criteri di sistema
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente tenta di procedere con una password formalmente non valida",
 )[]
 
@@ -937,6 +1013,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio di errore che segnala l'invalidità della chiave d'accesso
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente tenta di procedere con una password errata",
 )[]
 
@@ -951,7 +1033,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   post: [
     - L'utente visualizza la conferma dell'avvenuta associazione tra i profili
-    - L'utente risulta autorizzato dal sistema all'interazione con i propri repository GitHub
   ],
   scenari: [
     - L'utente interagisce con la notifica di reindirizzamento esterno #link(<UC3.1>)[#underline[\[UC3.1\]]]
@@ -961,6 +1042,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   inclusioni: [
     - #link(<UC3.1>)[#underline[\[UC3.1\]]]
     - #link(<UC3.2>)[#underline[\[UC3.2\]]]
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "L'utente richiede l'integrazione del proprio profilo con GitHub",
 )[
@@ -979,6 +1063,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza l'avviso di trasferimento temporaneo su un dominio esterno
     - L'utente impartisce il comando di conferma per procedere con il reindirizzamento
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC3.1.1>)[#underline[\[UC3.1.1\]]] 
@@ -1001,6 +1088,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente annulla l'operazione di collegamento
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente sceglie di non procedere verso la piattaforma esterna",
 )[]
 
@@ -1016,6 +1109,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza la conferma dell'avvenuta sincronizzazione tra l'account CodeGuardian e il profilo GitHub
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC3.2.1>)[#underline[\[UC3.2.1\]]] // Errore tecnico
@@ -1040,6 +1136,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un avviso relativo all'impossibilità tecnica di completare l'operazione
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "Il sistema rileva un'anomalia nel completamento della procedura di associazione",
 )[]
 
@@ -1054,6 +1156,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza un messaggio di errore che specifica l'impossibilità di procedere poiché il profilo GitHub risulta già collegato
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "L'utente tenta di associare un account GitHub già in uso presso un altro profilo",
 )[]
@@ -1070,6 +1178,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un avviso che informa del mancato collegamento a causa del rifiuto espresso su GitHub
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente nega il consenso alla condivisione dei dati sulla piattaforma esterna",
 )[]
 
@@ -1077,7 +1191,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente Autorizzato",
   pre: [
-    - L'utente risulta autorizzato all'interazione con i propri repository #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente accede alla collezione di report di un repository #link(<UC20>)[#underline[\[UC20\]]]
     - L'utente visualizza la sezione di configurazione dell'analisi
   ],
@@ -1112,6 +1225,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio che segnala l'inutilità di una nuova analisi per coerenza dei dati
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente tenta di avviare un'analisi per un repository il cui stato coincide con l'ultimo report generato",
 )[]
 
@@ -1127,6 +1246,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio circa l'impossibilità di avviare un nuovo audit simultaneo
   ],
+    inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente tenta di avviare un'analisi mentre un'altra elaborazione è già attiva sul medesimo repository",
 )[]
 
@@ -1141,6 +1266,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente seleziona le informazioni del repository di suo interesse (test, sicurezza o documentazione)
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC4.1.1>)[#underline[\[UC4.1.1\]]] // Nessuna area selezionata
@@ -1161,6 +1289,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza un messaggio di errore che segnala la mancata scelta delle aree di interesse
+  ],
+    inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "L'utente tenta di confermare senza aver selezionato alcuna area di analisi",
 )[]
@@ -1202,6 +1336,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente viene avvisato che non è stata ancora richiesta l'analisi di alcun repository
   ],
+    inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente accede alla sezione in assenza di repository censiti a sistema",
 )[]
 
@@ -1239,6 +1379,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC6.2>)[#underline[\[UC6.2\]]]
     - #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente richiede la consultazione dei dettagli di un repository analizzato",
 )[
   #useCaseDiagram("6", "UC6 - Visualizzazione report di analisi")
@@ -1255,6 +1398,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente seleziona o deseleziona le aree dell'analisi (Codice, Sicurezza, Documentazione) da mostrare a video
+  ],
+  inclusioni: [
+    - Nessuna 
   ],
   estensioni: [
     - #link(<UC6.1.1>)[#underline[\[UC6.1.1\]]] // Nessuna sezione selezionata
@@ -1275,6 +1421,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza un messaggio che inibisce il rendering dei dati analitici fino alla selezione di un'area
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "L'utente deseleziona tutte le aree di visualizzazione del report",
 )[]
@@ -1298,6 +1450,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC6.2.2>)[#underline[\[UC6.2.2\]]]
     - #link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]
   ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente accede alla testata del report di analisi",
 )[
   #useCaseDiagram("6_2", "UC6.2 - Visualizzazione metadati del report")
@@ -1314,6 +1469,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza espone il timestamp relativo al completamento dell'analisi
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "L'utente consulta le informazioni cronologiche del report",
 )[]
@@ -1345,6 +1506,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza lo username dell'Utente Autorizzato che ha avviato il processo di audit
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente consulta la paternità della richiesta di analisi",
 )[]
 
@@ -1363,6 +1530,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   inclusioni: [
     - #link(<UC6.3.1>)[#underline[\[6.3.1\]]]
+  ],
+  estensioni: [
+    - Nessuna
   ],
   generalizzazione: [
     - #link(<UC9>)[#underline[\[UC9\]]]
@@ -1385,6 +1555,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza la lista delle remediation suggerite
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC6.3.1.1>)[#underline[\[6.3.1.1\]]] // Nessuna remediation
@@ -1423,6 +1596,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente definisce i limiti temporali (data inizio e data fine) per la generazione del confronto
   ],
+  inclusioni: [
+    - Nessuna
+  ],
   estensioni: [
     - #link(<UC7.0.1>)[#underline[\[UC7.0.1\]]] // Nessun intervallo selezionato
     - #link(<UC7.0.2>)[#underline[\[UC7.0.2\]]] // Nessun report disponibile
@@ -1446,6 +1622,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio di errore che segnala la mancanza dei parametri temporali obbligatori
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente tenta di confermare il confronto senza aver definito l'intervallo",
 )[]
 
@@ -1460,6 +1642,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente viene informato che non esistono report archiviati coerenti con le date selezionate
+  ],
+    inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "L'utente seleziona un periodo in cui non sono state effettuate analisi",
 )[]
@@ -1476,6 +1664,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio di errore che segnala come la data di inizio sia successiva a quella di fine
   ],
+    inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente inserisce limiti temporali logicamente invertiti",
 )[]
 
@@ -1491,6 +1685,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio che segnala l'impossibilità di elaborare confronti su periodi eccessivamente estesi
   ],
+    inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente seleziona un intervallo che eccede i vincoli di sistema",
 )[]
 
@@ -1505,7 +1705,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza l'andamento delle metriche tramite rappresentazioni grafiche
-    - L'utente consulta i dati comparativi in formato tabellare
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "L'utente richiede la generazione della vista comparativa",
 )[]
@@ -1529,6 +1734,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC9.2>)[#underline[\[UC9.2\]]]
     - #link(<UC9.3>)[#underline[\[UC9.3\]]]
   ],
+  estensioni: [
+    - Nessuna
+  ],
   specializzazione: [
     - #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
@@ -1549,6 +1757,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza il dettaglio tecnico dei rilievi emersi dall'analisi del codice
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente consulta i dati di analisi statica",
 )[]
 
@@ -1564,6 +1778,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza le metriche relative alla qualità e quantità dei test eseguiti sul repository
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente consulta i dati di copertura test",
 )[]
 
@@ -1578,6 +1798,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza l'elenco dei suggerimenti correttivi per i difetti del codice
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC9.3.1>)[#underline[\[UC9.3.1\]]] // Nessuna remediation codice
@@ -1598,6 +1821,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente viene informato del fatto che non sono stati individuati difetti che richiedano remediation nell'area codice
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Il processo di analisi non rileva criticità nell'area del codice sorgente",
 )[]
@@ -1621,6 +1850,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC10.2>)[#underline[\[UC10.2\]]]
     - #link(<UC10.3>)[#underline[\[UC10.3\]]]
   ],
+  estensioni: [
+    - Nessuna
+  ],
   specializzazione: [
     - #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
@@ -1641,6 +1873,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza l'elenco delle librerie obsolete o affette da criticità di sicurezza
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente consulta i dati relativi alle dipendenze del codice",
 )[]
 
@@ -1656,6 +1894,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza le potenziali minacce identificate secondo gli standard di sicurezza internazionali
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente consulta i dati di conformità OWASP",
 )[]
 
@@ -1670,6 +1914,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza l'elenco delle azioni correttive per la sicurezza
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC10.3.1>)[#underline[\[UC10.3.1\]]]
@@ -1690,6 +1937,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente viene informato del fatto che non sono stati individuati difetti che richiedano remediation nell'area sicurezza
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Il processo di analisi non rileva vulnerabilità nell'area sicurezza",
 )[]
@@ -1713,6 +1966,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC11.2>)[#underline[\[UC11.2\]]]
     - #link(<UC11.3>)[#underline[\[UC11.3\]]]
   ],
+  estensioni: [
+    - Nessuna
+  ],
   specializzazione: [
     - #link(<UC6.3>)[#underline[\[UC6.3\]]]
   ],
@@ -1733,6 +1989,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza il dettaglio degli errori formali individuati nei file di testo
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente consulta i risultati dell'analisi sintattica dei file",
 )[]
 
@@ -1748,6 +2010,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza le percentuali di copertura descrittiva degli elementi del repository
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente consulta il grado di esaustività della documentazione",
 )[]
 
@@ -1762,6 +2030,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza l'elenco dei suggerimenti di miglioramento riguardanti la documentazione
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC11.3.1>)[#underline[\[UC11.3.1\]]]
@@ -1783,6 +2054,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente viene informato del fatto che non sono stati individuati difetti che richiedano remediation nell'area documentazione
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'analisi non rileva criticità documentali nel repository",
 )[]
 
@@ -1797,6 +2074,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza la lista dei repository analizzati ordinati in base al punteggio globale calcolato
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC12.1>)[#underline[\[UC12.1\]]]
@@ -1819,6 +2099,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio che gli suggerisce l'avvio di una prima analisi
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente accede alla sezione ranking senza dati storici disponibili",
 )[]
 
@@ -1833,6 +2119,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente conferma la volontà di rimuovere l'integrazione con GitHub tramite comando dedicato
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "L'utente richiede la rimozione del collegamento con il provider esterno GitHub",
 )[]
@@ -1854,6 +2146,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC14.1>)[#underline[\[UC14.1\]]]
     - #link(<UC14.2>)[#underline[\[UC14.2\]]]
   ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente richiede la versione scaricabile del report di analisi",
 )[
   #useCaseDiagram("14", "UC14 - Esportazione report")
@@ -1870,6 +2165,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente seleziona un formato tra le opzioni disponibili
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]
@@ -1892,6 +2190,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio di avviso circa l'obbligatorietà della scelta del formato
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "Mancata selezione del formato durante la conferma di esportazione",
 )[]
 
@@ -1906,6 +2210,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente attiva il comando di finalizzazione dell'esportazione
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "L'utente conferma l'operazione di download del report",
 )[]
@@ -1931,6 +2241,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC15.3>)[#underline[\[UC15.3\]]]
     - #link(<UC15.4>)[#underline[\[UC15.4\]]]
   ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente richiede la variazione delle proprie credenziali di accesso",
 )[
   #useCaseDiagram("15", "UC15 - Modifica password")
@@ -1947,6 +2260,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente digita la password attualmente associata al profilo
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC15.1.1>)[#underline[\[UC15.1.1\]]]
@@ -1967,6 +2283,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente riceve una segnalazione di errore per il mancato inserimento della password attuale
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente tenta di confermare la modifica con il campo password attuale vuoto",
 )[]
 
@@ -1982,6 +2304,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio di errore relativo all'invalidità della password attuale fornita
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente fornisce una chiave di accesso attuale non corretta",
 )[]
 
@@ -1996,6 +2324,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente definisce il nuovo valore per l'autenticazione
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC15.2.1>)[#underline[\[UC15.2.1\]]]
@@ -2017,6 +2348,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente riceve una segnalazione di errore per il mancato inserimento della nuova password
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente tenta di confermare la modifica senza aver definito una nuova password",
 )[]
 
@@ -2031,6 +2368,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente riceve una segnalazione circa la scarsa robustezza della nuova chiave scelta
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "L'utente inserisce una nuova password formalmente non valida",
 )[]
@@ -2047,6 +2390,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente riceve un avviso che segnala l'impossibilità di utilizzare la password attuale come nuova password
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente tenta di utilizzare la medesima chiave di accesso già attiva",
 )[]
 
@@ -2062,6 +2411,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente aziona il comando di conferma definitiva per l'aggiornamento del profilo
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente conferma la volontà di procedere con il cambio password",
 )[]
 
@@ -2076,6 +2431,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente riceve conferma visiva dell'avvenuto aggiornamento delle credenziali
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Il completamento con successo della procedura di aggiornamento",
 )[]
@@ -2147,6 +2508,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'orchestratore interroga i servizi remoti per verificarne l'operatività
   ],
+  inclusioni: [
+    - Nessuna
+  ],
   estensioni: [
     - #link(<UC17.1.1>)[#underline[\[UC17.1.1\]]]
   ],
@@ -2167,6 +2531,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'orchestratore rileva l'irreperibilità dei servizi esterni necessari
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "Mancata risposta o timeout della connessione remota",
 )[]
 
@@ -2182,6 +2552,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'orchestratore ricerca il repository come risorsa pubblica
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC17.2.1>)[#underline[\[UC17.2.1\]]]
@@ -2204,6 +2577,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'orchestratore recupera le credenziali associate all'utente richiedente
     - L'orchestratore utilizza il token di sessione per convalidare l'accesso privato
   ],
+  inclusioni: [
+    - Nessuna
+  ],
   estensioni: [
     - #link(<UC17.2.1.1>)[#underline[\[UC17.2.1.1\]]]
   ],
@@ -2221,6 +2597,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'orchestratore rileva il diniego di accesso persistente per la risorsa specificata
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Fallimento di tutti i metodi di autorizzazione disponibili",
 )[]
@@ -3654,7 +4036,6 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
   align: (col, row) => (center, left, center).at(col) + horizon,
 
-// --- REGISTRAZIONE (UC1) ---
   [#FRObx], 
   [Il Sistema deve consentire all'Utente non registrato l'accesso alla sezione di creazione account.], 
   [#link(<UC1>)[#underline[\[UC1\]]]],
@@ -3664,18 +4045,28 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
   [#FRObx], 
+  [Il Sistema deve eseguire la validazione completa dei campi obbligatori (presenza, formato, conformità ai vincoli e univocità) al momento dell'invio del modulo di registrazione.], 
+  [#link(<UC1>)[#underline[\[UC1\]]]],
+
+  [#FRObx], 
   [Il Sistema deve permettere la finalizzazione della registrazione solo a seguito della validazione positiva di tutti i campi obbligatori.], 
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
   [#FRObx], 
-  [Il Sistema deve persistere le credenziali dell'utente a seguito del completamento della procedura.], 
+  [Il Sistema deve creare e memorizzare un record account che includa almeno username, email, hash della password e salt associato a seguito di registrazione completata con esito positivo.], 
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
   [#FRObx], 
-  [Il Sistema deve memorizzare le chiavi di accesso esclusivamente in forma cifrata tramite algoritmi di hashing sicuri e l'utilizzo di salt.], 
+  [Il Sistema deve memorizzare le chiavi di accesso esclusivamente in forma cifrata tramite un algoritmo di hashing sicuro e generare un salt univoco per ciascun account.], 
   [#link(<UC1>)[#underline[\[UC1\]]]],
 
-  // --- CAMPI MANCANTI (UC1.0.1) ---
+  [#FRObx], 
+  [L'utente deve visualizzare un messaggio di conferma esplicito a seguito della creazione corretta dell'account CodeGuardian.], 
+  [#link(<UC1>)[#underline[\[UC1\]]]],
+
+
+  // --- CAMPI OBBLIGATORI MANCANTI (UC1.0.1) ---
+
   [#FRObx], 
   [Il Sistema deve rilevare il tentativo di invio del modulo di registrazione in presenza di campi obbligatori vuoti.], 
   [#link(<UC1.0.1>)[#underline[\[UC1.0.1\]]]],
@@ -3684,26 +4075,75 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [Il Sistema deve inibire la registrazione e notificare l'utente indicando specificamente quali dati obbligatori non sono stati inseriti.], 
   [#link(<UC1.0.1>)[#underline[\[UC1.0.1\]]]],
 
-  // --- DETTAGLI INPUT (UC1.1 - UC1.3) ---
+
+  // --- USERNAME (UC1.1 + ESTENSIONI) ---
+
   [#FRObx], 
   [Il Sistema deve consentire l'immissione di un username alfanumerico con lunghezza compresa tra 4 e 20 caratteri.], 
-  [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
+  [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
 
   [#FRObx], 
   [Il Sistema deve verificare l'univocità dello username rispetto agli account esistenti nel database.], 
+  [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve imporre vincoli di unicità lato persistenza su username per prevenire registrazioni duplicate anche in presenza di richieste concorrenti.], 
   [#link(<UC1.1.2>)[#underline[\[UC1.1.2\]]]],
 
   [#FRObx], 
-  [Il Sistema deve consentire l'immissione di un indirizzo email conforme agli standard sintattici RFC.], 
+  [In caso di violazione del vincolo di unicità in fase di persistenza, il Sistema deve annullare la registrazione e notificare l'utente con il messaggio previsto per username già in uso.], 
+  [#link(<UC1.1.2>)[#underline[\[UC1.1.2\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora lo username inserito non rispetti i vincoli sintattici previsti.], 
+  [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
+
+
+  // --- EMAIL (UC1.2 + ESTENSIONI) ---
+
+  [#FRObx], 
+  [Il Sistema deve consentire l'immissione di un indirizzo email composto da una parte locale, il carattere "@", e un dominio contenente almeno un "." con un TLD di lunghezza maggiore o uguale a 2 caratteri.], 
+  [#link(<UC1.2>)[#underline[\[UC1.2\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve rifiutare indirizzi email contenenti spazi o privi del carattere "@".], 
   [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
 
   [#FRObx], 
-  [Il Sistema deve verificare l'univocità dell'indirizzo email all'interno della piattaforma.], 
+  [Il Sistema deve verificare l'univocità dell'indirizzo email rispetto agli account esistenti nel database.], 
+  [#link(<UC1.2>)[#underline[\[UC1.2\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve imporre vincoli di unicità lato persistenza su indirizzo email per prevenire registrazioni duplicate anche in presenza di richieste concorrenti.], 
   [#link(<UC1.2.2>)[#underline[\[UC1.2.2\]]]],
 
   [#FRObx], 
-  [Il Sistema deve consentire l'immissione di una password conforme ai criteri di complessità e sicurezza stabiliti.], 
+  [In caso di violazione del vincolo di unicità in fase di persistenza, il Sistema deve annullare la registrazione e notificare l'utente con il messaggio previsto per email già in uso.], 
+  [#link(<UC1.2.2>)[#underline[\[UC1.2.2\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora l'indirizzo email inserito non sia conforme ai requisiti sintattici previsti.], 
+  [#link(<UC1.2.1>)[#underline[\[UC1.2.1\]]]],
+
+
+  // --- PASSWORD (UC1.3 + ESTENSIONE) ---
+
+  [#FRObx], 
+  [Il Sistema deve accettare una password solo se di lunghezza pari o superiore ad 8 caratteri.], 
+  [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve accettare una password solo se include almeno una lettera maiuscola, una lettera minuscola, una cifra e un carattere speciale.], 
+  [#link(<UC1.3>)[#underline[\[UC1.3\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve rifiutare password che coincidono con lo username o che contengono lo username come sottostringa.], 
   [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio che specifichi i requisiti di sicurezza non soddisfatti qualora la password inserita non rispetti i criteri stabiliti.], 
+  [#link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+
 
   // --- AUTENTICAZIONE (UC2) ---
   [#FRObx], 
@@ -3715,7 +4155,15 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
   [#FRObx], 
+  [Il Sistema deve eseguire la validazione completa delle credenziali (presenza, formato e corrispondenza con i dati registrati) al momento dell'invio del modulo di autenticazione.], 
+  [#link(<UC2>)[#underline[\[UC2\]]]],
+
+  [#FRObx], 
   [Il Sistema deve garantire l'accesso alle funzionalità riservate esclusivamente a seguito di una corretta validazione delle credenziali.], 
+  [#link(<UC2>)[#underline[\[UC2\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve visualizzare un messaggio di conferma esplicito a seguito di autenticazione avvenuta con successo.], 
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
   [#FRObx], 
@@ -3723,19 +4171,50 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
   [#FRObx], 
+  [Il Sistema deve utilizzare lo username fornito per recuperare dalla persistenza il record account associato.], 
+  [#link(<UC2>)[#underline[\[UC2\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve verificare la password inserita confrontando l'hash calcolato con l'hash memorizzato nel record account recuperato tramite lo username, utilizzando la medesima funzione di hashing e il salt associato.], 
+  [#link(<UC2>)[#underline[\[UC2\]]]],
+
+  [#FRObx], 
   [Il Sistema deve implementare meccanismi di rate limiting o lockout temporaneo a seguito di ripetuti tentativi di autenticazione falliti.], 
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
   [#FRObx], 
-  [Il Sistema deve rilevare campi incompleti nel login e inibire l'accesso notificando l'utente tramite avviso specifico.], 
+  [Il Sistema deve notificare l'utente dell'avvenuto lockout temporaneo e impedire ulteriori tentativi di autenticazione fino alla scadenza del periodo di blocco.], 
+  [#link(<UC2>)[#underline[\[UC2\]]]],
+
+
+  [#FRObx], 
+  [Il Sistema deve rilevare campi incompleti nel login e inibire l'accesso notificando l'utente tramite avviso specifico che indichi i dati mancanti.], 
   [#link(<UC2.0.1>)[#underline[\[UC2.0.1\]]]],
+
+
+  [#FRObx], 
+  [Il Sistema deve consentire l'immissione di uno username conforme ai vincoli sintattici stabiliti per gli identificativi utente.], 
+  [#link(<UC2.1>)[#underline[\[UC2.1\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora lo username inserito non rispetti i vincoli sintattici previsti.], 
+  [#link(<UC2.1.1>)[#underline[\[UC2.1.1\]]]],
 
   [#FRObx], 
   [Il Sistema deve notificare l'utente qualora l'identificativo (username) inserito non risulti censito nel sistema.], 
   [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
 
+
   [#FRObx], 
-  [Il Sistema deve notificare l'utente qualora la password inserita non corrisponda a quella registrata.], 
+  [Il Sistema deve accettare la password nel modulo di autenticazione solo se formalmente conforme ai vincoli di sistema stabiliti.], 
+  [#link(<UC2.2>)[#underline[\[UC2.2\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora la password inserita non sia formalmente conforme ai vincoli previsti.], 
+  [#link(<UC2.2.1>)[#underline[\[UC2.2.1\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve notificare l'utente qualora la password inserita non corrisponda a quella registrata e inibire l'accesso.], 
   [#link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]],
 
   // --- INTEGRAZIONE GITHUB (UC3) ---
@@ -3744,7 +4223,16 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC3>)[#underline[\[UC3\]]]],
 
   [#FRObx], 
-  [Il Sistema deve mostrare un avviso informativo obbligatorio prima di procedere al reindirizzamento verso il dominio esterno.], 
+  [Il Sistema deve consentire l'avvio della procedura di collegamento GitHub esclusivamente in presenza di una sessione attiva.], 
+  [#link(<UC3>)[#underline[\[UC3\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve impedire l'avvio della procedura di collegamento qualora un profilo GitHub risulti già associato all'account CodeGuardian dell'utente.], 
+  [#link(<UC3>)[#underline[\[UC3\]]]],
+
+
+  [#FRObx], 
+  [Il Sistema deve mostrare un avviso informativo obbligatorio prima di procedere al reindirizzamento verso il dominio esterno GitHub.], 
   [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
 
   [#FRObx], 
@@ -3752,65 +4240,100 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
 
   [#FRObx], 
-  [Il Sistema deve consentire all'utente di annullare il reindirizzamento tornando alla sezione integrazioni.], 
+  [Il Sistema deve consentire all'utente di annullare il reindirizzamento tornando alla sezione integrazioni, annullando la procedura di collegamento.], 
   [#link(<UC3.1.1>)[#underline[\[UC3.1.1\]]]],
 
   [#FRObx], 
-  [Il Sistema deve autorizzare l'interazione con i repository dell'utente dopo il completamento con successo dell'associazione.], 
+  [Il Sistema deve reindirizzare l'utente verso GitHub esclusivamente a seguito della conferma esplicita dell'avviso di reindirizzamento.], 
+  [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
+
+
+  [#FRObx], 
+  [Il Sistema deve elaborare l'esito della procedura di collegamento al ritorno dell'utente su CodeGuardian e visualizzare un messaggio di esito.], 
+  [#link(<UC3.2>)[#underline[\[UC3.2\]]]],
+
+  [#FRObx], 
+  [In caso di esito positivo, il Sistema deve visualizzare la conferma dell'avvenuta sincronizzazione tra l'account CodeGuardian e il profilo GitHub.], 
+  [#link(<UC3.2>)[#underline[\[UC3.2\]]]],
+
+  [#FRObx], 
+  [In caso di esito positivo, il Sistema deve memorizzare l'associazione tra l'account CodeGuardian e l'identificativo del profilo GitHub collegato.], 
   [#link(<UC3>)[#underline[\[UC3\]]]],
 
   [#FRObx], 
-  [Il Sistema deve memorizzare i token di accesso ottenuti da GitHub esclusivamente in forma cifrata all'interno del database.], 
+  [In caso di esito positivo, il Sistema deve autorizzare l'interazione con i repository GitHub dell'utente tramite le API GitHub utilizzando le credenziali ottenute in fase di autorizzazione.], 
   [#link(<UC3>)[#underline[\[UC3\]]]],
 
   [#FRObx], 
-  [Il Sistema deve notificare l'utente qualora la procedura di sincronizzazione fallisca per anomalie tecniche nella ricezione dei dati.], 
+  [Il Sistema deve memorizzare i token di accesso ottenuti da GitHub esclusivamente in forma cifrata all'interno del database e associarli univocamente all'account CodeGuardian dell'utente.], 
+  [#link(<UC3>)[#underline[\[UC3\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve evitare la persistenza di token o associazioni qualora la procedura di collegamento non termini con esito positivo.], 
+  [#link(<UC3>)[#underline[\[UC3\]]]],
+
+
+  [#FRObx], 
+  [Il Sistema deve notificare l'utente qualora la procedura di sincronizzazione fallisca per anomalie tecniche nella ricezione o nell'elaborazione dei dati di GitHub.], 
   [#link(<UC3.2.1>)[#underline[\[UC3.2.1\]]]],
 
   [#FRObx], 
-  [Il Sistema deve inibire il collegamento qualora il profilo GitHub risulti già associato a un altro account CodeGuardian.], 
-  [#link(<UC3.2.2>)[#underline[\[UC3.2.2\]]]],
+  [Il Sistema deve consentire all'utente di ripetere la procedura di collegamento a seguito di fallimento tecnico della sincronizzazione.], 
+  [#link(<UC3.2.1>)[#underline[\[UC3.2.1\]]]],
+
 
   [#FRObx], 
-  [Il Sistema deve mostrare un messaggio di errore specifico qualora l'utente neghi il consenso alla condivisione dei dati su GitHub.], 
+  [Il Sistema deve inibire il collegamento qualora il profilo GitHub risulti già associato a un altro account CodeGuardian e visualizzare un messaggio di errore dedicato.], 
+  [#link(<UC3.2.2>)[#underline[\[UC3.2.2\]]]],
+
+
+  [#FRObx], 
+  [Il Sistema deve mostrare un messaggio di errore specifico qualora l'utente neghi il consenso alla condivisione dei dati su GitHub e considerare la procedura di collegamento come non completata.], 
   [#link(<UC3.2.3>)[#underline[\[UC3.2.3\]]]],
 
   // --- RICHIESTA ANALISI (UC4) ---
   [#FRObx], 
-  [Il Sistema deve consentire l'accesso alla sezione di configurazione dell'analisi e l'immissione dell'URL del repository.], 
+  [Il Sistema deve consentire all'Utente Autorizzato l'accesso alla sezione di configurazione dell'analisi del repository.], 
   [#link(<UC4>)[#underline[\[UC4\]]]],
-/*
-  [#FRObx], 
-  [Il Sistema deve validare che l'URL del repository GitHub inserito utilizzi il protocollo 'https://' e il dominio 'github.com'.], 
-  [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
 
   [#FRObx], 
-  [Il Sistema deve inibire l'invio della richiesta e notificare l'utente qualora il repository risulti inesistente o non accessibile.], 
-  [#link(<UC4.1.2>)[#underline[\[UC4.1.2\]]]],
+  [Il Sistema deve consentire l'immissione dell'URL del repository GitHub nel modulo di richiesta analisi.], 
+  [#link(<UC4>)[#underline[\[UC4\]]]],
 
   [#FRObx], 
-  [Il Sistema deve inibire la procedura di analisi e notificare l'utente qualora il campo URL non venga compilato.], 
-  [#link(<UC4.1.3>)[#underline[\[UC4.1.3\]]]],
-*/
+  [Il Sistema deve inibire l'invio della richiesta e notificare l'utente qualora il campo URL non venga compilato.], 
+  [#link(<UC4>)[#underline[\[UC4\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve validare che l'URL del repository GitHub inserito utilizzi il protocollo "https://" e punti al dominio "github.com".], 
+  [#link(<UC4>)[#underline[\[UC4\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve inibire l'invio della richiesta e notificare l'utente qualora l'URL inserito non risulti valido secondo i vincoli di sistema.], 
+  [#link(<UC4>)[#underline[\[UC4\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve inibire l'invio della richiesta e notificare l'utente qualora il repository risulti inesistente o non accessibile dal sistema.], 
+  [#link(<UC4>)[#underline[\[UC4\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve validare lato server la titolarità o autorizzazione dell'utente sul repository GitHub prima di avviare l'analisi.], 
+  [#link(<UC4>)[#underline[\[UC4\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve impedire l'avvio di una nuova analisi e informare l'utente se il report esistente risulta già aggiornato rispetto allo stato corrente del repository.], 
+  [#link(<UC4.0.1>)[#underline[\[UC4.0.1\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve impedire l'invio di una nuova richiesta se un'analisi per il medesimo repository è già in fase di elaborazione e informare l'utente con un messaggio dedicato.], 
+  [#link(<UC4.0.2>)[#underline[\[UC4.0.2\]]]],
   [#FRObx], 
   [Il Sistema deve permettere la selezione multipla delle aree di interesse tra test, sicurezza e documentazione.], 
   [#link(<UC4.1>)[#underline[\[UC4.1\]]]],
 
   [#FRObx], 
-  [Il Sistema deve inibire la richiesta di analisi qualora non venga selezionata almeno un'area di interesse.], 
+  [Il Sistema deve inibire la richiesta di analisi qualora non venga selezionata almeno un'area di interesse e notificare l'utente con un messaggio dedicato.], 
   [#link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
-
-  [#FRObx], 
-  [Il Sistema deve validare lato server la titolarità dell'utente sul repository GitHub prima di avviare l'analisi.], 
-  [#link(<UC4>)[#underline[\[UC4\]]]],
-
-  [#FRObx], 
-  [Il Sistema deve impedire l'avvio di una nuova analisi e informare l'utente se il report esistente risulta già aggiornato.], 
-  [#link(<UC4.0.1>)[#underline[\[UC4.0.1\]]]],
-
-  [#FRObx], 
-  [Il Sistema deve impedire l'invio di una nuova richiesta se un'analisi per il medesimo repository è già in fase di elaborazione.], 
-  [#link(<UC4.0.2>)[#underline[\[UC4.0.2\]]]],
 
   // --- VISUALIZZAZIONE LISTA (UC5) ---
   [#FRObx], 
@@ -3818,25 +4341,51 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC5>)[#underline[\[UC5\]]]],
 
   [#FRObx], 
+  [Il Sistema deve mostrare all'Utente Autorizzato l'elenco dei repository per i quali è stato generato almeno un report.], 
+  [#link(<UC5>)[#underline[\[UC5\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve ordinare l'elenco dei repository analizzati in ordine decrescente rispetto alla data dell'ultima analisi disponibile.], 
+  [#link(<UC5>)[#underline[\[UC5\]]]],
+
+  [#FRObx], 
   [Il Sistema deve esporre per ogni elemento della lista: nome del repository, URL di riferimento e data dell'ultima analisi.], 
   [#link(<UC5.1>)[#underline[\[UC5.1\]]]],
 
   [#FRObx], 
-  [Il Sistema deve inibire la visualizzazione della tabella e mostrare un'informativa specifica qualora non risultino repository analizzati.], 
+  [Il Sistema deve inibire la visualizzazione della lista e mostrare un'informativa specifica qualora non risultino repository analizzati.], 
   [#link(<UC5.0.1>)[#underline[\[UC5.0.1\]]]],
 
-  // --- VISUALIZZAZIONE REPORT (UC6) ---
+
   [#FRObx], 
-  [Il Sistema deve consentire la selezione di un repository dalla lista per aprirne il report di dettaglio.], 
+  [Il Sistema deve consentire la selezione di un repository dalla lista per aprire il report di dettaglio associato.], 
   [#link(<UC6>)[#underline[\[UC6\]]]],
 
   [#FRObx], 
-  [Il Sistema deve permettere di filtrare la visualizzazione delle aree analitiche (Codice, Sicurezza, Documentazione).], 
+  [Il Sistema deve consentire l'accesso al report di dettaglio esclusivamente per repository associati all'account dell'Utente Autorizzato.], 
+  [#link(<UC6>)[#underline[\[UC6\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve visualizzare il contenuto dettagliato del report di analisi relativo al repository selezionato.], 
+  [#link(<UC6>)[#underline[\[UC6\]]]],
+
+
+  [#FRObx], 
+  [Il Sistema deve permettere di selezionare o deselezionare le aree analitiche (Codice, Sicurezza, Documentazione) da mostrare a video.], 
   [#link(<UC6.1>)[#underline[\[UC6.1\]]]],
 
   [#FRObx], 
-  [Il Sistema deve inibire il rendering dei risultati e mostrare un avviso informativo se nessuna area è selezionata.], 
+  [Il Sistema deve aggiornare dinamicamente la visualizzazione del report in base alle sezioni selezionate o deselezionate dall'utente.], 
+  [#link(<UC6.1>)[#underline[\[UC6.1\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve inibire il rendering dei risultati analitici e mostrare un avviso informativo se nessuna area risulta selezionata.], 
   [#link(<UC6.1.1>)[#underline[\[UC6.1.1\]]]],
+
+
+  [#FRObx], 
+  [Il Sistema deve esporre i metadati generali del report selezionato.], 
+  [#link(<UC6.2>)[#underline[\[UC6.2\]]]],
 
   [#FRObx], 
   [Il Sistema deve esporre il timestamp (data e ora) relativo al completamento dell'attività di audit.], 
@@ -3850,44 +4399,53 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [Il Sistema deve indicare lo username dell'Utente Autorizzato che ha sottomesso la richiesta di analisi.], 
   [#link(<UC6.2.3>)[#underline[\[UC6.2.3\]]]],
 
+
   [#FRObx], 
-  [Il Sistema deve esporre metriche tecniche e criticità rilevate per le sezioni selezionate dall'utente.], 
+  [Il Sistema deve esporre metriche tecniche e criticità rilevate per ciascuna sezione selezionata dall'utente.], 
   [#link(<UC6.3>)[#underline[\[UC6.3\]]]],
 
   [#FRObx], 
-  [Il Sistema deve presentare la lista delle azioni correttive (remediation) suggerite per i difetti individuati.], 
+  [Il Sistema deve presentare la lista delle azioni correttive (remediation) suggerite per i difetti individuati nelle sezioni selezionate.], 
   [#link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]],
 
   [#FRObx], 
-  [Il Sistema deve mostrare un messaggio di esito positivo (assenza di criticità) qualora non risultino remediation necessarie.], 
+  [Il Sistema deve mostrare un messaggio informativo di esito positivo (assenza di criticità) qualora non risultino remediation necessarie per la sezione selezionata.], 
   [#link(<UC6.3.1.1>)[#underline[\[UC6.3.1.1\]]]],
 
   // --- CONFRONTO STORICO (UC7) ---
   [#FRObx], 
-  [Il Sistema deve consentire la selezione di un intervallo temporale (data inizio e data fine) per l'analisi comparativa.], 
+  [Il Sistema deve consentire la selezione di un intervallo temporale (data inizio e data fine) per la generazione dell'analisi comparativa tra report.], 
   [#link(<UC7>)[#underline[\[UC7\]]]],
 
   [#FRObx], 
-  [Il Sistema deve predisporre un comando di conferma per aggiornare la vista di confronto tra i report selezionati.], 
+  [Il Sistema deve predisporre un comando di conferma per aggiornare la vista di confronto tra il report corrente e quelli compresi nell'intervallo selezionato.], 
   [#link(<UC7>)[#underline[\[UC7\]]]],
 
   [#FRObx], 
-  [Il Sistema deve notificare l'utente tramite avviso qualora i campi relativi all'intervallo temporale non siano popolati.], 
+  [Il Sistema deve eseguire la validazione completa dell'intervallo temporale (presenza delle date, coerenza cronologica e rispetto dei limiti di ampiezza) al momento della conferma del confronto.], 
+  [#link(<UC7>)[#underline[\[UC7\]]]],
+
+  [#FRObx], 
+  [Il Sistema deve notificare l'utente tramite avviso qualora i campi relativi all'intervallo temporale non siano popolati e inibire la generazione del confronto.], 
   [#link(<UC7.0.1>)[#underline[\[UC7.0.1\]]]],
 
   [#FRObx], 
-  [Il Sistema deve mostrare un'informativa specifica qualora non risultino report archiviati all'interno del periodo selezionato.], 
-  [#link(<UC7.0.2>)[#underline[\[UC7.0.2\]]]],
-
-  [#FRObx], 
-  [Il Sistema deve validare la coerenza cronologica dell'intervallo, segnalando come errore una data di inizio successiva a quella di fine.], 
+  [Il Sistema deve validare la coerenza cronologica dell'intervallo, segnalando come errore una data di inizio successiva a quella di fine e inibendo la generazione del confronto.], 
   [#link(<UC7.0.3>)[#underline[\[UC7.0.3\]]]],
 
   [#FRObx], 
-  [Il Sistema deve inibire la richiesta se l'intervallo temporale selezionato eccede l'ampiezza massima prevista.], 
+  [Il Sistema deve inibire la richiesta se l'intervallo temporale selezionato eccede l'ampiezza massima prevista e notificare l'utente con un messaggio dedicato.], 
   [#link(<UC7.0.4>)[#underline[\[UC7.0.4\]]]],
 
-  // --- METRICHE COMPARATIVE (UC8) ---
+  [#FRObx], 
+  [Il Sistema deve mostrare un'informativa specifica qualora non risultino report archiviati all'interno del periodo selezionato e non generare la vista comparativa.], 
+  [#link(<UC7.0.2>)[#underline[\[UC7.0.2\]]]],
+
+  [#FRObx], 
+  [In caso di validazione positiva e presenza di report nel periodo selezionato, il Sistema deve visualizzare la comparazione tra il report corrente e quelli compresi nell'intervallo temporale definito.], 
+  [#link(<UC7>)[#underline[\[UC7\]]]],
+
+
   [#FRDex], 
   [Il Sistema deve generare rappresentazioni grafiche per monitorare l'andamento delle metriche tra i report inclusi nell'intervallo temporale.], 
   [#link(<UC8>)[#underline[\[UC8\]]]],
@@ -3904,13 +4462,17 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [Il Sistema deve calcolare e visualizzare, all'interno della tabella, gli indicatori di variazione (trend) rispetto all'analisi cronologicamente precedente.], 
   [#link(<UC8>)[#underline[\[UC8\]]]],
 
-  // --- ANALISI DEL CODICE (UC9) ---
+  [#FRDex], 
+  [Il Sistema deve garantire che i dati visualizzati nella vista comparativa (grafici e tabella) siano coerenti con i report effettivamente inclusi nell'intervallo temporale selezionato.], 
+  [#link(<UC8>)[#underline[\[UC8\]]]],
+
+
   [#FRObx], 
-  [Il Sistema deve consentire la visualizzazione della sezione del report dedicata alla qualità del codice sorgente.], 
+  [Il Sistema deve consentire la visualizzazione della sezione del report dedicata alla qualità del codice sorgente quando l'area "Codice" risulta selezionata nei filtri del report.], 
   [#link(<UC9>)[#underline[\[UC9\]]]],
 
   [#FRObx], 
-  [Il Sistema deve esporre i risultati dell'analisi statica, specificando bug, vulnerabilità sintattiche e code smell rilevati.], 
+  [Il Sistema deve esporre i risultati dell'analisi statica, specificando bug, vulnerabilità e code smell rilevati.], 
   [#link(<UC9.1>)[#underline[\[UC9.1\]]]],
 
   [#FRObx], 
@@ -3927,36 +4489,36 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   // --- ANALISI DELLA SICUREZZA (UC10) ---
   [#FRObx],
-  [Il Sistema deve consentire la visualizzazione della sezione del report dedicata alla sicurezza del repository.],
+  [Il Sistema deve consentire la visualizzazione della sezione del report dedicata alla sicurezza del repository quando l'area "Sicurezza" risulta selezionata nei filtri di visualizzazione.],
   [#link(<UC10>)[#underline[\[UC10\]]]],
 
   [#FRObx],
-  [Il Sistema deve esporre i risultati dell'analisi delle librerie, indicando dipendenze obsolete o affette da vulnerabilità note (CVE).],
+  [Il Sistema deve esporre i risultati dell'analisi delle librerie e dipendenze, indicando dipendenze obsolete o affette da vulnerabilità note (CVE).],
   [#link(<UC10.1>)[#underline[\[UC10.1\]]]],
 
   [#FRObx],
-  [Il Sistema deve mostrare i rilievi di conformità rispetto agli standard di sicurezza OWASP.],
+  [Il Sistema deve mostrare i rilievi di conformità rispetto agli standard OWASP basati sulla Top 10 OWASP.],
   [#link(<UC10.2>)[#underline[\[UC10.2\]]]],
 
   [#FRObx],
-  [Il Sistema deve presentare l'elenco delle azioni correttive (remediation) specifiche per le vulnerabilità rilevate.],
+  [Il Sistema deve presentare l'elenco delle azioni correttive (remediation) specifiche per le vulnerabilità rilevate nell'area sicurezza.],
   [#link(<UC10.3>)[#underline[\[UC10.3\]]]],
 
   [#FRObx],
-  [Il Sistema deve mostrare un'informativa di esito positivo qualora non risultino minacce alla sicurezza che richiedano remediation.],
+  [Il Sistema deve mostrare un'informativa di esito positivo qualora non risultino vulnerabilità o minacce alla sicurezza che richiedano remediation.],
   [#link(<UC10.3.1>)[#underline[\[UC10.3.1\]]]],
 
-// --- ANALISI DELLA DOCUMENTAZIONE (UC11) ---
+
   [#FRObx],
-  [Il Sistema deve consentire la visualizzazione della sezione del report dedicata alla qualità della documentazione.],
+  [Il Sistema deve consentire la visualizzazione della sezione del report dedicata alla qualità della documentazione quando l'area "Documentazione" risulta selezionata nei filtri di visualizzazione.],
   [#link(<UC11>)[#underline[\[UC11\]]]],
 
   [#FRObx],
-  [Il Sistema deve esporre gli errori sintattici rilevati nei file di documentazione (es. Markdown malformato o link interrotti).],
+  [Il Sistema deve esporre gli errori sintattici rilevati nei file di documentazione analizzati.],
   [#link(<UC11.1>)[#underline[\[UC11.1\]]]],
 
   [#FRObx],
-  [Il Sistema deve mostrare le metriche di completezza della documentazione in relazione alle interfacce e alle componenti del codice.],
+  [Il Sistema deve mostrare le metriche di completezza della documentazione in relazione alle componenti e alle interfacce del repository.],
   [#link(<UC11.2>)[#underline[\[UC11.2\]]]],
 
   [#FRObx],
@@ -3964,46 +4526,58 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC11.3>)[#underline[\[UC11.3\]]]],
 
   [#FRObx],
-  [Il Sistema deve mostrare un'informativa di esito positivo qualora la documentazione risulti completa e priva di errori.],
+  [Il Sistema deve mostrare un'informativa di esito positivo qualora non risultino remediation necessarie per l'area documentazione.],
   [#link(<UC11.3.1>)[#underline[\[UC11.3.1\]]]],
 
   // --- RANKING REPOSITORY (UC12) ---
   [#FRObx],
-  [Il Sistema deve generare una graduatoria dei repository analizzati associati all'Utente Autorizzato.],
+  [Il Sistema deve consentire all'Utente Autorizzato l'accesso alla sezione dedicata alla visualizzazione del ranking dei repository analizzati.],
   [#link(<UC12>)[#underline[\[UC12\]]]],
 
   [#FRObx],
-  [Il Sistema deve ordinare i repository in modo decrescente in base al punteggio di qualità globale ottenuto.],
+  [Il Sistema deve generare una graduatoria dei repository analizzati associati all'account dell'Utente Autorizzato.],
   [#link(<UC12>)[#underline[\[UC12\]]]],
 
   [#FRObx],
-  [Il Sistema deve esporre, per ogni elemento del ranking, il punteggio calcolato e le relative metriche di sintesi.],
+  [Il Sistema deve ordinare i repository in modo decrescente in base al punteggio di qualità globale calcolato.],
   [#link(<UC12>)[#underline[\[UC12\]]]],
 
   [#FRObx],
-  [Il Sistema deve inibire la visualizzazione della classifica e mostrare un avviso specifico qualora l'utente non abbia analisi concluse.],
+  [Il Sistema deve esporre, per ogni elemento del ranking, il punteggio di qualità calcolato e le metriche di sintesi utilizzate per determinarlo.],
+  [#link(<UC12>)[#underline[\[UC12\]]]],
+
+  [#FRObx],
+  [Il Sistema deve inibire la visualizzazione della classifica e mostrare un avviso specifico qualora non risultino repository analizzati associati all'account dell'utente.],
   [#link(<UC12.1>)[#underline[\[UC12.1\]]]],
 
-  // --- DISCONNESSIONE GITHUB (UC13) ---
-  [#FRObx], 
-  [Il Sistema deve consentire all'Utente Avanzato l'accesso alla sezione per la rimozione del collegamento con l'account GitHub.], 
+
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Avanzato l'accesso alla sezione per la rimozione del collegamento con l'account GitHub.],
   [#link(<UC13>)[#underline[\[UC13\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve predisporre un comando di conferma per la finalizzazione della disconnessione dell'account GitHub.], 
+  [#FRObx],
+  [Il Sistema deve predisporre un comando di conferma per la finalizzazione della disconnessione dell'account GitHub.],
   [#link(<UC13>)[#underline[\[UC13\]]]],
 
-  [#FRObx], 
-  [Il Sistema deve revocare i token di accesso e rimuovere l'associazione tra il profilo utente e l'identità GitHub a seguito della conferma.], 
+  [#FRObx],
+  [Il Sistema deve rimuovere l'associazione tra l'account CodeGuardian dell'utente e l'identità GitHub collegata a seguito della conferma di disconnessione.],
   [#link(<UC13>)[#underline[\[UC13\]]]],
 
+  [#FRObx],
+  [Il Sistema deve revocare o invalidare i token di accesso GitHub memorizzati e associati all'account utente a seguito della conferma di disconnessione.],
+  [#link(<UC13>)[#underline[\[UC13\]]]],
+
+  [#FRObx],
+  [Il Sistema deve mostrare un messaggio di conferma esplicito a seguito della disconnessione dell'account GitHub.],
+  [#link(<UC13>)[#underline[\[UC13\]]]],
+  
   // --- ESPORTAZIONE REPORT (UC14) ---
   [#FRDex], 
   [Il Sistema deve consentire l'avvio della procedura di esportazione dei dati del report di analisi tramite comando dedicato.], 
   [#link(<UC14>)[#underline[\[UC14\]]]],
 
   [#FRDex], 
-  [Il Sistema deve permettere la selezione di un formato di output valido (es. PDF, JSON) per il file di esportazione.], 
+  [Il Sistema deve permettere la selezione di un formato di output valido per il file di esportazione tra le opzioni disponibili.], 
   [#link(<UC14.1>)[#underline[\[UC14.1\]]]],
 
   [#FRDex], 
@@ -4011,20 +4585,28 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]],
 
   [#FRDex], 
-  [Il Sistema deve predisporre un comando di conferma finale per l'attivazione del processo di generazione e download del report.], 
+  [Il Sistema deve predisporre un comando di conferma finale per l'attivazione del processo di generazione del file esportato.], 
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 
   [#FRDex], 
   [Il Sistema deve eseguire il parsing dei dati analitici e produrre un documento coerente con il formato selezionato dall'utente.], 
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 
-  // --- MODIFICA PASSWORD (UC15) ---
+  [#FRDex], 
+  [Il Sistema deve rendere disponibile il file generato per il download a seguito del completamento con successo dell'esportazione.], 
+  [#link(<UC14>)[#underline[\[UC14\]]]],
+
+  [#FRDex], 
+  [Il Sistema deve includere nel file esportato almeno i metadati del report e i risultati analitici relativi alle sezioni visualizzate o selezionate dall'utente.], 
+  [#link(<UC14>)[#underline[\[UC14\]]]],
+
+
   [#FRObx], 
   [Il Sistema deve consentire all'Utente Autorizzato l'accesso alla sezione dedicata alla modifica della chiave di accesso.], 
   [#link(<UC15>)[#underline[\[UC15\]]]],
 
   [#FRObx], 
-  [Il Sistema deve permettere l'immissione della password attualmente in uso per finalità di verifica della titolarità.], 
+  [Il Sistema deve permettere l'immissione della password attualmente in uso per finalità di verifica della titolarità prima di accettare la modifica.], 
   [#link(<UC15.1>)[#underline[\[UC15.1\]]]],
 
   [#FRObx], 
@@ -4044,7 +4626,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC15.2.1>)[#underline[\[UC15.2.1\]]]],
 
   [#FRObx], 
-  [Il Sistema deve validare che la nuova password rispetti i criteri di complessità (lunghezza, caratteri speciali, numeri) stabiliti.], 
+  [Il Sistema deve validare che la nuova password rispetti i criteri di complessità stabiliti.], 
   [#link(<UC15.2.2>)[#underline[\[UC15.2.2\]]]],
 
   [#FRObx], 
@@ -4056,41 +4638,49 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC15.3>)[#underline[\[UC15.3\]]]],
 
   [#FRObx], 
+  [Il Sistema deve aggiornare la password memorizzata esclusivamente in forma cifrata tramite un algoritmo di hashing sicuro con salt univoco.], 
+  [#link(<UC15>)[#underline[\[UC15\]]]],
+
+  [#FRObx], 
   [Il Sistema deve mostrare un messaggio di feedback esplicito a seguito della corretta persistenza della nuova password.], 
   [#link(<UC15.4>)[#underline[\[UC15.4\]]]],
   
   //UC16
   [#FRObx], 
-  [L'Utente deve poter visualizzare i dettagli di una singola remediation], 
+  [Il Sistema deve consentire all'Utente Autorizzato la selezione di una remediation dalla lista e la visualizzazione dei relativi dettagli.], 
   [#link(<UC16>)[#underline[\[UC16\]]]],
 
-  //UC17
+  [#FRObx], 
+  [Il Sistema deve presentare i dettagli della remediation selezionata includendo almeno descrizione, severità o priorità, e indicazioni operative di correzione quando disponibili.], 
+  [#link(<UC16>)[#underline[\[UC16\]]]],
+
+
   [#FRObx],
-  [Il sistema deve essere in grado di prendere in carico la richiesta di verifica dell'accessibilità del repository],
+  [Il Sistema deve essere in grado di prendere in carico la richiesta di verifica dell'accessibilità di un repository GitHub per avviare un audit.],
   [#link(<UC17>)[#underline[\[UC17\]]]],
 
   [#FRObx],
-  [Il sistema deve essere in grado di stabilire la connessione con GitHub],
-  [#link(<UC17>)[#underline[\[UC17\]]])],
-
-  [#FRObx],
-  [Il sistema deve poter avviare la procedura di verifica dell'accessibilitá di un repository da parte di un account GitHub specifico],
+  [Il Sistema deve essere in grado di stabilire una comunicazione con i servizi API di GitHub per verificare l'operatività della piattaforma esterna.],
   [#link(<UC17.1>)[#underline[\[UC17.1\]]]],
 
   [#FRObx],
-  [Il sistema deve essere in grado di rilevare l'eventuale errore di comunicazione con GitHub],
+  [Il Sistema deve avviare la procedura di verifica dell'accessibilità del repository a partire dall'URL recuperato dai metadati della collezione di report.],
+  [#link(<UC17>)[#underline[\[UC17\]]]],
+
+  [#FRObx],
+  [Il Sistema deve rilevare l'eventuale errore di comunicazione con GitHub (timeout o errore di rete) e interrompere la procedura di verifica.],
   [#link(<UC17.1.1>)[#underline[\[UC17.1.1\]]]],
 
   [#FRObx],
-  [Il sistema deve essere in grado di cercare il repository],
+  [Il Sistema deve essere in grado di ricercare il repository come risorsa pubblica e determinare se risulta accessibile in lettura.],
   [#link(<UC17.2>)[#underline[\[UC17.2\]]]],
 
   [#FRObx],
-  [Il sistema deve essere in grado di trovare il repository tramite token in caso esso sia privato],
+  [Qualora il repository non risulti accessibile pubblicamente, il Sistema deve tentare la verifica di accesso utilizzando credenziali o token validi associati all'utente richiedente.],
   [#link(<UC17.2.1>)[#underline[\[UC17.2.1\]]]],
 
   [#FRObx],
-  [Il sistema deve rilevare e comunicare un errore in caso non ci sia stato modo di accedere al repository],
+  [Il Sistema deve rilevare il fallimento di tutti i metodi di autorizzazione disponibili e annullare l'audit notificando l'impossibilità di accedere al repository.],
   [#link(<UC17.2.1.1>)[#underline[\[UC17.2.1.1\]]]],
 
   [#TODO("Requisiti commentati")],[],[],
