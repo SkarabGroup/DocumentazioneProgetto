@@ -2912,7 +2912,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 === UC21: Avvio analisi <UC21>
 #useCase(
   attore: "Orchestratore",
-  attori_secondari: "Servizio AWS",
+  attori_secondari: "Servizio AWS, Strumenti di Analisi",
   pre: [
     - L'accessibilità del repository è stata verificata con successo #link(<UC17>)[#underline[\[UC17\]]]
   ],
