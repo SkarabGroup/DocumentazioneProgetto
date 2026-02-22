@@ -1318,6 +1318,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   estensioni: [
     - #link(<UC5.0.1>)[#underline[\[UC5.0.1\]]] // Lista vuota
+    - #link(<UC5.0.2>)[#underline[\[UC5.0.2\]]] // Errore di caricamento
   ],
   trigger: "L'utente seleziona la funzione di visualizzazione storico analisi",
 )[
@@ -1336,7 +1337,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente viene avvisato che non è stata ancora richiesta l'analisi di alcun repository
   ],
-    inclusioni: [
+  inclusioni: [
     - Nessuna
   ],
   estensioni: [
@@ -1356,6 +1357,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza una segnalazione di errore a seguito di un timeout o di un'anomalia di connessione con la persistenza
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Rilevamento di un'anomalia tecnica durante la fase di recupero dei dati",
 )[]
@@ -1506,6 +1513,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza l'hash o il riferimento abbreviato del commit GitHub analizzato
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente consulta il riferimento alla versione del repository",
 )[]
 
@@ -1594,6 +1607,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente viene informato che la sezione analizzata rispetta tutti gli standard e non richiede interventi
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "Il sistema non individua criticità o suggerimenti per la sezione selezionata",
 )[]
 
@@ -1622,7 +1641,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'utente richiede la modifica del periodo temporale per l'analisi comparativa",
 )[
-  #useCaseDiagram("7", "UC7 - Selezione intervallo temporale")
+  #useCaseDiagram("7", "UC7 - Selezione intervallo temporale per confronto report")
 ]
 
 ==== UC7.0.1: Visualizzazione errore intervallo non inserito <UC7.0.1>
@@ -2166,7 +2185,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'utente richiede la versione scaricabile del report di analisi",
 )[
-  #useCaseDiagram("14", "UC14 - Esportazione report")
+  #useCaseDiagram("14", "UC14 - Esportazione report di analisi")
 ]
 
 ==== UC14.1: Selezione formato di esportazione <UC14.1>
@@ -2511,7 +2530,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'Orchestratore riceve una richiesta di analisi di un repository esterno",
 )[
-  #useCaseDiagram("17", "UC17 - Verifica accessibilità repository")
+  #useCaseDiagram("17", "UC17 - Verifica accessibilità repository GitHub")
 ]
 
 ==== UC17.1: Comunicazione con GitHub <UC17.1>
@@ -3052,7 +3071,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "Conferma di avvenuto avvio degli strumenti di analisi esterni",
 )[
-  #useCaseDiagram("22", "UC22 - Salvataggio stato analisi")
+  #useCaseDiagram("22", "UC22 - Salvataggio stato analisi nel sistema di persistenza")
 ]
 
 ==== UC22.0.1: Errore durante il salvataggio dello stato dell'analisi <UC22.0.1>
@@ -3099,23 +3118,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC23.0.1>)[#underline[\[UC23.0.1\]]] // Risultati incompleti
   ],
   trigger: "Uno o più strumenti terminano l'elaborazione del codice",
-)[]
-
-==== UC23.1: Controllo stato delle attività <UC23.1>
-#useCase(
-  attore: "Orchestratore",
-  attori_secondari: "Strumenti di Analisi",
-  pre: [
-    - Le analisi sono in corso presso gli strumenti esterni
-  ],
-  post: [
-    - Si conosce quali strumenti hanno finito e quali sono ancora al lavoro
-  ],
-  scenari: [
-    - L'orchestratore verifica periodicamente se le analisi esterne sono pronte o riceve un segnale di fine lavori
-  ],
-  trigger: "Intervallo di tempo programmato per il controllo dello stato",
-)[]
+)[
+  #useCaseDiagram("23", "UC23 - Recupero dei risultati dagli strumenti di analisi")
+]
 
 ==== UC23.0.1: Gestione risultati incompleti <UC23.0.1>
 #useCase(
@@ -3132,6 +3137,22 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'orchestratore decide di proseguire con i soli dati disponibili per non bloccare l'intero processo
   ],
   trigger: "Tempo di attesa massimo superato o errore di uno strumento esterno",
+)[]
+
+==== UC23.1: Controllo stato delle attività <UC23.1>
+#useCase(
+  attore: "Orchestratore",
+  attori_secondari: "Strumenti di Analisi",
+  pre: [
+    - Le analisi sono in corso presso gli strumenti esterni
+  ],
+  post: [
+    - Si conosce quali strumenti hanno finito e quali sono ancora al lavoro
+  ],
+  scenari: [
+    - L'orchestratore verifica periodicamente se le analisi esterne sono pronte o riceve un segnale di fine lavori
+  ],
+  trigger: "Intervallo di tempo programmato per il controllo dello stato",
 )[]
 
 ==== UC23.2: Acquisizione dei dati analitici <UC23.2>
@@ -3190,7 +3211,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC25.0.1>)[#underline[\[UC25.1\]]]
+    - #link(<UC25.0.1>)[#underline[\[UC25.0.1\]]]
   ],
   trigger: "Completamento delle operazioni di sintesi e aggregazione del report finale",
 )[
@@ -3235,14 +3256,14 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   estensioni: [
-    - #link(<UC26.1>)[#underline[\[UC26.1\]]] 
+    - #link(<UC26.0.1>)[#underline[\[UC26.0.1\]]] 
   ],
   trigger: "Avvenuto aggiornamento dello stato dell'analisi a 'completed' nel sistema di persistenza",
 )[
-  #useCaseDiagram("26", "UC26 - Invio notifica completamento analisi")
+  #useCaseDiagram("26", "UC26 - Invio notifica completamento dell'analisi del repository")
 ]
 
-==== UC26.1: Errore durante l'invio della notifica <UC26.1>
+==== UC26.0.1: Errore durante l'invio della notifica <UC26.0.1>
 #useCase(
   attore: "Orchestratore",
   pre: [
@@ -3283,7 +3304,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "Disponibilità del messaggio di notifica sui canali di comunicazione dell'utente",
 )[
-  //#useCaseDiagram("27", "UC27 - Ricezione notifica")
+  #useCaseDiagram("27", "UC27 - Ricezione notifica completamento analisi")
 ]
 
 ==== UC27.0.1: Notifica completamento analisi non ricevuta <UC27.0.1>
@@ -3307,7 +3328,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Mancata consegna o ricezione del messaggio informativo a seguito dell'invio",
 )[]
 
-=== UC28: Gestione errore critico durante l'analisi <UC28>
+=== UC28: Notifica errore critico durante l'analisi <UC28>
 #useCase(
   attore: "Utente Autorizzato",
   pre: [
@@ -3328,7 +3349,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'orchestratore rileva l'impossibilità di proseguire con l'analisi e invia la notifica di errore",
 )[
-  //#useCaseDiagram("28", "UC28 - Notifica errore critico")
+  #useCaseDiagram("28", "UC28 - Notifica errore critico durante l'analisi")
 ]
 
 ==== UC28.0.1: Notifica errore critico non ricevuta <UC28.0.1>
@@ -3374,7 +3395,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "Ricezione di un codice di autorizzazione valido dal fornitore esterno",
 )[
-  #useCaseDiagram("29", "UC29 - Gestione OAuth")
+  #useCaseDiagram("29", "UC29 - Gestione del codice OAuth GitHub")
 ]
 
 ==== UC29.0.1: Fallimento della procedura di scambio OAuth <UC29.0.1>
@@ -3414,10 +3435,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza le informazioni di dettaglio della remediation proposta
   ],
   inclusioni: [
-    - #link(<UC16>)[#underline[\[UC16\]]]
+    - Nessuna
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   specializzazione: [
     - #link(<UC16>)[#underline[\[UC16\]]]
@@ -3440,10 +3461,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza le informazioni di dettaglio della remediation proposta
   ],
   inclusioni: [
-    - #link(<UC16>)[#underline[\[UC16\]]]
+    - Nessuna
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   specializzazione: [
     - #link(<UC16>)[#underline[\[UC16\]]]
@@ -3466,10 +3487,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza le informazioni di dettaglio della remediation proposta
   ],
   inclusioni: [
-    - #link(<UC16>)[#underline[\[UC16\]]]
+    - Nessuna
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   specializzazione: [
     - #link(<UC16>)[#underline[\[UC16\]]]
@@ -3517,10 +3538,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza un messaggio che descrive l'impossibilità di applicare la remediation
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   trigger: "Anomalia tecnica o diniego di scrittura da parte del provider esterno",
 )[]
@@ -3540,10 +3561,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Il sistema scarta la proposta correttiva e aggiorna lo stato nella dashboard
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   specializzazione: [
     - #link(<UC19>)[#underline[\[UC19\]]]
@@ -3566,7 +3587,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Il sistema applica le azioni correttive e aggiorna lo stato della remediation
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC35.0.1>)[#underline[\[UC35.0.1\]]]
@@ -3591,10 +3612,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza un messaggio che descrive l'impossibilità di applicare la remediation
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   trigger: "Insuccesso tecnico durante il processo di hardening automatico",
 )[]
@@ -3614,10 +3635,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Il sistema scarta la proposta di mitigazione e aggiorna lo stato nella dashboard
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   specializzazione: [
     - #link(<UC19>)[#underline[\[UC19\]]]
@@ -3640,7 +3661,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Il sistema applica le correzioni ai file documentali e aggiorna lo stato della remediation
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC37.0.1>)[#underline[\[UC37.0.1\]]]
@@ -3665,10 +3686,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza un messaggio che descrive l'impossibilità di applicare la remediation
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   trigger: "Errore di I/O o di permessi durante l'aggiornamento dei file di documentazione",
 )[]
@@ -3688,10 +3709,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Il sistema scarta la proposta di miglioramento e aggiorna lo stato nella dashboard
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   specializzazione: [
     - #link(<UC19>)[#underline[\[UC19\]]]
@@ -3718,10 +3739,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC4.1>)[#underline[\[UC4.1\]]]
   ],
   estensioni: [
-    Nessuna
-  ],
-  specializzazione: [
-    - #link(<UC4>)[#underline[\[UC4\]]]
+    - Nessuna
   ],
   trigger: "L'utente richiede una nuova analisi per un repository privato",
 )[]
@@ -3741,7 +3759,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente conferma l'aggiunta del repository al catalogo personale
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC40.0.1>)[#underline[\[UC40.0.1\]]]
@@ -3764,10 +3782,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza un messaggio che segnala la presenza del repository nel catalogo personale
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   trigger: "Convalida di un URL già associato al profilo dell'utente",
 )[]
@@ -3786,7 +3804,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza la lista dei repository privati registrati
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC41.0.1>)[#underline[\[UC41.0.1\]]]
@@ -3807,10 +3825,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza un messaggio che suggerisce l'inserimento del primo repository privato
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   trigger: "Recupero di una lista priva di elementi per il profilo avanzato",
 )[]
@@ -3832,7 +3850,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC42.1>)[#underline[\[UC42.1\]]]
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   trigger: "L'utente richiede l'eliminazione di un repository dal catalogo personale",
 )[]
@@ -3850,7 +3868,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente conferma la rimozione definitiva del repository
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC42.1.1>)[#underline[\[UC42.1.1\]]]
@@ -3871,10 +3889,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente seleziona il comando di annullamento della rimozione
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   trigger: "L'utente aziona il comando di annullamento dell'operazione di eliminazione",
 )[]
@@ -3893,7 +3911,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza la lista degli utenti autorizzati
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC43.0.1>)[#underline[\[UC43.0.1\]]]
@@ -3914,10 +3932,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza un'informativa che segnala che l'accesso è limitato al proprietario
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   trigger: "Recupero di una lista di autorizzazioni priva di profili esterni",
 )[]
@@ -3939,7 +3957,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC44.1>)[#underline[\[UC44.1\]]]
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   trigger: "L'utente richiede l'estensione dei permessi di accesso a un altro utente della piattaforma",
 )[]
@@ -3958,7 +3976,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Il sistema valida l'identificativo e mostra l'esito della verifica
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC44.1.1>)[#underline[\[UC44.1.1\]]]
@@ -3981,6 +3999,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio che indica il formato richiesto
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "Validazione formale negativa dell'identificativo inserito",
 )[]
 
@@ -3995,6 +4019,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza un messaggio che indica che il destinatario non è registrato
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Ricerca profilo senza risultati",
 )[]
@@ -4011,6 +4041,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un messaggio che segnala che l'utente è già autorizzato
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "Tentativo di aggiungere un profilo già autorizzato",
 )[]
 
@@ -4025,6 +4061,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza un messaggio che richiede l'inserimento dello username o dell'email
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Conferma con campo identificativo non popolato",
 )[]
@@ -4046,7 +4088,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC45.1>)[#underline[\[UC45.1\]]]
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   trigger: "L'utente richiede l'eliminazione di un profilo dalla lista degli autorizzati",
 )[]
@@ -4064,10 +4106,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente conferma la revoca dell'autorizzazione per il profilo selezionato
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   trigger: "Visualizzazione dell'avviso di conferma per la revoca dei permessi",
 )[]
@@ -4090,7 +4132,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC46.1>)[#underline[\[UC46.1\]]]
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   trigger: "L'utente richiede l'eliminazione di una collezione di report dal proprio profilo",
 )[]
@@ -4108,7 +4150,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente conferma la rimozione definitiva della raccolta
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC46.1.1>)[#underline[\[UC46.1.1\]]]
@@ -4129,17 +4171,17 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente seleziona il comando di annullamento della rimozione
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   trigger: "L'utente aziona il comando di annullamento dell'operazione",
 )[]
 
 === UC47: Cancellazione profilo CodeGuardian <UC47>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente ha effettuato l'accesso alla piattaforma #link(<UC2>)[#underline[\[UC2\]]]
     - L'utente visualizza la sezione di gestione avanzata del profilo
@@ -4158,14 +4200,14 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC47.1>)[#underline[\[UC47.1\]]]
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   trigger: "L'utente richiede la chiusura permanente del proprio account CodeGuardian",
 )[]
 
 ==== UC47.1: Conferma definitiva cancellazione profilo <UC47.1>
 #useCase(
-  attore: "Utente Autenticato",
+  attore: "Utente Autorizzato",
   pre: [
     - L'utente ha completato la verifica dell'identità tramite password #link(<UC47>)[#underline[\[UC47\]]]
   ],
@@ -4176,10 +4218,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente conferma la cancellazione definitiva del profilo dopo la visualizzazione dell'avviso di irreversibilità
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
-    Nessuna
+    - Nessuna
   ],
   trigger: "Visualizzazione dell'avviso di avvertimento circa l'irreversibilità della cancellazione",
 )[]
@@ -4949,15 +4991,15 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
   [#FRObx], 
   [Il Sistema deve garantire che l'invio della notifica non interferisca con lo stato dell'analisi: se la notifica fallisce, il report deve comunque rimanere disponibile.], 
-  [#link(<UC26.1>)[#underline[\[UC26.1\]]]],
+  [#link(<UC26.0.1>)[#underline[\[UC26.0.1\]]]],
 
   [#FRObx], 
   [In caso di errore nell'invio del messaggio (es. email non raggiungibile), il Sistema deve segnare l'anomalia nei registri interni per permettere verifiche tecniche.], 
-  [#link(<UC26.1>)[#underline[\[UC26.1\]]]],
+  [#link(<UC26.0.1>)[#underline[\[UC26.0.1\]]]],
 
   [#FRObx], 
   [Il Sistema deve tentare nuovamente l'invio della notifica per un numero limitato di volte in caso di problemi temporanei di rete.], 
-  [#link(<UC26.1>)[#underline[\[UC26.1\]]]],
+  [#link(<UC26.0.1>)[#underline[\[UC26.0.1\]]]],
 
 // --- RICEZIONE NOTIFICHE (UC27 - UC28) ---
   [#FRObx], 
