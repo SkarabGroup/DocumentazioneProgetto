@@ -2904,13 +2904,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'orchestratore richiede la clonazione del repository da analizzare #link(<UC21.1>)[#underline[\[UC21.1\]]]
     - L'orchestratore inoltra la richiesta di analisi allo strumento per il codice #link(<UC21.2>)[#underline[\[UC21.2\]]]
     - L'orchestratore inoltra la richiesta di analisi allo strumento per la documentazione #link(<UC21.3>)[#underline[\[UC21.3\]]]
-    - L'orchestratore inoltra la richiesta di analisi allo strumento per gli standard OWASP #link(<UC21.4>)[#underline[\[UC21.4\]]]
+    - L'orchestratore inoltra la richiesta di analisi allo strumento per la sicurezza #link(<UC21.4>)[#underline[\[UC21.4\]]]
   ],
   inclusioni: [
     - #link(<UC21.1>)[#underline[\[UC21.1\]]]
     - #link(<UC21.2>)[#underline[\[UC21.2\]]]
     - #link(<UC21.3>)[#underline[\[UC21.3\]]]
     - #link(<UC21.4>)[#underline[\[UC21.4\]]]
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Convalida positiva delle autorizzazioni di accesso al repository remoto",
 )[
@@ -2930,11 +2933,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'orchestratore trasmette le coordinate della risorsa e i parametri di autenticazione al servizio di clonazione
   ],
+  inclusioni: [
+    - Nessuna
+  ],
   estensioni: [
     - #link(<UC21.1.1>)[#underline[\[UC21.1.1\]]]
   ],
   trigger: "Avvio della fase di preparazione del codice sorgente",
-)[]
+)[
+  #useCaseDiagram("21_1", "UC21.1 - Richiesta di clonazione del repository")
+]
 
 ===== UC21.1.1: Errore durante la clonazione del repository <UC21.1.1>
 #useCase(
@@ -2948,6 +2956,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'orchestratore riceve una notifica di fallimento o timeout dal servizio di clonazione remota
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Incapacità tecnica di replicare la codebase nell'ambiente locale",
 )[]
@@ -2965,6 +2979,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'orchestratore inoltra i file della codebase allo strumento specializzato nella rilevazione di bug e code smell
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "Disponibilità locale dei sorgenti per l'audit del codice",
 )[]
 
@@ -2981,10 +3001,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'orchestratore inoltra i file di documentazione e i sorgenti al servizio incaricato dell'analisi qualitativa
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "Disponibilità locale dei sorgenti per l'audit documentale",
 )[]
 
-==== UC21.4: Richiesta di analisi degli standard OWASP <UC21.4>
+==== UC21.4: Richiesta di analisi della sicurezza <UC21.4>
 #useCase(
   attore: "Orchestratore",
   attori_secondari: "Strumenti di Analisi",
@@ -2996,6 +3022,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'orchestratore inoltra la codebase allo strumento incaricato del controllo dei rischi di sicurezza
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Disponibilità locale dei sorgenti per l'audit di sicurezza",
 )[]
@@ -3023,6 +3055,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   #useCaseDiagram("22", "UC22 - Salvataggio stato analisi")
 ]
 
+#TODO("Riguardare scenario e postcondizione, contiene azioni che riguardano l'utente")
 ==== UC22.0.1: Errore durante il salvataggio dello stato dell'analisi <UC22.0.1>
 #useCase(
   attore: "Orchestratore",
@@ -3036,6 +3069,13 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'orchestratore rileva un'anomalia nel collegamento con il servizio di persistenza
     - L'orchestratore genera una notifica di errore per informare l'utente del problema riscontrato nel tracciamento
   ],
+  /*post: [
+    - La procedura termina in un errore e viene inviata una segnalazione relativa all'impossibilità tecnica di tracciare l'avanzamento dell'audit
+  ],
+  scenari: [
+    - L'orchestratore rileva un'anomalia nel collegamento con il servizio di persistenza
+    - L'orchestratore genera una notifica di errore riguardante il problema riscontrato nel tracciamento
+  ],*/
   inclusioni: [
     - Nessuna
   ],
@@ -3071,6 +3111,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   #useCaseDiagram("23", "UC23 - Recupero dei risultati dagli strumenti di analisi")
 ]
 
+#TODO("Anche qui post e scenario menzionano l'utente")
 ==== UC23.1: Fallimento parziale nel recupero dei risultati <UC23.1>
 #useCase(
   attore: "Orchestratore",
@@ -3222,7 +3263,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente riceve il messaggio informativo di completamento
   ],
   inclusioni: [
-    Nessuna
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC27.0.1>)[#underline[\[UC27.0.1\]]]
@@ -3244,6 +3285,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente non riceve il messaggio a causa di anomalie nei servizi di terze parti o problemi di rete locale
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "Mancata consegna o ricezione del messaggio informativo a seguito dell'invio",
 )[]
 
@@ -3261,6 +3308,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente riceve il messaggio informativo di errore critico
   ],
   inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC28.0.1>)[#underline[\[UC28.0.1\]]]
@@ -3281,6 +3329,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - Il messaggio di errore non viene recapitato per problemi di rete o dei servizi di messaggistica esterni
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Mancata ricezione della comunicazione di errore",
 )[]
@@ -3323,6 +3377,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - GitHub restituisce un errore di protocollo durante la richiesta di scambio del token
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "Rilevamento di un errore di validazione del codice da parte del fornitore esterno",
 )[]
 
@@ -3331,6 +3391,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza l'elenco delle remediation nella sezione di analisi del codice #link(<UC9.3>)[#underline[\[UC9.3\]]]
+    - L'utente seleziona una singola remediation dall'elenco
   ],
   post: [
     - L'utente visualizza i dettagli tecnici e la proposta di risoluzione della remediation selezionata
@@ -3356,6 +3417,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza l'elenco delle remediation nella sezione di analisi della sicurezza #link(<UC10.3>)[#underline[\[UC10.3\]]]
+    - L'utente seleziona una singola remediation dall'elenco
   ],
   post: [
     - L'utente visualizza le specifiche della vulnerabilità e le azioni correttive di sicurezza proposte
@@ -3381,6 +3443,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente Autorizzato",
   pre: [
     - L'utente visualizza l'elenco delle remediation nella sezione di analisi della documentazione #link(<UC11.3>)[#underline[\[UC11.3\]]]
+    - L'utente seleziona una singola remediation dall'elenco
   ],
   post: [
     - L'utente visualizza i rilievi sintattici e le proposte di integrazione documentale associati alla remediation selezionata
@@ -3672,7 +3735,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "L'utente richiede l'inserimento di un repository privato personale nel sistema",
 )[
-  #useCaseDiagram("40", "UC40 - Inserimento repository privato")
+  //#useCaseDiagram("40", "UC40 - Inserimento repository privato")
 ]
 
 ==== UC40.0.1: Visualizzazione errore repository già presente <UC40.0.1>
@@ -4823,11 +4886,11 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
   [#link(<UC21.3>)[#underline[\[UC21.3\]]]],
 
   [#FRObx],
-  [Il sistema deve poter richiedere l'analisi degli standard OWASP ad uno strumento di analisi esterno],
+  [Il sistema deve poter richiedere l'analisi della sicurezza ad uno strumento di analisi esterno],
   [#link(<UC21.4>)[#underline[\[UC21.4\]]]],
 
   [#FRObx],
-  [Il sistema deve trasmettere dei file o l'intera codebase ad uno strumento di analisi degli standard OWASP esterno],
+  [Il sistema deve trasmettere dei file o l'intera codebase ad uno strumento di analisi della sicurezza esterno],
   [#link(<UC21.4>)[#underline[\[UC21.4\]]]],
 
   //UC22
