@@ -2269,7 +2269,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC15.1.2>)[#underline[\[UC15.1.2\]]]
   ],
   trigger: "L'utente seleziona il campo relativo alla password attuale",
-)[]
+)[
+  #useCaseDiagram("15_1", "UC15.1 - Inserimento password corrente")
+]
 
 ===== UC15.1.1: Visualizzazione errore password corrente mancante <UC15.1.1>
 #useCase(
@@ -2334,7 +2336,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC15.2.3>)[#underline[\[UC15.2.3\]]]
   ],
   trigger: "L'utente seleziona il campo relativo alla nuova password",
-)[]
+)[
+  #useCaseDiagram("15_2", "UC15.2 - Inserimento nuova password")
+]
 
 ===== UC15.2.1: Visualizzazione errore nuova password mancante <UC15.2.1>
 #useCase(
@@ -2461,9 +2465,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   generalizzazione: [
-    - #link(<UC29>)[#underline[\[UC29\]]]
     - #link(<UC30>)[#underline[\[UC30\]]]
     - #link(<UC31>)[#underline[\[UC31\]]]
+    - #link(<UC32>)[#underline[\[UC32\]]]
   ],
   trigger: "L'utente seleziona una remediation dalla lista proposta",
 )[#useCaseDiagram("16", "UC16 - Visualizzazione singola remediation di sezione generica")]
@@ -2584,7 +2588,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC17.2.1.1>)[#underline[\[UC17.2.1.1\]]]
   ],
   trigger: "Esito negativo della ricerca pubblica del repository",
-)[]
+)[
+  #useCaseDiagram("17_2_1", "UC17.2.1 - Accesso a repository privato")
+]
 
 ===== UC17.2.1.1: Repository inaccessibile <UC17.2.1.1>
 #useCase(
@@ -2627,9 +2633,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "L'utente accetta la proposta di remediation visualizzata",
-)[]
+  generalizzazione: [
+    - #link(<UC33>)[#underline[\[UC33\]]]
+    - #link(<UC35>)[#underline[\[UC35\]]]
+    - #link(<UC37>)[#underline[\[UC37\]]]
+  ],
+)[
+  #useCaseDiagram("18", "UC18 - Accettazione di una singola remediation")
+]
 
-=== UC19: Rifiuto singola remediation generica <UC19>
+=== UC19: Rifiuto di una singola remediation <UC19>
 #useCase(
   attore: "Utente Autorizzato",
   pre: [
@@ -2641,207 +2654,22 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente esprime il dissenso rispetto all'applicazione della remediation proposta
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente rifiuta esplicitamente la proposta di remediation",
   generalizzazione: [
-    - #link(<UC33>)[#underline[\[UC33\]]]
-    - #link(<UC35>)[#underline[\[UC35\]]]
-    - #link(<UC37>)[#underline[\[UC37\]]]
+    - #link(<UC34>)[#underline[\[UC34\]]]
+    - #link(<UC36>)[#underline[\[UC36\]]]
+    - #link(<UC38>)[#underline[\[UC38\]]]
   ],
 )[
   #useCaseDiagram("19", "UC19 - Rifiuto singola remediation generica")
 ]
 
-#TODO("Il refactoring é una remdiation, va infondo (circa 43-49) in quanto specializzazione di 18 e/o 19")
-/*
-=== UC20: Suggerimenti di refactor <UC20>
-#useCase(
-  attore: "Utente Autorizzato",
-  pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente ha selezionato il repository da analizzare #link(<UC4>)[#underline[\[UC4\]]]
-    - L'utente si trova nella sezione suggerimenti refactor del pannello report
-  ],
-  post: [
-    - L'utente visualizza i suggerimenti di refactor ordinati per priorità
-    - L'utente può applicare refactor manualmente o automaticamente
-  ],
-  scenari: [
-    - L'utente accede alla sezione suggerimenti refactor
-    - L'utente seleziona i refactor da applicare
-  ],
-  inclusioni: [
-  ],
-  estensioni: [
-    - #link(<UC20.1>)[#underline[\[UC20.1\]]] // Applicazione automatica
-  ],
-  trigger: "L'utente seleziona il comando suggerimenti refactor dal pannello code quality",
-)[#useCaseDiagram("20", "UC20 - Suggerimenti di refactor")]
-
-==== UC20.1: Conferma di applicazione dei reafctor <UC20.1>
-#useCase(
-  attore: "Utente Autorizzato",
-  pre: [
-    - L'utente sta visualizzando i suggerimenti di refactoring #link(<UC20>)[#underline[\[UC20\]]]
-  ],
-  post: [
-    - Il refactoring vengono appplicati correttamente
-  ],
-  scenari: [
-    - L'utente visualizza il diff delle modifiche applicate
-    - L'utente ha accettato definitivamente o eseguito il rollback
-    - L'utente conferma definitivamente il refactoring proposto
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente conferma l'applicazione automatica",
-)[]
-
-===== UC20.2: Conferma dei refactor proposti <UC20.1.1>
-#useCase(
-  attore: "Utente Autorizzato",
-  pre: [
-    - L'utente sta visualizzando i suggerimenti di refactoring #link(<UC20>)[#underline[\[UC20\]]]
-  ],
-  post: [
-    - Il refactoring proposto non viene applicato
-  ],
-  scenari: [
-    - L'utente rifiuta il refactoring proposto
-  ],
-  inclusioni:[
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente ha rifiutato il refactoring proposto",
-)[]
-
-=== UC20: Report programmabili e alert <UC20>
-#useCase(
-  attore: "Utente Autorizzato",
-  pre: [
-    - L'utente è autenticato al sistema CodeGuardian #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente si trova nella sezione report programmabili e alert
-  ],
-  post: [
-    - L'utente ha configurato con successo i report periodici e gli alert
-  ],
-  scenari: [
-    - L'utente configura la periodicità dei report #link(<UC20.1>)[#underline[\[UC20.1\]]]
-    - L'utente configura le soglie per gli alert critici #link(<UC20.2>)[#underline[\[UC20.2\]]]
-    - L'utente conferma la sua configurazione per i report programmabili e gli alert
-  ],
-  inclusioni: [
-    - #link(<UC20.1>)[#underline[\[UC20.1\]]]
-    - #link(<UC20.2>)[#underline[\[UC20.2\]]]
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente accede alla sezione report programmabili e alert",
-)[
-  #useCaseDiagram("20", "UC20 - Report programmabili e alert")
-]
-
-==== UC20.1: Configurazione periodicità dei report <UC20.1>
-#useCase(
-  attore: "Utente Autorizzato",
-  pre: [
-    - L'utente sta configurando i report programmabili e gli alert #link(<UC20>)[#underline[\[UC20\]]]
-    - L'utente è nella sezione per la configurazione della periodicità dei report
-  ],
-  post: [
-    - L'utente ha selezionato e confermato la periodicità dei report
-  ],
-  scenari: [
-    - L'utente configura la periodicità dei report
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC20.1.1>)[#underline[\[UC20.1.1\]]]
-  ],
-  trigger: "L'utente accede alla sezione per la configurazione della periodicità dei report",
-)[
-  #useCaseDiagram("20_1", "UC20.1 - Configurazione periodicità dei report")
-]
-
-===== UC20.1.1: Nessuna periodicità selezionata <UC20.1.1>
-#useCase(
-  attore: "Utente Autorizzato",
-  pre: [
-    - L'utente è nella sezione per la configurazione della periodicità dei report #link(<UC20.1>)[#underline[\[UC20.1\]]]
-    - L'utente non ha selezionato nessuna periodicità
-  ],
-  post: [
-    - L'utente non può procedere con la configurazione della periodicità dei report
-  ],
-  scenari: [
-    - L'utente visualizza un messaggio di errore che indica che deve essere selezionata almeno una periodicità per i report
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente non inserisce alcuna periodicità e tenta di confermare la configurazione dei report",
-)[]
-
-==== UC20.2: Configurazione soglie per gli alert critici <UC20.2>
-#useCase(
-  attore: "Utente Autorizzato",
-  pre: [
-    - L'utente sta confiugurando i report programmabili e gli alert #link(<UC20>)[#underline[\[UC20\]]]
-    - L'utente è nella sezione per la configurazione delle soglie per gli alert critici
-  ],
-  post: [
-    - L'utente ha selezionato e confermato le soglie per gli alert critici
-  ],
-  scenari: [
-    - L'utente configura le soglie per gli alert critici
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC20.2.1>)[#underline[\[UC20.2.1\]]]
-  ],
-  trigger: "L'utente accede alla sezione per la configurazione delle soglie per gli alert critici",
-)[
-  #useCaseDiagram("20_2", "UC20.2 - Configurazione soglie per gli alert critici")
-]
-
-===== UC20.2.1: Nessuna soglia selezionata <UC20.2.1>
-#useCase(
-  attore: "Utente Autorizzato",
-  pre: [
-    - L'utente sta confiugurando i report programmabili e gli alert #link(<UC20>)[#underline[\[UC20\]]]
-    - L'utente si trova nella sezione per la configurazione delle soglie per gli alert critici #link(<UC20.2>)[#underline[\[UC20.2\]]]
-    - L'utente non ha selezionato nessuna soglia
-  ],
-  post: [
-    - L'utente non può procedere con la configurazione delle soglie per gli alert critici
-  ],
-  scenari: [
-    - L'utente visualizza un messaggio di errore che indica che deve essere selezionata almeno una soglia per gli alert critici
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "L'utente non inserisce alcuna soglia e tenta di confermare la configurazione dei report",
-)[]
-*/
-#TODO("Scenario non completo, trigger mancante")
 === UC20: Creazione raccolta report di analisi <UC20>
 #useCase(
   attore: "Utente Autorizzato",
@@ -2850,6 +2678,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   post: [
     - Una nuova collezione di report risulta creata e disponibile per l'archiviazione delle analisi del repository
+    - L'utente visualizza un messaggio di successo della procedura di creazione della raccolta
   ],
   scenari: [
     - L'utente definisce il nome identificativo della raccolta #link(<UC20.1>)[#underline[\[UC20.1\]]]
@@ -2878,9 +2707,17 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   post: [
     - La procedura di creazione viene inibita fino al completamento dei dati necessari
+    - L'utente ha ricevuto il messaggio di errore riguardante il mancanto popolamento dei campi obbligatori
+    - L'utente ha nuovamente accesso all'inserimento dei campi per la procedura
   ],
   scenari: [
     - L'utente riceve una segnalazione circa l'incompletezza dei dati obbligatori forniti
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Tentativo di conferma della creazione con campi obbligatori non popolati",
 )[]
@@ -2897,11 +2734,16 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente digita il nome scelto per la nuova raccolta di report
   ],
+  inclusioni: [
+    - Nessuna
+  ],
   estensioni: [
     - #link(<UC20.1.1>)[#underline[\[UC20.1.1\]]]
   ],
   trigger: "L'utente seleziona il campo dedicato all'identificativo della raccolta",
-)[]
+)[
+  #useCaseDiagram("20_1", "UC20.1 - Inserimento nome raccolta")
+]
 
 ===== UC20.1.1: Visualizzazione errore nome non conforme <UC20.1.1>
 #useCase(
@@ -2914,6 +2756,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente riceve un avviso circa la non validità formale del nome inserito
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Inserimento di un nome che non rispetta i vincoli alfanumerici o di lunghezza",
 )[]
@@ -2930,13 +2778,18 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente digita l'URL del repository GitHub associato alla raccolta
   ],
+  inclusioni: [
+    - Nessuna
+  ],
   estensioni: [
     - #link(<UC20.2.1>)[#underline[\[UC20.2.1\]]]
     - #link(<UC20.2.2>)[#underline[\[UC20.2.2\]]]
     - #link(<UC20.2.3>)[#underline[\[UC20.2.3\]]]
   ],
   trigger: "L'utente seleziona il campo dedicato all'indirizzo del repository",
-)[]
+)[
+  #useCaseDiagram("20_2", "UC20.2 - Inserimento URL repository GitHub")
+]
 
 ===== UC20.2.1: Visualizzazione errore URL non conforme <UC20.2.1>
 #useCase(
@@ -2949,6 +2802,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente riceve un messaggio di errore relativo al mancato rispetto del protocollo o del dominio richiesto
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Inserimento di un URL formalmente non valido",
 )[]
@@ -2965,7 +2824,13 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un avviso circa l'inesistenza o l'inaccessibilità del repository specificato
   ],
-  trigger: "Mancato riscontro dai servizi remoti per l'URL indicato",
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "Mancato riscontro positivo dai servizi remoti per l'URL indicato",
 )[]
 
 ===== UC20.2.3: Visualizzazione errore URL non inserito <UC20.2.3>
@@ -2979,6 +2844,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente riceve una segnalazione circa la necessità di fornire l'indirizzo del repository
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Tentativo di procedere senza aver popolato il campo URL",
 )[]
@@ -2994,6 +2865,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente fornisce informazioni testuali aggiuntive per contestualizzare la raccolta
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "L'utente seleziona il campo destinato alla descrizione",
 )[]
