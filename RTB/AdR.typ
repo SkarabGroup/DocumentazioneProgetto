@@ -2897,6 +2897,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC21.3>)[#underline[\[UC21.3\]]]
     - #link(<UC21.4>)[#underline[\[UC21.4\]]]
   ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "Convalida positiva delle autorizzazioni di accesso al repository remoto",
 )[
   #useCaseDiagram("21", "UC21 - Avvio analisi")
@@ -2914,6 +2917,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'orchestratore trasmette le coordinate della risorsa e i parametri di autenticazione al servizio di clonazione
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC21.1.1>)[#underline[\[UC21.1.1\]]]
@@ -2934,6 +2940,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'orchestratore riceve una notifica di fallimento o timeout dal servizio di clonazione remota
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "Incapacità tecnica di replicare la codebase nell'ambiente locale",
 )[]
 
@@ -2949,6 +2961,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'orchestratore inoltra i file della codebase allo strumento specializzato nella rilevazione di bug e code smell
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Disponibilità locale dei sorgenti per l'audit del codice",
 )[]
@@ -2966,6 +2984,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'orchestratore inoltra i file di documentazione e i sorgenti all'agente incaricato dell'analisi qualitativa
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "Disponibilità locale dei sorgenti per l'audit documentale",
 )[]
 
@@ -2981,6 +3005,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'orchestratore inoltra la codebase allo strumento incaricato del controllo dei rischi di sicurezza
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Disponibilità locale dei sorgenti per l'audit di sicurezza",
 )[]
@@ -3229,6 +3259,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente non riceve il messaggio a causa di anomalie nei servizi di terze parti o problemi di rete locale
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "Mancata consegna o ricezione del messaggio informativo a seguito dell'invio",
 )[]
 
@@ -3246,6 +3282,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente riceve il messaggio informativo di errore critico
   ],
   inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC28.0.1>)[#underline[\[UC28.0.1\]]]
@@ -3266,6 +3303,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - Il messaggio di errore non viene recapitato per problemi di rete o dei servizi di messaggistica esterni
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Mancata ricezione della comunicazione di errore",
 )[]
@@ -3308,6 +3351,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - GitHub restituisce un errore di protocollo durante la richiesta di scambio del token
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "Rilevamento di un errore di validazione del codice da parte del fornitore esterno",
 )[]
 
@@ -3322,6 +3371,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente consulta le informazioni di dettaglio della remediation proposta per il codice sorgente
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   specializzazione: [
     - #link(<UC16>)[#underline[\[UC16\]]]
@@ -3341,6 +3396,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente consulta le informazioni di dettaglio della remediation proposta per la sicurezza
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   specializzazione: [
     - #link(<UC16>)[#underline[\[UC16\]]]
   ],
@@ -3358,6 +3419,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente consulta le informazioni di dettaglio della remediation proposta per la documentazione
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   specializzazione: [
     - #link(<UC16>)[#underline[\[UC16\]]]
@@ -3377,6 +3444,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente conferma l'applicazione della correzione automatica per il codice sorgente
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC33.0.1>)[#underline[\[UC33.0.1\]]] // Fallimento applicazione
@@ -3399,6 +3469,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - Rilevamento di un errore durante la fase di commit o di scrittura dei file sul repository remoto
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "Anomalia tecnica o diniego di scrittura da parte del provider esterno",
 )[]
 
@@ -3414,6 +3490,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente esprime il dissenso verso l'applicazione della remediation del codice
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   specializzazione: [
     - #link(<UC19>)[#underline[\[UC19\]]]
@@ -3433,6 +3515,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente conferma l'applicazione delle azioni correttive di sicurezza
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC35.0.1>)[#underline[\[UC35.0.1\]]]
@@ -3455,6 +3540,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - Fallimento della procedura di aggiornamento delle dipendenze o delle chiavi di sicurezza
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "Insuccesso tecnico durante il processo di hardening automatico",
 )[]
 
@@ -3470,6 +3561,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente rifiuta esplicitamente la proposta di mitigazione della vulnerabilità
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   specializzazione: [
     - #link(<UC19>)[#underline[\[UC19\]]]
@@ -3489,6 +3586,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente conferma l'applicazione delle correzioni ai file documentali
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC37.0.1>)[#underline[\[UC37.0.1\]]]
@@ -3511,6 +3611,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - Impossibilità di sovrascrivere o integrare i file Markdown/testuali sul repository
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "Errore di I/O o di permessi durante l'aggiornamento dei file di documentazione",
 )[]
 
@@ -3526,6 +3632,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente rifiuta esplicitamente la proposta di miglioramento della documentazione
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   specializzazione: [
     - #link(<UC19>)[#underline[\[UC19\]]]
@@ -3550,6 +3662,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente imposta le aree di interesse per l'audit #link(<UC4.1>)[#underline[\[UC4.1\]]]
     - L'utente conferma l'invio della richiesta
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   specializzazione: [
     - #link(<UC4>)[#underline[\[UC4\]]]
   ],
@@ -3569,6 +3687,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente fornisce l'URL del repository di sua proprietà #link(<UC20.2>)[#underline[\[UC20.2\]]]
     - L'utente conferma l'aggiunta della risorsa al catalogo personale
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC40.0.1>)[#underline[\[UC40.0.1\]]]
@@ -3590,6 +3711,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente visualizza un avviso che segnala la presenza del repository nel catalogo personale
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "Convalida di un URL già associato al profilo dell'utente",
 )[]
 
@@ -3604,6 +3731,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente consulta la lista dei propri repository privati per identificarne uno specifico
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC41.0.1>)[#underline[\[UC41.0.1\]]]
@@ -3622,6 +3752,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente riceve un suggerimento circa l'inserimento del primo repository privato personale
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Recupero di una lista priva di elementi per il profilo avanzato",
 )[]
@@ -3642,6 +3778,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   inclusioni: [
     - #link(<UC42.1>)[#underline[\[UC42.1\]]]
   ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente richiede l'eliminazione di un repository dal catalogo personale",
 )[]
 
@@ -3656,6 +3795,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente esprime la volontà definitiva di procedere o desistere dalla rimozione
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC42.1.1>)[#underline[\[UC42.1.1\]]]
@@ -3675,6 +3817,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   scenari: [
     - L'utente sceglie di non procedere con la rimozione definitiva
   ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente aziona il comando di annullamento dell'operazione di eliminazione",
 )[]
 
@@ -3689,6 +3837,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza la lista degli utenti autorizzati per il repository selezionato
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC43.0.1>)[#underline[\[UC43.0.1\]]]
@@ -3707,6 +3858,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente riceve l'informazione che l'accesso alla risorsa è limitato esclusivamente al proprietario
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Recupero di una lista di autorizzazioni priva di profili esterni",
 )[]
@@ -3727,6 +3884,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   inclusioni: [
     - #link(<UC44.1>)[#underline[\[UC44.1\]]]
   ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente richiede l'estensione dei permessi di accesso a un altro utente della piattaforma",
 )[]
 
@@ -3741,6 +3901,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente digita lo username o l'email del destinatario dell'autorizzazione
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     #TODO("Estensioni da aggiungere")
@@ -3770,6 +3933,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   inclusioni: [
     - #link(<UC45.1>)[#underline[\[UC45.1\]]]
   ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente richiede l'eliminazione di un profilo dalla lista degli autorizzati",
 )[]
 
@@ -3784,6 +3950,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente esprime la volontà definitiva di procedere o desistere dalla revoca dei permessi
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     Nessuna
@@ -3808,6 +3977,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   inclusioni: [
     - #link(<UC46.1>)[#underline[\[UC46.1\]]]
   ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente richiede l'eliminazione di una collezione di report dal proprio profilo",
 )[]
 
@@ -3822,6 +3994,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente esprime la volontà definitiva di procedere o desistere dalla rimozione della raccolta
+  ],
+  inclusioni: [
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC46.1.1>)[#underline[\[UC46.1.1\]]]
@@ -3840,6 +4015,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente sceglie di non procedere con la rimozione della collezione
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "L'utente aziona il comando di annullamento dell'operazione",
 )[]
@@ -3864,6 +4045,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC15.1>)[#underline[\[UC15.1\]]]
     - #link(<UC47.1>)[#underline[\[UC47.1\]]]
   ],
+  estensioni: [
+    - Nessuna
+  ],
   trigger: "L'utente richiede la chiusura permanente del proprio account CodeGuardian",
 )[]
 
@@ -3878,6 +4062,12 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente conferma la comprensione dell'irreversibilità dell'operazione e procede
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
   ],
   trigger: "Visualizzazione dell'avviso di avvertimento circa l'irreversibilità della cancellazione",
 )[]
