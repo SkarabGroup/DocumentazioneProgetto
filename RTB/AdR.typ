@@ -3522,7 +3522,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC18>)[#underline[\[UC18\]]]
   ],
   trigger: "L'utente impartisce il comando di accettazione della remediation per il codice",
-)[]
+)[
+  #useCaseDiagram("33", "UC33 - Accettazione singola remediation riguardante l'analisi del codice")
+]
 
 ==== UC33.0.1: Errore nell'applicazione della remediation codice <UC33.0.1>
 #useCase(
@@ -3596,7 +3598,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC18>)[#underline[\[UC18\]]]
   ],
   trigger: "L'utente impartisce il comando di accettazione della remediation di sicurezza",
-)[]
+)[
+  #useCaseDiagram("35", "UC35 - Accettazione singola remediation riguardante l'analisi della sicurezza")
+]
 
 ==== UC35.0.1: Errore nell'applicazione della remediation sicurezza <UC35.0.1>
 #useCase(
@@ -3670,7 +3674,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - #link(<UC18>)[#underline[\[UC18\]]]
   ],
   trigger: "L'utente impartisce il comando di accettazione della remediation documentale",
-)[]
+)[
+  #useCaseDiagram("37", "UC37 - Accettazione singola remediation riguardante l'analisi della documentazione")
+]
 
 ==== UC37.0.1: Errore nell'applicazione della remediation documentale <UC37.0.1>
 #useCase(
@@ -3742,7 +3748,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "L'utente richiede una nuova analisi per un repository privato",
-)[]
+)[
+  #useCaseDiagram("39", "UC39 - Richiesta analisi repository GitHub privato autorizzato")
+]
 
 === UC40: Inserimento di un proprio repository privato <UC40>
 #useCase(
