@@ -614,6 +614,10 @@ Ogni caso d'uso deve essere identificato univocamente e contenere:
 
 Per approfondimenti riguardanti gli attori coinvolti, le precondizioni, le postcondizioni e lo scenario principale degli eventi, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti Vx.y.z"). #TODO("Link al documento")
 
+====== Criteri di Verifica dei Casi d'Uso
+L'elemento *Casi d'Uso* viene considerato conforme se, per ogni caso d'uso, soddisfa le seguenti condizioni:
+
+
 ===== Requisiti di Sistema
 I requisiti rappresentano le specifiche funzionali e non funzionali che il sistema deve soddisfare. Ogni requisito è classificato per garantire la tracciabilità rispetto alle fonti e ai casi d'uso associati.
 
@@ -631,6 +635,8 @@ Per la descrizione dei requisiti viene utilizzata la nomenclatura #strong("Tipol
 Poi viene riportata la fonte o il caso d'uso di riferimento per permettere il monitoraggio durante tutto il ciclo di vita del progetto.
 
 Per approfondimenti riguardanti la descrizione dettagliata, la fonte e i casi d'uso associati a ciascun requisito, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti Vx.y.z"). #TODO("Link al documento")
+
+====== Criteri di Verifica dei Requisiti di Sistema
 
 === Glossario
 ==== Definizione del Documento
