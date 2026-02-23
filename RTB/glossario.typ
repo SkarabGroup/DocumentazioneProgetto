@@ -12,7 +12,7 @@
     "0.11.0",
     "Revisionati tutti i termini",
     members.suar
-  )
+  ),
   (
     "2026/01/12",
     "0.10.0",
