@@ -11,7 +11,7 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.11.0"
+#let versione = "v0.12.0"
 #set heading(numbering: "1.1.1")
 
 #titlePage("Norme di Progetto", versione)
@@ -19,34 +19,46 @@
 
 #let history = (
   (
+    "2026/02/23",
+    "0.12.0",
+    "Verifica per la sezione Analisi dei Requisiti per la RTB",
+    "",
+    members.suar
+  ),
+  (
     "2026/02/21",
     "0.11.0",
     "Rielaborazione Processi di Supporto e Organizzativi",
     members.alice,
+    members.suar
   ),
   (
     "2026/02/20",
     "0.10.1",
     "Fix sezione AdR in processo di fornitura",
     members.andrea,
+    members.suar
   ),
   (
     "2026/02/14",
     "0.10.0",
     "Riorganizzazione sezione Processo di Sviluppo",
     members.alice,
+    members.suar
   ),
   (
     "2026/02/13",
     "0.9.0",
     "Ampliamento sezioni Verifica e Validazione. Criteri di Verifica Processi di Supporto e Sviluppo",
     members.alice,
+    members.suar
   ),
   (
     "2026/02/11",
     "0.8.1",
     "Ultimo fix/miglioramento sezione AdR",
     members.andrea,
+    members.suar
   ),
   (
     "2026/02/11",
@@ -74,12 +86,14 @@
     "0.5.0",
     "Riscrittura delle sezioni relative all'AdR",
     members.andrea,
+    members.suar
   ),
   (
     "2026/02/03",
     "0.4.0",
     "Integrazioni a PdQ e Metriche",
     members.alice,
+    members.suar
   ),
   (
     "2026/01/15",
@@ -306,7 +320,7 @@ Ai fini delle presenti Norme di Progetto, il processo di fornitura disciplina in
 Le seguenti procedure sono vincolanti per l'esecuzione del processo di fornitura e regolano l'interazione con l'esterno.
 
 ==== Protocollo di Comunicazione
-Per garantire professionalità e tracciabilità nei confronti del Proponente (#def[Var Group]):
+Per garantire professionalità e tracciabilità nei confronti del Proponente (#link("https://skarabgroup.github.io/SkarabGroup/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]]):
 - *Canale Ufficiale:* Le comunicazioni formali (consegne, richieste di chiarimento sui requisiti) avvengono esclusivamente tramite email istituzionale o incontri verbalizzati.
 - *Verbalizzazione:* Ogni incontro con il proponente deve produrre un verbale esterno entro *48 ore* lavorative dall'evento.
 - *Approvazione Verbali:* Il verbale si considera approvato se non pervengono richieste di rettifica entro 24 ore dalla sua pubblicazione/invio.
@@ -314,7 +328,7 @@ Per garantire professionalità e tracciabilità nei confronti del Proponente (#d
 ==== Procedura di Consegna
 In occasione delle scadenze ufficiali, il Responsabile di Progetto deve seguire questa checklist obbligatoria:
 1. *Verifica di Conformità:* Accertarsi che tutti i documenti siano nello stato *Approved* e che ogni artefatto in rilascio (documentale o software) soddisfi i criteri di verifica specifici definiti per esso nel Piano di Qualifica.
-2. *Consolidamento:* Generare i PDF definitivi dai sorgenti #def[Typst] congelati.
+2. *Consolidamento:* Generare i PDF definitivi dai sorgenti #link("https://skarabgroup.github.io/SkarabGroup/DocumentazioneProgetto/Glossario/glossario.html#typst")[#def[Typst]] congelati.
 3. *Tagging:* Creare una *Release* sul repository GitHub con il tag di versione corrispondente (es. `v1.0.0-RTB`).
 4. *Notifica:* Inviare comunicazione formale di avvenuta consegna al proponente indicando il link alla release note.
 
@@ -570,73 +584,87 @@ L’elemento *Monitoraggio e Controllo del Rendimento degli Sprint* è considera
 
 La mancata rendicontazione di uno o più Sprint o l’assenza degli elementi sopra elencati comporta la non conformità dell’elemento.
 
-=== AdR - Analisi dei Requisiti
+=== Analisi dei Requisiti
+
 ==== Standard di Riferimento
 Per la redazione del documento Analisi dei Requisiti, il gruppo adotta i seguenti standard internazionali, che garantiscono un approccio rigoroso e sistematico alla specifica delle necessità software:
 - *IEEE 830-1998 (Recommended Practice for Software Requirements Specifications)*: standard di riferimento per la stesura di specifiche dei requisiti software, che definisce una struttura chiara e completa per la documentazione dei requisiti funzionali e non funzionali.
-
 - *ISO/IEC/IEEE 29148:2018 (Systems and Software Engineering — Life Cycle Processes — Requirements Engineering)*: standard che fornisce linee guida per l’ingegneria dei requisiti, inclusi processi di analisi, specifica e gestione dei requisiti.
-
 - *UML 2.5*: standard per la modellazione dei casi d’uso, che consente di rappresentare graficamente le interazioni tra attori e sistema, facilitando la comprensione e la tracciabilità dei requisiti funzionali.
 
 ==== Definizione del Documento
-L’#def("Analisi dei Requisiti") costituisce il riferimento tecnico vincolante per la formalizzazione rigorosa delle necessità e dei vincoli relativi al sistema *Code Guardian*. Il documento ha lo scopo di tradurre le esigenze espresse dal proponente in un insieme di specifiche formali, non ambigue e verificabili, che guidano l’intero processo di ingegnerizzazione del software. \
-Il documento deve definire, in modo tracciabile e verificabile:
+L’#link("https://skarabgroup.github.io/SkarabGroup/DocumentazioneProgetto/Glossario/glossario.html#analisi-dei-requisiti")[#def("Analisi dei Requisiti")] costituisce il riferimento tecnico vincolante per la formalizzazione rigorosa delle necessità e dei vincoli relativi al sistema *Code Guardian*. Il documento ha lo scopo di tradurre le esigenze espresse dal proponente in un insieme di specifiche formali, non ambigue e verificabili, che guidano l’intero processo di ingegnerizzazione del software.
 
-- *Perimetro del Sistema*: la delimitazione univoca dei confini d'azione del software, specificando le interazioni tra il sistema e gli attori esterni per eliminare ogni ambiguità sulle responsabilità operative;
-- *Classificazione e Prioritizzazione delle Specifiche*: la scomposizione delle necessità del Capitolato in requisiti funzionali, di qualità (non funzionali) e di vincolo, necessari per l'analisi automatizzata di test, sicurezza e documentazione dei repository;
-- *Modellazione delle Interazioni (Casi d'Uso)*: la descrizione strutturata delle interazioni tra attori e sistema, supportata da diagrammi conformi allo standard UML 2.5, finalizzata alla validazione funzionale dei requisiti e al supporto delle attività di verifica;
-- *Tracciabilità dei Requisiti*: lo stabilimento di legami espliciti tra i requisiti e i casi d'uso, garantendo che ogni scelta implementativa sia giustificata e monitorabile;
-//- *Criteri di Accettazione*: la fornitura della base informativa necessaria per le attività di Verifica e Validazione, definendo i requisiti minimi per l'accettazione del prodotto finale da parte del Proponente.
+Il documento definisce, in modo tracciabile e verificabile:
+- *Perimetro del Sistema*: la delimitazione univoca dei confini d'azione del software, specificando le interazioni tra il sistema e gli attori esterni;
+- *Classificazione e Prioritizzazione delle Specifiche*: la scomposizione delle necessità del Capitolato in requisiti funzionali, di qualità e di vincolo;
+- *Modellazione delle Interazioni (Casi d'Uso)*: la descrizione strutturata delle interazioni tra attori e sistema, supportata da diagrammi conformi allo standard UML 2.5;
+- *Tracciabilità dei Requisiti*: lo stabilimento di legami espliciti tra i requisiti e i casi d'uso, garantendo che ogni scelta implementativa sia giustificata.
 
-L’Analisi dei Requisiti rappresenta la colonna portante della *Requirements and Technology Baseline* (*RTB*). Essa funge da ponte logico tra gli obiettivi strategici del Capitolato d'Appalto e l'implementazione tecnica, assicurando la tracciabilità di ogni scelta progettuale rispetto alle necessità approvate e documentate.
+L’Analisi dei Requisiti rappresenta la colonna portante della *Requirements and Technology Baseline* (*RTB*). Essa funge da ponte logico tra gli obiettivi strategici del Capitolato d'Appalto e l'implementazione tecnica.
 
 ==== Elementi Costituenti del Documento
-Il documento Analisi dei Requisiti deve essere organizzato in modo chiaro e strutturato, includendo obbligatoriamente i seguenti elementi:
-- *Casi d'Uso*: descrive le interazioni tra gli attori e il sistema, fornendo una visione chiara delle funzionalità richieste e aiutando a identificare i requisiti funzionali del sistema.
-- *Requisiti di Sistema*: descrive le specifiche funzionali, di qualità e di vincolo, che il sistema deve soddisfare per soddisfare le necessità del Capitolato.
+Il documento è organizzato in modo chiaro e strutturato, includendo obbligatoriamente i seguenti elementi:
+- *Casi d'Uso*: descrivono le interazioni tra gli attori e il sistema attraverso scenari d'uso specifici, costituendo la base per l'identificazione dei requisiti funzionali.
+- *Requisiti Funzionali*: definiscono i servizi o le funzioni che il sistema deve eseguire in risposta a determinati input.
+- *Requisiti di Qualità*: specificano le caratteristiche non funzionali (prestazioni, usabilità, sicurezza) che il sistema deve garantire.
+- *Requisiti di Vincolo*: descrivono limitazioni tecnologiche, normative o implementative che condizionano il progetto.
 
 ===== Casi d'Uso
-I #def("casi d'uso") rappresentano scenari specifici che descrivono come gli attori interagiscono con il sistema per raggiungere determinati obiettivi. Essi forniscono una visione chiara delle funzionalità richieste e aiutano a identificare i requisiti funzionali del sistema.
-Per la descrizione dei casi d'uso viene utilizzata la nomenclatura #strong("UCPrincipale.Secondario") dove:
-- *UC*: acronimo di Use Case (caso d'uso).
-- *Principale*: numero progressivo del caso d'uso principale, identifica un macro-scenario o una funzionalità atomica.
-- *Secondario*: numero progressivo del caso d'uso secondario, identifica varianti o estensioni del caso d'uso principale (sotto-casi).
-L'identificatore *Principale* è univoco a livello globale; non è quindi ammessa l'esistenza di due casi d'uso distinti con il medesimo valore principale. Il valore *Secondario* può invece essere ripetuto all'interno del documento, a patto che ciò non avvenga mai sotto lo stesso identificatore principale. Nel caso in cui un scenario secondario presenti a sua volta delle inclusioni o estensioni, la stringa *Principale.Secondario* assumerà il ruolo di radice per la nuova gerarchia, seguendo le medesime regole di progressione e unicità sopra descritte.
+I #link("https://skarabgroup.github.io/SkarabGroup/DocumentazioneProgetto/Glossario/glossario.html#casi-uso")[#def("casi d'uso")] rappresentano scenari specifici di interazione. Per la loro descrizione viene utilizzata la nomenclatura #strong("UCx.y.z") dove:
+- *x*: identificatore del caso d'uso principale (macro-scenario);
+- *y*: numero relativo alle inclusioni (0 indica il caso d'uso principale);
+- *z*: numero relativo alle estensioni.
 
-Ogni caso d'uso deve essere identificato univocamente e contenere:
-- *Attori*: identificazione degli utenti o sistemi esterni (lato Front-end e Back-end);
-- *Precondizioni* e Postcondizioni: stato del sistema prima e dopo l'esecuzione;
+L'identificatore *x* è univoco a livello globale. Qualora un'inclusione o un'estensione presentino ulteriori ramificazioni, la stringa *UCx.y.z* assumerà il ruolo di radice per la nuova gerarchia.
+
+Ogni caso d'uso include:
+- *Attori*: identificazione degli utenti o sistemi esterni coinvolti;
+- *Precondizioni e Postcondizioni*: stato del sistema prima e dopo l'esecuzione;
 - *Scenario Principale*: sequenza ordinata di azioni;
-- *Estensioni e Inclusioni*: per gestire flussi alternativi o comuni;
-- *Trigger*: evento che innesca il caso d'uso.
-- *Diagrammi UML*: rappresentazione grafica delle interazioni.
-
-Per approfondimenti riguardanti gli attori coinvolti, le precondizioni, le postcondizioni e lo scenario principale degli eventi, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti Vx.y.z"). #TODO("Link al documento")
+- *Trigger*: evento che innesca il caso d'uso;
+- *Inclusioni*: comportamenti obbligatori comuni a più casi d'uso, necessari per il completamento dello scenario principale.
+- *Estensioni*: comportamenti opzionali o condizionali che integrano lo scenario principale in circostanze specifiche.
+- *Generalizzazioni*: relazioni gerarchiche dove un caso d'uso (o attore) figlio eredita e specializza i comportamenti di un padre.
+- *Diagrammi UML*: rappresentazione grafica conforme allo standard UML 2.5.
 
 ====== Criteri di Verifica dei Casi d'Uso
-L'elemento *Casi d'Uso* viene considerato conforme se, per ogni caso d'uso, soddisfa le seguenti condizioni:
-
+L'elemento *Casi d'Uso* è considerato conforme se risultano soddisfatte tutte le seguenti condizioni:
+- [ ] *Univocità*: ogni identificatore UCx.y.z è unico e segue la gerarchia definita.
+- [ ] *Tracciabilità*: ogni caso d'uso è riconducibile a una necessità del Capitolato o a un verbale.
+- [ ] *Correttezza degli Attori*: ogni attore citato è stato precedentemente censito e definito.
+- [ ] *Completezza dei Flussi*: lo scenario copre tutti i percorsi logici necessari al raggiungimento dell'obiettivo.
+- [ ] *Coerenza UML*: esiste corrispondenza 1:1 tra descrizione testuale e diagramma grafico, ad eccezione dei casi d'uso privi di inclusioni o estensioni.
+- [ ] *Assenza di Implementazione*: la descrizione si limita al "cosa fa" il sistema, non al "come".
 
 ===== Requisiti di Sistema
-I requisiti rappresentano le specifiche funzionali e non funzionali che il sistema deve soddisfare. Ogni requisito è classificato per garantire la tracciabilità rispetto alle fonti e ai casi d'uso associati.
-
-Per la descrizione dei requisiti viene utilizzata la nomenclatura #strong("TipologiaRPrioritàNumero") dove:
-- *Tipologia*: indica il tipo di requisito. I valori possibili sono:
-  - *F*: Requisito #strong("F")unzionale.
-  - *Q*: Requisito di #strong("Q")ualità.
-  - *V*: Requisito di #strong("V")incolo.
+I requisiti rappresentano le specifiche che il sistema deve soddisfare. Ogni requisito è classificato per garantire la tracciabilità rispetto alle fonti.
+Viene utilizzata la nomenclatura #strong("TipologiaRPrioritàNumero") dove:
+- *Tipologia*: *F* (Funzionale), *Q* (Qualità), *V* (Vincolo).
 - *R*: acronimo di Requisito.
-- *Priorità*: indica l'importanza del requisito. I valori possibili sono:
-  - *Ob*: Requisito #strong("Ob")bligatorio.
-  - *De*: Requisito #strong("De")siderabile.
-  - *Op*: Requisito #strong("Op")zionale.
-- *Numero*: numero progressivo univoco per ogni requisito all'interno della sua tipologia.
-Poi viene riportata la fonte o il caso d'uso di riferimento per permettere il monitoraggio durante tutto il ciclo di vita del progetto.
+- *Priorità*: *Ob* (Obbligatorio), *De* (Desiderabile), *Op* (Opzionale).
+- *Numero*: numero progressivo univoco per tipologia.
 
-Per approfondimenti riguardanti la descrizione dettagliata, la fonte e i casi d'uso associati a ciascun requisito, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti Vx.y.z"). #TODO("Link al documento")
+====== Criteri di Verifica dei Requisiti Funzionali
+Un requisito funzionale è considerato conforme se risultano soddisfatte le seguenti condizioni:
+- [ ] *Atomicità*: esprime una singola necessità non ulteriormente scomponibile.
+- [ ] *Non Ambiguità*: il linguaggio è tecnico, oggettivo e privo di termini soggettivi.
+- [ ] *Testabilità*: è possibile definire un test di accettazione con esito binario (Passato/Fallito).
+- [ ] *Tracciabilità*: indica chiaramente la propria fonte (Capitolato o UC di riferimento).
 
-====== Criteri di Verifica dei Requisiti di Sistema
+====== Criteri di Verifica dei Requisiti di Qualità
+Un requisito di qualità è considerato conforme se risultano soddisfatte le seguenti condizioni:
+- [ ] *Misurabilità*: il requisito è espresso attraverso metriche quantitative o soglie numeriche precise.
+- [ ] *Pertinenza*: la caratteristica descritta è rilevante per gli standard definiti nel Piano di Qualifica.
+- [ ] *Verificabilità*: è stata individuata una metodologia o strumento atto a misurare il raggiungimento della soglia.
+
+====== Criteri di Verifica dei Requisiti di Vincolo
+Un requisito di vincolo è considerato conforme se risultano soddisfatte le seguenti condizioni:
+- [ ] *Giustificazione*: il vincolo deriva da una scelta nella *Technology Baseline*, obblighi normativi o imposizioni del Proponente.
+- [ ] *Fattibilità*: il vincolo non entra in conflitto con requisiti funzionali obbligatori.
+- [ ] *Precisione Tecnica*: specifica chiaramente l'ambito di applicazione (versioni, framework, standard).
+
+In assenza di una o più delle condizioni sopra elencate, la sezione non è considerata conforme e deve essere revisionata prima del rilascio ufficiale.
 
 === Glossario
 ==== Definizione del Documento

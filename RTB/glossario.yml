@@ -29,8 +29,8 @@ A:
     alternative: Requirement Analyst, Analisti
     descrizione: Membro del team di sviluppo responsabile della raccolta e dell'analisi dei requisiti del sistema software, nonché della comunicazione con gli stakeholder per garantire che le esigenze siano comprese e documentate correttamente.
 
-  API: 
-    acronimo: Application Programming Interface
+  Application Programming Interface: 
+    acronimo: API
     descrizione: Insieme di regole e protocolli che consentono a diverse applicazioni software di comunicare tra loro.
 
   API Contract:
@@ -69,8 +69,8 @@ C:
   Ciclo di vita del software:
     descrizione: Processo strutturato che guida la creazione, l'implementazione e la manutenzione di un prodotto software.
 
-  CMMI:
-    acronimo: Capability Maturity Model Integration
+  Capability Maturity Model Integration:
+    acronimo: CMMI
     descrizione: Modello di miglioramento dei processi che aiuta le organizzazioni a ottimizzare le proprie attività. L'obiettivo è aumentare la qualità e migliorare l'efficienza, utilizzando un approccio di ottimizzazione continua.
 
   Code Guardian:
@@ -164,8 +164,8 @@ G:
     alternative: Team di progetto
     descrizione: Insieme delle persone assegnate al progetto che collaborano attivamente per realizzare gli obiettivi definiti nel Piano di Progetto.
 
-  GUI:
-    acronimo: Graphical User Interface
+  Graphical User Interface:
+    acronimo: GUI
     descrizione: Interfaccia utente grafica che consente agli utenti di interagire con un sistema attraverso elementi visivi come finestre, icone e menu.
 
   Gulpease:
@@ -261,8 +261,8 @@ N:
 O:
   Optimism Bias:
     descrizione: Bias cognitivo che porta a sottostimare la probabilità di eventi negativi e i tempi necessari per completare un compito, basandosi su scenari ideali (il cosiddetto "Happy Path") piuttosto che su dati storici o realistici.
-  OWASP:
-    acronimo: Open Web Application Security Project
+  Open Web Application Security Project:
+    acronimo: OWASP
     descrizione: Organizzazione no-profit che si dedica a migliorare la sicurezza delle applicazioni web attraverso la creazione di risorse, strumenti e linee guida.
 P:
   Pair Programming: 
