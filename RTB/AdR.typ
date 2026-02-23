@@ -12,172 +12,206 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.47.0"
+#let versione = "v1.0.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
   (
+    "2026/02/23",
+    "1.0.0",
+    "Revisione finale per RTB",
+    "",
+    members.suar
+  ),
+  (
     "2026/02/18",
     "0.47.0",
     "Refactoring generale di tutti casi d'uso con riscrittura di molti di essi",
     members.kevin,
+    members.suar
   ),
   (
     "2026/02/16",
     "0.46.0",
     "Inserimento UC 47-53 e requisiti",
     members.antonio,
+    members.suar
   ),
   (
     "2026/02/15",
     "0.45.1",
     "Fix UC20-30, eliminazione UC23",
     members.andrea,
+    members.suar
   ),
   (
     "2026/02/15",
     "0.45.0",
     "Modifica UC 16 e 19, aggiunta UC 41-46 e requisiti",
     members.antonio,
+    members.suar
   ),
   (
     "2026/02/13",
     "0.44.7",
     "Fix UC6, UC37-41",
     members.andrea,
+    members.suar
   ),
   (
     "2026/02/13",
     "0.44.6",
     "Fix UC5, UC9-11",
     members.antonio,
+    members.suar
   ),
   (
     "2026/02/10",
     "0.44.5",
     "Fix vari degli UC + fix specifici UC13-15",
     members.andrea,
+    members.suar
   ),
   (
     "2026/02/10",
     "0.44.4",
     "Fix della posizione del sistema in tutti i diagrammi UC",
     members.andrea,
+    members.suar
   ),
   (
     "2026/02/10",
     "0.44.3",
     "Primo fix generale UC",
     members.andrea,
+    members.suar
   ),
   (
     "2026/02/09",
     "0.44.2",
     "Sistemato formato dei link al glossario",
     members.antonio,
+    members.suar
   ),
   (
     "2026/02/09",
     "0.44.1",
     "Fix definizione attori",
     members.andrea,
+    members.suar
   ),
   (
     "2026/02/08",
     "0.44.0",
     "Aggiunto UC12, inclusi diagrammi e requisiti associati. Fix alle precondizioni, attori e diagrammi di UC1, UC2, UC4",
     members.antonio,
+    members.suar
   ),
   (
     "2026/02/04",
     "0.43.0",
     "Classificazione Requisiti per priorità",
     members.alice,
+    members.suar
   ),
   (
     "2026/02/04",
     "0.42.1",
     "Sistemata la sezione Attori + immagini separate per Front-end e Back-end",
     members.andrea,
+    members.suar
   ),
   (
     "2026/02/03",
     "0.42.0",
     "Aggiunta diagrammi UC16-30",
     members.andrea,
+    members.suar
   ),
   (
     "2026/02/02",
     "0.41.0",
     "Fix e aggiunta diagrammi mancanti UC6, UC9, UC10, UC12, UC13, UC14, UC15",
     members.andrea,
+    members.suar
   ),
   (
     "2026/02/02",
     "0.40.0",
     "Fix e aggiunta diagrammi mancanti UC1-3",
     members.andrea,
+    members.suar
   ),
   (
     "2026/02/01",
     "0.39.0",
     "Aggiunta Requisiti di Qualità e di Vincolo",
     members.alice,
+    members.suar
   ),
   (
     "2026/01/27",
     "0.38.0",
     "Aggiunta dei requisiti funzionali UC36-UC29",
     members.andrea,
+    members.suar
   ),
   (
     "2026/01/25",
     "0.37.2",
     "Fix alla struttura delle precondizioni, modifica a UC1-3 e relativi requisiti",
     members.antonio,
+    members.suar
   ),
   (
     "2026/01/24",
     "0.37.1",
     "Fix alla struttura di inclusioni ed estensioni",
     members.antonio,
+    members.suar
   ),
   (
     "2026/01/24",
     "0.37.0",
     "Inserimento diagrammi per UC36-41",
     members.andrea,
+    members.suar
   ),
   (
     "2026/01/24",
     "0.36.0",
     "Modifica dei casi d'uso UC36, UC28 e UC28.1 e aggiunta di UC36.1, UC23, UC23.1, UC29 e UC29.1",
     members.andrea,
+    members.suar
   ),
   (
     "2026/01/21",
     "0.35.0",
     "Inserimento diagrammi aggiornati per UC1-5 e UC26-37",
     members.antonio,
+    members.suar
   ),
   (
     "2026/01/21",
     "0.34.0",
     "Aggiunta di sottocasi di UC21 e 30 e altri fix",
     members.berengan,
+    members.suar
   ),
   (
     "2026/01/19",
     "0.33.1",
     "Aggiunti requisiti funzionali UC12 e UC13, UC16-UC20 e UC20-UC20. Modifica requisiti UC5-UC15",
     members.alice,
+    members.suar
   ),
   (
     "2026/01/18",
     "0.32.1",
     "Riorganizzazione requisiti funzionali relativi ai casi d'uso da UC1 a UC4",
     members.alice,
+    members.suar
   ),
   (
     "2026/01/17",
@@ -198,30 +232,35 @@
     "0.30.2",
     "Modificati requisiti funzionali. Eliminazione requisiti di performance",
     members.alice,
+    members.suar
   ),
   (
     "2026/01/17",
     "0.30.1",
     "Modifica UC22. Aggiunta UC23, UC24",
     members.berengan,
+    members.suar
   ),
   (
     "2026/01/16",
     "0.29.0",
     "Aggiunta UC36, UC28, UC28.1, UC29",
     members.andrea,
+    members.suar
   ),
   (
     "2026/01/16",
     "0.28.0",
     "Aggiunta UC26, UC27, UC36 e UC37",
     members.antonio,
+    members.suar
   ),
   (
     "2026/01/16",
     "0.27.0",
     "Aggiunta UC21 e UC22",
     members.berengan,
+    members.suar
   ),
   (
     "2026/01/15",
@@ -263,6 +302,7 @@
     "0.23.0",
     "Caso d'uso UC16 con relativi sottocasi e diagrammi",
     members.alice,
+    members.suar
   ),
   (
     "2026/01/10",
@@ -290,6 +330,7 @@
     "0.20.0",
     "Requisiti da UC6 a UC8",
     members.alice,
+    members.suar
   ),
   (
     "2026/01/9",
@@ -303,12 +344,14 @@
     "0.18.0",
     "Modificati requisiti relativi a UC14. Aggiunti diagrammi UC14",
     members.alice,
+    members.suar
   ),
   (
     "2026/01/06",
     "0.17.0",
     "Casi d'uso UC14, UC14.1, UC14.1.1 e UC14.2. Requisiti relativi a UC14",
     members.alice,
+    members.suar
   ),
   (
     "2026/01/04",
@@ -591,9 +634,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
     [*Servizi AWS*],
     [Infrastruttura cloud esterna di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#amazon-web-service")[#def[Amazon Web Service]] utilizzata dal sistema come ambiente di calcolo e storage per l'esecuzione delle analisi intensive.],
-
-    [*Servizio LLM*],
-    [Servizio esterno di Intelligenza Artificiale interrogato per l'analisi semantica della documentazione e la generazione dei suggerimenti di remediation.],
 
     [*Strumenti di Analisi*],
     [Insieme degli strumenti terzi invocati dal sistema per l'esecuzione verticale delle scansioni di sicurezza e qualità del codice.],
@@ -1241,10 +1281,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente ha inviato una richiesta di analisi #link(<UC4>)[#underline[\[UC4\]]]
   ],
   post: [
-    - L'utente visualizza l'avviso di analisi già pendente per il medesimo repository
+    - L'utente viene accodato ad una lista di attesa del report per il medesimo repository
   ],
   scenari: [
-    - L'utente visualizza un messaggio circa l'impossibilità di avviare un nuovo audit simultaneo
+    - L'utente visualizza un messaggio di avvenuta presa a carico della analisi
   ],
   inclusioni: [
     - Nessuna
@@ -1304,7 +1344,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente Autorizzato",
   pre: [
     - L'utente dispone di una sessione attiva nel sistema #link(<UC2>)[#underline[\[UC2\]]]
-    - L'utente accede alla sezione dedicata ai repository analizzati
+    - L'utente accede alla sezione dedicata ai repository analizzati #link(<UC20>)[#underline[\[UC20\]]]
   ],
   post: [
     - L'utente visualizza l'elenco dei repository per i quali è stato generato almeno un report
@@ -1490,7 +1530,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente ha preso visione della data e dell'ora di generazione del report
   ],
   scenari: [
-    - L'utente visualizza espone il timestamp relativo al completamento dell'analisi
+    - L'utente visualizza il timestamp relativo al completamento dell'analisi
   ],
   inclusioni: [
     - Nessuna
@@ -2649,7 +2689,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC18: Accettazione di una singola remediation <UC18>
 #useCase(
-  attore: "Utente Autorizzato",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente sta visualizzando il dettaglio di una singola remediation #link(<UC16>)[#underline[\[UC16\]]]
   ],
@@ -2678,7 +2718,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC19: Rifiuto di una singola remediation <UC19>
 #useCase(
-  attore: "Utente Autorizzato",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente visualizza il dettaglio di una singola remediation #link(<UC16>)[#underline[\[UC16\]]]
   ],
@@ -3448,7 +3488,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC31: Visualizzazione singola remediation riguardante l'analisi della sicurezza <UC31>
 #useCase(
-  attore: "Utente Autorizzato",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente visualizza l'elenco delle remediation nella sezione di analisi della sicurezza #link(<UC10.3>)[#underline[\[UC10.3\]]]
     - L'utente seleziona una singola remediation dall'elenco
@@ -3474,7 +3514,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC32: Visualizzazione singola remediation riguardante l'analisi della documentazione <UC32>
 #useCase(
-  attore: "Utente Autorizzato",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente visualizza l'elenco delle remediation nella sezione di analisi della documentazione #link(<UC11.3>)[#underline[\[UC11.3\]]]
     - L'utente seleziona una singola remediation dall'elenco
@@ -3500,7 +3540,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC33: Accettazione singola remediation riguardante l'analisi del codice <UC33>
 #useCase(
-  attore: "Utente Autorizzato",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente visualizza il dettaglio della remediation per il codice #link(<UC30>)[#underline[\[UC30\]]]
   ],
@@ -3528,7 +3568,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC33.0.1: Errore nell'applicazione della remediation codice <UC33.0.1>
 #useCase(
-  attore: "Utente Autorizzato",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente ha confermato l'accettazione della remediation #link(<UC33>)[#underline[\[UC33\]]]
   ],
@@ -3550,7 +3590,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC34: Rifiuto singola remediation riguardante l'analisi del codice <UC34>
 #useCase(
-  attore: "Utente Autorizzato",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente visualizza il dettaglio della remediation per il codice #link(<UC30>)[#underline[\[UC30\]]]
   ],
@@ -3576,7 +3616,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC35: Accettazione singola remediation riguardante l'analisi della sicurezza <UC35>
 #useCase(
-  attore: "Utente Autorizzato",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente visualizza il dettaglio della remediation di sicurezza #link(<UC31>)[#underline[\[UC31\]]]
   ],
@@ -3604,7 +3644,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC35.0.1: Errore nell'applicazione della remediation sicurezza <UC35.0.1>
 #useCase(
-  attore: "Utente Autorizzato",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente ha confermato l'accettazione della remediation di sicurezza #link(<UC35>)[#underline[\[UC35\]]]
   ],
@@ -3626,7 +3666,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC36: Rifiuto singola remediation riguardante l'analisi della sicurezza <UC36>
 #useCase(
-  attore: "Utente Autorizzato",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente visualizza il dettaglio della remediation di sicurezza #link(<UC31>)[#underline[\[UC31\]]]
   ],
@@ -3652,7 +3692,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC37: Accettazione singola remediation riguardante l'analisi della documentazione <UC37>
 #useCase(
-  attore: "Utente Autorizzato",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente visualizza il dettaglio della remediation documentale #link(<UC32>)[#underline[\[UC32\]]]
   ],
@@ -3680,7 +3720,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 ==== UC37.0.1: Errore nell'applicazione della remediation documentale <UC37.0.1>
 #useCase(
-  attore: "Utente Autorizzato",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente ha confermato l'accettazione della remediation documentale #link(<UC37>)[#underline[\[UC37\]]]
   ],
@@ -3702,7 +3742,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 
 === UC38: Rifiuto singola remediation riguardante l'analisi della documentazione <UC38>
 #useCase(
-  attore: "Utente Autorizzato",
+  attore: "Utente Avanzato",
   pre: [
     - L'utente visualizza il dettaglio della remediation documentale #link(<UC32>)[#underline[\[UC32\]]]
   ],
@@ -3761,6 +3801,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   post: [
     - L'utente visualizza l'esito di registrazione del repository privato e la risorsa risulta disponibile nel catalogo personale
+    - La repository inserita può essere analizzata anche da utenti non proprietari qualora i token dimostrassero l'accessibilità alla repository in quanto collaboratori
   ],
   scenari: [
     - L'utente inserisce l'URL del repository privato di sua proprietà #link(<UC20.2>)[#underline[\[UC20.2\]]]
@@ -5328,6 +5369,9 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
 
   [#VRObx],
   [Il Back-end e l'Orchestratore devono essere sviluppati utilizzando #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#nestjs")[#def("NestJS")]],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
+  [#VRObx],
+  [Gli agenti devono essere sviluppati utilizzando #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#python")[#def("Python")]],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
 
   [#VRObx],
