@@ -2,7 +2,7 @@
 #import "../lib/variables.typ": *
 #import "../lib/glossarioUtil.typ": *
 
-#let versione = "v0.10.0"
+#let versione = "v0.11.0"
 
 #titlePage("Glossario", versione)
 #set page(numbering: "1", header: header("Glossario"), footer: footer())
