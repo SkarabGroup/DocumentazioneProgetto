@@ -21,10 +21,12 @@ A:
     descrizione: Tecnica di verifica del software effettuata esaminando il codice sorgente senza eseguirlo, mirata all'individuazione precoce di errori, vulnerabilità e non conformità agli standard di codifica.
   Analista:
     alternative: Requirement Analyst, Analisti
-    descrizione: Ruolo nel team di progetto responsabile dello studio del dominio, dell'identificazione dei bisogni degli stakeholder e della loro traduzione in specifiche tecniche.
-  Application Programming Interface:
+    descrizione: Membro del team di sviluppo responsabile della raccolta e dell'analisi dei requisiti del sistema software, nonché della comunicazione con gli stakeholder per garantire che le esigenze siano comprese e documentate correttamente.
+
+  Application Programming Interface: 
     acronimo: API
-    descrizione: Insieme di definizioni, protocolli e strumenti che permettono a diverse applicazioni software di comunicare e interagire tra loro in modo standardizzato.
+    descrizione: Insieme di regole e protocolli che consentono a diverse applicazioni software di comunicare tra loro.
+
   API Contract:
     descrizione: Accordo formale tra fornitore e consumatore di un'interfaccia che stabilisce endpoint, strutture dei dati e comportamenti attesi, garantendo la stabilità dell'integrazione.
   Approccio Agile:
@@ -54,10 +56,12 @@ C:
     alternative: Use case, casi d'uso
     descrizione: Specifica che descrive una sequenza di interazioni tra un attore e il sistema affinché l'attore raggiunga un obiettivo specifico.
   Ciclo di vita del software:
-    descrizione: Insieme strutturato delle fasi che un prodotto software attraversa dalla sua concezione iniziale fino al ritiro, includendo sviluppo, rilascio e manutenzione.
+    descrizione: Processo strutturato che guida la creazione, l'implementazione e la manutenzione di un prodotto software.
+
   Capability Maturity Model Integration:
     acronimo: CMMI
-    descrizione: Modello di riferimento per la valutazione e il miglioramento della maturità dei processi organizzativi, finalizzato a incrementare le prestazioni e la qualità del software.
+    descrizione: Modello di miglioramento dei processi che aiuta le organizzazioni a ottimizzare le proprie attività. L'obiettivo è aumentare la qualità e migliorare l'efficienza, utilizzando un approccio di ottimizzazione continua.
+
   Code Guardian:
     descrizione: Denominazione del progetto software commissionato da Var Group e in fase di sviluppo da parte del team Skarab Group.
   Collaudatori:
@@ -124,10 +128,12 @@ G:
     descrizione: Pratica sconsigliata di implementare funzionalità o perfezionamenti non richiesti dagli stakeholder, che consumano risorse senza aggiungere valore concordato.
   Gruppo di lavoro:
     alternative: Team di progetto
-    descrizione: Collettivo di individui con competenze complementari assegnati al progetto e impegnati collaborativamente verso il raggiungimento degli obiettivi comuni.
+    descrizione: Insieme delle persone assegnate al progetto che collaborano attivamente per realizzare gli obiettivi definiti nel Piano di Progetto.
+
   Graphical User Interface:
     acronimo: GUI
-    descrizione: Tipo di interfaccia utente che permette l'interazione con dispositivi elettronici tramite indicatori visivi e icone grafiche piuttosto che tramite interfacce a riga di comando.
+    descrizione: Interfaccia utente grafica che consente agli utenti di interagire con un sistema attraverso elementi visivi come finestre, icone e menu.
+
   Gulpease:
     descrizione: Indice linguistico calibrato sulla lingua italiana per valutare la leggibilità di un testo in base alla lunghezza delle parole e delle frasi.
 H:
@@ -210,13 +216,10 @@ N:
     descrizione: Insieme codificato di regole, convenzioni, strumenti e procedure che il team si impegna a seguire per garantire uniformità e qualità nel lavoro svolto.
 O:
   Optimism Bias:
-    descrizione: Distorsione cognitiva che porta le persone a sovrastimare la probabilità di eventi positivi e sottostimare i tempi e i costi necessari per completare un'attività.
-  OWASP:
-    acronimo: Open Web Application Security Project
-    descrizione: Organizzazione internazionale senza scopo di lucro dedicata a migliorare la sicurezza del software attraverso progetti open source, strumenti e documentazione.
+    descrizione: Bias cognitivo che porta a sottostimare la probabilità di eventi negativi e i tempi necessari per completare un compito, basandosi su scenari ideali (il cosiddetto "Happy Path") piuttosto che su dati storici o realistici.
   Open Web Application Security Project:
     acronimo: OWASP
-    descrizione: Comunità globale che lavora per creare metodologie, documentazione, strumenti e tecnologie liberamente disponibili nel campo della sicurezza delle applicazioni web.
+    descrizione: Organizzazione no-profit che si dedica a migliorare la sicurezza delle applicazioni web attraverso la creazione di risorse, strumenti e linee guida.
 P:
   Pair Programming:
     descrizione: Tecnica di sviluppo software in cui due programmatori lavorano insieme alla stessa postazione, uno scrivendo il codice e l'altro revisionandolo istantaneamente.
