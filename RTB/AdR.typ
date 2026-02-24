@@ -558,15 +558,15 @@ La versione più recente del Glossario è disponibile al seguente link:
 I seguenti documenti hanno valore vincolante per la redazione dell'Analisi dei Requisiti:
 - *Standard IEEE 830-1998* IEEE Recommended Practice for Software Requirements Specifications <830> \
   #underline[https://ieeexplore.ieee.org/document/720574] \
-  (ultimo accesso: *12/02/2026*)
+  (ultimo accesso: *24/02/2026*)
 
 - *Standard IEEE 29148-2018* ISO/IEC/IEEE International Standard – Systems and software engineering – Life cycle processes – Requirements engineering <29148>\
   #underline[https://ieeexplore.ieee.org/document/8559686] \
-  (ultimo accesso: *12/02/2026*)
+  (ultimo accesso: *24/02/2026*)
 
 - *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> \
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
-  (ultimo accesso: *12/02/2026*)
+  (ultimo accesso: *24/02/2026*)
 
 - *Norme di Progetto*: regole, convenzioni e standard di qualità adottati dal gruppo. <NdP>\
   #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")] \
@@ -574,10 +574,10 @@ I seguenti documenti hanno valore vincolante per la redazione dell'Analisi dei R
 === Riferimenti Informativi
 - *Dispense del Corso di Ingegneria del Software sull'Analisi dei Requisiti* <dispense_AdR>\
   #underline[https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T05.pdf] \
-  (ultimo accesso: *12/02/2026*)
+  (ultimo accesso: *24/02/2026*)
 - *Dispense del Corso di Ingegneria del Software sui Casi d'Uso* <dispense_UC>\
   #underline[https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20Use%20Case.pdf] \
-  (ultimo accesso: *12/02/2026*)
+  (ultimo accesso: *24/02/2026*)
 
 
 #pagebreak()
