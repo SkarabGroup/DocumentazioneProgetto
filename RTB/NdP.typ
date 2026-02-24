@@ -631,7 +631,6 @@ Ogni caso d'uso include:
 ====== Criteri di Verifica dei Casi d'Uso
 L'elemento *Casi d'Uso* è considerato conforme se risultano soddisfatte tutte le seguenti condizioni:
 - [ ] *Univocità*: ogni identificatore UCx.y.z è unico e segue la gerarchia definita.
-- [ ] *Tracciabilità*: ogni caso d'uso è riconducibile a una necessità del Capitolato o a un verbale.
 - [ ] *Correttezza degli Attori*: ogni attore citato è stato precedentemente censito e definito.
 - [ ] *Completezza dei Flussi*: lo scenario copre tutti i percorsi logici necessari al raggiungimento dell'obiettivo.
 - [ ] *Coerenza UML*: esiste corrispondenza 1:1 tra descrizione testuale e diagramma grafico, ad eccezione dei casi d'uso privi di inclusioni o estensioni.
