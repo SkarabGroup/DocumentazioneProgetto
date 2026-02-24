@@ -585,7 +585,7 @@ I seguenti documenti hanno valore vincolante per la redazione dell'Analisi dei R
 == Introduzione
 In questa sezione sono descritti i casi d'uso principali del sistema, che illustrano le interazioni funzionali tra gli utenti (umani e software) e l'applicazione.
 
-La specifica dei casi d'uso adotta il formato e le convenzioni di modellazione definite nel documento #link(<NdP>)[Norme di Progetto]. Si rimanda a tale documento per la descrizione dettagliata della struttura dei campi (precondizioni, postcondizioni, scenari) e della sintassi #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#uml")[#def[UML]] utilizzata.
+La specifica dei casi d'uso adotta il formato e le convenzioni di modellazione definite alla sezione 2.1.6.3.1 del documento #link(<NdP>)[Norme di Progetto]. Si rimanda a tale documento per la descrizione dettagliata della struttura dei campi (precondizioni, postcondizioni, scenari) e della sintassi #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#uml")[#def[UML]] utilizzata.
 
 == Attori
 Gli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#attore")[#def[attori]] rappresentano le entità che interagiscono con il sistema #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]]. Essi sono classificati in base al ruolo svolto nell'interazione:
@@ -4300,7 +4300,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 = Requisiti di Sistema
 In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati da _Skarab Group_.
 
-Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ delle #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/PdP.pdf")[#underline[*Norme di Progetto*]].
+Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.2 delle #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/PdP.pdf")[#underline[*Norme di Progetto*]].
 
 #let fr_counter = counter("FR")
 #let qr_ob_counter = counter("QROb")
@@ -5315,7 +5315,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
 #pagebreak()
 == Requisiti di Qualità (QR)
-I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente, ma sia anche manutenibile, performante e ben documentato.
+I seguenti requisiti garantiscono che il sistema sia manutenibile, performante e strutturato secondo gli standard di eccellenza ingegneristica definiti dal team.
 
 #table(
   columns: (1fr, 2.5fr, 1.5fr),
@@ -5326,38 +5326,25 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   align: (col, row) => (center, left, center).at(col) + horizon,
 
   [#QRObx],
-  [È necessario fornire un diagramma
-    architetturale completo che illustri la struttura multiagente e le interazioni tra componenti],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Obiettivi"],
+  [L'architettura deve garantire un'alta coesione e un basso accoppiamento tra l'orchestratore NestJS e gli agenti Python, verificabile tramite revisione dei diagrammi UML2.5.],
+  [Interno (Obiettivi di Qualità)],
 
   [#QRObx],
-  [Deve essere fornita documentazione tecnica esaustiva del sistema, includendo swagger #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#application-programming-interface")[#def("Application Programming Interface")] (API) e documentazione descrittiva del progetto],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+  [Il sistema deve garantire tempi di risposta della dashboard web ottimizzati, minimizzando il carico computazionale lato client durante il rendering dei report di audit.],
+  [Interno (Efficienza)],
 
   [#QRObx],
-  [Il codice prodotto deve raggiungere una copertura minima del 70% tramite #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#test-di-unita")[#def("Test di Unità")] automatizzati],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+  [Ogni componente software deve essere testabile isolatamente; la logica di business deve essere separata dalle interfacce di comunicazione (API/Database).],
+  [Interno (Manutenibilità)],
 
   [#QRObx],
-  [L'applicativo deve essere creato seguendo principi di modularità per consentire l'aggiunta di nuovi agenti di analisi],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
-
-  [#QRObx],
-  [Deve essere fornito un sistema di Bug Reporting strutturato per tracciare e gestire le anomalie riscontrate],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
-
-  [#QRObx],
-  [È necessario utilizzare appositi sistemi di versionamento del codice],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
-
-  [#QRObx],
-  [È necessario rispettare tutte le norme
-    presenti nelle #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[*Norme di Progetto*]],
+  [È necessario rispettare rigorosamente le metriche di qualità del codice (complessità ciclomatica, duplicazione) definite nelle #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[*Norme di Progetto*].],
   [Interno],
 )
 
 #pagebreak()
 == Requisiti di Vincolo (VR)
+Requisiti imposti dal committente riguardanti tecnologie, standard di sicurezza e documentazione obbligatoria.
 
 #table(
   columns: (1fr, 2.5fr, 1.5fr),
@@ -5368,37 +5355,54 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   align: (col, row) => (center, left, center).at(col) + horizon,
 
   [#VRObx],
-  [Il Back-end e l'Orchestratore devono essere sviluppati utilizzando #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#nestjs")[#def("NestJS")]],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
-  [#VRObx],
-  [Gli agenti devono essere sviluppati utilizzando #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#python")[#def("Python")]],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
-
-  [#VRObx],
-  [Il Front-end deve essere sviluppato utilizzando #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#react")[#def("React")]],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
-
-  [#VRObx],
-  [Il sistema di persistenza deve essere implementato utilizzando #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#mongodb")[#def("MongoDB")]],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
-
-  [#VRObx],
-  [L'architettura deve essere ospitata su infrastruttura cloud AWS],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
-
-  [#VRObx],
-  [Devono essere utilizzate GitHub Actions per implementare pipeline CI/CD],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
-
-  [#VRObx],
-  [Il codice sorgente deve essere versionato utilizzando sistemi come #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#git")[#def("Git")] o repository online],
+  [Il team deve svolgere un’attività di analisi preliminare includendo Design Thinking, User Story Mapping, Business Requirements e Diagrammi UML degli Use Case],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
   [#VRObx],
-  [L'analisi di sicurezza deve essere conforme agli standard OWASP Top 10],
+  [Deve essere fornita documentazione tecnica tramite standard OpenAPI 3.0 (Swagger) per le API e documentazione del codice sorgente tramite TypeDoc],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#VRObx],
+  [Deve essere fornito un Manuale Utente e un Manuale Manutentore (installazione e integrazione agenti) come parte integrante della fornitura finale],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#VRObx],
+  [Al termine del progetto deve essere consegnato un MVP funzionante accompagnato da una Demo Live e dallo Schema Design relativo alla base dati],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#VRObx],
+  [Il codice prodotto deve raggiungere una copertura minima del 70% tramite test di unità automatizzati misurati con Jest],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#VRObx],
+  [L'applicativo deve essere creato seguendo principi di modularità per consentire l'estensione delle funzioni e l'aggiunta di nuovi agenti di analisi],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#VRObx],
+  [Deve essere fornito un sistema di Bug Reporting strutturato su GitHub Issues per tracciare e gestire le anomalie tramite apposite label],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#VRObx],
+  [Il Back-end e l'Orchestratore devono essere sviluppati utilizzando NestJS v10+, il Front-end in React v18.3+ e gli agenti in Python v3.12+],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
+
+  [#VRObx],
+  [L'architettura deve essere ospitata su infrastruttura cloud AWS, utilizzando esclusivamente gli account IAM forniti dall'azienda proponente],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
+
+  [#VRObx],
+  [Devono essere utilizzate GitHub Actions per implementare pipeline di Continuous Integration e Continuous Deployment (CI/CD)],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
+
+  [#VRObx],
+  [Il codice sorgente deve essere versionato utilizzando Git (v2.40+) seguendo la branching strategy definita nelle NdP],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#VRObx],
+  [L'analisi di sicurezza deve essere conforme agli standard OWASP Top 10 (v2021 o successivi)],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "OWASP"],
 
   [#VRObx],
-  [L'interfaccia web del sistema deve essere compatibile con le versioni stabili più recenti dei principali sistemi operativi (Windows, macOS, Linux) e dei relativi browser moderni],
-  [Decisione Interna]
+  [L'interfaccia web deve essere compatibile con Windows 10/11, macOS 14+ e distribuzioni Linux (Ubuntu 22.04+) su browser Chrome 120+, Firefox 120+ e Safari 17+],
+  []
 )
