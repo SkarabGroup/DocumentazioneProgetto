@@ -1732,7 +1732,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [Verificare che le chiavi di accesso non siano mai salvate o trasmesse in chiaro, garantendo l'integrità del sistema di hashing.],
 
       [TA-3],
-      [Verificare che il sistema gestisca correttamente il reindirizzamento e il ritorno dalla piattaforma esterna GitHub, associando correttamente l'identificativo OAuth.],
+      [Verificare che il sistema gestisca correttamente il reindirizzamento e il ritorno dalla piattaforma esterna GitHub, associando correttamente l'identificativo OAuth e cifrando il token ottenuto.],
 
       [TA-4],
       [Verificare che l'utente possa configurare e avviare una richiesta di analisi fornendo un URL valido e selezionando le aree di interesse.],
@@ -1744,7 +1744,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [Verificare che il sistema impedisca l'avvio di analisi concorrenti sul medesimo repository, notificando correttamente lo stato di "Analisi in corso".],
 
       [TA-7],
-      [Verificare che l'accesso alle funzionalità di audit sia interdetto agli utenti che non hanno completato con successo l'integrazione con GitHub.],
+      [Verificare che l'accesso all'analisi di repository privati sia interdetto agli utenti che non hanno completato l'integrazione con GitHub, e che la richiesta di analisi (pubblica o privata) sia inibita in assenza di selezione di almeno un'area di interesse.],
 
       [TA-8],
       [Verificare che il sistema protegga i dati di sessione e i token GitHub tramite cifratura e protocolli di comunicazione sicuri (HTTPS).],
@@ -1784,118 +1784,54 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
 
       [TA-20],
       [Verificare che l'utente possa modificare la propria password di accesso previa validazione della credenziale attuale e rispetto dei criteri di sicurezza.],
-    ),
-  ),
-)
-
-/*== Test di Accettazione
-
-#show figure: set block(breakable: true)
-
-#figure(
-  block(
-    breakable: true,
-    table(
-      fill: (x, y) => if (y == 0) {
-        luma(63.75%)
-      } else if (calc.gcd(y, 2) == 2) {
-        luma(220)
-      },
-      columns: (1.3fr, 4fr),
-      inset: 10pt,
-      table.header([*ID Test*], [*Descrizione*]),
-
-      [TA-1], [Verificare che il prodotto dia la possibilità all'Utente di registrarsi e autenticarsi a CodeGuardian],
-
-      [TA-2],
-      [Verificare che il prodotto dia la possibilità all'Utente di collegare il proprio account GitHub tramite OAuth],
-
-      [TA-3], [Verificare che il prodotto dia la possibilità di richiedere l'analisi di un repository GitHub],
-
-      [TA-4],
-      [Verificare che il prodotto dia la possibilità di visualizzare i report di analisi completi con tutte le sezioni],
-
-      [TA-5], [Verificare che il prodotto dia la possibilità di filtrare i report passati per intervallo temporale],
-
-      [TA-6], [Verificare che il prodotto gestisca correttamente il caso di utente senza report disponibili],
-
-      [TA-7],
-      [Verificare che il prodotto dia la possibilità di confrontare report tramite grafici comparativi interattivi],
-
-      [TA-8],
-      [Verificare che il prodotto dia la possibilità di confrontare report tramite tabelle con indicatori di variazione],
-
-      [TA-9],
-      [Verificare che il prodotto dia la possibilità di visualizzare dettagli delle vulnerabilità di sicurezza (analisi statica, dipendenze, OWASP)],
-
-      [TA-10],
-      [Verificare che il prodotto dia la possibilità di visualizzare la qualità della documentazione (errori spelling, completezza)],
-
-      [TA-11],
-      [Verificare che il prodotto dia la possibilità di disconnettere l'account GitHub con richiesta di conferma],
-
-      [TA-12], [Verificare che il prodotto dia la possibilità di esportare report in formati configurabili],
-
-      [TA-13],
-      [Verificare che il prodotto dia la possibilità di modificare la password con validazione dei criteri di sicurezza],
-
-      [TA-14],
-      [Verificare che il prodotto dia la possibilità di visualizzare e gestire suggerimenti di remediation per vulnerabilità dipendenze],
-
-      [TA-15],
-      [Verificare che il prodotto dia la possibilità di rilevare e gestire segreti/token esposti con revoca automatica opzionale],
-
-      [TA-16],
-      [Verificare che il prodotto dia la possibilità di verificare conformità licenze con integrazione al processo di approvazione legale],
-
-      [TA-17],
-      [Verificare che il prodotto dia la possibilità di ricevere revisione automatizzata delle Pull Request con test e codemods],
-
-      [TA-18],
-      [Verificare che il prodotto dia la possibilità di monitorare la qualità del codice con integrazione a tool esterni e KPI],
-
-      [TA-19],
-      [Verificare che il prodotto dia la possibilità di ricevere suggerimenti di refactoring con verifica impatto tramite test],
-
-      [TA-20],
-      [Verificare che il prodotto dia la possibilità di generare changelog automatici con rilevamento breaking changes],
 
       [TA-21],
-      [Verificare che il prodotto dia la possibilità di applicare policy CI/CD dinamiche per branch differenti],
+      [Verificare che l'utente possa creare una raccolta di report associata a un repository GitHub, fornendo nome e URL validi, con eventuale descrizione facoltativa.],
 
-      [TA-22], [Verificare che il prodotto dia la possibilità di configurare report programmabili con alert automatici],
+      [TA-22],
+      [Verificare che l'Orchestratore verifichi correttamente l'accessibilità del repository prima di avviare l'analisi, distinguendo tra risorse pubbliche e private e gestendo i fallimenti di accesso.],
 
-      [TA-23], [Verificare che il prodotto crei correttamente ambienti sandbox e gestisca errori di creazione],
+      [TA-23],
+      [Verificare che l'Orchestratore avvii correttamente il processo di analisi, clonando il repository e distribuendo la codebase agli strumenti di analisi per le aree selezionate.],
 
-      [TA-24], [Verificare che il prodotto integri correttamente tool esterni di analisi con gestione fallback],
+      [TA-24],
+      [Verificare che il sistema aggreghi i risultati degli strumenti di analisi in un report strutturato, lo archivi correttamente nel sistema di persistenza e aggiorni lo stato dell'analisi a "completato".],
 
-      [TA-25], [Verificare che il prodotto generi e trasferisca correttamente i report finali al frontend],
+      [TA-25],
+      [Verificare che l'utente riceva una notifica al completamento dell'analisi e che il report risulti consultabile nella propria area personale anche in assenza di ricezione della notifica.],
 
-      [TA-26], [Verificare che il prodotto notifichi correttamente l'utente al completamento dell'analisi],
+      [TA-26],
+      [Verificare che l'utente venga notificato in caso di errore critico durante l'analisi e che lo stato di fallimento sia visibile nella dashboard indipendentemente dalla ricezione della notifica.],
 
-      [TA-27], [Verificare che il prodotto gestisca correttamente retry di comunicazione in caso di errori di rete],
+      [TA-27],
+      [Verificare che l'Utente Avanzato possa accettare una remediation proposta, con conseguente applicazione delle modifiche al repository e aggiornamento dello stato nella dashboard.],
 
       [TA-28],
-      [Verificare che il prodotto gestisca correttamente errori critici durante l'analisi con notifiche appropriate],
+      [Verificare che l'Utente Avanzato possa rifiutare una remediation proposta, con conseguente scarto della proposta e invarianza del repository.],
 
-      [TA-29], [Verificare che il prodotto salvi correttamente metadati, report e metriche aggregate nel database],
+      [TA-29],
+      [Verificare che l'Utente Avanzato con integrazione GitHub attiva possa avviare con successo l'analisi di un repository GitHub privato presente nel proprio catalogo, selezionando le aree di interesse.],
 
-      [TA-30], [Verificare che il prodotto gestisca correttamente il workflow completo OAuth per collegamento GitHub],
+      [TA-30],
+      [Verificare che l'Utente Avanzato possa gestire il proprio catalogo di repository privati, inserendo, visualizzando e rimuovendo risorse, con corretta gestione dei duplicati.],
 
-      [TA-31], [Verificare che il prodotto completi correttamente il workflow end-to-end],
+      [TA-31],
+      [Verificare che il proprietario di un repository privato possa gestire i permessi di accesso ai report, aggiungendo e revocando le autorizzazioni per altri utenti della piattaforma.],
 
-      [TA-34],
-      [Verificare che il prodotto mantenga la sincronizzazione corretta dei dati tra frontend e backend durante tutte le operazioni],
+      [TA-32],
+      [Verificare che l'utente possa rimuovere una raccolta di report dal proprio profilo senza che i singoli report in essa contenuti vengano eliminati.],
 
-      [TA-35], [Verificare che il prodotto sia scalabile e gestisca correttamente richieste multiple concorrenti],
+      [TA-33],
+      [Verificare che l'utente possa cancellare definitivamente il proprio profilo CodeGuardian, con conseguente rimozione dei dati personali, delle associazioni OAuth e invalidazione delle credenziali precedenti.],
     ),
   ),
   caption: [Tabella dei Test di Accettazione],
   kind: table,
   supplement: [Table],
 )
-*/
+
 #pagebreak()
+
 = Cruscotto di Valutazione
 Il presente cruscotto costituisce il sistema di monitoraggio attraverso il quale Skarab Group valuta oggettivamente l'andamento del progetto. Le metriche qui raccolte rappresentano l'evidenza empirica necessaria per attivare il ciclo _PDCA_ (Plan-Do-Check-Act), trasformando i dati grezzi in informazioni per il miglioramento continuo.
 
