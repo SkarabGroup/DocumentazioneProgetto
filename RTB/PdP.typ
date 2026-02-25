@@ -1,11 +1,17 @@
 #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
-#let versione = "v0.8.0"
+#let versione = "v0.10.0"
 
 #titlePage("Piano di Progetto", versione)
 #set page(numbering: "1", header: header("Piano di Progetto"), footer: footer())
 #set heading(numbering: "1.1.1")
 #let history = (
+  (
+    "2026/02/25",
+    "0.10.0",
+    "Retrospettiva Sprint 4",
+    members.antonio,
+  ),
   (
     "2026/02/12",
     "0.9.0",
@@ -518,16 +524,18 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
     // Analisi dei Requisiti
     [*Analisi dei Requisiti*],
     [Formalizzazione secondo ISO/IEC/IEEE 29148 e struttura IEEE 830:
-      - *Metodologia:* Fonti e attori.
-      - *Casi d'Uso:* Specifica UML e scenari.
-      - *Requisiti:* Classificazione funzionale, prestazionale e vincoli.
+      - Metodologia: Fonti e attori.
+      - Casi d'Uso: Specifica UML e scenari.
+      - Requisiti: Classificazione funzionale, prestazionale e vincoli.
+      - Revisione del documento: Verifica ultima del documento.
     ],
     [
       - Metodo: *Sprint 1*
-      - UC: *Sprint 1-2*
-      - Requisiti: *Sprint 2-3*
+      - UC: *Sprint 1-2-4*
+      - Requisiti: *Sprint 2-3-4*
+      - Revisione: *Sprint 4* 
     ],
-    [In corso],
+    [Concluso],
 
     // Piano di Progetto
     [*Piano di Progetto*],
@@ -535,13 +543,17 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
       - Analisi dei Rischi e Strategie.
       - Pianificazione temporale.
       - Preventivo costi e risorse.
+      - Inserimento degli Sprint.
+      - Revisione e verifica del documento
     ],
     [
       - Rischi: *Sprint 1*
-      - Pianif.: *Sprint 2*
+      - Pianif.: *Sprint 1-2*
       - Costi: *Sprint 2*
+      - Sprint: *Sprint 3-4*
+      - Revisione: *Sprint 4*
     ],
-    [In fase di chiusura],
+    [Ultima revisione],
 
     // Piano di Qualifica
     [*Piano di Qualifica*],
@@ -549,12 +561,15 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
       - Obiettivi di qualità e metriche (ISO/IEC).
       - Metodologie di test (Unit, System).
       - Cruscotto di Valutazione (PDCA).
+      - Revisione e verifica del documento.
     ],
     [
       - Qualità: *Sprint 1*
-      - Test: *Sprint 1-2*
+      - Test: *Sprint 1-2-4*
+      - Cruscotto: *Sprint 3-4*
+      - Revisione: *Sprint 4*
     ],
-    [In revisione],
+    [Ultima revisione],
 
     // Norme di Progetto
     [*Norme di Progetto*],
@@ -562,32 +577,40 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
       - Setup strumenti (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#jira")[#def[Jira]], #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#slack")[#def[Slack]]).
       - Definizione processi primari e di supporto.
       - Standard di codifica.
+      - Revisione e verifica.
     ],
     [
       - Strumenti: *Sprint 1*
       - Processi: *Sprint 1-2*
+      - Standard: *Sprint 2*
+      - Revisione: *Sprint 3-4*
     ],
-    [In revisione],
+    [Ultima revisione],
 
     // Glossario
     [*Glossario*],
     [Redazione incrementale dei termini tecnici.
       Responsabilità diffusa tra tutti i membri per garantire un vocabolario controllato (#link(<RCO5>)[#underline[RCO5]]).],
     [Trasversale],
-    [In corso],
+    [Ultima revisione],
 
     // Proof of Concept - ANTICIPATO
     [*Sviluppo PoC*],
     [Realizzazione prototipo per mitigazione rischi #link(<RT1>)[#underline[RT1]]/ #link(<RT2>)[#underline[RT2]]:
       - Studio API LLM e framework.
       - Progettazione architetturale preliminare.
-      - Implementazione agente base.
+      - Codifica delle singole parti.
+      - Integrazione dei sottosistemi.
+      - Ultima verifica dell'intero sistema.
     ],
     [
       - Studio: *Sprint 1-2*
-      - Coding: *Sprint 3*
+      - Progettazione: *Sprint 2*
+      - Codifica: *Sprint 3-4*
+      - Integrazione: *Sprint 4*
+      - Verifica: *Sprint 4*
     ],
-    [Avviato],
+    [Concluso],
 
     // Gestione
     [*Gestione e Coordinamento*],
@@ -604,8 +627,11 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
       - Slide di presentazione.
       - Simulazione esposizione (Dry run).
     ],
-    [- Slide: *Sprint 3*],
-    [Pianificato],
+    [
+      - Slide: *Sprint 3*
+      - Esposizione: *Sprint 4*
+    ],
+    [In corso],
   ),
   caption: [Dettaglio attività pianificate per la fase RTB],
 )
@@ -1183,7 +1209,7 @@ Il coordinamento interno è migliorato rispetto allo Sprint precedente. La distr
 - *Responsabile:* Preventivato 7h, Consuntivo 7h 
 - *Amministratore:* Preventivato 3h, Consuntivo 3h
 - *Analista:* Preventivato 16h, Consuntivo 14h 
- - Essendo questo sprint accavallato con la sessione di esami universitari, alcuni membri hanno dedicato meno tempo alla stesura dei documenti di analisi dei requisiti, nonostante fossero state giá risotte a preventivo, la riduzione era stata troppo ottimistica.
+ - Essendo questo sprint accavallato con la sessione di esami universitari, alcuni membri hanno dedicato meno tempo alla stesura dei documenti di analisi dei requisiti, nonostante fossero state giá ridotte a preventivo, la riduzione era stata troppo ottimistica.
 - *Progettista:* Preventivato 0h, Consuntivo 0h
 - *Programmatore:* Preventivato 12h, Consuntivo 12h
 - *Verificatore:* Preventivato 8h, Consuntivo 8h
@@ -1204,10 +1230,10 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
 - preparare il materiale per la presentazione di revisione.
 
 === Sprint 4
-*Periodo:* dal 01/02/2026 al 14/02/2026
+*Periodo:* dal 01/02/2026 al 21/02/2026
 
 ==== Attività Principali
-Le attività svolte nel periodo di riferimento sono state incentrate sulla conclusioni di tutte le attività normative e tecnologiche a scopo di candidarsi alla revisione RTB.
+Le attività svolte nel periodo di riferimento sono state incentrate sulla conclusioni di tutte le attività normative e di sviluppo a scopo di candidarsi alla revisione RTB.
 
 - *Piano di Progetto (PdP):*
   - aggiunta della sezione prospetto attività per tutti gli sprint
@@ -1216,40 +1242,38 @@ Le attività svolte nel periodo di riferimento sono state incentrate sulla concl
 
 - *Norme di Progetto (NdP):*
   - inserimento delle procedure adottate per la stesura della documentazione
+  - verifica generale del documento in vista della RTB
 
 - *Piano di Qualifica (PdQ):*
   - inserimento test di accettazione
   - rielaborazione test di sistema
+  - inserimento grafici per il quarto Sprint
 
 - *Analisi dei Requisiti (AdR):*
   - modifica alla struttura dei requisiti e inserimento dei requisiti mancanti
   - inserimento dei casi d'uso mancanti e riscrittura di quelli malposti
   - modifica alla struttura dei diagrammi dei casi d'uso e inserimento di quelli mancanti
-  - modifica alla parte di introduzione 
+  - revisione e verifica finale 
 
 - *Glossario:*
   - aggiunta di altri termini e controllo dello standard per tutti i documenti
 
 - *Proof of Concept (PoC):*
-  - ultimazione della parte di backend
-  - ultimazione della parte di server
-  - ultimazione della parte di agenti
-  - ultimazione della parte di database
-  - ultimazione della parte di frontend 
-  - unificazione delle parti e verifica totale
+  - ultimazione delle varie parti 
+  - integrazione delle parti e verifica totale
 
 ==== Prospetto Consumo Tempo (Preventivo)
 La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
 
 #sprint_table(
   (
-    ([Basso Kevin], 0, 3, 0, 0, 4, 0),
+    ([Basso Kevin], 0, 3, 0, 0, 6, 0),
     ([Berengan Riccardo], 0, 0, 0, 0, 5, 1),
     ([Martinello Riccardo], 0, 1, 0, 0, 5, 0),
-    ([Sandu Antonio], 7, 3, 4, 0, 0, 3),
+    ([Sandu Antonio], 7, 0, 7, 0, 0, 2),
     ([Sgreva Andrea], 0, 2, 7, 0, 0, 0),
-    ([Suar Alberto], 0, 2, 2, 0, 2, 4),
-    ([Zago Alice], 0, 4, 3, 0, 0, 1),
+    ([Suar Alberto], 0, 3, 2, 0, 4, 4),
+    ([Zago Alice], 0, 6, 3, 0, 0, 1),
   ),
   [Prospetto orario preventivato per lo Sprint 4],
 )
@@ -1258,40 +1282,33 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 #activity_table(
   (
     ("Inserimento requisiti di qualità e di vincolo", "Analista", "1:30", "1:30", "Completata"),
-    ("Aggiunta dei diagrammi mancanti", "Analista", "2:00", "2:00", "Completata"),
-    ("Modifica sezione degli attori", "Analista", "0:30", "0:30", "Completata"),
     ("Inserimento della colonna della priorità dei requisiti","Analista", "1:30", "1:30", "Completata"),
-    ("Modifica UC1-4 e relativi diagrammi e requisiti", "Analista", "2:00", "2:00", "Completata"),
-    ("Modifica UC5 in UC divisi, relativo diagrammi e requisiti", "Analista", "1:00", "1:30", "Completata"),
-    ("Modifica UC6-8 e relativi diagrammi e requisiti", "Analista", "1:00", "1:00", "Completata"),
-    ("Modifica UC9-12 e relativi diagrammi e requisiti", "Analista", "2:00", "2:00", "Completata"),
-    ("Modifica UC13-15 e relativi diagrammi e requisiti", "Analista", "1:30", "1:30", "Completata"),
-    ("Aggiunta UC43 con relativi diagrammi e requisiti", "Analista", "0:30", "0:30", "Completata"),
+    ("Aggiunta UC mancanti con relativi diagrammi e requisiti", "Analista", "2:30", "8:00", "Completata"),
+    ("Aggiunta dei diagrammi mancanti ai casi d'uso esistenti", "Analista", "2:00", "6:00", "Completata"),
+    ("Aggiunta dei requisiti mancanti ai casi d'uso esistenti", "Analista", "2:00", "5:00", "Completata"),
+    ("Revisione del documento", "Analista", "5:00", "15:00", "Completata"),
 
     ("Link al glossario aggiornati in AdR", "Amministratore", "2:00", "3:00", "Completata"),
     ("Aggiunta tabella attività sprint 1,2,3 a PdP", "Amministratore", "3:00", "3:00", "Completata"),
-    ("Test di Accettazione e rielaborazione Test di Sistema", "Amministratore", "2:00", "2:00", "Completata"),
-    ("Integrazioni a PdQ e Metriche nel documento di NdP","Amministratore","1:30","1:30", "Completata"),
+    ("Test di Accettazione e rielaborazione Test di Sistema", "Amministratore", "2:00", "4:00", "Completata"),
+    ("Integrazioni a PdQ e Metriche nel documento di NdP","Amministratore","2:00","3:00", "Completata"),
     ("Rielaborazione delle sezioni di procedure applicata nella stesura di AdR, PdP, PdQ in NdP", "Amministratore", "6:00", "6:00", "Completata"),
 
-    ("Terminazione della parte server nel PoC", "Programmatore","1:00","1:00","Completata"),
-    ("Terminazione della parte Back-end nel PoC", "Programmatore","1:00","1:00","Completata"),
-    ("Terminazione della parte Front-end nel PoC", "Programmatore","5:00","5:00","Completata"),
-    ("Terminazione della parte database nel PoC", "Programmatore","5:00","5:00","Completata"),
-    ("Terminazione della parte agenti nel PoC", "Programmatore","4:00","4:00","Completata"),
+    ("Terminazione della parti del PoC", "Programmatore","14:00","16:00","Completata"),
+    ("Integrazione delle parti", "Programmatore","2:00","5:00","Completata"),
 
     ("Verifica verbale riunione interna prima settimana", "Verificatore","0:30","0:30","Completata"),
     ("Verifica verbale riunione interna seconda settimana", "Verificatore","0:30","0:30","Completata"),
     ("Verifica AdR","Verificatore","5:00","5:00","Completata"),
     ("Verifica PdP","Verificatore","2:00","3:00","Completata"),
     ("Verifica NdP","Verificatore","2:00","2:00","Completata"),
-    ("Verifica PoC","Verificatore","2:00","3:00","Completata"),
+    ("Verifica PoC","Verificatore","1:00","2:00","Completata"),
 
     ("Stesura verbale riunione prima settimana", "Responsabile","1:00","1:00","Completata"),
     ("Stesura verbale riunione seconda settimana", "Responsabile","1:00","1:00","Completata"),  
     ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile","2:30","2:30","Completata"),
     ("Aggiunta task Jira", "Responsabile","0:30","1:00","Completata"),
-    ("Aggiunto sprint 4 nel PdP", "Responsabile","1:30","1:30","Completata")
+    ("Aggiunto sprint 4 nel PdP", "Responsabile","2:30","3:30","Completata")
   ),
   [Riassunto delle attivitá svolte durante lo Sprint 4]
 )
@@ -1301,15 +1318,54 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
 
 #sprint_table(
   (
-    ([Basso Kevin], 0, 3, 0, 0, 4, 0),
-    ([Berengan Riccardo], 0, 0, 0, 0, 5, 1),
-    ([Martinello Riccardo], 0, 1, 0, 0, 5, 0),
-    ([Sandu Antonio], 7, 3, 4, 0, 0, 3),
+    ([Basso Kevin], 0, 3, 0, 0, 7, 0),
+    ([Berengan Riccardo], 0, 0, 0, 0, 6, 3),
+    ([Martinello Riccardo], 0, 1, 0, 0, 6, 0),
+    ([Sandu Antonio], 8, 3, 17, 0, 0, 3),
     ([Sgreva Andrea], 0, 2, 7, 0, 0, 0),
-    ([Suar Alberto], 0, 2, 2, 0, 2, 4),
-    ([Zago Alice], 0, 4, 3, 0, 0, 1),
+    ([Suar Alberto], 0, 2, 6, 0, 7, 4),
+    ([Zago Alice], 0, 8, 5, 0, 0, 2),
   ),
   [Consuntivo orario effettivo per lo Sprint 4],
 )
 
 ==== Retrospettiva dello Sprint 4
+
+===== Valutazione del Periodo
+Lo Sprint ha mostrato un andamento sporadico. Gli obiettivi sono stati raggiunti ma con un grande ritardo rispetto alla previsione stabilita.
+
+===== Stato di Avanzamento dei Deliverable
+- *Documentazione Normativa:* PdP, NdP e PdQ sono arrivati a una versione stabile, sono pronti per la revisione RTB.
+- *Analisi dei Requisiti:* Pronta per la revisione RTB.
+- *Proof of Concept:* Concluso e pronto per la RTB.
+
+===== Dinamiche del Team e Coordinamento
+Il coordinamento interno di questo Sprint è stato molto compromesso da impegni riguardanti la sessione invernale e altri motivi personali. La distribuzione dei task è risultata tuttavia relativamente equilibrata e il processo di revisione ha portato alla conclusione delle attività previste con un ritardo di una settimana rispetto alla fine dello Sprint prevista.
+
+===== Squilibri orari preventivati e reali
+ - Data il ritardo della chiusura dello Sprint è naturale che le ore consuntive siano molte di più rispetto a quelle previste, specialmente tenedo conto del fatto che il team si è impegnato in maniera da concludere le attività per la RTB.
+- *Responsabile:* Preventivato 7h, Consuntivo 8h 
+- *Amministratore:* Preventivato 15h, Consuntivo 18h
+- *Analista:* Preventivato 20h, Consuntivo 36h 
+ - Conflitti interni ed errata stima delle attività da svolgere all'interno del documento di analisi dei requisiti hanno portato a un grande investimento di risorse per poterlo concludere.
+- *Progettista:* Preventivato 0h, Consuntivo 0h
+- *Programmatore:* Preventivato 20h, Consuntivo 26h
+ - Problemi incontrati nello sviluppo del PoC hanno portato a un elevato impegno da parte dei membri per poter risolverli entro le scadenze fissate.
+- *Verificatore:* Preventivato 8h, Consuntivo 13h
+ 
+===== Rischi Rilevati
+Nel corso dello Sprint si sono manifestati i seguenti rischi, molti emersi per via del PoC e impegni didattici esterni al progetto:
+- #link(<RT4>)[#underline[[RT4]]]: durante lo sviluppo del PoC si è imbattuti in problemi di allucinazione da parte dei LLM utilizzati.
+- #link(<RT8>)[#underline[[RT8]]]: nella fase di integrazione il team ha dovuto risolvere i problemi emersi nel provare a collegare le varie parti sviluppate.
+- #link(<RI1>)[#underline[[RI1]]]: a causa della sessione molti membri del team hanno dovuto ridurre drasticamente il tempo dedicato al progetto.
+- #link(<RI2>)[#underline[[RI2]]]: è successo che alcuni membri non fossero disponibili a causa di problemi di salutre, rallentando l'andamento generale. 
+- #link(<RI4>)[#underline[[RI4]]]: la mancata comunicazione efficace su come svolgere alcune attività o il conflitto di idee hanno portato a un importante rallentamento e lavoro aggiuntivo.
+- #link(<RI5>)[#underline[[RI5]]]: è stata riscontrata una disomogeneità del lavoro svolto da parte dei membri durante lo sprint.
+- #link(<RCO1>)[#underline[[RCO1]]]: la fine delle attività è stata troppo ottimistica.
+- #link(<RCO3>)[#underline[[RCO3]]]: attività di revisione hanno portato a lavoro aggiuntivo conseguendo in uno sforamento delle ore preventivate. 
+
+===== Obiettivi per lo Sprint Successivo
+Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
+- proporre un'organizzazione migliore per la fase di PB
+- iniziare le attività di progettazione
+- aumentare il ritmo di lavoro data la fine della sessione
