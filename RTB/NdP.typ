@@ -593,7 +593,7 @@ Per la redazione del documento Analisi dei Requisiti, il gruppo adotta i seguent
 - *UML 2.5*: standard per la modellazione dei casi d’uso, che consente di rappresentare graficamente le interazioni tra attori e sistema, facilitando la comprensione e la tracciabilità dei requisiti funzionali.
 
 ==== Definizione del Documento
-L’#link("https://skarabgroup.github.io/SkarabGroup/DocumentazioneProgetto/Glossario/glossario.html#analisi-dei-requisiti")[#def("Analisi dei Requisiti")] costituisce il riferimento tecnico vincolante per la formalizzazione rigorosa delle necessità e dei vincoli relativi al sistema *Code Guardian*. Il documento ha lo scopo di tradurre le esigenze espresse dal proponente in un insieme di specifiche formali, non ambigue e verificabili, che guidano l’intero processo di ingegnerizzazione del software.
+L’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-dei-requisiti")[#def("Analisi dei Requisiti")] costituisce il riferimento tecnico vincolante per la formalizzazione rigorosa delle necessità e dei vincoli relativi al sistema *Code Guardian*. Il documento ha lo scopo di tradurre le esigenze espresse dal proponente in un insieme di specifiche formali, non ambigue e verificabili, che guidano l’intero processo di ingegnerizzazione del software.
 
 Il documento definisce, in modo tracciabile e verificabile:
 - *Perimetro del Sistema*: la delimitazione univoca dei confini d'azione del software, specificando le interazioni tra il sistema e gli attori esterni;
@@ -611,7 +611,7 @@ Il documento è organizzato in modo chiaro e strutturato, includendo obbligatori
 - *Requisiti di Vincolo*: descrivono limitazioni tecnologiche, normative o implementative che condizionano il progetto.
 
 ===== Casi d'Uso
-I #link("https://skarabgroup.github.io/SkarabGroup/DocumentazioneProgetto/Glossario/glossario.html#casi-uso")[#def("casi d'uso")] rappresentano scenari specifici di interazione. Per la loro descrizione viene utilizzata la nomenclatura #strong("UCx.y.z") dove:
+I #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#caso-d-uso")[#def("casi d'uso")] rappresentano scenari specifici di interazione. Per la loro descrizione viene utilizzata la nomenclatura #strong("UCx.y.z") dove:
 - *x*: identificatore del caso d'uso principale (macro-scenario);
 - *y*: numero relativo alle inclusioni (0 indica il caso d'uso principale);
 - *z*: numero relativo alle estensioni.
