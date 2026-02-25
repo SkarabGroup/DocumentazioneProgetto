@@ -22,196 +22,196 @@
     "1.0.0",
     "Revisione finale per RTB",
     "",
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/18",
     "0.47.0",
     "Refactoring generale di tutti casi d'uso con riscrittura di molti di essi",
     members.kevin,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/16",
     "0.46.0",
     "Inserimento UC 47-53 e requisiti",
     members.antonio,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/15",
     "0.45.1",
     "Fix UC20-30, eliminazione UC23",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/15",
     "0.45.0",
     "Modifica UC 16 e 19, aggiunta UC 41-46 e requisiti",
     members.antonio,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/13",
     "0.44.7",
     "Fix UC6, UC37-41",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/13",
     "0.44.6",
     "Fix UC5, UC9-11",
     members.antonio,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/10",
     "0.44.5",
     "Fix vari degli UC + fix specifici UC13-15",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/10",
     "0.44.4",
     "Fix della posizione del sistema in tutti i diagrammi UC",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/10",
     "0.44.3",
     "Primo fix generale UC",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/09",
     "0.44.2",
     "Sistemato formato dei link al glossario",
     members.antonio,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/09",
     "0.44.1",
     "Fix definizione attori",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/08",
     "0.44.0",
     "Aggiunto UC12, inclusi diagrammi e requisiti associati. Fix alle precondizioni, attori e diagrammi di UC1, UC2, UC4",
     members.antonio,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/04",
     "0.43.0",
     "Classificazione Requisiti per priorità",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/04",
     "0.42.1",
     "Sistemata la sezione Attori + immagini separate per Front-end e Back-end",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/03",
     "0.42.0",
     "Aggiunta diagrammi UC16-30",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/02",
     "0.41.0",
     "Fix e aggiunta diagrammi mancanti UC6, UC9, UC10, UC12, UC13, UC14, UC15",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/02",
     "0.40.0",
     "Fix e aggiunta diagrammi mancanti UC1-3",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/01",
     "0.39.0",
     "Aggiunta Requisiti di Qualità e di Vincolo",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/27",
     "0.38.0",
     "Aggiunta dei requisiti funzionali UC36-UC29",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/25",
     "0.37.2",
     "Fix alla struttura delle precondizioni, modifica a UC1-3 e relativi requisiti",
     members.antonio,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/24",
     "0.37.1",
     "Fix alla struttura di inclusioni ed estensioni",
     members.antonio,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/24",
     "0.37.0",
     "Inserimento diagrammi per UC36-41",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/24",
     "0.36.0",
     "Modifica dei casi d'uso UC36, UC28 e UC28.1 e aggiunta di UC36.1, UC23, UC23.1, UC29 e UC29.1",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/21",
     "0.35.0",
     "Inserimento diagrammi aggiornati per UC1-5 e UC26-37",
     members.antonio,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/21",
     "0.34.0",
     "Aggiunta di sottocasi di UC21 e 30 e altri fix",
     members.berengan,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/19",
     "0.33.1",
     "Aggiunti requisiti funzionali UC12 e UC13, UC16-UC20 e UC20-UC20. Modifica requisiti UC5-UC15",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/18",
     "0.32.1",
     "Riorganizzazione requisiti funzionali relativi ai casi d'uso da UC1 a UC4",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/17",
@@ -232,35 +232,35 @@
     "0.30.2",
     "Modificati requisiti funzionali. Eliminazione requisiti di performance",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/17",
     "0.30.1",
     "Modifica UC22. Aggiunta UC23, UC24",
     members.berengan,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/16",
     "0.29.0",
     "Aggiunta UC36, UC28, UC28.1, UC29",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/16",
     "0.28.0",
     "Aggiunta UC26, UC27, UC36 e UC37",
     members.antonio,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/16",
     "0.27.0",
     "Aggiunta UC21 e UC22",
     members.berengan,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/15",
@@ -302,7 +302,7 @@
     "0.23.0",
     "Caso d'uso UC16 con relativi sottocasi e diagrammi",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/10",
@@ -330,7 +330,7 @@
     "0.20.0",
     "Requisiti da UC6 a UC8",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/9",
@@ -344,14 +344,14 @@
     "0.18.0",
     "Modificati requisiti relativi a UC14. Aggiunti diagrammi UC14",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/06",
     "0.17.0",
     "Casi d'uso UC14, UC14.1, UC14.1.1 e UC14.2. Requisiti relativi a UC14",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/04",
@@ -4259,11 +4259,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente avvia la richiesta di cancellazione del profilo
-    - L'utente inserisce la password attuale per conferma identità #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - L'utente inserisce la password attuale per conferma identità
     - L'utente conferma la cancellazione definitiva #link(<UC47.1>)[#underline[\[UC47.1\]]]
   ],
   inclusioni: [
-    - #link(<UC15.1>)[#underline[\[UC15.1\]]]
     - #link(<UC47.1>)[#underline[\[UC47.1\]]]
   ],
   estensioni: [
@@ -5404,5 +5403,5 @@ Requisiti imposti dal committente riguardanti tecnologie, standard di sicurezza 
 
   [#VRObx],
   [L'interfaccia web deve essere compatibile con Windows 10/11, macOS 14+ e distribuzioni Linux (Ubuntu 22.04+) su browser Chrome 120+, Firefox 120+ e Safari 17+],
-  []
+  [Decisione Interna],
 )
