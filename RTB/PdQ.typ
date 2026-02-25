@@ -2241,6 +2241,10 @@ Dopo la fase iniziale, in cui le attività di formazione e setup sono state gest
 
 Tuttavia, la situazione ha subito una variazione significativa durante lo _Sprint 2_: a fronte di un incremento del _Planned Value_ (PV) e dell'_Actual Cost_ (AC), l'_Earned Value_ (EV) ha subito una flessione. Questo testimonia l'insorgere di inefficienze produttive e debito tecnico, legati alla necessità di ricalibrare task qualitativamente insufficienti che hanno rallentato la produzione.
 
+A partire dallo _Sprint 3_, la situazione si è progressivamente stabilizzata: l'_Earned Value_
+(EV) ha ripreso ad allinearsi con il _Planned Value_ (PV), segnalando un recupero
+dell'efficienza produttiva e una migliore gestione delle attività pianificate.
+
 #pagebreak()
 === Budget Variance - Schedule Variance (MPC05 e MPC06)
 #image("../assets/graficiPdQ/grafico_bv_sv.png", height: 50%)
@@ -2253,10 +2257,14 @@ Dal grafico è possibile notare come, inizialmente, lo _Schedule Performance Ind
 
 La situazione è peggiorata nel corso dello _Sprint 2_, durante il quale si è verificato un crollo dello _Schedule Performance Index_ (SPI) che segnala un ritardo critico rispetto alla pianificazione. La cattiva gestione temporale è in contrasto con il _Cost Performance Index_ (CPI) che si mantiene abbastanza stabile, confermando che il problema non è di natura economica ma organizzativa.
 
+A partire dallo _Sprint 3_, la situazione ha iniziato a recuperare.
+
 #pagebreak()
 === Estimate at Completion (MPC09)
 #image("../assets/graficiPdQ/grafico_eac.png", height: 50%)
 Dopo una fase iniziale di stabilità coincidente con il budget originale, è possibile notare come una gestione inefficiente delle risorse abbia spinto la previsione di spesa verso il limite massimo.
+
+A partire dallo _Sprint 3_, l'EAC è migliorato.
 
 #pagebreak()
 === Requirements Stability Index (MPC10)
@@ -2266,11 +2274,17 @@ Il _Requirements Stability Index_ (RSI) registra un peggioramento nel corso dell
 #pagebreak()
 == Processi di Supporto
 === Gulpease Index (MPC11)
+Il grafico mostra un andamento complessivamente positivo dei documenti monitorati: a partire dallo _Sprint 1_, i valori si attestano al di sopra della soglia minima accettabile. L'_Analisi dei Requisiti_ presenta una lieve flessione nello _Sprint 2_, riconducibile alla necessità di introdurre terminologia tecnica più densa e alla fase di revisione intensiva dei requisiti.
+In generale, Skarab Group si impegna a mantenere nel tempo una buona leggibilità dei documenti.
+
 === Correttezza Ortografica (MPC12)
+Durante i primi sprint, il grafico evidenzia la presenza di alcuni errori ortografici nella documentazione, con un picco registrato nello _Sprint 2_. Il team ha prontamente identificato la criticità e adottato misure correttive, portando il conteggio degli errori a zero entro lo _Sprint 3_ per la maggior parte dei documenti.
 
 #pagebreak()
 == Processi Organizzativi
 === Metrics Satisfaction (MPC15)
+Durante lo _Sprint 1_ il valore si è attestato leggermente al di sopra della soglia minima accettabile, indicando una buona ma non ancora ottimale conformità ai criteri di qualità definiti. Nello _Sprint 2_ si è registrata una flessione al di sotto della soglia minima accettabile. Il team ha prontamente reagito adottando azioni correttive mirate, riportando il valore al di sopra della soglia accettabile già dallo _Sprint 3_.
+
 === Sprint Goal Achievement (MPC16)
 #image("../assets/graficiPdQ/grafico_sga.png", height: 50%)
 Dal grafico è possibile osservare la buona efficacia operativa dimostrata durante lo _Sprint 1_ dal team, che è riuscito a completare gli obiettivi prefissati quasi nella loro interezza. Durante lo _Sprint 2_, invece, la metrica ha subito una flessione poiché gli obiettivi prefissati non sono stati pienamente raggiunti.
