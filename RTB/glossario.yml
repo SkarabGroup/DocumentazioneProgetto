@@ -27,7 +27,6 @@ A:
   Analista:
     descrizione: Ruolo nel team di progetto responsabile dell'analisi dei requisiti e della modellazione del sistema.
     alternative: Requirement Analyst, Analisti
-    descrizione: Membro del team di sviluppo responsabile della raccolta e dell'analisi dei requisiti del sistema software, nonché della comunicazione con gli stakeholder per garantire che le esigenze siano comprese e documentate correttamente.
 
   API: 
     acronimo: Application Programming Interface
