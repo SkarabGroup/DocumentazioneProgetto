@@ -1,5 +1,3 @@
-// Importa il template del verbale
-
 #import "../../../lib/verbaleUtil.typ": *
 #import "../../../lib/docsUtil.typ": *
 #import "../../../lib/variables.typ": *
