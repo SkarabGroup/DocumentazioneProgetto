@@ -1,28 +1,37 @@
 #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
-#let versione = "v0.10.0"
+#let versione = "v0.11.0"
 
 #titlePage("Piano di Progetto", versione)
 #set page(numbering: "1", header: header("Piano di Progetto"), footer: footer())
 #set heading(numbering: "1.1.1")
 #let history = (
   (
+    "2026/02/26",
+    "0.11.0",
+    "AggiuntO preventivo a finire",
+    members.kevin,
+  ),
+  (
     "2026/02/25",
     "0.10.0",
     "Retrospettiva Sprint 4",
     members.antonio,
+    members.kevin,
   ),
   (
     "2026/02/12",
     "0.9.0",
     "Aggiunto Sprint 4",
     members.antonio,
+    members.kevin,
   ),
   (
     "2026/02/11",
     "0.8.0",
     "Aggiunte tabelle attivitá sprint 1,2,3, piccoli fix e aggiunte spiegazioni delle discrepanze orarie tra consuntivo e preventivo",
     members.kevin,
+    members.antonio,
   ),
   (
     "2026/02/01",
@@ -735,7 +744,7 @@ Per questo motivo, oltre il *60%* del monte ore complessivo del ruolo di *Ammini
       text(fill: white, weight: "bold")[Costo Parziale],
     ),
 
-    [Responsabile], [21], [€ 420,00],
+    [Responsabile], [21], [€ 630,00],
     [Amministratore], [56], [€ 1.120,00],
     [Analista], [63], [€ 1.575,00],
     [Progettista], [14], [€ 350,00],
@@ -978,6 +987,39 @@ Per lo Sprint 2 il team si pone i seguenti obiettivi:
 ]
 #pagebreak()
 
+
+===== Aggiornamento preventivo a finire
+
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    columns: (1fr, 1fr, 1fr, 1fr),
+    inset: 10pt,
+    align: center + horizon,
+    stroke: 0.5pt + luma(200),
+
+    table.header(
+      text(fill: white, weight: "bold")[Ruolo],
+      text(fill: white, weight: "bold")[Ore rimanenti],
+      text(fill: white, weight: "bold")[Differenze rispetto a preventivo],
+      text(fill: white, weight: "bold")[Preventivo a finire costi],
+    ),
+
+    [Responsabile], [15], [-],[€ 450],
+    [Amministratore], [28], [-], [€ 700,00],
+    [Analista], [52], text(fill: green)[-4 -> € -100],[€ 1.300,00],
+    [Progettista], [14], [-],[€ 350,00],
+    [Programmatore], [21], [-],[€ 315,00],
+    [Verificatore], [34], text(fill: green)[-4 -> € -60],[€ 510,00],
+
+    table.cell(fill: luma(240))[*Totale RTB*],
+    table.cell(fill: luma(240))[*164*],
+    table.cell(fill: luma(240))[#text(fill: green)[*-8 -> € -160*]],
+    table.cell(fill: luma(240))[*€ 3.625,00*],
+  ),
+  caption: [Aggiornamento preventivo a finire sprint 1],
+)
+
 === Sprint 2
 *Periodo:* dal 03/01/2026 al 17/01/2026
 
@@ -1093,6 +1135,41 @@ Per lo Sprint 3 il team individua come prioritari i seguenti obiettivi:
 - avviare e completare lo sviluppo del Proof of Concept;
 - migliorare il coordinamento operativo e l’efficacia delle revisioni interne.
 #pagebreak()
+
+
+===== Aggiornamento preventivo a finire
+
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    columns: (1fr, 1fr, 1fr, 1fr),
+    inset: 10pt,
+    align: center + horizon,
+    stroke: 0.5pt + luma(200),
+
+    table.header(
+      text(fill: white, weight: "bold")[Ruolo],
+      text(fill: white, weight: "bold")[Ore rimanenti],
+      text(fill: white, weight: "bold")[Differenze rispetto a preventivo],
+      text(fill: white, weight: "bold")[Preventivo a finire costi],
+    ),
+
+    [Responsabile], [9], [-],[€ 270,00],
+    [Amministratore], [15], text(fill: red)[+1 -> € +20], [€ 300,00],
+    [Analista], [35], text(fill: green)[-8 -> € -200],[€ 875,00],
+    [Progettista], [14], [-],[€ 350,00],
+    [Programmatore], [21], text(fill: green)[-6 -> € -90],[€ 315,00],
+    [Verificatore], [26], text(fill: green)[-4 -> € -60],[€ 390,00],
+
+    table.cell(fill: luma(240))[*Totale RTB*],
+    table.cell(fill: luma(240))[*120*],
+    table.cell(fill: luma(240))[#text(fill: green)[*-17 -> € -330*]],
+    table.cell(fill: luma(240))[*€ 2.500,00*],
+  ),
+  caption: [Aggiornamento preventivo a finire sprint 1],
+)
+
+
 
 === Sprint 3
 *Periodo:* dal 18/01/2026 al 31/01/2026
@@ -1229,6 +1306,39 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
 - rifinire eventuali osservazioni emerse in fase di pre-review;
 - preparare il materiale per la presentazione di revisione.
 
+
+===== Aggiornamento preventivo a finire
+
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    columns: (1fr, 1fr, 1fr, 1fr),
+    inset: 10pt,
+    align: center + horizon,
+    stroke: 0.5pt + luma(200),
+
+    table.header(
+      text(fill: white, weight: "bold")[Ruolo],
+      text(fill: white, weight: "bold")[Ore rimanenti],
+      text(fill: white, weight: "bold")[Differenze rispetto a preventivo],
+      text(fill: white, weight: "bold")[Preventivo a finire costi],
+    ),
+
+    [Responsabile], [2], [-],[€ 60,00],
+    [Amministratore], [12], [-], [€ 240,00],
+    [Analista], [21], text(fill: green)[-2 -> € -50],[€ 525,00],
+    [Progettista], [14], [-],[€ 350,00],
+    [Programmatore], [9],[-],[€ 135,00],
+    [Verificatore], [18],[-],[€ 270,00],
+
+    table.cell(fill: luma(240))[*Totale RTB*],
+    table.cell(fill: luma(240))[*76*],
+    table.cell(fill: luma(240))[#text(fill: green)[*-2 -> € -50*]],
+    table.cell(fill: luma(240))[*€ 1.580,00*],
+  ),
+  caption: [Aggiornamento preventivo a finire sprint 1],
+)
+
 === Sprint 4
 *Periodo:* dal 01/02/2026 al 21/02/2026
 
@@ -1321,7 +1431,7 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
     ([Basso Kevin], 0, 3, 0, 0, 7, 0),
     ([Berengan Riccardo], 0, 0, 0, 0, 6, 3),
     ([Martinello Riccardo], 0, 1, 0, 0, 6, 0),
-    ([Sandu Antonio], 8, 3, 17, 0, 0, 3),
+    ([Sandu Antonio], 8, 3, 7, 0, 0, 3),
     ([Sgreva Andrea], 0, 2, 7, 0, 0, 0),
     ([Suar Alberto], 0, 2, 6, 0, 7, 4),
     ([Zago Alice], 0, 8, 5, 0, 0, 2),
