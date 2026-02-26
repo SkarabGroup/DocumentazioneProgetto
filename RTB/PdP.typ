@@ -1442,7 +1442,7 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
 ==== Retrospettiva dello Sprint 4
 
 ===== Valutazione del Periodo
-Lo Sprint ha mostrato un andamento sporadico. Gli obiettivi sono stati raggiunti ma con un grande ritardo rispetto alla previsione stabilita.
+Lo Sprint ha mostrato un andamento sporadico. Gli obiettivi sono stati raggiunti ma con un grande ritardo rispetto a quanto preventivato.
 
 ===== Stato di Avanzamento dei Deliverable
 - *Documentazione Normativa:* PdP, NdP e PdQ sono arrivati a una versione stabile, sono pronti per la revisione RTB.
@@ -1450,13 +1450,13 @@ Lo Sprint ha mostrato un andamento sporadico. Gli obiettivi sono stati raggiunti
 - *Proof of Concept:* Concluso e pronto per la RTB.
 
 ===== Dinamiche del Team e Coordinamento
-Il coordinamento interno di questo Sprint è stato molto compromesso da impegni riguardanti la sessione invernale e altri motivi personali. La distribuzione dei task è risultata tuttavia relativamente equilibrata e il processo di revisione ha portato alla conclusione delle attività previste con un ritardo di una settimana rispetto alla fine dello Sprint prevista.
+Il coordinamento interno di questo Sprint è stato molto compromesso da impegni riguardanti la sessione invernale di esami universitari e altri motivi personali. La distribuzione delle task è risultata tuttavia relativamente equilibrata e il processo di revisione ha portato alla conclusione delle attività previste con un ritardo di una settimana rispetto alla fine dello Sprint prevista.
 
 ===== Squilibri orari preventivati e reali
  - Data il ritardo della chiusura dello Sprint è naturale che le ore consuntive siano molte di più rispetto a quelle previste, specialmente tenedo conto del fatto che il team si è impegnato in maniera da concludere le attività per la RTB.
 - *Responsabile:* Preventivato 7h, Consuntivo 8h 
 - *Amministratore:* Preventivato 15h, Consuntivo 18h
-- *Analista:* Preventivato 20h, Consuntivo 36h 
+- *Analista:* Preventivato 20h, Consuntivo 25h 
  - Conflitti interni ed errata stima delle attività da svolgere all'interno del documento di analisi dei requisiti hanno portato a un grande investimento di risorse per poterlo concludere.
 - *Progettista:* Preventivato 0h, Consuntivo 0h
 - *Programmatore:* Preventivato 20h, Consuntivo 26h
@@ -1465,10 +1465,10 @@ Il coordinamento interno di questo Sprint è stato molto compromesso da impegni 
  
 ===== Rischi Rilevati
 Nel corso dello Sprint si sono manifestati i seguenti rischi, molti emersi per via del PoC e impegni didattici esterni al progetto:
-- #link(<RT4>)[#underline[[RT4]]]: durante lo sviluppo del PoC si è imbattuti in problemi di allucinazione da parte dei LLM utilizzati.
+- #link(<RT4>)[#underline[[RT4]]]: durante lo sviluppo del PoC ci si è imbattuti in problemi di allucinazione da parte dei LLM utilizzati.
 - #link(<RT8>)[#underline[[RT8]]]: nella fase di integrazione il team ha dovuto risolvere i problemi emersi nel provare a collegare le varie parti sviluppate.
-- #link(<RI1>)[#underline[[RI1]]]: a causa della sessione molti membri del team hanno dovuto ridurre drasticamente il tempo dedicato al progetto.
-- #link(<RI2>)[#underline[[RI2]]]: è successo che alcuni membri non fossero disponibili a causa di problemi di salutre, rallentando l'andamento generale. 
+- #link(<RI1>)[#underline[[RI1]]]: a causa della sessione di esami molti membri del team hanno dovuto ridurre drasticamente il tempo dedicato al progetto.
+- #link(<RI2>)[#underline[[RI2]]]: è successo che alcuni membri non fossero disponibili a causa di problemi di salute, rallentando l'andamento generale. 
 - #link(<RI4>)[#underline[[RI4]]]: la mancata comunicazione efficace su come svolgere alcune attività o il conflitto di idee hanno portato a un importante rallentamento e lavoro aggiuntivo.
 - #link(<RI5>)[#underline[[RI5]]]: è stata riscontrata una disomogeneità del lavoro svolto da parte dei membri durante lo sprint.
 - #link(<RCO1>)[#underline[[RCO1]]]: la fine delle attività è stata troppo ottimistica.
@@ -1476,6 +1476,5 @@ Nel corso dello Sprint si sono manifestati i seguenti rischi, molti emersi per v
 
 ===== Obiettivi per lo Sprint Successivo
 Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
-- proporre un'organizzazione migliore per la fase di PB
 - iniziare le attività di progettazione
 - aumentare il ritmo di lavoro data la fine della sessione
