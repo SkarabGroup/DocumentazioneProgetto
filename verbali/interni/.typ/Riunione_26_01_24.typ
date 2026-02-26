@@ -4,8 +4,15 @@
 #verbale(
   versioni: (
     (
-      "2026-01-26",
+      "2026-01-24",
       "1.0.0",
+      "Verifica verbale",
+      "",
+      members.antonio
+    ),
+    (
+      "2026-01-24",
+      "0.1.0",
       "Prima stesura del documento",
       members.kevin,
       members.antonio
@@ -59,25 +66,20 @@
     )
     
     = Azioni e responsabilità
-    #tabellaAzioni((
-      (
-        "Inizio sviluppo PoC",
-        members.kevin + ", " + members.suar + ", " + members.berengan,
-        "2026/01/24",
-        "In avanzamento",
-      ),
-      (
-        "Verifica PdP,PdQ,NdP",
-        members.alice + ", " + members.martinello,
-        "2026/01/24",
-        "In avanzamento",
-      ),
-      (
-        "Redazione AdR",
-        members.alice + ", " + members.antonio + ", " + members.andrea + ", " + members.martinello,
-        "2026/01/24",
-        "In avanzamento",
-      )
+    #task_table((
+      ("Orchestrator PoC", "Programmatore", "2:00"),
+      ("SpellChecker PoC", "Programmatore", "1:30"),
+      ("Creazione repo mock PoC", "Programmatore", "0:30"),
+      ("Parte Database PoC", "Programmatore", "4:00"),
+      ("Parte Server PoC", "Programmatore", "4:00"),
+      ("Verifica PoC", "Verificatore", "4:00"),
+      ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile", "4:30"),
+      ("Stesura diario di bordo", "Responsabile", "0:30"),
+      ("Aggiunta task Jira", "Responsabile", "0:30"),
+      ("Stesura verbale riunione seconda settimana", "Responsabile", "1:00"),
+      ("Verifica verbale riunione interna seconda settimana", "Verificatore", "0:15"),
+      ("Verifica AdR", "Verificatore", "1:00"),
+      ("Verifica PdP", "Verificatore", "1:00"),
     ))
     #chiusuraVerbale(orarioFineRiunione,presidenteRiunione)
   ],

@@ -4,8 +4,15 @@
 #verbale(
   versioni: (
     (
-      "2026-02-03",
+      "2026-02-01",
       "1.0.0",
+      "Verifica verbale",
+      "",
+      members.andrea
+    ),
+    (
+      "2026-02-01",
+      "0.1.0",
       "Prima stesura del documento",
       members.antonio,
       members.andrea
@@ -58,25 +65,15 @@
     )
     
     = Azioni e responsabilità
-    #tabellaAzioni((
-      (
-        "Continuazione sviluppo PoC",
-        members.kevin + ", " + members.suar + ", " + members.berengan + ", " + members.martinello,
-        "2026/02/09",
-        "In avanzamento",
-      ),
-      (
-        "Modifiche e revisione NdP, PdP e PdQ",
-        members.andrea + ", " + members.suar + ", " + members.kevin + ", " + members.alice,
-        "2026/02/09",
-        "In stato di rifinitura",
-      ),
-      (
-        "Redazione e verifica AdR",
-        members.antonio + ", " + members.andrea + ", " + members.berengan + ", " + members.alice,
-        "2026/02/09",
-        "In avanzamento",
-      )
+    #task_table((
+      ("Inserimento requisiti di qualità e di vincolo", "Analista", "1:30"),
+      ("Inserimento della colonna della priorità dei requisiti", "Analista", "1:30"),
+      ("Aggiunta UC mancanti con relativi diagrammi e requisiti", "Analista", "2:30"),
+      ("Aggiunta dei diagrammi mancanti ai casi d'uso esistenti", "Analista", "2:00"),
+      ("Link al glossario aggiornati in AdR", "Amministratore", "2:00"),
+      ("Stesura verbale riunione prima settimana", "Responsabile", "1:00"),
+      ("Verifica verbale riunione interna prima settimana", "Verificatore", "0:30"),
+      ("Aggiunta task Jira", "Responsabile", "0:30"),
     ))
     #chiusuraVerbale(orarioFineRiunione,presidenteRiunione)
   ],

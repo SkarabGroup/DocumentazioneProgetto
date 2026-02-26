@@ -5,9 +5,17 @@
   versioni: (
     (
       "2026-02-07",
-      "1.0.0",
+      "0.1.0",
+      "Verifica verbale",
+      "",
+      members.suar
+    ),
+    (
+      "2026-02-07",
+      "0.1.0",
       "Prima stesura del documento",
-      members.antonio
+      members.antonio,
+      members.suar
     ),
   ),
 
@@ -73,25 +81,14 @@
     )
 
     = Azioni e responsabilità
-    #tabellaAzioni((
-      (
-        "Continuazione sviluppo PoC",
-        members.kevin + ", " + members.suar + ", " + members.berengan + ", " + members.martinello,
-        "2026/02/10",
-        "In avanzamento/prossimo alla conclusione",
-      ),
-      (
-        "Modifiche e revisione NdP, PdP e PdQ",
-        members.suar + ", " + members.kevin + ", " + members.alice + ", " + members.antonio,
-        "2026/02/12",
-        "In avanzamento",
-      ),
-      (
-        "Redazione e verifica AdR",
-        members.antonio + ", " + members.andrea + ", " + members.berengan + ", " + members.alice,
-        "2026/02/12",
-        "In avanzamento",
-      )
+    #task_table((
+      ("Terminazione della parti del PoC", "Programmatore", "14:00"),
+      ("Integrazione delle parti", "Programmatore", "2:00"),
+      ("Rielaborazione delle sezioni di procedure applicata nella stesura di AdR, PdP, PdQ in NdP", "Amministratore", "6:00"),
+      ("Integrazioni a PdQ e Metriche nel documento di NdP", "Amministratore", "2:00"),
+      ("Aggiunta dei requisiti mancanti ai casi d'uso esistenti", "Analista", "2:00"),
+      ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile", "2:30"),
+      ("Verifica PoC", "Verificatore", "1:00"),
     ))
     #chiusuraVerbale(orarioFineRiunione,presidenteRiunione)
   ],

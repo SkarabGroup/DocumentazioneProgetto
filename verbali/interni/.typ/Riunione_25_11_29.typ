@@ -7,6 +7,7 @@
       "2025-11-29",
       "1.0.0",
       "Verifica verbale",
+      "",
       members.alice,
     ),
     (
@@ -110,5 +111,6 @@
         "2025/12/06",
       ),
     ))
+    #chiusuraVerbale(orarioFineRiunione,presidenteRiunione)
   ],
 )

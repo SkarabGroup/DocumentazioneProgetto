@@ -6,6 +6,13 @@
     (
       "2026-01-17",
       "1.0.0",
+      "Verifica verbale",
+      "",
+      members.andrea
+    ),
+    (
+      "2026-01-17",
+      "0.1.0",
       "Prima stesura del documento",
       members.kevin,
       members.andrea
@@ -74,36 +81,18 @@
       "È stata discussa la necessità di modificare i costi orari delle risorse umane coinvolte nel progetto, al fine di predisporre un preventivo accurato per la RTB.",
       decisione: "Si è deciso aumentare le ore di Amministratore e Analista per riflettere meglio il lavoro svolto in queste aree. Le modifiche saranno implementate nel documento di Piano di Progetto.",
     )
-
-   
-    
-    
+    #pagebreak()
     = Azioni e responsabilità
-    #tabellaAzioni((
-      (
-        "Gestione GitHub actions",
-        members.suar + ", " + members.kevin,
-        "2026/01/24",
-        "Da iniziare",
-      ),
-      (
-        "Inizio sviluppo PoC",
-        members.kevin + ", " + members.suar + ", " + members.berengan,
-        "2026/01/24",
-        "Da iniziare",
-      ),
-      (
-        "Verifica PdP,PdQ,NdP",
-        members.alice + ", " + members.martinello,
-        "2026/01/24",
-        "Da iniziare",
-      ),
-      (
-        "Redazione AdR",
-        members.alice + ", " + members.antonio + ", " + members.andrea + ", " + members.martinello,
-        "2026/01/24",
-        "In avanzamento",
-      )
+    #task_table((
+      ("Stesura UC33-38", "Analista", "8:00"),
+      ("Stesura requisiti UC33-38", "Analista", "3:00"),
+      ("Controllo e correzione UC e requisiti", "Analista", "5:00"),
+      ("Aggiunta sezione a NdP", "Amministratore", "1:00"),
+      ("Revisione AdR", "Amministratore", "2:00"),
+      ("Sezione sprint 3 PdP", "Responsabile", "0:30"),
+      ("Stesura verbale riunione prima settimana", "Responsabile", "1:00"),
+      ("Verifica verbale riunione interna prima settimana", "Verificatore", "0:15"),
+      ("Verifica NdP", "Verificatore", "1:30"),
     ))
     #chiusuraVerbale(orarioFineRiunione,presidenteRiunione)
   ],

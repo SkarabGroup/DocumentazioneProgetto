@@ -4,25 +4,35 @@
 
 #verbale(
   versioni: (
-    ("2025-12-19", "1.0.0", "Creazione documento", "Basso Kevin", "Suar Alberto"),
+    (
+      "2025-12-19", 
+      "1.0.0", 
+      "Verifica verbale", 
+      "",
+      members.kevin
+      ),
+    (
+      "2025-12-19", 
+      "0.1.0", 
+      "Prima stesura del documento", 
+      members.suar,
+      members.kevin
+      ),
   ),
 
-  presenti: (
-    members.suar,
-    members.kevin,
-    members.andrea,
-    members.martinello,
-    members.antonio,
-    members.alice,
-    members.berengan,
-  ),
+  presenti: [
+    #members.suar,
+    #members.kevin,
+    #members.andrea,
+    #members.martinello,
+    #members.antonio,
+    #members.alice,
+    #members.berengan
+  ],
 
-  assenze: (
-    "",
-  ),
+  assenze: [],
 
   [
-
     = Ordine del giorno
     == Argomenti proposti
     #let punto1 = "Suddivisione ruoli per stesura documenti RTB"
@@ -70,27 +80,23 @@
     )
 
     = Azioni e responsabilità
-    #tabellaAzioni((
-      (
-        "Prima stesura del documento di analisi dei requisiti e glossario",
-        members.suar + " - " + members.kevin,
-        "2025-12-29",
-      ),
-      (
-        "Prima stesura del documento piano di progetto",
-        members.andrea + " - " + members.antonio,
-        "2025-12-29",
-      ),
-      (
-        "Prima stesura del documento piano di qualifica",
-        members.alice + " - " + members.berengan,
-        "2025-12-29",
-      ),
-      (
-        "Prima stesura del documento norme di progetto",
-        members.martinello,
-        "2025-12-29",
-      ),
+    #task_table((
+      ("Stabilita struttura repository e setup strumenti", "Amministratore", "6:00"),
+      ("Stesura introduzione AdR", "Amministratore", "1:00"),
+      ("Stesura scopo del documento AdR", "Amministratore", "1:00"),
+      ("Stesura prospettiva del prodotto", "Amministratore", "0:30"),
+      ("Stesura funzioni del prodotto", "Amministratore", "0:30"),
+      ("Prima stesura NdP", "Amministratore", "4:00"),
+      ("Stesura introduzione PdP", "Amministratore", "1:00"),
+      ("Stesura sezione scopo PdP", "Amministratore", "1:30"),
+      ("Stesura introduzione PdQ", "Amministratore", "1:00"),
+      ("Stesura scopo PdQ", "Amministratore", "0:30"),
+      ("Stesura sezione qualità di processo PdQ", "Amministratore", "0:30"),
+      ("Definizione attori dei casi d'uso", "Analista", "1:00"),
+      ("Stesura verbale riunione prima settimana", "Responsabile", "1:30"),
+      ("Verifica verbale riunione interna prima settimana", "Verificatore", "0:15"),
     ))
+    
+    #chiusuraVerbale(orarioFineRiunione,presidenteRiunione)
   ],
 )

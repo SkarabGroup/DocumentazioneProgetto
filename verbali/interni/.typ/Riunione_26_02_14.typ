@@ -6,8 +6,16 @@
     (
       "2026-02-14",
       "1.0.0",
+      "Verifica verbale",
+      "",
+      members.suar
+    ),
+    (
+      "2026-02-14",
+      "0.1.0",
       "Prima stesura del documento",
-      members.antonio
+      members.antonio,
+      members.suar
     ),
   ),
 
@@ -55,37 +63,16 @@
     )
 
     = Azioni e responsabilità
-    #tabellaAzioni((
-      (
-        "Unione delle parti del PoC, stesura del documento di presentazione",
-        members.kevin + ", " + members.suar + ", " + members.berengan + ", " + members.martinello,
-        "2026/02/16",
-        "Da iniziare",
-      ),
-      (
-        "Modifiche alla sezione dei processi in NdP",
-        members.suar + ", " + members.kevin + ", " + members.alice,
-        "2026/02/16",
-        "Da iniziare",
-      ),
-      (
-        "Redazione e verifica AdR",
-        members.antonio + ", " + members.andrea + ", " + members.berengan + ", " + members.martinello,
-        "2026/02/16",
-        "In avanzamento/prossimo alla conclusione",
-      ),
-      (
-        "Chiusura Sprint4 nel PdP",
-        members.antonio,
-        "2026/02/16",
-        "Da iniziare",
-      ),
-      (
-        "Test finali e gradici del quarto sprint in PdQ",
-        members.alice,
-        "2026/02/16",
-        "Da iniziare"
-      ),
+    #task_table((
+      ("Revisione del documento", "Analista", "5:00"),
+      ("Aggiunta tabella attività sprint 1,2,3 a PdP", "Amministratore", "3:00"),
+      ("Test di Accettazione e rielaborazione Test di Sistema", "Amministratore", "2:00"),
+      ("Aggiunto sprint 4 nel PdP", "Responsabile", "2:30"),
+      ("Stesura verbale riunione seconda settimana", "Responsabile", "1:00"),
+      ("Verifica AdR", "Verificatore", "5:00"),
+      ("Verifica PdP", "Verificatore", "2:00"),
+      ("Verifica NdP", "Verificatore", "2:00"),
+      ("Verifica verbale riunione interna seconda settimana", "Verificatore", "0:30"),
     ))
     #chiusuraVerbale(orarioFineRiunione,presidenteRiunione)
   ],

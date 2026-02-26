@@ -13,7 +13,7 @@
     (
       "2025-12-06",
       "0.1.0",
-      "Creazione documento e sintesi attività FE/BE",
+      "Prima stesura del documento",
       members.suar,
       members.alice,
     ),
@@ -105,8 +105,6 @@
         "2025/12/13",
       ),
     ))
-
-    = Chiusura
-    La riunione si è conclusa alle ore #orarioFineRiunione.
+    #chiusuraVerbale(orarioFineRiunione,presidenteRiunione)
   ],
 )
