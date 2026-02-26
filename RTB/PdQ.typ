@@ -11,12 +11,18 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.10.0"
+#let versione = "v0.11.0"
 
 #titlePage("Piano di Qualifica", versione)
 #set heading(numbering: "1.1.1")
 #set page(numbering: "1", header: header("Piano di Qualifica"), footer: footer())
 #let history = (
+  (
+    "2026/02/26",
+    "0.11.0",
+    "Aggiunta grafici mancanti",
+    members.alice,
+  ),
   (
     "2026/02/25",
     "0.10.0",
@@ -2241,50 +2247,65 @@ Dopo la fase iniziale, in cui le attività di formazione e setup sono state gest
 
 Tuttavia, la situazione ha subito una variazione significativa durante lo _Sprint 2_: a fronte di un incremento del _Planned Value_ (PV) e dell'_Actual Cost_ (AC), l'_Earned Value_ (EV) ha subito una flessione. Questo testimonia l'insorgere di inefficienze produttive e debito tecnico, legati alla necessità di ricalibrare task qualitativamente insufficienti che hanno rallentato la produzione.
 
-A partire dallo _Sprint 3_, la situazione si è progressivamente stabilizzata: l'_Earned Value_
-(EV) ha ripreso ad allinearsi con il _Planned Value_ (PV), segnalando un recupero
-dell'efficienza produttiva e una migliore gestione delle attività pianificate.
+Nello _Sprint 3_, nonostante una parziale ripresa, l'_Earned Value_ rimane ancora al di sotto del _Planned Value_, segnalando che il ritardo accumulato non è ancora stato recuperato. Nello _Sprint 4_ è possibile notare un miglioramento: EV e PV iniziano ad allinearsi.
 
 #pagebreak()
 === Budget Variance - Schedule Variance (MPC05 e MPC06)
 #image("../assets/graficiPdQ/grafico_bv_sv.png", height: 50%)
 Il grafico monitora la salute economica e temporale del progetto a partire dallo _Sprint 1_ durante il quale la _Schedule Variance_ (SV) mostra una leggera flessione. Quest'ultima si è accentuata nello _Sprint 2_, riflettendosi anche sulla _Budget Variance_ (BV).
 
+Successivamente, il ritardo accumulato negli sprint precedenti ha continuato a pesare sulla metrica. Nel corso dello _Sprint 4_, però, la _Schedule Variance_ torna a zero.
+
 #pagebreak()
 === Cost Performance Index - Schedule Performance Index (MPC07 e MPC08)
 #image("../assets/graficiPdQ/grafico_cpi_spi.png", height: 50%)
-Dal grafico è possibile notare come, inizialmente, lo _Schedule Performance Index_ (SPI) sia inferiore a 1, indicando un leggero ritardo fisiologico. La buona gestione dei costi è invece documentata dal _Cost Performance Index_ (CPI) che, essendo pari a 1, indica un ottimo utilizzo del budget.
+Dal grafico è possibile notare come, inizialmente, lo _Schedule Performance Index_ (SPI) sia inferiore a 1, indicando un leggero ritardo fisiologico. La buona gestione dei costi è invece documentata dal _Cost Performance Index_ (CPI).
 
-La situazione è peggiorata nel corso dello _Sprint 2_, durante il quale si è verificato un crollo dello _Schedule Performance Index_ (SPI) che segnala un ritardo critico rispetto alla pianificazione. La cattiva gestione temporale è in contrasto con il _Cost Performance Index_ (CPI) che si mantiene abbastanza stabile, confermando che il problema non è di natura economica ma organizzativa.
+La situazione è peggiorata nel corso dello _Sprint 2_, durante il quale si è verificato un crollo dello _Schedule Performance Index_ (SPI) che segnala un ritardo critico rispetto alla pianificazione.
 
-A partire dallo _Sprint 3_, la situazione ha iniziato a recuperare.
+A partire dallo _Sprint 3_, entrambe le metriche hanno iniziato a recuperare progressivamente.
 
 #pagebreak()
 === Estimate at Completion (MPC09)
 #image("../assets/graficiPdQ/grafico_eac.png", height: 50%)
 Dopo una fase iniziale di stabilità coincidente con il budget originale, è possibile notare come una gestione inefficiente delle risorse abbia spinto la previsione di spesa verso il limite massimo.
 
-A partire dallo _Sprint 3_, l'EAC è migliorato.
+Nello _Sprint 3_ la situazione è migliorata, con l'EAC che è rientrato entro i limiti accettabili. Tuttavia, nello _Sprint 4_, lo sforamento orario dovuto alle
+revisioni dell'Analisi dei Requisiti ha
+spinto nuovamente l'EAC a 12.941€, superando il BAC ma rimanendo al di sotto del limite
+superiore. Il team si impegna ad adottare azioni correttive nella fase successiva per
+ricondurre la previsione di spesa entro i parametri ottimali.
 
 #pagebreak()
 === Requirements Stability Index (MPC10)
 #image("../assets/graficiPdQ/grafico_rsi.png", height: 50%)
 Il _Requirements Stability Index_ (RSI) registra un peggioramento nel corso dello _Sprint 2_. Tale flessione è riconducibile a una sottostima iniziale dei requisiti impliciti e all'emersione di ulteriori requisiti in seguito al colloquio con il Prof. Cardin: il team ha dovuto apportare modifiche significative per aggiungere i requisiti non tracciati in precedenza dagli Analisti.
 
+Nello _Sprint 4_, la riscrittura di
+casi d'uso malposti e l'inserimento di requisiti mancanti hanno causato un ulteriore calo dell'indice all'80%, mantenendosi comunque al di sopra della soglia minima
+accettabile.
+
 #pagebreak()
 == Processi di Supporto
 === Gulpease Index (MPC11)
+#image("../assets/graficiPdQ/grafico_gulpease.png", height: 50%)
 Il grafico mostra un andamento complessivamente positivo dei documenti monitorati: a partire dallo _Sprint 1_, i valori si attestano al di sopra della soglia minima accettabile. L'_Analisi dei Requisiti_ presenta una lieve flessione nello _Sprint 2_, riconducibile alla necessità di introdurre terminologia tecnica più densa e alla fase di revisione intensiva dei requisiti.
 In generale, Skarab Group si impegna a mantenere nel tempo una buona leggibilità dei documenti.
 
+#pagebreak()
 === Correttezza Ortografica (MPC12)
+#image("../assets/graficiPdQ/errori_ortografici.png", height: 50%)
 Durante i primi sprint, il grafico evidenzia la presenza di alcuni errori ortografici nella documentazione, con un picco registrato nello _Sprint 2_. Il team ha prontamente identificato la criticità e adottato misure correttive, portando il conteggio degli errori a zero entro lo _Sprint 3_ per la maggior parte dei documenti.
 
 #pagebreak()
 == Processi Organizzativi
 === Metrics Satisfaction (MPC15)
-Durante lo _Sprint 1_ il valore si è attestato leggermente al di sopra della soglia minima accettabile, indicando una buona ma non ancora ottimale conformità ai criteri di qualità definiti. Nello _Sprint 2_ si è registrata una flessione al di sotto della soglia minima accettabile. Il team ha prontamente reagito adottando azioni correttive mirate, riportando il valore al di sopra della soglia accettabile già dallo _Sprint 3_.
+#image("../assets/graficiPdQ/grafico_ms.png", height: 50%)
+Durante lo _Sprint 1_ il valore si è attestato leggermente al di sopra della soglia minima accettabile, indicando una buona ma non ancora ottimale conformità ai criteri di qualità definiti. Nello _Sprint 2_ si è registrata una flessione al di sotto della soglia minima accettabile.
 
+Nello _Sprint 4_, lo sforamento orario e le difficoltà incontrate hanno causato un nuovo calo. Il team prende atto della criticità e si impegna ad adottare misure correttive nella fase successiva per garantire un maggiore rispetto delle metriche definite.
+
+#pagebreak()
 === Sprint Goal Achievement (MPC16)
 #image("../assets/graficiPdQ/grafico_sga.png", height: 50%)
 Dal grafico è possibile osservare la buona efficacia operativa dimostrata durante lo _Sprint 1_ dal team, che è riuscito a completare gli obiettivi prefissati quasi nella loro interezza. Durante lo _Sprint 2_, invece, la metrica ha subito una flessione poiché gli obiettivi prefissati non sono stati pienamente raggiunti.
