@@ -945,37 +945,6 @@ Per lo Sprint 2 il team si pone i seguenti obiettivi:
 ]
 #pagebreak()
 
-===== Aggiornamento preventivo a finire
-
-#figure(
-  table(
-    fill: (col, row) => if row == 0 { luma(64%) } else { white },
-    columns: (1fr, 1fr, 1fr, 1fr),
-    inset: 10pt,
-    align: center + horizon,
-    stroke: 0.5pt + luma(200),
-
-    table.header(
-      text(fill: white, weight: "bold")[Ruolo],
-      text(fill: white, weight: "bold")[Ore rimanenti],
-      text(fill: white, weight: "bold")[Differenze rispetto a preventivo],
-      text(fill: white, weight: "bold")[Preventivo a finire costi],
-    ),
-
-    [Responsabile], [15], [-],[€ 450],
-    [Amministratore], [28], [-], [€ 700,00],
-    [Analista], [52], text(fill: green)[-4 -> € -100],[€ 1.300,00],
-    [Progettista], [14], [-],[€ 350,00],
-    [Programmatore], [21], [-],[€ 315,00],
-    [Verificatore], [34], text(fill: green)[-4 -> € -60],[€ 510,00],
-
-    table.cell(fill: luma(240))[*Totale RTB*],
-    table.cell(fill: luma(240))[*164*],
-    table.cell(fill: luma(240))[#text(fill: green)[*-8 -> € -160*]],
-    table.cell(fill: luma(240))[*€ 3.625,00*],
-  ),
-  caption: [Aggiornamento preventivo a finire sprint 1],
-)
 
 === Sprint 2
 *Periodo:* dal 03/01/2026 al 17/01/2026
