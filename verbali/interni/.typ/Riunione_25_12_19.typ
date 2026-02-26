@@ -77,25 +77,21 @@
         "Prima stesura del documento di analisi dei requisiti e glossario",
         members.suar + " - " + members.kevin,
         "2025-12-29",
-        "In corso di svolgimento",
       ),
       (
         "Prima stesura del documento piano di progetto",
         members.andrea + " - " + members.antonio,
         "2025-12-29",
-        "Da iniziare",
       ),
       (
         "Prima stesura del documento piano di qualifica",
         members.alice + " - " + members.berengan,
         "2025-12-29",
-        "Da iniziare",
       ),
       (
         "Prima stesura del documento norme di progetto",
         members.martinello,
         "2025-12-29",
-        "Da iniziare",
       ),
     ))
   ],
