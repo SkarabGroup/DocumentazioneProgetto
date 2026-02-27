@@ -11,7 +11,7 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.14.0"
+#let versione = "v0.13.1"
 #set heading(numbering: "1.1.1")
 
 #titlePage("Norme di Progetto", versione)
@@ -20,7 +20,7 @@
 #let history = (
   (
     "2026/02/27",
-    "0.14.0",
+    "0.13.1",
     "Verifica per la sezione Processo di Sviluppo e sezione Processi Organizzativi",
     members.andrea
   ),
@@ -1960,7 +1960,7 @@ identificate come necessarie al completamento del progetto sono:
 
     [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#typst")[#def[Typst]]], [Documentazione ufficiale Typst; template e funzioni del repository interno.],
 
-    [Agenti AI e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#llm")[#def[LLM]]],
+    [Agenti AI e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]],
     [Documentazione framework specifici; documentazione Var Group fornita nelle sessioni di formazione dedicate.],
 
     [AWS], [Documentazione ufficiale AWS; materiale fornito da Var Group durante le sessioni di formazione.],
