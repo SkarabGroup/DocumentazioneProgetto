@@ -1394,9 +1394,7 @@ Per garantire la massima coerenza stilistica e facilitare il lavoro collaborativ
 
 
 = Processi di Supporto
-In conformità allo standard #link(<12207>)[ISO/IEC/IEEE 12207], i Processi di Supporto
-comprendono le attività trasversali che accompagnano l'intero ciclo di vita del progetto,
-garantendo la qualità, la tracciabilità e la verificabilità degli artefatti prodotti.
+In conformità allo standard #link(<12207>)[ISO/IEC/IEEE 12207], i Processi di Supporto comprendono le attività trasversali che accompagnano l'intero ciclo di vita del progetto, garantendo la qualità, la tracciabilità e la verificabilità degli artefatti prodotti.
 
 Nel contesto del progetto _Code Guardian_, Skarab Group ha identificato i seguenti Processi di Supporto rilevanti:
 - Documentazione;
@@ -1440,22 +1438,13 @@ Ogni documento adotta il seguente schema di versionamento semantico:
 
 dove:
 - `x` (*Major*): incrementato solo all'approvazione formale del documento da parte del Responsabile;
-- `y` (*Minor*): incrementato al completamento di una modifica sostanziale, dopo la verifica;
+- `y` (*Minor*): incrementato al completamento di una modifica sostanziale;
 - `z` (*Patch*): incrementato per modifiche minori (correzioni ortografiche, aggiustamenti di forma).
 
 Il changelog deve essere aggiornato ad ogni incremento di versione.
 
-==== Branching Strategy
-La gestione del codice sorgente segue la seguente struttura di branch:
-
-- `main`: branch stabile, contenente esclusivamente documenti approvati o verificati.
-- `develop`: branch di integrazione principale, protetto — ogni modifica richiede Pull Request con revisione obbligatoria da parte di almeno un membro diverso dal redattore.
-- `feature/nome-feature`: branch per lo sviluppo di nuove funzionalità software.
-- `fix/nome-fix`: branch per la correzione di bug.
-- `acronimo-documento` (es. `NdP`, `PdP`, `AdR`): branch dedicati alla redazione o aggiornamento di specifici documenti.
-
-*Regola fondamentale*: il branch `main` contiene esclusivamente artefatti verificati.
-Il branch `develop` è protetto e richiede Pull Request approvata da un Verificatore diverso dal redattore prima di qualsiasi integrazione.
+==== Branching
+La gestione dei documenti viene svolta all'interno del repository `DocumentazioneProgetto` e segue la struttura di branching descritta nella sezione dedicata alla #link(<branching>)[Struttura dei repository], a eccezione dei branch `nome-componente` siccome è una nomenclatura dedicata al repository `PoC`.
 
 ==== Denominazione dei File
 La denominazione dei file sorgente Typst segue lo schema:
@@ -1870,10 +1859,24 @@ Il gruppo utilizza diversi strumenti per supportare l'organizzazione del lavoro.
 
 === Configurazione dei Principali Strumenti
 
-==== GitHub - Struttura del Repository
-Il repository `DocumentazioneProgetto` è strutturato secondo quanto descritto nella sezione *Documentazione* del presente documento. L'Amministratore è responsabile di:
+==== GitHub - Struttura dei Repository
+I repository che vengono sviluppati nel corso del progetto sono strutturati secondo il branching sotto descritto. 
+L'Amministratore è responsabile di:
 - definire e applicare le regole di protezione dei branch (`develop` e `main`);
 - configurare le GitHub Actions per il deploy del sito web;
+
+===== Branching dei repository <branching>
+La gestione del codice sorgente segue la seguente struttura di branch:
+
+- `main`: branch stabile, contenente esclusivamente documenti approvati e verificati.
+- `develop`: branch di integrazione principale, protetto — ogni modifica richiede Pull Request con revisione obbligatoria da parte di almeno un membro diverso dal redattore.
+- `feature/nome-feature`: branch per lo sviluppo di nuove funzionalità software. Saranno adottati durante la fase di PB. Le eventuali funzionalità che emergeranno prima seguiranno la nomenclatura `nome-funzionalità`, senza creare branche feature.
+- `fix/nome-fix`: branch per la correzione di bug.
+- `acronimo-documento` (es. `NdP`, `PdP`, `AdR`): branch dedicati alla redazione o aggiornamento di specifici documenti. Un'eccezione viene fatta per i verbali che vengono raggruppati nel branch `verbali`.
+- `nome-componente`: branch per lo sviluppo delle componenti usate per il PoC; durante la fase di PB questa nomenclatura diventerà deprecata, verranno usati i feature branch.
+
+*Regola fondamentale*: il branch `main` contiene esclusivamente artefatti verificati e approvati.
+Il branch `develop` è protetto e richiede Pull Request approvata da un Verificatore diverso dal redattore prima di qualsiasi integrazione.
 
 ==== Script di Automazione
 Gli script di automazione attualmente in uso includono:
