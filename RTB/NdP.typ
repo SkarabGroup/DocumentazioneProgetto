@@ -11,13 +11,19 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.12.0"
+#let versione = "v0.14.0"
 #set heading(numbering: "1.1.1")
 
 #titlePage("Norme di Progetto", versione)
 #set page(numbering: "1", header: header("Norme di Progetto"), footer: footer())
 
 #let history = (
+  (
+    "2026/02/27",
+    "0.14.0",
+    "Verifica per la sezione Processo di Sviluppo e sezione Processi Organizzativi",
+    members.andrea
+  ),
   (
     "2026/02/27",
     "0.13.0",
@@ -1701,10 +1707,10 @@ costituiscono l'insieme delle attività trasversali che garantiscono il corretto
 progetto dal punto di vista gestionale, infrastrutturale e della crescita professionale del team.
 
 Nel contesto del progetto _Code Guardian_, Skarab Group ha identificato i seguenti Processi Organizzativi rilevanti:
-- Gestione dei Processi;
-- Infrastruttura;
-- Processo di Miglioramento;
-- Processo di Formazione.
+- *Gestione dei Processi*;
+- *Infrastruttura*;
+- *Processo di Miglioramento*;
+- *Processo di Formazione*.
 
 == Gestione dei Processi
 Il processo di Gestione dei Processi ha l'obiettivo di definire e coordinare le attività del
@@ -1762,10 +1768,10 @@ Ogni membro di Skarab Group ricopre ruoli differenti nel corso del progetto, gar
 rotazione ciclica prevista dalla struttura didattica del corso. La distribuzione dei ruoli per
 ciascuno Sprint è pianificata dal Responsabile di Progetto all'inizio dello Sprint e tracciata nel Piano di Progetto.
 
-=== Gestione dei Task e Pianificazione Operativa
+=== Gestione delle Task e Pianificazione Operativa
 
 ==== Strumento di Issue Tracking: Jira
-La gestione operativa dei task avviene esclusivamente tramite #def[Jira], che costituisce la
+La gestione operativa delle task avviene esclusivamente tramite #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#jira")[#def[Jira]], che costituisce la
 fonte ufficiale di dati per il monitoraggio dell'avanzamento e per la rendicontazione delle
 ore. Ogni membro del gruppo ha accesso alle proprie attività assegnate.
 
@@ -1776,10 +1782,10 @@ Ogni task su Jira deve includere obbligatoriamente:
 - scadenza temporale;
 - collegamento allo Sprint di riferimento.
 
-I task devono essere definiti in modo *atomico* (eseguibili da un singolo membro, senza
+Le task devono essere definite in modo *atomico* (eseguibili da un singolo membro, senza
 dipendenze bloccanti non esplicitate).
 
-L'aggiornamento dello stato dei task (ore rendicontate, avanzamento) è responsabilità
+L'aggiornamento dello stato delle task (ore rendicontate, avanzamento) è responsabilità
 individuale di ciascun membro, il quale deve segnalare eventuali impedimenti o ritardi.
 
 === Coordinamento: Riunioni e Comunicazioni
@@ -1791,16 +1797,17 @@ Le riunioni interne si tengono con cadenza settimanale e hanno lo scopo di:
 - identificare e risolvere impedimenti o problemi aperti;
 - gestire l'eventuale rotazione dei ruoli.
 
-Le riunioni interne si svolgono in modalità virtuale tramite *#def[Discord]* e permettono ai membri del team di allinearsi sugli obiettivi comuni.
+Le riunioni interne si svolgono in modalità virtuale tramite *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#discord")[#def[Discord]]* e permettono ai membri del team di allinearsi sugli obiettivi comuni.
 Ogni riunione deve produrre un verbale interno, redatto dal Responsabile di Progetto.
 
 ==== Riunioni Esterne
-Le riunioni esterne, organizzate dal Responsabile di Progetto, si tengono con il #def[Proponente] Var Group, quando necessario per:
+Le riunioni esterne, organizzate dal Responsabile di Progetto, si tengono con il #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#proponente")[#def[Proponente]] Var Group
+quando necessario per:
 - presentare lo stato di avanzamento del progetto;
 - discutere requisiti, feedback e modifiche;
 - allineare le aspettative e pianificare le fasi successive.
 
-Le comunicazioni per la convocazione avvengono tramite email del gruppo.
+Le comunicazioni per la convocazione avvengono tramite email del gruppo.   
 Le riunioni si svolgono in presenza o in modalità virtuale secondo quanto concordato con il Proponente. Ogni riunione esterna deve produrre un verbale esterno, da condividere
 con Var Group.
 
@@ -1816,9 +1823,9 @@ La comunicazione interna del team avviene attraverso le seguenti piattaforme, og
 
     [*Strumento*], [*Utilizzo*], [*Tipo*],
 
-    [#def[WhatsApp]], [Comunicazioni rapide e urgenti, aggiornamenti quotidiani di breve durata.], [Asincrono],
-    [#def[Telegram]], [Discussioni più strutturate, condivisione di file e link, coordinamento di gruppo.], [Asincrono],
-    [#def[Discord]],
+    [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#whatsapp")[#def[WhatsApp]]], [Comunicazioni rapide e urgenti, aggiornamenti quotidiani di breve durata.], [Asincrono],
+    [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#telegram")[#def[Telegram]]], [Discussioni più strutturate, condivisione di file e link, coordinamento di gruppo.], [Asincrono],
+    [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#discord")[#def[Discord]]],
     [Riunioni virtuali settimanali, sessioni di lavoro condivise, discussione di criticità complesse.],
     [Sincrono],
 
@@ -1826,7 +1833,7 @@ La comunicazione interna del team avviene attraverso le seguenti piattaforme, og
     [Comunicazioni formali con Var Group, Prof. Cardin e Prof. Vardanega. Gestita dal Responsabile di Progetto.],
     [Formale],
 
-    [#def[Jira]],
+    [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#jira")[#def[Jira]]],
     [Assegnazione e tracciamento task, monitoraggio avanzamento Sprint, gestione delle scadenze.],
     [Asincrono],
   ),
@@ -1835,7 +1842,7 @@ La comunicazione interna del team avviene attraverso le seguenti piattaforme, og
 
 == Infrastruttura
 Il Processo di Infrastruttura è responsabile della creazione, configurazione e manutenzione
-di tutti gli strumenti e gli ambienti necessari allo svolgimento delle attività di progetto.
+di tutti gli strumenti e gli ambienti necessari allo svolgimento delle attività di progetto. \
 La gestione dell'infrastruttura è di competenza dell'Amministratore di Progetto.
 
 === Strumenti Adottati
@@ -1850,13 +1857,13 @@ Il gruppo utilizza diversi strumenti per supportare l'organizzazione del lavoro.
 
     [*Strumento*], [*Utilizzo nel progetto*],
 
-    [#def[Git]],
+    [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#git")[#def[Git]]],
     [Sistema di controllo versione distribuito per la gestione del codice sorgente e della documentazione. Strumento base per il versionamento di tutti gli artefatti del progetto.],
 
-    [GitHub],
+    [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#github")[#def[GitHub]]],
     [Hosting remoto dei repository Git. Utilizzato per la sincronizzazione del lavoro tra i membri, la gestione delle Pull Request, la code review e le issue.],
 
-    [Google Calendar],
+    [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#google-calendar")[#def[Google Calendar]]],
     [Calendario condiviso per la pianificazione e il promemoria delle riunioni esterne con Var Group e delle scadenze di progetto. Gestito dal Responsabile.],
 
     [Script di automazione],
@@ -1868,7 +1875,7 @@ Il gruppo utilizza diversi strumenti per supportare l'organizzazione del lavoro.
 === Configurazione dei Principali Strumenti
 
 ==== GitHub - Struttura dei Repository
-I repository che vengono sviluppati nel corso del progetto sono strutturati secondo il branching sotto descritto. 
+I repository che vengono sviluppati nel corso del progetto sono strutturati secondo il branching di seguito descritto.  \
 L'Amministratore è responsabile di:
 - definire e applicare le regole di protezione dei branch (`develop` e `main`);
 - configurare le GitHub Actions per il deploy del sito web;
@@ -1876,11 +1883,11 @@ L'Amministratore è responsabile di:
 ===== Branching dei repository <branching>
 La gestione del codice sorgente segue la seguente struttura di branch:
 
-- `main`: branch stabile, contenente esclusivamente documenti approvati e verificati.
-- `develop`: branch di integrazione principale, protetto — ogni modifica richiede Pull Request con revisione obbligatoria da parte di almeno un membro diverso dal redattore.
-- `feature/nome-feature`: branch per lo sviluppo di nuove funzionalità software. Saranno adottati durante la fase di PB. Le eventuali funzionalità che emergeranno prima seguiranno la nomenclatura `nome-funzionalità`, senza creare branche feature.
-- `fix/nome-fix`: branch per la correzione di bug.
-- `acronimo-documento` (es. `NdP`, `PdP`, `AdR`): branch dedicati alla redazione o aggiornamento di specifici documenti. Un'eccezione viene fatta per i verbali che vengono raggruppati nel branch `verbali`.
+- `main`: branch stabile, contenente esclusivamente documenti approvati e verificati;
+- `develop`: branch di integrazione principale, protetto — ogni modifica richiede Pull Request con revisione obbligatoria da parte di almeno un membro diverso dal redattore;
+- `feature/nome-feature`: branch per lo sviluppo di nuove funzionalità software. Saranno adottati durante la fase di PB. Le eventuali funzionalità che emergeranno prima seguiranno la nomenclatura `nome-funzionalità`, senza creare branch feature;
+- `fix/nome-fix`: branch per la correzione di bug;
+- `acronimo-documento` (es. `NdP`, `PdP`, `AdR`): branch dedicati alla redazione o aggiornamento di specifici documenti. Un'eccezione viene fatta per i verbali che vengono raggruppati nel branch `verbali`;
 - `nome-componente`: branch per lo sviluppo delle componenti usate per il PoC; durante la fase di PB questa nomenclatura diventerà deprecata, verranno usati i feature branch.
 
 *Regola fondamentale*: il branch `main` contiene esclusivamente artefatti verificati e approvati.
@@ -1917,7 +1924,7 @@ Al termine di ogni Sprint, durante la retrospettiva, il team:
 
 Le modifiche alle Norme di Progetto derivanti da azioni di miglioramento devono essere approvate dal Responsabile di Progetto.
 
-== Processo di formazione
+== Processo di Formazione
 Il processo di formazione ha lo scopo di garantire che tutti i membri del team abbiano le competenze necessarie per svolgere efficacemente i propri ruoli all'interno del progetto.
 
 Questo processo include:
@@ -1938,22 +1945,22 @@ identificate come necessarie al completamento del progetto sono:
 
     [*Tecnologia / Ambito*], [*Fonte di formazione*],
 
-    [#def[TypeScript] e React], [Documentazione ufficiale TypeScript e React.],
+    [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#typescript")[#def[TypeScript]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#react")[#def[React]]], [Documentazione ufficiale TypeScript e React.],
 
-    [NestJS], [Documentazione ufficiale NestJS; guide e tutorial specifici sul framework.],
+    [/*#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#nestjs")[#def[NestJS]]*/NestJS], [Documentazione ufficiale NestJS; guide e tutorial specifici sul framework.],
 
-    [#def[Python] (Agenti AI / Orchestratore)],
+    [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#python")[#def[Python]] (Agenti AI / Orchestratore)],
     [Documentazione ufficiale Python; documentazione dei framework per agenti AI; documentazione AWS Bedrock/OpenAI per LLM.],
 
-    [#def[MongoDB] e Mongoose], [Documentazione ufficiale MongoDB e Mongoose.],
+    [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#mongodb")[#def[MongoDB]] e Mongoose], [Documentazione ufficiale MongoDB e Mongoose.],
 
-    [#def[Node.js]], [Documentazione ufficiale Node.js; tutorial su piattaforme online.],
+    [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#nodejs")[#def[Node.js]]], [Documentazione ufficiale Node.js; tutorial su piattaforme online.],
 
-    [#def[Git] e GitHub], [Documentazione ufficiale Git.],
+    [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#git")[#def[Git]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#github")[#def[GitHub]]], [Documentazione ufficiale Git.],
 
-    [#def[Typst]], [Documentazione ufficiale Typst; template e funzioni del repository interno.],
+    [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#typst")[#def[Typst]]], [Documentazione ufficiale Typst; template e funzioni del repository interno.],
 
-    [Agenti AI e #def[LLM]],
+    [Agenti AI e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#llm")[#def[LLM]]],
     [Documentazione framework specifici; documentazione Var Group fornita nelle sessioni di formazione dedicate.],
 
     [AWS], [Documentazione ufficiale AWS; materiale fornito da Var Group durante le sessioni di formazione.],
@@ -1973,5 +1980,3 @@ Le ore dedicate alla formazione personale *non sono rendicontabili* nel monte or
 Nel corso degli Sprint, i membri del team potranno dedicare tempo alla formazione personale nelle fasi di attività a peso minore, senza che ciò comprometta il rispetto degli
 obiettivi di Sprint. Il Responsabile di Progetto può, qualora lo ritenga necessario, pianificare periodi dedicati esplicitamente all'approfondimento tecnologico, specialmente
 in preparazione alle fasi di progettazione e sviluppo verso la _Product Baseline_ (PB).
-
-
