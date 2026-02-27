@@ -23,7 +23,8 @@
     "0.12.0",
     "Verifica per la sezione Analisi dei Requisiti per la RTB",
     "",
-    members.suar
+    members.suar,
+    members.kevin
   ),
   (
     "2026/02/21",
@@ -346,7 +347,7 @@ L’adozione dello standard garantisce una copertura completa degli aspetti crit
   In conformità alle linee guida IEEE, è adottato un approccio di risk management basato su valutazioni di probabilità, impatto e strategie di mitigazione/contingenza, consentendo un monitoraggio strutturato delle principali incertezze di progetto.
 
 - *Tracciabilità e controllo:* \
-  Il documento distingue in modo esplicito la fase di pianificazione (*Preventivo*) da quella di monitoraggio e rendicontazione (*Consuntivo*), permettendo un controllo oggettivo dell’avanzamento e l’analisi degli eventuali scostamenti rispetto alle stime iniziali.
+  Il documento distingue in modo esplicito la fase di pianificazione (*Preventivo*) da quella di monitoraggio e rendicontazione (*Consuntivo*), permettendo un controllo oggettivo dell’avanzamento e l’analisi degli eventuali scostamenti rispetto alle stime iniziali. Con aggiornamento del Piano di Progetto a ogni Sprint, si garantisce una gestione dinamica e adattiva del progetto, consentendo un controllo puntuale delle attività e una rapida identificazione di eventuali criticità.
 
 - *Efficacia operativa:* \
   Alcuni moduli previsti dallo standard sono stati ottimizzati e accorpati per migliorare la leggibilità e la comunicazione all’interno del team, mantenendo inalterati rigore metodologico e chiarezza dei flussi informativi richiesti dalla normativa.
@@ -485,13 +486,13 @@ La pianificazione a livello di Product Baseline garantisce comunque la tracciabi
 L’elemento *Pianificazione del Ciclo di Vita del Software* del Piano di Progetto è considerato conforme alle Norme di Progetto se risultano soddisfatte tutte le seguenti condizioni:
 
 + Per la *Requirements and Technology Baseline (RTB)* tutte le attività pianificate risultano:
-  - [ ] descritte in modo univoco;
-  - [ ] assegnate a un responsabile identificabile;
-  - [ ] tracciate come task sullo strumento di issue tracking adottato;
-  - [ ] le attività pianificate in RTB risultano definite in modo atomico; eventuali dipendenze sono esplicitate e tracciate sullo strumento di issue tracking;
+  - descritte in modo univoco;
+  - assegnate a un responsabile identificabile;
+  - tracciate come task sullo strumento di issue tracking adottato;
+  - le attività pianificate in RTB risultano definite in modo atomico; eventuali dipendenze sono esplicitate e tracciate sullo strumento di issue tracking;
 + Per la *Product Baseline (PB)* sono definite le macro-attività previste, senza anticipare decisioni progettuali non ancora consolidate;
-  - [ ] le milestone e le scadenze risultano coerenti con la pianificazione degli Sprint;
-  - [ ] eventuali variazioni significative della pianificazione sono motivate e tracciate nei verbali di progetto o negli strumenti di gestione delle attività.
+  - le milestone e le scadenze risultano coerenti con la pianificazione degli Sprint;
+  - eventuali variazioni significative della pianificazione sono motivate e tracciate nei verbali di progetto o negli strumenti di gestione delle attività.
 
 Il mancato rispetto di una o più delle condizioni sopra elencate comporta la non conformità dell’elemento e richiede un aggiornamento del Piano di Progetto.
 
@@ -524,11 +525,11 @@ L’allocazione delle risorse deve adattarsi alla natura specifica della fase di
 ====== Criteri di Verifica del Preventivo e dell’Allocazione delle Risorse
 L’elemento *Preventivo ed Allocazione delle Risorse* del Piano di Progetto è considerato conforme se:
 
-- [ ] è definito un preventivo iniziale coerente con le baseline di progetto individuate;
-- [ ] la distribuzione dell’impegno orario pro-capite è esplicitata e motivata;
-- [ ] per ciascuna baseline (RTB, PB) è indicata una ripartizione delle risorse coerente con la natura delle attività previste;
-- [ ] eventuali scostamenti rispetto al preventivo iniziale sono motivati e documentati;
-- [ ] il preventivo costituisce il riferimento per il confronto con i consuntivi di Sprint.
+- è definito un preventivo iniziale coerente con le baseline di progetto individuate;
+- la distribuzione dell’impegno orario pro-capite è esplicitata e motivata;
+- per ciascuna baseline (RTB, PB) è indicata una ripartizione delle risorse coerente con la natura delle attività previste;
+- eventuali scostamenti rispetto al preventivo iniziale sono motivati e documentati;
+- il preventivo costituisce il riferimento per il confronto con i consuntivi di Sprint.
 
 In assenza di una o più delle condizioni sopra elencate, l’elemento non è considerato conforme e deve essere revisionato.
 
@@ -575,12 +576,12 @@ Attività non pertinenti agli obiettivi del progetto o svolte senza autorizzazio
 ====== Criteri di Verifica del Monitoraggio e Controllo degli Sprint
 L’elemento *Monitoraggio e Controllo del Rendimento degli Sprint* è considerato conforme se, per ogni Sprint:
 
-- [ ] è definito un Preventivo di Sprint basato sulle attività assegnate;
-- [ ] è redatto un Consuntivo di Sprint basato esclusivamente sui dati estratti da #def[Jira];
-- [ ] il confronto tra preventivo e consuntivo è esplicitato e gli scostamenti sono motivati;
-- [ ] tutte le ore lavorate (incluse le attività non pianificate) sono state tracciate;
-- [ ] sono identificati e aggiornati i rischi emersi durante lo Sprint;
-- [ ] sono riportate eventuali azioni correttive o preventive per lo Sprint successivo.
+- è definito un Preventivo di Sprint basato sulle attività assegnate;
+- è redatto un Consuntivo di Sprint basato esclusivamente sui dati estratti da #def[Jira];
+- il confronto tra preventivo e consuntivo è esplicitato e gli scostamenti sono motivati;
+- tutte le ore lavorate (incluse le attività non pianificate) sono state tracciate;
+- sono identificati e aggiornati i rischi emersi durante lo Sprint;
+- sono riportate eventuali azioni correttive o preventive per lo Sprint successivo.
 
 La mancata rendicontazione di uno o più Sprint o l’assenza degli elementi sopra elencati comporta la non conformità dell’elemento.
 
