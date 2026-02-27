@@ -19,6 +19,12 @@
 
 #let history = (
   (
+    "2026/02/27",
+    "0.13.0",
+    "Verifica per la sezione Piano di Qualifica",
+    members.berengan
+  ),
+  (
     "2026/02/23",
     "0.12.0",
     "Verifica per la sezione Analisi dei Requisiti per la RTB",
@@ -985,9 +991,6 @@ dove:
       [Estimate At Completion],
       [Stima del costo totale finale del progetto basata sulla performance attuale. Utilizza il CPI per proiettare il costo a completamento considerando l'efficienza dimostrata],
 
-      [MPC10],
-      [Estimate To Complete],
-      [Misura dello spendibile attuale (calcolato periodicamente) rispetto al totale stimato inizialmente]
     ),
   ),
   caption: [Metriche per il processo di Fornitura],
@@ -1001,7 +1004,7 @@ dove:
     fill: (x, y) => if y == 0 { luma(220) },
     [*Codice*], [*Nome*], [*Descrizione*],
 
-    [MPC11],
+    [MPC10],
     [Requirements Stability Index],
     [Misura la volatilità dei requisiti. Indica la percentuale di requisiti che non hanno subito modifiche, aggiunte o cancellazioni rispetto alla baseline iniziale],
   ),
@@ -1021,17 +1024,17 @@ dove:
     fill: (x, y) => if y == 0 { luma(220) },
     [*Codice*], [*Nome*], [*Descrizione*],
 
-    [MPC12],
-    [Indice di Gulpease],
+    [MPC11],
+    [Gulpease Index],
     [Indice di leggibilità. Valuta la complessità linguistica basandosi sulla lunghezza delle parole e delle frasi. Valori: ≥80 molto facile; 60-80 media difficoltà; 40-60 abbastanza difficile; < 40 molto difficile],
 
-    [MPC13], [Correttezza Ortografica], [Numero di errori ortografici rilevati nel documento],
+    [MPC12], [Correttezza Ortografica], [Numero di errori ortografici rilevati nel documento],
 
-    [MPC14],
+    [MPC13],
     [Code Coverage],
     [Percentuale di codice sorgente che viene eseguita durante il lancio della suite di test automatizzati. Indica il grado di copertura della verifica dinamica],
 
-    [MPC15],
+    [MPC14],
     [Test Success Rate],
     [Percentuale di test automatizzati che superano con successo l'esecuzione. Un valore del 100% è necessario per garantire la stabilità del sistema prima di ogni rilascio],
   ),
@@ -1050,15 +1053,11 @@ dove:
     fill: (x, y) => if y == 0 { luma(220) },
     [*Codice*], [*Nome*], [*Descrizione*],
 
-    [MPC16],
-    [Quality Metrics Satisfied],
+    [MPC15],
+    [Metrics Satisfaction],
     [Percentuale di metriche che rispettano le soglie di accettabilità. Fornisce una visione d'insieme sulla qualità complessiva dei processi adottati],
 
-    [MPC17],
-    [Time Efficiency],
-    [Percentuale del tempo impiegato al raggiungimento degli obiettivi prefissati rispetto a quello inizialmente stimato],
-
-    [MPC18],
+    [MPC16],
     [Sprint Goal Achievement],
     [Percentuale degli obiettivi prefissati durante lo Sprint Planning che sono stati effettivamente raggiunti e validati al termine dello Sprint. Misura l'efficacia della pianificazione e dell'esecuzione],
   ),
@@ -1096,6 +1095,7 @@ dove:
 - `PD` indica Prodotto;
 - `##` è un numero progressivo crescente da 01.
 
+#pagebreak()
 ====== Adeguatezza Funzionale e Affidabilità
 
 #figure(
