@@ -23,7 +23,8 @@
     "0.12.0",
     "Verifica per la sezione Analisi dei Requisiti per la RTB",
     "",
-    members.suar
+    members.suar,
+    members.kevin
   ),
   (
     "2026/02/21",
@@ -346,7 +347,7 @@ L’adozione dello standard garantisce una copertura completa degli aspetti crit
   In conformità alle linee guida IEEE, è adottato un approccio di risk management basato su valutazioni di probabilità, impatto e strategie di mitigazione/contingenza, consentendo un monitoraggio strutturato delle principali incertezze di progetto.
 
 - *Tracciabilità e controllo:* \
-  Il documento distingue in modo esplicito la fase di pianificazione (*Preventivo*) da quella di monitoraggio e rendicontazione (*Consuntivo*), permettendo un controllo oggettivo dell’avanzamento e l’analisi degli eventuali scostamenti rispetto alle stime iniziali.
+  Il documento distingue in modo esplicito la fase di pianificazione (*Preventivo*) da quella di monitoraggio e rendicontazione (*Consuntivo*), permettendo un controllo oggettivo dell’avanzamento e l’analisi degli eventuali scostamenti rispetto alle stime iniziali. Con aggiornamento del Piano di Progetto a ogni Sprint, si garantisce una gestione dinamica e adattiva del progetto, consentendo un controllo puntuale delle attività e una rapida identificazione di eventuali criticità.
 
 - *Efficacia operativa:* \
   Alcuni moduli previsti dallo standard sono stati ottimizzati e accorpati per migliorare la leggibilità e la comunicazione all’interno del team, mantenendo inalterati rigore metodologico e chiarezza dei flussi informativi richiesti dalla normativa.
@@ -485,13 +486,13 @@ La pianificazione a livello di Product Baseline garantisce comunque la tracciabi
 L’elemento *Pianificazione del Ciclo di Vita del Software* del Piano di Progetto è considerato conforme alle Norme di Progetto se risultano soddisfatte tutte le seguenti condizioni:
 
 + Per la *Requirements and Technology Baseline (RTB)* tutte le attività pianificate risultano:
-  - [ ] descritte in modo univoco;
-  - [ ] assegnate a un responsabile identificabile;
-  - [ ] tracciate come task sullo strumento di issue tracking adottato;
-  - [ ] le attività pianificate in RTB risultano definite in modo atomico; eventuali dipendenze sono esplicitate e tracciate sullo strumento di issue tracking;
+  - descritte in modo univoco;
+  - assegnate a un responsabile identificabile;
+  - tracciate come task sullo strumento di issue tracking adottato;
+  - le attività pianificate in RTB risultano definite in modo atomico; eventuali dipendenze sono esplicitate e tracciate sullo strumento di issue tracking;
 + Per la *Product Baseline (PB)* sono definite le macro-attività previste, senza anticipare decisioni progettuali non ancora consolidate;
-  - [ ] le milestone e le scadenze risultano coerenti con la pianificazione degli Sprint;
-  - [ ] eventuali variazioni significative della pianificazione sono motivate e tracciate nei verbali di progetto o negli strumenti di gestione delle attività.
+  - le milestone e le scadenze risultano coerenti con la pianificazione degli Sprint;
+  - eventuali variazioni significative della pianificazione sono motivate e tracciate nei verbali di progetto o negli strumenti di gestione delle attività.
 
 Il mancato rispetto di una o più delle condizioni sopra elencate comporta la non conformità dell’elemento e richiede un aggiornamento del Piano di Progetto.
 
@@ -524,11 +525,11 @@ L’allocazione delle risorse deve adattarsi alla natura specifica della fase di
 ====== Criteri di Verifica del Preventivo e dell’Allocazione delle Risorse
 L’elemento *Preventivo ed Allocazione delle Risorse* del Piano di Progetto è considerato conforme se:
 
-- [ ] è definito un preventivo iniziale coerente con le baseline di progetto individuate;
-- [ ] la distribuzione dell’impegno orario pro-capite è esplicitata e motivata;
-- [ ] per ciascuna baseline (RTB, PB) è indicata una ripartizione delle risorse coerente con la natura delle attività previste;
-- [ ] eventuali scostamenti rispetto al preventivo iniziale sono motivati e documentati;
-- [ ] il preventivo costituisce il riferimento per il confronto con i consuntivi di Sprint.
+- è definito un preventivo iniziale coerente con le baseline di progetto individuate;
+- la distribuzione dell’impegno orario pro-capite è esplicitata e motivata;
+- per ciascuna baseline (RTB, PB) è indicata una ripartizione delle risorse coerente con la natura delle attività previste;
+- eventuali scostamenti rispetto al preventivo iniziale sono motivati e documentati;
+- il preventivo costituisce il riferimento per il confronto con i consuntivi di Sprint.
 
 In assenza di una o più delle condizioni sopra elencate, l’elemento non è considerato conforme e deve essere revisionato.
 
@@ -575,12 +576,12 @@ Attività non pertinenti agli obiettivi del progetto o svolte senza autorizzazio
 ====== Criteri di Verifica del Monitoraggio e Controllo degli Sprint
 L’elemento *Monitoraggio e Controllo del Rendimento degli Sprint* è considerato conforme se, per ogni Sprint:
 
-- [ ] è definito un Preventivo di Sprint basato sulle attività assegnate;
-- [ ] è redatto un Consuntivo di Sprint basato esclusivamente sui dati estratti da #def[Jira];
-- [ ] il confronto tra preventivo e consuntivo è esplicitato e gli scostamenti sono motivati;
-- [ ] tutte le ore lavorate (incluse le attività non pianificate) sono state tracciate;
-- [ ] sono identificati e aggiornati i rischi emersi durante lo Sprint;
-- [ ] sono riportate eventuali azioni correttive o preventive per lo Sprint successivo.
+- è definito un Preventivo di Sprint basato sulle attività assegnate;
+- è redatto un Consuntivo di Sprint basato esclusivamente sui dati estratti da #def[Jira];
+- il confronto tra preventivo e consuntivo è esplicitato e gli scostamenti sono motivati;
+- tutte le ore lavorate (incluse le attività non pianificate) sono state tracciate;
+- sono identificati e aggiornati i rischi emersi durante lo Sprint;
+- sono riportate eventuali azioni correttive o preventive per lo Sprint successivo.
 
 La mancata rendicontazione di uno o più Sprint o l’assenza degli elementi sopra elencati comporta la non conformità dell’elemento.
 
@@ -928,7 +929,7 @@ La determinazione delle soglie di accettabilità e ottimalità per le metriche a
 
 - *Adesione agli Standard Internazionali:* Per i processi di fornitura, il gruppo adotta il framework /*#def("Earned Value Management")*/ (EVM), utilizzando gli intervalli di confidenza standard del settore ($0.90 - 1.10$) per garantire la stabilità economica e temporale. Per la qualità del prodotto, le soglie sono calibrate sulle caratteristiche del modello /*#def("ISO/IEC 25010")*/.
 - *Analisi del Dominio e Benchmark:* Le metriche di supporto e sviluppo (es. /*#def("Gulpease Index"), #def("Complessità Ciclomatica")*/) sono tarate su benchmark di settore per lo sviluppo software moderno, garantendo che i requisiti di manutenibilità e sicurezza siano oggettivamente verificabili.
-- *Miglioramento Continuo e Calibrazione (PDCA):* In linea con l'approccio /*#def("Agile")*/, le soglie sono soggette a revisione periodica. Al termine di ogni /*#def("Sprint")*/, i valori vengono analizzati rispetto alle prestazioni storiche del team; questo permette una ricalibrazione dinamica delle soglie nel /*#def("Piano di Qualifica")*/, rendendo gli obiettivi sempre sfidanti ma tecnicamente sostenibili (obiettivi *S.M.A.R.T.*).
+- *Miglioramento Continuo e Calibrazione (PDCA):* In linea con l'approccio #def("Agile"), le soglie sono soggette a revisione periodica. Al termine di ogni #def("Sprint"), i valori vengono analizzati rispetto alle prestazioni storiche del team; questo permette una ricalibrazione dinamica delle soglie nel /*#def("Piano di Qualifica")*/, rendendo gli obiettivi sempre sfidanti ma tecnicamente sostenibili (obiettivi *S.M.A.R.T.*).
 
 ====== Nomenclatura delle Metriche
 La nomenclatura utilizzata per le metriche di processo è la seguente:
@@ -983,6 +984,10 @@ dove:
       [MPC09],
       [Estimate At Completion],
       [Stima del costo totale finale del progetto basata sulla performance attuale. Utilizza il CPI per proiettare il costo a completamento considerando l'efficienza dimostrata],
+
+      [MPC10],
+      [Estimate To Complete],
+      [Misura dello spendibile attuale (calcolato periodicamente) rispetto al totale stimato inizialmente]
     ),
   ),
   caption: [Metriche per il processo di Fornitura],
@@ -996,7 +1001,7 @@ dove:
     fill: (x, y) => if y == 0 { luma(220) },
     [*Codice*], [*Nome*], [*Descrizione*],
 
-    [MPC10],
+    [MPC11],
     [Requirements Stability Index],
     [Misura la volatilità dei requisiti. Indica la percentuale di requisiti che non hanno subito modifiche, aggiunte o cancellazioni rispetto alla baseline iniziale],
   ),
@@ -1016,17 +1021,17 @@ dove:
     fill: (x, y) => if y == 0 { luma(220) },
     [*Codice*], [*Nome*], [*Descrizione*],
 
-    [MPC11],
+    [MPC12],
     [Indice di Gulpease],
     [Indice di leggibilità. Valuta la complessità linguistica basandosi sulla lunghezza delle parole e delle frasi. Valori: ≥80 molto facile; 60-80 media difficoltà; 40-60 abbastanza difficile; < 40 molto difficile],
 
-    [MPC12], [Correttezza Ortografica], [Numero di errori ortografici rilevati nel documento],
+    [MPC13], [Correttezza Ortografica], [Numero di errori ortografici rilevati nel documento],
 
-    [MPC13],
+    [MPC14],
     [Code Coverage],
     [Percentuale di codice sorgente che viene eseguita durante il lancio della suite di test automatizzati. Indica il grado di copertura della verifica dinamica],
 
-    [MPC14],
+    [MPC15],
     [Test Success Rate],
     [Percentuale di test automatizzati che superano con successo l'esecuzione. Un valore del 100% è necessario per garantire la stabilità del sistema prima di ogni rilascio],
   ),
@@ -1034,7 +1039,7 @@ dove:
 )
 
 *Rilevanza:* Il Test Success Rate deve rimanere costantemente al 100% per evitare regressioni e garantire l'affidabilità del _Software_.
-
+#pagebreak()
 ====== Processi Organizzativi
 
 #figure(
@@ -1045,11 +1050,15 @@ dove:
     fill: (x, y) => if y == 0 { luma(220) },
     [*Codice*], [*Nome*], [*Descrizione*],
 
-    [MPC15],
-    [Metrics Satisfaction],
+    [MPC16],
+    [Quality Metrics Satisfied],
     [Percentuale di metriche che rispettano le soglie di accettabilità. Fornisce una visione d'insieme sulla qualità complessiva dei processi adottati],
 
-    [MPC16],
+    [MPC17],
+    [Time Efficiency],
+    [Percentuale del tempo impiegato al raggiungimento degli obiettivi prefissati rispetto a quello inizialmente stimato],
+
+    [MPC18],
     [Sprint Goal Achievement],
     [Percentuale degli obiettivi prefissati durante lo Sprint Planning che sono stati effettivamente raggiunti e validati al termine dello Sprint. Misura l'efficacia della pianificazione e dell'esecuzione],
   ),
