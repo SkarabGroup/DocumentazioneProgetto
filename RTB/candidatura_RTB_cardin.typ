@@ -56,7 +56,7 @@ repository software*
 \
 Si comunica, inoltre, che il gruppo ha sviluppato un *Proof of Concept* volto a validare la fattibilità tecnologica, reperibile al seguente indirizzo: #link("https://github.com/SkarabGroup/PoC")[#underline[Repository PoC]].
 
-L'intera documentazione di progetto è consultabile visitando il sito ufficiale del gruppo, #link("https://skarabgroup.github.io/DocumentazioneProgetto/")[#underline[Skarab Group - Sito Documentazione]], oppure direttamente all'interno del #link("https://github.com/SkarabGroup/DOcumentazioneProgetto")[#underline[Repository Documentazione]].
+L'intera documentazione di progetto è consultabile visitando il sito ufficiale del gruppo, #link("https://skarabgroup.github.io/DocumentazioneProgetto/")[#underline[Skarab Group - Sito Documentazione]], oppure direttamente all'interno del #link("https://github.com/SkarabGroup/DocumentazioneProgetto")[#underline[Repository Documentazione]].
 
 Il documento di *Analisi dei Requisiti* aggiornato e completo è disponibile per la consultazione al seguente link: #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/AdR.pdf")[#underline[Analisi dei Requisiti v1.0.0]].
 

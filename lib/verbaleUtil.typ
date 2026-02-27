@@ -5,7 +5,7 @@
   heading(level: 1)[Presenze]
 
   let presentiText = if type(presenti) == "list" { presenti.join(", ") } else { presenti }
-  let assentiText  = if type(assenti)  == "list" { assenti.join(", ") }  else { assenti }
+  let assentiText = if type(assenti) == "list" { assenti.join(", ") } else { assenti }
 
   grid(
     columns: (1.5fr, 0.5fr, 2fr),
@@ -32,24 +32,31 @@
 #let tabellaAzioni(azioni) = {
   figure(
     table(
-      columns: (1fr, 0.8fr, 0.6fr, 0.6fr),
-      align: (left, left, left, left),
-      stroke: none,
-      table.hline(stroke: 1pt),
-      table.header([*Azione*], [*Responsabile*], [*Scadenza*], [*Stato*]),
-      table.hline(stroke: 0.5pt),
-      ..azioni
-        .map(a => (
-          a.at(0),
-          a.at(1),
-          a.at(2),
-          a.at(3),
-          table.hline(stroke: 0.3pt),
-        ))
-        .flatten(),
-      table.hline(stroke: 1pt),
-      // Linea finale più spessa
+      columns: (1.2fr, 1fr, 0.6fr), // Bilanciamento pesi colonne
+      align: (left, left, center),  // La data centrata è più leggibile
+      stroke: none,                 // Rimuove la griglia standard
+      inset: (y: 8pt, x: 5pt),      // Più respiro verticale tra le righe
+      
+      // Riga d'intestazione con linea superiore e inferiore
+      table.header(
+        repeat: true,
+        table.hline(stroke: 1.5pt),
+        [*Azione*], [*Responsabile*], [*Scadenza*],
+        table.hline(stroke: 0.8pt),
+      ),
+      
+      // Ciclo per i dati con righe alternate (zebra striping) per seguire meglio l'occhio
+      fill: (x, y) => if calc.even(y) and y > 0 { gray.lighten(95%) },
+
+      ..azioni.map(a => (
+        a.at(0),
+        a.at(1),
+        a.at(2),
+      )).flatten(),
+      
+      table.hline(stroke: 1.5pt), // Chiusura tabella
     ),
+    caption: [Tabella delle Azioni e Scadenze],
   )
 }
 
@@ -58,8 +65,7 @@
   [La riunione si è conclusa alle ore #ora-fine.]
 
   heading(level: 1)[Presiede]
-  v(1cm)
-  line(length: 30%, stroke: 0.5pt)
+  v(0.3cm)
   presiede
 }
 
@@ -97,8 +103,6 @@
 
 
   body
-
-  chiusuraVerbale("11:00", members.suar)
 }
 
 
