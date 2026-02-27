@@ -1413,21 +1413,21 @@ Nel contesto del progetto _Code Guardian_, Skarab Group ha identificato i seguen
 Il processo di documentazione è trasversale a tutti i processi primari e di supporto: i suoi
 artefatti costituiscono la memoria del progetto e il mezzo principale per garantire tracciabilità, verificabilità e comunicazione uniforme tra i membri del gruppo e gli stakeholder esterni.
 
-Nel contesto di #def[Skarab Group], il processo di documentazione disciplina la pianificazione, lo sviluppo, la produzione, la revisione e la manutenzione di tutti i
+Nel contesto di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]], il processo di documentazione disciplina la pianificazione, lo sviluppo, la produzione, la revisione e la manutenzione di tutti i
 documenti ufficiali del progetto _Code Guardian_.
 
 === Ciclo di Vita dei Documenti
 Ogni documento segue obbligatoriamente il seguente ciclo di vita:
 
-+ *Creazione / Modifica*: redazione o aggiornamento del contenuto in formato sorgente (#def[Typst]). L'attività deve essere tracciata da una task su #def[Jira].
++ *Creazione / Modifica*: redazione o aggiornamento del contenuto in formato sorgente (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#typst")[#def[Typst]]). L'attività deve essere tracciata da una task su #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#jira")[#def[Jira]].
 + *Verifica*: controllo di conformità (ortografia, stile, contenuti, rispetto delle NdP) da parte di un membro del team diverso dal redattore.
-+ *Approvazione*: validazione finale da parte del #def[Responsabile di Progetto] per il rilascio ufficiale.
++ *Approvazione*: validazione finale da parte del #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#responsabile-di-progetto")[#def[Responsabile di Progetto]] per il rilascio ufficiale.
 
 === Strumenti di Redazione
 
-- *#def[Visual Studio Code]*: editor principale per la scrittura dei documenti.
-- *#def[Typst]*: linguaggio di markup utilizzato per la formattazione di tutti i documenti di progetto. Consente la creazione di documenti strutturati, la gestione di tabelle, figure, riferimenti incrociati e la definizione di funzioni riutilizzabili. I template comuni sono centralizzati nella cartella `lib/` del repository.
-- *#def[Tinymist]*: estensione per VS Code che fornisce anteprima in tempo reale e supporto per la scrittura in Typst.
+- *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#visual-studio-code")[#def[Visual Studio Code]]*: editor principale per la scrittura dei documenti.
+- *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#typst")[#def[Typst]]*: linguaggio di markup utilizzato per la formattazione di tutti i documenti di progetto. Consente la creazione di documenti strutturati, la gestione di tabelle, figure, riferimenti incrociati e la definizione di funzioni riutilizzabili. I template comuni sono centralizzati nella cartella `lib/` del repository.
+- *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#tinymist")[#def[Tinymist]]*: estensione per VS Code che fornisce anteprima in tempo reale e supporto per la scrittura in Typst.
 
 === Struttura dei Documenti
 Tutti i documenti ufficiali devono rispettare la struttura minima seguente:
@@ -1452,9 +1452,6 @@ dove:
 
 Il changelog deve essere aggiornato ad ogni incremento di versione.
 
-==== Branching
-La gestione dei documenti viene svolta all'interno del repository `DocumentazioneProgetto` e segue la struttura di branching descritta nella sezione dedicata alla #link(<branching>)[Struttura dei repository], a eccezione dei branch `nome-componente` siccome è una nomenclatura dedicata al repository `PoC`.
-
 ==== Denominazione dei File
 La denominazione dei file sorgente Typst segue lo schema:
 
@@ -1464,15 +1461,19 @@ dove `SIGLA` identifica il tipo di documento (es. `NdP`, `PdP`, `PdQ`, `AdR`).
 
 Le date all'interno dei documenti sono scritte nel formato `AAAA/MM/GG`.
 
+==== Repository GitHub - Branching
+La gestione dei documenti viene svolta all'interno del repository `DocumentazioneProgetto` e segue la struttura di branching descritta nella sezione dedicata alla #link(<branching>)[Struttura dei repository], a eccezione dei branch `nome-componente` siccome è una nomenclatura dedicata al repository `PoC`.
+
 ==== Repository GitHub - Struttura delle Cartelle
 La repository `DocumentazioneProgetto` è organizzata come segue:
 
 - `.github/`: Cartella contenente le configurazioni specifiche di GitHub.
-- `assets/`: risorse multimediali utilizzate nei documenti.
-- `diarioDiBordo/`: diari di bordo settimanali.
 - `Glossario/`: sorgenti e infrastruttura per la versione web del glossario.
-- `lib/`: librerie di funzioni Typst riutilizzabili tra i vari documenti.
 - `RTB/`: documenti relativi alla *Requirements and Technology Baseline*.
+- `assets/`: risorse multimediali utilizzate nei documenti.
+- `candidatura/`: documenti relativi alla *Candidatura*.
+- `diarioDiBordo/`: diari di bordo settimanali.
+- `lib/`: librerie di funzioni Typst riutilizzabili tra i vari documenti.
 - `verbali/`: verbali di riunioni interne ed esterne.
 - `website/`: sorgenti del sito web di Skarab Group.
 
@@ -1482,15 +1483,11 @@ Nella root della repository si trovano inoltre:
 - `index.html`: homepage del sito web di Skarab Group.
 
 ===== Librerie Typst (`lib/`)
-La cartella `lib/` contiene i file di funzioni Typst condivise tra i documenti. La gestione
-di questa cartella è responsabilità dell'Amministratore di Progetto, che garantisce coerenza, aggiornamento e documentazione delle funzioni disponibili. I documenti
-importano le librerie necessarie tramite `#import "../lib/..."`.
+La cartella `lib/` contiene i file di funzioni Typst condivise tra i documenti. La gestione di questa cartella è responsabilità dell'Amministratore di Progetto, che garantisce coerenza, aggiornamento e documentazione delle funzioni disponibili. I documenti importano le librerie necessarie tramite `#import "../lib/..."`.
 
 === Tracciabilità delle Attività Documentali
-Ogni attività documentale (redazione, verifica, aggiornamento) deve essere associata a
-una task su #def[Jira] con descrizione, assegnatario e scadenza.
-Al termine di ogni Sprint, i documenti completati e verificati vengono integrati nel branch
-`develop` tramite Pull Request, avviando lo Sprint successivo con una base documentale aggiornata.
+Ogni attività documentale (redazione, verifica, aggiornamento) deve essere associata a una task su #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#jira")[#def[Jira]] con descrizione, assegnatario e scadenza.
+Al termine di ogni Sprint, i documenti completati e verificati vengono integrati nel branch `develop` tramite Pull Request, avviando lo Sprint successivo con una base documentale aggiornata.
 
 == Qualifica
 Il processo di *Qualifica* garantisce che il prodotto software e la documentazione soddisfino gli standard di qualità definiti e i requisiti specificati. Tale processo si articola nelle attività di _Verifica_ e _Validazione_, complementari ma distinte negli obiettivi.
@@ -1532,7 +1529,7 @@ In conformità allo standard ISO/IEC/IECC 12207, il processo di Verifica si arti
   - *Documentazione*: verifica di completezza, correttezza e conformità.
 
 ==== Implementazione del processo
-Skarab Group ha stabilito che la principale necessità del progetto _Code Guardian_ è assicurare che il prodotto soddisfi le esigenze di *Var Group* attraverso verifiche sistematiche e rigorose.
+Skarab Group ha stabilito che la principale necessità del progetto _Code Guardian_ è assicurare che il prodotto soddisfi le esigenze di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]] attraverso verifiche sistematiche e rigorose.
 
 Per questo motivo, nessun documento o componente software può essere integrato nel branch principale del repository senza aver superato il processo di verifica.
 
@@ -1586,6 +1583,8 @@ Data l'elevata quantità di artefatti da verificare nel progetto _Code Guardian_
 - garantisce uniformità nei controlli;
 - riduce i tempi di verifica mantenendo l'efficacia.
 
+Naturalmente però, prima di poter usare l'ispezione è necessaria una parte di walkthrough in modo da poter stabilire quali elementi siano necessari per avere una buona procedura di ispezione.
+
 Il team applica l'analisi statica mediante:
 - *Review manuale del codice*.
 - *Strumenti automatici di linting*:
@@ -1630,7 +1629,7 @@ dove:
 - *Sottonumero:* identifica varianti o sottocasi del test principale.
 
 ======= Test di Unità
-I *Test di Unità* verificano il corretto funzionamento delle singole unità software, ovvero componenti atomiche con responsabilità ben definita e testabile in isolamento.
+I *Test di Unità* verificano il corretto funzionamento delle singole unità software, ovvero componenti atomiche con responsabilità ben definite e testabili in isolamento.
 
 I test di unità si suddividono in:
 
@@ -1650,7 +1649,7 @@ Strategie di integrazione adottate:
 
 - *Top-Down*: partendo dalle componenti di livello superiore che hanno maggiori dipendenze, ovvero quelle che hanno maggiore responsabilità verso l'esterno del Sistema;
 
-- *Bottom-Up*: partendo dalle componenti di base con minori dipendenze, ovvero quelle con maggiore importanza all'interno del Sistema.
+- *Bottom-Up*: partendo dalle componenti di base con minori dipendenze, ovvero quelle con meno responsabilità all'interno del Sistema.
 
 ======= Test di Sistema
 I Test di Sistema valutano il comportamento del sistema nel suo complesso, verificandone la conformità ai requisiti definiti nell'Analisi dei Requisiti.
@@ -1667,7 +1666,7 @@ Garantiscono che modifiche o correzioni al codice non introducano nuovi difetti 
 === Validazione
 Il processo di Validazione ha come scopo verificare che il prodotto _Code Guardian_ soddisfi le esigenze di Var Group e degli utenti finali, garantendo che il sistema realizzato sia effettivamente quello richiesto.
 
-Mentre la Verifica si concentra sulla conformità tecnica alle specifiche, la Validazione si focalizza sulla conformità del prodotto alle aspettative e ai bisogni reali degli _stakeholder_.
+Mentre la Verifica si concentra sulla conformità tecnica delle specifiche, la Validazione si focalizza sulla conformità del prodotto alle aspettative e ai bisogni reali degli _stakeholder_.
 
 ==== Obiettivi della Validazione
 Skarab Group identifica i seguenti obiettivi per il processo di Validazione:
