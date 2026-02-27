@@ -1349,7 +1349,7 @@ Il gruppo fornisce supporto alla Proponente durante la fase di accettazione del 
 Le attività del Processo di Sviluppo sono distribuite tra le due baseline principali del progetto, la Requirements and Technology Baseline (RTB) e la Product Baseline (PB), in modo da garantire un avanzamento progressivo e controllato.
 
 ==== Requirements and Technology Baseline (RTB)
-La #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#Requirements-and-Technology-Baseline")[#def[RTB]] si concentra sulla definizione completa dei requisiti e sulla validazione delle tecnologie scelte. Le attività che il gruppo ritiene fondamentali sono:
+La #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requirements-and-technology-baseline")[#def[RTB]] si concentra sulla definizione completa dei requisiti e sulla validazione delle tecnologie scelte. Le attività che il gruppo ritiene fondamentali sono:
 
 - *Analisi dei Requisiti*: attività cardine della RTB;
 - *Proof of Concept (PoC)*: dimostrazione pratica della fattibilità tecnica delle soluzioni progettate;
