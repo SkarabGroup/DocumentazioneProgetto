@@ -1322,7 +1322,7 @@ L'integrazione Software combina progressivamente le unità sviluppate in compone
 Per ogni integrazione vengono eseguiti test specifici che verificano la corretta interazione tra le componenti integrate.
 
 ==== Test di qualifica del Software:
-I test di qualifica verificano che il Software soddisfi gli obiettivi di qualità definiti nel #underline[Piano di Qualifica].
+I test di qualifica verificano che il Software soddisfi gli obiettivi di qualità definiti nel #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/PdQ.pdf")[#underline[Piano di Qualifica]].
 
 ==== Integrazione e Test di sistema:
 Il sistema completo viene assemblato integrando tutte le componenti sviluppate e viene sottoposto a test che verificano:
@@ -1501,7 +1501,7 @@ Il processo di Verifica ha come scopo accertare che quanto prodotto sia stato re
 
 La Verifica è un'attività continua che accompagna l'intero ciclo di vita del progetto e si applica sia alla documentazione che al codice prodotto.
 
-Tutte le informazioni relative agli esiti di tale attività, incluse misurazioni e risultati dei test, devono essere documentate nel #underline[Piano di Qualifica].
+Tutte le informazioni relative agli esiti di tale attività, incluse misurazioni e risultati dei test, devono essere documentate nel #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/PdQ.pdf")[#underline[Piano di Qualifica]].
 
 ==== Obiettivi della Verifica
 Skarab Group identifica i seguenti obiettivi per il processo di Verifica:
@@ -1556,7 +1556,7 @@ L'attività si articola nei seguenti controlli:
 - *Gestione del Flusso*: le procedure operative di redazione, revisione e approvazione sono vincolate al sistema di _versioning_, seguendo le policy di gestione dei branch e delle issue per garantire la tracciabilità delle modifiche.
 
 ===== Verifica del Codice
-Le metodologie di verifica del software verranno formalizzate e applicate in modo estensivo non appena raggiunta la _Requirements and Technology Baseline_ (RTB).
+Le metodologie di verifica del software verranno formalizzate e applicate in modo estensivo non appena raggiunta la #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requirements-and-technology-baseline")[#def[Requirements and Technology Baseline]] (RTB).
 
 In generale, la strategia di verifica adottata prevede l'integrazione di due approcci metodologici complementari: *Analisi Statica* e *Analisi Dinamica*.
 
@@ -1612,7 +1612,7 @@ Le principali tipologie di Test sono:
 - Test di Sistema.
 - Test di Regressione.
 
-La nomenclatura utilizzata per descrivere i Test, reperibili nel #underline[Piano di Qualifica], viene presentata di seguito.
+La nomenclatura utilizzata per descrivere i Test, reperibili nel #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/PdQ.pdf")[#underline[Piano di Qualifica]], viene presentata di seguito.
 
 ======= Nomenclatura dei Test
 La nomenclatura adottata per l'identificazione dei Test segue uno schema gerarchico:
@@ -1684,7 +1684,7 @@ In conformità allo standard ISO/IEC/IEEE 12207, il processo di Validazione si a
 - *Attività di Validazione*: esecuzione delle attività di validazione vera e propria.
 
 ===== Implementazione del processo
-Skarab Group ha analizzato le esigenze di Var Group espresse nel capitolato C2 e ha racchiuso tutti i requisiti da soddisfare nell'*Analisi dei Requisiti*.
+Skarab Group ha analizzato le esigenze di Var Group espresse nel capitolato C2 e ha racchiuso tutti i requisiti da soddisfare nell'#link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/AdR.pdf")[*Analisi dei Requisiti*].
 
 Per garantire una validazione efficace, il team adotta le seguenti strategie:
 
