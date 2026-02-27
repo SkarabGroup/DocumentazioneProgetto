@@ -928,7 +928,7 @@ La determinazione delle soglie di accettabilità e ottimalità per le metriche a
 
 - *Adesione agli Standard Internazionali:* Per i processi di fornitura, il gruppo adotta il framework /*#def("Earned Value Management")*/ (EVM), utilizzando gli intervalli di confidenza standard del settore ($0.90 - 1.10$) per garantire la stabilità economica e temporale. Per la qualità del prodotto, le soglie sono calibrate sulle caratteristiche del modello /*#def("ISO/IEC 25010")*/.
 - *Analisi del Dominio e Benchmark:* Le metriche di supporto e sviluppo (es. /*#def("Gulpease Index"), #def("Complessità Ciclomatica")*/) sono tarate su benchmark di settore per lo sviluppo software moderno, garantendo che i requisiti di manutenibilità e sicurezza siano oggettivamente verificabili.
-- *Miglioramento Continuo e Calibrazione (PDCA):* In linea con l'approccio /*#def("Agile")*/, le soglie sono soggette a revisione periodica. Al termine di ogni /*#def("Sprint")*/, i valori vengono analizzati rispetto alle prestazioni storiche del team; questo permette una ricalibrazione dinamica delle soglie nel /*#def("Piano di Qualifica")*/, rendendo gli obiettivi sempre sfidanti ma tecnicamente sostenibili (obiettivi *S.M.A.R.T.*).
+- *Miglioramento Continuo e Calibrazione (PDCA):* In linea con l'approccio #def("Agile"), le soglie sono soggette a revisione periodica. Al termine di ogni #def("Sprint"), i valori vengono analizzati rispetto alle prestazioni storiche del team; questo permette una ricalibrazione dinamica delle soglie nel /*#def("Piano di Qualifica")*/, rendendo gli obiettivi sempre sfidanti ma tecnicamente sostenibili (obiettivi *S.M.A.R.T.*).
 
 ====== Nomenclatura delle Metriche
 La nomenclatura utilizzata per le metriche di processo è la seguente:
@@ -983,6 +983,10 @@ dove:
       [MPC09],
       [Estimate At Completion],
       [Stima del costo totale finale del progetto basata sulla performance attuale. Utilizza il CPI per proiettare il costo a completamento considerando l'efficienza dimostrata],
+
+      [MPC10],
+      [Estimate To Complete],
+      [Misura dello spendibile attuale (calcolato periodicamente) rispetto al totale stimato inizialmente]
     ),
   ),
   caption: [Metriche per il processo di Fornitura],
@@ -996,7 +1000,7 @@ dove:
     fill: (x, y) => if y == 0 { luma(220) },
     [*Codice*], [*Nome*], [*Descrizione*],
 
-    [MPC10],
+    [MPC11],
     [Requirements Stability Index],
     [Misura la volatilità dei requisiti. Indica la percentuale di requisiti che non hanno subito modifiche, aggiunte o cancellazioni rispetto alla baseline iniziale],
   ),
@@ -1016,17 +1020,17 @@ dove:
     fill: (x, y) => if y == 0 { luma(220) },
     [*Codice*], [*Nome*], [*Descrizione*],
 
-    [MPC11],
+    [MPC12],
     [Indice di Gulpease],
     [Indice di leggibilità. Valuta la complessità linguistica basandosi sulla lunghezza delle parole e delle frasi. Valori: ≥80 molto facile; 60-80 media difficoltà; 40-60 abbastanza difficile; < 40 molto difficile],
 
-    [MPC12], [Correttezza Ortografica], [Numero di errori ortografici rilevati nel documento],
+    [MPC13], [Correttezza Ortografica], [Numero di errori ortografici rilevati nel documento],
 
-    [MPC13],
+    [MPC14],
     [Code Coverage],
     [Percentuale di codice sorgente che viene eseguita durante il lancio della suite di test automatizzati. Indica il grado di copertura della verifica dinamica],
 
-    [MPC14],
+    [MPC15],
     [Test Success Rate],
     [Percentuale di test automatizzati che superano con successo l'esecuzione. Un valore del 100% è necessario per garantire la stabilità del sistema prima di ogni rilascio],
   ),
@@ -1034,7 +1038,7 @@ dove:
 )
 
 *Rilevanza:* Il Test Success Rate deve rimanere costantemente al 100% per evitare regressioni e garantire l'affidabilità del _Software_.
-
+#pagebreak()
 ====== Processi Organizzativi
 
 #figure(
@@ -1045,11 +1049,15 @@ dove:
     fill: (x, y) => if y == 0 { luma(220) },
     [*Codice*], [*Nome*], [*Descrizione*],
 
-    [MPC15],
-    [Metrics Satisfaction],
+    [MPC16],
+    [Quality Metrics Satisfied],
     [Percentuale di metriche che rispettano le soglie di accettabilità. Fornisce una visione d'insieme sulla qualità complessiva dei processi adottati],
 
-    [MPC16],
+    [MPC17],
+    [Time Efficiency],
+    [Percentuale del tempo impiegato al raggiungimento degli obiettivi prefissati rispetto a quello inizialmente stimato],
+
+    [MPC18],
     [Sprint Goal Achievement],
     [Percentuale degli obiettivi prefissati durante lo Sprint Planning che sono stati effettivamente raggiunti e validati al termine dello Sprint. Misura l'efficacia della pianificazione e dell'esecuzione],
   ),
