@@ -5,6 +5,13 @@
     (
       "2025-12-29",
       "1.0.0",
+      "Verifica verbale",
+      " ",
+      members.alice,
+    ),
+    (
+      "2025-12-29",
+      "0.1.0",
       "Prima stesura del documento",
       members.suar,
       members.alice,
@@ -58,31 +65,26 @@
     )
 
     = Azioni e responsabilità
-    #tabellaAzioni((
-      (
-        "Continuazione redazione AdR",
-        members.suar + " " + members.kevin,
-        "2026/01/03",
-        "In avanzamento",
-      ),
-      (
-        "Continuazione redazione NdP",
-        members.martinello,
-        "2026/01/03",
-        "In avanzamento",
-      ),
-      (
-        "Continuazione redazione PdP",
-        members.antonio + " " + members.andrea,
-        "2026/01/03",
-        "In avanzamento",
-      ),
-      (
-        "Continuazione redazione PdQ",
-        members.alice + " " + members.berengan,
-        "2026/01/03",
-        "In avanzamento",
-      ),
+    #task_table((
+      ("Stesura sezione gestione rischi PdP", "Amministratore", "1:00"),
+      ("Stesura introduzione analisi dei rischi", "Amministratore", "1:30"),
+      ("Aggiunta primi rischi PdP", "Amministratore", "1:00"),
+      ("Stesura sezione pianificazione PdP", "Amministratore", "1:00"),
+      ("Stesura sezione processi primari PdQ", "Amministratore", "1:30"),
+      ("Stesura sezione processi secondari PdQ", "Amministratore", "1:30"),
+      ("Stesura sezione processi organizzativi PdQ", "Amministratore", "1:00"),
+      ("Stesura sezione qualitá di prodotto PdQ", "Amministratore", "1:00"),
+      ("Stesura sezione automiglioramento PdQ", "Amministratore", "1:00"),
+      ("Stesura caratteristiche degli utenti", "Analista", "1:00"),
+      ("Stesura UC1-12", "Analista", "10:00"),
+      ("Inizio stesura sezione requisiti", "Analista", "3:00"),
+      ("Stesura verbale riunione seconda settimana", "Responsabile", "1:30"),
+      ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile", "3:00"),
+      ("Verifica verbale riunione interna seconda settimana", "Verificatore", "0:15"),
+      ("Verifica AdR", "Verificatore", "6:00"),
+      ("Verifica PdP", "Verificatore", "4:00"),
+      ("Verifica NdP", "Verificatore", "1:30"),
     ))
+    #chiusuraVerbale(orarioFineRiunione,presidenteRiunione)
   ],
 )

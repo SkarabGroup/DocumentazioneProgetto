@@ -2,11 +2,17 @@
 #import "../lib/variables.typ": *
 #import "../lib/glossarioUtil.typ": *
 
-#let versione = "v0.10.0"
+#let versione = "v0.11.0"
 
 #titlePage("Glossario", versione)
 #set page(numbering: "1", header: header("Glossario"), footer: footer())
 #let history = (
+  (
+    "2026/02/17",
+    "0.11.0",
+    "Revisionati tutti i termini",
+    members.suar
+  ),
   (
     "2026/01/12",
     "0.10.0",

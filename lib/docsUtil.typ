@@ -196,10 +196,8 @@
   if not found {
     panic("Parola non definita nel glossario: " + parola)
   } else {
-    let term_id = term-to-id(parola)
-    let url = GLOSSARIO_URL + "#" + term_id
-    
-    link(url)[#underline(parola)]
+    [#text(parola) #super[G]]
+
   }
 }
 
@@ -320,5 +318,25 @@
       table.cell(fill: luma(240))[*#tot_ver*],
     ),
     caption: caption_text,
+  )
+}
+
+#let task_table(data) = {
+  table(
+    columns: (1fr, 0.8fr, 0.4fr),
+    align: (left, left, center),
+    stroke: 0.5pt + luma(200),
+    inset: 10pt,
+    
+    // Header che si ripete su ogni pagina
+    fill: (col, row) => if row == 0 { luma(245) },
+    table.header(
+      [*Descrizione Task*], 
+      [*Ruolo responsabile*], 
+      [*Ore*],
+    ),
+
+    // Dati
+    ..data.flatten().map(item => [#item])
   )
 }
