@@ -34,7 +34,7 @@
     "2026/02/27",
     "0.13.0",
     "Verifica per la sezione Piano di Qualifica",
-    members.berengan
+    members.berengan,
     members.andrea
   ),
   (
