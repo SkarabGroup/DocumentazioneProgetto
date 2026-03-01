@@ -1530,9 +1530,9 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
     ([Berengan Riccardo], 7, 0, 0, 8, 0, 0),
     ([Martinello Riccardo], 0, 0, 0, 8, 0, 0),
     ([Sandu Antonio], 0, 0, 0, 8, 0, 0),
-    ([Sgreva Andrea], 0, 0, 0, 8, 0, 0),
+    ([Sgreva Andrea], 0, 0, 0, 6, 0, 2),
     ([Suar Alberto], 0, 0, 0, 8, 0, 0),
-    ([Zago Alice], 0, 0, 0, 8, 0, 0),
+    ([Zago Alice], 0, 0, 0, 6, 0, 2),
   ),
   [Prospetto orario preventivato per lo Sprint 5],
 )
