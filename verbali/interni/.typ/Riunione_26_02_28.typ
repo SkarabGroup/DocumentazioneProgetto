@@ -66,15 +66,12 @@
 
      = Azioni e responsabilità
     #task_table((
-      ("Revisione del documento", "Analista", "5:00"),
-      ("Aggiunta tabella attività sprint 1,2,3 a PdP", "Amministratore", "3:00"),
-      ("Test di Accettazione e rielaborazione Test di Sistema", "Amministratore", "2:00"),
-      ("Aggiunto sprint 4 nel PdP", "Responsabile", "2:30"),
-      ("Stesura verbale riunione seconda settimana", "Responsabile", "1:00"),
-      ("Verifica AdR", "Verificatore", "5:00"),
-      ("Verifica PdP", "Verificatore", "2:00"),
-      ("Verifica NdP", "Verificatore", "2:00"),
-      ("Verifica verbale riunione interna seconda settimana", "Verificatore", "0:30"),
+      ("Revisione e verifica del documento NdP", "Analista", "2:00"),
+      ("Raccolta informazioni relative al documento specifica tecnica", "Progettista", "16:00"),
+      ("Strutturare il documento specifica tecinca", "Progettista", "16:00"),
+      ("Inizio fase di progettazione", "Progettista", "16:00"),
+      ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile", "5:00"),
+      ("Verifica del documento PdQ", "Analista", "2:00")
     ))
     #chiusuraVerbale(orarioFineRiunione,presidenteRiunione)
   ],
