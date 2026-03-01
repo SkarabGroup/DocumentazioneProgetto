@@ -250,7 +250,7 @@ Nel contesto del presente progetto, sono considerati rilevanti principalmente i 
 === Descrizione del Processo
 Il Processo di Fornitura definisce l’insieme delle attività svolte dal gruppo di lavoro in qualità di fornitore al fine di pianificare, coordinare e consegnare il prodotto software e la relativa documentazione in conformità ai requisiti stabiliti dal proponente.
 
-Nel contesto del progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]], il gruppo #def[Skarab Group] assume il ruolo di fornitore, mentre l’azienda #def[Var Group] ricopre il ruolo di proponente. Il #underline[#link(<capitolato>)[Capitolato C2]] costituisce il riferimento contrattuale che disciplina requisiti, vincoli e obiettivi della fornitura.
+Nel contesto del progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]], il gruppo #def[Skarab Group] assume il ruolo di fornitore, mentre l’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]] ricopre il ruolo di proponente. Il #underline[#link(<capitolato>)[Capitolato C2]] costituisce il riferimento contrattuale che disciplina requisiti, vincoli e obiettivi della fornitura.
 
 Il processo di fornitura è responsabile della gestione complessiva del progetto dal punto di vista organizzativo e qualitativo e coordina le attività necessarie a garantire la conformità degli artefatti prodotti rispetto a quanto concordato.
 
@@ -448,9 +448,9 @@ In base al valore di $R$, si applicano le seguenti strategie vincolanti:
 
 ====== Categorie di Rischio
 Per favorire l’analisi sistematica e l’assegnazione delle responsabilità, i rischi sono classificati nelle seguenti macro-categorie:
-- *RT (Rischi Tecnologici):* criticità legate alle tecnologie adottate (es. #def[LLM], #def[Agenti]), agli strumenti di sviluppo, alle integrazioni e all’infrastruttura;
-- *RI (Rischi Interpersonali):* problematiche relative al #def[team di progetto], quali disponibilità dei membri, comunicazione, coordinamento e gestione dei conflitti;
-- *RCO (Rischi di Costo e Organizzativi):* rischi derivanti da stime non accurate, pianificazione temporale (#def[Schedulazione]), dipendenze esterne e vincoli organizzativi.
+- *RT (Rischi Tecnologici):* criticità legate alle tecnologie adottate (es. #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]], #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[Agenti]]), agli strumenti di sviluppo, alle integrazioni e all’infrastruttura;
+- *RI (Rischi Interpersonali):* problematiche relative al team di progetto, quali disponibilità dei membri, comunicazione, coordinamento e gestione dei conflitti;
+- *RCO (Rischi di Costo e Organizzativi):* rischi derivanti da stime non accurate, pianificazione temporale (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#schedulazione")[#def[Schedulazione]]), dipendenze esterne e vincoli organizzativi.
 
 ====== Ruoli e Responsabilità
 La gestione dei rischi è una responsabilità condivisa, articolata come segue:
@@ -488,7 +488,7 @@ La pianificazione costituisce il riferimento formale per il coordinamento delle 
 ====== Pianificazione in Corrispondenza della RTB
 In corrispondenza della *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requirements-and-technology-baseline")[#def[Requirements and Technology Baseline]] (RTB)*, la pianificazione del ciclo di vita del software prevede la definizione dettagliata delle attività da svolgere. Per ciascuna attività sono obbligatoriamente specificati la descrizione, il responsabile assegnato e lo stato di avanzamento, al fine di garantire un controllo puntuale delle attività di analisi e di impostazione tecnologica.
 
-Al fine di assicurare la tracciabilità delle attività pianificate, ogni attività definita in questa fase deve corrispondere a una *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#task")[#def[task]]* registrata sullo strumento di issue tracking adottato dal team (#def[Jira]). Il Responsabile di Progetto, all’avvio di ogni Sprint, definisce e pianifica le task su Jira, assegnando a ciascuna una figura di riferimento del team e una scadenza temporale, così da consentire la verifica della coerenza tra quanto pianificato e quanto effettivamente svolto.
+Al fine di assicurare la tracciabilità delle attività pianificate, ogni attività definita in questa fase deve corrispondere a una *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#task")[#def[task]]* registrata sullo strumento di issue tracking adottato dal team (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#jira")[#def[Jira]]). Il Responsabile di Progetto, all’avvio di ogni Sprint, definisce e pianifica le task su Jira, assegnando a ciascuna una figura di riferimento del team e una scadenza temporale, così da consentire la verifica della coerenza tra quanto pianificato e quanto effettivamente svolto.
 
 Le attività pianificate devono essere *atomiche*. Una task si definisce atomica se:
 - è eseguibile da un singolo membro del team;
@@ -533,7 +533,7 @@ A seguito di un’analisi approfondita del lavoro svolto nel periodo di consolid
 L’allocazione delle risorse deve adattarsi alla natura specifica della fase di progetto.
 
 1. *Fase RTB (Requirements and Technology Baseline):*
-  L’allocazione delle risorse deve prevedere un impiego significativo delle figure di *Amministratore* e *Analista*.
+  L’allocazione delle risorse deve prevedere un impiego significativo delle figure di *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#amministratore")[#def[Amministratore]]* e *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analista")[#def[Analista]]*.
   \
   *Motivazione:* scelta dettata dall’elevato impatto delle attività documentali previste in questa fase (definizione procedure, strumenti, requisiti), propedeutiche all’avvio della progettazione post-RTB.
 
@@ -554,7 +554,7 @@ L’elemento *Preventivo ed Allocazione delle Risorse* del Piano di Progetto è 
 In assenza di una o più delle condizioni sopra elencate, l’elemento non è considerato conforme e deve essere revisionato.
 
 ===== Monitoraggio e Controllo del Rendimento degli Sprint
-Il Monitoraggio e Controllo del rendimento degli Sprint definisce le modalità con cui viene verificato in modo sistematico l’andamento del progetto rispetto alla pianificazione approvata. Tale attività è obbligatoriamente basata sulla suddivisione del lavoro in iterazioni temporali (*Sprint*), ciascuna caratterizzata da un insieme di attività definite in modo atomico e tracciabile.
+Il Monitoraggio e Controllo del rendimento degli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#sprint")[#def[Sprint]] definisce le modalità con cui viene verificato in modo sistematico l’andamento del progetto rispetto alla pianificazione approvata. Tale attività è obbligatoriamente basata sulla suddivisione del lavoro in iterazioni temporali (*Sprint*), ciascuna caratterizzata da un insieme di attività definite in modo atomico e tracciabile.
 
 Per ogni Sprint devono essere rilevati e confrontati il *Preventivo di Sprint* e il *Consuntivo di Sprint*, al fine di valutare il grado di aderenza tra quanto pianificato e quanto effettivamente realizzato. I risultati di tale confronto costituiscono l’input principale per l’analisi dell’andamento complessivo del progetto e per l’eventuale aggiornamento della pianificazione.
 
@@ -576,7 +576,7 @@ Il *Consuntivo di Sprint* è definito al termine dello Sprint sulla base delle a
 Il confronto tra preventivo e consuntivo consente di valutare l’efficacia della pianificazione, l’affidabilità delle stime e l’adeguatezza dell’organizzazione del lavoro adottata.
 
 ====== Strumenti di Rendicontazione
-La rendicontazione delle attività e delle ore di lavoro è effettuata esclusivamente tramite lo strumento di issue tracking adottato dal team (#def[Jira]), che rappresenta la fonte ufficiale dei dati di consuntivo.
+La rendicontazione delle attività e delle ore di lavoro è effettuata esclusivamente tramite lo strumento di issue tracking adottato dal team (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#jira")[#def[Jira]]), che rappresenta la fonte ufficiale dei dati di consuntivo.
 
 Per ciascuna task devono essere obbligatoriamente indicati:
 - lo stato di avanzamento;
@@ -597,7 +597,7 @@ Attività non pertinenti agli obiettivi del progetto o svolte senza autorizzazio
 L’elemento *Monitoraggio e Controllo del Rendimento degli Sprint* è considerato conforme se, per ogni Sprint:
 
 - è definito un Preventivo di Sprint basato sulle attività assegnate;
-- è redatto un Consuntivo di Sprint basato esclusivamente sui dati estratti da #def[Jira] ;
+- è redatto un Consuntivo di Sprint basato esclusivamente sui dati estratti da Jira;
 - il confronto tra preventivo e consuntivo è esplicitato e gli scostamenti sono motivati;
 - tutte le ore lavorate (incluse le attività non pianificate) sono state tracciate;
 - sono identificati e aggiornati i rischi emersi durante lo Sprint;
@@ -944,11 +944,11 @@ Il Piano di Qualifica deve includere almeno i seguenti elementi, ciascuno discip
 La sezione #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#qualita")[#def[Qualità]] di Processo definisce l'insieme delle metriche utilizzate per monitorare e controllare i processi produttivi adottati dal gruppo durante l'intero ciclo di vita del progetto. Il monitoraggio dei processi è essenziale per garantire efficienza, efficacia e miglioramento continuo del _#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#way-of-working")[#def[Way of Working]]_.
 
 ====== Strategia di Definizione delle Soglie Metriche
-La determinazione delle soglie di accettabilità e ottimalità per le metriche adottate dal gruppo /*#def("Skarab Group")*/ non è un processo arbitrario, ma segue una strategia ingegneristica basata sui seguenti criteri:
+La determinazione delle soglie di accettabilità e ottimalità per le metriche adottate dal gruppo #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] non è un processo arbitrario, ma segue una strategia ingegneristica basata sui seguenti criteri:
 
-- *Adesione agli Standard Internazionali:* Per i processi di fornitura, il gruppo adotta il framework /*#def("Earned Value Management")*/ (EVM), utilizzando gli intervalli di confidenza standard del settore ($0.90 - 1.10$) per garantire la stabilità economica e temporale. Per la qualità del prodotto, le soglie sono calibrate sulle caratteristiche del modello/*#def("ISO/IEC 25010")*/;
-- *Analisi del Dominio e Benchmark:* Le metriche di supporto e sviluppo (es. /*#def("Gulpease Index"), #def("Complessità Ciclomatica")*/) sono tarate su benchmark di settore per lo sviluppo software moderno, garantendo che i requisiti di manutenibilità e sicurezza siano oggettivamente verificabili;
-- *Miglioramento Continuo e Calibrazione (PDCA):* In linea con l'approccio #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agile")[#def[Agile]], le soglie sono soggette a revisione periodica. Al termine di ogni #def("Sprint"), i valori vengono analizzati rispetto alle prestazioni storiche del team; questo permette una ricalibrazione dinamica delle soglie nel /*#def("Piano di Qualifica")*/, rendendo gli obiettivi sempre sfidanti ma tecnicamente sostenibili (obiettivi *S.M.A.R.T.*).
+- *Adesione agli Standard Internazionali:* Per i processi di fornitura, il gruppo adotta il framework Earned Value Management (EVM), utilizzando gli intervalli di confidenza standard del settore ($0.90 - 1.10$) per garantire la stabilità economica e temporale. Per la qualità del prodotto, le soglie sono calibrate sulle caratteristiche del modello ISO/IEC 25010;
+- *Analisi del Dominio e Benchmark:* Le metriche di supporto e sviluppo (es. #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#gulpease")[#def[Gulpease]], #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#complessita-ciclomatica")[#def[Complessità Ciclomatica]]) sono tarate su benchmark di settore per lo sviluppo software moderno, garantendo che i requisiti di manutenibilità e sicurezza siano oggettivamente verificabili;
+- *Miglioramento Continuo e Calibrazione (PDCA):* In linea con l'approccio #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agile")[#def[Agile]], le soglie sono soggette a revisione periodica. Al termine di ogni #def("Sprint"), i valori vengono analizzati rispetto alle prestazioni storiche del team; questo permette una ricalibrazione dinamica delle soglie nel #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#piano-di-qualifica")[#def[Piano di Qualifica]], rendendo gli obiettivi sempre sfidanti ma tecnicamente sostenibili (obiettivi *S.M.A.R.T.*).
 
 ====== Nomenclatura delle Metriche
 La nomenclatura utilizzata per le metriche di processo è la seguente:
