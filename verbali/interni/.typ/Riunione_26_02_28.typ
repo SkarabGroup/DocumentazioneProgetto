@@ -70,8 +70,9 @@
       ("Raccolta informazioni relative al documento specifica tecnica", "Progettista", "16:00"),
       ("Strutturare il documento specifica tecinca", "Progettista", "16:00"),
       ("Inizio fase di progettazione", "Progettista", "16:00"),
-      ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile", "5:00"),
-      ("Verifica del documento PdQ", "Analista", "2:00")
+      ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile", "7:00"),
+      ("Verifica del documento PdQ", "Analista", "2:00"),
+      ("Preparazione delle slide per la presentazione con il Professor Vardanega", "Responsabile", "3:00")
     ))
     #chiusuraVerbale(orarioFineRiunione,presidenteRiunione)
   ],
