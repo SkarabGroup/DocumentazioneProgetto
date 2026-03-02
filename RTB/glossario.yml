@@ -82,6 +82,9 @@ C:
     descrizione: Metrica che indica la percentuale di istruzioni, rami o blocchi di codice eseguiti durante una suite di test automatizzati per valutare il grado di confidenza dell'attività di verifica.
   Code Guardian:
     descrizione: Denominazione ufficiale della piattaforma ad agenti sviluppata da Skarab Group per l'audit e la remediation automatizzata di vulnerabilità software, commissionata da Var Group.
+  Code Smell:
+    alternative: Code Smells
+    descrizione: Indica una serie di caratteristiche nel codice sorgente che, pur non costituendo necessariamente un errore logico o funzionale immediato, segnalano la presenza di problemi più profondi a livello di progettazione o implementazione. I code smell agiscono come indicatori di un possibile degrado della qualità del software.
   Collaudatori:
     descrizione: Membri del team o tecnici incaricati di eseguire i test di accettazione finale per validare la conformità del prodotto rispetto ai requisiti contrattuali e alle aspettative dell'utente.
   Complessità Ciclomatica:
