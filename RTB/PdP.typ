@@ -1449,6 +1449,8 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
 ==== Retrospettiva dello Sprint 4
 
 ===== Valutazione del Periodo
+Questo sprint nasce dal bisogno del team di concludere documentazione e PoC in vista della revisione RTB; essa era stata pianificata per il giorno 09/02/2026 tuttavia, a causa di ritardi accumulati nei precedenti sprint, è stato necessario posticipare la data di revisione al 23/02/2026. Essendo questo sprint non preventivato all'inizio delle attivitá, le ore di lavoro hanno sforato quelle preventivate per la revisione RTB.
+
 Lo Sprint ha mostrato un andamento sporadico. Gli obiettivi sono stati raggiunti ma con un grande ritardo rispetto a quanto preventivato.
 
 ===== Stato di Avanzamento dei Deliverable
@@ -1519,7 +1521,7 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
 )
 
 === Considerazioni finali per il preventivo della RTB
-Con lo Sprint 4 si concludono gli Sprint dedicati alla fase di RTB, e con questo il preventivo per il periodo verso la RTB. Come si nota dalla tabella sopra, data la natura straordianria di questo sprint, alcuni ruoli hanno avuto un consumo di ore molto superiore a quanto preventivato, portando a un aumento dei costi rispetto a quanto previsto. Tuttavia, è importante sottolineare che questo aumento è stato necessario per garantire la conclusione delle attività in vista della RTB, e che senza questo impegno aggiuntivo non sarebbe stato possibile raggiungere gli obiettivi prefissati. Da notare come il ruolo del progettista non si è rivelato utile al raggiungimento degli obiettivi RTB, quindi nessuno ha mai ricoperto quel ruolo durante questa fase.
+Con lo Sprint 4 si concludono gli Sprint dedicati alla fase di RTB, e con questo il preventivo per il periodo verso la RTB. Come si nota dalla tabella sopra, data la natura straordinaria di questo sprint, alcuni ruoli hanno avuto un consumo di ore molto superiore a quanto preventivato, portando a un aumento dei costi rispetto a quanto previsto. Tuttavia, è importante sottolineare che questo aumento è stato necessario per garantire la conclusione delle attività in vista della RTB, e che senza questo impegno aggiuntivo non sarebbe stato possibile raggiungere gli obiettivi prefissati. Da notare come il ruolo del progettista non si è rivelato utile al raggiungimento degli obiettivi RTB, quindi nessuno ha mai ricoperto quel ruolo durante questa fase.
 
 Riguardo ai costi, il preventivo di 4690.00€ è stato sforato di poco (60,00€), lo sforamento é molto mitigato dal fatto che un ruolo che era stato preventivato non é stato utilizzando, questo ha portato a un risparmio di 350,00€ che ha mitigato lo sforamento causato dagli altri ruoli.
 
