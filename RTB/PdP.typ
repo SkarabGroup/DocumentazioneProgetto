@@ -1,6 +1,6 @@
 #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
-#let versione = "v0.11.0"
+#let versione = "v1.0.0"
 
 #titlePage("Piano di Progetto", versione)
 #set page(numbering: "1", header: header("Piano di Progetto"), footer: footer())
@@ -8,8 +8,8 @@
 #let history = (
   (
     "2026/02/26",
-    "0.11.0",
-    "AggiuntO preventivo a finire",
+    "1.0.0",
+    "Aggiunto preventivo a finire, Versione finale per RTB",
     members.kevin,
   ),
   (
@@ -562,7 +562,7 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
       - Sprint: *Sprint 3-4*
       - Revisione: *Sprint 4*
     ],
-    [Ultima revisione],
+    [Concluso],
 
     // Piano di Qualifica
     [*Piano di Qualifica*],
@@ -578,7 +578,7 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
       - Cruscotto: *Sprint 3-4*
       - Revisione: *Sprint 4*
     ],
-    [Ultima revisione],
+    [Concluso],
 
     // Norme di Progetto
     [*Norme di Progetto*],
@@ -594,14 +594,14 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
       - Standard: *Sprint 2*
       - Revisione: *Sprint 3-4*
     ],
-    [Ultima revisione],
+    [Concluso],
 
     // Glossario
     [*Glossario*],
     [Redazione incrementale dei termini tecnici.
       Responsabilità diffusa tra tutti i membri per garantire un vocabolario controllato (#link(<RCO5>)[#underline[RCO5]]).],
     [Trasversale],
-    [Ultima revisione],
+    [In corso],
 
     // Proof of Concept - ANTICIPATO
     [*Sviluppo PoC*],
@@ -884,7 +884,7 @@ Le attività svolte nel periodo di riferimento si sono focalizzate sul consolida
 
 #activity_table(
   (
-    ("Stabilita struttura repository e setup strumenti", "Amministratore", "6:00", "6:30", "Completata"),
+    ("Stabilire struttura repository e setup strumenti", "Amministratore", "6:00", "6:30", "Completata"),
     ("Stesura introduzione AdR", "Amministratore", "1:00", "0:45","Completata"),
     ("Stesura scopo del documento AdR", "Amministratore", "1:00", "0:30","Completata"),
     ("Stesura prospettiva del prodotto", "Amministratore", "0:30", "0:30","Completata"),
@@ -986,7 +986,7 @@ Per lo Sprint 2 il team si pone i seguenti obiettivi:
   *Punto di attenzione:* La disparità oraria registrata deve essere monitorata per evitare colli di bottiglia e garantire che la conoscenza del dominio sia distribuita equamente tra tutti i componenti del gruppo.
 ]
 
-===== Aggiornamento preventivo a finire
+===== Aggiornamento preventivo a finire RTB RTB
 
 #figure(
   table(
@@ -1136,7 +1136,7 @@ Per lo Sprint 3 il team individua come prioritari i seguenti obiettivi:
 - migliorare il coordinamento operativo e l’efficacia delle revisioni interne.
 
 
-===== Aggiornamento preventivo a finire
+===== Aggiornamento preventivo a finire RTB
 
 #figure(
   table(
@@ -1306,7 +1306,7 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
 - preparare il materiale per la presentazione di revisione.
 
 
-===== Aggiornamento preventivo a finire
+===== Aggiornamento preventivo a finire RTB
 
 #figure(
   table(
@@ -1403,8 +1403,8 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
     ("Test di Accettazione e rielaborazione Test di Sistema", "Amministratore", "1:30", "2:00", "Completata"),
     ("Rielaborazione delle sezioni di procedure applicata nella stesura di AdR, PdP, PdQ in NdP", "Amministratore", "2:30", "3:00", "Completata"),
 
-    ("Terminazione della parti del PoC", "Programmatore","16:00","18:00","Completata"),
-    ("Integrazione delle parti", "Programmatore","5:00","7:00","Completata"),
+    ("Sviluppo sottosistemi PoC", "Programmatore","16:00","18:00","Completata"),
+    ("Integrazione sottosistemi", "Programmatore","5:00","7:00","Completata"),
 
     ("Verifica verbale riunione interna prima settimana", "Verificatore","0:30","0:30","Completata"),
     ("Verifica verbale riunione interna seconda settimana", "Verificatore","0:30","0:30","Completata"),
@@ -1478,7 +1478,7 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
 - iniziare le attività di progettazione
 - aumentare il ritmo di lavoro data la fine della sessione
 
-===== Aggiornamento preventivo a finire
+===== Aggiornamento preventivo a finire RTB
 #figure(
   table(
     fill: (col, row) => if row == 0 { luma(64%) } else { white },
@@ -1509,10 +1509,43 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
   caption: [Aggiornamento preventivo a finire sprint 4],
 )
 
-===== Considerazioni finali per il preventivo della RTB
-Con lo Sprint 4 si concludono gli Sprint dedicati alla fase di RTB, e con questo il preventivo per il periodo verso la RTB. Come si nota dalla tabella sopra, sono state consumate più ore da analista e programmatore del previsto, mentre quelle da responsabile, amministratore e verificatore non hanno ecceduto quanto stabilito. #linebreak()
-Nonostante tutto i costi rientrano a malapena entro la soglia dei 4690.00€. #linebreak()
+=== Considerazioni finali per il preventivo della RTB
+Con lo Sprint 4 si concludono gli Sprint dedicati alla fase di RTB, e con questo il preventivo per il periodo verso la RTB. Come si nota dalla tabella sopra, sono state consumate più ore da analista e programmatore del previsto, mentre quelle da responsabile, amministratore e verificatore non hanno ecceduto quanto stabilito.
+
+Riguardo ai costi, il preventivo di 4690.00€ è stato rispettato avendo speso 4680.00€, con un risparmio di 10.00€.
+
 Dal prossimo Sprint inizieranno le attività in vista della PB.
+
+==== Riassunto utilizzo orario RTB
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    columns: (1fr, 1fr, 1fr, 1fr),
+    inset: 10pt,
+    align: center + horizon,
+    stroke: 0.5pt + luma(200),
+
+    table.header(
+      text(fill: white, weight: "bold")[Ruolo],
+      text(fill: white, weight: "bold")[Ore preventivate],
+      text(fill: white, weight: "bold")[Ore consumate],
+      text(fill: white, weight: "bold")[Differenze rispetto a preventivo],
+    ),
+
+    [Responsabile], [28], [26],text(fill: green)[-2],
+    [Amministratore], [56], [51], text(fill: green)[-5],
+    [Analista], [63], [69],text(fill: red)[+6],
+    [Progettista], [0], [-],[-],
+    [Programmatore], [35], [37], text(fill: red)[+2],
+    [Verificatore], [42], [40], text(fill: green)[-2],
+
+    table.cell(fill: luma(240))[*Totale RTB*],
+    table.cell(fill: luma(240))[*224*],
+    table.cell(fill: luma(240))[*223*],
+    table.cell(fill: luma(240))[*-1*],
+  ),
+  caption: [Tabella riassuntiva utilizzo ore per RTB],
+)
 
 #pagebreak()
 
