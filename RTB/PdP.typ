@@ -688,7 +688,7 @@ In questa sezione viene presentato il preventivo consolidato dei costi e la pian
 Il preventivo è stato elaborato tenendo conto dei vincoli di budget e della scadenza finale di progetto fissata per il *21/03/2026*.
 
 == Evoluzione del Preventivo rispetto alla Candidatura
-Durante la candidatura per il capitolato C2, il gruppo ha formalizzato una prima stima economica tramite il documento *Preventivo costi ed impegno orario*, basata su una valutazione preliminare dei carichi di lavoro.
+Durante la candidatura per il capitolato C2, il gruppo ha formalizzato una prima stima economica tramite il documento #underline(link("https://skarabgroup.github.io/DocumentazioneProgetto/candidatura/Dichiarazione_Impegni.pdf")[*Preventivo costi ed impegno orario*]), basata su una valutazione preliminare dei carichi di lavoro.
 
 L’analisi approfondita dei requisiti normativi e l’avvio delle attività operative hanno tuttavia evidenziato la necessità di un *ribilanciamento strategico delle risorse*.
 In particolare, l’impegno richiesto per la gestione dell’infrastruttura documentale, la verifica dei processi e la manutenzione degli artefatti è risultato inizialmente sottostimato. Parallelamente, l’utilizzo di strumenti moderni di supporto allo sviluppo e la realizzazione anticipata del Proof of Concept hanno consentito un’ottimizzazione delle attività puramente tecniche.
@@ -752,16 +752,16 @@ Per questo motivo, oltre il *60%* del monte ore complessivo del ruolo di *Ammini
       text(fill: white, weight: "bold")[Costo Parziale],
     ),
 
-    [Responsabile], [28], [€ 840,00],
+    [Responsabile], [21], [€ 630,00],
     [Amministratore], [56], [€ 1.120,00],
     [Analista], [63], [€ 1.575,00],
-    [Progettista], [0], [€ 0,00],
-    [Programmatore], [35], [€ 525,00],
+    [Progettista], [14], [€ 350,00],
+    [Programmatore], [21], [€ 315,00],
     [Verificatore], [42], [€ 630,00],
 
     table.cell(fill: luma(240))[*Totale RTB*],
-    table.cell(fill: luma(240))[*224*],
-    table.cell(fill: luma(240))[*€ 4.690,00*],
+    table.cell(fill: luma(240))[*210*],
+    table.cell(fill: luma(240))[*€ 4.410,00*],
   ),
   caption: [Allocazione delle risorse nel periodo verso la RTB],
 )
@@ -784,16 +784,16 @@ In questo intervallo, le ore di *Amministratore* sono ridotte alla manutenzione 
       text(fill: white, weight: "bold")[Budget Residuo],
     ),
 
-    [Responsabile], [21], [€ 630,00],
+    [Responsabile], [28], [€ 1.050,00],
     [Amministratore], [35], [€ 700,00],
     [Analista], [21], [€ 525,00],
-    [Progettista], [119], [€ 2.975,00],
-    [Programmatore], [105], [€ 1.575,00],
+    [Progettista], [105], [€ 2.625,00],
+    [Programmatore], [119], [€ 1.785,00],
     [Verificatore], [105], [€ 1.575,00],
 
     table.cell(fill: luma(240))[*Totale PB*],
-    table.cell(fill: luma(240))[*406*],
-    table.cell(fill: luma(240))[*€ 7.980,00*],
+    table.cell(fill: luma(240))[*420*],
+    table.cell(fill: luma(240))[*€ 8.260,00*],
   ),
   caption: [Allocazione delle risorse nel periodo verso la PB],
 )
@@ -994,7 +994,7 @@ Per lo Sprint 2 il team si pone i seguenti obiettivi:
   *Punto di attenzione:* La disparità oraria registrata deve essere monitorata per evitare colli di bottiglia e garantire che la conoscenza del dominio sia distribuita equamente tra tutti i componenti del gruppo.
 ]
 
-===== Aggiornamento preventivo a finire RTB RTB
+===== Aggiornamento preventivo a finire RTB
 
 #figure(
   table(
@@ -1006,22 +1006,22 @@ Per lo Sprint 2 il team si pone i seguenti obiettivi:
 
     table.header(
       text(fill: white, weight: "bold")[Ruolo],
-      text(fill: white, weight: "bold")[Ore rimanenti],
-      text(fill: white, weight: "bold")[Differenze rispetto a preventivo],
+      text(fill: white, weight: "bold")[Ore rimanenti per RTB],
+      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
       text(fill: white, weight: "bold")[Preventivo a finire costi],
     ),
 
-    [Responsabile], [22], [-],[€ 660],
-    [Amministratore], [28], [-], [€ 560,00],
+    [Responsabile], [15], [-],[€ 450],
+    [Amministratore], [28], [-], [€ 700,00],
     [Analista], [52], text(fill: green)[-4 -> € -100],[€ 1.300,00],
-    [Progettista], [0], [-],[€ 0,00],
-    [Programmatore], [35], [-],[€ 525,00],
+    [Progettista], [14], [-],[€ 350,00],
+    [Programmatore], [21], [-],[€ 315,00],
     [Verificatore], [34], text(fill: green)[-4 -> € -60],[€ 510,00],
 
     table.cell(fill: luma(240))[*Totale RTB*],
-    table.cell(fill: luma(240))[*171*],
+    table.cell(fill: luma(240))[*164*],
     table.cell(fill: luma(240))[#text(fill: green)[*-8 -> € -160*]],
-    table.cell(fill: luma(240))[*€ 3.555,00*],
+    table.cell(fill: luma(240))[*€ 3.625,00*],
   ),
   caption: [Aggiornamento preventivo a finire sprint 1],
 )
@@ -1156,22 +1156,22 @@ Per lo Sprint 3 il team individua come prioritari i seguenti obiettivi:
 
     table.header(
       text(fill: white, weight: "bold")[Ruolo],
-      text(fill: white, weight: "bold")[Ore rimanenti],
-      text(fill: white, weight: "bold")[Differenze rispetto a preventivo],
+      text(fill: white, weight: "bold")[Ore rimanenti per RTB],
+      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
       text(fill: white, weight: "bold")[Preventivo a finire costi],
     ),
 
-    [Responsabile], [16], [-],[€ 480,00],
+    [Responsabile], [9], [-],[€ 270,00],
     [Amministratore], [15], text(fill: red)[+1 -> € +20], [€ 300,00],
     [Analista], [35], text(fill: green)[-8 -> € -200],[€ 875,00],
-    [Progettista], [0], [-],[€ 0,00],
-    [Programmatore], [35], text(fill: green)[-6 -> € -90],[€ 525,00],
+    [Progettista], [14], [-],[€ 350,00],
+    [Programmatore], [21], text(fill: green)[-6 -> € -90],[€ 315,00],
     [Verificatore], [26], text(fill: green)[-4 -> € -60],[€ 390,00],
 
     table.cell(fill: luma(240))[*Totale RTB*],
-    table.cell(fill: luma(240))[*127*],
+    table.cell(fill: luma(240))[*120*],
     table.cell(fill: luma(240))[#text(fill: green)[*-17 -> € -330*]],
-    table.cell(fill: luma(240))[*€ 2.570,00*],
+    table.cell(fill: luma(240))[*€ 2.500,00*],
   ),
   caption: [Aggiornamento preventivo a finire sprint 2],
 )
@@ -1326,22 +1326,22 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
 
     table.header(
       text(fill: white, weight: "bold")[Ruolo],
-      text(fill: white, weight: "bold")[Ore rimanenti],
-      text(fill: white, weight: "bold")[Differenze rispetto a preventivo],
+      text(fill: white, weight: "bold")[Ore rimanenti per RTB],
+      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
       text(fill: white, weight: "bold")[Preventivo a finire costi],
     ),
 
-    [Responsabile], [9], [-],[€ 270,00],
+        [Responsabile], [2], [-],[€ 60,00],
     [Amministratore], [12], [-], [€ 240,00],
     [Analista], [21], text(fill: green)[-2 -> € -50],[€ 525,00],
-    [Progettista], [0], [-],[€ 0,00],
-    [Programmatore], [23],[-],[€ 345,00],
+    [Progettista], [14], [-],[€ 350,00],
+    [Programmatore], [9],[-],[€ 135,00],
     [Verificatore], [18],[-],[€ 270,00],
 
     table.cell(fill: luma(240))[*Totale RTB*],
-    table.cell(fill: luma(240))[*83*],
+    table.cell(fill: luma(240))[*76*],
     table.cell(fill: luma(240))[#text(fill: green)[*-2 -> € -50*]],
-    table.cell(fill: luma(240))[*€ 1.650,00*],
+    table.cell(fill: luma(240))[*€ 1.580,00*],
   ),
   caption: [Aggiornamento preventivo a finire sprint 3],
 )
@@ -1486,6 +1486,7 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
 - iniziare le attività di progettazione
 - aumentare il ritmo di lavoro data la fine della sessione
 
+#pagebreak()
 ===== Aggiornamento preventivo a finire RTB
 #figure(
   table(
@@ -1497,30 +1498,31 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
 
     table.header(
       text(fill: white, weight: "bold")[Ruolo],
-      text(fill: white, weight: "bold")[Ore rimanenti],
-      text(fill: white, weight: "bold")[Differenze rispetto a preventivo],
+      text(fill: white, weight: "bold")[Ore rimanenti per RTB],
+      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
       text(fill: white, weight: "bold")[Preventivo a finire costi],
     ),
 
-    [Responsabile], [2], [-],[€ 60,00],
+    [Responsabile], [-5], [-],[€ -150,00],
     [Amministratore], [5], text(fill: red)[+1 ->€ +20], [€ 100,00],
     [Analista], [-6], text(fill: red)[+12 -> € +300],[€ -150,00],
-    [Progettista], [0], [-],[€ 0,00],
-    [Programmatore], [-2], text(fill: red)[+4 -> € +60],[€ -30,00],
+    [Progettista], [14], [-],[€ 350,00],
+    [Programmatore], [-16], text(fill: red)[+4 -> € +60],[€ -240,00],
     [Verificatore], [2], text(fill: red)[+8 -> € +120],[€ 30,00],
 
     table.cell(fill: luma(240))[*Totale RTB*],
-    table.cell(fill: luma(240))[*1*],
+    table.cell(fill: luma(240))[*-6*],
     table.cell(fill: luma(240))[#text(fill: red)[*+25 -> € +500*]],
-    table.cell(fill: luma(240))[*€ 10,00*],
+    table.cell(fill: luma(240))[*€ -60,00*],
   ),
   caption: [Aggiornamento preventivo a finire sprint 4],
 )
 
 === Considerazioni finali per il preventivo della RTB
-Con lo Sprint 4 si concludono gli Sprint dedicati alla fase di RTB, e con questo il preventivo per il periodo verso la RTB. Come si nota dalla tabella sopra, sono state consumate più ore da analista e programmatore del previsto, mentre quelle da responsabile, amministratore e verificatore non hanno ecceduto quanto stabilito.
+Con lo Sprint 4 si concludono gli Sprint dedicati alla fase di RTB, e con questo il preventivo per il periodo verso la RTB. Come si nota dalla tabella sopra, data la natura straordianria di questo sprint, alcuni ruoli hanno avuto un consumo di ore molto superiore a quanto preventivato, portando a un aumento dei costi rispetto a quanto previsto. Tuttavia, è importante sottolineare che questo aumento è stato necessario per garantire la conclusione delle attività in vista della RTB, e che senza questo impegno aggiuntivo non sarebbe stato possibile raggiungere gli obiettivi prefissati. Da notare come il ruolo del progettista non si è rivelato utile al raggiungimento degli obiettivi RTB, quindi nessuno ha mai ricoperto quel ruolo durante questa fase.
 
-Riguardo ai costi, il preventivo di 4690.00€ è stato rispettato avendo speso 4680.00€, con un risparmio di 10.00€.
+Riguardo ai costi, il preventivo di 4690.00€ è stato sforato di poco (60,00€), lo sforamento é molto mitigato dal fatto che un ruolo che era stato preventivato non é stato utilizzando, questo ha portato a un risparmio di 350,00€ che ha mitigato lo sforamento causato dagli altri ruoli.
+
 
 Dal prossimo Sprint inizieranno le attività in vista della PB.
 
@@ -1537,14 +1539,14 @@ Dal prossimo Sprint inizieranno le attività in vista della PB.
       text(fill: white, weight: "bold")[Ruolo],
       text(fill: white, weight: "bold")[Ore preventivate],
       text(fill: white, weight: "bold")[Ore consumate],
-      text(fill: white, weight: "bold")[Differenze rispetto a preventivo],
+      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
     ),
 
-    [Responsabile], [28], [26],text(fill: green)[-2],
+    [Responsabile], [21], [26],text(fill: red)[+5],
     [Amministratore], [56], [51], text(fill: green)[-5],
     [Analista], [63], [69],text(fill: red)[+6],
-    [Progettista], [0], [-],[-],
-    [Programmatore], [35], [37], text(fill: red)[+2],
+    [Progettista], [14], [0], text(fill: green)[-14],
+    [Programmatore], [21], [37], text(fill: red)[+16],
     [Verificatore], [42], [40], text(fill: green)[-2],
 
     table.cell(fill: luma(240))[*Totale RTB*],
