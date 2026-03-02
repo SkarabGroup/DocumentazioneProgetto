@@ -1,24 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const navLinks = document.querySelectorAll('nav a');
-  const sections = document.querySelectorAll('.section');
-  const toggleButton = document.getElementById("toggle-theme");
-
-  if (localStorage.getItem('theme') === 'dark') {
-    document.body.classList.add('dark-theme');
-    toggleButton.textContent = "☀️ Light Mode";
-  }
-
-  toggleButton.addEventListener("click", () => {
-    document.body.classList.toggle("dark-theme");
-
-    if (document.body.classList.contains("dark-theme")) {
-      toggleButton.textContent = "☀️ Light Mode";
-      localStorage.setItem('theme', 'dark');
-    } else {
-      toggleButton.textContent = "🌙 Dark Mode";
-      localStorage.setItem('theme', 'light');
-    }
-  });
 
   const scrollIndicator = document.createElement('div');
   scrollIndicator.style.position = 'fixed';

@@ -18,40 +18,53 @@
 #set page(numbering: "1", header: header("Piano di Qualifica"), footer: footer())
 #let history = (
   (
+    "2026/03/02",
+    "1.0.0",
+    "Ufficializzazione per RTB",
+    "",
+    members.suar
+  ),
+  (
     "2026/02/26",
     "0.11.0",
     "Aggiunta grafici mancanti",
     members.alice,
+    members.suar
   ),
   (
     "2026/02/25",
     "0.10.0",
     "Aggiunta Test di Unità mancanti",
     members.alice,
+    members.suar
   ),
   (
     "2026/02/06",
     "0.9.0",
     "Test di Accettazione e rielaborazione Test di Sistema",
     members.alice,
+    members.suar
   ),
   (
     "2026/01/27",
     "0.8.1",
     "Aggiunta grafico BV-SV, revisione Metodi di Testing e aggiunta test, modifiche minori al documento",
     members.alice,
+    members.suar
   ),
   (
     "2026/01/22",
     "0.7.0",
     "Grafici CPI-SPI, EAC, RSI e SGA",
     members.alice,
+    members.suar
   ),
   (
     "2026/01/21",
     "0.6.0",
     "Cruscotto di valutazione, grafico PV-AC-EV",
     members.alice,
+    members.suar
   ),
   (
     "2026/01/17",
@@ -122,9 +135,11 @@
 = Introduzione
 
 == Contesto del Progetto
-Il presente documento descrive il #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#piano-di-qualifica")[#def[Piano di Qualifica]] relativo al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]], commissionato dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
+Il presente documento descrive il #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#piano-di-qualifica")[#def[Piano di Qualifica]] relativo al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]], commissionato dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]] e realizzato dal team di sviluppo #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
 
-L’obiettivo del progetto è lo sviluppo di una piattaforma ad #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[Agenti]] per l’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e la #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] automatizzata delle vulnerabilità nei repository GitHub, in conformità con quanto definito dal capitolato *C2*.
+Il progetto ha come obiettivo la realizzazione di un sistema per l'automazione dei processi di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] delle vulnerabilità del software. L'architettura si basa sul paradigma degli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] software intelligenti, operanti su repository di codice sorgente. La conformità del sistema è vincolata ai requisiti definiti nel #link(<capitolato>)[#underline[Capitolato *C2*]].
+
+La piattaforma supporta attività di analisi statica del codice sorgente e di individuazione delle principali criticità di sicurezza, fornendo suggerimenti di correzione attraverso meccanismi automatizzati basati su modelli di linguaggio di grandi dimensioni (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]).
 
 == Finalità del Documento
 Il Piano di Qualifica definisce l’impostazione metodologica per la gestione della qualità, specificando come il gruppo intenda prevenire, rilevare e correggere i difetti.
@@ -133,14 +148,14 @@ Il documento costituisce il riferimento primario per il #link("https://skarabgro
 
 - *Piano della Qualità (Quality Assurance)*: definizione della strategia di gestione della qualità, identificando gli standard di riferimento (in particolare #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#iso-25010")[#def[ISO/IEC 25010]]), le metriche di misurazione e le relative soglie di accettazione/ottimalità.
 - *Controllo di Qualità (Quality Control)*: pianificazione operativa delle attività di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#verifica")[#def[Verifica]] (analisi statica, test dinamici) per garantire la correttezza tecnica degli artefatti prodotti.
-- *Validazione di Prodotto*: definizione delle procedure necessarie per accertare la conformità del sistema rispetto alle aspettative degli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#stakeholder")[#def[Stakeholder]] e ai requisiti del capitolato.
-- *Miglioramento Continuo*: applicazione di meccanismi retroattivi (basati sul ciclo #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#pdca")[#def[Plan-Do-Check-Act]]) che utilizzano i risultati delle misurazioni per ottimizzare i processi e il *Way of Working* in corso d'opera.
+- *Validazione di Prodotto*: definizione delle procedure necessarie per accertare che il sistema soddisfi i bisogni effettivi degli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#stakeholder")[#def[Stakeholder]] e i requisiti del capitolato.
+- *Miglioramento Continuo*: applicazione di meccanismi retroattivi (basati sul ciclo #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#pdca")[#def[Plan-Do-Check-Act]]) che utilizzano i risultati delle misurazioni per ottimizzare i processi e il #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#way-of-working")[*#def[Way of Working]*] in corso d'opera.
 
 == Traguardi Qualitativi
-L'assicurazione della qualità segue l'approccio incrementale del progetto, fissando obiettivi specifici per le due principali milestones:
+L'assicurazione della qualità segue l'approccio incrementale del progetto, fissando obiettivi specifici per le due principali milestone:
 
 === Revisione dei Requisiti e della Tecnologia (RTB)
-Per la milestone RTB (*06/02/2026*), le attività di qualità si concentrano sulla correttezza formale e sulla fattibilità tecnica:
+Per la milestone RTB (*25/02/2026*), le attività di qualità si concentrano sulla correttezza formale e sulla fattibilità tecnica:
 - *Qualità dei Documenti*: Verifica approfondita della documentazione (Analisi dei Requisiti, PdP, NdP) tramite analisi statica e walkthrough, per garantire assenza di ambiguità e coerenza interna (Indice di Gulpease).
 - *Qualità del Prototipo (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#proof-of-concept")[#def[PoC]])*: L'attività di verifica è focalizzata esclusivamente sulla *dimostrazione della fattibilità tecnica* (Technology Baseline), con particolare attenzione all'interazione Agenti-LLM. Il testing in questa fase ha valore _sperimentale e propedeutico_: esso funge da caso di studio per calibrare le metriche e validare le strategie di verifica che saranno poi applicate in modo sistematico ed estensivo sul #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#minimum-viable-product")[#def[MVP]].
 
@@ -151,40 +166,46 @@ Per il rilascio finale (*21/03/2026*), il focus si sposta sulla robustezza, sull
 - *Validazione Utente*: Verifica dell'usabilità tramite test di accettazione (UAT) basati sui casi d'uso principali.
 
 == Glossario
-Al fine di prevenire ambiguità interpretative, è stato redatto un #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#glossario")[#def[Glossario]] che definisce in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio utilizzati all’interno della documentazione.
-Le occorrenze dei termini presenti nel Glossario sono evidenziate nel testo mediante apposita formattazione.
+Al fine di prevenire ambiguità interpretative, è stato redatto un glossario che definisce in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio utilizzati all’interno della documentazione.
 
-Versione aggiornata del Glossario:
-#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario]
+Nel testo, *ogni termine evidenziato tramite una G come apice*, rimanda alla voce corrispondente del Glossario pubblicato sul sito ufficiale del gruppo, consentendo al lettore di accedere direttamente alla definizione associata.
+
+La versione più recente del Glossario è disponibile al seguente link:
+#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario]].
 
 == Riferimenti
 
 === Riferimenti Normativi
 I seguenti documenti hanno valore vincolante per la definizione delle strategie di qualità e per le attività di verifica:
-- *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. #linebreak()
-  #link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")
+- *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> #linebreak()
+  #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
+  (ultimo accesso: *24/02/2026*)
 
-- *Norme di Progetto*: Il documento definisce il "Way of Working", stabilendo gli strumenti e le procedure che questo Piano si occupa di misurare. #linebreak()
-  #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[Documento interno]
+- *Norme di Progetto*: Il documento definisce il "Way of Working", stabilendo gli strumenti e le procedure che questo Piano si occupa di misurare. <NdP> #linebreak() 
+  #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")] \
+  (versione: *v1.0.0*)
 
 === Riferimenti Informativi
-- *ISO/IEC 25010:2011*: Systems and software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE). #linebreak()
-  #link("https://iso25000.com/index.php/en/iso-25000-standards/iso-25010")
+- *ISO/IEC 25010:2011*: Systems and software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE). <25010> #linebreak()
+  #underline[#link("https://iso25000.com/index.php/en/iso-25000-standards/iso-25010")] \
+  (ultimo accesso: *24/02/2026*)
 
-- *ISO/IEC 12207:2008*: Systems and software engineering — Software life cycle processes. #linebreak()
-  #link("https://ieeexplore.ieee.org/document/4475826")
+- *ISO/IEC 12207:2008*: Systems and software engineering — Software life cycle processes. <12207> #linebreak()
+  #underline[#link("https://ieeexplore.ieee.org/document/4475826")] \
+  (ultimo accesso: *24/02/2026*)
 
-- *Dispense del corso di Ingegneria del Software – Qualità del software* #linebreak()
-  #link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T06.pdf")
+- *Dispense del corso di Ingegneria del Software – Qualità del software* <dispense_qualità> #linebreak()
+  #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T06.pdf")] \
+  (ultimo accesso: *24/02/2026*)
 
 #pagebreak()
-== Qualità di Processo
+= Qualità di Processo
 
 La garanzia della qualità del prodotto finale è intrinsecamente legata alla qualità dei processi produttivi che lo generano. Per il progetto _Code Guardian_, la gestione dei processi mira a rendere il #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#way-of-working")[#def("Way of Working")] sostenibile, tracciabile e soggetto a miglioramento continuo attraverso l'applicazione del ciclo PDCA.
 
-=== Centralizzazione delle Metriche e Obiettivi
+== Centralizzazione delle Metriche e Obiettivi
 
-Il presente documento costituisce il riferimento unico, autoritativo e analitico per la gestione della qualità del progetto _Code Guardian_. Mentre le #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#norme-di-progetto")[#def("Norme di Progetto")] definiscono le procedure operative, gli strumenti e le responsabilità per l'estrazione dei dati, il Piano di Qualifica ha il compito di centralizzare la "scienza della misurazione" del gruppo.
+Il presente documento costituisce il riferimento unico e autoritativo per la gestione della qualità del progetto Code Guardian. Il Piano di Qualifica centralizza la 'scienza della misurazione' del gruppo, definendo rigorosamente i criteri analitici, le metriche e le soglie necessarie per garantire la conformità degli artefatti agli standard prefissati.
 
 In particolare, ogni metrica qui esposta è corredata da:
 - *Identificativo univoco:* (MPC per il processo, MPD per il prodotto);
@@ -313,11 +334,11 @@ Misurano l'efficienza interna del team Skarab Group nell'auto-organizzarsi e nel
 
 #pagebreak()
 
-== Qualità di Prodotto
+= Qualità di Prodotto
 
 La qualità di prodotto valuta il software consegnato rispetto ai requisiti e alle caratteristiche intrinseche definite dallo standard ISO/IEC 25010.
 
-=== Adeguatezza Funzionale e Affidabilità
+== Adeguatezza Funzionale e Affidabilità
 Si misura la capacità del sistema di svolgere i compiti richiesti e di rimanere operativo senza guasti critici, parametro fondamentale per un tool di audit.
 
 #metrics_table(
@@ -341,7 +362,7 @@ Si misura la capacità del sistema di svolgere i compiti richiesti e di rimanere
   ),
 )
 
-=== Manutenibilità e Sicurezza
+== Manutenibilità e Sicurezza
 Data la natura del progetto Code Guardian, queste metriche rappresentano il valore distintivo del prodotto. Un codice manutenibile e privo di vulnerabilità è condizione necessaria per l'accettazione.
 
 #metrics_table(
@@ -371,7 +392,7 @@ Data la natura del progetto Code Guardian, queste metriche rappresentano il valo
 )
 #pagebreak()
 
-= Metodi di Testing
+= Strategie di Testing
 Il processo di testing rappresenta una fase cruciale nello sviluppo del prodotto _CodeGuardian_.
 
 Skarab Group ha adottato un approccio di testing multilivello che copre:
@@ -648,7 +669,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [Verificare la corretta aggregazione dei dati provenienti dai diversi strumenti (Codice, Sicurezza, Doc.) in un unico report strutturato.],
       [UC24],
 
-      [TS-24.2], [Verificare che il report venga validato prima del salvataggio.], [UC24],
+      [TS-24.1], [Verificare che il report venga validato prima del salvataggio.], [UC24],
 
       // --- SALVATAGGIO REPORT (UC25) ---
       [TS-25],

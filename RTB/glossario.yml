@@ -6,30 +6,38 @@ A:
     descrizione: Modello di gestione del progetto basato su cicli iterativi che permettono di adattare la pianificazione in risposta a requisiti emergenti o cambiamenti nel contesto operativo.
   Agente:
     alternative: Agenti
-    descrizione: Entità software autonoma capace di percepire l'ambiente circostante e agire su di esso per perseguire obiettivi specifici. Nel progetto, identifica i componenti basati su LLM per l'audit del codice.
+    descrizione: Componente software autonomo capace di percepire l'ambiente circostante, ragionare sui dati acquisiti e intraprendere azioni indipendenti per il conseguimento di specifici obiettivi mediante tecniche di intelligenza artificiale.
+  Agent Orchestration:
+    descrizione: Coordinamento strutturato di più agenti software volto a definire ruoli, flussi di esecuzione e regole di interazione, garantendo controllo, coerenza operativa e il raggiungimento degli obiettivi del sistema.
   Agile:
-    descrizione: Mentalità e approccio allo sviluppo software che promuove la pianificazione evolutiva, lo sviluppo iterativo, la consegna anticipata e il miglioramento continuo attraverso feedback rapidi.
+    descrizione: Filosofia di sviluppo software che privilegia la consegna frequente di software funzionante, la collaborazione costante con il cliente e la capacità di rispondere ai cambiamenti piuttosto che seguire un piano rigido.
   Allucinazione:
-    descrizione: Errore semantico o logico prodotto da un Large Language Model, che consiste nella generazione di output sintatticamente corretti ma privi di fondamento o fattualmente errati.
+    descrizione: Fenomeno per cui un modello di intelligenza artificiale genera output sintatticamente corretti e plausibili ma fattualmente errati o privi di riscontro nella base di conoscenza o nel contesto fornito.
+  Amazon Web Service:
+    acronimo: AWS
+    descrizione: Ecosistema di servizi cloud che fornisce l'infrastruttura computazionale e di storage per il sistema. Consente l'esecuzione di task intensivi in ambienti isolati e la gestione dinamica delle risorse, garantendo la scalabilità necessaria alle operazioni di analisi e la persistenza dei dati non sensibili.
   Amministratore:
-    descrizione: Ruolo responsabile del supporto infrastrutturale del team, incaricato della gestione della configurazione, della manutenzione degli strumenti e del controllo degli accessi.
+    descrizione: Ruolo nel team di progetto responsabile della gestione della configurazione, della documentazione, del supporto infrastrutturale e del mantenimento dei repository.
   Analisi dei requisiti:
-    descrizione: Attività di ingegneria del software volta a definire le funzionalità e i vincoli che il sistema deve rispettare, documentata formalmente per l'approvazione degli stakeholder.
+    descrizione: Processo sistematico di raccolta, elaborazione e formalizzazione delle esigenze degli stakeholder al fine di stabilire le specifiche (funzionali e non) che il sistema software deve soddisfare.
   Analisi statica:
-    descrizione: Procedura di verifica del codice sorgente eseguita senza l'esecuzione del programma, finalizzata al rilevamento di pattern di errore, vulnerabilità e non conformità agli standard di codifica.
+    descrizione: Tecnica di verifica del software effettuata esaminando il codice sorgente senza eseguirlo, mirata all'individuazione precoce di errori, vulnerabilità e non conformità agli standard di codifica.
   Analista:
-    alternative: Analisti, Requirement Analyst
-    descrizione: Ruolo incaricato di studiare il dominio del problema e di tradurre le necessità del proponente in requisiti tecnici e funzionali chiari, univoci e testabili.
-  API:
-    acronimo: Application Programming Interface
-    descrizione: Interfaccia definita tramite un insieme di protocolli e strumenti che permette a diverse applicazioni software di interagire e scambiare dati tra loro.
+    alternative: Requirement Analyst, Analisti
+    descrizione: Membro del team di sviluppo responsabile della raccolta e dell'analisi dei requisiti del sistema software, nonché della comunicazione con gli stakeholder per garantire che le esigenze siano comprese e documentate correttamente.
+  Application Programming Interface:
+    acronimo: API
+    descrizione: Insieme di regole e protocolli che consentono a diverse applicazioni software di comunicare tra loro, definendo endpoint, parametri e formati dati.
   API Contract:
-    descrizione: Specificazione tecnica vincolante che definisce le regole di interazione tra fornitore e consumatore di un'interfaccia, includendo endpoint, parametri e formati dati (es. OpenAPI).
+    descrizione: Specificazione tecnica vincolante e accordo formale tra fornitore e consumatore di un'interfaccia che stabilisce endpoint, strutture dei dati e comportamenti attesi (es. OpenAPI).
   Approccio Agile:
-    alternative: Metodo Agile
-    descrizione: Implementazione pratica dei principi del Manifesto Agile, caratterizzata da sprint brevi e revisioni costanti del prodotto e dei processi.
+    alternative: Metodo Agile, Agile
+    descrizione: Implementazione pratica dei principi del Manifesto Agile, caratterizzata da sprint brevi, feedback continui e adattamento progressivo dei processi e del prodotto.
+  Attore:
+    alternative: attori
+    descrizione: Entità esterna al sistema (persona, hardware o altro sistema software) che interagisce con esso scambiando informazioni per raggiungere un determinato scopo.
   Audit:
-    descrizione: Esame formale e sistematico eseguito su un artefatto o un processo per attestarne la conformità a standard di qualità, requisiti di sicurezza o normative vigenti.
+    descrizione: Esame formale, sistematico e indipendente eseguito su un artefatto o un processo per attestarne la conformità a standard di qualità, requisiti di sicurezza o normative vigenti.
   Availability:
     alternative: Disponibilità
     descrizione: Caratteristica di qualità del sistema che esprime la probabilità o la percentuale di tempo in cui il software è pronto all'uso e risponde correttamente alle richieste.
@@ -39,9 +47,11 @@ A:
 
 B:
   Backlog:
-    descrizione: Elenco dinamico e prioritizzato delle unità di lavoro (user story, task, bug) necessarie per realizzare il prodotto. È gestito dal Responsabile in collaborazione con il team su Jira.
+    descrizione: Elenco dinamico e prioritizzato di tutto il lavoro necessario per realizzare il prodotto (user story, task, bug), gestito dal Responsabile in collaborazione con il team.
   Back-end:
     descrizione: Strato logico-funzionale del sistema non visibile all'utente, responsabile dell'elaborazione dei dati, della gestione della persistenza e dell'integrazione con i servizi esterni (es. LLM).
+  Baseline:
+    descrizione: Configurazione approvata e consolidata di un elemento di configurazione (documenti o codice) che serve come base per ulteriori attività e che può essere modificata solo attraverso procedure formali di controllo.
   Big Design Up Front:
     acronimo: BDUF
     descrizione: Pratica di progettazione esaustiva e dettagliata che precede la fase di codifica. Approccio solitamente evitato nelle metodologie Agile a favore di una progettazione emergente.
@@ -50,57 +60,67 @@ B:
     descrizione: Valore totale del preventivo approvato per il completamento del progetto. Rappresenta la baseline economica rispetto alla quale vengono misurate le performance.
   Budget Variance:
     acronimo: BV
-    descrizione: Differenza algebrica tra il budget preventivato (BAC) e la stima del costo finale (EAC). Un valore positivo indica una previsione di risparmio rispetto alle risorse allocate.
+    descrizione: Differenza algebrica tra il budget preventivato (BAC) e la stima del costo finale (EAC). Un valore positivo indica una previsione di risparmio.
   Bus Factor:
-    descrizione: Indicatore di rischio che quantifica la dipendenza del progetto da un numero limitato di componenti del team. Un valore basso indica un'elevata criticità nella distribuzione della conoscenza.
+    descrizione: Indicatore di rischio che quantifica la dipendenza del progetto da un numero limitato di componenti del team; un valore basso indica che l'assenza di pochi membri bloccherebbe il lavoro.
 
 C:
   Caching:
-    descrizione: Meccanismo di memorizzazione temporanea di dati ad accesso frequente volto a ridurre i tempi di latenza e l'uso eccessivo di risorse (es. chiamate API verso LLM).
+    descrizione: Meccanismo di memorizzazione temporanea di dati ad accesso frequente in un'area rapida, volto a ridurre i tempi di latenza e l'uso eccessivo di risorse (es. chiamate API verso LLM).
+  Capability Maturity Model Integration:
+    acronimo: CMMI
+    descrizione: Framework internazionale per il miglioramento dei processi che definisce cinque livelli di maturità per valutare la capacità di un'organizzazione di gestire progetti complessi in modo efficiente.
   Caso d'uso:
     alternative: Use case, casi d'uso
-    descrizione: Unità di specifica dei requisiti funzionali che descrive una sequenza di interazioni tra un attore e il sistema per il raggiungimento di un risultato di valore.
+    descrizione: Unità di specifica dei requisiti funzionali che descrive una sequenza di interazioni tra un attore e il sistema per il raggiungimento di un obiettivo di valore.
   Ciclo di vita del software:
-    descrizione: Insieme delle fasi (analisi, progettazione, sviluppo, verifica, manutenzione) che scandiscono l'evoluzione di un prodotto software dalla sua concezione alla dismissione.
-  CMMI:
-    acronimo: Capability Maturity Model Integration
-    descrizione: Framework internazionale per il miglioramento dei processi che definisce cinque livelli di maturità per valutare la capacità di un'organizzazione di gestire progetti complessi.
+    descrizione: Processo strutturato e insieme delle fasi (analisi, progettazione, sviluppo, verifica, manutenzione) che scandiscono l'evoluzione di un prodotto software dalla sua concezione alla dismissione.
+  Codebase:
+    descrizione: Insieme completo di codice sorgente, risorse e configurazioni che costituiscono un'applicazione software o un sistema.
+  Code Coverage:
+    alternative: Coverage
+    descrizione: Metrica che indica la percentuale di istruzioni, rami o blocchi di codice eseguiti durante una suite di test automatizzati per valutare il grado di confidenza dell'attività di verifica.
   Code Guardian:
-    descrizione: Denominazione ufficiale della piattaforma ad agenti sviluppata da Skarab Group per l'audit e la remediation automatizzata di vulnerabilità software.
+    descrizione: Denominazione ufficiale della piattaforma ad agenti sviluppata da Skarab Group per l'audit e la remediation automatizzata di vulnerabilità software, commissionata da Var Group.
   Collaudatori:
-    descrizione: Membri del team (o stakeholder) incaricati dell'esecuzione dei test di accettazione per validare la conformità del prodotto finale rispetto ai requisiti contrattuali.
+    descrizione: Membri del team o tecnici incaricati di eseguire i test di accettazione finale per validare la conformità del prodotto rispetto ai requisiti contrattuali e alle aspettative dell'utente.
   Complessità Ciclomatica:
-    descrizione: Metrica che quantifica il numero di percorsi indipendenti attraverso il grafo di controllo di un modulo software, indicandone la difficoltà di test e manutenzione.
+    descrizione: Metrica quantitativa che misura la complessità logica di un programma calcolando il numero di percorsi linearmente indipendenti attraverso il grafo di controllo, indicandone la difficoltà di test e manutenzione.
   Consulente informatico:
-    descrizione: Ruolo di supporto tecnico o metodologico (es. proponente o docente) che fornisce competenze specialistiche per agevolare le scelte architetturali o procedurali del team.
+    descrizione: Esperto esterno o ruolo di supporto (es. proponente o docente) che fornisce competenze specialistiche e raccomandazioni strategiche per agevolare le scelte architetturali o procedurali.
   Consuntivo:
-    descrizione: Documento o sezione che riporta l'analisi dei costi e delle ore effettivamente sostenute al termine di un periodo lavorativo, confrontandoli con i dati del preventivo.
+    descrizione: Documento o sezione che riporta la rendicontazione finale dei costi e delle ore effettivamente sostenute al termine di un periodo, confrontandoli con i dati del preventivo.
   Containerizzazione:
-    descrizione: Tecnica di virtualizzazione a livello di sistema operativo per distribuire ed eseguire applicazioni in ambienti isolati (container), garantendo portabilità e coerenza tra ambienti.
+    descrizione: Tecnologia di virtualizzazione a livello di sistema operativo che impacchetta l'applicazione e le sue dipendenze in unità isolate (container), garantendo portabilità e coerenza tra ambienti.
+  Continuous Integration:
+    acronimo: CI
+    alternative: pipeline CI, Integrazione continua
+    descrizione: Pratica DevOps che prevede l'integrazione frequente del codice in un repository centrale, verificata automaticamente da build e test per rilevare errori il prima possibile.
   Cost Performance Index:
     acronimo: CPI
     descrizione: Indicatore di efficienza dei costi (EVM). Rapporto tra valore guadagnato (EV) e costo reale (AC); valori inferiori a 1 indicano un utilizzo inefficiente del budget.
   Coupling:
     alternative: Accoppiamento
-    descrizione: Misura del grado di interdipendenza tra i componenti di un sistema. Un basso accoppiamento è un traguardo qualitativo che favorisce la manutenibilità e la modularità.
-  Coverage:
-    alternative: Code Coverage
-    descrizione: Percentuale di istruzioni, rami o blocchi di codice eseguiti durante una suite di test. È una metrica fondamentale per valutare il grado di confidenza dell'attività di verifica.
+    descrizione: Misura del grado di interdipendenza tra i componenti di un sistema. Un basso accoppiamento favorisce la manutenibilità e la modularità.
 
 D:
   Database:
-    descrizione: Sistema per l'archiviazione, gestione e recupero strutturato dei dati di progetto (es. persistenza dello stato degli agenti o log delle vulnerabilità).
+    descrizione: Sistema organizzato per l'archiviazione, gestione e recupero efficiente dei dati di progetto (es. persistenza dello stato degli agenti o log delle vulnerabilità).
   Data Leakage:
     alternative: Fuga di dati
-    descrizione: Trasmissione non autorizzata di dati sensibili verso l'esterno. Nel contesto LLM, si riferisce anche all'invio accidentale di codice proprietario a modelli terzi.
+    descrizione: Esposizione o trasmissione non autorizzata di dati sensibili verso l'esterno. Nel contesto LLM, include l'invio accidentale di codice proprietario a modelli terzi.
+  Design Pattern:
+    descrizione: Soluzione progettuale generale e riutilizzabile per problemi ricorrenti nel contesto della progettazione del software.
   DevOps:
-    descrizione: Insieme di pratiche che integrano sviluppo software e operazioni IT, mirando a automatizzare i processi di rilascio e migliorare la qualità del software.
+    descrizione: Insieme di pratiche culturali e strumenti che integrano sviluppo software (Dev) e operazioni IT (Ops) per accorciare i cicli di rilascio e migliorare la qualità.
   Diagrammi dei casi d'uso:
-    descrizione: Formalismo grafico appartenente al linguaggio UML che illustra le funzionalità del sistema dal punto di vista degli attori esterni.
+    descrizione: Formalismo grafico UML che illustra le relazioni tra gli attori e le funzionalità del sistema, definendone i confini dal punto di vista dell'utente.
   Discord:
-    descrizione: Strumento di comunicazione istantanea utilizzato dal team per il coordinamento rapido e le riunioni interne non ufficiali.
+    descrizione: Piattaforma di comunicazione digitale utilizzata dal team per il coordinamento rapido, canali testuali/vocali e riunioni interne non ufficiali.
   Docker:
-    descrizione: Tecnologia di containerizzazione che permette di isolare l'applicazione e le sue dipendenze, garantendo l'identità dell'ambiente di esecuzione tra sviluppo e produzione.
+    descrizione: Tecnologia open source di containerizzazione che permette di isolare l'applicazione e le sue dipendenze in container, garantendo l'identità dell'ambiente tra sviluppo e produzione.
+  Draw.io:
+    descrizione: Applicazione web per la creazione di diagrammi tecnici, utilizzata per modellare flussi, architetture e schemi UML.
 
 E:
   Earned Value:
@@ -110,138 +130,158 @@ E:
     acronimo: EVM
     descrizione: Tecnica di gestione di progetto che integra misure di ambito, schedulazione e costi per fornire una valutazione oggettiva della performance e dei rischi economici.
   ESLint:
-    descrizione: Strumento di analisi statica utilizzato per identificare e segnalare pattern problematici o violazioni delle convenzioni di stile nel codice TypeScript.
+    descrizione: Strumento di analisi statica utilizzato per identificare e segnalare pattern problematici o violazioni delle convenzioni di stile nel codice JavaScript e TypeScript.
   Estimate At Completion:
     acronimo: EAC
     descrizione: Previsione del costo finale complessivo del progetto basata sulla proiezione delle performance correnti (CPI) sul budget rimanente.
 
 F:
   Failure Density:
-    descrizione: Metrica di qualità del prodotto calcolata come rapporto tra il numero di guasti rilevati e la dimensione del codice sorgente espressa in migliaia di linee (KLOC).
+    descrizione: Metrica di qualità del prodotto calcolata come rapporto tra il numero di guasti rilevati e la dimensione del codice sorgente (es. espressa in KLOC).
   Falsi negativi:
-    descrizione: Errori di tipo II in cui il sistema di audit non rileva una vulnerabilità effettivamente presente nel codice analizzato.
+    descrizione: Errore (Tipo II) in cui uno strumento di verifica o un test non rileva una vulnerabilità o un difetto effettivamente presente nel sistema.
   Falsi positivi:
-    descrizione: Errori di tipo I in cui il sistema di audit segnala come vulnerabilità una porzione di codice che è, in realtà, corretta e sicura.
+    descrizione: Errore (Tipo I) in cui uno strumento di verifica segnala come vulnerabilità o difetto una porzione di codice che è, in realtà, corretta e sicura.
   Front-end:
-    descrizione: Strato dell'applicazione responsabile della presentazione e dell'interazione con l'utente finale, deputato alla visualizzazione dei report di audit e remediation.
+    descrizione: Strato dell'applicazione responsabile della presentazione, dell'interfaccia utente e dell'interazione diretta, deputato alla visualizzazione dei report e dei dati.
 
 G:
   Gantt:
-    descrizione: Diagramma a barre utilizzato per la pianificazione temporale delle attività di progetto, utile per visualizzare la durata delle task e le dipendenze cronologiche.
+    descrizione: Diagramma a barre utilizzato per la pianificazione temporale delle attività di progetto, illustrando durate, scadenze e dipendenze reciproche su una scala temporale.
   Gestione Rischi:
-    descrizione: Processo sistematico volto a identificare, analizzare e mitigare gli eventi incerti che potrebbero influenzare negativamente gli obiettivi del progetto (es. ritardo nel PoC).
+    descrizione: Processo sistematico e iterativo volto a identificare, analizzare, mitigare e monitorare gli eventi incerti che potrebbero influenzare negativamente gli obiettivi del progetto.
   Git:
-    descrizione: Sistema di controllo di versione distribuito che permette il tracciamento delle modifiche al codice sorgente e la collaborazione tra più sviluppatori.
+    descrizione: Sistema di controllo di versione distribuito che permette il tracciamento delle modifiche al codice sorgente e la collaborazione efficiente tra più sviluppatori.
   GitHub:
-    descrizione: Servizio di hosting basato su cloud per repository Git; funge da piattaforma principale per il versionamento del codice di Code Guardian e per l'automazione tramite GitHub Actions.
+    descrizione: Servizio di hosting cloud per repository Git; funge da piattaforma principale per il versionamento del codice, la collaborazione e l'automazione (Actions).
   Glossario:
-    descrizione: Documento finalizzato a definire in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio per evitare ambiguità interpretative tra gli stakeholder.
+    descrizione: Documento normativo finalizzato a definire in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio per evitare ambiguità interpretative tra gli stakeholder.
   Gold Plating:
-    descrizione: Pratica di aggiungere funzionalità non richieste nei requisiti ufficiali. Nel contesto Agile, è considerata una fonte di spreco che allontana dal completamento del MVP.
+    descrizione: Pratica sconsigliata di aggiungere funzionalità o perfezionamenti non richiesti nei requisiti ufficiali, consumando risorse senza aggiungere valore concordato.
+  Google Calendar:
+    descrizione: Strumento di gestione del tempo utilizzato per pianificare riunioni, scadenze e attività condivise all'interno del team.
+  Graphical User Interface:
+    acronimo: GUI
+    descrizione: Interfaccia utente grafica che consente l'interazione con il sistema attraverso elementi visivi come finestre, icone e menu in modo intuitivo.
   Gruppo di lavoro:
     alternative: Team di progetto, Skarab Group
     descrizione: Insieme dei componenti assegnati al progetto che collaborano attivamente per il raggiungimento degli obiettivi definiti nel Piano di Progetto.
-  GUI:
-    acronimo: Graphical User Interface
-    descrizione: Interfaccia grafica che consente all'utente di interagire con il sistema Code Guardian in modo intuitivo tramite elementi visivi.
-  Gulpease Index:
+  Gulpease:
     alternative: Indice Gulpease
-    descrizione: Metrica di leggibilità per la lingua italiana che valuta la complessità di un testo in base alla lunghezza delle parole e delle frasi.
+    descrizione: Indice di leggibilità calibrato sulla lingua italiana che valuta la complessità di un testo in base alla lunghezza delle parole e delle frasi.
 
 H:
   Human-in-the-loop:
-    descrizione: Modello operativo in cui l'intervento umano è richiesto per validare o correggere l'output prodotto dall'IA (es. revisione manuale della remediation proposta dall'agente).
+    descrizione: Modello operativo che richiede l'intervento o la supervisione umana diretta per validare, correggere o guidare le decisioni prese da un sistema automatizzato (es. revisione della remediation).
   Hybrid:
-    descrizione: Modello di gestione del progetto che integra approcci predittivi (Waterfall) per la pianificazione e adattivi (Agile) per lo sviluppo.
+    descrizione: Modello di gestione del progetto che integra approcci predittivi (Waterfall) per la pianificazione e adattivi (Agile) per lo sviluppo, bilanciando controllo e flessibilità.
 
 I:
-  Incrementale:
-    descrizione: Caratteristica di un processo di sviluppo in cui il sistema viene realizzato e consegnato tramite rilasci successivi di funzionalità operative.
-  Information Technology:
-    acronimo: IT
-    descrizione: Insieme delle tecnologie e degli strumenti per l'elaborazione, l'archiviazione e la trasmissione delle informazioni in formato elettronico.
   Infrastructure as Code:
     acronimo: IaC
-    descrizione: Gestione e provisioning dell'infrastruttura informatica tramite file di configurazione leggibili da macchina, garantendo replicabilità e coerenza.
+    descrizione: Gestione e provisioning dell'infrastruttura informatica tramite file di configurazione leggibili da macchina, garantendo replicabilità, versionamento e coerenza degli ambienti.
+  Incrementale:
+    descrizione: Approccio allo sviluppo in cui il sistema viene realizzato e consegnato per parti successive (incrementi), dove ogni rilascio aggiunge nuove funzionalità operative alle precedenti.
+  Information Technology:
+    acronimo: IT
+    descrizione: Settore che comprende l'uso di tecnologie, elaboratori e software per elaborare, memorizzare, proteggere, trasmettere e recuperare informazioni.
   Ingegneria del Software:
-    alternative: Software Engineering, SWE
-    descrizione: Disciplina che applica approcci sistematici, disciplinati e quantificabili allo sviluppo, al funzionamento e alla manutenzione del software.
-  Integrazione continua:
-    acronimo: CI (Continuous Integration)
-    descrizione: Pratica DevOps basata sull'integrazione frequente delle modifiche al codice, verificata automaticamente tramite build e test per rilevare tempestivamente errori di integrazione.
+    acronimo: IS, SWE
+    alternative: Software Engineering
+    descrizione: Disciplina che applica un approccio sistematico, disciplinato e quantificabile allo sviluppo, al funzionamento e alla manutenzione del software.
   ISO 9001:
-    descrizione: Standard internazionale che specifica i requisiti per un sistema di gestione della qualità volto a dimostrare la capacità di fornire prodotti conformi ai requisiti.
+    descrizione: Standard internazionale che specifica i requisiti per un sistema di gestione della qualità volto a dimostrare la capacità di fornire prodotti conformi ai requisiti degli stakeholder.
   ISO/IEC 12207:
     descrizione: Standard internazionale che definisce i processi del ciclo di vita del software, fornendo un framework comune per la gestione e l'ingegneria dei sistemi.
   ISO/IEC 25010:
-    descrizione: Standard internazionale (SQuaRE) che definisce un modello gerarchico per la qualità del software basato su otto caratteristiche (es. affidabilità, sicurezza).
+    descrizione: Standard internazionale (SQuaRE) che definisce un modello per la qualità del software basato su otto caratteristiche principali (es. affidabilità, sicurezza, manutenibilità).
   Issue Tracking System:
-    alternative: Issue Tracking
     acronimo: ITS
-    descrizione: Strumento software che permette di registrare, gestire e monitorare l'evoluzione di unità di lavoro o problemi riscontrati.
+    alternative: Issue Tracking
+    descrizione: Strumento software (es. Jira) che permette di registrare, gestire e monitorare l'evoluzione di unità di lavoro, bug o problemi riscontrati.
+
 J:
   Jira:
-    descrizione: Software di gestione progetti utilizzato dal team per il tracking delle task, la gestione del backlog e la rendicontazione oraria tramite ticket.
+    descrizione: Software di gestione progetti e tracking delle issue utilizzato per il management del backlog, il tracking dei task e la rendicontazione oraria tramite ticket.
   JSDoc:
-    descrizione: Linguaggio di markup utilizzato per annotare il codice JavaScript, permettendo la generazione automatica della documentazione delle API e dei moduli.
+    descrizione: Linguaggio di markup e standard di documentazione utilizzato per annotare il codice JavaScript, permettendo la generazione automatica della documentazione tecnica di API e moduli.
 
 L:
   Large Language Model:
     acronimo: LLM
-    descrizione: Modello di intelligenza artificiale addestrato su vaste quantità di dati testuali per comprendere e generare linguaggio naturale, utilizzato in Code Guardian per l'analisi delle vulnerabilità.
+    descrizione: Modello di deep learning addestrato su vasti corpus di dati testuali per comprendere, riassumere, generare e prevedere linguaggio naturale, utilizzato per l'analisi delle vulnerabilità.
+  Linter:
+    descrizione: Strumento di analisi statica (come ESLint) che esamina il codice sorgente per segnalare errori di programmazione, bug stilistici e costrutti sospetti.
 
 M:
   Manutenibilità:
     alternative: Maintainability
-    descrizione: Caratteristica di qualità (ISO/IEC 25010) che esprime la facilità con cui un sistema software può essere modificato per correggere difetti, migliorare le prestazioni o adattarlo a nuovi requisiti.
+    descrizione: Caratteristica di qualità (ISO/IEC 25010) che esprime la facilità con cui un sistema può essere modificato per correggere difetti, migliorare prestazioni o adattarlo a nuovi requisiti.
   Mean Time To Failure:
     acronimo: MTTF
     descrizione: Metrica di affidabilità che indica il tempo medio previsto prima del verificarsi di un guasto irreparabile in un componente del sistema.
   Metrica:
     descrizione: Misura quantitativa del grado in cui un sistema, un componente o un processo possiede un determinato attributo.
-  Metrica di Processo:
+  Metriche di Processo:
     acronimo: MPC
-    descrizione: Indicatore utilizzato per valutare l'efficienza, la stabilità e la qualità delle attività produttive del team (es. indici EVM o RSI).
-  Metrica di Prodotto:
+    descrizione: Misure quantitative utilizzate per analizzare l'efficienza, la stabilità e la qualità delle attività produttive e gestionali del team (es. varianza tempi/costi).
+  Metriche di Prodotto Software:
+    acronimo: MPS
+    descrizione: Misure quantitative applicate al codice o all'eseguibile per valutarne attributi interni ed esterni, come complessità, dimensione o copertura dei test.
+  Metriche di Prodotto Documentale:
     acronimo: MPD
-    descrizione: Indicatore utilizzato per misurare le caratteristiche intrinseche del software consegnato (es. complessità ciclomatica o code coverage).
+    descrizione: Indicatori quantitativi utilizzati per valutare la qualità, la leggibilità (es. Gulpease) e la correttezza della documentazione tecnica prodotta.
+  Microsoft Teams:
+    descrizione: Hub digitale che integra conversazioni, contenuti e strumenti in un unico spazio di lavoro per favorire la collaborazione aziendale.
   Miglioramento Continuo:
-    descrizione: Filosofia gestionale basata sull'analisi costante dei risultati per identificare e implementare ottimizzazioni incrementali ai processi produttivi.
+    descrizione: Filosofia gestionale (spesso legata al PDCA) basata sull'analisi costante dei risultati per identificare e implementare ottimizzazioni incrementali ai processi.
   Milestone:
-    descrizione: Traguardo intermedio significativo nel cronoprogramma di progetto, utilizzato per monitorare l'avanzamento verso la consegna finale.
+    descrizione: Traguardo intermedio significativo o evento nel piano di progetto che segna il raggiungimento di un obiettivo critico, utilizzato per monitorare l'avanzamento.
   Minimum Viable Product:
     acronimo: MVP
-    descrizione: Versione del prodotto software dotata del set minimo di funzionalità necessarie per essere utilizzabile dagli stakeholder e per raccogliere feedback validanti.
+    descrizione: Versione del prodotto dotata del set minimo di funzionalità necessarie per essere utilizzabile dai primi clienti e raccogliere feedback validanti per lo sviluppo futuro.
   Mock:
-    descrizione: Oggetto simulato utilizzato nei test di unità per sostituire componenti complessi o esterni, permettendo di isolare la logica del modulo sotto esame.
+    descrizione: Oggetto simulato che riproduce in modo controllato il comportamento di componenti reali complessi o esterni, utilizzato nei test unitari per isolare il modulo sotto esame.
+  Modello di Processo per la Software Industry:
+    acronimo: MPS
+    descrizione: Framework metodologico progettato per valutare e migliorare la capacità dei processi software all'interno delle organizzazioni del settore.
+  MongoDB:
+    descrizione: Sistema di gestione di database NoSQL orientato ai documenti (formato simile a JSON), utilizzato per offrire scalabilità e flessibilità nella gestione dati.
   Monitoraggio:
-    descrizione: Attività sistematica di osservazione e raccolta dati relativa all'avanzamento dei lavori e al consumo di risorse.
+    descrizione: Attività sistematica di osservazione, raccolta e analisi dei dati relativa all'avanzamento dei lavori e al consumo di risorse per valutare le prestazioni rispetto al piano.
   Multi-Dealer Platform:
     acronimo: MDP
-    descrizione: Architettura di piattaforma che permette l'integrazione e l'offerta di servizi provenienti da molteplici fornitori attraverso un'interfaccia unificata.
+    descrizione: Architettura di piattaforma digitale che aggrega servizi provenienti da molteplici fornitori (dealer) attraverso un'interfaccia unificata.
+  Multi-Party Computation:
+    acronimo: MPC
+    descrizione: Protocollo crittografico che consente a diverse parti di calcolare congiuntamente una funzione sui propri input privati mantenendo tali input segreti agli altri.
 
 N:
+  NestJS:
+    descrizione: Framework open-source per lo sviluppo di applicazioni back-end Node.js scalabili. Scritto in TypeScript, utilizza un'architettura modulare e supporta pattern come la Dependency Injection.
   Node.js:
-    descrizione: Ambiente di runtime JavaScript basato sul motore V8 di Chrome, utilizzato per l'esecuzione di codice lato server (back-end).
+    descrizione: Ambiente di runtime JavaScript basato sul motore V8 di Chrome che permette l'esecuzione di codice JavaScript lato server per costruire applicazioni scalabili.
   Norme di Progetto:
-    descrizione: Documento normativo interno che definisce gli standard, le convenzioni, gli strumenti e le procedure operative che il team Skarab Group è tenuto a rispettare.
+    descrizione: Documento normativo interno che definisce gli standard, le convenzioni di codifica, gli strumenti e le procedure operative che il team è tenuto a rispettare.
 
 O:
   Optimism Bias:
-    descrizione: Bias cognitivo che porta a sottostimare sistematicamente i tempi e i costi necessari per il completamento delle attività, sovrastimando al contempo le probabilità di successo.
+    descrizione: Bias cognitivo che porta a sottostimare sistematicamente i tempi e i costi necessari per il completamento delle attività, basandosi su scenari ideali piuttosto che su dati realistici.
   Open Web Application Security Project:
     acronimo: OWASP
-    descrizione: Fondazione no-profit internazionale che collabora per migliorare la sicurezza del software, nota per la redazione della classifica delle vulnerabilità web più critiche.
+    descrizione: Fondazione no-profit internazionale che collabora per migliorare la sicurezza del software, nota per le linee guida e la classifica delle vulnerabilità web più critiche.
 
 P:
   Pair Programming:
-    descrizione: Tecnica di sviluppo Agile in cui due programmatori collaborano alla medesima postazione. il "Driver" scrive il codice, mentre il "Navigator" ne revisiona la logica e la qualità in tempo reale.
+    descrizione: Tecnica di sviluppo Agile in cui due programmatori collaborano alla medesima postazione. Il "Driver" scrive il codice, mentre il "Navigator" ne revisiona la logica in tempo reale.
   Pianificazione:
-    descrizione: Attività di definizione della strategia, delle risorse, delle scadenze e delle attività necessarie per il raggiungimento degli obiettivi di progetto.
+    descrizione: Processo di definizione della strategia, degli obiettivi, delle risorse, delle scadenze e delle attività necessarie per il raggiungimento degli scopi del progetto.
   Piano di Progetto:
-    descrizione: Documento di pianificazione che definisce la gestione operativa, economica e temporale dello sviluppo software.
+    acronimo: PdP
+    descrizione: Documento formale e approvato che definisce la gestione operativa, economica e temporale dello sviluppo, inclusi monitoraggio e controllo.
   Piano di Qualifica:
-    descrizione: Documento che definisce gli obiettivi di qualità, le metriche di misurazione e le attività di verifica necessarie per garantire la conformità del prodotto e dei processi.
+    acronimo: PdQ
+    descrizione: Documento che definisce gli obiettivi di qualità, le metriche, gli standard e le attività di verifica/validazione necessarie per garantire la conformità del prodotto.
   Plan-Do-Check-Act:
     acronimo: PDCA
     alternative: Ciclo di Deming
@@ -251,142 +291,160 @@ P:
     descrizione: Valore del lavoro che si prevedeva di completare entro una determinata data, secondo la baseline definita nel Piano di Progetto.
   Project Management Institute:
     acronimo: PMI
-    descrizione: Organizzazione globale leader nella definizione di standard e certificazioni per la gestione professionale dei progetti.
+    descrizione: Organizzazione globale leader nella definizione di standard (come il PMBOK), certificazioni e ricerca per la gestione professionale dei progetti.
   Proof of Concept:
     acronimo: PoC
-    descrizione: Realizzazione prototipale limitata volta a dimostrare la fattibilità tecnica di un'idea o di una specifica tecnologia (es. l'integrazione tra Agente e LLM).
+    descrizione: Realizzazione prototipale o sperimentale limitata volta a dimostrare la fattibilità tecnica di un'idea o di una specifica tecnologia prima dello sviluppo completo.
   Predictive:
-    descrizione: Approccio di gestione (es. Waterfall) caratterizzato da una pianificazione estensiva e rigida eseguita nelle fasi iniziali del progetto.
+    descrizione: Approccio di gestione (es. Waterfall) in cui ambito, tempi e costi sono determinati nelle fasi iniziali e le modifiche sono gestite in modo rigido e formale.
   Preventivo:
-    descrizione: Stima preliminare e analitica dell'impegno orario e dei costi necessari per la realizzazione delle attività previste.
+    descrizione: Stima preliminare e analitica dell'impegno orario, delle risorse e dei costi necessari per la realizzazione delle attività previste.
   Product Baseline:
     acronimo: PB
-    descrizione: Traguardo che identifica la configurazione definitiva del prodotto software pronto per il rilascio finale e l'accettazione.
+    descrizione: Milestone che identifica la configurazione tecnica definitiva e approvata del prodotto software, pronto per il rilascio finale e l'accettazione.
   Progettisti:
-    descrizione: Membri del team responsabili della definizione dell'architettura del sistema e della specifica tecnica dei singoli componenti.
+    alternative: Designer, Progettista
+    descrizione: Membri del team responsabili della definizione dell'architettura del sistema, delle strutture dati, delle interfacce e della specifica tecnica dei componenti.
   Progetto:
-    descrizione: Insieme coordinato di attività, vincolate nel tempo e nelle risorse, finalizzato alla creazione di un prodotto software unico che soddisfi i requisiti del capitolato.
+    descrizione: Impresa temporanea e insieme coordinato di attività finalizzate alla creazione di un prodotto o servizio unico, vincolato da tempi, costi e risorse.
   Programmatori:
-    descrizione: Membri del team responsabili dell'implementazione del codice sorgente, del debugging e dello sviluppo delle funzionalità software.
+    alternative: Developer, Programmatore, Sviluppatore software
+    descrizione: Membri del team responsabili dell'implementazione del codice sorgente, del debugging e della traduzione delle specifiche tecniche in software funzionante.
   Prompt Engineering:
-    descrizione: Disciplina volta a ottimizzare gli input (prompt) forniti ai Large Language Model per estrarre risposte più accurate, sicure e pertinenti.
+    descrizione: Disciplina volta a progettare e ottimizzare gli input (prompt) forniti ai modelli di intelligenza artificiale generativa per ottenere risposte accurate, sicure e pertinenti.
+  Proponente:
+    descrizione: Organizzazione o entità (es. Var Group) che presenta la richiesta o il capitolato iniziale per la realizzazione di un progetto.
   Python:
-    descrizione: Linguaggio di programmazione ad alto livello utilizzato nel progetto per la logica degli Agenti e l'interazione con i framework di Intelligenza Artificiale.
+    descrizione: Linguaggio di programmazione ad alto livello utilizzato nel progetto per la logica degli Agenti, il trattamento dati e l'interazione con framework di IA.
 
 Q:
   Qualità:
-    descrizione: Grado in cui un insieme di caratteristiche intrinseche del prodotto o del processo soddisfa i requisiti stabiliti o le aspettative implicite degli stakeholder.
+    descrizione: Grado in cui un insieme di caratteristiche intrinseche del prodotto o del processo soddisfa i requisiti stabiliti o le aspettative degli stakeholder (ISO 9001/25010).
 
 R:
   React:
-    descrizione: Libreria JavaScript open-source per la creazione di interfacce utente basate su componenti, utilizzata per lo sviluppo del Front-end della piattaforma.
+    descrizione: Libreria JavaScript open-source per la creazione di interfacce utente interattive basate su componenti, utilizzata per lo sviluppo del Front-end della piattaforma.
   Remediation:
-    descrizione: Fase del processo di audit in cui vengono implementate le correzioni o le contromisure necessarie per eliminare o mitigare le vulnerabilità identificate nel codice.
+    descrizione: Fase del processo di audit o azione correttiva intrapresa per risolvere vulnerabilità di sicurezza, bug o difetti identificati nel sistema.
   Repository:
-    descrizione: Archivio centralizzato e versionato (su piattaforma GitHub) atto alla conservazione e gestione del codice sorgente, della documentazione e degli asset di progetto.
+    descrizione: Archivio centralizzato e versionato (es. su GitHub) atto alla conservazione e gestione del codice sorgente, della documentazione e degli asset di progetto.
   Requirements and Technology Baseline:
     acronimo: RTB
-    descrizione: Prima milestone di progetto finalizzata alla validazione dei requisiti analizzati e alla dimostrazione della fattibilità tecnologica tramite prototipazione.
+    descrizione: Milestone di progetto finalizzata alla validazione dei requisiti analizzati e al consolidamento dell'architettura tecnologica tramite prototipazione (PoC).
   Requirements Stability Index:
     acronimo: RSI
-    descrizione: Metrica di processo che quantifica la volatilità dei requisiti. Misura il rapporto tra i requisiti stabili e il totale dei requisiti definiti nella baseline.
+    descrizione: Metrica di processo che quantifica la volatilità dei requisiti, misurando il rapporto tra requisiti stabili e totale dei requisiti nella baseline.
   Requisiti funzionali:
-    descrizione: Specifiche che descrivono i servizi, le funzioni e i compiti che il sistema deve essere in grado di eseguire per soddisfare i bisogni dell'utente.
+    descrizione: Specifiche che descrivono i comportamenti, i servizi e le funzioni che il sistema deve eseguire per soddisfare i bisogni dell'utente.
   Requisiti non funzionali:
-    descrizione: Vincoli e qualità che il sistema deve possedere (es. sicurezza, prestazioni, portabilità), definendo il modo in cui i servizi vengono erogati.
+    descrizione: Vincoli e criteri qualitativi (sicurezza, prestazioni, portabilità) che definiscono come il sistema deve comportarsi.
+  Requisiti obbligatori:
+    alternative: obbligatori
+    descrizione: Funzionalità essenziali e irrinunciabili che il sistema deve possedere per essere considerato conforme e accettabile.
+  Requisiti desiderabili:
+    alternative: desiderabili
+    descrizione: Funzionalità che apportano valore aggiunto ma la cui omissione non pregiudica l'utilità fondamentale del prodotto.
   Responsabile:
     alternative: Project Manager, Responsabile di Progetto
-    descrizione: Ruolo incaricato della gestione complessiva del progetto, della pianificazione delle risorse, del coordinamento del team e della comunicazione con gli stakeholder.
+    descrizione: Ruolo incaricato della gestione complessiva, della pianificazione delle risorse, del coordinamento del team e della comunicazione con gli stakeholder.
   Rischio:
-    alternative: Risk
-    descrizione: Evento incerto, la cui occorrenza può influire negativamente sui costi, sui tempi o sulla qualità degli obiettivi di progetto.
+    alternative: Risk, rischi
+    descrizione: Evento o condizione incerta la cui occorrenza può influire (positivamente o negativamente) su costi, tempi o qualità degli obiettivi di progetto.
   Risorse umane:
-    descrizione: Componenti del team Skarab Group che mettono a disposizione le proprie competenze e ore di lavoro per la realizzazione del progetto.
+    descrizione: L'insieme del personale e dei componenti del team che mettono a disposizione competenze e ore di lavoro per la realizzazione del progetto.
   Rolling Wave Planning:
-    descrizione: Tecnica di pianificazione iterativa in cui le attività a breve termine sono pianificate nel dettaglio, mentre quelle a lungo termine rimangono ad alto livello di astrazione.
+    descrizione: Tecnica di pianificazione iterativa in cui le attività a breve termine sono pianificate in dettaglio, mentre quelle future rimangono ad alto livello, venendo dettagliate progressivamente.
 
 S:
-  Stato Avanzamento Lavori:
-    acronimo: SAL
-    descrizione: Documento o incontro periodico volto a verificare il progresso del progetto rispetto alla baseline di pianificazione.
   Schedulazione:
-    descrizione: Attività di allocazione delle task lungo l'asse temporale del progetto, definendo le date di inizio e fine previste per ogni attività.
+    descrizione: Attività di allocazione delle task lungo l'asse temporale, definendo la sequenza logica e le date di inizio/fine previste per ogni attività di progetto.
   Schedule Performance Index:
     acronimo: SPI
-    descrizione: Indice di efficienza temporale del progetto (EVM). Rapporto tra valore guadagnato (EV) e valore pianificato (PV); indica se il team sta procedendo alla velocità prevista.
+    descrizione: Indice di efficienza temporale (EVM). Rapporto tra valore guadagnato (EV) e valore pianificato (PV); indica se il team procede alla velocità prevista.
   Schedule Variance:
     acronimo: SV
-    descrizione: Differenza algebrica tra valore guadagnato (EV) e valore pianificato (PV), che esprime lo scostamento temporale del progetto in termini di budget.
+    descrizione: Differenza algebrica tra valore guadagnato (EV) e valore pianificato (PV), che esprime lo scostamento temporale in termini di budget.
   Sistema multiagente:
-    alternative: Multi-agent system
+    alternative: Multi-agent system, sistema multi agente, multiagente
     descrizione: Architettura software in cui più agenti intelligenti e autonomi interagiscono tra loro per risolvere problemi complessi non affrontabili da un singolo componente.
+  Sistema software:
+    alternative: Software system, sistema
+    descrizione: Insieme integrato di componenti software organizzati per realizzare una serie specifica di funzionalità.
   Skarab Group:
-    descrizione: Nome del gruppo di lavoro composto dai sette studenti dell'Università di Padova responsabili dello sviluppo del progetto Code Guardian.
+    descrizione: Nome del gruppo di lavoro composto dagli studenti dell'Università di Padova responsabili dello sviluppo del progetto Code Guardian.
   Slack:
-    descrizione: Piattaforma di messaggistica istantanea utilizzata dal team per le comunicazioni rapide e l'integrazione di notifiche provenienti da strumenti esterni (es. Jira, GitHub).
+    descrizione: Piattaforma di messaggistica istantanea basata su canali, utilizzata per il coordinamento rapido e l'integrazione di notifiche da strumenti esterni (Jira, GitHub).
   Sprint:
-    descrizione: Iterazione di lavoro a durata fissa (time-boxed) durante la quale il team completa un set predefinito di attività volte al rilascio di un incremento di valore.
+    descrizione: Iterazione di lavoro a durata fissa (time-boxed) nelle metodologie Agile, durante la quale il team completa un set di attività per rilasciare un incremento di valore.
   Sprint Goal Achievement:
-    descrizione: Metrica che valuta il successo di uno sprint calcolando la percentuale di obiettivi (task critiche) portati a termine rispetto a quelli pianificati nello Sprint Planning.
+    descrizione: Metrica che valuta il successo di uno sprint calcolando la percentuale di obiettivi critici portati a termine rispetto a quelli pianificati.
   Software Quality Assurance:
     acronimo: SQA
-    descrizione: Insieme delle attività pianificate e sistematiche atte a garantire che i processi produttivi siano conformi agli standard di qualità stabiliti.
+    descrizione: Insieme delle attività pianificate e sistematiche atte a garantire che i processi produttivi e i prodotti siano conformi ai requisiti di qualità stabiliti.
   Stakeholder:
-    alternative: Portatori di interesse
-    descrizione: Persone o organizzazioni (es. Var Group, Proponente, Docenti) che hanno un interesse attivo o sono influenzati dagli esiti del progetto.
+    alternative: stakeholders, portatori di interesse
+    descrizione: Persone o organizzazioni (clienti, team, utenti, docenti) che hanno un interesse attivo nel progetto o ne sono influenzati dagli esiti.
+  Stato Avanzamento Lavori:
+    acronimo: SAL
+    descrizione: Documento o incontro periodico volto a verificare il progresso fisico ed economico del progetto rispetto alla baseline di pianificazione.
   Stima:
-    descrizione: Previsione quantitativa dell'impegno (ore), dei tempi o dei costi necessari per completare un'attività software, basata su esperienza o dati storici.
-  Sviluppatore software:
-    alternative: Software Developer, Programmatore
-    descrizione: Membro del team responsabile dell'implementazione del codice, della risoluzione dei bug e del mantenimento delle funzionalità del software.
+    descrizione: Previsione quantitativa dell'impegno (ore), dei tempi o dei costi necessari per completare un'attività, basata su esperienza, dati storici o modelli.
+  Storming:
+    descrizione: Fase dello sviluppo del team caratterizzata da conflitti interpersonali e negoziazione mentre si stabiliscono ruoli, processi e autorità.
 
 T:
   Task:
-    descrizione: Unità di lavoro atomica identificata nel backlog, assegnata a uno o più membri del team e tracciata tramite un identificativo univoco su Jira.
+    descrizione: Unità di lavoro atomica e definita, identificata nel backlog e assegnata a una risorsa, tracciata tramite identificativo univoco (es. su Jira).
   Telegram:
     descrizione: Servizio di messaggistica istantanea utilizzato per comunicazioni urgenti e coordinamento logistico informale tra i membri del gruppo.
   Test di Accettazione:
-    descrizione: Verifica finale condotta per accertare che il sistema software risponda alle esigenze del proponente e soddisfi i criteri di accettazione contrattuali.
+    descrizione: Verifica finale condotta per accertare che il sistema risponda alle esigenze del proponente e soddisfi i criteri contrattuali per l'accettazione formale.
   Test di Sistema:
-    descrizione: Fase di verifica in cui il software viene testato come un'unica entità integrata per verificarne la conformità ai requisiti globali.
+    descrizione: Fase di verifica in cui il software viene testato come un'unica entità integrata per verificarne la conformità ai requisiti globali e ai vincoli.
   Test di Unità:
-    descrizione: Livello di test volto a verificare il corretto funzionamento dei singoli moduli o componenti del codice in totale isolamento.
+    descrizione: Livello di test volto a verificare il corretto funzionamento delle singole parti testabili (funzioni, metodi o moduli) in totale isolamento.
   Test Success Rate:
     descrizione: Metrica di prodotto (MPD) che esprime la percentuale di casi di test superati con successo rispetto al totale dei test eseguiti.
+  Tinymist:
+    descrizione: Strumento di supporto per Visual Studio Code che fornisce funzionalità di anteprima e assistenza per il linguaggio Typst.
   T-Shaped Skills:
-    descrizione: Modello di competenza individuale che prevede una profonda specializzazione in un'area (asse verticale) e una capacità di collaborazione trasversale (asse orizzontale).
+    descrizione: Modello di competenza individuale che prevede una profonda specializzazione in un'area (asse verticale) e capacità di collaborazione trasversale (asse orizzontale).
   TypeScript:
-    descrizione: Superset di JavaScript che aggiunge la tipizzazione statica, utilizzato per garantire una maggiore robustezza e manutenibilità del codice sorgente di Code Guardian.
+    descrizione: Superset tipizzato di JavaScript che aggiunge la tipizzazione statica, utilizzato per garantire maggiore robustezza, manutenibilità e rilevamento errori a tempo di compilazione.
   Typst:
-    descrizione: Sistema di composizione editoriale basato su markup, utilizzato dal team per la redazione di tutta la documentazione di progetto in alternativa a LaTeX.
+    descrizione: Sistema di composizione editoriale basato su markup, moderno e performante, utilizzato dal team per la redazione della documentazione in alternativa a LaTeX.
 
 U:
   Unified Modeling Language:
     acronimo: UML
-    descrizione: Linguaggio di modellazione grafico standardizzato utilizzato per visualizzare, specificare e documentare l'architettura e il design dei sistemi software.
+    descrizione: Linguaggio di modellazione grafico standardizzato utilizzato per visualizzare, specificare, costruire e documentare l'architettura e il design dei sistemi software.
   Uniform Resource Locator:
     acronimo: URL
-    descrizione: Sequenza di caratteri che identifica univocamente l'indirizzo di una risorsa digitale in rete (es. il link al Glossario online).
+    descrizione: Sequenza di caratteri che identifica univocamente l'indirizzo e il meccanismo di recupero di una risorsa digitale in rete.
   Utente:
-    alternative: User
-    descrizione: Persona o sistema esterno che interagisce con le funzionalità erogate dalla piattaforma Code Guardian.
+    alternative: User, Utenti
+    descrizione: Persona o sistema esterno che interagisce con le funzionalità erogate dalla piattaforma per eseguire compiti o accedere a informazioni.
 
 V:
   Validazione:
-    descrizione: Attività volta a confermare, attraverso prove oggettive, che il prodotto software finale soddisfi le reali necessità degli stakeholder ("stiamo costruendo il prodotto giusto?").
+    descrizione: Attività volta a confermare che il prodotto finale soddisfi le reali necessità degli stakeholder e i requisiti specificati ("stiamo costruendo il prodotto giusto?").
   Var Group:
-    descrizione: Azienda partner del progetto e proponente del capitolato C2, operante nel settore della trasformazione digitale.
+    descrizione: Azienda partner, committente e proponente del capitolato che ha definito i requisiti per il progetto Code Guardian.
   Verifica:
-    descrizione: Attività di analisi (statica e dinamica) volta a confermare che il software rispetti i requisiti e i vincoli specificati nelle fasi precedenti ("stiamo costruendo il prodotto bene?").
+    descrizione: Processo di valutazione (statica/dinamica) volto a confermare che i prodotti di una fase rispettino i vincoli e i requisiti imposti all'inizio della stessa ("stiamo costruendo il prodotto bene?").
   Verificatori:
-    descrizione: Ruolo del team responsabile dell'accertamento della qualità e della correttezza di ogni artefatto (codice o documento) prima della sua approvazione formale.
+    alternative: Tester, Verificatore
+    descrizione: Ruolo del team responsabile dell'accertamento della qualità, dell'esecuzione dei test e della correttezza di ogni artefatto prima dell'approvazione.
   Visual Studio Code:
     acronimo: VS Code
-    descrizione: Ambiente di sviluppo integrato (IDE) leggero ed estensibile, adottato come standard dal team per la scrittura di codice e file Typst.
+    descrizione: Ambiente di sviluppo integrato (IDE) leggero ed estensibile, adottato come standard per la scrittura di codice, debugging e gestione file Typst.
 
 W:
   Way of Working:
-    descrizione: Insieme delle metodologie, degli standard di codifica, degli strumenti e dei processi operativi che definiscono l'approccio lavorativo specifico del gruppo.
+    acronimo: WoW
+    descrizione: Insieme concordato di pratiche, metodologie, standard di codifica e strumenti che definiscono l'approccio lavorativo specifico del gruppo.
   Web Application:
-    alternative: Webapp
-    descrizione: Applicazione software accessibile tramite browser web che offre funzionalità interattive all'utente attraverso un'architettura client-server.
+    alternative: Applicazione Web, Webapp
+    descrizione: Programma applicativo memorizzato su un server e accessibile tramite browser web che offre funzionalità interattive attraverso un'architettura client-server.
+  WhatsApp:
+    descrizione: Applicazione di messaggistica multipiattaforma utilizzata per comunicazioni rapide e coordinamento tramite Internet.
