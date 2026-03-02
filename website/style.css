@@ -1,18 +1,4 @@
 :root {
-  --bg: #F9FAFB; 
-  --text: #1F1A1B;
-  --primary: #5E2129;       
-  --primary-dark: #3D151A;
-  --primary-light: #7D2E39;
-  --accent: #D4A373;
-  --accent-hover: #E9C46A; 
-  --accent-text: #5E2129;
-  --surface: #FFFFFF;
-  --shadow: rgba(94, 33, 41, 0.15); 
-  --shadow-strong: rgba(94, 33, 41, 0.4);
-}
-
-.dark-theme {
   --bg: #120B0D;
   --text: #EAE0E2;
   --primary: #8F323F;       
@@ -67,7 +53,7 @@ header h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--surface);
+  background-color: white;
 }
 
 .logo-circle img {
@@ -78,7 +64,7 @@ header h1 {
 }
 
 .contact-button {
-  margin-top: 1.5rem;
+  margin: 1.5rem auto;
   text-align: center;
 }
 
@@ -246,7 +232,6 @@ footer {
   box-shadow: 0 -4px 10px var(--shadow);
 }
 
-/* --- 8. RESPONSIVE --- */
 @media (max-width: 600px) {
   nav a { padding: 0.8rem 1rem; font-size: 0.9rem; }
   .section { padding: 1.2rem; }
@@ -278,4 +263,83 @@ footer {
 }
 .dark-theme #toggle-theme:hover {
     color: var(--bg);
+}
+
+
+.team-section {
+  text-align: center;
+  padding: 2rem;
+  background-color: var(--surface);
+  border-radius: 20px;
+  box-shadow: 0 6px 12px var(--shadow);
+  transition: background-color 0.3s ease;
+}
+
+.team-section h2 {
+  font-family: inherit;
+  margin-bottom: 30px;
+  color: var(--primary);
+}
+
+.team-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.team-member img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary);
+  box-shadow: 0 4px 10px var(--shadow);
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.team-member span {
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+  color: var(--accent);
+}
+
+.team-member:hover img {
+  border-color: var(--accent);
+  box-shadow: 0 8px 15px var(--shadow-strong);
+}
+
+@media (max-width: 600px) {
+  nav a { 
+    padding: 0.8rem 1rem; 
+    font-size: 0.9rem; 
+  }
+  
+  .section, .team-section { 
+    padding: 1.2rem; 
+  }
+  
+  .team-member { 
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .team-container {
+    gap: 20px;
+  }
 }

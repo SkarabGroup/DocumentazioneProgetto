@@ -15,6 +15,8 @@
   post: none,
   attori_secondari: none,
   scenari_alternativi: none,
+  generalizzazione: none,
+  specializzazione: none,
   body,
 ) = [
 
@@ -48,5 +50,13 @@
 
   #if (trigger != none) {
     [- *Trigger*: #trigger]
+  }
+
+  #if (generalizzazione != none) {
+    [- *Generalizzazione*: #generalizzazione]
+  }
+
+  #if (specializzazione != none) {
+    [- *Specializzazione*: #specializzazione]
   }
 ]

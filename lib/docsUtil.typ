@@ -1,6 +1,47 @@
 #import "@preview/cetz:0.3.2": *
 #import "@preview/cetz-plot:0.1.1": chart
 
+// In glossarioUtil.typ
+#let GLOSSARIO_URL = "https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html"
+
+#let term-to-id(term) = {
+  let result = lower(term)
+  
+  // Caratteri accentati
+  let accents = (
+    ("à", "a"), ("á", "a"), ("â", "a"), ("ã", "a"), ("ä", "a"), ("å", "a"),
+    ("è", "e"), ("é", "e"), ("ê", "e"), ("ë", "e"),
+    ("ì", "i"), ("í", "i"), ("î", "i"), ("ï", "i"),
+    ("ò", "o"), ("ó", "o"), ("ô", "o"), ("õ", "o"), ("ö", "o"),
+    ("ù", "u"), ("ú", "u"), ("û", "u"), ("ü", "u"),
+  )
+  
+  for (from, to) in accents {
+    result = result.replace(from, to)
+  }
+  
+  // Altri caratteri comuni
+  result = result.replace("'", "")
+  result = result.replace(":", "")
+  result = result.replace(".", "")
+  result = result.replace(",", "")
+  result = result.replace(";", "")
+  
+  // Sostituisci spazi con trattini
+  result = result.replace(" ", "-")
+  
+  // Pulisci trattini multipli
+  while result.contains("--") {
+    result = result.replace("--", "-")
+  }
+  
+  // Rimuovi trattini iniziali/finali
+  result = result.trim("-", at: start, repeat: true)
+  result = result.trim("-", at: end, repeat: true)
+  
+  return result
+}
+
 //Definizione della prima pagina dei documenti
 #let titlePage(titoloDocumento, versioneDocumento) = {
   set text(font: "New Computer Modern", size: 15pt)
@@ -30,11 +71,17 @@
   set text(size: 13pt)
 
   let normalizedRows = rows.map(row => {
-    if row.len() == 4 { row + ([],) } else { row }
+    if row.len() == 4 { row + ([],) } 
+    else if row.len() == 5 { row }
+    else {
+      // Più verificatori: combina tutti gli elementi dal 5° in poi
+      let verificatori = row.slice(4).join([, ])
+      row.slice(0, 4) + (verificatori,)
+    }
   })
 
   table(
-    columns: (auto, auto, 1fr, auto, auto),
+    columns: (auto, auto, auto, auto, auto),
     inset: 5pt,
     stroke: 0.5pt + luma(200),
     
@@ -241,7 +288,7 @@
   // Rendering della figura
   figure(
     table(
-      fill: (col, row) => if row == 0 { luma(64%) } else { white },
+      fill: (col, row) => if row == 0 { luma(63.75%) } else { white },
       columns: (1.5fr, 0.7fr, 0.8fr, 0.5fr, 0.6fr, 0.8fr, 0.6fr),
       inset: 8pt,
       align: (col, row) => if col == 0 { left + horizon } else { center + horizon },
@@ -311,3 +358,57 @@
   )
 }
 
+#let metrics_table(caption_text, content_list) = {
+  figure(
+    table(
+      fill: (x, y) => if (y == 0) { luma(220) } else { white },
+      columns: (1.2fr, 2.2fr, 3fr, 1.1fr, 1.1fr),
+      inset: 10pt,
+      align: horizon,
+      table.header([*ID*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
+      ..content_list
+    ),
+    caption: caption_text,
+    kind: table
+  )
+}
+
+#let improvement_table(caption_text, content_list) = {
+  figure(
+    table(
+      fill: (x, y) => if (y == 0) {
+        luma(230) // Header scuro
+      } else {
+        luma(250) // Righe chiare
+      },
+      // 3 Colonne: ID, Problema, Azione
+      columns: (0.6fr, 2fr, 2.4fr),
+      inset: 10pt,
+      align: (x, y) => if x == 0 { center + horizon } else { left + horizon },
+      table.header([*ID*], [*Problema / Causa*], [*Azione Correttiva*]),
+      
+      ..content_list
+    ),
+    caption: caption_text,
+    kind: table
+  )
+}
+#let task_table(data) = {
+  table(
+    columns: (1fr, 0.8fr, 0.4fr),
+    align: (left, left, center),
+    stroke: 0.5pt + luma(200),
+    inset: 10pt,
+    
+    // Header che si ripete su ogni pagina
+    fill: (col, row) => if row == 0 { luma(245) },
+    table.header(
+      [*Descrizione Task*], 
+      [*Ruolo responsabile*], 
+      [*Ore*],
+    ),
+
+    // Dati
+    ..data.flatten().map(item => [#item])
+  )
+}

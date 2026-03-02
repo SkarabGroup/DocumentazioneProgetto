@@ -237,6 +237,68 @@ I rischi individuati vengono raggruppati in macro-categorie (tecnologiche, inter
 
 Le modalità operative e i criteri metodologici adottati per l’analisi e la valutazione dei rischi sono definiti nel documento *Norme di Progetto*, al quale si rimanda per la descrizione dettagliata del processo di di gestione dei rischi.
 
+=== RCO3: Rischio Collettivo Organizzativo legato a ritardi o incomprensioni nella comunicazione con la proponente
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(63.75%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (3fr, 4fr),
+    inset: 10pt,
+    table.header(
+      [*Tipologia Dato*],
+      [*Valore*],
+    ),
+
+    [*Codice*],
+    [RCO3],
+    [*Nome*], 
+    [Ritardi o incomprensioni nella comunicazione con la proponente],
+    [*Descrizione*], 
+    [Possibili ritardi nelle risposte da parte di #def[Var Group] o interpretazioni errate dei feedback forniti durante le sessioni di mentoring. Questo potrebbe portare a sviluppare funzionalità non in linea con le aspettative della proponente.],
+    [*Mitigazione*], 
+    [Programmazione di incontri periodici fissi e redazione di verbali (verbali esterni) dopo ogni incontro per formalizzare quanto deciso. Uso di canali di comunicazione diretti (#def[Slack]) per chiarimenti rapidi. In caso di dubbi sull'interpretazione dei feedback, il gruppo si impegnerà a richiedere chiarimenti tempestivi alla proponente per evitare incomprensioni. Nel caso in cui la proponente non risponda entro tempi ragionevoli il gruppo contattera il Prof. Vardanega per consigli su come procedere.],
+    [*Probabilità di avvenimento*],
+    [Media],
+    [*Pericolosità delle ripercussioni*],
+    [Media],
+  ),
+  caption: [Informazioni sul rischio RCO3],
+)
+
+=== RCO4: Rischio Collettivo Organizzativo legato alla disomogeneità nella produzione della documentazione
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(63.75%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (3fr, 4fr),
+    inset: 10pt,
+    table.header(
+      [*Tipologia Dato*],
+      [*Valore*],
+    ),
+
+    [*Codice*],
+    [RCO4],
+    [*Nome*], 
+    [Disomogeneità nella produzione della documentazione],
+    [*Descrizione*], 
+    [Dato che i membri del team hanno stili di scrittura diversi, i documenti (#def[Piano di Progetto], #def[Norme di Progetto], ecc.) potrebbero risultare frammentati, poco coerenti o con terminologie discordanti. Questo potrebbe compromettere la chiarezza e la professionalità della documentazione consegnata.],
+    [*Mitigazione*], 
+    [Definizione rigorosa dei template riguardante l'aspetto visivo, l'impaginazione e la formattazione del testo. Ogni documento deve passare per una fase di verifica incrociata, un membro diverso dal redattore controlla il lavoro, prima di essere considerato definitivo. Inoltre, viene stabilito un glossario condiviso per uniformare la terminologia tecnica utilizzata nei documenti.],
+    [*Probabilità di avvenimento*],
+    [Media],
+    [*Pericolosità delle ripercussioni*],
+    [Medio-Bassa],
+  ),
+  caption: [Informazioni sul rischio RCO4],
+)
+
 #pagebreak()
 
 == Rischi Tecnologici (RT)
