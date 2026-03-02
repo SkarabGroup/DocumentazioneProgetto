@@ -6,11 +6,19 @@
 #set page(numbering: "1", header: header("Piano di Progetto"), footer: footer())
 #set heading(numbering: "1.1.1")
 #let history = (
+    (
+    "2026/03/02",
+    "1.0.0",
+    "Verifica finale e approvazione documento per RTB",
+    "",
+    members.kevin,
+  ),
   (
     "2026/02/26",
-    "1.0.0",
-    "Aggiunto preventivo a finire, Versione finale per RTB",
+    "0.11.0",
+    "Aggiunto preventivo a finire",
     members.kevin,
+    members.suar,
   ),
   (
     "2026/02/25",
