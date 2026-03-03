@@ -551,7 +551,7 @@ Al fine di prevenire ambiguità interpretative, è stato redatto un glossario ch
 Nel testo, *ogni termine evidenziato tramite una G come apice*, rimanda alla voce corrispondente del Glossario pubblicato sul sito ufficiale del gruppo, consentendo al lettore di accedere direttamente alla definizione associata.
 
 La versione più recente del Glossario è disponibile al seguente link:
-#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario]].
+#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario (v1.0.0)]].
 
 == Riferimenti
 === Riferimenti Normativi
@@ -585,7 +585,7 @@ I seguenti documenti hanno valore vincolante per la redazione dell'Analisi dei R
 == Introduzione
 In questa sezione sono descritti i casi d'uso principali del sistema, che illustrano le interazioni funzionali tra gli utenti (umani e software) e l'applicazione.
 
-La specifica dei casi d'uso adotta il formato e le convenzioni di modellazione definite alla sezione 2.1.6.3.1 del documento #underline[#link(<NdP>)[Norme di Progetto]]. Si rimanda a tale documento per la descrizione dettagliata della struttura dei campi (precondizioni, postcondizioni, scenari) e della sintassi #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#uml")[#def[UML]] utilizzata.
+La specifica dei casi d'uso adotta il formato e le convenzioni di modellazione definite alla sezione *2.1.6.3.1* del documento #underline[#link(<NdP>)[Norme di Progetto]]. Si rimanda a tale documento per la descrizione dettagliata della struttura dei campi (precondizioni, postcondizioni, scenari) e della sintassi #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#uml")[#def[UML]] utilizzata.
 
 == Attori
 Gli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#attore")[#def[attori]] rappresentano le entità che interagiscono con il sistema #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]]. Essi sono classificati in base al ruolo svolto nell'interazione:
@@ -4299,7 +4299,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 = Requisiti di Sistema
 In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati da _Skarab Group_.
 
-Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.2 delle #link(<NdP>)[#underline[*Norme di Progetto*]].
+Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 delle #link(<NdP>)[#underline[*Norme di Progetto*]].
 
 #let fr_counter = counter("FR")
 #let qr_ob_counter = counter("QROb")
