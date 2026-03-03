@@ -2,22 +2,31 @@
 #import "../lib/variables.typ": *
 #import "../lib/glossarioUtil.typ": *
 
-#let versione = "v0.11.0"
+#let versione = "v1.0.0"
 
 #titlePage("Glossario", versione)
 #set page(numbering: "1", header: header("Glossario"), footer: footer())
-#let history = (
+#let history = ( 
+  (
+    "2026/03/03",
+    "1.0.0",
+    "Revision per RTB",
+    "",
+    members.suar
+  ),
   (
     "2026/02/17",
     "0.11.0",
     "Revisionati tutti i termini",
-    members.suar
+    members.suar,
+    members.antonio
   ),
   (
     "2026/01/12",
     "0.10.0",
     "Aggiunti termini Docker e Gantt",
     members.alice,
+    members.kevin
   ),
   (
     "2026/01/10",
@@ -66,6 +75,7 @@
     "0.3.0",
     "Correzioni sul formato delle date, standardizzate, riordino in ordine alfabetico dei termini e aggiunta termini",
     members.kevin,
+    members.berengan
   ),
   (
     "2025/12/24",

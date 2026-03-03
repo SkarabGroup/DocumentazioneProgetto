@@ -74,6 +74,7 @@ C:
     alternative: Use case, casi d'uso
     descrizione: Unità di specifica dei requisiti funzionali che descrive una sequenza di interazioni tra un attore e il sistema per il raggiungimento di un obiettivo di valore.
   Ciclo di vita del software:
+    alternative: Ciclo di vita
     descrizione: Processo strutturato e insieme delle fasi (analisi, progettazione, sviluppo, verifica, manutenzione) che scandiscono l'evoluzione di un prodotto software dalla sua concezione alla dismissione.
   Capability Maturity Model Integration:
     acronimo: CMMI
@@ -363,6 +364,12 @@ R:
   Requirements Stability Index:
     acronimo: RSI
     descrizione: Metrica di processo che quantifica la volatilità dei requisiti, misurando il rapporto tra requisiti stabili e totale dei requisiti nella baseline.
+  Requisiti di vincolo:
+    alternative: di vincolo
+    descrizione: Condizioni che impongono limiti alle decisioni progettuali o implementative, come l'uso di specifici standard, tecnologie o normative legali.
+  Requisiti di qualità:
+    alternative: di qualità
+    descrizione: Specifiche che definiscono gli attributi qualitativi del sistema, come prestazioni, affidabilità, sicurezza e manutenibilità.
   Requisiti funzionali:
     descrizione: Specifiche che descrivono i comportamenti, i servizi e le funzioni che il sistema deve eseguire per soddisfare i bisogni dell'utente.
   Requisiti non funzionali:
@@ -376,6 +383,9 @@ R:
   Responsabile:
     alternative: Project Manager, Responsabile di Progetto
     descrizione: Ruolo incaricato della gestione complessiva, della pianificazione delle risorse, del coordinamento del team e della comunicazione con gli stakeholder.
+  Requisiti opzionali:
+    alternative: opzionali
+    descrizione: Funzionalità accessorie che possono essere implementate solo se le risorse e i tempi lo permettono, senza impattare sugli obiettivi primari.
   Rischio:
     alternative: Risk, rischi
     descrizione: Evento o condizione incerta la cui occorrenza può influire (positivamente o negativamente) su costi, tempi o qualità degli obiettivi di progetto.

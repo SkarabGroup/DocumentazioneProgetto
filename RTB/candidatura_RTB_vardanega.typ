@@ -97,7 +97,7 @@ I documenti consultabili presenti sono i seguenti:
 - #link("https://skarabgroup.github.io/DocumentazioneProgetto/verbali/interni/Riunione_25_11_15.pdf")[#underline[Verbale Riunione Interna | 2025 - 11 - 15]]
 - #link("https://skarabgroup.github.io/DocumentazioneProgetto/verbali/interni/Riunione_25_11_08.pdf")[#underline[Verbale Riunione Interna | 2025 - 11 - 08]]
 
-Confermiamo, in conclusione, la nostra ferma intenzione di completare e consegnare il progetto entro la data del *21/03/2026*.
+Confermiamo, in conclusione, la nostra ferma intenzione di completare e consegnare il progetto entro la data del *15/04/2026*, posticipando la scadenza precedentemente fissata al *21/03/2026* a causa di ritardi di natura organizzativa e gestionale emersi durante lo sviluppo.
 
 #v(1cm)
 
