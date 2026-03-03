@@ -163,7 +163,8 @@ Il documento costituisce il riferimento primario per il gruppo di lavoro e per g
 I prodotti del progetto vengono rilasciati in modo incrementale in corrispondenza di due principali #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#baseline")[#def[baseline]]: la *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requirements-and-technology-baseline")[#def[Requirements and Technology Baseline]]* (RTB) e la *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#product-baseline")[#def[Product Baseline]]* (PB).
 
 === Revisione dei Requisiti e della Tecnologia (RTB)
-Il gruppo ha fissato come obiettivo per la candidatura alla revisione RTB la data del *09/02/2026*.
+Il gruppo aveva inizialmente fissato come obiettivo per la candidatura alla revisione RTB la data del *09/02/2026*; tuttavia, a causa di ritardi di natura organizzativa e gestionale emersi
+durante lo sviluppo, la candidatura è stata posticipata alla data del *23/02/2026*.
 Entro tale scadenza, verranno rilasciati e sottoposti a verifica i seguenti artefatti:
 - *Documentazione di Baseline*:
   - Analisi dei Requisiti (versione consolidata);
@@ -174,8 +175,7 @@ Entro tale scadenza, verranno rilasciati e sottoposti a verifica i seguenti arte
 - *Verbali*: documentazione tracciata delle decisioni e delle riunioni interne ed esterne rilevanti ai fini progettuali.
 
 === Revisione di Accettazione (Product Baseline – PB)
-Il rilascio finale del progetto, corrispondente alla Product Baseline, è pianificato per la data ultima del *21/03/2026*.
-La pianificazione è coerente con quanto preventivato nella #link("https://skarabgroup.github.io/DocumentazioneProgetto/candidatura/Proposta_di_Candidatura.pdf")[*Proposta di Candidatura*] al capitolato.
+Il rilascio finale del progetto, corrispondente alla Product Baseline, era stato pianificato per la data del *21/03/2026*. A causa del ritardo provocato dalla cattiva organizzazione durante la RTB, anche la PB ha subito uno slittamento di circa 3 settimane, spostando la data di consegna al *15/04/2026*.
 Entro tale termine, il gruppo fornirà:
 - *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#minimum-viable-product")[#def[Minimum Viable Product]] (MVP)*: versione completa e funzionante del sistema, conforme ai requisiti funzionali e qualitativi approvati;
 - *Codice Sorgente*: intero codebase documentato e versionato nel repository ufficiale del progetto;
@@ -190,7 +190,7 @@ Al fine di prevenire ambiguità interpretative, è stato redatto un glossario ch
 Nel testo, *ogni termine evidenziato tramite una G come apice*, rimanda alla voce corrispondente del Glossario pubblicato sul sito ufficiale del gruppo, consentendo al lettore di accedere direttamente alla definizione associata.
 
 La versione più recente del Glossario è disponibile al seguente link:
-#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario]].
+#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario (v1.0.0)]].
 
 
 == Riferimenti
@@ -202,7 +202,7 @@ I seguenti documenti hanno valore vincolante per la redazione del Piano di Proge
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
   (ultimo accesso: *31/01/2026*)
 
-- *Norme di Progetto*: regole, convenzioni e standard di qualità adottati dal gruppo. #linebreak()
+- *Norme di Progetto*: regole, convenzioni e standard di qualità adottati dal gruppo. <NdP> #linebreak()
   #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")] \
   (versione: *v1.0.0*)
 
@@ -218,7 +218,7 @@ I seguenti documenti hanno valore vincolante per la redazione del Piano di Proge
   #underline[#link("https://ieeexplore.ieee.org/document/25325")] \
   (ultimo accesso: *31/01/2026*)
 
-Le motivazioni e le modalità di applicazione dello standard IEEE 1058-1998 sono descritte in dettaglio nel documento *Norme di Progetto*, al quale si rimanda per gli aspetti metodologici e per la descrizione del grado di aderenza adottato.
+Le motivazioni e le modalità di applicazione dello standard IEEE 1058-1998 sono descritte in dettaglio nella sezione *2.1.5.1* del documento #link(<NdP>)[*Norme di Progetto*], al quale si rimanda per gli aspetti metodologici e per la descrizione del grado di aderenza adottato.
 
 
 #pagebreak()
@@ -235,7 +235,7 @@ Ciò consente al team del progetto di adattare tempestivamente le strategie di m
 
 I rischi individuati vengono raggruppati in macro-categorie (tecnologiche, interpersonali e organizzative) al fine di facilitarne l’analisi e l’assegnazione delle responsabilità.
 
-Le modalità operative e i criteri metodologici adottati per l’analisi e la valutazione dei rischi sono definiti nel documento *Norme di Progetto*, al quale si rimanda per la descrizione dettagliata del processo di di gestione dei rischi.
+Le modalità operative e i criteri metodologici adottati per l’analisi e la valutazione dei rischi sono definiti nella *sezione 2.1.5.3.1* del documento #link(<NdP>)[*Norme di Progetto*], al quale si rimanda per la descrizione dettagliata del processo di di gestione dei rischi.
 
 === RCO3: Rischio Collettivo Organizzativo legato a ritardi o incomprensioni nella comunicazione con la proponente
 #figure(
@@ -257,9 +257,9 @@ Le modalità operative e i criteri metodologici adottati per l’analisi e la va
     [*Nome*], 
     [Ritardi o incomprensioni nella comunicazione con la proponente],
     [*Descrizione*], 
-    [Possibili ritardi nelle risposte da parte di #def[Var Group] o interpretazioni errate dei feedback forniti durante le sessioni di mentoring. Questo potrebbe portare a sviluppare funzionalità non in linea con le aspettative della proponente.],
+    [Possibili ritardi nelle risposte da parte di Var Group o interpretazioni errate dei feedback forniti durante le sessioni di mentoring. Questo potrebbe portare a sviluppare funzionalità non in linea con le aspettative della proponente.],
     [*Mitigazione*], 
-    [Programmazione di incontri periodici fissi e redazione di verbali (verbali esterni) dopo ogni incontro per formalizzare quanto deciso. Uso di canali di comunicazione diretti (#def[Slack]) per chiarimenti rapidi. In caso di dubbi sull'interpretazione dei feedback, il gruppo si impegnerà a richiedere chiarimenti tempestivi alla proponente per evitare incomprensioni. Nel caso in cui la proponente non risponda entro tempi ragionevoli il gruppo contattera il Prof. Vardanega per consigli su come procedere.],
+    [Programmazione di incontri periodici fissi e redazione di verbali (verbali esterni) dopo ogni incontro per formalizzare quanto deciso. Uso di canali di comunicazione diretti (Slack) per chiarimenti rapidi. In caso di dubbi sull'interpretazione dei feedback, il gruppo si impegnerà a richiedere chiarimenti tempestivi alla proponente per evitare incomprensioni. Nel caso in cui la proponente non risponda entro tempi ragionevoli il gruppo contattera il Prof. Vardanega per consigli su come procedere.],
     [*Probabilità di avvenimento*],
     [Media],
     [*Pericolosità delle ripercussioni*],
@@ -288,7 +288,7 @@ Le modalità operative e i criteri metodologici adottati per l’analisi e la va
     [*Nome*], 
     [Disomogeneità nella produzione della documentazione],
     [*Descrizione*], 
-    [Dato che i membri del team hanno stili di scrittura diversi, i documenti (#def[Piano di Progetto], #def[Norme di Progetto], ecc.) potrebbero risultare frammentati, poco coerenti o con terminologie discordanti. Questo potrebbe compromettere la chiarezza e la professionalità della documentazione consegnata.],
+    [Dato che i membri del team hanno stili di scrittura diversi, i documenti (Piano di Progetto, Norme di Progetto, ecc.) potrebbero risultare frammentati, poco coerenti o con terminologie discordanti. Questo potrebbe compromettere la chiarezza e la professionalità della documentazione consegnata.],
     [*Mitigazione*], 
     [Definizione rigorosa dei template riguardante l'aspetto visivo, l'impaginazione e la formattazione del testo. Ogni documento deve passare per una fase di verifica incrociata, un membro diverso dal redattore controlla il lavoro, prima di essere considerato definitivo. Inoltre, viene stabilito un glossario condiviso per uniformare la terminologia tecnica utilizzata nei documenti.],
     [*Probabilità di avvenimento*],
@@ -747,7 +747,7 @@ Fase dedicata alla Quality Assurance e alla consegna.
 = Preventivo e Allocazione delle Risorse
 
 In questa sezione viene presentato il preventivo consolidato dei costi e la pianificazione dell’allocazione delle risorse umane.
-Il preventivo è stato elaborato tenendo conto dei vincoli di budget e della scadenza finale di progetto fissata per il *21/03/2026*.
+Il preventivo è stato elaborato tenendo conto dei vincoli di budget e della scadenza finale di progetto fissata per il *15/04/2026*.
 
 == Evoluzione del Preventivo rispetto alla Candidatura
 Durante la candidatura per il capitolato C2, il gruppo ha formalizzato una prima stima economica tramite il documento #underline(link("https://skarabgroup.github.io/DocumentazioneProgetto/candidatura/Dichiarazione_Impegni.pdf")[*Preventivo costi ed impegno orario*]), basata su una valutazione preliminare dei carichi di lavoro.
