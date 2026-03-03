@@ -65,7 +65,7 @@ I documenti consultabili presenti sono i seguenti:
 === Presentazioni e Lettere
 - #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/candidatura_RTB_vardanega.pdf")[#underline[Lettera di Candidatura alla RTB (Docente Vardanega)]]
 - #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/candidatura_RTB_cardin.pdf")[#underline[Lettera di Candidatura alla RTB (Docente Cardin)]]
-- #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/Presentazione_RTB_cardin.pdf")[#underline[Diapositive di Presentazione RTB (Docente Cardin)]]
+- #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/presentazione_RTB_cardin.pdf")[#underline[Diapositive di Presentazione RTB (Docente Cardin)]]
 
 === Documenti Interni
 - #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/glossario.pdf")[#underline[Glossario (v1.0.0)]], visionabile anche sul sito #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[#underline[al seguente link]]
@@ -81,6 +81,7 @@ I documenti consultabili presenti sono i seguenti:
 - #link("https://skarabgroup.github.io/DocumentazioneProgetto/verbali/esterni/Allineamento_25_11_25.pdf")[#underline[Verbale Riunione Esterna | 2025 - 11 - 25]]
 
 === Verbali Riunioni Interne
+- #link("https://skarabgroup.github.io/DocumentazioneProgetto/verbali/interni/Riunione_26_02_28.pdf")[#underline[Verbale Riunione Interna | 2026 - 02 - 28]]
 - #link("https://skarabgroup.github.io/DocumentazioneProgetto/verbali/interni/Riunione_26_02_14.pdf")[#underline[Verbale Riunione Interna | 2026 - 02 - 14]]
 - #link("https://skarabgroup.github.io/DocumentazioneProgetto/verbali/interni/Riunione_26_02_07.pdf")[#underline[Verbale Riunione Interna | 2026 - 02 - 07]]
 - #link("https://skarabgroup.github.io/DocumentazioneProgetto/verbali/interni/Riunione_26_02_01.pdf")[#underline[Verbale Riunione Interna | 2026 - 02 - 01]]
