@@ -160,7 +160,7 @@ Per la milestone RTB (*25/02/2026*), le attività di qualità si concentrano sul
 - *Qualità del Prototipo (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#proof-of-concept")[#def[PoC]])*: L'attività di verifica è focalizzata esclusivamente sulla *dimostrazione della fattibilità tecnica* (Technology Baseline), con particolare attenzione all'interazione Agenti-LLM. Il testing in questa fase ha valore _sperimentale e propedeutico_: esso funge da caso di studio per calibrare le metriche e validare le strategie di verifica che saranno poi applicate in modo sistematico ed estensivo sul #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#minimum-viable-product")[#def[MVP]].
 
 === Revisione di Accettazione (Product Baseline – PB)
-Per il rilascio finale (*21/03/2026*), il focus si sposta sulla robustezza, sulla copertura e sulla soddisfazione dei requisiti:
+Per il rilascio finale (*15/04/2026*), il focus si sposta sulla robustezza, sulla copertura e sulla soddisfazione dei requisiti:
 - *Qualità del Prodotto (MVP)*: Esecuzione completa dei test di unità, integrazione e sistema. Validazione finale rispetto ai requisiti funzionali e prestazionali del capitolato.
 - *Qualità del Codice*: Rispetto dei vincoli di stile, assenza di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-smell")[*#def[code smells]*] e raggiungimento delle soglie di copertura del codice #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-coverage")[#def[Code Coverage]] definite nel presente piano.
 - *Validazione Utente*: Verifica dell'usabilità tramite test di accettazione (UAT) basati sui casi d'uso principali.
@@ -171,7 +171,7 @@ Al fine di prevenire ambiguità interpretative, è stato redatto un glossario ch
 Nel testo, *ogni termine evidenziato tramite una G come apice*, rimanda alla voce corrispondente del Glossario pubblicato sul sito ufficiale del gruppo, consentendo al lettore di accedere direttamente alla definizione associata.
 
 La versione più recente del Glossario è disponibile al seguente link:
-#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario]].
+#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario (v1.0.0)]].
 
 == Riferimenti
 
@@ -270,7 +270,6 @@ Questi processi definiscono le attività core per la realizzazione del software.
   ),
 )
 
-_Riferimento: Norme di Progetto, Sezione [Stabilità dei Requisiti]_
 Il monitoraggio della stabilità dei requisiti è cruciale per prevenire lo *scope creep*, specialmente a seguito delle revisioni correttive post-S2.
 
 #metrics_table(
@@ -403,7 +402,7 @@ Skarab Group ha adottato un approccio di testing multilivello che copre:
 - *Test di Regressione*.
 - *Test di Integrazione*.
 
-La definizione dei test e la nomenclatura utilizzata sono presenti all'interno delle #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[#underline[*Norme di Progetto*]]. // inserire sezione
+La definizione dei test e la nomenclatura utilizzata sono presenti all'interno delle #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[#underline[*Norme di Progetto*]], alla sezione *2.1.9.3.5*. // inserire sezione
 I Test di Regressione e i Test di Integrazione, qui non presenti, verranno identificati durante lo svolgimento delle attività per la _Product Baseline_ (PB).
 
 == Test di Sistema
