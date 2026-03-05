@@ -7,6 +7,9 @@ on:
       - develop
       - main
 
+permissions:
+  contents: write
+
 jobs:
   generate:
     if: github.event.pull_request.merged == true
@@ -31,9 +34,18 @@ jobs:
         run: |
           python Glossario/glossario.py
 
-      - name: Commit generated HTML
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "auto: aggiorna glossario HTML"
-          file_pattern: |
-            Glossario/*.html
+      - name: Auto commit glossario.html
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # Aggiungi il file
+          git add Glossario/glossario.html
+          
+          # Controlla se ci sono modifiche prima di committare (per evitare errori)
+          if git diff --staged --quiet; then
+            echo "Nessuna modifica da committare"
+          else
+            git commit -m "Aggiornamento automatico [skip ci]"
+            git push
+          fi

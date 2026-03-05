@@ -5,6 +5,13 @@
     (
       "2026-01-03",
       "1.0.0",
+      "Verifica verbale",
+      "",
+      members.suar
+    ),
+    (
+      "2026-01-03",
+      "1.0.0",
       "Prima stesura del documento",
       members.alice,
       members.suar
@@ -56,39 +63,17 @@
     )
 
     = Azioni e responsabilità
-    #tabellaAzioni((
-      (
-        "Continuazione redazione AdR",
-        members.alice
-          + " "
-          + members.andrea
-          + " "
-          + members.martinello
-          + " "
-          + members.antonio
-          + " "
-          + members.berengan,
-        "2026/01/03",
-        "In avanzamento",
-      ),
-      (
-        "Verifica NdP",
-        members.kevin,
-        "2026/01/03",
-        "Da iniziare",
-      ),
-      (
-        "Verifica PdP",
-        members.suar,
-        "2026/01/03",
-        "Da iniziare",
-      ),
-      (
-        "Verifica PdQ",
-        members.suar,
-        "2026/01/03",
-        "Da iniziare",
-      ),
+    #task_table((
+      ("Stesura UC13-32", "Analista", "20:00"),
+      ("Stesura requisiti UC13-32", "Analista", "5:00"),
+      ("Ristesura NdP", "Amministratore", "4:30"),
+      ("Ristesura PdP", "Amministratore", "5:00"),
+      ("Aggiunta nuovi rischi PdP", "Amministratore", "1:30"),
+      ("Revisione sezione automiglioramento PdQ", "Amministratore", "0:30"),
+      ("Stesura verbale riunione prima settimana", "Responsabile", "1:00"),
+      ("Verifica verbale riunione interna prima settimana", "Verificatore", "0:15"),
+      ("Stesura verbale riunione esterna", "Responsabile", "1:00"),
     ))
+    #chiusuraVerbale(orarioFineRiunione,presidenteRiunione)
   ],
 )

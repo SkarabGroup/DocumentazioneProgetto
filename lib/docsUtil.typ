@@ -288,7 +288,7 @@
   // Rendering della figura
   figure(
     table(
-      fill: (col, row) => if row == 0 { luma(64%) } else { white },
+      fill: (col, row) => if row == 0 { luma(63.75%) } else { white },
       columns: (1.5fr, 0.7fr, 0.8fr, 0.5fr, 0.6fr, 0.8fr, 0.6fr),
       inset: 8pt,
       align: (col, row) => if col == 0 { left + horizon } else { center + horizon },
@@ -318,5 +318,97 @@
       table.cell(fill: luma(240))[*#tot_ver*],
     ),
     caption: caption_text,
+  )
+}
+
+
+#let activity_table(data, caption_text) = {
+  let table_body = ()
+
+  for row in data {
+    table_body.push(row.at(0))  // Attività
+    table_body.push(row.at(1))  // Data Inizio
+    table_body.push(row.at(2))  // Data Fine
+    table_body.push(row.at(3))  // Ruoli Assegnati
+    table_body.push(row.at(4))
+  }
+
+  // Rendering della figura
+  figure(
+    table(
+      fill: (col, row) => if row == 0 { luma(64%) } else { white },
+      columns: (3fr,2fr,1fr,1fr,2fr),
+      inset: 8pt,
+      align: (col, row) => if col == 0 { left + horizon } else { center + horizon },
+      stroke: 0.5pt + luma(200),
+      
+      // Header
+      table.header(
+        text(fill: white, weight: "bold")[Attività],
+        text(fill: white, weight: "bold")[Ruoli Assegnati],
+        text(fill: white, weight: "bold")[Ore previste],
+        text(fill: white, weight: "bold")[Ore effettive],
+        text(fill: white, weight: "bold")[Stato di completamento],
+      ),
+
+      // Inserisco le celle generate dal loop
+      ..table_body,
+    ),
+    caption: caption_text,
+  )
+}
+
+#let metrics_table(caption_text, content_list) = {
+  figure(
+    table(
+      fill: (x, y) => if (y == 0) { luma(220) } else { white },
+      columns: (1.2fr, 2.2fr, 3fr, 1.1fr, 1.1fr),
+      inset: 10pt,
+      align: horizon,
+      table.header([*ID*], [*Nome*], [*Formula*], [*V. Accettabile*], [*V. Ottimo*]),
+      ..content_list
+    ),
+    caption: caption_text,
+    kind: table
+  )
+}
+
+#let improvement_table(caption_text, content_list) = {
+  figure(
+    table(
+      fill: (x, y) => if (y == 0) {
+        luma(230) // Header scuro
+      } else {
+        luma(250) // Righe chiare
+      },
+      // 3 Colonne: ID, Problema, Azione
+      columns: (0.6fr, 2fr, 2.4fr),
+      inset: 10pt,
+      align: (x, y) => if x == 0 { center + horizon } else { left + horizon },
+      table.header([*ID*], [*Problema / Causa*], [*Azione Correttiva*]),
+      
+      ..content_list
+    ),
+    caption: caption_text,
+    kind: table
+  )
+}
+#let task_table(data) = {
+  table(
+    columns: (1fr, 0.8fr, 0.4fr),
+    align: (left, left, center),
+    stroke: 0.5pt + luma(200),
+    inset: 10pt,
+    
+    // Header che si ripete su ogni pagina
+    fill: (col, row) => if row == 0 { luma(245) },
+    table.header(
+      [*Descrizione Task*], 
+      [*Ruolo responsabile*], 
+      [*Ore*],
+    ),
+
+    // Dati
+    ..data.flatten().map(item => [#item])
   )
 }

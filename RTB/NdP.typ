@@ -11,7 +11,7 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v0.8.0"
+#let versione = "v1.0.0"
 #set heading(numbering: "1.1.1")
 
 #titlePage("Norme di Progetto", versione)
@@ -19,34 +19,110 @@
 
 #let history = (
   (
+    "2026/03/03",
+    "1.0.0",
+    "Revisione per RTB",
+    "",
+    members.suar
+  ),
+  (
+    "2026/02/28",
+    "0.14.0",
+    "Verifica di tutto lo stato attuale del documento",
+    members.andrea,
+    members.suar
+  ),
+  (
+    "2026/02/27",
+    "0.13.1",
+    "Verifica per la sezione Processo di Sviluppo e sezione Processi Organizzativi",
+    members.andrea,
+    members.suar
+  ),
+  (
+    "2026/02/27",
+    "0.13.0",
+    "Verifica per la sezione Piano di Qualifica",
+    members.berengan,
+    members.andrea
+  ),
+  (
+    "2026/02/23",
+    "0.12.0",
+    "Verifica per la sezione Analisi dei Requisiti per la RTB",
+    "",
+    members.suar,
+    members.kevin
+  ),
+  (
+    "2026/02/21",
+    "0.11.0",
+    "Rielaborazione Processi di Supporto e Organizzativi",
+    members.alice,
+    members.suar
+  ),
+  (
+    "2026/02/20",
+    "0.10.1",
+    "Fix sezione AdR in processo di fornitura",
+    members.andrea,
+    members.suar
+  ),
+  (
+    "2026/02/14",
+    "0.10.0",
+    "Riorganizzazione sezione Processo di Sviluppo",
+    members.alice,
+    members.suar
+  ),
+  (
+    "2026/02/13",
+    "0.9.0",
+    "Ampliamento sezioni Verifica e Validazione. Criteri di Verifica Processi di Supporto e Sviluppo",
+    members.alice,
+    members.suar
+  ),
+  (
+    "2026/02/11",
+    "0.8.1",
+    "Ultimo fix/miglioramento sezione AdR",
+    members.andrea,
+    members.suar
+  ),
+  (
     "2026/02/11",
     "0.8.0",
     "Sistemazione sezione AdR con nuove sezioni e miglioramenti",
     members.andrea,
+    members.kevin,
   ),
   (
     "2026/02/07",
     "0.7.0",
     "Rielaborazione sezioni relative al Piano di Qualifica",
     members.alice,
+    members.kevin,
   ),
   (
     "2026/02/04",
     "0.6.0",
     "Rielaborazione delle Norme di Progetto relative al Piano di Progetto",
     members.suar,
+    members.kevin,
   ),
   (
     "2026/02/03",
     "0.5.0",
     "Riscrittura delle sezioni relative all'AdR",
     members.andrea,
+    members.suar
   ),
   (
     "2026/02/03",
     "0.4.0",
     "Integrazioni a PdQ e Metriche",
     members.alice,
+    members.suar
   ),
   (
     "2026/01/15",
@@ -99,18 +175,19 @@
 = Introduzione
 
 == Contesto del Progetto
-Il presente documento descrive le #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#norme-di-progetto")[#def[Norme di Progetto]] applicate al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]], proposto dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
+Il presente documento descrive le #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#norme-di-progetto")[#def[Norme di Progetto]] applicate al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]], proposto dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]] e realizzato dal team di sviluppo #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
 
 Il progetto ha come obiettivo lo sviluppo di una piattaforma software ad #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] finalizzata all’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e alla #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] automatizzata delle vulnerabilità presenti nei repository di codice sorgente. Il sistema è progettato in conformità ai requisiti e ai vincoli definiti nel #link(<capitolato>)[#underline[Capitolato *C2*]].
+
 La piattaforma supporta attività di analisi statica del codice sorgente e di individuazione delle principali criticità di sicurezza, fornendo suggerimenti di correzione attraverso meccanismi automatizzati basati su modelli di linguaggio di grandi dimensioni (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]).
 
 == Finalità del Documento
 Le Norme di Progetto stabiliscono il quadro di riferimento metodologico, organizzativo e tecnologico adottato per lo sviluppo del sistema software.
 
-Il documento ha valore vincolante per l’intero gruppo di lavoro e persegue i seguenti obiettivi:
+Il presente documento costituisce lo standard normativo interno del team; esso è vincolante per l’intero gruppo di lavoro e persegue i seguenti obiettivi:
 - definire un insieme di regole comuni e convenzioni condivise al fine di garantire uniformità e coerenza nello sviluppo del prodotto software;
 - individuare e descrivere gli strumenti, le tecnologie e gli ambienti di lavoro adottati;
-- formalizzare i processi operativi, organizzativi e di controllo applicati durante l’intero ciclo di vita del progetto;
+- formalizzare i processi operativi, organizzativi e di controllo applicati durante l’intero #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#ciclo-di-vita-del-software")[#def[ciclo di vita]] del progetto;
 - assicurare l’allineamento delle attività progettuali agli standard di riferimento e alle buone pratiche dell’ingegneria del software.
 
 Il rispetto delle norme definite nel presente documento è obbligatorio per tutti i membri del gruppo di lavoro e costituisce un requisito fondamentale per garantire qualità, tracciabilità e controllo dell’intero ciclo di sviluppo.
@@ -118,10 +195,10 @@ Il rispetto delle norme definite nel presente documento è obbligatorio per tutt
 == Glossario
 Al fine di prevenire ambiguità interpretative, è stato redatto un glossario che definisce in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio utilizzati all’interno della documentazione.
 
-Nel testo, *ogni termine evidenziato tramite sottolineatura*, qualora *non sia esplicitamente indicato come collegamento a un documento o a una sezione specifica*, rimanda alla voce corrispondente del Glossario pubblicato sul sito ufficiale del gruppo, consentendo al lettore di accedere direttamente alla definizione associata.
+Nel testo, *ogni termine evidenziato tramite una G come apice*, rimanda alla voce corrispondente del Glossario pubblicato sul sito ufficiale del gruppo, consentendo al lettore di accedere direttamente alla definizione associata.
 
 La versione più recente del Glossario è disponibile al seguente link:
-#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario]].
+#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario (v1.0.0)]].
 
 == Riferimenti
 
@@ -130,36 +207,36 @@ I seguenti documenti hanno valore vincolante per la redazione delle Norme di Pro
 
 - *Regolamento del Progetto Didattico*: Regole e vincoli del corso di Ingegneria del Software. \
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/PD1.pdf")] \
-  (ultimo accesso: *04/02/2026*)
+  (ultimo accesso: *25/02/2026*)
 
 - *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> \
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
-  (ultimo accesso: *04/02/2026*)
+  (ultimo accesso: *25/02/2026*)
 
 - *ISO/IEC/IEEE 12207 – Software Life Cycle Processes*<12207>: framework internazionale per la gestione dei processi di sviluppo, manutenzione e dismissione del software. \
   #underline[#link("https://ieeexplore.ieee.org/document/8100771")] \
-  (ultimo accesso: *04/02/2026*)
+  (ultimo accesso: *25/02/2026*)
 
 === Riferimenti Informativi
 - *Dispense del corso di Ingegneria del Software relative ai Processi di Ciclo di Vita del Software* \
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T02.pdf")] \
-  (ultimo accesso: *04/02/2026*)
+  (ultimo accesso: *25/02/2026*)
 
 - *Dispense del corso di Ingegneria del Software relative alla Gestione di Progetto* \
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T04.pdf")] \
-  (ultimo accesso: *04/02/2026*)
+  (ultimo accesso: *25/02/2026*)
 
 - *IEEE 829 – Standard for Software and System Test Documentation*: definizione della struttura dei piani di test, casi di test, procedure e report. \
   #underline[#link("https://ieeexplore.ieee.org/document/4578383")] \
-  (ultimo accesso: *04/02/2026*)
+  (ultimo accesso: *25/02/2026*)
 
 - *IEEE 830 – Standard for Software Requirements Specifications*: guida alla redazione e classificazione dei requisiti funzionali e non funzionali. \
   #underline[#link("https://ieeexplore.ieee.org/document/720574")] \
-  (ultimo accesso: *04/02/2026*)
+  (ultimo accesso: *25/02/2026*)
 
 - *IEEE 1016 – Recommended Practice for Software Design Descriptions*: linee guida per la descrizione dell’architettura software e dei principali design pattern. \
   #underline[#link("https://ieeexplore.ieee.org/document/741934")] \
-  (ultimo accesso: *04/02/2026*)
+  (ultimo accesso: *25/02/2026*)
 
 
 #pagebreak()
@@ -177,125 +254,121 @@ I processi primari, come indicato nello standard sopracitato, sono:
 
 Nel contesto del presente progetto, sono considerati rilevanti principalmente i processi di Fornitura e Sviluppo, in quanto direttamente pertinenti alla natura didattica e contrattuale dell’iniziativa.
 
-
 == Processo di Fornitura
 
 === Descrizione del Processo
-Il Processo di Fornitura definisce l’insieme delle attività svolte dal gruppo di lavoro in qualità di fornitore al fine di pianificare, coordinare e consegnare il prodotto software e la relativa documentazione in conformità ai requisiti stabiliti dal proponente.
+Il Processo di Fornitura definisce l’insieme delle attività svolte dal team di sviluppo in qualità di fornitore al fine di pianificare, coordinare e consegnare il prodotto software e la relativa documentazione in conformità ai requisiti stabiliti dal proponente.
 
-Nel contesto del progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]], il gruppo #def[Skarab Group] assume il ruolo di fornitore, mentre l’azienda #def[Var Group] ricopre il ruolo di proponente. Il #underline[#link(<capitolato>)[Capitolato C2]] costituisce il riferimento contrattuale che disciplina requisiti, vincoli e obiettivi della fornitura.
+Nel contesto del progetto Code Guardian, il gruppo Skarab Group assume il ruolo di fornitore, mentre l’azienda Var Group ricopre il ruolo di proponente. Il #underline[#link(<capitolato>)[Capitolato C2]] costituisce il riferimento contrattuale che disciplina requisiti, vincoli e obiettivi della fornitura.
 
 Il processo di fornitura è responsabile della gestione complessiva del progetto dal punto di vista organizzativo e qualitativo e coordina le attività necessarie a garantire la conformità degli artefatti prodotti rispetto a quanto concordato.
 
 === Attività del Processo
-Nel presente progetto, il processo di fornitura si articola nelle seguenti attività principali:
+Nel presente progetto, il processo di fornitura si articola nelle seguenti attività principali, regolate da specifiche procedure operative:
 
-- *Analisi e presa in carico dei requisiti* \
-  Studio sistematico dei #underline(link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-funzionali")[#def[requisiti funzionali]]) e dei #underline(link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-non-funzionali")[#def[requisiti non funzionali]]) definiti nel Capitolato C2, finalizzato alla comprensione, classificazione e valutazione di fattibilità tecnica e organizzativa, nonché all’individuazione dei vincoli progettuali rilevanti.
+- *Pianificazione della Fornitura:* Il #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#responsabile")[#def[Responsabile]] *ha l'obbligo di* definire la struttura delle attività e assegnare le responsabilità operative all'inizio di ogni #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#sprint")[#def[Sprint]], garantendo la saturazione delle risorse;
 
-- *Pianificazione delle attività di progetto* \
-  Definizione della struttura delle attività necessarie allo sviluppo del progetto, assegnazione delle responsabilità all’interno del gruppo di lavoro, stima delle tempistiche e delle risorse disponibili e individuazione delle principali milestone di progetto.
+- *Gestione della Documentazione:* Ogni membro del team *è tenuto a* redigere e verificare gli artefatti seguendo le convenzioni stilistiche e i criteri di qualità normati, assicurando la tracciabilità delle modifiche;
 
-- *Produzione, gestione e verifica della documentazione* \
-  Redazione progressiva della documentazione di progetto secondo strutture e convenzioni condivise, gestione delle versioni dei documenti e verifica della loro completezza, coerenza e conformità alle Norme di Progetto e agli standard di riferimento.
+- *Monitoraggio e Controllo:* Il Responsabile *deve* verificare periodicamente l’avanzamento rispetto alla #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#baseline")[#def[baseline]] e attivare tempestivamente azioni correttive qualora si rilevino scostamenti dalle soglie di qualità definite nel #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#piano-di-qualifica")[#def[PdQ]];
 
-- *Monitoraggio dell’avanzamento e controllo della qualità della fornitura* \
-  Controllo periodico dello stato di avanzamento delle attività rispetto alla pianificazione definita, verifica del rispetto delle scadenze e valutazione della qualità degli artefatti prodotti mediante attività di revisione interna.
-
-- *Preparazione e consegna degli artefatti* \
-  Consolidamento degli artefatti prodotti, verifica finale della loro conformità ai requisiti stabiliti e predisposizione della documentazione necessaria alla consegna ufficiale prevista dalle scadenze di progetto.
-
-Nel contesto didattico del progetto, e in particolare nel periodo che conduce alla #underline(link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requirements-and-technology-baseline")[#def[RTB]]), tali attività si concretizzano prevalentemente nella redazione strutturata e nel controllo della documentazione di progetto, che rappresenta una componente essenziale della fornitura.
+- *Rilascio e Consegna:* Il team *deve* assicurare il consolidamento degli artefatti e la loro consegna formale nel rispetto delle scadenze contrattuali, seguendo il protocollo di rilascio ufficiale.
 
 === Prodotti del Processo
-Ai fini delle presenti Norme di Progetto, il processo di fornitura disciplina in particolare la produzione e la gestione dei seguenti prodotti *documentali*:
+I prodotti documentali della fornitura non costituiscono il fine ultimo del processo, ma rappresentano gli output formali risultanti dall'applicazione sistematica delle *procedure operative* di gestione e controllo. Essi sono:
 
-- *Norme di Progetto* \
-  Documento che definisce le regole metodologiche, organizzative e tecniche adottate dal gruppo di lavoro durante l’intero ciclo di vita del progetto.
+- *Norme di Progetto*: definiscono le regole operative e tecniche adottate dal team;
+- *Piano di Progetto*: definisce pianificazione, risorse e gestione dei rischi;
+- *Piano di Qualifica*: specifica criteri di qualità e attività di verifica;
+- *Analisi dei Requisiti*: formalizza le necessità del sistema derivate dal Capitolato;
+- *Verbali*: registrano decisioni e attività di revisione.
 
-- *Piano di Progetto* \
-  Documento che definisce l’organizzazione del lavoro, la pianificazione delle attività, l’allocazione delle risorse, la gestione dei rischi e le modalità di monitoraggio dell’avanzamento.
+#figure(
+  table(
+    columns: (2fr, 2fr, 3fr, 1.5fr),
+    align: horizon,
+    fill: (col, row) => if row == 0 {
+      luma(62.75%)
+    } else if calc.even(row) {
+      luma(220)
+    } else {
+      none
+    },
+    stroke: none,
 
-- *Piano di Qualifica* \
-  Documento che specifica i criteri di qualità del prodotto e della documentazione, nonché le attività di verifica e validazione previste.
+    // Header
+    text(white)[*Documento*], text(white)[*Redattori*], text(white)[*Destinatari*], text(white)[*Uso*],
 
-- *Analisi dei Requisiti* \
-  Documento che raccoglie e formalizza i requisiti funzionali e non funzionali del sistema, derivati dal Capitolato C2.
+    // Rows
+    [Lettera di Presentazione], [Responsabile], [Proponente, #members.cardin, #members.tullio, Skarab Group], [Esterno],
 
-- *Verbali di verifica e revisione* \
-  Documenti che registrano esiti e decisioni delle attività di controllo e revisione svolte durante il progetto.
+    [AdR – Analisi dei Requisiti], [Analisti], [Proponente, #members.cardin, #members.tullio, Skarab Group], [Esterno],
+
+    [Glossario], [Tutti i membri del gruppo], [Stakeholder interni ed esterni], [Esterno],
+
+    [NdP – Norme di Progetto], [Responsabili di processo], [Skarab Group, #members.cardin, #members.tullio], [Interno],
+
+    [PdP – Piano di Progetto], [Project Manager], [Proponente, #members.cardin, #members.tullio, Skarab Group], [Esterno],
+
+    [PdQ – Piano di Qualifica], [Responsabili Qualità], [Skarab Group, #members.cardin, #members.tullio, Proponente], [Esterno],
+
+    [Verbali delle Riunioni], [Responsabile], [Proponente (se esterni), #members.cardin, #members.tullio, Skarab Group], [Interno / Esterno],
+  ),
+  caption: [Tabella riepilogativa dei prodotti del processo di fornitura],
+)
 
 === Procedure Operative del Processo
 Le seguenti procedure sono vincolanti per l'esecuzione del processo di fornitura e regolano l'interazione con l'esterno.
+==== Protocollo di Comunicazione (PR-FOR-01)
+Per garantire professionalità e tracciabilità nei confronti del Proponente Var Group:
+- *Canale Ufficiale:* Le comunicazioni formali *devono* avvenire esclusivamente tramite email istituzionale o incontri verbalizzati;
+- *Verbalizzazione:* È *obbligatorio* produrre un verbale esterno entro 48 ore lavorative da ogni incontro con il proponente;
+- *Approvazione Verbali:* Il silenzio-assenso del proponente dopo 24 ore dalla pubblicazione *costituisce l'approvazione formale* del contenuto.
 
-==== Protocollo di Comunicazione
-Per garantire professionalità e tracciabilità nei confronti del Proponente (#def[Var Group]):
-- *Canale Ufficiale:* Le comunicazioni formali (consegne, richieste di chiarimento sui requisiti) avvengono esclusivamente tramite email istituzionale o incontri verbalizzati.
-- *Verbalizzazione:* Ogni incontro con il proponente deve produrre un verbale esterno entro *48 ore* lavorative dall'evento.
-- *Approvazione Verbali:* Il verbale si considera approvato se non pervengono richieste di rettifica entro 24 ore dalla sua pubblicazione/invio.
-
-==== Procedura di Consegna
-In occasione delle scadenze ufficiali, il Responsabile di Progetto deve seguire questa checklist obbligatoria:
-1. *Verifica di Conformità:* Accertarsi che tutti i documenti siano nello stato *Approved* e che ogni artefatto in rilascio (documentale o software) soddisfi i criteri di verifica specifici definiti per esso nel Piano di Qualifica.
-2. *Consolidamento:* Generare i PDF definitivi dai sorgenti #def[Typst] congelati.
-3. *Tagging:* Creare una *Release* sul repository GitHub con il tag di versione corrispondente (es. `v1.0.0-RTB`).
-4. *Notifica:* Inviare comunicazione formale di avvenuta consegna al proponente indicando il link alla release note.
+==== Procedura di Consegna (PR-FOR-02)
+In occasione delle scadenze ufficiali, il Responsabile di Progetto *deve obbligatoriamente* eseguire la seguente checklist operativa tramite gli strumenti di supporto:
+1. *Verifica di Conformità:* Accertarsi che tutti i documenti siano nello stato *Approved* e che ogni artefatto soddisfi i criteri definiti nel PdQ;
+2. *Consolidamento:* Generare i PDF definitivi dai sorgenti #link("https://skarabgroup.github.io/SkarabGroup/DocumentazioneProgetto/Glossario/glossario.html#typst")[#def[Typst]] congelati;
+3. *Tagging:* Creare una *Release* sul repository #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#github")[#def[GitHub]] con tag semantico (es. `v1.0.0-RTB`);
+4. *Notifica:* Inviare comunicazione formale di avvenuta consegna al proponente indicando il link alla release.
 
 === Piano di Progetto
 
 ==== Nota sull’Adozione dello Standard IEEE 1058
-Il documento *Piano di Progetto* adotta come riferimento metodologico lo standard #underline[#link("https://ieeexplore.ieee.org/document/741937")[*IEEE 1058-1998 (Standard for Software Project Management Plans)*]]. Tale scelta riflette la volontà di applicare un approccio rigoroso e sistematico alla gestione del progetto, adattando i contenuti alle dimensioni, alla complessità e alle tempistiche del caso di studio considerato.
+Il documento *Piano di Progetto* adotta come riferimento metodologico lo standard #underline[#link("https://ieeexplore.ieee.org/document/741937")[*IEEE 1058-1998*]]. Tale scelta *vincola il team* ad applicare un approccio rigoroso e sistematico alla gestione, adattando i contenuti alle dimensioni e alla complessità del progetto.
 
-L’adozione dello standard garantisce una copertura completa degli aspetti critici del ciclo di vita del progetto e si traduce concretamente nei seguenti elementi chiave:
-
-- *Struttura e organizzazione sistematica:* \
-  l’indice e l’articolazione del documento ricalcano la gerarchia proposta dallo standard IEEE 1058, assicurando una pianificazione completa delle aree gestionali, organizzative e tecniche ed evitando lacune nella definizione delle responsabilità e dei processi.
-
-- *Analisi e gestione del rischio:* \
-  in conformità alle linee guida IEEE, è adottato un approccio di risk management basato su valutazioni di probabilità, impatto e strategie di mitigazione/contingenza, consentendo un monitoraggio strutturato delle principali incertezze di progetto.
-
-- *Tracciabilità e controllo:* \
-  il documento distingue in modo esplicito la fase di pianificazione (*Preventivo*) da quella di monitoraggio e rendicontazione (*Consuntivo*), permettendo un controllo oggettivo dell’avanzamento e l’analisi degli eventuali scostamenti rispetto alle stime iniziali.
-
-- *Efficacia operativa:* \
-  alcuni moduli previsti dallo standard sono stati ottimizzati e accorpati per migliorare la leggibilità e la comunicazione all’interno del team, mantenendo inalterati rigore metodologico e chiarezza dei flussi informativi richiesti dalla normativa.
+L’adozione dello standard garantisce una copertura completa degli aspetti critici del ciclo di vita e si traduce nei seguenti obblighi operativi:
+- *Sistematicità:* l’articolazione del documento *deve* ricalcare la gerarchia IEEE 1058 per evitare lacune nella definizione delle responsabilità;
+- *Gestione del Rischio:* è *obbligatorio* adottare un approccio basato su probabilità e impatto per il monitoraggio delle incertezze;
+- *Controllo Dinamico:* il team *deve* aggiornare il Piano a ogni Sprint, distinguendo esplicitamente tra *Preventivo* e *Consuntivo* per identificare tempestivamente gli scostamenti.
 
 ==== Definizione del Documento
-Il *Piano di Progetto* costituisce il riferimento gestionale vincolante per la conduzione del progetto e deve definire, in modo tracciabile e verificabile:
+Il *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#piano-di-progetto")[#def[Piano di Progetto]]* costituisce lo *standard operativo vincolante* per la conduzione del progetto. Esso *deve* definire, in modo tracciabile e verificabile:
 - l’organizzazione del lavoro e le responsabilità operative;
-- la pianificazione temporale, incluse milestone e scadenze;
+- la pianificazione temporale (milestone e scadenze);
 - l’allocazione delle risorse e le stime di impegno;
-- la gestione dei rischi;
-- le modalità di monitoraggio e controllo dell’avanzamento.
-
-Il Piano di Progetto è utilizzato dal gruppo di lavoro come base per il coordinamento interno e per la rendicontazione dell’avanzamento, garantendo coerenza tra obiettivi, tempi e risorse disponibili.
+- la gestione dei rischi e le modalità di monitoraggio.
 
 ==== Elementi Costituenti del Documento
-Il Piano di Progetto deve includere almeno i seguenti elementi, ciascuno disciplinato da regole operative e criteri minimi di verifica:
+Il Piano di Progetto *deve obbligatoriamente integrare* i seguenti elementi, ciascuno governato dalle procedure operative e dai criteri di verifica descritti nelle sezioni successive:
 - Analisi dei Rischi;
 - Pianificazione del Ciclo di Vita del Software;
 - Preventivo ed Allocazione delle Risorse;
 - Monitoraggio e Controllo del Rendimento degli Sprint.
 
-Gli elementi costituenti del Piano di Progetto sono normati di seguito.
-
-===== Analisi dei Rischi
-L’Analisi dei Rischi deve individuare e valutare i principali fattori di rischio che possono compromettere il raggiungimento degli obiettivi di progetto. Essa deve includere rischi di natura tecnica, organizzativa e temporale, nonché la valutazione della loro probabilità di occorrenza e del potenziale impatto sul progetto.
+===== PR-FOR-03: Procedura di Analisi e Gestione dei Rischi
+L’attività di Analisi dei Rischi *deve* individuare e valutare sistematicamente i fattori che possono compromettere gli obiettivi di progetto. Il team *ha l'obbligo* di applicare tale procedura con approccio ciclico durante l'intero ciclo di vita.
 
 ====== Metodologia di Analisi
-Il team adotta un approccio *semi-quantitativo* per la valutazione dei rischi. Ogni rischio identificato viene descritto e valutato sulla base di due parametri fondamentali:
+Il team *adotta obbligatoriamente* un approccio *semi-quantitativo*. Ogni rischio identificato *deve* essere valutato tramite i seguenti parametri:
 
-- *Probabilità di accadimento (P):* verosimiglianza con cui l’evento potrebbe verificarsi;
-- *Impatto (I):* gravità delle conseguenze sul progetto qualora l’evento si manifesti.
+- *Probabilità di accadimento (P):* verosimiglianza dell'evento;
+- *Impatto (I):* gravità delle conseguenze.
 
-Il *Livello di Rischio (R)* è calcolato come:
+Il *Livello di Rischio (R)* *deve* essere calcolato come:
 $ R = P times I $
 
-I parametri $P$ e $I$ sono valutati su una scala discreta da 1 a 3.
-
-La scelta di una scala ridotta (1–3) rispetto a scale più estese (es. 1–5 o percentuali) è motivata dalla volontà di:
-- *ridurre la soggettività:* in assenza di dati storici pregressi, una scala più ampia introdurrebbe un’eccessiva varianza nelle stime individuali; la tripartizione Basso/Medio/Alto facilita una categorizzazione netta e supporta il decision-making;
-- *supportare l’approccio iterativo:* il metodo adottato permette una rivalutazione rapida dei rischi a ogni Sprint, evitando overhead non necessario rispetto alla dimensione del progetto.
+I parametri $P$ e $I$ *devono* essere valutati su una scala discreta da 1 a 3 per ridurre la soggettività e garantire la reattività dell'approccio iterativo.
 
 #figure(
   table(
@@ -323,333 +396,255 @@ La scelta di una scala ridotta (1–3) rispetto a scale più estese (es. 1–5 o
     table.cell(fill: rgb("ffcccc"))[*6 (Alto)*],
     table.cell(fill: rgb("ffcccc"))[*9 (Critico)*],
   ),
-  caption: [Matrice di Rischio: visualizzazione delle soglie di intervento],
+  caption: [Matrice di Rischio: visualizzazione delle soglie di intervento obbligatorio],
 )
 
-Sulla base del valore di $R$, i rischi vengono classificati per priorità come segue:
-- *Rischio Basso ($1–3$):* livello di guardia; il rischio è accettabile e soggetto al solo monitoraggio periodico;
-- *Rischio Medio ($4$):* livello di attenzione; richiede la definizione preventiva di una strategia di mitigazione e un controllo frequente;
-- *Rischio Alto ($6–9$):* livello critico; richiede azioni preventive tempestive e la predisposizione di piani di contingenza.
-
-In base al valore di $R$, si applicano le seguenti strategie vincolanti:
-- *Mitigazione (Preventiva):* Azioni da attuare *subito* per ridurre la Probabilità o l'Impatto (Obbligatoria per $R >= 4$).
-- *Contingenza (Reattiva):* Piano d'azione da attuare *solo se* il rischio si verifica (Obbligatoria per $R >= 6$).
+In base al valore di $R$, il team *è vincolato* all'applicazione delle seguenti strategie:
+- *Rischio Basso ($1–3$):* monitoraggio periodico;
+- *Rischio Medio ($4$):* *obbligo* di definizione preventiva di una strategia di mitigazione;
+- *Rischio Alto ($6–9$):* *obbligo* di azioni preventive e predisposizione di piani di contingenza.
 
 ====== Categorie di Rischio
-Per favorire l’analisi sistematica e l’assegnazione delle responsabilità, i rischi sono classificati nelle seguenti macro-categorie:
-- *RT (Rischi Tecnologici):* criticità legate alle tecnologie adottate (es. #def[LLM], #def[Agenti]), agli strumenti di sviluppo, alle integrazioni e all’infrastruttura;
-- *RI (Rischi Interpersonali):* problematiche relative al #def[team di progetto], quali disponibilità dei membri, comunicazione, coordinamento e gestione dei conflitti;
-- *RCO (Rischi di Costo e Organizzativi):* rischi derivanti da stime non accurate, pianificazione temporale (#def[Schedulazione]), dipendenze esterne e vincoli organizzativi.
+I rischi *devono* essere classificati nelle seguenti macro-categorie per l'assegnazione delle responsabilità:
+- *RT (Rischi Tecnologici):* LLM, Agenti, integrazioni;
+- *RI (Rischi Interpersonali):* disponibilità del team, comunicazione;
+- *RCO (Rischi di Costo e Organizzativi):* stime, schedulazione, vincoli esterni.
 
 ====== Ruoli e Responsabilità
-La gestione dei rischi è una responsabilità condivisa, articolata come segue:
-- *Responsabile di Progetto:* supervisiona il processo di gestione dei rischi, valuta la criticità degli eventi e decide l’attivazione delle strategie di mitigazione o dei piani di contingenza;
-- *Team di Progetto:* contribuisce all’identificazione dei rischi e segnala tempestivamente l’insorgere di eventi critici o condizioni anomale;
-- *Stakeholder di riferimento:* vengono informati in caso di rischi ad alto impatto o di variazioni rilevanti rispetto al piano approvato.
+- *Responsabile di Progetto:* *deve* supervisionare il processo, valutare le criticità e autorizzare l'attivazione dei piani di contingenza;
+- *Team di Sviluppo:* *ha il compito* di identificare e segnalare tempestivamente ogni anomalia;
+- *Stakeholder:* *devono* essere informati in caso di rischi con impatto critico sulla baseline.
 
-====== Gestione e Monitoraggio dei Rischi
-La gestione dei rischi non è limitata alla fase di avvio del progetto, ma costituisce un processo ciclico di controllo che accompagna l’intero ciclo di vita.
-
-Nel caso in cui un rischio si manifesti o emergano nuovi rischi, il team applica la seguente procedura operativa:
-+ *Rilevamento (Detection):* Ogni membro del team ha l'obbligo di segnalare al *Responsabile di Progetto* l’insorgere di problematiche tecniche o organizzative *entro il termine della giornata lavorativa* in cui vengono rilevate.
-+ *Documentazione:* L’evento viene tracciato nel sistema di issue tracking e, se necessario, discusso nel primo meeting utile.
-+ *Valutazione e Risposta:* Il Responsabile di Progetto valuta la criticità ($R$) e attiva la strategia di mitigazione o il piano di contingenza.
-+ *Rendicontazione:* Al termine dello #def[Sprint], l’evento viene analizzato nel consuntivo per valutare l'efficacia delle contromisure.
-+ *Aggiornamento:* Le strategie vengono aggiornate nel registro dei rischi per gli Sprint successivi.
+====== Procedura Operativa di Monitoraggio
+Qualora un rischio si manifesti, il team *deve* seguire rigorosamente questa sequenza:
+1. *Rilevamento (Detection):* Ogni membro *ha l'obbligo* di segnalare l'insorgere di problematiche al Responsabile *entro il termine della giornata lavorativa*;
+2. *Documentazione:* L’evento *deve* essere tracciato immediatamente nel sistema di issue tracking;
+3. *Valutazione e Risposta:* Il Responsabile *deve* attivare la strategia di mitigazione o il piano di contingenza;
+4. *Rendicontazione:* Al termine dello Sprint, l'evento *deve* essere analizzato nel consuntivo per validare l'efficacia delle contromisure.
 
 ====== Criteri di Verifica dell’Analisi dei Rischi
-L’elemento *Analisi dei Rischi* del Piano di Progetto è considerato conforme alle Norme di Progetto se risultano soddisfatte tutte le seguenti condizioni:
+L’elemento *Analisi dei Rischi* è conforme se e solo se:
+- ogni rischio è descritto e classificato univocamente (RT, RI, RCO);
+- sono indicati esplicitamente i valori di $P$, $I$ e $R$;
+- per ogni rischio è definita una strategia di mitigazione e contingenza;
+- lo stato dei rischi è aggiornato con cadenza pari alle iterazioni di Sprint;
+- l'insorgenza di nuovi rischi è tracciata nei verbali o negli strumenti di gestione.
 
-- [ ] ogni rischio è descritto in modo univoco e classificato in una delle categorie definite (RT, RI, RCO);
-- [ ] per ciascun rischio sono esplicitamente indicati i valori di *Probabilità (P)*, *Impatto (I)* e il corrispondente *Livello di Rischio (R)*;
-- [ ] per tutti i rischi classificati come *Medio* o *Alto* è definita almeno una strategia di mitigazione o un piano di contingenza;
-- [ ] lo stato dei rischi è aggiornato con cadenza coerente con la pianificazione degli Sprint;
-- [ ] l’insorgenza di nuovi rischi o la variazione significativa di rischi esistenti è tracciata nei verbali di progetto o negli strumenti di issue tracking adottati;
-- [ ] gli esiti delle attività di gestione dei rischi sono riportati nei consuntivi di Sprint o di fase (es. RTB).
+===== PR-FOR-04: Procedura di Pianificazione del Ciclo di Vita
+Questa procedura norma l’organizzazione temporale del progetto e vincola la scomposizione delle attività necessarie alla realizzazione del prodotto. Il team *deve* utilizzare la pianificazione come riferimento formale per il coordinamento e il monitoraggio costante dell’avanzamento.
 
-Il mancato rispetto di una o più delle condizioni sopra elencate comporta la non conformità dell’elemento e richiede un’azione correttiva prima della validazione del documento.
+====== Gestione Operativa della Pianificazione
+La pianificazione *deve* adattarsi alla granularità richiesta dalla fase corrente del ciclo di vita:
 
-===== Pianificazione del Ciclo di Vita del Software
-La pianificazione del ciclo di vita del software stabilisce l’organizzazione temporale del progetto e vincola la suddivisione delle attività nelle diverse fasi previste, definendo milestone, scadenze intermedie e relazioni di dipendenza tra le attività necessarie alla realizzazione del prodotto software.
+- *Pianificazione in RTB:* Il Responsabile *ha l'obbligo* di definire nel dettaglio ogni attività. Per ciascuna di esse *devono* essere specificati: descrizione univoca, responsabile assegnato e scadenza.
+- *Pianificazione in PB:* È *obbligatorio* adottare un approccio *rolling-wave*. La pianificazione si limita alla definizione delle macro-attività (es. Progettazione Architetturale, MVP) per preservare la flessibilità necessaria alle scelte implementative non ancora consolidate.
 
-La pianificazione costituisce il riferimento formale per il coordinamento delle attività e per il monitoraggio dell’avanzamento del progetto, in relazione alla suddivisione in sprint.
+====== Requisiti di Atomicità e Tracciabilità
+Per garantire l'efficacia del monitoraggio tramite lo strumento ufficiale #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#jira")[#def[Jira]], il team *deve* attenersi alle seguenti regole:
 
-====== Pianificazione in Corrispondenza della RTB
-In corrispondenza della *Requirements and Technology Baseline (RTB)*, la pianificazione del ciclo di vita del software prevede la definizione dettagliata delle attività da svolgere. Per ciascuna attività sono obbligatoriamente specificati la descrizione, il responsabile assegnato e lo stato di avanzamento, al fine di garantire un controllo puntuale delle attività di analisi e di impostazione tecnologica.
+1. *Corrispondenza 1:1:* Ogni attività definita *deve* corrispondere a una *task* registrata su Jira.
+2. *Atomicità delle Task:* Le attività pianificate in RTB *devono* essere atomiche. Una task è definita tale se:
+  - è eseguibile da un singolo membro del team;
+  - non presenta dipendenze bloccanti non tracciate; qualora esistano, *devono* essere esplicitate tramite relazioni "blocks/blocked-by".
+3. *Assegnazione:* Il Responsabile, all’avvio di ogni Sprint, *deve* assegnare ogni task a un componente del team, definendo lo stato di avanzamento atteso.
 
-Al fine di assicurare la tracciabilità delle attività pianificate, ogni attività definita in questa fase deve corrispondere a una *task* registrata sullo strumento di issue tracking adottato dal team (#def[Jira]). Il Responsabile di Progetto, all’avvio di ogni Sprint, definisce e pianifica le task su Jira, assegnando a ciascuna una figura di riferimento del team e una scadenza temporale, così da consentire la verifica della coerenza tra quanto pianificato e quanto effettivamente svolto.
+====== Criteri di Verifica della Pianificazione
+L’attività di pianificazione è considerata conforme se e solo se risultano soddisfatte le seguenti condizioni:
 
-Le attività pianificate devono essere *atomiche*. Una task si definisce atomica se:
-- è eseguibile da un singolo membro del team;
-- non presenta dipendenze dirette *bloccanti* da altre attività; qualora una dipendenza sia inevitabile, essa deve essere esplicitata su Jira tramite collegamento alla task prerequisita (es. relazione *blocks/blocked-by*);
++ *Per la fase RTB:*
+  - Tutte le attività sono tracciate su Jira come task atomiche;
+  - Ogni task possiede un responsabile identificabile;
+  - Le dipendenze sono esplicitate graficamente o tramite collegamenti tecnici.
++ *Per la fase PB:*
+  - Sono identificate le macro-attività senza forzare decisioni progettuali premature;
+  - Le milestone sono coerenti con la cadenza degli Sprint.
++ *Generali:*
+  - Ogni variazione significativa alla pianificazione è motivata e tracciata nei verbali di progetto.
 
-====== Pianificazione in Corrispondenza della PB
-Per le fasi successive del progetto, in particolare in prossimità della *Product Baseline (PB)*, la pianificazione adotta un livello di dettaglio più ampio e meno vincolante. In questa fase, la pianificazione si limita alla definizione delle macro-attività previste, evitando una scomposizione dettagliata in task operative.
+Il mancato rispetto di una sola condizione comporta lo stato di "Non Conformità", richiedendo l'immediata correzione del Piano di Progetto.
 
-Tale approccio è adottato con l’obiettivo di non formalizzare anticipatamente decisioni progettuali non ancora consolidate, preservando la flessibilità necessaria ad affrontare le scelte architetturali e implementative che emergeranno nel corso dello sviluppo.
+===== PR-FOR-05: Procedura di Preventivazione e Allocazione delle Risorse
+Questa procedura norma la distribuzione dell’impegno temporale e la gestione economica. Il preventivo approvato costituisce la baseline formale per il confronto con i consuntivi e supporta le attività di controllo.
 
-La pianificazione a livello di Product Baseline garantisce comunque la tracciabilità delle principali attività attese, includendo, a titolo esemplificativo, l’analisi post *proof-of-concept*, la progettazione architetturale, la progettazione di dettaglio e le attività che convergono nello sviluppo del *Minimum Viable Product (MVP)*.
+====== Regole di Definizione del Preventivo e Costi
+La determinazione del preventivo *deve* rispettare i seguenti vincoli normativi:
+- *Esclusione Auto-apprendimento:* Il periodo antecedente al primo Sprint è classificato come auto-apprendimento; è *fatto divieto* di rendicontare tali ore nel calcolo dei costi di progetto.
+- *Gestione Variazioni:* Ogni scostamento rispetto alle stime di candidatura *deve* essere documentato e motivato nei verbali di progetto o negli strumenti di issue tracking.
 
-====== Criteri di Verifica della Pianificazione del Ciclo di Vita
-L’elemento *Pianificazione del Ciclo di Vita del Software* del Piano di Progetto è considerato conforme alle Norme di Progetto se risultano soddisfatte tutte le seguenti condizioni:
+*Nota di Contesto (Analisi Preliminare):* A seguito del consolidamento delle baseline, la distribuzione pro-capite rimane invariata, pur registrando una riduzione del costo complessivo rispetto alle stime iniziali.
 
-+ Per la *Requirements and Technology Baseline (RTB)* tutte le attività pianificate risultano:
-  - [ ] descritte in modo univoco;
-  - [ ] assegnate a un responsabile identificabile;
-  - [ ] tracciate come task sullo strumento di issue tracking adottato;
-  - [ ] le attività pianificate in RTB risultano definite in modo atomico; eventuali dipendenze sono esplicitate e tracciate sullo strumento di issue tracking;
-+ Per la *Product Baseline (PB)* sono definite le macro-attività previste, senza anticipare decisioni progettuali non ancora consolidate;
-  - [ ] le milestone e le scadenze risultano coerenti con la pianificazione degli Sprint;
-  - [ ] eventuali variazioni significative della pianificazione sono motivate e tracciate nei verbali di progetto o negli strumenti di gestione delle attività.
+====== Strategia di Allocazione per Milestone
+L’allocazione delle risorse *deve* adattarsi alla natura specifica della milestone di progetto:
 
-Il mancato rispetto di una o più delle condizioni sopra elencate comporta la non conformità dell’elemento e richiede un aggiornamento del Piano di Progetto.
+1. *Milestone RTB (Requirements and Technology Baseline):*
+   L’allocazione *deve* prevedere un impiego prevalente delle figure di *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#amministratore")[#def[Amministratore]]* e *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analista")[#def[Analista]]*. Tale scelta è *obbligatoria* per gestire l'alto carico documentale e normativo di questa fase.
 
-===== Preventivo ed Allocazione delle Risorse
-Il Preventivo e l’Allocazione delle Risorse definiscono la distribuzione delle risorse disponibili tra le attività di progetto, con particolare riferimento all’impegno temporale richiesto e all’assegnazione delle responsabilità ai membri del gruppo di lavoro.
+2. *Milestone PB (Product Baseline):*
+   Il preventivo per questa fase *deve* essere gestito con metodologia *rolling-wave*. Esso *ha l'obbligo* di essere riesaminato alla chiusura di ogni Sprint; ogni revisione *deve* essere approvata dal Responsabile di Progetto.
 
-Il preventivo costituisce una stima iniziale dell’impegno complessivo e rappresenta il riferimento formale per il confronto con i consuntivi rilevati durante l’esecuzione del progetto, al fine di supportare le attività di monitoraggio e controllo.
+====== Criteri di Verifica del Preventivo e dell’Allocazione
+L'attività è considerata conforme se e solo se risultano soddisfatte le seguenti condizioni:
+- è definito un preventivo iniziale coerente con le baseline individuate;
+- la distribuzione dell’impegno orario pro-capite è esplicitata e motivata;
+- la ripartizione dei ruoli per fase (RTB/PB) è coerente con le attività pianificate;
+- eventuali scostamenti dal preventivo iniziale sono motivati e tracciati;
+- il preventivo è utilizzato come riferimento esplicito nel confronto con i consuntivi.
 
-====== Definizione della Baseline e Costi
-La determinazione del preventivo deve rispettare i seguenti criteri:
-- *Esclusione Auto-apprendimento:* il periodo antecedente al primo Sprint è classificato come auto-apprendimento e non concorre al calcolo dei costi rendicontabili;
-- *Gestione Variazioni:* eventuali scostamenti (in aumento o diminuzione) rispetto alle stime di candidatura devono essere documentati e motivati nei verbali di progetto o negli strumenti di issue tracking.
+===== PR-FOR-06: Procedura di Monitoraggio e Controllo del Rendimento
+Questa procedura norma la verifica sistematica dell’andamento del progetto rispetto alla pianificazione. L'attività *deve* basarsi su iterazioni temporali (*Sprint*) composte da task atomiche e tracciabili.
 
-*Nota di Contesto (Analisi Preliminare):*
-A seguito di un’analisi approfondita del lavoro svolto nel periodo di consolidamento, sono state formalmente definite le baseline di interesse. In conformità al Preventivo di candidatura, la distribuzione pro-capite dell’impegno orario rimane invariata. Tuttavia, il preventivo complessivo attuale riporta un lieve scostamento in diminuzione rispetto alle stime iniziali, determinando una riduzione del costo complessivo.
+====== Metodologia di Monitoraggio dello Sprint
+Al termine di ogni Sprint, il rendimento *deve* essere descritto in modo uniforme includendo:
+- *Attività svolte:* Elenco delle task concluse secondo la *Definition of Done*;
+- *Analisi delle deviazioni:* Confronto tra pianificato ed effettivo con analisi delle cause;
+- *Rischi rilevati:* Aggiornamento dello stato dei rischi emersi (rif. *PR-FOR-03*);
+- *Azioni correttive:* Decisioni adottate per migliorare l'efficacia delle iterazioni successive.
 
-====== Strategia di Allocazione per Fasi
-L’allocazione delle risorse deve adattarsi alla natura specifica della fase di progetto.
+====== Regole di Rendicontazione e Strumenti
+La rendicontazione *deve* avvenire esclusivamente tramite lo strumento #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#jira")[#def[Jira]]:
+1. *Frequenza:* L’aggiornamento dei dati *deve* avvenire con periodicità giornaliera, *entro il termine della giornata lavorativa*.
+2. *Precisione:* Per ogni task *devono* essere indicati obbligatoriamente lo stato di avanzamento, le ore spese e il responsabile.
+3. *Attività Non Pianificate:* È *obbligatorio* tracciare anche le attività impreviste (bugfix, criticità) creando nuove task; l'esclusione di tali ore è *vietata*.
 
-1. *Fase RTB (Requirements and Technology Baseline):*
-  L’allocazione delle risorse deve prevedere un impiego significativo delle figure di *Amministratore* e *Analista*.
-  \
-  *Motivazione:* scelta dettata dall’elevato impatto delle attività documentali previste in questa fase (definizione procedure, strumenti, requisiti), propedeutiche all’avvio della progettazione post-RTB.
+====== Criteri di Verifica del Monitoraggio e Controllo
+L'attività è considerata conforme se e solo se, per ogni Sprint:
+- è definito un Preventivo di Sprint basato sulle attività assegnate;
+- è redatto un Consuntivo di Sprint basato esclusivamente sui dati di Jira;
+- il confronto tra preventivo e consuntivo è esplicitato e giustificato;
+- tutte le ore lavorate (incluse le extra-piano) sono state tracciate correttamente;
+- sono riportate le azioni correttive o preventive validate dal Responsabile.
 
-2. *Fase PB (Product Baseline):*
-  Il preventivo per questa fase è definito come *flessibile* e soggetto a revisione *rolling-wave*.
-  \
-  *Motivazione:* nonostante la pianificazione accurata, la natura delle attività future e i rischi residui richiedono un margine di adattabilità. Il preventivo PB è definitivo rispetto allo stato attuale, ma deve essere riesaminato a cadenza almeno pari alla chiusura di ogni Sprint o al verificarsi di eventi significativi. Ogni revisione deve essere approvata dal Responsabile di Progetto e tracciata nei verbali o negli strumenti di gestione delle attività.
-
-====== Criteri di Verifica del Preventivo e dell’Allocazione delle Risorse
-L’elemento *Preventivo ed Allocazione delle Risorse* del Piano di Progetto è considerato conforme se:
-
-- [ ] è definito un preventivo iniziale coerente con le baseline di progetto individuate;
-- [ ] la distribuzione dell’impegno orario pro-capite è esplicitata e motivata;
-- [ ] per ciascuna baseline (RTB, PB) è indicata una ripartizione delle risorse coerente con la natura delle attività previste;
-- [ ] eventuali scostamenti rispetto al preventivo iniziale sono motivati e documentati;
-- [ ] il preventivo costituisce il riferimento per il confronto con i consuntivi di Sprint.
-
-In assenza di una o più delle condizioni sopra elencate, l’elemento non è considerato conforme e deve essere revisionato.
-
-===== Monitoraggio e Controllo del Rendimento degli Sprint
-Il Monitoraggio e Controllo del rendimento degli Sprint definisce le modalità con cui viene verificato in modo sistematico l’andamento del progetto rispetto alla pianificazione approvata. Tale attività è obbligatoriamente basata sulla suddivisione del lavoro in iterazioni temporali (*Sprint*), ciascuna caratterizzata da un insieme di attività definite in modo atomico e tracciabile.
-
-Per ogni Sprint devono essere rilevati e confrontati il *Preventivo di Sprint* e il *Consuntivo di Sprint*, al fine di valutare il grado di aderenza tra quanto pianificato e quanto effettivamente realizzato. I risultati di tale confronto costituiscono l’input principale per l’analisi dell’andamento complessivo del progetto e per l’eventuale aggiornamento della pianificazione.
-
-Il monitoraggio include inoltre una valutazione retrospettiva dello Sprint, finalizzata all’individuazione di criticità operative, al miglioramento continuo dei processi adottati e alla verifica della sostenibilità dell’organizzazione del lavoro del team.
-
-====== Metodologia di Monitoraggio del Rendimento dello Sprint
-Al termine di ogni Sprint, il rendimento deve essere descritto in modo strutturato e uniforme, includendo obbligatoriamente i seguenti elementi:
-
-- *Attività svolte:* elenco dettagliato delle attività completate nel periodo di riferimento, con indicazione delle task concluse ("Definition of Done");
-- *Analisi delle deviazioni:* confronto tra le attività pianificate e quelle effettivamente svolte, con evidenza delle cause principali di eventuali scostamenti (es. stime errate, problemi tecnici imprevisti);
-- *Rischi rilevati:* identificazione dei nuovi rischi emersi durante lo Sprint o aggiornamento dello stato dei rischi già noti, in conformità alle procedure definite nella sezione di Analisi dei Rischi;
-- *Azioni correttive e preventive:* decisioni adottate per mitigare i rischi rilevati o migliorare l’efficacia delle attività negli Sprint successivi.
-
-====== Preventivo e Consuntivo di Sprint
-Il *Preventivo di Sprint* è definito all’inizio dello Sprint sulla base delle attività assegnate a ciascun membro del team. Per ogni attività devono essere stimate le ore di lavoro previste, in coerenza con le responsabilità assegnate e con le competenze richieste.
-
-Il *Consuntivo di Sprint* è definito al termine dello Sprint sulla base delle attività effettivamente svolte e delle ore rendicontate per ciascuna task. La rendicontazione deve riflettere in modo accurato il lavoro realmente eseguito e costituisce una responsabilità individuale di ciascun membro del team.
-
-Il confronto tra preventivo e consuntivo consente di valutare l’efficacia della pianificazione, l’affidabilità delle stime e l’adeguatezza dell’organizzazione del lavoro adottata.
-
-====== Strumenti di Rendicontazione
-La rendicontazione delle attività e delle ore di lavoro è effettuata esclusivamente tramite lo strumento di issue tracking adottato dal team (#def[Jira]), che rappresenta la fonte ufficiale dei dati di consuntivo.
-
-Per ciascuna task devono essere obbligatoriamente indicati:
-- lo stato di avanzamento;
-- le ore rendicontate;
-- il membro del team responsabile dell’attività.
-
-L’aggiornamento dei dati deve avvenire con periodicità giornaliera e comunque *entro il termine della giornata lavorativa* in cui l'attività è stata svolta, per garantire la tempestività del controllo.
-
-====== Regole di Rendicontazione
-Sono considerate rendicontabili le attività che producono valore per il progetto. Al fine di garantire la veridicità dei dati, si applicano le seguenti regole:
-
-- *Attività Pianificate:* devono essere tracciate associandole alla task originale prevista nello Sprint;
-- *Attività Non Pianificate:* attività impreviste ma necessarie (es. bugfix urgenti, risoluzione problemi configurazione) devono essere obbligatoriamente tracciate creando una nuova task. L'esclusione di tali attività è vietata in quanto falserebbe il calcolo del costo reale del progetto.
-
-Attività non pertinenti agli obiettivi del progetto o svolte senza autorizzazione non possono essere rendicontate a carico del monte ore.
-
-====== Criteri di Verifica del Monitoraggio e Controllo degli Sprint
-L’elemento *Monitoraggio e Controllo del Rendimento degli Sprint* è considerato conforme se, per ogni Sprint:
-
-- [ ] è definito un Preventivo di Sprint basato sulle attività assegnate;
-- [ ] è redatto un Consuntivo di Sprint basato esclusivamente sui dati estratti da #def[Jira];
-- [ ] il confronto tra preventivo e consuntivo è esplicitato e gli scostamenti sono motivati;
-- [ ] tutte le ore lavorate (incluse le attività non pianificate) sono state tracciate;
-- [ ] sono identificati e aggiornati i rischi emersi durante lo Sprint;
-- [ ] sono riportate eventuali azioni correttive o preventive per lo Sprint successivo.
-
-La mancata rendicontazione di uno o più Sprint o l’assenza degli elementi sopra elencati comporta la non conformità dell’elemento.
-
-#TODO("Definire NdP per AdR in conformità con gli standard dichiarati alla sezione Norme di Progetto")
-=== AdR - Analisi dei Requisiti
+=== Analisi dei Requisiti
 ==== Standard di Riferimento
-Per la redazione del documento Analisi dei Requisiti, il gruppo adotta i seguenti standard internazionali, che garantiscono un approccio rigoroso e sistematico alla specifica delle necessità software:
-- *IEEE 830-1998 (Recommended Practice for Software Requirements Specifications)*: standard di riferimento per la stesura di specifiche dei requisiti software, che definisce una struttura chiara e completa per la documentazione dei requisiti funzionali e non funzionali.
-
-- *ISO/IEC/IEEE 29148:2018 (Systems and Software Engineering — Life Cycle Processes — Requirements Engineering)*: standard che fornisce linee guida per l’ingegneria dei requisiti, inclusi processi di analisi, specifica e gestione dei requisiti.
-
-- *UML 2.5*: standard per la modellazione dei casi d’uso, che consente di rappresentare graficamente le interazioni tra attori e sistema, facilitando la comprensione e la tracciabilità dei requisiti funzionali.
+Per la redazione del documento Analisi dei Requisiti, il gruppo *adotta obbligatoriamente* i seguenti standard internazionali:
+- *IEEE 830-1998*: standard di riferimento per la stesura di specifiche dei requisiti software;
+- *ISO/IEC/IEEE 29148:2018*: standard per i processi di Requirements Engineering;
+- *UML 2.5*: standard per la modellazione grafica dei casi d’uso e delle interazioni.
 
 ==== Definizione del Documento
-/* L’#def("Analisi dei Requisiti") è il documento che descrive in dettaglio i requisiti funzionali e non funzionali
-previsti dal progetto #def("Code Guardian"). Nel dettaglio il documento contiene un’analisi dettagliata delle
-funzionalità del sistema, degli attori coinvolti e le informazioni necessarie al tracciamento dei
-requisiti rispetto alle loro fonti. Il documento è utilizzato come riferimento principale per la progettazione e lo sviluppo del sistema, nonché per la verifica della conformità del prodotto finale rispetto alle esigenze espresse dal proponente. */
-L’#def("Analisi dei Requisiti") costituisce il riferimento tecnico vincolante per la formalizzazione rigorosa delle necessità e dei vincoli relativi al sistema *Code Guardian*. Il documento ha lo scopo di tradurre le esigenze espresse dal proponente in un insieme di specifiche formali, non ambigue e verificabili, che guidano l’intero processo di ingegnerizzazione del software. \
-Il documento deve definire, in modo tracciabile e verificabile:
-
-- *Perimetro del Sistema*: la delimitazione univoca dei confini d'azione del software, specificando le interazioni tra il sistema e gli attori esterni per eliminare ogni ambiguità sulle responsabilità operative;
-- *Specifiche Funzionali e Non Funzionali*: la scomposizione delle necessità di business in requisiti atomici e misurabili, che fungano da prerequisito obbligatorio per le successive fasi di progettazione e design;
-#TODO("Sistemare, fare questa parte meglio")
-
-L’Analisi dei Requisiti rappresenta la colonna portante della *Requirements and Technology Baseline* (*RTB*). Essa funge da ponte logico tra gli obiettivi strategici del Capitolato d'Appalto e l'implementazione tecnica, assicurando la tracciabilità di ogni scelta progettuale rispetto alle necessità approvate e documentate .
+L’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-dei-requisiti")[#def("Analisi dei Requisiti")] costituisce il *riferimento tecnico vincolante* per la formalizzazione delle necessità e dei vincoli del sistema *Code Guardian*. Il documento *ha l'obbligo* di tradurre le esigenze del proponente in specifiche formali, non ambigue e verificabili.
 
 ==== Elementi Costituenti del Documento
-Il documento Analisi dei Requisiti deve essere organizzato in modo chiaro e strutturato, includendo obbligatoriamente i seguenti elementi:
-- *Introduzione e Prospettiva del Prodotto*: deve descrivere il contesto del sistema, le funzioni principali (suddivise in Test, Sicurezza e Documentazione) e le caratteristiche degli utenti finali.
+Il documento *deve essere organizzato* includendo i seguenti elementi, normati dalle procedure operative interne:
+- *Casi d'Uso*: base per l'identificazione dei requisiti funzionali;
+- *Requisiti Funzionali, di Qualità e di Vincolo*: specifiche atomiche e misurabili.
 
-- *Casi d'Uso (Use Cases)*: rappresentano la fonte primaria dei requisiti funzionali. Ogni caso d'uso deve essere identificato univocamente e contenere:
-  - *Attori*: identificazione degli utenti o sistemi esterni (lato Front-end e Back-end);
-  - *Precondizioni* e Postcondizioni: stato del sistema prima e dopo l'esecuzione;
-  - *Scenario Principale*: sequenza ordinata di azioni;
-  - *Estensioni e Inclusioni*: per gestire flussi alternativi o comuni;
-  - *Trigger*: evento che innesca il caso d'uso.
-  - *Diagrammi UML*: rappresentazione grafica delle interazioni.
+===== PR-FOR-07: Procedura di Ingegneria dei Requisiti
+Questa procedura norma la formalizzazione delle necessità del sistema. Il team *deve* attenersi ai seguenti requisiti operativi:
 
-- *Requisiti di Sistema*: classificazione dettagliata dei requisiti derivati dai casi d'uso o da fonti esterne (Capitolato, Verbali). Ogni requisito deve essere classificato per:
-  - *Priorità*: Obbligatorio, Desiderabile o Opzionale;
-  - *Tipologia*: Funzionale (FR), di Qualità (QR) o di Vincolo (VR);
-  - *Tracciabilità*: ogni requisito deve essere identificato da un codice univoco e riportare la fonte o il caso d'uso di riferimento per permetterne il monitoraggio durante tutto il ciclo di vita del progetto
+- *Modellazione dei Casi d'Uso*: Ogni scenario *deve* essere identificato dalla nomenclatura *UCx.y.z* dove *x* è l'identificatore principale, *y* il numero di inclusioni e *z* il numero di estensioni. Qualora esistano ulteriori ramificazioni, la stringa *UCx.y.z* fungerà da radice gerarchica.
+- *Contenuto del Caso d'Uso*: Ogni scenario *deve includere* Attori, Pre/Post-condizioni, Scenario Principale, Trigger e, se presenti, Inclusioni, Estensioni o Generalizzazioni.
+- *Diagrammi UML*: È *obbligatorio* corredare la descrizione testuale con diagrammi conformi allo standard UML 2.5.
+
+- *Classificazione dei Requisiti*: Ogni requisito *deve* essere catalogato secondo la sintassi *TipologiaRPrioritàNumero* dove:
+  - *Tipologia*: *F* (Funzionale), *Q* (Qualità), *V* (Vincolo);
+  - *Priorità*: *Ob* (Obbligatorio), *De* (Desiderabile), *Op* (Opzionale).
+
+====== Criteri di Verifica dei Casi d'Uso
+L'elemento è considerato conforme se e solo se risultano soddisfatte le seguenti condizioni:
+- *Univocità*: ogni identificatore UCx.y.z è unico;
+- *Correttezza degli Attori*: ogni attore citato è stato precedentemente censito;
+- *Coerenza UML*: esiste corrispondenza 1:1 tra descrizione testuale e diagramma;
+- *Assenza di Implementazione*: la descrizione *deve* limitarsi al "cosa fa", non al "come".
+
+====== Criteri di Verifica dei Requisiti di Sistema
+I requisiti sono conformi se e solo se soddisfano i seguenti vincoli:
+- *Atomicità*: ogni requisito esprime una singola necessità non scomponibile;
+- *Non Ambiguità*: il linguaggio utilizzato è tecnico, oggettivo e privo di termini soggettivi;
+- *Testabilità*: permette la definizione di un test di accettazione binario;
+- *Misurabilità (Qualità)*: il requisito *deve* essere espresso attraverso metriche quantitative o soglie numeriche;
+- *Tracciabilità*: ogni requisito *deve* indicare chiaramente la propria fonte (Capitolato o UC) e la sua giustificazione (per i vincoli).
 
 === Glossario
 ==== Definizione del Documento
-Il *Glossario* costituisce il riferimento terminologico unico e vincolante per l'intero ciclo di vita del progetto. Esso ha lo scopo di definire il vocabolario controllato utilizzato trasversalmente nella documentazione di progetto e nelle comunicazioni ufficiali, eliminando ambiguità semantiche e garantendo uniformità comunicativa tra il gruppo di lavoro e gli stakeholder esterni.
-
-Il documento assolve alle seguenti funzioni:
-1. *Disambiguazione:* fornire definizioni univoche per termini che potrebbero avere significati diversi in contesti differenti.
-2. *Accessibilità:* rendere disponibile una base di conoscenza centralizzata, consultabile sia in formato documentale statico (PDF) sia come risorsa ipertestuale dinamica (pagina web).
+Il *Glossario* costituisce il riferimento terminologico unico e *vincolante* per l'intero ciclo di vita del progetto. Esso *ha l'obbligo* di eliminare ambiguità semantiche e garantire uniformità comunicativa.
 
 ==== Elementi Costituenti del Documento
-Il Glossario deve essere organizzato in ordine alfabetico e deve includere obbligatoriamente le seguenti categorie di voci:
-- *Termini Tecnici:* parole chiave relative a tecnologie, framework e strumenti adottati.
-- *Acronimi e Abbreviazioni:* espansione completa delle sigle utilizzate e loro significato nel contesto del progetto.
-- *Concetti di Dominio:* definizioni specifiche del contesto applicativo *Code Guardian*.
+Il Glossario *deve essere organizzato* in ordine alfabetico e includere: Termini Tecnici, Acronimi e Concetti di Dominio.
 
-*Struttura della voce:*
-Per ogni termine, la definizione deve rispettare i seguenti criteri:
-- *Univocità:* una sola definizione per termine (evitare sinonimi duplicati; in caso di sinonimi, scegliere un termine principale e rimandare ad esso).
-- *Sintesi:* descrizione concisa, priva di ridondanze, focalizzata sugli aspetti utili al progetto.
-- *Contestualizzazione:* il significato deve essere riferito all’ambito del progetto e non generico.
+===== PR-FOR-08: Procedura di Gestione Terminologica
+Questa procedura norma la manutenzione del vocabolario controllato del team:
 
-==== Criteri di Verifica del Glossario
-Il Glossario è considerato conforme se risultano soddisfatte tutte le seguenti condizioni:
+- *Redazione della Voce*: La definizione *deve* essere sintetica, non tautologica e contestualizzata. È *vietato* l'uso di sinonimi duplicati senza rimandi.
+- *Marcatura nei Documenti*: In ogni documento di progetto, la prima occorrenza di un termine di glossario *deve obbligatoriamente* essere marcata con l'apice #super[G] e linkata alla versione ufficiale.
+- *Accessibilità*: Il Glossario *deve* essere disponibile sia in formato PDF statico che come risorsa ipertestuale dinamica.
 
-- [ ] ogni termine marcato come voce di Glossario nella documentazione (tramite sottolineatura o link/definizione) possiede una corrispondente definizione nel Glossario.
-- [ ] in ogni documento di progetto, la prima occorrenza di un termine presente nel Glossario è evidenziata e rimanda alla relativa definizione; occorrenze successive possono non essere linkate per preservare la leggibilità.
-- [ ] la versione web del Glossario è raggiungibile e ogni collegamento (anchor link) inserito nei documenti punta a una sezione esistente della pagina web.
-- [ ] le voci sono presentate in rigoroso ordine alfabetico (A–Z).
-- [ ] le definizioni non sono tautologiche: è vietato definire un termine esclusivamente ripetendo il termine stesso o usando una sua variante non informativa; eventuali rimandi ad altri termini sono ammessi solo se tali termini sono a loro volta definiti nel Glossario.
-
-In assenza di una o più delle condizioni sopra elencate, il Glossario non è considerato conforme e deve essere revisionato prima del rilascio ufficiale.
-
+====== Criteri di Verifica del Glossario
+Il Glossario è considerato conforme se e solo se soddisfa le seguenti condizioni:
+- *Completezza*: ogni termine marcato nella documentazione possiede una definizione corrispondente;
+- *Integrità Web*: ogni collegamento (anchor link) punta a una sezione esistente della pagina web;
+- *Ordine*: le voci sono presentate in rigoroso ordine alfabetico (A–Z);
+- *Qualità*: le definizioni non sono tautologiche e i rimandi sono circolari solo verso termini definiti.
 
 === NdP – Norme di Progetto
-
 ==== Definizione del Documento
-Le *Norme di Progetto (NdP)* costituiscono il documento normativo di riferimento che disciplina le modalità operative adottate dal gruppo di lavoro durante l’intero ciclo di vita del progetto.
+Le *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#norme-di-progetto")[#def[Norme di Progetto]] (NdP)* costituiscono lo standard normativo di riferimento che disciplina le modalità operative dell’intero ciclo di vita del progetto. Esse definiscono in modo *vincolante*:
+- i *principi organizzativi* e il *Way of Working*;
+- le *norme* per la redazione della documentazione e lo sviluppo del software;
+- gli *strumenti* e gli *ambienti di lavoro*;
+- i *processi* e le *procedure operative* di pianificazione, esecuzione e controllo.
 
-Le NdP definiscono in modo vincolante:
-- i *principi organizzativi* e il *Way of Working* (#def[WoW]) adottato dal team;
-- le *norme* e le *convenzioni* per la redazione della documentazione e per lo sviluppo del prodotto software;
-- gli *strumenti* e gli *ambienti di lavoro* utilizzati;
-- i *processi* e le *procedure operative* che regolano la pianificazione, l’esecuzione, il controllo e la verifica delle attività di progetto.
-
-Le Norme di Progetto si applicano a tutti i membri del gruppo di lavoro e hanno validità per l’intera durata del progetto. Il loro rispetto è obbligatorio e costituisce requisito necessario per garantire uniformità operativa, tracciabilità delle attività, qualità degli artefatti prodotti e conformità agli standard di riferimento adottati.
+Il rispetto delle NdP è *obbligatorio* per tutti i membri del gruppo e costituisce requisito necessario per la qualità e la tracciabilità degli artefatti.
 
 ==== Elementi Costituenti del Documento
-Le Norme di Progetto sono strutturate secondo la descrizione normativa dei macro-processi primari rilevanti per il progetto, in conformità allo standard ISO/IEC/IEEE 12207.
-
-In particolare, il documento disciplina:
-- il *Processo di Fornitura*;
-- il *Processo di Sviluppo*.
-
-Per ciascun macro-processo, le Norme di Progetto definiscono:
-- l’ambito di applicazione e gli obiettivi del processo;
-- i ruoli e le responsabilità coinvolte;
-- i documenti prodotti dal processo;
-- le regole di redazione, struttura e verifica dei documenti;
-- le procedure operative e gli strumenti adottati.
+Le Norme di Progetto *devono* essere strutturate secondo la descrizione normativa dei macro-processi primari (*ISO/IEC/IEEE 12207*), disciplinando obbligatoriamente il *Processo di Fornitura* e il *Processo di Sviluppo*. Per ciascun processo, le NdP *devono* esplicitare obiettivi, ruoli, documenti prodotti, procedure operative e criteri di verifica.
 
 ===== Processo di Fornitura
-Il Processo di Fornitura disciplina la produzione, la gestione e la consegna dei documenti ufficiali di progetto.
-Tali documenti costituiscono gli artefatti formali della fornitura e sono vincolanti ai fini della validazione delle milestone previste.
+Il Processo di Fornitura disciplina la produzione e la consegna degli artefatti formali (PdP, PdQ, AdR, NdP, Glossario). Ogni documento di fornitura *deve* rispettare la seguente struttura minima obbligatoria:
+- *Definizione del Documento*;
+- *Elementi Costituenti del Documento*;
+- *Descrizione degli Elementi* (sezioni e contenuti);
+- *Criteri di Verifica* specifici.
 
-I documenti di fornitura normati dalle presenti Norme di Progetto sono:
-- Piano di Progetto (PdP);
-- Piano di Qualifica (PdQ);
-- Analisi dei Requisiti (AdR);
-- Norme di Progetto (NdP);
-- Glossario.
+====== Criteri di Verifica dei Documenti di Fornitura
+Un documento è considerato conforme se e solo se soddisfa le seguenti condizioni:
+- È presente tra gli artefatti previsti e rispetta la struttura minima obbligatoria;
+- Adotta le convenzioni tipografiche e stilistiche stabilite nelle NdP;
+- Risulta tracciabile tramite riferimenti incrociati coerenti;
+- È nello stato *Approved* al momento della consegna, a seguito di verifica formale.
 
-====== Piano di Progetto (PdP)
-Documento gestionale che definisce la pianificazione, l’organizzazione, l’allocazione delle risorse, la gestione dei rischi e il monitoraggio dell’avanzamento del progetto.
+===== Processo di Sviluppo
+Il Processo di Sviluppo disciplina la realizzazione tecnica (Codice e Test).
 
-====== Piano di Qualifica (PdQ)
-Documento che definisce i criteri di qualità del prodotto e del processo, nonché le attività di verifica e validazione applicate agli artefatti di progetto.
+====== Criteri di Verifica del Processo di Sviluppo
+Il processo è conforme se e solo se soddisfa le seguenti condizioni:
+- Il codice rispetta le convenzioni di nomenclatura e il *Single Responsibility Principle*;
+- Ogni funzione è documentata con commenti standard (scopo, parametri, ritorno);
+- Il codice include commenti di tracciabilità verso i requisiti dell'AdR;
+- I test seguono la nomenclatura definita e sono stati validati secondo le procedure di *Qualifica*.
 
-====== Analisi dei Requisiti (AdR)
-Documento che raccoglie, classifica e formalizza i requisiti funzionali e non funzionali del sistema, derivati dal Capitolato e dalle successive analisi.
+===== Processi di Supporto
+I Processi di Supporto garantiscono la qualità trasversale tramite le seguenti procedure operative:
 
-====== Norme di Progetto (NdP)
-Documento normativo che definisce le regole, le convenzioni, i processi e gli strumenti che devono essere adottati dal gruppo di lavoro durante l’intero ciclo di vita del progetto.
+- *PR-SUPP-01: Procedura di Documentazione:* Ogni documento *deve* essere redatto in *Typst*, versionato con schema `x.y.z` e associato a task su *Jira*. È *vietata* l'integrazione in `main` senza Pull Request approvata da un verificatore diverso dal redattore.
+- *PR-SUPP-02: Procedura di Qualifica:* Ogni artefatto *deve* essere sottoposto a verifica prima dell'integrazione. Gli esiti *devono* essere tracciati nel *Piano di Qualifica*.
 
-====== Glossario
-Documento terminologico che costituisce il riferimento unico e vincolante per la definizione dei termini tecnici, degli acronimi e dei concetti di dominio utilizzati nella documentazione e nel codice sorgente.
+===== Processi Organizzativi
+I Processi Organizzativi garantiscono la coerenza del team tramite le seguenti procedure operative:
 
-===== Criteri di Verifica dei Documenti di Fornitura
+- *PR-ORG-01: Gestione dei Processi:* Ogni Sprint *deve* essere avviato con task stimate su Jira e concluso con una retrospettiva documentata. Le riunioni *devono* produrre un verbale entro 48 ore.
+- *PR-ORG-02: Infrastruttura:* Il repository *deve* rispettare la struttura definita. Le *branch protection rules* su `develop` e `main` *devono* essere attive.
+- *PR-ORG-03: Miglioramento e Formazione:* Le azioni correttive *devono* essere tracciate su Jira. Le ore di formazione *devono* essere tenute distinte da quelle rendicontabili.
 
-Un documento di fornitura è considerato conforme alle Norme di Progetto se risultano soddisfatte tutte le seguenti condizioni:
-
-- [ ] il documento è presente tra gli artefatti previsti dal Processo di Fornitura;
-- [ ] il documento rispetta la struttura, i contenuti e i criteri di verifica definiti nella propria sezione normativa dedicata;
-- [ ] il documento è redatto utilizzando le convenzioni tipografiche e stilistiche stabilite nelle NdP;
-- [ ] il documento risulta tracciabile rispetto agli altri artefatti di progetto (riferimenti incrociati coerenti);
-- [ ] il documento è stato sottoposto alle attività di verifica previste e risulta nello stato *Approved* al momento della consegna;
-- [ ] il documento adotta obbligatoriamente la seguente struttura minima:
-  - *Definizione del Documento*;
-  - *Elementi Costituenti del Documento*;
-  - *Descrizione degli Elementi*, con specifica delle sezioni e dei contenuti previsti;
-  - *Criteri di Verifica* degli elementi definiti.
-
-Il mancato rispetto di uno o più criteri di verifica specifici, inclusa la struttura minima obbligatoria, comporta automaticamente la non conformità del documento ai fini del Processo di Fornitura.
-
-#TODO("Avviata la stesura, manca Processo di Sviluppo, di Supporto e Organizzativi")
+====== Criteri di Verifica dei Processi Organizzativi
+I processi sono conformi se e solo se soddisfano le seguenti condizioni:
+- Tutti i ruoli sono definiti; Jira è configurato con workflow attivi;
+- I verbali interni ed esterni sono pubblicati entro le scadenze;
+- Le metriche di Sprint sono analizzate e le modifiche alle NdP sono approvate dal Responsabile.
 
 === Piano di Qualifica
 
 ==== Nota sull'adozione dello Standard ISO/IEC 25010 e PDCA
-La redazione del Piano di Qualifica e la definizione delle metriche si ispirano alla famiglia di standard ISO/IEC 25010 (SQuaRE). Tale scelta garantisce una classificazione rigorosa delle caratteristiche di qualità del prodotto.
-Inoltre, l'adozione strutturale del ciclo /*#def("PDCA")*/ (Plan-Do-Check-Act) assicura che il processo di controllo qualità non sia statico, ma evolva:
-- *Plan:* Definizione delle metriche e delle soglie nel presente documento.
-- *Do:* Esecuzione delle misurazioni durante gli Sprint.
-- *Check:* Analisi degli scostamenti nei periodi di retrospettiva.
-- *Act:* Aggiornamento delle Norme di Progetto e ricalibrazione delle metriche per lo Sprint successivo.
+La redazione del #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#piano-di-qualifica")[#def[Piano di Qualifica]] e la definizione delle metriche si ispirano alla famiglia di standard *ISO/IEC 25010 (SQuaRE)*. Tale scelta garantisce una classificazione rigorosa delle caratteristiche di qualità del prodotto.
+
+Inoltre, l'adozione strutturale del ciclo *Plan-Do-Check-Act (PDCA)* assicura che il processo di controllo qualità non sia statico, ma evolva:
+- *Plan:* definizione delle metriche e delle soglie nel presente documento;
+- *Do:* esecuzione delle misurazioni durante gli Sprint;
+- *Check:* analisi degli scostamenti nei periodi di retrospettiva;
+- *Act:* aggiornamento delle *Norme di Progetto* e ricalibrazione delle metriche per lo Sprint successivo.
 
 ==== Definizione del Documento
-Il *Piano di Qualifica* costituisce il riferimento vincolante per la gestione della qualità nel progetto e deve definire, in modo tracciabile e verificabile:
+Il *Piano di Qualifica* costituisce il riferimento *vincolante* per la gestione della qualità nel progetto e *deve* definire, in modo tracciabile e verificabile:
 - le strategie di assicurazione qualità (_Quality Assurance_);
 - le attività di controllo qualità (_Quality Control_);
 - le metriche di processo e prodotto con relative soglie di accettabilità e ottimalità;
@@ -657,31 +652,21 @@ Il *Piano di Qualifica* costituisce il riferimento vincolante per la gestione de
 - i meccanismi di miglioramento continuo.
 
 ==== Elementi Costituenti del Documento
-Il Piano di Qualifica deve includere almeno i seguenti elementi, ciascuno disciplinato da regole operative e criteri minimi di verifica:
-
-- Qualità di Processo;
-- Qualità di Prodotto;
-- Metodi di Testing;
-- Cruscotto di Valutazione;
-- Automiglioramento.
+Il Piano di Qualifica *deve* includere obbligatoriamente i seguenti elementi: Qualità di Processo, Qualità di Prodotto, Metodi di Testing, Cruscotto di Valutazione e Automiglioramento.
 
 ===== Qualità di Processo
-La sezione Qualità di Processo definisce l'insieme delle metriche utilizzate per monitorare e controllare i processi produttivi adottati dal gruppo durante l'intero ciclo di vita del progetto. Il monitoraggio dei processi è essenziale per garantire efficienza, efficacia e miglioramento continuo del _Way of Working_.
+La sezione #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#qualita")[#def[Qualità]] di Processo definisce l'insieme delle metriche utilizzate per monitorare e controllare i processi produttivi adottati dal gruppo. Il monitoraggio *è essenziale* per garantire efficienza, efficacia e miglioramento continuo del *Way of Working*.
 
-====== Strategia di Definizione delle Soglie Metriche
-La determinazione delle soglie di accettabilità e ottimalità per le metriche adottate dal gruppo /*#def("Skarab Group")*/ non è un processo arbitrario, ma segue una strategia ingegneristica basata sui seguenti criteri:
+===== PR-FOR-09: Procedura di Definizione e Gestione delle Metriche
+La determinazione delle soglie di accettabilità e ottimalità per le metriche adottate dal gruppo *Skarab Group* segue una strategia ingegneristica basata sui seguenti criteri vincolanti:
 
-- *Adesione agli Standard Internazionali:* Per i processi di fornitura, il gruppo adotta il framework /*#def("Earned Value Management")*/ (EVM), utilizzando gli intervalli di confidenza standard del settore ($0.90 - 1.10$) per garantire la stabilità economica e temporale. Per la qualità del prodotto, le soglie sono calibrate sulle caratteristiche del modello /*#def("ISO/IEC 25010")*/.
-- *Analisi del Dominio e Benchmark:* Le metriche di supporto e sviluppo (es. /*#def("Gulpease Index"), #def("Complessità Ciclomatica")*/) sono tarate su benchmark di settore per lo sviluppo software moderno, garantendo che i requisiti di manutenibilità e sicurezza siano oggettivamente verificabili.
-- *Miglioramento Continuo e Calibrazione (PDCA):* In linea con l'approccio /*#def("Agile")*/, le soglie sono soggette a revisione periodica. Al termine di ogni /*#def("Sprint")*/, i valori vengono analizzati rispetto alle prestazioni storiche del team; questo permette una ricalibrazione dinamica delle soglie nel /*#def("Piano di Qualifica")*/, rendendo gli obiettivi sempre sfidanti ma tecnicamente sostenibili (obiettivi *S.M.A.R.T.*).
+- *Adesione agli Standard Internazionali:* Per i processi di fornitura, il gruppo *deve* adottare il framework *Earned Value Management (EVM)* con intervalli di confidenza standard ($0.90 - 1.10$). Per la qualità del prodotto, le soglie *devono* essere calibrate sul modello *ISO/IEC 25010*;
+- *Analisi del Dominio e Benchmark:* Le metriche di supporto e sviluppo (es. *Gulpease*, *Complessità Ciclomatica*) *devono* essere tarate su benchmark di settore per garantire la verificabilità oggettiva;
+- *Miglioramento Continuo (PDCA):* Al termine di ogni *Sprint*, i valori *devono* essere analizzati rispetto alle prestazioni storiche del team per una ricalibrazione dinamica delle soglie (obiettivi *S.M.A.R.T.*).
 
 ====== Nomenclatura delle Metriche
-La nomenclatura utilizzata per le metriche di processo è la seguente:
-
-#align(center)[
-  `MPC##`
-]
-
+La nomenclatura utilizzata per le metriche di processo *deve* essere la seguente:
+#align(center)[`MPC##`]
 dove:
 - `M` sta per Metrica;
 - `PC` indica Processo;
@@ -728,6 +713,7 @@ dove:
       [MPC09],
       [Estimate At Completion],
       [Stima del costo totale finale del progetto basata sulla performance attuale. Utilizza il CPI per proiettare il costo a completamento considerando l'efficienza dimostrata],
+
     ),
   ),
   caption: [Metriche per il processo di Fornitura],
@@ -748,7 +734,7 @@ dove:
   caption: [Metriche per il processo di Sviluppo],
 )
 
-*Nota:* Valori bassi di RSI possono segnalare un'analisi iniziale insufficiente o cambiamenti significativi nelle esigenze degli _stakeholder_. Il monitoraggio è cruciale specialmente a seguito di revisioni correttive.
+*Nota:* Valori bassi di RSI possono segnalare un'analisi iniziale insufficiente o cambiamenti significativi nelle esigenze degli _#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#stakeholder")[#def[stakeholder]]_. Il monitoraggio è cruciale specialmente a seguito di revisioni correttive.
 
 ====== Processi di Supporto
 ======= Documentazione e Verifica
@@ -762,7 +748,7 @@ dove:
     [*Codice*], [*Nome*], [*Descrizione*],
 
     [MPC11],
-    [Indice di Gulpease],
+    [Gulpease Index],
     [Indice di leggibilità. Valuta la complessità linguistica basandosi sulla lunghezza delle parole e delle frasi. Valori: ≥80 molto facile; 60-80 media difficoltà; 40-60 abbastanza difficile; < 40 molto difficile],
 
     [MPC12], [Correttezza Ortografica], [Numero di errori ortografici rilevati nel documento],
@@ -779,7 +765,7 @@ dove:
 )
 
 *Rilevanza:* Il Test Success Rate deve rimanere costantemente al 100% per evitare regressioni e garantire l'affidabilità del _Software_.
-
+#pagebreak()
 ====== Processi Organizzativi
 
 #figure(
@@ -805,20 +791,27 @@ dove:
 
 L'elemento *Qualità di Processo* del Piano di Qualifica è considerato conforme se risultano soddisfatte tutte le seguenti condizioni:
 
-- [ ] ogni metrica è identificata in modo univoco tramite codice (`MPC##`);
-- [ ] per ciascuna metrica sono definiti:
+- ogni metrica è identificata in modo univoco tramite codice (`MPC##`);
+- per ciascuna metrica sono definiti:
   - formulazione matematica o descrizione operativa del calcolo;
   - soglia di accettabilità;
-  - soglia di ottimalità;
-- [ ] le metriche sono classificate secondo i processi di riferimento (Primari, Supporto, Organizzativi);
-- [ ] le soglie adottate sono motivate in base a standard di settore, benchmark o analisi storiche;
-- [ ] i valori misurati sono confrontati con le soglie durante le retrospettive di Sprint;
-- [ ] gli scostamenti rilevati sono documentati e danno luogo ad azioni correttive tracciate.
+  - soglia di ottimalità.
+- le metriche sono classificate secondo i processi di riferimento (Primari, Supporto, Organizzativi);
+- le soglie adottate sono motivate in base a standard di settore, benchmark o analisi storiche;
+- i valori misurati sono confrontati con le soglie durante le retrospettive di Sprint;
+- gli scostamenti rilevati sono documentati e danno luogo ad azioni correttive tracciate.
 
 Il mancato rispetto di una o più delle condizioni sopra elencate comporta la non conformità dell'elemento e richiede un'azione correttiva prima della validazione del documento.
 
 ===== Qualità del Prodotto
-La sezione Qualità di Prodotto definisce l'insieme delle metriche utilizzate per valutare il prodotto software rispetto ai requisiti definiti nell'Analisi dei Requisiti e alle caratteristiche intrinseche definite dallo standard ISO/IEC 25010.
+La sezione Qualità di Prodotto definisce l'insieme delle metriche utilizzate per valutare il prodotto software rispetto ai requisiti e alle caratteristiche intrinseche dello standard *ISO/IEC 25010*.
+
+===== PR-FOR-10: Procedura di Controllo Qualità del Prodotto
+Questa procedura norma le attività di misurazione e valutazione del software *Code Guardian*. Il team *ha l'obbligo* di monitorare le metriche di prodotto per garantire il rispetto dei requisiti di qualità:
+
+- *Estrazione Dati:* Le metriche relative al codice (MPD04-07) *devono* essere estratte tramite strumenti di analisi statica automatizzati ad ogni chiusura di Sprint;
+- *Validazione:* Le metriche funzionali (MPD01-03) *devono* essere validate attraverso l'esecuzione dei test di sistema e di accettazione;
+- *Gestione Scostamenti:* Il superamento delle soglie di accettabilità *deve* comportare l'immediata apertura di una segnalazione su *Jira* per la risoluzione del debito tecnico.
 
 ====== Nomenclatura delle Metriche
 La nomenclatura utilizzata per le metriche di prodotto è la seguente:
@@ -885,587 +878,483 @@ dove:
 )
 
 ====== Criteri di Verifica della Qualità di Prodotto
-
 L'elemento *Qualità di Prodotto* del Piano di Qualifica è considerato conforme se risultano soddisfatte tutte le seguenti condizioni:
-
-- [ ] ogni metrica è identificata in modo univoco tramite codice (`MPD##`);
-- [ ] per ciascuna metrica sono definiti:
-  - formulazione matematica o descrizione operativa del calcolo;
-  - soglia di accettabilità;
-  - soglia di ottimalità;
-- [ ] le metriche sono riconducibili a caratteristiche del modello ISO/IEC 25010;
-- [ ] le soglie adottate sono motivate in base a standard di settore o analisi di benchmark;
-- [ ] i valori misurati sono tracciati e documentati nel Cruscotto di Valutazione;
-- [ ] gli scostamenti rispetto alle soglie sono analizzati e danno luogo ad azioni correttive.
+- ogni metrica è identificata in modo univoco tramite codice (`MPD##`);
+- per ciascuna metrica sono definiti: formulazione matematica, soglia di accettabilità e soglia di ottimalità;
+- le metriche sono riconducibili a caratteristiche del modello *ISO/IEC 25010*;
+- le soglie adottate sono motivate in base a standard di settore o analisi di benchmark;
+- i valori misurati sono tracciati nel Cruscotto di Valutazione;
+- gli scostamenti rispetto alle soglie sono analizzati e danno luogo ad azioni correttive.
 
 Il mancato rispetto di una o più delle condizioni sopra elencate comporta la non conformità dell'elemento.
+
+===== Strategie di Testing
+Questa sezione elenca le metodologie di testing adottate per garantire la qualità del prodotto. I dettagli operativi riguardanti le procedure, le tipologie di test e le relative nomenclature sono approfonditi normativamente nella sezione #link(<verifica>)[*3.2.1 Verifica*] delle presenti Norme di Progetto.
 
 ===== Cruscotto di Valutazione
 Nella sezione Cruscotto di Valutazione, per ciascuna metrica viene fornita una rappresentazione grafica dell'andamento temporale accompagnata da un'analisi qualitativa.
 
-Le misurazioni coprono il periodo che va dall'*aggiudicazione del capitolato* fino alla milestone *RTB*.
+Le misurazioni coprono il periodo dall'*aggiudicazione del capitolato* fino alla milestone *RTB*. Per la milestone *PB* vengono fornite _stime previsionali_ che riflettono un incremento dell'efficienza previsto dopo il superamento della sessione d'esame.
 
-Per la milestone *PB* vengono fornite _stime previsionali_.
-Rispetto a quanto rilevato nella RTB, ci si attende un _incremento dell'efficienza_ e una maggiore aderenza alle tempistiche prefissate. La fase precedente, infatti, ha risentito dei rallentamenti dovuti alla concomitanza con la sessione d'esame.
-Con il superamento di tale periodo, la PB riflette una pianificazione più fluida e una gestione operativa che punta a stabilizzare i ritmi, ottimizzando i risultati.
-
-====== Frequenza di Aggiornamento
-Il cruscotto viene aggiornato con cadenza di Sprint secondo la seguente procedura:
-- I dati vengono raccolti al termine di ogni Sprint.
-- L'analisi viene condotta durante la retrospettiva di Sprint.
-- Il Piano di Qualifica viene aggiornato per riflettere i nuovi valori misurati.
+===== PR-FOR-11: Procedura di Gestione del Cruscotto
+Il monitoraggio dei risultati *deve* avvenire tramite il Cruscotto di Valutazione. Il team *ha l'obbligo* di aggiornare tale strumento secondo la seguente procedura:
+- *Raccolta:* I dati vengono estratti al termine di ogni *Sprint*;
+- *Analisi:* L'analisi qualitativa *deve* essere condotta collegialmente durante la retrospettiva di Sprint;
+- *Formalizzazione:* Il Piano di Qualifica *deve* essere aggiornato per riflettere i nuovi valori entro l'inizio dello Sprint successivo.
 
 ====== Criteri di Verifica del Cruscotto di Valutazione
-L'elemento *Cruscotto di Valutazione* del Piano di Qualifica è considerato conforme se risultano soddisfatte tutte le seguenti condizioni:
-
-- [ ] per ciascuna metrica definita è presente una rappresentazione grafica dell'andamento temporale; // al momento solo Processo
-- [ ] ogni grafico è accompagnato da un'analisi qualitativa che interpreta i dati;
-- [ ] le soglie di accettabilità e ottimalità sono evidenziate graficamente;
-- [ ] il cruscotto è aggiornato con cadenza almeno pari alla chiusura di ogni Sprint;
-- [ ] gli scostamenti significativi sono documentati e motivati;
-
-Il mancato rispetto di una o più delle condizioni sopra elencate comporta la non conformità dell'elemento.
+L'elemento *Cruscotto di Valutazione* è considerato conforme se e solo se:
+- è presente una rappresentazione grafica dell'andamento temporale per ogni metrica;
+- ogni grafico è accompagnato da un'analisi qualitativa interpretativa;
+- le soglie di accettabilità e ottimalità sono evidenziate graficamente;
+- l'aggiornamento è coerente con la chiusura di ogni Sprint;
+- gli scostamenti significativi sono documentati e motivati.
 
 ===== Automiglioramento
 ====== Finalità e Ambito di Applicazione
-
-L'automiglioramento ha lo scopo di:
-
-- identificare criticità operative, organizzative o tecniche emerse durante il progetto;
-- analizzare le cause profonde delle inefficienze rilevate;
+L'automiglioramento si applica a tutti i processi adottati dal gruppo e costituisce un'attività trasversale che accompagna l'intero ciclo di vita del progetto. Esso ha lo scopo di:
+- identificare criticità operative, organizzative o tecniche;
+- analizzare le cause profonde delle inefficienze rilevate (*Root Cause Analysis*);
 - definire e implementare azioni correttive o preventive;
 - valutare l'efficacia delle soluzioni adottate attraverso metriche oggettive.
 
-L'automiglioramento si applica a tutti i processi adottati dal gruppo e costituisce un'attività trasversale che accompagna l'intero ciclo di vita del progetto.
-
 === Verbali delle Riunioni
-
 ==== Definizione del Documento
-I *Verbali delle Riunioni* sono documenti ufficiali che registrano in modo sintetico, chiaro e tracciabile lo svolgimento delle riunioni di progetto.
-Essi hanno lo scopo di documentare le decisioni assunte, le informazioni condivise e le azioni concordate, costituendo evidenza formale delle attività di coordinamento e comunicazione.
+I *Verbali delle Riunioni* sono documenti ufficiali che registrano in modo sintetico e tracciabile lo svolgimento degli incontri. Essi *hanno l'obbligo* di documentare decisioni, informazioni e azioni concordate, costituendo evidenza formale delle attività di coordinamento.
 
 ==== Elementi Costituenti del Documento
-Ogni verbale deve includere obbligatoriamente i seguenti elementi:
+Ogni verbale *deve* includere obbligatoriamente:
+- Data, ora e modalità/luogo;
+- Elenco dei partecipanti;
+- Ordine del giorno;
+- Sintesi delle discussioni e decisioni prese;
+- Azioni da intraprendere (assegnatario e impegno orario previsto).
 
-- *Data, ora e modalità/luogo* della riunione;
-- *Elenco dei partecipanti*;
-- *Ordine del giorno*;
-- *Sintesi delle discussioni*;
-- *Decisioni prese*;
-- *Azioni da intraprendere*, con eventuale assegnatario e scadenza.
+===== PR-FOR-12: Procedura di Verbalizzazione
+Questa procedura norma la gestione delle comunicazioni formali:
+- *Tempistiche:* I verbali interni *devono* essere redatti entro 24 ore. I verbali esterni *devono* essere inviati al proponente entro 48 ore lavorative (rif. *PR-FOR-01*).
+- *Identificazione:* Ogni verbale *deve* essere identificato in modo univoco (es. `VI_2026-03-02` per interni, `VE_2026-03-02` per esterni).
+- *Approvazione:* Per i verbali esterni, si applica la regola del silenzio-assenso dopo 24 ore dalla notifica.
 
-==== Tipologie di Verbale
-I verbali si distinguono in:
+====== Criteri di Verifica dei Verbali
+Un verbale è considerato conforme se e solo se soddisfa le seguenti condizioni:
+- include tutti gli elementi obbligatori sopra citati;
+- descrive decisioni e azioni in modo non ambiguo;
+- è archiviato nel repository ufficiale in formato PDF generato da *Typst*;
+- ogni azione tracciata ha un responsabile identificabile.
 
-- *Verbali Interni:* relativi a riunioni tra i membri del gruppo di lavoro, finalizzate al coordinamento delle attività di progetto;
-- *Verbali Esterni:* relativi a riunioni con il #def[Proponente] o altri stakeholder esterni, finalizzate alla discussione di requisiti, avanzamento dei lavori e feedback.
-
-==== Criteri di Verifica dei Verbali delle Riunioni
-Un *Verbale delle Riunioni* è considerato conforme alle Norme di Progetto se:
-
-- [ ] include tutti gli elementi costituenti obbligatori;
-- [ ] descrive in modo chiaro e non ambiguo decisioni e azioni concordate;
-- [ ] è redatto secondo le convenzioni tipografiche e strutturali definite nelle NdP;
-- [ ] è archiviato nel repository di progetto ed è tracciabile rispetto alla riunione a cui si riferisce.
-
-Il mancato rispetto di uno o più criteri comporta la non conformità del verbale.
 === Diario di Bordo
 
 ==== Definizione del Documento
-Il *Diario di Bordo* è un documento di monitoraggio a cadenza settimanale finalizzato all’allineamento sullo stato di avanzamento del progetto.
-Esso consente di fornire una visione sintetica e continuativa delle attività svolte, delle criticità emerse e della pianificazione a breve termine.
+Il *Diario di Bordo* è un documento di monitoraggio a cadenza settimanale. Esso *deve* fornire una visione sintetica e continuativa delle attività svolte, delle criticità emerse e della pianificazione a breve termine.
 
 ==== Elementi Costituenti del Documento
-Ogni Diario di Bordo deve includere obbligatoriamente i seguenti elementi:
+Ogni voce del diario *deve* includere obbligatoriamente:
+- Periodo di riferimento (Settimana n);
+- Sintesi delle attività svolte;
+- Problemi riscontrati e soluzioni adottate;
+- Pianificazione per la settimana successiva.
 
-- *Periodo di riferimento*;
-- *Attività svolte* durante la settimana;
-- *Problemi riscontrati* e soluzioni adottate;
-- *Pianificazione delle attività* per la settimana successiva.
+===== PR-FOR-13: Procedura di Aggiornamento del Diario
+Questa procedura norma l'allineamento continuativo:
+- *Redazione:* Il *Responsabile* di turno *ha l'obbligo* di aggiornare il diario entro la fine di ogni settimana lavorativa.
+- *Tracciabilità:* Le attività riportate *devono* trovare riscontro nelle task gestite su *Jira*.
 
-==== Criteri di Verifica del Diario di Bordo
-Il *Diario di Bordo* è considerato conforme alle Norme di Progetto se:
-
-- [ ] copre un periodo temporale ben definito;
-- [ ] riporta in modo coerente le attività effettivamente svolte;
-- [ ] evidenzia eventuali problemi o criticità incontrate;
-- [ ] include una pianificazione realistica delle attività future;
-- [ ] è redatto secondo il formato e le convenzioni stabilite nelle NdP.
-
-In assenza di uno o più elementi obbligatori, il Diario di Bordo non è considerato conforme.
-
-#TODO("Spostare nella Introduzione questa tabella?")
-#figure(
-  table(
-    columns: (2fr, 2fr, 3fr, 1.5fr),
-    align: horizon,
-    fill: (col, row) => if row == 0 {
-      luma(62.75%)
-    } else if calc.even(row) {
-      luma(220)
-    } else {
-      none
-    },
-    stroke: none,
-
-    // Header
-    text(white)[*Documento*], text(white)[*Redattori*], text(white)[*Destinatari*], text(white)[*Uso*],
-
-    // Rows
-    [Lettera di Presentazione], [Responsabile], [Proponente, #members.cardin, #members.tullio, Skarab Group], [Esterno],
-
-    [AdR – Analisi dei Requisiti], [Analisti], [Proponente, #members.cardin, #members.tullio, Skarab Group], [Esterno],
-
-    [Glossario], [Tutti i membri del gruppo], [Stakeholder interni ed esterni], [Esterno],
-
-    [NdP – Norme di Progetto], [Responsabili di processo], [Skarab Group, #members.cardin, #members.tullio], [Interno],
-
-    [PdP – Piano di Progetto],
-    [Project Manager],
-    [Proponente, #members.cardin, #members.tullio, Skarab Group],
-    [Esterno],
-
-    [PdQ – Piano di Qualifica],
-    [Responsabili Qualità],
-    [Skarab Group, #members.cardin, #members.tullio, Proponente],
-    [Esterno],
-
-    [Verbali delle Riunioni],
-    [Segretario della riunione],
-    [Proponente (se esterni), #members.cardin, #members.tullio, Skarab Group],
-    [Interno / Esterno],
-  ),
-  caption: [Tabella riepilogativa dei documenti di progetto],
-)
-
+====== Criteri di Verifica del Diario di Bordo
+Il Diario è considerato conforme se e solo se soddisfa le seguenti condizioni:
+- copre il periodo temporale in modo continuo senza lacune settimanali;
+- riporta in modo coerente le attività effettivamente svolte;
+- evidenzia esplicitamente le soluzioni adottate per le criticità riscontrate;
+- include una pianificazione realistica approvata dal Responsabile.
 
 #pagebreak()
 
-#TODO("Processo di Sviluppo è relativo al codice, non ai documenti")
 == Processo di Sviluppo
-
-Il Processo di Sviluppo adottato da Skarab Group definisce l’insieme delle attività necessarie alla realizzazione del prodotto software, dalla definizione dei requisiti fino alla consegna e accettazione del sistema finale.
-Tale processo è conforme allo standard ISO/IEC 12207:1995 e garantisce un approccio strutturato, tracciabile e orientato alla qualità.
+Il Processo di Sviluppo adottato da #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] definisce le attività necessarie all'analisi dei requisiti, alla progettazione, alla codifica, al testing e all'accettazione del prodotto Software _#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]]_. In conformità allo standard #underline[#link(<12207>)[ISO/IEC/IEEE 12207]], il team *garantisce* un approccio strutturato, orientato alla qualità e alla tracciabilità in ogni fase del ciclo di vita.
 
 === Attività del Processo di Sviluppo
+Il processo si articola nelle seguenti macro-attività, ciascuna delle quali contribuisce alla realizzazione del prodotto finale.
 
-Il processo comprende le seguenti macro-attività:
-==== Definizione del processo:
-Selezione del ciclo di vita del software più idoneo in base alla complessità, agli obiettivi e ai vincoli del progetto.
+==== Implementazione del processo
+Questa attività consiste nella selezione e definizione del *ciclo di vita* del Software. Per _Code Guardian_, il team adotta un approccio che permette di sviluppare il prodotto in modo graduale, rispondere rapidamente ai feedback della Proponente, mantenere alta la qualità tramite continue attività di verifica e allineare lo sviluppo alle milestone RTB e PB.
 
-==== Analisi dei Requisiti:
-Individuazione e formalizzazione delle esigenze dell’utente finale e dei vincoli imposti dal proponente, includendo funzionalità, requisiti di qualità e limitazioni progettuali.
+==== Analisi e Progettazione
+Questa attività norma la definizione logica e strutturale del prodotto.
+- *Analisi dei Requisiti:* Studio del capitolato, identificazione di attori e casi d'uso (UML 2.5) e classificazione (funzionali, qualità, vincolo).
+- *Progettazione Architetturale:* Identificazione delle componenti hardware e software per garantire scalabilità e separazione delle responsabilità.
+- *Progettazione di Dettaglio:* Specifica dettagliata di classi, interfacce, strutture dati e algoritmi.
 
-==== Progettazione dell’architettura di sistema:
-identificazione delle componenti hardware e software necessarie a soddisfare i requisiti, garantendo la tracciabilità degli stessi.
+===== PR-SVIL-01: Procedura di Specifica Tecnica
+- *Obbligo:* Definire interfacce, classi e algoritmi prima della fase di codifica.
+- *Strumenti:* StarUML, Draw.io, Typst.
 
-==== Analisi dei Requisiti Software:
-studio di come il software risponde ai requisiti utente, includendo aspetti funzionali, prestazionali, di sicurezza e di interfaccia.
+====== Criteri di Verifica di Analisi e Progettazione
+L'attività è conforme se e solo se:
+- ogni requisito dell'AdR è tracciato verso almeno una componente progettuale;
+- la progettazione specifica la strategia di gestione delle eccezioni;
+- i diagrammi UML sono aggiornati e coerenti con la documentazione tecnica.
 
-==== Progettazione dell’architettura software:
-definizione della struttura complessiva del sistema software e delle relazioni tra le sue componenti, senza entrare nel dettaglio implementativo.
+==== Implementazione e Integrazione
+Questa attività norma la trasformazione dei requisiti in codice sorgente eseguibile e la combinazione delle singole unità. L'integrazione può seguire strategie *bottom-up*, *top-down* o *incrementale*.
 
-==== Progettazione di dettaglio:
-specifica delle singole unità software che compongono il sistema.
+===== PR-SVIL-02: Procedura di Sviluppo e Build
+- *Codifica:* Implementazione fedele delle specifiche seguendo gli standard stilistici.
+- *Integrazione:* Combinazione progressiva delle unità con test ad ogni iterazione.
+- *Strumenti:* VS Code, Docker.
 
-==== Codifica e test delle unità:
-implementazione del codice sorgente e verifica del corretto funzionamento delle singole unità.
+====== Criteri di Verifica di Codifica e Integrazione
+L'attività è conforme se e solo se:
+- il codice supera l'analisi statica (ESLint/Prettier);
+- non sono presenti regressioni a seguito dell'integrazione di nuove unità;
+- ogni unità è corredata dai relativi test di unità (Unit Test).
 
-==== Integrazione software:
-combinazione progressiva delle componenti software, supportata da test di integrazione.
+==== Testing, Installazione e Qualifica
+Il team *ha l'obbligo* di verificare che il Software soddisfi gli obiettivi del *Piano di Qualifica*. Il sistema completo viene sottoposto a test su scenari d'uso reali, seguito dall'installazione nell'ambiente di destinazione e dal supporto all'accettazione.
 
-==== Test di qualifica del software:
-verifica della conformità del prodotto agli obiettivi di qualità definiti.
-
-==== Integrazione e test di sistema:
-assemblaggio del sistema completo e validazione del suo comportamento complessivo.
-Installazione: rilascio del software nell’ambiente concordato con il cliente.
-
-==== Supporto all’accettazione:
-assistenza al proponente durante la fase di verifica finale del prodotto.
+===== PR-SVIL-03: Procedura di Validazione
+- *Test di Sistema:* Simulazione di scenari reali per verificare interazione e robustezza.
+- *Supporto all'Accettazione:* Fornire evidenza del soddisfacimento dei requisiti alla Proponente e risolvere eventuali problematiche.
+- *Strumenti:* Postman, Playwright, Selenium.
 
 === Relazione con le Baseline di progetto
+Le attività del Processo di Sviluppo sono distribuite tra le due baseline principali per garantire un avanzamento controllato:
+- *Requirements and Technology Baseline (RTB)*: Si concentra su Analisi dei Requisiti, Proof of Concept (PoC) e definizione degli standard normativi.
+- *Product Baseline (PB)*: Si concentra su Progettazione dell'Architettura, Codifica e consolidamento del prodotto.
 
-In relazione alle baseline previste dal progetto, (#def("RTB") e #def("PB")), le attività di sviluppo si piú significative sono:
+=== Codifica e Standard Tecnici
+Lo stack tecnologico è multi-linguaggio e basato su:
+- *TypeScript*: Frontend (React) e Backend (NestJS).
+- *Python*: Agenti AI, Orchestratore e script di analisi dati.
+- *MongoDB e Node.js*: Database con Mongoose e ambiente di esecuzione per servizi server-side.
 
-==== Analisi dei Requisiti
-L'Analisi dei Requisiti costituisce una delle fasi più critiche e determinanti dell'intero ciclo di vita del software, assumendo un ruolo centrale durante la #def("Requirements and Technology Baseline") (#strong("RTB")). Questa attività non si limita alla semplice raccolta di informazioni, ma mira all’individuazione, allo studio e alla formalizzazione rigorosa di tutte le necessità che il sistema Code Guardian dovrà soddisfare per rispondere efficacemente alle richieste del proponente. \
-Svolgere un'analisi completa e corretta è fondamentale per fornire una base solida per le successive fasi di progettazione e codifica. I risultati di questa analisi sono documentati nel documento #strong("Analisi dei Requisiti vx.y.z"). #TODO("Link al documento")
+==== PR-SVIL-04: Standard di Codifica (Coding Standards)
+Ogni membro del team *è vincolato* al rispetto delle seguenti norme tecniche:
 
-===== Casi d'Uso
-I #def("casi d'uso") rappresentano scenari specifici che descrivono come gli attori interagiscono con il sistema per raggiungere determinati obiettivi. Essi forniscono una visione chiara delle funzionalità richieste e aiutano a identificare i requisiti funzionali del sistema.
-Per la descrizione dei casi d'uso viene utilizzata la nomenclatura #strong("UCPrincipale.Secondario") dove:
-- *UC*: acronimo di Use Case (caso d'uso).
-- *Principale*: numero progressivo del caso d'uso principale, identifica un macro-scenario o una funzionalità atomica.
-- *Secondario*: numero progressivo del caso d'uso secondario, identifica varianti o estensioni del caso d'uso principale (sotto-casi).
-L’identificatore *Principale* è univoco a livello globale; non è quindi ammessa l’esistenza di due casi d’uso distinti con il medesimo valore principale. Il valore *Secondario* può invece essere ripetuto all'interno del documento, a patto che ciò non avvenga mai sotto lo stesso identificatore principale. Nel caso in cui un scenario secondario presenti a sua volta delle inclusioni o estensioni, la stringa *Principale.Secondario* assumerà il ruolo di radice per la nuova gerarchia, seguendo le medesime regole di progressione e unicità sopra descritte.
+#figure(
+  table(
+    columns: (auto, 1fr),
+    inset: 8pt,
+    fill: (x, y) => if y == 0 { luma(230) },
+    [*Tipo*], [*Standard Obbligatorio*],
+    [`camelCase`], [Variabili e funzioni],
+    [`PascalCase`], [Classi, componenti React, interfacce (prefisso `I`)],
+    [`kebab-case`], [Nomi dei file di logica e Collezioni MongoDB (al plurale)],
+    [`SCREAMING_SNAKE_CASE`], [Costanti e variabili d'ambiente (.env)],
+  ),
+  caption: [Standard di nomenclatura tecnica],
+)
 
-Per approfondimenti riguardanti gli attori coinvolti, le precondizioni, le postcondizioni e lo scenario principale degli eventi, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti vx.y.z"). #TODO("Link al documento")
+*Regole di Qualità, Stile e Robustezza:*
+- *Modularità:* La logica di business *deve* essere separata dall'interfaccia utente; ogni funzionalità *deve* essere isolata in componenti atomici.
+- *Single Responsibility:* Ogni funzione *ha l'obbligo* di svolgere un'unica attività.
+- *Documentazione:* Uso *obbligatorio* di JSDoc/Docstring (descrizione, parametri e ritorno) per ogni metodo.
+- *Automazione:* L'uso di Prettier (2 spazi, apici singoli) ed ESLint è *mandatorio* in pipeline CI.
+- *Gestione Errori:* Ogni chiamata asincrona *deve* essere protetta da blocchi `try-catch` con logging specifico per prevenire crash.
+- *Funzioni Lambda:* Incoraggiate per callback brevi; la logica complessa *deve* essere estratta in metodi nominati.
 
-===== Requisiti
-I requisiti rappresentano le specifiche funzionali e non funzionali che il sistema deve soddisfare. Ogni requisito è classificato per garantire la tracciabilità rispetto alle fonti e ai casi d'uso associati. \
-Per la descrizione dei requisiti viene utilizzata la nomenclatura #strong("TipologiaRPrioritàNumero") dove:
-- *Tipologia*: indica il tipo di requisito. I valori possibili sono:
-  - *F*: Requisito #strong("F")unzionale.
-  - *Q*: Requisito di #strong("Q")ualità.
-  - *V*: Requisito di #strong("V")incolo.
-- *R*: acronimo di Requisito.
-- *Priorità*: indica l'importanza del requisito. I valori possibili sono:
-  - *Ob*: Requisito #strong("Ob")bligatorio.
-  - *De*: Requisito #strong("De")siderabile.
-  - *Op*: Requisito #strong("Op")zionale.
-- *Numero*: numero progressivo univoco per ogni requisito all'interno della sua tipologia.
+====== Criteri di Verifica della Codifica
+Il codice è conforme se e solo se:
+- supera i controlli di linting senza errori;
+- la densità di commenti rispetta la metrica *MPD04*;
+- la complessità ciclomatica (*MPD05*) non supera la soglia definita nel PdQ.
 
-Per approfondimenti riguardanti la descrizione dettagliata, la fonte e i casi d'uso associati a ciascun requisito, si rimanda alla sezione dedicata del documento #strong("Analisi dei Requisiti vx.y.z"). #TODO("Link al documento")
+==== PR-SVIL-05: Procedura di Gestione della Configurazione
+Norma l'archiviazione e il versionamento tramite *Git* e *GitHub*.
+- *Strategia Branching:* `main` (stabile), `develop` (integrazione), `feature/` (task atomiche).
+- *Commits:* Standard *Conventional Commits* (es. `feat(parser): add python support`).
+- *Pull Request:* Integrazione *vietata* senza Peer Review di un componente terzo.
 
-==== Codifica
+==== PR-SVIL-06: Procedura di Verifica (Testing)
+Il team *adotta* una strategia di test a livelli per assicurare la correttezza del software.
 
-La codifica ha come obiettivo l’implementazione fedele delle soluzioni progettate, nel rispetto degli standard di qualità definiti dal gruppo.
+#figure(
+  table(
+    columns: (1fr, 2fr),
+    inset: 8pt,
+    [*Livello*], [*Metodologia Obbligatoria*],
+    [Unit Test], [Verifica delle singole unità tramite Mocking.],
+    [Integration Test], [Verifica interazione tra moduli (es. Python e NestJS).],
+    [Analisi Statica], [Controllo automatico della qualità prima di ogni merge.],
+  ),
+  caption: [Livelli di test e strumenti (Vitest, Pytest, SonarQube)],
+)
 
-I linguaggi di programmazione utilizzati per il progetto sono #def("TypeScript") per il frontend e gli script di automazione, #def("Python") e #def("Node.js") per il backend e gli agenti intelligenti e #def("MongoDB") per la gestione del database.
+====== Criteri di Verifica della Qualità Tecnica
+L'attività è conforme se e solo se:
+- non sono presenti commit diretti sui rami protetti;
+- ogni PR supera i controlli automatizzati di CI;
+- la #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-coverage")[#def[Code Coverage]] non scende sotto la soglia definita nel PdQ.
 
-Mentre per la documentazione viene utilizzato il linguaggio #def("Typst").
+=== Evoluzione delle Norme verso l'MVP
+Le norme qui definite costituiscono la baseline tecnica per la fase *RTB*. 
 
-===== Convenzioni
-Per garantire uniformità e manutenibilità del codice, sono adottate delle convenzioni di codifica comuni a tutti i membri del gruppo. Queste convenzioni riguardano:
-- Nomenclatura di variabili, funzioni, classi e componenti, in particolare, si utilizza il `camelCase` per variabili e funzioni, e il `PascalCase` per classi e componenti.
-- Struttura e organizzazione del codice sorgente, con l’utilizzo di moduli e cartelle per separare le diverse funzionalità.
-- Commenti e documentazione del codice, ogni funzione deve possedere un commento che la descriva, i parametri in ingresso e il valore di ritorno.
-- Evitare funzioni lambda complesse e mantenere le funzioni con una singola responsabilità.
-
+*Nota Operativa:* Con l'avvio della fase *PB*, Skarab Group *ha l'obbligo* di includere configurazioni di deployment, standard di sicurezza API/LLM e soglie di accoppiamento per librerie terze.
 #pagebreak()
+
+
 = Processi di Supporto
+In conformità allo standard #link(<12207>)[ISO/IEC/IEEE 12207], i Processi di Supporto comprendono le attività trasversali che accompagnano l'intero ciclo di vita del progetto, garantendo la qualità, la tracciabilità e la verificabilità degli artefatti prodotti.
+
+Nel contesto del progetto _Code Guardian_, Skarab Group ha identificato i seguenti Processi di Supporto rilevanti:
+- Documentazione;
+- Qualifica (Verifica e Validazione).
 
 == Documentazione
-Il ciclo di vita dei documenti prevede:
-1. *Creazione/Modifica*: Redazione o aggiornamento del contenuto in formato source (#def("Typst")).
-2. *Verifica*: Controllo di conformità (ortografia, stile, contenuti) da parte di un membro diverso dal redattore.
-3. *Approvazione*: Validazione finale per il rilascio.
+Il processo di documentazione è trasversale a tutti i processi primari e di supporto: i suoi artefatti costituiscono la memoria del progetto e il mezzo principale per garantire tracciabilità, verificabilità e comunicazione uniforme tra i membri del gruppo e gli stakeholder esterni.
 
-=== Strumenti di Redazione
-- *#def("Visual Studio Code")*: Editor principale per la scrittura dei documenti.
-- *#def("Typst")*: Linguaggio di markup utilizzato per la formattazione dei documenti. Questo linguaggio permette di creare documenti con una struttura chiara e professionale, facilitando la gestione di elementi come intestazioni, tabelle, figure e riferimenti incrociati. Inoltre, si possono creare funzioni personalizzate per automatizzare parti della formattazione.
-- *#def("Tinymist")*: Estensione per #def("VS Code") che fornisce supporto e preview per Typst
+Nel contesto di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]], il processo di documentazione disciplina la pianificazione, lo sviluppo, la produzione, la revisione e la manutenzione di tutti i documenti ufficiali del progetto _#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]]_.
 
-=== Gestione della Configurazione
-Utilizzo di *#def("Git")* come sistema di controllo versione.
+=== PR-SUPP-01: Procedura di Gestione Documentale (Ciclo di Vita)
+Ogni documento *ha l'obbligo* di seguire il seguente ciclo di vita:
 
-=== Branching Strategy
-- `main`: Ramo stabile, contenente le versioni rilasciate o pronte al rilascio.
-- `develop`: Ramo di integrazione principale.
-- `feature/nome-feature`: Rami per lo sviluppo di nuove funzionalità.
-- `fix/nome-fix`: Rami per la correzione di bug.
-- 'acronimo-documento': Rami dedicati alla redazione dei documenti (es. `NdP`, `PdP`, `PdQ`, `AdR`).
+1. *Creazione / Modifica*: redazione o aggiornamento del contenuto in formato sorgente (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#typst")[#def[Typst]]). L'attività *deve* essere tracciata da una #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#task")[#def[task]] su #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#jira")[#def[Jira]];
+2. *Verifica*: controllo di conformità (ortografia, stile, contenuti, rispetto delle NdP) da parte di un membro del team *diverso* dal redattore;
+3. *Approvazione*: validazione finale da parte del #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#responsabile-di-progetto")[#def[Responsabile di Progetto]] per il rilascio ufficiale.
 
-Il ramo `develop` é protetto, questo vuol dire che ogni modifica deve essere effettuata tramite *pull request* e sottoposta a revisione da parte di almeno un membro del gruppo diverso dal redattore prima di essere unita.
-Questo assicura che ogni documento sia verificato prima di entrare nel branch.
+==== Strumenti di Redazione
+Il team *è vincolato* all'utilizzo del seguente toolkit tecnologico:
 
-=== Datazione e versionamento documenti
-Ogni documento deve includere una sezione di cronologia delle versioni che riporta:
-- Data della modifica.
+#figure(
+  table(
+    columns: (auto, 1fr),
+    inset: 8pt,
+    fill: (x, y) => if y == 0 { luma(230) },
+    [*Strumento*], [*Descrizione e Utilizzo Obbligatorio*],
+    [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#visual-studio-code")[#def[VS Code]]], [Editor principale per la scrittura dei documenti.],
+    [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#typst")[#def[Typst]]], [Linguaggio di markup per la formattazione. Consente la creazione di documenti strutturati, tabelle, figure e riferimenti. I template comuni sono centralizzati nella cartella `lib/`.],
+    [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#tinymist")[#def[Tinymist]]], [Estensione per VS Code che fornisce anteprima in tempo reale e supporto per la scrittura.],
+  ),
+  caption: [Strumenti di redazione documentale],
+)
 
-- Numero di versione
-  - Il numero della versione deve seguire lo scema `x.y.z`, dove:
-    - `x`: Major version, incrementata per cambiamenti significativi o incompatibili.
-    - `y`: Minor version, incrementata per l'aggiunta di funzionalità mantenendo la compatibilità.
-    - `z`: Patch version, incrementata per correzioni di bug o modifiche minori.
-- Descrizione delle modifiche apportate.
-- Nomi dei redattori coinvolti.
-- Nomi dei verificatori coinvolti.
+==== Struttura dei Documenti
+Tutti i documenti ufficiali *devono obbligatoriamente* rispettare la struttura minima seguente:
+- *Pagina di copertina*, contenente: nome del documento e versione;
+- *Registro delle modifiche*, con data, versione, descrizione della modifica e nomi di redattori e verificatori;
+- *Indice dei contenuti*, generato automaticamente;
+- *Corpo del documento*, organizzato in sezioni e sottosezioni numerate;
+- Ogni pagina (eccetto la copertina) *deve* riportare un header con nome del gruppo e titolo del documento, e un footer con numero di pagina.
 
-=== Configurazione dei Documenti
-Tutti i documenti devono essere archiviati nel repository GitHub del progetto, organizzati in cartelle in base a Quale sezione del progetto appartengono, se appartengono al sito, ad una baseline specifica o ad altro.
-Ogni documento deve essere salvato in formato source (#def("Typst")) per permettere modifiche future e versionamento.
+====== Criteri di Verifica della Documentazione
+L'attività è conforme se e solo se il documento rispetta la struttura minima, il Registro delle modifiche riporta il corretto incremento di versione e la verifica è stata effettuata da un membro indipendente tramite task tracciata su Jira.
 
-Dal momento che SkarabGroup utilizza Jira per la gestione delle attività di progetto, ogni documento deve essere associato all'attività corrispondente in Jira . Questo facilita il tracciamento delle modifiche e la gestione delle responsabilità durante i vari sprint.
+=== PR-SUPP-02: Gestione della Configurazione e Versionamento
 
-Alla fine di ogni sprint, i documenti completati e verificati devono essere uniti nel ramo `develop` tramite pull request, seguendo la procedura di revisione stabilita. questo permette di iniziare lo sprint successivo con una base documentale aggiornata e approvata in quanto, la p[rima attivitá di ogni sprint é quella di fare un pull del develop sul branch del documento a cui si sta lavorando.
+==== Sistema di Versioning
+Ogni documento *deve* adottare il seguente schema di versionamento semantico:
+#align(center)[`x.y.z`]
+- `x` (*Major*): incrementato solo all'approvazione formale del documento da parte del #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#responsabile")[#def[Responsabile]];
+- `y` (*Minor*): incrementato al completamento di una modifica sostanziale;
+- `z` (*Patch*): incrementato per modifiche minori (correzioni ortografiche, aggiustamenti di forma).
+Il changelog *deve* essere aggiornato ad ogni incremento di versione.
+
+==== Denominazione dei File e Tracciabilità
+La denominazione dei file sorgente Typst segue lo schema `SIGLA.typ` (es. `NdP`, `PdP`, `PdQ`, `AdR`). Le date all'interno dei documenti sono scritte nel formato `AAAA/MM/GG`.
+
+Ogni attività documentale (redazione, verifica, aggiornamento) *deve* essere associata a una task su #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#jira")[#def[Jira]] con descrizione, assegnatario e scadenza. Al termine di ogni Sprint, i documenti completati e verificati vengono integrati nel branch `develop` tramite *Pull Request*.
+
+==== Repository GitHub - Struttura e Branching
+La gestione avviene nel repository `DocumentazioneProgetto` seguendo la struttura di branching ufficiale (fatta eccezione per `nome-componente`, riservata al repository `PoC`).
+
+La repository *deve* rispettare la seguente organizzazione:
+#figure(
+  table(
+    columns: (auto, 1fr),
+    inset: 8pt,
+    [*Cartella / File*], [*Contenuto*],
+    [`.github/`], [Configurazioni specifiche di GitHub.],
+    [`Glossario/`], [Sorgenti e infrastruttura per la versione web del glossario.],
+    [`RTB/` e `candidatura/`], [Documenti ufficiali delle relative milestone.],
+    [`assets/`], [Risorse multimediali utilizzate nei documenti.],
+    [`diarioDiBordo/`], [Diari di bordo settimanali.],
+    [`lib/`], [Librerie di funzioni Typst riutilizzabili (gestite dall'Amministratore). I documenti le importano tramite `#import "../lib/..."`.],
+    [`verbali/`], [Verbali di riunioni interne ed esterne.],
+    [`website/`], [Sorgenti del sito web di Skarab Group.],
+    [`README.md` & `index.html`], [Presentazione del progetto e homepage del sito web nella root.],
+  ),
+  caption: [Struttura gerarchica del repository di documentazione],
+)
 
 == Qualifica
+Il processo di *Qualifica* garantisce che il prodotto software e la documentazione soddisfino gli standard di qualità definiti e i requisiti specificati. Si articola in due attività fondamentali:
+- *Verifica*: _"Did I build the system right?"_ (Ho costruito correttamente il sistema?);
+- *Validazione*: _"Did I build the right system?"_ (Ho costruito il sistema giusto?).
 
-=== Verifica
-La verifica ha l'obiettivo di accertare che i prodotti soddisfino i requisiti, ovvero di rispondere alla domanda: "Did I build the sistem right?".
+=== PR-SUPP-03: Procedura di Verifica <verifica>
+La Verifica ha come scopo accertare che quanto prodotto sia stato realizzato correttamente. È un'attività continua applicata sia alla documentazione che al codice. Gli esiti *devono* essere documentati nel #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/PdQ.pdf")[#underline[Piano di Qualifica]] per supportare il miglioramento continuo (ciclo PDCA) e garantire la conformità alle NdP.
 
-Tutti i prodotti del progetto sono soggetti a verifiche periodiche per garantire la conformità agli standard di qualità definiti nel Piano di Qualifica (#def("PdQ")).
+==== Strumenti a supporto
+Per il calcolo dell'indice di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#gulpease")[#def[Gulpease]] *deve* essere utilizzato il servizio #link("https://farfalla-project.org/readability_static/")[#underline[farfalla-project.org/readability_static/]]. Ulteriori strumenti verranno ampliati durante la PB.
 
-==== Implementazione
-Dal momento in cui per poter portare un documento, o parte di esso nel branch principlale `develop`, esso deve essere stato verificato e approvato, la verifica viene implementata tramite il sistema di *pull request* di GitHub. Questo assicura che tutto il codice e la documentazione presenti nel ramo principale abbiano superato un processo di verifica e che, quindi, siano conformi agli standard di qualità stabiliti.
+==== Attività previste (ISO/IEC/IEEE 12207)
+Il processo si articola nell'implementazione (definizione criticità, metodologie e strumenti) e nelle attività di controllo vero e proprio su:
+- *Processi*: verifica dell'efficacia dei processi adottati;
+- *Requisiti*: verifica di esaustività, consistenza e tracciabilità;
+- *Progettazione*: verifica di efficacia rispetto ai requisiti;
+- *Codice*: verifica del soddisfacimento dei requisiti implementativi;
+- *Integrazione*: verifica della corretta interazione tra componenti;
+- *Documentazione*: verifica di completezza, correttezza e conformità.
 
-===== Verifica
-La Verifica rappresenta un processo fondamentale per Skarab Group e accompagna l’intero ciclo di vita del progetto (a.a. 2025/2026), con l’obiettivo di garantire la correttezza, la qualità e la conformità dei prodotti realizzati rispetto ai requisiti definiti.
-Tutte le informazioni relative agli esiti delle attività di verifica, incluse misurazioni e risultati dei test, sono documentate nel Piano di Qualifica.
+==== Implementazione: Regola del Main e Pull Request
+Nessun documento o componente software può essere integrato senza aver superato il processo di verifica.
+- *Regola fondamentale*: Il branch `main` contiene esclusivamente artefatti verificati e di qualità accertata.
+- Le verifiche *devono* essere condotte tramite _Pull Request_ su #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#github")[#def[GitHub]], garantendo: tracciabilità, revisione da parte di un #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#verificatori")[#def[Verificatore]] diverso dal redattore e approvazione formale. Problematiche complesse sono discusse in riunione e verbalizzate.
 
-====== Verifica della Documentazione
-Nelle fasi iniziali del progetto, particolare attenzione è stata dedicata alla verifica della documentazione.
-Ogni documento, una volta redatto, viene sottoposto a verifica prima dell’integrazione nel ramo principale del repository.
-L’attività comprende:
-- controllo grammaticale e sintattico;
-- verifica della correttezza e coerenza dei contenuti.
-- Le modalità operative di redazione e verifica dei documenti sono descritte nelle regole di gestione dei branch e delle issue.
+==== Verifica della Documentazione
+Ogni documento *deve* seguire un approccio di revisione formale sistematica articolato in:
+- *Analisi Linguistica*: Verifica di grammatica, sintassi, ortografia e indice di leggibilità.
+- *Ispezione dei Contenuti*: Verifica di esaustività, consistenza interna e coerenza.
+- *Conformità Normativa*: Rispetto dei template e convenzioni grafiche interne.
+- *Gestione del Flusso*: Rispetto rigoroso del systema di versioning e policy dei branch.
 
-====== Verifica del Codice
+==== Verifica del Codice: Analisi Statica e Dinamica
+La strategia di verifica del software adotta due approcci complementari, formalizzati dalla RTB ed estesi in PB.
 
-Le attività di verifica del codice saranno approfondite in modo più dettagliato una volta raggiunta la Requirements and Technology Baseline (RTB).
-In generale, la verifica del software si articola in due approcci complementari: Analisi Statica e Analisi Dinamica.
+===== Analisi Statica
+Non richiede l'esecuzione dell'oggetto e individua errori sintattici, strutturali o concettuali. Si realizza tramite:
+- *Metodi Formali:* Dimostrazioni matematiche, riservate solo a componenti critiche.
+- *Walkthrough*: Analisi completa e approfondita. È costoso e applicato solo a componenti critiche o quando la natura del problema è ignota.
+- *Ispezione*: Utilizzo di checklist predefinite. *Skarab Group privilegia l'ispezione* in quanto garantisce uniformità e riduce i tempi. (Nota: Il walkthrough preliminare è necessario per stabilire i criteri della checklist).
 
-====== Analisi Statica
+Il team *ha l'obbligo* di applicare l'analisi statica mediante Review manuale del codice e strumenti di linting: #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#eslint")[#def[ESLint]] per JavaScript/TypeScript; Pylint/Black per Python.
 
-L’Analisi Statica comprende tutte le attività di verifica che non richiedono l’esecuzione dell’oggetto analizzato.
-Essa si concentra sull’individuazione di errori sintattici, strutturali o concettuali, permettendo di prevenire problemi prima della fase di esecuzione.
+===== Analisi Dinamica e Testing
+Prevede l'esecuzione dell'oggetto per rilevare *failure* (comportamenti non conformi) e *fault* (difetti nel codice). I test *devono* essere: Ripetibili, Indipendenti e Automatizzabili. L'automazione è supportata da:
+- *Driver*: invocano il codice da testare se non direttamente eseguibile;
+- *Stub*: simulano dipendenze non ancora implementate;
+- *Logger*: registrano gli esiti in formato strutturato.
 
-Può essere svolta tramite:
-- metodi formali, basati su dimostrazioni matematiche;
-- metodi di lettura, più flessibili e applicabili alla documentazione e al codice.
+I Test seguono lo schema gerarchico: #align(center)[`[Prefisso]-[Numero].[Sottonumero]`]
 
-Tra i metodi di lettura:
+#figure(
+  table(
+    columns: (auto, 1fr, 2.5fr),
+    inset: 8pt,
+    fill: (x, y) => if y == 0 { luma(230) },
+    [*Prefisso*], [*Tipologia*], [*Obiettivi e Dettagli Metodologici*],
+    [TU], [Test di Unità], [Verificano il funzionamento atomico in isolamento. Si suddividono in *Funzionali (black-box)* (verificano input/output tramite valori: non ammissibili inf., limite inf., centrali, limite sup., non ammissibili sup.) e *Strutturali (white-box)* (verificano percorsi logici e copertura).],
+    [TI], [Integrazione], [Verificano la corretta interazione tra unità. Strategie adottate: *Top-Down* (dalle componenti con maggiori dipendenze esterne) o *Bottom-Up* (dalle componenti di base con minori dipendenze).],
+    [TS], [Sistema], [Valutano il comportamento del sistema nel suo complesso conformemente all'AdR.],
+    [TR], [Regressione], [Garantiscono l'assenza di nuovi difetti. Procedura obbligatoria: 1. Correzione difetto; 2. Esecuzione del test che aveva rilevato il difetto; 3. Esecuzione intera suite di regressione; 4. Verifica che nessun test superato in precedenza sia fallito.],
+    [TA], [Accettazione], [Verifica finale per la validazione del prodotto rispetto alle aspettative.],
+  ),
+  caption: [Nomenclatura e Classificazione delle Analisi Dinamiche (Test)],
+)
 
-il Walkthrough, che prevede un’analisi completa e approfondita dell’oggetto, ma risulta costoso e poco automatizzabile;l’Ispezione, basata su checklist di controllo, meno esaustiva ma più efficiente e facilmente automatizzabile.
-Considerata l’elevata quantità di artefatti da verificare, Skarab Group privilegia l’ispezione.
+====== Criteri di Verifica della Qualifica
+L'attività è conforme se e solo se: ogni Pull Request è approvata da un verificatore indipendente, il Test Success Rate è pari al 100% prima del merge in `main`, gli indici di leggibilità rispettano il PdQ e ogni anomalia è tracciata su Jira.
 
-====== Analisi Dinamica
+=== PR-SUPP-04: Procedura di Validazione
+Il processo di Validazione ha come scopo verificare che *Code Guardian* soddisfi le esigenze di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]] e degli utenti finali, focalizzandosi sulla conformità alle aspettative reali.
 
-L’Analisi Dinamica prevede l’esecuzione dell’oggetto da verificare e si basa sull’identificazione delle failure, ossia comportamenti non conformi alle aspettative, al fine di individuare e correggere i relativi fault.
-Questa analisi è realizzata tramite Test, che devono essere:
-- ripetibili;
+==== Obiettivi e Strategie di Validazione
+Il team *ha l'obbligo* di: confermare l'implementazione delle funzionalità richieste, verificare l'utilizzabilità del sistema, assicurare la risoluzione dei problemi di audit/remediation e ottenere l'accettazione formale.
 
-- indipendenti dall’ambiente di esecuzione;
-
-- automatizzabili.
-
-L’automazione dei test è supportata dall’uso di driver, stub e logger per simulare e monitorare l’esecuzione del software.
-
-I test adottati nel progetto si suddividono nelle seguenti categorie:
-
-- Test di Unità
-
-- Test di Integrazione
-
-- Test di Sistema
-
-- Test di Regressione
-
-- Test di Accettazione
-
-Ogni test è identificato da una nomenclatura standard e possiede uno stato che ne indica il livello di implementazione o superamento.
-
-======= Nomenclatura dei Test
-La nomenclatura adottata per l'identificazione dei test segue uno schema gerarchico:
-#align(center)[`[Prefisso]-[Numero].[Sottonumero]`]
-
-dove:
-- *Prefisso del tipo di test:* identifica il livello di testing
-  - *TU:* Test di Unità.
-  - *TI:* Test di Integrazione (definiti durante PB).
-  - *TS:* Test di Sistema.
-  - *TR:* Test di Regressione (definiti durante PB).
-  - *TA:* Test di Accettazione.
-- *Numero progressivo:* identifica univocamente il test all'interno della categoria.
-- *Sottonumero:* per test derivati o sottocasi.
-
-======= Test di Unità
-
-I Test di Unità verificano il corretto funzionamento delle singole unità software.
-Si distinguono in:
-
-- test funzionali (black-box), che analizzano input e output;
-
-- test strutturali, che verificano i percorsi logici e le istruzioni eseguite.
-
-======= Test di Integrazione
-I Test di Integrazione verificano la corretta interazione tra le unità.
-L’integrazione può avvenire secondo due strategie:
-
-- Top-Down, partendo dalle componenti di livello più alto;
-
-- Bottom-Up, partendo dalle componenti di base.
-
-======= Test di Sistema
-I Test di Sistema valutano il comportamento del sistema nel suo complesso, verificandone la conformità ai requisiti e l’efficacia globale.
-
-======= Test di Regressione
-
-I Test di Regressione garantiscono che le modifiche apportate al sistema non reintroducano errori precedentemente risolti.
-In caso di correzione di un fault, l’intera suite di test viene rieseguita per assicurare la stabilità del sistema.
-
-======= Test di Accettazione:
-I Test di Accettazione rappresentano la verifica finale del prodotto rispetto alle aspettative degli _Stakeholder_. Essi confermano che tutte le funzionalità richieste siano implementate correttamente.
-
-=== Validazione
-La Validazione ha l’obiettivo di accertare che il prodotto soddisfi le esigenze della proponente e le aspettative degli utenti finali, rispondendo alla domanda: "Did I build the right system?".
-
-==== Implementazione
-
-La validazione viene implementata attraverso test di accettazione e raccolta di feedback dagli utenti finali. Queste attività assicurano che il prodotto finale risponda alle esigenze e ai requisiti definiti all'inizio del progetto.
+L'attività si realizza tramite un approccio strutturato basato su:
+1. *Tracciamento sistematico dei requisiti*: Ogni requisito raccolto nell'#link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/AdR.pdf")[*Analisi dei Requisiti*] *deve* essere tracciato fino alla sua implementazione e validazione, garantendo la copertura completa.
+2. *Test di Accettazione (TA)*: Simulano scenari d'uso reali per verificare criteri di successo oggettivi per ogni requisito, confermando che il sistema realizzato sia effettivamente quello richiesto.
+#pagebreak()
 
 = Processi Organizzativi
-I porcessi organizzativi sono tutti quei processi di supporto che permettono al gruppo di lavorare in modo efficiente e coordinato.
-La gestione dei processi organizzativi include la definizione di ruoli, responsabilità, comunicazione e gestione delle riunioni.
+In conformità allo standard #link(<12207>)[ISO/IEC/IEEE 12207], i Processi Organizzativi costituiscono l'insieme delle attività trasversali che garantiscono il corretto andamento del progetto dal punto di vista gestionale, infrastrutturale e della crescita professionale del team.
 
-== Ruoli
-La seguente tebella riporterá tutti i ruoli presenti all'interno del progetto con le relative responsabilitá.
+Nel contesto del progetto _#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]]_, #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] ha identificato i seguenti Processi Organizzativi rilevanti:
+- Gestione dei Processi;
+- Infrastruttura;
+- Processo di Miglioramento;
+- Processo di Formazione.
 
-#figure(
-  table(
-    columns: (auto, auto),
-    stroke: 0.5pt + luma(200),
+== Gestione dei Processi
+Il processo ha l'obiettivo di definire e coordinare le attività, assegnare responsabilità, pianificare le risorse e garantire una comunicazione interna ed esterna efficace.
 
-    fill: (col, row) => if row == 0 {
-      luma(62.75%)
-    } else if calc.even(row) {
-      luma(220)
-    } else {
-      none
-    },
-    [*Ruolo*], [*Responsabilità*],
-
-    [Responsabile],
-    [Coordina e supervisiona l'intero progetto, garantendo il rispetto delle scadule e del budget. Rappresenta il team nei rapporti con il committente e gli stakeholder esterni. Pianifica le attività, assegna le risorse, monitora l'avanzamento attraverso metriche e indicatori, gestisce i rischi e le criticità. Approva i documenti ufficiali e autorizza le spese. Convoca e presiede le riunioni, facilita la comunicazione interna ed esterna, risolve conflitti e prende decisioni strategiche per il successo del progetto.],
-
-    [Amministratore],
-    [Gestisce l'infrastruttura tecnica e organizzativa del progetto. Configura e mantiene gli strumenti di versionamento, continuous integration, issue tracking e documentazione. Amministra i repository, definisce workflow e convenzioni, monitora l'ambiente di sviluppo. Gestisce la documentazione di processo, redige le norme di progetto, mantiene aggiornato il piano di qualifica. Supporta il team nella risoluzione di problemi tecnici relativi all'ambiente di lavoro, garantisce backup e sicurezza dei dati, ottimizza i processi di automazione.],
-
-    [Verificatore],
-    [Assicura la qualità dei prodotti attraverso attività di verifica sistematica. Controlla la conformità dei documenti alle norme redazionali e tipografiche, verifica la correttezza tecnica e la coerenza dei contenuti. Esegue review del codice secondo checklist predefinite, controlla il rispetto degli standard di programmazione. Verifica la tracciabilità tra requisiti, design e implementazione. Redige verbali di verifica, segnala anomalie e non conformità, propone azioni correttive. Monitora le metriche di qualità e valida i test eseguiti dai programmatori.],
-
-    [Analista],
-    [Raccoglie, analizza e formalizza i requisiti del sistema attraverso l'interazione con committente e stakeholder. Studia il dominio applicativo, comprende le esigenze degli utenti, identifica vincoli e opportunità. Redige l'Analisi dei Requisiti classificando requisiti funzionali, di qualità, di vincolo e prestazionali. Definisce casi d'uso, scenari operativi e modelli del dominio. Mantiene la tracciabilità tra requisiti e fonti, gestisce l'evoluzione dei requisiti durante il progetto. Collabora con i progettisti per garantire la fattibilità tecnica delle soluzioni proposte.],
-
-    [Progettista],
-    [Definisce l'architettura del sistema e il design dettagliato dei componenti software. Individua pattern architetturali appropriati, decompone il sistema in moduli, definisce interfacce e dipendenze. Specifica la struttura delle classi, i diagrammi di sequenza e collaborazione, le strutture dati e gli algoritmi principali. Redige la Specifica Tecnica e il Piano di Qualifica nella parte relativa ai test di integrazione e sistema. Effettua scelte tecnologiche motivate, considera aspetti di manutenibilità, estensibilità e performance. Fornisce ai programmatori le specifiche di dettaglio necessarie all'implementazione.],
-
-    [Programmatore],
-    [Implementa il codice seguendo le specifiche fornite dai progettisti e rispettando gli standard di codifica definiti. Scrive codice pulito, manutenibile e ben documentato. Sviluppa unit test per verificare la correttezza delle singole unità software, garantendo un'adeguata code coverage. Gestisce le dipendenze, utilizza strumenti di build automation, integra librerie esterne. Documenta il codice con commenti significativi e mantiene aggiornata la documentazione tecnica. Esegue debugging e risolve difetti segnalati, ottimizza le performance quando necessario. Collabora con verificatori e progettisti per migliorare continuamente la qualità del software.],
-  ),
-  caption: [Ruoli di progetto e relative responsabilità],
-)
-
-=== Gestione dei task e allineamento
-La gestione dei task avviene tramite *#def("Jira")*, dove ogni membro del gruppo ha accesso alle proprie attività assegnate.
-Ogni task include una descrizione dettagliata, una stima del tempo necessario per il completamento e una scadenza.
-I membri del gruppo sono responsabili di aggiornare lo stato dei propri task in #def("Jira"), segnalando eventuali impedimenti o ritardi.
-Per garantire un allineamento costante, si tengono riunioni settimanali di team in cui si discutono i progressi, si risolvono problemi e si pianificano le attività future.
-
-==== Riunioni di allineamento
-===== Interne
-Le riunioni di allineamento si tengono settimanalmente e hanno lo scopo di:
-- Condividere lo stato di avanzamento delle attività.
-- Identificare e risolvere eventuali ostacoli o problemi.
-- Pianificare le attività per la settimana successiva.
-Le riunioni vengono svolte du Discord e permettono al Responsabile di Progetto di monitorare l'andamento del lavoro e di garantire che tutti i membri del team siano allineati sugli obiettivi comuni.
-
-===== esterne
-Le riunioni esterne si tengono con il #def("Proponente") e altri stakeholder per:
-- Presentare lo stato di avanzamento del progetto.
-- Discutere requisiti, feedback e modifiche.
-- Allineare le aspettative e pianificare le prossime fasi.
-é compito del Responsabile di Progetto organizzare e condurre queste riunioni, assicurando una comunicazione efficace tra il team di sviluppo e gli stakeholder esterni.
-
-===== Verbale
-Per ogni riunione, interna o esterna, viene redatto un verbale che riporta:
-- Data, ora, luogo e partecipanti.
-- Ordine del giorno.
-- Riassunto delle discussioni.
-- Decisioni prese e task assegnati.
-
-==== Comunicazione diretta
-La comunicazione interna del team avviene tramite varie piattaforme:
-- #def("Whatsapp"): Per comunicazioni rapide e urgenti, tramite un gruppo dedicato, utilizzato per aggiornamenti veloci e coordinamento immediato giornalmente.
-- #def("Telegram"): Per discussioni più strutturate e condivisione di file, utilizzato per comunicazioni di gruppo e condivisione di documenti importanti.
-- #def("Discord"): Per riunioni virtuali e collaborazione in tempo reale, utilizzato per meeting settimanali e sessioni di lavoro condivise.
-- Email: Per comunicazioni formali e invio di documenti ufficiali, utilizzato per comunicazioni con il proponente e con i professori ed é gestito principalmente dal Responsabile di Progetto.
-- #def("Jira"): Per la gestione delle attività e il monitoraggio del progresso, utilizzato per assegnare task, tracciare lo stato di avanzamento e gestire le scadenze.
-
-==== Strumenti di supporto all'organizzazione
-Come giá riportato in precedenza, il gruppo utilizza diversi strumenti per supportare l'organizzazione del lavoro anche in modo totalmente asincrono:
-- Google calendar: Per la pianificazione delle riunioni esterne.
-- Scripts di automazione: Per automatizzare attività ripetitive e migliorare l'efficienza del lavoro.
-  - queste comprendono, al momento del PoC: generazione glossario, sia in formato documento che in pagina web
-- Repository GitHub: Per il versionamento del codice e la gestione della documentazione di progetto.
-
-==== Creazione e gestione degli strumenti organizzativi
-La creazione e gestione degli strumenti organizzativi è responsabilità dell'Amministratore di Progetto, che si occupa di:
-- Configurare e mantenere gli strumenti di comunicazione e gestione delle attività.
-- Assicurare che tutti i membri del team abbiano accesso agli strumenti necessari.
-- Monitorare l'utilizzo degli strumenti e proporre miglioramenti o cambiamenti se necessario.
-
-===== Repository GitHub
-L'Amministratore di Progetto è responsabile della gestione del repository GitHub, che include:
-- Creazione e organizzazione delle cartelle per i documenti di progetto.
-- Definizione delle regole di branching e delle convenzioni di commit.
-- Monitoraggio delle pull request e delle revisioni del codice.
-- Assicurare che la documentazione sia aggiornata e accessibile a tutti i membri del team.
-
-La repository DocumentazioneProgetto é organizzata in questo modo:
-- .github/: Cartella contenente le configurazioni specifiche di GitHub, come azioni automatizzate e modelli di issue.
-- .github/workflows/: Contiene i file di configurazione per le GitHub Actions utilizzate nel progetto.
-- assets/: Cartella per le risorse multimediali utilizzate nei documenti (immagini, grafici, ecc.).
-- diarioDiBordo/: Contiene il diario di bordo del progetto.
-- Glossario/: Contiene l'infrastruttura necessaria per l'html del glossario dei termini tecnici utilizzati nel progetto.
-- lib/: Cartella che contiene tutti i file che copntengono le funzioni utilizzate nbei vari documenti typst.
-- RTB/: Cartella dedicata alla Requirements and Technology Baseline, contenente tutti i documenti relativi a questa fase del progetto.
-- verbali: Cartella che contiene tutti i verbali delle riunioni interne ed esterne.
-- website/: Cartella contenente i file sorgente del sito web di Skarab Group.
-
-====== Librerie .typ
-La cartella `lib/` contiene librerie di funzioni Typst che sono utilizzate in vari documenti del progetto per garantire coerenza e riusabilità del codice. Questa cartella é creata e gestita dall'amministratore del progetto, questo permette di avere un punto centrale dove vengono definite tutte le funzioni comuni, facilitando la manutenzione e l'aggiornamento delle stesse.
-
-== Processo di miglioramento
-Il processo di miglioramento continuo è fondamentale per garantire che i prodotti del progetto soddisfino gli standard di qualità definiti e le aspettative degli stakeholder. QWuesto processo si articola in 3 fasi principali:
-- Inizializzazione: Fase in cui vengono definiti i processi organizzativi che guideranno il lavoro del team.
-- Valutazione: Fase in cui vengono monitorati i processi e i prodotti attraverso metriche specifiche.
-- Miglioramento: Fase in cui vengono implementate azioni correttive basate sui risultati della valutazione.
-
-== Processo di formazione
-Il processo di formazione è progettato per garantire che tutti i membri del team abbiano le competenze necessarie per svolgere efficacemente i propri ruoli all'interno del progetto. Questo processo include:
-- Identificazione delle competenze chiave richieste per ogni ruolo.
-- Pianificazione di sessioni di formazione e workshop.
-- Monitoraggio del progresso formativo e valutazione delle competenze acquisite.
-Le ore svolte per formazione non sono rendicontate in quanto non fanno parte del lavoro di progetto vero e proprio ma della parte di 'palestra' che il corso universitario vuole fornire agli studenti.
-La seguente tabella riporta le fonti utilizzate per la formazione dei membri del gruppo in base alla tecnologia studiata.
-
+=== Ruoli di Progetto e Rotazione
+Ogni membro di Skarab Group ricopre ruoli differenti nel corso del progetto, garantendo la rotazione ciclica prevista. La distribuzione dei ruoli per ciascuno #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#sprint")[#def[Sprint]] è pianificata dal #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#responsabile")[#def[Responsabile di Progetto]] all'inizio dello Sprint e tracciata nel #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#piano-di-progetto")[#def[Piano di Progetto]].
 
 #figure(
   table(
-    columns: (auto, auto),
-    stroke: 0.5pt + luma(200),
-
-    fill: (col, row) => if row == 0 {
-      luma(62.75%)
-    } else if calc.even(row) {
-      luma(220)
-    } else {
-      none
-    },
-    [*Tecnologia*], [*Fonte di formazione*],
-
-    [Python], [Documentazione ufficiale Python, youtube tutorial],
-    [Agenti AI], [Documentazione framework specifici, paper accademici, documentazione AWS],
-    [AWS], [documentazione ufficiale AWS],
-    [Git], [Documentazione ufficiale Git, guide interattive, corso di Metodi e tecnologie per lo sviluppo software],
-    [Node.js], [Documentazione ufficiale Node.js, tutorial youtube],
-    [MongoDB], [documentazione ufficiale,],
+    columns: (auto, 1fr),
+    inset: 8pt,
+    fill: (x, y) => if y == 0 { luma(230) },
+    [*Ruolo*], [*Responsabilità Vincolante*],
+    [Responsabile], [Coordina il progetto, garantisce scadenze e budget. Rappresenta il team con Var Group e i docenti. Monitora l'avanzamento (EVM), gestisce rischi e approva documenti. Convoca riunioni e gestisce email formali.],
+    [Amministratore], [Gestisce l'infrastruttura (Git/GitHub, Jira) e gli ambienti di sviluppo. Definisce workflow di branching e convenzioni di commit. Mantiene le NdP e i template di documento. Garantisce backup e sicurezza.],
+    [Verificatore], [Assicura la qualità degli artefatti e la conformità alle NdP. Esegue review del codice sorgente e verifica il rispetto degli standard di codifica. Redige esiti di verifica nelle Pull Request e monitora le metriche.],
+    [Analista], [Formalizza i requisiti (funzionali, qualità, vincolo) tramite interazione con gli stakeholder. Redige l'AdR e garantisce la tracciabilità tra requisiti e fonti.],
+    [Progettista], [Definisce l'architettura del sistema e i design pattern. Specifica la struttura delle classi, algoritmi e interfacce. Redige la Specifica Tecnica ed effettua scelte tecnologiche motivate.],
+    [Programmatore], [Implementa il codice rispettando gli standard NdP. Sviluppa unit test e garantisce code coverage. Gestisce dipendenze e build automation. Documenta il codice e collabora alla risoluzione dei difetti.],
   ),
-  caption: [Tecnologie e fonti di formazione],
+  caption: [Matrice di responsabilità per i ruoli di progetto],
 )
 
-Inoltre l'azienda proponente Var group ha tenuto delle lezioni specifiche per ognuna delle tecnologie necessarie allo sviluppo del progetto e ha dato disponibilitá per la risoluzione di dubbi e domande.
+=== PR-ORG-01: Procedura di Gestione Task e Pianificazione
+La gestione operativa delle #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#task")[#def[task]] avviene esclusivamente tramite #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#jira")[#def[Jira]], fonte ufficiale per monitoraggio e rendicontazione.
+- *Requisiti Task:* Ogni task *deve* includere: descrizione univoca, assegnatario, stima ore, scadenza e Sprint di riferimento.
+- *Atomicità:* Le task *devono* essere eseguibili da un singolo membro senza dipendenze bloccanti non esplicitate.
+- *Rendicontazione:* È responsabilità individuale aggiornare quotidianamente lo stato e le ore, segnalando tempestivamente impedimenti.
 
-== Strategie di Verifica
-- *Analisi Statica*: Review manuale del codice e uso di #def("linter") (#def("ESLint") per JS/TS, Pylint/Black per #def("Python")).
-- *Analisi Dinamica*: Esecuzione della suite di test.
-- *Test*:
-  - *Unit Test*: Verifica di singole unità di codice.
-  - *Integration Test*: Verifica delle interazioni tra moduli.
-  - *System Test*: Verifica del sistema completo rispetto ai requisiti.
+=== PR-ORG-02: Procedura di Coordinamento e Comunicazione
+Il coordinamento avviene tramite canali specifici per garantire efficienza e formalità.
 
-== Software Quality Assurance #def("SQA")
-La #def("SQA") monitora tutti i processi per garantire conformità agli standard (es. #def("ISO 9001"), #def("ISO 25010")). Include:
-- *Politiche*: Definizione di procedure per ogni fase (requisiti, design, testing).
-- *Audit*: Revisioni periodiche per identificare non conformità.
-- *Attività*: Review di documenti, controllo qualità codice, #def("Gestione Rischi").
+#figure(
+  table(
+    columns: (auto, 1fr, auto),
+    inset: 8pt,
+    fill: (x, y) => if y == 0 { luma(230) },
+    [*Canale*], [*Utilizzo e Obblighi*], [*Tipo*],
+    [Discord], [Riunioni settimanali per condividere avanzamento e risolvere impedimenti. Ogni riunione *deve* produrre un verbale interno.], [Sincrono],
+    [WhatsApp / Telegram], [Comunicazioni rapide, urgenze e coordinamento di gruppo breve.], [Asincrono],
+    [Email], [Convocazioni e comunicazioni formali con Var Group e Docenti. Ogni riunione esterna *deve* produrre un verbale esterno.], [Formale],
+    [Jira], [Assegnazione task e monitoraggio avanzamento Sprint.], [Gestionale],
+  ),
+  caption: [Piano di comunicazione del team],
+)
 
-== Validazione
-La validazione conferma che il prodotto soddisfi le esigenze degli utenti.
-- *#def("Test di Accettazione")*: Verifica finale con stakeholder per requisiti non funzionali (es. usabilità, prestazioni).
-- *Feedback Utente*: Raccolta di input durante demo o beta testing.
-- *Allineamento Obiettivi*: Verifica rispetto agli obiettivi di progetto (es. automazione analisi qualità repository).
+== Infrastruttura
+L'#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#amministratore")[#def[Amministratore]] è responsabile della creazione, configurazione e manutenzione del toolkit tecnologico.
+
+#figure(
+  table(
+    columns: (auto, 1fr),
+    inset: 8pt,
+    fill: (x, y) => if y == 0 { luma(230) },
+    [*Strumento*], [*Utilizzo nel progetto*],
+    [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#git")[#def[Git]] / #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#github")[#def[GitHub]]], [Controllo versione, hosting repository, gestione Pull Request e code review. L'Amministratore definisce le regole di protezione branch.],
+    [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#google-calendar")[#def[Google Calendar]]], [Pianificazione riunioni esterne e scadenze gestite dal Responsabile.],
+    [Automazione], [Script interni per generazione Glossario (HTML/PDF), compilazione Typst e aggiornamento sito web (GitHub Actions).],
+  ),
+  caption: [Strumenti dell'infrastruttura di progetto],
+)
+
+=== PR-ORG-03: Procedura di Gestione della Configurazione (GitHub)
+La struttura dei branch *deve* seguire rigorosamente lo schema seguente:
+- `main`: Branch stabile con artefatti verificati e approvati. Commit diretti *vietati*.
+- `develop`: Branch di integrazione protetto. Richiede Pull Request con revisione obbligatoria.
+- `feature/nome-feature`: Sviluppo funzionalità (fase PB).
+- `fix/nome-fix`: Correzione bug.
+- `[ACRONIMO-DOC]`: Branch per redazione documenti (es. `NdP`, `AdR`). Verbali raggruppati in `verbali`.
+- `nome-componente`: Branch per componenti PoC (deprecato in PB).
+
+==== Organizzazione del Repository `DocumentazioneProgetto`
+Le cartelle *devono* essere così strutturate: `.github/` (configurazioni), `Glossario/` (sito web glossario), `RTB/` (documenti milestone), `assets/` (multimedia), `candidatura/`, `diarioDiBordo/`, `lib/` (librerie Typst condivise), `verbali/`, `website/`.
+
+== Processo di Miglioramento
+Il processo garantisce il soddisfacimento degli standard di qualità tramite il monitoraggio continuo.
+
+=== PR-ORG-04: Procedura di Miglioramento (Retrospettiva)
+Il processo si articola in: Inizializzazione (NdP), Valutazione (PdQ) e Miglioramento. Al termine di ogni Sprint, il team *ha l'obbligo* di:
+1. Analizzare i valori delle metriche rispetto alle soglie del PdQ.
+2. Identificare inefficienze operative.
+3. Definire azioni correttive concrete su Jira con responsabile e scadenza.
+4. Aggiornare le NdP o il PdQ previo approvazione del Responsabile.
+
+== Processo di Formazione
+Garantisce che il team acquisisca le competenze necessarie per gli obiettivi del Capitolato C2.
+
+=== PR-ORG-05: Procedura di Formazione Continua
+- *Competenze Chiave:* TypeScript/React, NestJS, Python (Agenti AI), MongoDB, Node.js, Git/GitHub, Typst, AWS.
+- *Auto-formazione:* Le ore di studio individuale *non sono rendicontabili* nel monte ore di progetto.
+- *Spazi per la Formazione:* Il Responsabile può pianificare periodi di approfondimento tecnologico nelle fasi a peso minore, senza compromettere gli obiettivi di Sprint.
+- *Supporto Proponente:* Il team *ha l'obbligo* di partecipare alle sessioni dedicate fornite da *Var Group*.
+
+====== Criteri di Verifica della Formazione
+Il processo è conforme se lo studio autonomo è escluso dal consuntivo e se il team dimostra operatività sulle tecnologie richieste senza blocchi critici.

@@ -22,196 +22,196 @@
     "1.0.0",
     "Revisione finale per RTB",
     "",
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/18",
     "0.47.0",
     "Refactoring generale di tutti casi d'uso con riscrittura di molti di essi",
     members.kevin,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/16",
     "0.46.0",
     "Inserimento UC 47-53 e requisiti",
     members.antonio,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/15",
     "0.45.1",
     "Fix UC20-30, eliminazione UC23",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/15",
     "0.45.0",
     "Modifica UC 16 e 19, aggiunta UC 41-46 e requisiti",
     members.antonio,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/13",
     "0.44.7",
     "Fix UC6, UC37-41",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/13",
     "0.44.6",
     "Fix UC5, UC9-11",
     members.antonio,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/10",
     "0.44.5",
     "Fix vari degli UC + fix specifici UC13-15",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/10",
     "0.44.4",
     "Fix della posizione del sistema in tutti i diagrammi UC",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/10",
     "0.44.3",
     "Primo fix generale UC",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/09",
     "0.44.2",
     "Sistemato formato dei link al glossario",
     members.antonio,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/09",
     "0.44.1",
     "Fix definizione attori",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/08",
     "0.44.0",
     "Aggiunto UC12, inclusi diagrammi e requisiti associati. Fix alle precondizioni, attori e diagrammi di UC1, UC2, UC4",
     members.antonio,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/04",
     "0.43.0",
     "Classificazione Requisiti per priorità",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/04",
     "0.42.1",
     "Sistemata la sezione Attori + immagini separate per Front-end e Back-end",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/03",
     "0.42.0",
     "Aggiunta diagrammi UC16-30",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/02",
     "0.41.0",
     "Fix e aggiunta diagrammi mancanti UC6, UC9, UC10, UC12, UC13, UC14, UC15",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/02",
     "0.40.0",
     "Fix e aggiunta diagrammi mancanti UC1-3",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/02/01",
     "0.39.0",
     "Aggiunta Requisiti di Qualità e di Vincolo",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/27",
     "0.38.0",
     "Aggiunta dei requisiti funzionali UC36-UC29",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/25",
     "0.37.2",
     "Fix alla struttura delle precondizioni, modifica a UC1-3 e relativi requisiti",
     members.antonio,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/24",
     "0.37.1",
     "Fix alla struttura di inclusioni ed estensioni",
     members.antonio,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/24",
     "0.37.0",
     "Inserimento diagrammi per UC36-41",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/24",
     "0.36.0",
     "Modifica dei casi d'uso UC36, UC28 e UC28.1 e aggiunta di UC36.1, UC23, UC23.1, UC29 e UC29.1",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/21",
     "0.35.0",
     "Inserimento diagrammi aggiornati per UC1-5 e UC26-37",
     members.antonio,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/21",
     "0.34.0",
     "Aggiunta di sottocasi di UC21 e 30 e altri fix",
     members.berengan,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/19",
     "0.33.1",
     "Aggiunti requisiti funzionali UC12 e UC13, UC16-UC20 e UC20-UC20. Modifica requisiti UC5-UC15",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/18",
     "0.32.1",
     "Riorganizzazione requisiti funzionali relativi ai casi d'uso da UC1 a UC4",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/17",
@@ -232,35 +232,35 @@
     "0.30.2",
     "Modificati requisiti funzionali. Eliminazione requisiti di performance",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/17",
     "0.30.1",
     "Modifica UC22. Aggiunta UC23, UC24",
     members.berengan,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/16",
     "0.29.0",
     "Aggiunta UC36, UC28, UC28.1, UC29",
     members.andrea,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/16",
     "0.28.0",
     "Aggiunta UC26, UC27, UC36 e UC37",
     members.antonio,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/16",
     "0.27.0",
     "Aggiunta UC21 e UC22",
     members.berengan,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/15",
@@ -302,7 +302,7 @@
     "0.23.0",
     "Caso d'uso UC16 con relativi sottocasi e diagrammi",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/10",
@@ -330,7 +330,7 @@
     "0.20.0",
     "Requisiti da UC6 a UC8",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/9",
@@ -344,14 +344,14 @@
     "0.18.0",
     "Modificati requisiti relativi a UC14. Aggiunti diagrammi UC14",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/06",
     "0.17.0",
     "Casi d'uso UC14, UC14.1, UC14.1.1 e UC14.2. Requisiti relativi a UC14",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/01/04",
@@ -513,8 +513,8 @@ Il documento di *Analisi dei Requisiti* formalizza le specifiche del prodotto so
 
 Il documento costituisce il riferimento primario per il gruppo di lavoro (#def[Skarab Group]) e per gli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#stakeholder")[#def[stakeholder]], perseguendo i seguenti obiettivi:
 - modellare le interazioni tra gli utenti e il sistema attraverso la definizione formale dei #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#caso-d-uso")[#def("casi d'uso")];
-- individuare e dettagliare i requisiti di sistema, distinguendo tra #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisito-funzionale")[#def[requisiti funzionali]], #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisito-di-qualita")[#def[di qualità]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisito-di-vincolo")[#def[di vincolo]];
-- classificare i requisiti in base alla priorità negoziale e strategica (#def[obbligatori], #def[opzionali], #def[desiderabili]), fornendo una guida per la pianificazione dello sviluppo;
+- individuare e dettagliare i requisiti di sistema, distinguendo tra #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-funzionali")[#def[requisiti funzionali]], #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-di-qualita")[#def[di qualità]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-di-vincolo")[#def[di vincolo]];
+- classificare i requisiti in base alla priorità negoziale e strategica (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-obbligatori")[#def[obbligatori]], #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-opzionali")[#def[opzionali]], #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-desiderabili")[#def[desiderabili]]), fornendo una guida per la pianificazione dello sviluppo;
 - definire i criteri di accettazione del prodotto, stabilendo una base contrattuale oggettiva per le attività di verifica e validazione finale rispetto a quanto concordato con il proponente.
 
 == Scopo del Prodotto
@@ -524,10 +524,10 @@ Il sistema è progettato per essere modulare, scalabile e per operare in ambient
 L'obiettivo corrente è il rilascio di un #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#minimum-viable-product")[#def[MVP]] che dimostri l'efficacia dell'approccio a micro-agenti per la risoluzione automatica del debito tecnico.
 
 == Funzioni del Prodotto
-Le funzionalità del sistema sono suddivise in quattro macro-aree operative, accessibili tramite un'interfaccia web (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#gui")[#def[GUI]]):
+Le funzionalità del sistema sono suddivise in quattro macro-aree operative, accessibili tramite un'interfaccia web (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#graphical-user-interface")[#def[GUI]]):
 
 - *Audit del Codice:* Esecuzione di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-statica")[#def[analisi statica]] per l'identificazione di errori a tempo di compilazione e verifica della presenza/copertura dei test unitari.
-- *Audit della Sicurezza:* Analisi delle dipendenze per l'individuazione di librerie obsolete o affette da vulnerabilità note e verifica della conformità agli standard #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#owasp")[#def[OWASP]].
+- *Audit della Sicurezza:* Analisi delle dipendenze per l'individuazione di librerie obsolete o affette da vulnerabilità note e verifica della conformità agli standard #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#open-web-application-security-project")[#def[OWASP]].
 - *Audit della Documentazione:* Controllo della completezza e della coerenza semantica della documentazione tecnica rispetto al codice sorgente, effettuato tramite #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]].
 - *Remediation:* Generazione automatica di suggerimenti correttivi (snippet di codice o testo) per le criticità rilevate.
 
@@ -551,22 +551,22 @@ Al fine di prevenire ambiguità interpretative, è stato redatto un glossario ch
 Nel testo, *ogni termine evidenziato tramite una G come apice*, rimanda alla voce corrispondente del Glossario pubblicato sul sito ufficiale del gruppo, consentendo al lettore di accedere direttamente alla definizione associata.
 
 La versione più recente del Glossario è disponibile al seguente link:
-#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario]].
+#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario (v1.0.0)]].
 
 == Riferimenti
 === Riferimenti Normativi
 I seguenti documenti hanno valore vincolante per la redazione dell'Analisi dei Requisiti:
 - *Standard IEEE 830-1998* IEEE Recommended Practice for Software Requirements Specifications <830> \
   #underline[https://ieeexplore.ieee.org/document/720574] \
-  (ultimo accesso: *12/02/2026*)
+  (ultimo accesso: *24/02/2026*)
 
 - *Standard IEEE 29148-2018* ISO/IEC/IEEE International Standard – Systems and software engineering – Life cycle processes – Requirements engineering <29148>\
   #underline[https://ieeexplore.ieee.org/document/8559686] \
-  (ultimo accesso: *12/02/2026*)
+  (ultimo accesso: *24/02/2026*)
 
 - *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> \
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
-  (ultimo accesso: *12/02/2026*)
+  (ultimo accesso: *24/02/2026*)
 
 - *Norme di Progetto*: regole, convenzioni e standard di qualità adottati dal gruppo. <NdP>\
   #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")] \
@@ -574,10 +574,10 @@ I seguenti documenti hanno valore vincolante per la redazione dell'Analisi dei R
 === Riferimenti Informativi
 - *Dispense del Corso di Ingegneria del Software sull'Analisi dei Requisiti* <dispense_AdR>\
   #underline[https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T05.pdf] \
-  (ultimo accesso: *12/02/2026*)
+  (ultimo accesso: *24/02/2026*)
 - *Dispense del Corso di Ingegneria del Software sui Casi d'Uso* <dispense_UC>\
   #underline[https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20Use%20Case.pdf] \
-  (ultimo accesso: *12/02/2026*)
+  (ultimo accesso: *24/02/2026*)
 
 
 #pagebreak()
@@ -585,7 +585,7 @@ I seguenti documenti hanno valore vincolante per la redazione dell'Analisi dei R
 == Introduzione
 In questa sezione sono descritti i casi d'uso principali del sistema, che illustrano le interazioni funzionali tra gli utenti (umani e software) e l'applicazione.
 
-La specifica dei casi d'uso adotta il formato e le convenzioni di modellazione definite nel documento #link(<NdP>)[Norme di Progetto]. Si rimanda a tale documento per la descrizione dettagliata della struttura dei campi (precondizioni, postcondizioni, scenari) e della sintassi #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#uml")[#def[UML]] utilizzata.
+La specifica dei casi d'uso adotta il formato e le convenzioni di modellazione definite alla sezione *2.1.6.3.1* del documento #underline[#link(<NdP>)[Norme di Progetto]]. Si rimanda a tale documento per la descrizione dettagliata della struttura dei campi (precondizioni, postcondizioni, scenari) e della sintassi #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#uml")[#def[UML]] utilizzata.
 
 == Attori
 Gli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#attore")[#def[attori]] rappresentano le entità che interagiscono con il sistema #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]]. Essi sono classificati in base al ruolo svolto nell'interazione:
@@ -4259,11 +4259,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente avvia la richiesta di cancellazione del profilo
-    - L'utente inserisce la password attuale per conferma identità #link(<UC15.1>)[#underline[\[UC15.1\]]]
+    - L'utente inserisce la password attuale per conferma identità
     - L'utente conferma la cancellazione definitiva #link(<UC47.1>)[#underline[\[UC47.1\]]]
   ],
   inclusioni: [
-    - #link(<UC15.1>)[#underline[\[UC15.1\]]]
     - #link(<UC47.1>)[#underline[\[UC47.1\]]]
   ],
   estensioni: [
@@ -4300,7 +4299,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 = Requisiti di Sistema
 In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati da _Skarab Group_.
 
-Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ delle #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/PdP.pdf")[#underline[*Norme di Progetto*]].
+Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 delle #link(<NdP>)[#underline[*Norme di Progetto*]].
 
 #let fr_counter = counter("FR")
 #let qr_ob_counter = counter("QROb")
@@ -5315,7 +5314,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione _Requisiti_ de
 
 #pagebreak()
 == Requisiti di Qualità (QR)
-I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente, ma sia anche manutenibile, performante e ben documentato.
+I seguenti requisiti garantiscono che il sistema sia manutenibile, performante e strutturato secondo gli standard di eccellenza ingegneristica definiti dal team.
 
 #table(
   columns: (1fr, 2.5fr, 1.5fr),
@@ -5326,38 +5325,53 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   align: (col, row) => (center, left, center).at(col) + horizon,
 
   [#QRObx],
-  [È necessario fornire un diagramma
-    architetturale completo che illustri la struttura multiagente e le interazioni tra componenti],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Obiettivi"],
+  [L'architettura deve garantire un'alta coesione e un basso accoppiamento tra l'orchestratore NestJS e gli agenti Python, verificabile tramite revisione dei diagrammi UML2.5.],
+  [Interno (Obiettivi di Qualità)],
 
   [#QRObx],
-  [Deve essere fornita documentazione tecnica esaustiva del sistema, includendo swagger #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#application-programming-interface")[#def("Application Programming Interface")] (API) e documentazione descrittiva del progetto],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+  [Il sistema deve garantire tempi di risposta della dashboard web ottimizzati, minimizzando il carico computazionale lato client durante il rendering dei report di audit.],
+  [Interno (Efficienza)],
 
   [#QRObx],
-  [Il codice prodotto deve raggiungere una copertura minima del 70% tramite #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#test-di-unita")[#def("Test di Unità")] automatizzati],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+  [Ogni componente software deve essere testabile isolatamente; la logica di business deve essere separata dalle interfacce di comunicazione (API/Database).],
+  [Interno (Manutenibilità)],
 
   [#QRObx],
-  [L'applicativo deve essere creato seguendo principi di modularità per consentire l'aggiunta di nuovi agenti di analisi],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
-
-  [#QRObx],
-  [Deve essere fornito un sistema di Bug Reporting strutturato per tracciare e gestire le anomalie riscontrate],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
-
-  [#QRObx],
-  [È necessario utilizzare appositi sistemi di versionamento del codice],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
-
-  [#QRObx],
-  [È necessario rispettare tutte le norme
-    presenti nelle #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[*Norme di Progetto*]],
+  [È necessario rispettare rigorosamente le metriche di qualità del codice (complessità ciclomatica, duplicazione) definite nelle #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[*Norme di Progetto*].],
   [Interno],
+
+  [#VRObx],
+  [Il team deve svolgere un’attività di analisi preliminare includendo Design Thinking, User Story Mapping, Business Requirements e Diagrammi UML degli Use Case],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#VRObx],
+  [Deve essere fornita documentazione tecnica tramite standard OpenAPI 3.0 (Swagger) per le API e documentazione del codice sorgente tramite TypeDoc],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#VRObx],
+  [Deve essere fornito un Manuale Utente e un Manuale Manutentore (installazione e integrazione agenti) come parte integrante della fornitura finale],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#VRObx],
+  [Al termine del progetto deve essere consegnato un MVP funzionante accompagnato da una Demo Live e dallo Schema Design relativo alla base dati],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#VRObx],
+  [Il codice prodotto deve raggiungere una copertura minima del 70% tramite test di unità automatizzati misurati con Jest],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#VRObx],
+  [Devono essere utilizzate GitHub Actions per implementare pipeline di Continuous Integration e Continuous Deployment (CI/CD)],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
+
+  [#VRObx],
+  [Il codice sorgente deve essere versionato utilizzando Git (v2.40+) seguendo la branching strategy definita nelle NdP],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 )
 
 #pagebreak()
 == Requisiti di Vincolo (VR)
+Requisiti imposti dal committente riguardanti tecnologie, standard di sicurezza e documentazione obbligatoria.
 
 #table(
   columns: (1fr, 2.5fr, 1.5fr),
@@ -5368,33 +5382,46 @@ I seguenti requisiti garantiscono che il sistema non solo funzioni correttamente
   align: (col, row) => (center, left, center).at(col) + horizon,
 
   [#VRObx],
-  [Il Back-end e l'Orchestratore devono essere sviluppati utilizzando #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#nestjs")[#def("NestJS")]],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
-  [#VRObx],
-  [Gli agenti devono essere sviluppati utilizzando #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#python")[#def("Python")]],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
-
-  [#VRObx],
-  [Il Front-end deve essere sviluppato utilizzando #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#react")[#def("React")]],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
-
-  [#VRObx],
-  [Il sistema di persistenza deve essere implementato utilizzando #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#mongodb")[#def("MongoDB")]],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
-
-  [#VRObx],
-  [L'architettura deve essere ospitata su infrastruttura cloud AWS],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
-
-  [#VRObx],
-  [Devono essere utilizzate GitHub Actions per implementare pipeline CI/CD],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
-
-  [#VRObx],
-  [Il codice sorgente deve essere versionato utilizzando sistemi come #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#git")[#def("Git")] o repository online],
+  [L'applicativo deve essere creato seguendo principi di modularità per consentire l'estensione delle funzioni e l'aggiunta di nuovi agenti di analisi],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
   [#VRObx],
-  [L'analisi di sicurezza deve essere conforme agli standard OWASP Top 10],
+  [Deve essere fornito un sistema di Bug Reporting strutturato su GitHub Issues per tracciare e gestire le anomalie tramite apposite label],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#VRObx],
+  [Il Back-end e l'Orchestratore devono essere sviluppati utilizzando NestJS v10+, il Front-end in React v18.3+ e gli agenti in Python v3.12+],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
+
+  [#VRObx],
+  [L'architettura deve essere ospitata su infrastruttura cloud AWS, utilizzando esclusivamente gli account IAM forniti dall'azienda proponente],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
+
+  [#VRObx],
+  [L'analisi di sicurezza deve essere conforme agli standard OWASP Top 10 (v2021 o successivi)],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "OWASP"],
+
+  [#VRObx],
+  [L'interfaccia web deve essere compatibile con Windows 10/11],
+  [Decisione Interna con la Proponente],
+    
+  [#VRObx],
+  [L'interfaccia web deve essere compatibile con macOS 14+],
+  [Decisione Interna con la Proponente],
+  
+  [#VRObx],
+  [L'interfaccia web deve essere compatibile con distribuzioni Linux (Ubuntu 22.04+)],
+  [Decisione Interna con la Proponente],
+    
+  [#VRObx],
+  [L'interfaccia web deve essere compatibile su browser Chrome 120+],
+  [Decisione Interna con la Proponente],
+  
+  [#VRObx],
+  [L'interfaccia web deve essere compatibile su browser Firefox 120+],
+  [Decisione Interna con la Proponente],
+  
+  [#VRObx],
+  [L'interfaccia web deve essere compatibile su browser Safari 17+],
+  [Decisione Interna con la Proponente],
 )

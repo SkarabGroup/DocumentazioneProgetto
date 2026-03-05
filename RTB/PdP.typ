@@ -1,22 +1,59 @@
 #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
-#let versione = "v0.7.1"
+#let versione = "v1.0.0"
 
 #titlePage("Piano di Progetto", versione)
 #set page(numbering: "1", header: header("Piano di Progetto"), footer: footer())
 #set heading(numbering: "1.1.1")
 #let history = (
+    (
+    "2026/03/02",
+    "1.0.0",
+    "Verifica finale e approvazione documento per RTB",
+    "",
+    members.kevin,
+  ),
+  (
+    "2026/02/26",
+    "0.11.0",
+    "Aggiunto preventivo a finire",
+    members.kevin,
+    members.suar,
+  ),
+  (
+    "2026/02/25",
+    "0.10.0",
+    "Retrospettiva Sprint 4",
+    members.antonio,
+    members.kevin,
+  ),
+  (
+    "2026/02/12",
+    "0.9.0",
+    "Aggiunto Sprint 4",
+    members.antonio,
+    members.kevin,
+  ),
+  (
+    "2026/02/11",
+    "0.8.0",
+    "Aggiunte tabelle attivitá sprint 1,2,3, piccoli fix e aggiunte spiegazioni delle discrepanze orarie tra consuntivo e preventivo",
+    members.kevin,
+    members.antonio,
+  ),
   (
     "2026/02/01",
     "0.7.2",
     "Rielaborazione sezione introduzione, analisi dei rischi, preventivo e monitoraggio",
     members.suar,
+    members.antonio
   ),
   (
     "2026/01/16",
     "0.7.1",
     "Retrospettiva degli Sprint 1 e 2",
     members.suar,
+    members.antonio
   ),
   (
     "2026/01/12",
@@ -123,10 +160,11 @@ Il documento costituisce il riferimento primario per il gruppo di lavoro e per g
 - monitorare l’avanzamento del progetto mediante il confronto sistematico tra preventivo e consuntivo al termine di ogni #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#sprint")[#def[sprint]].
 
 == Prodotti Attesi
-I prodotti del progetto vengono rilasciati in modo incrementale in corrispondenza di due principali #def[baseline]: la *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requirements-and-technology-baseline")[#def[Requirements and Technology Baseline]]* (RTB) e la *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#product-baseline")[#def[Product Baseline]]* (PB).
+I prodotti del progetto vengono rilasciati in modo incrementale in corrispondenza di due principali #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#baseline")[#def[baseline]]: la *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requirements-and-technology-baseline")[#def[Requirements and Technology Baseline]]* (RTB) e la *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#product-baseline")[#def[Product Baseline]]* (PB).
 
 === Revisione dei Requisiti e della Tecnologia (RTB)
-Il gruppo ha fissato come obiettivo per la candidatura alla revisione RTB la data del *09/02/2026*.
+Il gruppo aveva inizialmente fissato come obiettivo per la candidatura alla revisione RTB la data del *09/02/2026*; tuttavia, a causa di ritardi di natura organizzativa e gestionale emersi
+durante lo sviluppo, la candidatura è stata posticipata alla data del *23/02/2026*.
 Entro tale scadenza, verranno rilasciati e sottoposti a verifica i seguenti artefatti:
 - *Documentazione di Baseline*:
   - Analisi dei Requisiti (versione consolidata);
@@ -137,24 +175,22 @@ Entro tale scadenza, verranno rilasciati e sottoposti a verifica i seguenti arte
 - *Verbali*: documentazione tracciata delle decisioni e delle riunioni interne ed esterne rilevanti ai fini progettuali.
 
 === Revisione di Accettazione (Product Baseline – PB)
-Il rilascio finale del progetto, corrispondente alla Product Baseline, è pianificato per la data ultima del *21/03/2026*.
-La pianificazione è coerente con quanto preventivato nella #link("https://skarabgroup.github.io/DocumentazioneProgetto/candidatura/Proposta_di_Candidatura.pdf")[*Proposta di Candidatura*] al capitolato.
+Il rilascio finale del progetto, corrispondente alla Product Baseline, era stato pianificato per la data del *21/03/2026*. A causa del ritardo provocato dalla cattiva organizzazione durante la RTB, anche la PB ha subito uno slittamento di circa 3 settimane, spostando la data di consegna al *15/04/2026*.
 Entro tale termine, il gruppo fornirà:
 - *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#minimum-viable-product")[#def[Minimum Viable Product]] (MVP)*: versione completa e funzionante del sistema, conforme ai requisiti funzionali e qualitativi approvati;
 - *Codice Sorgente*: intero codebase documentato e versionato nel repository ufficiale del progetto;
 - *Manualistica*:
   - *Manuale Utente*: guida all’utilizzo della piattaforma;
   - *Manuale Amministratore*: guida all’installazione, configurazione e manutenzione del sistema;
-- *Documentazione Finale*: versioni definitive ed approvate di tutti i documenti normativi, gestionali e di supporto;
-- *Consuntivo Finale*: analisi conclusiva di costi, tempi e qualità, comprensiva degli scostamenti rispetto al preventivo.
+- *Documentazione Finale*: versioni definitive ed approvate di tutti i documenti normativi, gestionali e di supporto.
 
 == Glossario
 Al fine di prevenire ambiguità interpretative, è stato redatto un glossario che definisce in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio utilizzati all’interno della documentazione.
 
-Nel testo, *ogni termine evidenziato tramite sottolineatura*, qualora *non sia esplicitamente indicato come collegamento a un documento o a una sezione specifica*, rimanda alla voce corrispondente del Glossario pubblicato sul sito ufficiale del gruppo, consentendo al lettore di accedere direttamente alla definizione associata.
+Nel testo, *ogni termine evidenziato tramite una G come apice*, rimanda alla voce corrispondente del Glossario pubblicato sul sito ufficiale del gruppo, consentendo al lettore di accedere direttamente alla definizione associata.
 
 La versione più recente del Glossario è disponibile al seguente link:
-#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario]].
+#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario (v1.0.0)]].
 
 
 == Riferimenti
@@ -166,7 +202,7 @@ I seguenti documenti hanno valore vincolante per la redazione del Piano di Proge
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
   (ultimo accesso: *31/01/2026*)
 
-- *Norme di Progetto*: regole, convenzioni e standard di qualità adottati dal gruppo. #linebreak()
+- *Norme di Progetto*: regole, convenzioni e standard di qualità adottati dal gruppo. <NdP> #linebreak()
   #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")] \
   (versione: *v1.0.0*)
 
@@ -182,7 +218,7 @@ I seguenti documenti hanno valore vincolante per la redazione del Piano di Proge
   #underline[#link("https://ieeexplore.ieee.org/document/25325")] \
   (ultimo accesso: *31/01/2026*)
 
-Le motivazioni e le modalità di applicazione dello standard IEEE 1058-1998 sono descritte in dettaglio nel documento *Norme di Progetto*, al quale si rimanda per gli aspetti metodologici e per la descrizione del grado di aderenza adottato.
+Le motivazioni e le modalità di applicazione dello standard IEEE 1058-1998 sono descritte in dettaglio nella sezione *2.1.5.1* del documento #link(<NdP>)[*Norme di Progetto*], al quale si rimanda per gli aspetti metodologici e per la descrizione del grado di aderenza adottato.
 
 
 #pagebreak()
@@ -195,11 +231,11 @@ Il processo di gestione dei rischi viene eseguito:
 - in corrispondenza delle principali baseline;
 - in occasione di variazioni significative di requisiti, architettura o risorse.
 
-Ciò consente al #def[team di progetto] di adattare tempestivamente le strategie di mitigazione in funzione dell’evoluzione del contesto progettuale.
+Ciò consente al team del progetto di adattare tempestivamente le strategie di mitigazione in funzione dell’evoluzione del contesto progettuale.
 
-I rischi individuati vengono raggruppati in macro-categorie omogenee (tecnologiche, interpersonali e organizzative) al fine di facilitarne l’analisi e l’assegnazione delle responsabilità.
+I rischi individuati vengono raggruppati in macro-categorie (tecnologiche, interpersonali e organizzative) al fine di facilitarne l’analisi e l’assegnazione delle responsabilità.
 
-Le modalità operative e i criteri metodologici adottati per l’analisi e la valutazione dei rischi sono definiti nel documento *Norme di Progetto*, al quale si rimanda per la descrizione dettagliata del processo di di gestione dei rischi.
+Le modalità operative e i criteri metodologici adottati per l’analisi e la valutazione dei rischi sono definiti nella *sezione 2.1.5.3.1* del documento #link(<NdP>)[*Norme di Progetto*], al quale si rimanda per la descrizione dettagliata del processo di di gestione dei rischi.
 
 === RCO3: Rischio Collettivo Organizzativo legato a ritardi o incomprensioni nella comunicazione con la proponente
 #figure(
@@ -221,9 +257,9 @@ Le modalità operative e i criteri metodologici adottati per l’analisi e la va
     [*Nome*], 
     [Ritardi o incomprensioni nella comunicazione con la proponente],
     [*Descrizione*], 
-    [Possibili ritardi nelle risposte da parte di #def[Var Group] o interpretazioni errate dei feedback forniti durante le sessioni di mentoring. Questo potrebbe portare a sviluppare funzionalità non in linea con le aspettative della proponente.],
+    [Possibili ritardi nelle risposte da parte di Var Group o interpretazioni errate dei feedback forniti durante le sessioni di mentoring. Questo potrebbe portare a sviluppare funzionalità non in linea con le aspettative della proponente.],
     [*Mitigazione*], 
-    [Programmazione di incontri periodici fissi e redazione di verbali (verbali esterni) dopo ogni incontro per formalizzare quanto deciso. Uso di canali di comunicazione diretti (#def[Slack]) per chiarimenti rapidi. In caso di dubbi sull'interpretazione dei feedback, il gruppo si impegnerà a richiedere chiarimenti tempestivi alla proponente per evitare incomprensioni. Nel caso in cui la proponente non risponda entro tempi ragionevoli il gruppo contattera il Prof. Vardanega per consigli su come procedere.],
+    [Programmazione di incontri periodici fissi e redazione di verbali (verbali esterni) dopo ogni incontro per formalizzare quanto deciso. Uso di canali di comunicazione diretti (Slack) per chiarimenti rapidi. In caso di dubbi sull'interpretazione dei feedback, il gruppo si impegnerà a richiedere chiarimenti tempestivi alla proponente per evitare incomprensioni. Nel caso in cui la proponente non risponda entro tempi ragionevoli il gruppo contattera il Prof. Vardanega per consigli su come procedere.],
     [*Probabilità di avvenimento*],
     [Media],
     [*Pericolosità delle ripercussioni*],
@@ -252,7 +288,7 @@ Le modalità operative e i criteri metodologici adottati per l’analisi e la va
     [*Nome*], 
     [Disomogeneità nella produzione della documentazione],
     [*Descrizione*], 
-    [Dato che i membri del team hanno stili di scrittura diversi, i documenti (#def[Piano di Progetto], #def[Norme di Progetto], ecc.) potrebbero risultare frammentati, poco coerenti o con terminologie discordanti. Questo potrebbe compromettere la chiarezza e la professionalità della documentazione consegnata.],
+    [Dato che i membri del team hanno stili di scrittura diversi, i documenti (Piano di Progetto, Norme di Progetto, ecc.) potrebbero risultare frammentati, poco coerenti o con terminologie discordanti. Questo potrebbe compromettere la chiarezza e la professionalità della documentazione consegnata.],
     [*Mitigazione*], 
     [Definizione rigorosa dei template riguardante l'aspetto visivo, l'impaginazione e la formattazione del testo. Ogni documento deve passare per una fase di verifica incrociata, un membro diverso dal redattore controlla il lavoro, prima di essere considerato definitivo. Inoltre, viene stabilito un glossario condiviso per uniformare la terminologia tecnica utilizzata nei documenti.],
     [*Probabilità di avvenimento*],
@@ -313,7 +349,7 @@ Questa categoria raggruppa le criticità derivanti dalla natura innovativa dello
   [Utilizzo di tecniche di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#prompt-engineering")[#def[Prompt Engineering]] avanzate e contestualizzate. Integrazione di strumenti di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-statica")[#def[Analisi Statica]] come meccanismo deterministico di validazione prima della presentazione all’utente.],
   [Adozione di un modello #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#human-in-the-loop")[#def[Human-in-the-loop]]: il sistema viene utilizzato come supporto decisionale e non come auto-remediation. L’applicazione delle modifiche resta vincolata a supervisione e conferma umana.],
   "Alta",
-  "Medio",
+  "Alto",
 )
 
 === RT5: Costi e Limiti di Utilizzo <RT5>
@@ -321,7 +357,7 @@ Questa categoria raggruppa le criticità derivanti dalla natura innovativa dello
   "RT5",
   "Saturazione del budget o blocco delle API",
   [L’uso di LLM in architettura multi-agente può generare un volume elevato di chiamate, con saturazione dei crediti o blocchi per rate limit. Ciò può rallentare o interrompere sviluppo e test, impattando direttamente la consegna dell’MVP.],
-  [La mancata ottimizzazione dei flussi può produrre chiamate ridondanti o ricorsive, con consumo anomalo di risorse in tempi brevi. L’inesperienza nel dimensionamento di prompt e cicli agentivi amplifica il rischio di costi non controllati.],
+  [La mancata ottimizzazione dei flussi può produrre chiamate ridondanti o ricorsive, con consumo anomalo di risorse in tempi brevi. L’inesperienza nel dimensionamento di prompt e cicli agentivi amplifica il rischio di costi non controllati, inoltre scelte di modelli AI costosi puó aumentare significativamente i costi operativi.],
   [Caching e deduplicazione delle richieste, oltre a limiti applicativi su numero di chiamate e profondità dei loop. Monitoraggio dei costi con dashboard e preferenza per modelli economici durante lo sviluppo.],
   [Migrazione verso modelli open source eseguiti localmente o riduzione della componente LLM in fase di test. Rimodulazione delle funzionalità LLM per ridurre il numero di chiamate.],
   "Alta",
@@ -432,12 +468,12 @@ Questa categoria analizza le criticità legate alle risorse umane. Essendo il te
 #schedaRischio(
   "RI5",
   "Sbilanciamento produttivo tra membri",
-  [Un divario significativo di competenze può portare a sovraccarico dei membri più esperti e a demotivazione dei meno esperti. Ciò riduce la produttività complessiva e aumenta il rischio di ritardi e rework.],
+  [Un divario significativo di competenze o di impegno può portare a sovraccarico di alcuni membri. Ciò riduce la produttività complessiva e aumenta il rischio di ritardi e rework.],
   [Background eterogenei e diverse velocità di apprendimento generano una distribuzione non uniforme dei contributi. Se i task complessi restano sempre sugli stessi membri, il rischio di dipendenza e burnout aumenta.],
   [Pair Programming sistematico (esperto + junior) e code review incrociata obbligatoria per favorire trasferimento di competenze. Pianificazione dei task con rotazione controllata delle aree tecniche.],
   [Assegnazione graduata dei task: complessi agli esperti e di supporto/testing ai meno esperti, mantenendo però un percorso di crescita. Riallocazione delle attività in caso di colli di bottiglia persistenti.],
   "Alta", // P=3
-  "Medio", // I=2 -> R=6 (Alto)
+  "Alto", // I=3 -> R=9 (Molto Alto)
 )
 
 #pagebreak()
@@ -448,8 +484,8 @@ Questa categoria raggruppa le criticità legate alla pianificazione temporale, a
 #schedaRischio(
   "RCO1",
   "Sottostima della complessità dei task",
-  [Stime eccessivamente ottimistiche possono produrre ritardi a cascata sul #def[Gantt] e sulle scadenze di sprint e milestone. Il rischio compromette la capacità di consegnare incrementi completi e verificabili entro i tempi previsti.],
-  [L’inesperienza su tecnologie LLM e bias cognitivi come #def[Optimism Bias] portano a sottovalutare incertezze e rework. La scarsa scomposizione delle attività rende più difficile intercettare deviazioni in anticipo.],
+  [Stime eccessivamente ottimistiche possono produrre ritardi a cascata sul #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#Gantt")[#def[Gantt]] e sulle scadenze di sprint e milestone. Il rischio compromette la capacità di consegnare incrementi completi e verificabili entro i tempi previsti.],
+  [L’inesperienza su tecnologie LLM e bias cognitivi come #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#optimism-bias")[#def[Optimism Bias]] portano a sottovalutare incertezze e rework. La scarsa scomposizione delle attività rende più difficile intercettare deviazioni in anticipo.],
   [Stime a tre punti per i task critici e scomposizione granulare delle attività per ridurre l’incertezza. Riesame delle stime in sprint planning usando dati di consuntivo degli sprint precedenti.],
   [Resource leveling e riallocazione delle risorse dalle attività non critiche. Riduzione dello scope privilegiando l’MVP e posticipando requisiti opzionali.],
   "Alta", // P=3
@@ -498,8 +534,8 @@ Questa categoria raggruppa le criticità legate alla pianificazione temporale, a
   "Documentazione frammentata o non conforme",
   [Disomogeneità stilistica, terminologica o strutturale tra documenti può ridurre leggibilità e aumentare ambiguità interpretative. Incoerenze tra versioni possono inoltre generare non conformità alle norme interne e alle aspettative di revisione.],
   [La redazione parallela da parte di più autori, senza controlli sistematici, porta facilmente a divergenze di formato e contenuto. Cambiamenti non propagati e uso non uniforme del glossario accentuano la frammentazione.],
-  [Uso di template #def[Typst] vincolanti e glossario centralizzato come riferimento terminologico. Ruolo di Verificatore distinto dal Redattore e checklist di conformità applicata a ogni rilascio.],
-  [Armonizzazione finale (“One Voice”): revisione globale effettuata da un singolo editor prima del rilascio. Correzione delle incoerenze e riallineamento dei riferimenti incrociati tra documenti.],
+  [Uso di template #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#typst")[#def[Typst]] vincolanti e glossario centralizzato come riferimento terminologico. Ruolo di Verificatore distinto dal Redattore e checklist di conformità applicata a ogni rilascio.],
+  [Armonizzazione finale: revisione globale effettuata da un singolo editor prima del rilascio. Correzione delle incoerenze e riallineamento dei riferimenti incrociati tra documenti.],
   "Media", // P=2
   "Basso", // I=1 -> R=2 (Basso)
 )
@@ -510,9 +546,9 @@ In questa sezione viene descritta la schedulazione delle attività di progetto, 
 
 Il ciclo di vita del progetto è scandito da due milestone principali, in corrispondenza delle quali vengono stabilite le seguenti baseline:
 
-1. *Requirements and Technology Baseline (#def[RTB]):* baseline iniziale, stabilita al termine della milestone di revisione, che sancisce il consolidamento dei requisiti, della documentazione normativa e la validazione tecnologica tramite Proof of Concept.
+1. *Requirements and Technology Baseline (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requirements-and-technology-baseline")[#def[RTB]]):* baseline iniziale, stabilita al termine della milestone di revisione, che sancisce il consolidamento dei requisiti, della documentazione normativa e la validazione tecnologica tramite Proof of Concept.
 
-2. *Product Baseline (#def[PB]):* baseline finale, stabilita al termine della milestone di accettazione, che certifica il completamento del prodotto MVP, l’esecuzione dei test di sistema e il rilascio finale.
+2. *Product Baseline (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#product-baseline")[#def[PB]]):* baseline finale, stabilita al termine della milestone di accettazione, che certifica il completamento del prodotto MVP, l’esecuzione dei test di sistema e il rilascio finale.
 
 == Pianificazione a Breve Termine (Verso la RTB)
 Questa fase copre il periodo dall'avvio del progetto fino al colloquio per la RTB.
@@ -538,12 +574,16 @@ La fase è suddivisa in 4 iterazioni (*Sprint*). Le date sono state definite ten
     [*Sprint 1*], [19/12/2025], [03/01/2026],
     [*Sprint 2*], [03/01/2026], [17/01/2026],
     [*Sprint 3*], [17/01/2026], [31/01/2026],
-    [*Sprint 4*], [31/01/2026], [06/02/2026],
+    [*Sprint 4*], [31/01/2026], [14/02/2026],
     // Esteso per coprire finitura PoC
   ),
   caption: [Calendario degli Sprint pianificati per la fase RTB],
 )
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
 === Dettaglio delle Attività
 La tabella seguente dettaglia il carico di lavoro pianificato.
 
@@ -566,16 +606,18 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
     // Analisi dei Requisiti
     [*Analisi dei Requisiti*],
     [Formalizzazione secondo ISO/IEC/IEEE 29148 e struttura IEEE 830:
-      - *Metodologia:* Fonti e attori.
-      - *Casi d'Uso:* Specifica UML e scenari.
-      - *Requisiti:* Classificazione funzionale, prestazionale e vincoli.
+      - Metodologia: Fonti e attori.
+      - Casi d'Uso: Specifica UML e scenari.
+      - Requisiti: Classificazione funzionale, prestazionale e vincoli.
+      - Revisione del documento: Verifica ultima del documento.
     ],
     [
       - Metodo: *Sprint 1*
-      - UC: *Sprint 1-2*
-      - Requisiti: *Sprint 2-3*
+      - UC: *Sprint 1-2-4*
+      - Requisiti: *Sprint 2-3-4*
+      - Revisione: *Sprint 4* 
     ],
-    [In corso],
+    [Concluso],
 
     // Piano di Progetto
     [*Piano di Progetto*],
@@ -583,13 +625,17 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
       - Analisi dei Rischi e Strategie.
       - Pianificazione temporale.
       - Preventivo costi e risorse.
+      - Inserimento degli Sprint.
+      - Revisione e verifica del documento
     ],
     [
       - Rischi: *Sprint 1*
-      - Pianif.: *Sprint 2*
+      - Pianif.: *Sprint 1-2*
       - Costi: *Sprint 2*
+      - Sprint: *Sprint 3-4*
+      - Revisione: *Sprint 4*
     ],
-    [In fase di chiusura],
+    [Concluso],
 
     // Piano di Qualifica
     [*Piano di Qualifica*],
@@ -597,25 +643,31 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
       - Obiettivi di qualità e metriche (ISO/IEC).
       - Metodologie di test (Unit, System).
       - Cruscotto di Valutazione (PDCA).
+      - Revisione e verifica del documento.
     ],
     [
       - Qualità: *Sprint 1*
-      - Test: *Sprint 1-2*
+      - Test: *Sprint 1-2-4*
+      - Cruscotto: *Sprint 3-4*
+      - Revisione: *Sprint 4*
     ],
-    [In revisione],
+    [Concluso],
 
     // Norme di Progetto
     [*Norme di Progetto*],
     [Codifica regole e processi:
-      - Setup strumenti (#def[Jira], #def[Slack]).
+      - Setup strumenti (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#jira")[#def[Jira]], #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#slack")[#def[Slack]]).
       - Definizione processi primari e di supporto.
       - Standard di codifica.
+      - Revisione e verifica.
     ],
     [
       - Strumenti: *Sprint 1*
       - Processi: *Sprint 1-2*
+      - Standard: *Sprint 2*
+      - Revisione: *Sprint 3-4*
     ],
-    [In revisione],
+    [Concluso],
 
     // Glossario
     [*Glossario*],
@@ -629,13 +681,18 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
     [Realizzazione prototipo per mitigazione rischi #link(<RT1>)[#underline[RT1]]/ #link(<RT2>)[#underline[RT2]]:
       - Studio API LLM e framework.
       - Progettazione architetturale preliminare.
-      - Implementazione agente base.
+      - Codifica delle singole parti.
+      - Integrazione dei sottosistemi.
+      - Ultima verifica dell'intero sistema.
     ],
     [
       - Studio: *Sprint 1-2*
-      - Coding: *Sprint 3*
+      - Progettazione: *Sprint 2*
+      - Codifica: *Sprint 3-4*
+      - Integrazione: *Sprint 4*
+      - Verifica: *Sprint 4*
     ],
-    [Avviato],
+    [Concluso],
 
     // Gestione
     [*Gestione e Coordinamento*],
@@ -652,8 +709,11 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
       - Slide di presentazione.
       - Simulazione esposizione (Dry run).
     ],
-    [- Slide: *Sprint 3*],
-    [Pianificato],
+    [
+      - Slide: *Sprint 3*
+      - Esposizione: *Sprint 4*
+    ],
+    [In corso],
   ),
   caption: [Dettaglio attività pianificate per la fase RTB],
 )
@@ -678,7 +738,7 @@ Realizzazione del nucleo funzionale essenziale.
 
 Sviluppo funzionalità avanzate e UI finale.
 - *Obiettivo:* Copertura requisiti desiderabili e UX.
-- *Attività:* Modulo di Remediation automatica, Frontend (Dashboard), ottimizzazione costi API (#def[Caching] - #link(<RT5>)[#underline[RT5]]).
+- *Attività:* Modulo di Remediation automatica, Frontend (Dashboard), ottimizzazione costi API (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#catching")[#def[Caching]] - #link(<RT5>)[#underline[RT5]]).
 
 *4. Validazione e Rilascio*
 
@@ -690,10 +750,10 @@ Fase dedicata alla Quality Assurance e alla consegna.
 = Preventivo e Allocazione delle Risorse
 
 In questa sezione viene presentato il preventivo consolidato dei costi e la pianificazione dell’allocazione delle risorse umane.
-Il preventivo è stato elaborato tenendo conto dei vincoli di budget e della scadenza finale di progetto fissata per il *21/03/2026*.
+Il preventivo è stato elaborato tenendo conto dei vincoli di budget e della scadenza finale di progetto fissata per il *15/04/2026*.
 
 == Evoluzione del Preventivo rispetto alla Candidatura
-Durante la candidatura per il capitolato C2, il gruppo ha formalizzato una prima stima economica tramite il documento *Preventivo costi ed impegno orario*, basata su una valutazione preliminare dei carichi di lavoro.
+Durante la candidatura per il capitolato C2, il gruppo ha formalizzato una prima stima economica tramite il documento #underline(link("https://skarabgroup.github.io/DocumentazioneProgetto/candidatura/Dichiarazione_Impegni.pdf")[*Preventivo costi ed impegno orario*]), basata su una valutazione preliminare dei carichi di lavoro.
 
 L’analisi approfondita dei requisiti normativi e l’avvio delle attività operative hanno tuttavia evidenziato la necessità di un *ribilanciamento strategico delle risorse*.
 In particolare, l’impegno richiesto per la gestione dell’infrastruttura documentale, la verifica dei processi e la manutenzione degli artefatti è risultato inizialmente sottostimato. Parallelamente, l’utilizzo di strumenti moderni di supporto allo sviluppo e la realizzazione anticipata del Proof of Concept hanno consentito un’ottimizzazione delle attività puramente tecniche.
@@ -765,8 +825,8 @@ Per questo motivo, oltre il *60%* del monte ore complessivo del ruolo di *Ammini
     [Verificatore], [42], [€ 630,00],
 
     table.cell(fill: luma(240))[*Totale RTB*],
-    table.cell(fill: luma(240))[*210*],
-    table.cell(fill: luma(240))[*€ 4.410,00*],
+    table.cell(fill: luma(240))[*217*],
+    table.cell(fill: luma(240))[*€ 4.620,00*],
   ),
   caption: [Allocazione delle risorse nel periodo verso la RTB],
 )
@@ -789,7 +849,7 @@ In questo intervallo, le ore di *Amministratore* sono ridotte alla manutenzione 
       text(fill: white, weight: "bold")[Budget Residuo],
     ),
 
-    [Responsabile], [28], [€ 1.050,00],
+    [Responsabile], [28], [€ 840,00],
     [Amministratore], [35], [€ 700,00],
     [Analista], [21], [€ 525,00],
     [Progettista], [105], [€ 2.625,00],
@@ -797,8 +857,8 @@ In questo intervallo, le ore di *Amministratore* sono ridotte alla manutenzione 
     [Verificatore], [105], [€ 1.575,00],
 
     table.cell(fill: luma(240))[*Totale PB*],
-    table.cell(fill: luma(240))[*420*],
-    table.cell(fill: luma(240))[*€ 8.260,00*],
+    table.cell(fill: luma(240))[*413*],
+    table.cell(fill: luma(240))[*€ 8.050,00*],
   ),
   caption: [Allocazione delle risorse nel periodo verso la PB],
 )
@@ -853,7 +913,7 @@ In questa sezione viene rendicontato l'avanzamento effettivo del progetto attrav
 Le attività svolte antecedentemente alla data di avvio ufficiale del primo Sprint (19/12/2025) sono state classificate come *investimento interno* e *auto-formazione*.
 
 In questa fase propedeutica ("Palestra"), il team ha dedicato una parte consistente delle risorse a:
-- *Analisi critica dello stack tecnologico:* Studio approfondito delle tecnologie suggerite dal capitolato C2. I membri hanno redatto documenti di appunti pubblici e condivisi per analizzare le motivazioni tecniche della loro adozione e valutarne l'idoneità alla costruzione del progetto.
+- *Analisi critica dello stack tecnologico:* Studio approfondito delle tecnologie suggerite dal capitolato C2. I membri hanno redatto documenti di appunti condivisi per analizzare le motivazioni tecniche della loro adozione e valutarne l'idoneità alla costruzione del progetto.
 - *Allineamento tecnico:* Gli esiti di tali ricerche sono stati oggetto di discussione collegiale, tracciata nei *verbali interni*, permettendo al gruppo di livellare le conoscenze e validare le scelte preliminari.
 - *Setup infrastrutturale:* Configurazione degli strumenti di supporto (es. Typst, GitHub Actions, Jira) e definizione delle norme di collaborazione.
 
@@ -868,7 +928,7 @@ Tali attività, seppur essenziali per la partenza, *non vengono rendicontate* ne
 Le attività svolte nel periodo di riferimento si sono focalizzate sul consolidamento della base metodologica e sull'analisi dei requisiti:
 
 - *Pianificazione e Standardizzazione:*
-  - Stesura delle bozze iniziali dei documenti cardine: #def[Norme di Progetto], #def[Piano di Progetto] e #def[Piano di Qualifica];
+  - Stesura delle bozze iniziali dei documenti cardine: #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#norme-di-progetto")[#def[Norme di Progetto]], #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#piano-di-progetto")[#def[Piano di Progetto]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#piano-di-qualifica")[#def[Piano di Qualifica]];
   - Definizione di strutture templatizzate mediante l'uso di Typst, finalizzate a ottimizzare l'efficienza di redazione e garantire la coerenza stilistica e strutturale della documentazione.
 
 - *Analisi dei Requisiti:*
@@ -893,7 +953,51 @@ Le attività svolte nel periodo di riferimento si sono focalizzate sul consolida
   ),
   [Prospetto orario preventivato per lo Sprint 1 (Totale: 61 ore)],
 )
+==== Prospetto Attività
 
+#activity_table(
+  (
+    ("Stabilire struttura repository e setup strumenti", "Amministratore", "6:00", "6:30", "Completata"),
+    ("Stesura introduzione AdR", "Amministratore", "1:00", "0:45","Completata"),
+    ("Stesura scopo del documento AdR", "Amministratore", "1:00", "0:30","Completata"),
+    ("Stesura prospettiva del prodotto", "Amministratore", "0:30", "0:30","Completata"),
+    ("Stesura funzioni del prodotto", "Amministratore", "0:30", "0:45", "Completata"),
+
+    ("Prima stesura NdP", "Amministratore", "4:00", "3:00", "Completata"),
+
+    ("Stesura introduzione PdP", "Amministratore", "1:00", "1:00", "Completata"),
+    ("Stesura sezione gestione rischi PdP", "Amministratore", "1:00", "1:00", "Completata"),
+    ("Stesura sezione scopo PdP", "Amministratore", "1:30", "1:00", "Completata"),
+    ("Stesura introduzione analisi dei rischi", "Amministratore", "1:30", "1:30", "Completata"),
+    ("Aggiunta primi rischi PdP", "Amministratore", "1:00", "2:30", "Completata"),
+    ("Stesura sezione pianificazione PdP", "Amministratore", "1:00", "1:00", "Completata"),
+
+    ("Stesura introduzione PdQ", "Amministratore", "1:00", "1:00", "Completata"),
+    ("Stesura scopo PdQ", "Amministratore", "0:30", "0:30", "Completata"),
+    ("Stesura sezione qualità di processo PdQ", "Amministratore", "0:30", "0:30", "Completata"),
+    ("Stesura sezione processi primari PdQ", "Amministratore", "1:30", "1:30", "Completata"),
+    ("Stesura sezione processi secondari PdQ", "Amministratore", "1:30", "1:30", "Completata"),
+    ("Stesura sezione processi organizzativi PdQ", "Amministratore", "1:00", "1:00", "Completata"),
+    ("Stesura sezione qualitá di prodotto PdQ", "Amministratore", "1:00", "1:00", "Completata"),
+    ("Stesura sezione automiglioramento PdQ", "Amministratore", "1:00", "1:00", "Completata"),
+
+    ("Stesura caratteristiche degli utenti", "Analista", "1:00", "0:30", "Completata"),
+    ("Definizione attori dei casi d'uso", "Analista", "1:00", "0:30", "Completata"),
+    ("Stesura UC1-12", "Analista", "10:00", "9:00", "Completata"),
+    ("Inizio stesura sezione requisiti","Analista", "3:00", "1:00", "Completata"),
+    
+    ("Stesura verbale riunione prima settimana", "Responsabile","1:30","1:30","Completata"),
+    ("Stesura verbale riunione seconda settimana", "Responsabile","1:30","1:30","Completata"),
+    ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile","3:00","3:00","Completata"),
+
+    ("Verifica verbale riunione interna prima settimana", "Verificatore","0:15","0:30","Completata"),
+    ("Verifica verbale riunione interna seconda settimana", "Verificatore","0:15","0:30","Completata"),
+    ("Verifica AdR","Verificatore","6:00","4:00","Completata"),
+    ("Verifica PdP","Verificatore","4:00","2:00","Completata"),
+    ("Verifica NdP","Verificatore","1:30","1:00","Completata"),
+  ),
+  [Riassunto delle attivitá svolte durante lo Sprint 1]
+)
 ==== Consumo Tempo e Costi Effettivi (Consuntivo)
 Si nota una flessione nel monte ore totale dovuta alla pausa natalizia. Alcune attività di verifica sono slittate allo sprint successivo.
 
@@ -910,6 +1014,7 @@ Si nota una flessione nel monte ore totale dovuta alla pausa natalizia. Alcune a
   [Consuntivo orario effettivo per lo Sprint 1 (Totale: 53 ore)],
 )
 
+
 ==== Retrospettiva dello Sprint 1
 ===== Valutazione del Periodo
 Il primo Sprint ha registrato un andamento complessivamente positivo. Gli obiettivi principali di avvio del progetto sono stati raggiunti, nonostante una riduzione fisiologica dell’impegno orario dovuta al periodo festivo.
@@ -920,6 +1025,16 @@ Il primo Sprint ha registrato un andamento complessivamente positivo. Gli obiett
 ===== Relazioni Esterne con l’Azienda e Dinamiche del Team
 - *Rapporti con l’Azienda:* La comunicazione con il proponente è risultata proattiva e costruttiva, con un supporto tecnico utile alle scelte iniziali.
 - *Dinamiche del Team:* Il clima interno è stato positivo. Tuttavia, l’analisi del consuntivo ha evidenziato una distribuzione non uniforme dell’impegno orario, che richiede attenzione per evitare squilibri futuri.
+
+===== Squilibri orari preventivati e reali
+- *Responsabile:* Preventivato 6h, Consuntivo 6h 
+- *Amministratore:* Preventivato 28h, Consuntivo 28h
+- *Analista:* Preventivato 15h, Consuntivo 11h 
+ - Questo poiché i membri che avrebbero dovuto ricoprire questo ruolo hanno dedicato più tempo alla stesura dei documenti di gestione piú che all'analisi dei requisiti, quindi hanno consumato ore da amministratore. Questo, tuttavia, non ha portato i membri coinvolti a sforare le ore preventivate in quanto il preventivo per questi membri era molto ottimistico sulla quantitá di tempo da dedicare al progetto per questo sprint.
+- *Progettista:* Preventivato 0h, Consuntivo 0h
+- *Programmatore:* Preventivato 0h, Consuntivo 0h
+- *Verificatore:* Preventivato 12h, Consuntivo 8h
+ - La verifica dei documenti si é dimostrata piú rapida del previsto.
 ===== Rischi Rilevati
 Nel corso dello Sprint si sono manifestati i seguenti rischi già censiti:
 
@@ -943,15 +1058,47 @@ Per lo Sprint 2 il team si pone i seguenti obiettivi:
 )[
   *Punto di attenzione:* La disparità oraria registrata deve essere monitorata per evitare colli di bottiglia e garantire che la conoscenza del dominio sia distribuita equamente tra tutti i componenti del gruppo.
 ]
+
+===== Aggiornamento preventivo a finire RTB
+
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    columns: (1fr, 1fr, 1fr, 1fr),
+    inset: 10pt,
+    align: center + horizon,
+    stroke: 0.5pt + luma(200),
+
+    table.header(
+      text(fill: white, weight: "bold")[Ruolo],
+      text(fill: white, weight: "bold")[Ore rimanenti per RTB],
+      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
+      text(fill: white, weight: "bold")[Preventivo a finire costi],
+    ),
+
+    [Responsabile], [15], [-],[€ 450,00],
+    [Amministratore], [28], [-], [€ 560,00],
+    [Analista], [52], text(fill: green)[-4 -> € -100],[€ 1.300,00],
+    [Progettista], [14], [-],[€ 350,00],
+    [Programmatore], [21], [-],[€ 315,00],
+    [Verificatore], [34], text(fill: green)[-4 -> € -60],[€ 510,00],
+
+    table.cell(fill: luma(240))[*Totale RTB*],
+    table.cell(fill: luma(240))[*164*],
+    table.cell(fill: luma(240))[#text(fill: green)[*-8 -> € -160*]],
+    table.cell(fill: luma(240))[*€ 3.485,00*],
+  ),
+  caption: [Aggiornamento preventivo a finire sprint 1],
+)
+
 #pagebreak()
 
 
 === Sprint 2
 *Periodo:* dal 03/01/2026 al 17/01/2026
 
-==== Informazioni Generali
-Focus sul consolidamento della documentazione (versione per RTB) e accelerazione sull'Analisi dei Requisiti.
-Attività principali:
+==== Attività principali
+Focus sul consolidamento della documentazione (versione per RTB) e accelerazione sull'Analisi dei Requisiti:
 - *Piano di Progetto:* Arricchimento sezione Rischi e conformità IEEE 1058.
 - *Analisi dei Requisiti:* Allocazione massiva risorse (5 membri) per definizione UC e Requisiti.
 - *Incontri:* Meeting con Prof. Cardin e VarGroup per validazione direzione.
@@ -969,6 +1116,39 @@ Attività principali:
     ([Zago Alice], 6, 0, 5, 0, 0, 2),
   ),
   [Prospetto orario preventivato per lo Sprint 2 (Totale: 61 ore)],
+)
+
+==== Prospetto Attività
+#activity_table(
+  (
+    ("Stesura UC13-32","Analista", "20:00", "15:00", "Completata"),
+    ("Stesura requisiti UC13-32","Analista", "5:00", "2:00", "Completata"),
+
+    ("Ristesura NdP", "Amministratore", "4:30", "4:00", "Completata"),
+
+    ("Ristesura PdP", "Amministratore", "5:00", "4:00", "Completata"),
+    ("Aggiunta nuovi rischi PdP", "Amministratore", "1:30", "3:00", "Completata"),
+
+    ("Aggiunta retrospettiva Sprint 1", "Amministratore", "0:15", "0:30", "Completata"),
+    ("Aggiunta retrospettiva Sprint 2", "Amministratore", "0:15", "0:30", "Completata"),
+    ("Revisione sezione automiglioramento PdQ", "Amministratore", "0:30", "3:00", "Completata"),
+
+    ("Verifica verbale riunione interna prima settimana", "Verificatore","0:15","0:30","Completata"),
+    ("Verifica verbale riunione interna seconda settimana", "Verificatore","0:15","0:30","Completata"),
+    ("Verifica AdR","Verificatore","6:00","3:30","Completata"),
+    ("Verifica PdP","Verificatore","4:00","2:30","Completata"),
+    ("Verifica NdP","Verificatore","1:30","1:00","Completata"),
+
+    ("Programmazione sezione agenti PoC", "Programmatore", "3:00", "0:00", "Rimandata a prossimo sprint"),
+    ("Programmazione sezione server PoC", "Programmatore", "3:00", "0:00", "Rimandata a prossimo sprint"),
+
+    ("Stesura verbale riunione prima settimana", "Responsabile","1:00","0:30","Completata"),
+    ("Stesura verbale riunione seconda settimana", "Responsabile","1:00","0:30","Completata"),
+    ("Stesura verbale riunione esterna", "Responsabile","1:00","0:30","Completata"),
+    ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile","2:30","4:00","Completata"),
+    ("Stesura diario di bordo", "Responsabile","0:30","0:30","Completata"),
+  ),
+  [Riassunto delle attivitá svolte durante lo Sprint 2]
 )
 
 ==== Consumo Tempo e Costi Effettivi (Consuntivo)
@@ -1000,12 +1180,25 @@ Il secondo Sprint ha evidenziato un andamento complessivamente critico. Sebbene 
 - *Consultazione Accademica:* L’incontro con il docente #members.cardin ha chiarito aspetti metodologici rilevanti per l’Analisi dei Requisiti, fornendo indicazioni utili per il recupero delle criticità emerse.
 - *Dinamiche del Team:* Sono emerse difficoltà di coordinamento e una disomogeneità nella qualità dei contributi, che hanno inciso sull’efficacia complessiva dello Sprint.
 
+===== Squilibri orari preventivati e reali
+- *Responsabile:* Preventivato 6h, Consuntivo 6h 
+- *Amministratore:* Preventivato 12h, Consuntivo 13h
+ - L’impegno aggiuntivo è stato necessario per gestire le revisioni documentali e coordinare le attività di recupero.
+- *Analista:* Preventivato 25h, Consuntivo 17h 
+ - L'impegno dei vari membri é stato ridotto in vista della preparazione alla sessione di esami universitari in arrivo.
+- *Progettista:* Preventivato 0h, Consuntivo 0h
+- *Programmatore:* Preventivato 6h, Consuntivo 0h
+ - Per motivi di studio, le attività di programmazione sono state posticipate allo Sprint 3, con un impatto diretto sulla pianificazione complessiva del progetto.
+- *Verificatore:* Preventivato 12h, Consuntivo 8h
+ - La verifica dei documenti si é dimostrata piú rapida del previsto.
+
 ===== Rischi Rilevati
 Nel corso dello Sprint si sono concretizzati i seguenti rischi già censiti:
 - #link(<RI1>)[#underline[[RI1]]]: riduzione della disponibilità operativa di alcuni membri, con impatto sulla capacità produttiva complessiva.
 - #link(<RI4>)[#underline[[RI4]]]: difficoltà di coordinamento e comunicazione interna, che hanno rallentato il processo decisionale.
 - #link(<RI5>)[#underline[[RI5]]]: disomogeneità nella qualità e nell’efficacia dei contributi, con impatto diretto sull’Analisi dei Requisiti.
 - #link(<RCO5>)[#underline[[RCO5]]]: rischio di incoerenza documentale, emerso a seguito di modifiche non pienamente allineate agli standard definiti.
+- #link(<RT6>)[#underline[[RT6]]]: Esposizioni credenziali AWS nei . env e .env example della directory PoC
 
 In risposta, sono state pianificate azioni correttive coerenti con i piani di contingenza definiti, tra cui una riallocazione più mirata delle responsabilità, il rafforzamento delle attività di revisione incrociata e un controllo più stringente sull’aderenza alle Norme di Progetto.
 
@@ -1017,13 +1210,45 @@ Per lo Sprint 3 il team individua come prioritari i seguenti obiettivi:
 - migliorare il coordinamento operativo e l’efficacia delle revisioni interne.
 
 
+===== Aggiornamento preventivo a finire RTB
+
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    columns: (1fr, 1fr, 1fr, 1fr),
+    inset: 10pt,
+    align: center + horizon,
+    stroke: 0.5pt + luma(200),
+
+    table.header(
+      text(fill: white, weight: "bold")[Ruolo],
+      text(fill: white, weight: "bold")[Ore rimanenti per RTB],
+      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
+      text(fill: white, weight: "bold")[Preventivo a finire costi],
+    ),
+
+    [Responsabile], [9], [-],[€ 270,00],
+    [Amministratore], [15], text(fill: red)[+1 -> € +20], [€ 300,00],
+    [Analista], [35], text(fill: green)[-8 -> € -200],[€ 875,00],
+    [Progettista], [14], [-],[€ 350,00],
+    [Programmatore], [21], text(fill: green)[-6 -> € -90],[€ 315,00],
+    [Verificatore], [26], text(fill: green)[-4 -> € -60],[€ 390,00],
+
+    table.cell(fill: luma(240))[*Totale RTB*],
+    table.cell(fill: luma(240))[*120*],
+    table.cell(fill: luma(240))[#text(fill: green)[*-17 -> € -330*]],
+    table.cell(fill: luma(240))[*€ 2.500,00*],
+  ),
+  caption: [Aggiornamento preventivo a finire sprint 2],
+)
+#pagebreak()
+
+
 === Sprint 3
-*Periodo:* dal 17/01/2026 al 31/01/2026
+*Periodo:* dal 18/01/2026 al 31/01/2026
 
 ==== Attività Principali
 Le attività svolte nel periodo di riferimento si sono concentrate sulla chiusura e stabilizzazione degli artefatti normativi in vista della revisione RTB, nonché sull’avvio operativo del Proof of Concept.
-
-In particolare, lo Sprint ha riguardato:
 
 - *Piano di Progetto (PdP):*
   - completamento delle sezioni di Pianificazione, Analisi dei Rischi e Monitoraggio;
@@ -1066,6 +1291,39 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
   [Prospetto orario preventivato per lo Sprint 3],
 )
 
+==== Prospetto Attività
+#activity_table(
+  (
+    ("Stesura UC33-38","Analista", "8:00", "6:00", "Completata"),
+    ("Stesura requisiti UC33-38","Analista", "3:00", "2:00", "Completata"),
+    ("Controllo e correzione UC e requisiti", "Analista", "5:00", "4:00", "Completata"),
+
+    ("Aggiunta sezione a NdP", "Amministratore", "1:00", "1:30", "Completata"),
+    ("Revisione AdR", "Amministratore", "2:00", "1:30", "Completata"),
+
+    ("Orchestrator PoC", "Programmatore","2:00","2:30","Completata"),
+    ("SpellChecker PoC", "Programmatore","1:30","1:00","Completata"),
+    ("Creazione repo mock PoC", "Programmatore","0:30","0:30","Completata"),
+    ("Parte Database PoC", "Programmatore","4:00","4:00","Completata"),
+    ("Parte Server PoC", "Programmatore","4:00","4:00","Completata"),
+
+    ("Verifica verbale riunione interna prima settimana", "Verificatore","0:15","0:30","Completata"),
+    ("Verifica verbale riunione interna seconda settimana", "Verificatore","0:15","0:30","Completata"),
+    ("Verifica AdR","Verificatore","1:00","1:30","Completata"),
+    ("Verifica PdP","Verificatore","1:00","1:30","Completata"),
+    ("Verifica NdP","Verificatore","1:30","1:00","Completata"),
+    ("Verifica PoC","Verificatore","4:00","3:30","Completata"),
+
+    ("Stesura verbale riunione prima settimana", "Responsabile","1:00","0:30","Completata"),
+    ("Stesura verbale riunione seconda settimana", "Responsabile","1:00","0:30","Completata"),  
+    ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile","4:30","4:30","Completata"),
+    ("Stesura diario di bordo", "Responsabile","0:30","0:30","Completata"),
+    ("Aggiunta task Jira", "Responsabile","0:30","0:30","Completata"),
+    ("Sezione sprint 3 PdP", "Responsabile","0:30","1:00","Completata")
+
+  ),
+  [Riassunto delle attivitá svolte durante lo Sprint 3]
+)
 
 ==== Consumo Tempo e Costi Effettivi (Consuntivo)
 La tabella sottostante illustra le ore produttive effettivamente rendicontate.
@@ -1097,10 +1355,21 @@ Lo Sprint ha mostrato un andamento complessivamente controllato. Gli obiettivi d
 ===== Dinamiche del Team e Coordinamento
 Il coordinamento interno è migliorato rispetto allo Sprint precedente. La distribuzione dei task è risultata più equilibrata e il processo di revisione ha beneficiato delle azioni correttive già introdotte.
 
+===== Squilibri orari preventivati e reali
+- *Responsabile:* Preventivato 7h, Consuntivo 7h 
+- *Amministratore:* Preventivato 3h, Consuntivo 3h
+- *Analista:* Preventivato 16h, Consuntivo 14h 
+ - Essendo questo sprint accavallato con la sessione di esami universitari, alcuni membri hanno dedicato meno tempo alla stesura dei documenti di analisi dei requisiti, nonostante fossero state giá ridotte a preventivo, la riduzione era stata troppo ottimistica.
+- *Progettista:* Preventivato 0h, Consuntivo 0h
+- *Programmatore:* Preventivato 12h, Consuntivo 12h
+- *Verificatore:* Preventivato 8h, Consuntivo 8h
+ - Notando che gli sprint precedenti avevano richiesto meno ore da verificatore, per questo sprint ne sono state preventivate meno, trovando, finalmente, una stima più aderente alla realtá.
+ 
 ===== Rischi Rilevati
 Nel corso dello Sprint si sono manifestati i seguenti rischi già censiti:
 - #link(<RI4>)[#underline[[RI4]]]: necessità di ulteriore allineamento su alcune scelte tecniche;
 - #link(<RT3>)[#underline[[RT3]]]: complessità nella modellazione iniziale dei flussi decisionali del PoC.
+- #link(<RI5>)[#underline[[RI5]]]: disomogeneità nella qualità dei contributi.
 
 Le azioni di mitigazione pianificate sono state applicate tempestivamente, limitando l’impatto sui deliverable.
 
@@ -1109,3 +1378,305 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
 - completare il Proof of Concept in vista della revisione RTB;
 - rifinire eventuali osservazioni emerse in fase di pre-review;
 - preparare il materiale per la presentazione di revisione.
+
+
+===== Aggiornamento preventivo a finire RTB
+
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    columns: (1fr, 1fr, 1fr, 1fr),
+    inset: 10pt,
+    align: center + horizon,
+    stroke: 0.5pt + luma(200),
+
+    table.header(
+      text(fill: white, weight: "bold")[Ruolo],
+      text(fill: white, weight: "bold")[Ore rimanenti per RTB],
+      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
+      text(fill: white, weight: "bold")[Preventivo a finire costi],
+    ),
+
+        [Responsabile], [2], [-],[€ 60,00],
+    [Amministratore], [12], [-], [€ 240,00],
+    [Analista], [21], text(fill: green)[-2 -> € -50],[€ 525,00],
+    [Progettista], [14], [-],[€ 350,00],
+    [Programmatore], [9],[-],[€ 135,00],
+    [Verificatore], [18],[-],[€ 270,00],
+
+    table.cell(fill: luma(240))[*Totale RTB*],
+    table.cell(fill: luma(240))[*76*],
+    table.cell(fill: luma(240))[#text(fill: green)[*-2 -> € -50*]],
+    table.cell(fill: luma(240))[*€ 1.580,00*],
+  ),
+  caption: [Aggiornamento preventivo a finire sprint 3],
+)
+#pagebreak()
+
+=== Sprint 4
+*Periodo:* dal 01/02/2026 al 21/02/2026
+
+==== Attività Principali
+Le attività svolte nel periodo di riferimento sono state incentrate sulla conclusioni di tutte le attività normative e di sviluppo a scopo di candidarsi alla revisione RTB.
+
+- *Piano di Progetto (PdP):*
+  - aggiunta della sezione prospetto attività per tutti gli sprint
+  - aggiunta del quarto sprint
+  - verifica generale del documento in prospettiva della RTB
+
+- *Norme di Progetto (NdP):*
+  - inserimento delle procedure adottate per la stesura della documentazione
+  - verifica generale del documento in vista della RTB
+
+- *Piano di Qualifica (PdQ):*
+  - inserimento test di accettazione
+  - rielaborazione test di sistema
+  - inserimento grafici per il quarto Sprint
+
+- *Analisi dei Requisiti (AdR):*
+  - modifica alla struttura dei requisiti e inserimento dei requisiti mancanti
+  - inserimento dei casi d'uso mancanti e riscrittura di quelli malposti
+  - modifica alla struttura dei diagrammi dei casi d'uso e inserimento di quelli mancanti
+  - revisione e verifica finale 
+
+- *Glossario:*
+  - aggiunta di altri termini e controllo dello standard per tutti i documenti
+
+- *Proof of Concept (PoC):*
+  - ultimazione delle varie parti 
+  - integrazione delle parti e verifica totale
+
+==== Prospetto Consumo Tempo (Preventivo)
+La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
+
+#sprint_table(
+  (
+    ([Basso Kevin], 0, 0, 0, 0, 6, 0),
+    ([Berengan Riccardo], 0, 0, 0, 0, 5, 1),
+    ([Martinello Riccardo], 0, 0, 0, 0, 5, 1),
+    ([Sandu Antonio], 7, 1, 5, 0, 0, 0),
+    ([Sgreva Andrea], 0, 0, 5, 0, 0, 1),
+    ([Suar Alberto], 0, 2, 2, 0, 5, 3),
+    ([Zago Alice], 0, 3, 3, 0, 0, 2),
+  ),
+  [Prospetto orario preventivato per lo Sprint 4],
+)
+
+==== Prospetto Attività
+#activity_table(
+  (
+    ("Inserimento requisiti di qualità e di vincolo", "Analista", "2:00", "2:30", "Completata"),
+    ("Inserimento della colonna della priorità dei requisiti","Analista", "1:30", "2:00", "Completata"),
+    ("Aggiunta UC mancanti con relativi diagrammi e requisiti", "Analista", "3:30", "7:30", "Completata"),
+    ("Aggiunta dei diagrammi mancanti ai casi d'uso esistenti", "Analista", "3:00", "6:00", "Completata"),
+    ("Aggiunta dei requisiti mancanti ai casi d'uso esistenti", "Analista", "2:00", "4:00", "Completata"),
+    ("Revisione del documento AdR", "Analista", "3:00", "5:00", "Completata"),
+
+    ("Link al glossario aggiornati in AdR", "Amministratore", "1:00", "1:00", "Completata"),
+    ("Aggiunta tabella attività sprint 1,2,3 a PdP", "Amministratore", "1:00", "1:00", "Completata"),
+    ("Test di Accettazione e rielaborazione Test di Sistema", "Amministratore", "1:30", "2:00", "Completata"),
+    ("Rielaborazione delle sezioni di procedure applicata nella stesura di AdR, PdP, PdQ in NdP", "Amministratore", "2:30", "3:00", "Completata"),
+
+    ("Sviluppo sottosistemi PoC", "Programmatore","16:00","18:00","Completata"),
+    ("Integrazione sottosistemi", "Programmatore","5:00","7:00","Completata"),
+
+    ("Verifica verbale riunione interna prima settimana", "Verificatore","0:30","0:30","Completata"),
+    ("Verifica verbale riunione interna seconda settimana", "Verificatore","0:30","0:30","Completata"),
+    ("Verifica AdR","Verificatore","2:00","6:00","Completata"),
+    ("Verifica PdP","Verificatore","2:00","3:30","Completata"),
+    ("Verifica NdP","Verificatore","2:00","3:30","Completata"),
+    ("Verifica PoC","Verificatore","1:00","2:00","Completata"),
+
+    ("Stesura verbale riunione prima settimana", "Responsabile","1:00","1:00","Completata"),
+    ("Stesura verbale riunione seconda settimana", "Responsabile","1:00","1:00","Completata"),  
+    ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile","2:30","2:00","Completata"),
+    ("Aggiunta task Jira", "Responsabile","0:30","1:00","Completata"),
+    ("Aggiunto sprint 4 nel PdP", "Responsabile","2:00","2:00","Completata")
+  ),
+  [Riassunto delle attivitá svolte durante lo Sprint 4]
+)
+
+==== Consumo Tempo e Costi Effettivi (Consuntivo)
+La tabella sottostante illustra le ore produttive effettivamente rendicontate.
+
+#sprint_table(
+  (
+    ([Basso Kevin], 0, 0, 3, 0, 6, 2),
+    ([Berengan Riccardo], 0, 0, 0, 0, 6, 3),
+    ([Martinello Riccardo], 0, 0, 0, 0, 6, 1),
+    ([Sandu Antonio], 7, 1, 7, 0, 0, 1),
+    ([Sgreva Andrea], 0, 0, 6, 0, 0, 2),
+    ([Suar Alberto], 0, 2, 6, 0, 7, 4),
+    ([Zago Alice], 0, 4, 5, 0, 0, 3),
+  ),
+  [Consuntivo orario effettivo per lo Sprint 4],
+)
+
+==== Retrospettiva dello Sprint 4
+
+===== Valutazione del Periodo
+Questo sprint nasce dal bisogno del team di concludere documentazione e PoC in vista della revisione RTB; essa era stata pianificata per il giorno 09/02/2026 tuttavia, a causa di ritardi accumulati nei precedenti sprint, è stato necessario posticipare la data di revisione al 23/02/2026. Essendo questo sprint non preventivato all'inizio delle attivitá, le ore di lavoro hanno sforato quelle preventivate per la revisione RTB.
+
+Lo Sprint ha mostrato un andamento sporadico. Gli obiettivi sono stati raggiunti ma con un grande ritardo rispetto a quanto preventivato.
+
+===== Stato di Avanzamento dei Deliverable
+- *Documentazione Normativa:* PdP, NdP e PdQ sono arrivati a una versione stabile, sono pronti per la revisione RTB.
+- *Analisi dei Requisiti:* Pronta per la revisione RTB.
+- *Proof of Concept:* Concluso e pronto per la RTB.
+
+===== Dinamiche del Team e Coordinamento
+Il coordinamento interno di questo Sprint è stato molto compromesso da impegni riguardanti la sessione invernale di esami universitari e altri motivi personali. La distribuzione delle task è risultata tuttavia relativamente equilibrata e il processo di revisione ha portato alla conclusione delle attività previste con un ritardo di una settimana rispetto alla fine dello Sprint prevista.
+
+===== Squilibri orari preventivati e reali
+ - Data il ritardo della chiusura dello Sprint è naturale che le ore consuntive siano molte di più rispetto a quelle previste, specialmente tenedo conto del fatto che il team si è impegnato in maniera da concludere le attività per la RTB.
+- *Responsabile:* Preventivato 7h, Consuntivo 8h 
+- *Amministratore:* Preventivato 15h, Consuntivo 18h
+- *Analista:* Preventivato 20h, Consuntivo 25h 
+ - Conflitti interni ed errata stima delle attività da svolgere all'interno del documento di analisi dei requisiti hanno portato a un grande investimento di risorse per poterlo concludere.
+- *Progettista:* Preventivato 0h, Consuntivo 0h
+- *Programmatore:* Preventivato 20h, Consuntivo 26h
+ - Problemi incontrati nello sviluppo del PoC hanno portato a un elevato impegno da parte dei membri per poter risolverli entro le scadenze fissate.
+- *Verificatore:* Preventivato 8h, Consuntivo 13h
+ 
+===== Rischi Rilevati
+Nel corso dello Sprint si sono manifestati i seguenti rischi, molti emersi per via del PoC e impegni didattici esterni al progetto:
+- #link(<RT4>)[#underline[[RT4]]]: durante lo sviluppo del PoC ci si è imbattuti in problemi di allucinazione da parte dei LLM utilizzati.
+- #link(<RT8>)[#underline[[RT8]]]: nella fase di integrazione il team ha dovuto risolvere i problemi emersi nel provare a collegare le varie parti sviluppate.
+- #link(<RI1>)[#underline[[RI1]]]: a causa della sessione di esami molti membri del team hanno dovuto ridurre drasticamente il tempo dedicato al progetto.
+- #link(<RI2>)[#underline[[RI2]]]: è successo che alcuni membri non fossero disponibili a causa di problemi di salute, rallentando l'andamento generale. 
+- #link(<RI4>)[#underline[[RI4]]]: la mancata comunicazione efficace su come svolgere alcune attività o il conflitto di idee hanno portato a un importante rallentamento e lavoro aggiuntivo.
+- #link(<RI5>)[#underline[[RI5]]]: è stata riscontrata una disomogeneità del lavoro svolto da parte dei membri durante lo sprint.
+- #link(<RCO1>)[#underline[[RCO1]]]: la fine delle attività è stata troppo ottimistica.
+- #link(<RCO3>)[#underline[[RCO3]]]: attività di revisione hanno portato a lavoro aggiuntivo conseguendo in uno sforamento delle ore preventivate. 
+
+===== Obiettivi per lo Sprint Successivo
+Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
+- iniziare le attività di progettazione
+- aumentare il ritmo di lavoro data la fine della sessione
+
+#pagebreak()
+===== Aggiornamento preventivo a finire RTB
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    columns: (1fr, 1fr, 1fr, 1fr),
+    inset: 10pt,
+    align: center + horizon,
+    stroke: 0.5pt + luma(200),
+
+    table.header(
+      text(fill: white, weight: "bold")[Ruolo],
+      text(fill: white, weight: "bold")[Ore rimanenti per RTB],
+      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
+      text(fill: white, weight: "bold")[Preventivo a finire costi],
+    ),
+
+    [Responsabile], [-5], [-],[€ -150,00],
+    [Amministratore], [5], text(fill: red)[+1 ->€ +20], [€ 100,00],
+    [Analista], [-6], text(fill: red)[+12 -> € +300],[€ -150,00],
+    [Progettista], [14], [-],[€ 350,00],
+    [Programmatore], [-16], text(fill: red)[+4 -> € +60],[€ -240,00],
+    [Verificatore], [2], text(fill: red)[+8 -> € +120],[€ 30,00],
+
+    table.cell(fill: luma(240))[*Totale RTB*],
+    table.cell(fill: luma(240))[*-6*],
+    table.cell(fill: luma(240))[#text(fill: red)[*+25 -> € +500*]],
+    table.cell(fill: luma(240))[*€ -60,00*],
+  ),
+  caption: [Aggiornamento preventivo a finire sprint 4],
+)
+
+=== Considerazioni finali per il preventivo della RTB
+Con lo Sprint 4 si concludono gli Sprint dedicati alla fase di RTB, e con questo il preventivo per il periodo verso la RTB. Come si nota dalla tabella sopra, data la natura straordinaria di questo sprint, alcuni ruoli hanno avuto un consumo di ore molto superiore a quanto preventivato, portando a un aumento dei costi rispetto a quanto previsto. Tuttavia, è importante sottolineare che questo aumento è stato necessario per garantire la conclusione delle attività in vista della RTB, e che senza questo impegno aggiuntivo non sarebbe stato possibile raggiungere gli obiettivi prefissati. Da notare come il ruolo del progettista non si è rivelato utile al raggiungimento degli obiettivi RTB, quindi nessuno ha mai ricoperto quel ruolo durante questa fase.
+
+Riguardo ai costi, il preventivo di 4620.00€ è stato sforato di poco (60,00€), lo sforamento é molto mitigato dal fatto che un ruolo che era stato preventivato non é stato utilizzando, questo ha portato a un risparmio di 350,00€ che ha mitigato lo sforamento causato dagli altri ruoli.
+
+
+Dal prossimo Sprint inizieranno le attività in vista della PB.
+
+#pagebreak()
+==== Riassunto utilizzo orario RTB
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    columns: (1fr, 1fr, 1fr, 1fr),
+    inset: 10pt,
+    align: center + horizon,
+    stroke: 0.5pt + luma(200),
+
+    table.header(
+      text(fill: white, weight: "bold")[Ruolo],
+      text(fill: white, weight: "bold")[Ore preventivate],
+      text(fill: white, weight: "bold")[Ore consumate],
+      text(fill: white, weight: "bold")[Differenze rispetto a preventivo degli sprint],
+    ),
+
+    [Responsabile], [21], [26],text(fill: red)[+5],
+    [Amministratore], [56], [51], text(fill: green)[-5],
+    [Analista], [63], [69],text(fill: red)[+6],
+    [Progettista], [14], [0], text(fill: green)[-14],
+    [Programmatore], [21], [37], text(fill: red)[+16],
+    [Verificatore], [42], [40], text(fill: green)[-2],
+
+    table.cell(fill: luma(240))[*Totale RTB*],
+    table.cell(fill: luma(240))[*217*],
+    table.cell(fill: luma(240))[*223*],
+    table.cell(fill: luma(240))[*+6*],
+  ),
+  caption: [Tabella riassuntiva utilizzo ore per RTB],
+)
+
+
+==== Budget PB aggiornato a fine RTB
+
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    columns: (1fr, 1fr, 1fr, 1fr),
+    inset: 10pt,
+    align: center + horizon,
+    stroke: 0.5pt + luma(200),
+
+    table.header(
+      text(fill: white, weight: "bold")[Ruolo],
+      text(fill: white, weight: "bold")[Ore preventivate ad inizio progetto],
+      text(fill: white, weight: "bold")[Ore rimanenti da preventivo RTB],
+      text(fill: white, weight: "bold")[Ore preventivo aggiornato a fine RTB],
+    ),
+
+    [Responsabile], [28], [-5],[23],
+    [Amministratore], [35], [5], [40],
+    [Analista], [21], [-6],[15],
+    [Progettista], [105], [14], [119],
+    [Programmatore], [119], [-16], [103],
+    [Verificatore], [105], [2], [107],
+
+    table.cell(fill: luma(240))[*Totale*],
+    table.cell(fill: luma(240))[*413*],
+    table.cell(fill: luma(240))[*-6*],
+    table.cell(fill: luma(240))[*407*],
+  ),
+  caption: [Preventivo a finire PB aggiornato a fine RTB],
+)
+#pagebreak()
+
+=== Sprint 5
+*Periodo:* dal 22/02/2026 al 07/03/2026
+
+==== Attività Principali
+//inserire attività
+
+==== Prospetto Consumo Tempo (Preventivo)
+La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
+#sprint_table(
+  (
+    ([Basso Kevin], 0, 0, 0, 8, 0, 0),
+    ([Berengan Riccardo], 7, 0, 0, 8, 0, 0),
+    ([Martinello Riccardo], 0, 0, 0, 8, 0, 0),
+    ([Sandu Antonio], 0, 0, 0, 8, 0, 0),
+    ([Sgreva Andrea], 0, 0, 0, 6, 0, 2),
+    ([Suar Alberto], 0, 0, 0, 8, 0, 0),
+    ([Zago Alice], 0, 0, 0, 6, 0, 2),
+  ),
+  [Prospetto orario preventivato per lo Sprint 5],
+)
