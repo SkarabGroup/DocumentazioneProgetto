@@ -1657,7 +1657,7 @@ Dal prossimo Sprint inizieranno le attività in vista della PB.
 #pagebreak()
 
 === Sprint 5
-*Periodo:* dal 22/02/2026 al 07/03/2026
+*Periodo:* dal 28/02/2026 al 14/03/2026
 
 ==== Attività Principali
 //inserire attività
