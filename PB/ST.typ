@@ -10,11 +10,13 @@
 2. Aprite le impostazioni di VS Code e cercate plantuml.ex, deselezionate tutte le checkbox e inserite in outputDir assets/st_diagrams/svg
 3. Sempre dalle impostazioni cercate plantuml.pr e assicuratevi che il primo
 checkbox Plantuml: Preview Auto Update sia attivo
-4. Dalla cartella assets/st_diagrams entrate nella subfolder plantuml e create il file .plantuml. Per la sintassi guardate https://plantuml.com/
-5. Assicuratevi sempre che ci sia 
+4. Installare graphviz (sudo apt install graphviz)
+5. Dalla cartella assets/st_diagrams entrate nella subfolder del tipo di diagramma che intendete creare, entrate in plantuml e create il file .plantuml; Per la sintassi guardate https://plantuml.com/
+6. Assicuratevi sempre che ci sia 
 hide circles
 skinparam classAttributeIconSize 0 
 dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
+7. per salvare, tasto destro sul file .plantuml, export in svg e si salverá nella cartella svg
 */
 
 

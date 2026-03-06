@@ -1,4 +1,4 @@
-#let _diagram(kind, name, widthImage: 35%) = {
+#let _diagram(kind, name, widthImage) = {
   let path = "../assets/st_diagrams/svg/" + name + ".svg"
   let autoLabel = kind + "-" + name
 
@@ -8,14 +8,18 @@
   )
 }
 
-#let classDiagram(name, width: 10%) = {
-  _diagram("Class", name)
+#let codeDiagram(name, width) = {
+  _diagram("Code", name, width)
 }
 
-#let activityDiagram(name, width: 50%) = {
-  _diagram("Activity", name)
+#let componentDiagram(name, width) = {
+  _diagram("Component", name, width)
 }
 
-#let sequenceDiagram(name, width: 50%) = {
-  _diagram("Sequence", name)
+#let containerDiagram(name, width) = {
+  _diagram("Container", name, width)
+}
+
+#let contextDiagram(name, width) = {
+  _diagram("Context", name, width)
 }
