@@ -32,7 +32,7 @@
 #let meetingStartingTime = "14:00"
 #let meetingEndingTime = "14:30"
 #let location = "Microsoft Teams"
-#let chair = "Zago Alice"
+#let chair = "Berengan Riccardo"
 #let attendees = "Suar Alberto, Zago Alice, Basso Kevin, Berengan Riccardo, Sandu Antonio, Sgreva Andrea"
 #let assenti = "Martinello Riccardo"
 #let managers = " Battistella Francesco"
@@ -64,7 +64,7 @@
   fill: (x, y) => if y == 0 { gray.lighten(0%) },
   [*Data*], [*Versione*], [*Descrizione*], [*Redattore*], [*Verificatore*],
   [2026-03-05], [1.0.0], [Verifica verbale], [], [Riccardo Berengan],
-  [2026-03-05], [0.1.0], [Prima stesura del documento], [Riccardo Berengan], [],
+  [2026-03-05], [0.1.0], [Prima stesura del documento], [Riccardo Berengan], [Suar Alberto],
 )
 
 #pagebreak()
