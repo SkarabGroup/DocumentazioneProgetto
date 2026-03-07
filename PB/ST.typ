@@ -24,7 +24,13 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #set page(numbering: "1", header: header("Specifica Tecnica"), footer: footer())
 #let history = (
   (
-    "2025/03/04",
+    "2026/03/07",
+    "0.2.0",
+    "Prima strutturazione della sezione tecnologie",
+    members.berengan
+  ),
+  (
+    "2026/03/04",
     "0.1.0",
     "Prima stesura del documento",
     members.suar,
@@ -114,3 +120,61 @@ I seguenti documenti hanno valore vincolante per la redazione della Specifica Te
   #underline(link("https://drive.google.com/file/d/1cpi6rORMxFtC91nI6_sPrG1Xn-28z8eI/view?usp=sharing")) \
   (ultimo accesso: *05/03/2026*)
 #pagebreak()
+
+
+= Tecnologie
+Il progetto è basato su un insieme di teconologie attentamente analizzate e scelte dal team Skarabgroup. Le tecnologie in questione sono state selezionate in base a: 
+- Capacità di assolvere al proprio compito individualmente
+- Semplicità di utilizzo da parte dei membri del team
+- Capacità di interazione con le altre teconologie
+- Capacità di modularizzazione del codice sorgete
+- Necessità architetturali del progetto
+- Necessità 
+
+La scelta tecnologica è stata fatta in base all'analisi dei requisiti del capitolato. Il capitolato richiede lo sviluppo di una Web App che sia in grado di fare un'analisi approfondita di repository GitHub e non, con una particolare attenzione all'analisi di repository private.
+Quest'analisi deve comprendere:
+- Analisi statica del codice
+- Analisi semantica, sintattica e della coerenza della documentazione risptetto al codice
+- Errori e falle di sicurezza rispetto allo standard OWASP
+Inoltre l'applicazione deve essere sviluppata in modo da poter essere facilmente convertita in uno strumento integrabile nel i processi CD/CI, e non solo essere un'applicazione di tipo standalone.
+
+Queste teconologie sono state dunque organizzate e descritte per categoria e ruolo svolto nell'architettura dell'applicazione.\ Le categorie sono le seguenti :
+- Liguaggi di programmazione per lo svulippo del codice sorgente
+- Framework per la semplificazione e maggior sicurezza durante lo sviluppo
+- Teconologie per il deployment
+- Strumenti di analisi esterni (ad es. Semgrep)
+- Modelli di intelligenza artificiale per l'analisi ed il sistema agentico
+- Tecnologie per il monitoraggio dei microservizi
+#pagebreak()
+== Linguaggi di programmazione
+#figure(  
+  table(
+      columns: (1fr, 1fr, 3fr),
+    inset: 10pt,
+    stroke: 0.5pt + luma(200),
+    table.header([*Tecnologia*], [*Vesione*], [*Descrizione*]),
+    fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+    align: (col, row) => (center, left, center).at(col) + horizon,
+
+    [Python],[3.11.15],[Python è un linguaggio di programmazione open source di tipo interpretato. È uno dei leader per lo sviluppo di agenti di intelligenza artificiale. Alcuni dei migliori framework per lo sviluppo degli agenti IA sono infatti scritti in python. Semplifica la scrittura del codice delgi agenti e offre innumerevoli risorse per uno sviluppo che si adatta in base alle necessità dello sviluppatore],
+    [TypeScript], [5.9.3], [TypeScript è un linguaggio di programmazione sviluppato da Microsoft che estende JavaScript aggiungendo un sistema di tipizzazione statica. Grazie a funzionalità come tipi espliciti, interfacce, generics e strumenti avanzati di refactoring, facilita la collaborazione tra sviluppatori e la gestione di codebase complessi.],
+    [JavaScript], [ECMAScript 2025], [JavaScript è un linguaggio di programmazione ad alto livello utilizzato principalmente per lo sviluppo di applicazioni web lato client. Consente di creare interfacce dinamiche e interattive all’interno delle pagine web, gestendo eventi, manipolazione del DOM e comunicazioni asincrone con servizi backend.
+    JavaScript può essere utilizzato anche lato server tramite ambienti di esecuzione come Node.js.],
+  ),
+  caption: "Linguaggi di programmazione"
+)
+== Frameworks
+#figure(
+  table(
+      columns: (1fr, 1fr, 3fr),
+    inset: 10pt,
+    stroke: 0.5pt + luma(200),
+    table.header([*Tecnologia*], [*Vesione*], [*Descrizione*]),
+    fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+    align: (col, row) => (center, left, center).at(col) + horizon,
+
+    [Strands], [1.26.0], [Strands Agents SDK è un framework per agenti AI autonomi basato su LLM, che fornisce un ciclo di pianificazione, strumenti integrabili e orchestrazione del workflow, permettendo la costruzione di agenti intelligenti estendibili in Python e TypeScript.],
+    [Nestjs], [11.1.3], [NestJS è un framework Node.js/TypeScript per costruire applicazioni server‑side strutturate e scalabili. Per maggiori informazioni si consiglia di consultare il #underline(link("https://docs.nestjs.com")[sito ufficiale])]
+  ),
+  caption: "Frameworks"
+)
