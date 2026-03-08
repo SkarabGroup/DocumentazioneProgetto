@@ -127,20 +127,19 @@ I seguenti documenti hanno valore vincolante per la redazione della Specifica Te
 
 
 = Tecnologie
+#TODO("questa sezione è solo un placeholder andrà modificata in fututo man mano che vengono acquisite le comptenze e prese le scelte")
 Il progetto è basato su un insieme di tecnologie attentamente analizzate e scelte dal team SkarabGroup. Le tecnologie in questione sono state selezionate in base a: 
 - Capacità di assolvere al proprio compito individualmente
-- Semplicità di utilizzo da parte dei membri del team
 - Capacità di interazione con le altre tecnologie
 - Capacità di modularizzazione del codice sorgente
-- Necessità architetturali del progetto
-- Necessità #TODO("necessità di cosa?")
 
-La scelta tecnologica è stata fatta in base all'analisi dei requisiti del capitolato. Il capitolato richiede lo sviluppo di una Web App che sia in grado di fare un'analisi approfondita di repository GitHub e non #TODO("Cosa intendi con 'e non'?"), con una particolare attenzione all'analisi di repository private.
+La scelta tecnologica è stata fatta in base all'analisi dei requisiti del capitolato. Il capitolato richiede lo sviluppo di una Web App che sia in grado di fare un'analisi approfondita di repository GitHub, con una particolare attenzione all'analisi di repository private.
 Quest'analisi deve comprendere:
 - Analisi statica del codice
 - Analisi semantica, sintattica e della coerenza della documentazione rispetto al codice
 - Errori e falle di sicurezza rispetto allo standard OWASP
 Inoltre l'applicazione deve essere sviluppata in modo da poter essere facilmente convertita in uno strumento integrabile nei processi #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#continuous-integration")[#def[CI]]/#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#continuous-deployment")[#def[CD]], e non solo essere un'applicazione di tipo standalone.
+#TODO("Mettere questa sezione in introduzione")
 
 Queste tecnologie sono state dunque organizzate e descritte per categoria e ruolo svolto nell'architettura dell'applicazione.\ Le categorie sono le seguenti :
 - Linguaggi di programmazione per lo sviluppo del codice sorgente
@@ -149,6 +148,7 @@ Queste tecnologie sono state dunque organizzate e descritte per categoria e ruol
 - Strumenti di analisi esterni (ad es. Semgrep)
 - Modelli di intelligenza artificiale per l'analisi ed il sistema agentico
 - Tecnologie per il monitoraggio dei microservizi
+
 #pagebreak()
 == Linguaggi di programmazione
 #figure(  
