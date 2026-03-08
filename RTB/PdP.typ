@@ -1627,19 +1627,47 @@ Dal prossimo Sprint inizieranno le attività in vista della PB.
 *Periodo:* dal 22/02/2026 al 07/03/2026
 
 ==== Attività Principali
-//inserire attività
+Le attività svolte nel periodo di riferimento sono state incentrate sulla progettazione per il corretto avvio della PB e la rifinitura del documento AdR secondo le correzioni segnalate dal Professor. Cardin dopo il colloquio della revisione RTB.
+
+- *Piano di Progetto(PdP):*
+  - Aggiunta del quinto sprint
+- *Norme di Progetto (NdP):*
+  - Modifica definizione del ruolo di verificatore
+- *Piano di Qualifica (PdQ):*
+  - aggiunta del cruscotto di valutaizone per il quinto sprint
+- *Analisi dei Requisiti (AdR)*:
+  - Modifica del documento basate sulle correzioni segnalate dal Professor. Cardin.
+- *Specifica Tecnica (ST):*
+  - prima stesura del documento comprensiva di introduzione e tecnologie utilizzate
+  - Scrittura di alcuni lati dell'architettura a microservizi
 
 ==== Prospetto Consumo Tempo (Preventivo)
 La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
 #sprint_table(
   (
     ([Basso Kevin], 0, 0, 0, 8, 0, 0),
-    ([Berengan Riccardo], 7, 0, 0, 8, 0, 0),
-    ([Martinello Riccardo], 0, 0, 0, 8, 0, 0),
+    ([Berengan Riccardo], 7, 0, 1, 7, 0, 0),
+    ([Martinello Riccardo], 0, 0, 0, 6, 0, 2),
     ([Sandu Antonio], 0, 0, 0, 8, 0, 0),
-    ([Sgreva Andrea], 0, 0, 0, 6, 0, 2),
+    ([Sgreva Andrea], 0, 0, 2, 6, 0, 0),
     ([Suar Alberto], 0, 0, 0, 8, 0, 0),
-    ([Zago Alice], 0, 0, 0, 6, 0, 2),
+    ([Zago Alice], 0, 0, 1, 6, 0, 0),
   ),
   [Prospetto orario preventivato per lo Sprint 5],
+)
+
+==== Prospetto attività
+#activity_table(
+  (
+    ("Modifica del documento AdR in conformità alle correzioni proposte", "Analista", "2:00", "-", "-"),
+    ("Verifica delle modifiche al documento AdR", "Verificatore", "1:00","-", "-"),
+    ("Modifica della definizione di verificatore nelle NdP", "Analista", "0:30", "-", "-"),
+    ("Verifica delle modifiche in NdP", "Verificatore", "1:00", "-", "-"),
+    ("Scrittura del diario di bordo del giorno 2026-03-11", "Analista", "1:00", "-", "-"),
+    ("Prima stesura del documento ST", "Analista", "1:00", "-", "-"),
+    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa alla persistenza", "Progettista", "2:00", "-", "-"),
+    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa al backend", "Progettista", "2:00", "-", "-"),    
+    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa agli agenti LLM", "Progettista", "2:00", "-", "-"),
+  ),
+  [Riassunto delle attività svolte durante lo sprint 5]
 )
