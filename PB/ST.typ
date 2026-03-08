@@ -2,7 +2,7 @@
 #import "../lib/variables.typ": *
 #import "../lib/stDiagramUtil.typ": *
 
-#let versione = "v0.1.0"
+#let versione = "v0.2.0"
 
 /*
 === FUNZIONAMENTO DEL DOCUMENTO ===
@@ -27,13 +27,15 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
     "2026/03/07",
     "0.2.0",
     "Prima strutturazione della sezione tecnologie",
-    members.berengan
+    members.berengan,
+    members.suar
   ),
   (
     "2026/03/04",
     "0.1.0",
     "Prima stesura del documento",
     members.suar,
+    members.berengan
   ),
 )
 
@@ -50,7 +52,9 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #pagebreak()
 
 = Introduzione 
-Il presente documento descrive l'#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-dei-requisiti")[#def("Analisi dei Requisiti")] relativo al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def("Code Guardian")], commissionato dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def("Var Group")] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def("Skarab Group")] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
+Il presente documento descrive l'#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-dei-requisiti")[#def("Analisi dei Requisiti")] #TODO("correggere 'Analisi dei Requisiti' in 'Specifica Tecnica' e aggiungere termine da Glossario") relativo al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def("Code Guardian")], commissionato dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def("Var Group")] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def("Skarab Group")] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
+
+#TODO("Rispettare la struttura introduttiva adottata anche negli altri documenti")
 
 Il progetto ha come obiettivo la realizzazione di un sistema per l'automazione dei processi di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] delle vulnerabilità del software. L'architettura si basa sul paradigma degli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] software intelligenti, operanti su repository di codice sorgente. La conformità del sistema è vincolata ai requisiti definiti nel
 
@@ -123,25 +127,25 @@ I seguenti documenti hanno valore vincolante per la redazione della Specifica Te
 
 
 = Tecnologie
-Il progetto è basato su un insieme di teconologie attentamente analizzate e scelte dal team Skarabgroup. Le tecnologie in questione sono state selezionate in base a: 
+Il progetto è basato su un insieme di tecnologie attentamente analizzate e scelte dal team SkarabGroup. Le tecnologie in questione sono state selezionate in base a: 
 - Capacità di assolvere al proprio compito individualmente
 - Semplicità di utilizzo da parte dei membri del team
-- Capacità di interazione con le altre teconologie
-- Capacità di modularizzazione del codice sorgete
+- Capacità di interazione con le altre tecnologie
+- Capacità di modularizzazione del codice sorgente
 - Necessità architetturali del progetto
-- Necessità 
+- Necessità #TODO("necessità di cosa?")
 
-La scelta tecnologica è stata fatta in base all'analisi dei requisiti del capitolato. Il capitolato richiede lo sviluppo di una Web App che sia in grado di fare un'analisi approfondita di repository GitHub e non, con una particolare attenzione all'analisi di repository private.
+La scelta tecnologica è stata fatta in base all'analisi dei requisiti del capitolato. Il capitolato richiede lo sviluppo di una Web App che sia in grado di fare un'analisi approfondita di repository GitHub e non #TODO("Cosa intendi con 'e non'?"), con una particolare attenzione all'analisi di repository private.
 Quest'analisi deve comprendere:
 - Analisi statica del codice
-- Analisi semantica, sintattica e della coerenza della documentazione risptetto al codice
+- Analisi semantica, sintattica e della coerenza della documentazione rispetto al codice
 - Errori e falle di sicurezza rispetto allo standard OWASP
-Inoltre l'applicazione deve essere sviluppata in modo da poter essere facilmente convertita in uno strumento integrabile nel i processi CD/CI, e non solo essere un'applicazione di tipo standalone.
+Inoltre l'applicazione deve essere sviluppata in modo da poter essere facilmente convertita in uno strumento integrabile nei processi #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#continuous-integration")[#def[CI]]/#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#continuous-deployment")[#def[CD]], e non solo essere un'applicazione di tipo standalone.
 
-Queste teconologie sono state dunque organizzate e descritte per categoria e ruolo svolto nell'architettura dell'applicazione.\ Le categorie sono le seguenti :
-- Liguaggi di programmazione per lo svulippo del codice sorgente
+Queste tecnologie sono state dunque organizzate e descritte per categoria e ruolo svolto nell'architettura dell'applicazione.\ Le categorie sono le seguenti :
+- Linguaggi di programmazione per lo sviluppo del codice sorgente
 - Framework per la semplificazione e maggior sicurezza durante lo sviluppo
-- Teconologie per il deployment
+- Tecnologie per il deployment
 - Strumenti di analisi esterni (ad es. Semgrep)
 - Modelli di intelligenza artificiale per l'analisi ed il sistema agentico
 - Tecnologie per il monitoraggio dei microservizi
@@ -152,11 +156,11 @@ Queste teconologie sono state dunque organizzate e descritte per categoria e ruo
       columns: (1fr, 1fr, 3fr),
     inset: 10pt,
     stroke: 0.5pt + luma(200),
-    table.header([*Tecnologia*], [*Vesione*], [*Descrizione*]),
+    table.header([*Tecnologia*], [*Versione*], [*Descrizione*]),
     fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
     align: (col, row) => (center, left, center).at(col) + horizon,
 
-    [Python],[3.11.15],[Python è un linguaggio di programmazione open source di tipo interpretato. È uno dei leader per lo sviluppo di agenti di intelligenza artificiale. Alcuni dei migliori framework per lo sviluppo degli agenti IA sono infatti scritti in python. Semplifica la scrittura del codice delgi agenti e offre innumerevoli risorse per uno sviluppo che si adatta in base alle necessità dello sviluppatore],
+    [Python],[3.11.15],[Python è un linguaggio di programmazione open source di tipo interpretato. È uno dei leader per lo sviluppo di agenti di intelligenza artificiale. Alcuni dei migliori framework per lo sviluppo degli agenti IA sono infatti scritti in python. Semplifica la scrittura del codice degli agenti e offre innumerevoli risorse per uno sviluppo che si adatta in base alle necessità dello sviluppatore],
     [TypeScript], [5.9.3], [TypeScript è un linguaggio di programmazione sviluppato da Microsoft che estende JavaScript aggiungendo un sistema di tipizzazione statica. Grazie a funzionalità come tipi espliciti, interfacce, generics e strumenti avanzati di refactoring, facilita la collaborazione tra sviluppatori e la gestione di codebase complessi.],
     [JavaScript], [ECMAScript 2025], [JavaScript è un linguaggio di programmazione ad alto livello utilizzato principalmente per lo sviluppo di applicazioni web lato client. Consente di creare interfacce dinamiche e interattive all’interno delle pagine web, gestendo eventi, manipolazione del DOM e comunicazioni asincrone con servizi backend.
     JavaScript può essere utilizzato anche lato server tramite ambienti di esecuzione come Node.js.],
