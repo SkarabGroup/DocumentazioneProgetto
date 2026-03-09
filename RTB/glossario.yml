@@ -105,10 +105,10 @@ C:
     descrizione: Indicatore di efficienza dei costi (EVM). Rapporto tra valore guadagnato (EV) e costo reale (AC); valori inferiori a 1 indicano un utilizzo inefficiente del budget.
   Coverage:
     alternative: Code Coverage
-    descrizione: Misura che indica la percentuale di codice sorgente esguito durante i test automatizzati.
     descrizione: Pratica DevOps che prevede l'integrazione frequente del codice in un repository centrale, verificata automaticamente da build e test per rilevare errori il prima possibile.
   Cost Performance Index:
     acronimo: CPI
+    descrizione: Misura che indica la percentuale di codice sorgente esguito durante i test automatizzati.
   Coupling:
     alternative: Accoppiamento
     descrizione: Misura del grado di interdipendenza tra i componenti di un sistema. Un basso accoppiamento favorisce la manutenibilità e la modularità.
