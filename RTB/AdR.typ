@@ -1265,10 +1265,9 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza la lista dei repository sottoposti a scansione
-    - Ogni elemento della lista espone i dati identificativi del repository #link(<UC5.1>)[#underline[\[UC5.1\]]]
   ],
   inclusioni: [
-    - #link(<UC5.1>)[#underline[\[UC5.1\]]]
+    - Nessuna
   ],
   estensioni: [
     - #link(<UC5.0.1>)[#underline[\[UC5.0.1\]]] // Lista vuota
@@ -1321,20 +1320,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Rilevamento di un'anomalia tecnica durante la fase di recupero dei dati",
 )[]
 
-==== UC5.1: Visualizzazione informazioni identificative repository <UC5.1>
-#useCase(
-  attore: "Utente Autorizzato",
-  pre: [
-    - L'utente sta visualizzando la lista dei repository analizzati #link(<UC5>)[#underline[\[UC5\]]]
-  ],
-  post: [
-    - L'utente dispone dei dati necessari per distinguere i diversi repository in elenco
-  ],
-  scenari: [
-    - L'utente visualizza nome del repository, URL di riferimento e data dell'ultima analisi eseguita per ogni repository presente nella lista
-  ],
-  trigger: "L'utente accede alla schermata di riepilogo dei repository",
-)[]
+//ex UC5.1 spostato in fondo con un altro numero
 
 === UC6: Visualizzazione report di analisi repository <UC6>
 #useCase(
@@ -1358,7 +1344,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   estensioni: [
     - Nessuna
   ],
-  trigger: "L'utente richiede la consultazione dei dettagli di un repository analizzato",
+  trigger: "L'utente richiede la consultazione dei risultati dettagliati degli audit eseguiti di un repository analizzato",
 )[
   #useCaseDiagram("6", "UC6 - Visualizzazione report di analisi")
 ]
@@ -1507,8 +1493,8 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente visualizza i risultati tecnici dell'analisi per le aree scelte
   ],
   scenari: [
-    - L'utente visualizza le metriche e le criticità relative alla sezione consultata
-    - L'utente visualizza l'elenco dei suggerimenti di risoluzione (remediation) #link(<UC6.3.1>)[#underline[\[6.3.1\]]]
+    - L'utente visualizza, contemporaneamente sulla stessa schermata, le metriche e le criticità relative alle sezioni selezionate
+    - L'utente visualizza l'elenco dei suggerimenti di risoluzione (remediation) per ogni sezione selezionata #link(<UC6.3.1>)[#underline[\[6.3.1\]]]
   ],
   inclusioni: [
     - #link(<UC6.3.1>)[#underline[\[6.3.1\]]]
@@ -1537,6 +1523,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza la lista delle remediation suggerite
+    - Per ogni elemento della lista, l'utente visualizza un titolo identificativo, il livello di criticità, e una breve descrizione dell'intervento consigliato
   ],
   inclusioni: [
     - Nessuna
@@ -1786,6 +1773,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza l'elenco dei suggerimenti correttivi per i difetti del codice
+    - Per ogni elemento della lista, l'utente visualizza il file e la localizzazione dell'errore, il livello di severità e lo snippet di codice suggerito per la risoluzione
   ],
   inclusioni: [
     - Nessuna
@@ -1902,6 +1890,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza l'elenco delle azioni correttive per la sicurezza
+    - Per ogni elemento della lista, l'utente visualizza il nome della dipendenza/libreria vulnerabile, il codice CVE di riferimento, il grado di severità (CVSS) e la versione sicura consigliata
   ],
   inclusioni: [
     - Nessuna
@@ -2018,6 +2007,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza l'elenco dei suggerimenti di miglioramento riguardanti la documentazione
+    - Per ogni elemento della lista, l'utente visualizza il nome del file di documentazione interessato, il livello di severità e i suggerimenti testuali per l'integrazione o la correzione
   ],
   inclusioni: [
     - Nessuna
@@ -2062,6 +2052,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   scenari: [
     - L'utente visualizza la lista dei repository analizzati ordinati in base al punteggio globale calcolato
+    - Per ogni riga della graduatoria, l'utente visualizza la posizione in classifica, il nome del repository, il punteggio globale e un indicatore di trend rispetto all'analisi precedente
   ],
   inclusioni: [
     - Nessuna
@@ -2152,7 +2143,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Il formato di output risulta correttamente impostato
   ],
   scenari: [
-    - L'utente seleziona un formato tra le opzioni disponibili
+    - L'utente seleziona un formato di esportazione tra le opzioni disponibili (PDF o JSON)
   ],
   inclusioni: [
     - Nessuna
@@ -2221,13 +2212,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente inserisce la chiave di accesso attuale #link(<UC15.1>)[#underline[\[UC15.1\]]]
     - L'utente definisce la nuova chiave di accesso #link(<UC15.2>)[#underline[\[UC15.2\]]]
     - L'utente impartisce il comando di conferma della modifica #link(<UC15.3>)[#underline[\[UC15.3\]]]
-    - L'utente visualizza la notifica di avvenuto aggiornamento #link(<UC15.4>)[#underline[\[UC15.4\]]]
   ],
   inclusioni: [
     - #link(<UC15.1>)[#underline[\[UC15.1\]]]
     - #link(<UC15.2>)[#underline[\[UC15.2\]]]
     - #link(<UC15.3>)[#underline[\[UC15.3\]]]
-    - #link(<UC15.4>)[#underline[\[UC15.4\]]]
   ],
   estensioni: [
     - Nessuna
@@ -2399,6 +2388,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   post: [
     - L'aggiornamento delle credenziali viene trasmesso per la persistenza
+    - l'utente riceve una notifica email automatica di conferma dell'avvenuta modifica
   ],
   scenari: [
     - L'utente aziona il comando di conferma definitiva per l'aggiornamento del profilo
@@ -2410,27 +2400,6 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "L'utente conferma la volontà di procedere con il cambio password",
-)[]
-
-==== UC15.4: Notifica avvenuta modifica password <UC15.4>
-#useCase(
-  attore: "Utente Autorizzato",
-  pre: [
-    - La persistenza dei nuovi dati è stata completata con successo #link(<UC15.3>)[#underline[\[UC15.3\]]]
-  ],
-  post: [
-    - L'utente visualizza l'esito positivo dell'operazione di modifica
-  ],
-  scenari: [
-    - L'utente riceve conferma visiva dell'avvenuto aggiornamento delle credenziali
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - Nessuna
-  ],
-  trigger: "Il completamento con successo della procedura di aggiornamento",
 )[]
 
 === UC16: Visualizzazione singola remediation di sezione generica <UC16>
@@ -3238,7 +3207,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Rilevamento di un errore di connessione o rifiuto da parte del fornitore del servizio di messaggistica",
 )[]
 
-=== UC27: Ricezione notifica completamento analisi <UC27>
+/* === UC27: Ricezione notifica completamento analisi <UC27>
 #useCase(
   attore: "Utente Autorizzato",
   pre: [
@@ -3325,7 +3294,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - Nessuna
   ],
   trigger: "Mancata ricezione della comunicazione di errore",
-)[]
+)[] */
 
 === UC29: Gestione del codice OAuth GitHub <UC29>
 #useCase(
@@ -3758,16 +3727,17 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente Avanzato",
   pre: [
     - L'utente dispone di una sessione attiva e ha collegato GitHub #link(<UC3>)[#underline[\[UC3\]]]
+    - L'utente accede alla sezione di gestione repository privati
   ],
   post: [
     - L'utente visualizza l'elenco dei repository privati registrati nel proprio catalogo personale
   ],
   scenari: [
-    - L'utente accede alla sezione di gestione repository privati
     - L'utente visualizza la lista dei repository privati registrati
+    - Ogni elemento della lista espone le informazioni identificative di ogni repository privato #link(<UC41.1>)[#underline[\[UC41.1\]]]
   ],
   inclusioni: [
-    - Nessuna
+    - #link(<UC41.1>)[#underline[\[UC41.1\]]]
   ],
   estensioni: [
     - #link(<UC41.0.1>)[#underline[\[UC41.0.1\]]]
@@ -3797,6 +3767,28 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "Recupero di una lista priva di elementi per il profilo avanzato",
 )[]
+
+=== UC41.1: Visualizzazione informazioni repository privato <UC41.1>
+#useCase(
+  attore: "Utente Avanzato",
+  pre: [
+    - L'utente sta visualizzando la lista dei repository privati #link(<UC41>)[#underline[\[UC41\]]]
+  ],
+  post: [
+    - L'utente dispone dei dati necessari per distinguere i diversi repository in elenco
+  ],
+  scenari: [
+    - L'utente visualizza il nome del repository e l'URL della risorsa per ogni elemento presente nella lista
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente accede alla schermata del catalogo personale dei repository privati",
+)[
+]
 
 === UC42: Rimozione di un proprio repository privato <UC42>
 #useCase(
@@ -3871,16 +3863,17 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   attore: "Utente Avanzato",
   pre: [
     - L'utente seleziona un repository dal proprio catalogo #link(<UC41>)[#underline[\[UC41\]]]
+    - L'utente accede alla sezione di gestione permessi per il repository scelto
   ],
   post: [
     - L'utente visualizza l'elenco dei profili autorizzati alla consultazione dei report per la risorsa selezionata
   ],
   scenari: [
-    - L'utente accede alla sezione di gestione permessi per il repository scelto
     - L'utente visualizza la lista degli utenti autorizzati
+    - L'utente visualizza le informazioni identificative di ogni profilo autorizzato #link(<UC43.1>)[#underline[\[UC43.1\]]]
   ],
   inclusioni: [
-    - Nessuna
+    - #link(<UC43.1>)[#underline[\[UC43.1\]]]
   ],
   estensioni: [
     - #link(<UC43.0.1>)[#underline[\[UC43.0.1\]]]
@@ -3910,6 +3903,28 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   ],
   trigger: "Recupero di una lista di autorizzazioni priva di profili esterni",
 )[]
+
+=== UC43.1: Visualizzazione dati profilo autorizzato <UC43.1>
+#useCase(
+  attore: "Utente Avanzato",
+  pre: [
+    - L'utente sta visualizzando la lista dei profili autorizzati per un repository #link(<UC43>)[#underline[\[UC43\]]]
+  ],
+  post: [
+    - L'utente dispone dei dati necessari per distinguere i diversi profili autorizzati in elenco
+  ],
+  scenari: [
+    - L'utente visualizza lo username e/o l'indirizzo email associato di ogni profilo presente nella lista
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - Nessuna
+  ],
+  trigger: "L'utente accede alla schermata di gestione permessi per un repository privato",
+)[
+]
 
 === UC44: Aggiunta utente autorizzato <UC44>
 #useCase(
@@ -4208,6 +4223,22 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Visualizzazione dell'avviso di avvertimento circa l'irreversibilità della cancellazione",
 )[]
 
+//ex UC5.1
+==== UC48: Visualizzazione informazioni identificative repository <UC48>
+#useCase(
+  attore: "Utente Autorizzato",
+  pre: [
+    - L'utente seleziona un repository dalla lista dei repository analizzati #link(<UC5>)[#underline[\[UC5\]]]
+  ],
+  post: [
+    - L'utente visualizza le informazioni identificative del repository selezionato
+  ],
+  scenari: [
+    - L'utente visualizza nome del repository, URL di riferimento e data dell'ultima analisi eseguita del repository presente nella lista
+  ],
+  trigger: "L'utente accede alla sezione informativa del repository selezionato",
+)[]
+
 #pagebreak()
 
 = Requisiti di Sistema
@@ -4484,9 +4515,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   [Il Sistema deve ordinare l'elenco dei repository analizzati in ordine decrescente rispetto alla data dell'ultima analisi disponibile.],
   [#link(<UC5>)[#underline[\[UC5\]]]],
 
-  [#FRObx],
-  [Il Sistema deve esporre per ogni elemento della lista: nome del repository, URL di riferimento e data dell'ultima analisi.],
-  [#link(<UC5.1>)[#underline[\[UC5.1\]]]],
+  //ex requisito UC5.1 spostato in UC48
 
   [#FRObx],
   [Il Sistema deve inibire la visualizzazione della lista e mostrare un'informativa specifica qualora non risultino repository analizzati.],
@@ -4548,11 +4577,11 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
 
   // --- RISULTATI E REMEDIATION (UC6.3) ---
   [#FRObx],
-  [Il Sistema deve presentare le metriche tecniche aggregate (es. punteggi di qualità, numero bug, vulnerabilità) per ogni sezione attiva.],
+  [Il Sistema deve presentare le metriche tecniche aggregate (es. punteggi di qualità, numero bug, vulnerabilità) per ogni sezione attiva sulla stessa schermata.],
   [#link(<UC6.3>)[#underline[\[UC6.3\]]]],
 
   [#FRObx],
-  [Il Sistema deve caricare e visualizzare la lista delle azioni correttive (remediation) associate univocamente alle criticità rilevate nel report.],
+  [Il Sistema deve caricare e visualizzare la lista delle azioni correttive (remediation), esponendo per ogni elemento un titolo identificativo, il livello di criticità e una breve descrizione dell'intervento consigliato.],
   [#link(<UC6.3.1>)[#underline[\[UC6.3.1\]]]],
 
   [#FRObx],
@@ -4627,7 +4656,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   [#link(<UC9.2>)[#underline[\[UC9.2\]]]],
 
   [#FRObx],
-  [Il Sistema deve presentare la lista delle remediation specifiche per il codice, permettendo la navigazione verso il dettaglio della singola azione.],
+  [Il Sistema deve presentare la lista delle remediation specifiche per il codice, esponendo per ogni elemento un titolo identificativo, il file associato, la riga di codice interessata e il livello di severità, permettendo inoltre la navigazione verso il dettaglio della singola azione.],
   [#link(<UC9.3>)[#underline[\[UC9.3\]]]],
 
   [#FRObx],
@@ -4648,7 +4677,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   [#link(<UC10.2>)[#underline[\[UC10.2\]]]],
 
   [#FRObx],
-  [Il Sistema deve presentare le remediation di sicurezza, ordinandole prioritariamente in base alla criticità della vulnerabilità associata.],
+  [Il Sistema deve presentare la lista delle remediation di sicurezza, esponendo per ogni elemento un titolo identificativo, la libreria o dipendenza vulnerabile associata, il livello di severità e l'azione correttiva consigliata, ordinandole prioritariamente in base alla criticità.],
   [#link(<UC10.3>)[#underline[\[UC10.3\]]]],
 
   [#FRObx],
@@ -4669,7 +4698,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   [#link(<UC11.2>)[#underline[\[UC11.2\]]]],
 
   [#FRObx],
-  [Il Sistema deve esporre suggerimenti testuali per l'integrazione delle parti di documentazione mancanti o incomplete.],
+  [Il Sistema deve esporre nell'elenco delle remediation documentali il nome del file interessato, il livello di severità e i suggerimenti testuali per l'integrazione delle parti di documentazione mancanti o incomplete.],
   [#link(<UC11.3>)[#underline[\[UC11.3\]]]],
 
   [#FRObx],
@@ -4758,11 +4787,11 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
 
   [#FRObx],
   [Il Sistema deve inviare una notifica email automatica all'indirizzo associato al profilo a seguito dell'avvenuta modifica delle credenziali.],
-  [#link(<UC15.4>)[#underline[\[UC15.4\]]]],
+  [#link(<UC15.3>)[#underline[\[UC15.3\]]]],
 
   [#FRObx],
   [Il Sistema deve invalidare tutte le sessioni attive dell'utente (ad eccezione di quella corrente) a seguito del cambio password avvenuto con successo.],
-  [#link(<UC15.4>)[#underline[\[UC15.4\]]]],
+  [#link(<UC15.3>)[#underline[\[UC15.3\]]]],
 
   // --- VISUALIZZAZIONE REMEDIATION (UC16) ---
   [#FRObx],
@@ -4986,30 +5015,36 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   [Il Sistema deve tentare nuovamente l'invio della notifica per un numero limitato di volte in caso di problemi temporanei di rete.],
   [#link(<UC26.0.1>)[#underline[\[UC26.0.1\]]]],
 
-  // --- RICEZIONE NOTIFICHE (UC27 - UC28) ---
+  // --- EX RICEZIONE NOTIFICHE (UC27 - UC28) --- CASI D'USO CANCELLATI
   [#FRObx],
   [Il Sistema deve consegnare la notifica di fine analisi attraverso i canali scelti dall'utente (es. email o notifiche app).],
-  [#link(<UC27>)[#underline[\[UC27\]]]],
+  [#link(<UC4>)[#underline[\[UC4\]]]],
+  //ex [#link(<UC27>)[#underline[\[UC27\]]]],
 
   [#FRObx],
   [Il Sistema deve mostrare i dettagli dell'analisi (nome progetto e ora) direttamente nell'avviso ricevuto dall'utente.],
-  [#link(<UC27>)[#underline[\[UC27\]]]],
+  [#link(<UC4>)[#underline[\[UC4\]]]],
+  //ex [#link(<UC27>)[#underline[\[UC27\]]]],
 
   [#FRObx],
   [Il Sistema deve garantire che l'utente possa consultare i risultati nella propria area personale anche se la notifica via email non viene recapitata.],
-  [#link(<UC27.0.1>)[#underline[\[UC27.0.1\]]]],
+  [#link(<UC5>)[#underline[\[UC5\]]]],
+  //ex [#link(<UC27.0.1>)[#underline[\[UC27.0.1\]]]],
 
   [#FRObx],
   [Il Sistema deve inviare un avviso immediato se un'analisi si interrompe per un errore imprevisto, spiegandone brevemente il motivo.],
-  [#link(<UC28>)[#underline[\[UC28\]]]],
+  [#link(<UC4>)[#underline[\[UC4\]]]],
+  //ex [#link(<UC28>)[#underline[\[UC28\]]]],
 
   [#FRObx],
   [Il Sistema deve contrassegnare l'analisi come "Fallita" nella lista dei progetti dell'utente se il processo non può essere completato.],
-  [#link(<UC28>)[#underline[\[UC28\]]]],
+  [#link(<UC5>)[#underline[\[UC5\]]]],
+  //ex [#link(<UC28>)[#underline[\[UC28\]]]],
 
   [#FRObx],
   [Il Sistema deve rendere visibili le cause del fallimento all'interno della dashboard, indipendentemente dall'invio o dalla ricezione dell'avviso di errore.],
-  [#link(<UC28.0.1>)[#underline[\[UC28.0.1\]]]],
+  [#link(<UC5>)[#underline[\[UC5\]]]],
+  //ex [#link(<UC28.0.1>)[#underline[\[UC28.0.1\]]]], 
 
   // --- GESTIONE ACCESSO GITHUB (UC29) ---
   [#FRObx],
@@ -5172,12 +5207,16 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   [#link(<UC40.0.1>)[#underline[\[UC40.0.1\]]]],
 
   [#FRObx],
-  [Il Sistema deve esporre all'Utente Avanzato la lista dei repository privati registrati, includendo per ciascuno il nome e l'URL della risorsa.],
+  [Il Sistema deve ordinare l’elenco dei repository privati registrati in ordine decrescente rispetto a data di inserimento.],
   [#link(<UC41>)[#underline[\[UC41\]]]],
 
   [#FRObx],
   [Il Sistema deve visualizzare un'informativa specifica che suggerisce l'inserimento della prima risorsa qualora il catalogo privato risulti vuoto.],
   [#link(<UC41.0.1>)[#underline[\[UC41.0.1\]]]],
+
+  [#FRObx],
+  [Il Sistema deve esporre all'Utente Avanzato la lista dei repository privati registrati, includendo per ciascuno il nome e l'URL della risorsa.],
+  [#link(<UC41.1>)[#underline[\[UC41.1\]]]],
 
   [#FRObx],
   [Il Sistema deve consentire la rimozione di un repository dal catalogo privato previa conferma esplicita dell'utente.],
@@ -5189,12 +5228,16 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
 
   // --- GESTIONE PERMESSI TERZI (UC43, UC44, UC45) ---
   [#FRObx],
-  [Il Sistema deve mostrare all'Utente Avanzato l'elenco dei profili autorizzati alla consultazione dei report per un repository privato selezionato.],
+  [Il Sistema deve mostrare all'Utente Avanzato l'elenco dei profili autorizzati alla consultazione dei report per un repository privato selezionato in ordine alfabetico.],
   [#link(<UC43>)[#underline[\[UC43\]]]],
 
   [#FRObx],
   [Il Sistema deve informare l'utente proprietario qualora l'accesso ai report di un repository privato sia limitato esclusivamente al suo profilo.],
   [#link(<UC43.0.1>)[#underline[\[UC43.0.1\]]]],
+
+  [#FRObx],
+  [Il Sistema deve esporre all'Utente Avanzato le informazioni identificative di ogni profilo autorizzato presente nella lista, includendo lo username e/o l'indirizzo email associato.],
+  [#link(<UC43.1>)[#underline[\[UC43.1\]]]],
 
   [#FRObx],
   [Il Sistema deve consentire l'aggiunta di un utente autorizzato tramite l'inserimento dello username o dell'indirizzo email del profilo destinatario.],
@@ -5228,6 +5271,11 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   [#FRObx],
   [A seguito della cancellazione del profilo, il Sistema deve rimuovere i dati personali e le associazioni OAuth, invalidando ogni credenziale di accesso precedente.],
   [#link(<UC47>)[#underline[\[UC47\]]]],
+
+  // VISUALIZZAZIONE DETTAGLIO REPOSITORY IN LISTA (UC48)
+  [#FRObx],
+  [Il Sistema deve esporre per ogni elemento selezionato della lista: nome del repository, URL di riferimento e data dell'ultima analisi.],
+  [#link(<UC48>)[#underline[\[UC48\]]]],
 )
 
 #pagebreak()
@@ -5258,7 +5306,51 @@ I seguenti requisiti garantiscono che il sistema sia manutenibile, performante e
   [È necessario rispettare rigorosamente le metriche di qualità del codice (complessità ciclomatica, duplicazione) definite nelle #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[*Norme di Progetto*].],
   [Interno],
 
-  [#VRObx],
+  // SPOSTATI DA REQUISITI DI VINCOLO ----------------------------------------------------------------------
+  [#QRObx],
+  [Il team deve svolgere un’attività di analisi preliminare includendo Design Thinking, User Story Mapping, Business Requirements e Diagrammi UML degli Use Case],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#QRObx],
+  [Deve essere fornita documentazione tecnica tramite standard OpenAPI 3.0 (Swagger) per le API e documentazione del codice sorgente tramite TypeDoc],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#QRObx],
+  [Deve essere fornito un Manuale Utente e un Manuale Manutentore (installazione e integrazione agenti) come parte integrante della fornitura finale],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#QRObx],
+  [Al termine del progetto deve essere consegnato un MVP funzionante accompagnato da una Demo Live e dallo Schema Design relativo alla base dati],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#QRObx],
+  [Il codice prodotto deve raggiungere una copertura minima del 70% tramite test di unità automatizzati misurati con Jest],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#QRObx],
+  [Il codice sorgente deve essere versionato utilizzando Git (v2.40+) seguendo la branching strategy definita nelle NdP],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+
+  [#QRObx],
+  [L'analisi di sicurezza deve essere conforme agli standard OWASP Top 10 (v2021 o successivi)],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "OWASP"],
+  // ----------------------------------------------------------------------
+)
+
+#pagebreak()
+== Requisiti di Vincolo (VR)
+Requisiti imposti dal committente riguardanti tecnologie, standard di sicurezza e documentazione obbligatoria.
+
+#table(
+  columns: (1fr, 2.5fr, 1.5fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*ID*], [*Descrizione*], [*Fonti*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, left, center).at(col) + horizon,
+
+  // SPOSTATI IN REQUISITI DI QUALITA' ----------------------------------------------------------------------
+  /* [#VRObx],
   [Il team deve svolgere un’attività di analisi preliminare includendo Design Thinking, User Story Mapping, Business Requirements e Diagrammi UML degli Use Case],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
@@ -5276,39 +5368,33 @@ I seguenti requisiti garantiscono che il sistema sia manutenibile, performante e
 
   [#VRObx],
   [Il codice prodotto deve raggiungere una copertura minima del 70% tramite test di unità automatizzati misurati con Jest],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"], */
+  // ----------------------------------------------------------------------
 
   [#VRObx],
-  [Devono essere utilizzate GitHub Actions per implementare pipeline di Continuous Integration e Continuous Deployment (CI/CD)],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
-
-  [#VRObx],
-  [Il codice sorgente deve essere versionato utilizzando Git (v2.40+) seguendo la branching strategy definita nelle NdP],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
-)
-
-#pagebreak()
-== Requisiti di Vincolo (VR)
-Requisiti imposti dal committente riguardanti tecnologie, standard di sicurezza e documentazione obbligatoria.
-
-#table(
-  columns: (1fr, 2.5fr, 1.5fr),
-  inset: 10pt,
-  stroke: 0.5pt + luma(200),
-  table.header([*ID*], [*Descrizione*], [*Fonti*]),
-  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
-  align: (col, row) => (center, left, center).at(col) + horizon,
-
-  [#VRObx],
-  [L'applicativo deve essere creato seguendo principi di modularità per consentire l'estensione delle funzioni e l'aggiunta di nuovi agenti di analisi],
+  [L'applicativo deve essere strutturato in moduli indipendenti, garantendo che l'aggiunta di un nuovo agente di analisi avvenga senza richiedere modifiche al codice sorgente degli agenti già esistenti],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
   [#VRObx],
   [Deve essere fornito un sistema di Bug Reporting strutturato su GitHub Issues per tracciare e gestire le anomalie tramite apposite label],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
+  //prima: (non atomico)
+  /* [#VRObx],
+  [Il Back-end e l’Orchestratore devono essere sviluppati utilizzando NestJS v10+, il Frontend in React v18.3+ e gli agenti in Python v3.12+],
+  [Capitolato di Progetto], Sez. "Tecnologie"], */
+
+  //dopo
   [#VRObx],
-  [Il Back-end e l'Orchestratore devono essere sviluppati utilizzando NestJS v10+, il Front-end in React v18.3+ e gli agenti in Python v3.12+],
+  [Il Back-end e l’Orchestratore devono essere sviluppati utilizzando il framework NestJS v10+],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
+
+  [#VRObx],
+  [L'interfaccia Front-end deve essere sviluppata utilizzando la libreria React v18.3+],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
+
+  [#VRObx],
+  [Gli agenti di analisi devono essere sviluppati utilizzando il linguaggio Python v3.12+],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
 
   [#VRObx],
@@ -5316,31 +5402,198 @@ Requisiti imposti dal committente riguardanti tecnologie, standard di sicurezza 
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
 
   [#VRObx],
-  [L'analisi di sicurezza deve essere conforme agli standard OWASP Top 10 (v2021 o successivi)],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "OWASP"],
+  [Devono essere utilizzate GitHub Actions per implementare pipeline di Continuous Integration e Continuous Deployment (CI/CD)],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
+
+  // SPOSTATI IN REQUISITI DI QUALITA' ----------------------------------------------------------------------
+  /* [#VRObx],
+  [Il codice sorgente deve essere versionato utilizzando Git (v2.40+) seguendo la branching strategy definita nelle NdP],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
   [#VRObx],
+  [L'analisi di sicurezza deve essere conforme agli standard OWASP Top 10 (v2021 o successivi)],
+  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "OWASP"], */
+  // ----------------------------------------------------------------------
+
+  //prima: (non atomico)
+  /* [#VRObx],
+  [L’interfaccia web deve essere compatibile con Windows 10/11, macOS 14+ e distribuzioni Linux (Ubuntu 22.04+) su browser Chrome 120+, Firefox 120+ e Safari 17+],
+  [Decisione Interna], */
+
+  //dopo
+  [#VRObx],
   [L'interfaccia web deve essere compatibile con Windows 10/11],
-  [Decisione Interna con la Proponente],
+  [Decisione Interna],
     
   [#VRObx],
   [L'interfaccia web deve essere compatibile con macOS 14+],
-  [Decisione Interna con la Proponente],
+  [Decisione Interna],
   
   [#VRObx],
   [L'interfaccia web deve essere compatibile con distribuzioni Linux (Ubuntu 22.04+)],
-  [Decisione Interna con la Proponente],
+  [Decisione Interna],
     
   [#VRObx],
   [L'interfaccia web deve essere compatibile su browser Chrome 120+],
-  [Decisione Interna con la Proponente],
+  [Decisione Interna],
   
   [#VRObx],
   [L'interfaccia web deve essere compatibile su browser Firefox 120+],
-  [Decisione Interna con la Proponente],
+  [Decisione Interna],
   
   [#VRObx],
   [L'interfaccia web deve essere compatibile su browser Safari 17+],
-  [Decisione Interna con la Proponente],
+  [Decisione Interna],
 )
+\
+\
 
+== Tracciamento Casi d'Uso - Requisiti
+La tabella seguente mostra la mappatura tra i casi d'uso identificati e i requisiti funzionali associati, evidenziando la copertura funzionale del sistema.
+
+#table(
+  columns: (1fr, 1.5fr),
+  align: (center, center),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*Casi d'Uso*], [*Requisiti*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+
+  [#link(<UC1>)[#underline[\[UC1\]]], #link(<UC1.0.1>)[#underline[\[UC1.0.1\]]], #link(<UC1.1>)[#underline[\[UC1.1\]]], #link(<UC1.1.1>)[#underline[\[UC1.1.1\]]], #link(<UC1.1.2>)[#underline[\[UC1.1.2\]]], #link(<UC1.2>)[#underline[\[UC1.2\]]], #link(<UC1.2.1>)[#underline[\[UC1.2.1\]]], #link(<UC1.2.2>)[#underline[\[UC1.2.2\]]], #link(<UC1.3>)[#underline[\[UC1.3\]]], #link(<UC1.3.1>)[#underline[\[UC1.3.1\]]]],
+  [FROb1, FROb2, FROb3, FROb4, FROb5, FROb6, FROb7, FROb8, FROb9, FROb10, FROb11, FROb12, FROb13, FROb14, FROb15, FROb16, FROb17, FROb18, FROb19, FROb20, FROb21, FROb22, FROb23, FROb24],
+
+  [#link(<UC2>)[#underline[\[UC2\]]], #link(<UC2.0.1>)[#underline[\[UC2.0.1\]]], #link(<UC2.0.2>)[#underline[\[UC2.0.2\]]], #link(<UC2.1>)[#underline[\[UC2.1\]]], #link(<UC2.2>)[#underline[\[UC2.2\]]]],
+  [FROb25, FROb26, FROb27, FROb28, FROb29, FROb30, FROb31, FROb32, FROb33, FROb34, FROb35, FROb36],
+
+  [#link(<UC3>)[#underline[\[UC3\]]], #link(<UC3.0.1>)[#underline[\[UC3.0.1\]]], #link(<UC3.0.2>)[#underline[\[UC3.0.2\]]], #link(<UC3.0.3>)[#underline[\[UC3.0.3\]]], #link(<UC3.1>)[#underline[\[UC3.1\]]], #link(<UC3.1.1>)[#underline[\[UC3.1.1\]]]],
+  [FROb37, FROb38, FROb39, FROb40, FROb41, FROb42, FROb43, FROb44, FROb45, FROb46],
+
+  [#link(<UC4>)[#underline[\[UC4\]]], #link(<UC4.0.1>)[#underline[\[UC4.0.1\]]], #link(<UC4.0.2>)[#underline[\[UC4.0.2\]]], #link(<UC4.1>)[#underline[\[UC4.1\]]], #link(<UC4.1.1>)[#underline[\[UC4.1.1\]]]],
+  [FROb47, FROb48, FROb49, FROb50, FROb51, FROb52, FROb53, FROb173, FROb174, FROb176],
+
+  [#link(<UC5>)[#underline[\[UC5\]]], #link(<UC5.0.1>)[#underline[\[UC5.0.1\]]], #link(<UC5.0.2>)[#underline[\[UC5.0.2\]]]],
+  [FROb54, FROb55, FROb56, FROb57, FROb175, FROb177, FROb178],
+
+  [#link(<UC6>)[#underline[\[UC6\]]], #link(<UC6.1>)[#underline[\[UC6.1\]]], #link(<UC6.1.1>)[#underline[\[UC6.1.1\]]], #link(<UC6.2>)[#underline[\[UC6.2\]]], #link(<UC6.2.1>)[#underline[\[UC6.2.1\]]], #link(<UC6.2.2>)[#underline[\[UC6.2.2\]]], #link(<UC6.2.3>)[#underline[\[UC6.2.3\]]], #link(<UC6.3>)[#underline[\[UC6.3\]]], #link(<UC6.3.1>)[#underline[\[UC6.3.1\]]], #link(<UC6.3.1.1>)[#underline[\[UC6.3.1.1\]]]],
+  [FROb58, FROb59, FROb60, FROb61, FROb62, FROb63, FROb64, FROb65, FROb66, FROb67, FROb68, FROb69, FROb70, FROb71, FROb72],
+
+  [#link(<UC7>)[#underline[\[UC7\]]], #link(<UC7.0.1>)[#underline[\[UC7.0.1\]]], #link(<UC7.0.2>)[#underline[\[UC7.0.2\]]], #link(<UC7.0.3>)[#underline[\[UC7.0.3\]]], #link(<UC7.0.4>)[#underline[\[UC7.0.4\]]]],
+  [FROb73, FROb74, FROb75, FROb76, FROb77, FROb78],
+
+  [#link(<UC8>)[#underline[\[UC8\]]]],
+  [FRDe79, FRDe80, FROb81, FROb82, FROb83, FROb84],
+
+  [#link(<UC9>)[#underline[\[UC9\]]], #link(<UC9.1>)[#underline[\[UC9.1\]]], #link(<UC9.2>)[#underline[\[UC9.2\]]], #link(<UC9.3>)[#underline[\[UC9.3\]]], #link(<UC9.3.1>)[#underline[\[UC9.3.1\]]]],
+  [FROb85, FROb86, FROb87, FROb88, FROb89],
+
+  [#link(<UC10>)[#underline[\[UC10\]]], #link(<UC10.1>)[#underline[\[UC10.1\]]], #link(<UC10.2>)[#underline[\[UC10.2\]]], #link(<UC10.3>)[#underline[\[UC10.3\]]], #link(<UC10.3.1>)[#underline[\[UC10.3.1\]]]],
+  [FROb90, FROb91, FROb92, FROb93, FROb94],
+
+  [#link(<UC11>)[#underline[\[UC11\]]], #link(<UC11.1>)[#underline[\[UC11.1\]]], #link(<UC11.2>)[#underline[\[UC11.2\]]], #link(<UC11.3>)[#underline[\[UC11.3\]]], #link(<UC11.3.1>)[#underline[\[UC11.3.1\]]]],
+  [FROb95, FROb96, FROb97, FROb98, FROb99],
+
+  [#link(<UC12>)[#underline[\[UC12\]]], #link(<UC12.1>)[#underline[\[UC12.1\]]]],
+  [FROb100, FROb101, FROb102, FROb103],
+
+  [#link(<UC13>)[#underline[\[UC13\]]]],
+  [FROb104, FROb105, FROb106, FROb107],
+
+  [#link(<UC14>)[#underline[\[UC14\]]], #link(<UC14.1>)[#underline[\[UC14.1\]]], #link(<UC14.1.1>)[#underline[\[UC14.1.1\]]], #link(<UC14.2>)[#underline[\[UC14.2\]]]],
+  [FRDe108, FRDe109, FRDe110, FRDe111, FRDe112],
+
+  [#link(<UC15>)[#underline[\[UC15\]]], #link(<UC15.1>)[#underline[\[UC15.1\]]], #link(<UC15.1.1>)[#underline[\[UC15.1.1\]]], #link(<UC15.1.2>)[#underline[\[UC15.1.2\]]], #link(<UC15.2>)[#underline[\[UC15.2\]]], #link(<UC15.2.1>)[#underline[\[UC15.2.1\]]], #link(<UC15.2.2>)[#underline[\[UC15.2.2\]]], #link(<UC15.2.3>)[#underline[\[UC15.2.3\]]], #link(<UC15.3>)[#underline[\[UC15.3\]]]],
+  [FROb113, FROb114, FROb115, FROb116, FROb117, FROb118, FROb119, FROb120],
+
+  [#link(<UC16>)[#underline[\[UC16\]]]],
+  [FROb121, FROb122, FROb123],
+
+  [#link(<UC17>)[#underline[\[UC17\]]], #link(<UC17.1>)[#underline[\[UC17.1\]]], #link(<UC17.1.1>)[#underline[\[UC17.1.1\]]], #link(<UC17.2>)[#underline[\[UC17.2\]]], #link(<UC17.2.1>)[#underline[\[UC17.2.1\]]], #link(<UC17.2.1.1>)[#underline[\[UC17.2.1.1\]]]],
+  [FROb124, FROb125, FROb126, FROb127, FROb128, FROb129, FROb130],
+
+  [#link(<UC18>)[#underline[\[UC18\]]]],
+  [FRDe131, FRDe132, FRDe133, FRDe134],
+
+  [#link(<UC19>)[#underline[\[UC19\]]]],
+  [FRDe133],
+
+  [#link(<UC20>)[#underline[\[UC20\]]], #link(<UC20.0.1>)[#underline[\[UC20.0.1\]]], #link(<UC20.1>)[#underline[\[UC20.1\]]], #link(<UC20.1.1>)[#underline[\[UC20.1.1\]]], #link(<UC20.2>)[#underline[\[UC20.2\]]], #link(<UC20.2.1>)[#underline[\[UC20.2.1\]]], #link(<UC20.2.2>)[#underline[\[UC20.2.2\]]], #link(<UC20.2.3>)[#underline[\[UC20.2.3\]]], #link(<UC20.3>)[#underline[\[UC20.3\]]]],
+  [FROb135, FROb136, FROb137, FROb138, FROb139, FROb140],
+
+  [#link(<UC21>)[#underline[\[UC21\]]], #link(<UC21.1>)[#underline[\[UC21.1\]]], #link(<UC21.1.1>)[#underline[\[UC21.1.1\]]], #link(<UC21.2>)[#underline[\[UC21.2\]]], #link(<UC21.3>)[#underline[\[UC21.3\]]], #link(<UC21.4>)[#underline[\[UC21.4\]]]],
+  [FROb141, FROb142, FROb143, FROb144, FROb145, FROb146],
+
+  [#link(<UC22>)[#underline[\[UC22\]]], #link(<UC22.0.1>)[#underline[\[UC22.0.1\]]]],
+  [FROb147, FROb148, FROb149, FROb150, FROb151],
+
+  [#link(<UC23>)[#underline[\[UC23\]]], #link(<UC23.0.1>)[#underline[\[UC23.0.1\]]], #link(<UC23.1>)[#underline[\[UC23.1\]]], #link(<UC23.2>)[#underline[\[UC23.2\]]]],
+  [FROb152, FROb153, FROb154, FROb155, FROb156, FROb157],
+
+  [#link(<UC24>)[#underline[\[UC24\]]]],
+  [FROb158, FROb159, FROb160, FROb161],
+
+  [#link(<UC25>)[#underline[\[UC25\]]], #link(<UC25.0.1>)[#underline[\[UC25.0.1\]]]],
+  [FROb162, FROb163, FROb164, FROb165, FROb166],
+
+  [#link(<UC26>)[#underline[\[UC26\]]], #link(<UC26.0.1>)[#underline[\[UC26.0.1\]]]],
+  [FROb167, FROb168, FROb169, FROb170, FROb171, FROb172],
+
+  [#link(<UC29>)[#underline[\[UC29\]]], #link(<UC29.0.1>)[#underline[\[UC29.0.1\]]]],
+  [FROb179, FROb180, FROb181, FROb182],
+
+  [#link(<UC30>)[#underline[\[UC30\]]]],
+  [FROb183, FROb184],
+
+  [#link(<UC31>)[#underline[\[UC31\]]]],
+  [FROb185, FROb186],
+
+  [#link(<UC32>)[#underline[\[UC32\]]]],
+  [FROb187, FROb188],
+
+  [#link(<UC33>)[#underline[\[UC33\]]], #link(<UC33.0.1>)[#underline[\[UC33.0.1\]]]],
+  [FROb189, FROb190, FROb191, FROb192],
+
+  [#link(<UC34>)[#underline[\[UC34\]]]],
+  [FROb193, FROb194],
+
+  [#link(<UC35>)[#underline[\[UC35\]]], #link(<UC35.0.1>)[#underline[\[UC35.0.1\]]]],
+  [FROb195, FROb196, FROb197, FROb198],
+
+  [#link(<UC36>)[#underline[\[UC36\]]]],
+  [FROb199, FROb200],
+
+  [#link(<UC37>)[#underline[\[UC37\]]], #link(<UC37.0.1>)[#underline[\[UC37.0.1\]]]],
+  [FROb201, FROb202, FROb203, FROb204],
+
+  [#link(<UC38>)[#underline[\[UC38\]]]],
+  [FROb205, FROb206, FROb207, FROb208, FROb209, FROb210],
+
+  [#link(<UC39>)[#underline[\[UC39\]]]],
+  [FROb211, FROb212, FROb213],
+
+  [#link(<UC40>)[#underline[\[UC40\]]], #link(<UC40.0.1>)[#underline[\[UC40.0.1\]]]],
+  [FROb214, FROb215],
+
+  [#link(<UC41>)[#underline[\[UC41\]]], #link(<UC41.0.1>)[#underline[\[UC41.0.1\]]], #link(<UC41.1>)[#underline[\[UC41.1\]]]],
+  [FROb216, FROb217, FROb218],
+
+  [#link(<UC42>)[#underline[\[UC42\]]], #link(<UC42.1>)[#underline[\[UC42.1\]]], #link(<UC42.1.1>)[#underline[\[UC42.1.1\]]]],
+  [FROb219, FROb220],
+
+  [#link(<UC43>)[#underline[\[UC43\]]], #link(<UC43.0.1>)[#underline[\[UC43.0.1\]]], #link(<UC43.1>)[#underline[\[UC43.1\]]]],
+  [FROb221, FROb222, FROb223],
+
+  [#link(<UC44>)[#underline[\[UC44\]]], #link(<UC44.1>)[#underline[\[UC44.1\]]], #link(<UC44.1.1>)[#underline[\[UC44.1.1\]]], #link(<UC44.1.2>)[#underline[\[UC44.1.2\]]], #link(<UC44.1.3>)[#underline[\[UC44.1.3\]]], #link(<UC44.1.4>)[#underline[\[UC44.1.4\]]]],
+  [FROb224, FROb225, FROb226],
+
+  [#link(<UC45>)[#underline[\[UC45\]]], #link(<UC45.1>)[#underline[\[UC45.1\]]]],
+  [FROb227],
+
+  [#link(<UC46>)[#underline[\[UC46\]]], #link(<UC46.1>)[#underline[\[UC46.1\]]], #link(<UC46.1.1>)[#underline[\[UC46.1.1\]]]],
+  [FROb228],
+
+  [#link(<UC47>)[#underline[\[UC47\]]], #link(<UC47.1>)[#underline[\[UC47.1\]]]],
+  [FROb229, FROb230, FROb231],
+
+  [#link(<UC48>)[#underline[\[UC48\]]]],
+  [FROb232]
+)
