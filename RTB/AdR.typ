@@ -1174,10 +1174,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente ha inviato una richiesta di analisi #link(<UC4>)[#underline[\[UC4\]]]
   ],
   post: [
-    - L'utente visualizza l'informativa che indica la presenza di un report già aggiornato
+    - La richiesta di analisi viene annullata in quanto è già presente un report aggiornato
+    - L'utente visualizza l'informativa che indica la presenza di un report il cui stato coincide con l'ultimo report generato
   ],
   scenari: [
-    - L'utente visualizza un messaggio che segnala l'inutilità di una nuova analisi per coerenza dei dati
+    - L'utente visualizza un messaggio circa l'inutilità di una nuova analisi per coerenza dei dati
   ],
   inclusioni: [
     - Nessuna
@@ -1195,10 +1196,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente ha inviato una richiesta di analisi #link(<UC4>)[#underline[\[UC4\]]]
   ],
   post: [
-    - L'utente viene accodato ad una lista di attesa del report per il medesimo repository
+    - La nuova richiesta di analisi viene bloccata per prevenire elaborazioni duplicate concorrenti
+    - L'utente visualizza un avviso che lo invita ad attendere il completamento del processo già attivo
   ],
   scenari: [
-    - L'utente visualizza un messaggio di avvenuta presa a carico della analisi
+    - L'utente visualizza un messaggio che segnala che un'analisi per il medesimo repository è attualmente in corso
   ],
   inclusioni: [
     - Nessuna
@@ -2430,67 +2432,45 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 )[#useCaseDiagram("16", "UC16 - Visualizzazione singola remediation di sezione generica")]
 
 //USE CASE DEL BACK-END
+
 === UC17: Verifica accessibilità repository GitHub <UC17>
 #useCase(
   attore: "Orchestratore",
   attori_secondari: "GitHub",
   pre: [
-    - L'orchestratore recupera l'URL di riferimento dai metadati della collezione di report di analisi #link(<UC20>)[#underline[\[UC20\]]]
+    - L'Orchestratore recupera l'URL di riferimento dai metadati della collezione di report di analisi #link(<UC20>)[#underline[\[UC20\]]]
   ],
   post: [
-    - L'accessibilità del repository è stata accertata e l'orchestratore dispone dei permessi di lettura per avviare la analisi
+    - L'accessibilità del repository è stata accertata e l'Orchestratore dispone dei permessi di lettura per avviare l'analisi
   ],
   scenari: [
-    - L'orchestratore stabilisce una connessione con la piattaforma GitHub #link(<UC17.1>)[#underline[\[UC17.1\]]]
-    - L'orchestratore esegue la ricerca del repository per determinarne la disponibilità #link(<UC17.2>)[#underline[\[UC17.2\]]]
+    - L'Orchestratore interroga le API di GitHub per verificarne l'operatività
+    - L'Orchestratore esegue la ricerca del repository per determinarne la disponibilità pubblica
   ],
   inclusioni: [
-    - #link(<UC17.1>)[#underline[\[UC17.1\]]]
-    - #link(<UC17.2>)[#underline[\[UC17.2\]]]
+    - Nessuna
   ],
   estensioni: [
-    - Nessuna
+    - #link(<UC17.0.1>)[#underline[\[UC17.0.1\]]] // Errore di comunicazione
+    - #link(<UC17.1>)[#underline[\[UC17.1\]]] // Accesso privato
   ],
   trigger: "L'Orchestratore riceve una richiesta di analisi di un repository esterno",
 )[
   #useCaseDiagram("17", "UC17 - Verifica accessibilità repository GitHub")
 ]
 
-==== UC17.1: Comunicazione con GitHub <UC17.1>
+==== UC17.0.1: Errore di comunicazione con GitHub <UC17.0.1>
 #useCase(
   attore: "Orchestratore",
   attori_secondari: "GitHub",
   pre: [
-    - La procedura di verifica è stata inizializzata #link(<UC17>)[#underline[\[UC17\]]]
-  ],
-  post: [
-    - Il canale di comunicazione con la piattaforma esterna risulta operativo
-  ],
-  scenari: [
-    - L'orchestratore interroga i servizi remoti per verificarne l'operatività
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC17.1.1>)[#underline[\[UC17.1.1\]]]
-  ],
-  trigger: "Tentativo di contatto con i servizi API di GitHub",
-)[
-  #useCaseDiagram("17_1", "UC17.1 - Comunicazione con GitHub")
-]
-
-===== UC17.1.1: Errore di comunicazione con GitHub <UC17.1.1>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - Il contatto con la piattaforma esterna non produce risposta o restituisce un errore di rete #link(<UC17.1>)[#underline[\[UC17.1\]]]
+    - Il contatto con la piattaforma esterna non produce risposta o restituisce un errore di rete #link(<UC17>)[#underline[\[UC17\]]]
   ],
   post: [
     - La procedura viene interrotta per impossibilità tecnica di collegamento
   ],
   scenari: [
-    - L'orchestratore rileva l'irreperibilità dei servizi esterni necessari
+    - L'Orchestratore rileva l'irreperibilità dei servizi esterni necessari
   ],
   inclusioni: [
     - Nessuna
@@ -2501,65 +2481,42 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
   trigger: "Mancata risposta o timeout della connessione remota",
 )[]
 
-==== UC17.2: Ricerca del repository <UC17.2>
+==== UC17.1: Accesso a repository privato <UC17.1>
+#useCase(
+  attore: "Orchestratore",
+  pre: [
+    - La risorsa non risulta accessibile pubblicamente #link(<UC17>)[#underline[\[UC17\]]]
+  ],
+  post: [
+    - L'autorizzazione all'accesso è ottenuta tramite l'uso del token OAuth 2.0
+  ],
+  scenari: [
+    - L'Orchestratore recupera le credenziali associate all'utente richiedente
+    - L'Orchestratore utilizza il token OAuth 2.0 per convalidare l'accesso privato
+  ],
+  inclusioni: [
+    - Nessuna
+  ],
+  estensioni: [
+    - #link(<UC17.1.1>)[#underline[\[UC17.1.1\]]]
+  ],
+  trigger: "Esito negativo della ricerca pubblica del repository",
+)[
+  #useCaseDiagram("17_1", "UC17.1 - Accesso a repository privato")
+]
+
+==== UC17.1.1: Repository inaccessibile <UC17.1.1>
 #useCase(
   attore: "Orchestratore",
   attori_secondari: "GitHub",
   pre: [
-    - La comunicazione con i servizi remoti è stata stabilita con successo #link(<UC17.1>)[#underline[\[UC17.1\]]]
-  ],
-  post: [
-    - L'individuazione del repository e la convalida dell'accesso sono completate
-  ],
-  scenari: [
-    - L'orchestratore ricerca il repository come risorsa pubblica
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC17.2.1>)[#underline[\[UC17.2.1\]]]
-  ],
-  trigger: "Interrogazione dei metadati della risorsa remota",
-)[
-  #useCaseDiagram("17_2", "UC17.2 - Ricerca del repository")
-]
-
-===== UC17.2.1: Accesso a repository privato <UC17.2.1>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - La risorsa non risulta accessibile pubblicamente #link(<UC17.2>)[#underline[\[UC17.2\]]]
-  ],
-  post: [
-    - L'autorizzazione all'accesso è ottenuta tramite l'uso di credenziali o token validi
-  ],
-  scenari: [
-    - L'orchestratore recupera le credenziali associate all'utente richiedente
-    - L'orchestratore utilizza il token di sessione per convalidare l'accesso privato
-  ],
-  inclusioni: [
-    - Nessuna
-  ],
-  estensioni: [
-    - #link(<UC17.2.1.1>)[#underline[\[UC17.2.1.1\]]]
-  ],
-  trigger: "Esito negativo della ricerca pubblica del repository",
-)[
-  #useCaseDiagram("17_2_1", "UC17.2.1 - Accesso a repository privato")
-]
-
-===== UC17.2.1.1: Repository inaccessibile <UC17.2.1.1>
-#useCase(
-  attore: "Orchestratore",
-  pre: [
-    - Ogni tentativo di accesso (pubblico e privato via credenziali/token) ha dato esito negativo #link(<UC17.2.1>)[#underline[\[UC17.2.1\]]]
+    - Ogni tentativo di accesso (pubblico e privato via token OAuth 2.0) ha dato esito negativo #link(<UC17.1>)[#underline[\[UC17.1\]]]
   ],
   post: [
     - L'audit viene annullato per mancanza definitiva dei permessi di lettura
   ],
   scenari: [
-    - L'orchestratore rileva il diniego di accesso persistente per la risorsa specificata
+    - L'Orchestratore rileva il diniego di accesso persistente per la risorsa specificata
   ],
   inclusioni: [
     - Nessuna
@@ -4813,27 +4770,27 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
 
   [#FRObx],
   [L'Orchestratore deve implementare un meccanismo di "Exponential Backoff" per gestire i tentativi di riconnessione in caso di errori di rete temporanei verso GitHub.],
-  [#link(<UC17.1.1>)[#underline[\[UC17.1.1\]]]],
+  [#link(<UC17.0.1>)[#underline[\[UC17.0.1\]]]],
 
   [#FRObx],
   [L'Orchestratore deve validare la raggiungibilità dell'endpoint API di GitHub inviando una richiesta di "Heartbeat" prima di tentare il fetch del repository.],
-  [#link(<UC17.1>)[#underline[\[UC17.1\]]]],
+  [#link(<UC17>)[#underline[\[UC17\]]]],
 
   [#FRObx],
   [L'Orchestratore deve prima tentare l'accesso al repository senza intestazioni di autorizzazione per verificare se la risorsa è di dominio pubblico.],
-  [#link(<UC17.2>)[#underline[\[UC17.2\]]]],
+  [#link(<UC17>)[#underline[\[UC17\]]]],
 
   [#FRObx],
-  [In caso di errore HTTP 404 o 403 sulla risorsa pubblica, l'Orchestratore deve tentare una seconda richiesta iniettando nel modulo di autorizzazione il "Personal Access Token" (PAT) o il token OAuth dell'utente.],
-  [#link(<UC17.2.1>)[#underline[\[UC17.2.1\]]]],
+  [In caso di errore HTTP 404 o 403 sulla risorsa pubblica, l'Orchestratore deve tentare una seconda richiesta iniettando nel modulo di autorizzazione il token OAuth 2.0 dell'utente.],
+  [#link(<UC17.1>)[#underline[\[UC17.1\]]]],
 
   [#FRObx],
   [L'Orchestratore deve verificare che il token fornito disponga degli "scopes" (permessi) minimi di lettura (repo o public_repo) necessari per il clonaggio.],
-  [#link(<UC17.2.1>)[#underline[\[UC17.2.1\]]]],
+  [#link(<UC17.1>)[#underline[\[UC17.1\]]]],
 
   [#FRObx],
   [In caso di fallimento definitivo (es. token scaduto o repository eliminato), l'Orchestratore deve inviare un segnale di interruzione al modulo di notifica e aggiornare lo stato dell'audit in "FAILED_ACCESS".],
-  [#link(<UC17.2.1.1>)[#underline[\[UC17.2.1.1\]]]],
+  [#link(<UC17.1.1>)[#underline[\[UC17.1.1\]]]],
 
   // --- GESTIONE REMEDIATION (UC18 - UC19) ---
   [#FRDex],
@@ -5507,7 +5464,7 @@ La tabella seguente mostra la mappatura tra i casi d'uso identificati e i requis
   [#link(<UC16>)[#underline[\[UC16\]]]],
   [FROb121, FROb122, FROb123],
 
-  [#link(<UC17>)[#underline[\[UC17\]]], #link(<UC17.1>)[#underline[\[UC17.1\]]], #link(<UC17.1.1>)[#underline[\[UC17.1.1\]]], #link(<UC17.2>)[#underline[\[UC17.2\]]], #link(<UC17.2.1>)[#underline[\[UC17.2.1\]]], #link(<UC17.2.1.1>)[#underline[\[UC17.2.1.1\]]]],
+  [#link(<UC17>)[#underline[\[UC17\]]], #link(<UC17.0.1>)[#underline[\[UC17.0.1\]]], #link(<UC17.1>)[#underline[\[UC17.1\]]], #link(<UC17.1.1>)[#underline[\[UC17.1.1\]]]],
   [FROb124, FROb125, FROb126, FROb127, FROb128, FROb129, FROb130],
 
   [#link(<UC18>)[#underline[\[UC18\]]]],
