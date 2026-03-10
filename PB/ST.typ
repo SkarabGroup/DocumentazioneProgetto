@@ -259,6 +259,17 @@ Qualora in futuro un agente specifico richiedesse risorse computazionali tali da
 == Scelta intrapresa
 Alla luce di quanto esposto, il team ha optato per un'architettura a due microservizi, con un *Account Service* dedicato alla gestione degli utenti e un *Analysis Service* che ospita l'orchestratore e i tre agenti. Questa soluzione rappresenta un compromesso ottimale tra modularità, scalabilità e semplicità operativa, al finne di garantire un percorso di evoluzione sostenibile per l'applicazione, in linea con i requisiti del capitolato e le best practice di ingegneria del software.
 
+Questa scelta, inoltre, permette un'evoluzione futura verso un'architettura a microservizi più granulare, qualora si rendesse necessario scalare in modo indipendente uno specifico agente o integrare funzionalità che richiedono risorse dedicate, senza compromettere la coesione e l'integrità del sistema, la scelta.
+
+=== Fonti per la scelta architetturale
+- #underline(link("https://martinfowler.com/bliki/MonolithFirst.html")[Monolith First - Martin Fowler])
+ - Cenni di ispirazione per la scelta di usare un microservizio unico per l'orchestrazione e gli agenti, con focus sulla modularità interna piuttosto che sulla separazione in servizi distinti. Da notare, peró come l'articolo sottolinei, che questa scelta è stata fatta in un'ottica di MVP, e non esclude evoluzioni future verso un'architettura a microservizi più granulare qualora si rendesse necessario scalare in modo indipendente uno specifico agente o integrare funzionalità che richiedono risorse dedicate.
+
+- #underline(link("https://docs.aws.amazon.com/bedrock/latest/userguide/agents-multi-agent-collaboration.html")[Multi-agent collaboration - AWS Bedrock])
+ - Esempio di gestione di più agenti all'interno di un unico servizio, con orchestrazione centralizzata e comunicazione in-process, che ha ispirato la scelta di implementare gli agenti come moduli distinti all'interno dello stesso servizio.
+
+- #underline(link("https://martinfowler.com/bliki/BoundedContext.html")[Bounded Context - Martin Fowler])
+ - Concetto di contesto delimitato che ha permesso di comprendere al meglio come dividere le parti del software, guidando la decisione di separare l'Account Service dall'Analysis Service, al fine di isolare le responsabilità e permettere scalabilità indipendente.
 = Diagrammi architetturali
 #contextDiagram("C4_Level1_SystemContext",50%)
 #containerDiagram("C4_Level2_Container",80%)
