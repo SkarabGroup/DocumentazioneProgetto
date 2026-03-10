@@ -257,7 +257,7 @@ Qualora in futuro un agente specifico richiedesse risorse computazionali tali da
 )
 
 == Scelta intrapresa
-Alla luce di quanto esposto, il team ha optato per un'architettura a due microservizi, con un *Account Service* dedicato alla gestione degli utenti e un *Analysis Service* che ospita l'orchestratore e i tre agenti. Questa soluzione rappresenta un compromesso ottimale tra modularità, scalabilità e semplicità operativa, al finne di garantire un percorso di evoluzione sostenibile per l'applicazione, in linea con i requisiti del capitolato e le best practice di ingegneria del software.
+Alla luce di quanto esposto, il team ha optato per un'architettura a due microservizi, con un *Account Service* dedicato alla gestione degli utenti e un *Analysis Service* che ospita l'orchestratore e i tre agenti. Questa soluzione rappresenta un compromesso ottimale tra modularità, scalabilità e semplicità operativa, al fine di garantire un percorso di evoluzione sostenibile per l'applicazione, in linea con i requisiti del capitolato e le best practice di ingegneria del software.
 
 Questa scelta, inoltre, permette un'evoluzione futura verso un'architettura a microservizi più granulare, qualora si rendesse necessario scalare in modo indipendente uno specifico agente o integrare funzionalità che richiedono risorse dedicate, senza compromettere la coesione e l'integrità del sistema, la scelta.
 
@@ -274,3 +274,63 @@ Questa scelta, inoltre, permette un'evoluzione futura verso un'architettura a mi
 #contextDiagram("C4_Level1_SystemContext",50%)
 #containerDiagram("C4_Level2_Container",80%)
 #componentDiagram("C4_Level3_Component_AnalysisService",100%)
+
+=== Conseguenze della Scelta
+Sviluppando un'applicazione in cloud c'è il bisogno che sia scalabile e robusta, la scelta che abbiamo fatto riesce a coprire entrambi i nostri bisogni. Avessimo scelto un approccio a microservizi granulari avremmo riscontrato il problema di gestire l'efficienza nella comunicazione tra i servizi dei sottoagenti e la necessità di avere dati condivisi tra questi. Invece così il problema viene risolto a monte.
+
+=== Comunicazione fra componenti
+
+==== Endpoint
+Un endpoint è un URL specifico esposto da un servizio che consente ai client di interagire con il sistema tramite richieste HTTP. Ogni endpoint corrisponde a un'operazione specifica, come l'avvio di un'analisi del repository o l'autenticazione di un utente.
+
+==== API Gateway
+Un API Gateway viene utilizzato come singolo punto di ingresso per le richieste client. Smista le richieste HTTP in arrivo ai servizi back-end appropriati, come il servizio di autenticazione o il servizio di analisi. Nel caso della nostra scelta, implementare un Gateway potrebbe essere over-engineering dato che non vengono esposti molti endpoint.
+
+=== Monitoraggio e osservabilità dei microservizi
+L'adozione di un'architettura a microservizi, seppur limitata a due servizi principali, introduce la necessità di introdurre strumenti per monitorare lo stato del sistema durante l'esecuzione e di individuare rapidamente eventuali anomalie.
+Nel contesto del progetto, il monitoraggio non ha solo lo scopo di gestire il corretto funzionamento del sistema, ma svolge anche un ruolo importante nel supportare lo sviluppo e il debugging delle pipeline di analisi. Ad esmpio le operazioni eseguite dall'Analysis Service sono complesse e coinvolgono l'interazione con sistemi esterni; possono avere tempi di esecuzione relativamente lunghi rispetto alle normali richieste HTTP di un'applicazione web.
+
+In assenza di strumenti di osservabilità, risulterebbe difficile distinguere tra diverse condizioni di errore o degradazione del servizio, ad esempio:
+- richieste di analisi bloccate o particolarmente lente;
+- fallimenti parziali nell'esecuzione di uno degli agenti;
+- saturazione delle risorse computazionali del servizio di analisi;
+- errori derivanti da dipendenze esterne (GitHub API).
+
+Per questo motivo si vuole integrare una soluzione di monitoraggio basata su tre componenti complementari: raccolta delle metriche, aggregazione dei log e visualizzazione centralizzata.
+
+==== Raccolta delle metriche
+Per la raccolta delle metriche di sistema viene utilizzato Prometheus. Questo opera secondo un modello di pull-based monitoring: interroga periodicamente endpoint esposti dai servizi per raccogliere informazioni quantitative sul loro stato. Nel contesto dell'applicazione, tali metriche includono ad esempio:
+- numero di richieste HTTP gestite da ciascun servizio;
+- tempo medio di risposta degli endpoint principali;
+- utilizzo delle risorse del processo (CPU, memoria).
+
+Queste informazioni permettono di individuare rapidamente colli di bottiglia o anomalie di performance, in particolare per quanto riguarda l'Analysis Service, che rappresenta il componente più critico dal punto di vista computazionale.
+
+==== Aggregazione dei log applicativi
+Accanto alle metriche quantitative, è fondamentale disporre di una visione unificata dei log prodotti dai servizi. A questo scopo viene utilizzato Grafana Loki, un sistema progettato per la raccolta dei log provenienti dai componenti dell'infrastruttura. Loki consente di aggregare in un unico punto i log generati sia dall'Account Service sia dall'Analysis Service, facilitando l'analisi degli errori.
+Questa funzionalità può essere particolarmente utili nel caso delle pipeline di analisi: se un agente produce un risultato inatteso o l'orchestrazione fallisca, i log permettono di individuare rapidamente il putno esatto della catena di esecuzione in cui si è verificato il problema.
+
+==== Visualizzazione e dashboard operative
+La visualizzazione delle metriche e dei log avviene tramite Grafana, che fa da interfaccia centralizzata per i dati raccolti da Prometheus e Loki. Grafana permette di costruire dashboard che mostrano in tempo reale lo stato del sistema, combinando metriche di performance e log applicativi. Alcuni indicatori rilevanti per il progetto possono includere:
+- numero di analisi in esecuzione;
+- durata media delle analisi;
+- tasso di errore degli endpoint principali.
+
+==== Benefici dell'approccio adottato
+L'integrazione di strumenti di osservabilità fin dalle prime fasi della progettazione consente di migliorare significativamente la manutenibilità del sistema. In particolare, la combinazione di metriche e log centralizzati permette di:
+- identificare rapidamente problemi di performance o stabilità;
+- comprendere il comportamento del sistema sotto carico;
+- semplificare il debugging delle pipeline di analisi;
+- supportare eventuali evoluzioni future dell'architettura.
+
+L'approccio adottato introduce un overhead infrastrutturale ma fornisce al tempo stesso una base solida per il monitoraggio di un sistema a microservizi, risultando quindi adeguato alla complessità e agli obiettivi del progetto.
+
+=== Fonti per la scelta del monitoraggio
+- #underline(link("https://prometheus.io/docs/introduction/overview")[Prometheus Overview])
+ - Panoramica sul funzionamento di Prometheus e sui benefici del modello di raccolta pull-based per il monitoraggio dei microservizi.
+
+- #underline(link("https://grafana.com/oss/loki")[Grafana Loki])
+ - Descrizione di Grafana Loki come soluzione per l'aggregazione dei log in ambienti a microservizi, con focus sulla facilità di integrazione e analisi centralizzata.
+
+- #underline(link("https://grafana.com/docs/grafana-cloud/introduction/dashboards/")[Grafana Dashboards])
+ - Guida alla creazione di dashboard in Grafana, evidenziando come combinare metriche e log per ottenere una visione completa dello stato del sistema.
