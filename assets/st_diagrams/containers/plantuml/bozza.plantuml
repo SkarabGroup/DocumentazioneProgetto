@@ -16,22 +16,22 @@ System_Boundary(codeGuardian, "Code Guardian") {
 
     Container(analysisService, "Analysis Service", "Python + FastAPI", "Orchestratore centrale che coordina i 3 agenti AI. Espone REST API per avviare analisi e recuperare report.")
 
-    ContainerDb(accountDb, "Account DB", "PostgreSQL", "Persistenza utenti, credenziali, sessioni, API keys.")
+    ContainerDb(accountDb, "Account DB", "MongoDB", "Persistenza utenti, credenziali, sessioni, API keys.")
 
     ContainerDb(analysisDb, "Analysis DB", "MongoDB", "Persistenza report di analisi, vulnerabilità rilevate, suggerimenti di remediation, storico per repository.")
 }
 
 System_Ext(github, "GitHub API", "Sorgente del codice da analizzare")
-System_Ext(llmApi, "LLM API", "Reasoning degli agenti AI")
+System_Ext(aws, "AWS", "Infrastruttura cloud per Lambda, S3, EFS ...")
 
 Rel(developer, frontend, "Usa", "HTTPS / Browser")
 Rel(frontend, accountService, "Login, registrazione, verifica token", "HTTPS / REST + JWT")
 Rel(frontend, analysisService, "Avvia analisi, recupera report, accetta remediation", "HTTPS / REST + JWT")
 
-Rel(accountService, accountDb, "Legge e scrive dati utenti", "TCP / SQL")
-Rel(analysisService, analysisDb, "Salva e recupera report di analisi", "TCP / MongoDB Driver")
+Rel(accountService, accountDb, "Legge e scrive dati utenti", "MongoDB Driver")
+Rel(analysisService, analysisDb, "Salva e recupera report di analisi", "MongoDB Driver")
 
 Rel(analysisService, github, "Clona repository, legge struttura file", "HTTPS / GitHub API")
-Rel(analysisService, llmApi, "Invia prompt di analisi agli agenti", "HTTPS / REST")
+Rel(analysisService, aws, "Utilizza servizi cloud", "HTTPS / REST")
 
 @enduml
