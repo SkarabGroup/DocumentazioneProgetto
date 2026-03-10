@@ -23,6 +23,7 @@
     "1.0.1",
     "Modifica Ruolo del Verificatore",
     members.alice,
+    members.martinello,
   ),
   (
     "2026/03/03",
