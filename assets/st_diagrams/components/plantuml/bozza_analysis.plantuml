@@ -3,61 +3,110 @@
 
 LAYOUT_TOP_DOWN()
 LAYOUT_WITH_LEGEND()
+skinparam linetype ortho
+skinparam nodesep 200
+skinparam ranksep 200
 
 title C4 Level 3 — Component: Analysis Service (Strands SDK)
 
 Container_Boundary(analysisService, "Analysis Service (Python + FastAPI)") {
 
-    Component(apiRouter, "API Router", "FastAPI Router", "Espone gli endpoint REST: POST /analyze, GET /report/{id}, GET /repos. Valida JWT in ingresso.")
+    Component(apiRouter, "API Router", "FastAPI Router", "Espone gli endpoint REST:\nPOST /analyze → Orchestrator\nGET /report/{id} → Query Service\nGET /repos → Query Service\nValida JWT in ingresso.")
 
-    Component(orchestrator, "Orchestrator Agent", "Strands SDK / Supervisor Agent", "Agente supervisore Strands che coordina l'esecuzione parallela dei sub-agent. Aggrega i risultati e costruisce il report finale.")
+    Component(orchestrator, "Orchestrator Agent", "Strands SDK / Supervisor Agent — Lambda", "Agente supervisore Strands. Coordina l'esecuzione parallela dei sub-agent via asyncio.gather(). Aggrega i risultati e costruisce il report finale.")
 
-    Component(repoFetcher, "Repo Fetcher", "Python Module / Strands Tool", "Tool Strands che clona il repository da GitHub. Estrae struttura file, linguaggi, dipendenze e versioni librerie.")
+    Component(queryService, "Query Service", "Python Module", "Gestisce le GET requests.\nLegge summary report da MongoDB.\nGenera presigned URL temporanei per\naccedere ai full report su S3.")
 
-    Component(testAgent, "Test Agent", "Strands SDK / Sub-Agent", "Sub-agent Strands che analizza la copertura dei test unitari. Verifica presenza e qualità rispetto a soglia minima del 70%.")
+    Component(repoFetcher, "Repo Fetcher", "Python Module / Strands Tool — Lambda", "Tool Strands che clona il repository da GitHub direttamente su EFS in /mnt/shared/{job_id}/repo/. Estrae struttura file, linguaggi, dipendenze e versioni librerie.")
 
-    Component(owaspAgent, "OWASP Agent", "Strands SDK / Sub-Agent", "Sub-agent Strands che scansiona il codice per vulnerabilità OWASP Top 10: SQL Injection, XSS, Broken Auth, ecc.")
+    Component(testAgent,  "Test Agent",          "Strands SDK / Sub-Agent — Lambda", "Analizza la copertura dei test unitari leggendo da /mnt/shared/{job_id}/. Verifica presenza e qualità rispetto a soglia minima del 70%.")
+    Component(owaspAgent, "OWASP Agent",         "Strands SDK / Sub-Agent — Lambda", "Scansiona il codice per vulnerabilità OWASP Top 10 leggendo da /mnt/shared/{job_id}/: SQL Injection, XSS, Broken Auth, ecc.")
+    Component(docAgent,   "Documentation Agent", "Strands SDK / Sub-Agent — Lambda", "Verifica presenza e qualità di README, commenti, docstring e documentazione API leggendo da /mnt/shared/{job_id}/.")
+    Component(codeAgent,  "Code Agent",          "Strands SDK / Sub-Agent — Lambda", "Analizza qualità del codice sorgente e rileva problemi strutturali leggendo da /mnt/shared/{job_id}/.")
 
-    Component(docAgent, "Documentation Agent", "Strands SDK / Sub-Agent", "Sub-agent Strands che verifica presenza e qualità di README, commenti, docstring e documentazione API e coerenza con il codice.")
+    Component(remediationAgent, "Remediation Agent", "Strands SDK / Sub-Agent — Lambda", "Genera suggerimenti concreti di fix per ogni issue rilevata dai sub-agent. Produce diff di codice applicabili.")
 
-    Component(codeAgent, "Code Agent", "Strands SDK / Sub-Agent", "Sub-agent Strands che analizza il codice sorgente e rileva i problemi presenti.")
+    Component(reportBuilder, "Report Builder", "Python Module / Strands Tool", "Aggrega output dei sub-agent. Genera report strutturato con score, issues e remediation. Salva summary su MongoDB e full report su S3.")
 
-    Component(reportBuilder, "Report Builder", "Python Module / Strands Tool", "Tool Strands che aggrega output dei sub-agent. Genera report strutturato con score, issues e remediation.")
+    Component(cleanupHandler, "Cleanup Handler", "Python Module", "Eseguito nel blocco finally dell'orchestratore. Rimuove /mnt/shared/{job_id}/ da EFS al termine dell'analisi, anche in caso di errore.")
 
-    Component(remediationEngine, "Remediation Engine", "Strands SDK / Sub-Agent", "Sub-agent Strands che genera suggerimenti concreti di fix per ogni issue rilevata. Produce diff di codice applicabili.")
 }
 
-Container_Ext(frontend, "Web Dashboard", "React.js", "Invia richieste di analisi")
-ContainerDb_Ext(analysisDb, "Analysis DB", "MongoDB", "Persistenza report")
-System_Ext(github, "GitHub API", "Codice sorgente")
+' Esterni sopra
+Container_Ext(frontend, "Web Dashboard", "React.js", "Invia richieste di analisi e visualizza report")
 System_Ext(llmApi, "LLM API (Amazon Bedrock)", "Modello AI sottostante agli agenti Strands")
 
-' Layout: frontend sopra, esterni sotto
-Lay_U(apiRouter, frontend)
-Lay_D(remediationEngine, analysisDb)
-Lay_D(remediationEngine, github)
-Lay_D(remediationEngine, llmApi)
-Lay_D(orchestrator, llmApi)
+' Esterni sotto / lato
+ContainerDb_Ext(analysisDb, "Analysis DB", "MongoDB", "Persistenza summary report: score, top_issues, s3_key")
+System_Ext(s3Reports,    "S3 — Full Reports",     "AWS S3",                     "Report JSON completi.\nAccesso via presigned URL temporanei.")
+System_Ext(efs,          "EFS — Shared Workspace","AWS Elastic File System",    "Filesystem condiviso montato su tutte le Lambda.\n/mnt/shared/{job_id}/repo/")
+System_Ext(github,       "GitHub API",            "Codice sorgente da analizzare")
 
-Rel(frontend, apiRouter, "POST /analyze, GET /report/{id}", "HTTPS / REST + JWT")
-Rel(apiRouter, orchestrator, "Avvia pipeline di analisi", "Python call")
-Rel(orchestrator, repoFetcher, "Invoca tool di download e parsing repo", "Strands Tool call")
-Rel(repoFetcher, github, "git clone + API metadata", "HTTPS")
+' ── Layout hints ──
+Lay_D(frontend,      apiRouter)
+Lay_R(apiRouter,     queryService)
+Lay_D(apiRouter,     orchestrator)
+Lay_R(orchestrator,  repoFetcher)
+Lay_D(orchestrator,  testAgent)
+Lay_D(orchestrator,  owaspAgent)
+Lay_D(orchestrator,  docAgent)
+Lay_D(orchestrator,  codeAgent)
+Lay_R(testAgent,     owaspAgent)
+Lay_R(owaspAgent,    docAgent)
+Lay_R(docAgent,      codeAgent)
+Lay_R(codeAgent,     reportBuilder)
+Lay_D(reportBuilder, remediationAgent)
+Lay_D(repoFetcher,   github)
+Lay_D(testAgent,     efs)
+Lay_D(orchestrator,  cleanupHandler)
+Lay_D(queryService,  analysisDb)
+Lay_D(reportBuilder, s3Reports)
+Lay_R(s3Reports,     analysisDb)
+Lay_U(llmApi,        orchestrator)
 
-Rel(orchestrator, testAgent, "Delega analisi test (parallelo)", "Strands Agent delegation")
-Rel(orchestrator, owaspAgent, "Delega analisi OWASP (parallelo)", "Strands Agent delegation")
-Rel(orchestrator, docAgent, "Delega analisi doc (parallelo)", "Strands Agent delegation")
-Rel(orchestrator, codeAgent, "Delega analisi codice (parallelo)", "Strands Agent delegation")
+' ── Relazioni ingresso ──
+Rel_Down(frontend,    apiRouter,     "POST /analyze\nGET /report/{id}\nGET /repos",      "HTTPS / REST + JWT")
+Rel_Down(apiRouter,   orchestrator,  "POST /analyze\nAvvia pipeline di analisi",          "Python call")
+Rel_Right(apiRouter,  queryService,  "GET /report/{id}\nGET /repos",                      "Python call")
 
-Rel(testAgent, llmApi, "Reasoning via Bedrock", "Strands SDK / HTTPS")
-Rel(owaspAgent, llmApi, "Reasoning via Bedrock", "Strands SDK / HTTPS")
-Rel(docAgent, llmApi, "Reasoning via Bedrock", "Strands SDK / HTTPS")
-Rel(codeAgent, llmApi, "Reasoning via Bedrock", "Strands SDK / HTTPS")
-Rel(orchestrator, llmApi, "Supervisione e aggregazione", "Strands SDK / HTTPS")
+' ── Query Service → storage ──
+Rel_Down(queryService,  analysisDb,  "Legge summary report e lista repos",                "MongoDB Driver")
+Rel_Down(queryService,  s3Reports,   "Genera presigned URL\nper download full report",    "boto3 / HTTPS")
 
-Rel(orchestrator, reportBuilder, "Invoca tool con risultati aggregati", "Strands Tool call")
-Rel(reportBuilder, remediationEngine, "Delega generazione fix per ogni issue", "Strands Agent delegation")
-Rel(remediationEngine, llmApi, "Genera remediation via Bedrock", "Strands SDK / HTTPS")
-Rel(reportBuilder, analysisDb, "Salva report finale", "MongoDB Driver")
+' ── Orchestrator → RepoFetcher ──
+Rel_Right(orchestrator, repoFetcher, "Invoca tool di clone",                              "Strands Tool call")
+Rel_Down(repoFetcher,   github,      "git clone + API metadata",                          "HTTPS")
+Rel_Down(repoFetcher,   efs,         "Scrive /mnt/shared/{job_id}/repo/",                 "NFS mount (write)")
+
+' ── Orchestrator → Sub-Agents (parallelo) ──
+Rel_Down(orchestrator,  testAgent,   "invoke parallelo — job_id",                         "Lambda / asyncio.gather")
+Rel_Down(orchestrator,  owaspAgent,  "invoke parallelo — job_id",                         "Lambda / asyncio.gather")
+Rel_Down(orchestrator,  docAgent,    "invoke parallelo — job_id",                         "Lambda / asyncio.gather")
+Rel_Down(orchestrator,  codeAgent,   "invoke parallelo — job_id",                         "Lambda / asyncio.gather")
+
+' ── Sub-Agents → EFS (read) ──
+Rel_Down(testAgent,     efs,         "Legge /mnt/shared/{job_id}/",                       "NFS mount (read)")
+Rel_Down(owaspAgent,    efs,         "Legge /mnt/shared/{job_id}/",                       "NFS mount (read)")
+Rel_Down(docAgent,      efs,         "Legge /mnt/shared/{job_id}/",                       "NFS mount (read)")
+Rel_Down(codeAgent,     efs,         "Legge /mnt/shared/{job_id}/",                       "NFS mount (read)")
+
+' ── Sub-Agents → LLM ──
+Rel_Up(testAgent,       llmApi,      "Reasoning — Test",                                  "Strands SDK / HTTPS")
+Rel_Up(owaspAgent,      llmApi,      "Reasoning — OWASP",                                 "Strands SDK / HTTPS")
+Rel_Up(docAgent,        llmApi,      "Reasoning — Doc",                                   "Strands SDK / HTTPS")
+Rel_Up(codeAgent,       llmApi,      "Reasoning — Code",                                  "Strands SDK / HTTPS")
+Rel_Up(orchestrator,    llmApi,      "Supervisione e aggregazione",                        "Strands SDK / HTTPS")
+
+' ── Report ──
+Rel_Right(orchestrator,    reportBuilder,    "Passa risultati aggregati",                  "Strands Tool call")
+Rel_Down(reportBuilder,    remediationAgent, "Delega generazione fix\nper ogni issue",     "Strands Agent delegation")
+Rel_Up(remediationAgent,   llmApi,           "Genera remediation",                         "Strands SDK / HTTPS")
+Rel_Up(remediationAgent,   reportBuilder,     "Restituisce suggerimenti di fix",           "Strands Agent callback")
+Rel_Down(reportBuilder,    s3Reports,        "Salva full report JSON",                     "boto3 / HTTPS")
+Rel_Right(reportBuilder,   analysisDb,       "Salva summary:\nscore, top_issues, s3_key",  "MongoDB Driver")
+
+' ── Cleanup ──
+Rel_Down(orchestrator,   cleanupHandler, "finally: cancella job da EFS",                  "Python call")
+Rel_Down(cleanupHandler, efs,            "shutil.rmtree /mnt/shared/{job_id}/",           "NFS mount")
 
 @enduml
