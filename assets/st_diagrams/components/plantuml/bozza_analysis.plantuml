@@ -1,0 +1,51 @@
+@startuml C4_Level3_Component_AnalysisService
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+title C4 Level 3 — Component: Analysis Service (Strands SDK)
+
+Container_Ext(frontend, "Web Dashboard", "React.js", "Invia richieste di analisi")
+ContainerDb_Ext(analysisDb, "Analysis DB", "MongoDB", "Persistenza report")
+System_Ext(github, "GitHub API", "Codice sorgente")
+System_Ext(llmApi, "LLM API (Amazon Bedrock)", "Modello AI sottostante agli agenti Strands")
+
+Container_Boundary(analysisService, "Analysis Service (Python + FastAPI)") {
+
+    Component(apiRouter, "API Router", "FastAPI Router", "Espone gli endpoint REST: POST /analyze, GET /report/{id}, GET /repos. Valida JWT in ingresso.")
+
+    Component(orchestrator, "Orchestrator Agent", "Strands SDK / Supervisor Agent", "Agente supervisore Strands che coordina l'esecuzione parallela dei 3 sub-agent. Aggrega i risultati e costruisce il report finale.")
+
+    Component(repoFetcher, "Repo Fetcher", "Python Module / Strands Tool", "Tool Strands che clona il repository da GitHub. Estrae struttura file, linguaggi, dipendenze e versioni librerie.")
+
+    Component(testAgent, "Test Agent", "Strands SDK / Sub-Agent", "Sub-agent Strands che analizza la copertura dei test unitari. Verifica presenza e qualità rispetto a soglia minima del 70%.")
+
+    Component(owaspAgent, "OWASP Agent", "Strands SDK / Sub-Agent", "Sub-agent Strands che scansiona il codice per vulnerabilità OWASP Top 10: SQL Injection, XSS, Broken Auth, ecc.")
+
+    Component(docAgent, "Documentation Agent", "Strands SDK / Sub-Agent", "Sub-agent Strands che verifica presenza e qualità di README, commenti, docstring e documentazione API.")
+
+    Component(reportBuilder, "Report Builder", "Python Module / Strands Tool", "Tool Strands che aggrega output dei 3 sub-agent. Genera report strutturato con score, issues e remediation.")
+
+    Component(remediationEngine, "Remediation Engine", "Strands SDK / Sub-Agent", "Sub-agent Strands che genera suggerimenti concreti di fix per ogni issue rilevata. Produce diff di codice applicabili.")
+}
+
+Rel(frontend, apiRouter, "POST /analyze, GET /report/{id}", "HTTPS / REST + JWT")
+Rel(apiRouter, orchestrator, "Avvia pipeline di analisi", "Python call")
+Rel(orchestrator, repoFetcher, "Invoca tool di download e parsing repo", "Strands Tool call")
+Rel(repoFetcher, github, "git clone + API metadata", "HTTPS")
+
+Rel(orchestrator, testAgent, "Delega analisi test (parallelo)", "Strands Agent delegation")
+Rel(orchestrator, owaspAgent, "Delega analisi OWASP (parallelo)", "Strands Agent delegation")
+Rel(orchestrator, docAgent, "Delega analisi doc (parallelo)", "Strands Agent delegation")
+
+Rel(testAgent, llmApi, "Reasoning via Bedrock", "Strands SDK / HTTPS")
+Rel(owaspAgent, llmApi, "Reasoning via Bedrock", "Strands SDK / HTTPS")
+Rel(docAgent, llmApi, "Reasoning via Bedrock", "Strands SDK / HTTPS")
+Rel(orchestrator, llmApi, "Supervisione e aggregazione", "Strands SDK / HTTPS")
+
+Rel(orchestrator, reportBuilder, "Invoca tool con risultati aggregati", "Strands Tool call")
+Rel(reportBuilder, remediationEngine, "Delega generazione fix per ogni issue", "Strands Agent delegation")
+Rel(remediationEngine, llmApi, "Genera remediation via Bedrock", "Strands SDK / HTTPS")
+Rel(reportBuilder, analysisDb, "Salva report finale", "MongoDB Driver")
+
+@enduml

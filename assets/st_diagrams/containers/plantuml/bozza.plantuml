@@ -1,0 +1,37 @@
+
+@startuml C4_Level2_Container
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title C4 Level 2 — Container: Code Guardian
+
+Person(developer, "Developer / Tech Lead", "Utente della piattaforma")
+
+System_Boundary(codeGuardian, "Code Guardian") {
+
+    Container(frontend, "Web Dashboard", "React.js / SPA", "Interfaccia utente: submit repository, visualizzazione report, gestione remediation interattiva, ranking progetti.")
+
+    Container(accountService, "Account Service", "Node.js + Express", "Gestisce autenticazione, registrazione utenti, emissione e validazione JWT, API Keys.")
+
+    Container(analysisService, "Analysis Service", "Python + FastAPI", "Orchestratore centrale che coordina i 3 agenti AI. Espone REST API per avviare analisi e recuperare report.")
+
+    ContainerDb(accountDb, "Account DB", "PostgreSQL", "Persistenza utenti, credenziali, sessioni, API keys.")
+
+    ContainerDb(analysisDb, "Analysis DB", "MongoDB", "Persistenza report di analisi, vulnerabilità rilevate, suggerimenti di remediation, storico per repository.")
+}
+
+System_Ext(github, "GitHub API", "Sorgente del codice da analizzare")
+System_Ext(llmApi, "LLM API", "Reasoning degli agenti AI")
+
+Rel(developer, frontend, "Usa", "HTTPS / Browser")
+Rel(frontend, accountService, "Login, registrazione, verifica token", "HTTPS / REST + JWT")
+Rel(frontend, analysisService, "Avvia analisi, recupera report, accetta remediation", "HTTPS / REST + JWT")
+
+Rel(accountService, accountDb, "Legge e scrive dati utenti", "TCP / SQL")
+Rel(analysisService, analysisDb, "Salva e recupera report di analisi", "TCP / MongoDB Driver")
+
+Rel(analysisService, github, "Clona repository, legge struttura file", "HTTPS / GitHub API")
+Rel(analysisService, llmApi, "Invia prompt di analisi agli agenti", "HTTPS / REST")
+
+@enduml

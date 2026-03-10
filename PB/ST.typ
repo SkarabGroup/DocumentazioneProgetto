@@ -182,3 +182,84 @@ Queste tecnologie sono state dunque organizzate e descritte per categoria e ruol
   ),
   caption: "Frameworks"
 )
+
+= Scelta architetturale
+
+Il team ha valutato tre possibili approcci architetturali prima di giungere alla soluzione adottata. Le alternative considerate sono:
+
++ *Architettura a microservizi granulari*: ogni agente (Test, OWASP, Documentazione) viene deployato come servizio indipendente, affiancato da un servizio orchestratore separato e da un servizio di gestione account.
++ *Architettura monolitica*: l'intera applicazione — gestione account, orchestrazione e agenti — viene sviluppata e deployata come un'unica unità.
++ *Architettura a due microservizi*: il sistema è suddiviso in due soli servizi — un *Account Service* (Node.js + NestJS) e un *Analysis Service* (Python + FastAPI + Strands SDK) — dove quest'ultimo contiene internamente l'orchestratore e i tre agenti come moduli distinti.
+
+== Confronto con i microservizi granulari
+
+L'architettura a microservizi granulari, pur essendo teoricamente allineata ai principi di separazione delle responsabilità, introduce una complessità operativa sproporzionata rispetto ai benefici nel contesto di questo progetto.
+
+I tre agenti — Test Agent, OWASP Agent e Documentation Agent — non sono componenti indipendenti dal punto di vista del ciclo di vita: vengono sempre invocati congiuntamente su uno stesso repository, condividono il medesimo contesto di analisi e producono output che devono essere aggregati prima della persistenza. Separarli in servizi distinti comporterebbe:
+
+- *Comunicazione di rete ad alto volume*: i risultati intermedi di ogni agente, potenzialmente corposi (alberi sintattici, elenchi di vulnerabilità, frammenti di codice), dovrebbero essere trasmessi via rete tra servizi, con impatto su latenza e affidabilità.
+- *Gestione distribuita dei fallimenti*: un errore parziale in uno dei servizi agente richiederebbe meccanismi di compensazione (saga pattern, circuit breaker) che aumentano significativamente la complessità del codice.
+- *Overhead infrastrutturale*: ogni servizio aggiuntivo richiede una propria pipeline CI/CD, configurazione di rete, health check e monitoraggio, moltiplicando il carico operativo senza un reale guadagno in scalabilità indipendente.
+- *Assenza di benefici di scaling indipendente*: poiché i tre agenti vengono sempre eseguiti insieme, non vi è alcun vantaggio nel poterli scalare separatamente.
+
+== Confronto con l'architettura monolitica
+
+Un'architettura monolitica ridurrebbe ulteriormente la complessità operativa e sarebbe una scelta difendibile per un MVP. Tuttavia presenta un limite strutturale rilevante per questo progetto: l'*Account Service* e l'*Analysis Service* hanno profili di carico radicalmente diversi.
+
+Le operazioni di autenticazione e gestione utenti sono leggere e frequenti; le operazioni di analisi di un repository sono computazionalmente intensive, coinvolgono chiamate a servizi esterni (GitHub API, LLM) e hanno una durata dell'ordine dei minuti. In un monolite, un picco di carico sul processo di analisi — ad esempio la gestione della coda di richieste concorrenti — degrada direttamente le performance delle operazioni di autenticazione, che devono invece rimanere reattive.
+
+La separazione in due servizi consente di scalare orizzontalmente solo l'Analysis Service in risposta al carico, senza toccare l'Account Service, con un costo architetturale minimo.
+
+== Modularità ed estensibilità nell'architettura adottata
+
+Il capitolato richiede esplicitamente che la piattaforma sia realizzata *in ottica modulare*, così da permettere l'aggiunta futura di nuovi agenti. Questa proprietà è garantita dall'architettura adottata a livello di modulo applicativo, non di servizio.
+
+All'interno dell'Analysis Service, ogni agente è implementato come un *Strands Sub-Agent* autonomo, registrato nell'orchestratore tramite il meccanismo nativo di tool registration di Strands SDK:
+
+```python
+# Configurazione attuale dell'orchestratore
+orchestrator = Agent(
+    tools=[test_agent, owasp_agent, doc_agent]
+)
+
+# Aggiunta di un nuovo agente — nessuna modifica al resto del sistema
+orchestrator = Agent(
+    tools=[test_agent, owasp_agent, doc_agent, performance_agent]
+)
+```
+
+L'aggiunta di un nuovo agente richiede esclusivamente la creazione di un nuovo modulo Python e la sua registrazione nell'orchestratore, senza modifiche all'API Router, al Report Builder, al database o al frontend. Il confine di modifica coincide con il confine del componente, non con il confine del servizio.
+
+Qualora in futuro un agente specifico richiedesse risorse computazionali tali da giustificarne l'estrazione in un servizio indipendente, l'architettura lo consente: è sufficiente sostituire la chiamata locale Strands con una chiamata HTTP verso il nuovo servizio, mantenendo invariata l'interfaccia dell'orchestratore. L'operazione inversa — consolidare microservizi granulari mal progettati — è invece strutturalmente più complessa e costosa.
+
+#figure(
+  table(
+    columns: (2fr, 1fr, 1fr, 1fr),
+    inset: 10pt,
+    stroke: 0.5pt + luma(200),
+    table.header(
+      [*Criterio*],
+      [*Microservizi granulari*],
+      [*Monolite*],
+      [*Soluzione adottata*]
+    ),
+    fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+    align: (col, row) => if col == 0 { left + horizon } else { center + horizon },
+
+    [Complessità operativa], [Alta], [Minima], [Bassa],
+    [Scalabilità indipendente Analysis], [Sì], [No], [Sì],
+    [Aggiunta nuovo agente], [Nuovo servizio + CI/CD], [Nuovo modulo], [Nuovo modulo],
+    [Comunicazione inter-agente], [Rete], [In-process], [In-process],
+    [Isolamento Account / Analysis], [Sì], [No], [Sì],
+    [Complessità di sviluppo per MVP], [Alta], [Bassa], [Media]
+  ),
+  caption: "Confronto tra le alternative architetturali considerate"
+)
+
+== Scelta intrapresa
+Alla luce di quanto esposto, il team ha optato per un'architettura a due microservizi, con un *Account Service* dedicato alla gestione degli utenti e un *Analysis Service* che ospita l'orchestratore e i tre agenti. Questa soluzione rappresenta un compromesso ottimale tra modularità, scalabilità e semplicità operativa, al finne di garantire un percorso di evoluzione sostenibile per l'applicazione, in linea con i requisiti del capitolato e le best practice di ingegneria del software.
+
+= Diagrammi architetturali
+#contextDiagram("C4_Level1_SystemContext",50%)
+#containerDiagram("C4_Level2_Container",80%)
+#componentDiagram("C4_Level3_Component_AnalysisService",100%)
