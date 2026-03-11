@@ -12,11 +12,17 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v1.0.0"
+#let versione = "v1.1.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2026/03/11",
+    "1.1.0",
+    "Correzioni degli errori segnalati per la Requirements And Technology Baseline",
+    members.andrea,
+  ),
   (
     "2026/02/23",
     "1.0.0",
@@ -1032,7 +1038,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente Autorizzato",
   pre: [
-    - L'utente ha completato l'interazione con la piattaforma esterna GitHub #link(<UC3.1>)[#underline[\[UC3.1\]]]
+    - L'utente ha completato l'interazione con la piattaforma esterna GitHub #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente è tornato alla piattaforma CodeGuardian
   ],
   post: [
@@ -1055,7 +1061,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente Autorizzato",
   pre: [
-    - L'utente ha completato l'interazione con la piattaforma esterna GitHub #link(<UC3.1>)[#underline[\[UC3.1\]]]
+    - L'utente ha completato l'interazione con la piattaforma esterna GitHub #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente è tornato alla piattaforma CodeGuardian
   ],
   post: [
@@ -1077,7 +1083,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 #useCase(
   attore: "Utente Autorizzato",
   pre: [
-    - L'utente ha completato l'interazione con la piattaforma esterna GitHub #link(<UC3.1>)[#underline[\[UC3.1\]]]
+    - L'utente ha completato l'interazione con la piattaforma esterna GitHub #link(<UC3>)[#underline[\[UC3\]]]
     - L'utente è tornato alla piattaforma CodeGuardian
   ],
   post: [
@@ -1174,11 +1180,11 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente ha inviato una richiesta di analisi #link(<UC4>)[#underline[\[UC4\]]]
   ],
   post: [
-    - La richiesta di analisi viene annullata in quanto è già presente un report aggiornato
+    - La richiesta viene soddisfatta restituendo immediatamente il report già esistente
     - L'utente visualizza l'informativa che indica la presenza di un report il cui stato coincide con l'ultimo report generato
   ],
   scenari: [
-    - L'utente visualizza un messaggio circa l'inutilità di una nuova analisi per coerenza dei dati
+    - L'utente visualizza un messaggio circa l'assenza di nuove modifiche e l'immediata disponibilità del report aggiornato
   ],
   inclusioni: [
     - Nessuna
@@ -1196,11 +1202,10 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     - L'utente ha inviato una richiesta di analisi #link(<UC4>)[#underline[\[UC4\]]]
   ],
   post: [
-    - La nuova richiesta di analisi viene bloccata per prevenire elaborazioni duplicate concorrenti
-    - L'utente visualizza un avviso che lo invita ad attendere il completamento del processo già attivo
+    - L'utente viene accodato in attesa della conclusione dell'elaborazione già attiva per il medesimo repository
   ],
   scenari: [
-    - L'utente visualizza un messaggio che segnala che un'analisi per il medesimo repository è attualmente in corso
+    - L'utente visualizza un messaggio di avvenuta presa in carico e di accodamento della richiesta
   ],
   inclusioni: [
     - Nessuna
@@ -4474,11 +4479,11 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   // ---
 
   [#FRObx],
-  [Il Sistema deve impedire l'avvio di una nuova analisi e informare l'utente se il report esistente risulta già aggiornato.],
+  [Il Sistema deve restituire immediatamente il report esistente, senza avviare una nuova elaborazione, informando l'utente qualora i dati remoti risultino già aggiornati.],
   [#link(<UC4.0.1>)[#underline[\[UC4.0.1\]]]],
 
   [#FRObx],
-  [Il Sistema deve impedire l'invio di una nuova richiesta se un'analisi per il medesimo repository è già in fase di elaborazione.],
+  [Il Sistema deve accodare la richiesta di analisi al processo già in corso per il medesimo repository, informando l'utente dell'avvenuta presa in carico.],
   [#link(<UC4.0.2>)[#underline[\[UC4.0.2\]]]],
 
   [#FRObx],
@@ -5198,6 +5203,10 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   [#link(<UC41.1>)[#underline[\[UC41.1\]]]],
 
   [#FRObx],
+  [Il Sistema deve consentire all'Utente Avanzato di avviare la procedura di rimozione di un repository dal proprio catalogo privato.],
+  [#link(<UC42>)[#underline[\[UC42\]]]],
+
+  [#FRObx],
   [Il Sistema deve consentire la rimozione di un repository dal catalogo privato previa conferma esplicita dell'utente.],
   [#link(<UC42.1>)[#underline[\[UC42.1\]]]],
 
@@ -5219,8 +5228,16 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   [#link(<UC43.1>)[#underline[\[UC43.1\]]]],
 
   [#FRObx],
+  [Il Sistema deve deve consentire l'aggiunta di un nuovo profilo autorizzato alla consultazione dei report per un repository privato.],
+  [#link(<UC44>)[#underline[\[UC44\]]]],
+
+  [#FRObx],
   [Il Sistema deve consentire l'aggiunta di un utente autorizzato tramite l'inserimento dello username o dell'indirizzo email del profilo destinatario.],
   [#link(<UC44.1>)[#underline[\[UC44.1\]]]],
+
+  [#FRObx],
+  [Il Sistema deve inibire la procedura e mostrare un messaggio di errore qualora l'identificativo inserito per l'autorizzazione non rispetti il formato previsto.],
+  [#link(<UC44.1.1>)[#underline[\[UC44.1.1\]]]],
 
   [#FRObx],
   [Il Sistema deve validare che l'identificativo inserito corrisponda a un profilo effettivamente registrato nella piattaforma.],
@@ -5231,6 +5248,14 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   [#link(<UC44.1.3>)[#underline[\[UC44.1.3\]]]],
 
   [#FRObx],
+  [Il Sistema deve mostrare un avviso di obbligatorietà e inibire l'aggiunta qualora il campo identificativo risulti vuoto al momento della conferma.],
+  [#link(<UC44.1.4>)[#underline[\[UC44.1.4\]]]],
+
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Avanzato di selezionare un utente dalla lista e avviare la procedura di revoca dei suoi permessi.],
+  [#link(<UC45>)[#underline[\[UC45\]]]],
+
+  [#FRObx],
   [Il Sistema deve consentire la revoca dei permessi di consultazione per un utente precedentemente autorizzato a seguito di conferma del proprietario.],
   [#link(<UC45.1>)[#underline[\[UC45.1\]]]],
 
@@ -5238,6 +5263,14 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   [#FRObx],
   [Il Sistema deve consentire la rimozione di una raccolta di report senza che questo comporti l'eliminazione dei singoli report di analisi in essa contenuti.],
   [#link(<UC46>)[#underline[\[UC46\]]]],
+
+  [#FRObx],
+  [Il Sistema deve richiedere una conferma esplicita prima di procedere con l'eliminazione definitiva di una raccolta dal profilo.],
+  [#link(<UC46.1>)[#underline[\[UC46.1\]]]],
+
+  [#FRObx],
+  [Il Sistema deve consentire di annullare la procedura di rimozione della raccolta, mantenendola inalterata nel sistema.],
+  [#link(<UC46.1.1>)[#underline[\[UC46.1.1\]]]],
 )
 
 #pagebreak()
@@ -5544,17 +5577,17 @@ La tabella seguente mostra la mappatura tra i casi d'uso identificati e i requis
   [FROb220, FROb221, FROb222],
 
   [#link(<UC42>)[#underline[\[UC42\]]], #link(<UC42.1>)[#underline[\[UC42.1\]]], #link(<UC42.1.1>)[#underline[\[UC42.1.1\]]]],
-  [FROb223, FROb224],
+  [FROb223, FROb224, FROb225],
 
   [#link(<UC43>)[#underline[\[UC43\]]], #link(<UC43.0.1>)[#underline[\[UC43.0.1\]]], #link(<UC43.1>)[#underline[\[UC43.1\]]]],
-  [FROb225, FROb226, FROb227],
+  [FROb226, FROb227, FROb228],
 
   [#link(<UC44>)[#underline[\[UC44\]]], #link(<UC44.1>)[#underline[\[UC44.1\]]], #link(<UC44.1.1>)[#underline[\[UC44.1.1\]]], #link(<UC44.1.2>)[#underline[\[UC44.1.2\]]], #link(<UC44.1.3>)[#underline[\[UC44.1.3\]]], #link(<UC44.1.4>)[#underline[\[UC44.1.4\]]]],
-  [FROb228, FROb229, FROb230],
+  [FROb229, FROb230, FROb231, FROb232, FROb233, FROb234],
 
   [#link(<UC45>)[#underline[\[UC45\]]], #link(<UC45.1>)[#underline[\[UC45.1\]]]],
-  [FROb231],
+  [FROb235, FROb236],
 
   [#link(<UC46>)[#underline[\[UC46\]]], #link(<UC46.1>)[#underline[\[UC46.1\]]], #link(<UC46.1.1>)[#underline[\[UC46.1.1\]]]],
-  [FROb232]
+  [FROb237, FROb238, FROb239]
 )
