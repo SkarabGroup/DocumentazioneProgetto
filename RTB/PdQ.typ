@@ -947,18 +947,25 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TU-41.3], [FROb222], [Verifica esposizione lista repository privati registrati con nome e URL.], [Lista popolata correttamente con tutti i repository del catalogo personale.],
       [TU-42.1], [FROb223], [Verifica rimozione repository dal catalogo privato previa conferma esplicita utente.], [Repository rimosso solo dopo conferma; dialog di conferma presente.],
       [TU-42.2], [FROb224], [Verifica integrità catalogo in caso di annullamento procedura di rimozione.], [Repository mantenuto nel catalogo se l'utente annulla l'operazione.],
-      [TU-42.3], [FROb223], [Verifica avvio procedura di rimozione di un repository dal catalogo privato.], [Caricamento corretto del dialog di rimozione.],
+      [TU-42.3], [FROb225], [Verifica avvio procedura di rimozione di un repository dal catalogo privato.], [Caricamento corretto del dialog di rimozione.],
 
       // --- GESTIONE PERMESSI REPOSITORY (UC43, UC44, UC45) ---
-      [TU-43.1], [FROb225], [Verifica visualizzazione elenco profili autorizzati per repository privato selezionato.], [Lista degli utenti autorizzati caricata correttamente.],
-      [TU-43.2], [FROb226], [Verifica informativa per accesso limitato esclusivamente al proprietario.], [Messaggio mostrato se lista utenti autorizzati è vuota.],
-      [TU-44.1], [FROb228], [Verifica aggiunta utente autorizzato tramite username o email con validazione del profilo.], [Profilo esistente aggiunto; identificativo non valido o inesistente rifiutato con errore specifico.],
-      [TU-44.2], [FROb229], [Verifica validazione corrispondenza identificativo a profilo registrato in piattaforma.], [Identificativo non trovato genera avviso di inesistenza.],
-      [TU-44.3], [FROb230], [Verifica impedimento autorizzazione multipla del medesimo profilo per stesso repository.], [Avviso di duplicazione mostrato; lista permessi invariata.],
-      [TU-45.1], [FROb231], [Verifica revoca permessi utente autorizzato previa conferma proprietario.], [Profilo rimosso dalla lista autorizzati dopo conferma; accesso al report revocato.],
+      [TU-43.1], [FROb226], [Verifica visualizzazione elenco profili autorizzati per repository privato selezionato.], [Lista degli utenti autorizzati caricata correttamente.],
+      [TU-43.2], [FROb227], [Verifica informativa per accesso limitato esclusivamente al proprietario.], [Messaggio mostrato se lista utenti autorizzati è vuota.],
+      [TU-43.3], [FROb228], [Verifica esposizione informazioni identificative del profilo autorizzato.], [Username e/o email dell'utente visibili nella lista.],
+      [TU-44.1], [FROb229], [Verifica aggiunta utente autorizzato tramite username o email con validazione del profilo.], [Profilo esistente aggiunto; identificativo non valido o inesistente rifiutato con errore specifico.],
+      [TU-44.2], [FROb230], [Verifica validazione corrispondenza identificativo a profilo registrato in piattaforma.], [Identificativo non trovato genera avviso di inesistenza.],
+      [TU-44.3], [FROb231], [Verifica impedimento autorizzazione multipla del medesimo profilo per stesso repository.], [Avviso di duplicazione mostrato; lista permessi invariata.],
+      [TU-44.4], [FROb232], [Verifica predisposizione comando di conferma per aggiunta utente.], [Pulsante di conferma presente e funzionante.],
+      [TU-44.5], [FROb233], [Verifica notifica errore sintattico per identificativo utente non valido.], [Messaggio di errore mostrato a schermo in caso di formato errato.],
+      [TU-44.6], [FROb234], [Verifica inibizione form autorizzazione con identificativo vuoto.], [Procedura inibita e avviso mostrato in caso di campo vuoto.],
+      [TU-45.1], [FROb235], [Verifica revoca permessi utente autorizzato previa conferma proprietario.], [Profilo rimosso dalla lista autorizzati dopo conferma; accesso al report revocato.],
+      [TU-45.2], [FROb236], [Verifica selezione utente e avvio procedura revoca da lista profili.], [Azione di revoca avviata per il profilo specifico selezionato.],
       
       // --- RIMOZIONE RACCOLTA (UC46) ---
-      [TU-46.1], [FROb232], [Verifica rimozione raccolta report senza eliminazione dei singoli report contenuti.], [Raccolta rimossa; report precedentemente contenuti ancora consultabili tramite altri percorsi.]
+      [TU-46.1], [FROb237], [Verifica rimozione raccolta report senza eliminazione dei singoli report contenuti.], [Raccolta rimossa; report precedentemente contenuti ancora consultabili tramite altri percorsi.],
+      [TU-46.2], [FROb238], [Verifica presenza dialog di conferma esplicita per eliminazione raccolta.], [Richiesta conferma mostrata prima dell'eliminazione definitiva.],
+      [TU-46.3], [FROb239], [Verifica ripristino stato su annullamento rimozione raccolta.], [Procedura interrotta e raccolta mantenuta inalterata nel sistema.]
     ),
   ),
   caption: [Tabella dei Test di Unità],
