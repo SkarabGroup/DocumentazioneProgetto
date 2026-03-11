@@ -11,12 +11,18 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v1.0.0"
+#let versione = "v1.1.0"
 
 #titlePage("Piano di Qualifica", versione)
 #set heading(numbering: "1.1.1")
 #set page(numbering: "1", header: header("Piano di Qualifica"), footer: footer())
 #let history = (
+  (
+    "2026/03/11",
+    "1.1.0",
+    "Correzzione numerazione test dopo modifiche AdR per errori segnalati per la RTB",
+    members.andrea,
+  ),
   (
     "2026/03/02",
     "1.0.0",
