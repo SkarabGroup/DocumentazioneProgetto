@@ -702,9 +702,9 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TU-4.1], [FROb47], [Verifica predisposizione campo URL nel modulo di richiesta analisi.], [Campo URL presente e funzionante nel modulo.],
       [TU-4.2], [FROb48], [Verifica vincoli sintattici URL: protocollo “https://” e dominio “github.com”.], [Validazione positiva solo per URL conformi.],
       [TU-4.3], [FROb49], [Verifica controllo dimensione repository tramite API GitHub.], [Analisi inibita se il repository supera i limiti tecnici prestabiliti.],
-      [TU-4.4], [FROb54], [Verifica blocco invio se report già aggiornato.], [Informativa su analisi già aggiornata; nuova analisi impedita.],
+      [TU-4.4], [FROb54], [Verifica restituzione report esistente se già aggiornato.], [Informativa su analisi già aggiornata; disponibilità immediata del report senza nuova analisi.],
       [TU-4.5], [FROb50], [Verifica disabilitazione comando di conferma dopo prima pressione.], [Bottone disabilitato dopo il click per prevenire richieste duplicate.],
-      [TU-4.6], [FROb55], [Verifica rilevamento processi analisi attivi e impedimento invio duplicato.], [Feedback su audit già pendente per il medesimo repository.],
+      [TU-4.6], [FROb55], [Verifica accodamento richiesta per analisi già in corso.], [Avviso di presa in carico mostrato e utente accodato al processo pendente.],
       [TU-4.7], [FROb56], [Verifica inibizione richiesta analisi in assenza di selezione aree di interesse.], [Messaggio di errore se nessuna area è selezionata.],
       [TU-4.8], [FROb51], [Verifica consegna notifica di fine analisi tramite canali scelti dall'utente.], [Notifica recapitata sul canale configurato dall'utente.],
       [TU-4.9], [FROb52], [Verifica inclusione dettagli analisi (nome progetto, ora) nell'avviso ricevuto.], [Messaggio contiene nome progetto e timestamp correttamente formattati.],
@@ -947,6 +947,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TU-41.3], [FROb222], [Verifica esposizione lista repository privati registrati con nome e URL.], [Lista popolata correttamente con tutti i repository del catalogo personale.],
       [TU-42.1], [FROb223], [Verifica rimozione repository dal catalogo privato previa conferma esplicita utente.], [Repository rimosso solo dopo conferma; dialog di conferma presente.],
       [TU-42.2], [FROb224], [Verifica integrità catalogo in caso di annullamento procedura di rimozione.], [Repository mantenuto nel catalogo se l'utente annulla l'operazione.],
+      [TU-42.3], [FROb223], [Verifica avvio procedura di rimozione di un repository dal catalogo privato.], [Caricamento corretto del dialog di rimozione.],
 
       // --- GESTIONE PERMESSI REPOSITORY (UC43, UC44, UC45) ---
       [TU-43.1], [FROb225], [Verifica visualizzazione elenco profili autorizzati per repository privato selezionato.], [Lista degli utenti autorizzati caricata correttamente.],
