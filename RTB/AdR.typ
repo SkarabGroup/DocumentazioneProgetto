@@ -22,6 +22,7 @@
     "1.1.0",
     "Correzioni degli errori segnalati per la Requirements And Technology Baseline",
     members.andrea,
+    members.martinello,
   ),
   (
     "2026/02/23",
