@@ -1,0 +1,108 @@
+@startuml C4_Component_Mega_Hexagonal_Final
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+skinparam linetype ortho
+skinparam nodesep 200
+skinparam ranksep 200   
+
+title Component Diagram - Microservizio Analisi (Esagonale Completo)
+
+' --- SISTEMI ESTERNI ---
+System_Ext(apigw, "Amazon API Gateway", "Punto di ingresso, Auth & Throttling")
+System_Ext(github, "GitHub API", "Source Code")
+System_Ext(bedrock, "AWS Bedrock", "LLM per Remediation")
+System_Ext(auth, "Auth Service", "Validazione Token")
+ContainerDb_Ext(mongo, "MongoDB Atlas", "Memorizzazione Report")
+System_Ext(s3, "AWS S3", "Storage Repository e risultati analisi")
+
+Container_Boundary(microservice, "AI-Powered Analysis Microservice") {
+
+    Container_Boundary(nestjs, "NestJS Orchestrator (Fargate)") {
+        
+        Boundary(primary_adapters, "Primary Adapters (Inbound)") #FFF2CC {
+            Component(rest_ctrl, "REST Controller", "NestJS Controller", "Espone l'API per gli utenti")
+            Component(webhook_ctrl, "Webhook Listener", "NestJS Controller", "Riceve feedback asincroni da AWS")
+        }
+
+        Boundary(domain_core, "Domain Core (Hexagon)") #E6F3FF {
+            Boundary(input_ports, "Input Ports") #CEADF0 {
+                Component(i_analysis, "IAnalysisServicePort", "Interface")
+                Component(i_callback, "ICallbackPort", "Interface")
+            }
+
+            Component(use_case, "Analysis Use Case", "Domain Service", "Orchestra il flusso di business")
+            Component(packager, "Packager Engine", "Domain Service", "Algoritmi di sharding")
+            
+            Boundary(output_ports, "Output Ports") #E6DED3 {
+                Component(port_git, "SourceControl Port", "Interface")
+                Component(port_storage, "Storage Port", "Interface")
+                Component(port_workflow, "Workflow Port", "Interface")
+                Component(port_db, "Database Port", "Interface")
+            }
+        }
+
+        Boundary(secondary_adapters, "Secondary Adapters (Outbound)") #D5E8D4 {
+            Component(git_adapter, "GitHub Adapter", "Class")
+            Component(s3_adapter, "S3 Adapter", "Class")
+            Component(sfn_adapter, "StepFunctions Adapter", "Class")
+            Component(mongo_adapter, "MongoDB Adapter", "Class")
+        }
+    }
+
+    Container_Boundary(serverless, "Serverless Execution Layer") #F8CECC {
+        Component(sfn_workflow, "Analysis State Machine", "Step Functions", "Orchestra il flusso e aggrega i risultati")
+        Component(ag_owasp, "Agente OWASP", "Lambda", "Security Scan")
+        Component(ag_code, "Agente Codice", "Lambda", "Static Analysis")
+        Component(ag_doc, "Agente Documentazione", "Lambda", "Docs Check")
+        Component(ag_fix, "Agente Remediation", "Lambda", "Generazione patch AI")
+    }
+}
+
+' --- RELAZIONI INFRASTRUTTURA ---
+Rel_D(apigw, rest_ctrl, "Proxy richieste", "HTTPS/VPC Link")
+Rel_L(apigw, auth, "Validazione Token", "Lambda Authorizer")
+
+' --- RELAZIONI INBOUND ---
+Rel_D(rest_ctrl, i_analysis, "Usa")
+Rel_D(webhook_ctrl, i_callback, "Usa")
+Rel_D(i_analysis, use_case, "Implementata da")
+Rel_D(i_callback, use_case, "Implementata da")
+
+' --- CORE LOGIC ---
+Rel_R(use_case, packager, "Usa")
+
+' --- OUTBOUND PORTS ---
+Rel_D(use_case, port_git, "Chiama")
+Rel_D(use_case, port_storage, "Chiama")
+Rel_D(use_case, port_workflow, "Chiama")
+Rel_D(use_case, port_db, "Chiama")
+
+' --- ADAPTER IMPLEMENTATIONS ---
+Rel_D(port_git, git_adapter, "Implementato da")
+Rel_D(port_storage, s3_adapter, "Implementato da")
+Rel_D(port_workflow, sfn_adapter, "Implementato da")
+Rel_D(port_db, mongo_adapter, "Implementato da")
+
+' --- EXTERNAL ADAPTER SERVICES ---
+Rel_D(git_adapter, github, "Clone repo", "HTTPS")
+Rel_D(sfn_adapter, sfn_workflow, "Trigger", "HTTPS/JSON")
+Rel_L(s3_adapter, s3, "Upload Shards", "HTTPS")
+Rel_D(mongo_adapter, mongo, "Salva report", "Wire Protocol")
+
+' --- SERVERLESS FLOW ---
+Rel_D(sfn_workflow, ag_owasp, "Invoke (Map State)")
+Rel_D(sfn_workflow, ag_code, "Invoke (Map State)")
+Rel_D(sfn_workflow, ag_doc, "Invoke (Map State)")
+Rel_D(sfn_workflow, ag_fix, "Invoke (dopo aggregazione)")
+
+' --- DATA FLOW LAMBDA <-> S3 ---
+Rel_R(ag_owasp, s3, "Get Zip / Put JSON", "HTTPS")
+Rel_R(ag_code, s3, "Get Zip / Put JSON", "HTTPS")
+Rel_R(ag_doc, s3, "Get Zip / Put JSON", "HTTPS")
+Rel_R(ag_fix, s3, "Get Results / Put Patch", "HTTPS")
+
+Rel_R(ag_fix, bedrock, "AI Prompt", "HTTPS")
+Rel_U(sfn_workflow, webhook_ctrl, "Invia Callback", "HTTPS")
+
+@enduml
