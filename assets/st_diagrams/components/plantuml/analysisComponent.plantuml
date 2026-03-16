@@ -1,38 +1,48 @@
-@startuml C4_Component_Mega_Hexagonal_Final
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+@startuml C4_Component_Mega_Hexagonal_FinalS
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
 
 skinparam linetype ortho
-skinparam nodesep 200
-skinparam ranksep 200   
+skinparam nodesep 120
+skinparam ranksep 130
 
-title Component Diagram - Microservizio Analisi (Esagonale Completo)
+title Diagramma Integrale - CodeGuardian Analysis Microservice (Dettaglio Domain Core)
 
 ' --- SISTEMI ESTERNI ---
-System_Ext(apigw, "Amazon API Gateway", "Punto di ingresso, Auth & Throttling")
-System_Ext(github, "GitHub API", "Source Code")
+System_Ext(apigw, "Amazon API Gateway", "Ingresso, Throttling & VPC Link")
+System_Ext(github, "GitHub API", "Source Code (HTTPS)")
 System_Ext(bedrock, "AWS Bedrock", "LLM per Remediation")
-System_Ext(auth, "Auth Service", "Validazione Token")
-ContainerDb_Ext(mongo, "MongoDB Atlas", "Memorizzazione Report")
-System_Ext(s3, "AWS S3", "Storage Repository e risultati analisi")
+ContainerDb_Ext(mongo, "MongoDB Atlas", "Report, Audit & PAT Utenti")
+System_Ext(s3, "AWS S3", "Storage ZIP (Shards) & Risultati JSON")
 
-Container_Boundary(microservice, "AI-Powered Analysis Microservice") {
+' --- SICUREZZA INFRASTRUTTURALE ---
+Component(lambda_auth, "Lambda Authorizer", "AWS Lambda", "Controlla solo la validità del JWT")
 
-    Container_Boundary(nestjs, "NestJS Orchestrator (Fargate)") {
+Container_Boundary(microservice, "Analysis Microservice (Fargate)") {
+
+    Container_Boundary(nestjs, "NestJS Orchestrator") {
         
-        Boundary(primary_adapters, "Primary Adapters (Inbound)") #FFF2CC {
-            Component(rest_ctrl, "REST Controller", "NestJS Controller", "Espone l'API per gli utenti")
-            Component(webhook_ctrl, "Webhook Listener", "NestJS Controller", "Riceve feedback asincroni da AWS")
+        Boundary(primary_adapters, "Inbound Adapters") #FFF2CC {
+            Component(start_ctrl, "Start Analysis Controller", "NestJS", "POST /analysis")
+            Component(report_ctrl, "Report Controller", "NestJS", "GET /analysis/:id")
+            Component(config_ctrl, "Settings Controller", "NestJS", "PUT /settings/github")
+            Component(webhook_ctrl, "Callback Controller", "NestJS", "POST /webhooks/stn-callback")
+            Component(health_ctrl, "Health Controller", "NestJS", "GET /health")
         }
 
-        Boundary(domain_core, "Domain Core (Hexagon)") #E6F3FF {
+        Boundary(domain_core, "Domain Core (Esagono)") #E6F3FF {
             Boundary(input_ports, "Input Ports") #CEADF0 {
                 Component(i_analysis, "IAnalysisServicePort", "Interface")
+                Component(i_config, "IConfigServicePort", "Interface")
                 Component(i_callback, "ICallbackPort", "Interface")
             }
 
-            Component(use_case, "Analysis Use Case", "Domain Service", "Orchestra il flusso di business")
-            Component(packager, "Packager Engine", "Domain Service", "Algoritmi di sharding")
+            ' Scomposizione dell'Orchestrator in servizi SRP
+            Component(orchestrator, "Analysis Orchestrator", "Domain Service", "Facade: coordina il flusso")
+            Component(cred_service, "Credentials Service", "Domain Service", "Recupero e gestione PAT")
+            Component(cache_service, "Cache Service", "Domain Service", "Verifica Idempotenza e SHA")
+            Component(prep_engine, "Preparation Engine", "Domain Service", "Gestione Clone & Workflow")
+            Component(packager, "Packager Engine", "Domain Service", "Scan, Shard & Cleanup")
+            Component(config_use_case, "Config Use Case", "Domain Service", "Gestione PAT Locali")
             
             Boundary(output_ports, "Output Ports") #E6DED3 {
                 Component(port_git, "SourceControl Port", "Interface")
@@ -42,67 +52,81 @@ Container_Boundary(microservice, "AI-Powered Analysis Microservice") {
             }
         }
 
-        Boundary(secondary_adapters, "Secondary Adapters (Outbound)") #D5E8D4 {
-            Component(git_adapter, "GitHub Adapter", "Class")
-            Component(s3_adapter, "S3 Adapter", "Class")
-            Component(sfn_adapter, "StepFunctions Adapter", "Class")
-            Component(mongo_adapter, "MongoDB Adapter", "Class")
+        Boundary(secondary_adapters, "Outbound Adapters") #D5E8D4 {
+            Component(git_adapter, "GitHub Adapter", "simple-git", "Interazioni Git (Clone, SHA)")
+            Component(s3_adapter, "S3 Adapter", "AWS SDK", "Upload/Download Shards")
+            Component(sfn_adapter, "StepFunctions Adapter", "AWS SDK", "Trigger Workflow")
+            Component(mongo_adapter, "MongoDB Adapter", "Mongoose", "Persistence")
+        }
+
+        Boundary(local_fs, "Ephemeral Storage (/tmp)") #DDDDDD {
+            Component(temp_folder, "Analysis Workspace", "File System", "Storage temporaneo codice")
         }
     }
 
     Container_Boundary(serverless, "Serverless Execution Layer") #F8CECC {
-        Component(sfn_workflow, "Analysis State Machine", "Step Functions", "Orchestra il flusso e aggrega i risultati")
-        Component(ag_owasp, "Agente OWASP", "Lambda", "Security Scan")
-        Component(ag_code, "Agente Codice", "Lambda", "Static Analysis")
-        Component(ag_doc, "Agente Documentazione", "Lambda", "Docs Check")
-        Component(ag_fix, "Agente Remediation", "Lambda", "Generazione patch AI")
+        Component(sfn_workflow, "Step Functions", "State Machine", "Orchestra gli Agenti")
+        Component(ag_owasp, "Agente OWASP", "Lambda/Semgrep")
+        Component(ag_code, "Agente Codice", "Lambda/Semgrep")
+        Component(ag_fix, "Agente AI Fix", "Lambda/Bedrock")
     }
 }
 
-' --- RELAZIONI INFRASTRUTTURA ---
-Rel_D(apigw, rest_ctrl, "Proxy richieste", "HTTPS/VPC Link")
-Rel_L(apigw, auth, "Validazione Token", "Lambda Authorizer")
+' --- RELAZIONI DI FLUSSO ---
 
-' --- RELAZIONI INBOUND ---
-Rel_D(rest_ctrl, i_analysis, "Usa")
-Rel_D(webhook_ctrl, i_callback, "Usa")
-Rel_D(i_analysis, use_case, "Implementata da")
-Rel_D(i_callback, use_case, "Implementata da")
+' 1. Sicurezza & Ingresso
+Rel_R(apigw, lambda_auth, "1. Invia JWT per controllo")
+Rel_D(apigw, start_ctrl, "2. Inoltra (se Allow)")
+Rel_D(apigw, config_ctrl, "Inoltra (se Allow)")
+Rel_D(apigw, report_ctrl, "Inoltra (se Allow)")
 
-' --- CORE LOGIC ---
-Rel_R(use_case, packager, "Usa")
+' 2. Flusso Configurazione PAT
+Rel_D(config_ctrl, i_config, "Salva/Legge")
+Rel_D(i_config, config_use_case, "Implementato da")
+Rel_D(config_use_case, port_db, "Salva PAT per l'utente")
 
-' --- OUTBOUND PORTS ---
-Rel_D(use_case, port_git, "Chiama")
-Rel_D(use_case, port_storage, "Chiama")
-Rel_D(use_case, port_workflow, "Chiama")
-Rel_D(use_case, port_db, "Chiama")
+' 3. Inbound -> Core (Analysis Facade)
+Rel_D(start_ctrl, i_analysis, "Avvia")
+Rel_D(i_analysis, orchestrator, "Implementato da")
 
-' --- ADAPTER IMPLEMENTATIONS ---
-Rel_D(port_git, git_adapter, "Implementato da")
-Rel_D(port_storage, s3_adapter, "Implementato da")
-Rel_D(port_workflow, sfn_adapter, "Implementato da")
-Rel_D(port_db, mongo_adapter, "Implementato da")
+' 4. Core Interno: Orchestrazione e SRP
+Rel_D(orchestrator, cred_service, "1. Richiede PAT")
+Rel_D(cred_service, port_db, "Legge credenziali")
 
-' --- EXTERNAL ADAPTER SERVICES ---
-Rel_D(git_adapter, github, "Clone repo", "HTTPS")
-Rel_D(sfn_adapter, sfn_workflow, "Trigger", "HTTPS/JSON")
-Rel_L(s3_adapter, s3, "Upload Shards", "HTTPS")
-Rel_D(mongo_adapter, mongo, "Salva report", "Wire Protocol")
+Rel_D(orchestrator, cache_service, "2. Verifica stato")
+Rel_D(cache_service, port_git, "Ottiene SHA Remoto")
+Rel_D(cache_service, port_db, "Cerca analisi in cache")
 
-' --- SERVERLESS FLOW ---
-Rel_D(sfn_workflow, ag_owasp, "Invoke (Map State)")
-Rel_D(sfn_workflow, ag_code, "Invoke (Map State)")
-Rel_D(sfn_workflow, ag_doc, "Invoke (Map State)")
-Rel_D(sfn_workflow, ag_fix, "Invoke (dopo aggregazione)")
+Rel_R(orchestrator, prep_engine, "3. Delega Esecuzione (se Cache Miss)")
 
-' --- DATA FLOW LAMBDA <-> S3 ---
-Rel_R(ag_owasp, s3, "Get Zip / Put JSON", "HTTPS")
-Rel_R(ag_code, s3, "Get Zip / Put JSON", "HTTPS")
-Rel_R(ag_doc, s3, "Get Zip / Put JSON", "HTTPS")
-Rel_R(ag_fix, s3, "Get Results / Put Patch", "HTTPS")
+' 5. Esecuzione (Clone & Shard)
+Rel_D(prep_engine, port_git, "Richiede Clone")
+Rel_D(port_git, git_adapter, "Usa")
+Rel_D(git_adapter, github, "Interazione remota (SHA, Clone)")
+Rel_D(git_adapter, temp_folder, "Scrive file repository")
 
-Rel_R(ag_fix, bedrock, "AI Prompt", "HTTPS")
-Rel_U(sfn_workflow, webhook_ctrl, "Invia Callback", "HTTPS")
+Rel_D(prep_engine, packager, "Innesca Sharding")
+Rel_L(packager, temp_folder, "Legge, Zippa & Pulisce")
+
+' 6. Outbound -> Cloud
+Rel_D(prep_engine, port_storage, "Salva Shards")
+Rel_D(port_storage, s3_adapter, "Upload")
+Rel_D(s3_adapter, s3, "File ZIP")
+
+Rel_D(prep_engine, port_workflow, "Avvia Macchina a Stati")
+Rel_D(port_workflow, sfn_adapter, "Trigger")
+Rel_D(sfn_adapter, sfn_workflow, "Start")
+
+' 7. Serverless Loop & Callback
+Rel_D(sfn_workflow, ag_owasp, "Analizza")
+Rel_D(sfn_workflow, ag_code, "Analizza")
+Rel_U(sfn_workflow, webhook_ctrl, "Invia Risultati finali")
+
+' 8. Persistenza dei Risultati
+Rel_D(webhook_ctrl, i_callback, "Riceve payload")
+Rel_D(i_callback, orchestrator, "Implementato da")
+Rel_D(orchestrator, port_db, "Salva Report Finale")
+Rel_D(port_db, mongo_adapter, "Usa")
+Rel_D(mongo_adapter, mongo, "Operazioni DB (JSON)")
 
 @enduml
