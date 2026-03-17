@@ -69,11 +69,6 @@ Container_Boundary(microservice, "Analysis Microservice (Fargate)") {
         Component(ag_secu, "Security Scan", "Lambda / Semgrep", "OWASP SAST scan")
         Component(ag_secr, "Secrets Scan", "Lambda / Trivy", "Secrets scan")
         Component(ag_dep, "Dependency Scan", "Lambda / Syft + Grype", "CVE scan")
-        'Component(ag_aspy, "Analisi Statica Python", "Lambda/Ruff")
-        'Component(ag_asjsts, "Analisi Statica JS/TS", "Lambda/Biome")
-        'Component(ag_asjav, "Analisi Statica Java", "Lambda/Checkstyle")
-        'Component(ag_asccpp, "Analisi Statica C/C++", "Lambda/cppcheck")
-        Component(ag_fix, "Agente AI Fix", "Lambda/Bedrock")
     }
 }
 
@@ -123,22 +118,11 @@ Rel_D(port_workflow, sfn_adapter, "Trigger")
 Rel_D(sfn_adapter, sfn_workflow, "Start")
 
 ' 7. Serverless Loop & Callback
-Rel_D(sfn_workflow, ag_secu, "Analizza")
-Rel_D(sfn_workflow, ag_secr, "Analizza")
-Rel_D(sfn_workflow, ag_dep, "Analizza")
-Rel_D(sfn_workflow, ag_aspy, "Analizza")
-Rel_D(sfn_workflow, ag_asjsts, "Analizza")
-Rel_D(sfn_workflow, ag_asjav, "Analizza")
-Rel_D(sfn_workflow, ag_asccpp, "Analizza")
-Rel_D(sfn_workflow, ag_covpy, "Analizza")
 Rel_R(ag_secu, s3, "Get repo / Put report")
 Rel_R(ag_secr, s3, "Get repo / Put report")
 Rel_R(ag_dep, s3, "Get repo / Put report")
-'Rel_R(ag_aspy, s3, "Get repo / Put report")
-'Rel_R(ag_asjsts, s3, "Get repo / Put report")
-'Rel_R(ag_asjav, s3, "Get repo / Put report")
-'Rel_R(ag_asccpp, s3, "Get repo / Put report")
 Rel_U(sfn_workflow, webhook_ctrl, "Invia Risultati finali")
+
 
 ' 8. Persistenza dei Risultati
 Rel_D(webhook_ctrl, i_callback, "Riceve payload")

@@ -10,7 +10,7 @@ Person(developer, "Developer / Tech Lead", "Utente della piattaforma")
 
 System_Boundary(codeGuardian, "Code Guardian") {
 
-    Container(frontend, "Web Dashboard", "React.js / SPA", "Interfaccia utente: submit repository, visualizzazione report, gestione remediation interattiva, ranking progetti.")
+    Container(Gt, "Gateway", "Interfaccia REST API", "Gestisce le richieste API e si occupa di validare JWT e autorizzare richieste.")
 
     Container(accountService, "Account Service", "Node.js + Express", "Gestisce autenticazione, registrazione utenti, emissione e validazione JWT, API Keys.")
 
@@ -24,14 +24,15 @@ System_Boundary(codeGuardian, "Code Guardian") {
 System_Ext(github, "GitHub API", "Sorgente del codice da analizzare")
 System_Ext(aws, "AWS", "Infrastruttura cloud per Lambda, S3, EFS ...")
 
-Rel(developer, frontend, "Usa", "HTTPS / Browser")
-Rel(frontend, accountService, "Login, registrazione, verifica token", "HTTPS / REST + JWT")
-Rel(frontend, analysisService, "Avvia analisi, recupera report, accetta remediation", "HTTPS / REST + JWT")
+Rel(developer, Gt, "Usa", "HTTPS / Browser")
+Rel(Gt, accountService, "Login, registrazione, verifica token", "HTTPS / REST + JWT")
+Rel(Gt, analysisService, "Avvia analisi, recupera report, accetta remediation", "HTTPS / REST + JWT")
 
 Rel(accountService, accountDb, "Legge e scrive dati utenti", "MongoDB Driver")
 Rel(analysisService, analysisDb, "Salva e recupera report di analisi", "MongoDB Driver")
 
 Rel(analysisService, github, "Clona repository, legge struttura file", "HTTPS / GitHub API")
 Rel(analysisService, aws, "Utilizza servizi cloud", "HTTPS / REST")
+Rel_Left(analysisService, accountService, "Verifica Github PAT", "HTTPS / REST")
 
 @enduml

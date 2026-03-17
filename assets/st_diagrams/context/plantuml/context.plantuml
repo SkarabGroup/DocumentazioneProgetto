@@ -1,4 +1,3 @@
-
 @startuml C4_Level1_SystemContext
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
 
@@ -12,10 +11,10 @@ System(codeGuardian, "Code Guardian", "Piattaforma web ad agenti AI per l'audit 
 
 System_Ext(github, "GitHub", "Hosting dei repository software da analizzare. Fornisce il codice sorgente tramite API REST.")
 
-System_Ext(llmApi, "LLM API (Claude / Bedrock)", "Modello linguistico large usato dagli agenti AI per ragionamento, analisi e generazione di remediation.")
+System_Ext(AWS, "AWS Infrastructure", "Hosting del servizio e fornisce servizi di intelligenza artificiale e machine learning per l'analisi del codice e la generazione di suggerimenti di remediation.")
 
-Rel(developer, codeGuardian, "Invia URL repository, consulta report, accetta/rifiuta remediation", "HTTPS / Browser")
+Rel(developer, codeGuardian, "Si registra, poi puó inviare URL repository, consultare report, accettare/rifiutare remediation", "HTTPS / Browser")
 Rel(codeGuardian, github, "Scarica codice sorgente e metadati del repository", "HTTPS / GitHub API")
-Rel(codeGuardian, llmApi, "Invia contesto di analisi, riceve risultati e suggerimenti", "HTTPS / REST")
+Rel(codeGuardian, AWS, "Utilizza vari servizi per hosting, storage, llms", "HTTPS / AWS SDK")
 
 @enduml
