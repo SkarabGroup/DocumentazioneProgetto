@@ -1,0 +1,69 @@
+@startuml C4_Level4_Orchestrator_Mongo_FromC3
+
+skinparam linetype ortho
+skinparam nodesep 70
+skinparam ranksep 90
+skinparam classAttributeIconSize 0
+hide circles
+skinparam class {
+    BackgroundColor White
+    BorderColor #555555
+    ArrowColor #555555
+    FontSize 12
+}
+skinparam interface {
+    BackgroundColor #E8F5E9
+    BorderColor #2E7D32
+    FontSize 12
+}
+skinparam package {
+    BorderColor #999999
+    FontSize 13
+    BackgroundColor White
+}
+
+title C4 Level 4 — Code\nZoom: port_db → mongo_adapter
+
+
+interface IPortDb {
+    +save(dto: DTO): void
+    +findUserReports(userId: string): Promise<DTO>
+    +findReport(repository: string, commitSha: string): Promise<DTO>
+}
+
+
+class MongoDbAdapter {
+    -DbModel: Model
+    -toDTO(doc: DbSchema): DTO
+    -toDocument(dto: DTO): DbSchema
+    --
+    +save(dto: DTO): void
+    +findUserReports(userId: string): Promise<DTO>
+    +findReport(repository: string, commitSha: string): Promise<DTO>
+}
+
+MongoDbAdapter ..|> IPortDb : implements
+
+
+abstract class DbSchema {}
+class DbSchemaOWASP extends DbSchema {}
+class DbSchemaCode  extends DbSchema {}
+class DbSchemaTest  extends DbSchema {}
+
+
+abstract class DTO {}
+class DTOOWASP extends DTO {}
+class DTOCode  extends DTO {}
+class DTOTest  extends DTO {}
+
+MongoDbAdapter ..> DbSchemaOWASP : "toDocument() — input"
+MongoDbAdapter ..> DTOOWASP      : "toDTO() — output"
+
+MongoDbAdapter ..> DbSchemaCode  : "toDocument() — input"
+MongoDbAdapter ..> DTOCode       : "toDTO() — output"
+
+MongoDbAdapter ..> DbSchemaTest  : "toDocument() — input"
+MongoDbAdapter ..> DTOTest       : "toDTO() — output"
+
+
+@enduml
