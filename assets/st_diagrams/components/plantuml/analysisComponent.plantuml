@@ -69,6 +69,8 @@ Container_Boundary(microservice, "Analysis Microservice (Fargate)") {
         Component(ag_secu, "Security Scan", "Lambda / Semgrep", "OWASP SAST scan")
         Component(ag_secr, "Secrets Scan", "Lambda / Trivy", "Secrets scan")
         Component(ag_dep, "Dependency Scan", "Lambda / Syft + Grype", "CVE scan")
+        Component(ag_doc, "Agente for LLM AI Documentation", "Lambda/Markdown")
+        Component(ag_api, "OpenAPI Scan", "Lambda/Spectral", "Linting & Swagger Validation")
     }
 }
 
@@ -121,6 +123,8 @@ Rel_D(sfn_adapter, sfn_workflow, "Start")
 Rel_R(ag_secu, s3, "Get repo / Put report")
 Rel_R(ag_secr, s3, "Get repo / Put report")
 Rel_R(ag_dep, s3, "Get repo / Put report")
+Rel_D(ag_doc, s3, "Get repo / Put report")
+Rel_D(ag_api, s3, "Get repo / Put report")
 Rel_U(sfn_workflow, webhook_ctrl, "Invia Risultati finali")
 
 
