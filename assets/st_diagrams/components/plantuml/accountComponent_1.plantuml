@@ -1,0 +1,100 @@
+@startuml C4_Component_Account_Service_Hexagonal
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+skinparam linetype ortho
+skinparam nodesep 200
+skinparam ranksep 200
+
+title Component Diagram - Account Service (Esagonale) — Auth + GitHub PAT per utente
+
+' SISTEMI ESTERNI
+System_Ext(user, "Utente", "Persona che usa il browser")
+System_Ext(github, "GitHub API", "API REST GitHub\n(validazione PAT e recupero profilo)")
+ContainerDb_Ext(rds, "Amazon RDS", "PostgreSQL\n— users\n— github_tokens (PAT cifrato per utente)")
+System_Ext(ssm, "AWS SSM Parameter Store", "Segreti applicativi\n(JWT_SECRET, BCRYPT_ROUNDS,\nDATABASE_URL, TOKEN_ENCRYPTION_KEY)")
+
+' Nota: nessuna GitHub App registrata.
+' L'utente genera il PAT manualmente su github.com
+' e lo incolla nella UI. Il backend lo valida,
+' lo cifra con AES-256-GCM e lo salva su RDS.'
+
+Container_Boundary(microservice, "Account Service") {
+
+    Container_Boundary(apprunner, "NestJS Account Service (App Runner)") {
+
+        Boundary(primary_adapters, "Primary Adapters (Inbound)") #FFF2CC {
+            Component(rest_ctrl, "REST Controller", "NestJS Controller", "Espone gli endpoint HTTP:\nPOST /auth/register\nPOST /auth/login\nPOST /github/pat\nDELETE /github/pat\nValida tutti i DTO con class-validator.")
+        }
+
+        Boundary(domain_core, "Domain Core (Hexagon)") #E6F3FF {
+
+            Boundary(input_ports, "Input Ports") #CEADF0 {
+                Component(i_auth, "IAuthServicePort", "Interface", "register(dto): TokenDTO\nlogin(dto): TokenDTO")
+                Component(i_github_pat, "IGithubPatServicePort", "Interface","connectPAT(userId, pat): void\ndisconnectPAT(userId): void")
+            }
+
+            Component(auth_usecase, "Auth Use Case", "Domain Service","Registrazione e login utente.\nControlla duplicati email,\ndelega hashing a IHashPort,\npersiste via IUserRepositoryPort,\nfirma JWT via ITokenPort.")
+
+            Component(github_pat_usecase, "GitHub PAT Use Case", "Domain Service","Collegamento PAT GitHub per utente.\n1. Valida il PAT su GitHub API\n   via IGithubClientPort.\n2. Verifica scope 'repo' nell'header\n   X-OAuth-Scopes della risposta.\n3. Recupera githubId e login dal profilo.\n4. Cifra il PAT via IEncryptionPort.\n5. Salva su IGithubTokenRepositoryPort.\nGestisce anche la disconnessione\n(DELETE del token cifrato da RDS).")
+
+            Boundary(output_ports, "Output Ports") #E6DED3 {
+                Component(port_user, "IUserRepositoryPort", "Interface","findByEmail(email)\nfindById(id)\nsave(user)")
+                Component(port_github_token, "IGithubTokenRepositoryPort", "Interface","save(userId, encryptedPat, githubId)\nfindByUserId(userId)\ndelete(userId)")
+                Component(port_github_client, "IGithubClientPort", "Interface","validateAndGetProfile(pat):\n{ githubId, login, email, scopes }")
+                Component(port_jwt, "ITokenPort", "Interface","sign(payload): string\nverify(token): Payload")
+                Component(port_hash, "IHashPort", "Interface","hash(plain): string\nverify(plain, hash): boolean")
+                Component(port_encryption, "IEncryptionPort", "Interface","encrypt(plain): string\ndecrypt(cipher): string")
+            }
+        }
+
+        Boundary(secondary_adapters, "Secondary Adapters (Outbound)") #D5E8D4 {
+            Component(postgres_adapter, "Postgres Adapter", "Class","Implementa IUserRepositoryPort\ne IGithubTokenRepositoryPort.\nTabelle: users, github_tokens.\nIl token arriva già cifrato\nda IEncryptionPort — questo\nadapter non conosce il plain text.")
+            Component(github_adapter, "GitHub Adapter", "Class","Implementa IGithubClientPort.\nGET /user con Authorization: token {pat}.\nVerifica X-OAuth-Scopes per 'repo'.\nNon gestisce cifratura.")
+            Component(jwt_adapter, "JwtAdapter", "Class","Implementa ITokenPort.\nWrapa @nestjs/jwt.\nLegge JWT_SECRET da ConfigService.")
+            Component(hash_adapter, "BcryptAdapter", "Class","Implementa IHashPort.\nWrapa bcrypt.\nLegge BCRYPT_ROUNDS da ConfigService.")
+            Component(encryption_adapter, "AesEncryptionAdapter", "Class","Implementa IEncryptionPort.\nCifra/decifra con AES-256-GCM.\nLegge TOKEN_ENCRYPTION_KEY da ConfigService.")
+        }
+
+        Component(config, "Config", "NestJS ConfigService","Legge process.env popolato da App Runner\ntramite SSM Parameter Store al boot.\nFonte unica di configurazione.")
+    }
+}
+ 
+' RELAZIONI INBOUND
+Rel_D(user, rest_ctrl, "POST /auth/register\nPOST /auth/login\nPOST /github/pat\nDELETE /github/pat", "HTTPS / 443")
+Rel_D(rest_ctrl, i_auth, "Chiama (via DI)")
+Rel_D(rest_ctrl, i_github_pat, "Chiama (via DI)")
+Rel_U(auth_usecase, i_auth, "Implementa")
+Rel_U(github_pat_usecase, i_github_pat, "Implementa")
+
+' CORE LOGIC — Auth Use Case
+Rel_D(auth_usecase, port_user, "Chiama")
+Rel_D(auth_usecase, port_jwt, "Chiama")
+Rel_D(auth_usecase, port_hash, "Chiama")
+
+' CORE LOGIC — GitHub PAT Use Case
+Rel_D(github_pat_usecase, port_github_client, "Chiama — valida PAT")
+Rel_D(github_pat_usecase, port_encryption, "Chiama — cifra PAT")
+Rel_D(github_pat_usecase, port_github_token, "Chiama — salva / cancella")
+
+' ADAPTER IMPLEMENTATIONS
+Rel_U(postgres_adapter, port_user, "Implementa")
+Rel_U(postgres_adapter, port_github_token, "Implementa")
+Rel_U(github_adapter, port_github_client, "Implementa")
+Rel_U(jwt_adapter, port_jwt, "Implementa")
+Rel_U(hash_adapter, port_hash, "Implementa")
+Rel_U(encryption_adapter, port_encryption, "Implementa")
+
+' EXTERNAL SERVICES
+Rel_D(postgres_adapter, rds, "SELECT/INSERT/UPDATE/DELETE\nsu users e github_tokens", "TCP / 5432 (VPC interno)")
+Rel_D(github_adapter, github, "GET /user\nAuthorization: token {pat}", "HTTPS / 443")
+
+' CONFIG / SSM
+Rel_U(ssm, config, "Inietta segreti al boot", "App Runner → process.env")
+Rel_L(config, postgres_adapter, "Fornisce DATABASE_URL")
+Rel_L(config, jwt_adapter, "Fornisce JWT_SECRET")
+Rel_L(config, hash_adapter, "Fornisce BCRYPT_ROUNDS")
+Rel_L(config, encryption_adapter, "Fornisce TOKEN_ENCRYPTION_KEY")
+
+@enduml
