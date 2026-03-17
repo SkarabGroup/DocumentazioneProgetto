@@ -37,7 +37,7 @@ Container_Boundary(microservice, "Account Service") {
 
             Component(auth_usecase, "Auth Use Case", "Domain Service","Registrazione e login utente.\nControlla duplicati email,\ndelega hashing a IHashPort,\npersiste via IUserRepositoryPort,\nfirma JWT via ITokenPort.")
 
-            Component(github_pat_usecase, "GitHub PAT Use Case", "Domain Service","Collegamento PAT GitHub per utente.\n1. Valida il PAT su GitHub API\n   via IGithubClientPort.\n2. Verifica scope 'repo' nell'header\n   X-OAuth-Scopes della risposta.\n3. Recupera githubId e login dal profilo.\n4. Cifra il PAT via IEncryptionPort.\n5. Salva su IGithubTokenRepositoryPort.\nGestisce anche la disconnessione\n(DELETE del token cifrato da RDS).")
+            Component(github_pat_usecase, "GitHub PAT Use Case", "Domain Service","Collegamento PAT GitHub per utente.")
 
             Boundary(output_ports, "Output Ports") #E6DED3 {
                 Component(port_user, "IUserRepositoryPort", "Interface","findByEmail(email)\nfindById(id)\nsave(user)")
@@ -50,8 +50,8 @@ Container_Boundary(microservice, "Account Service") {
         }
 
         Boundary(secondary_adapters, "Secondary Adapters (Outbound)") #D5E8D4 {
-            Component(postgres_adapter, "Postgres Adapter", "Class","Implementa IUserRepositoryPort\ne IGithubTokenRepositoryPort.\nTabelle: users, github_tokens.\nIl token arriva già cifrato\nda IEncryptionPort — questo\nadapter non conosce il plain text.")
-            Component(github_adapter, "GitHub Adapter", "Class","Implementa IGithubClientPort.\nGET /user con Authorization: token {pat}.\nVerifica X-OAuth-Scopes per 'repo'.\nNon gestisce cifratura.")
+            Component(postgres_adapter, "Postgres Adapter", "Class","Implementa IUserRepositoryPort\ne IGithubTokenRepositoryPort.")
+            Component(github_adapter, "GitHub Adapter", "Class","Implementa IGithubClientPort.\nGET /user con Authorization")
             Component(jwt_adapter, "JwtAdapter", "Class","Implementa ITokenPort.\nWrapa @nestjs/jwt.\nLegge JWT_SECRET da ConfigService.")
             Component(hash_adapter, "BcryptAdapter", "Class","Implementa IHashPort.\nWrapa bcrypt.\nLegge BCRYPT_ROUNDS da ConfigService.")
             Component(encryption_adapter, "AesEncryptionAdapter", "Class","Implementa IEncryptionPort.\nCifra/decifra con AES-256-GCM.\nLegge TOKEN_ENCRYPTION_KEY da ConfigService.")
