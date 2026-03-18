@@ -1,4 +1,4 @@
-@startuml C4_Level4_Orchestrator_Mongo_FromC3
+@startuml C4_MongoDB_Adapter
 
 skinparam linetype ortho
 skinparam nodesep 70
@@ -25,45 +25,77 @@ skinparam package {
 title C4 Level 4 — Code\nZoom: port_db → mongo_adapter
 
 
+
 interface IPortDb {
     +save(dto: DTO): void
-    +findUserReports(userId: string): Promise<DTO>
+    +findUserReports(userId: string): Promise<List<DTO>>
     +findReport(repository: string, commitSha: string): Promise<DTO>
 }
 
 
 class MongoDbAdapter {
-    -DbModel: Model
-    -toDTO(doc: DbSchema): DTO
-    -toDocument(dto: DTO): DbSchema
-    --
-    +save(dto: DTO): void
-    +findUserReports(userId: string): Promise<DTO>
-    +findReport(repository: string, commitSha: string): Promise<DTO>
+    - DbModel: Model
+    - mapper: ReportMapper
+    + save(dto: DTO): void
+    + findUserReports(userId: string): Promise<List<DTO>>
+    + findReport(repository: string, commitSha: string): Promise<DTO>
 }
 
-MongoDbAdapter ..|> IPortDb : implements
+note left of MongoDbAdapter::mapper
+    ho un dizionario con le chiavi che identificano il tipo di report (es. "OWASP", "CODE", "TEST") 
+    e setto il mapper tramite il costruttore del tipo corretto(OwaspMapper, CodeMapper, TestMapper)
+    quando leggo il tipo di DTO/schema.
+end note
 
 
-abstract class DbSchema {}
-class DbSchemaOWASP extends DbSchema {}
-class DbSchemaCode  extends DbSchema {}
-class DbSchemaTest  extends DbSchema {}
+
+DbService ..up.|> iDbUseCase : implements
+DbService --down-> IPortDb : uses
+MongoDbAdapter ..up.|> IPortDb : implements
 
 
-abstract class DTO {}
-class DTOOWASP extends DTO {}
-class DTOCode  extends DTO {}
-class DTOTest  extends DTO {}
+MongoDbAdapter --> ReportMapper
 
-MongoDbAdapter ..> DbSchemaOWASP : "toDocument() — input"
-MongoDbAdapter ..> DTOOWASP      : "toDTO() — output"
+skinparam linetype ortho
+hide circles
 
-MongoDbAdapter ..> DbSchemaCode  : "toDocument() — input"
-MongoDbAdapter ..> DTOCode       : "toDTO() — output"
+title Pattern: Factory Method applicato al Data Mapper (Bidirezionale)
 
-MongoDbAdapter ..> DbSchemaTest  : "toDocument() — input"
-MongoDbAdapter ..> DTOTest       : "toDTO() — output"
+abstract class "AbstractProduct: DTO" as DTO {
+    +id: string
+}
+class "ConcreteProduct: DTOOWASP" as DTOOWASP extends DTO
+class "ConcreteProduct: DTOCode" as DTOCode   extends DTO
+class "ConcreteProduct: DTOTest" as DTOTest   extends DTO
 
+' --- Gerarchia dei Mapper (FACTORY METHOD) ---
+abstract class "AbstractCreator: ReportMapper" as ReportMapper {
+    {abstract} +toDTO(doc: DbSchema): DTO
+    {abstract} +toPersistence(dto: DTO): DbSchema
+}
+
+class "ConcreteCreator: OwaspMapper" as OwaspMapper extends ReportMapper {
+    +toDTO(doc: DbSchemaOWASP): DTOOWASP
+    +toPersistence(dto: DTOOWASP): DbSchemaOWASP
+}
+
+class "ConcreteCreator: CodeMapper" as CodeMapper extends ReportMapper {
+    +toDTO(doc: DbSchemaCode): DTOCode
+    +toPersistence(dto: DTOCode): DbSchemaCode
+}
+
+class "ConcreteCreator: TestMapper" as TestMapper extends ReportMapper {
+    +toDTO(doc: DbSchemaTest): DTOTest
+    +toPersistence(dto: DTOTest): DbSchemaTest
+}
+
+ReportMapper ..left.> DTO 
+ReportMapper ..right.|> DbSchema
+
+' --- Gerarchia degli Schemi ---
+abstract class DbSchema
+class DbSchemaOWASP extends DbSchema
+class DbSchemaCode extends DbSchema
+class DbSchemaTest extends DbSchema
 
 @enduml

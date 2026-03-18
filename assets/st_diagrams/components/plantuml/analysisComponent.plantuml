@@ -24,7 +24,6 @@ Container_Boundary(microservice, "Analysis Microservice (Fargate)") {
         Boundary(primary_adapters, "Inbound Adapters") #FFF2CC {
             Component(start_ctrl, "Start Analysis Controller", "NestJS", "POST /analysis")
             Component(report_ctrl, "Report Controller", "NestJS", "GET /analysis/:id")
-            Component(config_ctrl, "Settings Controller", "NestJS", "PUT /settings/github")
             Component(webhook_ctrl, "Callback Controller", "NestJS", "POST /webhooks/stn-callback")
             Component(health_ctrl, "Health Controller", "NestJS", "GET /health")
         }
@@ -32,18 +31,17 @@ Container_Boundary(microservice, "Analysis Microservice (Fargate)") {
         Boundary(domain_core, "Domain Core (Esagono)") #E6F3FF {
             Boundary(input_ports, "Input Ports") #CEADF0 {
                 Component(i_analysis, "IAnalysisServicePort", "Interface")
-                Component(i_config, "IConfigServicePort", "Interface")
                 Component(i_callback, "ICallbackPort", "Interface")
             }
 
             ' Scomposizione dell'Orchestrator in servizi SRP
             Component(orchestrator, "Analysis Orchestrator", "Domain Service", "Facade: coordina il flusso")
-            Component(cred_service, "Credentials Service", "Domain Service", "Recupero e gestione PAT")
             Component(cache_service, "Cache Service", "Domain Service", "Verifica Idempotenza e SHA")
             Component(prep_engine, "Preparation Engine", "Domain Service", "Gestione Clone & Workflow")
             Component(packager, "Packager Engine", "Domain Service", "Scan, Shard & Cleanup")
-            Component(config_use_case, "Config Use Case", "Domain Service", "Gestione PAT Locali")
-            
+            Component(dbService, "Database Service", "Domain Service", "Logica di persistenza (cache + final report)")
+            Component(db_UC, "IDbUseCase", "Domain Service", "Logica di persistenza (cache + final report)")
+           
             Boundary(output_ports, "Output Ports") #E6DED3 {
                 Component(port_git, "SourceControl Port", "Interface")
                 Component(port_storage, "Storage Port", "Interface")
@@ -79,25 +77,16 @@ Container_Boundary(microservice, "Analysis Microservice (Fargate)") {
 ' 1. Sicurezza & Ingresso
 Rel_R(apigw, lambda_auth, "1. Invia JWT per controllo")
 Rel_D(apigw, start_ctrl, "2. Inoltra (se Allow)")
-Rel_D(apigw, config_ctrl, "Inoltra (se Allow)")
 Rel_D(apigw, report_ctrl, "Inoltra (se Allow)")
-
-' 2. Flusso Configurazione PAT
-Rel_D(config_ctrl, i_config, "Salva/Legge")
-Rel_D(i_config, config_use_case, "Implementato da")
-Rel_D(config_use_case, port_db, "Salva PAT per l'utente")
 
 ' 3. Inbound -> Core (Analysis Facade)
 Rel_D(start_ctrl, i_analysis, "Avvia")
 Rel_D(i_analysis, orchestrator, "Implementato da")
 
-' 4. Core Interno: Orchestrazione e SRP
-Rel_D(orchestrator, cred_service, "1. Richiede PAT")
-Rel_D(cred_service, port_db, "Legge credenziali")
 
 Rel_D(orchestrator, cache_service, "2. Verifica stato")
 Rel_D(cache_service, port_git, "Ottiene SHA Remoto")
-Rel_D(cache_service, port_db, "Cerca analisi in cache")
+Rel_D(cache_service, db_UC, "Cerca analisi in cache")
 
 Rel_R(orchestrator, prep_engine, "3. Delega Esecuzione (se Cache Miss)")
 
@@ -131,8 +120,11 @@ Rel_U(sfn_workflow, webhook_ctrl, "Invia Risultati finali")
 ' 8. Persistenza dei Risultati
 Rel_D(webhook_ctrl, i_callback, "Riceve payload")
 Rel_D(i_callback, orchestrator, "Implementato da")
-Rel_D(orchestrator, port_db, "Salva Report Finale")
-Rel_D(port_db, mongo_adapter, "Usa")
+Rel_D(orchestrator, db_UC, "Salva Report Finale")
+Rel_D(mongo_adapter,port_db, "Implementa")
 Rel_D(mongo_adapter, mongo, "Operazioni DB (JSON)")
+
+Rel_D(dbService, port_db, "Usa")
+Rel_Up(dbService, db_UC, "Implementa")
 
 @enduml
