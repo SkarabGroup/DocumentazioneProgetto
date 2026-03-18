@@ -40,7 +40,7 @@ Container_Boundary(microservice, "Analysis Microservice (Fargate)") {
             Component(prep_engine, "Preparation Engine", "Domain Service", "Gestione Clone & Workflow")
             Component(packager, "Packager Engine", "Domain Service", "Scan, Shard & Cleanup")
             Component(dbService, "Database Service", "Domain Service", "Logica di persistenza (cache + final report)")
-            Component(db_UC, "IDbUseCase", "Domain Service", "Logica di persistenza (cache + final report)")
+            Component(db_UC, "IDbUseCase", "Interface (Strategy pattern)", "Logica di persistenza (cache + final report)")
            
             Boundary(output_ports, "Output Ports") #E6DED3 {
                 Component(port_git, "SourceControl Port", "Interface")
@@ -103,6 +103,7 @@ Rel_L(packager, temp_folder, "Legge, Zippa & Pulisce")
 Rel_D(prep_engine, port_storage, "Salva Shards")
 Rel_D(port_storage, s3_adapter, "Upload")
 Rel_D(s3_adapter, s3, "File ZIP")
+Rel_L(s3_adapter, temp_folder, "Legge ZIP per upload")
 
 Rel_D(prep_engine, port_workflow, "Avvia Macchina a Stati")
 Rel_D(port_workflow, sfn_adapter, "Trigger")
