@@ -1,4 +1,4 @@
-@startuml C4_Component_Mega_Hexagonal_FinalS
+@startuml C4_Component_Mega_Hexagonal_Final
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
 
 skinparam linetype ortho
@@ -10,9 +10,21 @@ title Diagramma Integrale - CodeGuardian Analysis Microservice (Dettaglio Domain
 ' --- SISTEMI ESTERNI ---
 System_Ext(APIGateway, "Amazon API Gateway", "Ingresso, Throttling & VPC Link")
 System_Ext(GitHub, "GitHub API", "Source Code (HTTPS)")
-System_Ext(AWSBedrock, "AWS Bedrock", "LLM per Remediation")
-ContainerDb_Ext(MongoDB, "MongoDB Atlas", "Report, Audit & PAT Utenti")
-System_Ext(AWSS3, "AWS S3", "Storage ZIP (Shards) & Risultati JSON")
+ContainerDb_Ext(MongoDB, "MongoDB Atlas", "Report, Analisi")
+System_Ext(AWSS3, "AWS S3", "Storage ZIP (Shards)")
+System_Ext(CredMicr, "Credential Microservice", "Gestione PAT Utenti")
+
+Container_Boundary(ServerlessLayer, "Serverless Execution Layer") #F8CECC {
+    Component(StepFun, "Step Function", "State Machine", "Orchestra gli Agenti")
+
+    Container_Boundary(AWSLAMBDA, "AWS Lambda", "Esecuzione Agenti") #da9e51 {
+        Component(SecuAg, "Security Scan Agent", "AWSBedrock/ Semgrep")
+        Component(SecrAg, "Secrets Scan Agent", "AWSBedrock/ Trivy")
+        Component(LibAg, "Libraries Scan Agent", "AWSBedrock/ Syft")
+        Component(DocAg, "Documentation Agent", "AWSBedrock/ Markdown")
+        Component(CodAg, "Static Code Analysis Agent", "AWSBedrock/..")
+    }
+}
 
 ' --- SICUREZZA INFRASTRUTTURALE ---
 Component(LambdaAuthorizer, "Lambda Authorizer", "AWS Lambda", "Controlla solo la validità del JWT")
@@ -20,105 +32,84 @@ Component(LambdaAuthorizer, "Lambda Authorizer", "AWS Lambda", "Controlla solo l
 Container_Boundary(AnalysisMicroservice, "Analysis Microservice (Fargate)") {
 
     Container_Boundary(NestJS, "NestJS Orchestrator") {
-        
+
+        'Adattatori Inbound (Controllers)
         Boundary(PrimaryAdapters, "Inbound Adapters") #FFF2CC {
-            Component(AnalysisController, "Analysis Controller", "NestJS", "POST /analysis")
-            Component(ReportController, "Report Controller", "NestJS", "GET /analysis/:id")
-            Component(WebhookController, "Webhook Controller", "NestJS", "POST /webhooks/stn-callback")
-            Component(HealthController, "Health Controller", "NestJS", "GET /health")
+            Component(AnCon,"AnalysisController","Riceve richiesta di analisi")
         }
-
+        
         Boundary(DomainCore, "Domain Core (Esagono)") #E6F3FF {
+
+            'USECASES'
             Boundary(InputPorts, "Input Ports (Use Cases)") #CEADF0 {
-                Component(IAnalysisUseCase, "IAnalysisUseCase", "Interface")
-                Component(ICallbackUseCase, "ICallbackUseCase", "Interface")
-                Component(IDatabaseUseCase, "IDatabaseUseCase", "Interface")
+                Component(AnUC, "IAnalysisUseCase","interface")
+                Rel_D(AnCon, AnUC, "Usa")
+
+                Component(DbUC, "IDataBaseUseCase","interface")
             }
 
-            ' Scomposizione in servizi SRP
-            Component(AnalysisOrchestrator, "Analysis Orchestrator", "Application Service", "Coordina il flusso")
-            Component(CacheService, "Cache Service", "Domain Service", "Verifica Idempotenza e SHA")
-            Component(PreparationEngine, "Preparation Engine", "Domain Service", "Gestione Clone & Workflow")
-            Component(PackagerEngine, "Packager Engine", "Domain Service", "Scan, Shard & Cleanup")
-            Component(DatabaseService, "Database Service", "Domain Service", "Logica di persistenza e rimodellazione")
+            'MAIN CORE'
+            Component(AnSer,"AnalysisService","Gestisce l'avvio del flusso di analisi")
+            Rel_U(AnSer, AnUC, "Implements")
+            Rel_U(AnSer, DbUC, "3. Creazione Analisi con status 'running' ,controllo presenza reports, modifica dello status dell'analisi") 
+
+            Component(DbSer,"DbService","Gestisce la logica di persistenza")
+            Rel_U(DbSer, DbUC, "Implementa")
             
-            Boundary(OutputPorts, "Output Ports") #E6DED3 {
-                Component(ISourceControlPort, "ISourceControlPort", "Interface")
-                Component(IStoragePort, "IStoragePort", "Interface")
-                Component(IWorkflowPort, "IWorkflowPort", "Interface")
-                Component(IDatabasePort, "IDatabasePort", "Interface")
+            Component(PrepSer, "PreparationService", "Gestisce la preparazione del codice per l'analisi (clone, sharding, zipping e upload)")
+            Rel_D(AnSer,PrepSer, "4. Inoltre richiesta di analisi")
+
+            'PORTE SECONDARIE (verso servizi esterni)'
+            Boundary(SecondaryPorts, "Outbound Ports") #faac0365 {
+                Component(CredMicPort, "ICredentialManagerPort", "Interface")
+                Rel_D(AnSer, CredMicPort, "1. Richiede PAT se Password presente")
+
+                Component(GHPort, "IGitHubPort", "Interface")
+                Rel_D(AnSer, GHPort, "2. Verifica accessibilità repo")
+                Rel_D(PrepSer, GHPort, "1. Richiede Clone repository")
+
+                Component(DbPort, "IDatabasePort", "Interface")
+                Rel_D(DbSer, DbPort, "Effettua queries per salvataggio, modifica o richiesta reports")
+
+                Component(S3Port, "IS3Port", "interface")
+                Rel_D(PrepSer, S3Port, "2. Richiede caricamento ZIP su S3")
+
+                Component(StepFunPort, "IStepFunctionsPort", "Interface")
+                Rel_D(PrepSer, StepFunPort, "3. Richiede avvio workflow di analisi")
             }
         }
 
+        'ADAPTORI VERSO SERVIZI ESTERNI'
         Boundary(SecondaryAdapters, "Outbound Adapters") #D5E8D4 {
-            Component(GitHubAdapter, "GitHub Adapter", "simple-git", "Interazioni Git")
-            Component(S3Adapter, "S3 Adapter", "AWS SDK", "Upload/Download Shards")
-            Component(StepFunctionsAdapter, "StepFunctions Adapter", "AWS SDK", "Trigger Workflow")
-            Component(MongoDBAdapter, "MongoDB Adapter", "Mongoose", "Persistence")
-        }
 
-        Boundary(LocalFS, "Ephemeral Storage (/tmp)") #DDDDDD {
-            ContainerDb(TempFolder, "Analysis Workspace", "File System", "Storage temporaneo codice")
-        }
-    }
+            Component(CredMicAd, "Credential Microservice Adapter", "HTTP Client", "Comunica con Credential Microservice")
+            Rel_U(CredMicAd, CredMicPort, "Implements")
+            Rel_D(CredMicAd, CredMicr, "Comunica")
 
-    Container_Boundary(ServerlessLayer, "Serverless Execution Layer") #F8CECC {
-        Component(StepFunctionsWorkflow, "Step Functions", "State Machine", "Orchestra gli Agenti")
-        Component(SecurityScanAgent, "Security Scan Agent", "Lambda / Semgrep")
-        Component(SecretsScanAgent, "Secrets Scan Agent", "Lambda / Trivy")
-        Component(DependencyScanAgent, "Dependency Scan Agent", "Lambda / Syft")
-        Component(DocumentationAgent, "Documentation Agent", "Lambda / Markdown")
-        Component(ApiScanAgent, "Api Scan Agent", "Lambda / Spectral")
+            Component(GHAd, "GitHub Adapter", "simple-git", "Interazioni Git")
+            Rel_U(GHAd, GHPort, "Implements")
+            Rel_D(GHAd, GitHub, "GitHub API (HTTPS)")
+
+            Component(DbAd, "DataBaseAdapter", "HTTP Client", "Gestione queries")
+            Rel_U(DbAd, DbPort, "Implements")
+            Rel_D(DbAd, MongoDB, "MongoDB Atlas")
+
+            Component(S3Ad, "S3Adapter", "HTTP Client")
+            Rel_U(S3Ad, S3Port,"Implements")
+            Rel_D(S3Ad, AWSS3, "Salva zip")
+
+            Component(StepFunAd, "StepFunctionsAdapter", "HTTP Client")
+            Rel_U(StepFunAd, StepFunPort, "Implements")
+            Rel_D(StepFunAd, StepFun, "Trigger Workflow")
+
+        }
     }
 }
+Rel_D(StepFun, SecuAG, "Call Agent")
+Rel_D(StepFun, SecrAg, "Call Agent")
+Rel_D(StepFun, LibAg, "Call Agent")
+Rel_D(StepFun, DocAg, "Call Agent")
+Rel_D(StepFun, CodAg, "Call Agent")
 
-' --- RELAZIONI ---
-
-Rel_R(APIGateway, LambdaAuthorizer, "1. Verifica JWT")
-Rel_D(APIGateway, AnalysisController, "2. HTTP Request")
-Rel_D(APIGateway, ReportController, "HTTP Request")
-
-' Inbound -> Core
-Rel_D(AnalysisController, IAnalysisUseCase, "Avvia")
-Rel_D(IAnalysisUseCase, AnalysisOrchestrator, "Implementato da")
-
-Rel_D(AnalysisOrchestrator, CacheService, "Check Cache")
-Rel_D(CacheService, ISourceControlPort, "Get SHA")
-Rel_D(CacheService, IDatabaseUseCase, "Verify Idempotency")
-
-Rel_R(AnalysisOrchestrator, PreparationEngine, "Delega Preparazione")
-Rel_D(PreparationEngine, ISourceControlPort, "Clone")
-Rel_D(ISourceControlPort, GitHubAdapter, "Usa")
-Rel_D(GitHubAdapter, GitHub, "Clone API")
-Rel_D(GitHubAdapter, TempFolder, "Scrive file")
-
-Rel_D(PreparationEngine, PackagerEngine, "Innesca Sharding")
-Rel_L(PackagerEngine, TempFolder, "Zippa & Pulisce")
-
-Rel_D(PreparationEngine, IStoragePort, "Save Shards")
-Rel_D(IStoragePort, S3Adapter, "Upload")
-Rel_D(S3Adapter, AWSS3, "S3 Put")
-
-Rel_D(PreparationEngine, IWorkflowPort, "Start Execution")
-Rel_D(IWorkflowPort, StepFunctionsAdapter, "Trigger")
-Rel_D(StepFunctionsAdapter, StepFunctionsWorkflow, "Start")
-
-' Callback
-Rel_U(StepFunctionsWorkflow, WebhookController, "Callback Risultati")
-Rel_D(WebhookController, ICallbackUseCase, "Invia Payload")
-Rel_D(ICallbackUseCase, AnalysisOrchestrator, "Implementato da")
-Rel_D(AnalysisOrchestrator, IDatabaseUseCase, "Save Final Report")
-
-' Persistence
-Rel_D(DatabaseService, IDatabasePort, "Dati grezzi")
-Rel_Up(DatabaseService, IDatabaseUseCase, "Implementa")
-Rel_D(IDatabasePort, MongoDBAdapter, "Usa")
-Rel_D(MongoDBAdapter, MongoDB, "Write/Read")
-
-Rel_U(StepFunctionsWorkflow, SecurityScanAgent, "Call Agent")
-Rel_R(StepFunctionsWorkflow, SecretsScanAgent, "Call Agent")
-Rel_L(StepFunctionsWorkflow, DependencyScanAgent, "Call Agent")
-Rel_D(StepFunctionsWorkflow, DocumentationAgent, "Call Agent")
-Rel_U(StepFunctionsWorkflow, ApiScanAgent, "Call Agent")
 
 @enduml
