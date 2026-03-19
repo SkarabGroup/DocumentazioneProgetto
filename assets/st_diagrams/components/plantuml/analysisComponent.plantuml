@@ -26,16 +26,18 @@ Container_Boundary(ServerlessLayer, "Serverless Execution Layer") #F8CECC {
     }
 }
 
-' --- SICUREZZA INFRASTRUTTURALE ---
-Component(LambdaAuthorizer, "Lambda Authorizer", "AWS Lambda", "Controlla solo la validità del JWT")
 
 Container_Boundary(AnalysisMicroservice, "Analysis Microservice (Fargate)") {
+    ' --- SICUREZZA INFRASTRUTTURALE ---
+    Component(LambdaAuthorizer, "Lambda Authorizer", "AWS Lambda", "Controlla solo la validità del JWT")
 
     Container_Boundary(NestJS, "NestJS Orchestrator") {
 
         'Adattatori Inbound (Controllers)
         Boundary(PrimaryAdapters, "Inbound Adapters") #FFF2CC {
             Component(AnCon,"AnalysisController","Riceve richiesta di analisi")
+
+            Component(DbCon, "DatabaseController", "Riceve richiesta di visualizzazione e salvataggio report e stato analisi")
         }
         
         Boundary(DomainCore, "Domain Core (Esagono)") #E6F3FF {
@@ -46,6 +48,7 @@ Container_Boundary(AnalysisMicroservice, "Analysis Microservice (Fargate)") {
                 Rel_D(AnCon, AnUC, "Usa")
 
                 Component(DbUC, "IDataBaseUseCase","interface")
+                Rel_D(DbCon, DbUC, "Usa")
             }
 
             'MAIN CORE'
@@ -105,11 +108,17 @@ Container_Boundary(AnalysisMicroservice, "Analysis Microservice (Fargate)") {
         }
     }
 }
-Rel_D(StepFun, SecuAG, "Call Agent")
+Rel_D(StepFun, SecuAg, "Call Agent")
 Rel_D(StepFun, SecrAg, "Call Agent")
 Rel_D(StepFun, LibAg, "Call Agent")
 Rel_D(StepFun, DocAg, "Call Agent")
 Rel_D(StepFun, CodAg, "Call Agent")
+
+Rel_U(SecuAg, DbCon, "Invia report di analisi")
+Rel_U(SecrAg, DbCon, "Invia report di analisi")
+Rel_U(LibAg, DbCon, "Invia report di analisi")
+Rel_U(DocAg, DbCon, "Invia report di analisi")
+Rel_U(CodAg, DbCon, "Invia report di analisi")
 
 
 @enduml
