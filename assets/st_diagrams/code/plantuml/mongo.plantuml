@@ -22,10 +22,6 @@ title C4 Level 4 — Code\nZoom: port_db → mongo_adapter
 
 ' --- 1. APPLICATION LAYER (Use Cases & Services) ---
 
-class CacheService #6d6b6b{
-    - dbUseCase: IDbUseCase
-    +checkCache(repository: string, commitSha: string): Promise<DTO>
-}
 interface iDbUseCase  {
     + {abstract} save(dto: DTO): void
     + {abstract}findUserReports(userId: string): Promise<List<DTO>>
@@ -115,7 +111,6 @@ class DbSchemaCode extends DbSchema
 class DbSchemaTest extends DbSchema
 
 ' --- 5. RELAZIONI DI DIPENDENZA (WIRING) ---
-CacheService --> iDbUseCase : uses (findReport)
 DbService ..up.|> iDbUseCase : implements
 DbService --down-> IPortDb : uses
 MongoDbAdapter ..up.|> IPortDb : implements
