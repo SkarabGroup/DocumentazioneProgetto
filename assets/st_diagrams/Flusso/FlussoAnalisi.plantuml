@@ -1,0 +1,44 @@
+@startuml FlussoAnalisi
+
+Client --> APIGateway : POST /analysis
+APIGateway --> LambdaAuthorizer : Verifica JWT
+LambdaAuthorizer --> APIGateway : JWT Valido/Non Valido
+APIGateway --> AnalysisController : Richiesta Analisi
+AnalysisController --> AnalysisService : Richiede Analisi
+opt Se è stata inserita una password
+    AnalysisService --> credentialsMicroservice : Richiede PAT
+    credentialsMicroservice --> AnalysisService : Restituisce PAT/Non Presente/Accesso Negato
+end
+AnalysisService --> GitHubAdapter : Verifica accessibilità repo (HTTPS + PAT(se presente))
+GitHubAdapter --> AnalysisService : 401 se PAT non valido, 200 se accesso OK \n(con sha ultimo commit), 404 se non puoi accedere/non esiste
+
+opt Se accesso al repo negato
+    AnalysisService --> Client : Restituisce Errore Accesso Repo
+end
+AnalysisService --> DbService : Richiede la creazione dell'istanza analisi su DBanalisiUtenti (stato running)
+AnalysisService --> DbService : Richiede presenza Report Esistente per SHA
+DbService --> AnalysisService : Report Trovati
+
+opt Se Report Esistente Trovato (tutte le parti richieste)
+    AnalysisService --> DbService : Richiede aggiorname istanza analisi con riferimento al report esistente e stato completed
+else Altrimenti
+    opt Se Esistono giá alcune parti
+        AnalysisService --> DbService : Richiede aggiornamento istanza con id report trovati
+        AnalysisService --> PreparationEngine : Modella e inoltra richiesta parziale
+    else Altrimenti
+        AnalysisService --> PreparationEngine : Richiede analisi completa
+    end
+        PreparationEngine --> GitHubAdapter : Clona Repo & Checkout SHA
+        PreparationEngine --> PackageManager : Sharda e zippa codice (esclusi file non rilevanti)
+        PreparationEngine --> S3Adapter : Carica ZIP su S3
+        S3Adapter --> PreparationEngine : URL temporaneo ZIP
+        PreparationEngine --> StepFunctionsAdapter : Trigger Workflow (con URL ZIP, id analisi, Parti richieste)
+        StepFunctionsAdapter --> AWS_Lambda : Avvio Anlisi(tramite step function)
+        StepFunctionsAdapter --> PreparationEngine : Conferma avvio Workflow
+        PreparationEngine --> AnalysisService : Conferma avvio Analisi
+        AnalysisService --> Client : Restituisce Conferma Avvio Analisi
+        AWS_Lambda --> APIGateway : Callback con risultati
+        APIGateway --> ResultWebHookController : POST /webhooks/stn-callback
+        ResultWebHookController -->  DbService : Richiede salvataggio analisi e aggiornamento istanza analisi con risultati e stato completed
+end
+
