@@ -28,97 +28,112 @@ Container_Boundary(ServerlessLayer, "Serverless Execution Layer") #F8CECC {
 
 
 Container_Boundary(AnalysisMicroservice, "Analysis Microservice (Fargate)") {
-    ' --- SICUREZZA INFRASTRUTTURALE ---
-    Component(LambdaAuthorizer, "Lambda Authorizer", "AWS Lambda", "Controlla solo la validità del JWT")
+' --- SICUREZZA INFRASTRUTTURALE ---
+Component(LambdaAuthorizer, "Lambda Authorizer", "AWS Lambda", "Controlla solo la validità del JWT")
 
-    Container_Boundary(NestJS, "NestJS Orchestrator") {
+    'Adattatori Inbound (Controllers)
+    Boundary(PrimaryAdapters, "Inbound Adapters") #FFF2CC {
+        Component(AnCon,"AnalysisController","Riceve richiesta di analisi")
 
-        'Adattatori Inbound (Controllers)
-        Boundary(PrimaryAdapters, "Inbound Adapters") #FFF2CC {
-            Component(AnCon,"AnalysisController","Riceve richiesta di analisi")
+        Component(DbCon, "DataBaseController", "Riceve richiesta di visualizzazione report")
 
-            Component(DbCon, "DatabaseController", "Riceve richiesta di visualizzazione e salvataggio report e stato analisi")
+        Component(CBCon, "CallBackController", "Riceve richiesta di Salvataggio report da agenti")
+    
+        Component(StCon, "StatusController", "Riceve richiesta di visualizzazione stato analisi")
+    }
+    
+    Boundary(DomainCore, "Domain Core (Esagono)") #E6F3FF {
+
+        'USECASES'
+        Boundary(InputPorts, "Input Ports (Use Cases)") #CEADF0 {
+            Component(AnUC, "IAnalysisUseCase","interface")
+            Rel_D(AnCon, AnUC, "Usa")
+
+            Component(DbUC, "IDataBaseUseCase","interface")
+            Rel_D(DbCon, DbUC, "Usa")
+            Rel_D(CBCon, DbUC, "Usa")
+            Rel_D(StCon, DbUC, "Usa")
         }
+
+        'MAIN CORE'
+        Component(AnSer,"AnalysisService","Gestisce l'avvio del flusso di analisi")
+        Rel_U(AnSer, AnUC, "Implements")
+        Rel_U(AnSer, DbUC, "3. Creazione Analisi con status 'running' ,controllo presenza reports, modifica dello status dell'analisi") 
+
+        Component(DbSer,"DbService","Gestisce la logica di persistenza")
+        Rel_U(DbSer, DbUC, "Implementa")
         
-        Boundary(DomainCore, "Domain Core (Esagono)") #E6F3FF {
+        Component(PrepSer, "PreparationService", "Gestisce la preparazione del codice per l'analisi (clone, sharding, zipping e upload)")
+        Rel_D(AnSer,PrepSer, "4. Inoltre richiesta di analisi")
 
-            'USECASES'
-            Boundary(InputPorts, "Input Ports (Use Cases)") #CEADF0 {
-                Component(AnUC, "IAnalysisUseCase","interface")
-                Rel_D(AnCon, AnUC, "Usa")
+        'PORTE SECONDARIE (verso servizi esterni)'
+        Boundary(SecondaryPorts, "Outbound Ports") #faac0365 {
+            Component(CredMicPort, "ICredentialManagerPort", "Interface")
+            Rel_D(AnSer, CredMicPort, "1. Richiede PAT se Password presente")
 
-                Component(DbUC, "IDataBaseUseCase","interface")
-                Rel_D(DbCon, DbUC, "Usa")
-            }
+            Component(GHPort, "IGitHubPort", "Interface")
+            Rel_D(AnSer, GHPort, "2. Verifica accessibilità repo")
+            Rel_D(PrepSer, GHPort, "1. Richiede Clone repository")
 
-            'MAIN CORE'
-            Component(AnSer,"AnalysisService","Gestisce l'avvio del flusso di analisi")
-            Rel_U(AnSer, AnUC, "Implements")
-            Rel_U(AnSer, DbUC, "3. Creazione Analisi con status 'running' ,controllo presenza reports, modifica dello status dell'analisi") 
+            Component(DbPort, "IDatabasePort", "Interface")
+            Rel_D(DbSer, DbPort, "Effettua queries per salvataggio, modifica o richiesta reports")
 
-            Component(DbSer,"DbService","Gestisce la logica di persistenza")
-            Rel_U(DbSer, DbUC, "Implementa")
-            
-            Component(PrepSer, "PreparationService", "Gestisce la preparazione del codice per l'analisi (clone, sharding, zipping e upload)")
-            Rel_D(AnSer,PrepSer, "4. Inoltre richiesta di analisi")
+            Component(S3Port, "IS3Port", "interface")
+            Rel_D(PrepSer, S3Port, "2. Richiede caricamento ZIP su S3")
 
-            'PORTE SECONDARIE (verso servizi esterni)'
-            Boundary(SecondaryPorts, "Outbound Ports") #faac0365 {
-                Component(CredMicPort, "ICredentialManagerPort", "Interface")
-                Rel_D(AnSer, CredMicPort, "1. Richiede PAT se Password presente")
-
-                Component(GHPort, "IGitHubPort", "Interface")
-                Rel_D(AnSer, GHPort, "2. Verifica accessibilità repo")
-                Rel_D(PrepSer, GHPort, "1. Richiede Clone repository")
-
-                Component(DbPort, "IDatabasePort", "Interface")
-                Rel_D(DbSer, DbPort, "Effettua queries per salvataggio, modifica o richiesta reports")
-
-                Component(S3Port, "IS3Port", "interface")
-                Rel_D(PrepSer, S3Port, "2. Richiede caricamento ZIP su S3")
-
-                Component(StepFunPort, "IStepFunctionsPort", "Interface")
-                Rel_D(PrepSer, StepFunPort, "3. Richiede avvio workflow di analisi")
-            }
-        }
-
-        'ADAPTORI VERSO SERVIZI ESTERNI'
-        Boundary(SecondaryAdapters, "Outbound Adapters") #D5E8D4 {
-
-            Component(CredMicAd, "Credential Microservice Adapter", "HTTP Client", "Comunica con Credential Microservice")
-            Rel_U(CredMicAd, CredMicPort, "Implements")
-            Rel_D(CredMicAd, CredMicr, "Comunica")
-
-            Component(GHAd, "GitHub Adapter", "simple-git", "Interazioni Git")
-            Rel_U(GHAd, GHPort, "Implements")
-            Rel_D(GHAd, GitHub, "GitHub API (HTTPS)")
-
-            Component(DbAd, "DataBaseAdapter", "HTTP Client", "Gestione queries")
-            Rel_U(DbAd, DbPort, "Implements")
-            Rel_D(DbAd, MongoDB, "MongoDB Atlas")
-
-            Component(S3Ad, "S3Adapter", "HTTP Client")
-            Rel_U(S3Ad, S3Port,"Implements")
-            Rel_D(S3Ad, AWSS3, "Salva zip")
-
-            Component(StepFunAd, "StepFunctionsAdapter", "HTTP Client")
-            Rel_U(StepFunAd, StepFunPort, "Implements")
-            Rel_D(StepFunAd, StepFun, "Trigger Workflow")
-
+            Component(StepFunPort, "IStepFunctionsPort", "Interface")
+            Rel_D(PrepSer, StepFunPort, "3. Richiede avvio workflow di analisi")
         }
     }
-}
-Rel_D(StepFun, SecuAg, "Call Agent")
-Rel_D(StepFun, SecrAg, "Call Agent")
-Rel_D(StepFun, LibAg, "Call Agent")
-Rel_D(StepFun, DocAg, "Call Agent")
-Rel_D(StepFun, CodAg, "Call Agent")
 
-Rel_U(SecuAg, DbCon, "Invia report di analisi")
-Rel_U(SecrAg, DbCon, "Invia report di analisi")
-Rel_U(LibAg, DbCon, "Invia report di analisi")
-Rel_U(DocAg, DbCon, "Invia report di analisi")
-Rel_U(CodAg, DbCon, "Invia report di analisi")
+    'ADAPTORI VERSO SERVIZI ESTERNI'
+    Boundary(SecondaryAdapters, "Outbound Adapters") #D5E8D4 {
+
+        Component(CredMicAd, "Credential Microservice Adapter", "HTTP Client", "Comunica con Credential Microservice")
+        Rel_U(CredMicAd, CredMicPort, "Implements")
+        Rel_D(CredMicAd, CredMicr, "Comunica")
+
+        Component(GHAd, "GitHub Adapter", "simple-git", "Interazioni Git")
+        Rel_U(GHAd, GHPort, "Implements")
+        Rel_D(GHAd, GitHub, "GitHub API (HTTPS)")
+
+        Component(DbAd, "DataBaseAdapter", "HTTP Client", "Gestione queries")
+        Rel_U(DbAd, DbPort, "Implements")
+        Rel_D(DbAd, MongoDB, "MongoDB Atlas")
+
+        Component(S3Ad, "S3Adapter", "HTTP Client")
+        Rel_U(S3Ad, S3Port,"Implements")
+        Rel_D(S3Ad, AWSS3, "Salva zip")
+
+        Component(StepFunAd, "StepFunctionsAdapter", "HTTP Client")
+        Rel_U(StepFunAd, StepFunPort, "Implements")
+        Rel_L(StepFunAd, StepFun, "Trigger Workflow")
+
+    }
+}
+
+Rel_U(StepFun, SecuAg, "Call Agent")
+Rel_U(StepFun, SecrAg, "Call Agent")
+Rel_U(StepFun, LibAg, "Call Agent")
+Rel_U(StepFun, DocAg, "Call Agent")
+Rel_U(StepFun, CodAg, "Call Agent")
+
+Rel_U(SecuAg, CBCon, "Invia report di analisi")
+Rel_U(SecrAg, CBCon, "Invia report di analisi")
+Rel_U(LibAg, CBCon, "Invia report di analisi")
+Rel_U(DocAg, CBCon, "Invia report di analisi")
+Rel_U(CodAg, CBCon, "Invia report di analisi")
+
+Rel_D(APIGateway, AnCon, "Riceve richiesta di analisi")
+Rel_D(APIGateway, DbCon, "Riceve richiesta di visualizzazione report e stato")
+Rel_D(APIGateway, LambdaAuthorizer, "Controlla validità JWT")
+Rel_D(APIGateway, StCon, "Riceve richiesta di visualizzazione stato")
+
+Rel_D(SecuAg, AWSS3, "Aquisisce Zip")
+Rel_D(SecrAg, AWSS3, "Aquisisce Zip")
+Rel_D(LibAg, AWSS3, "Aquisisce Zip")
+Rel_D(DocAg, AWSS3, "Aquisisce Zip")
+Rel_D(CodAg, AWSS3, "Aquisisce Zip")
 
 
 @enduml

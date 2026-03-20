@@ -29,7 +29,6 @@ else Altrimenti
         AnalysisService --> PreparationEngine : Richiede analisi completa
     end
         PreparationEngine --> GitHubAdapter : Clona Repo & Checkout SHA
-        PreparationEngine --> PackageManager : Sharda e zippa codice (esclusi file non rilevanti)
         PreparationEngine --> S3Adapter : Carica ZIP su S3
         S3Adapter --> PreparationEngine : URL temporaneo ZIP
         PreparationEngine --> StepFunctionsAdapter : Trigger Workflow (con URL ZIP, id analisi, Parti richieste)
