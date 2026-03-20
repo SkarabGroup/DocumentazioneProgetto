@@ -1,0 +1,138 @@
+@startuml C4_Prompt_Builders
+
+' --- CONFIGURAZIONE ESTETICA ---
+skinparam linetype ortho
+skinparam nodesep 70
+skinparam ranksep 90
+skinparam classAttributeIconSize 0
+hide circles
+skinparam class {
+    BackgroundColor White
+    BorderColor #555555
+    ArrowColor #555555
+    FontSize 12
+}
+skinparam interface {
+    BackgroundColor #E8F5E9
+    BorderColor #2E7D32
+    FontSize 12
+}
+skinparam package {
+    BorderColor #999999
+    BackgroundColor White
+}
+
+title C4 Level 4 — Code\nZoom: Prompt Builders (IPromptBuilder implementations)
+
+' ============================================================
+' 1. APPLICATION LAYER (riferimento — specchia bedrock_agents.plantuml)
+' ============================================================
+package "Application Layer" {
+
+    interface IPromptBuilder <<Port>> {
+        + buildSystemPrompt(ctx: dict): str
+        + buildUserPrompt(ctx: dict): str
+    }
+}
+
+' ============================================================
+' 2. DOMAIN LAYER
+' ============================================================
+package "Domain" {
+
+    class SecurityPromptBuilder {
+        + buildSystemPrompt(ctx: dict): str
+        + buildUserPrompt(ctx: dict): str
+    }
+
+    note bottom of SecurityPromptBuilder
+        System prompt: OWASP Top 10 expert
+        ctx keys: semgrep_output, repo_name, lang
+        Output JSON:
+          findings[owasp_category, severity,
+            false_positive, vulnerable_snippet,
+            fixed_snippet]
+    end note
+
+    class SecretsPromptBuilder {
+        + buildSystemPrompt(ctx: dict): str
+        + buildUserPrompt(ctx: dict): str
+    }
+
+    note bottom of SecretsPromptBuilder
+        System prompt: Cloud security AWS expert
+        ctx keys: trivy_output, repo_name, runtime
+        Output JSON:
+          secrets[type, risk_level, rotation_plan,
+            refactored_snippet, aws_secret_path]
+    end note
+
+    class DepsPromptBuilder {
+        + buildSystemPrompt(ctx: dict): str
+        + buildUserPrompt(ctx: dict): str
+    }
+
+    note bottom of DepsPromptBuilder
+        System prompt: Supply chain expert
+        ctx keys: grype_output, package_manager, manifest
+        Output JSON:
+          vulnerabilities[package, cve_ids, cvss_max,
+            safe_version, upgrade_command, breaking_changes]
+    end note
+
+    class DocPromptBuilder {
+        + buildSystemPrompt(ctx: dict): str
+        + buildUserPrompt(ctx: dict): str
+    }
+
+    note bottom of DocPromptBuilder
+        System prompt: Technical writer JSDoc/docstring
+        ctx keys: source_files, existing_docs, lang
+        Output JSON:
+          missing_docs[file, type, name, generated_doc],
+          readme_assessment
+    end note
+
+    class OpenAPIPromptBuilder {
+        - isComplex: bool
+        + buildSystemPrompt(ctx: dict): str
+        + buildUserPrompt(ctx: dict): str
+    }
+
+    note right of OpenAPIPromptBuilder
+        System prompt: OAS3 expert
+        ctx keys: spectral_output, openapi_spec
+        Output JSON:
+          issues[spectral_rule, severity, yaml_patch],
+          corrected_spec_diff
+        ----
+        isComplex=false → OPENAPI_SIMPLE
+          (amazon.nova-lite-v1:0)
+        isComplex=true  → OPENAPI_COMPLEX
+          (anthropic.claude-sonnet-4-6)
+    end note
+
+    class AggregationPromptBuilder {
+        + buildSystemPrompt(ctx: dict): str
+        + buildUserPrompt(ctx: dict): str
+    }
+
+    note bottom of AggregationPromptBuilder
+        System prompt: Virtual CSO
+        ctx keys: tutti i JSON remediation da S3
+        Output JSON:
+          executive_summary, action_plan, correlations
+    end note
+}
+
+' ============================================================
+' RELAZIONI — IMPLEMENTS
+' ============================================================
+SecurityPromptBuilder    ..|> IPromptBuilder : implements
+SecretsPromptBuilder     ..|> IPromptBuilder : implements
+DepsPromptBuilder        ..|> IPromptBuilder : implements
+DocPromptBuilder         ..|> IPromptBuilder : implements
+OpenAPIPromptBuilder     ..|> IPromptBuilder : implements
+AggregationPromptBuilder ..|> IPromptBuilder : implements
+
+@enduml
