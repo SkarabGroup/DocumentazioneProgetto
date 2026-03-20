@@ -45,20 +45,20 @@ class AnalysisRequest <<ValueObject>> {
 }
 
 class PersonalAccessTokenDTO <<DTO>> {
-    + PAT: string ?? ""
+    + pat: string | undefined
 }
 
 class RepositoryRequest {
     repoURL: string
     branch: string ?? "main"
-    pat?: string
+    commit: string | undefined
+    pat: string | undefined
 }
 
 class RepoCheckResult {
-    + isPublic: boolean
-    + exists: boolean
-    + statusError?: ["NOT_FOUND", "UNREACHABLE"]   
+    + resultCode: HTTPStatusCode
 }
+
 ' --- CONTROLLER ---
 package Controller <<Rectangle>> #FFFFFF {
 
@@ -99,14 +99,13 @@ class AnalysisService {
     + executeAnalysis(analysisRequest: AnalysisRequest) : Promise<AnalysisResponse>
 }
 
-note right of AnalysisService::executeAnalysis
-    if(analysisRequest['password'] !== undefined) {
-        const credentials = this.ICredentialManagerPort.retrievePersonalAccessToken(analysisRequest['repoURL'])
-        const repositoryRequest = new RepositoryRequest(repoURL, credentials['pat'])
-    } else {
-        const repositoryRequest = new RepositoryRequest(repoURL)
+note left of AnalysisService::createRepositoryRequest
+    let pat : string | undefined
+    if(analysisRequest.password) {
+        const credentials = await this.ICredentialManagerPort.retrievePersonalAccessToken(analysisRequest.repoURL, analysisRequest.password)
+        pat = credentials.pat
     }
-    this.verifyRepositoryAccess(repositoryRequest)
+    return RepositoryRequest(analysisRequest.repoURL, analysisRequest.branch, analysisRequest.commit, pat)
 end note
 
 class DBService {
@@ -120,7 +119,7 @@ interface ISourceControlPort <<Interface>> {
 }
 
 interface ICredentialManagerPort <<Interface>> {
-    + {abstract} retrievePersonalAccessToken(repoURL: string) : Promise<PersonalAccessTokenDTO>
+    + {abstract} retrievePersonalAccessToken(repoURL: string, password: string) : Promise<PersonalAccessTokenDTO>
 }
 
 interface IPersistenceRepository <<Interface>> {}
@@ -140,7 +139,7 @@ end note
 class MongoDBAdapter {}
 
 class CredentialMicroserviceAdapter {
-+ retrievePersonalAccessToken(repoURL: string) : Promise<PersonalAccessTokenDTO>  
++ retrievePersonalAccessToken(repoURL: string, password: string) : Promise<PersonalAccessTokenDTO>  
 }
 
 
