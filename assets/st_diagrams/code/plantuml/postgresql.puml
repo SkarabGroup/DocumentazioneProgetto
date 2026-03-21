@@ -1,0 +1,163 @@
+@startuml C4_Postgres_Account_Adapter
+
+skinparam linetype ortho
+skinparam nodesep 70
+skinparam ranksep 90
+skinparam classAttributeIconSize 0
+hide circles
+
+skinparam class {
+    BackgroundColor White
+    BorderColor #555555
+    ArrowColor #555555
+    FontSize 12
+}
+
+skinparam interface {
+    BackgroundColor #E8F5E9
+    BorderColor #2E7D32
+    FontSize 12
+}
+
+skinparam package {
+    BorderColor #999999
+    BackgroundColor White
+}
+
+title C4 Level 4 — Code\nZoom: PostgresAccountAdapter
+
+package "Application Layer" {
+
+    ' IUserRepositoryPort suddivisa
+    interface IFindUserByUsernamePort <<Interface>> {
+        + {abstract} findByUsername(username: string): Promise<UserDTO>
+    }
+    interface IFindUserByEmailPort <<Interface>> {
+        + {abstract} findByEmail(email: string): Promise<UserDTO>
+    }
+    interface IFindUserByIdPort <<Interface>> {
+        + {abstract} findById(id: string): Promise<UserDTO>
+    }
+    interface ISaveUserPort <<Interface>> {
+        + {abstract} saveUser(user: UserDTO): Promise<void>
+    }
+    interface IDeleteUserPort <<Interface>> {
+        + {abstract} deleteUser(userId: string): Promise<void>
+    }
+
+    ' IGithubTokenRepositoryPort suddivisa
+    interface ISaveTokenPort <<Interface>> {
+        + {abstract} saveToken(userId: string, pat: string, ghId: string): Promise<void>
+    }
+    interface IFindTokenByUserIdPort <<Interface>> {
+        + {abstract} findByUserId(userId: string): Promise<GithubTokenDTO>
+    }
+    interface IDeleteTokenPort <<Interface>> {
+        + {abstract} deleteToken(userId: string): Promise<void>
+    }
+}
+
+package "DTOs" {
+    abstract class "AbstractDTO: AccountDTO" as AccountDTO {
+        + id: string
+        + createdAt: Date
+    }
+
+    class "ConcreteDTO: UserDTO" as UserDTO extends AccountDTO {
+        + username: string
+        + email: string
+        + passwordHash: string
+        + passwordSalt: string
+    }
+
+    class "ConcreteDTO: GithubTokenDTO" as GithubTokenDTO extends AccountDTO {
+        + userId: string
+        + encryptedPat: string
+        + githubUserId: string
+    }
+}
+
+package "Mappers" {
+    abstract class "AbstractMapper: AccountMapper<S,D>" as AccountMapper {
+        {abstract} +toDTO(schema: S): D
+        {abstract} +toPersistence(dto: D): S
+    }
+
+    class "ConcreteMapper: UserMapper" as UserMapper extends AccountMapper {
+        +toDTO(schema: UserTable): UserDTO
+        +toPersistence(dto: UserDTO): UserTable
+    }
+
+    class "ConcreteMapper: GithubTokenMapper" as GithubTokenMapper extends AccountMapper {
+        +toDTO(schema: GithubTokenTable): GithubTokenDTO
+        +toPersistence(dto: GithubTokenDTO): GithubTokenTable
+    }
+}
+
+package "Adapter" {
+    class PostgresAccountAdapter {
+        - userRepo: Repository<UserTable>
+        - tokenRepo: Repository<GithubTokenTable>
+        - userMapper: UserMapper
+        - tokenMapper: GithubTokenMapper
+
+        .. IUserRepositoryPort ..
+        + findByUsername(username: string): Promise<UserDTO>
+        + findByEmail(email: string): Promise<UserDTO>
+        + findById(id: string): Promise<UserDTO>
+        + saveUser(user: UserDTO): Promise<void>
+        + deleteUser(userId: string): Promise<void>
+
+        .. IGithubTokenRepositoryPort ..
+        + saveToken(userId: string, pat: string, ghId: string): Promise<void>
+        + findByUserId(userId: string): Promise<GithubTokenDTO>
+        + deleteToken(userId: string): Promise<void>
+    }
+
+    note left of PostgresAccountAdapter::userMapper
+        Iniettati singolarmente dal
+        DI container.
+    end note
+}
+
+package "Persistence" {
+    abstract class "AbstractTable: DbSchema" as DbSchema {
+        + id: uuid <<PK>>
+        + created_at: timestamp
+    }
+
+    class "ConcreteTable: UserTable" as UserTable #FAD7A0 extends DbSchema {
+        + username: varchar(20) <<Unique, NotNull>>
+        + email: varchar(254) <<Unique, NotNull>>
+        + password_hash: varchar(255) <<NotNull>>
+        + password_salt: varchar(255) <<NotNull>>
+    }
+
+    class "ConcreteTable: GithubTokenTable" as GithubTokenTable #FAD7A0 extends DbSchema {
+        + user_id: uuid <<FK → UserTable.id, NotNull>>
+        + encrypted_pat: text <<NotNull>>
+        + github_user_id: varchar(50) <<NotNull>>
+    }
+}
+
+' Adapter implementa tutte le interfacce atomiche
+PostgresAccountAdapter ..up.|> IFindUserByUsernamePort
+PostgresAccountAdapter ..up.|> IFindUserByEmailPort
+PostgresAccountAdapter ..up.|> IFindUserByIdPort
+PostgresAccountAdapter ..up.|> ISaveUserPort
+PostgresAccountAdapter ..up.|> IDeleteUserPort
+PostgresAccountAdapter ..up.|> ISaveTokenPort
+PostgresAccountAdapter ..up.|> IFindTokenByUserIdPort
+PostgresAccountAdapter ..up.|> IDeleteTokenPort
+
+PostgresAccountAdapter --> UserMapper         : uses
+PostgresAccountAdapter --> GithubTokenMapper  : uses
+PostgresAccountAdapter --right-> UserTable
+PostgresAccountAdapter --right-> GithubTokenTable
+
+UserMapper ..left.>  UserDTO
+UserMapper ..right.> UserTable
+GithubTokenMapper ..left.>  GithubTokenDTO
+GithubTokenMapper ..right.> GithubTokenTable
+
+@enduml
