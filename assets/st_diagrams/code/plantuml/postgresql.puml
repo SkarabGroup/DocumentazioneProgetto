@@ -26,19 +26,33 @@ skinparam package {
 
 title C4 Level 4 — Code\nZoom: PostgresAccountAdapter
 
-' operazioni su utenti e token Github
 package "Application Layer" {
-    interface IUserRepositoryPort <<Interface>> {
+
+    ' IUserRepositoryPort suddivisa
+    interface IFindUserByUsernamePort <<Interface>> {
         + {abstract} findByUsername(username: string): Promise<UserDTO>
+    }
+    interface IFindUserByEmailPort <<Interface>> {
         + {abstract} findByEmail(email: string): Promise<UserDTO>
+    }
+    interface IFindUserByIdPort <<Interface>> {
         + {abstract} findById(id: string): Promise<UserDTO>
+    }
+    interface ISaveUserPort <<Interface>> {
         + {abstract} saveUser(user: UserDTO): Promise<void>
+    }
+    interface IDeleteUserPort <<Interface>> {
         + {abstract} deleteUser(userId: string): Promise<void>
     }
 
-    interface IGithubTokenRepositoryPort <<Interface>> {
+    ' IGithubTokenRepositoryPort suddivisa
+    interface ISaveTokenPort <<Interface>> {
         + {abstract} saveToken(userId: string, pat: string, ghId: string): Promise<void>
+    }
+    interface IFindTokenByUserIdPort <<Interface>> {
         + {abstract} findByUserId(userId: string): Promise<GithubTokenDTO>
+    }
+    interface IDeleteTokenPort <<Interface>> {
         + {abstract} deleteToken(userId: string): Promise<void>
     }
 }
@@ -80,35 +94,32 @@ package "Mappers" {
     }
 }
 
-' implementa le interfacce 
 package "Adapter" {
     class PostgresAccountAdapter {
         - userRepo: Repository<UserTable>
         - tokenRepo: Repository<GithubTokenTable>
         - userMapper: UserMapper
         - tokenMapper: GithubTokenMapper
-        
+
         .. IUserRepositoryPort ..
         + findByUsername(username: string): Promise<UserDTO>
         + findByEmail(email: string): Promise<UserDTO>
         + findById(id: string): Promise<UserDTO>
         + saveUser(user: UserDTO): Promise<void>
         + deleteUser(userId: string): Promise<void>
-        
+
         .. IGithubTokenRepositoryPort ..
         + saveToken(userId: string, pat: string, ghId: string): Promise<void>
         + findByUserId(userId: string): Promise<GithubTokenDTO>
         + deleteToken(userId: string): Promise<void>
     }
 
-    ' l'Adapter non istanzia i Mapper: il DI Container fornisce le istanze già pronte
     note left of PostgresAccountAdapter::userMapper
-        Iniettati singolarmente dal 
+        Iniettati singolarmente dal
         DI container.
     end note
 }
 
-' definisce la struttura fisica dei dati tramite TypeORM
 package "Persistence" {
     abstract class "AbstractTable: DbSchema" as DbSchema {
         + id: uuid <<PK>>
@@ -129,16 +140,24 @@ package "Persistence" {
     }
 }
 
-PostgresAccountAdapter ..up.|> IUserRepositoryPort
-PostgresAccountAdapter ..up.|> IGithubTokenRepositoryPort
-PostgresAccountAdapter --> UserMapper : uses
-PostgresAccountAdapter --> GithubTokenMapper : uses
+' Adapter implementa tutte le interfacce atomiche
+PostgresAccountAdapter ..up.|> IFindUserByUsernamePort
+PostgresAccountAdapter ..up.|> IFindUserByEmailPort
+PostgresAccountAdapter ..up.|> IFindUserByIdPort
+PostgresAccountAdapter ..up.|> ISaveUserPort
+PostgresAccountAdapter ..up.|> IDeleteUserPort
+PostgresAccountAdapter ..up.|> ISaveTokenPort
+PostgresAccountAdapter ..up.|> IFindTokenByUserIdPort
+PostgresAccountAdapter ..up.|> IDeleteTokenPort
+
+PostgresAccountAdapter --> UserMapper         : uses
+PostgresAccountAdapter --> GithubTokenMapper  : uses
 PostgresAccountAdapter --right-> UserTable
 PostgresAccountAdapter --right-> GithubTokenTable
 
-UserMapper ..left.> UserDTO
+UserMapper ..left.>  UserDTO
 UserMapper ..right.> UserTable
-GithubTokenMapper ..left.> GithubTokenDTO
+GithubTokenMapper ..left.>  GithubTokenDTO
 GithubTokenMapper ..right.> GithubTokenTable
 
 @enduml
