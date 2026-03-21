@@ -1,0 +1,289 @@
+@startuml Clone
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+
+skinparam PackageBorderColor white
+skinparam PackageStyle Rectangle
+skinparam PackageFontColor white
+hide circles
+top to bottom direction
+
+
+title Diagramma Integrale - CodeGuardian Analysis Microservice
+
+skinparam class {
+    BackgroundColor White
+    BorderColor #555555
+    ArrowColor #555555
+    FontSize 11
+}
+
+skinparam package {
+    BorderColor white
+    Style Rectangle
+    PackageFontColor white
+}
+
+skinparam interface {
+    BackgroundColor #E8F5E9
+    BorderColor #2E7D32
+    FontSize 12
+}
+
+package DTO {
+    class AnalysisRequestDTO <<Request DTO>> {
+        + repoURL: string
+        + branch?: string
+        + password?: string
+        + commit?: string
+        //Da aggiungere i componenti della\n  richiesta
+    }
+
+    class AnalysisResponseDTO <<Response DTO>> {
+        + analysisId: string
+        + status: string
+        + requestedAt: Date
+        + estimatedTime?: Time
+
+        + AnalysisResponseDTO(id: string, status: string, date: Date, time?: Time)
+    }
+}
+
+package Controllers {
+    class AnalysisController {
+        - startAnalysisUseCase: IStartAnalysisUseCase
+        + requestAnalysis(userID: string, repoInfo: AnalysisRequestDTO): Promise<AnalysisResponseDTO>
+    }
+}
+
+package Commands {
+    class StartAnalysisCommand <<Command>> {
+        + userID: string
+        + repoURL: string
+        + branch: string ?? 'main'
+        + password?: string
+        + commit?: string
+
+        + StartAnalysisCommand(userID: string, repoURL: string, branch?: string, password?: string, commit?: string)
+    }
+}
+
+package UseCases {
+    interface IStartAnalysisUseCase <<Inbound Port>> {
+        + {abstract} start(command: StartAnalysisCommand): Promise<AnalysisResponseDTO>
+    }
+}
+
+package Application {
+    class StartAnalysisService {
+        - repository: IAnalysisRepository
+        - credentialManager: ICredentialPort
+        - gitValidator: IGitValidatorPort
+        - gitCloner: IGitClonerPort
+        - orchestator: IAnalysisOrchestratorPort
+        - saveAnalysis(analysis: Analysis): Promise<void>
+        - retrievePersonalAccessToken(credentials: Credentials): Promise<string>
+        - verifyRepositoryExistance(repository: GitRequest): Promise<GitCheckResult>
+        - cloneRepository(cloneRepository: CloneRequest): Promise<string>
+        - persistToCloudStorage(source: LocalRepository) : Promise<string>
+        - startExternalOrchestration(task: AnalysisStartTask) : Promise<void>
+        + StartAnalysisService(repository: IAnalysisRepository)
+        + start(command: StartAnalysisCommand): Promise<AnalysisResponseDTO>
+    }
+}
+
+class Analysis <<Entity>> {
+    - analysisID: string
+    - status: AnalysisStatus
+    - userID: string
+    - repoURL: string
+    - branch: string
+    - commit?: string
+
+    - Analysis(id: string, userID: string, repoURL: string, branch: string, commit?: string)
+    + {static} create(userID: string, repoURL: string, branch: string, commit?: string): Analysis
+    + getAnalysisID(): string
+    + getStatus(): AnalysisStatus
+    + getUserID(): string
+    + getRepoURL(): string
+    + getBranch(): string
+    + getCommit(): string | null
+}
+
+enum AnalysisStatus {
+    INITIALIZING
+    PENDING
+    RUNNING
+    COMPLETED
+    FAILED
+}
+
+class Credentials <<Entity>> {
+    - repoURL: string
+    - password: string
+
+    - Credentials(repoURL: string, password: string)
+    + {static} crate(repoURL: string, password: string): Credentials
+    + getRepoURL(): string
+    + getPassword(): string
+}
+
+class GitRequest <<Entity>> {
+    - repoURL: string
+    - pat?: string
+
+    - GitRequest(repoURL: string, pat?: string)
+    + {static} create(repoURL: string, pat?: string): GitRequest
+    + getRepoURL(): string
+    + getPersonalAccessToken(): string
+}
+
+enum GitCheckResult {
+    EXISTS
+    NOT_FOUND
+    UNAUTHORIZED
+    FORBIDDEN
+    UNAVAILABLE
+}
+
+class CloneRequest <<Value Object>> {
+    - analysisID: string
+    - repoURL: string
+    - branch: string
+    - pat: string | null
+    - commit: string | null
+
+    - CloneRequest(id: string, url: string, branch: string, pat?: string, commit?: string)
+    + {static} create(id: string, url: string, branch: string, pat?: string, commit?: string) : CloneRequest
+    
+    + getAnalysisID() : string
+    + getRepoURL() : string
+    + getBranch() : string
+    + getPat() : string | null
+    + getCommit() : string | null
+}
+
+class LocalRepository <<Value Object>> {
+    - fullPath: string
+    - analysisID: string
+
+    - LocalRepository(path: string, id: string)
+    + {static} create(path: string, id: string) : LocalRepository
+    + getFullPath() : string
+    + getAnalysisID() : string
+}
+
+
+class AnalysisStartTask <<Value Object>> {
+    - analysisID: string
+    - storageLocation: string ' Il link S3 (URI)
+
+    - AnalysisStartTask(id: string, location: string)
+    + {static} create(id: string, location: string) : AnalysisStartTask
+    + getAnalysisID() : string
+    + getStorageLocation() : string
+}
+
+
+package Ports {
+    interface ICredentialPort <<Outbound Port>> {
+        + {abstract} getPersonalAccessToken(credentials: Credentials): Promise<string>
+    }
+    
+    interface IAnalysisRepository <<Outbound Port>> {
+        + {abstract} save(analysis: Analysis): Promise<void>
+    }
+
+    interface IGitValidatorPort <<Outbound Port>> {
+        + {abstract} checkRepositoryExistance(repository: GitRequest): Promise<GitCheckResult>
+    }
+
+    interface IGitClonerPort <<Outbound Port>> {
+        + {abstract} cloneRepository(request: CloneRequest): Promise<string> 
+    }
+
+    interface IStoragePort <<Outbound Port>> {
+        + {abstract} uploadToStorage(source: LocalRepository) : Promise<string>
+    }
+
+    interface IAnalysisOrchestratorPort <<Outbound Port>> {
+        + {abstract} triggerAnalysis(task: AnalysisStartTask) : Promise<void>
+    }
+}
+
+package Adapters {
+    class MongoDBAdapter {
+        + save(analysis: Analysis): Promise<void>
+    }
+
+    class CredentialsMicroserviceAdapter {
+        + getPersonalAccessToken(credentials: Credentials): Promise<string>
+    }
+
+    class GitHubAdapter {
+        + checkRepositoryExistance(repository: GitRequest): Promise<GitCheckResult>
+    }
+
+    class S3Adapter {
+        + uploadToStorage(source: LocalRepository) : Promise<string>
+    }
+
+    class StepFunctionAdapter {
+        + triggerAnalysis(task: AnalysisStartTask) : Promise<void>
+    }
+}
+
+' --- RELATIONS ---
+AnalysisController ..up-> AnalysisRequestDTO: "receives"
+AnalysisController -down-> IStartAnalysisUseCase: "invokes"
+AnalysisController ..down-> StartAnalysisCommand: "creates"
+AnalysisController ..up-> AnalysisResponseDTO: "responses"
+
+IStartAnalysisUseCase ..up-> StartAnalysisCommand: "uses"
+IStartAnalysisUseCase ..up-> AnalysisResponseDTO
+
+StartAnalysisService ..up|> IStartAnalysisUseCase 
+StartAnalysisService --down-> IAnalysisRepository
+StartAnalysisService --down-> ICredentialPort
+StartAnalysisService --down-> IGitValidatorPort
+StartAnalysisService --down-> IGitClonerPort
+StartAnalysisService --down-> IStoragePort
+StartAnalysisService --down-> IAnalysisOrchestratorPort
+
+StartAnalysisService ..down-> Analysis
+StartAnalysisService ..down-> Credentials
+StartAnalysisService ..down-> GitRequest
+StartAnalysisService ..down-> GitCheckResult
+StartAnalysisService ..down-> CloneRequest
+StartAnalysisService ..down-> LocalRepository
+StartAnalysisService ..down-> AnalysisStartTask
+
+Analysis --left-> AnalysisStatus
+
+ICredentialPort ..up-> Credentials
+
+IAnalysisRepository ..up-> Analysis
+
+IGitValidatorPort ..up-> GitRequest
+IGitValidatorPort ..up-> GitCheckResult
+
+IGitClonerPort ..up-> CloneRequest
+
+IStoragePort ..up-> LocalRepository
+
+IAnalysisOrchestratorPort ..up-> AnalysisStartTask
+
+MongoDBAdapter ..up|> IAnalysisRepository
+
+CredentialsMicroserviceAdapter ..up|> ICredentialPort
+
+GitHubAdapter ..up|> IGitValidatorPort
+GitHubAdapter ..up|> IGitClonerPort
+
+S3Adapter ..up|> IStoragePort
+
+StepFunctionAdapter ..up|> IAnalysisOrchestratorPort
+
+' --- NOTES ---
