@@ -27,16 +27,27 @@ Container_Boundary(microservice, "Account Service") {
             Component(login_ctrl, "Login Controller", "NestJS Controller", "NestJS Controller", "POST/auth/login")
             Component(pat_ctrl, "GitHub connection Controller", "NestJS Controller", "POST/github/pat, DELETE/github/pat")
         }
-
+        
         Boundary(domain_core, "Domain Core (Hexagon)") #E6F3FF {
-            Component(login_usecase, "Login Use Case", "Domain Service","Login utente.")
-            Component(registration_usecase, "Registration Use Case", "Domain Service", "Registrazione utente")
-            Component(github_pat_usecase, "GitHub PAT Use Case", "Domain Service","Collegamento PAT GitHub per utente, e disconnessione pat per utente")
+            Component(login_usecase, "Login Use Case", "Interface","Login utente.")
+            Component(registration_usecase, "Registration Use Case", "Interface", "Registrazione utente")
+            Component(github_pat_usecase, "GitHub PAT Use Case", "Interface","Collegamento PAT GitHub per utente, e disconnessione pat per utente")
             
+            Boundary(application_logic, "Application logic Serivecs"){
+                Component(login_service, "Login Serivce", "Class", "Login Utente")
+                Component(registration_service, "Registration Service", "Class","Registrazione utente")
+                Component(github_service, "GitHubService", "Class", "Collegamento e scollegamento a github")
+            }
             Boundary(output_ports, "Output Ports") #E6DED3 {
                 Component(port_user, "IUserRepositoryPort", "Interface","findByEmail(email)\nfindById(id)\nsave(user)")
                 Component(port_github_token, "IGithubTokenRepositoryPort", "Interface","save(userId, encryptedPat, githubId)\nfindByUserId(userId)\ndelete(userId)")
                 Component(port_github_client, "IGithubClientPort", "Interface","validateAndGetProfile(pat):\n{ githubId, login, email, scopes }")
+            }
+
+            Boundary(service_interfaces, "Service Interfaces") #e4a3f1{
+                Component(jwt_usecase, "JWT Use Case", "Interface", "Interfaccia di comunicazione tra logica e implementazione")
+                Component(hash_usecase, "Bcrypt Use Case", "Interface", "Interfaccia di comunicazione tra logica e implementazione")
+                Component(encryption_usecase, "Encryption Use Case", "Interface", "Interfaccia di comunicazione tra logica e implementazione")
             }
 
             Boundary(serivces, "Internal Services") #f568b5 {
@@ -65,18 +76,26 @@ Rel_D(login_ctrl, login_usecase, "DTO")
 Rel_D(registration_ctrl, registration_usecase, "DTO")
 Rel_D(pat_ctrl, github_pat_usecase, "DTO")
 
+'RELAZIONI UC SERVIZI
+Rel_U(login_service, login_usecase, "implementa")
+Rel_U(registration_service, registration_usecase, "implementa")
+Rel_U(github_service, github_pat_usecase, "implementa")
+Rel_U(jwt_service, jwt_usecase, "implementa")
+Rel_U(hash_service, hash_usecase, "implementa")
+Rel_U(encryption_service, encryption_usecase, "implementa")
+
 ' CORE LOGIC — Auth Use Case
-Rel_D(login_usecase, port_user, "Chiama")
-Rel_D(login_usecase, jwt_service, "Chiama")
-Rel_D(login_usecase, hash_service, "Chiama")
-Rel_D(registration_usecase, port_user,"Chiama")
-Rel_D(registration_usecase, jwt_service,"Chiama")
-Rel_D(registration_usecase, hash_service,"Chiama")
+Rel_D(login_service, port_user, "Chiama")
+Rel_D(login_service, jwt_usecase, "Chiama")
+Rel_D(login_service, hash_usecase, "Chiama")
+Rel_D(registration_service, port_user,"Chiama")
+Rel_D(registration_service, jwt_usecase,"Chiama")
+Rel_D(registration_service, hash_usecase,"Chiama")
 
 ' CORE LOGIC — GitHub PAT Use Case
-Rel_D(github_pat_usecase, port_github_client, "Chiama — valida PAT")
-Rel_D(github_pat_usecase, encryption_service, "Chiama — cifra PAT")
-Rel_D(github_pat_usecase, port_github_token, "Chiama — salva / cancella")
+Rel_D(github_service, port_github_client, "Chiama — valida PAT")
+Rel_D(github_service, encryption_usecase, "Chiama — cifra PAT")
+Rel_D(github_service, port_github_token, "Chiama — salva / cancella")
 
 ' ADAPTER IMPLEMENTATIONS
 Rel_U(postgres_adapter, port_user, "Implementa")
