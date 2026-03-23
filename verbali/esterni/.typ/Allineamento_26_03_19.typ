@@ -63,9 +63,7 @@
   align: center + horizon,
   fill: (x, y) => if y == 0 { gray.lighten(0%) },
   [*Data*], [*Versione*], [*Descrizione*], [*Redattore*], [*Verificatore*],
-  [2026-03-18], [1.0.0], [Verifica verbale], [], [Riccardo Berengan],
-  [2026-03-05], [0.1.0], [Prima stesura del documento], [Riccardo Berengan], [Suar Alberto],
-)
+  [2026-03-18], [1.0.0], [Stesura verbale], [Basso Kevin], [Zago Alice],)
 
 #pagebreak()
 
@@ -111,7 +109,7 @@ In data 18 Marzo 2026, alle ore #meetingStartingTime, ha avuto luogo in modalit�
 
 == Punto 1: #punto1
 #nota("Sintesi")[
-  Il team ha esposto ai rappresentanti dell'azienda la scelta di adottare un'architettura a microservizi per l'MVP, illustrando la struttura composta da 2 microservizi: microservizio analisi e microservizio Credenziali. Il team ha esposto i dubbi riguardo alla comunicazione tra i microservizi, esponendo la difficoltá di implementare una subnet privata e suggerendo un approccio basatoi su criptazione dei contenuti, scelta appoggiata e approvata dai rappresentanti dell'azienda.]
+  Il team ha esposto ai rappresentanti dell'azienda la scelta di adottare un'architettura a microservizi per l'MVP, illustrando la struttura composta da 2 microservizi: microservizio analisi e microservizio credenziali. Il team ha esposto i dubbi riguardo alla comunicazione tra i microservizi, esponendo la difficoltá di implementare una subnet privata e suggerendo un approccio basato su criptazione dei contenuti, scelta appoggiata e approvata dai rappresentanti dell'azienda.]
 #nota("Decisione")[
   SkarabGroup ha deciso di adottare un'architettura a microservizi per l'MVP, composta da 2 microservizi: microservizio analisi e microservizio Credenziali. Per quanto riguarda la comunicazione tra i microservizi, SkarabGroup adotterá un approccio basato sulla criptazione dei contenuti, evitando l'implementazione di una subnet privata.]
 
@@ -120,13 +118,13 @@ In data 18 Marzo 2026, alle ore #meetingStartingTime, ha avuto luogo in modalit�
 
 == Punto 2: #punto2
 #nota("Sintesi")[
-  Il team ha esposto ai rappresentanti dell'azienda la scelta di utilizzare un'architettura esagonale per il microservizio di analisi con il core hostato su ECS + Fargate, DataBase in Atlas MongoDB, le repo clonate nello storage effimero di Fargate poi zippate in S3 e gli agenti Hostati su delle Lambda con un orchestratore implementato tramite Step Functions. L'azienda si é mostrata dubbiosa sulla scelta di utilizzare un orchestratore basato su Step Functions, tuttavia ha appoggiato la scelta e ha permesso al team di continuare la progettazione senza modifiche.]
+  Il team ha esposto ai rappresentanti dell'azienda la scelta di utilizzare un'architettura esagonale per il microservizio di analisi con il core hostato su ECS + Fargate, DataBase in Atlas MongoDB, le repo clonate nello storage effimero di Fargate poi zippate in S3 e gli agenti hostati su delle Lambda con un orchestratore implementato tramite Step Function. L'azienda si é mostrata dubbiosa sulla scelta di utilizzare un orchestratore basato su Step Function, tuttavia ha appoggiato la scelta e ha permesso al team di continuare la progettazione senza modifiche.]
 #nota("Decisione")[
   SkarabGroup ha deciso di utilizzare un'architettura esagonale per il microservizio di analisi con il core hostato su ECS + Fargate, DataBase in Atlas MongoDB, le repo clonate nello storage effimero di Fargate poi zippate in S3 e gli agenti Hostati su delle Lambda con un orchestratore implementato tramite Step Functions, le risposte degli agenti saranno inviate ad un webhook implementato tramite API Gateway che inoltrerá le risposte al microservizio di analisi.]
 
 == Punto 3: #punto3
 #nota("Sintesi")[
-  Il team ha esposto ai rappresentanti dell'azienda la scelta di utilizzare un'architettura esagonale per il microservizio di Credenziali con il core hostato su AppRunner, DataBase in RDS MySQL. L'azienda si é mostrata dubbiosa sulla scelta di utilizzare un database , tuttavia ha appoggiato la scelta e ha permesso al team di continuare la progettazione senza modifiche.]
+  Il team ha esposto ai rappresentanti dell'azienda la scelta di utilizzare un'architettura esagonale per il microservizio di credenziali con il core hostato su AppRunner e database in RDS MySQL. L'azienda si é mostrata dubbiosa sulla scelta di utilizzare un database SQL, tuttavia ha appoggiato la scelta e ha permesso al team di continuare la progettazione senza modifiche.]
 #nota("Decisione")[
   SkarabGroup ha deciso di utilizzare un'architettura esagonale per il microservizio di Credenziali con il core hostato su AppRunner, DataBase in RDS MySQL, le credenziali saranno inviate al microservizio di analisi tramite un webhook implementato tramite API Gateway che inoltrerá le credenziali al microservizio di analisi.]
 = Chiusura
