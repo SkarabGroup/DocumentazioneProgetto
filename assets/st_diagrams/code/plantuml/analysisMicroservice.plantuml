@@ -8,7 +8,6 @@ skinparam PackageBorderColor white
 skinparam PackageStyle Rectangle
 skinparam PackageFontColor white
 hide circles
-top to bottom direction
 
 
 title Diagramma Integrale - CodeGuardian Analysis Microservice
@@ -49,12 +48,48 @@ package DTO {
 
         + AnalysisResponseDTO(id: string, status: string, date: Date, time?: Time)
     }
+
+    class AnalysisDTO <<Response DTO>> {
+        + analysisId: string
+        + userID: string
+        + repoURL: string
+        + branch: string
+        + commit?: string
+        + status: string
+        + requestedAt: Date
+        + completedAt?: Date
+        //Da aggiungere tutti i vari errori, i risultati e le metriche
+        + AnalysisDTO(id: string, userID: string, repoURL: string, branch: string, commit: string, status: string, requestedAt: Date, completedAt?: Date)
+    }
+
+    class DataBaseUserDTO <<Request DTO>> {
+        + userID: string
+        + repoURL: string
+        + password?: string
+
+        + DataBaseIDCommandDTO(userID: string, repoURL: string, password?: string)
+    }
+
+    class DataBaseIDDTO <<Request DTO>> {
+        + analysisID: string
+        + repoURL: string
+        + password?: string
+
+        + DataBaseIDDTO(analysisID: string, repoURL: string, password?: string)
+    }
 }
 
 package Controllers {
     class AnalysisController {
         - startAnalysisUseCase: IStartAnalysisUseCase
         + requestAnalysis(userID: string, repoInfo: AnalysisRequestDTO): Promise<AnalysisResponseDTO>
+    }
+
+    class DataBaseController {
+        - getByUserUseCase: IGetAnalysisByUserUseCase
+        - getByIDUseCase: IGetAnalysisByIDUseCase
+        + getReportsByUser(command: DataBaseUserDTO): Promise<AnalysisDTO[]>
+        + getReportByID(command: DataBaseIDDTO): Promise<AnalysisDTO>
     }
 }
 
@@ -68,18 +103,41 @@ package Commands {
 
         + StartAnalysisCommand(userID: string, repoURL: string, branch?: string, password?: string, commit?: string)
     }
+
+    class DataBaseIDCommand <<Command>> {
+        + analysisID: string
+        + repoURL: string
+        + password?: string
+
+        + DataBaseIDCommand(analysisID: string)
+    }
+
+    class DataBaseUserCommand <<Command>> {
+        + userID: string
+
+        + DataBaseUserCommand(userID: string)
+    }
 }
 
 package UseCases {
     interface IStartAnalysisUseCase <<Inbound Port>> {
         + {abstract} start(command: StartAnalysisCommand): Promise<AnalysisResponseDTO>
     }
+
+    interface IGetAnalysisByUserUseCase <<Inbound Port>> {
+        + {abstract} getByUser(userID: string): Promise<AnalysisDTO[]>
+    }
+
+    interface IGetAnalysisByIDUseCase <<Inbound Port>> {
+        + {abstract} getByIdUseCase(command: DataBaseIDCommand): Promise<AnalysisDTO>
+    }
+
 }
 
 package Application {
     class StartAnalysisService {
         - repository: IAnalysisRepository
-        - credentialManager: ICredentialPort
+        - credentialManager: ICredentialAnalysisPort
         - gitValidator: IGitValidatorPort
         - gitCloner: IGitClonerPort
         - orchestator: IAnalysisOrchestratorPort
@@ -91,6 +149,16 @@ package Application {
         - startExternalOrchestration(task: AnalysisStartTask) : Promise<void>
         + StartAnalysisService(repository: IAnalysisRepository)
         + start(command: StartAnalysisCommand): Promise<AnalysisResponseDTO>
+    }
+
+    class DatabaseService {
+        - MongoByUser: IMongoGetByUser
+        - MongoByID: IMongoGetByID
+        - CredentialsManager: ICredentialDbPort
+        - getPersonalAccessToRepository(credentials: Credentials): Promise<bool>
+        + DatabaseService()
+        + getReportsByUser(command: DataBaseUserCommand): Promise<AnalysisDTO[]>
+        + getReportByID(command: DataBaseIDCommand): Promise<AnalysisDTO>
     }
 }
 
@@ -186,9 +254,25 @@ class AnalysisStartTask <<Value Object>> {
     + getStorageLocation() : string
 }
 
+class UserID <<Value Object>> {
+    - userID: string
+
+    - UserID(userID: string)
+    + {static} create(userID: string) : UserID
+    + getUserID() : string
+}
+
+class AnalysisID <<Value Object>> {
+    - analysisID: string
+
+    - AnalysisID(analysisID: string)
+    + {static} create(analysisID: string) : AnalysisID
+    + getAnalysisID() : string
+}
+
 
 package Ports {
-    interface ICredentialPort <<Outbound Port>> {
+    interface ICredentialAnalysisPort <<Outbound Port>> {
         + {abstract} getPersonalAccessToken(credentials: Credentials): Promise<string>
     }
     
@@ -211,19 +295,35 @@ package Ports {
     interface IAnalysisOrchestratorPort <<Outbound Port>> {
         + {abstract} triggerAnalysis(task: AnalysisStartTask) : Promise<void>
     }
+
+    interface IMongoGetByUser <<Outbound Port>> {
+        + {abstract} getReportsByUser(userID: UserID): Promise<Analysis[]>
+    }
+
+    interface IMongoGetByID <<Outbound Port>> {
+        + {abstract} getReportByID(analysisID: AnalysisID): Promise<Analysis>
+    }
+
+    interface ICredentialDbPort <<Outbound Port>> {
+        + {abstract} getPersonalAccessToRepository(credentials: Credentials): Promise<bool>
+    }
 }
 
 package Adapters {
     class MongoDBAdapter {
         + save(analysis: Analysis): Promise<void>
+        + getReportsByUser(userID: UserID): Promise<Analysis[]>
+        + getReportByID(analysisID: AnalysisID): Promise<Analysis>
     }
 
     class CredentialsMicroserviceAdapter {
         + getPersonalAccessToken(credentials: Credentials): Promise<string>
+        + getPersonalAccessToRepository(credentials: Credentials): Promise<bool>
     }
 
     class GitHubAdapter {
         + checkRepositoryExistance(repository: GitRequest): Promise<GitCheckResult>
+        + cloneRepository(request: CloneRequest): Promise<string>
     }
 
     class S3Adapter {
@@ -241,16 +341,32 @@ AnalysisController -down-> IStartAnalysisUseCase: "invokes"
 AnalysisController ..down-> StartAnalysisCommand: "creates"
 AnalysisController ..up-> AnalysisResponseDTO: "responses"
 
-IStartAnalysisUseCase ..up-> StartAnalysisCommand: "uses"
-IStartAnalysisUseCase ..up-> AnalysisResponseDTO
+DataBaseController ..up-> DataBaseUserDTO: "receives"
+DataBaseController ..up-> DataBaseIDDTO: "receives"
+DataBaseController -down-> IGetAnalysisByUserUseCase: "invokes"
+DataBaseController -down-> IGetAnalysisByIDUseCase: "invokes"
+DataBaseController ..down-> DataBaseUserCommand: "creates"
+DataBaseController ..down-> DataBaseIDCommand: "creates"
+DataBaseController ..up-> AnalysisDTO: "responses"
 
-StartAnalysisService ..up|> IStartAnalysisUseCase 
+IStartAnalysisUseCase ..up-> StartAnalysisCommand: "uses"
+
+StartAnalysisService ..up.|> IStartAnalysisUseCase 
 StartAnalysisService --down-> IAnalysisRepository
-StartAnalysisService --down-> ICredentialPort
+StartAnalysisService --down-> ICredentialAnalysisPort
 StartAnalysisService --down-> IGitValidatorPort
 StartAnalysisService --down-> IGitClonerPort
 StartAnalysisService --down-> IStoragePort
 StartAnalysisService --down-> IAnalysisOrchestratorPort
+
+IGetAnalysisByIDUseCase ..up-> DataBaseIDCommand : "uses"
+IGetAnalysisByUserUseCase ..up-> DataBaseUserCommand : "uses"
+
+DatabaseService ..up.|> IGetAnalysisByUserUseCase 
+DatabaseService ..up.|> IGetAnalysisByIDUseCase 
+DatabaseService --down-> IMongoGetByUser
+DatabaseService --down-> IMongoGetByID
+DatabaseService --down-> ICredentialDbPort
 
 StartAnalysisService ..down-> Analysis
 StartAnalysisService ..down-> Credentials
@@ -260,11 +376,21 @@ StartAnalysisService ..down-> CloneRequest
 StartAnalysisService ..down-> LocalRepository
 StartAnalysisService ..down-> AnalysisStartTask
 
+DatabaseService ..down-> Credentials
+DatabaseService ..down-> Analysis
+DatabaseService ..down-> UserID
+DatabaseService ..down-> AnalysisID
+
 Analysis --left-> AnalysisStatus
 
-ICredentialPort ..up-> Credentials
+ICredentialAnalysisPort ..up-> Credentials
+ICredentialDbPort ..up-> Credentials
+IMongoGetByID ..up-> AnalysisID
+IMongoGetByUser ..up-> UserID
 
 IAnalysisRepository ..up-> Analysis
+IMongoGetByUser ..up.> Analysis
+IMongoGetByID ..up.> Analysis
 
 IGitValidatorPort ..up-> GitRequest
 IGitValidatorPort ..up-> GitCheckResult
@@ -275,9 +401,11 @@ IStoragePort ..up-> LocalRepository
 
 IAnalysisOrchestratorPort ..up-> AnalysisStartTask
 
+
 MongoDBAdapter ..up|> IAnalysisRepository
 
-CredentialsMicroserviceAdapter ..up|> ICredentialPort
+CredentialsMicroserviceAdapter ..up|> ICredentialAnalysisPort
+CredentialsMicroserviceAdapter ..up|> ICredentialDbPort
 
 GitHubAdapter ..up|> IGitValidatorPort
 GitHubAdapter ..up|> IGitClonerPort
@@ -286,4 +414,10 @@ S3Adapter ..up|> IStoragePort
 
 StepFunctionAdapter ..up|> IAnalysisOrchestratorPort
 
-' --- NOTES ---
+MongoDBAdapter ..down.|> IMongoGetByUser
+MongoDBAdapter ..down.|> IMongoGetByID
+
+
+
+
+@enduml
