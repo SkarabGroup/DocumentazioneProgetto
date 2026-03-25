@@ -1,14 +1,37 @@
 @startuml login_unified
-skinparam ClassAttributeIconSize 0
 skinparam linetype ortho
-skinparam packageStyle rectangle
-skinparam nodesep 100
-skinparam ranksep 100
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
 
+skinparam PackageBorderColor white
+skinparam PackageStyle Rectangle
+skinparam PackageFontColor white
 hide circles
 
+title Diagramma Integrale - CodeGuardian Account Microservice
+
+skinparam class {
+    BackgroundColor White
+    BorderColor #555555
+    ArrowColor #555555
+    FontSize 11
+}
+
+skinparam package {
+    BorderColor white
+    Style Rectangle
+    PackageFontColor white
+}
+
+skinparam interface {
+    BackgroundColor #E8F5E9
+    BorderColor #2E7D32
+    FontSize 12
+}
+
 ' PRIMARY ADAPTERS (Entry Points)
-package "Primary Adapters (Entry Points)" {
+package PrimaryAdapters {
 
     class LoginController {
         - loginUseCase: LoginUseCase
@@ -67,85 +90,83 @@ package "Primary Adapters (Entry Points)" {
     }
 }
 
-' DOMAIN CORE (Hexagon)
-package "Domain Core (Hexagon)" {
+' DOMAIN CORE 
+package DomainCore {
 
-    'Use Cases (Input Ports)
-    package "Use Cases (Input Ports)" {
-        interface LoginUseCase {
-            + execute(dto: LoginDto): Promise<AuthResponseDto>
+    package UseCases {
+        interface LoginUseCase <<Inbound Port>> {
+            + {abstract} execute(dto: LoginDto): Promise<AuthResponseDto>
         }
-        interface RegistrationUseCase {
-            + execute(dto: RegistrationDto): Promise<AuthResponseDto>
+        interface RegistrationUseCase <<Inbound Port>> {
+            + {abstract} execute(dto: RegistrationDto): Promise<AuthResponseDto>
         }
-        interface DeleteUseCase {
-            + execute(dto: DeleteDto): Promise<DeleteResponseDto>
+        interface DeleteUseCase <<Inbound Port>> {
+            + {abstract} execute(dto: DeleteDto): Promise<DeleteResponseDto>
         }
-        interface IAssociatePatUseCase {
-            + associatePat(userId: string, pat: string): Promise<void>
+        interface IAssociatePatUseCase <<Inbound Port>> {
+            + {abstract} associatePat(userId: string, pat: string): Promise<void>
         }
-        interface IRemovePatUseCase {
-            + removePat(userId: string): Promise<void>
+        interface IRemovePatUseCase <<Inbound Port>> {
+            + {abstract} removePat(userId: string): Promise<void>
         }
     }
 
-    'Output Ports (Contracts)
-    package "Output Ports (Contracts)" {
+    package Ports {
 
         ' User
-        interface IUserRepositoryPort {
-            + findByEmail(email: string): Promise<UserDTO | null>
+        interface IUserRepositoryPort <<Outbound Port>> {
+            + {abstract} findByEmail(email: string): Promise<UserDTO | null>
         }
-        interface IUserSaveRepositoryPort {
-            + saveUser(user: UserDTO): Promise<void>
+        interface IUserSaveRepositoryPort <<Outbound Port>> {
+            + {abstract} saveUser(user: UserDTO): Promise<void>
         }
-        interface IUserDeletePort {
-            + deleteUser(userId: string): Promise<void>
+        interface IUserDeletePort <<Outbound Port>> {
+            + {abstract} deleteUser(userId: string): Promise<void>
         }
 
         ' GitHub Token (DB)
-        interface ISaveTokenPort {
-            + saveToken(token: GithubTokenDTO): Promise<void>
+        interface ISaveTokenPort <<Outbound Port>> {
+            + {abstract} saveToken(token: GithubTokenDTO): Promise<void>
         }
-        interface IFindTokenByUserIdPort {
-            + findByUserId(userId: string): Promise<GithubTokenDTO | null>
+        interface IFindTokenByUserIdPort <<Outbound Port>> {
+            + {abstract} findByUserId(userId: string): Promise<GithubTokenDTO | null>
         }
-        interface IDeleteTokenPort {
-            + deleteToken(userId: string): Promise<void>
+        interface IDeleteTokenPort <<Outbound Port>> {
+            + {abstract} deleteToken(userId: string): Promise<void>
         }
 
         ' GitHub REST API
-        interface IGithubClientPort {
-            + validateAndGetProfile(pat: string): Promise<GithubProfileDTO>
+        interface IGithubClientPort <<Outbound Port>> {
+            + {abstract} validateAndGetProfile(pat: string): Promise<GithubProfileDTO>
         }
 
         ' Crypto
-        interface IEncryptTextPort {
-            + encryptText(plainText: string): Promise<string>
+        interface IEncryptTextPort <<Outbound Port>> {
+            + {abstract} encryptText(plainText: string): Promise<string>
         }
 
         ' Infrastruttura
-        interface Bcrypt {
-            + hash(plaintext: string): Promise<string>
-            + compare(plaintext: string, hash: string): Promise<boolean>
+        interface Bcrypt <<Outbound Port>> {
+            + {abstract} hash(plaintext: string): Promise<string>
+            + {abstract} compare(plaintext: string, hash: string): Promise<boolean>
         }
-        interface Jwt {
-            + generateToken(payload: JwtPayload): string
-            + verifyToken(token: string): JwtPayload | null
+        interface Jwt <<Outbound Port>> {
+            + {abstract} generateToken(payload: JwtPayload): string
+            + {abstract} verifyToken(token: string): JwtPayload | null
         }
-        interface ConfJwt {
-            + getJwtSecret(): string
+        interface ConfJwt <<Outbound Port>> {
+            + {abstract} getJwtSecret(): string
         }
-        interface ConfRounds {
-            + getBcryptRounds(): number
+        interface ConfRounds <<Outbound Port>> {
+            + {abstract} getBcryptRounds(): number
         }
-        interface ConfPostgre {
-            + getDBURL(): string
+        interface ConfPostgre <<Outbound Port>> {
+            + {abstract} getDBURL(): string
         }
     }
 
     'Application Logic
-    package "Application Logic" {
+    package Application {
 
         class LoginService {
             - userRepository: IUserRepositoryPort
@@ -229,11 +250,10 @@ package "Domain Core (Hexagon)" {
     }
 }
 
-' SECONDARY ADAPTERS (Infrastructure)
-package "Secondary Adapters (Infrastructure)" {
+' SECONDARY ADAPTERS 
+package SecondaryAdapters {
 
-    'Postgres Adapter
-    package "Postgres Adapter" {
+    package PostgresAdapter {
 
         class PostgresAccountAdapter <<Adapter>> {
             - userRepo: Repository<UserTable>
@@ -283,8 +303,7 @@ package "Secondary Adapters (Infrastructure)" {
         }
     }
 
-    'GitHub Adapter
-    package "GitHub Adapter" {
+    package GitHubAdapterPkg {
 
         class GitHubAdapter <<Adapter>> {
             - profileMapper: GithubProfileMapper
@@ -334,27 +353,33 @@ package "Secondary Adapters (Infrastructure)" {
     }
 }
 
-' RELAZIONI
+' --- RELATIONS ---
+
 ' Entry Points -> Use Cases
-LoginController --> LoginDto : riceve
-LoginController --> LoginUseCase : invoca
-RegistrationController --> RegistrationDto : riceve
-RegistrationController --> RegistrationUseCase : invoca
-DeleteUserController --> DeleteDto : riceve
-DeleteUserController --> DeleteUseCase : invoca
-GitHubController --> AssociatePatDto : riceve
-GitHubController --> RemovePatDto : riceve
-GitHubController --> IAssociatePatUseCase : invoca
-GitHubController --> IRemovePatUseCase : invoca
+LoginController ..up-> LoginDto : "receives"
+LoginController -down-> LoginUseCase : "invokes"
+RegistrationController ..up-> RegistrationDto : "receives"
+RegistrationController -down-> RegistrationUseCase : "invokes"
+DeleteUserController ..up-> DeleteDto : "receives"
+DeleteUserController -down-> DeleteUseCase : "invokes"
+GitHubController ..up-> AssociatePatDto : "receives"
+GitHubController ..up-> RemovePatDto : "receives"
+GitHubController -down-> IAssociatePatUseCase : "invokes"
+GitHubController -down-> IRemovePatUseCase : "invokes"
 
-'Use Cases implementati dai Service
-LoginService .up.|> LoginUseCase : implementa
-RegistrationService .up.|> RegistrationUseCase : implementa
-DeleteService .up.|> DeleteUseCase : implementa
-GitHubService .up.|> IAssociatePatUseCase : implementa
-GitHubService .up.|> IRemovePatUseCase : implementa
+' Responses
+LoginController ..up-> AuthResponseDto : "responses"
+RegistrationController ..up-> AuthResponseDto : "responses"
+DeleteUserController ..up-> DeleteResponseDto : "responses"
 
-'DTO / Table inheritance
+' Use Cases implemented by Services
+LoginService ..up.|> LoginUseCase
+RegistrationService ..up.|> RegistrationUseCase
+DeleteService ..up.|> DeleteUseCase
+GitHubService ..up.|> IAssociatePatUseCase
+GitHubService ..up.|> IRemovePatUseCase
+
+' DTO / Table inheritance
 UserDTO -up-|> AccountDTO
 GithubTokenDTO -up-|> AccountDTO
 UserTable -up-|> DbSchema
@@ -363,71 +388,71 @@ UserMapper -up-|> AccountMapper
 GithubTokenMapper -up-|> AccountMapper
 
 ' Factory
-GithubTokenFactory ..> GithubTokenDTO : crea
-GithubTokenFactory ..> IEncryptTextPort : usa
+GithubTokenFactory ..down-> GithubTokenDTO : "creates"
+GithubTokenFactory ..down-> IEncryptTextPort : "uses"
 
-'Service -> Output Ports
-LoginService ..> IUserRepositoryPort : usa
-LoginService ..> Jwt : usa
-LoginService ..> Bcrypt : usa
-RegistrationService ..> IUserRepositoryPort : usa
-RegistrationService ..> IUserSaveRepositoryPort : usa
-RegistrationService ..> Jwt : usa
-RegistrationService ..> Bcrypt : usa
-DeleteService ..> IUserDeletePort : usa
-GitHubService ..> IGithubClientPort : usa
-GitHubService ..> ISaveTokenPort : usa
-GitHubService ..> IFindTokenByUserIdPort : usa
-GitHubService ..> IDeleteTokenPort : usa
-GitHubService ..> IEncryptTextPort : usa
-GitHubService --> GithubTokenFactory : usa
+' Service -> Output Ports
+LoginService --down-> IUserRepositoryPort
+LoginService --down-> Jwt
+LoginService --down-> Bcrypt
+RegistrationService --down-> IUserRepositoryPort
+RegistrationService --down-> IUserSaveRepositoryPort
+RegistrationService --down-> Jwt
+RegistrationService --down-> Bcrypt
+DeleteService --down-> IUserDeletePort
+GitHubService --down-> IGithubClientPort
+GitHubService --down-> ISaveTokenPort
+GitHubService --down-> IFindTokenByUserIdPort
+GitHubService --down-> IDeleteTokenPort
+GitHubService --down-> IEncryptTextPort
+GitHubService --> GithubTokenFactory : "uses"
 
-'Service <-> Entity / DTO
-LoginService ..> User : costruisce
-LoginService ..> UserDTO : riceve
-RegistrationService ..> User : costruisce
-RegistrationService ..> UserDTO : produce
-GitHubService ..> GithubToken : costruisce
-GitHubService ..> GithubProfileDTO : riceve
+' Service <-> Entity / DTO
+LoginService ..down-> User : "constructs"
+LoginService ..down-> UserDTO : "receives"
+RegistrationService ..down-> User : "constructs"
+RegistrationService ..down-> UserDTO : "produces"
+GitHubService ..down-> GithubToken : "constructs"
+GitHubService ..down-> GithubProfileDTO : "receives"
 
-'Postgres Adapter implementa porte
-PostgresAccountAdapter .up.|> IUserRepositoryPort : implementa
-PostgresAccountAdapter .up.|> IUserSaveRepositoryPort : implementa
-PostgresAccountAdapter .up.|> IUserDeletePort : implementa
-PostgresAccountAdapter .up.|> ISaveTokenPort : implementa
-PostgresAccountAdapter .up.|> IFindTokenByUserIdPort : implementa
-PostgresAccountAdapter .up.|> IDeleteTokenPort : implementa
+' Postgres Adapter implements ports
+PostgresAccountAdapter ..up-|> IUserRepositoryPort
+PostgresAccountAdapter ..up-|> IUserSaveRepositoryPort
+PostgresAccountAdapter ..up-|> IUserDeletePort
+PostgresAccountAdapter ..up-|> ISaveTokenPort
+PostgresAccountAdapter ..up-|> IFindTokenByUserIdPort
+PostgresAccountAdapter ..up-|> IDeleteTokenPort
 
-'Postgres Adapter usa Mapper e Table
-PostgresAccountAdapter --> UserMapper : usa
-PostgresAccountAdapter --> GithubTokenMapper : usa
-PostgresAccountAdapter --> UserTable : persiste
-PostgresAccountAdapter --> GithubTokenTable : persiste
-PostgresAccountAdapter --> ConfPostgre : legge DB_URL
+' Postgres Adapter uses Mapper and Table
+PostgresAccountAdapter --> UserMapper : "uses"
+PostgresAccountAdapter --> GithubTokenMapper : "uses"
+PostgresAccountAdapter ..down-> UserTable : "persists"
+PostgresAccountAdapter ..down-> GithubTokenTable : "persists"
+PostgresAccountAdapter --> ConfPostgre : "reads DB_URL"
 
-'Mapper <-> DTO / Table
-UserMapper ..> UserDTO : produce
-UserMapper ..> UserTable : produce
-GithubTokenMapper ..> GithubTokenDTO : produce
-GithubTokenMapper ..> GithubTokenTable : produce
+' Mapper <-> DTO / Table
+UserMapper ..down-> UserDTO : "produces"
+UserMapper ..down-> UserTable : "produces"
+GithubTokenMapper ..down-> GithubTokenDTO : "produces"
+GithubTokenMapper ..down-> GithubTokenTable : "produces"
 
-'GitHub Adapter
-GitHubAdapter .up.|> IGithubClientPort : implementa
-GitHubAdapter --> GithubProfileMapper : usa
-GitHubAdapter --> GitHubAPI : GET /user
-GithubProfileMapper ..> GitHubAPIResponse : legge
-GithubProfileMapper ..> GithubProfileDTO : produce
+' GitHub Adapter
+GitHubAdapter ..up-|> IGithubClientPort
+GitHubAdapter --> GithubProfileMapper : "uses"
+GitHubAdapter --> GitHubAPI : "GET /user"
+GithubProfileMapper ..down-> GitHubAPIResponse : "reads"
+GithubProfileMapper ..down-> GithubProfileDTO : "produces"
 
-'Config
-ConfigService .up.|> ConfJwt : implementa
-ConfigService .up.|> ConfRounds : implementa
-ConfigService .up.|> ConfPostgre : implementa
-JwtService --> ConfJwt : legge JWT_SECRET
-BcryptService --> ConfRounds : legge BCRYPT_ROUNDS
+' Config
+ConfigService ..up-|> ConfJwt
+ConfigService ..up-|> ConfRounds
+ConfigService ..up-|> ConfPostgre
+JwtService --> ConfJwt : "reads JWT_SECRET"
+BcryptService --> ConfRounds : "reads BCRYPT_ROUNDS"
 
-'Crypto implementa porte
-BcryptService .up.|> Bcrypt : implementa
-JwtService .up.|> Jwt : implementa
-EncryptionService .up.|> IEncryptTextPort : implementa
+' Crypto implements ports
+BcryptService ..up-|> Bcrypt
+JwtService ..up-|> Jwt
+EncryptionService ..up-|> IEncryptTextPort
 
 @enduml
