@@ -1,0 +1,433 @@
+@startuml login_unified
+skinparam ClassAttributeIconSize 0
+skinparam linetype ortho
+skinparam packageStyle rectangle
+skinparam nodesep 100
+skinparam ranksep 100
+
+hide circles
+
+' PRIMARY ADAPTERS (Entry Points)
+package "Primary Adapters (Entry Points)" {
+
+    class LoginController {
+        - loginUseCase: LoginUseCase
+        + login(dto: LoginDto): Promise<AuthResponseDto>
+    }
+
+    class RegistrationController {
+        - registrationUseCase: RegistrationUseCase
+        + register(dto: RegistrationDto): Promise<AuthResponseDto>
+    }
+
+    class DeleteUserController {
+        - deleteUseCase: DeleteUseCase
+        + delete(dto: DeleteDto): Promise<DeleteResponseDto>
+    }
+
+    class GitHubController {
+        - associatePatUseCase: IAssociatePatUseCase
+        - removePatUseCase: IRemovePatUseCase
+        + associatePat(dto: AssociatePatDto): Promise<void>
+        + removePat(dto: RemovePatDto): Promise<void>
+    }
+
+    'DTO 
+    class LoginDto <<DTO>> {
+        + email: string
+        + password: string
+    }
+
+    class RegistrationDto <<DTO>> {
+        + email: string
+        + password: string
+    }
+
+    class DeleteDto <<DTO>> {
+        + userToDelete: string
+    }
+
+    class AssociatePatDto <<DTO>> {
+        + userId: string
+        + pat: string
+    }
+
+    class RemovePatDto <<DTO>> {
+        + userId: string
+    }
+
+    class AuthResponseDto <<DTO>> {
+        + accessToken: string
+        + refreshToken: string
+        + user: UserDTO
+    }
+
+    class DeleteResponseDto <<DTO>> {
+        + deleted: boolean
+    }
+}
+
+' DOMAIN CORE (Hexagon)
+package "Domain Core (Hexagon)" {
+
+    'Use Cases (Input Ports)
+    package "Use Cases (Input Ports)" {
+        interface LoginUseCase {
+            + execute(dto: LoginDto): Promise<AuthResponseDto>
+        }
+        interface RegistrationUseCase {
+            + execute(dto: RegistrationDto): Promise<AuthResponseDto>
+        }
+        interface DeleteUseCase {
+            + execute(dto: DeleteDto): Promise<DeleteResponseDto>
+        }
+        interface IAssociatePatUseCase {
+            + associatePat(userId: string, pat: string): Promise<void>
+        }
+        interface IRemovePatUseCase {
+            + removePat(userId: string): Promise<void>
+        }
+    }
+
+    'Output Ports (Contracts)
+    package "Output Ports (Contracts)" {
+
+        ' User
+        interface IUserRepositoryPort {
+            + findByEmail(email: string): Promise<UserDTO | null>
+        }
+        interface IUserSaveRepositoryPort {
+            + saveUser(user: UserDTO): Promise<void>
+        }
+        interface IUserDeletePort {
+            + deleteUser(userId: string): Promise<void>
+        }
+
+        ' GitHub Token (DB)
+        interface ISaveTokenPort {
+            + saveToken(token: GithubTokenDTO): Promise<void>
+        }
+        interface IFindTokenByUserIdPort {
+            + findByUserId(userId: string): Promise<GithubTokenDTO | null>
+        }
+        interface IDeleteTokenPort {
+            + deleteToken(userId: string): Promise<void>
+        }
+
+        ' GitHub REST API
+        interface IGithubClientPort {
+            + validateAndGetProfile(pat: string): Promise<GithubProfileDTO>
+        }
+
+        ' Crypto
+        interface IEncryptTextPort {
+            + encryptText(plainText: string): Promise<string>
+        }
+
+        ' Infrastruttura
+        interface Bcrypt {
+            + hash(plaintext: string): Promise<string>
+            + compare(plaintext: string, hash: string): Promise<boolean>
+        }
+        interface Jwt {
+            + generateToken(payload: JwtPayload): string
+            + verifyToken(token: string): JwtPayload | null
+        }
+        interface ConfJwt {
+            + getJwtSecret(): string
+        }
+        interface ConfRounds {
+            + getBcryptRounds(): number
+        }
+        interface ConfPostgre {
+            + getDBURL(): string
+        }
+    }
+
+    'Application Logic
+    package "Application Logic" {
+
+        class LoginService {
+            - userRepository: IUserRepositoryPort
+            - jwt: Jwt
+            - bcrypt: Bcrypt
+            - checkExistentUser(email: string): Promise<UserDTO>
+            - checkPasswordHash(plaintext: string, hash: string): Promise<boolean>
+            - generateJWT(user: User): string
+            + execute(dto: LoginDto): Promise<AuthResponseDto>
+        }
+
+        class RegistrationService {
+            - userRepository: IUserRepositoryPort
+            - userSave: IUserSaveRepositoryPort
+            - jwt: Jwt
+            - bcrypt: Bcrypt
+            - checkNewUser(email: string): Promise<boolean>
+            - buildUserDTO(dto: RegistrationDto, hash: string): UserDTO
+            - generateJWT(user: User): string
+            + execute(dto: RegistrationDto): Promise<AuthResponseDto>
+        }
+
+        class DeleteService {
+            - deletePort: IUserDeletePort
+            + execute(dto: DeleteDto): Promise<DeleteResponseDto>
+        }
+
+        class GitHubService {
+            - githubClientPort: IGithubClientPort
+            - saveTokenPort: ISaveTokenPort
+            - findTokenPort: IFindTokenByUserIdPort
+            - deleteTokenPort: IDeleteTokenPort
+            - encryptPort: IEncryptTextPort
+            - tokenFactory: GithubTokenFactory
+            + associatePat(userId: string, pat: string): Promise<void>
+            + removePat(userId: string): Promise<void>
+        }
+
+        class GithubTokenFactory <<Factory>> {
+            + createToken(userId: string, pat: string, githubId: string, encryptor: IEncryptTextPort): Promise<GithubTokenDTO>
+        }
+
+        'Domain Entities 
+        class User <<Entity>> {
+            + id: string
+            + email: string
+            + passwordHash: string
+            + createdAt: Date
+            + updatedAt: Date
+        }
+
+        class GithubToken <<Entity>> {
+            + userId: string
+            + githubId: string
+            + encryptedPat: string
+        }
+
+        'Value Objects
+        class GithubProfileDTO <<Value Object>> {
+            + githubId: string
+            + email: string
+        }
+
+        'DTOs (Domain <-> Adapter)
+        abstract class AccountDTO <<DTO>> {
+            + id: string
+            + createdAt: Date
+        }
+
+        class UserDTO <<DTO>> {
+            + email: string
+            + passwordHash: string
+            + updatedAt: Date
+        }
+
+        class GithubTokenDTO <<DTO>> {
+            + userId: string
+            + githubId: string
+            + encryptedPat: string
+        }
+    }
+}
+
+' SECONDARY ADAPTERS (Infrastructure)
+package "Secondary Adapters (Infrastructure)" {
+
+    'Postgres Adapter
+    package "Postgres Adapter" {
+
+        class PostgresAccountAdapter <<Adapter>> {
+            - userRepo: Repository<UserTable>
+            - tokenRepo: Repository<GithubTokenTable>
+            - userMapper: UserMapper
+            - tokenMapper: GithubTokenMapper
+            .. User Ports ..
+            + findByEmail(email: string): Promise<UserDTO | null>
+            + saveUser(user: UserDTO): Promise<void>
+            + deleteUser(userId: string): Promise<void>
+            .. Token Ports ..
+            + saveToken(token: GithubTokenDTO): Promise<void>
+            + findByUserId(userId: string): Promise<GithubTokenDTO | null>
+            + deleteToken(userId: string): Promise<void>
+        }
+
+        abstract class AccountMapper<S, D> {
+            + {abstract} toDTO(schema: S): D
+            + {abstract} toPersistence(dto: D): S
+        }
+
+        class UserMapper {
+            + toDTO(schema: UserTable): UserDTO
+            + toPersistence(dto: UserDTO): UserTable
+        }
+
+        class GithubTokenMapper {
+            + toDTO(schema: GithubTokenTable): GithubTokenDTO
+            + toPersistence(dto: GithubTokenDTO): GithubTokenTable
+        }
+
+        abstract class DbSchema <<Entity>> {
+            + id: uuid <<PK>>
+            + created_at: timestamp
+        }
+
+        class UserTable <<Entity>> {
+            + email: varchar(254) <<Unique, NotNull>>
+            + password_hash: varchar(255) <<NotNull>>
+            + updated_at: timestamp
+        }
+
+        class GithubTokenTable <<Entity>> {
+            + user_id: uuid <<FK - UserTable.id, NotNull>>
+            + encrypted_pat: text <<NotNull>>
+            + github_user_id: varchar(50) <<NotNull>>
+        }
+    }
+
+    'GitHub Adapter
+    package "GitHub Adapter" {
+
+        class GitHubAdapter <<Adapter>> {
+            - profileMapper: GithubProfileMapper
+            + validateAndGetProfile(pat: string): Promise<GithubProfileDTO>
+        }
+
+        class GithubProfileMapper {
+            + toDTO(response: GitHubAPIResponse): GithubProfileDTO
+        }
+
+        class GitHubAPIResponse <<RawType>> {
+            + id: number
+            + email: string
+        }
+
+        class GitHubAPI <<ExternalSystem>> {
+            + Base URL: https://api.github.com
+            + Endpoint: GET /user
+            + Header: Authorization: token {pat}
+        }
+    }
+
+    'Config & Crypto
+    class ConfigService {
+        - envConfig: Record<string, string>
+        - loadFromSSM(): Promise<void>
+        + getJwtSecret(): string
+        + getBcryptRounds(): number
+        + getDBURL(): string
+        + validate(): void
+    }
+
+    class BcryptService {
+        - rounds: number
+        + hash(plaintext: string): Promise<string>
+        + compare(plaintext: string, hash: string): Promise<boolean>
+    }
+
+    class JwtService {
+        - secret: string
+        + generateToken(payload: JwtPayload): string
+        + verifyToken(token: string): JwtPayload | null
+    }
+
+    class EncryptionService {
+        + encryptText(plainText: string): Promise<string>
+    }
+}
+
+' RELAZIONI
+' Entry Points -> Use Cases
+LoginController --> LoginDto : riceve
+LoginController --> LoginUseCase : invoca
+RegistrationController --> RegistrationDto : riceve
+RegistrationController --> RegistrationUseCase : invoca
+DeleteUserController --> DeleteDto : riceve
+DeleteUserController --> DeleteUseCase : invoca
+GitHubController --> AssociatePatDto : riceve
+GitHubController --> RemovePatDto : riceve
+GitHubController --> IAssociatePatUseCase : invoca
+GitHubController --> IRemovePatUseCase : invoca
+
+'Use Cases implementati dai Service
+LoginService .up.|> LoginUseCase : implementa
+RegistrationService .up.|> RegistrationUseCase : implementa
+DeleteService .up.|> DeleteUseCase : implementa
+GitHubService .up.|> IAssociatePatUseCase : implementa
+GitHubService .up.|> IRemovePatUseCase : implementa
+
+'DTO / Table inheritance
+UserDTO -up-|> AccountDTO
+GithubTokenDTO -up-|> AccountDTO
+UserTable -up-|> DbSchema
+GithubTokenTable -up-|> DbSchema
+UserMapper -up-|> AccountMapper
+GithubTokenMapper -up-|> AccountMapper
+
+' Factory
+GithubTokenFactory ..> GithubTokenDTO : crea
+GithubTokenFactory ..> IEncryptTextPort : usa
+
+'Service -> Output Ports
+LoginService ..> IUserRepositoryPort : usa
+LoginService ..> Jwt : usa
+LoginService ..> Bcrypt : usa
+RegistrationService ..> IUserRepositoryPort : usa
+RegistrationService ..> IUserSaveRepositoryPort : usa
+RegistrationService ..> Jwt : usa
+RegistrationService ..> Bcrypt : usa
+DeleteService ..> IUserDeletePort : usa
+GitHubService ..> IGithubClientPort : usa
+GitHubService ..> ISaveTokenPort : usa
+GitHubService ..> IFindTokenByUserIdPort : usa
+GitHubService ..> IDeleteTokenPort : usa
+GitHubService ..> IEncryptTextPort : usa
+GitHubService --> GithubTokenFactory : usa
+
+'Service <-> Entity / DTO
+LoginService ..> User : costruisce
+LoginService ..> UserDTO : riceve
+RegistrationService ..> User : costruisce
+RegistrationService ..> UserDTO : produce
+GitHubService ..> GithubToken : costruisce
+GitHubService ..> GithubProfileDTO : riceve
+
+'Postgres Adapter implementa porte
+PostgresAccountAdapter .up.|> IUserRepositoryPort : implementa
+PostgresAccountAdapter .up.|> IUserSaveRepositoryPort : implementa
+PostgresAccountAdapter .up.|> IUserDeletePort : implementa
+PostgresAccountAdapter .up.|> ISaveTokenPort : implementa
+PostgresAccountAdapter .up.|> IFindTokenByUserIdPort : implementa
+PostgresAccountAdapter .up.|> IDeleteTokenPort : implementa
+
+'Postgres Adapter usa Mapper e Table
+PostgresAccountAdapter --> UserMapper : usa
+PostgresAccountAdapter --> GithubTokenMapper : usa
+PostgresAccountAdapter --> UserTable : persiste
+PostgresAccountAdapter --> GithubTokenTable : persiste
+PostgresAccountAdapter --> ConfPostgre : legge DB_URL
+
+'Mapper <-> DTO / Table
+UserMapper ..> UserDTO : produce
+UserMapper ..> UserTable : produce
+GithubTokenMapper ..> GithubTokenDTO : produce
+GithubTokenMapper ..> GithubTokenTable : produce
+
+'GitHub Adapter
+GitHubAdapter .up.|> IGithubClientPort : implementa
+GitHubAdapter --> GithubProfileMapper : usa
+GitHubAdapter --> GitHubAPI : GET /user
+GithubProfileMapper ..> GitHubAPIResponse : legge
+GithubProfileMapper ..> GithubProfileDTO : produce
+
+'Config
+ConfigService .up.|> ConfJwt : implementa
+ConfigService .up.|> ConfRounds : implementa
+ConfigService .up.|> ConfPostgre : implementa
+JwtService --> ConfJwt : legge JWT_SECRET
+BcryptService --> ConfRounds : legge BCRYPT_ROUNDS
+
+'Crypto implementa porte
+BcryptService .up.|> Bcrypt : implementa
+JwtService .up.|> Jwt : implementa
+EncryptionService .up.|> IEncryptTextPort : implementa
+
+@enduml
