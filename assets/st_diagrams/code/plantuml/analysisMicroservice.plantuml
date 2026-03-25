@@ -67,7 +67,7 @@ package DTO {
         + repoURL: string
         + password?: string
 
-        + DataBaseIDCommandDTO(userID: string, repoURL: string, password?: string)
+        + DataBaseUserDTO(userID: string, repoURL: string, password?: string)
     }
 
     class DataBaseIDDTO <<Request DTO>> {
@@ -163,21 +163,30 @@ package Application {
 }
 
 class Analysis <<Entity>> {
-    - analysisID: string
-    - status: AnalysisStatus
-    - userID: string
-    - repoURL: string
-    - branch: string
-    - commit?: string
+    - analysisID: AnalysisId
+    - status: enum
+    - userID: UserId
+    - repoURL: RepoUrl
+    - branch: Branch
+    - commit?: CommitHash
 
-    - Analysis(id: string, userID: string, repoURL: string, branch: string, commit?: string)
-    + {static} create(userID: string, repoURL: string, branch: string, commit?: string): Analysis
+    - Analysis(id: string, userID: string, repoURL: string, branch: string, commit?: CommitHash)
+    + {static} create(userID: string, repoURL: string, branch: string, commit?: CommitHash): Analysis
     + getAnalysisID(): string
     + getStatus(): AnalysisStatus
     + getUserID(): string
     + getRepoURL(): string
     + getBranch(): string
-    + getCommit(): string | null
+    + getCommit(): CommitHash | null
+    + setStatus(status: AnalysisStatus): void
+}
+
+class RepoURL <<Value Object>> {
+    - url: string
+
+    - RepoURL(url: string)
+    + {static} create(url: string): RepoURL
+    + getURL(): string
 }
 
 enum AnalysisStatus {
@@ -189,23 +198,23 @@ enum AnalysisStatus {
 }
 
 class Credentials <<Entity>> {
-    - repoURL: string
-    - password: string
+    - repoURL: RepoURL
+    - password: PATPassword
 
-    - Credentials(repoURL: string, password: string)
-    + {static} crate(repoURL: string, password: string): Credentials
-    + getRepoURL(): string
-    + getPassword(): string
+    - Credentials(repoURL: RepoURL, password: PATPassword)
+    + {static} create(repoURL: RepoURL, password: PATPassword): Credentials
+    + getRepoURL(): RepoURL
+    + getPassword(): PATPassword
 }
 
 class GitRequest <<Entity>> {
-    - repoURL: string
-    - pat?: string
+    - repoURL: RepoURL
+    - pat?: PersonalAccessToken
 
-    - GitRequest(repoURL: string, pat?: string)
-    + {static} create(repoURL: string, pat?: string): GitRequest
-    + getRepoURL(): string
-    + getPersonalAccessToken(): string
+    - GitRequest(repoURL: RepoURL, pat?: PersonalAccessToken)
+    + {static} create(repoURL: RepoURL, pat?: PersonalAccessToken): GitRequest
+    + getRepoURL(): RepoURL
+    + getPersonalAccessToken(): PersonalAccessToken | null
 }
 
 enum GitCheckResult {
@@ -218,40 +227,55 @@ enum GitCheckResult {
 
 class CloneRequest <<Value Object>> {
     - analysisID: string
-    - repoURL: string
-    - branch: string
-    - pat: string | null
-    - commit: string | null
+    - repoURL: RepoURL
+    - branch: Branch
+    - pat: PersonalAccessToken | null
+    - commit: CommitHash | null
 
-    - CloneRequest(id: string, url: string, branch: string, pat?: string, commit?: string)
-    + {static} create(id: string, url: string, branch: string, pat?: string, commit?: string) : CloneRequest
+    - CloneRequest(id: string, url: string, branch: Branch, pat?: PersonalAccessToken, commit?: CommitHash)
+    + {static} create(id: string, url: string, branch: Branch, pat?: PersonalAccessToken, commit?: CommitHash) : CloneRequest
     
-    + getAnalysisID() : string
-    + getRepoURL() : string
-    + getBranch() : string
-    + getPat() : string | null
-    + getCommit() : string | null
+    + getAnalysisID() : AnalysisId
+    + getRepoURL() : RepoURL
+    + getBranch() : Branch
+    + getPat() : PersonalAccessToken | null
+    + getCommit() : CommitHash | null
 }
 
 class LocalRepository <<Value Object>> {
     - fullPath: string
-    - analysisID: string
+    - analysisId: AnalysisId
 
-    - LocalRepository(path: string, id: string)
-    + {static} create(path: string, id: string) : LocalRepository
+    - LocalRepository(path: string, id: AnalysisId)
+    + {static} create(path: string, id: AnalysisId) : LocalRepository
     + getFullPath() : string
-    + getAnalysisID() : string
+    + getAnalysisID() : AnalysisId
+}
+
+class PersonalAccessToken <<Value Object>> {
+    - token: string
+
+    - PersonalAccessToken(token: string)
+    + {static} create(token: string) : PersonalAccessToken
+    + getToken() : string
 }
 
 
 class AnalysisStartTask <<Value Object>> {
-    - analysisID: string
-    - storageLocation: string ' Il link S3 (URI)
+    - analysisID: AnalysisId
+    - storageLocation: S3Location
+    - AnalysisStartTask(id: AnalysisId, location: S3Location)
+    + {static} create(id: AnalysisId, location: S3Location) : AnalysisStartTask
+    + getAnalysisID() : AnalysisId
+    + getStorageLocation() : S3Location
+}
 
-    - AnalysisStartTask(id: string, location: string)
-    + {static} create(id: string, location: string) : AnalysisStartTask
-    + getAnalysisID() : string
-    + getStorageLocation() : string
+class S3Location <<Value Object>> {
+    - uri: string
+
+    - S3Location(uri: string)
+    + {static} create(uri: string) : S3Location
+    + getURI() : string
 }
 
 class UserID <<Value Object>> {
@@ -262,12 +286,36 @@ class UserID <<Value Object>> {
     + getUserID() : string
 }
 
-class AnalysisID <<Value Object>> {
-    - analysisID: string
+class AnalysisId <<Value Object>> {
+    - analysisId: string
 
-    - AnalysisID(analysisID: string)
-    + {static} create(analysisID: string) : AnalysisID
-    + getAnalysisID() : string
+    - AnalysisId(analysisId: string)
+    + {static} create(analysisId: string) : AnalysisId
+    + getAnalysisId() : string
+}
+
+class Branch <<Value Object>> {
+    - branch: string
+
+    - Branch(branch: string)
+    + {static} create(branch: string) : Branch
+    + getBranch() : string
+}
+
+class CommitHash <<Value Object>> {
+    - commit: string
+
+    - CommitHash(commit: string)
+    + {static} create(commit: string) : CommitHash
+    + getCommit() : string
+}
+
+class PATPassword <<Value Object>> {
+    - password: string
+
+    - PATPassword(password: string)
+    + {static} create(password: string) : PATPassword
+    + getPassword() : string
 }
 
 
@@ -379,13 +427,13 @@ StartAnalysisService ..down-> AnalysisStartTask
 DatabaseService ..down-> Credentials
 DatabaseService ..down-> Analysis
 DatabaseService ..down-> UserID
-DatabaseService ..down-> AnalysisID
+DatabaseService ..down-> AnalysisId
 
 Analysis --left-> AnalysisStatus
 
 ICredentialAnalysisPort ..up-> Credentials
 ICredentialDbPort ..up-> Credentials
-IMongoGetByID ..up-> AnalysisID
+IMongoGetByID ..up-> AnalysisId
 IMongoGetByUser ..up-> UserID
 
 IAnalysisRepository ..up-> Analysis
@@ -402,22 +450,44 @@ IStoragePort ..up-> LocalRepository
 IAnalysisOrchestratorPort ..up-> AnalysisStartTask
 
 
-MongoDBAdapter ..up|> IAnalysisRepository
+MongoDBAdapter ..up-|> IAnalysisRepository
 
-CredentialsMicroserviceAdapter ..up|> ICredentialAnalysisPort
-CredentialsMicroserviceAdapter ..up|> ICredentialDbPort
+CredentialsMicroserviceAdapter ..up-|> ICredentialAnalysisPort
+CredentialsMicroserviceAdapter ..up-|> ICredentialDbPort
 
-GitHubAdapter ..up|> IGitValidatorPort
-GitHubAdapter ..up|> IGitClonerPort
+GitHubAdapter ..up-|> IGitValidatorPort
+GitHubAdapter ..up-|> IGitClonerPort
 
-S3Adapter ..up|> IStoragePort
+S3Adapter ..up-|> IStoragePort
 
-StepFunctionAdapter ..up|> IAnalysisOrchestratorPort
+StepFunctionAdapter ..up-|> IAnalysisOrchestratorPort
 
-MongoDBAdapter ..down.|> IMongoGetByUser
-MongoDBAdapter ..down.|> IMongoGetByID
-
-
+MongoDBAdapter ..down-|> IMongoGetByUser
+MongoDBAdapter ..down-|> IMongoGetByID
 
 
+'relazioni tra entity e value object
+Analysis *--down-> AnalysisId
+Analysis *--left-> UserID
+Analysis *--right-> RepoURL
+Analysis *--left-> Branch
+Analysis *--right-> CommitHash
+
+Credentials *--left-> RepoURL
+Credentials *--right-> PATPassword
+
+AnalysisStartTask *--left-> AnalysisId
+AnalysisStartTask *--right-> S3Location
+
+GitRequest *--right-> RepoURL
+
+CloneRequest *--left-> AnalysisId
+CloneRequest *--left-> RepoURL
+CloneRequest *--right-> PersonalAccessToken
+CloneRequest *--right-> Branch
+CloneRequest *--right-> CommitHash
+
+GitRequest *--up-> PersonalAccessToken
+
+LocalRepository *--left-> AnalysisId
 @enduml
