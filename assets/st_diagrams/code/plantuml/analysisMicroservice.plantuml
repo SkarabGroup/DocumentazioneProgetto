@@ -144,7 +144,7 @@ package Application {
         - saveAnalysis(analysis: Analysis): Promise<void>
         - retrievePersonalAccessToken(credentials: Credentials): Promise<string>
         - verifyRepositoryExistance(repository: GitRequest): Promise<GitCheckResult>
-        - cloneRepository(cloneRepository: CloneRequest): Promise<string>
+        - cloneRepository(cloneRepository: GitCloneRequest): Promise<string>
         - persistToCloudStorage(source: LocalRepository) : Promise<string>
         - startExternalOrchestration(task: AnalysisStartTask) : Promise<void>
         + StartAnalysisService(repository: IAnalysisRepository)
@@ -166,19 +166,25 @@ class Analysis <<Entity>> {
     - analysisID: AnalysisId
     - status: enum
     - userID: UserId
+
+    - Analysis(id: AnalysisId, userID: UserId, status: enum)
+    + {static} create(id: AnalysisId, userID: UserId, status: enum): Analysis
+    + getAnalysisID(): AnalysisId
+    + getStatus(): enum
+    + getUserID(): UserId
+    + setStatus(status: enum): void
+}
+
+class GitHubAnalysis <<Entity>> {
     - repoURL: RepoUrl
     - branch: Branch
     - commit?: CommitHash
 
-    - Analysis(id: string, userID: string, repoURL: string, branch: string, commit?: CommitHash)
-    + {static} create(userID: string, repoURL: string, branch: string, commit?: CommitHash): Analysis
-    + getAnalysisID(): string
-    + getStatus(): AnalysisStatus
-    + getUserID(): string
-    + getRepoURL(): string
-    + getBranch(): string
+    - GitHubAnalysis(id: AnalysisId, userID: UserId, repoURL: RepoUrl, branch: Branch, commit?: CommitHash)
+    + {static} create(id: AnalysisId, userID: UserId, repoURL: RepoUrl, branch: Branch, commit?: CommitHash): GitHubAnalysis
+    + getRepoURL(): RepoUrl
+    + getBranch(): Branch
     + getCommit(): CommitHash | null
-    + setStatus(status: AnalysisStatus): void
 }
 
 class RepoURL <<Value Object>> {
@@ -225,15 +231,15 @@ enum GitCheckResult {
     UNAVAILABLE
 }
 
-class CloneRequest <<Value Object>> {
+class GitCloneRequest <<Value Object>> {
     - analysisID: string
     - repoURL: RepoURL
     - branch: Branch
     - pat: PersonalAccessToken | null
     - commit: CommitHash | null
 
-    - CloneRequest(id: string, url: string, branch: Branch, pat?: PersonalAccessToken, commit?: CommitHash)
-    + {static} create(id: string, url: string, branch: Branch, pat?: PersonalAccessToken, commit?: CommitHash) : CloneRequest
+    - GitCloneRequest(id: string, url: string, branch: Branch, pat?: PersonalAccessToken, commit?: CommitHash)
+    + {static} create(id: string, url: string, branch: Branch, pat?: PersonalAccessToken, commit?: CommitHash) : GitCloneRequest
     
     + getAnalysisID() : AnalysisId
     + getRepoURL() : RepoURL
@@ -333,7 +339,7 @@ package Ports {
     }
 
     interface IGitClonerPort <<Outbound Port>> {
-        + {abstract} cloneRepository(request: CloneRequest): Promise<string> 
+        + {abstract} cloneRepository(request: GitCloneRequest): Promise<string> 
     }
 
     interface IStoragePort <<Outbound Port>> {
@@ -371,7 +377,7 @@ package Adapters {
 
     class GitHubAdapter {
         + checkRepositoryExistance(repository: GitRequest): Promise<GitCheckResult>
-        + cloneRepository(request: CloneRequest): Promise<string>
+        + cloneRepository(request: GitCloneRequest): Promise<string>
     }
 
     class S3Adapter {
@@ -420,7 +426,7 @@ StartAnalysisService ..down-> Analysis
 StartAnalysisService ..down-> Credentials
 StartAnalysisService ..down-> GitRequest
 StartAnalysisService ..down-> GitCheckResult
-StartAnalysisService ..down-> CloneRequest
+StartAnalysisService ..down-> GitCloneRequest
 StartAnalysisService ..down-> LocalRepository
 StartAnalysisService ..down-> AnalysisStartTask
 
@@ -443,7 +449,7 @@ IMongoGetByID ..up.> Analysis
 IGitValidatorPort ..up-> GitRequest
 IGitValidatorPort ..up-> GitCheckResult
 
-IGitClonerPort ..up-> CloneRequest
+IGitClonerPort ..up-> GitCloneRequest
 
 IStoragePort ..up-> LocalRepository
 
@@ -469,9 +475,10 @@ MongoDBAdapter ..down-|> IMongoGetByID
 'relazioni tra entity e value object
 Analysis *--down-> AnalysisId
 Analysis *--left-> UserID
-Analysis *--right-> RepoURL
-Analysis *--left-> Branch
-Analysis *--right-> CommitHash
+GitHubAnalysis ..up.|> Analysis
+GitHubAnalysis *--right-> RepoURL
+GitHubAnalysis *--left-> Branch
+GitHubAnalysis *--right-> CommitHash
 
 Credentials *--left-> RepoURL
 Credentials *--right-> PATPassword
@@ -481,11 +488,11 @@ AnalysisStartTask *--right-> S3Location
 
 GitRequest *--right-> RepoURL
 
-CloneRequest *--left-> AnalysisId
-CloneRequest *--left-> RepoURL
-CloneRequest *--right-> PersonalAccessToken
-CloneRequest *--right-> Branch
-CloneRequest *--right-> CommitHash
+GitCloneRequest *--left-> AnalysisId
+GitCloneRequest *--left-> RepoURL
+GitCloneRequest *--right-> PersonalAccessToken
+GitCloneRequest *--right-> Branch
+GitCloneRequest *--right-> CommitHash
 
 GitRequest *--up-> PersonalAccessToken
 
