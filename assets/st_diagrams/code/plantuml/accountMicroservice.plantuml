@@ -114,7 +114,7 @@ package DomainCore {
     package Ports {
 
         ' User
-        interface IUserRepositoryPort <<Outbound Port>> {
+        interface IFindUserByEmailPort <<Outbound Port>> {
             + {abstract} findByEmail(email: string): Promise<UserDTO | null>
         }
         interface IUserSaveRepositoryPort <<Outbound Port>> {
@@ -140,28 +140,27 @@ package DomainCore {
             + {abstract} validateAndGetProfile(pat: string): Promise<GithubProfileDTO>
         }
 
-        ' Crypto
-        interface IEncryptTextPort <<Outbound Port>> {
-            + {abstract} encryptText(plainText: string): Promise<string>
-        }
+        package ServiceInterfaces {
+            ' Crypto
+            interface IEncryptTextPort <<Outbound Port>> {
+                + {abstract} encryptText(plainText: string): Promise<string>
+            }
 
-        ' Infrastruttura
-        interface Bcrypt <<Outbound Port>> {
-            + {abstract} hash(plaintext: string): Promise<string>
-            + {abstract} compare(plaintext: string, hash: string): Promise<boolean>
-        }
-        interface Jwt <<Outbound Port>> {
-            + {abstract} generateToken(payload: JwtPayload): string
-            + {abstract} verifyToken(token: string): JwtPayload | null
-        }
-        interface ConfJwt <<Outbound Port>> {
-            + {abstract} getJwtSecret(): string
-        }
-        interface ConfRounds <<Outbound Port>> {
-            + {abstract} getBcryptRounds(): number
-        }
-        interface ConfPostgre <<Outbound Port>> {
-            + {abstract} getDBURL(): string
+            ' Infrastruttura
+            ' LoginService usa solo IComparePort
+            ' RegistrationService usa solo IHashPort
+            interface IHashPort <<Interface>> {
+                + {abstract} hash(plaintext: string): Promise<string>
+            }
+            interface IComparePort <<Interface>> {
+                + {abstract} compare(plaintext: string, hash: string): Promise<boolean>
+            }
+
+            ' da valutare separazione metodi Jwt
+            interface Jwt <<Interface>> {
+                + {abstract} generateToken(payload: JwtPayload): string
+                + {abstract} verifyToken(token: string): JwtPayload | null
+            }
         }
     }
 
@@ -224,12 +223,6 @@ package DomainCore {
             + encryptedPat: string
         }
 
-        'Value Objects
-        class GithubProfileDTO <<Value Object>> {
-            + githubId: string
-            + email: string
-        }
-
         'DTOs (Domain <-> Adapter)
         abstract class AccountDTO <<DTO>> {
             + id: string
@@ -255,6 +248,7 @@ package SecondaryAdapters {
 
     package PostgresAdapter {
 
+        ' implicito RDS
         class PostgresAccountAdapter <<Adapter>> {
             - userRepo: Repository<UserTable>
             - tokenRepo: Repository<GithubTokenTable>
@@ -314,6 +308,11 @@ package SecondaryAdapters {
             + toDTO(response: GitHubAPIResponse): GithubProfileDTO
         }
 
+        class GithubProfileDTO <<DTO>> {
+            + githubId: string
+            + email: string
+        }
+
         class GitHubAPIResponse <<RawType>> {
             + id: number
             + email: string
@@ -323,6 +322,18 @@ package SecondaryAdapters {
             + Base URL: https://api.github.com
             + Endpoint: GET /user
             + Header: Authorization: token {pat}
+        }
+
+        package ConfigInterfaces {
+            interface ConfJwt <<Interface>> {
+                + {abstract} getJwtSecret(): string
+            }
+            interface ConfRounds <<Interface>> {
+                + {abstract} getBcryptRounds(): number
+            }
+            interface ConfPostgre <<Interface>> {
+                + {abstract} getDBURL(): string
+            }
         }
     }
 
@@ -334,6 +345,12 @@ package SecondaryAdapters {
         + getBcryptRounds(): number
         + getDBURL(): string
         + validate(): void
+    }
+
+    class AWSSSM <<ExternalSystem>> {
+        + Service: AWS SSM Parameter Store
+        + Secrets: JWT_SECRET, BCRYPT_ROUNDS,\n  DATABASE_URL, TOKEN_ENCRYPTION_KEY
+        + Access: App Runner → process.env at boot
     }
 
     class BcryptService {
@@ -392,13 +409,13 @@ GithubTokenFactory ..down-> GithubTokenDTO : "creates"
 GithubTokenFactory ..down-> IEncryptTextPort : "uses"
 
 ' Service -> Output Ports
-LoginService --down-> IUserRepositoryPort
+LoginService --down-> IFindUserByEmailPort 
 LoginService --down-> Jwt
-LoginService --down-> Bcrypt
-RegistrationService --down-> IUserRepositoryPort
+LoginService --down-> IComparePort
+RegistrationService --down-> IFindUserByEmailPort 
 RegistrationService --down-> IUserSaveRepositoryPort
 RegistrationService --down-> Jwt
-RegistrationService --down-> Bcrypt
+RegistrationService --down-> IHashPort
 DeleteService --down-> IUserDeletePort
 GitHubService --down-> IGithubClientPort
 GitHubService --down-> ISaveTokenPort
@@ -416,7 +433,7 @@ GitHubService ..down-> GithubToken : "constructs"
 GitHubService ..down-> GithubProfileDTO : "receives"
 
 ' Postgres Adapter implements ports
-PostgresAccountAdapter ..up-|> IUserRepositoryPort
+PostgresAccountAdapter ..up-|> IFindUserByEmailPort
 PostgresAccountAdapter ..up-|> IUserSaveRepositoryPort
 PostgresAccountAdapter ..up-|> IUserDeletePort
 PostgresAccountAdapter ..up-|> ISaveTokenPort
@@ -428,7 +445,6 @@ PostgresAccountAdapter --> UserMapper : "uses"
 PostgresAccountAdapter --> GithubTokenMapper : "uses"
 PostgresAccountAdapter ..down-> UserTable : "persists"
 PostgresAccountAdapter ..down-> GithubTokenTable : "persists"
-PostgresAccountAdapter --> ConfPostgre : "reads DB_URL"
 
 ' Mapper <-> DTO / Table
 UserMapper ..down-> UserDTO : "produces"
@@ -447,11 +463,14 @@ GithubProfileMapper ..down-> GithubProfileDTO : "produces"
 ConfigService ..up-|> ConfJwt
 ConfigService ..up-|> ConfRounds
 ConfigService ..up-|> ConfPostgre
+ConfigService ..down-> AWSSSM : "reads secrets at boot"
 JwtService --> ConfJwt : "reads JWT_SECRET"
 BcryptService --> ConfRounds : "reads BCRYPT_ROUNDS"
+PostgresAccountAdapter --> ConfPostgre : "reads DB_URL"
 
 ' Crypto implements ports
-BcryptService ..up-|> Bcrypt
+BcryptService ..up-|> IHashPort
+BcryptService ..up-|> IComparePort
 JwtService ..up-|> Jwt
 EncryptionService ..up-|> IEncryptTextPort
 
