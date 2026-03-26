@@ -32,7 +32,7 @@ Code Guardian utilizza *AWS Bedrock* come unico provider LLM. La scelta del prov
 - *Integrazione nativa IAM*: le Lambda Remediation Agents accedono a Bedrock tramite IAM Role, senza chiavi API da gestire o segreti da ruotare.
 - *Pricing on-demand*: nessun impegno volumetrico o contratto privato. Il costo è proporzionale all'utilizzo reale.
 
-La valutazione ha coperto *4 provider* disponibili su Bedrock a marzo 2026: *Anthropic*, *Amazon*, *Meta* e *Mistral*.
+La valutazione ha coperto *tutti i provider* disponibili su Bedrock a marzo 2026: ~100 modelli da 13+ provider. I modelli Anthropic/Claude sono esclusi per vincolo cliente. Vengono valutati tutti i candidati non-Anthropic rilevanti per task di analisi del codice e sicurezza.
 
 = Modelli Bedrock candidati
 
@@ -50,29 +50,40 @@ La valutazione ha coperto *4 provider* disponibili su Bedrock a marzo 2026: *Ant
     fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
     align: (col, row) => if col <= 2 { left + horizon } else { center + horizon },
 
-    [Claude Sonnet 4.6],          [Anthropic], [anthropic.claude-sonnet-4-6],                   [\$3.00],  [\$15.00], [1M],   [*77.2%*], [],
-    [Claude 3.5 Sonnet (legacy)], [Anthropic], [anthropic.claude-3-5-sonnet-20241022-v2:0],      [\$6.00],  [\$30.00], [200K], [49%],     [92%],
-    [Claude 3.5 Haiku],           [Anthropic], [anthropic.claude-3-5-haiku-20241022-v1:0],       [\$0.80],  [\$4.00],  [200K], [40.6%],   [88.1%],
-    [Claude 3 Haiku],             [Anthropic], [anthropic.claude-3-haiku-20240307-v1:0],         [\$0.25],  [\$1.25],  [200K], [],        [],
-    [Amazon Nova Premier],        [Amazon],    [amazon.nova-premier-v1:0],                       [\$2.50],  [\$12.50], [],     [],        [],
+    [Amazon Nova Premier],        [Amazon],    [amazon.nova-premier-v1:0],                       [\$2.50],  [\$12.50], [1M],   [],        [],
     [Amazon Nova Pro],            [Amazon],    [amazon.nova-pro-v1:0],                           [\$0.80],  [\$3.20],  [],     [],        [89%],
     [Amazon Nova Lite],           [Amazon],    [amazon.nova-lite-v1:0],                          [\$0.06],  [\$0.24],  [300K], [],        [85.4%],
     [Amazon Nova Micro],          [Amazon],    [amazon.nova-micro-v1:0],                         [\$0.035], [\$0.14],  [128K], [],        [81.1%],
-    [Llama 3.1 70B],              [Meta],      [meta.llama3-1-70b-instruct-v1:0],                [~\$0.99], [~\$0.99], [128K], [],        [],
-    [Llama 3.3 70B],              [Meta],      [(routing Bedrock)],                              [~\$0.99], [~\$0.99], [128K], [],        [],
-    [Mixtral 8x7B],               [Mistral],   [mistral.mixtral-8x7b-instruct-v0:1],             [\$0.45],  [\$0.70],  [],     [],        [],
-    [Mistral 7B],                 [Mistral],   [mistral.mistral-7b-instruct-v0:2],               [\$0.15],  [\$0.20],  [],     [],        [],
+    [Llama 4 Scout 17B],          [Meta],      [meta.llama4-scout-17b-instruct-v1:0],            [n.d.],    [n.d.],    [10M],  [],        [],
+    [Llama 4 Maverick 17B],       [Meta],      [meta.llama4-maverick-17b-instruct-v1:0],         [n.d.],    [n.d.],    [],     [],        [],
+    [Llama 3.3 70B],              [Meta],      [meta.llama3-3-70b-instruct-v1:0],                [~\$0.99], [~\$0.99], [128K], [],        [],
+    [Mistral Large 3],            [Mistral],   [mistral.mistral-large-3-v1:0],                   [n.d.],    [n.d.],    [],     [],        [],
+    [Mistral Small],              [Mistral],   [mistral.mistral-small-v1:0],                     [~\$0.10], [~\$0.30], [],     [],        [],
+    [DeepSeek R1],                [DeepSeek],  [deepseek.r1-v1:0],                               [n.d.],    [n.d.],    [],     [],        [],
+    [Qwen3 235B A22B],            [Qwen],      [qwen.qwen3-235b-a22b-v1:0],                      [n.d.],    [n.d.],    [],     [],        [],
+    [NVIDIA Nemotron 3 Super],    [NVIDIA],    [nvidia.nemotron-3-super-v1:0],                   [n.d.],    [n.d.],    [],     [],        [],
+    [Gemma 3 27B PT],             [Google],    [google.gemma-3-27b-pt-v1:0],                     [n.d.],    [n.d.],    [],     [],        [],
+    [Gemma 3 12B IT],             [Google],    [google.gemma-3-12b-it-v1:0],                     [n.d.],    [n.d.],    [],     [],        [],
   ),
   caption: "Modelli Bedrock candidati, prezzi on-demand marzo 2026"
 )
 ]
 
-= Esclusione Meta e Mistral
+= Modelli esclusi
 
-I modelli *Meta* (Llama 3.1/3.3 70B) e *Mistral* (Mixtral 8x7B, Mistral 7B) sono stati esclusi dalla selezione finale per due ragioni:
+*Anthropic / Claude*: vincolo cliente. Nessun modello Anthropic viene considerato indipendentemente dalle prestazioni.
 
-+ *Mancanza di benchmark security-specific*: nessun dato pubblico su security reasoning (classificazione OWASP, analisi CVE, contesto exploit). I benchmark generici non sono rappresentativi di task security-critical.
-+ *Qualità inconsistente su code security*: la letteratura documenta output di qualità variabile su task di analisi e remediation del codice. Per un sistema che produce fix di sicurezza direttamente consumati da sviluppatori in produzione, il rischio di false remediation o fix incorretti non è accettabile.
+*DeepSeek (R1, V3) e Qwen (Alibaba)*: esclusi per *compliance*. Code Guardian analizza codice sorgente contenente segreti e vulnerabilità; inviare questi dati a un provider di origine cinese introduce un rischio di compliance contrattuale non accettabile, indipendentemente dal fatto che i dati transitino su infrastruttura AWS.
+
+*Llama 4 Scout / Maverick e Mistral Large 3*: candidati frontier legittimi (Llama 4: aprile 2025, Mistral Large 3: dicembre 2025) con qualità paragonabile o superiore a Nova Premier. Esclusi in questa iterazione per *pricing su Bedrock non ancora consolidato* (dati di costo stabili non disponibili a marzo 2026), non per qualità. *Da rivalutare a settembre 2026* quando i prezzi Bedrock saranno stabili.
+
+*NVIDIA Nemotron 3 Super*: posizionato su multi-agent orchestration e inferenza ibrida MoE, non su analisi di codice e security reasoning. Nessun benchmark rilevante per i task di Code Guardian.
+
+*Llama 3.3 70B, Mistral Small*: adeguati per task deterministici (ROUTING, OPENAPI_SIMPLE), ma Nova Micro e Nova Lite sono già ottimali per quegli slot e garantiscono uniformità del batch pricing Nova.
+
+*Google Gemma 3*: da non confondere con Gemini (disponibile solo su Google Cloud Vertex AI, non su Bedrock). Gemma 3 è open-source; le varianti disponibili su Bedrock sono 4B IT, 12B IT e 27B PT. Dimensioni insufficienti per task security-critical; il 27B è pre-trained (non instruction-tuned, non utilizzabile direttamente). Nessun benchmark security-specific pubblicato.
+
+*Modelli generazione immagini (Stability AI, Luma AI), embedding (Cohere), video*: fuori scope per Code Guardian.
 
 = Selezione finale per categoria
 
@@ -92,15 +103,15 @@ Le 9 categorie corrispondono esattamente all'`enum TaskCategory` nel diagramma C
     fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
     align: (col, row) => if col == 0 or col == 1 or col == 2 or col == 6 { left + horizon } else { center + horizon },
 
-    [Code Remediation (OWASP)],   [Claude Sonnet 4.6],  [anthropic.claude-sonnet-4-6],              [\$3.00],  [\$15.00], [77.2%], [Best SWE-bench su Bedrock, context 1M, code fix precisi],
-    [Docs Analysis + Generation], [Claude Sonnet 4.6],  [anthropic.claude-sonnet-4-6],              [\$3.00],  [\$15.00], [77.2%], [Scrittura tecnica eccellente, 1M ctx per repo interi],
-    [Security Remediation],       [Claude Sonnet 4.6],  [anthropic.claude-sonnet-4-6],              [\$3.00],  [\$15.00], [77.2%], [Massima accuratezza su exploit/OWASP, nessun compromesso],
-    [Dependency CVE],             [Claude 3.5 Haiku],   [anthropic.claude-3-5-haiku-20241022-v1:0], [\$0.80],  [\$4.00],  [40.6%], [Task semi-strutturato; supera Claude 3 Opus (22.2% SWE), costo contenuto],
-    [Secrets Remediation],        [Claude Sonnet 4.6],  [anthropic.claude-sonnet-4-6],              [\$3.00],  [\$15.00], [77.2%], [Conoscenza AWS SDK, IAM least privilege, Secrets Manager],
-    [OpenAPI Fix (semplice)],     [Amazon Nova Lite],   [amazon.nova-lite-v1:0],                    [\$0.06],  [\$0.24],  [],      [Task deterministico; ~12× più economico di Haiku, HumanEval 85.4%],
-    [OpenAPI Fix (complesso)],    [Claude Sonnet 4.6],  [anthropic.claude-sonnet-4-6],              [\$3.00],  [\$15.00], [77.2%], [Schema inconsistenti, security scheme errors: ragionamento strutturale],
-    [Aggregazione Report],        [Claude Sonnet 4.6],  [anthropic.claude-sonnet-4-6],              [\$3.00],  [\$15.00], [77.2%], [1M context, sintesi multi-dominio, correlazioni tra findings],
-    [Routing / Classificazione],  [Amazon Nova Micro],  [amazon.nova-micro-v1:0],                   [\$0.035], [\$0.14],  [],      [~85× più economico di Sonnet 4.6; task di classificazione triviale],
+    [Code Remediation (OWASP)],   [Amazon Nova Premier], [amazon.nova-premier-v1:0],  [\$2.50],  [\$12.50], [], [Miglior modello Amazon disponibile; task complesso OWASP/SAST, ragionamento strutturale],
+    [Docs Analysis + Generation], [Amazon Nova Premier], [amazon.nova-premier-v1:0],  [\$2.50],  [\$12.50], [], [Scrittura tecnica, analisi repo interi],
+    [Security Remediation],       [Amazon Nova Premier], [amazon.nova-premier-v1:0],  [\$2.50],  [\$12.50], [], [Task security-critical: massima qualità tra modelli non-Anthropic su Bedrock],
+    [Dependency CVE],             [Amazon Nova Pro],     [amazon.nova-pro-v1:0],      [\$0.80],  [\$3.20],  [], [Task semi-strutturato, output deterministico; HumanEval 89%, costo contenuto],
+    [Secrets Remediation],        [Amazon Nova Premier], [amazon.nova-premier-v1:0],  [\$2.50],  [\$12.50], [], [Conoscenza AWS SDK, IAM least privilege, Secrets Manager],
+    [OpenAPI Fix (semplice)],     [Amazon Nova Lite],    [amazon.nova-lite-v1:0],     [\$0.06],  [\$0.24],  [], [Task deterministico; HumanEval 85.4%, costo minimo],
+    [OpenAPI Fix (complesso)],    [Amazon Nova Premier], [amazon.nova-premier-v1:0],  [\$2.50],  [\$12.50], [], [Schema inconsistenti, security scheme errors: ragionamento strutturale],
+    [Aggregazione Report],        [Amazon Nova Premier], [amazon.nova-premier-v1:0],  [\$2.50],  [\$12.50], [], [Sintesi multi-dominio, correlazioni tra findings],
+    [Routing / Classificazione],  [Amazon Nova Micro],   [amazon.nova-micro-v1:0],    [\$0.035], [\$0.14],  [], [Task di classificazione triviale, costo minimo],
   ),
   caption: "Selezione finale modelli per categoria di task"
 )
@@ -108,25 +119,36 @@ Le 9 categorie corrispondono esattamente all'`enum TaskCategory` nel diagramma C
 
 = Note sulla selezione
 
-== Claude Sonnet 4.6 e non il legacy Claude 3.5 Sonnet
+== Amazon Nova Premier per task complessi
 
-Il legacy `claude-3-5-sonnet-20241022-v2:0` è dominato sotto ogni dimensione da Sonnet 4.6: costa il doppio (\$6/\$30 vs \$3/\$15 per MTok), ha SWE-bench del 49% contro il 77.2% e context window 200K contro 1M. Non esiste scenario in cui il legacy sia preferibile. Tutti i riferimenti al legacy devono essere rimossi dal codice.
+Amazon Nova Premier (`amazon.nova-premier-v1:0`, \$2.50/\$12.50 per MTok) è scelto per le 6 categorie che richiedono qualità massima (Code Remediation, Security Remediation, Secrets Remediation, Docs Analysis, OpenAPI Fix complesso, Aggregazione Report) per tre ragioni combinate:
 
-== Amazon Nova Lite per OpenAPI semplice, non Claude 3 Haiku
++ *AWS-native*: stesso account, stessa catena IAM, stessa Region dei Lambda Agents. Nessun dato attraversa provider diversi.
++ *Pricing fisso e noto*: \$2.50/\$12.50 sono stabili. Mistral Large 3 e Llama 4 Maverick, pur essendo candidati frontier legittimi, non hanno prezzi Bedrock consolidati a marzo 2026.
++ *Batch pricing integrato*: il −50% Nova batch si applica uniformemente a tutta la famiglia Nova (Premier + Pro + Lite + Micro), semplificando la gestione dei costi.
 
-Nova Lite (\$0.06/\$0.24) batte Claude 3 Haiku (\$0.25/\$1.25) sul costo (~4× input, ~5× output) con HumanEval comparabile (85.4%). Per task deterministici come aggiungere un `operationId` mancante o completare una `description` vuota, la qualità di Haiku è over-engineered.
+Nova Premier *non è l'unico candidato tecnicamente valido*: Mistral Large 3 (dicembre 2025) e Llama 4 Maverick (aprile 2025) sono modelli frontier che competono sulla qualità. La scelta è di governance e pricing, non di qualità assoluta.
 
-== Perché non Amazon Nova Pro
+== Amazon Nova Pro per Dependency CVE
 
-Nova Pro (\$0.80/\$3.20) ha HumanEval 89%, comparabile a Claude 3.5 Haiku, ma non ha benchmark SWE-bench pubblici né benchmark su OWASP/security reasoning. Per un sistema il cui output è remediation di sicurezza, l'incertezza sulla qualità su task security-specific è inaccettabile.
+Nova Pro (`amazon.nova-pro-v1:0`, \$0.80/\$3.20) con HumanEval 89% è sufficiente per il task Dependency CVE, che produce output semi-strutturato e deterministico (upgrade path + breaking changes). Il costo è significativamente inferiore a Premier. HumanEval 89% supera quello di Claude 3.5 Haiku (88.1%) che era il modello precedente per questa categoria.
 
-== Prompt caching, batch pricing, Intelligent Routing
+== Amazon Nova Lite per OpenAPI semplice
 
-La selezione adotta tre ottimizzazioni di costo attivabili senza modifiche al codice applicativo:
+Nova Lite (\$0.06/\$0.24) è adeguato per task completamente deterministici come aggiungere un `operationId` mancante o completare una `description` vuota. HumanEval 85.4%. Costo minimo.
 
-- *Prompt caching*: il system prompt invariante di ogni Lambda viene messo in cache da Bedrock. Risparmio stimato ~25% sui token input per modelli Anthropic.
-- *Batch pricing*: −50% su tutti i modelli Claude per batch inference. Da attivare per analisi schedulate non urgenti.
-- *Bedrock Intelligent Prompt Routing*: opzione futura per distribuire richieste tra modelli in base alla complessità stimata del prompt.
+== Rivalutazione futura: Mistral Large 3 e Llama 4
+
+Mistral Large 3 (Mistral AI, dicembre 2025) e Llama 4 Scout / Maverick (Meta, aprile 2025) sono modelli frontier con qualità paragonabile o superiore a Nova Premier per task di codice e ragionamento. *Non sono esclusi per qualità*, ma per pricing Bedrock non ancora stabilizzato al momento di questa analisi.
+
+Criteri per la rivalutazione (settembre 2026):
+- Pricing Bedrock pubblico e stabile disponibile
+- Benchmark indipendenti su task security-specific (OWASP, CVE) pubblicati
+- Llama 4 Scout (10M token context): potenzialmente molto rilevante per analisi di repo large con 200K+ LOC
+
+== Batch pricing
+
+AWS Bedrock offre il −50% su tutti i modelli Nova per batch inference. Da attivare per analisi schedulate non urgenti (scan notturno dell'intera codebase). Il risparmio si applica a tutti i modelli della selezione.
 
 = Stima costo per analisi (repo ~50K LOC)
 
@@ -144,20 +166,19 @@ La selezione adotta tre ottimizzazioni di costo attivabili senza modifiche al co
     fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
     align: (col, row) => if col <= 1 { left + horizon } else { center + horizon },
 
-    [Security Remediation],      [Claude Sonnet 4.6],  [80 000],  [15 000], [\$0.240],   [\$0.225],   [\$0.465],
-    [Secrets Remediation],       [Claude Sonnet 4.6],  [10 000],  [3 000],  [\$0.030],   [\$0.045],   [\$0.075],
-    [Dependency CVE],            [Claude 3.5 Haiku],   [15 000],  [5 000],  [\$0.012],   [\$0.020],   [\$0.032],
-    [Documentation],             [Claude Sonnet 4.6],  [60 000],  [20 000], [\$0.180],   [\$0.300],   [\$0.480],
-    [OpenAPI Fix (semplice)],    [Amazon Nova Lite],   [5 000],   [2 000],  [\$0.0003],  [\$0.0005],  [~\$0.001],
-    [OpenAPI Fix (complesso)],   [Claude Sonnet 4.6],  [8 000],   [3 000],  [\$0.024],   [\$0.045],   [\$0.069],
-    [Aggregazione Report],       [Claude Sonnet 4.6],  [40 000],  [10 000], [\$0.120],   [\$0.150],   [\$0.270],
-    [Routing / Classificazione], [Amazon Nova Micro],  [2 000],   [500],    [\$0.00007], [\$0.00007], [~\$0.0001],
-    [*Totale analisi*],          [],                   [],        [],       [],          [],          [*~\$1.39*],
+    [Security Remediation],      [Amazon Nova Premier], [80 000],  [15 000], [\$0.200],   [\$0.1875],  [\$0.388],
+    [Secrets Remediation],       [Amazon Nova Premier], [10 000],  [3 000],  [\$0.025],   [\$0.0375],  [\$0.063],
+    [Dependency CVE],            [Amazon Nova Pro],     [15 000],  [5 000],  [\$0.012],   [\$0.016],   [\$0.028],
+    [Documentation],             [Amazon Nova Premier], [60 000],  [20 000], [\$0.150],   [\$0.250],   [\$0.400],
+    [OpenAPI Fix (semplice)],    [Amazon Nova Lite],    [5 000],   [2 000],  [\$0.0003],  [\$0.0005],  [~\$0.001],
+    [OpenAPI Fix (complesso)],   [Amazon Nova Premier], [8 000],   [3 000],  [\$0.020],   [\$0.0375],  [\$0.058],
+    [Aggregazione Report],       [Amazon Nova Premier], [40 000],  [10 000], [\$0.100],   [\$0.125],   [\$0.225],
+    [Routing / Classificazione], [Amazon Nova Micro],   [2 000],   [500],    [\$0.00007], [\$0.00007], [~\$0.0001],
+    [*Totale analisi*],          [],                    [],        [],       [],          [],          [*~\$1.16*],
   ),
   caption: "Stima costo per analisi, repo ~50K LOC, prezzi on-demand"
 )
 ]
 
-Con *prompt caching* attivo (~25% risparmio input Anthropic): *~\$1.05/analisi*. \
-Con *batch pricing* (−50% modelli Claude): *~\$0.60/analisi* per run schedulate non urgenti. \
+Con *batch pricing* (−50% modelli Nova): *~\$0.58/analisi* per run schedulate non urgenti. \
 La voce dominante è Documentation + Security Remediation.
