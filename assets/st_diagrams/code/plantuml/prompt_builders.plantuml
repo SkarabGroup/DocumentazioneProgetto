@@ -109,7 +109,7 @@ package "Domain" {
         isComplex=false → OPENAPI_SIMPLE
           (amazon.nova-lite-v1:0)
         isComplex=true  → OPENAPI_COMPLEX
-          (anthropic.claude-sonnet-4-6)
+          (amazon.nova-premier-v1:0)
     end note
 
     class AggregationPromptBuilder {

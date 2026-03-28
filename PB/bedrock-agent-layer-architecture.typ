@@ -26,7 +26,7 @@
 
 = Contesto
 
-Le *Lambda Remediation Agents* di Code Guardian (Phase 2 della Step Functions State Machine) invocano modelli LLM differenti per categoria di task: Sonnet 4.6 per remediation OWASP, Claude 3.5 Haiku per CVE, Nova Lite per OpenAPI semplice, Nova Micro per routing.
+Le *Lambda Remediation Agents* di Code Guardian (Phase 2 della Step Functions State Machine) invocano modelli LLM differenti per categoria di task: Amazon Nova Premier per remediation OWASP/Security/Secrets/Docs/OpenAPI complesso, Nova Pro per Dependency CVE, Nova Lite per OpenAPI semplice, Nova Micro per routing. Tutti i modelli sono Amazon Nova su AWS Bedrock.
 
 Il layer Bedrock è implementato seguendo il *pattern Port/Adapter* (Hexagonal Architecture): le classi di dominio degli agenti non dipendono da AWS SDK, boto3 o da qualsiasi concetto Bedrock. Dipendono da due interfacce (Port) che esprimono le esigenze del dominio: invocare un LLM e costruire prompt. `BedrockAdapter` e `ModelRouter` sono Adapter nell'Infrastructure layer.
 
@@ -114,17 +114,17 @@ Nessuna chiamata AWS, nessun costo, test deterministici.
     fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
     align: left + horizon,
 
-    [`CODE_REMEDIATION`],      [`anthropic.claude-sonnet-4-6`],
-    [`DOCS_ANALYSIS`],         [`anthropic.claude-sonnet-4-6`],
-    [`SECURITY_REMEDIATION`],  [`anthropic.claude-sonnet-4-6`],
-    [`DEPENDENCY_CVE`],        [`anthropic.claude-3-5-haiku-20241022-v1:0`],
-    [`SECRETS_REMEDIATION`],   [`anthropic.claude-sonnet-4-6`],
-    [`OPENAPI_SIMPLE`],        [`amazon.nova-lite-v1:0`],
-    [`OPENAPI_COMPLEX`],       [`anthropic.claude-sonnet-4-6`],
-    [`REPORT_AGGREGATION`],    [`anthropic.claude-sonnet-4-6`],
-    [`ROUTING`],               [`amazon.nova-micro-v1:0`],
+    [`CODE_REMEDIATION`], [`amazon.nova-premier-v1:0`],
+    [`DOCS_ANALYSIS`], [`amazon.nova-premier-v1:0`],
+    [`SECURITY_REMEDIATION`], [`amazon.nova-premier-v1:0`],
+    [`DEPENDENCY_CVE`], [`amazon.nova-pro-v1:0`],
+    [`SECRETS_REMEDIATION`], [`amazon.nova-premier-v1:0`],
+    [`OPENAPI_SIMPLE`], [`amazon.nova-lite-v1:0`],
+    [`OPENAPI_COMPLEX`], [`amazon.nova-premier-v1:0`],
+    [`REPORT_AGGREGATION`], [`amazon.nova-premier-v1:0`],
+    [`ROUTING`], [`amazon.nova-micro-v1:0`],
   ),
-  caption: "ModelRouter: mapping TaskCategory / Model ID Bedrock"
+  caption: "ModelRouter: mapping TaskCategory / Model ID Bedrock",
 )
 
 Il routing per categoria è preferito al routing dinamico (es. per lunghezza del prompt) perché il tipo di task è un predittore più affidabile dei requisiti di qualità. La complessità è controllata staticamente: `OpenAPIRemediationAgent.isComplex` viene settato dalla Lambda handler in base al tipo di errori Spectral trovati.
@@ -153,7 +153,7 @@ RemediationAgentBase.execute(ctx)
 
 BedrockAdapter.invoke(...)
   ├─ ModelRouter.resolveModelId(SECURITY_REMEDIATION)
-  │    → "anthropic.claude-sonnet-4-6"
+  │    → "amazon.nova-premier-v1:0"
   └─ BedrockRuntimeClient.invoke_model(modelId, body)
        → response text
 
@@ -172,6 +172,6 @@ Step Functions riprende
 
 - *Versionamento prompt*: i prompt (`IPromptBuilder`) sono configurazione. Esternalizzarli su SSM Parameter Store o DynamoDB consente aggiornamenti senza re-deploy della Lambda; la struttura Port/Adapter lo rende possibile senza modifiche al Domain.
 
-- *Prompt caching*: Claude Sonnet 4.6 su Bedrock supporta il caching del system prompt invariante. Attivare nel `BedrockAdapter.invoke()` passando il flag `cache_control`. Risparmio stimato ~25% sui token input per invocazioni Anthropic.
+- *Prompt caching*: Amazon Nova Premier su Bedrock supporta il caching del system prompt invariante (`cache_control`). Risparmio stimato ~25% sui token input per le invocazioni Nova Premier.
 
 - *Logging per categoria*: il `ModelRouter` è il punto ideale dove emettere metriche CloudWatch per categoria (latenza, costo stimato, tasso errore per modello), utile per il monitoring Grafana/Loki descritto in ST.typ.
