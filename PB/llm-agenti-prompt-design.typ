@@ -258,7 +258,7 @@ Regole:
 
 == Remediation Codice OWASP
 
-*Modello:* Claude Sonnet 4.6
+*Modello:* Amazon Nova Premier (`amazon.nova-premier-v1:0`)
 
 *System Prompt:*
 
@@ -297,7 +297,7 @@ Genera il codice corretto con spiegazione.
 
 == Remediation Documentazione
 
-*Modello:* Claude Sonnet 4.6
+*Modello:* Amazon Nova Premier (`amazon.nova-premier-v1:0`)
 
 *System Prompt:*
 
@@ -313,7 +313,7 @@ Standard da rispettare:
 
 == Remediation Dipendenze CVE
 
-*Modello:* Claude 3.5 Haiku (task strutturato, costo contenuto)
+*Modello:* Amazon Nova Pro (`amazon.nova-pro-v1:0`) — task strutturato, costo contenuto
 
 *System Prompt:*
 
@@ -330,7 +330,7 @@ Sii conciso e diretto. Non speculare su informazioni CVE che non hai.
 
 == Remediation Segreti
 
-*Modello:* Claude Sonnet 4.6
+*Modello:* Amazon Nova Premier (`amazon.nova-premier-v1:0`)
 
 *System Prompt:*
 
@@ -349,7 +349,7 @@ Usa sempre il principio del least privilege per le IAM policy necessarie.
 
 == Remediation OpenAPI
 
-*Modello:* Amazon Nova Lite per errori semplici (operationId mancante, description vuota); Claude Sonnet 4.6 per errori strutturali complessi (schema inconsistenti, security scheme).
+*Modello:* Amazon Nova Lite (`amazon.nova-lite-v1:0`) per errori semplici (operationId mancante, description vuota); Amazon Nova Premier (`amazon.nova-premier-v1:0`) per errori strutturali complessi (schema inconsistenti, security scheme).
 
 *System Prompt:*
 
@@ -362,7 +362,7 @@ Non cambiare la semantica dell'API: correggi solo la conformità alla specifica 
 
 == Aggregazione Report (Agente Finale)
 
-*Modello:* Claude Sonnet 4.6
+*Modello:* Amazon Nova Premier (`amazon.nova-premier-v1:0`)
 
 *System Prompt:*
 
@@ -410,7 +410,7 @@ Branch 3 — Lambda "DependencyScanAgent"
 
 Branch 4 — Lambda "DocumentationAgent"
   → Estrae file .md, .ts, .py, JSDoc
-  → Chiama Bedrock (Claude Sonnet 4.6)
+  → Chiama Bedrock (Amazon Nova Premier)
   → Salva → s3://bucket/{sha}/raw/docs.json
 
 Branch 5 — Lambda "OpenAPIScanAgent"
@@ -425,22 +425,22 @@ Ogni branch legge il JSON di Phase 1 da S3 e chiama Bedrock:
 
 ```
 Branch 1 — Lambda "SecurityRemediationAgent"
-  → Bedrock: Claude Sonnet 4.6
+  → Bedrock: Amazon Nova Premier
   → Scrive → s3://bucket/{sha}/remediation/security.json
 
 Branch 2 — Lambda "SecretsRemediationAgent"
-  → Bedrock: Claude Sonnet 4.6
+  → Bedrock: Amazon Nova Premier
   → Scrive → s3://bucket/{sha}/remediation/secrets.json
 
 Branch 3 — Lambda "DepsRemediationAgent"
-  → Bedrock: Claude 3.5 Haiku
+  → Bedrock: Amazon Nova Pro
   → Scrive → s3://bucket/{sha}/remediation/deps.json
 
 Branch 4 — (Docs già processato in Phase 1)
   → No-op: copia docs.json in remediation/docs.json
 
 Branch 5 — Lambda "OpenAPIRemediationAgent"
-  → Bedrock: Nova Lite (errori semplici) o Sonnet 4.6 (complessi)
+  → Bedrock: Nova Lite (errori semplici) o Nova Premier (complessi)
   → Scrive → s3://bucket/{sha}/remediation/openapi.json
 ```
 
@@ -449,7 +449,7 @@ Branch 5 — Lambda "OpenAPIRemediationAgent"
 ```
 Lambda "ReportAggregator"
   → Legge tutti i JSON da s3://bucket/{sha}/remediation/
-  → Bedrock: Claude Sonnet 4.6
+  → Bedrock: Amazon Nova Premier
   → Produce report finale consolidato
   → Salva → s3://bucket/{sha}/report-final.json
   → POST /webhooks/stn-callback
