@@ -13,16 +13,18 @@ System_Ext(GitHub, "GitHub API", "Source Code (HTTPS)")
 ContainerDb_Ext(MongoDB, "MongoDB Atlas", "Report, Analisi")
 System_Ext(AWSS3, "AWS S3", "Storage ZIP (Shards)")
 System_Ext(CredMicr, "Credential Microservice", "Gestione PAT Utenti")
+System_Ext(ECR, "Amazon ECR", "Container Image Registry")
 
 Container_Boundary(ServerlessLayer, "Serverless Execution Layer") #F8CECC {
     Component(StepFun, "Step Function", "State Machine", "Orchestra gli Agenti")
 
     Container_Boundary(AWSLAMBDA, "AWS Lambda", "Esecuzione Agenti") #da9e51 {
-        Component(SecuAg, "Security Scan Agent", "AWSBedrock/ Semgrep")
-        Component(SecrAg, "Secrets Scan Agent", "AWSBedrock/ Trivy")
-        Component(LibAg, "Libraries Scan Agent", "AWSBedrock/ Syft")
-        Component(DocAg, "Documentation Agent", "AWSBedrock/ Markdown")
-        Component(CodAg, "Static Code Analysis Agent", "AWSBedrock/..")
+        Component(SecAg, "Security Agent", "AWSBedrock")
+        Component(DocAg, "Documentation Agent", "AWSBedrock")
+        Component(PyCodAg, "Python Code Analysis Agent", "AWSBedrock")
+        Component(JsTsCodAg, "Javascript/Typescript Code Analysis Agent", "AWSBedrock")
+        Component(JavaCodAg, "Java Code Analysis Agent", "AWSBedrock")
+        Component(Aggregator, "Code Report Aggregator", "LLM/script")
     }
 }
 
@@ -112,28 +114,34 @@ Component(LambdaAuthorizer, "Lambda Authorizer", "AWS Lambda", "Controlla solo l
     }
 }
 
-Rel_U(StepFun, SecuAg, "Call Agent")
-Rel_U(StepFun, SecrAg, "Call Agent")
-Rel_U(StepFun, LibAg, "Call Agent")
-Rel_U(StepFun, DocAg, "Call Agent")
-Rel_U(StepFun, CodAg, "Call Agent")
+Rel_U(StepFun, SecAg, "Chiama Agente")
+Rel_U(StepFun, DocAg, "Chiama Agente")
+Rel_U(StepFun, PyCodAg, "Chiama Agente")
+Rel_U(StepFun, JsTsCodAg, "Chiama Agente")
+Rel_U(StepFun, JavaCodAg, "Chiama Agente")
+Rel_D(StepFun, Aggregator, "Passa report parziali e chiama Aggregator")
 
-Rel_U(SecuAg, CBCon, "Invia report di analisi")
-Rel_U(SecrAg, CBCon, "Invia report di analisi")
-Rel_U(LibAg, CBCon, "Invia report di analisi")
-Rel_U(DocAg, CBCon, "Invia report di analisi")
-Rel_U(CodAg, CBCon, "Invia report di analisi")
+Rel_U(SecAg, ECR, "Prende immagine ambiente")
+Rel_U(DocAg, ECR, "Prende immagine ambiente")
+Rel_U(PyCodAg, ECR, "Prende immagine ambiente")
+Rel_U(JsTsCodAg, ECR, "Prende immagine ambiente")
+Rel_U(JavaCodAg, ECR, "Prende immagine ambiente")
+Rel_U(Aggregator, ECR, "Prende immagine ambiente")
+
+Rel_U(SecAg, CBCon, "Invia report di analisi sicurezza")
+Rel_U(DocAg, CBCon, "Invia report di analisi documentazione")
+Rel_U(Aggregator, CBCon, "Invia report di analisi codice")
 
 Rel_D(APIGateway, AnCon, "Riceve richiesta di analisi")
 Rel_D(APIGateway, DbCon, "Riceve richiesta di visualizzazione report e stato")
 Rel_D(APIGateway, LambdaAuthorizer, "Controlla validità JWT")
 Rel_D(APIGateway, StCon, "Riceve richiesta di visualizzazione stato")
 
-Rel_D(SecuAg, AWSS3, "Aquisisce Zip")
-Rel_D(SecrAg, AWSS3, "Aquisisce Zip")
-Rel_D(LibAg, AWSS3, "Aquisisce Zip")
+Rel_D(SecAg, AWSS3, "Aquisisce Zip")
 Rel_D(DocAg, AWSS3, "Aquisisce Zip")
-Rel_D(CodAg, AWSS3, "Aquisisce Zip")
+Rel_D(PyCodAg, AWSS3, "Aquisisce Zip")
+Rel_D(JsTsCodAg, AWSS3, "Aquisisce Zip")
+Rel_D(JavaCodAg, AWSS3, "Aquisisce Zip")
 
 
 @enduml
