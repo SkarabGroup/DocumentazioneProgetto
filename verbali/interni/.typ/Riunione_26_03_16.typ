@@ -61,7 +61,7 @@
       ("Rimozione della sezione GitHub App dal diagramma", "Progettista", "1:00"),
       ("Integrazione dei tool e delle parti mancanti nel diagramma", "Progettista", "1:00"),
       ("Rivalutazione e confronto tecnico tra i tool", "Progettista", "2:00"),
-      ("Ricerca e impostazione pattern progettuali per la codifica", "Programmatori", "4:00"),
+      ("Ricerca e impostazione pattern progettuali per la codifica", "Programmatore", "4:00"),
     ))
 
     #chiusuraVerbale(orarioFineRiunione, presidenteRiunione)
