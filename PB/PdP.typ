@@ -1,33 +1,39 @@
 #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
-#let versione = "v1.1.0"
+#let versione = "v1.4.0"
 
 #titlePage("Piano di Progetto", versione)
 #set page(numbering: "1", header: header("Piano di Progetto"), footer: footer())
 #set heading(numbering: "1.1.1")
 #let history = (
   (
-      "2026/03/29",
-      "1.3.0",
-      "Completato lo Sprint 6 e Sprint 7",
-      "",
-      members.martinello
-    ),
-    (
-      "2026/03/18",
-      "1.2.0",
-      "Completato lo Sprint 5",
-      "",
-      members.berengan
-    ),
-    (
-      "2026/03/08",
-      "1.1.0",
-      "Aggiunta tabella attvità e modifica alle ore preventivsate di sprint 5",
-      "",
-      members.berengan
-    ),
-    (
+    "2026/02/26",
+    "1.4.0",
+    "Aggiunto Sprint 8",
+    members.andrea,
+  ),
+  (
+    "2026/03/29",
+    "1.3.0",
+    "Completato lo Sprint 6 e Sprint 7",
+    "",
+    members.martinello
+  ),
+  (
+    "2026/03/18",
+    "1.2.0",
+    "Completato lo Sprint 5",
+    "",
+    members.berengan
+  ),
+  (
+    "2026/03/08",
+    "1.1.0",
+    "Aggiunta tabella attvità e modifica alle ore preventivsate di sprint 5",
+    "",
+    members.berengan
+  ),
+  (
     "2026/03/02",
     "1.0.0",
     "Verifica finale e approvazione documento per RTB",
@@ -1727,7 +1733,7 @@ Il coordinamento interno di questo sprint è migliorato rispetto ai precedenti. 
 - Dato il grande quantitativo di ore dedicate allo studio individuale (palestra) necessarie per la progettazione, le ore preventivate erano molto maggiori delle ore produttive consuntivate. La distribuzione delle task è risultata comunque equilibrata e per il momento sono stati raggiunti gli obiettivi previsti.
 - *Responsabile:* Preventivato 7h, Consuntivo 7h
 - *Amministratore:* Preventivato 0h, Consuntivo 0h
-- *Analista:* Aanalista 4h, COnsuntivo 4h
+- *Analista:* Aanalista 4h, Consuntivo 4h
 - *Progettista:* Preventivato 49h, Consuntivo 20h
 - *Programmatore:* Preventivato 0h, Consuntivo 0h
 - *Verificatore:* Preventivato 2h, Consuntivo 2h
@@ -1990,3 +1996,51 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
   caption: [Aggiornamento preventivo a finire sprint 7],
 )
 #pagebreak()
+
+
+=== Sprint 8
+*Periodo:* dal 28/03/2026 al 04/04/2026
+
+==== Attività Principali
+Le attività pianificate per questo sprint si concentrano sull'avanzamento della codifica e sul consolidamento delle scelte architetturali.
+
+- *Specifica Tecnica (ST) e norme di codifica*:
+  - Stesura delle linee guida di sviluppo (file contributing, regole sui branch e test coverage).
+  - Documentazione delle scelte architetturali in ST, motivando le scelte implementative e i pattern utilizzati.
+- *Sviluppo Backend:*
+  - Continuazione sviluppo del codice dei microservizi (Value Object, Entity, Domain Services) con configurazione delle GitHub Actions per il testing.
+- *Sviluppo Frontend:*
+  - Avvio e implementazione delle prime bozze dell'interfaccia Frontend.
+- *Progettazione AWS e Agenti:*
+  - Definizione del flusso delle Step Functions.
+  - Integrazione degli agenti LLM.
+  - Implementazione delle Lambda.
+
+==== Prospetto Consumo Tempo (Preventivo)
+La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
+
+#sprint_table(
+  (
+    ([Basso Kevin], 0, 0, 0, 2, 3, 0),
+    ([Berengan Riccardo], 0, 0, 0, 1, 4, 0),
+    ([Martinello Riccardo], 0, 0, 0, 1, 4, 0),
+    ([Sandu Antonio], 0, 0, 0, 3, 3, 0),
+    ([Sgreva Andrea], 3.5, 0, 0, 3, 2, 0),
+    ([Suar Alberto], 0, 4, 0, 6, 6, 0),
+    ([Zago Alice], 0, 0, 0, 1, 4, 0),
+  ),
+  [Prospetto orario preventivato per lo Sprint 8],
+)
+
+==== Prospetto attività
+#activity_table(
+  (
+    ("Stesura norme di codifica e design pattern in ST", "Amministratore", "4:00", "", "In corso"),
+    ("Progettazione architettura AWS Lambda e Step Functions", "Progettista", "4:00", "", "In corso"),
+    ("Aggiornamento diagrammi architetturali e di dominio (C3/C4)", "Progettista", "13:00", "", "In corso"),
+    ("Inizio sviluppo interfaccia Frontend", "Programmatore", "4:00", "", "In corso"),
+    ("Implementazione codice dei due microservizi con test", "Programmatore", "22:00", "", "In corso"),
+    ("Coordinamento riunioni e avanzamenti", "Responsabile", "3:30", "", "In corso"),
+  ),
+  [Riassunto delle attività svolte durante lo sprint 8]
+)
