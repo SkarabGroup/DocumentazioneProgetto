@@ -150,7 +150,7 @@
 }
 
 #let def(parola) = {
-  let yml = yaml("../RTB/glossario.yml")
+  let yml = yaml("../PB/glossario.yml")
 
   if type(parola) == content {
     parola = parola.text

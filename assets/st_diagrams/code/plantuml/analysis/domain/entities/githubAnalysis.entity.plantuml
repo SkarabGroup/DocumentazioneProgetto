@@ -1,10 +1,5 @@
 @startuml GitHubAnalysis
 
-!import analysis.entity.plantuml
-!import ../valueObjects/repoURL.vo.plantuml
-!import ../valueObjects/commitHash.vo.plantuml
-!import ../valueObjects/branchName.vo.plantuml
-
 skinparam componentStyle uml2.5
 skinparam linetype ortho
 skinparam nodesep 30
