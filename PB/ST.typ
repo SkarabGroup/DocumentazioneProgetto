@@ -3,7 +3,7 @@
 #import "../lib/stDiagramUtil.typ": *
 
 #let versione = "v0.2.0"
-
+#set heading(numbering: "1.1.1")
 /*
 === FUNZIONAMENTO DEL DOCUMENTO ===
 1. Scaricare l'estensione PlantUML su VS Code
@@ -23,6 +23,12 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #titlePage("Specifica Tecnica", versione)
 #set page(numbering: "1", header: header("Specifica Tecnica"), footer: footer())
 #let history = (
+  (
+    "2026/03/30",
+    "0.3.0",
+    "Stesura delle tecnologie, dei VO e delle Entity dell'AnalysisMicroservice",
+    members.suar,
+  ),
   (
     "2026/03/07",
     "0.2.0",
@@ -71,10 +77,6 @@ La versione più recente del Glossario è disponibile al seguente link:
 == Riferimenti
 === Riferimenti Normativi
 I seguenti documenti hanno valore vincolante per la redazione della Specifica Tecnica:
-- *Standard IEEE/ISO/IEC 42010-2022*: International Standard for Software, systems and enterprise--Architecture description \
-  #underline(link("https://ieeexplore.ieee.org/document/9938446")) \
-  (ultimo accesso: *05/03/2026*)
-
 - *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> \
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
   (ultimo accesso: *05/03/2026*)
@@ -88,6 +90,10 @@ I seguenti documenti hanno valore vincolante per la redazione della Specifica Te
   (versione: *v1.0.0*)
 
 === Riferimenti Informativi
+- *Standard IEEE/ISO/IEC 42010-2022*: International Standard for Software, systems and enterprise--Architecture description \
+  #underline(link("https://ieeexplore.ieee.org/document/9938446")) \
+  (ultimo accesso: *05/03/2026*)
+
 - *Dispense del Corso di Ingegneria del Software sulla Progettazione*: \
   #underline(link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T06.pdf")) \
   (ultimo accesso: *05/03/2026*)
@@ -125,60 +131,177 @@ I seguenti documenti hanno valore vincolante per la redazione della Specifica Te
   (ultimo accesso: *05/03/2026*)
 #pagebreak()
 
-
 = Tecnologie
-#TODO("questa sezione è solo un placeholder andrà modificata in fututo man mano che vengono acquisite le comptenze e prese le scelte")
-Il progetto è basato su un insieme di tecnologie attentamente analizzate e scelte dal team SkarabGroup. Le tecnologie in questione sono state selezionate in base a: 
-- Capacità di assolvere al proprio compito individualmente
-- Capacità di interazione con le altre tecnologie
-- Capacità di modularizzazione del codice sorgente
+== Linguaggi e Runtime
+#table(
+    columns: (1.5fr, 1.3fr, 8fr),
+    inset: 10pt,
+    stroke: 0.5pt + luma(200),
+    table.header([*Tecnologia*], [*Versione*], [*Motivazioni*]),
+    fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+    align: (col, row) => (center, center, center).at(col) + horizon,
 
-La scelta tecnologica è stata fatta in base all'analisi dei requisiti del capitolato. Il capitolato richiede lo sviluppo di una Web App che sia in grado di fare un'analisi approfondita di repository GitHub, con una particolare attenzione all'analisi di repository private.
-Quest'analisi deve comprendere:
-- Analisi statica del codice
-- Analisi semantica, sintattica e della coerenza della documentazione rispetto al codice
-- Errori e falle di sicurezza rispetto allo standard OWASP
-Inoltre l'applicazione deve essere sviluppata in modo da poter essere facilmente convertita in uno strumento integrabile nei processi #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#continuous-integration")[#def[CI]]/#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#continuous-deployment")[#def[CD]], e non solo essere un'applicazione di tipo standalone.
-#TODO("Mettere questa sezione in introduzione")
+    [TypeScript], 
+    [5.9.3], 
+    [TypeScript è il linguaggio principale adottato per lo sviluppo di entrambi i microservizi. La tipizzazione statica forte consente di rilevare errori a tempo di compilazione anziché a runtime, riducendo il rischio di regressioni e rendendo i contratti tra componenti espliciti e verificabili staticamente. Questa caratteristica è particolarmente rilevante in un'architettura a microservizi dove le interfacce tra moduli devono essere chiare e stabili nel tempo. La compatibilità con l'intero ecosistema Node.js garantisce inoltre accesso a un vasto insieme di librerie mature e mantenute attivamente.],
 
-Queste tecnologie sono state dunque organizzate e descritte per categoria e ruolo svolto nell'architettura dell'applicazione.\ Le categorie sono le seguenti :
-- Linguaggi di programmazione per lo sviluppo del codice sorgente
-- Framework per la semplificazione e maggior sicurezza durante lo sviluppo
-- Tecnologie per il deployment
-- Strumenti di analisi esterni (ad es. Semgrep)
-- Modelli di intelligenza artificiale per l'analisi ed il sistema agentico
-- Tecnologie per il monitoraggio dei microservizi
+    [Python],
+    [],
+    [Python è il linguaggio adottato per la componente agentica del sistema, ospitata all'interno del microservizio di analisi. La scelta è motivata dalla maturità e dall'ampiezza del suo ecosistema nel dominio dell'intelligenza artificiale: Python dispone delle librerie più aggiornate per l'integrazione con modelli di linguaggio di grandi dimensioni e per la costruzione di sistemi agentici. In particolare, AWS Strands — il framework agentico adottato — è disponibile nativamente in Python, rendendo questo linguaggio la scelta obbligata per la componente che esegue all'interno delle funzioni Lambda.],
+
+    [NestJS],
+    [11.0.16],
+    [NestJS è il framework adottato per entrambi i microservizi TypeScript. La scelta è motivata da molteplici fattori rispetto ad alternative più minimali come Express.
+    A differenza di Express, che è una libreria priva di convenzioni architetturali, NestJS è un framework completo che impone una struttura modulare ben definita. Ogni modulo incapsula un dominio funzionale coeso, favorendo la separazione delle responsabilità e rendendo il codice più comprensibile e manutenibile nel tempo.
+    Il supporto nativo alla Dependency Injection, basato su decoratori e metadata reflection, consente di dichiarare le dipendenze tra componenti in modo esplicito e di delegarne la risoluzione al framework. Questo meccanismo è particolarmente compatibile con l'architettura Ports & Adapters adottata: le porte vengono definite come interfacce TypeScript e gli adapter come implementazioni concrete, iniettate dal container di NestJS senza che il dominio ne sia a conoscenza.
+    L'integrazione nativa con Jest e il supporto al mocking delle dipendenze tramite il sistema di DI rendono il testing unitario e di integrazione agevole e strutturato, consentendo di sostituire le implementazioni reali con mock durante i test senza modificare il codice di produzione.],
+    
+    [AWS Strands],
+    [],
+    [AWS Strands è il framework adottato per la definizione e l'orchestrazione  degli agenti software nella componente Python. Fornisce le primitive necessarie per integrare modelli LLM all'interno di flussi agentici strutturati, gestendo il ciclo di vita degli agenti, la comunicazione con i modelli e la composizione dei tool disponibili. La scelta è motivata dalla sua integrazione nativa con l'ecosistema AWS, in particolare con i servizi Lambda e Step Functions utilizzati per l'orchestrazione del flusso agentico.],
+
+    [MongoDB Atlas],
+    [],
+    [MongoDB Atlas è il sistema di persistenza adottato per il microservizio di analisi. La motivazione principale risiede nella natura eterogenea dei documenti prodotti: i risultati di audit su repository differenti variano per struttura e contenuto a seconda del tipo di analisi eseguita, rendendo inadeguato uno schema relazionale rigido come quello di PostgreSQL o MySQL. Un documento store come MongoDB permette di persistere risultati con struttura variabile senza migrazioni di schema, adattandosi naturalmente all'evoluzione del dominio. La scelta della versione gestita Atlas elimina l'onere di amministrazione dell'infrastruttura database — provisioning, backup, patching e monitoring sono delegati alla piattaforma — consentendo al team di concentrarsi sul dominio applicativo. MongoDB Atlas offre inoltre scalabilità orizzontale nativa tramite sharding, garantendo che le performance rimangano adeguate all'aumentare del volume di analisi e della dimensione dei documenti persistiti.],
+
+    [Amazon RDS],
+    [],
+    [Amazon RDS è il sistema di persistenza adottato per il microservizio di gestione delle credenziali. A differenza dei risultati di analisi, le credenziali utente hanno una struttura relazionale ben definita, stabile nel tempo e con vincoli di integrità forti tra entità. Un database relazionale è quindi la scelta più appropriata, garantendo consistenza transazionale e integrità referenziale che un document store non offre nativamente. La versione gestita RDS delega l'amministrazione dell'infrastruttura ad AWS, analogamente a quanto avviene con MongoDB Atlas per il microservizio di analisi.],
+
+    [Amazon Fargate],
+    [],
+    [AWS Fargate è utilizzato per l'hosting containerizzato del microservizio di analisi. Rispetto a una gestione diretta di istanze EC2, Fargate elimina la necessità di amministrare il sistema operativo e l'infrastruttura sottostante, delegando ad AWS il provisioning e la gestione dei nodi. La scalabilità automatica in base al carico garantisce che il microservizio possa gestire picchi di richieste senza intervento manuale, mantenendo al contempo costi proporzionali all'utilizzo effettivo.],
+
+    [Amazon S3],
+    [],
+    [Amazon S3 è utilizzato per la memorizzazione del contenuto delle repository da analizzare. Prima di avviare il flusso agentico, il microservizio di analisi carica il codice sorgente su S3, rendendolo accessibile in modo condiviso e affidabile alle funzioni Lambda durante l'esecuzione. S3 garantisce durabilità e disponibilità elevata degli artefatti, disaccoppiando la fase di acquisizione del codice dalla fase di analisi vera e propria e consentendo alle Lambda di operare in modo stateless. In questo contesto, Amazon S3 non funge solo da storage statico, ma opera come un Data Staging Layer fondamentale per l'architettura stateless delle Lambda. Caricando preventivamente i sorgenti su S3, il microservizio di analisi supera i limiti fisici di trasferimento dati tra container e funzioni serverless, garantendo che l'agente Python operi su un set di dati immutabile e prontamente disponibile. Tale disaccoppiamento protegge il sistema da perdite di dati in caso di interruzioni del flusso e facilita eventuali operazioni di re-try o debugging post-mortem.],
+
+  [Amazon Step Function & Amazon Lambda],
+  [],
+  [AWS Step Functions e AWS Lambda costituiscono il motore del flusso agentico. Step Functions definisce il workflow come macchina a stati esplicita, coordinando l'esecuzione sequenziale e condizionale dei singoli passi agentici implementati come funzioni Lambda in Python. Questo approccio offre diversi vantaggi architetturali e operativi.La gestione degli errori e i meccanismi di retry sono configurabili direttamente nella definizione della macchina a stati, senza dover implementare logica di resilienza all'interno del codice applicativo. In caso di fallimento di un passo, Step Functions può ritentare automaticamente o instradare il flusso verso uno stato di compensazione, rendendo il workflow intrinsecamente robusto.Le funzioni Lambda scalano automaticamente in risposta al numero di esecuzioni concorrenti, con un modello di costo pay-per-use che rende l'approccio economicamente efficiente per carichi di lavoro discontinui come le analisi di repository.Dal punto di vista architetturale, il microservizio NestJS avvia il flusso attraverso una porta dedicata, la cui implementazione è delegata a un adapter che comunica con Step Functions. Questo disaccoppiamento, coerente con l'architettura Ports & Adapters adottata, garantisce che il dominio applicativo non abbia dipendenze dirette verso l'infrastruttura AWS: sostituire Step Functions con un altro orchestratore richiederebbe unicamente la riscrittura dell'adapter, senza alcun impatto sul dominio.],
+
+  [Amazon App Runner],
+  [],
+  [AWS App Runner è utilizzato per l'hosting del microservizio di gestione delle credenziali. Rispetto a Fargate, App Runner offre un livello di astrazione superiore: il deployment avviene direttamente da un'immagine container senza necessità di configurare cluster, task definition o load balancer. Questa semplicità è adeguata per un microservizio con requisiti di scalabilità e controllo infrastrutturale meno stringenti rispetto al microservizio di analisi.],
+)
+
+L'insieme di queste scelte tecnologiche mira a minimizzare il Total Cost of Ownership (TCO) del sistema. L'orientamento verso servizi Managed (Atlas, RDS) e Serverless (Lambda, Step Functions, Fargate) riduce drasticamente l'overhead operativo legato alla manutenzione del ferro e del software di base. Questo approccio 'Ops-less' consente di scalare i costi in modo lineare rispetto all'effettivo utilizzo della piattaforma, trasformando i costi fissi di infrastruttura in costi variabili ottimizzati sul volume di analisi processate.
+
+= Architettura
+== Architettura di deployment
+#TODO("Inserire introduzione")
+== Architettura Logica
+#TODO("Inserire introduzione")
+=== AnalysisMicroservice
+#TODO("Inserire introduzione")
+==== Domain
+Il Dominio rappresenta il nucleo centrale dell'architettura esagonale, dove risiedono esclusivamente la logica di business e le regole vitali del progetto. Questa sezione è progettata per essere totalmente agnostica rispetto alla tecnologia: non possiede alcuna conoscenza di database, protocolli di comunicazione (HTTP/REST) o framework esterni.
+
+L'obiettivo del Domain Core è modellare la realtà del problema attraverso un linguaggio comune (_Ubiquitous Language_), garantendo che ogni operazione sia coerente con le aspettative del business.
+
+- *Isolamento Tecnologico:* Il dominio non importa librerie esterne di infrastruttura. Questo garantisce che la logica rimanga testabile in isolamento e protetta dall'obsolescenza dei framework.
+- *Integrità e Validazione:* È responsabilità del dominio impedire la creazione di oggetti inconsistenti. Ogni componente (Value Object o Entity) è un "garante" della propria validità.
+- *Espressione delle Regole:* Non è un semplice deposito di dati, ma un insieme di componenti attivi che governano i processi (es. il ciclo di vita di un'analisi).
+===== Value Object
+I Value Object rappresentano concetti del dominio definiti esclusivamente dai loro attributi. Sono progettati per essere *immutabili*: una volta istanziati, il loro stato non può subire variazioni, garantendo la thread-safety e la stabilità dei riferimenti durante l'intero ciclo di vita della richiesta. L'uguaglianza tra due Value Object è determinata dal valore delle proprietà incapsulate e non dall'identità dell'istanza in memoria.
+====== AnalysisId
+#codeDiagram("AnalysisId", 30%)
+
+L'identificativo `AnalysisId` costituisce l'atomo di identità del dominio. Eleva un dato primitivo a concetto di business, garantendo la coerenza semantica all'interno dell'intero esagono attraverso le seguenti potenzialità:
+
+- *Type Safety e Coerenza:* Impedisce l'interscambiabilità accidentale tra identificativi di diversa natura (es. `UserId` e `AnalysisId`), un errore comune nel caso di utilizzo di tipi primitivi omogenei.
+- *Invariante di Dominio:* Funge da "gatekeeper" per il Core; la sua esistenza garantisce che l'identificativo sia formalmente integro, sollevando i casi d'uso e i servizi da validazioni sintattiche ridondanti.
+- *Centralizzazione dell'Evoluzione:* Qualsiasi modifica strutturale (es. migrazione a UUID v7 o aggiunta di prefissi) è confinata in questo componente, rendendo il cambiamento trasparente alla logica di business.
+- *Confronto Deterministico:* Centralizza la logica di comparazione, assicurando coerenza nei processi di ricerca e persistenza dei dati.
+
+====== UserId
+#codeDiagram("UserId", 30%)
+L'identificativo `UserId` rappresenta l'atomo di identità dell'attore (utente o sistema) all'interno del dominio. La sua funzione principale è garantire la tracciabilità e la titolarità delle azioni e delle risorse.
+
+- *Isolamento dai Sistemi di Identity:* Funge da ponte tra il sistema di autenticazione esterno (es. Identity Provider, JWT) e il Core, garantendo che una volta superato il confine dell'esagono, l'identità sia trattata come un tipo forte e non come una stringa volatile.
+- *Invariante di Sicurezza:* La validazione centralizzata assicura che ogni operazione del Core sia riferita a un identificativo che rispetti i criteri di integrità del sistema, prevenendo tentativi di injection o l'elaborazione di ID malformati.
+- *Prevenzione del Type Mismatch:* Impedisce l'associazione errata di identificativi in contesti dove coesistono più entità (es. associare per errore un `AnalysisId` a un campo destinato allo `UserId`), riducendo drasticamente i bug logici in fase di compilazione.
+- *Astrazione della Persistenza:* Permette di slegare la logica di business dalla specifica implementazione della chiave primaria nel database, facilitando eventuali migrazioni o cambiamenti nella strategia di gestione delle identità.
+
+====== RepoURL - GitHub Domain
+#codeDiagram("RepoURL", 30%)
+L'oggetto `RepoURL` incapsula il localizzatore remoto del repository sorgente specifico per il contesto GitHub. A differenza di un identificativo generico, questo Value Object garantisce che l'indirizzo sia conforme ai protocolli di comunicazione e agli standard della piattaforma target.
+
+- *Validazione del Canale:* Assicura che la stringa sia un URL ben formato e compatibile con i protocolli supportati HTTPS, prevenendo fallimenti a runtime durante le operazioni di clonazione degli adattatori di infrastruttura.
+- *Invariante di Protocollo:* Permette di centralizzare le politiche di accesso, garantendo che il sistema accetti solo puntatori a risorse autorizzate o che rispettino determinati criteri di sicurezza definiti per il dominio GitHub.
+- *Disaccoppiamento Tecnologico:* Il Core manipola il concetto astratto di "sorgente remota", delegando la risoluzione effettiva agli adattatori Driven, che operano così su dati già verificati e normalizzati.
+- *Normalizzazione del Dato:* Gestisce internamente la pulizia della stringa (es. rimozione di trailing slashes o suffissi `.git` ridondanti), garantendo un confronto deterministico tra diverse istanze di analisi.
+
+====== BranchName - GitHub Domain
+#codeDiagram("BranchName", 30%)
+
+L'oggetto `BranchName` rappresenta il riferimento simbolico a una specifica linea di sviluppo all'interno del repository. La sua funzione è quella di tipizzare la stringa che identifica il ramo di analisi, isolando il Core dalle convenzioni di naming esterne.
+
+- *Validazione dei Riferimenti:* Garantisce che il nome del branch rispetti gli standard sintattici di Git (es. assenza di caratteri di controllo, spazi o sequenze non ammesse come `..`), prevenendo errori di esecuzione nei comandi di checkout o fetch degli adattatori.
+- *Invariante di Contesto:* Assicura che il puntatore alla risorsa sia formalmente integro prima di essere passato ai servizi di analisi, permettendo al sistema di gestire in modo univoco branch principali (es. `main`, `master`) o feature branch.
+- *Disaccoppiamento Semantico:* Permette al dominio di trattare il "nome del ramo" come un'entità logica, slegando la logica di business dalle specifiche implementazioni dei client Git utilizzati nei Driven Adapters.
+- *Normalizzazione e Confronto:* Centralizza la gestione della case-sensitivity e della formattazione (es. rimozione del prefisso `refs/heads/`), assicurando che il confronto tra due rami avvenga in modo deterministico e senza ambiguità.
+
+====== CommitHash - GitHub Domain
+#codeDiagram("CommitHash", 30%)
+
+L'oggetto `CommitHash` rappresenta l'identificativo crittografico univoco di una specifica istantanea (snapshot) del repository. La sua funzione è garantire che l'analisi venga eseguita su una versione del codice deterministica e non ambigua.
+
+- *Garanzia di Riproducibilità:* Tipizzando l'hash, il Core assicura che ogni metrica estratta sia riferibile a un preciso stato del sorgente, rendendo l'analisi verificabile anche a fronte di evoluzioni successive del branch.
+- *Validazione Formale:* Centralizza il controllo sintattico sulla stringa (es. verifica del formato esadecimale e della lunghezza standard SHA-1 o SHA-256), intercettando input malformati prima dell'invio ai comandi di basso livello dei Driven Adapters.
+- *Integrità del Dato:* Impedisce l'utilizzo di riferimenti parziali o ambigui all'interno della logica di business, elevando il concetto di "revisione" a un tipo forte che non può essere confuso con altri parametri testuali.
+- *Determinismo del Confronto:* Permette di stabilire con certezza se due sessioni di analisi insistono sul medesimo stato del codice, facilitando logiche di caching o di skipping delle analisi ridondanti. 
+
+===== Entity
+A differenza dei Value Object, le Entity sono definite dalla loro *identità* persistente nel tempo e non solo dai loro attributi. Un'Entity mantiene la propria individualità anche se i suoi dati interni subiscono variazioni. Esse incapsulano lo stato e il comportamento del business, garantendo che le transizioni di stato avvengano nel rispetto delle regole del dominio.
+
+- *Identità Univoca:* Ogni Entity è associata a un identificatore immutabile che ne permette la distinzione univoca all'interno del sistema.
+- *Ciclo di Vita e Stato:* Le Entity possiedono un ciclo di vita (creazione, modifica, archiviazione) e gestiscono attivamente le proprie mutazioni interne attraverso metodi espliciti.
+- *Integrità Comportamentale:* Non si limitano a esporre dati (getter/setter), ma offrono metodi che rappresentano azioni di business, assicurando che l'oggetto passi solo attraverso stati validi e coerenti.
+
+====== Analysis
+#codeDiagram("Analysis", 45%)
+
+L'entità `Analysis` costituisce l'astrazione fondamentale del dominio. Essa aggrega l'identità dell'analisi, il riferimento al titolare e la macchina a stati che ne governa l'esecuzione. Essendo definita come classe astratta, stabilisce il protocollo comune per ogni specializzazione (es. GitHub Analysis), garantendo coerenza comportamentale nell'intero sistema.
+
+- *Gestione del Ciclo di Vita:* Incapsula la logica di transizione tra i diversi stati (`INITIALIZING` -> `RUNNING` -> `COMPLETED/FAILED`). Questo approccio garantisce che il cambio di stato non sia una semplice modifica di un campo, ma un evento di dominio controllato.
+- *Integrità del Possesso:* Attraverso l'associazione forte con `UserId`, l'entità garantisce che ogni processo di analisi sia intrinsecamente legato a un attore, facilitando le logiche di autorizzazione e segregazione dei dati nel Core.
+- *Identità Immutabile:* Una volta generata tramite `AnalysisId`, l'identità dell'analisi rimane costante per tutto il suo ciclo di vita, indipendentemente dalle mutazioni del suo stato interno o dei dati prodotti.
+- *Astrazione dei Comportamenti:* I metodi `start()`, `complete()` e `fail()` definiscono l'interfaccia di controllo dell'entità, permettendo agli Application Services di pilotare il processo senza dover conoscere i dettagli implementativi delle sottoclassi.
+
+====== AnalysisStatus (Domain Enumeration)
+L'enumerativo `AnalysisStatus` definisce l'insieme finito e ordinato degli stati in cui può trovarsi un'analisi. 
+
+- *INITIALIZING / PENDING:* Fasi di preparazione e accodamento della richiesta.
+- *RUNNING:* Fase attiva di elaborazione (es. clonazione, scansione).
+- *COMPLETED / FAILED:* Stati terminali che decretano il successo o l'interruzione del processo per anomalie.
+
+====== GitHubAnalysis
+#codeDiagram("GitHubAnalysis", 100%)
+
+L'entità `GitHubAnalysis` è la specializzazione del dominio dedicata all'audit di sorgenti ospitati su GitHub. Estende la classe astratta `Analysis`, ereditandone la macchina a stati e l'identità, e vi aggrega i metadati necessari per la localizzazione e il versionamento del codice.
+
+- *Specializzazione del Contesto:* Integra i Value Object `RepoURL`, `BranchName` e `CommitHash`, trasformando un'analisi generica in un processo contestualizzato e riproducibile su uno specifico stato del repository.
+- *Incapsulamento della Creazione:* Attraverso il metodo statico `create()`, l'entità valida la coerenza del comando di input (`AnalysisFactoryCommand`), garantendo che nessuna istanza di `GitHubAnalysis` possa esistere in uno stato parziale o inconsistente.
+- *Contratto di Esecuzione:* Fornisce agli adattatori di infrastruttura (Driven Adapters) tutti i parametri necessari per le operazioni di clonazione e analisi, agendo come unica "fonte di verità" per i dati di accesso al codice sorgente.
+- *Relazione di Ereditarietà:* Sfruttando il polimorfismo, permette ai servizi applicativi di gestire il ciclo di vita (start, complete, fail) in modo uniforme, indipendentemente dal fatto che l'analisi sia di tipo GitHub o di altra natura futura.
 
 #pagebreak()
-== Linguaggi di programmazione
-#figure(  
-  table(
-      columns: (1fr, 1fr, 3fr),
-    inset: 10pt,
-    stroke: 0.5pt + luma(200),
-    table.header([*Tecnologia*], [*Versione*], [*Descrizione*]),
-    fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
-    align: (col, row) => (center, left, center).at(col) + horizon,
+=== AnalysisMicroservice
+#TODO("Inserire introduzione")
+==== Domain
+Il Dominio rappresenta il nucleo centrale dell'architettura esagonale, dove risiedono esclusivamente la logica di business e le regole vitali del progetto. Questa sezione è progettata per essere totalmente agnostica rispetto alla tecnologia: non possiede alcuna conoscenza di database, protocolli di comunicazione (HTTP/REST) o framework esterni.
 
-    [Python],[3.11.15],[Python è un linguaggio di programmazione open source di tipo interpretato. È uno dei leader per lo sviluppo di agenti di intelligenza artificiale. Alcuni dei migliori framework per lo sviluppo degli agenti IA sono infatti scritti in python. Semplifica la scrittura del codice degli agenti e offre innumerevoli risorse per uno sviluppo che si adatta in base alle necessità dello sviluppatore],
-    [TypeScript], [5.9.3], [TypeScript è un linguaggio di programmazione sviluppato da Microsoft che estende JavaScript aggiungendo un sistema di tipizzazione statica. Grazie a funzionalità come tipi espliciti, interfacce, generics e strumenti avanzati di refactoring, facilita la collaborazione tra sviluppatori e la gestione di codebase complessi.],
-    [JavaScript], [ECMAScript 2025], [JavaScript è un linguaggio di programmazione ad alto livello utilizzato principalmente per lo sviluppo di applicazioni web lato client. Consente di creare interfacce dinamiche e interattive all’interno delle pagine web, gestendo eventi, manipolazione del DOM e comunicazioni asincrone con servizi backend.
-    JavaScript può essere utilizzato anche lato server tramite ambienti di esecuzione come Node.js.],
-  ),
-  caption: "Linguaggi di programmazione"
-)
-== Frameworks
-#figure(
-  table(
-      columns: (1fr, 1fr, 3fr),
-    inset: 10pt,
-    stroke: 0.5pt + luma(200),
-    table.header([*Tecnologia*], [*Vesione*], [*Descrizione*]),
-    fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
-    align: (col, row) => (center, left, center).at(col) + horizon,
+L'obiettivo del Domain Core è modellare la realtà del problema attraverso un linguaggio comune (_Ubiquitous Language_), garantendo che ogni operazione sia coerente con le aspettative del business.
 
-    [Strands], [1.26.0], [Strands Agents SDK è un framework per agenti AI autonomi basato su LLM, che fornisce un ciclo di pianificazione, strumenti integrabili e orchestrazione del workflow, permettendo la costruzione di agenti intelligenti estendibili in Python e TypeScript.],
-    [Nestjs], [11.1.3], [NestJS è un framework Node.js/TypeScript per costruire applicazioni server‑side strutturate e scalabili. Per maggiori informazioni si consiglia di consultare il #underline(link("https://docs.nestjs.com")[sito ufficiale])]
-  ),
-  caption: "Frameworks"
-)
+- *Isolamento Tecnologico:* Il dominio non importa librerie esterne di infrastruttura. Questo garantisce che la logica rimanga testabile in isolamento e protetta dall'obsolescenza dei framework.
+- *Integrità e Validazione:* È responsabilità del dominio impedire la creazione di oggetti inconsistenti. Ogni componente (Value Object o Entity) è un "garante" della propria validità.
+- *Espressione delle Regole:* Non è un semplice deposito di dati, ma un insieme di componenti attivi che governano i processi (es. il ciclo di vita di un'analisi).
+===== Value Object
+I Value Object rappresentano concetti del dominio definiti esclusivamente dai loro attributi. Sono progettati per essere *immutabili*: una volta istanziati, il loro stato non può subire variazioni, garantendo la thread-safety e la stabilità dei riferimenti durante l'intero ciclo di vita della richiesta. L'uguaglianza tra due Value Object è determinata dal valore delle proprietà incapsulate e non dall'identità dell'istanza in memoria.
+===== Entity
+A differenza dei Value Object, le Entity sono definite dalla loro *identità* persistente nel tempo e non solo dai loro attributi. Un'Entity mantiene la propria individualità anche se i suoi dati interni subiscono variazioni. Esse incapsulano lo stato e il comportamento del business, garantendo che le transizioni di stato avvengano nel rispetto delle regole del dominio.
+
+- *Identità Univoca:* Ogni Entity è associata a un identificatore immutabile che ne permette la distinzione univoca all'interno del sistema.
+- *Ciclo di Vita e Stato:* Le Entity possiedono un ciclo di vita (creazione, modifica, archiviazione) e gestiscono attivamente le proprie mutazioni interne attraverso metodi espliciti.
+- *Integrità Comportamentale:* Non si limitano a esporre dati (getter/setter), ma offrono metodi che rappresentano azioni di business, assicurando che l'oggetto passi solo attraverso stati validi e coerenti.

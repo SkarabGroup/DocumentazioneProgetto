@@ -9,7 +9,7 @@
 }
 
 #let codeDiagram(name, width) = {
-  _diagram("Code", name, width)
+  _diagram("Class", name, width)
 }
 
 #let componentDiagram(name, width) = {

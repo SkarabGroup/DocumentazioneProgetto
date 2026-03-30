@@ -1,0 +1,39 @@
+@startuml Analysis
+
+!import ../valueObjects/analysisId.vo.plantuml
+!import ../valueObjects/userId.vo.plantuml
+!import ../valueObjects/analysisId.vo.plantuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+
+enum AnalysisStatus {
+    INITIALIZING
+    PENDING
+    RUNNING
+    COMPLETED
+    FAILED
+}
+
+abstract class Analysis <<Abstract>> {
+    - id: AnalysisId
+    - user: UserId
+    - status: AnalysisStatus
+    ---
+    # Analysis(user: UserId)
+    + getAnalysisId(): AnalysisId
+    + getUserId(): UserId
+    + getStatus(): AnalysisStatus
+    + start(): void
+    + complete(): void
+    + fail(): void
+}
+
+Analysis --left-> AnalysisId
+Analysis --right-> UserId
+Analysis --left-> AnalysisStatus
+@enduml

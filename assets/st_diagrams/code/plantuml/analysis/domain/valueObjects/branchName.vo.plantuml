@@ -1,0 +1,20 @@
+@startuml BranchName
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class BranchName {
+    - _value: string
+    ---
+    - BranchName(value: string)
+    - validate(value: string): void
+    + equals(other: BranchName): boolean
+    + getValue(): string
+    + {static} create(value: string): BranchName
+}
+
+@enduml
