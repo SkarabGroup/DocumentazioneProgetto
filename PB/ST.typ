@@ -2,7 +2,7 @@
 #import "../lib/variables.typ": *
 #import "../lib/stDiagramUtil.typ": *
 
-#let versione = "v0.4.0"
+#let versione = "v0.5.0"
 #set heading(numbering: "1.1.1")
 /*
 === FUNZIONAMENTO DEL DOCUMENTO ===
@@ -23,6 +23,12 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #titlePage("Specifica Tecnica", versione)
 #set page(numbering: "1", header: header("Specifica Tecnica"), footer: footer())
 #let history = (
+  (
+    "2026/03/31",
+    "0.5.0",
+    "Stesura dei VO dell'Account Microservice",
+    members.alice,
+  ),
   (
     "2026/03/31",
     "0.4.0",
@@ -373,6 +379,71 @@ L'obiettivo del Domain Core è modellare la realtà del problema attraverso un l
 - *Espressione delle Regole:* Non è un semplice deposito di dati, ma un insieme di componenti attivi che governano i processi (es. il ciclo di vita di un'analisi).
 ===== Value Object
 I Value Object rappresentano concetti del dominio definiti esclusivamente dai loro attributi. Sono progettati per essere *immutabili*: una volta istanziati, il loro stato non può subire variazioni, garantendo la thread-safety e la stabilità dei riferimenti durante l'intero ciclo di vita della richiesta. L'uguaglianza tra due Value Object è determinata dal valore delle proprietà incapsulate e non dall'identità dell'istanza in memoria.
+
+====== UserIdAccount <UserIdAccount>
+#codeDiagram("UserIdAccount", 30%)
+
+L'identificativo `UserIdAccount` costituisce l'atomo di identità dell'utente all'interno del dominio. Esso rappresenta univocamente un registrante nei sistemi di persistenza.
+
+- *Invariante di Formato:* La sua validazione garantisce che l'identificativo sia un UUID formattato correttamente, prevenendo l'introduzione di chiavi primarie invalide o attacchi tramite stringhe malformate.
+- *Astrazione della Persistenza:* Disaccoppia la logica di business dall'implementazione fisica della chiave primaria, assicurando che lo strato di dominio comunichi tramite un tipo forte e non attraverso primitive volatili come le stringhe.
+- *Prevenzione del Type Mismatch:* Impedisce l'interscambiabilità accidentale con altri identificativi testuali (come ad esempio il #underline[#link(<GithubId>)[`GithubId`]]), prevenendo bug che la normale tipizzazione a stringa non riuscirebbe a intercettare.
+- *Comparazione Deterministica:* Semplifica e rende sicura l'uguaglianza tra identificatori tramite un metodo centralizzato, garantendo una risoluzione coerente quando gli utenti vengono ricercati o confrontati.
+
+====== Email <Email>
+#codeDiagram("Email", 30%)
+
+L'oggetto `Email` incapsula l'indirizzo di posta elettronica dell'utente, fungendo da identificativo principale per le procedure di autenticazione e recupero credenziali.
+
+- *Validazione Formale Sicura:* Assicura che ogni stringa in ingresso sia conforme allo standard degli indirizzi email tramite pattern matching, prevenendo errori o comportamenti inattesi durante l'invio di notifiche o il login.
+- *Normalizzazione del Dato:* Gestisce internamente la pulizia della stringa (conversione in minuscolo e rimozione delle spaziature esterne), garantendo un processo di autenticazione indifferente al maiuscolo/minuscolo e riducendo duplicazioni anomale a database.
+- *Invariante di Dominio:* Assicurando che non esistano oggetti `Email` nulli o formattati erroneamente, solleva i servizi applicativi e gli adattatori di persistenza dal dover validare ripetutamente il dato, centralizzando la logica di consistenza.
+
+====== Password <Password>
+#codeDiagram("Password", 30%)
+
+L'oggetto `Password` rappresenta una password in chiaro nel momento del suo inserimento. Il dominio garantisce che questa istanza sia temporanea e serva esclusivamente per le fasi di controllo qualitativo e crittografico.
+
+- *Enforcement della Complessità:* Verifica rigorosamente le regole di sicurezza e gli standard industriali (minimo 8 caratteri, presenza di maiuscole, minuscole, numeri e caratteri speciali), rigettando password deboli ancor prima che raggiungano gli strati inferiori.
+- *Garanzia di Sicurezza Proattiva:* Centralizza la business rule relativa alla robustezza della password. Un cambiamento alle politiche di sicurezza avverrà unicamente in questo contesto, propagandosi automaticamente in ogni punto del sistema.
+- *Limitazione dell'Esposizione:* Essendo un oggetto effimero, il suo scopo principale è transitare in modo controllato verso i servizi di crittografia (per la generazione dell'hash) o di comparazione, impedendone l'accidentale salvataggio in chiaro.
+
+====== PasswordHash <PasswordHash>
+#codeDiagram("PasswordHash", 40%)
+
+L'oggetto `PasswordHash` rappresenta la credenziale cifrata salvata in isolamento e persistita nel sistema. L'infrastruttura di dominio non possiede le chiavi in formati leggibili ma esclusivamente la loro traduzione crittografica sicura.
+
+- *Invariante Crittografica:* Assicura attraverso la validazione che la stringa instanziata sia effettivamente un hash compatibile con lo standard `bcrypt` (identificato dal prefisso `$2a$` o `$2b$`), precludendo il salvataggio o l'utilizzo di testi in chiaro nel posto di un hash.
+- *Scudo per la Persistenza:* Costituisce l'unica rappresentazione della password ammessa nel modello persistente, certificando allo strato di database che il dato fornito è già stato processato e validato da un servizio crittografico.
+- *Confronto Cifrato Sicuro:* Identifica esplicitamente il dominio di competenza per le collisioni e agevola la comunicazione con i servizi di hashing durante le procedure di login per il ricalcolo e confronto dell'hash reale.
+
+====== GithubId <GithubId>
+#codeDiagram("GithubId", 30%)
+
+L'oggetto `GithubId` è l'identificativo numerico remoto restituito da GitHub. Rappresenta in modo affidabile e duraturo l'utente nel contesto esplicito di un identity provider esterno.
+
+- *Identificazione Stabile:* Poiché gli username su GitHub possono essere cambiati dagli utenti, questo Value Object incapsula l'Id numerico immutabile, conferendo una stabilità architetturale al legame tra l'account di _Code Guardian_ e il profilo GitHub.
+- *Prevenzione del Type Mismatch:* Distingue in modo forte questo identificativo remoto da un ID account generato internamente (es. #underline[#link(<UserIdAccount>)[`UserIdAccount`]]), ostacolando qualsiasi confusione a livello di codice durante l'associazione delle piattaforme.
+- *Validazione del Formato Remoto:* Garantisce con espressioni regolari che il valore consista esclusivamente in cifre numeriche (fino a 50) e non sia vuoto, bloccando manipolazioni del dato o corruzioni dall'API remota ancor prima che arrivino al database.
+
+====== PersonalAccessToken <PersonalAccessToken>
+#codeDiagram("PersonalAccessToken", 40%)
+
+L'oggetto `PersonalAccessToken` incapsula il token di accesso in chiaro necessario per interagire con le API di GitHub. Nel dominio, questo rappresenta un "segreto di accesso" provvisorio che richiede rigorose ispezioni alla creazione.
+
+- *Validazione Formale Stringente:* Previene la manipolazione o la creazione errata accertandosi che il token rispetti fedelmente gli standard e i pattern crittografici dettati da GitHub (es. presenza del prefisso `ghp_` o `github_pat_`).
+- *Confinamento del Token:* Essendo un dato ad altissima sensibilità, la sua natura di tipo forte riduce radicalmente le chance che il token sfugga per errore nei file di log, consentendo nel caso un offuscamento semplificato a livello logging.
+- *Filtraggio alla Fonte:* La validazione centralizzata intercetta tempestivamente PAT scaduti (per formato) o fittizi.
+
+====== EncryptedPat <EncryptedPat>
+#codeDiagram("EncryptedPat", 40%)
+
+L'oggetto `EncryptedPat` è la rappresentazione sicura del #underline[#link(<PersonalAccessToken>)[`Personal Access Token`]], l'unica formalmente autorizzata a essere salvata nella persistenza del database.
+
+- *Isolamento a Riposo Sicuro:* Garantisce che la persistenza gestisca soltanto testi oscurati serializzati in `Base64`, rendendo inoffensiva l'esposizione o esfiltrazione del DB da parte di attori malevoli.
+- *Invariante di Lunghezza e Formato:* Certifica l'output del servizio di crittografia validando che la stringa prodotta rientri nello standard, difendendo il dominio da malfunzionamenti dell'algoritmo matematico.
+- *Disaccoppiamento Teorico:* Traccia in maniera esplicita la linea di confine tra un "segreto utilizzabile" (`PersonalAccessToken`) e un "segreto archiviabile" (`EncryptedPat`), innalzando la sicurezza per tipizzazione del dominio.
+
 ===== Entity
 A differenza dei Value Object, le Entity sono definite dalla loro *identità* persistente nel tempo e non solo dai loro attributi. Un'Entity mantiene la propria individualità anche se i suoi dati interni subiscono variazioni. Esse incapsulano lo stato e il comportamento del business, garantendo che le transizioni di stato avvengano nel rispetto delle regole del dominio.
 
