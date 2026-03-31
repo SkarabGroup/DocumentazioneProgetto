@@ -28,6 +28,7 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
     "0.5.0",
     "Stesura dei VO dell'Account Microservice",
     members.alice,
+    members.suar
   ),
   (
     "2026/03/31",
