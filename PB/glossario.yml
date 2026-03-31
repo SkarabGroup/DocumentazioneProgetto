@@ -470,6 +470,9 @@ T:
     descrizione: Sistema di composizione editoriale basato su markup, moderno e performante, utilizzato dal team per la redazione della documentazione in alternativa a LaTeX.
 
 U:
+  Ubiquitous Language:
+    alternative: Linguaggio Ubiquo
+    descrizione: Linguaggio comune e condiviso, utilizzato in modo consistente sia dagli sviluppatori software che dagli esperti di dominio (esperti del business) all'interno di un progetto.
   Unified Modeling Language:
     acronimo: UML
     descrizione: Linguaggio di modellazione grafico standardizzato utilizzato per visualizzare, specificare, costruire e documentare l'architettura e il design dei sistemi software.

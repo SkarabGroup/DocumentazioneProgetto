@@ -1,0 +1,27 @@
+@startuml Analysis
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+
+abstract class Analysis <<Abstract>> {
+    - id: AnalysisId
+    - user: UserId
+    - status: AnalysisStatus
+    ---
+    # Analysis(user: UserId)
+    + getAnalysisId(): AnalysisId
+    + getUserId(): UserId
+    + getStatus(): AnalysisStatus
+    + start(): void
+    + complete(): void
+    + fail(): void
+}
+
+Analysis --left-> AnalysisId
+Analysis --right-> UserId
+Analysis --left-> AnalysisStatus
+@enduml

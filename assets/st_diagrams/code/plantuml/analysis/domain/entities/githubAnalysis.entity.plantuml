@@ -1,0 +1,27 @@
+@startuml GitHubAnalysis
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class GitHubAnalysis {
+    - url: RepoURL
+    - branch: BranchName
+    - commit: CommitHash
+    ---
+    # GitHubAnalysis(user: UserId, url: RepoURL, branch: BranchName, commit: CommitHash)
+    + getURL(): RepoURL
+    + getCommit(): CommitHash
+    + getBranch(): BranchName
+    + {static} create(analysisCommand: AnalysisFactoryCommand): GitHubAnalysis
+}
+
+GitHubAnalysis --up|> Analysis
+
+GitHubAnalysis --right-> RepoURL
+GitHubAnalysis --left-> BranchName
+GitHubAnalysis --left-> CommitHash
+@enduml
