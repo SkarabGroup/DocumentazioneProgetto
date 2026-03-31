@@ -2021,13 +2021,13 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 
 #sprint_table(
   (
-    ([Basso Kevin], 0, 0, 0, 2, 3, 0),
-    ([Berengan Riccardo], 0, 0, 0, 1, 4, 0),
-    ([Martinello Riccardo], 0, 0, 0, 1, 4, 0),
-    ([Sandu Antonio], 0, 0, 0, 3, 3, 0),
-    ([Sgreva Andrea], 3.5, 0, 0, 3, 2, 0),
-    ([Suar Alberto], 0, 4, 0, 6, 6, 0),
-    ([Zago Alice], 0, 0, 0, 1, 4, 0),
+    ([Basso Kevin], 0, 0, 0, 2, 3, 2),
+    ([Berengan Riccardo], 0, 0, 0, 1, 4, 2),
+    ([Martinello Riccardo], 0, 0, 0, 1, 4, 2),
+    ([Sandu Antonio], 0, 0, 0, 3, 3, 2),
+    ([Sgreva Andrea], 3.5, 0, 0, 3, 2, 2),
+    ([Suar Alberto], 0, 4, 0, 6, 6, 2),
+    ([Zago Alice], 0, 0, 0, 1, 4, 2),
   ),
   [Prospetto orario preventivato per lo Sprint 8],
 )
@@ -2041,6 +2041,7 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
     ("Inizio sviluppo interfaccia Frontend", "Programmatore", "4:00", "", "In corso"),
     ("Implementazione codice dei due microservizi con test", "Programmatore", "22:00", "", "In corso"),
     ("Coordinamento riunioni e avanzamenti", "Responsabile", "3:30", "", "In corso"),
+    ("Attività di verifica dei documenti e del codice", "Verificatore", "14:00", "", "In corso"),
   ),
   [Riassunto delle attività svolte durante lo sprint 8]
 )
