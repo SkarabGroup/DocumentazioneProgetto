@@ -11,27 +11,28 @@
     "1.4.0",
     "Aggiunto Sprint 8",
     members.andrea,
+    members.suar
   ),
   (
     "2026/03/29",
     "1.3.0",
     "Completato lo Sprint 6 e Sprint 7",
-    "",
-    members.martinello
+    members.martinello,
+    members.andrea
   ),
   (
     "2026/03/18",
     "1.2.0",
     "Completato lo Sprint 5",
-    "",
-    members.berengan
+    members.berengan,
+    members.andrea
   ),
   (
     "2026/03/08",
     "1.1.0",
     "Aggiunta tabella attvità e modifica alle ore preventivsate di sprint 5",
-    "",
-    members.berengan
+    members.berengan,
+    members.andrea
   ),
   (
     "2026/03/02",
