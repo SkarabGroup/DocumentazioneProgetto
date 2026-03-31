@@ -23,6 +23,7 @@
     "1.1.0",
     "Rielaborazione documento con modifiche proposte dal docente Vardanega",
     members.suar,
+    members.andrea
   ),
   (
     "2026/03/03",
