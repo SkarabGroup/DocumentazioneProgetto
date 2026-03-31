@@ -2,7 +2,7 @@
 #import "../lib/variables.typ": *
 #import "../lib/stDiagramUtil.typ": *
 
-#let versione = "v0.3.0"
+#let versione = "v0.4.0"
 #set heading(numbering: "1.1.1")
 /*
 === FUNZIONAMENTO DEL DOCUMENTO ===
@@ -12,9 +12,9 @@
 checkbox Plantuml: Preview Auto Update sia attivo
 4. Installare graphviz (sudo apt install graphviz)
 5. Dalla cartella assets/st_diagrams entrate nella subfolder del tipo di diagramma che intendete creare, entrate in plantuml e create il file .plantuml; Per la sintassi guardate https://plantuml.com/
-6. Assicuratevi sempre che ci sia 
+6. Assicuratevi sempre che ci sia
 hide circles
-skinparam classAttributeIconSize 0 
+skinparam classAttributeIconSize 0
 dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 7. i file .svg sono inseriti come non versionabili all'interno
 */
@@ -24,25 +24,32 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #set page(numbering: "1", header: header("Specifica Tecnica"), footer: footer())
 #let history = (
   (
+    "2026/03/31",
+    "0.4.0",
+    "Completata Introduzione e aggiunti primi Command",
+    members.suar,
+    members.alice,
+  ),
+  (
     "2026/03/30",
     "0.3.0",
     "Stesura delle tecnologie, dei VO e delle Entity dell'Analysis Microservice",
     members.suar,
-    members.kevin
+    members.kevin,
   ),
   (
     "2026/03/07",
     "0.2.0",
     "Prima strutturazione della sezione tecnologie",
     members.berengan,
-    members.suar
+    members.suar,
   ),
   (
     "2026/03/04",
     "0.1.0",
     "Prima stesura del documento",
     members.suar,
-    members.berengan
+    members.berengan,
   ),
 )
 
@@ -58,14 +65,22 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 
 #pagebreak()
 
-= Introduzione 
-Il presente documento descrive l'#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-dei-requisiti")[#def("Analisi dei Requisiti")] #TODO("correggere 'Analisi dei Requisiti' in 'Specifica Tecnica' e aggiungere termine da Glossario") relativo al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def("Code Guardian")], commissionato dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def("Var Group")] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def("Skarab Group")] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
-
-#TODO("Rispettare la struttura introduttiva adottata anche negli altri documenti")
+= Introduzione
+Il presente documento descrive la #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#specifica-tecnica")[#def("Specifica Tecnica")] relativa al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def("Code Guardian")], commissionato dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def("Var Group")] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def("Skarab Group")] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
 
 Il progetto ha come obiettivo la realizzazione di un sistema per l'automazione dei processi di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] delle vulnerabilità del software. L'architettura si basa sul paradigma degli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] software intelligenti, operanti su repository di codice sorgente. La conformità del sistema è vincolata ai requisiti definiti nel
 
 La piattaforma supporta attività di analisi statica del codice sorgente e di individuazione delle principali criticità di sicurezza, fornendo suggerimenti di correzione attraverso meccanismi automatizzati basati su modelli di linguaggio di grandi dimensioni (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]).
+
+== Finalità del Documento
+Il presente documento ha lo scopo di definire l'architettura di sistema e le scelte implementative necessarie alla realizzazione di Code Guardian. Partendo dai requisiti definiti nell'Analisi dei Requisiti, il documento ne formalizza la traduzione in componenti software, definendo i vincoli tecnologici e i pattern di progettazione adottati.
+
+Il documento costituisce il riferimento tecnico primario per il gruppo di lavoro (#def[Skarab Group]) e per gli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#stakeholder")[#def[stakeholder]], perseguendo i seguenti obiettivi:
+- definire l'#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#architettura-logica")[#def[architettura logica]] del sistema, descrivendo l'interazione tra i componenti attraverso una scomposizione in layer basata sul pattern #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#architettura-esagonale")[#def[esagonale]];
+- illustrare l'#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#architettura-di-deployment")[#def[architettura di deployment]], specificando la topologia di rete, i nodi di calcolo e le strategie di orchestrazione dei container necessari all'erogazione del servizio;
+- formalizzare i #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#design-pattern")[#def[design pattern]] applicati, motivandone l'adozione per garantire la modularità e la testabilità del codice;
+- garantire la tracciabilità del progetto attraverso la mappatura dei requisiti, verificando che ogni specifica identificata nell'Analisi dei Requisiti trovi riscontro in una componente tecnica o in una logica di business implementata;
+- fornire una rappresentazione grafica del sistema mediante diagrammi UML e schemi architetturali, facilitando la comprensione delle dipendenze e del flusso dei dati tra i sottosistemi.
 
 == Glossario
 Al fine di prevenire ambiguità interpretative, è stato redatto un glossario che definisce in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio utilizzati all’interno della documentazione.
@@ -80,7 +95,7 @@ La versione più recente del Glossario è disponibile al seguente link:
 I seguenti documenti hanno valore vincolante per la redazione della Specifica Tecnica:
 - *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> \
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
-  (ultimo accesso: *05/03/2026*)
+  (ultimo accesso: *31/03/2026*)
 
 - *Analisi dei Requisiti*: insieme dei requisiti e dei casi d'uso coperti nel Minimum Viable Product. <AdR> \
   #underline(link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/AdR.pdf")) \
@@ -93,89 +108,95 @@ I seguenti documenti hanno valore vincolante per la redazione della Specifica Te
 === Riferimenti Informativi
 - *Standard IEEE/ISO/IEC 42010-2022*: International Standard for Software, systems and enterprise--Architecture description \
   #underline(link("https://ieeexplore.ieee.org/document/9938446")) \
-  (ultimo accesso: *05/03/2026*)
+  (ultimo accesso: *31/03/2026*)
 
 - *Dispense del Corso di Ingegneria del Software sulla Progettazione*: \
   #underline(link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T06.pdf")) \
-  (ultimo accesso: *05/03/2026*)
+  (ultimo accesso: *31/03/2026*)
 - *Dispense del Corso di Ingegneria del Software sulla Dependency Management*: \
-  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Dependency%20Management%20in%20Object-Oriented%20Programming.pdf")] \
-  (ultimo accesso: *05/03/2026*)
+  #underline[#link(
+    "https://www.math.unipd.it/~rcardin/swea/2022/Dependency%20Management%20in%20Object-Oriented%20Programming.pdf",
+  )] \
+  (ultimo accesso: *31/03/2026*)
 
 - *Dispense del Corso di Ingegneria del Software sui Diagrammi delle Classi*: <ddC> \
   #underline[#link("https://www.math.unipd.it/~rcardin/swea/2023/Diagrammi%20delle%20Classi.pdf")] \
-  (ultimo accesso: *05/03/2026*)
+  (ultimo accesso: *31/03/2026*)
 
 - *Dipsense del Corso di Ingegneria del Software sui Diagrammi delle Attività*: <ddA> \
   #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20di%20Attivit%C3%A0.pdf")] \
-  (ultimo accesso: *05/03/2026*)
+  (ultimo accesso: *31/03/2026*)
 
 - *Dispense del Corso di Ingegneria del Software sui Pattern Architetturali*: \
   #underline(link("https://www.math.unipd.it/~rcardin/swea/2022/Software%20Architecture%20Patterns.pdf")) \
-  (ultimo accesso: *05/03/2026*)
+  (ultimo accesso: *31/03/2026*)
 
 - *Dispense del Corso di Ingegneria del Software sulla Dependency Injection*:  \
-  #underline(link("https://www.math.unipd.it/~rcardin/swea/2022/Design%20Pattern%20Architetturali%20-%20Dependency%20Injection.pdf")) \
-  (ultimo accesso: *05/03/2026*)
+  #underline(
+    link(
+      "https://www.math.unipd.it/~rcardin/swea/2022/Design%20Pattern%20Architetturali%20-%20Dependency%20Injection.pdf",
+    ),
+  ) \
+  (ultimo accesso: *31/03/2026*)
 
-- *Dispense del Corso di Ingegneria del Software sui Model-View Patterns*: \ 
+- *Dispense del Corso di Ingegneria del Software sui Model-View Patterns*: \
   #underline(link("https://www.math.unipd.it/~rcardin/sweb/2022/L02.pdf")) \
-  (ultimo accesso: *05/03/2026*)
+  (ultimo accesso: *31/03/2026*)
 - *Dispense del Corso di Ingegneria del Software sui Pattern Creazionali*:  \
   #underline(link("https://www.math.unipd.it/~rcardin/swea/2022/Design%20Pattern%20Creazionali.pdf")) \
-  (ultimo accesso: *05/03/2026*)
+  (ultimo accesso: *31/03/2026*)
 - *Dispense del Corso di Ingegneria del Software sui Pattern Strutturali*:  \
   #underline(link("https://www.math.unipd.it/~rcardin/swea/2022/Design%20Pattern%20Strutturali.pdf")) \
-  (ultimo accesso: *05/03/2026*)
+  (ultimo accesso: *31/03/2026*)
 - *Dispense del Corso di Ingegneria del Software sui Pattern Comportamentali*:  \
   #underline(link("https://drive.google.com/file/d/1cpi6rORMxFtC91nI6_sPrG1Xn-28z8eI/view?usp=sharing")) \
-  (ultimo accesso: *05/03/2026*)
+  (ultimo accesso: *31/03/2026*)
 #pagebreak()
 
 = Tecnologie
 == Linguaggi e Runtime
 #table(
-    columns: (1.5fr, 1.3fr, 8fr),
-    inset: 10pt,
-    stroke: 0.5pt + luma(200),
-    table.header([*Tecnologia*], [*Versione*], [*Motivazioni*]),
-    fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
-    align: (col, row) => (center, center, center).at(col) + horizon,
+  columns: (1.5fr, 1.3fr, 8fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*Tecnologia*], [*Versione*], [*Motivazioni*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, center, center).at(col) + horizon,
 
-    [TypeScript], 
-    [5.9.3], 
-    [TypeScript è il linguaggio principale adottato per lo sviluppo di entrambi i microservizi. La tipizzazione statica forte consente di rilevare errori a tempo di compilazione anziché a runtime, riducendo il rischio di regressioni e rendendo i contratti tra componenti espliciti e verificabili staticamente. Questa caratteristica è particolarmente rilevante in un'architettura a microservizi dove le interfacce tra moduli devono essere chiare e stabili nel tempo. La compatibilità con l'intero ecosistema Node.js garantisce inoltre accesso a un vasto insieme di librerie mature e mantenute attivamente.],
+  [TypeScript],
+  [5.9.3],
+  [TypeScript è il linguaggio principale adottato per lo sviluppo di entrambi i microservizi. La tipizzazione statica forte consente di rilevare errori a tempo di compilazione anziché a runtime, riducendo il rischio di regressioni e rendendo i contratti tra componenti espliciti e verificabili staticamente. Questa caratteristica è particolarmente rilevante in un'architettura a microservizi dove le interfacce tra moduli devono essere chiare e stabili nel tempo. La compatibilità con l'intero ecosistema Node.js garantisce inoltre accesso a un vasto insieme di librerie mature e mantenute attivamente.],
 
-    [Python],
-    [TBD],
-    [Python è il linguaggio adottato per la componente agentica del sistema, ospitata all'interno del microservizio di analisi. La scelta è motivata dalla maturità e dall'ampiezza del suo ecosistema nel dominio dell'intelligenza artificiale: Python dispone delle librerie più aggiornate per l'integrazione con modelli di linguaggio di grandi dimensioni e per la costruzione di sistemi agentici. In particolare, AWS Strands — il framework agentico adottato — è disponibile nativamente in Python, rendendo questo linguaggio la scelta obbligata per la componente che esegue all'interno delle funzioni Lambda.],
+  [Python],
+  [TBD],
+  [Python è il linguaggio adottato per la componente agentica del sistema, ospitata all'interno del microservizio di analisi. La scelta è motivata dalla maturità e dall'ampiezza del suo ecosistema nel dominio dell'intelligenza artificiale: Python dispone delle librerie più aggiornate per l'integrazione con modelli di linguaggio di grandi dimensioni e per la costruzione di sistemi agentici. In particolare, AWS Strands — il framework agentico adottato — è disponibile nativamente in Python, rendendo questo linguaggio la scelta obbligata per la componente che esegue all'interno delle funzioni Lambda.],
 
-    [NestJS],
-    [11.0.16],
-    [NestJS è il framework adottato per entrambi i microservizi TypeScript. La scelta è motivata da molteplici fattori rispetto ad alternative più minimali come Express.
+  [NestJS],
+  [11.0.16],
+  [NestJS è il framework adottato per entrambi i microservizi TypeScript. La scelta è motivata da molteplici fattori rispetto ad alternative più minimali come Express.
     A differenza di Express, che è una libreria priva di convenzioni architetturali, NestJS è un framework completo che impone una struttura modulare ben definita. Ogni modulo incapsula un dominio funzionale coeso, favorendo la separazione delle responsabilità e rendendo il codice più comprensibile e manutenibile nel tempo.
     Il supporto nativo alla Dependency Injection, basato su decoratori e metadata reflection, consente di dichiarare le dipendenze tra componenti in modo esplicito e di delegarne la risoluzione al framework. Questo meccanismo è particolarmente compatibile con l'architettura Ports & Adapters adottata: le porte vengono definite come interfacce TypeScript e gli adapter come implementazioni concrete, iniettate dal container di NestJS senza che il dominio ne sia a conoscenza.
     L'integrazione nativa con Jest e il supporto al mocking delle dipendenze tramite il sistema di DI rendono il testing unitario e di integrazione agevole e strutturato, consentendo di sostituire le implementazioni reali con mock durante i test senza modificare il codice di produzione.],
-    
-    [AWS Strands],
-    [TBD],
-    [AWS Strands è il framework adottato per la definizione e l'orchestrazione  degli agenti software nella componente Python. Fornisce le primitive necessarie per integrare modelli LLM all'interno di flussi agentici strutturati, gestendo il ciclo di vita degli agenti, la comunicazione con i modelli e la composizione dei tool disponibili. La scelta è motivata dalla sua integrazione nativa con l'ecosistema AWS, in particolare con i servizi Lambda e Step Functions utilizzati per l'orchestrazione del flusso agentico.],
 
-    [MongoDB Atlas],
-    [TBD],
-    [MongoDB Atlas è il sistema di persistenza adottato per il microservizio di analisi. La motivazione principale risiede nella natura eterogenea dei documenti prodotti: i risultati di audit su repository differenti variano per struttura e contenuto a seconda del tipo di analisi eseguita, rendendo inadeguato uno schema relazionale rigido come quello di PostgreSQL o MySQL. Un documento store come MongoDB permette di persistere risultati con struttura variabile senza migrazioni di schema, adattandosi naturalmente all'evoluzione del dominio. La scelta della versione gestita Atlas elimina l'onere di amministrazione dell'infrastruttura database — provisioning, backup, patching e monitoring sono delegati alla piattaforma — consentendo al team di concentrarsi sul dominio applicativo. MongoDB Atlas offre inoltre scalabilità orizzontale nativa tramite sharding, garantendo che le performance rimangano adeguate all'aumentare del volume di analisi e della dimensione dei documenti persistiti.],
+  [AWS Strands],
+  [TBD],
+  [AWS Strands è il framework adottato per la definizione e l'orchestrazione  degli agenti software nella componente Python. Fornisce le primitive necessarie per integrare modelli LLM all'interno di flussi agentici strutturati, gestendo il ciclo di vita degli agenti, la comunicazione con i modelli e la composizione dei tool disponibili. La scelta è motivata dalla sua integrazione nativa con l'ecosistema AWS, in particolare con i servizi Lambda e Step Functions utilizzati per l'orchestrazione del flusso agentico.],
 
-    [Amazon RDS],
-    [TBD],
-    [Amazon RDS è il sistema di persistenza adottato per il microservizio di gestione delle credenziali. A differenza dei risultati di analisi, le credenziali utente hanno una struttura relazionale ben definita, stabile nel tempo e con vincoli di integrità forti tra entità. Un database relazionale è quindi la scelta più appropriata, garantendo consistenza transazionale e integrità referenziale che un document store non offre nativamente. La versione gestita RDS delega l'amministrazione dell'infrastruttura ad AWS, analogamente a quanto avviene con MongoDB Atlas per il microservizio di analisi.],
+  [MongoDB Atlas],
+  [TBD],
+  [MongoDB Atlas è il sistema di persistenza adottato per il microservizio di analisi. La motivazione principale risiede nella natura eterogenea dei documenti prodotti: i risultati di audit su repository differenti variano per struttura e contenuto a seconda del tipo di analisi eseguita, rendendo inadeguato uno schema relazionale rigido come quello di PostgreSQL o MySQL. Un documento store come MongoDB permette di persistere risultati con struttura variabile senza migrazioni di schema, adattandosi naturalmente all'evoluzione del dominio. La scelta della versione gestita Atlas elimina l'onere di amministrazione dell'infrastruttura database — provisioning, backup, patching e monitoring sono delegati alla piattaforma — consentendo al team di concentrarsi sul dominio applicativo. MongoDB Atlas offre inoltre scalabilità orizzontale nativa tramite sharding, garantendo che le performance rimangano adeguate all'aumentare del volume di analisi e della dimensione dei documenti persistiti.],
 
-    [Amazon Fargate],
-    [TBD],
-    [AWS Fargate è utilizzato per l'hosting containerizzato del microservizio di analisi. Rispetto a una gestione diretta di istanze EC2, Fargate elimina la necessità di amministrare il sistema operativo e l'infrastruttura sottostante, delegando ad AWS il provisioning e la gestione dei nodi. La scalabilità automatica in base al carico garantisce che il microservizio possa gestire picchi di richieste senza intervento manuale, mantenendo al contempo costi proporzionali all'utilizzo effettivo.],
+  [Amazon RDS],
+  [TBD],
+  [Amazon RDS è il sistema di persistenza adottato per il microservizio di gestione delle credenziali. A differenza dei risultati di analisi, le credenziali utente hanno una struttura relazionale ben definita, stabile nel tempo e con vincoli di integrità forti tra entità. Un database relazionale è quindi la scelta più appropriata, garantendo consistenza transazionale e integrità referenziale che un document store non offre nativamente. La versione gestita RDS delega l'amministrazione dell'infrastruttura ad AWS, analogamente a quanto avviene con MongoDB Atlas per il microservizio di analisi.],
 
-    [Amazon S3],
-    [TBD],
-    [Amazon S3 è utilizzato per la memorizzazione del contenuto delle repository da analizzare. Prima di avviare il flusso agentico, il microservizio di analisi carica il codice sorgente su S3, rendendolo accessibile in modo condiviso e affidabile alle funzioni Lambda durante l'esecuzione. S3 garantisce durabilità e disponibilità elevata degli artefatti, disaccoppiando la fase di acquisizione del codice dalla fase di analisi vera e propria e consentendo alle Lambda di operare in modo stateless. In questo contesto, Amazon S3 non funge solo da storage statico, ma opera come un Data Staging Layer fondamentale per l'architettura stateless delle Lambda. Caricando preventivamente i sorgenti su S3, il microservizio di analisi supera i limiti fisici di trasferimento dati tra container e funzioni serverless, garantendo che l'agente Python operi su un set di dati immutabile e prontamente disponibile. Tale disaccoppiamento protegge il sistema da perdite di dati in caso di interruzioni del flusso e facilita eventuali operazioni di re-try o debugging post-mortem.],
+  [Amazon Fargate],
+  [TBD],
+  [AWS Fargate è utilizzato per l'hosting containerizzato del microservizio di analisi. Rispetto a una gestione diretta di istanze EC2, Fargate elimina la necessità di amministrare il sistema operativo e l'infrastruttura sottostante, delegando ad AWS il provisioning e la gestione dei nodi. La scalabilità automatica in base al carico garantisce che il microservizio possa gestire picchi di richieste senza intervento manuale, mantenendo al contempo costi proporzionali all'utilizzo effettivo.],
+
+  [Amazon S3],
+  [TBD],
+  [Amazon S3 è utilizzato per la memorizzazione del contenuto delle repository da analizzare. Prima di avviare il flusso agentico, il microservizio di analisi carica il codice sorgente su S3, rendendolo accessibile in modo condiviso e affidabile alle funzioni Lambda durante l'esecuzione. S3 garantisce durabilità e disponibilità elevata degli artefatti, disaccoppiando la fase di acquisizione del codice dalla fase di analisi vera e propria e consentendo alle Lambda di operare in modo stateless. In questo contesto, Amazon S3 non funge solo da storage statico, ma opera come un Data Staging Layer fondamentale per l'architettura stateless delle Lambda. Caricando preventivamente i sorgenti su S3, il microservizio di analisi supera i limiti fisici di trasferimento dati tra container e funzioni serverless, garantendo che l'agente Python operi su un set di dati immutabile e prontamente disponibile. Tale disaccoppiamento protegge il sistema da perdite di dati in caso di interruzioni del flusso e facilita eventuali operazioni di re-try o debugging post-mortem.],
 
   [Amazon Step Function & Amazon Lambda],
   [TBD],
@@ -191,9 +212,16 @@ L'insieme di queste scelte tecnologiche mira a minimizzare il Total Cost of Owne
 #pagebreak()
 = Architettura
 == Architettura di Deployment
-#TODO("Inserire introduzione")
+Il servizio di Analisi è progettato come un microservizio autonomo, responsabile della gestione completa del ciclo di vita delle analisi delle repository. Esso opera in un Bounded Context segregato, isolando la logica di business relativa ai parametri di qualità e alla scansione dei repository dalle altre funzionalità della piattaforma.
+
+Seguendo il pattern Database per Service, il microservizio dispone di uno schema di persistenza dedicato. Questo garantisce l'indipendenza del deployment e impedisce l'accoppiamento a livello di dati con altri servizi, permettendo evoluzioni dello schema senza impatti collaterali sul resto del sistema.
+
+L'interazione con l'ecosistema avviene esclusivamente tramite interfacce ben definite (API Contract). Il servizio espone porte d'ingresso (Primary Adapters) per la ricezione dei comandi e utilizza porte d'uscita (Secondary Adapters) per comunicare in modo asincrono o sincrono con i servizi esterni (es. GitHub API, Servizi di Notifica), mantenendo l'integrità del core logico.
+
+La natura di microservizio permette una scalabilità orizzontale selettiva: essendo l'analisi del codice un'operazione ad alto consumo di risorse (CPU/RAM), il servizio può essere replicato indipendentemente dagli altri moduli del sistema per gestire picchi di carico durante le scansioni massive.
 == Architettura Logica
 #TODO("Inserire introduzione")
+#pagebreak()
 === Analysis Microservice
 #TODO("Inserire introduzione")
 ==== Domain
@@ -253,7 +281,7 @@ L'oggetto `CommitHash` rappresenta l'identificativo crittografico univoco di una
 - *Garanzia di Riproducibilità:* Tipizzando l'hash, il Core assicura che ogni metrica estratta sia riferibile a un preciso stato del sorgente, rendendo l'analisi verificabile anche a fronte di evoluzioni successive del branch.
 - *Validazione Formale:* Centralizza il controllo sintattico sulla stringa (es. verifica del formato esadecimale e della lunghezza standard SHA-1 o SHA-256), intercettando input malformati prima dell'invio ai comandi di basso livello dei Driven Adapters.
 - *Integrità del Dato:* Impedisce l'utilizzo di riferimenti parziali o ambigui all'interno della logica di business, elevando il concetto di "revisione" a un tipo forte che non può essere confuso con altri parametri testuali.
-- *Determinismo del Confronto:* Permette di stabilire con certezza se due sessioni di analisi insistono sul medesimo stato del codice, facilitando logiche di caching o di skipping delle analisi ridondanti. 
+- *Determinismo del Confronto:* Permette di stabilire con certezza se due sessioni di analisi insistono sul medesimo stato del codice, facilitando logiche di caching o di skipping delle analisi ridondanti.
 
 ===== Entity
 A differenza dei Value Object, le Entity sono definite dalla loro *identità* persistente nel tempo e non solo dai loro attributi. Un'Entity mantiene la propria individualità anche se i suoi dati interni subiscono variazioni. Esse incapsulano lo stato e il comportamento del business, garantendo che le transizioni di stato avvengano nel rispetto delle regole del dominio.
@@ -263,7 +291,7 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 - *Integrità Comportamentale:* Non si limitano a esporre dati (getter/setter), ma offrono metodi che rappresentano azioni di business, assicurando che l'oggetto passi solo attraverso stati validi e coerenti.
 
 ====== Analysis <Analysis>
-#codeDiagram("Analysis", 45%)
+#codeDiagram("Analysis", 50%)
 
 L'entità `Analysis` costituisce l'astrazione fondamentale del dominio. Essa aggrega l'identità dell'analisi (#underline[#link(<AnalysisId>)[`AnalysisId`]]), il riferimento al titolare (#underline[#link(<UserId>)[`UserId`]]) e la macchina a stati (#underline[#link(<AnalysisStatus>)[`AnalysisStatus`]]) che ne governa l'esecuzione. Essendo definita come classe astratta, stabilisce il protocollo comune per ogni specializzazione (es. #underline[#link(<GitHubAnalysis>)[`GitHub Analysis`]]), garantendo coerenza comportamentale nell'intero sistema.
 
@@ -275,19 +303,23 @@ L'entità `Analysis` costituisce l'astrazione fondamentale del dominio. Essa agg
 ====== AnalysisStatus <AnalysisStatus>
 #codeDiagram("AnalysisStatus", 15%)
 
-L'enumerativo `AnalysisStatus` definisce l'insieme finito e ordinato degli stati in cui può trovarsi un'analisi. 
+L'enumerativo `AnalysisStatus` definisce l'insieme finito e ordinato degli stati in cui può trovarsi un'analisi.
 
 - *INITIALIZING / PENDING:* Fasi di preparazione e accodamento della richiesta.
 - *RUNNING:* Fase attiva di elaborazione (es. clonazione, scansione).
 - *COMPLETED / FAILED:* Stati terminali che decretano il successo o l'interruzione del processo per anomalie.
 
+===== AnalysisType <AnalysisType>
+#codeDiagram("AnalysisType", 15%)
+
+L'enumerativo `AnalysisType` definisce l'insieme finito ed ordinato dei possibili provider per cui è possibile svolgere una analisi.
 ====== GitHubAnalysis <GitHubAnalysis>
 #codeDiagram("GitHubAnalysis", 100%)
 
 L'entità `GitHubAnalysis` è la specializzazione del dominio dedicata all'audit di sorgenti ospitati su GitHub. Estende la classe astratta #link(<Analysis>)[`Analysis`], ereditandone la macchina a stati e l'identità, e vi aggrega i metadati necessari per la localizzazione e il versionamento del codice.
 
 - *Specializzazione del Contesto:* Integra i Value Object #underline[#link(<RepoURL>)[`RepoURL`]], #underline[#link(<BranchName>)[`BranchName`]] e #underline[#link(<CommitHash>)[`CommitHash`]], trasformando un'analisi generica in un processo contestualizzato e riproducibile su uno specifico stato del repository.
-- *Incapsulamento della Creazione:* Attraverso il metodo statico `create()`, l'entità valida la coerenza del comando di input #TODO("Aggiungere collegamento quando definito") (`AnalysisFactoryCommand`), garantendo che nessuna istanza di`GitHubAnalysis` possa esistere in uno stato parziale o inconsistente.
+- *Incapsulamento della Creazione:* Attraverso il metodo statico `create()`, l'entità valida la coerenza del comando di input #underline[#link(<AnalysisFactoryCommand>)[(`AnalysisFactoryCommand`)]], garantendo che nessuna istanza di `GitHubAnalysis` possa esistere in uno stato parziale o inconsistente.
 - *Contratto di Esecuzione:* Fornisce agli adattatori di infrastruttura (Driven Adapters) tutti i parametri necessari per le operazioni di clonazione e analisi, agendo come unica "fonte di verità" per i dati di accesso al codice sorgente.
 - *Relazione di Ereditarietà:* Sfruttando il polimorfismo, permette ai servizi applicativi di gestire il ciclo di vita (start, complete, fail) in modo uniforme, indipendentemente dal fatto che l'analisi sia di tipo GitHub o di altra natura futura.
 
@@ -295,6 +327,38 @@ L'entità `GitHubAnalysis` è la specializzazione del dominio dedicata all'audit
 ===== Command
 Un Command è un oggetto di puro trasporto dati (Data Transfer Object) che incapsula tutte le informazioni necessarie per eseguire una specifica operazione di scrittura o una logica di business all'interno dello strato Application. In un'architettura esagonale, i Command rappresentano l'espressione formale di un intento dell'utente volto a modificare lo stato del sistema.
 
+====== AnalysisFactoryCommand <AnalysisFactoryCommand>
+#codeDiagram("AnalysisFactoryCommand", 60%)
+
+La classe astratta `AnalysisFactoryCommand` definisce la struttura base e il contratto minimo per tutti i comandi destinati alla creazione di nuove entità di audit. Essa agisce come una radice gerarchica che normalizza i dati comuni, permettendo all'#link(<AnalysisProvider>)[`AnalysisProvider` (Factory)] di operare su un'interfaccia uniforme durante le prime fasi di istanziazione.
+
+- *Generalizzazione del Dominio:* Centralizza gli attributi condivisi, quali l'identificativo dell'utente proprietario (#underline[#link(<UserId>)[`UserId`]]) e il discriminatore di categoria (#underline[#link(<AnalysisType>)[`AnalysisType`]]), riducendo la ridondanza nelle definizioni dei comandi specialistici.
+- *Integrità dei Dati Comuni:* Attraverso un costruttore `protected`, impedisce l'istanziazione diretta di comandi generici, obbligando il sistema a utilizzare esclusivamente specializzazioni concrete e complete (come #underline[#link(<GitHubAnalysisCommand>)[`GitHubAnalysisCommand`]]).
+- *Discriminazione del Polimorfismo:* L'inclusione esplicita dell'attributo `type` fornisce alla Factory il metadato necessario per determinare quale specifica sottoclasse di `Analysis` debba essere generata, facilitando l'estendibilità verso nuovi motori di analisi.
+- *Isolamento della Proprietà:* Garantisce che ogni processo di creazione sia intrinsecamente legato a un #link(<UserId>)[`UserId`], forzando il rispetto dei vincoli di sicurezza e appartenenza dei dati fin dalla fase di trasporto nel layer applicativo.
+
+====== GitHubAnalysisFactoryCommand <GitHubAnalysisCommand>
+#codeDiagram("GitHubAnalysisFactoryCommand", 70%)
+
+Il componente `GitHubAnalysisCommand` rappresenta la specializzazione concreta del comando di creazione per il provider GitHub. Estendendo la classe astratta #underline[#link(<AnalysisFactoryCommand>)[`AnalysisFactoryCommand`]], esso aggrega i metadati specifici necessari per inizializzare un'istanza di #link(<GitHubAnalysis>)[`GitHubAnalysis`] attraverso la factory di dominio.
+
+- *Specializzazione del Comando:* Integra i parametri tecnici indispensabili per l'interazione con le API di GitHub, trasformando una richiesta generica in un set di istruzioni contestualizzate (URL del repository, branch e riferimento al commit).
+- *Iniezione Automatica del Tipo:* Attraverso la chiamata al costruttore della classe base (`super`), vincola l'operazione al valore #underline[#link(<AnalysisType>)[`AnalysisType.GITHUB`]], garantendo la coerenza del discriminatore durante il processo di dispatching nella factory.
+- *Flessibilità di Versione:* Gestisce il parametro `branch` con un valore predefinito (`main`), consentendo al contempo l'override tramite il parametro opzionale `commit` per analisi puntuali su snapshot specifici del codice sorgente.
+- *Contratto per la Factory:* Fornisce all'#underline[#link(<AnalysisProvider>)[`AnalysisProvider`]] un oggetto tipizzato e validato sintatticamente, facilitando la creazione dei Value Object di dominio (come #link(<RepoURL>)[`RepoURL` or `BranchName`]) senza ambiguità sui dati di origine.
+- *Tracciabilità dell'Identità:* Eredita la gestione del `userId` dalla classe base, assicurando che ogni specifica di analisi GitHub sia nativamente ancorata a un proprietario verificato nel sistema.
+
+==== Service
+===== AnalysisProvider <AnalysisProvider>
+
+==== Use Case
+===== StartAnalysisUseCase <StartAnalysisUseCase>
+
+
+== Design Patterns
+=== Dependency Injection
+
+=== Factory Pattern
 #pagebreak()
 
 === Account Microservice

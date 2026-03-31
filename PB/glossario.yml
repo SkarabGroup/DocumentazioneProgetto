@@ -33,6 +33,13 @@ A:
   Approccio Agile:
     alternative: Metodo Agile, Agile
     descrizione: Implementazione pratica dei principi del Manifesto Agile, caratterizzata da sprint brevi, feedback continui e adattamento progressivo dei processi e del prodotto.
+  Architettura di Deployment:
+    descrizione: descrive la distribuzione fisica dei componenti software sulle risorse di calcolo e la configurazione dell'infrastruttura di rete. Essa specifica le strategie di containerizzazione e le modalità di interazione tra i nodi, delineando l'ambiente di esecuzione necessario per l'erogazione dei servizi e l'integrazione degli strumenti di analisi.
+  Architettura Esagonale:
+    alternative: esagonale
+    descrizione: Pattern che isola la logica di dominio dall'esterno. Il "core" comunica con l'esterno esclusivamente tramite porte (interfacce), mentre gli adapter gestiscono le implementazioni specifiche per database, interfacce utente o servizi di terze parti.
+  Architettura Logica:
+    descrizione: Definisce l'organizzazione strutturale del software e le interazioni tra i suoi componenti interni, adottata per separare la logica di business dalle dipendenze tecnologiche, garantendo l'isolamento del core applicativo attraverso l'uso di interfacce standardizzate e implementazioni specifiche.
   Attore:
     alternative: attori
     descrizione: Entità esterna al sistema (persona, hardware o altro sistema software) che interagisce con esso scambiando informazioni per raggiungere un determinato scopo.
@@ -122,6 +129,9 @@ D:
   Data Leakage:
     alternative: Fuga di dati
     descrizione: Esposizione o trasmissione non autorizzata di dati sensibili verso l'esterno. Nel contesto LLM, include l'invio accidentale di codice proprietario a modelli terzi.
+  Data Transfer Object:
+    acronimo: DTO
+    descrizione: Oggetto progettato per trasportare dati tra componenti o livelli di un sistema, senza includere logica di business; contiene tipicamente solo campi e metodi di accesso (getter/setter).
   Design Pattern:
     descrizione: Soluzione progettuale generale e riutilizzabile per problemi ricorrenti nel contesto della progettazione del software.
   DevOps:
@@ -302,6 +312,9 @@ P:
 P:
   Pair Programming:
     descrizione: Tecnica di sviluppo Agile in cui due programmatori collaborano alla medesima postazione. Il "Driver" scrive il codice, mentre il "Navigator" ne revisiona la logica in tempo reale.
+  Personal Access Token:
+    acronimo: PAT
+    descrizione: Stringa segreta generata da un sistema per autenticare un utente o un’applicazione, utilizzata come alternativa alle credenziali tradizionali per accedere a risorse o API con permessi specifici.
   Pianificazione:
     descrizione: Processo di definizione della strategia, degli obiettivi, delle risorse, delle scadenze e delle attività necessarie per il raggiungimento degli scopi del progetto.
   Piano di Progetto:
@@ -416,6 +429,8 @@ S:
     descrizione: Nome del gruppo di lavoro composto dagli studenti dell'Università di Padova responsabili dello sviluppo del progetto Code Guardian.
   Slack:
     descrizione: Piattaforma di messaggistica istantanea basata su canali, utilizzata per il coordinamento rapido e l'integrazione di notifiche da strumenti esterni (Jira, GitHub).
+  Specifica Tecnica:
+    descrizione: Documento formale che definisce dettagliatamente le caratteristiche richieste per un prodotto, materiale, servizio o sistema. Include requisiti funzionali, prestazioni, standard di sicurezza, materiali e metodi di prova, fungendo da guida per la progettazione e la realizzazione
   Sprint:
     descrizione: Periodo di lavoro di breve durata (tipicamente 1-2 settimane) durante il quale il team realizza un insieme definito di attività e obiettivi.
 

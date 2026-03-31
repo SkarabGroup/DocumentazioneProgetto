@@ -1,0 +1,17 @@
+@startuml AnalysisFactoryCommand
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+
+abstract class AnalysisFactoryCommand <<Abstract>>{
+    + userId: string 
+    + type: AnalysisType
+    + AnalysisFactoryCommand(user: string, type: AnalysisType)
+}
+
+AnalysisFactoryCommand --left-> AnalysisType
+@enduml

@@ -8,13 +8,10 @@ skinparam ClassAttributeIconSize 0
 hide circles
 
 class StartAnalysisCommand {
-    - userId: string
-    - repositoryURL: string
-    - branchName: string = 'main'
-    - commitHash: string | null
-    - personalAccessToken: string | null
+    + userId: string
+    + repositoryURL: string
+    + branchName: string = 'main'
+    + commitHash: string | null
+    + personalAccessToken: string | null
 }
-
-
-StartAnalysisCommand ..left-> Analysis
 @enduml
