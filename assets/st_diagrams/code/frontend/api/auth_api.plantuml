@@ -1,0 +1,16 @@
+@startuml
+package "API Layer (Model)" {
+  class AuthApi {
+    + login(credentials): Promise<AuthTokens>
+    + register(credentials): Promise<AuthTokens>
+    + refresh(refreshToken): Promise<AuthTokens>
+    + logout(): Promise<void>
+    --
+    Incapsula le chiamate HTTP verso il microservizio Account
+    per login, registrazione, refresh token e logout.
+    Tutti i metodi delegano al Gateway per l'invio HTTP.
+  }
+
+  AuthApi --> "Gateway" : usa
+}
+@enduml

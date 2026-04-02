@@ -1,0 +1,16 @@
+@startuml
+package "View — Pagine protette" {
+  class SettingsPage {
+    --
+    Pagina di gestione account organizzata in tab:
+    - Profilo: aggiornamento username e email
+    - Sicurezza: cambio password
+    - GitHub: collegamento/scollegamento account GitHub
+    - API Key: generazione e visualizzazione della chiave API
+    - Account: eliminazione account con dialog di conferma
+  }
+
+  SettingsPage --> "UsersApi" : getProfile, updateProfile, changePassword,\ngenerateApiKey, linkGithub, unlinkGithub, deleteAccount
+  SettingsPage --> "useAuth" : logout() dopo deleteAccount
+}
+@enduml

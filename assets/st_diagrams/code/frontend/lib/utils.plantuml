@@ -1,0 +1,21 @@
+@startuml
+package "Utilities" {
+  class Utils {
+    + cn(...classes): string
+    + formatDate(date): string
+    + formatDuration(seconds): string
+    + getScoreVar(score): string
+    + getScoreColor(score): string
+    + getSeverityVar(severity): string
+    + getSeverityBadgeClass(severity): string
+    + truncate(str, maxLen): string
+    + extractRepoName(url): string
+    --
+    Raccolta di funzioni di utilità senza stato.
+    cn() compone classi CSS Tailwind in modo sicuro (clsx + tailwind-merge).
+    Le funzioni get*() mappano score numerici e severity a variabili CSS
+    e classi di colore per la UI. formatDate/Duration normalizzano
+    la visualizzazione di timestamp e durate.
+  }
+}
+@enduml

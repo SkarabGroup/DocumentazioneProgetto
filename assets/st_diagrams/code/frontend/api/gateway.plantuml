@@ -1,0 +1,29 @@
+@startuml
+package "API Layer (Model)" {
+  class Gateway {
+    + get(url): Promise<Response>
+    + post(url, data): Promise<Response>
+    + put(url, data): Promise<Response>
+    + delete(url): Promise<Response>
+    --
+    Istanza Axios configurata con base URL (VITE_GATEWAY_URL).
+    Interceptor in entrata: aggiunge il Bearer token ad ogni richiesta.
+    Interceptor in uscita: su risposta 401 tenta il refresh del token
+    e mette in coda le richieste in attesa, poi le ri-esegue.
+    Se il refresh fallisce, pulisce i token e reindirizza al login.
+  }
+
+  class TokenStorage {
+    + getAccess(): string | null
+    + getRefresh(): string | null
+    + setAccess(token): void
+    + setRefresh(token): void
+    + clear(): void
+    --
+    Wrapper su localStorage per i token JWT dell'utente
+    (chiavi: cg_access_token, cg_refresh_token).
+  }
+
+  Gateway ..> TokenStorage : legge/scrive token
+}
+@enduml

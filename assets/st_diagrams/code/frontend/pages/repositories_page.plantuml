@@ -1,0 +1,19 @@
+@startuml
+package "View — Pagine protette" {
+  class RepositoriesPage {
+    --
+    Pagina principale post-login. Mostra la lista dei repository
+    dell'utente con ricerca per nome/URL e possibilità di aggiungere
+    nuovi repository tramite AddRepositoryModal.
+    Per ogni repository mostra stato ultima analisi (AnalysisStatusBadge)
+    e permette di avviare una nuova analisi tramite AnalysisOptionsModal.
+    Aggiorna lo stato dell'analisi in tempo reale via useAnalysisSocket.
+  }
+
+  RepositoriesPage --> "RepositoriesApi" : list, create, startAnalysis
+  RepositoriesPage --> "useAnalysisSocket" : aggiornamenti real-time
+  RepositoriesPage ..> "AddRepositoryModal" : apre
+  RepositoriesPage ..> "AnalysisOptionsModal" : apre
+  RepositoriesPage ..> "AnalysisStatusBadge" : usa
+}
+@enduml

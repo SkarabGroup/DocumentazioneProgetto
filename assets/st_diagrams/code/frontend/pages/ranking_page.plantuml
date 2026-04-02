@@ -1,0 +1,14 @@
+@startuml
+package "View — Pagine protette" {
+  class RankingPage {
+    --
+    Mostra la classifica globale dei repository ordinata per score
+    di qualità aggregato. Evidenzia i primi tre con icone medaglia
+    (oro, argento, bronzo). Usa ScoreCard per visualizzare il punteggio
+    di ciascun repository.
+  }
+
+  RankingPage --> "RepositoriesApi" : getRanking()
+  RankingPage ..> "ScoreCard" : usa
+}
+@enduml

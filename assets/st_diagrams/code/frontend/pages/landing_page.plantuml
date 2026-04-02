@@ -1,0 +1,11 @@
+@startuml
+package "View — Pagine pubbliche" {
+  class LandingPage {
+    --
+    Pagina di presentazione pubblica del prodotto.
+    Mostra hero con CTA, feature showcase, lista degli agenti AI
+    usati nell'analisi, sezione pricing e footer.
+    Non richiede autenticazione.
+  }
+}
+@enduml

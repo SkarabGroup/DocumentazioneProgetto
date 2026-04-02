@@ -1,0 +1,13 @@
+@startuml
+package "View — Pagine protette" {
+  class HistoryPage {
+    --
+    Mostra lo storico globale di tutte le analisi completate
+    dall'utente su tutti i repository, ordinate per data decrescente.
+    Supporta paginazione e permette di navigare al dettaglio
+    di ciascuna analisi.
+  }
+
+  HistoryPage --> "AnalysisApi" : getHistory()
+}
+@enduml
