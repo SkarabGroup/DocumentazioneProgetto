@@ -1,0 +1,26 @@
+@startuml CoverageFile
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class CoverageFile {
+    - pathFinding: PathFinding
+    - linesPercentage: CoveragePercentage
+    - branchesPercentage: CoveragePercentage
+    - missedLines: int[]
+    ---
+    - CoverageFile(path: PathFinding, lines: CoveragePercentage, branches: CoveragePercentage, missed: int[])
+    + getPath() : PathFinding
+    + getLinesPercentage() : CoveragePercentage
+    + getBranchesPercentage() : CoveragePercentage
+    + getMissedLines() : int[]
+    + {static} create(path: PathFinding, lines: CoveragePercentage, branches: CoveragePercentage, missed: int[]): CoverageFile
+}
+
+CoverageFile --left--> PathFinding
+CoverageFile --right--> CoveragePercentage
+@enduml
