@@ -265,67 +265,6 @@ I rischi individuati vengono raggruppati in macro-categorie (tecnologiche, inter
 
 Le modalità operative e i criteri metodologici adottati per l’analisi e la valutazione dei rischi sono definiti nel documento *Norme di Progetto*, al quale si rimanda per la descrizione dettagliata del processo di di gestione dei rischi.
 
-=== RCO3: Rischio Collettivo Organizzativo legato a ritardi o incomprensioni nella comunicazione con la proponente
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr),
-    inset: 10pt,
-    table.header(
-      [*Tipologia Dato*],
-      [*Valore*],
-    ),
-
-    [*Codice*],
-    [RCO3],
-    [*Nome*], 
-    [Ritardi o incomprensioni nella comunicazione con la proponente],
-    [*Descrizione*], 
-    [Possibili ritardi nelle risposte da parte di #def[Var Group] o interpretazioni errate dei feedback forniti durante le sessioni di mentoring. Questo potrebbe portare a sviluppare funzionalità non in linea con le aspettative della proponente.],
-    [*Mitigazione*], 
-    [Programmazione di incontri periodici fissi e redazione di verbali (verbali esterni) dopo ogni incontro per formalizzare quanto deciso. Uso di canali di comunicazione diretti (#def[Slack]) per chiarimenti rapidi. In caso di dubbi sull'interpretazione dei feedback, il gruppo si impegnerà a richiedere chiarimenti tempestivi alla proponente per evitare incomprensioni. Nel caso in cui la proponente non risponda entro tempi ragionevoli il gruppo contattera il Prof. Vardanega per consigli su come procedere.],
-    [*Probabilità di avvenimento*],
-    [Media],
-    [*Pericolosità delle ripercussioni*],
-    [Media],
-  ),
-  caption: [Informazioni sul rischio RCO3],
-)
-
-=== RCO4: Rischio Collettivo Organizzativo legato alla disomogeneità nella produzione della documentazione
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr),
-    inset: 10pt,
-    table.header(
-      [*Tipologia Dato*],
-      [*Valore*],
-    ),
-
-    [*Codice*],
-    [RCO4],
-    [*Nome*], 
-    [Disomogeneità nella produzione della documentazione],
-    [*Descrizione*], 
-    [Dato che i membri del team hanno stili di scrittura diversi, i documenti (#def[Piano di Progetto], #def[Norme di Progetto], ecc.) potrebbero risultare frammentati, poco coerenti o con terminologie discordanti. Questo potrebbe compromettere la chiarezza e la professionalità della documentazione consegnata.],
-    [*Mitigazione*], 
-    [Definizione rigorosa dei template riguardante l'aspetto visivo, l'impaginazione e la formattazione del testo. Ogni documento deve passare per una fase di verifica incrociata, un membro diverso dal redattore controlla il lavoro, prima di essere considerato definitivo. Inoltre, viene stabilito un glossario condiviso per uniformare la terminologia tecnica utilizzata nei documenti.],
-    [*Probabilità di avvenimento*],
-    [Media],
-    [*Pericolosità delle ripercussioni*],
-    [Medio-Bassa],
-  ),
-  caption: [Informazioni sul rischio RCO4],
-)
 
 #pagebreak()
 
@@ -567,6 +506,70 @@ Questa categoria raggruppa le criticità legate alla pianificazione temporale, a
   "Media", // P=2
   "Basso", // I=1 -> R=2 (Basso)
 )
+
+=== RCO6: Ritardi o incomprensioni nella comunicazione con la proponente
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(63.75%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (3fr, 4fr),
+    inset: 10pt,
+    table.header(
+      [*Tipologia Dato*],
+      [*Valore*],
+    ),
+
+    [*Codice*],
+    [RCO3],
+    [*Nome*], 
+    [Ritardi o incomprensioni nella comunicazione con la proponente],
+    [*Descrizione*], 
+    [Possibili ritardi nelle risposte da parte di #def[Var Group] o interpretazioni errate dei feedback forniti durante le sessioni di mentoring. Questo potrebbe portare a sviluppare funzionalità non in linea con le aspettative della proponente.],
+    [*Mitigazione*], 
+    [Programmazione di incontri periodici fissi e redazione di verbali (verbali esterni) dopo ogni incontro per formalizzare quanto deciso. Uso di canali di comunicazione diretti (#def[Slack]) per chiarimenti rapidi. In caso di dubbi sull'interpretazione dei feedback, il gruppo si impegnerà a richiedere chiarimenti tempestivi alla proponente per evitare incomprensioni. Nel caso in cui la proponente non risponda entro tempi ragionevoli il gruppo contattera il Prof. Vardanega per consigli su come procedere.],
+    [*Probabilità di avvenimento*],
+    [Media],
+    [*Pericolosità delle ripercussioni*],
+    [Media],
+  ),
+  caption: [Informazioni sul rischio RCO3],
+)
+
+=== RCO7: Disomogeneità nella produzione della documentazione
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(63.75%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (3fr, 4fr),
+    inset: 10pt,
+    table.header(
+      [*Tipologia Dato*],
+      [*Valore*],
+    ),
+
+    [*Codice*],
+    [RCO4],
+    [*Nome*], 
+    [Disomogeneità nella produzione della documentazione],
+    [*Descrizione*], 
+    [Dato che i membri del team hanno stili di scrittura diversi, i documenti (#def[Piano di Progetto], #def[Norme di Progetto], ecc.) potrebbero risultare frammentati, poco coerenti o con terminologie discordanti. Questo potrebbe compromettere la chiarezza e la professionalità della documentazione consegnata.],
+    [*Mitigazione*], 
+    [Definizione rigorosa dei template riguardante l'aspetto visivo, l'impaginazione e la formattazione del testo. Ogni documento deve passare per una fase di verifica incrociata, un membro diverso dal redattore controlla il lavoro, prima di essere considerato definitivo. Inoltre, viene stabilito un glossario condiviso per uniformare la terminologia tecnica utilizzata nei documenti.],
+    [*Probabilità di avvenimento*],
+    [Media],
+    [*Pericolosità delle ripercussioni*],
+    [Medio-Bassa],
+  ),
+  caption: [Informazioni sul rischio RCO4],
+)
+
+
 #pagebreak()
 
 = Pianificazione del Ciclo di Vita
@@ -2045,4 +2048,79 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
     ("Attività di verifica dei documenti e del codice", "Verificatore", "14:00", "", "In corso"),
   ),
   [Riassunto delle attività svolte durante lo sprint 8]
+)
+
+==== Consumo Tempo e Costi Effettivi (Consuntivo)
+La tabella sottostante illustra le ore produttive effettivamente rendicontate.
+
+#sprint_table(
+  (
+    ([Basso Kevin], 0, 0, 0, 4, 4, 2),
+    ([Berengan Riccardo], 0, 0, 0, 1, 4, 2), // non pervenuto
+    ([Martinello Riccardo], 0, 0, 0, 2, 4, 0),
+    ([Sandu Antonio], 0, 0, 0, 5, 0, 0),
+    ([Sgreva Andrea], 3.5, 0, 0, 5, 0, 2),
+    ([Suar Alberto], 0, 1.5, 0, 3, 6, 2),
+    ([Zago Alice], 0, 0, 0, 3, 4, 2),
+  ),
+  [Consuntivo orario effettivo per lo Sprint 8],
+)
+
+==== Retrospettiva dello sprint 8
+===== Valutazione del Periodo
+===== Squilibri orari preventivati e reali
+===== Rischi Rilevati
+===== Obiettivi per lo Sprint Successivo
+===== Aggiornamento preventivo a finire PB
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    columns: (1fr, 1fr, 1fr, 1fr),
+    inset: 10pt,
+    align: center + horizon,
+    stroke: 0.5pt + luma(200),
+
+    table.header(
+      text(fill: white, weight: "bold")[Ruolo],
+      text(fill: white, weight: "bold")[Ore rimanenti per PB],
+      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
+      text(fill: white, weight: "bold")[Preventivo a finire costi],
+    ),
+
+    [Responsabile], [], [-],[],
+    [Amministratore], [], [-], [],
+    [Analista], [], [-],[],
+    [Progettista], [],[-],[],
+    [Programmatore], [],[-],[],
+    [Verificatore], [],[-],[],
+
+    table.cell(fill: luma(240))[*Totale PB*],
+    table.cell(fill: luma(240))[*69*],
+    table.cell(fill: luma(240))[*[-]*],
+    table.cell(fill: luma(240))[*€ 420,00*],
+  ),
+  caption: [Aggiornamento preventivo a finire sprint 8],
+)
+#pagebreak()
+
+=== Sprint 9
+*Periodo:* dal 04/04/2026 al 11/04/2026
+
+==== Attività Principali
+
+
+==== Prospetto Consumo Tempo (Preventivo)
+La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
+
+#sprint_table(
+  (
+    ([Basso Kevin], 0, 0, 0, 2, 3, 2),
+    ([Berengan Riccardo], 0, 0, 0, 1, 4, 2),
+    ([Martinello Riccardo], 0, 0, 0, 1, 4, 2),
+    ([Sandu Antonio], 0, 0, 0, 3, 3, 2),
+    ([Sgreva Andrea], 3.5, 0, 0, 3, 2, 2),
+    ([Suar Alberto], 0, 4, 0, 6, 6, 2),  //60% 40% ore rimanenti
+    ([Zago Alice], 0, 0, 0, 1, 4, 2),
+  ),
+  [Prospetto orario preventivato per lo Sprint 9],
 )
