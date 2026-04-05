@@ -1,13 +1,20 @@
 #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
-#let versione = "v1.4.0"
+#let versione = "v1.5.0"
 
 #titlePage("Piano di Progetto", versione)
 #set page(numbering: "1", header: header("Piano di Progetto"), footer: footer())
 #set heading(numbering: "1.1.1")
 #let history = (
   (
-    "2026/02/26",
+    "2026/04/05",
+    "1.5.0",
+    "Retrospettiva Sprint 8 e aggiunto Sprint 9",
+    members.andrea,
+    "",
+  ),
+  (
+    "2026/03/31",
     "1.4.0",
     "Aggiunto Sprint 8",
     members.andrea,
@@ -2039,13 +2046,13 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 ==== Prospetto attività
 #activity_table(
   (
-    ("Stesura norme di codifica e design pattern in ST", "Amministratore", "4:00", "", "In corso"),
-    ("Progettazione architettura AWS Lambda e Step Functions", "Progettista", "4:00", "", "In corso"),
-    ("Aggiornamento diagrammi architetturali e di dominio (C3/C4)", "Progettista", "13:00", "", "In corso"),
-    ("Inizio sviluppo interfaccia Frontend", "Programmatore", "4:00", "", "In corso"),
-    ("Implementazione codice dei due microservizi con test", "Programmatore", "22:00", "", "In corso"),
-    ("Coordinamento riunioni e avanzamenti", "Responsabile", "3:30", "", "In corso"),
-    ("Attività di verifica dei documenti e del codice", "Verificatore", "14:00", "", "In corso"),
+    ("Stesura norme di codifica e design pattern in ST", "Amministratore", "4:00", "", "Completata"),
+    ("Progettazione architettura AWS Lambda e Step Functions", "Progettista", "4:00", "", "Scartata"),
+    ("Aggiornamento diagrammi architetturali e di dominio (C3/C4)", "Progettista", "13:00", "", "Completata"),
+    ("Inizio sviluppo interfaccia Frontend", "Programmatore", "4:00", "", "Completata"),
+    ("Implementazione codice dei due microservizi con test", "Programmatore", "22:00", "", "Completata"),
+    ("Coordinamento riunioni e avanzamenti", "Responsabile", "3:30", "", "Completata"),
+    ("Attività di verifica dei documenti e del codice", "Verificatore", "14:00", "", "Completata"),
   ),
   [Riassunto delle attività svolte durante lo sprint 8]
 )
@@ -2068,9 +2075,30 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
 
 ==== Retrospettiva dello sprint 8
 ===== Valutazione del Periodo
+Questo sprint è stato caratterizzato da un cruciale cambio di rotta architetturale che ha ridefinito la struttura del microservizio di analisi per quanto riguarda la parte di agenti. Il team aveva inizialmente esplorato l'adozione di un'architettura Serverless basata su AWS Step Functions e Lambda. Tuttavia, valutata l'eccessiva complessità infrastrutturale e i tempi di sviluppo incompatibili con le scadenze della Product Baseline, il gruppo ha deciso di scartare la soluzione Serverless. Si è optato per mantenere l'orchestrazione all'interno dell'esagono del microservizio di analisi. Per quanto riguarda gli altri aspetti del microservizio di analisi e il microservizio credenziali/account, lo sviluppo del codice sta proseguendo secondo le tempistiche previste.
+
 ===== Squilibri orari preventivati e reali
+L'imprevista necessità di studiare l'ambiente Serverless e la successiva riprogettazione dell'architettura interna hanno generato un maggiore consumo di ore da "Progettista" e un minore consumo di ore da "Programmatore". Per quanto riguarda il ruolo di "Verificatore" e "Amministratore" c'è stato un minore consumo di ore rispetto al preventivo, in quanto questi ruoli sono stati utilizzati meno di quanto previsto.
+- *Responsabile:* Preventivato 3.5h, Consuntivo 3.5h
+- *Progettista:* Preventivato 17h, Consuntivo 23h
+- *Programmatore:* Preventivato 26h, Consuntivo 22h
+- *Amministratore:* Preventivato 4h, Consuntivo 1.5h
+- *Verificatore:* Preventivato 14h, Consuntivo 10h
+
 ===== Rischi Rilevati
+Nel corso dello Sprint si sono manifestati o sono stati sfiorati i seguenti rischi già censiti:
+- #link(<RT1>)[#underline[[RT1]]] e #link(<RT3>)[#underline[[RT3]]]: L'inesperienza con architetture cloud complesse (Serverless) stava per far deragliare la progettazione. Il rischio è stato mitigato riconducendo il sistema a pattern noti (NestJS interno).
+- #link(<RCO1>)[#underline[[RCO1]]]: La stima dei tempi per l'integrazione di Step Functions era stata sottovalutata. Il team ha cambiato rotta in tempo, evitando ritardi significativi.
+- #link(<RCO4>)[#underline[[RCO4]]]: La Propronente non si è presentata al colloquio di revisione, impedendo un feedback diretto. Il team ha comunque proseguito con le attività, ma resta il rischio di non essere allineati sulle aspettative dell'azienda.
+- #link(<RI4>)[#underline[[RI4]]]: Fisiologici conflitti comunicativi durante la progettazione, risolti con successo tramite mediazione e confronto tecnico.
+
 ===== Obiettivi per lo Sprint Successivo
+Per lo Sprint successivo, il team si pone i seguenti obiettivi prioritari:
+- Iniziare lo sviluppo pratico (codifica) del microservizio di analisi lato agenti e l'integrazione effettiva degli Adapter per i tool.
+- Completare la stesura della Specifica Tecnica con le nuove decisioni architetturali.
+- Affrontare la riunione di allineamento con l'azienda Proponente mostrando un'architettura consolidata.
+- Proseguire lo sviluppo del Frontend collegandolo in modo basilare ai Backend.
+
 ===== Aggiornamento preventivo a finire PB
 #figure(
   table(
@@ -2087,17 +2115,17 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
       text(fill: white, weight: "bold")[Preventivo a finire costi],
     ),
 
-    [Responsabile], [], [-],[],
-    [Amministratore], [], [-], [],
-    [Analista], [], [-],[],
-    [Progettista], [],[-],[],
-    [Programmatore], [],[-],[],
-    [Verificatore], [],[-],[],
+    [Responsabile], [13.5], [-],[€ 405,00],
+    [Amministratore], [33.5], text(fill:green)[-2.5 -> € +50], [€ 670,00],
+    [Analista], [17], [-],[€ 425,00],
+    [Progettista], [21],text(fill:red)[+6 -> € -150],[€ 525,00],
+    [Programmatore], [86],text(fill:green)[-4 -> € +60],[€ 1290,00],
+    [Verificatore], [93],text(fill:green)[-4 -> € +60],[€ 1395,00],
 
     table.cell(fill: luma(240))[*Totale PB*],
-    table.cell(fill: luma(240))[*69*],
-    table.cell(fill: luma(240))[*[-]*],
-    table.cell(fill: luma(240))[*€ 420,00*],
+    table.cell(fill: luma(240))[*264*],
+    table.cell(fill: luma(240))[#text(fill: green)[*€ +20*]],
+    table.cell(fill: luma(240))[*€ 4710,00*],
   ),
   caption: [Aggiornamento preventivo a finire sprint 8],
 )
@@ -2107,20 +2135,45 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
 *Periodo:* dal 04/04/2026 al 11/04/2026
 
 ==== Attività Principali
+Le attività pianificate per questo sprint si concentrano sull'avanzamento della codifica e sul consolidamento delle nuove scelte architetturali.
 
+- *Sviluppo Microservizio Analisi:*
+  - Completamento degli use case per il recupero dei report, finalizzazione della logica di clonazione della repository e sviluppo dei test di integrazione con MongoDB.
+  - Fine svilippo e implementazione dei Value Object per i report delle analisi.
+  - Sviluppo della logica di conversione (mapping) all'interno degli Adapter dei tool per standardizzare in un formato comprensibile per l'Application Service.
+- *Sviluppo Microservizio Credenziali/Account:*
+  - Sviluppo dei controller mancanti per le fasi di Login e Registrazione e sistemazione finale del Adapter per il collegamento al database.
+- *Sviluppo Front-end*
+- *Progettazione e Specifica Tecnica (ST):*
+  - Progettazione dei diagrammi delle classi (livello codice) per i vari componenti mancanti.
+  - Stesura della Specifica Tecnica sulle classi e i componenti implementati.
 
 ==== Prospetto Consumo Tempo (Preventivo)
 La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
 
 #sprint_table(
   (
-    ([Basso Kevin], 0, 0, 0, 2, 3, 2),
-    ([Berengan Riccardo], 0, 0, 0, 1, 4, 2),
-    ([Martinello Riccardo], 0, 0, 0, 1, 4, 2),
-    ([Sandu Antonio], 0, 0, 0, 3, 3, 2),
-    ([Sgreva Andrea], 3.5, 0, 0, 3, 2, 2),
-    ([Suar Alberto], 0, 4, 0, 6, 6, 2),  //60% 40% ore rimanenti
-    ([Zago Alice], 0, 0, 0, 1, 4, 2),
+    ([Basso Kevin], 0, 0, 0, 0, 0, 0),
+    ([Berengan Riccardo], 0, 0, 0, 0, 0, 0),
+    ([Martinello Riccardo], 0, 0, 0, 0, 0, 0),
+    ([Sandu Antonio], 0, 0, 0, 0, 0, 0),
+    ([Sgreva Andrea], 3.5, 0, 0, 0, 0, 0),
+    ([Suar Alberto], 0, 0, 0, 0, 0, 0),  //60% 40% ore rimanenti
+    ([Zago Alice], 0, 0, 0, 0, 0, 0),
   ),
   [Prospetto orario preventivato per lo Sprint 9],
+)
+
+==== Prospetto attività
+#activity_table(
+  (
+    ("Stesura della Specifica Tecnica", "Amministratore", "", "", "In corso"),
+    ("Sviluppo interfaccia Frontend", "Programmatore", "", "", "In corso"),
+    ("Implementazioni del codice generali dei microservizi", "Programmatore", "", "", "In corso"),
+    ("Implementazione codice dei Value Objects per i report di analisi", "Programmatore", "", "", "In corso"),
+    ("Sviluppo logica di mapping negli Adapter dei tool", "Progettista", "", "", "In corso"),
+    ("Coordinamento riunioni e avanzamenti", "Responsabile", "3:30", "3:30", "In corso"),
+    ("Attività di verifica dei documenti e del codice", "Verificatore", "", "", "In corso"),
+  ),
+  [Riassunto delle attività svolte durante lo sprint 9]
 )
