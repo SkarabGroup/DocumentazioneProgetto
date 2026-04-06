@@ -28,6 +28,7 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
     "0.6.0",
     "Aggiunta sezione scelta tool per l'analisi della sicureza",
     members.antonio,
+    members.suar
   ),
   (
     "2026/03/31",
