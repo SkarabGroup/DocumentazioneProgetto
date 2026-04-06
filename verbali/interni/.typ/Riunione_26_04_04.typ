@@ -8,6 +8,7 @@
       "0.1.0",
       "Prima stesura del documento",
       members.andrea,
+      members.antonio
     ),
   ),
 
@@ -48,14 +49,14 @@
     === Punto 1: #punto1
     #puntoOdg(
       punto1,
-      "Si è discusso dello stato attuale dei due microservizi, cosa manca da ultimare e le tempistiche previste per il completamento.",
-      decisione: "Per il microservizio di analisi, la comunicazione per l'inizializzazione è a buon punto; mancano da ultimare gli use case per il recupero dei report, la logica finale di clonazione della repository e i test di integrazione con MongoDB. Per quanto riguarda il microservizio di amministrazione account, è necessario completare i controller per le fasi di login e registrazione, sistemare in via definitiva il Postgre Adapter per il database e integrare la gestione dei Personal Access Token (PAT) per le repository private.",
+      "Si è discusso lo stato attuale dei due microservizi, cosa manca da ultimare e le tempistiche previste per il completamento.",
+      decisione: "Per il microservizio di analisi, la comunicazione preliminare all'avvio dell'analisi è a buon punto; mancano da ultimare gli use case per il recupero dei report, la logica finale di clonazione della repository e i test di integrazione con MongoDB. Per quanto riguarda il microservizio di amministrazione account, è necessario completare i controller per le fasi di login e registrazione, sistemare in via definitiva il Postgres Adapter per il database e integrare la gestione dei Personal Access Token (PAT) per le repository private.",
     )
 
     === Punto 2: #punto2
     #puntoOdg(
       punto2,
-      "Il team ha fatto il punto sui Value Object, dicendo che mancavano ancora quelli per la Code Coverage e per la Documentazione. È sorto inoltre un dubbio su dove e come convertire i valori eterogenei restituiti dai vari tool (ad esempio, le scale di severità degli errori).",
+      "Il team ha fatto il resoconto dei Value Object, arrivando alla conclusione che mancano ancora quelli per la Code Coverage e per la Documentazione. È sorto inoltre un dubbio su dove e come convertire i valori eterogenei restituiti dai vari tool (ad esempio, le scale di severità degli errori).",
       decisione: "Si è deciso per ragioni architetturali che la conversione e la standardizzazione dei dati non devono avvenire nell'Application Service. Sarà responsabilità esclusiva dell'Adapter del singolo tool occuparsi di mappare la risposta nel formato di dominio.",
     )
 
