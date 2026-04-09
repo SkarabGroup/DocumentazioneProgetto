@@ -26,7 +26,7 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
   (
     "2026/04/08",
     "0.7.0",
-    "",
+    "Aggiunti tutti i componenti di Analysis Microservice",
     members.suar
   ),
   (
