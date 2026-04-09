@@ -4,11 +4,12 @@ package "View — Pagine protette" {
     --
     Mostra la classifica globale dei repository ordinata per score
     di qualità aggregato. Evidenzia i primi tre con icone medaglia
-    (oro, argento, bronzo). Usa ScoreCard per visualizzare il punteggio
-    di ciascun repository.
+    (oro, argento, bronzo). Per ogni riga mostra scoreDelta: variazione
+    rispetto all'analisi precedente, con icona TrendingUp/TrendingDown.
+    Usa getScoreVar() e formatDateShort() per formattare score e date.
   }
 
   RankingPage --> "RepositoriesApi" : getRanking()
-  RankingPage ..> "ScoreCard" : usa
+  RankingPage ..> "getScoreVar, formatDateShort" : utils
 }
 @enduml

@@ -1,8 +1,8 @@
 @startuml
 package "API Layer (Model)" {
   class AuthApi {
-    + login(credentials): Promise<AuthTokens>
-    + register(credentials): Promise<AuthTokens>
+    + login(credentials): Promise<AuthTokens & { user: User }>
+    + register(credentials): Promise<AuthTokens & { user: User }>
     + refresh(refreshToken): Promise<AuthTokens>
     + logout(): Promise<void>
     --

@@ -6,7 +6,7 @@ package "API Layer (Model)" {
     + changePassword(payload): Promise<void>
     + deleteAccount(): Promise<void>
     + generateApiKey(): Promise<{ apiKey }>
-    + linkGithub(code): Promise<void>
+    + linkGithub(code): Promise<User>
     + unlinkGithub(): Promise<void>
     --
     Gestisce le operazioni sul profilo utente verso il microservizio
