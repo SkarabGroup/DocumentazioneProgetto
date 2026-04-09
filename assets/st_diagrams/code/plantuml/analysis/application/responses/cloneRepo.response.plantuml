@@ -1,0 +1,18 @@
+@startuml CloneRepoResponse
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class CloneRepoResponse {
+    + cloned: boolean
+    + localFolderPath?: string
+    + errorMessage?: string
+    ---
+    - CloneRepoResponse(cloned, localFolderPath?, errorMessage?)
+    + {static} success(path): CloneRepoResponse
+    + {static} failure(error): CloneRepoResponse
+}
+@enduml

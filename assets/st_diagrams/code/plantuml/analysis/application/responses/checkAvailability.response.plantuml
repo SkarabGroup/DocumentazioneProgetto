@@ -1,0 +1,19 @@
+@startuml CheckAvailabilityResponse
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class CheckAvailabilityResponse {
+    + isAccessible: boolean
+    + branch: string | null
+    + commit: string | null
+    + errorMessage?: string
+    ---
+    + CheckAvailabilityResponse(isAccessible, branch, commit, errorMessage?)
+    + {static} success(branch, commit): CheckAvailabilityResponse
+    + {static} failure(message): CheckAvailabilityResponse
+}
+@enduml

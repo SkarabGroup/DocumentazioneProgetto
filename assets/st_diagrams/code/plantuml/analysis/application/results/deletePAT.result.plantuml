@@ -1,0 +1,17 @@
+@startuml DeletePatResult
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class DeletePatResult {
+    + isSuccess: boolean
+    + errorMessage?: string
+    ---
+    - DeletePatResult(isSuccess, errorMessage?)
+    + {static} success(): DeletePatResult
+    + {static} failure(errorMessage): DeletePatResult
+}
+@enduml

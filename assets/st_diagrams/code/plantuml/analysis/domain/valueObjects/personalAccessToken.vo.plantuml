@@ -1,0 +1,18 @@
+@startuml PersonalAccessToken
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class PersonalAccessToken {
+    - _value: string
+    ---
+    - PersonalAccessToken(value: string)
+    - validate(token: string): void
+    + {static} create(value: string): PersonalAccessToken
+    + get value(): string
+    + equals(other: PersonalAccessToken): boolean
+}
+@enduml

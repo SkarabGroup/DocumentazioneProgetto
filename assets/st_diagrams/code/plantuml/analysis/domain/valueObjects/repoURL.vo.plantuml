@@ -1,9 +1,8 @@
 @startuml RepoURL
-
 skinparam componentStyle uml2.5
 skinparam linetype ortho
-skinparam nodesep auto
-skinparam ranksep 70
+skinparam nodesep 30
+skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
@@ -12,9 +11,8 @@ class RepoURL {
     ---
     - RepoURL(value: string)
     - validate(value: string): void
-    + equals(other: RepoURL): boolean
-    + getValue(): string
     + {static} create(value: string): RepoURL
+    + get value(): string
+    + equals(other: RepoURL): boolean
 }
-
 @enduml

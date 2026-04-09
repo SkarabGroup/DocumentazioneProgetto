@@ -1,0 +1,22 @@
+@startuml StartAnalysisResult
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class StartAnalysisResult {
+    + success: boolean
+    + message: string
+    + user: string
+    + id?: string
+    + url?: string
+    + branch?: string
+    + commit?: string
+    ---
+    - StartAnalysisResult(success, message, user, id?, url?, branch?, commit?)
+    + {static} success(user, id, url, branch, commit, message): StartAnalysisResult
+    + {static} failure(user, message): StartAnalysisResult
+}
+@enduml

@@ -1,0 +1,24 @@
+@startuml CloneRepoRequest
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class CloneRepoRequest {
+    + repoUrl: RepoURL
+    + analysisId: AnalysisId
+    + patToken: PersonalAccessToken | null
+    + branch: BranchName | null
+    + commit: CommitHash | null
+    ---
+    + CloneRepoRequest(repoUrl, analysisId, patToken, branch, commit)
+}
+
+CloneRepoRequest --right-> RepoURL
+CloneRepoRequest --right-> AnalysisId
+CloneRepoRequest --down-> PersonalAccessToken
+CloneRepoRequest --down-> BranchName
+CloneRepoRequest --down-> CommitHash
+@enduml

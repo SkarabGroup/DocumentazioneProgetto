@@ -1,0 +1,21 @@
+@startuml AnalysisOrchestratorService
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+interface IAnalysisOrchestrator {
+    + analyze(analysis, path, code, docs, security): void
+}
+
+class AnalysisOrchestratorService {
+    ---
+    + AnalysisOrchestratorService()
+    + analyze(analysis: GitHubAnalysis, path: string, code: boolean, docs: boolean, security: boolean): void
+    - orchestrateAnalysis(analysis, repoPath, code, docs, security): Promise<void>
+}
+
+AnalysisOrchestratorService ..|> IAnalysisOrchestrator
+@enduml
