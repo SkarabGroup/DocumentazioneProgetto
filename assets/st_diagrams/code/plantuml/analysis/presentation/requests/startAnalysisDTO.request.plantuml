@@ -1,0 +1,20 @@
+@startuml StartAnalysisRequestDTO
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class StartAnalysisRequestDTO {
+    + repoUrl: string
+    + password: string | undefined
+    + branch: string | undefined
+    + commit: string | undefined
+    + requestedCode: boolean
+    + requestDocumentation: boolean
+    + requestedSecurity: boolean
+    ---
+    + StartAnalysisRequestDTO(repoUrl, password, branch, commit, code, docs, security)
+}
+@enduml

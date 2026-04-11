@@ -1,0 +1,23 @@
+@startuml GitAuthorizerService
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+interface IRepositoryAuthorizer {
+    + authorize(url: RepoURL, password?: PATPassword): Promise<PersonalAccessToken>
+}
+
+class GitAuthorizerService {
+    - credentialPort: IGitCredentialReadPort
+    - configService: ConfigService
+    ---
+    + GitAuthorizerService(credentialPort, configService)
+    + authorize(url: RepoURL, password?: PATPassword): Promise<PersonalAccessToken>
+}
+
+GitAuthorizerService ..|> IRepositoryAuthorizer
+GitAuthorizerService --right-> IGitCredentialReadPort
+@enduml

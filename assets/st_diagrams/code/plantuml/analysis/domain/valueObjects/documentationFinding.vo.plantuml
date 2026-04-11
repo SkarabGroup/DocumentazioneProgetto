@@ -1,0 +1,26 @@
+@startuml DocumentationFinding
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class DocumentationFinding {
+    - _pathFinding: PathFinding
+    - _errorFinding: ErrorFinding
+    - _ruleCode: string
+    - _documentPath: string[]
+    ---
+    - DocumentationFinding(path, error, ruleCode, documentPath)
+    + {static} create(pathFinding, errorFinding, documentPath, ruleCode): DocumentationFinding
+    + getPathFinding(): PathFinding
+    + getErrorFinding(): ErrorFinding
+    + getRuleCode(): string
+    + getDocumentPath(): string[]
+    + equals(other: DocumentationFinding): boolean
+}
+
+DocumentationFinding --right-> PathFinding
+DocumentationFinding --right-> ErrorFinding
+@enduml

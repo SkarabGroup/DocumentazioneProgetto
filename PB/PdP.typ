@@ -1,13 +1,27 @@
 #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
-#let versione = "v1.4.0"
+#let versione = "v1.6.0"
 
 #titlePage("Piano di Progetto", versione)
 #set page(numbering: "1", header: header("Piano di Progetto"), footer: footer())
 #set heading(numbering: "1.1.1")
 #let history = (
   (
-    "2026/02/26",
+    "2026/04/11",
+    "1.6.0",
+    "Retrospettiva Sprint 9",
+    members.andrea,
+    "",
+  ),
+  (
+    "2026/04/05",
+    "1.5.0",
+    "Retrospettiva Sprint 8 e aggiunto Sprint 9",
+    members.andrea,
+    "",
+  ),
+  (
+    "2026/03/31",
     "1.4.0",
     "Aggiunto Sprint 8",
     members.andrea,
@@ -265,67 +279,6 @@ I rischi individuati vengono raggruppati in macro-categorie (tecnologiche, inter
 
 Le modalità operative e i criteri metodologici adottati per l’analisi e la valutazione dei rischi sono definiti nel documento *Norme di Progetto*, al quale si rimanda per la descrizione dettagliata del processo di di gestione dei rischi.
 
-=== RCO3: Rischio Collettivo Organizzativo legato a ritardi o incomprensioni nella comunicazione con la proponente
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr),
-    inset: 10pt,
-    table.header(
-      [*Tipologia Dato*],
-      [*Valore*],
-    ),
-
-    [*Codice*],
-    [RCO3],
-    [*Nome*], 
-    [Ritardi o incomprensioni nella comunicazione con la proponente],
-    [*Descrizione*], 
-    [Possibili ritardi nelle risposte da parte di #def[Var Group] o interpretazioni errate dei feedback forniti durante le sessioni di mentoring. Questo potrebbe portare a sviluppare funzionalità non in linea con le aspettative della proponente.],
-    [*Mitigazione*], 
-    [Programmazione di incontri periodici fissi e redazione di verbali (verbali esterni) dopo ogni incontro per formalizzare quanto deciso. Uso di canali di comunicazione diretti (#def[Slack]) per chiarimenti rapidi. In caso di dubbi sull'interpretazione dei feedback, il gruppo si impegnerà a richiedere chiarimenti tempestivi alla proponente per evitare incomprensioni. Nel caso in cui la proponente non risponda entro tempi ragionevoli il gruppo contattera il Prof. Vardanega per consigli su come procedere.],
-    [*Probabilità di avvenimento*],
-    [Media],
-    [*Pericolosità delle ripercussioni*],
-    [Media],
-  ),
-  caption: [Informazioni sul rischio RCO3],
-)
-
-=== RCO4: Rischio Collettivo Organizzativo legato alla disomogeneità nella produzione della documentazione
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr),
-    inset: 10pt,
-    table.header(
-      [*Tipologia Dato*],
-      [*Valore*],
-    ),
-
-    [*Codice*],
-    [RCO4],
-    [*Nome*], 
-    [Disomogeneità nella produzione della documentazione],
-    [*Descrizione*], 
-    [Dato che i membri del team hanno stili di scrittura diversi, i documenti (#def[Piano di Progetto], #def[Norme di Progetto], ecc.) potrebbero risultare frammentati, poco coerenti o con terminologie discordanti. Questo potrebbe compromettere la chiarezza e la professionalità della documentazione consegnata.],
-    [*Mitigazione*], 
-    [Definizione rigorosa dei template riguardante l'aspetto visivo, l'impaginazione e la formattazione del testo. Ogni documento deve passare per una fase di verifica incrociata, un membro diverso dal redattore controlla il lavoro, prima di essere considerato definitivo. Inoltre, viene stabilito un glossario condiviso per uniformare la terminologia tecnica utilizzata nei documenti.],
-    [*Probabilità di avvenimento*],
-    [Media],
-    [*Pericolosità delle ripercussioni*],
-    [Medio-Bassa],
-  ),
-  caption: [Informazioni sul rischio RCO4],
-)
 
 #pagebreak()
 
@@ -567,6 +520,70 @@ Questa categoria raggruppa le criticità legate alla pianificazione temporale, a
   "Media", // P=2
   "Basso", // I=1 -> R=2 (Basso)
 )
+
+=== RCO6: Ritardi o incomprensioni nella comunicazione con la proponente
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(63.75%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (3fr, 4fr),
+    inset: 10pt,
+    table.header(
+      [*Tipologia Dato*],
+      [*Valore*],
+    ),
+
+    [*Codice*],
+    [RCO3],
+    [*Nome*], 
+    [Ritardi o incomprensioni nella comunicazione con la proponente],
+    [*Descrizione*], 
+    [Possibili ritardi nelle risposte da parte di #def[Var Group] o interpretazioni errate dei feedback forniti durante le sessioni di mentoring. Questo potrebbe portare a sviluppare funzionalità non in linea con le aspettative della proponente.],
+    [*Mitigazione*], 
+    [Programmazione di incontri periodici fissi e redazione di verbali (verbali esterni) dopo ogni incontro per formalizzare quanto deciso. Uso di canali di comunicazione diretti (#def[Slack]) per chiarimenti rapidi. In caso di dubbi sull'interpretazione dei feedback, il gruppo si impegnerà a richiedere chiarimenti tempestivi alla proponente per evitare incomprensioni. Nel caso in cui la proponente non risponda entro tempi ragionevoli il gruppo contattera il Prof. Vardanega per consigli su come procedere.],
+    [*Probabilità di avvenimento*],
+    [Media],
+    [*Pericolosità delle ripercussioni*],
+    [Media],
+  ),
+  caption: [Informazioni sul rischio RCO3],
+)
+
+=== RCO7: Disomogeneità nella produzione della documentazione
+#figure(
+  table(
+    fill: (x, y) => if (y == 0) {
+      luma(63.75%)
+    } else if (calc.gcd(y, 2) == 2) {
+      luma(220)
+    },
+    columns: (3fr, 4fr),
+    inset: 10pt,
+    table.header(
+      [*Tipologia Dato*],
+      [*Valore*],
+    ),
+
+    [*Codice*],
+    [RCO4],
+    [*Nome*], 
+    [Disomogeneità nella produzione della documentazione],
+    [*Descrizione*], 
+    [Dato che i membri del team hanno stili di scrittura diversi, i documenti (#def[Piano di Progetto], #def[Norme di Progetto], ecc.) potrebbero risultare frammentati, poco coerenti o con terminologie discordanti. Questo potrebbe compromettere la chiarezza e la professionalità della documentazione consegnata.],
+    [*Mitigazione*], 
+    [Definizione rigorosa dei template riguardante l'aspetto visivo, l'impaginazione e la formattazione del testo. Ogni documento deve passare per una fase di verifica incrociata, un membro diverso dal redattore controlla il lavoro, prima di essere considerato definitivo. Inoltre, viene stabilito un glossario condiviso per uniformare la terminologia tecnica utilizzata nei documenti.],
+    [*Probabilità di avvenimento*],
+    [Media],
+    [*Pericolosità delle ripercussioni*],
+    [Medio-Bassa],
+  ),
+  caption: [Informazioni sul rischio RCO4],
+)
+
+
 #pagebreak()
 
 = Pianificazione del Ciclo di Vita
@@ -2036,13 +2053,220 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 ==== Prospetto attività
 #activity_table(
   (
-    ("Stesura norme di codifica e design pattern in ST", "Amministratore", "4:00", "", "In corso"),
-    ("Progettazione architettura AWS Lambda e Step Functions", "Progettista", "4:00", "", "In corso"),
-    ("Aggiornamento diagrammi architetturali e di dominio (C3/C4)", "Progettista", "13:00", "", "In corso"),
-    ("Inizio sviluppo interfaccia Frontend", "Programmatore", "4:00", "", "In corso"),
-    ("Implementazione codice dei due microservizi con test", "Programmatore", "22:00", "", "In corso"),
-    ("Coordinamento riunioni e avanzamenti", "Responsabile", "3:30", "", "In corso"),
-    ("Attività di verifica dei documenti e del codice", "Verificatore", "14:00", "", "In corso"),
+    ("Stesura norme di codifica e design pattern in ST", "Amministratore", "4:00", "", "Completata"),
+    ("Progettazione architettura AWS Lambda e Step Functions", "Progettista", "4:00", "", "Scartata"),
+    ("Aggiornamento diagrammi architetturali e di dominio (C3/C4)", "Progettista", "13:00", "", "Completata"),
+    ("Inizio sviluppo interfaccia Frontend", "Programmatore", "4:00", "", "Completata"),
+    ("Implementazione codice dei due microservizi con test", "Programmatore", "22:00", "", "Completata"),
+    ("Coordinamento riunioni e avanzamenti", "Responsabile", "3:30", "", "Completata"),
+    ("Attività di verifica dei documenti e del codice", "Verificatore", "14:00", "", "Completata"),
   ),
   [Riassunto delle attività svolte durante lo sprint 8]
 )
+
+==== Consumo Tempo e Costi Effettivi (Consuntivo)
+La tabella sottostante illustra le ore produttive effettivamente rendicontate.
+
+#sprint_table(
+  (
+    ([Basso Kevin], 0, 0, 0, 4, 4, 2),
+    ([Berengan Riccardo], 0, 0, 0, 1, 4, 2), // non pervenuto
+    ([Martinello Riccardo], 0, 0, 0, 2, 4, 0),
+    ([Sandu Antonio], 0, 0, 0, 5, 0, 0),
+    ([Sgreva Andrea], 3.5, 0, 0, 5, 0, 2),
+    ([Suar Alberto], 0, 1.5, 0, 3, 6, 2),
+    ([Zago Alice], 0, 0, 0, 3, 4, 2),
+  ),
+  [Consuntivo orario effettivo per lo Sprint 8],
+)
+
+==== Retrospettiva dello sprint 8
+===== Valutazione del Periodo
+Questo sprint è stato caratterizzato da un cruciale cambio di rotta architetturale che ha ridefinito la struttura del microservizio di analisi per quanto riguarda la parte di agenti. Il team aveva inizialmente esplorato l'adozione di un'architettura Serverless basata su AWS Step Functions e Lambda. Tuttavia, valutata l'eccessiva complessità infrastrutturale e i tempi di sviluppo incompatibili con le scadenze della Product Baseline, il gruppo ha deciso di scartare la soluzione Serverless. Si è optato per mantenere l'orchestrazione all'interno dell'esagono del microservizio di analisi. Per quanto riguarda gli altri aspetti del microservizio di analisi e il microservizio credenziali/account, lo sviluppo del codice sta proseguendo secondo le tempistiche previste.
+
+===== Squilibri orari preventivati e reali
+L'imprevista necessità di studiare l'ambiente Serverless e la successiva riprogettazione dell'architettura interna hanno generato un maggiore consumo di ore da "Progettista" e un minore consumo di ore da "Programmatore". Per quanto riguarda il ruolo di "Verificatore" e "Amministratore" c'è stato un minore consumo di ore rispetto al preventivo, in quanto questi ruoli sono stati utilizzati meno di quanto previsto.
+- *Responsabile:* Preventivato 3.5h, Consuntivo 3.5h
+- *Progettista:* Preventivato 17h, Consuntivo 23h
+- *Programmatore:* Preventivato 26h, Consuntivo 22h
+- *Amministratore:* Preventivato 4h, Consuntivo 1.5h
+- *Verificatore:* Preventivato 14h, Consuntivo 10h
+
+===== Rischi Rilevati
+Nel corso dello Sprint si sono manifestati o sono stati sfiorati i seguenti rischi già censiti:
+- #link(<RT1>)[#underline[[RT1]]] e #link(<RT3>)[#underline[[RT3]]]: L'inesperienza con architetture cloud complesse (Serverless) stava per far deragliare la progettazione. Il rischio è stato mitigato riconducendo il sistema a pattern noti (NestJS interno).
+- #link(<RCO1>)[#underline[[RCO1]]]: La stima dei tempi per l'integrazione di Step Functions era stata sottovalutata. Il team ha cambiato rotta in tempo, evitando ritardi significativi.
+- #link(<RCO4>)[#underline[[RCO4]]]: La Propronente non si è presentata al colloquio di revisione, impedendo un feedback diretto. Il team ha comunque proseguito con le attività, ma resta il rischio di non essere allineati sulle aspettative dell'azienda.
+- #link(<RI4>)[#underline[[RI4]]]: Fisiologici conflitti comunicativi durante la progettazione, risolti con successo tramite mediazione e confronto tecnico.
+
+===== Obiettivi per lo Sprint Successivo
+Per lo Sprint successivo, il team si pone i seguenti obiettivi prioritari:
+- Iniziare lo sviluppo pratico (codifica) del microservizio di analisi lato agenti e l'integrazione effettiva degli Adapter per i tool.
+- Completare la stesura della Specifica Tecnica con le nuove decisioni architetturali.
+- Affrontare la riunione di allineamento con l'azienda Proponente mostrando un'architettura consolidata.
+- Proseguire lo sviluppo del Frontend collegandolo in modo basilare ai Backend.
+
+===== Aggiornamento preventivo a finire PB
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    columns: (1fr, 1fr, 1fr, 1fr),
+    inset: 10pt,
+    align: center + horizon,
+    stroke: 0.5pt + luma(200),
+
+    table.header(
+      text(fill: white, weight: "bold")[Ruolo],
+      text(fill: white, weight: "bold")[Ore rimanenti per PB],
+      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
+      text(fill: white, weight: "bold")[Preventivo a finire costi],
+    ),
+
+    [Responsabile], [13.5], [-],[€ 405,00],
+    [Amministratore], [33.5], text(fill:green)[-2.5 -> € +50], [€ 670,00],
+    [Analista], [17], [-],[€ 425,00],
+    [Progettista], [21],text(fill:red)[+6 -> € -150],[€ 525,00],
+    [Programmatore], [86],text(fill:green)[-4 -> € +60],[€ 1290,00],
+    [Verificatore], [93],text(fill:green)[-4 -> € +60],[€ 1395,00],
+
+    table.cell(fill: luma(240))[*Totale PB*],
+    table.cell(fill: luma(240))[*264*],
+    table.cell(fill: luma(240))[#text(fill: green)[*€ +20*]],
+    table.cell(fill: luma(240))[*€ 4710,00*],
+  ),
+  caption: [Aggiornamento preventivo a finire sprint 8],
+)
+#pagebreak()
+
+=== Sprint 9
+*Periodo:* dal 04/04/2026 al 11/04/2026
+
+==== Attività Principali
+Le attività pianificate per questo sprint si concentrano sull'avanzamento della codifica e sul consolidamento delle nuove scelte architetturali.
+
+- *Sviluppo Microservizio Analisi:*
+  - Completamento degli use case per il recupero dei report, finalizzazione della logica di clonazione della repository e sviluppo dei test di integrazione con MongoDB.
+  - Fine svilippo e implementazione dei Value Object per i report delle analisi.
+  - Sviluppo focalizzato sull'implementazione pratica degli Agenti LLM (Agente Codice, Agente Documentazione e base dell'Agente Sicurezza).
+  - Sviluppo della logica di conversione (mapping) all'interno degli Adapter dei tool per standardizzare in un formato comprensibile per l'Application Service.
+- *Sviluppo Microservizio Credenziali/Account:*
+  - Sviluppo dei controller mancanti per le fasi di Login e Registrazione e sistemazione finale del Adapter per il collegamento al database.
+- *Sviluppo Front-end*
+- *Progettazione e Specifica Tecnica (ST):*
+  - Progettazione dei diagrammi delle classi (livello codice) per i vari componenti mancanti.
+  - Stesura della Specifica Tecnica sulle classi e i componenti implementati.
+
+==== Prospetto Consumo Tempo (Preventivo)
+La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
+
+#sprint_table(
+  (
+    ([Basso Kevin], 0, 0, 0, 0, 6, 4),
+    ([Berengan Riccardo], 0, 0, 0, 1, 10, 1), 
+    ([Martinello Riccardo], 0, 0, 0, 4, 2, 0),
+    ([Sandu Antonio], 0, 2, 0, 1, 6, 2),
+    ([Sgreva Andrea], 3.5, 0, 0, 1, 8, 2),
+    ([Suar Alberto], 0, 3, 0, 2, 6, 4),
+    ([Zago Alice], 0, 0, 0, 0, 0, 0),
+  ),
+  [Prospetto orario preventivato per lo Sprint 9],
+)
+
+==== Prospetto attività
+#activity_table(
+  (
+    ("Stesura ST (Microservizio Account e Tecnologie)", "Amministratore", "5:00", "5:00", "Completata"),
+    ("Progettazione diagrammi Value Object in ST", "Progettista", "4:00", "4:00", "Completata"),
+    ("Sviluppo Microservizio Account e credenziali", "Programmatore", "12:00", "12:00", "Completata"),
+    ("Sviluppo Agenti (Codice, Doc, Sicurezza) e tool", "Programmatore", "18:00", "18:00", "Completata"),
+    ("Sviluppo interfaccia Frontend", "Programmatore", "2:00", "2:00", "Completata"),
+    ("Progettazione interfaccia Frontend", "Progettista", "4:00", "4:00", "Completata"),
+    ("Configurazione Deployment AWS (AppRunner, RDS)", "Programmatore", "6:00", "6:00", "Completata"),
+    ("Progettazione configurazione Deployment AWS (AppRunner, RDS)", "Programmatore", "1:00", "1:00", "Completata"),
+    ("Coordinamento riunioni e avanzamenti", "Responsabile", "3:30", "3:30", "Completata"),
+    ("Attività di verifica PR, codice e documenti", "Verificatore", "13:00", "13:00", "Completata"),
+  ),
+  [Riassunto delle attività svolte durante lo sprint 9]
+)
+
+==== Consumo Tempo e Costi Effettivi (Consuntivo)
+La tabella sottostante illustra le ore produttive effettivamente rendicontate.
+
+#sprint_table(
+  (
+    ([Basso Kevin], 0, 0, 0, 0, 6, 4),
+    ([Berengan Riccardo], 0, 0, 0, 1, 10, 1), 
+    ([Martinello Riccardo], 0, 0, 0, 4, 2, 0),
+    ([Sandu Antonio], 0, 2, 0, 1, 6, 2),
+    ([Sgreva Andrea], 3.5, 0, 0, 1, 8, 2),
+    ([Suar Alberto], 0, 3, 0, 2, 6, 4),
+    ([Zago Alice], 0, 0, 0, 0, 0, 0),
+  ),
+  [Consuntivo orario effettivo per lo Sprint 9],
+)
+
+==== Retrospettiva dello sprint 9
+===== Valutazione del Periodo
+Questo sprint si è concluso con un forte avanzamento per quanto riguarda la codifica e l'integrazione. Il focus principale del team è stato lo sviluppo pratico dei microservizi ed in particolare dello sviluppo degli agenti, il testing degli endpoint e l'inizio delle complesse procedure di deployment in ambiente AWS.
+
+===== Stato di Avanzamento dei Deliverable
+- *Microservizio Account/Credenziali*: Lo sviluppo può considerarsi concluso ed è stata terminata anche la relativa parte di Specifica Tecnica.
+
+- *Microservizio Analisi (Agenti)*:
+  - *Agente Documentazione*: Lo sviluppo è concluso, manca solo il salvataggio dell'entity nel database
+  - *Agente Codice*: Il codice è a un ottimo punto, ma sono emersi problemi bloccanti legati all'esaurimento dei token durante l'analisi dei report di coverage
+  - *Agente Sicurezza*: Lo sviluppo ha accumulato un leggero ritardo ma è in fase di conclusione
+
+- *Deployment*: È in corso la configurazione su AWS (AppRunner, ECS, RDS), un'attività che si è rivelata più complessa del previsto, specialmente per la gestione dei servizi esterni nella stessa rete
+
+- *Frontend*: Il codice è stato caricato su un branch dedicato ed è in corso l'attività di collegamento con gli endpoint e la stesura dei grafici per la Specifica Tecnica
+
+===== Squilibri orari preventivati e reali
+Poiché non era stato redatto un preventivo formale a inizio settimana, le stime del preventivo sono state adattate basandosi sul lavoro effettivamente svolto (consuntivo) per mantenere la coerenza dei documenti.  
+#TODO("Cambiare questa parte se si fa il preventivo")
+
+===== Rischi Rilevati
+Nel corso dello Sprint si sono manifestati o sono stati sfiorati i seguenti rischi già censiti:
+- #link(<RT5>)[#underline[[RT5]]] Costi e Limiti di Utilizzo: Il limite di token in output è stato ripetutamente superato dall'Agente Codice a causa della dimensione dei report generati, rendendo difficile il testing nonostante il passaggio a modelli superiori. 
+- #link(<RI4>)[#underline[[RI4]]] e #link(<RI5>)[#underline[[RI5]]] Conflitti interni e disomogeneità: Si sono verificate importanti frizioni comunicative e incomprensioni dovute a uno sbilanciamento produttivo e a divergenze su cosa debba essere considerato "lavoro rendicontabile".
+- #link(<RCO1>)[#underline[[RCO1]]] Errata stima dei tempi: Si è evidenziata un'incongruenza tra il tempo speso per la progettazione di componenti semplici e la necessità di completare task critici come gli agenti, portando a ritardi sulle milestone pattuite.
+
+===== Obiettivi per lo Sprint Successivo
+Per lo Sprint successivo, il team si pone i seguenti obiettivi prioritari:
+- Finire lo sviluppo dell'Agente Codice, dell'Agente Sicurezza e dell'Agente Documentazione, oltre all'implementazione dell'orchestrazione e degli adapter per i tool.
+- Concludere il deployment dell'architettura in AWS (AppRunner, ECS, RDS).
+- Concludere il collegamento delle interfacce frontend con gli endpoint dei microservizi e completare la generazione dei grafici/diagrammi da inserire nella Specifica Tecnica.
+- Revisionare e terminare la Specifica Tecnica in tutte le sue parti, gettare le basi per la stesura del Manuale Utente e sistemare definitivamente tabelle e consuntivi nel Piano di Progetto (PdP).
+
+===== Aggiornamento preventivo a finire PB
+#TODO("Cambiare questa parte se si fanno modifiche orarie")
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    columns: (1fr, 1fr, 1fr, 1fr),
+    inset: 10pt,
+    align: center + horizon,
+    stroke: 0.5pt + luma(200),
+
+    table.header(
+      text(fill: white, weight: "bold")[Ruolo],
+      text(fill: white, weight: "bold")[Ore rimanenti per PB],
+      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
+      text(fill: white, weight: "bold")[Preventivo a finire costi],
+    ),
+
+    [Responsabile], [10], [-],[€ 300,00],
+    [Amministratore], [28.5], [-], [€ 570,00],
+    [Analista], [17], [-],[€ 425,00],
+    [Progettista], [12],[-],[€ 300,00],
+    [Programmatore], [48],[-],[€ 720,00],
+    [Verificatore], [80],[-],[€ 1200,00],
+
+    table.cell(fill: luma(240))[*Totale PB*],
+    table.cell(fill: luma(240))[*196.5*],
+    table.cell(fill: luma(240))[[*-*]],
+    table.cell(fill: luma(240))[*€ 3540,00*],
+  ),
+  caption: [Aggiornamento preventivo a finire sprint 9],
+)
+#pagebreak()

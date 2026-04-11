@@ -8,17 +8,22 @@ skinparam ClassAttributeIconSize 0
 hide circles
 
 class CoverageFinding {
-    - totalLinesPercentage: CoveragePercentage
-    - totalBranchesPercentage: CoveragePercentage
-    - coverageFiles: CoverageFile[]
+    - _totalLinesPercentage: CoveragePercentage
+    - _totalBranchesPercentage: CoveragePercentage
+    - _coverageFiles: FileCoverage[]
+    - _analyzedLanguage: SupportedLanguages
     ---
-    - CoverageFinding(lines: CoveragePercentage, branches: CoveragePercentage, filesCov: CoverageFile[])
-    + getTotalLinesPercentage() : CoveragePercentage
-    + getTotalBranchesPercentage() : CoveragePercentage
-    + getCoverageFiles() : CoverageFile[]
-    + {static} create(lines: CoveragePercentage, branches: CoveragePercentage, filesCov: CoverageFile[]) : CoverageFinding
+    - CoverageFinding(lines, branches, files, language)
+    - validate(): void
+    + {static} create(lines, branches, files, language): CoverageFinding
+    + getTotalLinesPercentage(): CoveragePercentage
+    + getTotalBranchesPercentage(): CoveragePercentage
+    + getCoverageFiles(): FileCoverage[]
+    + getAnalyzedLanguage(): SupportedLanguages
+    + equals(other: CoverageFinding): boolean
 }
 
-CoverageFinding --left--> CoverageFile
-CoverageFinding --right--> CoveragePercentage
+CoverageFinding --right-> CoveragePercentage
+CoverageFinding --right-> FileCoverage
+CoverageFinding --down-> SupportedLanguages
 @enduml

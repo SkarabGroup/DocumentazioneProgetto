@@ -1,0 +1,22 @@
+@startuml CheckAvailabilityRequest
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class CheckAvailabilityRequest {
+    + repoUrl: RepoURL
+    + patToken: PersonalAccessToken | null
+    + branch: BranchName | null
+    + commit: CommitHash | null
+    ---
+    + CheckAvailabilityRequest(repoUrl, patToken, branch, commit)
+}
+
+CheckAvailabilityRequest --right-> RepoURL
+CheckAvailabilityRequest --right-> PersonalAccessToken
+CheckAvailabilityRequest --down-> BranchName
+CheckAvailabilityRequest --down-> CommitHash
+@enduml
