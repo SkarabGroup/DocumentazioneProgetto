@@ -422,7 +422,7 @@ L'obiettivo del Domain Core è modellare la realtà del problema attraverso un l
 I Value Object rappresentano concetti del dominio definiti esclusivamente dai loro attributi. Sono progettati per essere *immutabili*: una volta istanziati, il loro stato non può subire variazioni, garantendo la thread-safety e la stabilità dei riferimenti durante l'intero ciclo di vita della richiesta. L'uguaglianza tra due Value Object è determinata dal valore delle proprietà incapsulate e non dall'identità dell'istanza in memoria.
 
 ====== UserId <UserIdAccount>
-#codeDiagram("UserIdAccount", 30%)
+#codeDiagram("UserIdAccount", 35%)
 
 L'identificativo `UserId` costituisce l'atomo di identità dell'utente all'interno del dominio. Esso rappresenta univocamente un registrante nei sistemi di persistenza.
 
@@ -432,7 +432,7 @@ L'identificativo `UserId` costituisce l'atomo di identità dell'utente all'inter
 - *Comparazione Deterministica:* Semplifica e rende sicura l'uguaglianza tra identificatori tramite un metodo centralizzato, garantendo una risoluzione coerente quando gli utenti vengono ricercati o confrontati.
 
 ====== Email <Email>
-#codeDiagram("Email", 30%)
+#codeDiagram("Email", 35%)
 
 L'oggetto `Email` incapsula l'indirizzo di posta elettronica dell'utente, fungendo da identificativo principale per le procedure di autenticazione e recupero credenziali.
 
@@ -441,7 +441,7 @@ L'oggetto `Email` incapsula l'indirizzo di posta elettronica dell'utente, fungen
 - *Invariante di Dominio:* Assicurando che non esistano oggetti `Email` nulli o formattati erroneamente, solleva i servizi applicativi e gli adattatori di persistenza dal dover validare ripetutamente il dato, centralizzando la logica di consistenza.
 
 ====== Password <Password>
-#codeDiagram("Password", 30%)
+#codeDiagram("Password", 40%)
 
 L'oggetto `Password` rappresenta una password in chiaro nel momento del suo inserimento. Il dominio garantisce che questa istanza sia temporanea e serva esclusivamente per le fasi di controllo qualitativo e crittografico.
 
@@ -450,7 +450,7 @@ L'oggetto `Password` rappresenta una password in chiaro nel momento del suo inse
 - *Limitazione dell'Esposizione:* Essendo un oggetto effimero, il suo scopo principale è transitare in modo controllato verso i servizi di crittografia (per la generazione dell'hash) o di comparazione, impedendone l'accidentale salvataggio in chiaro.
 
 ====== PasswordHash <PasswordHash>
-#codeDiagram("PasswordHash", 40%)
+#codeDiagram("PasswordHash", 45%)
 
 L'oggetto `PasswordHash` rappresenta la credenziale cifrata salvata in isolamento e persistita nel sistema. L'infrastruttura di dominio non possiede le chiavi in formati leggibili ma esclusivamente la loro traduzione crittografica sicura.
 
@@ -466,7 +466,7 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 - *Integrità Comportamentale:* Non si limitano a esporre dati (getter/setter), ma offrono metodi che rappresentano azioni di business, assicurando che l'oggetto passi solo attraverso stati validi e coerenti.
 
 ====== User <User>
-#codeDiagram("User", 80%)
+#codeDiagram("User", 90%)
 
 L'entità `User` costituisce l'entità radice del dominio di autenticazione. Essa incapsula l'identità dell'utente (`UserId`), le credenziali di accesso nella loro forma protetta (`Email`, `PasswordHash`) e i metadati temporali di ciclo di vita (`createdAt`, `updatedAt`).
 
@@ -736,11 +736,12 @@ L'entità `User` costituisce l'entità radice del dominio di autenticazione. Ess
 
 - *Dipendenza dall'Interfaccia:* La dipendenza da `IloginUseCase` anziché da `LoginService` garantisce che il controller possa essere testato con un mock dell'interfaccia senza dover istanziare l'intera catena di dipendenze del servizio.
 
-//controllo service
 ====== LogoutController <LogoutController>
 #codeDiagram("LogoutController", 75%)
 
-`LogoutController` espone l'endpoint HTTP di chiusura sessione. Inietta direttamente `LogoutService`, costruisce un `LogoutCommand` dal `LogoutRequestDto` e invoca il caso d'uso, restituendo un `LogoutResponseDto`.
+`LogoutController` espone l'endpoint HTTP di chiusura sessione. Inietta `ILogoutUseCase`, costruisce un `LogoutCommand` dal `LogoutRequestDto` e invoca il caso d'uso, restituendo un `LogoutResponseDto`.
+
+- *Dipendenza dall'Interfaccia:* La dipendenza da `ILogoutUseCase` anziché da `LogoutService` garantisce che il controller possa essere testato con un mock dell'interfaccia senza dover istanziare l'intera catena di dipendenze del servizio.
 
 ====== RegistrationController <RegistrationController>
 #codeDiagram("RegistrationController", 75%)
