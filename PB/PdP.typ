@@ -1,11 +1,18 @@
 #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
-#let versione = "v1.5.0"
+#let versione = "v1.6.0"
 
 #titlePage("Piano di Progetto", versione)
 #set page(numbering: "1", header: header("Piano di Progetto"), footer: footer())
 #set heading(numbering: "1.1.1")
 #let history = (
+  (
+    "2026/04/11",
+    "1.6.0",
+    "Retrospettiva Sprint 9",
+    members.andrea,
+    "",
+  ),
   (
     "2026/04/05",
     "1.5.0",
@@ -2140,6 +2147,7 @@ Le attività pianificate per questo sprint si concentrano sull'avanzamento della
 - *Sviluppo Microservizio Analisi:*
   - Completamento degli use case per il recupero dei report, finalizzazione della logica di clonazione della repository e sviluppo dei test di integrazione con MongoDB.
   - Fine svilippo e implementazione dei Value Object per i report delle analisi.
+  - Sviluppo focalizzato sull'implementazione pratica degli Agenti LLM (Agente Codice, Agente Documentazione e base dell'Agente Sicurezza).
   - Sviluppo della logica di conversione (mapping) all'interno degli Adapter dei tool per standardizzare in un formato comprensibile per l'Application Service.
 - *Sviluppo Microservizio Credenziali/Account:*
   - Sviluppo dei controller mancanti per le fasi di Login e Registrazione e sistemazione finale del Adapter per il collegamento al database.
@@ -2153,12 +2161,12 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 
 #sprint_table(
   (
-    ([Basso Kevin], 0, 0, 0, 0, 0, 0),
-    ([Berengan Riccardo], 0, 0, 0, 0, 0, 0),
-    ([Martinello Riccardo], 0, 0, 0, 0, 0, 0),
-    ([Sandu Antonio], 0, 0, 0, 0, 0, 0),
-    ([Sgreva Andrea], 3.5, 0, 0, 0, 0, 0),
-    ([Suar Alberto], 0, 0, 0, 0, 0, 0),  //60% 40% ore rimanenti
+    ([Basso Kevin], 0, 0, 0, 0, 6, 4),
+    ([Berengan Riccardo], 0, 0, 0, 1, 10, 1), 
+    ([Martinello Riccardo], 0, 0, 0, 4, 2, 0),
+    ([Sandu Antonio], 0, 2, 0, 1, 6, 2),
+    ([Sgreva Andrea], 3.5, 0, 0, 1, 8, 2),
+    ([Suar Alberto], 0, 3, 0, 2, 6, 4),
     ([Zago Alice], 0, 0, 0, 0, 0, 0),
   ),
   [Prospetto orario preventivato per lo Sprint 9],
@@ -2167,13 +2175,98 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 ==== Prospetto attività
 #activity_table(
   (
-    ("Stesura della Specifica Tecnica", "Amministratore", "", "", "In corso"),
-    ("Sviluppo interfaccia Frontend", "Programmatore", "", "", "In corso"),
-    ("Implementazioni del codice generali dei microservizi", "Programmatore", "", "", "In corso"),
-    ("Implementazione codice dei Value Objects per i report di analisi", "Programmatore", "", "", "In corso"),
-    ("Sviluppo logica di mapping negli Adapter dei tool", "Progettista", "", "", "In corso"),
-    ("Coordinamento riunioni e avanzamenti", "Responsabile", "3:30", "3:30", "In corso"),
-    ("Attività di verifica dei documenti e del codice", "Verificatore", "", "", "In corso"),
+    ("Stesura ST (Microservizio Account e Tecnologie)", "Amministratore", "5:00", "5:00", "Completata"),
+    ("Progettazione diagrammi Value Object in ST", "Progettista", "4:00", "4:00", "Completata"),
+    ("Sviluppo Microservizio Account e credenziali", "Programmatore", "12:00", "12:00", "Completata"),
+    ("Sviluppo Agenti (Codice, Doc, Sicurezza) e tool", "Programmatore", "18:00", "18:00", "Completata"),
+    ("Sviluppo interfaccia Frontend", "Programmatore", "2:00", "2:00", "Completata"),
+    ("Progettazione interfaccia Frontend", "Progettista", "4:00", "4:00", "Completata"),
+    ("Configurazione Deployment AWS (AppRunner, RDS)", "Programmatore", "6:00", "6:00", "Completata"),
+    ("Progettazione configurazione Deployment AWS (AppRunner, RDS)", "Programmatore", "1:00", "1:00", "Completata"),
+    ("Coordinamento riunioni e avanzamenti", "Responsabile", "3:30", "3:30", "Completata"),
+    ("Attività di verifica PR, codice e documenti", "Verificatore", "13:00", "13:00", "Completata"),
   ),
   [Riassunto delle attività svolte durante lo sprint 9]
 )
+
+==== Consumo Tempo e Costi Effettivi (Consuntivo)
+La tabella sottostante illustra le ore produttive effettivamente rendicontate.
+
+#sprint_table(
+  (
+    ([Basso Kevin], 0, 0, 0, 0, 6, 4),
+    ([Berengan Riccardo], 0, 0, 0, 1, 10, 1), 
+    ([Martinello Riccardo], 0, 0, 0, 4, 2, 0),
+    ([Sandu Antonio], 0, 2, 0, 1, 6, 2),
+    ([Sgreva Andrea], 3.5, 0, 0, 1, 8, 2),
+    ([Suar Alberto], 0, 3, 0, 2, 6, 4),
+    ([Zago Alice], 0, 0, 0, 0, 0, 0),
+  ),
+  [Consuntivo orario effettivo per lo Sprint 9],
+)
+
+==== Retrospettiva dello sprint 9
+===== Valutazione del Periodo
+Questo sprint si è concluso con un forte avanzamento per quanto riguarda la codifica e l'integrazione. Il focus principale del team è stato lo sviluppo pratico dei microservizi ed in particolare dello sviluppo degli agenti, il testing degli endpoint e l'inizio delle complesse procedure di deployment in ambiente AWS.
+
+===== Stato di Avanzamento dei Deliverable
+- *Microservizio Account/Credenziali*: Lo sviluppo può considerarsi concluso ed è stata terminata anche la relativa parte di Specifica Tecnica.
+
+- *Microservizio Analisi (Agenti)*:
+  - *Agente Documentazione*: Lo sviluppo è concluso, manca solo il salvataggio dell'entity nel database
+  - *Agente Codice*: Il codice è a un ottimo punto, ma sono emersi problemi bloccanti legati all'esaurimento dei token durante l'analisi dei report di coverage
+  - *Agente Sicurezza*: Lo sviluppo ha accumulato un leggero ritardo ma è in fase di conclusione
+
+- *Deployment*: È in corso la configurazione su AWS (AppRunner, ECS, RDS), un'attività che si è rivelata più complessa del previsto, specialmente per la gestione dei servizi esterni nella stessa rete
+
+- *Frontend*: Il codice è stato caricato su un branch dedicato ed è in corso l'attività di collegamento con gli endpoint e la stesura dei grafici per la Specifica Tecnica
+
+===== Squilibri orari preventivati e reali
+Poiché non era stato redatto un preventivo formale a inizio settimana, le stime del preventivo sono state adattate basandosi sul lavoro effettivamente svolto (consuntivo) per mantenere la coerenza dei documenti.  
+#TODO("Cambiare questa parte se si fa il preventivo")
+
+===== Rischi Rilevati
+Nel corso dello Sprint si sono manifestati o sono stati sfiorati i seguenti rischi già censiti:
+- #link(<RT5>)[#underline[[RT5]]] Costi e Limiti di Utilizzo: Il limite di token in output è stato ripetutamente superato dall'Agente Codice a causa della dimensione dei report generati, rendendo difficile il testing nonostante il passaggio a modelli superiori. 
+- #link(<RI4>)[#underline[[RI4]]] e #link(<RI5>)[#underline[[RI5]]] Conflitti interni e disomogeneità: Si sono verificate importanti frizioni comunicative e incomprensioni dovute a uno sbilanciamento produttivo e a divergenze su cosa debba essere considerato "lavoro rendicontabile".
+- #link(<RCO1>)[#underline[[RCO1]]] Errata stima dei tempi: Si è evidenziata un'incongruenza tra il tempo speso per la progettazione di componenti semplici e la necessità di completare task critici come gli agenti, portando a ritardi sulle milestone pattuite.
+
+===== Obiettivi per lo Sprint Successivo
+Per lo Sprint successivo, il team si pone i seguenti obiettivi prioritari:
+- Finire lo sviluppo dell'Agente Codice, dell'Agente Sicurezza e dell'Agente Documentazione, oltre all'implementazione dell'orchestrazione e degli adapter per i tool.
+- Concludere il deployment dell'architettura in AWS (AppRunner, ECS, RDS).
+- Concludere il collegamento delle interfacce frontend con gli endpoint dei microservizi e completare la generazione dei grafici/diagrammi da inserire nella Specifica Tecnica.
+- Revisionare e terminare la Specifica Tecnica in tutte le sue parti, gettare le basi per la stesura del Manuale Utente e sistemare definitivamente tabelle e consuntivi nel Piano di Progetto (PdP).
+
+===== Aggiornamento preventivo a finire PB
+#TODO("Cambiare questa parte se si fanno modifiche orarie")
+#figure(
+  table(
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    columns: (1fr, 1fr, 1fr, 1fr),
+    inset: 10pt,
+    align: center + horizon,
+    stroke: 0.5pt + luma(200),
+
+    table.header(
+      text(fill: white, weight: "bold")[Ruolo],
+      text(fill: white, weight: "bold")[Ore rimanenti per PB],
+      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
+      text(fill: white, weight: "bold")[Preventivo a finire costi],
+    ),
+
+    [Responsabile], [10], [-],[€ 300,00],
+    [Amministratore], [28.5], [-], [€ 570,00],
+    [Analista], [17], [-],[€ 425,00],
+    [Progettista], [12],[-],[€ 300,00],
+    [Programmatore], [48],[-],[€ 720,00],
+    [Verificatore], [80],[-],[€ 1200,00],
+
+    table.cell(fill: luma(240))[*Totale PB*],
+    table.cell(fill: luma(240))[*196.5*],
+    table.cell(fill: luma(240))[[*-*]],
+    table.cell(fill: luma(240))[*€ 3540,00*],
+  ),
+  caption: [Aggiornamento preventivo a finire sprint 9],
+)
+#pagebreak()
