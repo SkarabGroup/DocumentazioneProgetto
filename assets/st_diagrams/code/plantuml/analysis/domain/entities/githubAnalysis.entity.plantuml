@@ -1,5 +1,4 @@
 @startuml GitHubAnalysis
-
 skinparam componentStyle uml2.5
 skinparam linetype ortho
 skinparam nodesep 30
@@ -8,20 +7,29 @@ skinparam ClassAttributeIconSize 0
 hide circles
 
 class GitHubAnalysis {
-    - url: RepoURL
+    - analysisId: AnalysisId
+    - userId: UserId
+    - repoURL: RepoURL
     - branch: BranchName
     - commit: CommitHash
+    - status: AnalysisStatus
     ---
-    # GitHubAnalysis(user: UserId, url: RepoURL, branch: BranchName, commit: CommitHash)
-    + getURL(): RepoURL
-    + getCommit(): CommitHash
+    - GitHubAnalysis(id, user, url, branch, commit)
+    + {static} create(properties: GitHubAnalysisProps): GitHubAnalysis
+    + getRepoURL(): RepoURL
     + getBranch(): BranchName
-    + {static} create(analysisCommand: AnalysisFactoryCommand): GitHubAnalysis
+    + getCommit(): CommitHash
+    + getAnalysisId(): AnalysisId
+    + inProgress(): void
+    + complete(): void
+    + failed(): void
+    + equals(other: GitHubAnalysis): boolean
 }
 
-GitHubAnalysis --up|> Analysis
-
-GitHubAnalysis --right-> RepoURL
-GitHubAnalysis --left-> BranchName
-GitHubAnalysis --left-> CommitHash
+GitHubAnalysis --right-> AnalysisId
+GitHubAnalysis --right-> UserId
+GitHubAnalysis --down-> RepoURL
+GitHubAnalysis --down-> BranchName
+GitHubAnalysis --down-> CommitHash
+GitHubAnalysis --left-> AnalysisStatus
 @enduml

@@ -1,0 +1,31 @@
+@startuml StartAnalysisService
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+interface StartAnalysisUseCase {
+    + execute(command: StartAnalysisCommand): Promise<StartAnalysisResult>
+}
+
+class StartAnalysisService {
+    - passwordProviderService: IPasswordProvider
+    - authorizationService: IRepositoryAuthorizer
+    - validatorService: IRepositoryValidator
+    - clonerService: IRepositoryCloner
+    - orchestratorService: IAnalysisOrchestrator
+    ---
+    + StartAnalysisService(passwordProvider, authorizer, validator, cloner, orchestrator)
+    + execute(command: StartAnalysisCommand): Promise<StartAnalysisResult>
+}
+
+StartAnalysisService ..|> StartAnalysisUseCase
+StartAnalysisService --right-> IPasswordProvider
+StartAnalysisService --right-> IRepositoryAuthorizer
+StartAnalysisService --right-> IRepositoryValidator
+StartAnalysisService --right-> IRepositoryCloner
+StartAnalysisService --right-> IAnalysisOrchestrator
+StartAnalysisService --down-> GitHubAnalysis
+@enduml

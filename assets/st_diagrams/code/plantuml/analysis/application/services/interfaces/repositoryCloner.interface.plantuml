@@ -1,0 +1,18 @@
+@startuml IRepositoryCloner
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+interface IRepositoryCloner {
+    + clone(repoUrl: RepoURL, analysisId: AnalysisId, patToken: PersonalAccessToken | null, branch: BranchName | null, commit: CommitHash | null): Promise<string>
+}
+
+IRepositoryCloner --right-> RepoURL
+IRepositoryCloner --right-> AnalysisId
+IRepositoryCloner --down-> PersonalAccessToken
+IRepositoryCloner --down-> BranchName
+IRepositoryCloner --down-> CommitHash
+@enduml

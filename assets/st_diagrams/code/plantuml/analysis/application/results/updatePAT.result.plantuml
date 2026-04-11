@@ -1,0 +1,17 @@
+@startuml UpdatePatResult
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class UpdatePatResult {
+    + isSuccess: boolean
+    + errorMessage?: string
+    ---
+    - UpdatePatResult(isSuccess, errorMessage?)
+    + {static} success(): UpdatePatResult
+    + {static} failure(errorMessage): UpdatePatResult
+}
+@enduml
