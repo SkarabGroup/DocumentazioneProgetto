@@ -12,7 +12,7 @@ class UserId {
     ---
     - UserId(value: string)
     + {static} create(value: string): UserId
-    + {static} generate(): UserId
+    + {static} generate(value: string): UserId
     - validate(value: string): void
     + equals(other: UserId): boolean
     + get value(): string

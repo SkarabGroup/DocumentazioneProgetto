@@ -1,0 +1,20 @@
+@startuml BcryptService
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class BcryptService {
+    - rounds: number
+    + hash(plaintext: string): Promise<string>
+    + compare(plaintext: string, hash: string): Promise<boolean>
+}
+
+' Relations
+BcryptService ..up|> IHashPasswordPort
+BcryptService ..up|> IHashComparePort
+
+@enduml

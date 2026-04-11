@@ -1,0 +1,22 @@
+@startuml LoginController
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class LoginController {
+    - loginUseCase: IloginUseCase
+    ---
+    + LoginController(loginUseCase: IloginUseCase)
+    + login(requestDto: LoginRequestDto): Promise<AuthResponseDto>
+}
+
+' Relations
+LoginController --> IloginUseCase
+LoginController ..> LoginRequestDto
+LoginController ..> AuthResponseDto
+
+@enduml

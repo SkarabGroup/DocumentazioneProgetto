@@ -2,7 +2,7 @@
 #import "../lib/variables.typ": *
 #import "../lib/stDiagramUtil.typ": *
 
-#let versione = "v0.5.0"
+#let versione = "v0.8.0"
 #set heading(numbering: "1.1.1")
 /*
 === FUNZIONAMENTO DEL DOCUMENTO ===
@@ -24,18 +24,24 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #set page(numbering: "1", header: header("Specifica Tecnica"), footer: footer())
 #let history = (
   (
+    "2026/04/09",
+    "0.8.0",
+    "Aggiunti tutti i componenti di Account Microservice",
+    members.alice,
+  ),
+  (
     "2026/04/06",
     "0.6.0",
-    "Aggiunta sezione scelta tool per l'analisi della sicureza",
+    "Aggiunta sezione scelta tool per l'analisi della sicurezza",
     members.antonio,
-    members.suar
+    members.suar,
   ),
   (
     "2026/03/31",
     "0.5.0",
     "Stesura dei VO dell'Account Microservice",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/03/31",
@@ -415,14 +421,14 @@ L'obiettivo del Domain Core è modellare la realtà del problema attraverso un l
 ===== Value Object
 I Value Object rappresentano concetti del dominio definiti esclusivamente dai loro attributi. Sono progettati per essere *immutabili*: una volta istanziati, il loro stato non può subire variazioni, garantendo la thread-safety e la stabilità dei riferimenti durante l'intero ciclo di vita della richiesta. L'uguaglianza tra due Value Object è determinata dal valore delle proprietà incapsulate e non dall'identità dell'istanza in memoria.
 
-====== UserIdAccount <UserIdAccount>
+====== UserId <UserIdAccount>
 #codeDiagram("UserIdAccount", 30%)
 
-L'identificativo `UserIdAccount` costituisce l'atomo di identità dell'utente all'interno del dominio. Esso rappresenta univocamente un registrante nei sistemi di persistenza.
+L'identificativo `UserId` costituisce l'atomo di identità dell'utente all'interno del dominio. Esso rappresenta univocamente un registrante nei sistemi di persistenza.
 
 - *Invariante di Formato:* La sua validazione garantisce che l'identificativo sia un UUID formattato correttamente, prevenendo l'introduzione di chiavi primarie invalide o attacchi tramite stringhe malformate.
 - *Astrazione della Persistenza:* Disaccoppia la logica di business dall'implementazione fisica della chiave primaria, assicurando che lo strato di dominio comunichi tramite un tipo forte e non attraverso primitive volatili come le stringhe.
-- *Prevenzione del Type Mismatch:* Impedisce l'interscambiabilità accidentale con altri identificativi testuali (come ad esempio il #underline[#link(<GithubId>)[`GithubId`]]), prevenendo bug che la normale tipizzazione a stringa non riuscirebbe a intercettare.
+- *Prevenzione del Type Mismatch:* Impedisce l'interscambiabilità accidentale con altri identificativi testuali, prevenendo bug che la normale tipizzazione a stringa non riuscirebbe a intercettare.
 - *Comparazione Deterministica:* Semplifica e rende sicura l'uguaglianza tra identificatori tramite un metodo centralizzato, garantendo una risoluzione coerente quando gli utenti vengono ricercati o confrontati.
 
 ====== Email <Email>
@@ -452,36 +458,351 @@ L'oggetto `PasswordHash` rappresenta la credenziale cifrata salvata in isolament
 - *Scudo per la Persistenza:* Costituisce l'unica rappresentazione della password ammessa nel modello persistente, certificando allo strato di database che il dato fornito è già stato processato e validato da un servizio crittografico.
 - *Confronto Cifrato Sicuro:* Identifica esplicitamente il dominio di competenza per le collisioni e agevola la comunicazione con i servizi di hashing durante le procedure di login per il ricalcolo e confronto dell'hash reale.
 
-====== GithubId <GithubId>
-#codeDiagram("GithubId", 30%)
-
-L'oggetto `GithubId` è l'identificativo numerico remoto restituito da GitHub. Rappresenta in modo affidabile e duraturo l'utente nel contesto esplicito di un identity provider esterno.
-
-- *Identificazione Stabile:* Poiché gli username su GitHub possono essere cambiati dagli utenti, questo Value Object incapsula l'Id numerico immutabile, conferendo una stabilità architetturale al legame tra l'account di _Code Guardian_ e il profilo GitHub.
-- *Prevenzione del Type Mismatch:* Distingue in modo forte questo identificativo remoto da un ID account generato internamente (es. #underline[#link(<UserIdAccount>)[`UserIdAccount`]]), ostacolando qualsiasi confusione a livello di codice durante l'associazione delle piattaforme.
-- *Validazione del Formato Remoto:* Garantisce con espressioni regolari che il valore consista esclusivamente in cifre numeriche (fino a 50) e non sia vuoto, bloccando manipolazioni del dato o corruzioni dall'API remota ancor prima che arrivino al database.
-
-====== PersonalAccessToken <PersonalAccessToken>
-#codeDiagram("PersonalAccessToken", 40%)
-
-L'oggetto `PersonalAccessToken` incapsula il token di accesso in chiaro necessario per interagire con le API di GitHub. Nel dominio, questo rappresenta un "segreto di accesso" provvisorio che richiede rigorose ispezioni alla creazione.
-
-- *Validazione Formale Stringente:* Previene la manipolazione o la creazione errata accertandosi che il token rispetti fedelmente gli standard e i pattern crittografici dettati da GitHub (es. presenza del prefisso `ghp_` o `github_pat_`).
-- *Confinamento del Token:* Essendo un dato ad altissima sensibilità, la sua natura di tipo forte riduce radicalmente le chance che il token sfugga per errore nei file di log, consentendo nel caso un offuscamento semplificato a livello logging.
-- *Filtraggio alla Fonte:* La validazione centralizzata intercetta tempestivamente PAT scaduti (per formato) o fittizi.
-
-====== EncryptedPat <EncryptedPat>
-#codeDiagram("EncryptedPat", 40%)
-
-L'oggetto `EncryptedPat` è la rappresentazione sicura del #underline[#link(<PersonalAccessToken>)[`Personal Access Token`]], l'unica formalmente autorizzata a essere salvata nella persistenza del database.
-
-- *Isolamento a Riposo Sicuro:* Garantisce che la persistenza gestisca soltanto testi oscurati serializzati in `Base64`, rendendo inoffensiva l'esposizione o esfiltrazione del DB da parte di attori malevoli.
-- *Invariante di Lunghezza e Formato:* Certifica l'output del servizio di crittografia validando che la stringa prodotta rientri nello standard, difendendo il dominio da malfunzionamenti dell'algoritmo matematico.
-- *Disaccoppiamento Teorico:* Traccia in maniera esplicita la linea di confine tra un "segreto utilizzabile" (`PersonalAccessToken`) e un "segreto archiviabile" (`EncryptedPat`), innalzando la sicurezza per tipizzazione del dominio.
-
 ===== Entity
 A differenza dei Value Object, le Entity sono definite dalla loro *identità* persistente nel tempo e non solo dai loro attributi. Un'Entity mantiene la propria individualità anche se i suoi dati interni subiscono variazioni. Esse incapsulano lo stato e il comportamento del business, garantendo che le transizioni di stato avvengano nel rispetto delle regole del dominio.
 
 - *Identità Univoca:* Ogni Entity è associata a un identificatore immutabile che ne permette la distinzione univoca all'interno del sistema.
 - *Ciclo di Vita e Stato:* Le Entity possiedono un ciclo di vita (creazione, modifica, archiviazione) e gestiscono attivamente le proprie mutazioni interne attraverso metodi espliciti.
 - *Integrità Comportamentale:* Non si limitano a esporre dati (getter/setter), ma offrono metodi che rappresentano azioni di business, assicurando che l'oggetto passi solo attraverso stati validi e coerenti.
+
+====== User <User>
+#codeDiagram("User", 80%)
+
+L'entità `User` costituisce l'entità radice del dominio di autenticazione. Essa incapsula l'identità dell'utente (`UserId`), le credenziali di accesso nella loro forma protetta (`Email`, `PasswordHash`) e i metadati temporali di ciclo di vita (`createdAt`, `updatedAt`).
+
+- *Incapsulamento del Ciclo di Vita:* I metodi `create` e `reconstitute` impongono percorsi di costruzione distinti e semanticamente precisi, facilitando la tracciabilità delle operazioni di dominio.
+- *Mutazione Controllata:* Il metodo `updatePassword` è l'unico punto di modifica dello stato interno dell'entità, garantendo che ogni cambio di credenziali passi attraverso la logica di dominio e non avvenga mediante accesso diretto ai campi.
+- *Proiezione verso il Layer Applicativo:* Il metodo `toDTO` genera una rappresentazione dell'entità esente da dettagli implementativi, permettendo il trasferimento sicuro dei dati verso i layer superiori senza esporre i segreti del dominio.
+
+
+==== Application
+===== Commands
+
+====== DeleteCommand <DeleteCommand>
+#codeDiagram("DeleteCommand", 30%)
+
+`DeleteCommand` incapsula il parametro necessario all'eliminazione di un account utente. Trasporta l'identificativo dell'utente da cancellare (`userToDelete`) come stringa non nulla, garantendo che il caso d'uso di cancellazione riceva un riferimento esplicito e non ambiguo al soggetto dell'operazione.
+
+====== LoginCommand <LoginCommand>
+#codeDiagram("LoginCommand", 50%)
+
+`LoginCommand` trasporta le credenziali di autenticazione dell'utente.
+
+- *Accoppiamento Esplicito delle Credenziali:* Il costruttore impone la co-presenza di `email` e `password`, impedendo l'invio di un comando di autenticazione parziale che potrebbe generare comportamenti indefiniti nel servizio sottostante.
+
+====== LogoutCommand <LogoutCommand>
+#codeDiagram("LogoutCommand", 30%)
+
+`LogoutCommand` incapsula il parametro necessario all'invalidazione di una sessione attiva. Il `refreshToken` rappresenta il token di sessione da revocare, identificando univocamente la sessione dell'utente da terminare senza richiederne l'identità diretta.
+
+====== RegistrationUserCommand <RegistrationUserCommand>
+#codeDiagram("RegistrationUserCommand", 60%)
+
+`RegistrationUserCommand` trasporta i dati necessari alla creazione di un nuovo account. Il costruttore esplicito garantisce che email e password siano sempre fornite contestualmente, rendendo impossibile avviare il flusso di registrazione in assenza di uno dei due parametri fondamentali.
+
+====== UpdateUserCommand <UpdateUserCommand>
+#codeDiagram("UpdateUserCommand", 60%)
+
+`UpdateUserCommand` incapsula i parametri per l'aggiornamento delle credenziali di un utente esistente. Trasporta l'email come identificativo del soggetto e la `newPassword`, separando semanticamente l'aggiornamento dalla creazione.
+
+- *Identificazione Implicita del Soggetto:* L'email funge sia da identificativo per recuperare l'utente dal repository, sia da dato invariante dell'account, riflettendo la decisione di design per cui l'email non è modificabile in questa versione del sistema.
+
+===== Application DTOs
+====== AuthResultDto <AuthResultDto>
+#codeDiagram("AuthResultDto", 60%)
+
+`AuthResultDto` rappresenta il risultato di un'operazione di autenticazione riuscita. Aggrega i token di sessione (`accessToken` e `refreshToken`) con la proiezione dell'utente autenticato (`UserDTO`).
+
+- *Completezza del Contratto di Autenticazione:* La co-presenza di token e dati utente evita una doppia richiesta al backend (una per i token e una per il profilo), ottimizzando il flusso di autenticazione.
+
+====== JwtPayload <JwtPayload>
+#codeDiagram("JwtPayload", 25%)
+
+`JwtPayload` definisce la struttura del payload del token JWT. Incapsula il `sub` (subject, ovvero l'`userId`), l'`email`, e i campi temporali standard `iat` (issued at) e `exp` (expiration).
+
+- *Contratto Condiviso tra Porte:* Sia `ITokenProviderPort` che `IVerifyTokenPort` dipendono da questo tipo, garantendo che la struttura del payload sia coerente tra il momento della firma e quello della verifica, senza duplicazioni di definizione.
+- *Campi Temporali Opzionali:* `iat` ed `exp` sono marcati come opzionali (`?`) poiché possono essere aggiunti dalla libreria JWT durante la firma e non devono essere necessariamente presenti nel payload in input alla generazione.
+
+====== UserDTO <UserDTO>
+#codeDiagram("UserDTO", 25%)
+
+`UserDTO` è la proiezione del dominio utente destinata alla comunicazione interna tra i livelli applicativo e di presentazione. Espone i soli campi necessari alle operazioni di lettura (`id`, `email`, `createdAt`, `updatedAt`), occultando i dettagli sensibili come `PasswordHash`.
+
+===== Exceptions
+
+====== InvalidCredentialsException <InvalidCredentialsException>
+#codeDiagram("InvalidCredentialsException", 40%)
+
+`InvalidCredentialsException` è l'eccezione sollevata dal `LoginService` quando la combinazione email/password fornita non corrisponde a nessun account valido nel sistema. Il costruttore senza parametri formalizza un errore di business che non richiede dettagli aggiuntivi: l'unica informazione rilevante è che le credenziali sono invalide.
+
+===== Ports
+
+====== IHashComparePort <IHashComparePort>
+#codeDiagram("IHashComparePort", 65%)
+
+`IHashComparePort` definisce il contratto per la verifica di una password in chiaro rispetto a un hash crittografico. Il metodo `compare(plaintext, hash)` restituisce una `Promise<boolean>`, astraendo l'algoritmo di hashing effettivamente utilizzato dall'interno del Core applicativo.
+
+- *Inversione della Dipendenza:* Il `LoginService` dipende da questa interfaccia e non da una specifica implementazione, rendendo possibile la sostituzione dell'algoritmo di hashing senza modificare la logica di business.
+- *Testabilità:* In fase di test unitario, questa porta può essere sostituita da un'implementazione mock che restituisce `true` o `false` in modo deterministico, isolando il `LoginService` dall'overhead computazionale del vero algoritmo crittografico.
+
+====== IHashPasswordPort <IHashPasswordPort>
+#codeDiagram("IHashPasswordPort", 50%)
+
+`IHashPasswordPort` definisce il contratto per la trasformazione di una password in chiaro nel suo hash crittografico. Il metodo `hash(plaintext)` restituisce una `Promise<string>`, rendendo il Core indipendente dall'algoritmo di hashing e dalla sua configurazione.
+
+- *Separazione delle Responsabilità:* La porta di hashing è distinta da quella di confronto (`IHashComparePort`), poiché si tratta di operazioni semanticamente diverse usate in contesti diversi (registrazione vs login), con diversi use case come dipendenti.
+- *Sicurezza by Design:* Incapsulare l'hashing in una porta formalizza la regola che nessuna password deve mai essere salvata in chiaro nel sistema, rendendo questo vincolo di sicurezza esplicito nell'architettura.
+
+====== ISessionDeletePort <ISessionDeletePort>
+#codeDiagram("ISessionDeletePort", 60%)
+
+`ISessionDeletePort` definisce il contratto per la revoca di una sessione attiva. Il metodo `deleteSession(refreshToken)` richiede il token di sessione come identificativo, delegando all'adattatore la ricerca e l'eliminazione del record corrispondente nel layer di persistenza.
+
+- *Semantica del Logout:* L'uso del `refreshToken` come parametro riflette la decisione architetturale di trattare la sessione come un'entità identificata dal token e non dall'utente, permettendo il logout selettivo in scenari multi-sessione.
+- *Isolamento dalla Persistenza:* Il Core non ha conoscenza del meccanismo di archiviazione delle sessioni; tale dettaglio è completamente nascosto dall'adattatore che implementa questa porta.
+
+====== ISessionSavePort <ISessionSavePort>
+#codeDiagram("ISessionSavePort", 80%)
+
+`ISessionSavePort` definisce il contratto per la creazione e il salvataggio di una nuova sessione. Il metodo `saveSession(userId, refreshToken, expiresAt)` riceve i tre parametri essenziali che caratterizzano una sessione: il soggetto, il token di accesso rinnovabile e la scadenza.
+
+- *Completezza del Contratto di Sessione:* I tre parametri riflettono i requisiti minimi per una gestione sicura delle sessioni: l'`expiresAt` permette la scadenza automatica e il `refreshToken` identifica univocamente la sessione per operazioni future.
+- *Disaccoppiamento dallo Storage:* Il Core delega completamente all'adattatore la scelta di dove e come persistere la sessione.
+
+====== ITokenProviderPort <ITokenProviderPort>
+#codeDiagram("ITokenProviderPort", 60%)
+
+`ITokenProviderPort` definisce il contratto per la generazione di token di autenticazione. Il metodo `generateToken` produce il token di accesso a breve scadenza, mentre `generateRefreshToken` produce il token di rinnovo a lunga scadenza, entrambi a partire da un `JwtPayload`.
+
+- *Separazione dei Tipi di Token:* L'esistenza di due metodi distinti riflette la differente semantica e configurazione dei due tipi di token, rendendo esplicita nell'architettura la distinzione tra access token e refresh token.
+- *Indipendenza dalla Libreria JWT:* Il Core non importa direttamente librerie come `jsonwebtoken`; la generazione è delegata all'adattatore `JwtService`, che può essere sostituito con qualsiasi altra implementazione compatibile con il contratto.
+
+====== IUserDeletePort <IUserDeletePort>
+#codeDiagram("IUserDeletePort", 50%)
+
+`IUserDeletePort` definisce il contratto per la rimozione permanente di un utente dal sistema. Il metodo `deleteUser(userId)` utilizza l'identificativo come unico parametro, separando semanticamente l'eliminazione dell'utente dalla cancellazione delle sue sessioni (gestita da `ISessionDeletePort`).
+
+- *Granularità delle Operazioni:* La separazione tra la porta di cancellazione dell'utente e quella della sessione consente al `DeleteService` di orchestrare la rimozione in più fasi, o di implementare soft delete senza modificare i contratti.
+- *Atomicità Delegata:* La gestione dell'atomicità dell'operazione è responsabilità dell'adattatore o dello strato di infrastruttura, non del Core.
+
+====== IUserFindPort <IUserFindPort>
+#codeDiagram("IUserFindPort", 50%)
+
+`IUserFindPort` definisce il contratto per il recupero di un'entità `User` dalla persistenza tramite email. La firma `find(email): Promise<User | null>` comunica esplicitamente che l'utente potrebbe non esistere, obbligando i chiamanti a gestire il caso di assenza senza ricorrere a eccezioni per il controllo di flusso ordinario.
+
+- *Return Type Esplicito del "Not Found":* Il tipo di ritorno `User | null` è preferito alla propagazione di un'eccezione per l'assenza dell'utente, distinguendo a livello di tipo tra un errore operativo e un esito atteso ma negativo della ricerca.
+
+====== IUserSavePort <IUserSavePort>
+#codeDiagram("IUserSavePort", 45%)
+
+`IUserSavePort` definisce il contratto per la persistenza di una nuova entità `User`. Il metodo `save(user)` riceve l'intera entità di dominio, delegando all'adattatore la traduzione nel formato specifico del database (es. record SQL).
+
+- *Accoppiamento all'Entità di Dominio:* A differenza delle porte che accettano primitive, questa porta riceve un oggetto `User` completo, garantendo che solo entità coerenti e già validate dalla logica di dominio possano essere persistite.
+- *Separazione da Update:* L'esistenza di porte distinte per `save` e `update` (tramite `IUserUpdatePort`) permette all'adattatore di distinguere tra un'operazione `INSERT` e un `UPDATE` a livello di database, ottimizzando le query sottostanti.
+
+====== IUserUpdatePort <IUserUpdatePort>
+#codeDiagram("IUserUpdatePort", 50%)
+
+`IUserUpdatePort` definisce il contratto per la modifica di un'entità `User` già esistente nel sistema. Il metodo `update(user)` riceve l'entità aggiornata, lasciando all'adattatore la responsabilità di determinare quali campi modificare e come gestire la transazione.
+
+- *Gestione dell'`updatedAt` Delegata:* Sebbene l'entità `User` gestisca il campo `updatedAt`, la porta permette all'adattatore di aggiornarlo a livello di database, garantendo la coerenza temporale della persistenza.
+
+====== IVerifyTokenPort <IVerifyTokenPort>
+#codeDiagram("IVerifyTokenPort", 55%)
+
+`IVerifyTokenPort` definisce il contratto per la verifica e il parsing di un token JWT. Il metodo `verifyToken(token)` restituisce il `JwtPayload` estratto se il token è valido, o `null` se la verifica fallisce (token scaduto, firma non valida, ecc.), evitando l'uso di eccezioni per scenari di token non validi.
+
+- *Return Type Null-Safe:* Il tipo di ritorno `JwtPayload | null` comunica esplicitamente che un token non valido è un esito atteso, semplificando la gestione nel controller che usa questa porta.
+- *Co-Localizzazione con `ITokenProviderPort`:* Il fatto che `JwtService` implementi sia la generazione che la verifica dei token, ma che le due capacità siano esposte come porte distinte, permette di iniettare solo la capacità necessaria nei diversi use case, rispettando il principio di minimo privilegio.
+
+===== Services
+
+====== DeleteService <DeleteService>
+#codeDiagram("DeleteService", 65%)
+
+`DeleteService` implementa il caso d'uso di eliminazione dell'account. Inietta `IUserDeletePort` tramite costruttore e coordina la cancellazione dell'utente. Implementa `IDeleteUseCase` e restituisce un `DeleteResponseDto` per confermare l'esito dell'operazione.
+
+- *Orchestrazione Minima:* La logica del servizio è deliberatamente semplice: recupera il comando, delega la cancellazione alla porta e costruisce la risposta. La complessità transazionale (es. eliminare prima le sessioni) può essere gestita a livello di adattatore o aggiungendo dipendenze da `ISessionDeletePort` in evoluzioni future.
+- *Implementazione del Contratto:* Implementando `IDeleteUseCase`, il servizio garantisce che il controller dipenda dall'interfaccia e non dalla classe concreta, mantenendo l'invertibilità della dipendenza.
+
+====== LoginService <LoginService>
+#codeDiagram("LoginService", 100%)
+
+`LoginService` implementa il caso d'uso di autenticazione. Coordina quattro porte: recupera l'utente tramite `IUserFindPort`, verifica la password con `IHashComparePort`, genera i token con `ITokenProviderPort` e persiste la sessione con `ISessionSavePort`. In caso di credenziali invalide solleva `InvalidCredentialsException`.
+
+- *Orchestrazione Multi-Porta:* L'elevato numero di dipendenze riflette la complessità intrinseca del flusso di autenticazione, che richiede la cooperazione di più capacità infrastrutturali.
+- *Short-Circuit in Caso di Errore:* Il servizio interrompe il flusso non appena le credenziali risultano invalide, sollevando `InvalidCredentialsException` prima di procedere alla generazione dei token, minimizzando le operazioni eseguite a fronte di un tentativo fallito.
+
+====== LogoutService <LogoutService>
+#codeDiagram("LogoutService", 55%)
+
+`LogoutService` implementa il caso d'uso di chiusura della sessione. Inietta `ISessionDeletePort` e invoca `deleteSession` con il `refreshToken` estratto dal `LogoutCommand`. L'operazione non restituisce dati applicativi rilevanti (ritorno `void`).
+
+- *Semplicità Intenzionale:* La singola dipendenza del servizio riflette la natura atomica dell'operazione di logout, che si riduce alla revoca di un token senza effetti collaterali sul profilo utente.
+- *Idempotenza Implicita:* L'eliminazione di un token già revocato o inesistente è gestita a livello di adattatore.
+
+====== RegistrationService <RegistrationService>
+#codeDiagram("RegistrationService", 100%)
+
+`RegistrationService` implementa il caso d'uso di creazione di un nuovo account. Coordina `IUserFindPort` (verifica unicità dell'email), `IHashPasswordPort` (hashing della password), `IUserSavePort` (persistenza dell'utente) e `ITokenProviderPort` (generazione dei token post-registrazione), restituendo un `AuthResultDto` completo.
+
+- *Verifica di Unicità Pre-Creazione:* Il servizio verifica che l'email non sia già registrata prima di procedere con hashing e salvataggio, proteggendo l'invariante di unicità dell'account a livello applicativo prima ancora che il database possa sollevare un constraint error.
+- *Registrazione e Login Unificati:* La restituzione di un `AuthResultDto` completo (con token) al termine della registrazione riflette la scelta di UX di autenticare automaticamente l'utente al termine del processo di registrazione, eliminando un secondo round-trip di login.
+
+====== UpdateService <UpdateService>
+#codeDiagram("UpdateService", 100%)
+
+`UpdateService` implementa il caso d'uso di aggiornamento delle credenziali. Coordina `IUserFindPort` (recupero dell'utente esistente), `IHashPasswordPort` (hashing della nuova password), `IUserUpdatePort` (persistenza della modifica) e `ITokenProviderPort` (generazione di nuovi token post-aggiornamento), restituendo un `AuthResultDto` aggiornato.
+
+- *Rinnovo dei Token Post-Update:* La restituzione di nuovi token dopo l'aggiornamento della password riflette la pratica di sicurezza di invalidare le sessioni precedenti dopo un cambio di credenziali, forzando la ri-autenticazione su tutti i dispositivi.
+- *Recupero dell'Entità Prima della Modifica:* Il servizio recupera l'utente tramite email prima di applicare la modifica, garantendo che l'aggiornamento avvenga su un'entità già esistente e coerente con lo stato attuale del dominio.
+
+===== Use Cases
+
+====== IDeleteUseCase <IDeleteUseCase>
+#codeDiagram("IDeleteUseCase", 65%)
+
+`IDeleteUseCase` definisce il contratto del caso d'uso di cancellazione account. Il metodo `execute(command: DeleteCommand): Promise<DeleteResponseDto>` standardizza la firma del flusso di eliminazione, permettendo al `DeleteUserController` di invocare l'operazione senza conoscere l'implementazione concreta del servizio.
+
+====== IloginUseCase <IloginUseCase>
+#codeDiagram("IloginUseCase", 65%)
+
+`IloginUseCase` definisce il contratto del caso d'uso di autenticazione. Il metodo `execute(command: LoginCommand): Promise<AuthResultDto>` standardizza la firma del flusso di login, disaccoppiando il `LoginController` dall'implementazione concreta del `LoginService`.
+
+====== ILogoutUseCase <ILogoutUseCase>
+#codeDiagram("ILogoutUseCase", 60%)
+
+`ILogoutUseCase` definisce il contratto del caso d'uso di logout. Il metodo `execute(command: LogoutCommand): Promise<void>` standardizza la firma del flusso di chiusura sessione, rendendo il `LogoutController` indipendente dalla concreta implementazione del `LogoutService`.
+
+====== IregistrationUseCase <IregistrationUseCase>
+#codeDiagram("IregistrationUseCase", 70%)
+
+`IregistrationUseCase` definisce il contratto del caso d'uso di registrazione. Il metodo `execute(command: RegistrationUserCommand): Promise<AuthResultDto>` standardizza la firma del flusso di creazione account, disaccoppiando il `RegistrationController` dall'implementazione concreta del `RegistrationService`.
+
+====== IupdateUseCase <IupdateUseCase>
+#codeDiagram("IupdateUseCase", 70%)
+
+`IupdateUseCase` definisce il contratto del caso d'uso di aggiornamento credenziali. Il metodo `execute(command: UpdateUserCommand): Promise<AuthResultDto>` standardizza la firma del flusso di modifica password, rendendo l'`UpdateController` indipendente dall'implementazione concreta dell'`UpdateService`.
+
+
+==== Infrastructure
+
+===== Adapters
+
+====== BcryptService <BcryptService>
+#codeDiagram("BcryptService", 60%)
+
+`BcryptService` è l'adattatore Driven che implementa sia `IHashPasswordPort` sia `IHashComparePort`, fornendo le operazioni crittografiche di hashing e verifica delle password tramite l'algoritmo bcrypt. Il campo `rounds` configura il fattore di costo dell'algoritmo, bilanciando sicurezza e performance.
+
+- *Implementazione Doppia Porta:* Il fatto che un singolo adattatore implementi due porte distinte è una scelta pragmatica: bcrypt è l'algoritmo comune a entrambe le operazioni, e separare le implementazioni non apporterebbe vantaggi architetturali. Le porte rimangono comunque distinte, consentendo di iniettarne solo una nei servizi che ne necessitano.
+- *Configurabilità del Fattore di Costo:* Il campo `rounds` permette di calibrare il fattore di costo di bcrypt in base all'ambiente (es. più basso nei test per ridurre la latenza, più alto in produzione per aumentare la resistenza agli attacchi brute-force).
+- *Operazioni Asincrone:* I metodi `hash` e `compare` restituiscono `Promise`, riflettendo la natura computazionalmente intensa di bcrypt e la necessità di non bloccare il thread dell'event loop di Node.js durante l'esecuzione.
+
+====== JwtService <JwtService>
+#codeDiagram("JwtService", 60%)
+
+`JwtService` è l'adattatore Driven che implementa sia `ITokenProviderPort` sia `IVerifyTokenPort`, gestendo la generazione e la verifica dei token JWT tramite la configurazione di `secret` ed `expiresIn`. Dipende dal tipo `JwtPayload` per garantire la coerenza strutturale del payload.
+
+- *Implementazione Doppia Porta:* Analogamente a `BcryptService`, l'implementazione di due porte in un singolo adattatore è motivata dalla coerenza: la stessa chiave segreta e la stessa configurazione sono necessarie sia per firmare che per verificare i token.
+- *Configurabilità Centralizzata:* I campi `secret` ed `expiresIn` centralizzano la configurazione dei token, rendendo semplice la sostituzione dei valori tramite variabili d'ambiente senza modificare la logica del servizio.
+- *Gestione del Fallimento di Verifica:* Il metodo `verifyToken` restituisce `null` in caso di token non valido (anziché propagare un'eccezione), trasferendo la responsabilità di gestire l'assenza di un payload valido al chiamante in modo esplicito e sicuro.
+
+====== PostgresAdapter <PostgresAdapter>
+#codeDiagram("PostgresAdapter", 100%)
+
+`PostgresAdapter` è l'adattatore Driven principale del microservizio Account. Implementa sei porte: `IUserFindPort`, `IUserSavePort`, `IUserUpdatePort`, `IUserDeletePort`, `ISessionSavePort` e `ISessionDeletePort`, centralizzando tutta la comunicazione con il database PostgreSQL tramite un `Pool` di connessioni. L'interfaccia interna `UserDbRecord` definisce la forma del record nel database.
+
+- *Aggregazione delle Porte di Persistenza:* La scelta di implementare tutte le porte di accesso ai dati in un unico adattatore riflette la coerenza della sorgente dati sottostante: operazioni su utenti e sessioni condividono la stessa connessione al database, semplificando la gestione delle transazioni e della coerenza.
+- *Gestione del Pool di Connessioni:* L'uso di un `Pool` anziché di connessioni singole garantisce performance e resilienza in scenari concorrenti, delegando al pool la gestione del ciclo di vita delle connessioni.
+- *`onModuleDestroy` per la Pulizia:* L'implementazione del lifecycle hook `onModuleDestroy` garantisce che il pool di connessioni venga chiuso correttamente allo spegnimento del modulo, prevenendo resource leak in ambienti di deployment containerizzati.
+- *`UserDbRecord` come Contratto di Mapping:* L'interfaccia interna `UserDbRecord` definisce la forma esatta del record nel database, separando la struttura di persistenza dall'entità di dominio `User` e centralizzando la logica di mapping in un unico punto.
+
+==== Presentation
+
+===== Controllers
+
+====== DeleteUserController <DeleteUserController>
+#codeDiagram("DeleteUserController", 75%)
+
+`DeleteUserController` espone l'endpoint HTTP per la cancellazione dell'account. Inietta `IDeleteUseCase` per l'esecuzione del flusso di business e `JwtService` per l'estrazione dell'identità dell'utente dal token JWT presente nella richiesta, restituendo un `DeleteResponseDto`.
+
+- *Estrazione dell'Identità dal Token:* La dipendenza da `JwtService` nel controller riflette la necessità di identificare il soggetto della cancellazione dal token di autenticazione incluso nella richiesta, senza richiedere all'utente di fornire esplicitamente il proprio ID nel body.
+- *Delegazione al Use Case:* Il controller non contiene logica di business; si limita a costruire il `DeleteCommand` con le informazioni estratte dalla richiesta e a passarlo al caso d'uso, rispettando il principio di singola responsabilità.
+
+====== LoginController <LoginController>
+#codeDiagram("LoginController", 70%)
+
+`LoginController` espone l'endpoint HTTP di autenticazione. Inietta `IloginUseCase`, costruisce un `LoginCommand` dal `LoginRequestDto` ricevuto nel body della richiesta e restituisce un `AuthResponseDto` in caso di successo.
+
+- *Dipendenza dall'Interfaccia:* La dipendenza da `IloginUseCase` anziché da `LoginService` garantisce che il controller possa essere testato con un mock dell'interfaccia senza dover istanziare l'intera catena di dipendenze del servizio.
+
+//controllo service
+====== LogoutController <LogoutController>
+#codeDiagram("LogoutController", 75%)
+
+`LogoutController` espone l'endpoint HTTP di chiusura sessione. Inietta direttamente `LogoutService`, costruisce un `LogoutCommand` dal `LogoutRequestDto` e invoca il caso d'uso, restituendo un `LogoutResponseDto`.
+
+====== RegistrationController <RegistrationController>
+#codeDiagram("RegistrationController", 75%)
+
+`RegistrationController` espone l'endpoint HTTP di creazione account. Inietta `IregistrationUseCase`, costruisce un `RegistrationUserCommand` dal `RegistrationDto` ricevuto nel body e restituisce un `AuthResponseDto` completo di token e profilo utente.
+
+- *Registrazione e Autenticazione Contestuale:* La restituzione di un `AuthResponseDto` (contenente i token) al termine della registrazione riflette la scelta UX di autenticare l'utente immediatamente dopo la creazione dell'account.
+
+====== UpdateController <UpdateController>
+#codeDiagram("UpdateController", 80%)
+
+`UpdateController` espone l'endpoint HTTP di aggiornamento credenziali. Inietta sia `IupdateUseCase` per l'esecuzione del caso d'uso, sia `JwtService` per estrarre l'email dell'utente autenticato dal token JWT nella richiesta, costruendo l'`UpdateUserCommand` con i dati combinati di richiesta e identità.
+
+- *Identità dall'Autenticazione:* La dipendenza da `JwtService` permette di estrarre l'email dell'utente dal token di sessione, evitando che il client debba includere la propria identità nel body della richiesta e proteggendo da attacchi di impersonation.
+- *Costruzione del Comando Arricchito:* Il controller combina le informazioni del `UpdateRequestDto` (nuova password) con quelle estratte dal token (email), producendo un `UpdateUserCommand` completo prima di delegare al use case.
+
+===== Presentation DTOs
+
+====== LoginRequestDto <LoginRequestDto>
+#codeDiagram("LoginRequestDto", 30%)
+
+`LoginRequestDto` definisce il contratto del body della richiesta HTTP di login. I campi `email` e `password` sono entrambi obbligatori, garantendo che il framework di validazione (es. `class-validator`) rifiuti le richieste incomplete prima che raggiungano il controller.
+
+====== LogoutRequestDto <LogoutRequestDto>
+#codeDiagram("LogoutRequestDto", 30%)
+
+`LogoutRequestDto` definisce il contratto del body della richiesta HTTP di logout. Il campo `refreshToken` trasporta il token di sessione da revocare, che il controller utilizzerà per costruire il `LogoutCommand`.
+
+====== RegistrationDto <RegistrationDto>
+#codeDiagram("RegistrationDto", 30%)
+
+`RegistrationDto` definisce il contratto del body della richiesta HTTP di registrazione. I campi `email` e `password` sono obbligatori, rispecchiando i requisiti minimi necessari alla creazione di un nuovo account nel sistema.
+
+====== UpdateRequestDto <UpdateRequestDto>
+#codeDiagram("UpdateRequestDto", 35%)
+
+`UpdateRequestDto` definisce il contratto del body della richiesta HTTP di aggiornamento credenziali. Il solo campo obbligatorio `newPassword` riflette la scelta di non richiedere al client di includere la propria identità nel body.
+
+====== AuthResponseDto e UserResponseDto <AuthResponseDto>
+#codeDiagram("AuthResponseDto", 35%)
+
+`AuthResponseDto` definisce il contratto della risposta HTTP per le operazioni di autenticazione. Aggrega i token di sessione (`accessToken`, `refreshToken`) con la proiezione ridotta dell'utente tramite `UserResponseDto`, che espone solo `id` ed `email`.
+
+- *Proiezione Minima dell'Utente:* `UserResponseDto` espone meno campi di `UserDTO` (omette `createdAt` e `updatedAt`), riflettendo la necessità del client di disporre dell'identità dell'utente autenticato senza sovraccaricare la risposta con metadati non essenziali al flusso di autenticazione.
+- *Contratto Stabile verso il Client:* La forma di `AuthResponseDto` costituisce il contratto pubblico del microservizio per le operazioni di autenticazione.
+
+====== DeleteResponseDto <DeleteResponseDto>
+#codeDiagram("DeleteResponseDto", 30%)
+
+`DeleteResponseDto` definisce la risposta HTTP per l'operazione di cancellazione account. Il campo booleano `deleted` fornisce una conferma esplicita e tipizzata dell'esito dell'operazione, permettendo al client di distinguere tra un'eliminazione avvenuta con successo e un esito negativo senza dover interpretare esclusivamente il codice HTTP.
+
+====== LogoutResponseDto <LogoutResponseDto>
+#codeDiagram("LogoutResponseDto", 30%)
+
+`LogoutResponseDto` definisce la risposta HTTP per l'operazione di logout. Il campo `message` trasporta un messaggio testuale di conferma, fornendo al client un feedback descrittivo dell'esito dell'operazione di chiusura sessione.
+
+===== Filters
+
+====== AllExceptionsFilter <AllExceptionsFilter>
+#codeDiagram("AllExceptionsFilter", 60%)
+
+`AllExceptionsFilter` è il filtro globale delle eccezioni del microservizio Account. Implementa l'interfaccia `ExceptionFilter` di NestJS e intercetta tutte le eccezioni non gestite che emergono dalla catena di elaborazione delle richieste, traducendole in risposte HTTP strutturate e coerenti.
+
+- *Centralizzazione della Gestione degli Errori:* Concentrare la traduzione delle eccezioni in un unico filtro garantisce uniformità nel formato delle risposte di errore verso i client, evitando che dettagli tecnici interni vengano esposti accidentalmente.
+- *Mapping Eccezioni - HTTP:* Il filtro implementa la logica di mapping tra le eccezioni di dominio (es. `InvalidCredentialsException`) e i codici di stato HTTP appropriati (es. `401 Unauthorized`), centralizzando questa trasformazione e rimuovendo la necessità di gestirla nei singoli controller.
