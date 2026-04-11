@@ -27,21 +27,22 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
     "2026/04/08",
     "0.7.0",
     "Aggiunti tutti i componenti di Analysis Microservice",
-    members.suar
+    members.suar,
+    members.alice,
   ),
   (
     "2026/04/06",
     "0.6.0",
     "Aggiunta sezione scelta tool per l'analisi della sicureza",
     members.antonio,
-    members.suar
+    members.suar,
   ),
   (
     "2026/03/31",
     "0.5.0",
     "Stesura dei VO dell'Account Microservice",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/03/31",
@@ -550,7 +551,7 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 - *Sostituzione Sicura:* La verifica della password corrente (`patPassword`) prima della sostituzione impedisce aggiornamenti non autorizzati, garantendo che solo il proprietario delle credenziali possa modificarle.
 
 
-==== Application 
+==== Application
 ===== Use Cases
 ====== StartAnalysisUseCase <StartAnalysisUseCase>
 #codeDiagram("StartAnalysisUseCase", 100%)
@@ -807,7 +808,7 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 `UpdateGitCredentialPatRequest` trasporta URL, hash della password e nuovo PAT per l'aggiornamento delle credenziali.
 
-===== Response 
+===== Response
 ====== CheckAvailabilityResponse <CheckAvailabilityResponse>
 #codeDiagram("CheckAvailabilityResponse", 100%)
 
@@ -849,7 +850,7 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 `UpdateGitCredentialPatResponse` indica l'esito dell'aggiornamento del PAT.
 
 ==== Infrastructure
-===== Adapter 
+===== Adapter
 ====== GitHubAdapter <GitHubAdapter>
 #codeDiagram("GitHubAdapter", 100%)
 
@@ -868,7 +869,7 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 - *Adattatore Unificato:* Concentra tutta la logica di persistenza delle credenziali in un unico adapter, semplificando la configurazione del modulo NestJS e riducendo la frammentazione infrastrutturale.
 - *Schema MongoDB:* Utilizza lo schema #link(<GitCredential>)[`GitCredential`] per mappare le credenziali sul documento MongoDB, applicando validazione a livello di schema (regex SHA-256 per la password, unicità dell'URL).
 
-===== Schema 
+===== Schema
 ====== GitCredential <GitCredential>
 #codeDiagram("GitCredential", 100%)
 
@@ -876,8 +877,8 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 - *Persistenza delle Credenziali:* Rappresenta la proiezione di persistenza dei dati gestiti dai Value Object #link(<RepoURL>)[`RepoURL`], #link(<PATPassword>)[`PATPassword`] e #link(<PersonalAccessToken>)[`PersonalAccessToken`], adattandoli al formato MongoDB.
 
-==== Presentation 
-===== Controller 
+==== Presentation
+===== Controller
 ====== AnalysisController <AnalysisController>
 #codeDiagram("AnalysisController", 100%)
 
@@ -895,7 +896,7 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 - *Delega ai Use Case:* Per ogni endpoint, costruisce il Command appropriato e delega al rispettivo use case (#link(<NewPatUseCase>)[`NewPatUseCase`], #link(<DeletePatUseCase>)[`DeletePatUseCase`], #link(<UpdatePatUseCase>)[`UpdatePatUseCase`]), mantenendo la logica di controllo nel layer applicativo.
 
-===== Request 
+===== Request
 ====== StartAnalysisRequestDTO <StartAnalysisRequestDTO>
 #codeDiagram("StartAnalysisRequestDTO", 100%)
 
@@ -920,7 +921,7 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 `UpdatePatRequestDTO` è il DTO di presentazione per l'aggiornamento di un PAT.
 
-===== Response 
+===== Response
 ====== StartAnalysisResponseDTO <StartAnalysisResponseDTO>
 #codeDiagram("StartAnalysisResponseDTO", 100%)
 
