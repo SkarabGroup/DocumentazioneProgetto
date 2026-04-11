@@ -1,0 +1,24 @@
+@startuml AuthResponseDto
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class UserResponseDto {
+    + id!: string
+    + email!: string
+}
+
+class AuthResponseDto {
+    + accessToken!: string
+    + refreshToken!: string
+    + user!: UserResponseDto
+}
+
+' Relations
+AuthResponseDto --> UserResponseDto
+
+@enduml

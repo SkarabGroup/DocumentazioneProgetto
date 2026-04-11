@@ -1,0 +1,40 @@
+@startuml PostgresAdapter
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class PostgresAdapter {
+    - pool: Pool
+    ---
+    + PostgresAdapter()
+    + onModuleDestroy(): void
+    + save(user: User): Promise<void>
+    + find(email: string): Promise<User | null>
+    + saveSession(userId: string, refreshToken: string, expiresAt: Date): Promise<void>
+    + deleteSession(refreshToken: string): Promise<void>
+    + deleteUser(userId: string): Promise<void>
+    + update(user: User): Promise<void>
+}
+
+class UserDbRecord {
+    + id: string
+    + email: string
+    + password_hash: string
+    + created_at: Date
+    + updated_at: Date
+}
+
+' Relations
+PostgresAdapter ..up|> IUserFindPort
+PostgresAdapter ..up|> IUserSavePort
+PostgresAdapter ..up|> ISessionSavePort
+PostgresAdapter ..up|> ISessionDeletePort
+PostgresAdapter ..up|> IUserDeletePort
+PostgresAdapter ..up|> IUserUpdatePort
+PostgresAdapter ..> User
+
+@enduml
