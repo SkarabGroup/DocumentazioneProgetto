@@ -28,6 +28,7 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
     "0.9.0",
     "Aggiunta introduzione Account Microservice e aggiornamento di alcuni componenti",
     members.alice,
+    members.andrea,
   ),
   (
     "2026/04/09",
