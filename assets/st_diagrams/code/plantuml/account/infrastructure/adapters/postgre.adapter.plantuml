@@ -10,7 +10,7 @@ hide circles
 class PostgresAdapter {
     - pool: Pool
     ---
-    + PostgresAdapter()
+    + PostgresAdapter(connectionString: string)
     + onModuleDestroy(): void
     + save(user: User): Promise<void>
     + find(email: string): Promise<User | null>

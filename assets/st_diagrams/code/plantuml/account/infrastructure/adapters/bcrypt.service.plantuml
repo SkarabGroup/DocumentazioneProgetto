@@ -9,6 +9,8 @@ hide circles
 
 class BcryptService {
     - rounds: number
+    ---
+    + BcryptService(rounds: number)
     + hash(plaintext: string): Promise<string>
     + compare(plaintext: string, hash: string): Promise<boolean>
 }
