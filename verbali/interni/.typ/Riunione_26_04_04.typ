@@ -5,6 +5,13 @@
   versioni: (
     (
       "2026-04-04",
+      "1.0.0",
+      "Approvazione verbale",
+      "",
+      members.antonio,
+    ),
+    (
+      "2026-04-04",
       "0.1.0",
       "Prima stesura del documento",
       members.andrea,
