@@ -10,6 +10,8 @@ hide circles
 class JwtService {
     - secret: string
     - expiresIn: string
+    ---
+    + JwtService(secret: string, expiresIn: string)
     + generateToken(payload: JwtPayload): string
     + generateRefreshToken(payload: JwtPayload): string
     + verifyToken(token: string): JwtPayload | null
