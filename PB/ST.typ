@@ -28,6 +28,14 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
     "0.11.0",
     "Aggiunta architettura del Frontend e aggiornamento frameworks in sezione Tecnologie",
     members.martinello,
+    members.suar
+  ),
+  (
+    "2026/04/12",
+    "0.10.0",
+    "Aggiunti tutti i componenti mancanti per l'entità DocumentationReport di Analysis Microservice",
+    members.andrea,
+    members.suar,
   ),
   (
     "2026/04/12",
@@ -347,6 +355,13 @@ L'entità `AnalysisId` è il Value Object che rappresenta l'identità univoca di
 - *Uguaglianza Strutturale:* Il metodo `equals()` implementa la semantica dei Value Object: due `AnalysisId` sono uguali se e solo se il loro valore stringa è identico.
 - *Contratto verso il Dominio:* Viene utilizzato da #link(<GitHubAnalysis>)[`GitHubAnalysis`] come identificatore primario e da #link(<IRepositoryCloner>)[`IRepositoryCloner`] per contestualizzare le operazioni di clonazione.
 
+====== APIViolation <APIViolation>
+#codeDiagram("APIViolation", 100%)
+
+`APIViolation` è il Value Object che rappresenta una violazione rilevata nel contratto API del repository analizzato. Aggrega la localizzazione del problema, la regola violata, la severità e una descrizione testuale.
+
+- *Regola Esplicita:* Il campo `_rule` identifica la specifica norma del contratto API non rispettata, consentendo classificazioni aggregate per tipologia di violazione.
+- *Composizione:* Aggrega #link(<PathFinding>)[`PathFinding`], #link(<SeverityFinding>)[`SeverityFinding`] e #link(<DescriptionFinding>)[`DescriptionFinding`], contestualizzando ogni violazione con la sua localizzazione, criticità e dettaglio testuale.
 
 ====== BranchName <BranchName>
 #codeDiagram("BranchName", 100%)
@@ -365,6 +380,13 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Validazione Strutturale:* La regex `/^[0-9a-fA-F]{40}$/` assicura che solo hash commit validi possano essere istanziati, rendendo impossibile la propagazione di hash corrotti nel dominio.
 - *Riproducibilità:* In combinazione con #link(<BranchName>)[`BranchName`] e #link(<RepoURL>)[`RepoURL`], fissa lo stato esatto del repository, rendendo ogni analisi un'operazione deterministica.
 
+====== ConfigDependency <ConfigDependency>
+#codeDiagram("ConfigDependency", 100%)
+
+`ConfigDependency` è il Value Object che rappresenta una dipendenza rilevata in un file di configurazione del progetto (es. `package.json`, `requirements.txt`).
+
+- *Localizzazione della Fonte:* Il campo `_pathFinding` di tipo #link(<PathFinding>)[`PathFinding`] identifica il file di configurazione specifico in cui la dipendenza è stata rilevata, permettendo di risalire alla fonte senza ambiguità.
+- *Versione Pinned Opzionale:* Il campo `_versionPinned` è nullable, gestendo i casi in cui una dipendenza sia dichiarata senza vincolo di versione nel file di configurazione.
 
 ====== CoverageFinding <CoverageFinding>
 #codeDiagram("CoverageFinding", 100%)
@@ -383,6 +405,13 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Invariante Numerica:* La validazione garantisce che il valore sia un numero finito compreso tra 0 e 1 inclusivi, prevenendo valori impossibili come percentuali superiori al 100%.
 - *Primitivo di Copertura:* Viene usato come building block da #link(<FileCoverage>)[`FileCoverage`] e da #link(<CoverageFinding>)[`CoverageFinding`].
 
+====== DependencyAudit <DependencyAudit>
+#codeDiagram("DependencyAudit", 100%)
+
+`DependencyAudit` è il Value Object che aggrega l'intero risultato dell'analisi delle dipendenze, confrontando quanto dichiarato nel README con quanto configurato nei file di progetto.
+
+- *Visione Completa:* Raccoglie in un unico oggetto le dipendenze documentate (#link(<ReadmeDependency>)[`ReadmeDependency`]), quelle configurate (#link(<ConfigDependency>)[`ConfigDependency`]), quelle mancanti (#link(<MissingInConfigDependency>)[`MissingInConfigDependency`]), quelle non documentate (#link(<UndocumentedDependency>)[`UndocumentedDependency`]) e i disallineamenti di versione (#link(<VersionMismatchDependency>)[`VersionMismatchDependency`]).
+- *Uguaglianza Ordinata:* Il confronto tra collezioni è indipendente dall'ordine di inserimento, garantendo che due audit con le stesse dipendenze siano sempre considerati equivalenti.
 
 ====== DependencyFinding <DependencyFinding>
 #codeDiagram("DependencyFinding", 100%)
@@ -400,6 +429,13 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 
 - *Riuso Composizionale:* Viene riutilizzato come componente da Value Object più complessi quali #link(<ErrorFinding>)[`ErrorFinding`] e #link(<DependencyFinding>)[`DependencyFinding`].
 
+====== DocsDiscrepancy <DocsDiscrepancy>
+#codeDiagram("DocsDiscrepancy", 100%)
+
+`DocsDiscrepancy` è il Value Object che rappresenta una discrepanza tra quanto dichiarato nella documentazione e quanto effettivamente rilevato nel codice sorgente.
+
+- *Confronto Duale:* I campi `_docsClaim` e `_actualFinding` catturano esplicitamente entrambi i lati della divergenza, rendendo il problema autoesplicativo senza necessità di ricorrere al codice sorgente.
+- *Categorizzazione:* Il campo `_discrepancyCategory` raggruppa le discrepanze per tipologia, abilitando analisi aggregate e prioritizzazione degli interventi correttivi.
 
 ====== DocumentationFinding <DocumentationFinding>
 #codeDiagram("DocumentationFinding", 100%)
@@ -427,6 +463,21 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Coerenza Interna:* Se la copertura è 100%, le `missedLines` devono essere vuote; i numeri di riga devono essere interi positivi e univoci.
 - *Granularità:* Fornisce le informazioni necessarie per identificare esattamente quali righe richiedono test aggiuntivi.
 
+====== MissingFile <MissingFile>
+#codeDiagram("MissingFile", 100%)
+
+`MissingFile` è il Value Object che rappresenta un file referenziato nella documentazione ma assente nel repository analizzato.
+
+- *Doppia Localizzazione:* I campi `_referencedPath` e `_referencedIn` permettono di risalire non solo al file mancante, ma anche al documento che ne dichiara l'esistenza, rendendo il finding immediatamente azionabile.
+- *Stato Classificato:* Il campo `_statusMissing` di tipo #link(<StatusMissing>)[`StatusMissing`] distingue semanticamente le diverse cause di assenza, abilitando politiche di gestione differenziate.
+
+====== MissingInConfigDependency <MissingInConfigDependency>
+#codeDiagram("MissingInConfigDependency", 100%)
+
+`MissingInConfigDependency` è il Value Object che rappresenta una dipendenza documentata nel README ma assente nei file di configurazione del progetto.
+
+- *Severità Associata:* Il campo `_severity` di tipo #link(<SeverityFinding>)[`SeverityFinding`] permette di graduare il rischio della mancanza, distinguendo dipendenze critiche da quelle accessorie.
+- *Riferimento al Contesto:* Il campo `_pathFinding` di tipo #link(<PathFinding>)[`PathFinding`] indica il file di configurazione in cui la dipendenza avrebbe dovuto essere presente, contestualizzando il problema per chi deve risolverlo.
 
 ====== OWASPFinding <OWASPFinding>
 #codeDiagram("OWASPFinding", 100%)
@@ -459,6 +510,13 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 
 - *Validazione del Formato:* La regex garantisce che solo token con formato ufficiale possano essere usati, prevenendo la registrazione di token malformati.
 
+====== ReadmeDependency <ReadmeDependency>
+#codeDiagram("ReadmeDependency", 100%)
+
+`ReadmeDependency` è il Value Object che rappresenta una dipendenza dichiarata nel file README del repository.
+
+- *Versione Opzionale:* Il campo `_versionClaimed` è nullable, riflettendo la realtà documentale in cui un README può citare una dipendenza senza specificarne la versione esatta.
+- *Fonte Documentale:* Viene aggregato da #link(<DependencyAudit>)[`DependencyAudit`] come rappresentazione della dipendenza dal punto di vista della documentazione, da confrontare con quanto dichiarato nei file di configurazione.
 
 ====== RepoURL <RepoURL>
 #codeDiagram("RepoURL", 100%)
@@ -494,6 +552,13 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Contestualizzazione:* Il campo `analyzedLanguage` garantisce che il finding sia sempre associato al linguaggio corretto.
 - *Categoria:* Il campo `errorCategory` fornisce un raggruppamento tematico (es. `null-dereference`) per analisi aggregate.
 
+====== UndocumentedDependency <UndocumentedDependency>
+#codeDiagram("UndocumentedDependency", 100%)
+
+`UndocumentedDependency` è il Value Object che rappresenta una dipendenza presente nei file di configurazione del progetto ma non menzionata nel README.
+
+- *Gap di Documentazione:* La sua presenza segnala una libreria introdotta senza aggiornamento del README, riducendo la comprensibilità del progetto per i nuovi contributori.
+- *Localizzazione Precisa:* Il campo `_pathFinding` di tipo #link(<PathFinding>)[`PathFinding`] indica il file di configurazione in cui la dipendenza è stata rilevata, facilitando l'intervento correttivo sulla documentazione.
 
 ====== UserId <UserId>
 #codeDiagram("UserId", 100%)
@@ -503,6 +568,13 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Tracciabilità:* Viene aggregato da #link(<GitHubAnalysis>)[`GitHubAnalysis`] per associare ogni analisi al richiedente, abilitando audit trail e politiche di accesso.
 - *Separazione:* Permette di evolvere il modello identitario senza impattare la logica di analisi del dominio.
 
+====== VersionMismatchDependency <VersionMismatchDependency>
+#codeDiagram("VersionMismatchDependency", 100%)
+
+`VersionMismatchDependency` è il Value Object che rappresenta una dipendenza la cui versione dichiarata nel README differisce da quella specificata nel file di configurazione.
+
+- *Confronto Esplicito:* I campi `_readmeVersion` e `_configVersion` preservano entrambe le versioni rilevate, permettendo al report di mostrare la discrepanza in modo diretto senza perdita di informazione.
+- *Tracciabilità della Fonte:* Il campo `_pathFinding` di tipo #link(<PathFinding>)[`PathFinding`] indica il file di configurazione in cui la versione discordante è stata rilevata, guidando l'intervento correttivo verso il file specifico da aggiornare.
 
 ===== Enums
 ====== AnalysisStatus <AnalysisStatus>
@@ -513,8 +585,6 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Macchina a Stati:* Definisce le transizioni valide gestite da #link(<GitHubAnalysis>)[`GitHubAnalysis`]: `PENDING → IN_PROGRESS` (via `inProgress()`), `IN_PROGRESS → COMPLETED` (via `complete()`), `IN_PROGRESS → FAILED` (via `failed()`). Ogni transizione non valida genera un errore esplicito.
 - *Osservabilità:* Permette ai servizi applicativi e all'infrastruttura di monitorare e persistere lo stato di avanzamento dell'analisi in modo type-safe.
 
-
-
 ====== SeverityLevel <SeverityLevel>
 #codeDiagram("SeverityLevel", 100%)
 
@@ -523,7 +593,13 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Vocabolario Condiviso:* Definisce il vocabolario ufficiale del dominio per la classificazione della severità, usato da #link(<SeverityFinding>)[`SeverityFinding`] come insieme di valori validi.
 - *Standardizzazione:* Evita l'uso di stringhe libere, garantendo che tutti i componenti del sistema parlino lo stesso linguaggio per la prioritizzazione dei problemi rilevati.
 
+====== StatusMissing <StatusMissing>
+#codeDiagram("StatusMissing", 100%)
 
+`StatusMissing` è l'enumerazione che classifica la causa di assenza di un file referenziato nella documentazione: `NOT_FOUND`, `POSSIBLY_RENAMED`, `WRONG_PATH`.
+
+- *Vocabolario Diagnostico:* Definisce il vocabolario ufficiale del dominio per distinguere le diverse cause di assenza, usato da #link(<MissingFile>)[`MissingFile`] per caratterizzare semanticamente ogni file mancante.
+- *Azionabilità:* I tre valori guidano interventi distinti: `NOT_FOUND` suggerisce un file mai creato, `POSSIBLY_RENAMED` un refactoring non riflesso nella documentazione, `WRONG_PATH` un errore di percorso nel riferimento.
 
 ====== SupportedLanguages <SupportedLanguages>
 #codeDiagram("SupportedLanguages", 100%)

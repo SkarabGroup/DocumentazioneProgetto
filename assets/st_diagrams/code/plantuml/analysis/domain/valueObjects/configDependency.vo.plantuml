@@ -1,0 +1,23 @@
+@startuml ConfigDependency
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class ConfigDependency {
+    - _name: string
+    - _versionPinned: string | null
+    - _pathFinding: PathFinding
+    ---
+    - ConfigDependency(name, versionPinned, pathFinding)
+    + {static} create(name: string, versionPinned: string | null, pathFinding: PathFinding): ConfigDependency
+    + getName(): string
+    + getVersionPinned(): string | null
+    + getPathFinding(): PathFinding
+    + equals(other: ConfigDependency): boolean
+}
+
+ConfigDependency --right-> PathFinding
+@enduml

@@ -1,0 +1,19 @@
+@startuml ReadmeDependency
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class ReadmeDependency {
+    - _name: string
+    - _versionClaimed: string | null
+    ---
+    - ReadmeDependency(name, versionClaimed)
+    + {static} create(name: string, versionClaimed: string | null): ReadmeDependency
+    + getName(): string
+    + getVersionClaimed(): string | null
+    + equals(other: ReadmeDependency): boolean
+}
+@enduml
