@@ -1,0 +1,19 @@
+@startuml
+package "Hooks Layer (ViewModel)" {
+  class useAuth {
+    --
+    Espone lo stato di autenticazione globale (utente corrente,\nisAuthenticated, isLoading) e le azioni login, register, logout.\nConsumatoper AuthContext, che è il provider React sottostante.
+  }
+
+  class useAnalysisSocket {
+    --
+    Si iscrive agli eventi Socket.io del microservizio Analysis\n(avvio, progresso, completamento, fallimento analisi)\ne notifica la UI tramite toast e callback.
+  }
+
+  useAuth --> "Context Layer" : AuthContext
+  useAnalysisSocket --> "Context Layer" : SocketContext
+  useAuth --> "API Layer" : AuthApi
+  useAuth --> "API Layer" : UsersApi
+  useAnalysisSocket --> "API Layer" : RepositoriesApi
+}
+@enduml

@@ -1,0 +1,19 @@
+@startuml FluxDbRequest
+
+Client --> APIGateway : POST /dbrequest/allReportsByUser
+APIGateway --> LambdaAuthorizer : Verifica JWT
+LambdaAuthorizer --> APIGateway : JWT Valido/Non Valido
+APIGateway --> DbController : Richiesta Lista ReportUtente
+DbController --> DbService : Richiede Lista ReportUtente
+DbService --> CredentialMicroservice : Richiede validitá credenziali
+CredentialMicroservice --> DbService : Credenziali Valide/Non Valide
+DbService --> DbAdapter : Richiede Lista ReportUtente
+
+Client --> APIGateway : POST /dbrequest/ReportById
+APIGateway --> LambdaAuthorizer : Verifica JWT
+LambdaAuthorizer --> APIGateway : JWT Valido/Non Valido
+APIGateway --> DbController : Richiesta ReportById
+DbController --> DbService : Richiede ReportById
+DbService --> CredentialMicroservice : Richiede validitá credenziali
+CredentialMicroservice --> DbService : Credenziali Valide/Non Valide
+DbService --> DbAdapter : Richiede ReportById

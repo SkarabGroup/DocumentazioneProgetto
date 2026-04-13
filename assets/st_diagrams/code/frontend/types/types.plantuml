@@ -1,0 +1,122 @@
+@startuml
+package "Domain Types (Model)" {
+
+  class User {
+    + id: string
+    + email: string
+    + username?: string
+    + createdAt: string
+    + githubId?: string
+    + hasGithubLinked?: boolean
+    --
+    Rappresenta un utente autenticato. Contiene le credenziali
+    di base e il collegamento opzionale con GitHub.
+  }
+
+  class Repository {
+    + id: string
+    + name: string
+    + url: string
+    + isPrivate?: boolean
+    + language?: string
+    + lastAnalysis?: Analysis
+    + totalAnalyses?: number
+    --
+    Rappresenta un repository di codice sorgente registrato
+    nel sistema, con metadati e riferimento all'ultima analisi.
+  }
+
+  class Analysis {
+    + id: string
+    + date: string
+    + status: AnalysisStatus
+    + areas?: AnalysisArea[]
+    + branch?: string
+    + report?: AnalysisReport
+    --
+    Rappresenta una singola esecuzione di analisi su un repository,
+    con stato corrente, aree analizzate e report risultante.
+  }
+
+  class AnalysisReport {
+    + qualityScore: number
+    + securityScore: number
+    + documentationScore?: number
+    + criticalIssues: number
+    + warningIssues: number
+    + remediations: Remediation[]
+    --
+    Risultato aggregato di un'analisi: score per area,
+    conteggio issue per severità e lista di remediation suggerite.
+  }
+
+  class Issue {
+    + title: string
+    + description: string
+    + severity: IssueSeverity
+    + file?: string
+    + line?: number
+    --
+    Singolo problema rilevato durante l'analisi, con localizzazione
+    nel codice sorgente e livello di severità.
+  }
+
+  class Remediation {
+    + id: string
+    + title: string
+    + severity: IssueSeverity
+    + currentCode?: string
+    + suggestedCode?: string
+    + decision?: 'accepted' | 'rejected' | 'pending'
+    --
+    Suggerimento di correzione per un'issue, con codice attuale
+    e codice proposto. L'utente può accettare, rifiutare o posticipare.
+  }
+
+  class RankedRepository {
+    + rank: number
+    + repository: Repository
+    + score: number
+    + lastAnalyzed?: string
+    --
+    Rappresenta un repository nella classifica globale,
+    con posizione e score aggregato di qualità.
+  }
+
+  enum AnalysisStatus {
+    not-analyzed
+    pending
+    in-progress
+    completed
+    failed
+    --
+    Ciclo di vita di un'analisi dalla richiesta al completamento.
+  }
+
+  enum IssueSeverity {
+    critical
+    warning
+    info
+    --
+    Livello di gravità di un'issue rilevata.
+  }
+
+  enum AnalysisArea {
+    code
+    security
+    documentation
+    --
+    Aree del codice che possono essere analizzate separatamente.
+  }
+
+  Repository "1" --> "0..*" Analysis
+  Analysis --> AnalysisReport
+  AnalysisReport --> "0..*" Issue
+  AnalysisReport --> "0..*" Remediation
+  RankedRepository --> Repository
+  Analysis --> AnalysisStatus
+  Issue --> IssueSeverity
+  Remediation --> IssueSeverity
+  Analysis --> AnalysisArea
+}
+@enduml

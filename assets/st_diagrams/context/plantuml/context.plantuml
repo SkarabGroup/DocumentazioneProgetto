@@ -1,0 +1,20 @@
+@startuml C4_Level1_SystemContext
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+
+title C4 Level 1 — System Context: Code Guardian
+
+Person(developer, "Developer / Tech Lead", "Utente che sottomette repository GitHub e consulta i report di audit e remediation.")
+
+System(codeGuardian, "Code Guardian", "Piattaforma web ad agenti AI per l'audit automatico di repository software: analisi test, sicurezza OWASP e documentazione.")
+
+System_Ext(github, "GitHub", "Hosting dei repository software da analizzare. Fornisce il codice sorgente tramite API REST.")
+
+System_Ext(AWS, "AWS Infrastructure", "Hosting del servizio e fornisce servizi di intelligenza artificiale e machine learning per l'analisi del codice e la generazione di suggerimenti di remediation.")
+
+Rel(developer, codeGuardian, "Si registra, poi puó inviare URL repository, consultare report, accettare/rifiutare remediation", "HTTPS / Browser")
+Rel(codeGuardian, github, "Scarica codice sorgente e metadati del repository", "HTTPS / GitHub API")
+Rel(codeGuardian, AWS, "Utilizza vari servizi per hosting, storage, llms", "HTTPS / AWS SDK")
+
+@enduml

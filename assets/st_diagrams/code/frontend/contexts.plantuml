@@ -1,0 +1,16 @@
+@startuml
+package "Context Layer (stato globale)" {
+  class AuthContext {
+    --
+    Provider React per lo stato di autenticazione.\nMantiene utente corrente, flag isAuthenticated e isLoading.\nGestisce il ripristino della sessione al mount tramite i token\nsalvati in localStorage (cg_access_token, cg_refresh_token).
+  }
+
+  class SocketContext {
+    --
+    Provider React per la connessione Socket.io verso il\nmicroservizio Analysis (VITE_ANALYSIS_WS_URL).\nGestisce la connessione autenticata con JWT, la riconnessione\nautomatica (max 5 tentativi) e il flag isConnected.
+  }
+
+  AuthContext --> "API Layer" : AuthApi
+  SocketContext --> "API Layer" : Gateway
+}
+@enduml
