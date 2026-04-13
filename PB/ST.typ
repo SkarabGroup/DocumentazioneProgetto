@@ -2,7 +2,7 @@
 #import "../lib/variables.typ": *
 #import "../lib/stDiagramUtil.typ": *
 
-#let versione = "v0.10.0"
+#let versione = "v0.11.0"
 #set heading(numbering: "1.1.1")
 /*
 === FUNZIONAMENTO DEL DOCUMENTO ===
@@ -24,18 +24,32 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #set page(numbering: "1", header: header("Specifica Tecnica"), footer: footer())
 #let history = (
   (
+    "2026/04/13",
+    "0.11.0",
+    "Aggiunta architettura del Frontend e aggiornamento frameworks in sezione Tecnologie",
+    members.martinello,
+    members.suar
+  ),
+  (
     "2026/04/12",
     "0.10.0",
     "Aggiunti tutti i componenti mancanti per l'entità DocumentationReport di Analysis Microservice",
     members.andrea,
-    "",
+    members.suar,
+  ),
+  (
+    "2026/04/12",
+    "0.9.0",
+    "Aggiunta introduzione Account Microservice e aggiornamento di alcuni componenti",
+    members.alice,
+    members.andrea,
   ),
   (
     "2026/04/09",
     "0.8.0",
     "Aggiunti tutti i componenti di Account Microservice",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/04/08",
@@ -240,9 +254,44 @@ I seguenti documenti hanno valore vincolante per la redazione della Specifica Te
   [Amazon App Runner],
   [TBD],
   [AWS App Runner è utilizzato per l'hosting del microservizio di gestione delle credenziali. Rispetto a Fargate, App Runner offre un livello di astrazione superiore: il deployment avviene direttamente da un'immagine container senza necessità di configurare cluster, task definition o load balancer. Questa semplicità è adeguata per un microservizio con requisiti di scalabilità e controllo infrastrutturale meno stringenti rispetto al microservizio di analisi.],
+
+  [React],
+  [19],
+  [Libreria JavaScript per la costruzione di interfacce utente basata su componenti dichiarativi e aggiornamenti reattivi tramite Virtual DOM. Costituisce la base di tutte le pagine e i componenti del frontend.],
+
+  [Vite],
+  [6],
+  [Build tool e dev server ad alte prestazioni per progetti TypeScript e React. Offre Hot Module Replacement (HMR) e un sistema di proxy per il forwarding delle richieste HTTP verso i microservizi durante lo sviluppo locale.],
+
+  [React Router],
+  [7],
+  [Libreria per il routing client-side nelle SPA React. Gestisce la navigazione tra pagine pubbliche e protette tramite il pattern #emph[nested routes] con un layout condiviso per le route autenticate.],
 )
 
 L'insieme di queste scelte tecnologiche mira a minimizzare il Total Cost of Ownership (TCO) del sistema. L'orientamento verso servizi Managed (Atlas, RDS) e Serverless (Lambda, Step Functions, Fargate) riduce drasticamente l'overhead operativo legato alla manutenzione del ferro e del software di base. Questo approccio 'Ops-less' consente di scalare i costi in modo lineare rispetto all'effettivo utilizzo della piattaforma, trasformando i costi fissi di infrastruttura in costi variabili ottimizzati sul volume di analisi processate.
+
+== Librerie e Strumenti Frontend
+
+#figure(
+  table(
+    columns: (1fr, 1fr, 3fr),
+    inset: 10pt,
+    stroke: 0.5pt + luma(200),
+    table.header([*Tecnologia*], [*Versione*], [*Descrizione*]),
+    fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+    align: (col, row) => (center, left, center).at(col) + horizon,
+
+    [Tailwind CSS], [4], [Framework CSS utility-first. Permette di definire stili direttamente come classi HTML, eliminando la necessità di fogli CSS custom e garantendo consistenza visiva su tutti i componenti.],
+    [shadcn/ui + Radix UI], [—], [Set di componenti UI accessibili costruiti su primitive Radix UI. Fornisce Button, Dialog, Tabs, Badge, Input, Progress e Skeleton già integrati nel design system del progetto.],
+    [Axios], [1.x], [Client HTTP per le chiamate REST verso i microservizi Account e Analysis. Integrato nel modulo Gateway con interceptor per autenticazione Bearer e refresh automatico dei token su risposta 401.],
+    [Socket.io-client], [4.x], [Libreria per la comunicazione real-time via WebSocket. Utilizzata per ricevere gli aggiornamenti sullo stato delle analisi in corso direttamente dal microservizio Analysis, senza ricorrere al polling HTTP.],
+    [Zod], [3.x], [Libreria di validazione e parsing di schemi TypeScript. Utilizzata nelle pagine di login e registrazione per validare i dati dei form lato client prima dell'invio al backend.],
+    [Recharts], [2.x], [Libreria per la visualizzazione di dati tramite grafici SVG basati su React. Utilizzata nella pagina di dettaglio repository per la cronologia degli score di qualità nel tempo.],
+    [Sonner], [—], [Sistema di notifiche toast non invasive. Fornisce feedback visivo per le operazioni asincrone: avvio analisi, errori di rete, conferme di salvataggio.],
+  ),
+  caption: "Librerie e strumenti del frontend"
+)
+
 
 == Tool per l'analisi
 === Tool per l'agente di sicurezza
@@ -1031,7 +1080,8 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 #pagebreak()
 
 === Account Microservice
-#TODO("Inserire introduzione")
+L'Account Microservice rappresenta il modulo centrale per la gestione del ciclo di vita delle identità all'interno di _CodeGuardian_. Progettato seguendo i principi della *Hexagonal Architecture*, il servizio isola rigorosamente i processi core — quali la gestione delle utenze, l'autenticazione basata su JWT e la sicurezza delle credenziali — dalle tecnologie di persistenza (PostgreSQL) e di cifratura (Bcrypt). Grazie a una netta separazione tra porte e adattatori, il microservizio garantisce l'integrità del dominio utente e la flessibilità nell'evoluzione dei criteri di sicurezza, fungendo da garante per l'accesso protetto a tutte le funzionalità della piattaforma.
+
 ==== Domain
 Il Dominio rappresenta il nucleo centrale dell'architettura esagonale, dove risiedono esclusivamente la logica di business e le regole vitali del progetto. Questa sezione è progettata per essere totalmente agnostica rispetto alla tecnologia: non possiede alcuna conoscenza di database, protocolli di comunicazione (HTTP/REST) o framework esterni.
 
@@ -1048,7 +1098,7 @@ I Value Object rappresentano concetti del dominio definiti esclusivamente dai lo
 
 L'identificativo `UserId` costituisce l'atomo di identità dell'utente all'interno del dominio. Esso rappresenta univocamente un registrante nei sistemi di persistenza.
 
-- *Invariante di Formato:* La sua validazione garantisce che l'identificativo sia un UUID formattato correttamente, prevenendo l'introduzione di chiavi primarie invalide o attacchi tramite stringhe malformate.
+- *Invariante di Formato:* La sua validazione garantisce che l'identificativo sia un UUID versione 7 (v7) formattato correttamente, prevenendo l'introduzione di chiavi primarie invalide o attacchi tramite stringhe malformate.
 - *Astrazione della Persistenza:* Disaccoppia la logica di business dall'implementazione fisica della chiave primaria, assicurando che lo strato di dominio comunichi tramite un tipo forte e non attraverso primitive volatili come le stringhe.
 - *Prevenzione del Type Mismatch:* Impedisce l'interscambiabilità accidentale con altri identificativi testuali, prevenendo bug che la normale tipizzazione a stringa non riuscirebbe a intercettare.
 - *Comparazione Deterministica:* Semplifica e rende sicura l'uguaglianza tra identificatori tramite un metodo centralizzato, garantendo una risoluzione coerente quando gli utenti vengono ricercati o confrontati.
@@ -1429,3 +1479,172 @@ L'entità `User` costituisce l'entità radice del dominio di autenticazione. Ess
 
 - *Centralizzazione della Gestione degli Errori:* Concentrare la traduzione delle eccezioni in un unico filtro garantisce uniformità nel formato delle risposte di errore verso i client, evitando che dettagli tecnici interni vengano esposti accidentalmente.
 - *Mapping Eccezioni - HTTP:* Il filtro implementa la logica di mapping tra le eccezioni di dominio (es. `InvalidCredentialsException`) e i codici di stato HTTP appropriati (es. `401 Unauthorized`), centralizzando questa trasformazione e rimuovendo la necessità di gestirla nei singoli controller.
+=== Frontend Application
+
+Il frontend di Code Guardian è una *Single-Page Application* (SPA) sviluppata in TypeScript con React, strutturata seguendo il pattern architetturale *Model-View-ViewModel* (MVVM). Le responsabilità sono distribuite in quattro strati orizzontali con dipendenze che fluiscono sempre dalla View verso il Model, senza mai invertirsi.
+
+==== Pattern architetturale: MVVM
+
+Il pattern MVVM (Model-View-ViewModel) separa le responsabilità in tre aree principali:
+
+====== Model <Model>
+rappresenta i dati di dominio e la logica di accesso remoto. Comprende i moduli API (`AuthApi`, `UsersApi`, `RepositoriesApi`, `AnalysisApi`) e i tipi TypeScript condivisi.
+
+====== ViewModel <ViewModel>
+media tra Model e View, espone stato osservabile e comandi ai componenti. Implementato tramite React Context (`AuthContext`, `SocketContext`) e custom hook (`useAuth`, `useAnalysisSocket`).
+
+====== View <View>
+l'interfaccia utente, composta da pagine e componenti React. Legge lo stato dal ViewModel e delega le azioni ai hook; non contiene logica di business.
+
+
+La dipendenza è unidirezionale: View → ViewModel → Model. Nessuno strato dipende dallo strato superiore.
+
+==== Strati dell'architettura
+
+===== Model — API Layer
+
+Lo strato Model è composto da cinque moduli, tutti costruiti attorno a un'istanza Axios centralizzata denominata `Gateway`:
+
+====== Gateway <Gateway>
+istanza Axios configurata con la base URL proveniente dalla variabile d'ambiente `VITE_GATEWAY_URL`. Espone un interceptor in entrata che aggiunge il token Bearer ad ogni richiesta, e un interceptor in uscita che: (1) normalizza lo stato dell'analisi dalla convenzione del backend (`PENDING`, `IN_PROGRESS`) a quella del frontend (`"pending"`, `"in-progress"`); (2) converte la copertura dei test da intervallo $[0,1]$ a $[0,100]$; (3) su risposta 401, tenta il refresh del token e mette in coda le richieste in attesa, poi le ri-esegue con il nuovo token. Se il refresh fallisce, pulisce i token e reindirizza al login.
+
+====== AuthApi <AuthApi>
+chiamate di login, registrazione, refresh e logout verso il microservizio Account. I metodi `login` e `register` restituiscono sia i token (`accessToken`, `refreshToken`) sia l'oggetto `user`.
+
+====== UsersApi <UsersApi>
+operazioni sul profilo utente (lettura, aggiornamento), cambio password, cancellazione account, generazione API key e collegamento/scollegamento dell'account GitHub. La chiamata `getProfile` è configurata con un timeout esplicito di 5 secondi per non bloccare il mount dell'applicazione nel caso in cui l'endpoint non sia ancora disponibile.
+
+====== RepositoriesApi <RepositoriesApi>
+CRUD dei repository, avvio analisi, recupero report, storico per repository e classifica globale per score. Il metodo `startAnalysis` distingue tra due path di backend: se `repositoryUrl` è fornito, utilizza `POST /analysis/start` (endpoint reale); altrimenti ricade su `POST /analysis/repositories/:id/analyze` per compatibilità con la modalità mock.
+
+====== AnalysisApi <AnalysisApi>
+recupero e parsing di un report di analisi, esportazione in formato PDF, JSON o Markdown, aggiornamento della decisione di remediation per una singola issue.
+
+
+#codeDiagram("api_layer", 90%)
+
+===== Model — Tipi di dominio
+
+I tipi TypeScript condivisi tra tutti gli strati sono definiti nel modulo `@/types`. Le strutture principali sono:
+
+====== Entità <Entità>
+`User`, `Repository`, `Analysis`, `AnalysisReport`, `Issue`, `Remediation`, `RankedRepository`.
+
+====== Enum <Enum>
+`AnalysisStatus` (`not-analyzed` | `pending` | `in-progress` | `completed` | `failed`), `IssueSeverity` (`critical` | `high` | `medium` | `low` | `info`), `AnalysisArea` (`code` | `security` | `documentation`).
+
+
+#codeDiagram("types", 80%)
+
+===== ViewModel — Context Layer
+
+Lo strato ViewModel è implementato tramite due React Context provider, montati alla radice dell'applicazione in `App.tsx`:
+
+====== AuthProvider <AuthProvider>
+gestisce lo stato dell'utente autenticato (`user`, `isAuthenticated`, `isLoading`). Al mount, tenta il ripristino della sessione tramite `getProfile` con timeout di 5 secondi. Se la risposta è 404 (endpoint non implementato nel backend), la sessione viene considerata anonima senza invalidare il token locale. Espone le azioni `login`, `register`, `logout` e `refreshUser`.
+
+====== SocketProvider <SocketProvider>
+inizializza la connessione Socket.io verso il microservizio Analysis e propaga gli eventi di avanzamento delle analisi (`analysis:started`, `analysis:progress`, `analysis:completed`, `analysis:failed`) ai componenti sottoscritti tramite il hook `useAnalysisSocket`.
+
+
+#codeDiagram("contexts", 80%)
+
+===== ViewModel — Hooks Layer
+
+I custom hook isolano la logica stateful riutilizzabile e la rendono disponibile a più componenti:
+
+====== useAuth <useAuth>
+legge `AuthContext` e garantisce, tramite type narrowing, che `user` non sia mai `null` nelle pagine protette.
+
+====== useAnalysisSocket <useAnalysisSocket>
+sottoscrive gli eventi Socket.io relativi a uno specifico `repositoryId`, invocando i callback `onStarted`, `onProgress`, `onCompleted` e `onFailed` al verificarsi dei rispettivi eventi.
+
+
+#codeDiagram("hooks_logic", 80%)
+
+===== View — Componenti
+
+I componenti sono organizzati in due categorie:
+
+*Componenti di dominio*:
+====== AppLayout <AppLayout>
+wrapper delle route protette che compone `Sidebar` e `<Outlet />`. Verifica `isAuthenticated` e reindirizza al login se necessario.
+
+====== Sidebar <Sidebar>
+navigazione principale con link alle sezioni protette, indicatore visivo dello stato della connessione WebSocket, e pulsante di logout.
+
+====== ScoreCard <ScoreCard>
+gauge SVG semicircolare e barra lineare per la visualizzazione degli score. Il colore si adatta dinamicamente al valore: verde (score ≥ 75), giallo (≥ 50), rosso (< 50).
+
+====== AnalysisStatusBadge <AnalysisStatusBadge>
+badge visivo che rappresenta i cinque stati del ciclo di vita di un'analisi.
+
+====== AddRepositoryModal <AddRepositoryModal>
+dialog con form per l'aggiunta di un repository, con validazione dell'URL GitHub.
+
+====== AnalysisOptionsModal <AnalysisOptionsModal>
+dialog per la configurazione di un'analisi (selezione delle aree, branch, commit hash). Seleziona automaticamente il path dell'endpoint in base alla disponibilità di `repositoryUrl`.
+
+
+*Primitive UI* (basate su Radix UI tramite shadcn/ui): `Button` in sette varianti (default, destructive, outline, secondary, ghost, link, accent) e quattro taglie; `Card`, `Dialog`, `Badge`, `Tabs`, `Input`, `Progress`, `Skeleton`, `Separator`.
+
+#codeDiagram("components_view", 90%)
+
+===== View — Pagine
+
+Le pagine si dividono in pubbliche e protette:
+
+*Pagine pubbliche* (accessibili senza autenticazione):
+====== LandingPage <LandingPage>
+presentazione del prodotto con chiamata all'azione verso login e registrazione.
+
+====== LoginPage <LoginPage>
+form con validazione Zod; delegano le operazioni di autenticazione ad `AuthContext`.
+
+====== NotFoundPage <NotFoundPage>
+pagina di fallback per route non mappate.
+
+
+*Pagine protette* (accessibili solo con utente autenticato):
+====== RepositoriesPage <RepositoriesPage>
+lista dei repository con ricerca full-text e paginazione. Permette di aggiungere nuovi repository tramite `AddRepositoryModal` e di avviare analisi tramite `AnalysisOptionsModal`.
+
+====== RepositoryDetailPage <RepositoryDetailPage>
+dettaglio di un repository con tab per Code Quality, Security, Documentation, Remediation e History. Mostra il report dell'ultima analisi, la progressione in tempo reale via `useAnalysisSocket`, e permette di esportare il report nei formati PDF, JSON e Markdown.
+
+====== HistoryPage <HistoryPage>
+storico globale delle analisi con paginazione.
+
+====== RankingPage <RankingPage>
+classifica ordinata per score aggregato. Per ogni repository mostra il delta dello score rispetto all'analisi precedente (`scoreDelta`) con icone di tendenza (`TrendingUp` / `TrendingDown`).
+
+====== SettingsPage <SettingsPage>
+gestione del profilo utente, cambio password, generazione di API key e collegamento/scollegamento dell'account GitHub.
+
+
+#codeDiagram("app", 80%)
+
+==== Flusso di autenticazione
+
+Il routing è gestito da React Router v7. `App.tsx` definisce due gruppi di route:
+====== Route pubbliche <Routepubbliche>
+`LandingPage`, `LoginPage`, `RegisterPage`, `NotFoundPage`.
+
+====== Route protette <Routeprotette>
+avvolte da `AppLayout`, che verifica `isAuthenticated` e reindirizza al login se necessario.
+
+
+All'avvio dell'applicazione, `AuthProvider` tenta il ripristino della sessione chiamando `getProfile` con un timeout di 5 secondi. Tre scenari possibili:
++ Il token è valido → `getProfile` ritorna l'utente e la sessione viene ripristinata senza un nuovo login.
++ Il token è scaduto (risposta 401) → il Gateway tenta il refresh; se fallisce, i token vengono invalidati e l'utente è reindirizzato al login.
++ L'endpoint non è implementato (risposta 404 o timeout) → la sessione viene considerata anonima senza invalidare il token locale, per evitare logout involontari durante lo sviluppo.
+
+Il token di accesso viene allegato automaticamente a ogni richiesta dall'interceptor di `Gateway`, senza che i componenti debbano gestirlo esplicitamente.
+
+==== Aggiornamenti in tempo reale
+
+Le analisi dei repository sono operazioni a lunga durata (ordine dei minuti). Il frontend non utilizza polling HTTP ricorrente, ma una connessione *Socket.io* persistente verso il microservizio Analysis.
+
+Quando un'analisi cambia stato, il server emette un evento che `SocketProvider` riceve e propaga. Il hook `useAnalysisSocket` permette a qualsiasi componente di sottoscriversi agli eventi relativi a un repository specifico tramite callback (`onStarted`, `onProgress`, `onCompleted`, `onFailed`), senza conoscere i dettagli del protocollo WebSocket.
+
+Questo approccio elimina il carico di polling e garantisce che `RepositoryDetailPage` aggiorni la barra di avanzamento e il report in tempo reale, riducendo la latenza percepita dall'utente.

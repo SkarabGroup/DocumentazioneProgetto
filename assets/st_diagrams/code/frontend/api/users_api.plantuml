@@ -1,0 +1,19 @@
+@startuml
+package "API Layer (Model)" {
+  class UsersApi {
+    + getProfile(): Promise<User>
+    + updateProfile(payload): Promise<User>
+    + changePassword(payload): Promise<void>
+    + deleteAccount(): Promise<void>
+    + generateApiKey(): Promise<{ apiKey }>
+    + linkGithub(code): Promise<User>
+    + unlinkGithub(): Promise<void>
+    --
+    Gestisce le operazioni sul profilo utente verso il microservizio
+    Account: lettura e aggiornamento dati, cambio password,
+    generazione API key e collegamento/scollegamento account GitHub.
+  }
+
+  UsersApi --> "Gateway" : usa
+}
+@enduml

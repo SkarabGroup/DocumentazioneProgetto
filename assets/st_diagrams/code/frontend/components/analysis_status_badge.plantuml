@@ -1,0 +1,12 @@
+@startuml
+package "View — Componenti dominio" {
+  class AnalysisStatusBadge {
+    + status: AnalysisStatus
+    --
+    Badge visivo che rappresenta lo stato di un'analisi.
+    Mappa ogni stato a un colore e un'etichetta:
+    not-analyzed (grigio), pending (giallo), in-progress (giallo con pulse),
+    completed (verde), failed (rosso).
+  }
+}
+@enduml

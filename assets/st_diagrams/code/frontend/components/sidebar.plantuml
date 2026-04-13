@@ -1,0 +1,14 @@
+@startuml
+package "View — Layout" {
+  class Sidebar {
+    --
+    Barra di navigazione laterale collassabile presente in tutte le
+    pagine protette. Mostra logo, link di navigazione (Repository,
+    Storico, Classifica, Impostazioni), nome utente, pulsante logout
+    e indicatore stato connessione WebSocket (connected/disconnected).
+  }
+
+  Sidebar --> "useAuth" : user, logout()
+  Sidebar --> "SocketContext" : isConnected
+}
+@enduml

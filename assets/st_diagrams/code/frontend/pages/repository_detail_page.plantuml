@@ -1,0 +1,20 @@
+@startuml
+package "View — Pagine protette" {
+  class RepositoryDetailPage {
+    --
+    Pagina di dettaglio per un singolo repository. Mostra i metadati
+    del repository e il report dell'ultima analisi in tab separate:
+    Code Quality, Security, Documentation, Remediation e History.
+    Include ScoreCard per i punteggi, barra di avanzamento per
+    analisi in corso, e permette di avviare una nuova analisi.
+    Aggiorna lo stato in tempo reale via useAnalysisSocket.
+  }
+
+  RepositoryDetailPage --> "RepositoriesApi" : get, startAnalysis, getHistory
+  RepositoryDetailPage --> "AnalysisApi" : exportReport, updateRemediationDecision
+  RepositoryDetailPage --> "useAnalysisSocket" : aggiornamenti real-time
+  RepositoryDetailPage ..> "AnalysisOptionsModal" : apre
+  RepositoryDetailPage ..> "ScoreCard" : usa
+  RepositoryDetailPage ..> "AnalysisStatusBadge" : usa
+}
+@enduml

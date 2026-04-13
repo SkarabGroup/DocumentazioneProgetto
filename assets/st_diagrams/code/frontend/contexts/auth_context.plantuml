@@ -1,0 +1,21 @@
+@startuml
+package "Context Layer (ViewModel)" {
+  class AuthProvider {
+    + user: User | null
+    + isAuthenticated: boolean
+    + isLoading: boolean
+    + login(credentials): Promise<void>
+    + register(credentials): Promise<void>
+    + logout(): Promise<void>
+    + refreshUser(): Promise<void>
+    --
+    Provider React che gestisce lo stato globale di autenticazione.
+    Al mount ripristina la sessione dai token salvati in localStorage.
+    Espone user corrente, stato di caricamento e le azioni auth
+    a tutti i componenti figli tramite AuthContext.
+  }
+
+  AuthProvider --> "AuthApi" : login / register / refresh
+  AuthProvider --> "TokenStorage" : legge/scrive token
+}
+@enduml

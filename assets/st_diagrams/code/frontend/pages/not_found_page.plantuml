@@ -1,0 +1,9 @@
+@startuml
+package "View — Pagine pubbliche" {
+  class NotFoundPage {
+    --
+    Pagina 404 mostrata per qualsiasi route non riconosciuta.
+    Visualizza un grande "404" e un link per tornare alla home.
+  }
+}
+@enduml
