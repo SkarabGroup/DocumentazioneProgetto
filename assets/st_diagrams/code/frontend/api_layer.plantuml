@@ -20,15 +20,18 @@ package "API Layer (Model)" {
   }
 
   class UsersApi {
-    + getProfile(): Promise<User>
-    + updateProfile(payload): Promise<User>
     + changePassword(payload): Promise<void>
     + deleteAccount(): Promise<void>
-    + generateApiKey(): Promise<Object>
-    + linkGithub(code): Promise<void>
-    + unlinkGithub(): Promise<void>
     --
-    Gestisce le operazioni sul profilo utente verso il microservizio Account:\naggiornamento dati, cambio password, API key e integrazione GitHub.
+    Gestisce le operazioni sul profilo utente verso il microservizio Account:\ncambio password ed eliminazione account.
+  }
+
+  class PatApi {
+    + add(payload): Promise<void>
+    + update(payload): Promise<void>
+    + delete(payload): Promise<void>
+    --
+    Gestisce le operazioni di salvataggio, aggiornamento ed eliminazione\ndei Personal Access Token (PAT) per i repository scansionati.
   }
 
   class RepositoriesApi {
@@ -56,6 +59,7 @@ package "API Layer (Model)" {
 
   Gateway <-- AuthApi : usa
   Gateway <-- UsersApi : usa
+  Gateway <-- PatApi : usa
   Gateway <-- RepositoriesApi : usa
   Gateway <-- AnalysisApi : usa
 }
