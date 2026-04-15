@@ -12,7 +12,7 @@ class StartAnalysisRequestDTO {
     + branch: string | undefined
     + commit: string | undefined
     + requestedCode: boolean
-    + requestDocumentation: boolean
+    + requestedDocumentation: boolean
     + requestedSecurity: boolean
     ---
     + StartAnalysisRequestDTO(repoUrl, password, branch, commit, code, docs, security)
