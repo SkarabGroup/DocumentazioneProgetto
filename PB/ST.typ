@@ -1512,7 +1512,10 @@ istanza Axios configurata con la base URL proveniente dalla variabile d'ambiente
 chiamate di login, registrazione, refresh e logout verso il microservizio Account. I metodi `login` e `register` restituiscono sia i token (`accessToken`, `refreshToken`) sia l'oggetto `user`.
 
 ====== UsersApi <UsersApi>
-operazioni sul profilo utente (lettura, aggiornamento), cambio password, cancellazione account, generazione API key e collegamento/scollegamento dell'account GitHub. La chiamata `getProfile` è configurata con un timeout esplicito di 5 secondi per non bloccare il mount dell'applicazione nel caso in cui l'endpoint non sia ancora disponibile.
+operazioni per il cambio password e la cancellazione dell'account.
+
+====== PatApi <PatApi>
+operazioni di aggiunta, aggiornamento e rimozione dei Personal Access Token (PAT) associati agli URL dei repository.
 
 ====== RepositoriesApi <RepositoriesApi>
 CRUD dei repository, avvio analisi, recupero report, storico per repository e classifica globale per score. Il metodo `startAnalysis` distingue tra due path di backend: se `repositoryUrl` è fornito, utilizza `POST /analysis/start` (endpoint reale); altrimenti ricade su `POST /analysis/repositories/:id/analyze` per compatibilità con la modalità mock.
@@ -1528,7 +1531,7 @@ recupero e parsing di un report di analisi, esportazione in formato PDF, JSON o 
 I tipi TypeScript condivisi tra tutti gli strati sono definiti nel modulo `@/types`. Le strutture principali sono:
 
 ====== Entità <Entità>
-`User`, `Repository`, `Analysis`, `AnalysisReport`, `Issue`, `Remediation`, `RankedRepository`.
+`User`, `Repository`, `Analysis`, `AnalysisReport`, `Issue`, `Remediation`, `RankedRepository`, `CodeAgentStaticIssue` e `AIInterpretation`.
 
 ====== Enum <Enum>
 `AnalysisStatus` (`not-analyzed` | `pending` | `in-progress` | `completed` | `failed`), `IssueSeverity` (`critical` | `high` | `medium` | `low` | `info`), `AnalysisArea` (`code` | `security` | `documentation`).
@@ -1541,7 +1544,7 @@ I tipi TypeScript condivisi tra tutti gli strati sono definiti nel modulo `@/typ
 Lo strato ViewModel è implementato tramite due React Context provider, montati alla radice dell'applicazione in `App.tsx`:
 
 ====== AuthProvider <AuthProvider>
-gestisce lo stato dell'utente autenticato (`user`, `isAuthenticated`, `isLoading`). Al mount, tenta il ripristino della sessione tramite `getProfile` con timeout di 5 secondi. Se la risposta è 404 (endpoint non implementato nel backend), la sessione viene considerata anonima senza invalidare il token locale. Espone le azioni `login`, `register`, `logout` e `refreshUser`.
+gestisce lo stato dell'utente autenticato (`user`, `isAuthenticated`, `isLoading`). Al mount, tenta il ripristino della sessione decodificando localmente il payload del JWT di accesso per estrarre i dati dell'utente e verificandone la scadenza, evitando così chiamate di rete aggiuntive. Espone le azioni `login`, `register`, `logout` e `refreshUser`.
 
 ====== SocketProvider <SocketProvider>
 inizializza la connessione Socket.io verso il microservizio Analysis e propaga gli eventi di avanzamento delle analisi (`analysis:started`, `analysis:progress`, `analysis:completed`, `analysis:failed`) ai componenti sottoscritti tramite il hook `useAnalysisSocket`.
@@ -1619,7 +1622,7 @@ storico globale delle analisi con paginazione.
 classifica ordinata per score aggregato. Per ogni repository mostra il delta dello score rispetto all'analisi precedente (`scoreDelta`) con icone di tendenza (`TrendingUp` / `TrendingDown`).
 
 ====== SettingsPage <SettingsPage>
-gestione del profilo utente, cambio password, generazione di API key e collegamento/scollegamento dell'account GitHub.
+gestione e salvataggio dei Personal Access Token (PAT) per repository specifici, cambio password utente e cancellazione definitiva dell'account.
 
 
 #codeDiagram("app", 80%)
@@ -1634,10 +1637,10 @@ Il routing è gestito da React Router v7. `App.tsx` definisce due gruppi di rout
 avvolte da `AppLayout`, che verifica `isAuthenticated` e reindirizza al login se necessario.
 
 
-All'avvio dell'applicazione, `AuthProvider` tenta il ripristino della sessione chiamando `getProfile` con un timeout di 5 secondi. Tre scenari possibili:
-+ Il token è valido → `getProfile` ritorna l'utente e la sessione viene ripristinata senza un nuovo login.
-+ Il token è scaduto (risposta 401) → il Gateway tenta il refresh; se fallisce, i token vengono invalidati e l'utente è reindirizzato al login.
-+ L'endpoint non è implementato (risposta 404 o timeout) → la sessione viene considerata anonima senza invalidare il token locale, per evitare logout involontari durante lo sviluppo.
+All'avvio dell'applicazione, `AuthProvider` tenta il ripristino della sessione estraendo e validando localmente il payload dal token JWT salvato. Tre scenari possibili:
++ Il token è presente e non scaduto → il payload viene interpretato e la sessione viene ripristinata a partire dai dati in esso contenuti, senza alcuna chiamata di rete aggiuntiva.
++ Il token è scaduto o non valido → il ripristino fallisce in locale, invalidando lo stato e richiedendo un nuovo login.
++ Il token non è più valido durante le richieste di navigazione (risposta 401) → l'interceptor `Gateway` tenta il refresh; se fallisce, i token vengono invalidati e l'utente è reindirizzato al login.
 
 Il token di accesso viene allegato automaticamente a ogni richiesta dall'interceptor di `Gateway`, senza che i componenti debbano gestirlo esplicitamente.
 
