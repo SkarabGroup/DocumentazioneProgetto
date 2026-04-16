@@ -382,7 +382,7 @@ I moduli API sono:
 - *`AuthApi`*: login, registrazione, refresh e logout verso il microservizio Account.
 - *`UsersApi`*: profilo utente, cambio password, cancellazione account, API key, collegamento GitHub. `getProfile` ha un timeout di 5 secondi.
 - *`RepositoriesApi`*: CRUD repository, avvio analisi, storico e classifica. `startAnalysis` chiama `POST /analysis/start` traducendo le aree selezionate nei flag booleani `requestedCode`, `requestedSecurity`, `requestedDocumentation`.
-- *`AnalysisApi`*: recupero report via `GET /analysis/one` con body `{ analysisId }`, esportazione PDF/JSON/Markdown, aggiornamento decisioni di remediation.
+- *`AnalysisApi`*: recupero singolo report via `GET /analysis/one` con body `{ analysisId }`; storico globale via `GET /analysis/all` (tutte le analisi dell'utente corrente, userId da JWT); esportazione PDF/JSON/Markdown; aggiornamento decisioni di remediation.
 
 #codeDiagram("api_layer", 90%)
 

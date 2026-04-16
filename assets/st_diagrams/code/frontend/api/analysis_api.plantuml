@@ -8,7 +8,9 @@ package "API Layer (Model)" {
     --
     Recupera singoli report tramite GET /analysis/one con body { analysisId },
     mappando la risposta al tipo Analysis (meta-dati + DocsAnalysisReport).
-    Gestisce lo storico globale, l'esportazione in json/pdf/csv/markdown
+    getHistory chiama GET /analysis/all: ritorna tutte le analisi dell'utente
+    corrente (userId da JWT) come PaginatedResponse con pagina unica.
+    Gestisce l'esportazione in json/pdf/csv/markdown
     e l'aggiornamento delle decisioni sulle remediation suggerite.
   }
 
