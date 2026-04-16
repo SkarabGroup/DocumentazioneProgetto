@@ -6,9 +6,10 @@ package "API Layer (Model)" {
     + exportReport(id, format): Promise<Blob>
     + updateRemediationDecision(analysisId, remediationId, decision): Promise<void>
     --
-    Recupera singoli report di analisi, lo storico globale di tutte
-    le analisi dell'utente, esporta report in vari formati (json, pdf,
-    csv, markdown) e aggiorna le decisioni sulle remediation suggerite.
+    Recupera singoli report tramite GET /analysis/one con body { analysisId },
+    mappando la risposta al tipo Analysis (meta-dati + DocsAnalysisReport).
+    Gestisce lo storico globale, l'esportazione in json/pdf/csv/markdown
+    e l'aggiornamento delle decisioni sulle remediation suggerite.
   }
 
   AnalysisApi --> "Gateway" : usa
