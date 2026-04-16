@@ -412,3 +412,77 @@
     ..data.flatten().map(item => [#item])
   )
 }
+#let preventivo_a_finire(data, caption_text, preventivo, consuntivo) = {
+  let rates = (30, 20, 25, 25, 15, 15)
+
+  let showVal(val) = {
+    if val == 0 { [-] } else { [#val] }
+  }
+
+  let showCost(val) = {
+    if val == 0 { [-] } else { [#val €] }
+  }
+
+  // Totale ore rimanenti = somma colonne dei membri
+  let totals = (0, 0, 0, 0, 0, 0)
+  let table_body = ()
+
+  for row in data {
+    totals = totals.enumerate().map(((i, t)) => t + row.at(i + 1))
+    let row_total = range(6).map(i => row.at(i + 1)).sum()
+
+    table_body.push(row.at(0))
+    for i in range(6) {
+      table_body.push(showVal(row.at(i + 1)))
+    }
+    table_body.push(table.cell(fill: luma(240))[*#row_total*])
+  }
+
+  let tot_grand  = totals.sum()
+  let pac        = totals.enumerate().map(((i, t)) => t * rates.at(i))
+  let pac_grand  = pac.sum()
+
+  figure(
+    table(
+      fill: (col, row) => if row == 0 { luma(63.75%) } else { white },
+      columns: (1.5fr, 0.7fr, 0.8fr, 0.5fr, 0.6fr, 0.8fr, 0.6fr, 0.7fr),
+      inset: 8pt,
+      align: (col, row) => if col == 0 { left + horizon } else { center + horizon },
+      stroke: 0.5pt + luma(200),
+
+      table.header(
+        text(fill: white, weight: "bold")[Membro],
+        text(fill: white, size: 8pt, weight: "bold")[Responsabile],
+        text(fill: white, size: 8pt, weight: "bold")[Amministratore],
+        text(fill: white, size: 8pt, weight: "bold")[Analista],
+        text(fill: white, size: 8pt, weight: "bold")[Progettista],
+        text(fill: white, size: 8pt, weight: "bold")[Programmatore],
+        text(fill: white, size: 8pt, weight: "bold")[Verificatore],
+        text(fill: white, size: 8pt, weight: "bold")[Totale],
+      ),
+
+      ..table_body,
+
+      // Preventivo sprint — solo display, non usato nei calcoli
+      table.cell(fill: luma(220), align: left)[*Preventivo sprint*],
+      ..preventivo.map(p => table.cell(fill: luma(220))[#showVal(p)]),
+      table.cell(fill: luma(220))[#showVal(preventivo.sum())],
+
+      // Consuntivo sprint — solo display, non usato nei calcoli
+      table.cell(fill: luma(220), align: left)[*Consuntivo sprint*],
+      ..consuntivo.map(c => table.cell(fill: luma(220))[#showVal(c)]),
+      table.cell(fill: luma(220))[#showVal(consuntivo.sum())],
+
+      // Totale ore rimanenti = somma ore rimanenti per ruolo dai membri
+      table.cell(fill: luma(240), align: left)[*Totale Ore rimanenti*],
+      ..totals.map(t => table.cell(fill: luma(240))[*#t*]),
+      table.cell(fill: luma(230))[*#tot_grand*],
+
+      // Prev. a finire = ore rimanenti × tariffa
+      table.cell(fill: luma(200), align: left)[*Prev. a finire*],
+      ..pac.map(c => table.cell(fill: luma(200))[#showCost(c)]),
+      table.cell(fill: luma(200))[#showCost(pac_grand)],
+    ),
+    caption: caption_text,
+  )
+}

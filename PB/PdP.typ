@@ -1634,7 +1634,7 @@ Riguardo ai costi, il preventivo di 4690.00€ è stato sforato di poco (60,00�
 
 
 Dal prossimo Sprint inizieranno le attività in vista della PB.
-
+#pagebreak()
 ==== Riassunto utilizzo orario RTB
 #figure(
   table(
@@ -1666,7 +1666,35 @@ Dal prossimo Sprint inizieranno le attività in vista della PB.
   caption: [Tabella riassuntiva utilizzo ore per RTB],
 )
 
+=== Consumo orario per membro RTB
+#sprint_table(
+  (
+  ([Kevin],      7,  8,  8,  0,  10,5,  38),
+ ([Riccardo B.],0,    5,  6,  0,  10,  5, 26),
+ ([Riccardo M.],0,    5,  4,  0,  6,  5,  20),
+ ([Antonio],    7,  6,  15,0,  0,     3, 31),
+ ([Andrea],     0,    5,  11,0,  0,     5, 21),
+ ([Alberto],    6,  13,12,0,  11, 8,  50),
+ ([Alice],      6,  9,  13,0,  0,     9, 37,)
+ ),
+ [Consumo orario per membro RTB],
+)
 #pagebreak()
+=== Ore rimanenti per PB
+La seguente tabella riporta le ore rimanenti di ogni componente per ruolo per completare la PB.
+#sprint_table(
+  (
+  ([Kevin],       0,  5,  4,  17, 10, 16, 52),
+  ([Riccardo B.], 7,  8,  6,  17, 10, 16, 64),
+  ([Riccardo M.], 7,  8,  8,  17, 14, 16, 70),
+  ([Antonio],     0,  7,  -3, 17, 20, 18, 59),
+  ([Andrea],      7,  8,  1,  17, 20, 16, 69),
+  ([Alberto],     1,  0,  0,  17, 9,  13, 40),
+  ([Alice],       1,  4,  -1, 17, 20, 12, 53), 
+
+  ),
+  [Ore rimanenti per PB per membro],
+)   
 
 === Sprint 5
 *Periodo:* dal 22/02/2026 al 07/03/2026
@@ -1697,6 +1725,7 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
     ([Sgreva Andrea], 0, 0, 2, 6, 0, 0),
     ([Suar Alberto], 0, 0, 0, 8, 0, 0),
     ([Zago Alice], 0, 0, 1, 6, 0, 0),
+
   ),
   [Prospetto orario preventivato per lo Sprint 5],
 )
@@ -1705,16 +1734,24 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 #activity_table(
   (
     ("Modifica del documento AdR in conformità alle correzioni proposte", "Analista", "2:00", "2:00", "Completata"),
-    ("Verifica delle modifiche al documento AdR", "Verificatore", "1:00","1:00", "Completata"),
-    ("Modifica della definizione di verificatore nelle NdP", "Analista", "0:30", "1:00", "Completata"),
-    ("Verifica delle modifiche in NdP", "Verificatore", "1:00", "1:00", "Completata"),
+    ("Verifica delle modifiche al documento AdR", "Verificatore", "1:00","0:45", "Completata"),
+    ("Verifica delle modifiche in NdP", "Verificatore", "1:00", "0:45", "Completata"),
     ("Scrittura del diario di bordo del giorno 2026-03-11", "Analista", "1:00", "1:00", "Completata"),
-    ("Prima stesura del documento ST", "Analista", "1:00", "1:00", "Completata"),
-    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa alla persistenza", "Progettista", "2:00", "2:00", "Completata"),
-    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa al backend", "Progettista", "2:00", "2:00", "Completata"),    
-    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa agli agenti LLM", "Progettista", "2:00", "2:00", "Completata"),
-    ("Progettazione di livello 3 del C4 model per il microservizio di Analisi", "Progettista", "Progettista", "2:00", "2:00", "Completata"),
-    ("Progettazione di livello 3 del C4 model per il microservizio di Gestione degli Account", "Progettista","2:00", "2:00", "Completata"),
+    ("Prima stesura del documento ST", "Analista", "6:00", "1:00", "Completata"),
+    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa alla persistenza", "Progettista", "2:00", "0:00", "Rimandata causa ritardo nella palestra"),
+    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa al backend", "Progettista", "8:00", "0:00", "Rimandata causa ritardo nella palestra"),    
+    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa agli agenti LLM", "Progettista", "14:00", "0:00", "Rimandata causa ritardo nella palestra"),
+    ("Progettazione di livello 3 del C4 model per il microservizio di Analisi", "Progettista", "12:00", "0:00", "Rimandata causa ritardo nella palestra"),
+    ("Progettazione di livello 3 del C4 model per il microservizio di Gestione degli Account", "Progettista","7:00", "0:00", "Rimandata causa ritardo nella palestra"),
+    ("Progettazione di livello 3 del C4 model per il frontend", "Progettista","6:00", "0:00", "Rimandata causa ritardo nella palestra"),
+    ("Stesura verbale riunione prima settimana", "Responsabile","1:00","1:00","Completata"),
+    ("Stesura verbale riunione seconda settimana", "Responsabile","1:00","1:00","Completata"),  
+    ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile","2:30","2:00","Completata"),
+    ("Aggiunta task Jira", "Responsabile","0:30","1:00","Completata"),
+    ("Aggiunto sprint 5 nel PdP", "Responsabile","2:00","2:00","Completata"),
+    ("Verifica verbale riunione interna prima settimana", "Verificatore","0:30","0:15","Completata"),
+    ("Verifica verbale riunione interna seconda settimana", "Verificatore","0:30","0:15","Completata"),
+    ("Verifica ST","Verificatore","2:00","0:00","Rimandata causa ritardo nella palestra")
   ),
   [Riassunto delle attività svolte durante lo sprint 5]
 )
@@ -1764,35 +1801,20 @@ Per lo sprint successivo il team si pone i seguenti obiettvi prioritari:
 - Iniziare le attvità di codifica
 
 ===== Aggiornamento preventivo a finire PB
-#figure(
-  table(
-    fill: (col, row) => if row == 0 { luma(64%) } else { white },
-    columns: (1fr, 1fr, 1fr, 1fr),
-    inset: 10pt,
-    align: center + horizon,
-    stroke: 0.5pt + luma(200),
-
-    table.header(
-      text(fill: white, weight: "bold")[Ruolo],
-      text(fill: white, weight: "bold")[Ore rimanenti per PB],
-      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
-      text(fill: white, weight: "bold")[Preventivo a finire costi],
-    ),
-
-    [Responsabile], [21], [-],[€ 630,00],
-    [Amministratore], [35], [-], [€ 700,00],
-    [Analista], [17], [-],[€ 425,00],
-    [Progettista], [105],text(fill:green)[-49->€+1225],[€ 2625,00],
-    [Programmatore], [119], [-],[€ 1785,00],
-    [Verificatore], [103],[],[€ 1545,00],
-
-    table.cell(fill: luma(240))[*Totale PB*],
-    table.cell(fill: luma(240))[*400*],
-    table.cell(fill: luma(240))[#text(fill: green)[*-49 -> € +1125*]],
-    table.cell(fill: luma(240))[*€ 7710,00*],
+#preventivo_a_finire(
+  (
+    //               Resp  Amm  Anal  Prog  Cod  Ver
+    ([Kevin],           0,   5,   4,   17,  10,  16),
+    ([Riccardo B.],     0,   8,   5,   17,  10,  16),
+    ([Riccardo M.],     7,   8,   8,   17,  14,  14),
+    ([Antonio],         0,   7,  -3,   17,  20,  18),
+    ([Andrea],          7,   8,  -1,   17,  20,  16),
+    ([Alberto],         1,   0,   0,   17,   9,  13),
+    ([Alice],           1,   4,  -2,   17,  20,  12),
   ),
-
-  caption: [Aggiornamento preventivo a finire sprint 5],
+  [Consuntivo Sprint],
+  (7,0,4,49,0,2),  // preventivo
+  (7,0,3,20,0,2),  // consuntivo ← nuovo argomento
 )
 #pagebreak()
 
@@ -1872,35 +1894,20 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
 - Chiudere le decisioni progettuali sui pattern in Specifica Tecnica.
 - Iniziare lo sviluppo dei microservizi.
 
-===== Aggiornamento preventivo a finire PB
-#figure(
-  table(
-    fill: (col, row) => if row == 0 { luma(64%) } else { white },
-    columns: (1fr, 1fr, 1fr, 1fr),
-    inset: 10pt,
-    align: center + horizon,
-    stroke: 0.5pt + luma(200),
-
-    table.header(
-      text(fill: white, weight: "bold")[Ruolo],
-      text(fill: white, weight: "bold")[Ore rimanenti per PB],
-      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
-      text(fill: white, weight: "bold")[Preventivo a finire costi],
-    ),
-
-    [Responsabile], [19], [-], [€ 570,00],
-    [Amministratore], [35], [-], [€ 700,00],
-    [Analista], [17], [-], [€ 425,00],
-    [Progettista], [67], [-], [€ 1675,00],
-    [Programmatore], [119], [-], [€ 1785,00],
-    [Verificatore], [103], [-], [€ 1545,00],
-
-    table.cell(fill: luma(240))[*Totale PB*],
-    table.cell(fill: luma(240))[*360*],
-    table.cell(fill: luma(240))[*[-]*],
-    table.cell(fill: luma(240))[*€ 6700,00*],
+#preventivo_a_finire(
+  (
+    //               Resp  Amm  Anal  Prog  Cod  Ver
+    ([Kevin],           0,   5,   4,   9,  10,  16),
+    ([Riccardo B.],     0,   8,   5,   11,  10,  16),
+    ([Riccardo M.],     5,   8,   8,   13,  14,  14),
+    ([Antonio],         0,   7,  -3,   14,  20,  18),
+    ([Andrea],          7,   8,  -1,   14,  20,  16),
+    ([Alberto],         1,   0,   0,   9,   9,  13),
+    ([Alice],           1,   4,  -2,   11,  20,  12),
   ),
-  caption: [Aggiornamento preventivo a finire sprint 6],
+  [Consuntivo Sprint],
+  (2,0,0,38,0,0),  // preventivo
+  (2,0,0,38,0,0),  // consuntivo ← nuovo argomento
 )
 #pagebreak()
 
@@ -1929,7 +1936,7 @@ La seguente tabella riporta la pianificazione oraria per ruolo.
   ),
   [Prospetto orario preventivato per lo Sprint 7],
 )
-
+#TODO("redila piú lunga che fa cagare")
 ==== Prospetto attività
 #activity_table(
   (
@@ -1983,38 +1990,22 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
 - Sviluppo del microservizio autenticazione.
 
 
-===== Aggiornamento preventivo a finire PB
-#figure(
-  table(
-    fill: (col, row) => if row == 0 { luma(64%) } else { white },
-    columns: (1fr, 1fr, 1fr, 1fr),
-    inset: 10pt,
-    align: center + horizon,
-    stroke: 0.5pt + luma(200),
-
-    table.header(
-      text(fill: white, weight: "bold")[Ruolo],
-      text(fill: white, weight: "bold")[Ore rimanenti per PB],
-      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
-      text(fill: white, weight: "bold")[Preventivo a finire costi],
-    ),
-
-    [Responsabile], [17], [-],[€ 510,00],
-    [Amministratore], [35], [-], [€ 700,00],
-    [Analista], [17], [-],[€ 425,00],
-    [Progettista], [44],[-],[€ 1100,00],
-    [Programmatore], [108],[-],[€ 1620,00],
-    [Verificatore], [103],[-],[€ 1545,00],
-
-    table.cell(fill: luma(240))[*Totale PB*],
-    table.cell(fill: luma(240))[*324*],
-    table.cell(fill: luma(240))[*[-]*],
-    table.cell(fill: luma(240))[*€ 5900,00*],
+#preventivo_a_finire(
+  (
+    //               Resp  Amm  Anal  Prog  Cod  Ver
+    ([Kevin],           0,   5,   4,   5,  6,  16),
+    ([Riccardo B.],     0,   8,   5,   8,  8,  16),
+    ([Riccardo M.],     3,   8,   8,   10,  14,  14),
+    ([Antonio],         0,   7,  -3,   11,  20,  18),
+    ([Andrea],          7,   8,  -1,   11,  20,  16),
+    ([Alberto],         1,   0,   0,   5,   6,  13),
+    ([Alice],           1,   4,  -2,   8,  18,  12),
   ),
-  caption: [Aggiornamento preventivo a finire sprint 7],
+  [Consuntivo Sprint],
+  (2,0,0,23,11,0),  // preventivo
+  (2,0,0,23,11,0),  // consuntivo ← nuovo argomento
 )
 #pagebreak()
-
 
 === Sprint 8
 *Periodo:* dal 28/03/2026 al 04/04/2026
@@ -2053,13 +2044,13 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 ==== Prospetto attività
 #activity_table(
   (
-    ("Stesura norme di codifica e design pattern in ST", "Amministratore", "4:00", "", "Completata"),
-    ("Progettazione architettura AWS Lambda e Step Functions", "Progettista", "4:00", "", "Scartata"),
-    ("Aggiornamento diagrammi architetturali e di dominio (C3/C4)", "Progettista", "13:00", "", "Completata"),
-    ("Inizio sviluppo interfaccia Frontend", "Programmatore", "4:00", "", "Completata"),
-    ("Implementazione codice dei due microservizi con test", "Programmatore", "22:00", "", "Completata"),
-    ("Coordinamento riunioni e avanzamenti", "Responsabile", "3:30", "", "Completata"),
-    ("Attività di verifica dei documenti e del codice", "Verificatore", "14:00", "", "Completata"),
+    ("Stesura norme di codifica e design pattern in ST", "Amministratore", "4:00", "1:30", "Completata"),
+    ("Progettazione architettura AWS Lambda e Step Functions", "Progettista", "4:00", "7:00", "Scartata"),
+    ("Aggiornamento diagrammi architetturali e di dominio (C3/C4)", "Progettista", "13:00", "16:00", "Completata"),
+    ("Inizio sviluppo interfaccia Frontend", "Programmatore", "4:00", "4:00", "Completata"),
+    ("Implementazione codice dei due microservizi con test", "Programmatore", "22:00", "18:00", "Completata"),
+    ("Coordinamento riunioni e avanzamenti", "Responsabile", "3:30", "3:30", "Completata"),
+    ("Attività di verifica dei documenti e del codice", "Verificatore", "14:00", "10:00", "Completata"),
   ),
   [Riassunto delle attività svolte durante lo sprint 8]
 )
@@ -2087,9 +2078,9 @@ Questo sprint è stato caratterizzato da un cruciale cambio di rotta architettur
 ===== Squilibri orari preventivati e reali
 L'imprevista necessità di studiare l'ambiente Serverless e la successiva riprogettazione dell'architettura interna hanno generato un maggiore consumo di ore da "Progettista" e un minore consumo di ore da "Programmatore". Per quanto riguarda il ruolo di "Verificatore" e "Amministratore" c'è stato un minore consumo di ore rispetto al preventivo, in quanto questi ruoli sono stati utilizzati meno di quanto previsto.
 - *Responsabile:* Preventivato 3.5h, Consuntivo 3.5h
+- *Amministratore:* Preventivato 4h, Consuntivo 1.5h
 - *Progettista:* Preventivato 17h, Consuntivo 23h
 - *Programmatore:* Preventivato 26h, Consuntivo 22h
-- *Amministratore:* Preventivato 4h, Consuntivo 1.5h
 - *Verificatore:* Preventivato 14h, Consuntivo 10h
 
 ===== Rischi Rilevati
@@ -2107,34 +2098,20 @@ Per lo Sprint successivo, il team si pone i seguenti obiettivi prioritari:
 - Proseguire lo sviluppo del Frontend collegandolo in modo basilare ai Backend.
 
 ===== Aggiornamento preventivo a finire PB
-#figure(
-  table(
-    fill: (col, row) => if row == 0 { luma(64%) } else { white },
-    columns: (1fr, 1fr, 1fr, 1fr),
-    inset: 10pt,
-    align: center + horizon,
-    stroke: 0.5pt + luma(200),
-
-    table.header(
-      text(fill: white, weight: "bold")[Ruolo],
-      text(fill: white, weight: "bold")[Ore rimanenti per PB],
-      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
-      text(fill: white, weight: "bold")[Preventivo a finire costi],
-    ),
-
-    [Responsabile], [13.5], [-],[€ 405,00],
-    [Amministratore], [33.5], text(fill:green)[-2.5 -> € +50], [€ 670,00],
-    [Analista], [17], [-],[€ 425,00],
-    [Progettista], [21],text(fill:red)[+6 -> € -150],[€ 525,00],
-    [Programmatore], [86],text(fill:green)[-4 -> € +60],[€ 1290,00],
-    [Verificatore], [93],text(fill:green)[-4 -> € +60],[€ 1395,00],
-
-    table.cell(fill: luma(240))[*Totale PB*],
-    table.cell(fill: luma(240))[*264*],
-    table.cell(fill: luma(240))[#text(fill: green)[*€ +20*]],
-    table.cell(fill: luma(240))[*€ 4710,00*],
+#preventivo_a_finire(
+  (
+    //               Resp  Amm  Anal  Prog  Cod  Ver
+    ([Kevin],           0,   5,   4,   1,  2,  14),
+    ([Riccardo B.],     0,   8,   5,   7,  4,  14),
+    ([Riccardo M.],     3,   8,   8,   8,  10,  14),
+    ([Antonio],         0,   7,  -3,   6,  20,  18),
+    ([Andrea],          3.5,   8,  -1,   6,  20,  14),
+    ([Alberto],         1,   -1.5,   0,   2,   0,  11),
+    ([Alice],           1,   4,  -2,   5,  7,  10),
   ),
-  caption: [Aggiornamento preventivo a finire sprint 8],
+  [Consuntivo Sprint],
+  (3.5,4,0,17,26,14),  // preventivo
+  (3.5,1.5,0,23,22,10),  // consuntivo ← nuovo argomento
 )
 #pagebreak()
 
@@ -2180,7 +2157,7 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
     ("Sviluppo Microservizio Account e credenziali", "Programmatore", "12:00", "12:00", "Completata"),
     ("Sviluppo Agenti (Codice, Doc, Sicurezza) e tool", "Programmatore", "18:00", "18:00", "Completata"),
     ("Sviluppo interfaccia Frontend", "Programmatore", "2:00", "2:00", "Completata"),
-    ("Progettazione interfaccia Frontend", "Progettista", "4:00", "4:00", "Completata"),
+    ("Progettazione interfaccia Frontend", "Progettista", "5:00", "5:00", "Completata"),
     ("Configurazione Deployment AWS (AppRunner, RDS)", "Programmatore", "6:00", "6:00", "Completata"),
     ("Progettazione configurazione Deployment AWS (AppRunner, RDS)", "Programmatore", "1:00", "1:00", "Completata"),
     ("Coordinamento riunioni e avanzamenti", "Responsabile", "3:30", "3:30", "Completata"),
@@ -2239,34 +2216,19 @@ Per lo Sprint successivo, il team si pone i seguenti obiettivi prioritari:
 - Revisionare e terminare la Specifica Tecnica in tutte le sue parti, gettare le basi per la stesura del Manuale Utente e sistemare definitivamente tabelle e consuntivi nel Piano di Progetto (PdP).
 
 ===== Aggiornamento preventivo a finire PB
-#TODO("Cambiare questa parte se si fanno modifiche orarie")
-#figure(
-  table(
-    fill: (col, row) => if row == 0 { luma(64%) } else { white },
-    columns: (1fr, 1fr, 1fr, 1fr),
-    inset: 10pt,
-    align: center + horizon,
-    stroke: 0.5pt + luma(200),
-
-    table.header(
-      text(fill: white, weight: "bold")[Ruolo],
-      text(fill: white, weight: "bold")[Ore rimanenti per PB],
-      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
-      text(fill: white, weight: "bold")[Preventivo a finire costi],
-    ),
-
-    [Responsabile], [10], [-],[€ 300,00],
-    [Amministratore], [28.5], [-], [€ 570,00],
-    [Analista], [17], [-],[€ 425,00],
-    [Progettista], [12],[-],[€ 300,00],
-    [Programmatore], [48],[-],[€ 720,00],
-    [Verificatore], [80],[-],[€ 1200,00],
-
-    table.cell(fill: luma(240))[*Totale PB*],
-    table.cell(fill: luma(240))[*196.5*],
-    table.cell(fill: luma(240))[[*-*]],
-    table.cell(fill: luma(240))[*€ 3540,00*],
+#preventivo_a_finire(
+  (
+    //               Resp  Amm  Anal  Prog  Cod  Ver
+    ([Kevin],           0,   5,   4,   1,  -4,  10),
+    ([Riccardo B.],     0,   8,   5,   6,  -6,  13),
+    ([Riccardo M.],     3,   8,   8,   4,  8,  14),
+    ([Antonio],         0,   5,  -3,   5,  14,  16),
+    ([Andrea],          0,   8,  -1,   5,  12,  12),
+    ([Alberto],         1,   -4.5,   0,   0,   -6,  7),
+    ([Alice],           1,   4,  -2,   8,  11,  10),
   ),
-  caption: [Aggiornamento preventivo a finire sprint 9],
+  [Consuntivo Sprint],
+  (3.5,4,0,17,26,14),  // preventivo
+  (3.5,1.5,0,23,22,10),  // consuntivo ← nuovo argomento
 )
 #pagebreak()
