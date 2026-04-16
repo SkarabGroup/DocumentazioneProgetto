@@ -45,9 +45,20 @@ package "Domain Types (Model)" {
     + criticalIssues: number
     + warningIssues: number
     + remediations: Remediation[]
+    + codeAnalysis?: CodeAnalysisSection
     --
     Risultato aggregato di un'analisi: score per area,
     conteggio issue per severità e lista di remediation suggerite.
+  }
+
+  class CodeAnalysisSection {
+    + testCoverage?: number
+    + linesAnalyzed?: number
+    + ai_interpretation?: AIInterpretation
+    + static_analysis?: { issues: CodeAgentStaticIssue[] }
+    + coverage?: { files: any[] }
+    --
+    Risultati specifici dell'agente base di Code Quality
   }
 
   class Issue {
@@ -56,9 +67,34 @@ package "Domain Types (Model)" {
     + severity: IssueSeverity
     + file?: string
     + line?: number
+    + suggested_fix?: string
+    + url?: string
+    + location?: { line_start: number, line_end: number, column: number }
     --
     Singolo problema rilevato durante l'analisi, con localizzazione
     nel codice sorgente e livello di severità.
+  }
+
+  class CodeAgentStaticIssue {
+    + file: string
+    + location: { line_start: number, line_end: number, column: number }
+    + rule: string
+    + category: string
+    + severity: string
+    + description: string
+    + suggested_fix: string
+    + url: string
+    --
+    Nuovo modello ritornato dal CodeAgent per l'analisi statica.
+  }
+
+  class AIInterpretation {
+    + verdict: string
+    + executive_summary: string
+    --
+    Verdetto AI e argomentazioni sui file critici e key issues,
+    generato dall'AILLM dell'agente di backend limitatamente
+    per le fasi di Code/Security/Docs Analysis.
   }
 
   class Remediation {
@@ -113,6 +149,9 @@ package "Domain Types (Model)" {
   Analysis --> AnalysisReport
   AnalysisReport --> "0..*" Issue
   AnalysisReport --> "0..*" Remediation
+  AnalysisReport --> "0..1" CodeAnalysisSection
+  CodeAnalysisSection --> "0..1" AIInterpretation
+  CodeAnalysisSection --> "0..*" CodeAgentStaticIssue
   RankedRepository --> Repository
   Analysis --> AnalysisStatus
   Issue --> IssueSeverity

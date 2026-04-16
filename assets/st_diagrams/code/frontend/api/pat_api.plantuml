@@ -1,0 +1,15 @@
+@startuml
+package "API Layer (Model)" {
+  class PatApi {
+    + add(payload): Promise<void>
+    + update(payload): Promise<void>
+    + delete(payload): Promise<void>
+    --
+    Gestisce le operazioni di salvataggio, aggiornamento ed eliminazione
+    dei Personal Access Token (PAT) per i repository scansionati.
+    Comunica con il microservizio Analysis.
+  }
+
+  PatApi --> "Gateway" : usa
+}
+@enduml
