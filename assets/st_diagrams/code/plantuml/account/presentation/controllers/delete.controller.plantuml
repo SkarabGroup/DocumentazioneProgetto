@@ -9,15 +9,15 @@ hide circles
 
 class DeleteUserController {
     - deleteUseCase: IDeleteUseCase
-    - jwtService: JwtService
+    - jwtAdapter: JwtAdapter
     ---
-    + DeleteUserController(deleteUseCase: IDeleteUseCase, jwtService: JwtService)
+    + DeleteUserController(deleteUseCase: IDeleteUseCase, jwtAdapter: JwtAdapter)
     + delete(req: Request): Promise<DeleteResponseDto>
 }
 
 ' Relations
 DeleteUserController --> IDeleteUseCase
-DeleteUserController --> JwtService
+DeleteUserController --> JwtAdapter
 DeleteUserController ..> DeleteResponseDto
 
 @enduml

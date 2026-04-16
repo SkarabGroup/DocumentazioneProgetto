@@ -1,4 +1,4 @@
-@startuml JwtService
+@startuml JwtAdapter
 
 skinparam componentStyle uml2.5
 skinparam linetype ortho
@@ -7,19 +7,19 @@ skinparam ranksep 70
 skinparam ClassAttributeIconSize 0
 hide circles
 
-class JwtService {
+class JwtAdapter {
     - secret: string
     - expiresIn: string
     ---
-    + JwtService(secret: string, expiresIn: string)
+    + JwtAdapter(secret: string, expiresIn: string)
     + generateToken(payload: JwtPayload): string
     + generateRefreshToken(payload: JwtPayload): string
     + verifyToken(token: string): JwtPayload | null
 }
 
 ' Relations
-JwtService ..up|> ITokenProviderPort
-JwtService ..up|> IVerifyTokenPort
-JwtService ..> JwtPayload
+JwtAdapter ..up|> ITokenProviderPort
+JwtAdapter ..up|> IVerifyTokenPort
+JwtAdapter ..> JwtPayload
 
 @enduml
