@@ -1926,7 +1926,7 @@ La seguente tabella riporta la pianificazione oraria per ruolo.
 
 #sprint_table(
   (
-    ([Basso Kevin], 0, 0, 0, 4, 4, 0),
+    ([Basso Kevin], 0, 0, 0, 4, 4, 2),
     ([Berengan Riccardo], 0, 0, 0, 3, 2, 0),
     ([Martinello Riccardo], 2, 0, 0, 3, 0, 0),
     ([Sandu Antonio], 0, 0, 0, 3, 0, 0),
@@ -1943,8 +1943,16 @@ La seguente tabella riporta la pianificazione oraria per ruolo.
     ("Progettazione diagrammi concettuali e architettura C3/C4", "Progettista", "11:00", "11:00", "Completata"),
     ("Stesura capitoli Specifica Tecnica sui microservizi", "Progettista", "9:00", "9:00", "Completata"),
     ("Rivalutazione e confronto tecnico architetturale per i tool", "Progettista", "3:00", "3:00", "Completata"),
-    ("Avvio sviluppo, setup repository e prime implementazioni del codice", "Programmatore", "11:00", "11:00", "Completata"),
+    ("Implementazione Value Object (userId, repoURL, personalAccessToken)", "Programmatore", "2:00", "2:00", "Completata"),
+    ("Implementazione Value Object (commitHash, branchName, analysisId)", "Programmatore", "1:30", "1:30", "Completata"),
+    ("Sviluppo Analysis Entity e GitHubAnalysis con domain logic", "Programmatore", "2:00", "2:00", "Completata"),
+    ("Implementazione Analysis Factory e FactoryCommand", "Programmatore", "1:30", "1:30", "Completata"),
+    ("Sviluppo Analysis Provider e command per start-analysis", "Programmatore", "1:00", "1:00", "Completata"),
+    ("Implementazione GitRequest model, mapper e Git validator port", "Programmatore", "0:30", "0:30", "Completata"),
+    ("Aggiunta value object microservizio account", "Programmatore", "2:00", "2:00", "Completata"),
+    ("Setup repository, folder structure e configurazione build (ESM to CJS)", "Programmatore", "0:30", "0:30", "Completata"),
     ("Coordinamento riunioni e avanzamenti", "Responsabile", "2:00", "2:00", "Completata"),
+    ("Verifica codice e pr microservizio analisi", "Verificatore", "2:00", "2:00", "Completata" )
   ),
   [Riassunto delle attività svolte durante lo sprint 7]
 )
@@ -1954,7 +1962,7 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
 
 #sprint_table(
   (
-    ([Basso Kevin], 0, 0, 0, 4, 4, 0),
+    ([Basso Kevin], 0, 0, 0, 4, 4, 2),
     ([Berengan Riccardo], 0, 0, 0, 3, 2, 0),
     ([Martinello Riccardo], 2, 0, 0, 3, 0, 0),
     ([Sandu Antonio], 0, 0, 0, 3, 0, 0),
@@ -1993,7 +2001,7 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
 #preventivo_a_finire(
   (
     //               Resp  Amm  Anal  Prog  Cod  Ver
-    ([Kevin],           0,   5,   4,   5,  6,  16),
+    ([Kevin],           0,   5,   4,   5,  6,  14),
     ([Riccardo B.],     0,   8,   5,   8,  8,  16),
     ([Riccardo M.],     3,   8,   8,   10,  14,  14),
     ([Antonio],         0,   7,  -3,   11,  20,  18),
@@ -2047,10 +2055,18 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
     ("Stesura norme di codifica e design pattern in ST", "Amministratore", "4:00", "1:30", "Completata"),
     ("Progettazione architettura AWS Lambda e Step Functions", "Progettista", "4:00", "7:00", "Scartata"),
     ("Aggiornamento diagrammi architetturali e di dominio (C3/C4)", "Progettista", "13:00", "16:00", "Completata"),
-    ("Inizio sviluppo interfaccia Frontend", "Programmatore", "4:00", "4:00", "Completata"),
-    ("Implementazione codice dei due microservizi con test", "Programmatore", "22:00", "18:00", "Completata"),
+    ("Sviluppo Microservizio Account: JWT e BCrypt services", "Programmatore", "1:00", "1:00", "Completata"),
+    ("Sviluppo Microservizio Account: PostgreSQL adapter e models", "Programmatore", "2:00", "2:00", "Completata"),
+    ("Sviluppo Microservizio Account: controllers login e registrazione", "Programmatore", "5:00", "5:00", "Completata"),
+    ("Sviluppo Microservizio Account: delete controller e service", "Programmatore", "2:00", "2:00", "Completata"),
+    ("Sviluppo Microservizio Analisi: GitHub adapter e GitValidator port", "Programmatore", "5:00", "5:00", "Completata"),
+    ("Sviluppo Microservizio Analisi: GitAccessRequestModel e mapper", "Programmatore", "3:00", "3:00", "Completata"),
+    ("Sviluppo Microservizio Analisi: PAT password VO e CredentialModel", "Programmatore", "2:00", "2:00", "Completata"),
+    ("Sviluppo Microservizio Analisi: StartAnalysisCommand e AnalysisProvider", "Programmatore", "2:00", "2:00", "Completata"),
+    ("Sviluppo Microservizio Analisi: MongoDBAdapter e IGitCredentialWritePort", "Programmatore", "2:00", "2:00", "Completata"),
+    ("Sviluppo frontend: inizio interfaccia utente e setup componenti", "Programmatore", "2:00", "2:00", "Completata"),
     ("Coordinamento riunioni e avanzamenti", "Responsabile", "3:30", "3:30", "Completata"),
-    ("Attività di verifica dei documenti e del codice", "Verificatore", "14:00", "10:00", "Completata"),
+    ("Attività di verifica dei documenti e del codice", "Verificatore", "14:00", "12:00", "Completata"),
   ),
   [Riassunto delle attività svolte durante lo sprint 8]
 )
@@ -2060,7 +2076,7 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
 
 #sprint_table(
   (
-    ([Basso Kevin], 0, 0, 0, 4, 4, 2),
+    ([Basso Kevin], 0, 0, 0, 4, 4, 4),
     ([Berengan Riccardo], 0, 0, 0, 1, 4, 2), // non pervenuto
     ([Martinello Riccardo], 0, 0, 0, 2, 4, 0),
     ([Sandu Antonio], 0, 0, 0, 5, 0, 0),
@@ -2101,7 +2117,7 @@ Per lo Sprint successivo, il team si pone i seguenti obiettivi prioritari:
 #preventivo_a_finire(
   (
     //               Resp  Amm  Anal  Prog  Cod  Ver
-    ([Kevin],           0,   5,   4,   1,  2,  14),
+    ([Kevin],           0,   5,   4,   1,  2,  10),
     ([Riccardo B.],     0,   8,   5,   7,  4,  14),
     ([Riccardo M.],     3,   8,   8,   8,  10,  14),
     ([Antonio],         0,   7,  -3,   6,  20,  18),
@@ -2117,7 +2133,58 @@ Per lo Sprint successivo, il team si pone i seguenti obiettivi prioritari:
 
 === Sprint 9
 *Periodo:* dal 04/04/2026 al 11/04/2026
+==== Attività Principali
+Le attività pianificate per questo sprint si concentrano sull'avanzamento della codifica e sul consolidamento delle nuove scelte architetturali.
 
+- *Sviluppo Microservizio Analisi:*
+  - Completamento degli use case per il recupero dei report, finalizzazione della logica di clonazione della repository e sviluppo dei test di integrazione con MongoDB.
+  - Fine sviluppo e implementazione dei Value Object per i report delle analisi.
+  - Sviluppo focalizzato sull'implementazione pratica degli Agenti LLM (Agente Codice, Agente Documentazione e base dell'Agente Sicurezza).
+  - Sviluppo della logica di conversione (mapping) all'interno degli Adapter dei tool per standardizzare in un formato comprensibile per l'Application Service.
+- *Sviluppo Microservizio Credenziali/Account:*
+  - Sviluppo dei controller mancanti per le fasi di Login e Registrazione e sistemazione finale del Adapter per il collegamento al database.
+- *Sviluppo Front-end*
+- *Progettazione e Specifica Tecnica (ST):*
+  - Progettazione dei diagrammi delle classi (livello codice) per i vari componenti mancanti.
+  - Stesura della Specifica Tecnica sulle classi e i componenti implementati.
+
+==== Prospetto Consumo Tempo (Preventivo)
+La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
+
+#sprint_table(
+  (
+    ([Basso Kevin], 0, 0, 0, 0, 6, 6),
+    ([Berengan Riccardo], 0, 0, 0, 1, 10, 1), 
+    ([Martinello Riccardo], 0, 0, 0, 4, 2, 0),
+    ([Sandu Antonio], 0, 2, 0, 1, 6, 2),
+    ([Sgreva Andrea], 3.5, 0, 0, 1, 8, 2),
+    ([Suar Alberto], 0, 3, 0, 2, 6, 4),
+    ([Zago Alice], 0, 0, 0, 0, 0, 0),
+  ),
+  [Prospetto orario preventivato per lo Sprint 9],
+)
+
+==== Prospetto attività
+#activity_table(
+  (
+    ("Implementazione Documentation Finding VO con unit test", "Programmatore", "3:00", "3:00", "Completata"),
+    ("Implementazione Secret Finding VO con unit test", "Programmatore", "3:00", "3:00", "Completata"),
+    ("Implementazione OWASP Finding VO con unit test", "Programmatore", "3:00", "3:00", "Completata"),
+    ("Implementazione Static Analysis Finding VO con unit test", "Programmatore", "3:30", "3:30", "Completata"),
+    ("Implementazione Documentation Report Entity e unit test", "Programmatore", "5:00", "5:00", "Completata"),
+    ("Implementazione Code Report Entity e unit test", "Programmatore", "3:30", "3:30", "Completata"),
+    ("Implementazione GitHubAnalysis Save Port con unit test", "Programmatore", "3:00", "3:00", "Completata"),
+    ("Sviluppo Code Agent Adapter e Agent Port", "Programmatore", "4:00", "4:00", "Completata"),
+    ("Implementazione Documentation Agent con adapter", "Programmatore", "5:00", "5:00", "Completata"),
+    ("Implementazione OrchestratorService e integrazione", "Programmatore", "4:00", "4:00", "Completata"),
+    ("Implementazione DocsAgent e prompt engeneering", "Programmatore", "2:00", "2:00", "Completata"),
+    ("Stesura ST (Microservizio Account e Tecnologie)", "Amministratore", "5:00", "5:00", "Completata"),
+    ("Progettazione diagrammi Value Object in ST", "Progettista", "4:00", "4:00", "Completata"),
+    ("Coordinamento riunioni e avanzamenti", "Responsabile", "3:30", "3:30", "Completata"),
+    ("Attività di verifica PR, codice e documenti", "Verificatore", "13:00", "13:00", "Completata"),
+  ),
+  [Riassunto delle attività svolte durante lo sprint 9]
+)
 ==== Attività Principali
 Le attività pianificate per questo sprint si concentrano sull'avanzamento della codifica e sul consolidamento delle nuove scelte architetturali.
 
@@ -2138,7 +2205,7 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 
 #sprint_table(
   (
-    ([Basso Kevin], 0, 0, 0, 0, 6, 4),
+    ([Basso Kevin], 0, 0, 0, 0, 6, 6),
     ([Berengan Riccardo], 0, 0, 0, 1, 10, 1), 
     ([Martinello Riccardo], 0, 0, 0, 4, 2, 0),
     ([Sandu Antonio], 0, 2, 0, 1, 6, 2),
@@ -2154,12 +2221,7 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
   (
     ("Stesura ST (Microservizio Account e Tecnologie)", "Amministratore", "5:00", "5:00", "Completata"),
     ("Progettazione diagrammi Value Object in ST", "Progettista", "4:00", "4:00", "Completata"),
-    ("Sviluppo Microservizio Account e credenziali", "Programmatore", "12:00", "12:00", "Completata"),
-    ("Sviluppo Agenti (Codice, Doc, Sicurezza) e tool", "Programmatore", "18:00", "18:00", "Completata"),
-    ("Sviluppo interfaccia Frontend", "Programmatore", "2:00", "2:00", "Completata"),
-    ("Progettazione interfaccia Frontend", "Progettista", "5:00", "5:00", "Completata"),
-    ("Configurazione Deployment AWS (AppRunner, RDS)", "Programmatore", "6:00", "6:00", "Completata"),
-    ("Progettazione configurazione Deployment AWS (AppRunner, RDS)", "Programmatore", "1:00", "1:00", "Completata"),
+    
     ("Coordinamento riunioni e avanzamenti", "Responsabile", "3:30", "3:30", "Completata"),
     ("Attività di verifica PR, codice e documenti", "Verificatore", "13:00", "13:00", "Completata"),
   ),
@@ -2171,7 +2233,7 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
 
 #sprint_table(
   (
-    ([Basso Kevin], 0, 0, 0, 0, 6, 4),
+    ([Basso Kevin], 0, 0, 0, 0, 6, 6),
     ([Berengan Riccardo], 0, 0, 0, 1, 10, 1), 
     ([Martinello Riccardo], 0, 0, 0, 4, 2, 0),
     ([Sandu Antonio], 0, 2, 0, 1, 6, 2),
@@ -2219,7 +2281,7 @@ Per lo Sprint successivo, il team si pone i seguenti obiettivi prioritari:
 #preventivo_a_finire(
   (
     //               Resp  Amm  Anal  Prog  Cod  Ver
-    ([Kevin],           0,   5,   4,   1,  -4,  10),
+    ([Kevin],           0,   5,   4,   1,  -4,  4),
     ([Riccardo B.],     0,   8,   5,   6,  -6,  13),
     ([Riccardo M.],     3,   8,   8,   4,  8,  14),
     ([Antonio],         0,   5,  -3,   5,  14,  16),
