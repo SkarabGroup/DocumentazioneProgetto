@@ -1789,7 +1789,7 @@ Il coordinamento interno di questo sprint è migliorato rispetto ai precedenti. 
 - *Responsabile:* Preventivato 7h, Consuntivo 7h
 - *Amministratore:* Preventivato 0h, Consuntivo 0h
 - *Analista:* Aanalista 4h, Consuntivo 4h
-- *Progettista:* Preventivato 49h, Consuntivo 20h
+- *Progettista:* Preventivato 49h, Consuntivo 0h
 - *Programmatore:* Preventivato 0h, Consuntivo 0h
 - *Verificatore:* Preventivato 2h, Consuntivo 2h
 
@@ -1847,11 +1847,11 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 #activity_table(
   (
     ("Completare l'analisi dei tool mancanti e redigerne la documentazione", "Progettista", "10:00", "10:00", "Completata"),
-    ("Studi sull'implementazione e configurazione OAuth", "Progettista", "5:00", "5:00", "Completata"),
+    ("Progettazione dell'implementazione e configurazione OAuth", "Progettista", "5:00", "5:00", "Completata"),
     ("Completamento del componente C3 e relative integrazioni interne", "Progettista", "8:00", "8:00", "Completata"),
-    ("Spacchettamento del repository e definizione persistenza", "Progettista", "6:00", "6:00", "Completata"),
-    ("Definire gateway e porte di ingresso per l'architettura esagonale", "Progettista", "5:00", "5:00", "Completata"),
-    ("Verifica del meccanismo di zipping e del flusso dati", "Progettista", "4:00", "4:00", "Completata"),
+    ("Progettazione dell'impacchettamento del repository e definizione persistenza", "Progettista", "6:00", "6:00", "Completata"),
+    ("Progettazione dei gateway e delle porte di ingresso per l'architettura esagonale", "Progettista", "5:00", "5:00", "Completata"),
+    ("Progettazione del meccanismo di zipping e del flusso dati", "Progettista", "4:00", "4:00", "Completata"),
     ("Gestione riunioni e allineamento Sprint 6", "Responsabile", "2:00", "2:00", "Completata"),
   ),
   [Riassunto delle attività svolte durante lo sprint 6]
@@ -1936,7 +1936,6 @@ La seguente tabella riporta la pianificazione oraria per ruolo.
   ),
   [Prospetto orario preventivato per lo Sprint 7],
 )
-#TODO("redila piú lunga che fa cagare")
 ==== Prospetto attività
 #activity_table(
   (
@@ -1985,6 +1984,7 @@ Le decisioni finali sull'architettura, la stesura in ST dei modelli C3/C4 e la r
 - *Responsabile:* Preventivato 2h, Consuntivo 2h
 - *Progettista:* Preventivato 23h, Consuntivo 23h
 - *Programmatore:* Preventivato 11h, Consuntivo 11h
+- *Verificatore:* Preventivato 2h, Consuntivo 2h
 
 ===== Rischi Rilevati
 Nel corso dello Sprint si è prestata particolare attenzione a evitare i seguenti rischi già censiti:
@@ -2153,13 +2153,13 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 
 #sprint_table(
   (
-    ([Basso Kevin], 0, 0, 0, 0, 6, 6),
+    ([Basso Kevin], 0, 2, 0, 0, 6, 6),
     ([Berengan Riccardo], 0, 0, 0, 1, 10, 1), 
     ([Martinello Riccardo], 0, 0, 0, 4, 2, 0),
     ([Sandu Antonio], 0, 2, 0, 1, 6, 2),
     ([Sgreva Andrea], 3.5, 0, 0, 1, 8, 2),
     ([Suar Alberto], 0, 3, 0, 2, 6, 4),
-    ([Zago Alice], 0, 0, 0, 0, 0, 0),
+    ([Zago Alice], 0, 0, 0, 1, 10, 1),
   ),
   [Prospetto orario preventivato per lo Sprint 9],
 )
@@ -2200,46 +2200,16 @@ Le attività pianificate per questo sprint si concentrano sull'avanzamento della
   - Progettazione dei diagrammi delle classi (livello codice) per i vari componenti mancanti.
   - Stesura della Specifica Tecnica sulle classi e i componenti implementati.
 
-==== Prospetto Consumo Tempo (Preventivo)
-La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
 
 #sprint_table(
   (
-    ([Basso Kevin], 0, 0, 0, 0, 6, 6),
+    ([Basso Kevin], 0, 3, 0, 0, 6, 6),
     ([Berengan Riccardo], 0, 0, 0, 1, 10, 1), 
     ([Martinello Riccardo], 0, 0, 0, 4, 2, 0),
     ([Sandu Antonio], 0, 2, 0, 1, 6, 2),
     ([Sgreva Andrea], 3.5, 0, 0, 1, 8, 2),
     ([Suar Alberto], 0, 3, 0, 2, 6, 4),
-    ([Zago Alice], 0, 0, 0, 0, 0, 0),
-  ),
-  [Prospetto orario preventivato per lo Sprint 9],
-)
-
-==== Prospetto attività
-#activity_table(
-  (
-    ("Stesura ST (Microservizio Account e Tecnologie)", "Amministratore", "5:00", "5:00", "Completata"),
-    ("Progettazione diagrammi Value Object in ST", "Progettista", "4:00", "4:00", "Completata"),
-    
-    ("Coordinamento riunioni e avanzamenti", "Responsabile", "3:30", "3:30", "Completata"),
-    ("Attività di verifica PR, codice e documenti", "Verificatore", "13:00", "13:00", "Completata"),
-  ),
-  [Riassunto delle attività svolte durante lo sprint 9]
-)
-
-==== Consumo Tempo e Costi Effettivi (Consuntivo)
-La tabella sottostante illustra le ore produttive effettivamente rendicontate.
-
-#sprint_table(
-  (
-    ([Basso Kevin], 0, 0, 0, 0, 6, 6),
-    ([Berengan Riccardo], 0, 0, 0, 1, 10, 1), 
-    ([Martinello Riccardo], 0, 0, 0, 4, 2, 0),
-    ([Sandu Antonio], 0, 2, 0, 1, 6, 2),
-    ([Sgreva Andrea], 3.5, 0, 0, 1, 8, 2),
-    ([Suar Alberto], 0, 3, 0, 2, 6, 4),
-    ([Zago Alice], 0, 0, 0, 0, 0, 0),
+    ([Zago Alice], 0, 0, 0, 1, 10, 1),
   ),
   [Consuntivo orario effettivo per lo Sprint 9],
 )
@@ -2262,7 +2232,12 @@ Questo sprint si è concluso con un forte avanzamento per quanto riguarda la cod
 
 ===== Squilibri orari preventivati e reali
 Poiché non era stato redatto un preventivo formale a inizio settimana, le stime del preventivo sono state adattate basandosi sul lavoro effettivamente svolto (consuntivo) per mantenere la coerenza dei documenti.  
-#TODO("Cambiare questa parte se si fa il preventivo")
+
+- *Responsabile:* Preventivato 3.5h, Consuntivo 3.5h
+- *Amministratore:* Preventivato 7h, Consuntivo 1.5h
+- *Progettista:* Preventivato 10h, Consuntivo 10h
+- *Programmatore:* Preventivato 48h, Consuntivo 48h
+- *Verificatore:* Preventivato 16h, Consuntivo 16h
 
 ===== Rischi Rilevati
 Nel corso dello Sprint si sono manifestati o sono stati sfiorati i seguenti rischi già censiti:
@@ -2281,7 +2256,7 @@ Per lo Sprint successivo, il team si pone i seguenti obiettivi prioritari:
 #preventivo_a_finire(
   (
     //               Resp  Amm  Anal  Prog  Cod  Ver
-    ([Kevin],           0,   5,   4,   1,  -4,  4),
+    ([Kevin],           0,   2,   4,   1,  -4,  4),
     ([Riccardo B.],     0,   8,   5,   6,  -6,  13),
     ([Riccardo M.],     3,   8,   8,   4,  8,  14),
     ([Antonio],         0,   5,  -3,   5,  14,  16),
@@ -2294,3 +2269,46 @@ Per lo Sprint successivo, il team si pone i seguenti obiettivi prioritari:
   (3.5,1.5,0,23,22,10),  // consuntivo ← nuovo argomento
 )
 #pagebreak()
+
+//KEVIN
+
+=== Sprint 10
+*Periodo:* dal 11/04/2026 al 18/04/2026
+==== Attività Principali
+Le attività pianificate per questo sprint si concentrano sul completamento del codice e dei test per l'MVP, completamento documenti e preparazione alla presentazione finale.
+
+- *Sviluppo Microservizio Analisi:*
+  - Completamento sviluppo agenti ed entitá annesse, completamento test di integrazione e unitari, completamento logica di mapping degli adapter.
+  - Completamento integrazioen database, salvataggio dei report e query per il recupero delle analisi.
+- *Sviluppo Microservizio Credenziali/Account:*
+  - Ultimi ritocchi e test.
+- *Sviluppo Front-end*
+  - Integrazione con i controller dei microservizi.
+- *Progettazione e Specifica Tecnica (ST):*
+  - Ultimazione di tutti i diagrammi mancanti e completamento della stesura della Specifica Tecnica.
+
+
+==== Prospetto Consumo Tempo (Preventivo)
+La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
+
+#TODO("aggiornare preventivo")
+#sprint_table(
+  (
+    ([Basso Kevin], 0, 2, 0, 0, 6, 6),
+    ([Berengan Riccardo], 0, 0, 0, 1, 10, 1), 
+    ([Martinello Riccardo], 0, 0, 0, 4, 2, 0),
+    ([Sandu Antonio], 0, 2, 0, 1, 6, 2),
+    ([Sgreva Andrea], 3.5, 0, 0, 1, 8, 2),
+    ([Suar Alberto], 0, 3, 0, 2, 6, 4),
+    ([Zago Alice], 0, 0, 0, 1, 10, 1),
+  ),
+  [Prospetto orario preventivato per lo Sprint 9],
+)
+
+==== Prospetto attività
+#activity_table(
+  (
+   
+  ),
+  [Riassunto delle attività svolte durante lo sprint 10]
+)
