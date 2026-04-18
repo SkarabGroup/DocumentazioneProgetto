@@ -9,15 +9,15 @@ hide circles
 
 class UpdateController {
     - updateUseCase: IupdateUseCase
-    - jwtService: JwtService
+    - jwtAdapter: JwtAdapter
     ---
-    + UpdateController(updateUseCase: IupdateUseCase, jwtService: JwtService)
+    + UpdateController(updateUseCase: IupdateUseCase, jwtAdapter: JwtAdapter)
     + updatePassword(req: Request, requestDto: UpdateRequestDto): Promise<AuthResponseDto>
 }
 
 ' Relations
 UpdateController --> IupdateUseCase
-UpdateController --> JwtService
+UpdateController --> JwtAdapter
 UpdateController ..> UpdateRequestDto
 UpdateController ..> AuthResponseDto
 

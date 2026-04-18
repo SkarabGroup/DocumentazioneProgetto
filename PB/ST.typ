@@ -2,7 +2,7 @@
 #import "../lib/variables.typ": *
 #import "../lib/stDiagramUtil.typ": *
 
-#let versione = "v0.11.0"
+#let versione = "v0.12.0"
 #set heading(numbering: "1.1.1")
 /*
 === FUNZIONAMENTO DEL DOCUMENTO ===
@@ -24,11 +24,17 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #set page(numbering: "1", header: header("Specifica Tecnica"), footer: footer())
 #let history = (
   (
+    "2026/04/16",
+    "0.12.0",
+    "Aggiunta sezione Design Patterns per Account Microservice",
+    members.alice,
+  ),
+  (
     "2026/04/13",
     "0.11.0",
     "Aggiunta architettura del Frontend e aggiornamento frameworks in sezione Tecnologie",
     members.martinello,
-    members.suar
+    members.suar,
   ),
   (
     "2026/04/12",
@@ -281,15 +287,35 @@ L'insieme di queste scelte tecnologiche mira a minimizzare il Total Cost of Owne
     fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
     align: (col, row) => (center, left, center).at(col) + horizon,
 
-    [Tailwind CSS], [4], [Framework CSS utility-first. Permette di definire stili direttamente come classi HTML, eliminando la necessità di fogli CSS custom e garantendo consistenza visiva su tutti i componenti.],
-    [shadcn/ui + Radix UI], [—], [Set di componenti UI accessibili costruiti su primitive Radix UI. Fornisce Button, Dialog, Tabs, Badge, Input, Progress e Skeleton già integrati nel design system del progetto.],
-    [Axios], [1.x], [Client HTTP per le chiamate REST verso i microservizi Account e Analysis. Integrato nel modulo Gateway con interceptor per autenticazione Bearer e refresh automatico dei token su risposta 401.],
-    [Socket.io-client], [4.x], [Libreria per la comunicazione real-time via WebSocket. Utilizzata per ricevere gli aggiornamenti sullo stato delle analisi in corso direttamente dal microservizio Analysis, senza ricorrere al polling HTTP.],
-    [Zod], [3.x], [Libreria di validazione e parsing di schemi TypeScript. Utilizzata nelle pagine di login e registrazione per validare i dati dei form lato client prima dell'invio al backend.],
-    [Recharts], [2.x], [Libreria per la visualizzazione di dati tramite grafici SVG basati su React. Utilizzata nella pagina di dettaglio repository per la cronologia degli score di qualità nel tempo.],
-    [Sonner], [—], [Sistema di notifiche toast non invasive. Fornisce feedback visivo per le operazioni asincrone: avvio analisi, errori di rete, conferme di salvataggio.],
+    [Tailwind CSS],
+    [4],
+    [Framework CSS utility-first. Permette di definire stili direttamente come classi HTML, eliminando la necessità di fogli CSS custom e garantendo consistenza visiva su tutti i componenti.],
+
+    [shadcn/ui + Radix UI],
+    [—],
+    [Set di componenti UI accessibili costruiti su primitive Radix UI. Fornisce Button, Dialog, Tabs, Badge, Input, Progress e Skeleton già integrati nel design system del progetto.],
+
+    [Axios],
+    [1.x],
+    [Client HTTP per le chiamate REST verso i microservizi Account e Analysis. Integrato nel modulo Gateway con interceptor per autenticazione Bearer e refresh automatico dei token su risposta 401.],
+
+    [Socket.io-client],
+    [4.x],
+    [Libreria per la comunicazione real-time via WebSocket. Utilizzata per ricevere gli aggiornamenti sullo stato delle analisi in corso direttamente dal microservizio Analysis, senza ricorrere al polling HTTP.],
+
+    [Zod],
+    [3.x],
+    [Libreria di validazione e parsing di schemi TypeScript. Utilizzata nelle pagine di login e registrazione per validare i dati dei form lato client prima dell'invio al backend.],
+
+    [Recharts],
+    [2.x],
+    [Libreria per la visualizzazione di dati tramite grafici SVG basati su React. Utilizzata nella pagina di dettaglio repository per la cronologia degli score di qualità nel tempo.],
+
+    [Sonner],
+    [—],
+    [Sistema di notifiche toast non invasive. Fornisce feedback visivo per le operazioni asincrone: avvio analisi, errori di rete, conferme di salvataggio.],
   ),
-  caption: "Librerie e strumenti del frontend"
+  caption: "Librerie e strumenti del frontend",
 )
 
 
@@ -1080,7 +1106,36 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 #pagebreak()
 
 === Account Microservice
-L'Account Microservice rappresenta il modulo centrale per la gestione del ciclo di vita delle identità all'interno di _CodeGuardian_. Progettato seguendo i principi della *Hexagonal Architecture*, il servizio isola rigorosamente i processi core — quali la gestione delle utenze, l'autenticazione basata su JWT e la sicurezza delle credenziali — dalle tecnologie di persistenza (PostgreSQL) e di cifratura (Bcrypt). Grazie a una netta separazione tra porte e adattatori, il microservizio garantisce l'integrità del dominio utente e la flessibilità nell'evoluzione dei criteri di sicurezza, fungendo da garante per l'accesso protetto a tutte le funzionalità della piattaforma.
+L'Account Microservice rappresenta il modulo centrale per la gestione del ciclo di vita delle identità all'interno di _CodeGuardian_. Progettato seguendo i principi dell'*Architettura Esagonale*, il servizio isola rigorosamente i processi core — quali la gestione delle utenze, l'autenticazione basata su JWT e la sicurezza delle credenziali — dalle tecnologie di persistenza (PostgreSQL) e di cifratura (Bcrypt). Grazie a una netta separazione tra porte e adattatori, il microservizio garantisce l'integrità del dominio utente e la flessibilità nell'evoluzione dei criteri di sicurezza, fungendo da garante per l'accesso protetto a tutte le funzionalità della piattaforma.
+
+==== Design Patterns
+
+All'interno dell'Account Microservice sono stati adottati molteplici design pattern per garantire disaccoppiamento, testabilità e manutenibilità del codice. Di seguito vengono descritti i principali pattern utilizzati e le motivazioni alla base della loro scelta:
+
+===== Architettura Esagonale (Ports and Adapters)
+L'intera struttura del microservizio si basa saldamente sui principi di Ports and Adapters.
+- *Problema risolto:* Evita il forte accoppiamento logico tra il nucleo applicativo (Domain e Application) e i layer esterni come database, interfacce utente e servizi di terze parti, isolando la logica di business e rendendola indipendente dalle tecnologie di contorno.
+- *Implementazione:* Il livello applicativo definisce interfacce specifiche dette "Porte" (come `IUserSavePort` o `IHashPasswordPort`), mentre il livello infrastrutturale e di presentazione ospita i componenti concreti detti "Adapters" (come `PostgresAdapter`) che si curano di implementare o utilizzare tali interfacce.
+
+===== Command Pattern
+Il pattern *Command* è stato utilizzato diffusamente nel layer applicativo per incapsulare i dati di una specifica operazione richiesta dall'utente (es. `LoginCommand`, `DeleteCommand`, `RegistrationUserCommand`).
+- *Problema risolto:* Semplifica le firme dei metodi nei casi d'uso, evitando il passaggio di liste di argomenti lunghe e fragili alle modifiche.
+- *Implementazione:* Invece di passare molteplici parametri sparsi ai metodi dei servizi, ogni Use Case accetta come unico parametro un oggetto istanza di un Command specifico, che raggruppa logicamente e tipizza tutti i parametri necessari per svolgere l'operazione.
+
+===== Data Transfer Object (DTO)
+Il pattern *DTO* viene impiegato sistematicamente sia a livello applicativo (`AuthResultDto`, `UserDTO`) che a livello di presentazione e comunicazione HTTP (`LoginRequestDto`, `AuthResponseDto`).
+- *Problema risolto:* Consente di trasferire dati tra i diversi layer del microservizio e verso i client esterni senza esporre direttamente le entità di dominio interno. Quest'ultime, infatti, potrebbero nascondere metadati o riferimenti sensibili come `PasswordHash` che non devono in nessun caso fuoriuscire dal sistema inavvertitamente.
+- *Implementazione:* Tramite i DTO, i dati in transito assumono una forma asettica e consona per le sole esigenze di comunicazione, abilitando inoltre l'inserimento di una logica di convalida lato framework sfruttando i decoratori di NestJS (es. `class-validator`) direttamente sulle classi di richiesta in arrivo.
+
+===== Adapter Pattern
+Nel livello infrastrutturale è evidente l'adozione dell'*Adapter Pattern*, guidato dall'architettura esagonale.
+- *Problema risolto:* Astrae completamente la logica di business in merito ai dettagli sulle operazioni di memorizzazione dei dati e alle query sql, mantenendo nascosta la specifica tecnologia di database relazionale utilizzata (PostgreSQL).
+- *Implementazione:* `PostgresAdapter` agisce da adattatore verso il livello di persistenza, centralizzando fisicamente le esecuzioni delle transazioni nel DB e traducendo i contratti del dominio. Al contempo soddisfa molteplici porte del core applicativo (es. `IUserFindPort`, `IUserSavePort`). Ciò garantisce un disaccoppiamento così netto da permettere, qualora si rivelasse necessario, di sostituire agilmente il database con una tecnologia differente.
+
+===== Dependency Injection
+Sfruttando nativamente le capacità del framework NestJS, l'*Iniezione delle Dipendenze (DI)* rappresenta uno dei pattern tecnici principali alla base del progetto software.
+- *Problema risolto:* Evita la creazione "hard-coded" ed esplicita delle dipendenze direttamente cablate in ogni classe chiamante, migliorando notevolmente le probabilità di riutilizzo del codice, la modularità e abbattendo gli ostacoli che impediscono altrimenti l'agevole testing unitario.
+- *Implementazione:* Attraverso i costruttori di classe, i vari Controllers e i Services ricevono all'avvio del sistema le loro rispettive dipendenze sotto forma ridotta di interfacce/componenti di istanziazione validati. Un container `Inversion of Control` (IoC) di supporto si prende in totale carico l'apposita istanziazione ed assegnazione dei componenti.
 
 ==== Domain
 Il Dominio rappresenta il nucleo centrale dell'architettura esagonale, dove risiedono esclusivamente la logica di business e le regole vitali del progetto. Questa sezione è progettata per essere totalmente agnostica rispetto alla tecnologia: non possiede alcuna conoscenza di database, protocolli di comunicazione (HTTP/REST) o framework esterni.
@@ -1247,7 +1302,7 @@ L'entità `User` costituisce l'entità radice del dominio di autenticazione. Ess
 `ITokenProviderPort` definisce il contratto per la generazione di token di autenticazione. Il metodo `generateToken` produce il token di accesso a breve scadenza, mentre `generateRefreshToken` produce il token di rinnovo a lunga scadenza, entrambi a partire da un `JwtPayload`.
 
 - *Separazione dei Tipi di Token:* L'esistenza di due metodi distinti riflette la differente semantica e configurazione dei due tipi di token, rendendo esplicita nell'architettura la distinzione tra access token e refresh token.
-- *Indipendenza dalla Libreria JWT:* Il Core non importa direttamente librerie come `jsonwebtoken`; la generazione è delegata all'adattatore `JwtService`, che può essere sostituito con qualsiasi altra implementazione compatibile con il contratto.
+- *Indipendenza dalla Libreria JWT:* Il Core non importa direttamente librerie come `jsonwebtoken`; la generazione è delegata all'adattatore `JwtAdapter`, che può essere sostituito con qualsiasi altra implementazione compatibile con il contratto.
 
 ====== IUserDeletePort <IUserDeletePort>
 #codeDiagram("IUserDeletePort", 50%)
@@ -1285,7 +1340,7 @@ L'entità `User` costituisce l'entità radice del dominio di autenticazione. Ess
 `IVerifyTokenPort` definisce il contratto per la verifica e il parsing di un token JWT. Il metodo `verifyToken(token)` restituisce il `JwtPayload` estratto se il token è valido, o `null` se la verifica fallisce (token scaduto, firma non valida, ecc.), evitando l'uso di eccezioni per scenari di token non validi.
 
 - *Return Type Null-Safe:* Il tipo di ritorno `JwtPayload | null` comunica esplicitamente che un token non valido è un esito atteso, semplificando la gestione nel controller che usa questa porta.
-- *Co-Localizzazione con `ITokenProviderPort`:* Il fatto che `JwtService` implementi sia la generazione che la verifica dei token, ma che le due capacità siano esposte come porte distinte, permette di iniettare solo la capacità necessaria nei diversi use case, rispettando il principio di minimo privilegio.
+- *Co-Localizzazione con `ITokenProviderPort`:* Il fatto che `JwtAdapter` implementi sia la generazione che la verifica dei token, ma che le due capacità siano esposte come porte distinte, permette di iniettare solo la capacità necessaria nei diversi use case, rispettando il principio di minimo privilegio.
 
 ===== Services
 
@@ -1361,21 +1416,21 @@ L'entità `User` costituisce l'entità radice del dominio di autenticazione. Ess
 
 ===== Adapters
 
-====== BcryptService <BcryptService>
-#codeDiagram("BcryptService", 60%)
+====== BcryptAdapter <BcryptAdapter>
+#codeDiagram("BcryptAdapter", 60%)
 
-`BcryptService` è l'adattatore Driven che implementa sia `IHashPasswordPort` sia `IHashComparePort`, fornendo le operazioni crittografiche di hashing e verifica delle password tramite l'algoritmo bcrypt. Il campo `rounds` configura il fattore di costo dell'algoritmo, bilanciando sicurezza e performance.
+`BcryptAdapter` è l'adattatore Driven che implementa sia `IHashPasswordPort` sia `IHashComparePort`, fornendo le operazioni crittografiche di hashing e verifica delle password tramite l'algoritmo bcrypt. Il campo `rounds` configura il fattore di costo dell'algoritmo, bilanciando sicurezza e performance.
 
 - *Implementazione Doppia Porta:* Il fatto che un singolo adattatore implementi due porte distinte è una scelta pragmatica: bcrypt è l'algoritmo comune a entrambe le operazioni, e separare le implementazioni non apporterebbe vantaggi architetturali. Le porte rimangono comunque distinte, consentendo di iniettarne solo una nei servizi che ne necessitano.
 - *Configurabilità del Fattore di Costo:* Il campo `rounds` permette di calibrare il fattore di costo di bcrypt in base all'ambiente (es. più basso nei test per ridurre la latenza, più alto in produzione per aumentare la resistenza agli attacchi brute-force).
 - *Operazioni Asincrone:* I metodi `hash` e `compare` restituiscono `Promise`, riflettendo la natura computazionalmente intensa di bcrypt e la necessità di non bloccare il thread dell'event loop di Node.js durante l'esecuzione.
 
-====== JwtService <JwtService>
-#codeDiagram("JwtService", 60%)
+====== JwtAdapter <JwtAdapter>
+#codeDiagram("JwtAdapter", 60%)
 
-`JwtService` è l'adattatore Driven che implementa sia `ITokenProviderPort` sia `IVerifyTokenPort`, gestendo la generazione e la verifica dei token JWT tramite la configurazione di `secret` ed `expiresIn`. Dipende dal tipo `JwtPayload` per garantire la coerenza strutturale del payload.
+`JwtAdapter` è l'adattatore Driven che implementa sia `ITokenProviderPort` sia `IVerifyTokenPort`, gestendo la generazione e la verifica dei token JWT tramite la configurazione di `secret` ed `expiresIn`. Dipende dal tipo `JwtPayload` per garantire la coerenza strutturale del payload.
 
-- *Implementazione Doppia Porta:* Analogamente a `BcryptService`, l'implementazione di due porte in un singolo adattatore è motivata dalla coerenza: la stessa chiave segreta e la stessa configurazione sono necessarie sia per firmare che per verificare i token.
+- *Implementazione Doppia Porta:* Analogamente a `BcryptAdapter`, l'implementazione di due porte in un singolo adattatore è motivata dalla coerenza: la stessa chiave segreta e la stessa configurazione sono necessarie sia per firmare che per verificare i token.
 - *Configurabilità Centralizzata:* I campi `secret` ed `expiresIn` centralizzano la configurazione dei token, rendendo semplice la sostituzione dei valori tramite variabili d'ambiente senza modificare la logica del servizio.
 - *Gestione del Fallimento di Verifica:* Il metodo `verifyToken` restituisce `null` in caso di token non valido (anziché propagare un'eccezione), trasferendo la responsabilità di gestire l'assenza di un payload valido al chiamante in modo esplicito e sicuro.
 
@@ -1396,9 +1451,9 @@ L'entità `User` costituisce l'entità radice del dominio di autenticazione. Ess
 ====== DeleteUserController <DeleteUserController>
 #codeDiagram("DeleteUserController", 75%)
 
-`DeleteUserController` espone l'endpoint HTTP per la cancellazione dell'account. Inietta `IDeleteUseCase` per l'esecuzione del flusso di business e `JwtService` per l'estrazione dell'identità dell'utente dal token JWT presente nella richiesta, restituendo un `DeleteResponseDto`.
+`DeleteUserController` espone l'endpoint HTTP per la cancellazione dell'account. Inietta `IDeleteUseCase` per l'esecuzione del flusso di business e `JwtAdapter` per l'estrazione dell'identità dell'utente dal token JWT presente nella richiesta, restituendo un `DeleteResponseDto`.
 
-- *Estrazione dell'Identità dal Token:* La dipendenza da `JwtService` nel controller riflette la necessità di identificare il soggetto della cancellazione dal token di autenticazione incluso nella richiesta, senza richiedere all'utente di fornire esplicitamente il proprio ID nel body.
+- *Estrazione dell'Identità dal Token:* La dipendenza da `JwtAdapter` nel controller riflette la necessità di identificare il soggetto della cancellazione dal token di autenticazione incluso nella richiesta, senza richiedere all'utente di fornire esplicitamente il proprio ID nel body.
 - *Delegazione al Use Case:* Il controller non contiene logica di business; si limita a costruire il `DeleteCommand` con le informazioni estratte dalla richiesta e a passarlo al caso d'uso, rispettando il principio di singola responsabilità.
 
 ====== LoginController <LoginController>
@@ -1425,9 +1480,9 @@ L'entità `User` costituisce l'entità radice del dominio di autenticazione. Ess
 ====== UpdateController <UpdateController>
 #codeDiagram("UpdateController", 80%)
 
-`UpdateController` espone l'endpoint HTTP di aggiornamento credenziali. Inietta sia `IupdateUseCase` per l'esecuzione del caso d'uso, sia `JwtService` per estrarre l'email dell'utente autenticato dal token JWT nella richiesta, costruendo l'`UpdateUserCommand` con i dati combinati di richiesta e identità.
+`UpdateController` espone l'endpoint HTTP di aggiornamento credenziali. Inietta sia `IupdateUseCase` per l'esecuzione del caso d'uso, sia `JwtAdapter` per estrarre l'email dell'utente autenticato dal token JWT nella richiesta, costruendo l'`UpdateUserCommand` con i dati combinati di richiesta e identità.
 
-- *Identità dall'Autenticazione:* La dipendenza da `JwtService` permette di estrarre l'email dell'utente dal token di sessione, evitando che il client debba includere la propria identità nel body della richiesta e proteggendo da attacchi di impersonation.
+- *Identità dall'Autenticazione:* La dipendenza da `JwtAdapter` permette di estrarre l'email dell'utente dal token di sessione, evitando che il client debba includere la propria identità nel body della richiesta e proteggendo da attacchi di impersonation.
 - *Costruzione del Comando Arricchito:* Il controller combina le informazioni del `UpdateRequestDto` (nuova password) con quelle estratte dal token (email), producendo un `UpdateUserCommand` completo prima di delegare al use case.
 
 ===== Presentation DTOs
