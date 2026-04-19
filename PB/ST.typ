@@ -623,7 +623,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Localizzazione Precisa:* Il campo `_pathFinding` di tipo #link(<PathFinding>)[`PathFinding`] indica il file di configurazione in cui la dipendenza è stata rilevata, facilitando l'intervento correttivo sulla documentazione.
 
 ====== UserId <UserId>
-#codeDiagram("UserId", 40%)
+#codeDiagram("UserId", 35%)
 
 `UserId` è il Value Object che rappresenta l'identità dell'utente che ha richiesto l'analisi. Incapsula un UUID standard validato.
 
@@ -768,50 +768,128 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 ==== Application
 
 ===== Command
+
+====== AddRepositoryCollectionCommand <AddRepositoryCollectionCommand>
+#codeDiagram("AddRepositoryCollectionCommand", 40%)
+
+`AddRepositoryCollectionCommand` è il Command Object per la creazione di una nuova collezione di repository, trasportando l'identità dell'utente, l'URL del repository, il nome della collezione e una descrizione opzionale.
+
+- *Oggetto di Trasferimento Validato:* I decorator `class-validator` garantiscono che i campi obbligatori siano presenti e non vuoti prima che il comando raggiunga il servizio applicativo.
+- *Neutralità verso il Dominio:* Lavora con tipi primitivi (`string`), delegando la costruzione dei Value Object al servizio applicativo, rispettando la separazione tra layer applicativo e dominio.
+
+
+====== DeletePatCommand <DeletePatCommand>
+#codeDiagram("DeletePatCommand", 30%)
+
+`DeletePatCommand` è il Command Object per l'eliminazione di un PAT esistente, richiedendo URL del repository e password di protezione come meccanismo di autorizzazione all'eliminazione.
+
+- *Autorizzazione Implicita:* La richiesta della `patPassword` garantisce che solo chi conosce la password possa eliminare le credenziali, implementando un controllo di accesso a livello applicativo.
+
+
+====== DeleteRepositoryCollectionCommand <DeleteRepositoryCollectionCommand>
+#codeDiagram("DeleteRepositoryCollectionCommand", 70%)
+
+`DeleteRepositoryCollectionCommand` è il Command Object per l'eliminazione di una collezione di repository, identificando la collezione tramite URL e l'utente richiedente.
+
+- *Costruzione Anticipata dei Value Object:* A differenza degli altri Command, il costruttore istanzia direttamente #link(<RepoURL>)[`RepoURL`] e #link(<UserId>)[`UserId`] a partire dalle stringhe ricevute, spostando la validazione strutturale nel punto di ingresso del comando anziché delegarla al servizio applicativo.
+
+====== GetAllAnalysesForUserCommand <GetAllAnalysesForUserCommand>
+#codeDiagram("GetAllAnalysesForUserCommand", 55%)
+
+`GetAllAnalysesForUserCommand` è il Command Object per il recupero di tutte le analisi associate a un utente, trasportando esclusivamente l'identificatore dell'utente richiedente.
+
+- *Oggetto di Trasferimento Validato:* Il decorator `@IsNotEmpty()` garantisce che l'identificatore utente sia sempre presente prima che il comando raggiunga il servizio applicativo.
+
+====== GetAllRepositoryCollectionsCommand <GetAllRepositoryCollectionsCommand>
+#codeDiagram("GetAllRepositoryCollectionsCommand", 58%)
+
+`GetAllRepositoryCollectionsCommand` è il Command Object per il recupero di tutte le collezioni di repository associate a un utente, trasportando esclusivamente l'identificatore dell'utente richiedente.
+
+- *Oggetto di Trasferimento Validato:* Il decorator `@IsNotEmpty()` garantisce che l'identificatore utente sia sempre presente prima che il comando raggiunga il servizio applicativo.
+
+====== GetAnalysisFromIdCommand <GetAnalysisFromIdCommand>
+#codeDiagram("GetAnalysisFromIdCommand", 55%)
+
+`GetAnalysisFromIdCommand` è il Command Object per il recupero di una singola analisi tramite il suo identificatore, trasportando esclusivamente l'`analysisId` come stringa primitiva.
+
+- *Oggetto di Trasferimento Validato:* Il decorator `@IsNotEmpty()` garantisce che l'identificatore sia sempre presente prima che il comando raggiunga il servizio applicativo.
+
+====== GetRepositoryCollectionCommand <GetRepositoryCollectionCommand>
+#codeDiagram("GetRepositoryCollectionCommand", 45%)
+
+`GetRepositoryCollectionCommand` è il Command Object per il recupero di una specifica collezione di repository, identificandola tramite URL e utente richiedente.
+
+- *Oggetto di Trasferimento Validato:* I decorator `class-validator` garantiscono che entrambi i campi siano presenti e non vuoti prima che il comando raggiunga il servizio applicativo.
+- *Neutralità verso il Dominio:* Lavora con tipi primitivi (`string`), delegando la costruzione dei Value Object al servizio applicativo, rispettando la separazione tra layer applicativo e dominio.
+
+====== NewPatCommand <NewPatCommand>
+#codeDiagram("NewPatCommand", 35%)
+
+`NewPatCommand` è il Command Object per la registrazione di un nuovo Personal Access Token, trasportando l'URL del repository, la password di protezione e il token PAT in chiaro.
+
+- *Dati Sensibili in Transito:* Il PAT è presente in chiaro solo nel Command, che viene processato e dismesso immediatamente dopo l'esecuzione del use case, minimizzando il tempo di esposizione del segreto.
+
+
 ====== StartAnalysisCommand <StartAnalysisCommand>
-#codeDiagram("StartAnalysisCommand", 100%)
+#codeDiagram("StartAnalysisCommand", 35%)
 
 `StartAnalysisCommand` è il Command Object che trasporta i dati di input per avviare una nuova analisi: l'identità dell'utente, l'URL del repository, la password opzionale per repository privati, e i flag per i tre tipi di analisi (codice, documentazione, sicurezza).
 
 - *Oggetto di Trasferimento Validato:* I decorator `class-validator` garantiscono che i campi obbligatori siano presenti e correttamente formattati prima che il comando raggiunga il servizio applicativo.
 - *Neutralità verso il Dominio:* Lavora con tipi primitivi (`string`, `boolean`), delegando la costruzione dei Value Object al servizio #link(<StartAnalysisService>)[`StartAnalysisService`], rispettando la separazione tra layer applicativo e dominio.
 
----
-
-====== NewPatCommand <NewPatCommand>
-#codeDiagram("NewPatCommand", 100%)
-
-`NewPatCommand` è il Command Object per la registrazione di un nuovo Personal Access Token, trasportando l'URL del repository, la password di protezione e il token PAT in chiaro.
-
-- *Dati Sensibili in Transito:* Il PAT è presente in chiaro solo nel Command, che viene processato e dismesso immediatamente dopo l'esecuzione del use case, minimizzando il tempo di esposizione del segreto.
-
----
-
-====== DeletePatCommand <DeletePatCommand>
-#codeDiagram("DeletePatCommand", 100%)
-
-`DeletePatCommand` è il Command Object per l'eliminazione di un PAT esistente, richiedendo URL del repository e password di protezione come meccanismo di autorizzazione all'eliminazione.
-
-- *Autorizzazione Implicita:* La richiesta della `patPassword` garantisce che solo chi conosce la password possa eliminare le credenziali, implementando un controllo di accesso a livello applicativo.
-
----
 
 ====== UpdatePatCommand <UpdatePatCommand>
-#codeDiagram("UpdatePatCommand", 100%)
+#codeDiagram("UpdatePatCommand", 32%)
 
 `UpdatePatCommand` è il Command Object per l'aggiornamento di un PAT esistente, richiedendo URL, password corrente e il nuovo PAT da sostituire.
 
 - *Sostituzione Sicura:* La verifica della password corrente (`patPassword`) prima della sostituzione impedisce aggiornamenti non autorizzati, garantendo che solo il proprietario delle credenziali possa modificarle.
 
+
+
 ===== Use Cases
-====== StartAnalysisUseCase <StartAnalysisUseCase>
-#codeDiagram("StartAnalysisUseCase", 100%)
+// descrizione? Il controller dipende solo da questa interfaccia (una per ogni controller), permettendo di sostituire l'implementazione senza modificare il layer di presentazione.
 
-`StartAnalysisUseCase` è l'interfaccia del use case principale del sistema: accetta uno #link(<StartAnalysisCommand>)[`StartAnalysisCommand`] e restituisce un #link(<StartAnalysisResult>)[`StartAnalysisResult`].
+====== AddRepositoryCollectionUseCase <AddRepositoryCollectionUseCase>
+#codeDiagram("AddRepositoryCollectionUseCase", 100%)
 
-- *Contratto Applicativo:* Definisce il punto di ingresso primario del bounded context, disaccoppiando la presentazione dall'implementazione concreta #link(<StartAnalysisService>)[`StartAnalysisService`].
+`AddRepositoryCollectionUseCase` è l'interfaccia del use case per la creazione di una nuova collezione di repository, implementata dal servizio applicativo corrispondente.
 
----
+====== DeletePatUseCase <DeletePatUseCase>
+#codeDiagram("DeletePatUseCase", 100%)
+
+`DeletePatUseCase` è l'interfaccia del use case per l'eliminazione di un PAT, implementata da #link(<DeletePatService>)[`DeletePatService`].
+
+====== DeleteRepositoryCollectionUseCase <DeleteRepositoryCollectionUseCase>
+#codeDiagram("DeleteRepositoryCollectionUseCase", 100%)
+
+`DeleteRepositoryCollectionUseCase` è l'interfaccia del use case per l'eliminazione di una collezione di repository, implementata dal servizio applicativo corrispondente.
+
+====== GetAllAnalysesForUserUseCase <GetAllAnalysesForUserUseCase>
+#codeDiagram("GetAllAnalysesForUserUseCase", 100%)
+
+`GetAllAnalysesForUserUseCase` è l'interfaccia del use case per il recupero di tutte le analisi associate a un utente, implementata dal servizio applicativo corrispondente.
+
+//- *Metodo Non Convenzionale:* Espone `getAllAnalysesForUser()` invece del canonico `execute()`, rendendo esplicita la semantica dell'operazione direttamente nella firma del contratto.
+
+====== GetAllRepositoryCollectionsUseCase <GetAllRepositoryCollectionsUseCase>
+#codeDiagram("GetAllRepositoryCollectionsUseCase", 100%)
+
+`GetAllRepositoryCollectionsUseCase` è l'interfaccia del use case per il recupero di tutte le collezioni di repository di un utente, implementata dal servizio applicativo corrispondente.
+
+//- *Metodo Non Convenzionale:* Espone `executeAll()` invece del canonico `execute()`, rendendo esplicita nella firma del contratto la natura collettiva dell'operazione.
+
+====== GetAnalysisUseCase <GetAnalysisUseCase>
+#codeDiagram("GetAnalysisUseCase", 100%)
+
+`GetAnalysisUseCase` è l'interfaccia del use case per il recupero di una singola analisi tramite il suo identificatore, implementata dal servizio applicativo corrispondente.
+
+====== GetRepositoryCollectionUseCase <GetRepositoryCollectionUseCase>
+#codeDiagram("GetRepositoryCollectionUseCase", 100%)
+
+`GetRepositoryCollectionUseCase` è l'interfaccia del use case per il recupero di una specifica collezione di repository tramite URL e utente, implementata dal servizio applicativo corrispondente.
+
 
 ====== NewPatUseCase <NewPatUseCase>
 #codeDiagram("NewPatUseCase", 100%)
@@ -820,14 +898,13 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 - *Disaccoppiamento Controller-Servizio:* Il controller #link(<PatController>)[`PatController`] dipende solo da questa interfaccia, permettendo di sostituire l'implementazione senza modificare il layer di presentazione.
 
----
+====== StartAnalysisUseCase <StartAnalysisUseCase>
+#codeDiagram("StartAnalysisUseCase", 100%)
 
-====== DeletePatUseCase <DeletePatUseCase>
-#codeDiagram("DeletePatUseCase", 100%)
+`StartAnalysisUseCase` è l'interfaccia del use case principale del sistema: accetta uno #link(<StartAnalysisCommand>)[`StartAnalysisCommand`] e restituisce un #link(<StartAnalysisResult>)[`StartAnalysisResult`].
 
-`DeletePatUseCase` è l'interfaccia del use case per l'eliminazione di un PAT, implementata da #link(<DeletePatService>)[`DeletePatService`].
+- *Contratto Applicativo:* Definisce il punto di ingresso primario del bounded context, disaccoppiando la presentazione dall'implementazione concreta #link(<StartAnalysisService>)[`StartAnalysisService`].
 
----
 
 ====== UpdatePatUseCase <UpdatePatUseCase>
 #codeDiagram("UpdatePatUseCase", 100%)
