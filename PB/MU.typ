@@ -1,7 +1,7 @@
 #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
 
-#let versione = "v0.1.0"
+#let versione = "v0.3.0"
 #set heading(numbering: "1.1.1")
 
 /*
@@ -17,6 +17,12 @@
     "0.1.0",
     "Prima stesura del documento",
     members.alice,
+  ),
+  (
+    "2026/04/19",
+    "0.2.0",
+    "Aggiunta sezione Gestione Repository, Analisi ed Esportazione",
+    members.martinello,
   ),
 )
 
@@ -111,3 +117,62 @@ Una procedura pratica per aggiornare la password di accesso. Per procedere è ne
 Un'operazione irreversibile concepita per tutelare la privacy. Prima di poter eseguire l'eliminazione, per motivazioni di sicurezza è tassativamente richiesto di compilare il campo vuoto digitando _La tua password_ per confermare la propria identità. Cliccando infine sul pulsante rosso _Elimina account definitivamente_, l'utente provvede a rimuovere in modo definitivo e permanente il profilo dal sistema _CodeGuardian_, venendo immediatamente revocato da qualsiasi diritto d'accesso.
 
 
+
+
+== Funzionalità della Piattaforma
+
+Una volta effettuato l'accesso, l'utente ha a disposizione un menù di navigazione laterale
+
+#figure(
+  image("../assets/manuale_utente/sidebar.png", width: 40%),
+  caption: [Menù di navigazione laterale (Sidebar)],
+) che suddivide l'applicativo nelle seguenti sezioni principali: *Repository*, *Storico*, *Classifica* e *Impostazioni*.
+
+=== Repository (Dashboard Principale)
+La sezione Repository costituisce la dashboard principale da cui gestire i propri progetti.
+
+#figure(
+  image("../assets/manuale_utente/dashboard principale.png", width: 90%),
+  caption: [Dashboard Principale: Lista dei Repository],
+)
+
+- *Aggiunta e Rimozione:* È possibile visualizzare la lista dei repository importati. Per aggiungerne uno nuovo da ispezionare, è sufficiente inserirne l'URL (es. GitHub). È possibile anche rimuovere i repository non più necessari tramite l'apposito pulsante.
+
+#figure(
+  image("../assets/manuale_utente/aggiunta o rimozione.png", width: 80%),
+  caption: [Aggiunta di un nuovo Repository],
+)
+- *Esecuzione Analisi:* Cliccando su uno specifico repository, si accede alla sua *Pagina di Dettaglio*. Da qui, l'utente può avviare l'ispezione automatica cliccando sul pulsante dedicato. L'interfaccia aggiornerà dinamicamente lo stato dell'analisi (avvio, in corso, completamento) fornendo un chiaro feedback visivo senza complicati caricamenti.
+
+#figure(
+  image("../assets/manuale_utente/avvio analisi.png", width: 90%),
+  caption: [Pagina di Dettaglio: Avvio Analisi in corso],
+)
+
+- *Risultato ed Esportazione:* Al termine, il report viene presentato a schermo suddiviso per metriche di qualità, scorecard generali e lista accurata delle vulnerabilità. Per ogni scansione sono previste funzionalità di esportazione dirette scaricando il referto formattato in *PDF* oppure sotto forma di *JSON* strutturato.
+
+#figure(
+  image("../assets/manuale_utente/risultato analisi.png", width: 90%),
+  caption: [Pagina di Dettaglio: Risultato Analisi e metriche],
+)
+
+=== Storico Analisi
+
+#figure(
+  image("../assets/manuale_utente/storico analisi.png", width: 90%),
+  caption: [Schermata Storico delle Analisi],
+)
+
+La schermata *Storico* raccoglie la traccia di tutte le scansioni ed ispezioni del codice precedentemente eseguite sulla piattaforma, relative all'utente attivo.
+- L'interfaccia fornisce una visuale strutturata che mostra la data, il repository analizzato e l'esito per ciascuna richiesta pregressa.
+- Attraverso i controlli messi a disposizione dall'interfaccia (es. intervalli di date d'interesse), l'utente può filtrare l'elenco e cercare rapidamente report di analisi storiche o valutare l'andamento del codice nel tempo.
+
+=== Classifica (Ranking)
+
+#figure(
+  image("../assets/manuale_utente/classifica analisi.png", width: 90%),
+  caption: [Schermata Classifica Repository (Ranking)],
+)
+
+Questa prospettiva gestionale fornisce una panoramica focalizzata sugli scenari architetturali dei progetti caricati in CodeGuardian. 
+L'applicativo genera in tempo reale una *Classifica* di tutti i repository associati all'utente: vengono elencati gerarchicamente tenendo conto dello "Score di Qualità" generale derivante dai più recenti audit, permettendo in modo istantaneo di confrontare i progetti più robusti e quelli che richiedono maggiore attenzione.
