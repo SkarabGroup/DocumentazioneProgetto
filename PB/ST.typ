@@ -24,6 +24,13 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #set page(numbering: "1", header: header("Specifica Tecnica"), footer: footer())
 #let history = (
   (
+    "2026/04/19",
+    "0.13.0",
+    "Miglioramento parte frontend in seguito alle integrazioni con i microservizi di analisi e di autentificazione",
+    members.martinello,
+    members.suar,
+  ),
+  (
     "2026/04/16",
     "0.12.0",
     "Aggiunta sezione Design Patterns per Account Microservice",
