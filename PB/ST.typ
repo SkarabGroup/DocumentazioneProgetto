@@ -682,30 +682,90 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 ====== GitHubAnalysis <GitHubAnalysis>
 #codeDiagram("GitHubAnalysis", 100%)
 
-`GitHubAnalysis` è l'entità radice dell'aggregato che rappresenta un'analisi di un repository GitHub. Incapsula l'identità, l'utente richiedente, il contesto del repository e la macchina a stati del ciclo di vita.
+`GitHubAnalysis` è l'entità radice dell'aggregato che rappresenta un'analisi di un repository GitHub. Incapsula l'identità, l'utente richiedente, il contesto del repository, i riferimenti ai report prodotti dalle analisi e la macchina a stati del ciclo di vita.
 
-- *Radice dell'Aggregato:* Coordina e protegge la consistenza dei Value Object #link(<AnalysisId>)[`AnalysisId`], #link(<UserId>)[`UserId`], #link(<RepoURL>)[`RepoURL`], #link(<BranchName>)[`BranchName`] e #link(<CommitHash>)[`CommitHash`].
+- *Identità Basata sull'Analisi:* Il metodo `equals()` confronta due istanze esclusivamente tramite #link(<AnalysisId>)[`AnalysisId`], esprimendo la semantica fondamentale delle entity: due `GitHubAnalysis` sono la stessa analisi se condividono l'identità, indipendentemente dai dati aggregati.
+- *Radice dell'Aggregato:* Coordina e protegge la consistenza dei Value Object #link(<AnalysisId>)[`AnalysisId`], #link(<UserId>)[`UserId`], #link(<RepoURL>)[`RepoURL`], #link(<BranchName>)[`BranchName`], #link(<CommitHash>)[`CommitHash`] e #link(<ReportId>)[`ReportId`].
+- *Riferimenti ai Report Opzionali:* I campi `codeReportId`, `docsReportId` e `securityReportId` sono nullable, modellando il fatto che un'analisi può coinvolgere solo un sottoinsieme dei tre tipi di report disponibili in base a quanto richiesto.
 - *Macchina a Stati Protetta:* I metodi `inProgress()`, `complete()` e `failed()` implementano le transizioni valide dell'#link(<AnalysisStatus>)[`AnalysisStatus`], rifiutando transizioni non consentite con errori espliciti.
-- *Creazione Controllata:* Il metodo statico `create()` è l'unico punto di ingresso, garantendo che nessuna istanza possa esistere in stato parziale o inconsistente.
 
+
+====== CodeAgentReport <CodeAgentReport>
+#codeDiagram("CodeAgentReport", 100%)
+
+`CodeAgentReport` è l'entità che rappresenta il report prodotto dall'analisi del codice per una specifica analisi. Aggrega i metadati dell'esecuzione e l'interpretazione complessiva dei risultati, collegandosi all'analisi di appartenenza tramite identificatori.
+
+- *Identità Basata sul Report:* Il metodo `equals()` confronta due istanze esclusivamente tramite #link(<ReportId>)[`ReportId`], esprimendo la semantica fondamentale delle entity: due `CodeAgentReport` sono lo stesso report se condividono l'identità, indipendentemente dai dati aggregati.
+- *Contenuto del Report:* Aggrega #link(<CodeAgentMetadata>)[`CodeAgentMetadata`] per i metadati contestuali dell'esecuzione e #link(<AIInterpretation>)[`AIInterpretation`] per il verdetto complessivo e le valutazioni di dettaglio sull'analisi statica e sulla copertura.
+
+====== DocumentationReport <DocumentationReport>
+#codeDiagram("DocumentationReport", 100%)
+
+`DocumentationReport` è l'entità che rappresenta il report prodotto dall'analisi della documentazione per una specifica analisi. Aggrega le violazioni API, le discrepanze documentali, i file mancanti e l'audit delle dipendenze, collegandosi all'analisi di appartenenza tramite identificatori.
+
+- *Identità Basata sul Report:* Il metodo `equals()` confronta due istanze esclusivamente tramite #link(<ReportId>)[`ReportId`], esprimendo la semantica fondamentale delle entity: due `DocumentationReport` sono lo stesso report se condividono l'identità, indipendentemente dai dati aggregati.
+- *Risultati Opzionali:* Le collezioni `apiViolations` (#link(<APIViolation>)[`APIViolation`]), `docsDiscrepancies` (#link(<DocsDiscrepancy>)[`DocsDiscrepancy`]) e `missingFiles` (#link(<MissingFile>)[`MissingFile`]) vengono inizializzate a array vuoto se non fornite, mentre `dependencyAudit` (#link(<DependencyAudit>)[`DependencyAudit`]) è nullable, modellando il fatto che ciascuna categoria di risultati può essere assente in base all'esito dell'analisi.
+
+====== SecurityReport <SecurityReport>
+#codeDiagram("SecurityReport", 100%)
+
+`SecurityReport` è l'entità che rappresenta il report prodotto dall'analisi di sicurezza per una specifica analisi. Aggrega i finding sulle dipendenze vulnerabili, le violazioni OWASP, i segreti esposti e gli eventuali errori degli strumenti di analisi, collegandosi all'analisi di appartenenza tramite identificatori.
+
+- *Identità Basata sul Report:* Il metodo `equals()` confronta due istanze esclusivamente tramite #link(<ReportId>)[`ReportId`], esprimendo la semantica fondamentale delle entity: due `SecurityReport` sono lo stesso report se condividono l'identità, indipendentemente dai dati aggregati.
+- *Tre Assi di Sicurezza:* Le collezioni `dependencyFindings` (#link(<DependencyFinding>)[`DependencyFinding`]), `owaspFindings` (#link(<OWASPFinding>)[`OWASPFinding`]) e `secretFindings` (#link(<SecretFinding>)[`SecretFinding`]) modellano tre categorie distinte di problemi di sicurezza (standard OWASP, dipendenze vulnerabili e segreti), ciascuna con la propria semantica e struttura dati.
+- *Tracciabilità degli Errori:* La collezione `toolErrors` di tipo #link(<ToolError>)[`ToolError`] preserva i fallimenti degli strumenti di analisi all'interno del report stesso, rendendo visibile anche un'esecuzione parziale senza perdere i risultati già raccolti.
 
 ===== Service
 ====== IPasswordProvider <IPasswordProvider>
-#codeDiagram("IPasswordProvider", 100%)
+#codeDiagram("IPasswordProvider", 60%)
 
 `IPasswordProvider` è l'interfaccia del Domain Service responsabile della trasformazione di una password in chiaro in un #link(<PATPassword>)[`PATPassword`] (hash SHA-256 validato).
 
 - *Separazione della Responsabilità:* Isola la logica di hashing dall'applicazione, permettendo di sostituire l'algoritmo di hashing senza modificare i servizi applicativi che dipendono da questo contratto.
 - *Porta del Dominio:* Definisce un contratto che viene implementato dal Domain Service concreto #link(<PATPasswordProvider>)[`PATPasswordProvider`], seguendo il pattern Ports & Adapters anche all'interno del dominio.
 
+====== ICodeReportEntityProvider <ICodeReportEntityProvider>
+#codeDiagram("ICodeReportEntityProvider", 100%)
+
+`ICodeReportEntityProvider` è l'interfaccia del Domain Service responsabile della costruzione di un'entità #link(<CodeAgentReport>)[`CodeAgentReport`] a partire dalla risposta grezza dell'agente di analisi del codice.
+
+- *Porta del Dominio:* Definisce il contratto che separa il dominio dal layer applicativo, impedendo che la logica di mapping del JSON dell'agente penetri nelle entità di dominio.
+- *Contestualizzazione:* Il metodo riceve #link(<ReportId>)[`ReportId`] e #link(<AnalysisId>)[`AnalysisId`] come parametri espliciti, garantendo che ogni entità prodotta sia immediatamente contestualizzata nel sistema senza ambiguità.
+
+====== IDocsReportEntityProvider <IDocsReportEntityProvider>
+#codeDiagram("IDocsReportEntityProvider", 100%)
+
+`IDocsReportEntityProvider` è l'interfaccia del Domain Service responsabile della costruzione di un'entità #link(<DocumentationReport>)[`DocumentationReport`] a partire dalla risposta grezza dell'agente di analisi della documentazione.
+
+- *Porta del Dominio:* Definisce il contratto che separa il dominio dal layer applicativo, impedendo che la logica di mapping del JSON dell'agente penetri nelle entità di dominio.
+- *Contestualizzazione:* Il metodo riceve #link(<ReportId>)[`ReportId`] e #link(<AnalysisId>)[`AnalysisId`] come parametri espliciti, garantendo che ogni entità prodotta sia immediatamente contestualizzata nel sistema senza ambiguità.
 
 ====== PATPasswordProvider <PATPasswordProvider>
-#codeDiagram("PATPasswordProvider", 100%)
+#codeDiagram("PATPasswordProvider", 58%)
 
 `PATPasswordProvider` è l'implementazione concreta del Domain Service #link(<IPasswordProvider>)[`IPasswordProvider`]. Valida i requisiti di complessità della password (maiuscola, numero, carattere speciale, lunghezza minima) e produce un #link(<PATPassword>)[`PATPassword`] tramite hash SHA-256.
 
 - *Politica di Sicurezza:* Applica una politica di complessità esplicita prima dell'hashing, garantendo che solo password sufficientemente robuste possano essere usate per proteggere i PAT.
 - *Immutabilità del Risultato:* Il risultato è sempre un `PATPassword` immutabile, che può circolare nel dominio senza rischio di esposizione della password originale.
+
+====== ISecurityReportEntityProvider <ISecurityReportEntityProvider>
+#codeDiagram("ISecurityReportEntityProvider", 100%)
+
+`ISecurityReportEntityProvider` è l'interfaccia del Domain Service responsabile della costruzione di un'entità #link(<SecurityReport>)[`SecurityReport`] a partire dalla risposta grezza dell'agente di analisi di sicurezza.
+
+- *Porta del Dominio:* Definisce il contratto che separa il dominio dal layer applicativo, impedendo che la logica di mapping del JSON dell'agente penetri nelle entità di dominio.
+- *Contestualizzazione:* Il metodo riceve #link(<ReportId>)[`ReportId`] e #link(<AnalysisId>)[`AnalysisId`] come parametri espliciti, garantendo che ogni entità prodotta sia immediatamente contestualizzata nel sistema senza ambiguità.
+
+====== ReportEntitiesProvider <ReportEntitiesProvider>
+#codeDiagram("ReportEntitiesProvider", 100%)
+
+`ReportEntitiesProvider` è il Domain Service concreto che implementa le tre interfacce #link(<ICodeReportEntityProvider>)[`ICodeReportEntityProvider`], #link(<IDocsReportEntityProvider>)[`IDocsReportEntityProvider`] e #link(<ISecurityReportEntityProvider>)[`ISecurityReportEntityProvider`], centralizzando in un'unica classe tutta la logica di mapping dalle risposte grezze degli agenti alle entità di dominio.
+
+- *Normalizzazione degli Alias:* Gestisce internamente le tabelle di alias (`STATUS_MISSING_ALIASES`, `SEVERITY_ALIASES`, `VERDICT_ALIASES`) che traducono i valori testuali non standardizzati prodotti dagli agenti nei valori type-safe delle enumerazioni di dominio, proteggendo le entità da input arbitrari.
+- *Mapping Strutturato:* Per ciascun tipo di report, decompone la risposta JSON in Value Object atomici — costruendo ad esempio #link(<KeyIssueReasoning>)[`KeyIssueReasoning`], #link(<CriticalFileReasoning>)[`CriticalFileReasoning`] e #link(<AIInterpretation>)[`AIInterpretation`] per il report del codice — prima di assemblarli nell'entità finale.
+- *Implementazione Tripla:* L'implementazione simultanea delle tre interfacce permette di registrare un unico bean nel container di NestJS, riducendo la complessità infrastrutturale senza violare la separazione dei contratti.
+
+==== Application
 
 ===== Command
 ====== StartAnalysisCommand <StartAnalysisCommand>
@@ -743,8 +803,6 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 - *Sostituzione Sicura:* La verifica della password corrente (`patPassword`) prima della sostituzione impedisce aggiornamenti non autorizzati, garantendo che solo il proprietario delle credenziali possa modificarle.
 
-
-==== Application
 ===== Use Cases
 ====== StartAnalysisUseCase <StartAnalysisUseCase>
 #codeDiagram("StartAnalysisUseCase", 100%)
