@@ -445,7 +445,7 @@
   figure(
     table(
       fill: (col, row) => if row == 0 { luma(63.75%) } else { white },
-      columns: (1.5fr, 0.7fr, 0.8fr, 0.5fr, 0.6fr, 0.8fr, 0.6fr, 0.7fr),
+      columns: (1.0fr, 0.7fr, 0.8fr, 0.5fr, 0.6fr, 0.8fr, 0.6fr, 1.0fr),
       inset: 8pt,
       align: (col, row) => if col == 0 { left + horizon } else { center + horizon },
       stroke: 0.5pt + luma(200),
@@ -458,7 +458,7 @@
         text(fill: white, size: 8pt, weight: "bold")[Progettista],
         text(fill: white, size: 8pt, weight: "bold")[Programmatore],
         text(fill: white, size: 8pt, weight: "bold")[Verificatore],
-        text(fill: white, size: 8pt, weight: "bold")[Totale],
+        text(fill: white, size: 8pt, weight: "bold")[Totale ore rimaste rispetto alle 90 preventivate],
       ),
 
       ..table_body,
@@ -482,6 +482,87 @@
       table.cell(fill: luma(200), align: left)[*Prev. a finire*],
       ..pac.map(c => table.cell(fill: luma(200))[#showCost(c)]),
       table.cell(fill: luma(200))[#showCost(pac_grand)],
+    ),
+    caption: caption_text,
+  )
+}
+
+#let sprint_table_con_preventivo(data, caption_text) = {
+  let showVal(val) = if val == 0 { [-] } else { [#val] }
+
+  // Ore preventivate hardcoded per ruolo (per membro)
+  let preventivo_per_ruolo = (7,13,12,17,20,21)
+  let costo_per_ruolo = (30, 20, 25, 25, 15, 15)
+  let preventivo_orario_totale = (49,91,84,119,140,147)
+  let preventivo_totale = preventivo_per_ruolo.sum()
+  let totale_preventivo_orario_generale = preventivo_orario_totale.sum()
+
+  let table_body = ()
+  let total_generale = 0
+
+  for row in data {
+    let row_total = range(6).map(i => row.at(i + 1)).sum()
+    total_generale += row_total
+
+    table_body.push(row.at(0))
+    for i in range(6) {
+      table_body.push(showVal(row.at(i + 1)))
+    }
+    table_body.push([*#row_total*])
+  }
+
+  let showCost(val) = if val == 0 { [-] } else { [#val €] }
+
+  figure(
+    table(
+      fill: (col, row) => if row == 0 { luma(63.75%) } else { white },
+      columns: (1.5fr, 0.7fr, 0.8fr, 0.5fr, 0.6fr, 0.8fr, 0.6fr, 0.9fr),
+      inset: 8pt,
+      align: (col, row) => if col == 0 { left + horizon } else { center + horizon },
+      stroke: 0.5pt + luma(200),
+
+      table.header(
+        text(fill: white, weight: "bold")[Membro],
+        text(fill: white, size: 8pt, weight: "bold")[Responsabile],
+        text(fill: white, size: 8pt, weight: "bold")[Amministratore],
+        text(fill: white, size: 8pt, weight: "bold")[Analista],
+        text(fill: white, size: 8pt, weight: "bold")[Progettista],
+        text(fill: white, size: 8pt, weight: "bold")[Programmatore],
+        text(fill: white, size: 8pt, weight: "bold")[Verificatore],
+        text(fill: white, size: 8pt, weight: "bold")[Totale],
+      ),
+
+      // Prima riga: preventivo hardcoded per membro
+      table.cell(fill: luma(230), align: left)[*Preventivo per membro*],
+      ..preventivo_per_ruolo.map(v => table.cell(fill: luma(230))[#showVal(v)]),
+      table.cell(fill: luma(230))[*#preventivo_totale*],
+
+      // Righe membri
+      ..table_body,
+      //totale preventivo per ruolo
+      table.cell(fill: luma(240), align: left)[*Totale Preventivato*],
+      ..preventivo_orario_totale.map(v => table.cell(fill: luma(240))[#showVal(v)]),
+      table.cell(fill: luma(240))[*#totale_preventivo_orario_generale*],
+
+      // Totale complessivo finale
+      table.cell(fill: luma(230), align: left)[*Totale Consuntivato*],
+      ..range(6).map(i => table.cell(fill: luma(230))[*#data.map(row => row.at(i + 1)).sum()*]),
+      table.cell(fill: luma(230))[*#total_generale*],
+
+      //costi
+      table.cell(fill: luma(240), align: left)[*Costo orario ruolo*],
+      ..costo_per_ruolo.map(v => table.cell(fill: luma(240))[#showVal(v)]),
+      table.cell(fill: luma(240))[*-*],
+
+      //totasle preventivato = ore preventivate × costo orario
+      table.cell(fill: luma(230), align: left)[*Costo totale Preventivato*],
+      ..range(6).map(i => table.cell(fill: luma(230))[#showCost(preventivo_orario_totale.at(i) * costo_per_ruolo.at(i))]),
+      table.cell(fill: luma(230))[#underline(showCost(range(6).map(i => preventivo_orario_totale.at(i) * costo_per_ruolo.at(i)).sum()))],
+
+      //totale consuntivato = ore consuntivate × costo orario
+      table.cell(fill: luma(240), align: left)[*Costo totale Consuntivato*],
+      ..range(6).map(i => table.cell(fill: luma(240))[#showCost(data.map(row => row.at(i + 1)).sum() * costo_per_ruolo.at(i))]),
+      table.cell(fill: luma(240))[#underline(showCost(range(6).map(i => data.map(row => row.at(i + 1)).sum() * costo_per_ruolo.at(i)).sum()))],
     ),
     caption: caption_text,
   )
