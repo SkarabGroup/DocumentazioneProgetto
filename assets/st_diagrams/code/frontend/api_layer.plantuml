@@ -1,7 +1,7 @@
 @startuml
 package "API Layer (Model)" {
   class Gateway {
-    - axiosInstance: AxiosInstance
+    # axiosInstance: AxiosInstance
     + get(url: String): Promise<Response>
     + post(url: String, data: Any): Promise<Response>
     + put(url: String, data: Any): Promise<Response>
@@ -52,9 +52,8 @@ package "API Layer (Model)" {
     + getById(id): Promise<Analysis>
     + getHistory(params): Promise<PaginatedResponse>
     + exportReport(id, format): Promise<Blob>
-    + updateRemediationDecision(analysisId, remediationId, decision): Promise<void>
-    --
-    Recupera i report di analisi e gestisce le decisioni di remediation\nverso il microservizio Analysis.
+        --
+    Recupera i report di analisi e genera internamente\nl'esportazione nei formati supportati.
   }
 
   Gateway <-- AuthApi : usa

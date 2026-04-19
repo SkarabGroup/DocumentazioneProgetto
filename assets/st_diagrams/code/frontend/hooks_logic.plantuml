@@ -2,18 +2,17 @@
 package "Hooks Layer (ViewModel)" {
   class useAuth {
     --
-    Espone lo stato di autenticazione globale (utente corrente,\nisAuthenticated, isLoading) e le azioni login, register, logout.\nConsumatoper AuthContext, che è il provider React sottostante.
+    Espone lo stato di autenticazione globale (utente corrente,\nisAuthenticated, isLoading) e le azioni login, register, logout.\nConsuma AuthContext, che è il provider React sottostante.
   }
 
-  class useAnalysisSocket {
+  class useAnalysisPolling {
     --
-    Si iscrive agli eventi Socket.io del microservizio Analysis\n(avvio, progresso, completamento, fallimento analisi)\ne notifica la UI tramite toast e callback.
+    Effettua il polling periodico verso il microservizio Analysis\nper ottenere lo stato aggiornato dell'analisi in corso\n(avvio, progresso, completamento, fallimento)\ne notifica la UI tramite callback.
   }
 
   useAuth --> "Context Layer" : AuthContext
-  useAnalysisSocket --> "Context Layer" : SocketContext
   useAuth --> "API Layer" : AuthApi
   useAuth --> "API Layer" : UsersApi
-  useAnalysisSocket --> "API Layer" : RepositoriesApi
+  useAnalysisPolling --> "API Layer" : AnalysisApi
 }
 @enduml

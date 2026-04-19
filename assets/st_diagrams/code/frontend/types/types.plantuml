@@ -44,11 +44,10 @@ package "Domain Types (Model)" {
     + documentationScore?: number
     + criticalIssues: number
     + warningIssues: number
-    + remediations: Remediation[]
     + codeAnalysis?: CodeAnalysisSection
     --
     Risultato aggregato di un'analisi: score per area,
-    conteggio issue per severità e lista di remediation suggerite.
+    conteggio issue per severità.
   }
 
   class CodeAnalysisSection {
@@ -97,17 +96,6 @@ package "Domain Types (Model)" {
     per le fasi di Code/Security/Docs Analysis.
   }
 
-  class Remediation {
-    + id: string
-    + title: string
-    + severity: IssueSeverity
-    + currentCode?: string
-    + suggestedCode?: string
-    + decision?: 'accepted' | 'rejected' | 'pending'
-    --
-    Suggerimento di correzione per un'issue, con codice attuale
-    e codice proposto. L'utente può accettare, rifiutare o posticipare.
-  }
 
   class RankedRepository {
     + rank: number
@@ -148,14 +136,12 @@ package "Domain Types (Model)" {
   Repository "1" --> "0..*" Analysis
   Analysis --> AnalysisReport
   AnalysisReport --> "0..*" Issue
-  AnalysisReport --> "0..*" Remediation
   AnalysisReport --> "0..1" CodeAnalysisSection
   CodeAnalysisSection --> "0..1" AIInterpretation
   CodeAnalysisSection --> "0..*" CodeAgentStaticIssue
   RankedRepository --> Repository
   Analysis --> AnalysisStatus
   Issue --> IssueSeverity
-  Remediation --> IssueSeverity
   Analysis --> AnalysisArea
 }
 @enduml
