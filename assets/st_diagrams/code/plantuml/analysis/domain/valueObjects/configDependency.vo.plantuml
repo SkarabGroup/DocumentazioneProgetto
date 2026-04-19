@@ -19,5 +19,5 @@ class ConfigDependency {
     + equals(other: ConfigDependency): boolean
 }
 
-ConfigDependency --right-> PathFinding
+ConfigDependency --down-> PathFinding
 @enduml

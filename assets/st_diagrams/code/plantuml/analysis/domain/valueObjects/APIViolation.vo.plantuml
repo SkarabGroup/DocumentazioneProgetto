@@ -21,7 +21,7 @@ class APIViolation {
     + equals(other: APIViolation): boolean
 }
 
-APIViolation --right-> PathFinding
-APIViolation --right-> SeverityFinding
+APIViolation --down-> PathFinding
+APIViolation --down-> SeverityFinding
 APIViolation --down-> DescriptionFinding
 @enduml

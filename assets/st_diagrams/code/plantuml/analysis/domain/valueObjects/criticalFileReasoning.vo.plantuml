@@ -1,0 +1,28 @@
+@startuml CriticalFileReasoning
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class CriticalFileReasoning {
+    - _file: PathFinding
+    - _lineCoveragePct: CoveragePercentage
+    - _missingLines: number[]
+    - _missingBranches: number
+    - _aiReasoning: DescriptionFinding
+    ---
+    - CriticalFileReasoning(file, lineCoveragePct, missingLines, missingBranches, aiReasoning)
+    + {static} create(file: PathFinding, lineCoveragePct: CoveragePercentage, missingLines: number[], missingBranches: number, aiReasoning: DescriptionFinding): CriticalFileReasoning
+    + getFile(): PathFinding
+    + getLineCoveragePct(): CoveragePercentage
+    + getMissingLines(): number[]
+    + getMissingBranches(): number
+    + getAiReasoning(): DescriptionFinding
+}
+
+CriticalFileReasoning --down-> PathFinding
+CriticalFileReasoning --down-> CoveragePercentage
+CriticalFileReasoning --down-> DescriptionFinding
+@enduml

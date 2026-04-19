@@ -19,6 +19,6 @@ class ErrorFinding {
     + equals(other: ErrorFinding): boolean
 }
 
-ErrorFinding --right-> DescriptionFinding
-ErrorFinding --right-> SeverityFinding
+ErrorFinding --down-> DescriptionFinding
+ErrorFinding --down-> SeverityFinding
 @enduml

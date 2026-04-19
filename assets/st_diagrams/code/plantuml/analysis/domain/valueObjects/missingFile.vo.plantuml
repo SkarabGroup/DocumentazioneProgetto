@@ -22,7 +22,7 @@ class MissingFile {
     + equals(other: MissingFile): boolean
 }
 
-MissingFile --right-> PathFinding
+MissingFile --down-> PathFinding
 MissingFile --down-> DescriptionFinding
-MissingFile --left-> StatusMissing
+MissingFile --down-> StatusMissing
 @enduml

@@ -373,8 +373,16 @@ L'obiettivo del Domain Core è modellare la realtà del problema attraverso un l
 ===== Value Object
 I Value Object rappresentano concetti del dominio definiti esclusivamente dai loro attributi. Sono progettati per essere *immutabili*: una volta istanziati, il loro stato non può subire variazioni, garantendo la thread-safety e la stabilità dei riferimenti durante l'intero ciclo di vita della richiesta. L'uguaglianza tra due Value Object è determinata dal valore delle proprietà incapsulate e non dall'identità dell'istanza in memoria.
 
+====== AIInterpretation <AIInterpretation>
+#codeDiagram("AIInterpretation", 100%)
+
+`AIInterpretation` è il Value Object che rappresenta la valutazione complessiva prodotta dall'agente AI a partire dai risultati dell'analisi statica e della copertura. Aggrega il verdetto finale, il sommario esecutivo e le due valutazioni di dettaglio.
+
+- *Verdetto Vincolato:* Il campo `_verdict` è tipizzato sull'enumerazione #link(<VerdictStatus>)[`VerdictStatus`], garantendo che il giudizio dell'agente sia sempre espresso con un valore riconosciuto dal dominio.
+- *Composizione Duale:* Aggrega #link(<StaticAnalysisEvaluation>)[`StaticAnalysisEvaluation`] e #link(<CoverageEvaluation>)[`CoverageEvaluation`], offrendo una visione unificata dei due assi di qualità analizzati.
+
 ====== AnalysisId <AnalysisId>
-#codeDiagram("AnalysisId", 100%)
+#codeDiagram("AnalysisId", 40%)
 
 L'entità `AnalysisId` è il Value Object che rappresenta l'identità univoca di un'analisi nel sistema. Incapsula un UUID v7 validato, garantendo che ogni analisi possa essere identificata in modo non ambiguo e cronologicamente ordinabile.
 
@@ -383,7 +391,7 @@ L'entità `AnalysisId` è il Value Object che rappresenta l'identità univoca di
 - *Contratto verso il Dominio:* Viene utilizzato da #link(<GitHubAnalysis>)[`GitHubAnalysis`] come identificatore primario e da #link(<IRepositoryCloner>)[`IRepositoryCloner`] per contestualizzare le operazioni di clonazione.
 
 ====== APIViolation <APIViolation>
-#codeDiagram("APIViolation", 100%)
+#codeDiagram("APIViolation", 90%)
 
 `APIViolation` è il Value Object che rappresenta una violazione rilevata nel contratto API del repository analizzato. Aggrega la localizzazione del problema, la regola violata, la severità e una descrizione testuale.
 
@@ -391,16 +399,23 @@ L'entità `AnalysisId` è il Value Object che rappresenta l'identità univoca di
 - *Composizione:* Aggrega #link(<PathFinding>)[`PathFinding`], #link(<SeverityFinding>)[`SeverityFinding`] e #link(<DescriptionFinding>)[`DescriptionFinding`], contestualizzando ogni violazione con la sua localizzazione, criticità e dettaglio testuale.
 
 ====== BranchName <BranchName>
-#codeDiagram("BranchName", 100%)
+#codeDiagram("BranchName", 40%)
 
 Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicando le regole sintattiche del protocollo Git a livello di dominio. Rappresenta un concetto esplicito del dominio, evitando l'uso di stringhe primitive non validate.
 
 - *Validazione di Dominio:* Tramite una regex derivata dalle specifiche Git (`git-check-ref-format`), impedisce la creazione di branch name che iniziano o terminano con `/`, contengono `..` o caratteri speciali proibiti (`~`, `^`, `:`, `?`, `*`, `[`).
 - *Uso come Parametro Contestuale:* Viene aggregato da #link(<GitHubAnalysis>)[`GitHubAnalysis`] per fissare la versione della sorgente analizzata.
 
+====== CodeAgentMetadata <CodeAgentMetadata>
+#codeDiagram("CodeAgentMetadata", 60%)
+
+`CodeAgentMetadata` è il Value Object che rappresenta i metadati contestuali prodotti dall'agente di analisi del codice, descrivendo il linguaggio analizzato e lo stato dell'esecuzione.
+
+- *Contesto dell'Esecuzione:* Il campo `_status` garantisce che ogni report sia accompagnato da un'indicazione esplicita sull'esito dell'esecuzione dell'agente, distinguendo analisi completate da quelle parziali o fallite.
+- *Linguaggio Dichiarato:* Il campo `_language` associa il report al linguaggio di programmazione analizzato, contestualizzando i risultati per i layer superiori che ne fanno uso.
 
 ====== CommitHash <CommitHash>
-#codeDiagram("CommitHash", 100%)
+#codeDiagram("CommitHash", 40%)
 
 `CommitHash` è il Value Object che rappresenta un hash SHA-1 di un commit Git (40 caratteri esadecimali). Garantisce che ogni riferimento a un commit nel sistema sia sintatticamente corretto e immutabile.
 
@@ -408,29 +423,36 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Riproducibilità:* In combinazione con #link(<BranchName>)[`BranchName`] e #link(<RepoURL>)[`RepoURL`], fissa lo stato esatto del repository, rendendo ogni analisi un'operazione deterministica.
 
 ====== ConfigDependency <ConfigDependency>
-#codeDiagram("ConfigDependency", 100%)
+#codeDiagram("ConfigDependency", 85%)
 
 `ConfigDependency` è il Value Object che rappresenta una dipendenza rilevata in un file di configurazione del progetto (es. `package.json`, `requirements.txt`).
 
 - *Localizzazione della Fonte:* Il campo `_pathFinding` di tipo #link(<PathFinding>)[`PathFinding`] identifica il file di configurazione specifico in cui la dipendenza è stata rilevata, permettendo di risalire alla fonte senza ambiguità.
 - *Versione Pinned Opzionale:* Il campo `_versionPinned` è nullable, gestendo i casi in cui una dipendenza sia dichiarata senza vincolo di versione nel file di configurazione.
 
-====== CoverageFinding <CoverageFinding>
-#codeDiagram("CoverageFinding", 100%)
+====== CoverageEvaluation <CoverageEvaluation>
+#codeDiagram("CoverageEvaluation", 85%)
 
-`CoverageFinding` è il Value Object aggregato che rappresenta il risultato completo dell'analisi di copertura per un intero progetto, per un dato linguaggio di programmazione.
+`CoverageEvaluation` è il Value Object che aggrega i risultati della valutazione dell'analisi di code coverage, combinando un giudizio sintetico sulla salute complessiva con il dettaglio ragionato per i file critici. 
 
-- *Aggregazione Consistente:* La validazione verifica che non esistano duplicati di percorsi tra i `FileCoverage` e che i totali siano coerenti con i file presenti.
-- *Report di Qualità:* Fornisce una vista a due livelli: totale aggregato per una valutazione rapida e dettaglio per file per un'analisi puntuale.
-
+- *Salute Aggregata:* Il campo `_overallHealth` fornisce una valutazione sintetica dell'intera copertura, permettendo ai layer superiori di ottenere un giudizio immediato senza dover ispezionare i singoli file.
+- *Dettaglio per File:* La collezione di #link(<CriticalFileReasoning>)[`CriticalFileReasoning`] raccoglie il ragionamento dettagliato per ciascun file critico, fornendo localizzazione delle lacune e spiegazione contestuale in un'unica struttura coesa.
 
 ====== CoveragePercentage <CoveragePercentage>
-#codeDiagram("CoveragePercentage", 100%)
+#codeDiagram("CoveragePercentage", 50%)
 
 `CoveragePercentage` è il Value Object che rappresenta una percentuale di copertura del codice come numero decimale nell'intervallo `[0, 1]`.
 
 - *Invariante Numerica:* La validazione garantisce che il valore sia un numero finito compreso tra 0 e 1 inclusivi, prevenendo valori impossibili come percentuali superiori al 100%.
-- *Primitivo di Copertura:* Viene usato come building block da #link(<FileCoverage>)[`FileCoverage`] e da #link(<CoverageFinding>)[`CoverageFinding`].
+- *Primitivo di Copertura:* Viene riutilizzato come building block da #link(<CriticalFileReasoning>)[`CriticalFileReasoning`] per rappresentare la percentuale di copertura per linee dei file critici.
+
+====== CriticalFileReasoning <CriticalFileReasoning>
+#codeDiagram("CriticalFileReasoning", 100%)
+
+`CriticalFileReasoning` è il Value Object che rappresenta il ragionamento dettagliato su un singolo file critico per la copertura, associando i dati quantitativi delle lacune alla spiegazione contestuale del problema.
+
+- *Dati Quantitativi:* I campi `_missingLines` e `_missingBranches` localizzano con precisione le lacune di copertura, permettendo di intervenire direttamente sulle righe e i branch non coperti.
+- *Spiegazione Contestuale:* Il campo `_aiReasoning` di tipo #link(<DescriptionFinding>)[`DescriptionFinding`] arricchisce i dati numerici con una descrizione del problema, trasformando il dato grezzo in un'indicazione azionabile.
 
 ====== DependencyAudit <DependencyAudit>
 #codeDiagram("DependencyAudit", 100%)
@@ -441,7 +463,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Uguaglianza Ordinata:* Il confronto tra collezioni è indipendente dall'ordine di inserimento, garantendo che due audit con le stesse dipendenze siano sempre considerati equivalenti.
 
 ====== DependencyFinding <DependencyFinding>
-#codeDiagram("DependencyFinding", 100%)
+#codeDiagram("DependencyFinding", 70%)
 
 `DependencyFinding` è il Value Object che rappresenta una vulnerabilità nota rilevata in una dipendenza del progetto (es. CVE in un pacchetto npm o pip).
 
@@ -450,7 +472,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 
 
 ====== DescriptionFinding <DescriptionFinding>
-#codeDiagram("DescriptionFinding", 100%)
+#codeDiagram("DescriptionFinding", 45%)
 
 `DescriptionFinding` è il Value Object primitivo che rappresenta la descrizione testuale di un finding di analisi. Garantisce che la descrizione non sia mai vuota o composta da soli spazi.
 
@@ -464,31 +486,29 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Confronto Duale:* I campi `_docsClaim` e `_actualFinding` catturano esplicitamente entrambi i lati della divergenza, rendendo il problema autoesplicativo senza necessità di ricorrere al codice sorgente.
 - *Categorizzazione:* Il campo `_discrepancyCategory` raggruppa le discrepanze per tipologia, abilitando analisi aggregate e prioritizzazione degli interventi correttivi.
 
-====== DocumentationFinding <DocumentationFinding>
-#codeDiagram("DocumentationFinding", 100%)
-
-`DocumentationFinding` è il Value Object composito che rappresenta un singolo problema di documentazione rilevato. Combina la localizzazione del file, il dettaglio dell'errore e il percorso logico nel documento.
-
-- *Specificità del Dominio:* Il campo `documentPath` (array di stringhe) rappresenta il percorso logico all'interno di un documento strutturato (es. `["API", "endpoints"]`).
-- *Invarianti:* Tutte le parti del `documentPath` devono essere stringhe non vuote.
-
-
 ====== ErrorFinding <ErrorFinding>
-#codeDiagram("ErrorFinding", 100%)
+#codeDiagram("ErrorFinding", 90%)
 
 `ErrorFinding` è il Value Object composito che rappresenta un singolo errore rilevato durante l'analisi, aggregando la riga di codice incriminata, una descrizione e un livello di severità.
 
 - *Composizione di Primitivi:* Aggrega #link(<DescriptionFinding>)[`DescriptionFinding`] e #link(<SeverityFinding>)[`SeverityFinding`], arricchendoli con il numero di riga (intero positivo).
-- *Blocco Costruttivo:* Viene utilizzato come componente da #link(<OWASPFinding>)[`OWASPFinding`], #link(<SecretFinding>)[`SecretFinding`] e #link(<StaticAnalysisFinding>)[`StaticAnalysisFinding`].
+- *Blocco Costruttivo:* Viene utilizzato come componente da #link(<OWASPFinding>)[`OWASPFinding`] e #link(<SecretFinding>)[`SecretFinding`].
 
+====== IssueLocation <IssueLocation>
+#codeDiagram("IssueLocation", 75%)
 
-====== FileCoverage <FileCoverage>
-#codeDiagram("FileCoverage", 100%)
+`IssueLocation` è il Value Object che rappresenta la posizione precisa di un problema all'interno di un file sorgente, identificando l'intervallo di righe e la colonna coinvolti.
 
-`FileCoverage` è il Value Object che rappresenta la copertura di test di un singolo file, aggregando la percentuale di copertura per linee e branch, il percorso del file e le righe non coperte.
+- *Posizione Intervallare:* I campi `_lineStart` e `_lineEnd` modellano problemi che si estendono su più righe, garantendo tramite validazione che `lineStart` non superi mai `lineEnd` e che entrambi siano positivi.
+- *Localizzazione Completa:* Combinato con #link(<PathFinding>)[`PathFinding`] in #link(<KeyIssueReasoning>)[`KeyIssueReasoning`], consente di identificare un problema con la precisione necessaria per navigarvi direttamente in un editor.
 
-- *Coerenza Interna:* Se la copertura è 100%, le `missedLines` devono essere vuote; i numeri di riga devono essere interi positivi e univoci.
-- *Granularità:* Fornisce le informazioni necessarie per identificare esattamente quali righe richiedono test aggiuntivi.
+====== KeyIssueReasoning <KeyIssueReasoning>
+#codeDiagram("KeyIssueReasoning", 100%)
+
+`KeyIssueReasoning` è il Value Object che rappresenta il ragionamento dettagliato su un singolo problema rilevato dall'analisi statica, arricchendo il dato grezzo con interpretazione e risoluzione suggerita.
+
+- *Triplice Descrizione:* I campi `_originalDescription`, `_aiReasoning` e `_suggestedResolution`, tutti di tipo #link(<DescriptionFinding>)[`DescriptionFinding`], separano esplicitamente il problema rilevato dallo strumento, la sua interpretazione e la strategia di risoluzione proposta.
+- *Localizzazione Precisa:* Aggrega #link(<PathFinding>)[`PathFinding`] e #link(<IssueLocation>)[`IssueLocation`], permettendo di navigare direttamente al punto esatto del codice senza ambiguità.
 
 ====== MissingFile <MissingFile>
 #codeDiagram("MissingFile", 100%)
@@ -499,7 +519,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Stato Classificato:* Il campo `_statusMissing` di tipo #link(<StatusMissing>)[`StatusMissing`] distingue semanticamente le diverse cause di assenza, abilitando politiche di gestione differenziate.
 
 ====== MissingInConfigDependency <MissingInConfigDependency>
-#codeDiagram("MissingInConfigDependency", 100%)
+#codeDiagram("MissingInConfigDependency", 90%)
 
 `MissingInConfigDependency` è il Value Object che rappresenta una dipendenza documentata nel README ma assente nei file di configurazione del progetto.
 
@@ -507,7 +527,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Riferimento al Contesto:* Il campo `_pathFinding` di tipo #link(<PathFinding>)[`PathFinding`] indica il file di configurazione in cui la dipendenza avrebbe dovuto essere presente, contestualizzando il problema per chi deve risolverlo.
 
 ====== OWASPFinding <OWASPFinding>
-#codeDiagram("OWASPFinding", 100%)
+#codeDiagram("OWASPFinding", 70%)
 
 `OWASPFinding` è il Value Object che rappresenta una vulnerabilità di sicurezza classificata secondo la tassonomia OWASP. Aggrega localizzazione, dettaglio dell'errore e categoria OWASP.
 
@@ -515,7 +535,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 
 
 ====== PATPassword <PATPassword>
-#codeDiagram("PATPassword", 100%)
+#codeDiagram("PATPassword", 40%)
 
 `PATPassword` è il Value Object che rappresenta l'hash SHA-256 di una password usata per proteggere un Personal Access Token. Non contiene mai la password in chiaro.
 
@@ -523,7 +543,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 
 
 ====== PathFinding <PathFinding>
-#codeDiagram("PathFinding", 100%)
+#codeDiagram("PathFinding", 40%)
 
 `PathFinding` è il Value Object che rappresenta un percorso relativo a un file nel repository analizzato. Applica regole di sicurezza per impedire path traversal e percorsi assoluti.
 
@@ -531,22 +551,30 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 
 
 ====== PersonalAccessToken <PersonalAccessToken>
-#codeDiagram("PersonalAccessToken", 100%)
+#codeDiagram("PersonalAccessToken", 50%)
 
 `PersonalAccessToken` è il Value Object che incapsula un GitHub PAT, validandone il formato secondo i pattern ufficiali GitHub (`ghp_*` o `github_pat_*`).
 
 - *Validazione del Formato:* La regex garantisce che solo token con formato ufficiale possano essere usati, prevenendo la registrazione di token malformati.
 
 ====== ReadmeDependency <ReadmeDependency>
-#codeDiagram("ReadmeDependency", 100%)
+#codeDiagram("ReadmeDependency", 65%)
 
 `ReadmeDependency` è il Value Object che rappresenta una dipendenza dichiarata nel file README del repository.
 
 - *Versione Opzionale:* Il campo `_versionClaimed` è nullable, riflettendo la realtà documentale in cui un README può citare una dipendenza senza specificarne la versione esatta.
 - *Fonte Documentale:* Viene aggregato da #link(<DependencyAudit>)[`DependencyAudit`] come rappresentazione della dipendenza dal punto di vista della documentazione, da confrontare con quanto dichiarato nei file di configurazione.
 
+====== ReportId <ReportId>
+#codeDiagram("ReportId", 40%)
+
+`ReportId` è il Value Object che rappresenta l'identità univoca di un report nel sistema. Incapsula un UUID v7 validato, garantendo che ogni report possa essere identificato in modo non ambiguo e cronologicamente ordinabile.
+
+- *Uguaglianza Strutturale:* Il metodo `equals()` implementa la semantica dei Value Object: due `ReportId` sono uguali se e solo se il loro valore stringa è identico.
+//- *Contratto verso il Dominio:* Viene utilizzato come identificatore primario dalle entity di report quali #link(<CodeReport>)[`CodeReport`] e #link(<DocumentationReport>)[`DocumentationReport`].
+
 ====== RepoURL <RepoURL>
-#codeDiagram("RepoURL", 100%)
+#codeDiagram("RepoURL", 40%)
 
 `RepoURL` è il Value Object che rappresenta l'URL di un repository GitHub. La validazione garantisce la conformità al formato `https://github.com/<owner>/<repo>`.
 
@@ -555,7 +583,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 
 
 ====== SecretFinding <SecretFinding>
-#codeDiagram("SecretFinding", 100%)
+#codeDiagram("SecretFinding", 65%)
 
 `SecretFinding` rappresenta la rilevazione di un segreto esposto (API key, token, password) all'interno del codice sorgente analizzato.
 
@@ -564,23 +592,30 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 
 
 ====== SeverityFinding <SeverityFinding>
-#codeDiagram("SeverityFinding", 100%)
+#codeDiagram("SeverityFinding", 45%)
 
 `SeverityFinding` è il Value Object che rappresenta il livello di severità di un finding, vincolato all'enumerazione #link(<SeverityLevel>)[`SeverityLevel`] (`LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
 
 - *Coerenza del Dominio:* Normalizza la stringa in input e la valida, garantendo che nessun livello arbitrario possa essere introdotto.
 
+====== StaticAnalysisEvaluation <StaticAnalysisEvaluation>
+#codeDiagram("StaticAnalysisEvaluation", 100%)
 
-====== StaticAnalysisFinding <StaticAnalysisFinding>
-#codeDiagram("StaticAnalysisFinding", 100%)
+`StaticAnalysisEvaluation` è il Value Object che aggrega i risultati della valutazione dell'analisi statica, combinando il conteggio totale dei problemi rilevati con la collezione dei ragionamenti dettagliati per ciascun problema.
 
-`StaticAnalysisFinding` è il Value Object che rappresenta un problema di qualità del codice rilevato dall'analisi statica, classificato per linguaggio e categoria.
+- *Conteggio Totale:* Il campo `_totalIssuesAnalyzed` preserva il numero complessivo di problemi analizzati, permettendo di avere una visione quantitativa immediata dell'entità dei problemi rilevati.
+- *Ragionamenti Aggregati:* La collezione di #link(<KeyIssueReasoning>)[`KeyIssueReasoning`] raccoglie il dettaglio analitico per ciascun problema, fornendo localizzazione, severità e risoluzione suggerita in un'unica struttura coesa.
 
-- *Contestualizzazione:* Il campo `analyzedLanguage` garantisce che il finding sia sempre associato al linguaggio corretto.
-- *Categoria:* Il campo `errorCategory` fornisce un raggruppamento tematico (es. `null-dereference`) per analisi aggregate.
+====== ToolError <ToolError>
+#codeDiagram("ToolError", 60%)
+
+`ToolError` è il Value Object che rappresenta un errore verificatosi durante l'esecuzione di uno strumento di analisi, associando il nome dello strumento alla descrizione del problema riscontrato.
+
+- *Identificazione della Fonte:* Il campo `_toolName` permette di risalire immediatamente allo strumento che ha generato l'errore.
+- *Uguaglianza per Contenuto:* Il metodo `equals()` confronta sia il nome dello strumento che la descrizione, garantendo che due errori identici prodotti dallo stesso tool siano riconosciuti come equivalenti.
 
 ====== UndocumentedDependency <UndocumentedDependency>
-#codeDiagram("UndocumentedDependency", 100%)
+#codeDiagram("UndocumentedDependency", 70%)
 
 `UndocumentedDependency` è il Value Object che rappresenta una dipendenza presente nei file di configurazione del progetto ma non menzionata nel README.
 
@@ -588,7 +623,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Localizzazione Precisa:* Il campo `_pathFinding` di tipo #link(<PathFinding>)[`PathFinding`] indica il file di configurazione in cui la dipendenza è stata rilevata, facilitando l'intervento correttivo sulla documentazione.
 
 ====== UserId <UserId>
-#codeDiagram("UserId", 100%)
+#codeDiagram("UserId", 40%)
 
 `UserId` è il Value Object che rappresenta l'identità dell'utente che ha richiesto l'analisi. Incapsula un UUID standard validato.
 
@@ -605,7 +640,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 
 ===== Enums
 ====== AnalysisStatus <AnalysisStatus>
-#codeDiagram("AnalysisStatus", 100%)
+#codeDiagram("AnalysisStatus", 20%)
 
 `AnalysisStatus` è l'enumerazione che definisce gli stati del ciclo di vita di un'analisi: `PENDING`, `IN_PROGRESS`, `COMPLETED`, `FAILED`.
 
@@ -613,7 +648,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Osservabilità:* Permette ai servizi applicativi e all'infrastruttura di monitorare e persistere lo stato di avanzamento dell'analisi in modo type-safe.
 
 ====== SeverityLevel <SeverityLevel>
-#codeDiagram("SeverityLevel", 100%)
+#codeDiagram("SeverityLevel", 20%)
 
 `SeverityLevel` è l'enumerazione che definisce i livelli di criticità dei finding: `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`.
 
@@ -621,20 +656,20 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Standardizzazione:* Evita l'uso di stringhe libere, garantendo che tutti i componenti del sistema parlino lo stesso linguaggio per la prioritizzazione dei problemi rilevati.
 
 ====== StatusMissing <StatusMissing>
-#codeDiagram("StatusMissing", 100%)
+#codeDiagram("StatusMissing", 30%)
 
 `StatusMissing` è l'enumerazione che classifica la causa di assenza di un file referenziato nella documentazione: `NOT_FOUND`, `POSSIBLY_RENAMED`, `WRONG_PATH`.
 
 - *Vocabolario Diagnostico:* Definisce il vocabolario ufficiale del dominio per distinguere le diverse cause di assenza, usato da #link(<MissingFile>)[`MissingFile`] per caratterizzare semanticamente ogni file mancante.
 - *Azionabilità:* I tre valori guidano interventi distinti: `NOT_FOUND` suggerisce un file mai creato, `POSSIBLY_RENAMED` un refactoring non riflesso nella documentazione, `WRONG_PATH` un errore di percorso nel riferimento.
 
-====== SupportedLanguages <SupportedLanguages>
-#codeDiagram("SupportedLanguages", 100%)
+====== VerdictStatus <VerdictStatus>
+#codeDiagram("VerdictStatus", 20%)
 
-`SupportedLanguages` elenca i linguaggi di programmazione supportati dall'analisi: `PYTHON`, `JAVASCRIPT`, `TYPESCRIPT`, `JAVA`.
+`VerdictStatus` è l'enumerazione che definisce i livelli di qualità complessiva restituiti dall'analisi del codice: `CRITICAL`, `POOR`, `FAIR`, `GOOD`, `EXCELLENT`.
 
-- *Contratto di Supporto:* Definisce esplicitamente l'ambito tecnologico del sistema, usato da #link(<StaticAnalysisFinding>)[`StaticAnalysisFinding`] e #link(<CoverageFinding>)[`CoverageFinding`] per contestualizzare i risultati al linguaggio analizzato.
-- *Estendibilità Controllata:* L'aggiunta di nuovi linguaggi richiede una modifica esplicita all'enum, prevenendo l'introduzione accidentale di linguaggi non supportati.
+- *Scala Ordinata:* I cinque valori formano una scala progressiva dalla qualità peggiore alla migliore, usata da #link(<AIInterpretation>)[`AIInterpretation`] per esprimere il giudizio sintetico sull'intero repository analizzato.
+- *Standardizzazione:* Traduce il verdetto testuale presente nel JSON dell'agente in un valore type-safe del dominio, impedendo la propagazione di verdetti arbitrari nei layer applicativi.
 
 
 ===== Entity

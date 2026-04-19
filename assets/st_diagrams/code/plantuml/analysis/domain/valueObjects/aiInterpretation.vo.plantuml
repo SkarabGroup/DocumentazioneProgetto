@@ -1,0 +1,27 @@
+@startuml AIInterpretation
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class AIInterpretation {
+    - _verdict: VerdictStatus
+    - _executiveSummary: DescriptionFinding
+    - _staticAnalysisEvaluation: StaticAnalysisEvaluation
+    - _coverageEvaluation: CoverageEvaluation
+    ---
+    - AIInterpretation(verdict, executiveSummary, staticAnalysisEvaluation, coverageEvaluation)
+    + {static} create(verdict: VerdictStatus, executiveSummary: DescriptionFinding, staticAnalysisEvaluation: StaticAnalysisEvaluation, coverageEvaluation: CoverageEvaluation): AIInterpretation
+    + getVerdict(): VerdictStatus
+    + getExecutiveSummary(): DescriptionFinding
+    + getStaticAnalysisEvaluation(): StaticAnalysisEvaluation
+    + getCoverageEvaluation(): CoverageEvaluation
+}
+
+AIInterpretation --down-> VerdictStatus
+AIInterpretation --down-> DescriptionFinding
+AIInterpretation --down-> StaticAnalysisEvaluation
+AIInterpretation --down-> CoverageEvaluation
+@enduml

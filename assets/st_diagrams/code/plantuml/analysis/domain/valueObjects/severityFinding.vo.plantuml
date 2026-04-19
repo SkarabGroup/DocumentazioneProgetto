@@ -16,5 +16,5 @@ class SeverityFinding {
     + equals(other: SeverityFinding): boolean
 }
 
-SeverityFinding --right-> SeverityLevel
+SeverityFinding --down-> SeverityLevel
 @enduml

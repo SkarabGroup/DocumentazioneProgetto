@@ -23,7 +23,7 @@ class DocsDiscrepancy {
     + equals(other: DocsDiscrepancy): boolean
 }
 
-DocsDiscrepancy --right-> PathFinding
-DocsDiscrepancy --right-> SeverityFinding
+DocsDiscrepancy --down-> PathFinding
+DocsDiscrepancy --down-> SeverityFinding
 DocsDiscrepancy --down-> DescriptionFinding
 @enduml

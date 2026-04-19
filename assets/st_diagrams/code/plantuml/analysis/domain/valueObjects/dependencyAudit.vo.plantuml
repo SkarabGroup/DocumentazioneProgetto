@@ -24,9 +24,9 @@ class DependencyAudit {
     - arrayEquals(a: T[], b: T[]): boolean
 }
 
-DependencyAudit --right-> ReadmeDependency
-DependencyAudit --right-> ConfigDependency
+DependencyAudit --down-> ReadmeDependency
+DependencyAudit --down-> ConfigDependency
 DependencyAudit --down-> MissingInConfigDependency
 DependencyAudit --down-> UndocumentedDependency
-DependencyAudit --left-> VersionMismatchDependency
+DependencyAudit --down-> VersionMismatchDependency
 @enduml
