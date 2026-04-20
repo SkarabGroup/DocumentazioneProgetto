@@ -1,0 +1,28 @@
+@startuml ECSDocumentationAnalysisAdapter
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+interface IDocumentationAgentPort {
+    + runAnalysis(model: AgentRequest): Promise<DocsAgentResponse>
+}
+
+class ECSDocumentationAnalysisAdapter {
+    - logger: Logger
+    - ecsClient: ECSClient
+    - s3Client: S3Client
+    - configService: ConfigurationService
+    ---
+    + ECSDocumentationAnalysisAdapter(configService: ConfigurationService)
+    + runAnalysis(model: AgentRequest): Promise<DocsAgentResponse>
+    - runEcsTask(analysisId: string): Promise<void>
+    - waitForTaskCompletion(cluster: string, taskArn: string): Promise<void>
+    - fetchResultFromS3(analysisId: string): Promise<string>
+    - createFallbackResponse(repository: string): DocsAgentResponse
+}
+
+ECSDocumentationAnalysisAdapter ..|> IDocumentationAgentPort
+@enduml

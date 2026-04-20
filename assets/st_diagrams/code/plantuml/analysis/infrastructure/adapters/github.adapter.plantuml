@@ -21,7 +21,11 @@ class GitHubAdapter {
     + check(request: CheckAvailabilityRequest): Promise<CheckAvailabilityResponse>
     + clone(request: CloneRepoRequest): Promise<CloneRepoResponse>
     - buildAccessRequestCurl(request): string
-    - parseResponse(stdout, request): CheckAvailabilityResponse
+    - buildUrl(request): string
+    - parseResponse(stdout, request): Promise<CheckAvailabilityResponse>
+    - validateBody(body, request): Promise<CheckAvailabilityResponse>
+    - getCommitFromBranch(repoPath, branch, patToken?): Promise<{sha: string} | null>
+    - extractRepoPath(repositoryUrl): string
 }
 
 GitHubAdapter ..|> IGitHubAvailabilityPort

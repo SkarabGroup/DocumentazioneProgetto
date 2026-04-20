@@ -1439,23 +1439,121 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 - *Adattamento verso l'Esterno:* Traduce i DTO del dominio applicativo in comandi shell Git/curl e ne interpreta le risposte, isolando il resto del sistema dai dettagli dell'API GitHub.
 - *Testabilità:* Il costruttore accetta un `execAsync` iniettabile, permettendo il testing con mock senza eseguire comandi reali.
 
----
+====== LocalCodeAnalysisAdapter <LocalCodeAnalysisAdapter>
+#codeDiagram("LocalCodeAnalysisAdapter", 60%)
+
+`LocalCodeAnalysisAdapter` è il Driven Adapter che implementa #link(<ICodeAgentPort>)[`ICodeAgentPort`], avviando il container Docker dell'agente di analisi del codice e raccogliendo il JSON prodotto dallo stdout.
+
+- *Estrazione Resiliente:* Il metodo `extractJson()` scansiona iterativamente lo stdout del container alla ricerca del blocco JSON valido, gestendo output misti a log o messaggi di errore parziali.
+- *Fallback Garantito:* In caso di errore del container, `createFallbackResponse()` restituisce una risposta strutturata con stato di errore, evitando la propagazione di eccezioni non gestite verso l'orchestratore.
+
+====== DocumentationAnalysisAdapter <DocumentationAnalysisAdapter>
+#codeDiagram("DocumentationAnalysisAdapter", 60%)
+
+`DocumentationAnalysisAdapter` è il Driven Adapter che implementa #link(<IDocumentationAgentPort>)[`IDocumentationAgentPort`], avviando il container Docker dell'agente di analisi della documentazione e raccogliendo il JSON prodotto dallo stdout.
+
+- *Estrazione Resiliente:* Il metodo `extractJson()` scansiona iterativamente lo stdout del container alla ricerca del blocco JSON valido, gestendo output misti a log o messaggi di errore parziali.
+- *Fallback Garantito:* In caso di errore del container, `createFallbackResponse()` restituisce una risposta strutturata con stato di errore, evitando la propagazione di eccezioni non gestite verso l'orchestratore.
+
+====== LocalSecurityAnalysisAdapter <LocalSecurityAnalysisAdapter>
+#codeDiagram("LocalSecurityAnalysisAdapter", 70%)
+
+`LocalSecurityAnalysisAdapter` è il Driven Adapter che implementa #link(<ISecurityAgentPort>)[`ISecurityAgentPort`], avviando il container Docker dell'agente di analisi della sicurezza e raccogliendo il JSON prodotto dallo stdout.
+
+- *Estrazione Resiliente:* Il metodo `extractJson()` scansiona iterativamente lo stdout del container alla ricerca del blocco JSON valido, gestendo output misti a log o messaggi di errore parziali.
+- *Fallback Garantito:* In caso di errore del container, `createFallbackResponse()` costruisce una risposta con lista degli errori per tool, preservando il contesto del repository analizzato.
 
 ====== MongoDBAdapter <MongoDBAdapter>
 #codeDiagram("MongoDBAdapter", 100%)
 
-`MongoDBAdapter` è il Driven Adapter che implementa tutti e quattro i port di repository per le credenziali Git (#link(<IGitCredentialReadPort>)[`IGitCredentialReadPort`], #link(<IGitCredentialSavePort>)[`IGitCredentialSavePort`], #link(<IGitCredentialDeletePort>)[`IGitCredentialDeletePort`], #link(<IGitCredentialUpdatePort>)[`IGitCredentialUpdatePort`]), interagendo con MongoDB tramite Mongoose.
+`MongoDBAdapter` è il Driven Adapter che implementa tutti i port di repository del sistema, concentrando in un unico componente la gestione della persistenza su MongoDB tramite Mongoose per credenziali, analisi, report e collezioni.
 
-- *Adattatore Unificato:* Concentra tutta la logica di persistenza delle credenziali in un unico adapter, semplificando la configurazione del modulo NestJS e riducendo la frammentazione infrastrutturale.
-- *Schema MongoDB:* Utilizza lo schema #link(<GitCredential>)[`GitCredential`] per mappare le credenziali sul documento MongoDB, applicando validazione a livello di schema (regex SHA-256 per la password, unicità dell'URL).
+- *Adattatore Unificato:* Implementa quattordici port distinti, coprendo le operazioni su credenziali Git, analisi GitHub, report di codice, documentazione e sicurezza, e collezioni di repository.
+- *Modelli Multipli:* Inietta nel costruttore sei modelli Mongoose distinti, derivati dai rispettivi schema per mappare i dati sulle collezioni MongoDB: #link(<GitCredential>)[`GitCredential`], #link(<GitHubAnalysisRecord>)[`GitHubAnalysisRecord`], #link(<DocumentationReportModel>)[`DocumentationReportModel`], #link(<CodeReportModel>)[`CodeReportModel`], #link(<SecurityReportModel>)[`SecurityReportModel`] e #link(<GitHubCollection>)[`GitHubCollection`].
+
+====== S3Adapter <S3Adapter>
+#codeDiagram("S3Adapter", 60%)
+
+`S3Adapter` è il Driven Adapter cloud-native che implementa #link(<IGitClonePort>)[`IGitClonePort`]. Sostituisce la semplice clonazione locale clonando il repository, comprimendolo in un archivio `tar.gz` e caricandolo su un bucket AWS S3.
+
+- *Preparazione per il Cloud:* Traduce il processo di clonazione in un formato compatibile con i worker distribuiti. L'archivio generato e caricato su S3 funge da input condiviso per i task ECS.
+- *Gestione Sicura del Ciclo di Vita:* Si assicura di ripulire il file system locale (file temporanei e archivi) sia in caso di successo che di fallimento, prevenendo leak di spazio disco sul server orchestratore.
+
+====== ECSCodeAnalysisAdapter <ECSCodeAnalysisAdapter>
+#codeDiagram("ECSCodeAnalysisAdapter", 67%)
+
+`ECSCodeAnalysisAdapter` è il Driven Adapter che implementa #link(<ICodeAgentPort>)[`ICodeAgentPort`] delegando l'esecuzione dell'agente di analisi del codice all'infrastruttura serverless AWS ECS (Fargate).
+
+- *Orchestrazione Asincrona:* Il metodo `runEcsTask()` avvia un task Fargate isolato, passando l'ID dell'analisi e il bucket S3 come variabili d'ambiente. Successivamente, `waitForTaskCompletion()` effettua un polling dello stato del task fino al suo completamento.
+- *Recupero Cloud-Native:* Invece di leggere dallo standard output come l'adapter locale, utilizza `fetchResultFromS3()` per scaricare il report JSON (`code_report.json`) che il container Fargate ha preventivamente caricato su S3 a fine esecuzione.
+
+====== ECSDocumentationAnalysisAdapter <ECSDocumentationAnalysisAdapter>
+#codeDiagram("ECSDocumentationAnalysisAdapter", 70%)
+
+`ECSDocumentationAnalysisAdapter` è il Driven Adapter che implementa #link(<IDocumentationAgentPort>)[`IDocumentationAgentPort`] eseguendo l'agente di documentazione su AWS ECS (Fargate).
+
+- *Esecuzione Distribuita:* Utilizza il client ECS per avviare il task dedicato alla documentazione, isolando il carico computazionale dal server applicativo principale.
+- *Integrazione S3:* Recupera in modo robusto i risultati scaricando il file `docs_report.json` da S3. In caso di fallimento o timeout dell'infrastruttura cloud, genera una risposta di fallback controllata per non bloccare la pipeline.
+
+====== ECSSecurityAnalysisAdapter <ECSSecurityAnalysisAdapter>
+#codeDiagram("ECSSecurityAnalysisAdapter", 74%)
+
+`ECSSecurityAnalysisAdapter` è il Driven Adapter che implementa #link(<ISecurityAgentPort>)[`ISecurityAgentPort`] eseguendo la suite di analisi di sicurezza su AWS ECS (Fargate).
+
+- *Scalabilità Serverless:* Lancia un task Fargate iniettando i parametri di rete e di sicurezza necessari (subnet e security group definiti nella configurazione). Al termine, `fetchResultFromS3()` recupera il file `security_report.json`.
+- *Resilienza Architetturale:* Il pattern di polling tramite `DescribeTasksCommand` permette di rilevare non solo il completamento, ma anche eventuali fallimenti prematuri del container, scatenando la generazione del report di fallback con gli errori aggregati.
 
 ===== Schema
 ====== GitCredential <GitCredential>
-//#codeDiagram("GitCredential", 100%)
+#codeDiagram("GitCredential", 20%)
 
-`GitCredential` è lo schema Mongoose che definisce la struttura del documento MongoDB per le credenziali Git: URL del repository (chiave univoca), hash della password, e PAT cifrato.
+`GitCredential` è lo schema Mongoose che definisce la struttura del documento MongoDB per le credenziali Git: URL del repository (chiave univoca), hash della password e PAT.
 
 - *Persistenza delle Credenziali:* Rappresenta la proiezione di persistenza dei dati gestiti dai Value Object #link(<RepoURL>)[`RepoURL`], #link(<PATPassword>)[`PATPassword`] e #link(<PersonalAccessToken>)[`PersonalAccessToken`], adattandoli al formato MongoDB.
+- *Ricerca Ottimizzata:* Il campo `repoUrl` è marcato come `unique` e indicizzato (`index: true`), garantendo l'unicità delle credenziali per repository e ricerche fulminee durante l'autorizzazione.
+
+====== GitHubAnalysisRecord <GitHubAnalysisRecord>
+#codeDiagram("GitHubAnalysisRecord", 30%)
+
+`GitHubAnalysisRecord` è lo schema Mongoose che definisce la persistenza dell'entità #link(<GitHubAnalysis>)[`GitHubAnalysis`], memorizzando i metadati dell'analisi e i riferimenti ai vari report generati.
+
+- *Proiezione dell'Entità:* Mappa gli attributi gestiti dai Value Object #link(<AnalysisId>)[`AnalysisId`], #link(<UserId>)[`UserId`], #link(<RepoURL>)[`RepoURL`], #link(<BranchName>)[`BranchName`], #link(<CommitHash>)[`CommitHash`] e l'enumerazione #link(<AnalysisStatus>)[`AnalysisStatus`] in tipi primitivi persistibili nel database.
+- *Tracciamento dei Report:* Mantiene i riferimenti opzionali (di tipo stringa, derivati dal Value Object #link(<ReportId>)[`ReportId`]) ai documenti separati che contengono i payload massivi generati dagli agenti.
+- *Gestione Temporale:* Utilizza l'opzione `timestamps: true` di Mongoose per gestire automaticamente i campi `createdAt` e `updatedAt`.
+
+====== GitHubCollection <GitHubCollection>
+#codeDiagram("GitHubCollection", 25%)
+
+`GitHubCollection` è lo schema Mongoose che raggruppa le analisi ripetute su uno stesso repository per un dato utente, creando una vista "storica" o di progetto.
+
+- *Relazioni MongoDB:* Il campo `analyses` utilizza `ObjectId` per referenziare multipli documenti della collezione `github_analyses` (ossia analisi derivanti dall'entità #link(<GitHubAnalysis>)[`GitHubAnalysis`]), modellando una relazione uno-a-molti.
+- *Indice Composto:* Definisce un indice composto e univoco su `{ url: 1, userId: 1 }` per garantire che un utente non possa creare più collezioni per lo stesso repository, ottimizzando contemporaneamente le query di lookup basate in origine su #link(<RepoURL>)[`RepoURL`] e #link(<UserId>)[`UserId`].
+
+====== CodeReportModel <CodeReportModel>
+#codeDiagram("CodeReportModel", 35%)
+
+`CodeReportModel` è lo schema Mongoose che archivia i risultati dettagliati prodotti dall'agente di analisi del codice, fungendo da proiezione persistente per l'entità #link(<CodeAgentReport>)[`CodeAgentReport`].
+
+- *Integrità Strutturale:* Utilizza regex per validare che `reportId` e `analysisId` (rappresentazioni testuali di #link(<ReportId>)[`ReportId`] e #link(<AnalysisId>)[`AnalysisId`]) siano formattati correttamente come UUID v7.
+- *Sub-documenti Strutturati:* Fa un uso estensivo di classi Schema interne per mappare fedelmente l'alberatura complessa prodotta dai Value Object #link(<CodeAgentMetadata>)[`CodeAgentMetadata`] e #link(<AIInterpretation>)[`AIInterpretation`].
+- *Indicizzazione Strategica:* Crea indici specifici su `interpretation.verdict` (direttamente correlato all'enumerazione #link(<VerdictStatus>)[`VerdictStatus`]) e `metadata.language` per permettere aggregazioni e filtri rapidi a livello di database.
+
+====== DocumentationReportModel <DocumentationReportModel>
+#codeDiagram("DocumentationReportModel", 42%)
+
+`DocumentationReportModel` è lo schema Mongoose dedicato al salvataggio massivo dei risultati emessi dall'agente di analisi della documentazione, fungendo da proiezione persistente per l'entità #link(<DocumentationReport>)[`DocumentationReport`].
+
+- *Mappatura delle Discrepanze:* Salva direttamente gli array di oggetti complessi derivati dai Value Object #link(<APIViolation>)[`APIViolation`], #link(<DocsDiscrepancy>)[`DocsDiscrepancy`], #link(<MissingFile>)[`MissingFile`] e #link(<DependencyAudit>)[`DependencyAudit`].
+- *Integrità Relazionale:* Come gli altri report, vincola i campi legati a #link(<ReportId>)[`ReportId`] e #link(<AnalysisId>)[`AnalysisId`] ad essere univoci.
+- *Ottimizzazione delle Ricerche:* Implementa indici manuali sui campi di severità annidati (correlati all'enumerazione #link(<SeverityLevel>)[`SeverityLevel`]), fondamentali per estrarre rapidamente le metriche senza caricare interi documenti in memoria.
+
+====== SecurityReportModel <SecurityReportModel>
+#codeDiagram("SecurityReportModel", 45%)
+
+`SecurityReportModel` è lo schema Mongoose progettato per immagazzinare in modo strutturato le vulnerabilità riscontrate, fungendo da proiezione persistente per l'entità #link(<SecurityReport>)[`SecurityReport`].
+
+- *Categorizzazione Multi-Tool:* Separa logicamente i risultati in array di sub-documenti tipizzati che riflettono esattamente le collezioni di Value Object dell'entità: #link(<DependencyFinding>)[`DependencyFinding`], #link(<OWASPFinding>)[`OWASPFinding`], #link(<SecretFinding>)[`SecretFinding`] e gli errori #link(<ToolError>)[`ToolError`].
+- *Indicizzazione Profonda:* Include indici composti e specifici sulle proprietà annidate (come i livelli di severità legati a #link(<SeverityFinding>)[`SeverityFinding`] o le categorie OWASP) per supportare query ad alte prestazioni necessarie per i cruscotti di sicurezza.
 
 ==== Presentation
 ===== Controller
