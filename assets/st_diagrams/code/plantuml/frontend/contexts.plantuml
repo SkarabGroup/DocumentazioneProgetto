@@ -1,0 +1,10 @@
+@startuml
+package "Context Layer (stato globale)" {
+  class AuthContext {
+    --
+    Provider React per lo stato di autenticazione.\nMantiene utente corrente, flag isAuthenticated e isLoading.\nGestisce il ripristino della sessione al mount decodificando localmente\nil token JWT di accesso salvato o richiedendo un refresh token.
+  }
+
+  AuthContext --> "API Layer" : AuthApi / Gateway
+}
+@enduml

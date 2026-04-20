@@ -1,0 +1,37 @@
+@startuml MongoDBAdapter
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+interface IGitCredentialReadPort {
+    + authorize(model: GetGitCredentialRequest): Promise<GetGitCredentialResponse>
+}
+interface IGitCredentialSavePort {
+    + save(request: PostGitCredentialRequest): Promise<PostGitCredentialResponse>
+}
+interface IGitCredentialDeletePort {
+    + deletePAT(request: DeleteGitCredentialRequest): Promise<DeleteGitCredentialResponse>
+}
+interface IGitCredentialUpdatePort {
+    + updatePAT(request: UpdateGitCredentialPatRequest): Promise<UpdateGitCredentialPatResponse>
+}
+
+class MongoDBAdapter {
+    - readonly model: Model<GitCredential>
+    ---
+    + MongoDBAdapter(model)
+    + authorize(model: GetGitCredentialRequest): Promise<GetGitCredentialResponse>
+    + save(request: PostGitCredentialRequest): Promise<PostGitCredentialResponse>
+    + deletePAT(request: DeleteGitCredentialRequest): Promise<DeleteGitCredentialResponse>
+    + updatePAT(request: UpdateGitCredentialPatRequest): Promise<UpdateGitCredentialPatResponse>
+}
+
+MongoDBAdapter ..|> IGitCredentialReadPort
+MongoDBAdapter ..|> IGitCredentialSavePort
+MongoDBAdapter ..|> IGitCredentialDeletePort
+MongoDBAdapter ..|> IGitCredentialUpdatePort
+MongoDBAdapter --right-> GitCredential
+@enduml

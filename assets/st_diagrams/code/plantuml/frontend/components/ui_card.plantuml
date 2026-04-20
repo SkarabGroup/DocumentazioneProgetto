@@ -1,0 +1,11 @@
+@startuml
+package "View — UI Primitives" {
+  class Card {
+    --
+    Componente contenitore con bordo e padding, composto da
+    sotto-componenti: CardHeader, CardTitle, CardDescription,
+    CardContent, CardFooter. Usato come wrapper strutturale
+    per blocchi di contenuto nelle pagine.
+  }
+}
+@enduml

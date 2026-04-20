@@ -1,0 +1,27 @@
+@startuml APIViolation
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class APIViolation {
+    - _pathFinding: PathFinding
+    - _rule: string
+    - _severity: SeverityFinding
+    - _description: DescriptionFinding
+    ---
+    - APIViolation(path, rule, severity, description)
+    + {static} create(path: PathFinding, rule: string, severity: SeverityFinding, description: DescriptionFinding): APIViolation
+    + getPathFinding(): PathFinding
+    + getRule(): string
+    + getSeverityFinding(): SeverityFinding
+    + getDescriptionFinding(): DescriptionFinding
+    + equals(other: APIViolation): boolean
+}
+
+APIViolation --down-> PathFinding
+APIViolation --down-> SeverityFinding
+APIViolation --down-> DescriptionFinding
+@enduml

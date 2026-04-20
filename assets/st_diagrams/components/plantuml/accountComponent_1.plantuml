@@ -1,0 +1,116 @@
+@startuml C4_Component_Account_Service_Hexagonal
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+skinparam linetype ortho
+skinparam nodesep 200
+skinparam ranksep 200
+
+title Component Diagram - Account Service (Esagonale) — Auth + GitHub PAT per utente
+
+' SISTEMI ESTERNI
+System_Ext(user, "Utente", "Persona che usa il browser")
+System_Ext(github, "GitHub API", "API REST GitHub\n(validazione PAT e recupero profilo)")
+ContainerDb_Ext(rds, "Amazon RDS", "PostgreSQL\n— users\n— github_tokens (PAT cifrato per utente)")
+System_Ext(ssm, "AWS SSM Parameter Store", "Segreti applicativi\n(JWT_SECRET, BCRYPT_ROUNDS,\nDATABASE_URL, TOKEN_ENCRYPTION_KEY)")
+
+' Nota: nessuna GitHub App registrata.
+' L'utente genera il PAT manualmente su github.com
+' e lo incolla nella UI. Il backend lo valida,
+' lo cifra con AES-256-GCM e lo salva su RDS.'
+
+Container_Boundary(microservice, "Account Service") {
+
+    Container_Boundary(apprunner, "NestJS Account Service (App Runner)") {
+
+        Boundary(primary_adapters, "Controllers") #FFF2CC {
+            Component(registration_ctrl, "Registration Controller", "NestJS Controller", "POST/auth/registration")
+            Component(login_ctrl, "Login Controller", "NestJS Controller", "NestJS Controller", "POST/auth/login")
+            Component(pat_ctrl, "GitHub connection Controller", "NestJS Controller", "POST/github/pat, DELETE/github/pat")
+        }
+        
+        Boundary(domain_core, "Domain Core (Hexagon)") #E6F3FF {
+            Component(login_usecase, "Login Use Case", "Interface","Login utente.")
+            Component(registration_usecase, "Registration Use Case", "Interface", "Registrazione utente")
+            Component(github_pat_usecase, "GitHub PAT Use Case", "Interface","Collegamento PAT GitHub per utente, e disconnessione pat per utente")
+            
+            Boundary(application_logic, "Application logic Serivecs"){
+                Component(login_service, "Login Serivce", "Class", "Login Utente")
+                Component(registration_service, "Registration Service", "Class","Registrazione utente")
+                Component(github_service, "GitHubService", "Class", "Collegamento e scollegamento a github")
+            }
+            Boundary(output_ports, "Output Ports") #E6DED3 {
+                Component(port_user, "IUserRepositoryPort", "Interface","findByEmail(email)\nfindById(id)\nsave(user)")
+                Component(port_github_token, "IGithubTokenRepositoryPort", "Interface","save(userId, encryptedPat, githubId)\nfindByUserId(userId)\ndelete(userId)")
+                Component(port_github_client, "IGithubClientPort", "Interface","validateAndGetProfile(pat):\n{ githubId, login, email, scopes }")
+            }
+
+            Boundary(service_interfaces, "Service Interfaces") #e4a3f1{
+                Component(jwt_usecase, "JWT Use Case", "Interface", "Interfaccia di comunicazione tra logica e implementazione")
+                Component(hash_usecase, "Bcrypt Use Case", "Interface", "Interfaccia di comunicazione tra logica e implementazione")
+                Component(encryption_usecase, "Encryption Use Case", "Interface", "Interfaccia di comunicazione tra logica e implementazione")
+            }
+
+            Boundary(serivces, "Internal Services") #f568b5 {
+                Component(jwt_service, "JwtService", "Class","Implementa ITokenInterface.\nWrapa @nestjs/jwt.\nLegge JWT_SECRET da ConfigService.")
+                Component(hash_service, "BcryptService", "Class","Implementa IHashInterface.\nWrapa bcrypt.\nLegge BCRYPT_ROUNDS da ConfigService.")
+                Component(encryption_service, "AesEncryptionSerivce", "Class","Implementa IEncryptionInterface.\nCifra/decifra con AES-256-GCM.\nLegge TOKEN_ENCRYPTION_KEY da ConfigService.")
+            }
+        }
+
+        Boundary(secondary_adapters, "Secondary Adapters (Outbound)") #D5E8D4 {
+            Component(postgres_adapter, "Postgres Adapter", "Class","Implementa IUserRepositoryPort\ne IGithubTokenRepositoryPort.")
+            Component(github_adapter, "GitHub Adapter", "Class","Implementa IGithubClientPort.\nGET /user con Authorization")
+        }
+
+        Component(config, "Config", "NestJS ConfigService","Legge process.env popolato da App Runner\ntramite SSM Parameter Store al boot.\nFonte unica di configurazione.")
+    }
+}
+
+' RELAZIONI INBOUND
+Rel_D(user, login_ctrl, "POST/auth/login", "HTTPS / 443")
+Rel_D(user, registration_ctrl, "POST/auth/registration")
+Rel_D(user, pat_ctrl, "POST/github/pat")
+
+'RELAZIONI CONTROLLER UC
+Rel_D(login_ctrl, login_usecase, "DTO")
+Rel_D(registration_ctrl, registration_usecase, "DTO")
+Rel_D(pat_ctrl, github_pat_usecase, "DTO")
+
+'RELAZIONI UC SERVIZI
+Rel_U(login_service, login_usecase, "implementa")
+Rel_U(registration_service, registration_usecase, "implementa")
+Rel_U(github_service, github_pat_usecase, "implementa")
+Rel_U(jwt_service, jwt_usecase, "implementa")
+Rel_U(hash_service, hash_usecase, "implementa")
+Rel_U(encryption_service, encryption_usecase, "implementa")
+
+' CORE LOGIC — Auth Use Case
+Rel_D(login_service, port_user, "Chiama")
+Rel_D(login_service, jwt_usecase, "Chiama")
+Rel_D(login_service, hash_usecase, "Chiama")
+Rel_D(registration_service, port_user,"Chiama")
+Rel_D(registration_service, jwt_usecase,"Chiama")
+Rel_D(registration_service, hash_usecase,"Chiama")
+
+' CORE LOGIC — GitHub PAT Use Case
+Rel_D(github_service, port_github_client, "Chiama — valida PAT")
+Rel_D(github_service, encryption_usecase, "Chiama — cifra PAT")
+Rel_D(github_service, port_github_token, "Chiama — salva / cancella")
+
+' ADAPTER IMPLEMENTATIONS
+Rel_U(postgres_adapter, port_user, "Implementa")
+Rel_U(postgres_adapter, port_github_token, "Implementa")
+Rel_U(github_adapter, port_github_client, "Implementa")
+
+' EXTERNAL SERVICES
+Rel_D(postgres_adapter, rds, "SELECT/INSERT/UPDATE/DELETE\nsu users e github_tokens", "TCP / 5432 (VPC interno)")
+Rel_D(github_adapter, github, "GET /user\nAuthorization: token {pat}", "HTTPS / 443")
+
+' CONFIG / SSM
+Rel_U(ssm, config, "Inietta segreti al boot", "App Runner → process.env")
+Rel_L(config, postgres_adapter, "Fornisce DATABASE_URL")
+Rel_L(config, jwt_service, "Fornisce JWT_SECRET")
+Rel_L(config, hash_service, "Fornisce BCRYPT_ROUNDS")
+Rel_L(config, encryption_service, "Fornisce TOKEN_ENCRYPTION_KEY")
+
+@enduml

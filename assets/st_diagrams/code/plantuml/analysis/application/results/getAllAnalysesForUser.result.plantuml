@@ -1,0 +1,18 @@
+@startuml GetAllAnalysesForUserResult
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class GetAllAnalysesForUserResult {
+    + success: boolean
+    + message?: string
+    + analyses?: GitHubAnalysisGeneralDataDTO[]
+    ---
+    + GetAllAnalysesForUserResult(success, message?, analyses?)
+    + {static} success(analyses: GitHubAnalysisGeneralDataDTO[]): GetAllAnalysesForUserResult
+    + {static} failure(message: string): GetAllAnalysesForUserResult
+}
+@enduml

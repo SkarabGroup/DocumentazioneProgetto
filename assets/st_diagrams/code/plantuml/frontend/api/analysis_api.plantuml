@@ -1,0 +1,14 @@
+@startuml
+package "API Layer (Model)" {
+  class AnalysisApi {
+    + getById(id): Promise<Analysis>
+    + getHistory(params): Promise<PaginatedResponse<Analysis>>
+    + exportReport(id, format): Promise<Blob>
+        --
+    Recupera singoli report di analisi, lo storico globale di tutte
+    le analisi dell'utente, esporta i report nei formati JSON e PDF.
+  }
+
+  AnalysisApi --> "Gateway" : usa
+}
+@enduml

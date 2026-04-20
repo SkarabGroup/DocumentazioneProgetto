@@ -1,0 +1,21 @@
+@startuml StartAnalysisResponseDTO
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class StartAnalysisResponseDTO {
+    + user: string | undefined
+    + id: string | undefined
+    + url: string | undefined
+    + branch: string | undefined
+    + commit: string | undefined
+    + errorMessage: string
+    ---
+    - StartAnalysisResponseDTO(user, id, url, branch, commit, errorMessage)
+    + {static} success(user, id, url, branch, commit): StartAnalysisResponseDTO
+    + {static} failure(error): StartAnalysisResponseDTO
+}
+@enduml

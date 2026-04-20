@@ -1,0 +1,65 @@
+@startuml
+package "API Layer (Model)" {
+  class Gateway {
+    # axiosInstance: AxiosInstance
+    + get(url: String): Promise<Response>
+    + post(url: String, data: Any): Promise<Response>
+    + put(url: String, data: Any): Promise<Response>
+    + delete(url: String): Promise<Response>
+    --
+    Gestisce l'autenticazione, il refresh dei token e le chiamate base HTTP.\nAggiunge il Bearer token ad ogni richiesta e gestisce il rinnovo automatico\ndel token alla scadenza (coda di richieste in attesa di refresh).
+  }
+
+  class AuthApi {
+    + login(credentials): Promise<AuthTokens>
+    + register(credentials): Promise<AuthTokens>
+    + refresh(token): Promise<AuthTokens>
+    + logout(): Promise<void>
+    --
+    Incapsula le chiamate HTTP verso il microservizio Account\nper la registrazione, il login e la gestione dei token JWT.
+  }
+
+  class UsersApi {
+    + changePassword(payload): Promise<void>
+    + deleteAccount(): Promise<void>
+    --
+    Gestisce le operazioni sul profilo utente verso il microservizio Account:\ncambio password ed eliminazione account.
+  }
+
+  class PatApi {
+    + add(payload): Promise<void>
+    + update(payload): Promise<void>
+    + delete(payload): Promise<void>
+    --
+    Gestisce le operazioni di salvataggio, aggiornamento ed eliminazione\ndei Personal Access Token (PAT) per i repository scansionati.
+  }
+
+  class RepositoriesApi {
+    + list(params): Promise<PaginatedResponse>
+    + get(id): Promise<Repository>
+    + create(payload): Promise<Repository>
+    + update(id, payload): Promise<Repository>
+    + delete(id): Promise<void>
+    + getRanking(): Promise<RankedRepository[]>
+    + startAnalysis(id, payload): Promise<Analysis>
+    + getHistory(id, params): Promise<PaginatedResponse>
+    + compareAnalyses(id, ids): Promise<CompareResult>
+    --
+    Gestisce le operazioni CRUD sui repository e l'avvio delle analisi\nverso il microservizio Analysis. Fornisce anche storico e classifica.
+  }
+
+  class AnalysisApi {
+    + getById(id): Promise<Analysis>
+    + getHistory(params): Promise<PaginatedResponse>
+    + exportReport(id, format): Promise<Blob>
+        --
+    Recupera i report di analisi e genera internamente\nl'esportazione nei formati supportati.
+  }
+
+  Gateway <-- AuthApi : usa
+  Gateway <-- UsersApi : usa
+  Gateway <-- PatApi : usa
+  Gateway <-- RepositoriesApi : usa
+  Gateway <-- AnalysisApi : usa
+}
+@enduml

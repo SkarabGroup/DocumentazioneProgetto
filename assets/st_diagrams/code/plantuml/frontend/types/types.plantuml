@@ -1,0 +1,147 @@
+@startuml
+package "Domain Types (Model)" {
+
+  class User {
+    + id: string
+    + email: string
+    + username?: string
+    + createdAt: string
+    + githubId?: string
+    + hasGithubLinked?: boolean
+    --
+    Rappresenta un utente autenticato. Contiene le credenziali
+    di base e il collegamento opzionale con GitHub.
+  }
+
+  class Repository {
+    + id: string
+    + name: string
+    + url: string
+    + isPrivate?: boolean
+    + language?: string
+    + lastAnalysis?: Analysis
+    + totalAnalyses?: number
+    --
+    Rappresenta un repository di codice sorgente registrato
+    nel sistema, con metadati e riferimento all'ultima analisi.
+  }
+
+  class Analysis {
+    + id: string
+    + date: string
+    + status: AnalysisStatus
+    + areas?: AnalysisArea[]
+    + branch?: string
+    + report?: AnalysisReport
+    --
+    Rappresenta una singola esecuzione di analisi su un repository,
+    con stato corrente, aree analizzate e report risultante.
+  }
+
+  class AnalysisReport {
+    + qualityScore: number
+    + securityScore: number
+    + documentationScore?: number
+    + criticalIssues: number
+    + warningIssues: number
+    + codeAnalysis?: CodeAnalysisSection
+    --
+    Risultato aggregato di un'analisi: score per area,
+    conteggio issue per severità.
+  }
+
+  class CodeAnalysisSection {
+    + testCoverage?: number
+    + linesAnalyzed?: number
+    + ai_interpretation?: AIInterpretation
+    + static_analysis?: { issues: CodeAgentStaticIssue[] }
+    + coverage?: { files: any[] }
+    --
+    Risultati specifici dell'agente base di Code Quality
+  }
+
+  class Issue {
+    + title: string
+    + description: string
+    + severity: IssueSeverity
+    + file?: string
+    + line?: number
+    + suggested_fix?: string
+    + url?: string
+    + location?: { line_start: number, line_end: number, column: number }
+    --
+    Singolo problema rilevato durante l'analisi, con localizzazione
+    nel codice sorgente e livello di severità.
+  }
+
+  class CodeAgentStaticIssue {
+    + file: string
+    + location: { line_start: number, line_end: number, column: number }
+    + rule: string
+    + category: string
+    + severity: string
+    + description: string
+    + suggested_fix: string
+    + url: string
+    --
+    Nuovo modello ritornato dal CodeAgent per l'analisi statica.
+  }
+
+  class AIInterpretation {
+    + verdict: string
+    + executive_summary: string
+    --
+    Verdetto AI e argomentazioni sui file critici e key issues,
+    generato dall'AILLM dell'agente di backend limitatamente
+    per le fasi di Code/Security/Docs Analysis.
+  }
+
+
+  class RankedRepository {
+    + rank: number
+    + repository: Repository
+    + score: number
+    + lastAnalyzed?: string
+    --
+    Rappresenta un repository nella classifica globale,
+    con posizione e score aggregato di qualità.
+  }
+
+  enum AnalysisStatus {
+    not-analyzed
+    pending
+    in-progress
+    completed
+    failed
+    --
+    Ciclo di vita di un'analisi dalla richiesta al completamento.
+  }
+
+  enum IssueSeverity {
+    critical
+    warning
+    info
+    --
+    Livello di gravità di un'issue rilevata.
+  }
+
+  enum AnalysisArea {
+    code
+    security
+    documentation
+    --
+    Aree del codice che possono essere analizzate separatamente.
+  }
+
+  Repository "1" --> "0..*" Analysis
+  Analysis --> AnalysisReport
+  AnalysisReport --> "0..*" Issue
+  AnalysisReport --> "0..1" CodeAnalysisSection
+  CodeAnalysisSection --> "0..1" AIInterpretation
+  CodeAnalysisSection --> "0..*" CodeAgentStaticIssue
+  RankedRepository --> Repository
+  Analysis --> AnalysisStatus
+  Issue --> IssueSeverity
+  Analysis --> AnalysisArea
+}
+@enduml

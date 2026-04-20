@@ -1,0 +1,14 @@
+@startuml IAnalysisOrchestrator
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+interface IAnalysisOrchestrator {
+    + analyze(analysis: GitHubAnalysis, path: string, code: boolean, docs: boolean, security: boolean): void
+}
+
+IAnalysisOrchestrator --down-> GitHubAnalysis
+@enduml

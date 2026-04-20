@@ -1,0 +1,21 @@
+@startuml
+package "View — Componenti dominio" {
+  class AnalysisOptionsModal {
+    + open: boolean
+    + repositoryId: string
+    + repositoryName: string
+    + repositoryUrl: string
+    + onOpenChange(open): void
+    + onStarted(): void
+    --
+    Dialog modale per configurare e avviare un'analisi su un repository.
+    Permette di selezionare le aree da analizzare (code, security,
+    documentation), il branch e un commit hash opzionale.
+    Se repositoryUrl è fornito, usa POST /analysis/start (backend reale);
+    altrimenti POST /analysis/repositories/:id/analyze (mock/legacy).
+    Chiama RepositoriesApi.startAnalysis() al submit.
+  }
+
+  AnalysisOptionsModal --> "RepositoriesApi" : startAnalysis()
+}
+@enduml

@@ -1,24 +1,24 @@
 @startuml ErrorFinding
-
 skinparam componentStyle uml2.5
 skinparam linetype ortho
-skinparam nodesep auto
-skinparam ranksep 70
+skinparam nodesep 30
+skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
 class ErrorFinding {
-    - errorLine: int
-    - descriptionFinding: DescriptionFinding
-    - severityFinding: SeverityFinding
+    - _errorLine: number
+    - _description: DescriptionFinding
+    - _severity: SeverityFinding
     ---
-    - ErrorFinding(line: int, description: DescriptionFinding, severity: SeverityFinding)
-    + getErrorLine() : int
-    + getDescriptionFinding() : DescriptionFinding
-    + getSeverityFinding() : SeverityFinding
-    + {static} create(line: int, description: DescriptionFinding, severity: SeverityFinding) : ErrorFinding
+    - ErrorFinding(line, description, severity)
+    + {static} create(line: number, description: DescriptionFinding, severity: SeverityFinding): ErrorFinding
+    + getErrorLine(): number
+    + getDescriptionFinding(): DescriptionFinding
+    + getSeverityFinding(): SeverityFinding
+    + equals(other: ErrorFinding): boolean
 }
 
-ErrorFinding --left--> DescriptionFinding
-ErrorFinding --right--> SeverityFinding
+ErrorFinding --down-> DescriptionFinding
+ErrorFinding --down-> SeverityFinding
 @enduml

@@ -11,13 +11,20 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v1.1.0"
+#let versione = "v2.0.0"
 #set heading(numbering: "1.1.1")
 
 #titlePage("Norme di Progetto", versione)
 #set page(numbering: "1", header: header("Norme di Progetto"), footer: footer())
 
 #let history = (
+  (
+    "2026/04/19",
+    "2.0.0",
+    "Revisione per PB",
+    "",
+    members.antonio
+  ),
   (
     "2026/03/30",
     "1.1.0",
@@ -35,29 +42,28 @@
   (
     "2026/02/28",
     "0.14.0",
-    "Verifica di tutto lo stato attuale del documento",
+    "Rifinitura e fix minori di tutto il documento",
     members.andrea,
     members.suar
   ),
   (
     "2026/02/27",
     "0.13.1",
-    "Verifica per la sezione Processo di Sviluppo e sezione Processi Organizzativi",
+    "Rifinitura della sezione Processo di Sviluppo e sezione Processi Organizzativi",
     members.andrea,
     members.suar
   ),
   (
     "2026/02/27",
     "0.13.0",
-    "Verifica per la sezione Piano di Qualifica",
+    "Rifinitura della sezione Piano di Qualifica",
     members.berengan,
     members.andrea
   ),
   (
     "2026/02/23",
     "0.12.0",
-    "Verifica per la sezione Analisi dei Requisiti per la RTB",
-    "",
+    "Rifinitura della sezione Analisi dei Requisiti per la RTB",
     members.suar,
     members.kevin
   ),
@@ -181,14 +187,14 @@
 
 = Introduzione
 == Contesto del Progetto
-Il presente documento descrive le #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#norme-di-progetto")[#def[Norme di Progetto]] applicate al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]], proposto dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]] e realizzato dal team di sviluppo #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
+Il presente documento descrive le #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#norme-di-progetto")[#def[Norme di Progetto]] applicate al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]], proposto dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]] e realizzato dal team di sviluppo #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] nell’ambito del corso di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#ingegneria-del-software")[#def[Ingegneria del Software]] presso l’Università degli Studi di Padova.
 
-Il progetto ha come obiettivo lo sviluppo di una piattaforma software ad #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] finalizzata all’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e alla #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] automatizzata delle vulnerabilità presenti nei repository di codice sorgente. Il sistema è progettato in conformità ai requisiti e ai vincoli definiti nel #link(<capitolato>)[#underline[Capitolato *C2*]].
+Il progetto ha come obiettivo lo sviluppo di una piattaforma software ad #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] finalizzata all’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e alla #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] automatizzata delle vulnerabilità presenti nei #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#repository")[#def[repository]] di codice sorgente. Il sistema è progettato in conformità ai requisiti e ai vincoli definiti nel #link(<capitolato>)[#underline[Capitolato *C2*]].
 
-La piattaforma supporta attività di analisi statica del codice sorgente e di individuazione delle principali criticità di sicurezza, fornendo suggerimenti di correzione attraverso meccanismi automatizzati basati su modelli di linguaggio di grandi dimensioni (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]).
+La piattaforma supporta attività di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-statica")[#def[analisi statica]] del codice sorgente, di individuazione delle principali criticità di sicurezza e di analisi di file informativi come README e OpenAPI, fornendo suggerimenti di correzione attraverso meccanismi automatizzati basati su modelli di linguaggio di grandi dimensioni (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]).
 
 == Finalità del Documento
-Le Norme di Progetto stabiliscono il quadro di riferimento metodologico, organizzativo e tecnologico adottato per lo sviluppo del sistema software.
+Le Norme di Progetto stabiliscono il quadro di riferimento metodologico, organizzativo e tecnologico adottato per lo sviluppo del #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#sistema-software")[#def[sistema software]].
 
 Il presente documento costituisce lo standard normativo interno del team; esso è vincolante per l’intero gruppo di lavoro e persegue i seguenti obiettivi:
 - definire un insieme di regole comuni e convenzioni condivise al fine di garantire uniformità e coerenza nello sviluppo del prodotto software;
@@ -204,7 +210,7 @@ Al fine di prevenire ambiguità interpretative, è stato redatto un glossario ch
 Nel testo, *ogni termine evidenziato tramite una G come apice*, rimanda alla voce corrispondente del Glossario pubblicato sul sito ufficiale del gruppo, consentendo al lettore di accedere direttamente alla definizione associata.
 
 La versione più recente del Glossario è disponibile al seguente link:
-#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario (v1.0.0)]].
+#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario (v2.0.0)]].
 
 == Riferimenti
 
@@ -213,37 +219,37 @@ I seguenti documenti hanno valore vincolante per la redazione delle Norme di Pro
 
 - *Regolamento del Progetto Didattico*: Regole e vincoli del corso di Ingegneria del Software. \
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/PD1.pdf")] \
-  (ultimo accesso: *30/03/2026*)
+  (ultimo accesso: *19/04/2026*)
 
 - *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> \
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
-  (ultimo accesso: *30/03/2026*)
+  (ultimo accesso: *19/04/2026*)
 
 === Riferimenti Informativi
 
 - *Dispense del corso di Ingegneria del Software relative ai Processi di Ciclo di Vita del Software* \
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T02.pdf")] \
-  (ultimo accesso: *30/03/2026*)
+  (ultimo accesso: *19/04/2026*)
 
 - *Dispense del corso di Ingegneria del Software relative alla Gestione di Progetto* \
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T04.pdf")] \
-  (ultimo accesso: *30/03/2026*)
+  (ultimo accesso: *19/04/2026*)
 
 - *IEEE 829 – Standard for Software and System Test Documentation*: definizione della struttura dei piani di test, casi di test, procedure e report. \
   #underline[#link("https://ieeexplore.ieee.org/document/4578383")] \
-  (ultimo accesso: *30/03/2026*)
+  (ultimo accesso: *19/04/2026*)
 
-- *IEEE 830 – Standard for Software Requirements Specifications*: guida alla redazione e classificazione dei requisiti funzionali e non funzionali. \
+- *IEEE 830 – Standard for Software Requirements Specifications*: guida alla redazione e classificazione dei #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-funzionali")[#def[requisiti funzionali]] e non funzionali. \
   #underline[#link("https://ieeexplore.ieee.org/document/720574")] \
-  (ultimo accesso: *30/03/2026*)
+  (ultimo accesso: *19/04/2026*)
 
 - *IEEE 1016 – Recommended Practice for Software Design Descriptions*: linee guida per la descrizione dell’architettura software e dei principali design pattern. \
   #underline[#link("https://ieeexplore.ieee.org/document/741934")] \
-  (ultimo accesso: *30/03/2026*)
+  (ultimo accesso: *19/04/2026*)
 
 - *ISO/IEC/IEEE 12207 – Software Life Cycle Processes*<12207>: framework internazionale per la gestione dei processi di sviluppo, manutenzione e dismissione del software. \
   #underline[#link("https://ieeexplore.ieee.org/document/8100771")] \
-  (ultimo accesso: *30/03/2026*)
+  (ultimo accesso: *19/04/2026*)
 
 
 #pagebreak()
@@ -254,24 +260,24 @@ Nel contesto del presente progetto sono rilevanti i processi di *Fornitura* e *S
 
 == Processo di Fornitura
 === Descrizione del Processo
-Il Processo di Fornitura comprende le attività svolte dal gruppo #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] in qualità di fornitore nei confronti del proponente Var Group. Esso governa la pianificazione, il coordinamento, la produzione e la consegna degli artefatti di progetto in conformità ai requisiti del #underline[#link(<capitolato>)[Capitolato C2]].
+Il Processo di Fornitura comprende le attività svolte dal gruppo Skarab Group in qualità di fornitore nei confronti del proponente Var Group. Esso governa la pianificazione, il coordinamento, la produzione e la consegna degli artefatti di progetto in conformità ai requisiti del #underline[#link(<capitolato>)[Capitolato C2]].
 
 === Attività del Processo
 ==== Attività FOR-A01 — Pianificazione della Fornitura
-Consiste nella definizione della struttura di lavoro, nell'assegnazione delle responsabilità operative e nella stima dell'impegno per ogni Sprint.
+Consiste nella definizione della struttura di lavoro, nell'assegnazione delle responsabilità operative e nella stima dell'impegno per ogni #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#sprint")[#def[Sprint]].
 
 ===== Procedura PR-FOR-01: Avvio dello Sprint
 *Obiettivo:* Garantire la saturazione pianificata delle risorse all'inizio di ogni iterazione.
 
 *Passi operativi:*
-+ Il #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#responsabile")[#def[Responsabile]] definisce le attività dello Sprint e le scompone in task atomiche;
++ Il #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#responsabile")[#def[Responsabile]] definisce le attività dello Sprint e le scompone in #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#task")[#def[task]] atomiche;
 + Ogni task viene stimata in ore, assegnata a un membro del team e registrata su #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#jira")[#def[Jira]];
 + Le dipendenze tra task vengono esplicitate tramite relazioni "blocks/blocked-by" su Jira;
 + Il Responsabile verifica che la distribuzione del carico rispetti il preventivo approvato.
 
-*Prodotti:* Sprint backlog su Jira con task atomiche assegnate e stimate.
+*Prodotti:* Sprint #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#backlog")[#def[backlog]] su Jira con task atomiche assegnate e stimate.
 
-*Strumenti:* #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#jira")[#def[Jira]].
+*Strumenti:* Jira.
 
 *Criteri di conformità:*
 - Tutte le task sono atomiche: eseguibili da un singolo membro, senza dipendenze bloccanti non tracciate;
@@ -282,7 +288,7 @@ Consiste nella definizione della struttura di lavoro, nell'assegnazione delle re
 
 *Obiettivo:* Identificare, valutare e monitorare i fattori che possono compromettere gli obiettivi di progetto.
 
-*Metodologia:* Il team adotta un approccio *semi-quantitativo*. Ogni rischio è valutato tramite:
+*Metodologia:* Il team adotta un approccio *semi-quantitativo*. Ogni #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#rischio")[#def[rischio]] è valutato tramite:
 - *Probabilità (P):* scala discreta 1–3;
 - *Impatto (I):* scala discreta 1–3;
 - *Livello di Rischio (R):* $R = P times I$.
@@ -326,7 +332,7 @@ Consiste nella definizione della struttura di lavoro, nell'assegnazione delle re
   - *R 6–9 (Alto/Critico):* attivazione di azioni preventive e piano di contingenza;
 + Al termine dello Sprint il Responsabile analizza nel consuntivo l'efficacia delle contromisure adottate.
 
-*Prodotti:* Registro dei rischi aggiornato su Jira; sezione "Analisi dei Rischi" del Piano di Progetto.
+*Prodotti:* Registro dei rischi aggiornato su Jira; sezione "Analisi dei Rischi" del #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#piano-di-progetto")[#def[Piano di Progetto]].
 
 *Strumenti:* Jira.
 
@@ -346,7 +352,7 @@ Consiste nella verifica sistematica dell'andamento del progetto rispetto alla pi
 *Passi operativi:*
 + Ogni membro aggiorna quotidianamente su Jira lo stato delle proprie task, le ore effettive e l'avanzamento, *entro il termine della giornata lavorativa*;
 + Le attività non pianificate (bugfix, criticità emergenti) sono tracciate creando nuove task su Jira; l'omissione di tali ore è *vietata*;
-+ Al termine dello Sprint il Responsabile confronta il Consuntivo (dati Jira) con il Preventivo e ne analizza le cause di scostamento;
++ Al termine dello Sprint il Responsabile confronta il #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#consuntivo")[#def[Consuntivo]] (dati Jira) con il Preventivo e ne analizza le cause di scostamento;
 + Il Responsabile valida le azioni correttive per lo Sprint successivo.
 
 *Prodotti:* Consuntivo di Sprint (sezione del Piano di Progetto) con analisi delle deviazioni e azioni correttive.
@@ -379,7 +385,7 @@ Consiste nella verifica sistematica dell'andamento del progetto rispetto alla pi
 
 ==== Attività FOR-A03 — Produzione della Documentazione
 
-Consiste nella redazione, verifica e rilascio di tutti gli artefatti documentali previsti dal processo di fornitura.
+Consiste nella redazione, #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#verifica")[#def[verifica]] e rilascio di tutti gli artefatti documentali previsti dal processo di fornitura.
 
 ===== Procedura PR-FOR-05: Redazione degli Artefatti
 
@@ -388,7 +394,7 @@ Consiste nella redazione, verifica e rilascio di tutti gli artefatti documentali
 *Passi operativi:*
 + Il redattore crea o aggiorna il documento in Typst, nel rispetto delle convenzioni stabilite nelle presenti NdP;
 + Il documento viene versionato secondo lo schema `x.y.z` e associato a una task su Jira;
-+ L'integrazione in `main` e in `develop` richiede una Pull Request approvata da un verificatore *diverso* dal redattore;
++ L'integrazione in `main` e in `develop` richiede una Pull Request approvata da un #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#verificatori")[#def[verificatore]] *diverso* dal redattore;
 + Il verificatore controlla la conformità ai criteri definiti nel #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#piano-di-qualifica")[#def[PdQ]] e, se conforme, porta il documento allo stato *Approved*.
 
 *Prodotti:* Artefatto documentale nello stato *Approved*, versione PDF, storico delle modifiche su GitHub.
@@ -410,13 +416,15 @@ Consiste nella redazione, verifica e rilascio di tutti gli artefatti documentali
     },
     stroke: none,
     text(white)[*Documento*], text(white)[*Redattori*], text(white)[*Destinatari*], text(white)[*Uso*],
-    [Lettera di Presentazione], [Responsabile], [Proponente, #members.cardin, #members.tullio, Skarab Group], [Esterno],
+    [Lettera di Presentazione], [Responsabile di Progetto], [Proponente, #members.cardin, #members.tullio, Skarab Group], [Esterno],
     [AdR – Analisi dei Requisiti], [Analisti], [Proponente, #members.cardin, #members.tullio, Skarab Group], [Esterno],
     [Glossario], [Tutti i membri], [Stakeholder interni ed esterni], [Esterno],
     [NdP – Norme di Progetto], [Responsabili di processo], [Skarab Group, #members.cardin, #members.tullio], [Interno],
     [PdP – Piano di Progetto], [Project Manager], [Proponente, #members.cardin, #members.tullio, Skarab Group], [Esterno],
     [PdQ – Piano di Qualifica], [Responsabili Qualità], [Skarab Group, #members.cardin, #members.tullio, Proponente], [Esterno],
     [Verbali delle Riunioni], [Responsabile], [Proponente (se esterni), #members.cardin, #members.tullio, Skarab Group], [Interno / Esterno],
+    [ST - Specifica Tecnica], [Progettisti], [Proponente, Cardin Riccardo, Vardanega Tullio, Skarab Group], [Esterno],
+    [MU - Manuale Utente], [Amministratori], [Proponente, Cardin Riccardo, Vardanega Tullio, Skarab Group], [Esterno],
   ),
   caption: [Artefatti documentali del processo di fornitura],
 )
@@ -450,21 +458,21 @@ Consiste nella redazione, verifica e rilascio di tutti gli artefatti documentali
 
 Consiste nell'elicitazione, analisi, formalizzazione e verifica dei requisiti del sistema a partire dal Capitolato e dai feedback del proponente.
 
-*Standard di riferimento:* IEEE 830-1998; ISO/IEC/IEEE 29148:2018; UML 2.5.
+*Base di comparazione:* IEEE 830-1998; ISO/IEC/IEEE 29148:2018; UML 2.5.
 
 ===== Procedura PR-FOR-07: Modellazione dei Casi d'Uso
 
 *Obiettivo:* Descrivere in modo non ambiguo i comportamenti attesi del sistema dal punto di vista degli attori.
 
 *Passi operativi:*
-+ Gli Analisti identificano gli attori del sistema e li censiscono;
++ Gli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analista")[#def[Analisti]] identificano gli attori del sistema e li censiscono;
 + Per ogni scenario viene prodotta una descrizione testuale con nomenclatura *UCx.y.z*, dove *x* è l'identificatore principale, *y* il numero di inclusioni e *z* il numero di estensioni;
-+ Ogni caso d'uso include obbligatoriamente: Attori, Pre/Post-condizioni, Scenario Principale, Trigger e, se presenti, Inclusioni, Estensioni o Generalizzazioni;
++ Ogni #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#caso-d-uso")[#def("caso d'uso")] include obbligatoriamente: Attori, Pre/Post-condizioni, Scenario Principale, Trigger e, se presenti, Inclusioni, Estensioni o Generalizzazioni;
 + La descrizione testuale viene corredata da un diagramma UML 2.5 con corrispondenza 1:1.
 
-*Prodotti:* Sezione "Casi d'Uso" dell'Analisi dei Requisiti; diagrammi UML.
+*Prodotti:* Sezione "Casi d'Uso" dell'Analisi dei Requisiti; diagrammi #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#unified-modeling-language")[#def[UML]].
 
-*Strumenti:* StarUML; Draw.io; Typst.
+*Strumenti:* StarUML; #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#drawio")[#def[Draw.io]]; Typst.
 
 *Criteri di conformità:*
 - Ogni identificatore UCx.y.z è univoco;
@@ -481,7 +489,7 @@ Consiste nell'elicitazione, analisi, formalizzazione e verifica dei requisiti de
 + Ogni requisito viene catalogato con la sintassi *TipologiaPrioritàNumero*:
   - *Tipologia:* F (Funzionale), Q (Qualità), V (Vincolo);
   - *Priorità:* Ob (Obbligatorio), De (Desiderabile), Op (Opzionale);
-+ Per ogni requisito viene indicata la fonte (UC o sezione del Capitolato);
++ Per ogni requisito viene indicata la fonte (UC, sezione del Capitolato o decisione interna);
 + I requisiti vengono verificati rispetto ai criteri di atomicità, non ambiguità e testabilità.
 
 *Prodotti:* Tabella dei requisiti nell'Analisi dei Requisiti.
@@ -506,8 +514,8 @@ Consiste nella stima dell'impegno, nella distribuzione dei ruoli e nella definiz
 + Il Responsabile definisce il preventivo iniziale rispettando i seguenti vincoli:
   - Le ore di auto-apprendimento precedenti al primo Sprint *non sono rendicontabili*;
   - La distribuzione dell'impegno orario pro-capite è esplicitata e motivata;
-+ Per la milestone *RTB* l'allocazione prevede un impiego prevalente delle figure di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#amministratore")[#def[Amministratore]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analista")[#def[Analista]], in ragione dell'alto carico documentale;
-+ Per la milestone *PB* il preventivo è gestito con metodologia *rolling-wave*: il Responsabile lo riesamina alla chiusura di ogni Sprint e ogni revisione deve essere approvata;
++ Per la milestone *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requirements-and-technology-baseline")[#def[RTB]]* l'allocazione prevede un impiego prevalente delle figure di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#amministratore")[#def[Amministratore]] e Analista, in ragione dell'alto carico documentale;
++ Per la milestone *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#product-baseline")[#def[PB]]* il preventivo è gestito con metodologia *rolling-wave*: il Responsabile lo riesamina alla chiusura di ogni Sprint e ogni revisione deve essere approvata;
 + Ogni scostamento rispetto alle stime è documentato e motivato nei verbali o su Jira.
 
 *Prodotti:* Sezione "Preventivo e Allocazione delle Risorse" del Piano di Progetto.
@@ -546,15 +554,15 @@ Consiste nel consolidamento, nel tagging e nella notifica ufficiale della conseg
 
 == Processo di Sviluppo
 
-Il Processo di Sviluppo adottato da #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]] definisce le attività necessarie alla realizzazione tecnica del prodotto _#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]]_, in conformità allo standard #underline[#link(<12207>)[ISO/IEC/IEEE 12207]].
+Il Processo di Sviluppo adottato da Skarab Group definisce le attività necessarie alla realizzazione tecnica del prodotto _Code Guardian_, in conformità allo standard #underline[#link(<12207>)[ISO/IEC/IEEE 12207]].
 
 Lo stack tecnologico adottato è:
-- *TypeScript:* Frontend (React) e Backend (NestJS);
-- *Python:* Agenti AI, Orchestratore e script di analisi dati;
-- *MongoDB e Node.js:* Database con Mongoose e ambiente di esecuzione server-side.
+- *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#typescript")[#def[TypeScript]]:* #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#front-end")[#def[Frontend]] (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#react")[#def[React]]) e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#back-end")[#def[Backend]] (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#nestjs")[#def[NestJS]]);
+- *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#python")[#def[Python]]:* Agenti AI, Orchestratore e script di analisi dati;
+- *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#mongodb")[#def[MongoDB]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#nodejs")[#def[Node.js]]:* #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#database")[#def[Database]] con Mongoose e ambiente di esecuzione server-side.
 
-Le attività del processo sono distribuite tra le due baseline principali:
-- *RTB (Requirements and Technology Baseline):* Analisi dei Requisiti, Proof of Concept, definizione degli standard normativi;
+Le attività del processo sono distribuite tra le due #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#baseline")[#def[baseline]] principali:
+- *RTB (Requirements and Technology Baseline):* Analisi dei Requisiti, #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#proof-of-concept")[#def[Proof of Concept]], definizione degli standard normativi;
 - *PB (Product Baseline):* Progettazione Architetturale, Codifica, consolidamento del prodotto.
 
 === Attività del Processo
@@ -568,7 +576,7 @@ Consiste nella selezione e nella formalizzazione del modello di ciclo di vita ad
 *Obiettivo:* Garantire un approccio di sviluppo graduato, verificabile e allineato alle milestone RTB e PB.
 
 *Passi operativi:*
-+ Il team adotta un modello iterativo-incrementale articolato in Sprint di durata fissa;
++ Il team adotta un modello iterativo-#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#incrementale")[#def[incrementale]] articolato in Sprint di durata fissa;
 + Ogni Sprint produce un incremento verificabile del prodotto o della documentazione tecnica;
 + Al termine di ogni Sprint viene svolta una retrospettiva per identificare azioni di miglioramento.
 
@@ -582,7 +590,7 @@ Consiste nella selezione e nella formalizzazione del modello di ciclo di vita ad
 
 ==== Attività SVIL-A02 — Analisi e Progettazione
 
-Consiste nella definizione logica e strutturale del sistema, dall'analisi dei requisiti alla specifica architetturale e di dettaglio.
+Consiste nella definizione logica e strutturale del sistema, dall'#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-dei-requisiti")[#def[analisi dei requisiti]] alla specifica architetturale e di dettaglio.
 
 ===== Procedura PR-SVIL-02: Progettazione Architetturale
 
@@ -594,7 +602,7 @@ Consiste nella definizione logica e strutturale del sistema, dall'analisi dei re
 + Per ogni componente sono specificate le responsabilità, le interfacce esposte e le dipendenze;
 + La progettazione garantisce la separazione tra logica di business e interfaccia utente.
 
-*Prodotti:* Documento di Specifica Tecnica (diagrammi architetturali, descrizione delle componenti).
+*Prodotti:* Documento di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#specifica-tecnica")[#def[Specifica Tecnica]] (diagrammi architetturali, descrizione delle componenti).
 
 *Strumenti:* StarUML; Draw.io; Typst.
 
@@ -629,7 +637,7 @@ Consiste nella trasformazione delle specifiche progettuali in codice sorgente es
 *Obiettivo:* Produrre codice corretto, leggibile, modulare e conforme agli standard tecnici del progetto.
 
 *Passi operativi:*
-+ Il Programmatore implementa le specifiche rispettando gli standard di nomenclatura obbligatori:
++ Il Programmatore implementa le specifiche rispettando gli standard di nomenclatura:
 
 #figure(
   table(
@@ -648,17 +656,17 @@ Consiste nella trasformazione delle specifiche progettuali in codice sorgente es
 + Ogni file deve *obbligatoriamente* essere nominativo della classe che descrive, indicando come estensione il tipo di componente che ci si aspetta all'interno del file (es: analysisIdt.vo.ts per indicare che è un Value Object). Per nomi come Value Object, Use Case, Domain Service è sufficiente l'acronimo;
 + La logica di business è separata dall'interfaccia utente; ogni funzionalità è isolata in componenti atomici (*Single Responsibility Principle*);
 + Ogni chiamata asincrona è protetta da blocchi `try-catch` con logging specifico;
-+ Prettier (2 spazi, apici singoli) ed ESLint sono eseguiti obbligatoriamente in pipeline CI.
++ Prettier (2 spazi, apici singoli) ed #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#eslint")[#def[ESLint]] sono eseguiti obbligatoriamente in pipeline CI.
 + Prima dell'avvio di ogni sessione di codifica, è *obbligatorio* leggere e rispettare le direttive di lavoro indicate in `CONTRIBUTING.md`.
 
 *Prodotti:* Codice sorgente versionato su GitHub; report di analisi statica.
 
-*Strumenti:* VS Code; ESLint; Prettier; Docker.
+*Strumenti:* #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#visual-studio-code")[#def[VS Code]]; ESLint; Prettier; #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#docker")[#def[Docker]].
 
 *Criteri di conformità:*
 - Il codice supera i controlli di linting (ESLint/Prettier) senza errori;
 - La densità di commenti rispetta la metrica MPD04 del PdQ;
-- La complessità ciclomatica (MPD05) non supera la soglia definita nel PdQ.
+- La #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#complessita-ciclomatica")[#def[complessità ciclomatica]] (MPD05) non supera la soglia definita nel PdQ.
 
 ==== Attività SVIL-A04 — Integrazione
 
@@ -666,7 +674,7 @@ Consiste nella combinazione progressiva delle unità software e nella verifica d
 
 ===== Procedura PR-SVIL-05: Integrazione e Gestione della Configurazione
 
-*Obiettivo:* Garantire la coerenza e la stabilità del codebase a ogni integrazione di nuove unità.
+*Obiettivo:* Garantire la coerenza e la stabilità del #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#codebase")[#def[codebase]] a ogni integrazione di nuove unità.
 
 *Passi operativi:*
 + Il team adotta la strategia di branching: `main` (stabile), `develop` (integrazione), `feature/` (task atomiche);
@@ -677,7 +685,7 @@ Consiste nella combinazione progressiva delle unità software e nella verifica d
 
 *Prodotti:* Codebase aggiornato su GitHub; report della CI.
 
-*Strumenti:* GitHub (Pull Request, branch protection rules); pipeline CI; SonarQube.
+*Strumenti:* GitHub (Pull Request, branch protection rules); pipeline CI.
 
 *Criteri di conformità:*
 - Non sono presenti commit diretti sui rami protetti (`develop`, `main`);
@@ -705,22 +713,22 @@ Consiste nell'esecuzione sistematica dei test per accertare la correttezza, la r
     [System Test], [Simulazione di scenari reali per verificare interazione e robustezza. Nomenclatura: `ST-XXX`.],
     [Analisi Statica], [Controllo automatico della qualità prima di ogni merge.],
   ),
-  caption: [Livelli di test e strumenti (Vitest, Pytest, SonarQube)],
+  caption: [Livelli di test e relative metodologie],
 )
 
 *Passi operativi:*
 + Il Verificatore implementa i test di unità contestualmente alla codifica di ogni componente;
 + I test di integrazione vengono eseguiti a ogni merge in `develop`;
 + I test di sistema vengono eseguiti su scenari reali prima di ogni rilascio;
-+ I risultati vengono tracciati nel Piano di Qualifica (Cruscotto di Valutazione);
++ I risultati vengono tracciati nel #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#piano-di-qualifica")[#def[Piano di Qualifica]] (Cruscotto di Valutazione);
 + Il superamento delle soglie di non conformità comporta l'apertura immediata di una segnalazione su Jira.
 
 *Prodotti:* Suite di test versionata; report di esecuzione; aggiornamento del Cruscotto di Valutazione nel PdQ.
 
-*Strumenti:* Vitest; Pytest; Postman; Playwright; Selenium; SonarQube.
+*Strumenti:* Jest; Pytest; Postman.
 
 *Criteri di conformità:*
-- La Code Coverage (MPC13) non scende sotto la soglia definita nel PdQ;
+- La #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-coverage")[#def[Code Coverage]] (MPC13) non scende sotto la soglia definita nel PdQ;
 - Il Test Success Rate (MPC14) è al 100% prima di ogni rilascio;
 - Ogni unità è corredata dai relativi Unit Test.
 
@@ -735,22 +743,16 @@ Consiste nell'esecuzione sistematica dei test per accertare la correttezza, la r
 
 *Prodotti:* Report di accettazione; verbale della sessione di collaudo (se presente).
 
-*Strumenti:* Jira; Postman; Playwright.
+*Strumenti:* Jira; Postman.
 
 *Criteri di conformità:*
 - Tutti i requisiti obbligatori sono coperti da evidenza di test;
 - Le non conformità sono tracciate e risolte prima della consegna.
 
-=== Evoluzione delle Norme verso l'MVP
-
-Le norme qui definite costituiscono la baseline tecnica per la fase *RTB*.
-
-*Nota Operativa:* Con l'avvio della fase *PB*, Skarab Group *ha l'obbligo* di integrare le presenti norme con: configurazioni di deployment, standard di sicurezza API/LLM e soglie di accoppiamento per librerie terze.
-
 #pagebreak()
 
 = Processi di Supporto
-In conformità allo standard #underline[#link(<12207>)[ISO/IEC/IEEE 12207]], i Processi di Supporto comprendono le attività trasversali che accompagnano l'intero ciclo di vita del progetto, garantendo la qualità, la tracciabilità e la verificabilità degli artefatti prodotti.
+Basandosi sullo standard #underline[#link(<12207>)[ISO/IEC/IEEE 12207]], i Processi di Supporto comprendono le attività trasversali che accompagnano l'intero ciclo di vita del progetto, garantendo la qualità, la tracciabilità e la verificabilità degli artefatti prodotti.
 
 #pagebreak()
 == Processo di Documentazione
@@ -760,10 +762,10 @@ In conformità allo standard #underline[#link(<12207>)[ISO/IEC/IEEE 12207]], i P
 *Obiettivo:* Disciplinare le fasi di scrittura, controllo e rilascio ufficiale di ogni documento di progetto.
 
 *Passi operativi:*
-+ *Creare* o *modificare* il contenuto in formato sorgente (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#typst")[#def[Typst]]);
-+ *Tracciare* obbligatoriamente l'attività di redazione tramite una #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#task")[#def[task]] assegnata su #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#jira")[#def[Jira]];
++ *Creare* o *modificare* il contenuto in formato sorgente (Typst);
++ *Tracciare* obbligatoriamente l'attività di redazione tramite una task assegnata su Jira;
 + *Sottoporre* il documento a verifica di conformità (ortografia, stile, contenuti, rispetto delle NdP) assegnando la task a un membro del team diverso dal redattore;
-+ *Approvare* e validare il documento (da parte del #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#responsabile-di-progetto")[#def[Responsabile di Progetto]]) per procedere al rilascio ufficiale.
++ *Approvare* e validare il documento (da parte del Responsabile di Progetto) per procedere al rilascio ufficiale.
 
 *Prodotti:* Documentazione ufficiale di progetto (copertina, registro modifiche, indice, header/footer con numerazione).
 
@@ -774,8 +776,8 @@ In conformità allo standard #underline[#link(<12207>)[ISO/IEC/IEEE 12207]], i P
     inset: 8pt,
     fill: (x, y) => if y == 0 { luma(230) },
     [*Strumento*], [*Descrizione e Utilizzo Obbligatorio*],
-    [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#visual-studio-code")[#def[VS Code]]], [Editor principale per la scrittura dei documenti.],
-    [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#typst")[#def[Typst]]], [Linguaggio di markup per la formattazione. I template comuni sono centralizzati nella cartella `lib/`.],
+    [VS Code], [Editor principale per la scrittura dei documenti.],
+    [Typst], [Linguaggio di markup per la formattazione. I template comuni sono centralizzati nella cartella `lib/`.],
     [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#tinymist")[#def[Tinymist]]], [Estensione per VS Code per l'anteprima in tempo reale.],
   ),
   caption: [Strumenti di redazione documentale],
@@ -819,9 +821,9 @@ In conformità allo standard #underline[#link(<12207>)[ISO/IEC/IEEE 12207]], i P
 + *Eseguire* le suite di analisi dinamica (Test di Unità, Integrazione, Sistema e Regressione);
 + *Effettuare* il merge nel branch `main` solo a fronte del superamento di tutti i controlli qualitativi.
 
-*Prodotti:* Codice sorgente e documenti verificati; Esiti di verifica documentati nel #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/PdQ.pdf")[#underline[Piano di Qualifica]].
+*Prodotti:* Codice sorgente e documenti verificati; Esiti di verifica documentati nel #link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/PdQ.pdf")[#underline[Piano di Qualifica]].
 
-*Strumenti:* #link("https://farfalla-project.org/readability_static/")[#underline[farfalla-project.org]]; Linter (ESLint, Pylint/Black); Framework di testing.
+*Strumenti:* #link("https://farfalla-project.org/readability_static/")[#underline[farfalla-project.org]]; #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#linter")[#def[Linter]] (ESLint, Pylint/Black); Framework di testing.
 
 *Criteri di conformità:*
 - Test Success Rate pari al 100% prima del merge in `main`;
@@ -833,11 +835,11 @@ In conformità allo standard #underline[#link(<12207>)[ISO/IEC/IEEE 12207]], i P
 *Obiettivo:* Accertare la conformità del prodotto finale ai requisiti concordati con il proponente.
 
 *Passi operativi:*
-+ *Tracciare* ogni requisito derivato dall'#link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/AdR.pdf")[*Analisi dei Requisiti*] fino alla sua implementazione nel sistema;
++ *Tracciare* ogni requisito derivato dall'#link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/AdR.pdf")[*Analisi dei Requisiti*] fino alla sua implementazione nel sistema;
 + *Sviluppare* i Test di Accettazione (TA) basandoli su scenari d'uso reali;
 + *Eseguire* i Test di Accettazione e *verificare* il soddisfacimento dei criteri di successo oggettivi per ciascun requisito obbligatorio.
 
-*Prodotti:* Matrice di tracciamento requisiti aggiornata; verbali di validazione e accettazione.
+*Prodotti:* Matrice di tracciamento requisiti aggiornata; verbali di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#validazione")[#def[validazione]] e accettazione.
 
 *Strumenti:* Sistema di issue tracking (Jira); Framework di automazione test.
 
@@ -847,7 +849,7 @@ In conformità allo standard #underline[#link(<12207>)[ISO/IEC/IEEE 12207]], i P
 
 #pagebreak()
 = Processi Organizzativi
-In conformità allo standard #underline[#link(<12207>)[ISO/IEC/IEEE 12207]], i Processi Organizzativi costituiscono l'insieme delle attività trasversali che garantiscono il corretto andamento del progetto dal punto di vista gestionale, infrastrutturale e della crescita professionale del team.
+Prendendo spunto dallo standard #underline[#link(<12207>)[ISO/IEC/IEEE 12207]], i Processi Organizzativi costituiscono l'insieme delle attività trasversali che garantiscono il corretto andamento del progetto dal punto di vista gestionale, infrastrutturale e della crescita professionale del team.
 
 == Processo di Gestione dei Processi
 
@@ -863,7 +865,7 @@ In conformità allo standard #underline[#link(<12207>)[ISO/IEC/IEEE 12207]], i P
 
 *Prodotti:* Backlog di Sprint; Board Jira aggiornata.
 
-*Strumenti:* #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#jira")[#def[Jira]].
+*Strumenti:* Jira.
 
 *Criteri di conformità:*
 - Assenza di task prive di stima oraria o assegnatario;
@@ -871,12 +873,12 @@ In conformità allo standard #underline[#link(<12207>)[ISO/IEC/IEEE 12207]], i P
 
 === Attività ORG-A02 — Coordinamento Informativo
 ==== Procedura PR-ORG-02: Esecuzione delle Comunicazioni
-*Obiettivo:* Garantire il corretto allineamento informativo tra i membri del team e verso gli stakeholder esterni.
+*Obiettivo:* Garantire il corretto allineamento informativo tra i membri del team e verso gli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#stakeholder")[#def[stakeholder]] esterni.
 
 *Passi operativi:*
-+ *Condurre* riunioni periodiche sincrone su Discord per condividere l'avanzamento e intercettare eventuali criticità;
++ *Condurre* riunioni periodiche sincrone su #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#discord")[#def[Discord]] per condividere l'avanzamento e intercettare eventuali criticità;
 + *Redigere* e archiviare un verbale interno a seguito di ogni riunione sincrona del team;
-+ *Utilizzare* sistemi di messaggistica istantanea (WhatsApp/Telegram) esclusivamente per coordinamenti operativi rapidi e asincroni;
++ *Utilizzare* sistemi di messaggistica istantanea (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#whatsapp")[#def[WhatsApp]]/#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#telegram")[#def[Telegram]]) esclusivamente per coordinamenti operativi rapidi e asincroni;
 + *Comunicare* con il proponente (Var Group) o i docenti unicamente tramite Email istituzionale;
 + *Redigere* un verbale esterno ufficiale a seguito di ogni incontro con gli stakeholder.
 
@@ -885,7 +887,7 @@ In conformità allo standard #underline[#link(<12207>)[ISO/IEC/IEEE 12207]], i P
 *Strumenti:* Discord, WhatsApp/Telegram, Email.
 
 *Criteri di conformità:*
-- Presenza a repository di un verbale per ogni SAL (Stato Avanzamento Lavori) o riunione esterna effettuata.
+- Presenza a repository di un verbale per ogni #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#stato-avanzamento-lavori")[#def[SAL]] (Stato Avanzamento Lavori) o riunione esterna effettuata.
 
 == Processo di Infrastruttura
 
@@ -894,7 +896,7 @@ In conformità allo standard #underline[#link(<12207>)[ISO/IEC/IEEE 12207]], i P
 *Obiettivo:* Assicurare la continuità operativa fornendo ambienti di lavoro protetti e automatizzati.
 
 *Passi operativi:*
-+ *Configurare* e manutenere il toolkit tecnologico (Git, GitHub, Google Calendar, GitHub Actions);
++ *Configurare* e manutenere il toolkit tecnologico (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#git")[#def[Git]], GitHub, GitHub Actions);
 + *Applicare* le regole di protezione dei branch su GitHub, impedendo l'esecuzione di commit diretti sui branch `main` e `develop`;
 + *Applicare* la nomenclatura standardizzata per la creazione di nuovi branch (`feature/nome`, `fix/nome`, `[ACRONIMO-DOC]`);
 + *Mantenere* funzionanti gli script di automazione CI/CD per la generazione documentale e l'aggiornamento del sito web.
@@ -904,14 +906,14 @@ In conformità allo standard #underline[#link(<12207>)[ISO/IEC/IEEE 12207]], i P
 *Strumenti:* Git, GitHub, GitHub Actions.
 
 *Criteri di conformità:*
-- Nessun commit effettuato direttamente nei branch protetti;
+- Nessun commit effettuato direttamente nei branch protetti. 
 - Pipeline di automazione passanti (green) sui branch principali.
 
 == Processo di Miglioramento
 
 === Attività ORG-A04 — Monitoraggio e Retrospettiva
 ==== Procedura PR-ORG-04: Esecuzione Retrospettiva di Sprint
-*Obiettivo:* Applicare il ciclo PDCA (Plan-Do-Check-Act) per individuare le inefficienze metodologiche e incrementare la qualità del lavoro.
+*Obiettivo:* Applicare il ciclo #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#plan-do-check-act")[#def[PDCA]] (Plan-Do-Check-Act) per individuare le inefficienze metodologiche e incrementare la qualità del lavoro.
 
 *Passi operativi (Da eseguire al termine di ogni Sprint):*
 + *Raccogliere* i valori delle metriche misurate e *confrontarli* con le soglie accettabili definite nel PdQ;

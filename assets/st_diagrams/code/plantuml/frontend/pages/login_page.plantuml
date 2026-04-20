@@ -1,0 +1,13 @@
+@startuml
+package "View — Pagine pubbliche" {
+  class LoginPage {
+    --
+    Interfaccia per il login tramite email e password.
+    Valida i campi con Zod (email valida, password min 6 caratteri).
+    Mostra credenziali demo per ambienti di test.
+    Richiama useAuth().login() e in caso di errore mostra un toast.
+  }
+
+  LoginPage --> "useAuth" : login()
+}
+@enduml

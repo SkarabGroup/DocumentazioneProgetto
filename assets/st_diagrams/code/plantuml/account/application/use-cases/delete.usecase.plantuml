@@ -1,0 +1,18 @@
+@startuml IDeleteUseCase
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class IDeleteUseCase {
+    + execute(command: DeleteCommand): Promise<DeleteResponseDto>
+}
+
+' Relations
+IDeleteUseCase ..> DeleteCommand
+IDeleteUseCase ..> DeleteResponseDto
+
+@enduml

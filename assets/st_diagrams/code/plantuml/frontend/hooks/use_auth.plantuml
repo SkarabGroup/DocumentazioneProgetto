@@ -1,0 +1,13 @@
+@startuml
+package "Hooks Layer (ViewModel)" {
+  class useAuth {
+    --
+    Custom hook che restituisce il valore corrente di AuthContext.
+    Lancia un errore esplicito se usato fuori dall'AuthProvider,
+    garantendo che i componenti consumatori siano sempre nel
+    contesto corretto.
+  }
+
+  useAuth --> "AuthProvider" : consuma AuthContext
+}
+@enduml

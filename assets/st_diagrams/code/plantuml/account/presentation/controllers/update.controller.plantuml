@@ -1,0 +1,24 @@
+@startuml UpdateController
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class UpdateController {
+    - updateUseCase: IupdateUseCase
+    - jwtAdapter: JwtAdapter
+    ---
+    + UpdateController(updateUseCase: IupdateUseCase, jwtAdapter: JwtAdapter)
+    + updatePassword(req: Request, requestDto: UpdateRequestDto): Promise<AuthResponseDto>
+}
+
+' Relations
+UpdateController --> IupdateUseCase
+UpdateController --> JwtAdapter
+UpdateController ..> UpdateRequestDto
+UpdateController ..> AuthResponseDto
+
+@enduml

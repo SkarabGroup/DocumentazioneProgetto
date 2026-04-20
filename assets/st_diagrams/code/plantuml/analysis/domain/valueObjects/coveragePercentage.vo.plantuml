@@ -1,18 +1,18 @@
 @startuml CoveragePercentage
-
 skinparam componentStyle uml2.5
 skinparam linetype ortho
-skinparam nodesep auto
-skinparam ranksep 70
+skinparam nodesep 30
+skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
 class CoveragePercentage {
-    - coveragePercentage: float
+    - _value: number
     ---
-    - CoveragePercentage(coverage: float)
-    + getCoveragePercentage() : float
-    + {static} create(coverage: float) : CoveragePercentage
+    - CoveragePercentage(value: number)
+    - validate(value: number): void
+    + {static} create(value: number): CoveragePercentage
+    + get value(): number
+    + equals(other: CoveragePercentage): boolean
 }
-
 @enduml

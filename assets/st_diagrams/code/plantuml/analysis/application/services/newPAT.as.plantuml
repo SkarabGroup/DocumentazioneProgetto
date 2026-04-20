@@ -1,0 +1,24 @@
+@startuml NewPatService
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+interface NewPatUseCase {
+    + execute(command: NewPatCommand): Promise<NewPatResult>
+}
+
+class NewPatService {
+    - passwordProviderService: IPasswordProvider
+    - gitSaveCredentialPort: IGitCredentialSavePort
+    ---
+    + NewPatService(passwordProvider, savePort)
+    + execute(command: NewPatCommand): Promise<NewPatResult>
+}
+
+NewPatService ..|> NewPatUseCase
+NewPatService --right-> IPasswordProvider
+NewPatService --left-> IGitCredentialSavePort
+@enduml

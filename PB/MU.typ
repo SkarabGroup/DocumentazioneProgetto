@@ -1,0 +1,180 @@
+#import "../lib/docsUtil.typ": *
+#import "../lib/variables.typ": *
+
+#let versione = "v0.2.0"
+#set heading(numbering: "1.1.1")
+
+/*
+=== FUNZIONAMENTO DEL DOCUMENTO ===
+1. Inserire le immagini nella cartella assets/manuale_utente
+*/
+
+#titlePage("Manuale Utente", versione)
+#set page(numbering: "1", header: header("Manuale Utente"), footer: footer())
+#let history = (
+  (
+    "2026/04/19",
+    "0.2.0",
+    "Aggiunta sezione Gestione Repository, Analisi ed Esportazione",
+    members.martinello,
+    members.antonio
+  ),
+  (
+    "2026/04/16",
+    "0.1.0",
+    "Prima stesura del documento",
+    members.alice,
+    members.antonio
+  ),
+)
+
+#versionTable(history)
+
+#indice()
+
+#indiceImmagini()
+
+#pagebreak()
+
+= Introduzione
+
+== Scopo del Documento
+Il presente documento ha lo scopo di guidare l'utilizzatore finale nell'impiego corretto e completo del sistema *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]]*, realizzato da _#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]]_ e proposto dall'azienda *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]]*, illustrandone i flussi operativi, le interfacce grafiche e le modalità di configurazione del proprio profilo.
+
+== Scopo del Prodotto
+_CodeGuardian_ è un'innovativa piattaforma ad #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] finalizzata all’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e alla #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] automatizzata delle vulnerabilità presenti nei #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#repository")[#def[repository]] di codice sorgente.
+
+La piattaforma supporta attività di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-statica")[#def[analisi statica]] del codice sorgente e di individuazione delle principali criticità di sicurezza, fornendo suggerimenti di correzione attraverso meccanismi automatizzati basati su modelli di linguaggio di grandi dimensioni (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]).
+
+#pagebreak()
+
+= Guida
+
+== Schermata Iniziale
+La piattaforma *CodeGuardian* si presenta con un'intuitiva schermata iniziale, dalla quale è possibile l'accesso diretto ai moduli di registrazione e autenticazione per iniziare ad ispezionare i propri repository.
+
+#figure(
+  image("../assets/manuale_utente/schermata_iniziale.png", width: 90%),
+  caption: [Schermata Iniziale della Piattaforma],
+)
+
+
+== Autenticazione e Gestione Account
+
+Per poter accedere agli strumenti di monitoraggio e ai report di _CodeGuardian_ è necessario possedere un'identità verificata all'interno del sistema; ciò consente di mantenere protette le associazioni con i propri #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#uniform-resource-locator")[#def[URL]] repository e l'eventuale tracciamento privato.
+
+=== Registrazione
+
+#figure(
+  image("../assets/manuale_utente/registrazione.png", width: 90%),
+  caption: [Schermata di Registrazione Profilo],
+)
+
+La creazione di un nuovo #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#utente")[#def[utente]] avviene tramite l'apposita schermata di registrazione, raggiungibile direttamente dalla pagina iniziale.
+
+Per effettuare la registrazione è necessario:
+1. Compilare il campo *Username*: deve essere un identificativo univoco (tra i 4 e i 20 caratteri) contenente esclusivamente lettere e numeri, senza spazi.
+
+2. Inserire un indirizzo *Email* valido nel formato standard.
+
+3. Scegliere una *Password* sicura. A tutela dell'account, la password deve contenere minimo 8 caratteri ed includere obbligatoriamente almeno una lettera maiuscola, una minuscola, un numero e un carattere speciale. Per motivi di sicurezza addizionali, la password *non può* mai contenere al suo interno la stringa dello username.
+
+4. *Confermare* la password re-inserendola nell'ultimo campo e selezionare il pulsante _Crea Account_.
+
+Inizierà la fase di approvazione; in caso di successo, un messaggio di notifica riporterà l'avvenuta creazione e l'utente verrà reindirizzato ed automaticamente autenticato alla dashboard principale.
+
+=== Accesso (Login)
+
+#figure(
+  image("../assets/manuale_utente/login.png", width: 90%),
+  caption: [Schermata di Accesso],
+)
+
+Gli utenti precedentemente iscritti o coloro a cui è temporaneamente scaduta la sessione di navigazione possono ricollegarsi tramite la schermata di *Accesso*.
+Fornendo l'indirizzo _Email_ e la _Password_ associata, la piattaforma autorizza istantaneamente l'accesso sbloccando i privilegi utente. In caso di errore o credenziali errate, il sistema restituirà l'avviso di *"Credenziali non valide"*.
+
+=== Uscita dal sistema (Logout)
+Per terminare in totale sicurezza la sessione attiva, l'utente può usufruire del pulsante testuale *Esci*, situato nel menù di navigazione laterale in corrispondenza del riquadro contenente i propri dati di profilo (Username ed Email formattati).
+Questa azione comporta la chiusura definitiva della sessione di lavoro, garantendo la protezione del profilo. Per accedere nuovamente alle funzionalità del sistema, sarà necessario effettuare un nuovo _Accesso_ (Login).
+
+=== Impostazioni
+L'area impostazioni costituisce il pannello di controllo della gestione dell'Account.
+
++ *Cambio Password*:
+
+#figure(
+  image("../assets/manuale_utente/cambio_password.png", width: 80%),
+  caption: [Impostazioni: Cambio Password],
+)
+
+Una procedura pratica per aggiornare la password di accesso. Per procedere è necessario compilare nell'ordine i campi previsti dalla schermata: digitare inizialmente _La tua password attuale_, inserire la sequenza desiderata in _La nuova password_ e confermarla un'ultima volta in _Conferma la nuova password_, rispettando sempre i pattern di sicurezza in vigore.
+
++ *Eliminazione Profilo*:
+
+#figure(
+  image("../assets/manuale_utente/eliminazione.png", width: 80%),
+  caption: [Impostazioni: Eliminazione Definitiva Profilo],
+)
+
+Un'operazione irreversibile concepita per tutelare la privacy. Prima di poter eseguire l'eliminazione, per motivazioni di sicurezza è tassativamente richiesto di compilare il campo vuoto digitando _La tua password_ per confermare la propria identità. Cliccando infine sul pulsante rosso _Elimina account definitivamente_, l'utente provvede a rimuovere in modo definitivo e permanente il profilo dal sistema _CodeGuardian_, venendo immediatamente revocato da qualsiasi diritto d'accesso.
+
+
+
+
+== Funzionalità della Piattaforma
+
+Una volta effettuato l'accesso, l'utente ha a disposizione un menù di navigazione laterale
+
+#figure(
+  image("../assets/manuale_utente/sidebar.png", width: 40%),
+  caption: [Menù di navigazione laterale (Sidebar)],
+) che suddivide l'applicativo nelle seguenti sezioni principali: *Repository*, *Storico*, *Classifica* e *Impostazioni*.
+
+=== Repository (Dashboard Principale)
+La sezione Repository costituisce la dashboard principale da cui gestire i propri progetti.
+
+#figure(
+  image("../assets/manuale_utente/dashboard_principale.png", width: 90%),
+  caption: [Dashboard Principale: Lista dei Repository],
+)
+
+- *Aggiunta e Rimozione:* È possibile visualizzare la lista dei repository importati. Per aggiungerne uno nuovo da ispezionare, è sufficiente inserirne l'URL GitHub. È possibile anche rimuovere i repository non più necessari tramite l'apposito pulsante.
+
+#figure(
+  image("../assets/manuale_utente/aggiunta_o_rimozione.png", width: 80%),
+  caption: [Aggiunta di un nuovo Repository],
+)
+- *Esecuzione Analisi:* Cliccando su uno specifico repository, si accede alla sua *Pagina di Dettaglio*. Da qui, l'utente può avviare l'ispezione automatica cliccando sul pulsante dedicato. L'interfaccia aggiornerà dinamicamente lo stato dell'analisi (avvio, in corso, completamento) fornendo un chiaro feedback visivo senza complicati caricamenti.
+
+#figure(
+  image("../assets/manuale_utente/avvio_analisi.png", width: 90%),
+  caption: [Pagina di Dettaglio: Avvio Analisi in corso],
+)
+
+- *Risultato ed Esportazione:* Al termine, il report viene presentato a schermo suddiviso per metriche di qualità, scorecard generali e lista accurata delle vulnerabilità. Per ogni scansione sono previste funzionalità di esportazione dirette scaricando il referto formattato in *PDF* oppure sotto forma di *JSON* strutturato.
+
+#figure(
+  image("../assets/manuale_utente/risultato_analisi.png", width: 90%),
+  caption: [Pagina di Dettaglio: Risultato Analisi e metriche],
+)
+
+=== Storico Analisi
+
+#figure(
+  image("../assets/manuale_utente/storico_analisi.png", width: 90%),
+  caption: [Schermata Storico delle Analisi],
+)
+
+La schermata *Storico* raccoglie la traccia di tutte le scansioni ed ispezioni del codice precedentemente eseguite sulla piattaforma, relative all'utente attivo.
+- L'interfaccia fornisce una visuale strutturata che mostra la data, il repository analizzato e l'esito per ciascuna richiesta pregressa.
+- Attraverso i controlli messi a disposizione dall'interfaccia (es. intervalli di date d'interesse), l'utente può filtrare l'elenco e cercare rapidamente report di analisi storiche o valutare l'andamento del codice nel tempo.
+
+=== Classifica (Ranking)
+
+#figure(
+  image("../assets/manuale_utente/classifica_analisi.png", width: 90%),
+  caption: [Schermata Classifica Repository (Ranking)],
+)
+
+Questa prospettiva gestionale fornisce una panoramica focalizzata sugli scenari architetturali dei progetti caricati in CodeGuardian. 
+L'applicativo genera in tempo reale una *Classifica* di tutti i repository associati all'utente: vengono elencati gerarchicamente tenendo conto dello "Score di Qualità" generale derivante dai più recenti audit, permettendo in modo istantaneo di confrontare i progetti più robusti e quelli che richiedono maggiore attenzione.

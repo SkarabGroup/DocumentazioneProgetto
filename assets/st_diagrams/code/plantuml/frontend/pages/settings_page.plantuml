@@ -1,0 +1,15 @@
+@startuml
+package "View — Pagine protette" {
+  class SettingsPage {
+    --
+    Pagina di gestione account organizzata in tab:
+    - Profilo (PAT): aggiornamento ed eliminazione dei Personal Access Token GitHub
+    - Password: cambio password
+    - Account: eliminazione account con dialog di conferma
+  }
+
+  SettingsPage --> "UsersApi" : changePassword, deleteAccount
+  SettingsPage --> "PatApi" : add, update, delete
+  SettingsPage --> "useAuth" : logout() dopo deleteAccount
+}
+@enduml

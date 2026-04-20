@@ -1,0 +1,13 @@
+@startuml
+package "API Layer (Model)" {
+  class UsersApi {
+    + changePassword(payload): Promise<void>
+    + deleteAccount(): Promise<void>
+    --
+    Gestisce le operazioni sul profilo utente verso il microservizio
+    Account: cambio password ed eliminazione account.
+  }
+
+  UsersApi --> "Gateway" : usa
+}
+@enduml

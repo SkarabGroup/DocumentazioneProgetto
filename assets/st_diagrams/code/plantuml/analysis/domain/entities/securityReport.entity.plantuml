@@ -1,0 +1,34 @@
+@startuml SecurityReport
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class SecurityReport {
+    - reportId: ReportId
+    - analysisId: AnalysisId
+    - dependencyFindings: DependencyFinding[]
+    - owaspFindings: OWASPFinding[]
+    - secretFindings: SecretFinding[]
+    - toolErrors: ToolError[]
+    ---
+    - SecurityReport(reportId, analysisId, dependencyFindings, owaspFindings, secretFindings, toolErrors)
+    + {static} create(properties: SecurityReportProps): SecurityReport
+    + getReportId(): ReportId
+    + getAnalysisId(): AnalysisId
+    + getDependencyFindings(): DependencyFinding[]
+    + getOwaspFindings(): OWASPFinding[]
+    + getSecretFindings(): SecretFinding[]
+    + getToolErrors(): ToolError[]
+    + equals(other: SecurityReport): boolean
+}
+
+SecurityReport --right-> ReportId
+SecurityReport --left-> AnalysisId
+SecurityReport --down-> DependencyFinding
+SecurityReport --down-> OWASPFinding
+SecurityReport --down-> SecretFinding
+SecurityReport --down-> ToolError
+@enduml

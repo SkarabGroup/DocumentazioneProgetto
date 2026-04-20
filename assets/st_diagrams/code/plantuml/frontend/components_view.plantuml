@@ -1,0 +1,89 @@
+@startuml
+package "Components Layer (View)" {
+
+  package "Route pubbliche" {
+    class LandingPage {
+      --
+      Pagina di presentazione pubblica del prodotto.
+      Punto di ingresso per utenti non autenticati.
+    }
+
+    class LoginPage {
+      --
+      Interfaccia per l'accesso tramite email e password.
+      Reindirizza a /repositories dopo login riuscito.
+    }
+
+    class RegisterPage {
+      --
+      Interfaccia per la registrazione di un nuovo account.
+      Include validazione della password in tempo reale.
+    }
+  }
+
+  package "Route protette" {
+    class AppLayout {
+      --
+      Wrapper delle route autenticate: contiene la Sidebar
+      e il contenuto principale. Reindirizza al login se
+      l'utente non è autenticato.
+    }
+
+    class RepositoriesPage {
+      --
+      Mostra la lista dei repository dell'utente con ricerca
+      e filtri. Permette di aggiungere nuovi repository.
+    }
+
+    class RepositoryDetailPage {
+      --
+      Mostra i dettagli di un repository, lo storico delle analisi
+      e il report dell'ultima analisi con score e tab di dettaglio.
+      Consente di avviare una nuova analisi.
+    }
+
+    class HistoryPage {
+      --
+      Visualizza lo storico globale di tutte le analisi
+      effettuate dall'utente, con filtri e paginazione.
+    }
+
+    class RankingPage {
+      --
+      Mostra la classifica dei repository ordinata per
+      qualità del codice (score aggregato).
+    }
+
+    class SettingsPage {
+      --
+      Gestione del profilo utente: aggiornamento dati,
+      cambio password, gestione dei PAT GitHub
+      e cancellazione dell'account.
+    }
+  }
+
+  class CodeGuardianApp {
+    --
+    Componente root che inizializza il router,
+    il Context provider (AuthContext)
+    e il sistema di notifiche toast.
+  }
+
+  CodeGuardianApp *-- LandingPage
+  CodeGuardianApp *-- LoginPage
+  CodeGuardianApp *-- RegisterPage
+  CodeGuardianApp *-- AppLayout
+
+  AppLayout *-- RepositoriesPage
+  AppLayout *-- RepositoryDetailPage
+  AppLayout *-- HistoryPage
+  AppLayout *-- RankingPage
+  AppLayout *-- SettingsPage
+
+  LoginPage --> "Hooks Layer" : useAuth
+  RegisterPage --> "Hooks Layer" : useAuth
+  RepositoriesPage --> "Hooks Layer" : useAuth
+  RepositoryDetailPage --> "Hooks Layer" : useAnalysisPolling
+  SettingsPage --> "Hooks Layer" : useAuth
+}
+@enduml

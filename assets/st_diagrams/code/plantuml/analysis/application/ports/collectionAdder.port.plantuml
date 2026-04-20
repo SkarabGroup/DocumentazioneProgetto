@@ -1,0 +1,15 @@
+@startuml ICollectionAdderPort
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+interface ICollectionAdderPort {
+    + addCollection(model: AddRepositoryCollectionRequest): Promise<AddRepositoryCollectionResponse>
+}
+
+ICollectionAdderPort --down-> AddRepositoryCollectionRequest
+ICollectionAdderPort --down-> AddRepositoryCollectionResponse
+@enduml

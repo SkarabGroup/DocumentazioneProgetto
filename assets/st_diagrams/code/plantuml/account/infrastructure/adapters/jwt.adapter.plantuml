@@ -1,0 +1,25 @@
+@startuml JwtAdapter
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class JwtAdapter {
+    - secret: string
+    - expiresIn: string
+    ---
+    + JwtAdapter(secret: string, expiresIn: string)
+    + generateToken(payload: JwtPayload): string
+    + generateRefreshToken(payload: JwtPayload): string
+    + verifyToken(token: string): JwtPayload | null
+}
+
+' Relations
+JwtAdapter ..up|> ITokenProviderPort
+JwtAdapter ..up|> IVerifyTokenPort
+JwtAdapter ..> JwtPayload
+
+@enduml
