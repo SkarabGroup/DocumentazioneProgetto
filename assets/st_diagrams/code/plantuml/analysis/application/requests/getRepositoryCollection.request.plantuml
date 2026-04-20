@@ -1,0 +1,18 @@
+@startuml GetRepositoryCollectionRequest
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class GetRepositoryCollectionRequest {
+    + user: UserId
+    + url: RepoURL
+    ---
+    + GetRepositoryCollectionRequest(user, url)
+}
+
+GetRepositoryCollectionRequest --right-> UserId
+GetRepositoryCollectionRequest --right-> RepoURL
+@enduml

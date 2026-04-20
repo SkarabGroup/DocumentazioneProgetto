@@ -1,0 +1,26 @@
+@startuml SaveDocsReportRequest
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class SaveDocsReportRequest {
+    + reportId: ReportId
+    + analysisId: AnalysisId
+    + apiViolations: APIViolation[]
+    + docsDiscrepancies: DocsDiscrepancy[]
+    + missingFiles: MissingFile[]
+    + dependencyAudit: DependencyAudit | null
+    ---
+    + SaveDocsReportRequest(reportId, analysisId, apiViolations, docsDiscrepancies, missingFiles, dependencyAudit)
+}
+
+SaveDocsReportRequest --right-> ReportId
+SaveDocsReportRequest --right-> AnalysisId
+SaveDocsReportRequest --down-> APIViolation
+SaveDocsReportRequest --down-> DocsDiscrepancy
+SaveDocsReportRequest --down-> MissingFile
+SaveDocsReportRequest --down-> DependencyAudit
+@enduml

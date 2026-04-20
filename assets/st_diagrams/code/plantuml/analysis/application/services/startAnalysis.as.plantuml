@@ -15,17 +15,19 @@ class StartAnalysisService {
     - authorizationService: IRepositoryAuthorizer
     - validatorService: IRepositoryValidator
     - clonerService: IRepositoryCloner
-    - orchestratorService: IAnalysisOrchestrator
+    - orchestrationService: IAnalysisOrchestrator
+    - analysisSavePort: IGitHubAnalysisSavePort
     ---
-    + StartAnalysisService(passwordProvider, authorizer, validator, cloner, orchestrator)
+    + StartAnalysisService(passwordProvider, authorizer, validator, cloner, orchestrator, analysisSavePort)
     + execute(command: StartAnalysisCommand): Promise<StartAnalysisResult>
 }
 
 StartAnalysisService ..|> StartAnalysisUseCase
-StartAnalysisService --right-> IPasswordProvider
-StartAnalysisService --right-> IRepositoryAuthorizer
-StartAnalysisService --right-> IRepositoryValidator
-StartAnalysisService --right-> IRepositoryCloner
-StartAnalysisService --right-> IAnalysisOrchestrator
-StartAnalysisService --down-> GitHubAnalysis
+StartAnalysisService --down-> IPasswordProvider
+StartAnalysisService --down-> IRepositoryAuthorizer
+StartAnalysisService --down-> IRepositoryValidator
+StartAnalysisService --down-> IRepositoryCloner
+StartAnalysisService --left-> IAnalysisOrchestrator
+StartAnalysisService --left-> IGitHubAnalysisSavePort
+StartAnalysisService --right-> GitHubAnalysis
 @enduml

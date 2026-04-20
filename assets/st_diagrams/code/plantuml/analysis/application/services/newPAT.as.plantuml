@@ -20,5 +20,5 @@ class NewPatService {
 
 NewPatService ..|> NewPatUseCase
 NewPatService --right-> IPasswordProvider
-NewPatService --right-> IGitCredentialSavePort
+NewPatService --left-> IGitCredentialSavePort
 @enduml

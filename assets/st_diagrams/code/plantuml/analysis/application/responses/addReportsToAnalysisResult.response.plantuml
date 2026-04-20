@@ -1,0 +1,17 @@
+@startuml AddReportsToAnalysisResult
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class AddReportsToAnalysisResult {
+    + success: boolean
+    + message?: string
+    ---
+    + AddReportsToAnalysisResult(success, message?)
+    + {static} success(): AddReportsToAnalysisResult
+    + {static} failure(message: string): AddReportsToAnalysisResult
+}
+@enduml

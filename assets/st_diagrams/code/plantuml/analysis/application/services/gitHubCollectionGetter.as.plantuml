@@ -1,0 +1,30 @@
+@startuml GitHubCollectionGetter
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+interface GetRepositoryCollectionUseCase {
+    + execute(command: GetRepositoryCollectionCommand): Promise<GetRepositoryCollectionResult>
+}
+
+interface GetAllRepositoryCollectionsUseCase {
+    + executeAll(command: GetAllRepositoryCollectionsCommand): Promise<GetAllRepositoryCollectionsResult>
+}
+
+class GitHubCollectionGetter {
+    - singleCollectionGetter: IGetRepositoryCollectionPort
+    - allCollectionGetter: IGetAllRepositoryCollectionsPort
+    ---
+    + GitHubCollectionGetter(singleCollectionGetter, allCollectionGetter)
+    + execute(command: GetRepositoryCollectionCommand): Promise<GetRepositoryCollectionResult>
+    + executeAll(command: GetAllRepositoryCollectionsCommand): Promise<GetAllRepositoryCollectionsResult>
+}
+
+GitHubCollectionGetter ..|> GetRepositoryCollectionUseCase
+GitHubCollectionGetter ..|> GetAllRepositoryCollectionsUseCase
+GitHubCollectionGetter --right-> IGetRepositoryCollectionPort
+GitHubCollectionGetter --left-> IGetAllRepositoryCollectionsPort
+@enduml

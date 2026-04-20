@@ -1,0 +1,18 @@
+@startuml CheckCollectionDuplicateRequest
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class CheckCollectionDuplicateRequest {
+    + user: UserId
+    + url: RepoURL
+    ---
+    + CheckCollectionDuplicateRequest(user, url)
+}
+
+CheckCollectionDuplicateRequest --right-> UserId
+CheckCollectionDuplicateRequest --right-> RepoURL
+@enduml

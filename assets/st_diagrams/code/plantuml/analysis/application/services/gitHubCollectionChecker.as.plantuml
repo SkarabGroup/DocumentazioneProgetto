@@ -1,0 +1,22 @@
+@startuml GitHubCollectionChecker
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+interface ICollectionExistenceChecker {
+    + check(user: UserId, url: RepoURL): Promise<boolean>
+}
+
+class GitHubCollectionChecker {
+    - duplicateCheckerPort: ICollectionDuplicateCheckerPort
+    ---
+    + GitHubCollectionChecker(duplicateCheckerPort)
+    + check(user: UserId, url: RepoURL): Promise<boolean>
+}
+
+GitHubCollectionChecker ..|> ICollectionExistenceChecker
+GitHubCollectionChecker --right-> ICollectionDuplicateCheckerPort
+@enduml

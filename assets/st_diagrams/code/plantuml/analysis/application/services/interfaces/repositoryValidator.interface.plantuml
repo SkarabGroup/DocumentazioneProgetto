@@ -10,8 +10,8 @@ interface IRepositoryValidator {
     + check(url: RepoURL, pat: PersonalAccessToken | null, branch: BranchName | null, commit: CommitHash | null): Promise<{branch: BranchName, commit: CommitHash}>
 }
 
-IRepositoryValidator --right-> RepoURL
-IRepositoryValidator --right-> PersonalAccessToken
+IRepositoryValidator --down-> RepoURL
+IRepositoryValidator --down-> PersonalAccessToken
 IRepositoryValidator --down-> BranchName
 IRepositoryValidator --down-> CommitHash
 @enduml

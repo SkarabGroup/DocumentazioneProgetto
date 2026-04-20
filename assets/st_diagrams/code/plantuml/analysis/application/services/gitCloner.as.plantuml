@@ -18,5 +18,5 @@ class GitClonerService {
 }
 
 GitClonerService ..|> IRepositoryCloner
-GitClonerService --right-> IGitClonePort
+GitClonerService --down-> IGitClonePort
 @enduml
