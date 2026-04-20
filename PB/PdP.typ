@@ -18,7 +18,7 @@
     "1.7.0",
     "Fix generali e inizio aggiunta sprint 10",
     members.kevin,
-    "",
+    members.berengan,
   ),
   (
     "2026/04/11",
