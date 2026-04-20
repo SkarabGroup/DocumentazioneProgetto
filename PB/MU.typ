@@ -1,7 +1,7 @@
 #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
 
-#let versione = "v0.3.0"
+#let versione = "v0.2.0"
 #set heading(numbering: "1.1.1")
 
 /*
@@ -13,16 +13,18 @@
 #set page(numbering: "1", header: header("Manuale Utente"), footer: footer())
 #let history = (
   (
-    "2026/04/16",
-    "0.1.0",
-    "Prima stesura del documento",
-    members.alice,
-  ),
-  (
     "2026/04/19",
     "0.2.0",
     "Aggiunta sezione Gestione Repository, Analisi ed Esportazione",
     members.martinello,
+    members.antonio
+  ),
+  (
+    "2026/04/16",
+    "0.1.0",
+    "Prima stesura del documento",
+    members.alice,
+    members.antonio
   ),
 )
 
@@ -37,12 +39,12 @@
 = Introduzione
 
 == Scopo del Documento
-Il presente documento ha lo scopo di guidare l'utilizzatore finale nell'impiego corretto e completo del sistema *CodeGuardian*, realizzato da _Skarab Group_ e proposto dall'azienda *Var Group*, illustrandone i flussi operativi, le interfacce grafiche e le modalità di configurazione del proprio profilo.
+Il presente documento ha lo scopo di guidare l'utilizzatore finale nell'impiego corretto e completo del sistema *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]]*, realizzato da _#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]]_ e proposto dall'azienda *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]]*, illustrandone i flussi operativi, le interfacce grafiche e le modalità di configurazione del proprio profilo.
 
 == Scopo del Prodotto
-_CodeGuardian_ è un'innovativa piattaforma ad agenti finalizzata all’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e alla #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] automatizzata delle vulnerabilità presenti nei repository di codice sorgente.
+_CodeGuardian_ è un'innovativa piattaforma ad #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] finalizzata all’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e alla #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] automatizzata delle vulnerabilità presenti nei #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#repository")[#def[repository]] di codice sorgente.
 
-La piattaforma supporta attività di analisi statica del codice sorgente e di individuazione delle principali criticità di sicurezza, fornendo suggerimenti di correzione attraverso meccanismi automatizzati basati su modelli di linguaggio di grandi dimensioni (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]).
+La piattaforma supporta attività di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-statica")[#def[analisi statica]] del codice sorgente e di individuazione delle principali criticità di sicurezza, fornendo suggerimenti di correzione attraverso meccanismi automatizzati basati su modelli di linguaggio di grandi dimensioni (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]).
 
 #pagebreak()
 
@@ -59,7 +61,7 @@ La piattaforma *CodeGuardian* si presenta con un'intuitiva schermata iniziale, d
 
 == Autenticazione e Gestione Account
 
-Per poter accedere agli strumenti di monitoraggio e ai report di _CodeGuardian_ è necessario possedere un'identità verificata all'interno del sistema; ciò consente di mantenere protette le associazioni con i propri URL repository e l'eventuale tracciamento privato.
+Per poter accedere agli strumenti di monitoraggio e ai report di _CodeGuardian_ è necessario possedere un'identità verificata all'interno del sistema; ciò consente di mantenere protette le associazioni con i propri #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#uniform-resource-locator")[#def[URL]] repository e l'eventuale tracciamento privato.
 
 === Registrazione
 
@@ -68,7 +70,7 @@ Per poter accedere agli strumenti di monitoraggio e ai report di _CodeGuardian_ 
   caption: [Schermata di Registrazione Profilo],
 )
 
-La creazione di un nuovo utente avviene tramite l'apposita schermata di registrazione, raggiungibile direttamente dalla pagina iniziale.
+La creazione di un nuovo #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#utente")[#def[utente]] avviene tramite l'apposita schermata di registrazione, raggiungibile direttamente dalla pagina iniziale.
 
 Per effettuare la registrazione è necessario:
 1. Compilare il campo *Username*: deve essere un identificativo univoco (tra i 4 e i 20 caratteri) contenente esclusivamente lettere e numeri, senza spazi.
@@ -132,34 +134,34 @@ Una volta effettuato l'accesso, l'utente ha a disposizione un menù di navigazio
 La sezione Repository costituisce la dashboard principale da cui gestire i propri progetti.
 
 #figure(
-  image("../assets/manuale_utente/dashboard principale.png", width: 90%),
+  image("../assets/manuale_utente/dashboard_principale.png", width: 90%),
   caption: [Dashboard Principale: Lista dei Repository],
 )
 
-- *Aggiunta e Rimozione:* È possibile visualizzare la lista dei repository importati. Per aggiungerne uno nuovo da ispezionare, è sufficiente inserirne l'URL (es. GitHub). È possibile anche rimuovere i repository non più necessari tramite l'apposito pulsante.
+- *Aggiunta e Rimozione:* È possibile visualizzare la lista dei repository importati. Per aggiungerne uno nuovo da ispezionare, è sufficiente inserirne l'URL GitHub. È possibile anche rimuovere i repository non più necessari tramite l'apposito pulsante.
 
 #figure(
-  image("../assets/manuale_utente/aggiunta o rimozione.png", width: 80%),
+  image("../assets/manuale_utente/aggiunta_o_rimozione.png", width: 80%),
   caption: [Aggiunta di un nuovo Repository],
 )
 - *Esecuzione Analisi:* Cliccando su uno specifico repository, si accede alla sua *Pagina di Dettaglio*. Da qui, l'utente può avviare l'ispezione automatica cliccando sul pulsante dedicato. L'interfaccia aggiornerà dinamicamente lo stato dell'analisi (avvio, in corso, completamento) fornendo un chiaro feedback visivo senza complicati caricamenti.
 
 #figure(
-  image("../assets/manuale_utente/avvio analisi.png", width: 90%),
+  image("../assets/manuale_utente/avvio_analisi.png", width: 90%),
   caption: [Pagina di Dettaglio: Avvio Analisi in corso],
 )
 
 - *Risultato ed Esportazione:* Al termine, il report viene presentato a schermo suddiviso per metriche di qualità, scorecard generali e lista accurata delle vulnerabilità. Per ogni scansione sono previste funzionalità di esportazione dirette scaricando il referto formattato in *PDF* oppure sotto forma di *JSON* strutturato.
 
 #figure(
-  image("../assets/manuale_utente/risultato analisi.png", width: 90%),
+  image("../assets/manuale_utente/risultato_analisi.png", width: 90%),
   caption: [Pagina di Dettaglio: Risultato Analisi e metriche],
 )
 
 === Storico Analisi
 
 #figure(
-  image("../assets/manuale_utente/storico analisi.png", width: 90%),
+  image("../assets/manuale_utente/storico_analisi.png", width: 90%),
   caption: [Schermata Storico delle Analisi],
 )
 
@@ -170,7 +172,7 @@ La schermata *Storico* raccoglie la traccia di tutte le scansioni ed ispezioni d
 === Classifica (Ranking)
 
 #figure(
-  image("../assets/manuale_utente/classifica analisi.png", width: 90%),
+  image("../assets/manuale_utente/classifica_analisi.png", width: 90%),
   caption: [Schermata Classifica Repository (Ranking)],
 )
 
