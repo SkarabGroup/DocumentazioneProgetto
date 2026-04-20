@@ -18,7 +18,7 @@
 #set page(numbering: "1", header: header("Piano di Qualifica"), footer: footer())
 #let history = (
   (
-    "2026/04/",
+    "2026/04/19",
     "1.2.0",
     "Aggiornamento Cruscotto di Valutazione",
     members.alice,
@@ -2304,7 +2304,7 @@ Tuttavia, la situazione ha subito una variazione significativa durante lo _Sprin
 Nello _Sprint 3_, nonostante una parziale ripresa, l'_Earned Value_ rimane ancora al di sotto del _Planned Value_, segnalando che il ritardo accumulato non è ancora stato recuperato. Nello _Sprint 4_ EV e PV iniziano ad allinearsi, a fronte però di un aumento dell'AC.
 
 ==== Product Baseline (PB)
-Nel corso della fase di Product Baseline, le varianze si sono complessivamente stabilizzate. A partire dallo _Sprint 5_ il progetto ha mantenuto la _Budget Variance_ e la _Schedule Variance_ entro i valori accettabili, con lievi oscillazioni positive che testimoniano una maggiore maturità pianificatoria del team. Gli Sprint finali (8–10) mostrano varianze prossime allo zero, a conferma del pieno allineamento tra valore erogato, costo sostenuto e pianificazione originale.
+All'inizio della Product Baseline si è registrata una temporanea divergenza tra le curve: nello _Sprint 5_, l'_Actual Cost_ è risultato superiore all'_Earned Value_, con quest'ultimo che è rimasto al di sotto del valore pianificato. Tale scostamento è indicativo di un rallentamento produttivo. Tuttavia, nel corso dello _Sprint 6_, il team è riuscito a riallineare le metriche, mantenendo un equilibrio ottimale tra lavoro prodotto, costi e pianificazione fino alla conclusione del progetto, con un Actual Cost finale inferiore al budget preventivato.
 
 #pagebreak()
 === Budget Variance - Schedule Variance (MPC05 e MPC06)
@@ -2316,7 +2316,7 @@ Il grafico monitora la salute economica e temporale del progetto a partire dallo
 Successivamente, il ritardo accumulato negli sprint precedenti ha continuato a pesare sulla metrica. Nel corso dello _Sprint 4_, però, la _Schedule Variance_ torna quasi a zero.
 
 ==== Product Baseline (PB)
-Nel corso della fase di Product Baseline, la _Budget Variance_ e la _Schedule Variance_ si sono mantenute entro i valori accettabili per la quasi totalità degli Sprint. A partire dallo _Sprint 6_ entrambe le varianze risultano positive o prossime allo zero, a conferma del progressivo allineamento tra pianificazione e realtà operative. Gli Sprint finali confermano una gestione del progetto economicamente sana e temporalmente rispettosa della pianificazione.
+Questa baseline è stata caratterizzata da una marcata criticità nello _Sprint 5_, dove sia la _Budget Variance_ che la _Schedule Variance_ hanno subito una brusca flessione negativa. Questo scostamento è stato prontamente analizzato e corretto dal team: a partire dallo _Sprint 7_, entrambe le metriche sono tornate stabilmente sopra lo zero, confermando una gestione economica sana (con una Budget Variance finale di 540€) e una puntualità ottimale.
 
 #pagebreak()
 === Cost Performance Index - Schedule Performance Index (MPC07 e MPC08)
@@ -2330,7 +2330,7 @@ La situazione è peggiorata nel corso dello _Sprint 2_, durante il quale si è v
 A partire dallo _Sprint 3_ lo SPI inizia a recuperare progressivamente. Nello Sprint 4 lo SPI raggiunge il valore ottimale, mentre il CPI scende a causa dello sforamento orario.
 
 ==== Product Baseline (PB)
-Durante la Product Baseline, il _CPI_ si è stabilizzato intorno a 1.00 a partire dallo _Sprint 6_, indicando un utilizzo del budget coerente con il valore prodotto. Lo _SPI_ ha superato in più Sprint la soglia ottimale, a testimonianza di una schedulazione più efficace rispetto alla fase RTB.
+Il _CPI_ ha oscillato inizialmente tra 0.91 e 1.01, stabilizzandosi sul valore ottimale a partire dallo _Sprint 7_ e raggiungendo un indice finale di 1.04. Lo _SPI_ ha mostrato un calo significativo nello _Sprint 5_, per poi risalire e mantenersi costantemente a 1.00 per il resto della baseline. Questa progressione testimonia la capacità del team di assorbire i ritardi e ottimizzare l'efficienza di costo dopo le difficoltà incontrate.
 
 #pagebreak()
 === Estimate at Completion (MPC09)
@@ -2346,7 +2346,7 @@ superiore. Il team si impegna ad adottare azioni correttive nella fase successiv
 ricondurre la previsione di spesa entro i parametri ottimali.
 
 ==== Product Baseline (PB)
-Nella fase di Product Baseline, l'_EAC_ ha progressivamente riallineato verso il BAC originale di 12.670€. A partire dagli Sprint centrali (6–8), le stime a finire si sono attestate stabilmente sotto il tetto massimo, a conferma dell'efficacia delle azioni correttive intraprese durante la RTB. Gli Sprint finali registrano un EAC sostanzialmente in linea con il budget preventivato.
+L'_EAC_ ha subito una fluttuazione marcata nello _Sprint 5_, raggiungendo un picco di spesa prevista di 13.908€. Tale incremento è stato causato dal dispendio di ore superiore al previsto per la progettazione. Grazie alle azioni correttive intraprese, a partire dallo _Sprint 7_ le stime a finire sono rientrate stabilmente sotto il budget preventivato, attestandosi definitivamente a 12.130€.
 
 #pagebreak()
 === Requirements Stability Index (MPC10)
@@ -2360,7 +2360,7 @@ casi d'uso malposti e l'inserimento di requisiti mancanti hanno causato un ulter
 accettabile.
 
 ==== Product Baseline (PB)
-Nella fase di Product Baseline il _Requirements Stability Index_ ha raggiunto e mantenuto il 100% per la maggior parte degli Sprint. Il team ha garantito la stabilità dell'ambito, evitando fenomeni di scope creep e consolidando la base dei requisiti in vista del rilascio finale.
+Il _Requirements Stability Index_ ha raggiunto il valore ottimale del 100% per quasi tutta la durata del periodo, con un'unica flessione fisiologica nello _Sprint 8_ (95%). Il team ha garantito una gestione rigorosa dell'ambito tecnico, consolidando i requisiti in vista del rilascio finale e limitando al minimo le variazioni tardive.
 
 #pagebreak()
 == Processi di Supporto
@@ -2372,7 +2372,7 @@ Il grafico mostra un andamento complessivamente positivo dei documenti monitorat
 In generale, Skarab Group si impegna a mantenere nel tempo una buona leggibilità dei documenti.
 
 ==== Product Baseline (PB)
-Nella fase di Product Baseline i valori di Gulpease di tutti i documenti, inclusi il _Manuale Utente_ e la _Specifica Tecnica_ (la cui misurazione ha preso avvio a partire dallo _Sprint 5_), si sono attestati costantemente al di sopra della soglia ottimale di 60. L'andamento è risultato stabile e in lieve crescita, a conferma della maturità stilistica raggiunta dal team nella stesura della documentazione.
+Durante la PB, l'_Indice di Gulpease_ per tutti i documenti monitorati si è attestato stabilmente sopra la soglia ottimale di 60. L'introduzione del _Manuale Utente_ e della _Specifica Tecnica_ a partire dallo _Sprint 8_ ha mostrato indici inizialmente vicini alla soglia accettabile, che sono poi progressivamente cresciuti.
 
 #pagebreak()
 === Correttezza Ortografica (MPC12)
@@ -2382,27 +2382,27 @@ Nella fase di Product Baseline i valori di Gulpease di tutti i documenti, inclus
 Durante i primi sprint, il grafico evidenzia la presenza di alcuni errori ortografici nella documentazione, con un picco registrato nello _Sprint 2_. Il team ha prontamente identificato la criticità e adottato misure correttive, portando il conteggio degli errori a zero entro lo _Sprint 3_ per la maggior parte dei documenti.
 
 ==== Product Baseline (PB)
-Nella fase di Product Baseline la correttezza ortografica è stata mantenuta a zero errori per tutti i documenti già presenti dalla RTB. Per il _Manuale Utente_ e la _Specifica Tecnica_, introdotti a partire dallo _Sprint 5_, si registra un numero contenuto di errori nei primi sprint di redazione, prontamente corretti nelle iterazioni successive fino ad azzerare completamente il conteggio.
+La correttezza ortografica è stata mantenuta a zero errori per i documenti consolidati nella RTB. Anche per il _Manuale Utente_ e la _Specifica Tecnica_, grazie all'adozione di procedure di controllo incrociato più stringenti, non sono stati rilevati errori fin dalla loro introduzione nello _Sprint 8_.
 
 #pagebreak()
 === Code Coverage (MPC13)
 #image("../assets/graficiPdQ/grafico_coverage.png", height: 50%)
 
 ==== Requirements and Technology Baseline (RTB)
-La metrica _Code Coverage_ non è stata rilevata durante la fase RTB in quanto la codebase era in uno stato sperimentale e prototipale. Le attività di testing sistematico non erano ancora state avviate, rendendo la misurazione della copertura non significativa.
+La metrica _Code Coverage_ non è stata rilevata durante la baseline RTB.
 
 ==== Product Baseline (PB)
-La misurazione ha preso avvio a partire dallo _Sprint 5_. Il valore iniziale si è attestato al 78%, già al di sopra della soglia minima del 70%. Nei successivi Sprint la copertura ha raggiunto e stabilmente mantenuto l'80%, corrispondente alla soglia ottimale.
+La metrica non è stata rilevata durante i primi sprint della PB, in quanto il team era focalizzato sulla progettazione. Il valore iniziale rilevato nello _Sprint 7_ si è attestato al 94%, superando la soglia minima del 70%. Negli Sprint successivi la copertura ha mostrato un trend di crescita costante fino a raggiungere il 98%, superando ampiamente la soglia di qualità del 90% imposta nelle configurazioni di test del progetto.
 
 #pagebreak()
 === Test Success Rate (MPC14)
 #image("../assets/graficiPdQ/grafico_test_success.png", height: 50%)
 
 ==== Requirements and Technology Baseline (RTB)
-La metrica _Test Success Rate_ non è stata rilevata durante la fase RTB, poiché le attività di testing automatizzato non erano ancora state istituite in modo sistematico nella fase sperimentale del progetto.
+La metrica _Test Success Rate_ non è stata rilevata durante la baseline RTB.
 
 ==== Product Baseline (PB)
-A partire dallo _Sprint 5_, il _Test Success Rate_ ha registrato valori sempre pari o superiori al 98%, con la totalità degli Sprint successivi che mostrano un tasso del 100%. L'unica lieve flessione nello Sprint 5 è stata rapidamente corretta, portando il team a mantenere stabilmente il valore obiettivo per tutta la durata della PB.
+A partire dallo _Sprint 7_, il _Test Success Rate_ ha mostrato un trend di crescita costante, passando dal 96% fino a raggiungere il valore ottimale del 100% nello _Sprint 9_. Il team è riuscito a mantenere stabilmente il valore obiettivo per tutta la fase conclusiva della PB.
 
 #pagebreak()
 == Processi Organizzativi
@@ -2415,7 +2415,7 @@ Durante lo _Sprint 1_ il valore si è attestato al di sopra della soglia minima 
 Nello _Sprint 4_, lo sforamento orario e le difficoltà incontrate hanno causato un nuovo calo. Il team prende atto della criticità e si impegna ad adottare misure correttive nella fase successiva per garantire un maggiore rispetto delle metriche definite.
 
 ==== Product Baseline (PB)
-Non si applicano valori relativi alla fase RTB. Nella Product Baseline, a partire dallo _Sprint 5_, il valore si è attestato costantemente al 100%, indicando che tutte le metriche definite nel Piano di Qualifica rispettano le soglie di accettabilità. Questo risultato è frutto del lavoro di calibrazione e delle azioni correttive intraprese durante la RTB.
+Nello _Sprint 5_ si è registrata una lieve flessione al di sotto della soglia minima a causa del mancato raggiungimento di alcuni obiettivi. Tuttavia, a partire dallo _Sprint 6_, il valore si è attestato costantemente al 100%, indicando che tutte le metriche definite nel Piano di Qualifica rispettano le soglie di accettabilità per il resto del periodo di sviluppo.
 
 #pagebreak()
 === Sprint Goal Achievement (MPC16)
@@ -2425,66 +2425,66 @@ Non si applicano valori relativi alla fase RTB. Nella Product Baseline, a partir
 Dal grafico è possibile osservare la buona efficacia operativa dimostrata durante lo _Sprint 1_ dal team, che è riuscito a completare gli obiettivi prefissati quasi nella loro interezza. Durante lo _Sprint 2_, invece, la metrica ha subito una flessione poiché gli obiettivi prefissati non sono stati pienamente raggiunti.
 
 ==== Product Baseline (PB)
-Nella fase di Product Baseline il team ha consistentemente mantenuto lo _Sprint Goal Achievement_ al 100%, completando tutti gli obiettivi pianificati in ogni iterazione. Il miglioramento rispetto alla fase RTB è attribuibile a una pianificazione più accurata e a una maggiore consapevolezza della velocity del team.
+La PB è iniziata con una criticità nello _Sprint 5_, dove lo _Sprint Goal Achievement_ è sceso al 68%, al di sotto della soglia minima accettabile dell'80%. Il team ha reagito tempestivamente rivedendo, in particolare, la granularità dei task: tale intervento ha permesso di mantenere un tasso di successo del 100% per tutti gli Sprint successivi.
 
 #pagebreak()
 === Copertura Requisiti Obbligatori (MPD01)
 #image("../assets/graficiPdQ/grafico_req_obbligatori.png", height: 50%)
 
 ==== Requirements and Technology Baseline (RTB)
-La metrica _Copertura dei Requisiti Obbligatori_ non è stata rilevata durante la fase RTB, poiché l'implementazione era ancora nella fase di Proof of Concept e non era significativo misurare la copertura rispetto ai requisiti funzionali definitivi.
+La metrica _Copertura dei Requisiti Obbligatori_ non è stata rilevata durante la baseline RTB.
 
 ==== Product Baseline (PB)
-A partire dallo _Sprint 5_, la copertura dei requisiti obbligatori ha raggiunto il 95%, per poi attestarsi al 100% già dallo _Sprint 6_ e mantenersi su tale valore per tutti i successivi Sprint. Questo risultato conferma il pieno soddisfacimento dei requisiti funzionali chiave definiti nel capitolato.
+Il mancato raggiungimento del 100% a partire dallo _Sprint 7_ è ascrivibile alla scelta strategica di declassare alcuni requisiti inizialmente obbligatori a opzionali, concentrando le risorse sugli obiettivi core del prodotto.
 
 #pagebreak()
 === Failure Density - Availability (MPD02 e MPD03)
 
 ==== Requirements and Technology Baseline (RTB)
-Le metriche _Failure Density_ e _Availability_ non sono state rilevate durante la fase RTB: la natura sperimentale del PoC non rendeva significativa la misurazione di guasti e disponibilità su un prototipo non destinato al deploy in produzione.
+Le metriche _Failure Density_ e _Availability_ non sono state rilevate durante la baseline RTB.
 
 ==== Product Baseline (PB)
-La _Failure Density_ e l'_Availability_ sono metriche che richiedono un periodo di esercizio prolungato del sistema in produzione per poter essere misurate in modo affidabile. Il progetto Code Guardian, non essendo ancora in esercizio continuo, non dispone di un campione temporale sufficiente per determinare valori statisticamente significativi. Si raccomanda di avviare la misurazione sistematica a partire dal primo rilascio in ambiente di produzione, monitorandole nel lungo periodo.
+La _Failure Density_ e l'_Availability_ sono metriche che richiedono un periodo di esercizio prolungato del sistema in produzione per poter essere misurate in modo affidabile. Il prodotto _Code Guardian_, non essendo ancora in esercizio continuo, non dispone di un campione temporale sufficiente per determinare valori statisticamente significativi.
 
 #pagebreak()
 === Comment Density (MPD04)
 #image("../assets/graficiPdQ/grafico_comment_density.png", height: 50%)
 
 ==== Requirements and Technology Baseline (RTB)
-La metrica _Comment Density_ non è stata rilevata durante la fase RTB, in quanto la codebase era limitata al Proof of Concept e non soggetta agli standard di commento sistematico applicati nella fase produttiva.
+La metrica _Comment Density_ non è stata rilevata durante la baseline RTB.
 
 ==== Product Baseline (PB)
-A partire dallo _Sprint 5_, la densità dei commenti si è attestata tra il 19% e il 22%, rientrando nel range ottimale definito (15%–25%). L'andamento è risultato stabile, a conferma di una buona disciplina nella documentazione del codice sorgente.
+A partire dallo _Sprint 7_, la _Comment Density_ si è attestata tra il 21% e il 23%, rientrando stabilmente nel range ottimale definito (15% - 25%).
 
 #pagebreak()
 === Cyclomatic Complexity (MPD05)
 #image("../assets/graficiPdQ/grafico_cyclomatic_complexity.png", height: 50%)
 
 ==== Requirements and Technology Baseline (RTB)
-La metrica _Cyclomatic Complexity_ non è stata rilevata durante la fase RTB, in quanto la codebase del PoC non era ancora strutturata in modo definitivo.
+La metrica _Cyclomatic Complexity_ non è stata rilevata durante la baseline RTB.
 
 ==== Product Baseline (PB)
-A partire dallo _Sprint 5_, la complessità ciclomatica media si è attestata su valori compresi tra 8 e 11, rientrando entro la soglia ottimale di V(G) ≤ 10 per la maggior parte degli Sprint. Il lieve picco iniziale (11, Sprint 5) è rientrato già dallo Sprint successivo grazie alle attività di refactoring condotte in parallelo allo sviluppo.
+A partire dallo _Sprint 7_, la _Cyclomatic Complexity_ media si è attestata su valori compresi tra 9 e 6, rimanendo ampiamente entro la soglia ottimale di V(G) ≤ 10. Il progressivo abbassamento del valore testimonia l'efficacia delle attività di refactoring e la scomposizione del codice in metodi granulari e focalizzati.
 
 #pagebreak()
 === Coupling (MPD06)
 #image("../assets/graficiPdQ/grafico_accoppiamento.png", height: 50%)
 
 ==== Requirements and Technology Baseline (RTB)
-La metrica _Coupling_ non è stata rilevata durante la fase RTB, in quanto l'architettura del PoC non era ancora consolidata e la misurazione delle dipendenze avrebbe avuto valore limitato.
+La metrica _Coupling_ non è stata rilevata durante la baseline RTB.
 
 ==== Product Baseline (PB)
-A partire dallo _Sprint 5_, il valore di Fan-out si è attestato tra 3 e 4, in linea con la soglia ottimale (≤ 3) o comunque al di sotto del limite massimo accettabile (≤ 6). Il rispetto dell'architettura esagonale e la separazione netta delle responsabilità tra i componenti hanno contribuito a mantenere un basso grado di accoppiamento.
+Dallo _Sprint 7_, il valore di _Coupling_ si è attestato tra 3 e 2, in pieno rispetto della soglia ottimale (≤ 3). Il rigoroso utilizzo dell'_Architettura Esagonale_ e l'inversione delle dipendenze tramite _Porte_ hanno permesso di mantenere un basso grado di accoppiamento tra i moduli.
 
 #pagebreak()
 === Vulnerability Detection (MPD07)
 #image("../assets/graficiPdQ/grafico_vulnerabilita.png", height: 50%)
 
 ==== Requirements and Technology Baseline (RTB)
-La metrica _Vulnerability Detection_ non è stata rilevata durante la fase RTB, in quanto il PoC non era soggetto a scansioni sistematiche di sicurezza su codebase produttiva.
+La metrica _Vulnerability Detection_ non è stata rilevata durante la baseline RTB.
 
 ==== Product Baseline (PB)
-A partire dallo _Sprint 5_, la scansione delle vulnerabilità ha registrato costantemente zero vulnerabilità critiche rilevate, rispettando la soglia ottimale definita nel piano. Il risultato è attribuibile all'adozione di pratiche di secure coding, all'utilizzo di librerie aggiornate e all'esecuzione periodica di audit di sicurezza sul codice sorgente.
+La scansione delle vulnerabilità ha registrato costantemente zero vulnerabilità critiche rilevate, rispettando la soglia ottimale definita nel piano. Il risultato è attribuibile all'adozione di pratiche di secure coding e all'utilizzo di librerie aggiornate.
 
 #pagebreak()
 
