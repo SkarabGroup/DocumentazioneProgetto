@@ -1736,30 +1736,31 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
   ),
   [Prospetto orario preventivato per lo Sprint 5],
 )
-#TODO("ore consuntivate e attività svolte")
 
 ==== Prospetto attività
 #activity_table(
   (
-    ("Modifica del documento AdR in conformità alle correzioni proposte", "Analista", "2:00", "2:00", "Completata"),
-    ("Verifica delle modifiche al documento AdR", "Verificatore", "1:00","0:45", "Completata"),
-    ("Verifica delle modifiche in NdP", "Verificatore", "1:00", "0:45", "Completata"),
-    ("Scrittura del diario di bordo del giorno 2026-03-11", "Analista", "1:00", "1:00", "Completata"),
-    ("Prima stesura del documento ST", "Analista", "6:00", "1:00", "Completata"),
-    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa alla persistenza", "Progettista", "2:00", "0:00", "Rimandata causa ritardo nella palestra"),
-    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa al backend", "Progettista", "8:00", "0:00", "Rimandata causa ritardo nella palestra"),    
-    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa agli agenti LLM", "Progettista", "14:00", "0:00", "Rimandata causa ritardo nella palestra"),
+    ("Modifica del documento AdR in conformità alle correzioni proposte", "Analista", "2:00", "3:00", "Completata"),
+    ("Stesura introduzione e primi capitoli del documento ST", "Analista", "3:00", "1:00", "Completata"),
+
+    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa alla persistenza", "Progettista", "6:00", "0:00", "Rimandata causa ritardo nella palestra"),
+    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa al backend", "Progettista", "12:00", "0:00", "Rimandata causa ritardo nella palestra"),    
+    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa agli agenti LLM", "Progettista", "10:00", "0:00", "Rimandata causa ritardo nella palestra"),
     ("Progettazione di livello 3 del C4 model per il microservizio di Analisi", "Progettista", "12:00", "0:00", "Rimandata causa ritardo nella palestra"),
-    ("Progettazione di livello 3 del C4 model per il microservizio di Gestione degli Account", "Progettista","7:00", "0:00", "Rimandata causa ritardo nella palestra"),
+    ("Progettazione di livello 3 del C4 model per il microservizio di Gestione degli Account", "Progettista","8:00", "0:00", "Rimandata causa ritardo nella palestra"),
     ("Progettazione di livello 3 del C4 model per il frontend", "Progettista","6:00", "0:00", "Rimandata causa ritardo nella palestra"),
+    
     ("Stesura verbale riunione prima settimana", "Responsabile","1:00","1:00","Completata"),
     ("Stesura verbale riunione seconda settimana", "Responsabile","1:00","1:00","Completata"),  
     ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile","2:30","2:00","Completata"),
     ("Aggiunta task Jira", "Responsabile","0:30","1:00","Completata"),
     ("Aggiunto sprint 5 nel PdP", "Responsabile","2:00","2:00","Completata"),
+
     ("Verifica verbale riunione interna prima settimana", "Verificatore","0:30","0:15","Completata"),
     ("Verifica verbale riunione interna seconda settimana", "Verificatore","0:30","0:15","Completata"),
-    ("Verifica ST","Verificatore","2:00","0:00","Rimandata causa ritardo nella palestra")
+    ("Verifica ST","Verificatore","8:00","0:00","Rimandata causa ritardo nella palestra"),
+    ("Verifica delle modifiche al documento AdR", "Verificatore", "1:00","0:45", "Completata"),
+    ("Verifica delle modifiche in NdP", "Verificatore", "1:00", "0:45", "Completata"),
   ),
   [Riassunto delle attività svolte durante lo sprint 5]
 )
@@ -1796,10 +1797,10 @@ Il coordinamento interno di questo sprint è migliorato rispetto ai precedenti. 
 - Dato il grande quantitativo di ore dedicate allo studio individuale (palestra) necessarie per la progettazione, le ore preventivate erano molto maggiori delle ore produttive consuntivate. La distribuzione delle task è risultata comunque equilibrata e per il momento sono stati raggiunti gli obiettivi previsti.
 - *Responsabile:* Preventivato 7h, Consuntivo 7h
 - *Amministratore:* Preventivato 0h, Consuntivo 0h
-- *Analista:* Analista 4h, Consuntivo 4h
-- *Progettista:* Preventivato 49h, Consuntivo 0h
+- *Analista:* Analista 5h, Consuntivo 4h
+- *Progettista:* Preventivato 54h, Consuntivo 0h
 - *Programmatore:* Preventivato 0h, Consuntivo 0h
-- *Verificatore:* Preventivato 2h, Consuntivo 2h
+- *Verificatore:* Preventivato 11h, Consuntivo 2h
 
 ===== Rischi rilevati
 
@@ -1821,8 +1822,8 @@ Per lo sprint successivo il team si pone i seguenti obiettvi prioritari:
     ([Alice],           1,   4,  -2,   17,  20,  12),
   ),
   [Consuntivo Sprint],
-  (7,0,4,49,0,2),  // preventivo
-  (7,0,3,20,0,2),  // consuntivo ← nuovo argomento
+  (7,0,5,54,0,11),  // preventivo
+  (7,0,4,0,0,2),  // consuntivo ← nuovo argomento
 )
 #pagebreak()
 
@@ -1861,6 +1862,7 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
     ("Progettazione dei gateway e delle porte di ingresso per l'architettura esagonale", "Progettista", "5:00", "7:00", "Completata"),
     ("Progettazione del meccanismo di zipping e del flusso dati", "Progettista", "4:00", "6:00", "Completata"),
     ("Rifinitura diagrammi C3/C4 e allineamento decisioni architetturali", "Progettista", "3:00", "7:00", "Completata"),
+
     ("Gestione riunioni e allineamento Sprint 6", "Responsabile", "2:00", "2:00", "Completata"),
     ("Verifica documentazione ST e coerenza requisiti architetturali", "Verificatore", "0:00", "4:00", "Completata"),
     ("Verifica diagrammi C3/C4 e consistenza delle interfacce", "Verificatore", "0:00", "5:00", "Completata"),
@@ -1896,6 +1898,8 @@ Si sono presentati dei problemi di coordinamento, e di ritardo nello svolgimento
 - Nonostante i ritardi logistici e i problemi di coordinamento emersi, grazie al tempestivo re-allineamento del gruppo, le ore rendicontate hanno potuto coincidere col monte ore preventivato.
 - *Responsabile:* Preventivato 2h, Consuntivo 2h
 - *Progettista:* Preventivato 38h, Consuntivo 38h
+- *Verificatore:* Preventivato 0h, Consuntivo 12h
+ - Questo é stato un errore di valutazione in quanto il team non pensava di riuscire anche a verificare le modifiche in 1 sola settimana, invece tutte le verifiche necessarie sono state portate a termine entro la fine dello sprint.
 
 ===== Rischi Rilevati
 Nel corso dello Sprint si sono manifestati i seguenti rischi già censiti:
@@ -1918,8 +1922,8 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
     ([Alice],           1,   4,  -2,   11,  20,  12),
   ),
   [Consuntivo Sprint],
-  (7,0,4,49,0,2),  // preventivo
-  (2,0,3,54,0,14),  // consuntivo ← nuovo argomento
+  (2,0,0,38,0,0),  // preventivo
+  (2,0,0,54,0,14),  // consuntivo ← nuovo argomento
 )
 #pagebreak()
 
@@ -2000,9 +2004,9 @@ Le decisioni finali sull'architettura, la stesura in ST dei modelli C3/C4 e la r
 ===== Squilibri orari preventivati e reali
 - Le ore preventivate e le ore consuntivate coincidono, in quanto l'esatta definizione e ripartizione dei compiti per l'avvio della programmazione era stata ben pianificata in precedenza.
 - *Responsabile:* Preventivato 2h, Consuntivo 2h
-- *Progettista:* Preventivato 23h, Consuntivo 23h
+- *Progettista:* Preventivato 28h, Consuntivo 28h
 - *Programmatore:* Preventivato 11h, Consuntivo 11h
-- *Verificatore:* Preventivato 2h, Consuntivo 2h
+- *Verificatore:* Preventivato 8h, Consuntivo 9h
 
 ===== Rischi Rilevati
 Nel corso dello Sprint si è prestata particolare attenzione a evitare i seguenti rischi già censiti:
@@ -2028,7 +2032,7 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
     ([Alice],           1,   4,  -2,   8,  18,  12),
   ),
   [Consuntivo Sprint],
-  (7,0,4,49,0,2),  // preventivo
+  (2,0,0,28,11,8),  // preventivo
   (2,0,0,28,11,9),  // consuntivo ← nuovo argomento
 )
 #pagebreak()
@@ -2056,14 +2060,14 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 #sprint_table(
   (
     ([Basso Kevin], 0, 0, 0, 2, 3, 2),
-    ([Berengan Riccardo], 0, 0, 0, 2, 5, 1),
+    ([Berengan Riccardo], 0, 0, 0, 2, 3, 1),
     ([Martinello Riccardo], 0, 0, 0, 3, 8, 2),
     ([Sandu Antonio], 0, 0, 0, 4, 5, 3),
     ([Sgreva Andrea], 3.5, 0, 0, 4, 3, 4),
-    ([Suar Alberto], 0, 4, 0, 5, 5, 2),
+    ([Suar Alberto], 0, 4, 0, 5, 4, 2),
     ([Zago Alice], 0, 0, 0, 2, 4, 2),
   ),
-  [Prospetto orario preventivato per lo Sprint 8 (Totale: 78h 30m)],
+  [Prospetto orario preventivato per lo Sprint 8],
 )
 
 ==== Prospetto attività
@@ -2080,30 +2084,30 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
     ("Glossario v1.1.0 + aggiornamento sito PB", "Amministratore", "0:30", "0:30", "Completata"),
 
     ("ST v0.3.0: revisione errori e link ai componenti", "Progettista", "3:00", "3:00", "Completata"),
-    ("ST v0.4.0: introduzione e command applicativi", "Progettista", "4:00", "4:00", "Completata"),
-    ("ST v0.4.0: avvio architettura di deployment", "Progettista", "3:00", "3:00", "Completata"),
+    ("ST v0.4.0: introduzione e command applicativi", "Progettista", "3:00", "4:00", "Completata"),
+    ("ST v0.4.0: avvio architettura di deployment", "Progettista", "3:30", "3:00", "Completata"),
     ("ST v0.5.0: value object per Account Microservice", "Progettista", "3:00", "3:00", "Completata"),
-    ("Refactor in Sub-Application Services", "Progettista", "3:00", "3:00", "Completata"),
+    ("Refactor in Sub-Application Services", "Progettista", "2:30", "3:00", "Completata"),
     ("Helper service per mapper e confini StartAnalysis", "Progettista", "3:00", "3:00", "Completata"),
-    ("Pulizia artefatti architetturali e allineamento Ubiquitous Language", "Progettista", "3:00", "3:00", "Completata"),
+    ("Pulizia artefatti architetturali e allineamento Ubiquitous Language", "Progettista", "4:00", "3:00", "Completata"),
 
     ("Feature entities: user.entity e github-token.entity + test", "Programmatore", "3:00", "3:00", "Completata"),
-    ("Aggiunta password-hash.vo + test", "Programmatore", "2:00", "2:00", "Completata"),
+    ("Aggiunta password-hash.vo + test", "Programmatore", "1:00", "3:00", "Completata"),
     ("GitHub DTO/ports e github-token-factory + test", "Programmatore", "2:30", "2:30", "Completata"),
     ("Use-case servizi GitHub con test", "Programmatore", "2:30", "2:30", "Completata"),
     ("DTO/services JWT e BCrypt + fix linting", "Programmatore", "2:30", "2:30", "Completata"),
     ("Register services e fix postgres adapter/dependency", "Programmatore", "3:30", "3:30", "Completata"),
-    ("Login/registration services + docker", "Programmatore", "3:00", "3:00", "Completata"),
-    ("Delete service + delete controller + test", "Programmatore", "3:00", "3:00", "Completata"),
-    ("Git request result/mapper/enum/port + start-analysis-command + test", "Programmatore", "3:30", "3:30", "Completata"),
-    ("Credential model + mock PAT password + PAT Password VO", "Programmatore", "2:30", "2:30", "Completata"),
+    ("Login/registration services + docker", "Programmatore", "2:00", "3:00", "Completata"),
+    ("Delete service + delete controller + test", "Programmatore", "3:30", "3:00", "Completata"),
+    ("Git request result/mapper/enum/port + start-analysis-command + test", "Programmatore", "3:00", "3:30", "Completata"),
+    ("Credential model + mock PAT password + PAT Password VO", "Programmatore", "1:30", "2:30", "Completata"),
     ("MongoDBAdapter + IGitCredentialWritePort + GitHub interaction + final fix test/package", "Programmatore", "5:00", "5:00", "Completata"),
 
     ("Verifica PR #32 (AdR) e coerenza requisiti", "Verificatore", "2:00", "2:00", "Completata"),
-    ("Verifica PR #33 (PdQ) e consistenza dei test", "Verificatore", "1:30", "1:30", "Completata"),
+    ("Verifica PR #33 (PdQ) e consistenza dei test", "Verificatore", "1:00", "1:30", "Completata"),
     ("Verifica PR #34 e #37 (PdP), inclusa revisione ore verificatore", "Verificatore", "2:00", "2:30", "Completata"),
     ("Verifica PR #35, #38, #39 (ST) e assegnazione verifier", "Verificatore", "3:00", "3:30", "Completata"),
-    ("Verifica PR #36 (NdP) e aggiornamento membri", "Verificatore", "2:00", "2:00", "Completata"),
+    ("Verifica PR #36 (NdP) e aggiornamento membri", "Verificatore", "2:30", "2:00", "Completata"),
     ("Verifica PR backend #17-#33 su test e coerenza dominio", "Verificatore", "3:00", "3:00", "Completata"),
     ("Verifica fix CI/lint/check-test-symmetry", "Verificatore", "2:30", "2:30", "Completata")
   ),
@@ -2133,10 +2137,10 @@ Questo sprint è stato caratterizzato da un cruciale cambio di rotta architettur
 ===== Squilibri orari preventivati e reali
 L'imprevista necessità di studiare l'ambiente Serverless e la successiva riprogettazione dell'architettura interna hanno generato un maggiore consumo di ore da "Progettista" e un minore consumo di ore da "Programmatore". Per quanto riguarda il ruolo di "Verificatore" e "Amministratore" c'è stato un minore consumo di ore rispetto al preventivo, in quanto questi ruoli sono stati utilizzati meno di quanto previsto.
 - *Responsabile:* Preventivato 3.5h, Consuntivo 3.5h
-- *Amministratore:* Preventivato 4h, Consuntivo 1.5h
-- *Progettista:* Preventivato 17h, Consuntivo 23h
-- *Programmatore:* Preventivato 26h, Consuntivo 22h
-- *Verificatore:* Preventivato 14h, Consuntivo 10h
+- *Amministratore:* Preventivato 4h, Consuntivo 4h
+- *Progettista:* Preventivato 22h, Consuntivo 22h
+- *Programmatore:* Preventivato 30h, Consuntivo 33h
+- *Verificatore:* Preventivato 16h, Consuntivo 17h
 
 ===== Rischi Rilevati
 Nel corso dello Sprint si sono manifestati o sono stati sfiorati i seguenti rischi già censiti:
@@ -2165,8 +2169,8 @@ Per lo Sprint successivo, il team si pone i seguenti obiettivi prioritari:
     ([Alice],           1,   4,  -2,   7,  14,  10),
   ),
   [Consuntivo Sprint],
-  (3.5,4,0,17,26,14),  // preventivo
-  (3.5,1.5,0,23,22,10),  // consuntivo ← nuovo argomento
+  (3.5,4,0,22,30,16),  // preventivo
+  (3.5,4,0,22,33,17),  // consuntivo ← nuovo argomento
 )
 #pagebreak()
 
@@ -2194,12 +2198,12 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 #sprint_table(
   (
     ([Basso Kevin], 0, 5, 0, 0, 6, 8),
-    ([Berengan Riccardo], 0, 0, 0, 4, 9, 1), 
+    ([Berengan Riccardo], 0, 0, 0, 4, 7, 1), 
     ([Martinello Riccardo], 0, 0, 0, 4, 4, 4),
-    ([Sandu Antonio], 0, 2, 0, 2, 7, 4),
+    ([Sandu Antonio], 0, 2, 0, 2, 5, 4),
     ([Sgreva Andrea], 3.5, 0, 0, 5, 7, 3),
     ([Suar Alberto], 0, 3, 0, 2, 6, 3),
-    ([Zago Alice], 0, 0, 0, 0, 10, 7),
+    ([Zago Alice], 0, 0, 0, 0, 7, 7),
   ),
   [Prospetto orario preventivato per lo Sprint 9 (Totale: 109h 30m)],
 )
@@ -2223,14 +2227,14 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
     ("Progettazione flusso clone repository + integrazione MongoDB", "Progettista", "2:30", "2:30", "Completata"),
     ("Progettazione contratti sessione ed eccezioni (fix_port/exceptions)", "Progettista", "2:30", "2:30", "Completata"),
 
-    ("Implementazione VO findings base (coverage-percentage, path, description, severity) + UT", "Programmatore", "4:30", "4:30", "Completata"),
-    ("Implementazione VO findings estesi (error, file-coverage, dependency, coverage) + UT", "Programmatore", "4:30", "4:30", "Completata"),
-    ("Implementazione VO findings sicurezza (static-analysis, owasp, documentation, secret) + UT", "Programmatore", "5:00", "5:00", "Completata"),
-    ("Implementazione Analysis report entities (documentation/code report) + unit test", "Programmatore", "5:00", "5:00", "Completata"),
-    ("Implementazione save port (GitHubAnalysis, code-report) + unit test", "Programmatore", "4:00", "4:00", "Completata"),
-    ("Implementazione CodeAgentAdapter e Agent Port", "Programmatore", "4:00", "4:00", "Completata"),
-    ("Implementazione OrchestratorService e bootstrap cartella agents", "Programmatore", "4:30", "4:30", "Completata"),
-    ("Prima implementazione Documentation Agent e tuning adapter", "Programmatore", "5:00", "5:00", "Completata"),
+    ("Implementazione VO findings base (coverage-percentage, path, description, severity) + UT", "Programmatore", "3:30", "4:30", "Completata"),
+    ("Implementazione VO findings estesi (error, file-coverage, dependency, coverage) + UT", "Programmatore", "3:00", "4:30", "Completata"),
+    ("Implementazione VO findings sicurezza (static-analysis, owasp, documentation, secret) + UT", "Programmatore", "4:30", "5:00", "Completata"),
+    ("Implementazione Analysis report entities (documentation/code report) + unit test", "Programmatore", "4:00", "5:00", "Completata"),
+    ("Implementazione save port (GitHubAnalysis, code-report) + unit test", "Programmatore", "3:30", "4:00", "Completata"),
+    ("Implementazione CodeAgentAdapter e Agent Port", "Programmatore", "5:00", "4:00", "Completata"),
+    ("Implementazione OrchestratorService e bootstrap cartella agents", "Programmatore", "3:00", "4:30", "Completata"),
+    ("Prima implementazione Documentation Agent e tuning adapter", "Programmatore", "4:00", "5:00", "Completata"),
     ("Flusso PAT completo: save/update/delete, validator e controllers", "Programmatore", "4:30", "4:30", "Completata"),
     ("Git clone application service + AnalysisController + integrazione MongoDB", "Programmatore", "4:00", "4:00", "Completata"),
     ("Auth hardening: JWT guard, secret-jwt-string, ISessionSave/ISessionDelete", "Programmatore", "4:00", "4:00", "Completata"),
@@ -2245,21 +2249,8 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
   ),
   [Riassunto delle attività svolte durante lo sprint 9 (Preventivo: 109h 30m, Consuntivo: 109h 30m)]
 )
-==== Attività Principali
-Le attività pianificate per questo sprint si concentrano sull'avanzamento della codifica e sul consolidamento delle nuove scelte architetturali.
-
-- *Sviluppo Microservizio Analisi:*
-  - Completamento degli use case per il recupero dei report, finalizzazione della logica di clonazione della repository e sviluppo dei test di integrazione con MongoDB.
-  - Fine svilippo e implementazione dei Value Object per i report delle analisi.
-  - Sviluppo focalizzato sull'implementazione pratica degli Agenti LLM (Agente Codice, Agente Documentazione e base dell'Agente Sicurezza).
-  - Sviluppo della logica di conversione (mapping) all'interno degli Adapter dei tool per standardizzare in un formato comprensibile per l'Application Service.
-- *Sviluppo Microservizio Credenziali/Account:*
-  - Sviluppo dei controller mancanti per le fasi di Login e Registrazione e sistemazione finale del Adapter per il collegamento al database.
-- *Sviluppo Front-end*
-- *Progettazione e Specifica Tecnica (ST):*
-  - Progettazione dei diagrammi delle classi (livello codice) per i vari componenti mancanti.
-  - Stesura della Specifica Tecnica sulle classi e i componenti implementati.
-
+==== Consumo Tempo e Costi Effettivi (Consuntivo)
+La tabella sottostante illustra le ore produttive effettivamente rendicontate.
 
 #sprint_table(
   (
@@ -2294,10 +2285,10 @@ Questo sprint si è concluso con un forte avanzamento per quanto riguarda la cod
 Poiché non era stato redatto un preventivo formale a inizio settimana, le stime del preventivo sono state adattate basandosi sul lavoro effettivamente svolto (consuntivo) per mantenere la coerenza dei documenti.  
 
 - *Responsabile:* Preventivato 3.5h, Consuntivo 3.5h
-- *Amministratore:* Preventivato 7h, Consuntivo 1.5h
-- *Progettista:* Preventivato 10h, Consuntivo 10h
-- *Programmatore:* Preventivato 48h, Consuntivo 48h
-- *Verificatore:* Preventivato 16h, Consuntivo 16h
+- *Amministratore:* Preventivato 10h, Consuntivo 10h
+- *Progettista:* Preventivato 17h, Consuntivo 17h
+- *Programmatore:* Preventivato 42h, Consuntivo 49h
+- *Verificatore:* Preventivato 30h, Consuntivo 30h
 
 ===== Rischi Rilevati
 Nel corso dello Sprint si sono manifestati o sono stati sfiorati i seguenti rischi già censiti:
@@ -2325,8 +2316,8 @@ Per lo Sprint successivo, il team si pone i seguenti obiettivi prioritari:
     ([Alice],           1,   4,  -2,   6,  4,  4),
   ),
   [Consuntivo Sprint],
-  (3.5,4,0,17,26,14),  // preventivo
-  (3.5,1.5,0,23,22,10),  // consuntivo ← nuovo argomento
+  (3.5,10,0,17,42,30),  // preventivo
+  (3.5,10,0,17,49,30),  // consuntivo ← nuovo argomento
 )
 #pagebreak()
 
@@ -2346,6 +2337,9 @@ Le attività pianificate per questo sprint si concentrano sul completamento del 
   - Integrazione con i controller dei microservizi.
 - *Progettazione e Specifica Tecnica (ST):*
   - Ultimazione di tutti i diagrammi mancanti e completamento della stesura della Specifica Tecnica.
+- *Altri documenti*
+  - Completamento del Manuale Utente e sistemazione finale di tabelle, consuntivi e sezioni testuali del Piano di Progetto (PdP).
+  - Completamento grafici PdQ e revisione finale del documento.
 
 
 ==== Prospetto Consumo Tempo (Preventivo)
@@ -2354,51 +2348,55 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 #sprint_table(
   (
     ([Basso Kevin], 4, 0, 0, 2, 1, 5),
-    ([Berengan Riccardo], 0, 4, 0, 1, 0, 5), 
-    ([Martinello Riccardo], 0, 5, 0, 1, 1, 0),
+    ([Berengan Riccardo], 0, 4, 0, 1, 0, 7), 
+    ([Martinello Riccardo], 0, 5, 0, 1, 1, 3),
     ([Sandu Antonio], 0, 0, 0, 0, 6, 0),
     ([Sgreva Andrea], 0, 0, 0, 1, 6, 0),
     ([Suar Alberto], 0, 0, 0, 0, 0, 4),
     ([Zago Alice], 0, 4, 0, 2, 2, 6),
   ),
-  [Prospetto orario preventivato per lo Sprint 10 (Totale: 60 ore)],
+  [Prospetto orario preventivato per lo Sprint 10],
 )
 
 ==== Prospetto attività
 #activity_table(
   (
-    ("Coordinamento backlog e merge train di sprint", "Responsabile", "1:00", "1:30", "Completata"),
-    ("Pianificazione sprint e assegnazione task puntuali", "Responsabile", "1:30", "1:00", "Completata"),
-    ("Allineamento milestone e chiusura avanzamento", "Responsabile", "1:30", "1:30", "Completata"),
+    ("Coordinamento Team, verifiche varie ed eventuali", "Responsabile", "0:30", "1:00", "Completata"),
+    ("Pianificazione sprint e assegnazione task puntuali", "Responsabile", "1:00", "1:00", "Completata"),
+    ("Allineamento milestone e chiusura avanzamento", "Responsabile", "1:00", "1:00", "Completata"),
+    ("Gestione riunioni e verbali", "Responsabile", "1:30", "1:00", "Completata"),
 
-    ("Inizio stesura Sprint 10 nel PdP", "Amministratore", "2:00", "2:30", "Completata"),
+    ("Stesura Sprint 10 nel PdP", "Amministratore", "2:00", "2:30", "Completata"),
     ("Refinement task più puntuali nel prospetto attività", "Amministratore", "2:30", "3:00", "Completata"),
-    ("Rese coerenti tabelle con preventivi e consuntivi", "Amministratore", "2:30", "2:30", "Completata"),
+    ("Aggiornamento PdQ", "Amministratore", "2:30", "2:30", "Completata"),
     ("Pulizia sezioni e contenuti obsoleti di documentazione", "Amministratore", "2:00", "2:00", "Completata"),
-    ("Aggiornamento didascalie e riepiloghi sprint", "Amministratore", "4:00", "3:00", "Completata"),
+    ("Conclusione manuale utente", "Amministratore", "4:00", "3:00", "Completata"),
 
     ("Definizione contratti getAnalysis/getAll e struttura response DTO", "Progettista", "1:30", "2:00", "Completata"),
     ("Revisione code-report schema e mapping entity/model", "Progettista", "2:00", "1:30", "Completata"),
     ("Rifinitura orchestrator per integrazione code-save port", "Progettista", "1:30", "1:30", "Completata"),
     ("Allineamento pattern risposta agenti con entity di dominio", "Progettista", "2:00", "2:00", "Completata"),
 
-    ("Avvio implementazione getAnalysis", "Programmatore", "2:00", "2:30", "Completata"),
+    ("Avvio implementazione getAnalysis", "Programmatore", "3:00", "2:30", "Completata"),
     ("Aggiunta GET su analysisId", "Programmatore", "2:30", "2:00", "Completata"),
-    ("Implementazione feature getAll", "Programmatore", "2:30", "2:30", "Completata"),
+    ("Implementazione feature getAll", "Programmatore", "3:00", "2:30", "Completata"),
     ("Aggiunta code-save port in OrchestratorService", "Programmatore", "2:00", "2:00", "Completata"),
     ("Aggiunta save-code-report model e fix code-agent-report entity", "Programmatore", "2:30", "2:00", "Completata"),
     ("Aggiunta saveCodeReport su mongo-adapter e test dedicati", "Programmatore", "2:00", "2:30", "Completata"),
-    ("Fix analysis module, cleanup file/json, remove import inutili", "Programmatore", "2:30", "2:30", "Completata"),
+    ("Deploy AWS", "Programmatore", "1:00", "2:30", "Completata"),
 
-    ("Merge/rebase da develop e risoluzione conflitti", "Verificatore", "3:00", "3:30", "Completata"),
-    ("Verifica PR #67 code-agent e conflitti tra branch agenti", "Verificatore", "3:30", "3:00", "Completata"),
-    ("Verifica PR #68/#69 docs-agent-response e saveDocReport", "Verificatore", "3:00", "3:00", "Completata"),
-    ("Verifica PR #72/#73 code-agent-report e docs-agent-integration", "Verificatore", "3:00", "3:30", "Completata"),
-    ("Verifica PR #74/#75 schema+analysis_update (dto/tests/mocks)", "Verificatore", "3:30", "3:00", "Completata"),
+    ("Verifica codice agenti e mapping", "Verificatore", "3:00", "3:30", "Completata"),
     ("Verifica PR #76 code-report-save-port e regressione finale", "Verificatore", "4:00", "4:00", "Completata"),
+    ("Verifica modifiche PdP e documentazione correlata", "Verificatore", "3:30", "2:30", "Completata"),
+    ("Verifica documenti", "Verificatore", "3:00", "2:30", "Completata"),
+    ("verifica manuale utente e grafici PdQ", "Verificatore", "3:00", "2:30", "Completata"),
+    ("Verifica finale consistenza documentazione e tabelle con consuntivi", "Verificatore", "2:30", "2:00", "Completata"),
+    ("Verifica finale ST e coerenza con codice implementato", "Verificatore", "6:00", "3:00", "Completata")
   ),
   [Riassunto delle attività svolte durante lo Sprint 10 (Preventivo: 60h, Consuntivo: 60h)]
 )
+==== Consumo Tempo e Costi Effettivi (Consuntivo)
+La tabella sottostante illustra le ore produttive effettivamente rendicontate.
 
 #sprint_table(
   (
@@ -2412,6 +2410,43 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
   ),
   [Prospetto orario consuntivato per lo Sprint 10 (Totale: 60 ore)],
 )
+
+==== Retrospettiva dello sprint 10
+===== Valutazione del Periodo
+Questo sprint ha permesso al team di concludere il progetto con un consumo orario minore del previsto, ma in forte ritardo rispetto alla pianificazione iniziale. 
+Il focus è stato principalmente sul completamento del codice e dei test per il microservizio di analisi, con particolare attenzione agli agenti e alla logica di salvataggio e recupero delle analisi. 
+Il deployment su AWS è stato completato, ma ha richiesto più tempo del previsto a causa di complessità tecniche non anticipate. 
+Sul fronte documentale, sono stati completati la Specifica Tecnica, il Manuale Utente e la revisione finale del Piano di Progetto (PdP) e Piano di Qualifica.
+===== Stato di Avanzamento dei Deliverable
+- *Microservizio Account/Credenziali*: non sono state apportate modifiche dato che era giá stato completato allo sprint 9.
+
+- *Microservizio Analisi (Agenti)*: 
+  - *Agente Documentazione*: Lo sviluppo è stato completato, è stata implementata la logica di salvataggio dei report e sono state completate le query per il recupero delle analisi.
+  - *Agente Codice*: Lo sviluppo è stato completato, è stata implementata la logica di salvataggio dei report e sono state completate le query per il recupero delle analisi. Il testing è stato 
+  ostacolato da problemi legati all'esaurimento dei token durante l'analisi dei report di coverage, ma è stato comunque possibile concludere lo sviluppo.
+  - *Agente Sicurezza*: Lo sviluppo è stato completato, è stata implementata la logica di salvataggio dei report e sono state completate le query per il recupero delle analisi.
+
+- *Deployment*: É stato completato il deployment su AWS (AppRunner, ECS, RDS, Fargate), ma è stato necessario più tempo del previsto a causa di complessità tecniche non anticipate.
+
+- *Frontend*: É stata completata la stesura della Specifica Tecnica
+
+===== Squilibri orari preventivati e reali
+Poiché non era stato redatto un preventivo formale a inizio settimana, le stime del preventivo sono state adattate basandosi sul lavoro effettivamente svolto (consuntivo) per mantenere la coerenza dei documenti.  
+
+- *Responsabile:* Preventivato 4h, Consuntivo 4h
+- *Amministratore:* Preventivato 13h, Consuntivo 13h
+- *Progettista:* Preventivato 7h, Consuntivo 17h
+- *Programmatore:* Preventivato 16h, Consuntivo 16h
+- *Verificatore:* Preventivato 25h, Consuntivo 20h
+
+===== Rischi Rilevati
+Nel corso dello Sprint si sono manifestati o sono stati sfiorati i seguenti rischi già censiti:
+- #link(<RT5>)[#underline[[RT5]]] Costi e Limiti di Utilizzo: Il limite di token in output è stato superato più volte dall'Agente Codice a causa della dimensione dei report generati, rendendo difficile il testing nonostante il passaggio a modelli superiori. Il rischio è stato mitigato con un tuning specifico degli agenti e una ristrutturazione del formato dei report per ridurne la dimensione.
+- #link(<RI4>)[#underline[[RI4]]] e #link(<RI5>)[#underline[[RI5]]] Conflitti interni e disomogeneità: Si sono verificate frizioni
+ comunicative e incomprensioni dovute a uno sbilanciamento produttivo e a divergenze su cosa debba essere considerato 
+ "lavoro rendicontabile". Il rischio è stato mitigato con un confronto diretto tra i membri del team per riallineare 
+ le aspettative e definire in modo più chiaro e definitivo i criteri di rendicontazione.
+
 
 #pagebreak()
 
@@ -2429,13 +2464,11 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
     ([Alice],           1,   0,  -2,   4,  1,  -1),
   ),
   [Preventivo a finire post sprint 10],
-  (3.5,4,0,17,26,14),  // preventivo
-  (3.5,1.5,0,23,22,10),  // consuntivo ← nuovo argomento
+  (4,13,0,7,16,25),  // preventivo
+  (4,13,0,7,16,20),  // consuntivo ← nuovo argomento
 )
 
 === Conclusioni Finali
-#TODO("parole")
-#pagebreak()
 #sprint_table_con_preventivo(
   (  //              Resp  Amm  Anal  Prog  Cod  Ver
       //              7     13    12   17   20    21
@@ -2448,3 +2481,13 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
     ([Zago Alice], 6, 13, 14, 13, 19, 22),
   ),["Totale spesa per progetto"]
 )
+
+Come si può vedere dalla tabella sopra, il progetto si è concluso con un consumo totale di ore inferiore al preventivo iniziale, questo ha portato il team Skarab 
+a concludere il progetto con una spesa di *12130€* contro i *12670€* preventivati, con un risparmio di *540€*.
+
+Durante tutto il progetto il team ha riscontrato molte divergenze nella produttivitá e impiego di ore produttive da parte dei vari membri del team,
+infatti, osservando la tabella 71, si può notare come alcuni membri del team abbiano speso più ore di quanto preventivato 
+mentre altri ne hanno spese meno. Questo indica, per l'appunto uno squilibrio di impegno e redditività tra i membri del team, che ha portato a frizioni comunicative 
+e difficoltà di coordinamento, specialmente nei momenti più critici del progetto.
+
+In particolare si puó notare come la maggior parte de tempo sia stato speso per attività di programmazione, progettazione e verifica, mentre le attività di analisi e amministrazione hanno avuto un consumo di ore più contenuto.
