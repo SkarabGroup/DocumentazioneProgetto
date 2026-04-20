@@ -14,9 +14,10 @@ class GitClonerService {
     - cloningPort: IGitClonePort
     ---
     + GitClonerService(cloningPort)
-    + clone(repoUrl: RepoURL, analysisId: AnalysisId, patToken: PersonalAccessToken | null, branch: BranchName | null, commit: CommitHash | null): Promise<string>
+    + clone(repoUrl: RepoURL, analysisId: AnalysisId, patToken: PersonalAccessToken | null, 
+    branch: BranchName | null, commit: CommitHash | null): Promise<string>
 }
 
 GitClonerService ..|> IRepositoryCloner
-GitClonerService --right-> IGitClonePort
+GitClonerService --down-> IGitClonePort
 @enduml

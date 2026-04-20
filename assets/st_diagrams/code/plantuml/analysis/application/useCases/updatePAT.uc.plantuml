@@ -10,6 +10,6 @@ interface UpdatePatUseCase {
     + execute(command: UpdatePatCommand): Promise<UpdatePatResult>
 }
 
-UpdatePatUseCase --right-> UpdatePatCommand
-UpdatePatUseCase --right-> UpdatePatResult
+UpdatePatUseCase --down-> UpdatePatCommand
+UpdatePatUseCase --down-> UpdatePatResult
 @enduml

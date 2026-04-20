@@ -14,7 +14,8 @@ class DocsDiscrepancy {
     - _actualFinding: DescriptionFinding
     ---
     - DocsDiscrepancy(path, category, severity, docsClaim, actualFinding)
-    + {static} create(path: PathFinding, category: string, severity: SeverityFinding, docsClaim: DescriptionFinding, actualFinding: DescriptionFinding): DocsDiscrepancy
+    + {static} create(path: PathFinding, category: string, severity: SeverityFinding, 
+      {static} docsClaim: DescriptionFinding, actualFinding: DescriptionFinding): DocsDiscrepancy
     + getPathFinding(): PathFinding
     + getDiscrepancyCategory(): string
     + getSeverityFinding(): SeverityFinding
@@ -23,7 +24,7 @@ class DocsDiscrepancy {
     + equals(other: DocsDiscrepancy): boolean
 }
 
-DocsDiscrepancy --right-> PathFinding
-DocsDiscrepancy --right-> SeverityFinding
+DocsDiscrepancy --down-> PathFinding
+DocsDiscrepancy --down-> SeverityFinding
 DocsDiscrepancy --down-> DescriptionFinding
 @enduml

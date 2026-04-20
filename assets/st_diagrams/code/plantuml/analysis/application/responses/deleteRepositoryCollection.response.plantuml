@@ -1,0 +1,17 @@
+@startuml DeleteRepositoryCollectionResponse
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class DeleteRepositoryCollectionResponse {
+    + deleted: boolean
+    + message?: string
+    ---
+    - DeleteRepositoryCollectionResponse(deleted, message?)
+    + {static} success(): DeleteRepositoryCollectionResponse
+    + {static} failure(err: string): DeleteRepositoryCollectionResponse
+}
+@enduml

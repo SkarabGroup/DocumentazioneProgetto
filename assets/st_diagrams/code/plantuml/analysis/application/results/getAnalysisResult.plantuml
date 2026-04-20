@@ -1,0 +1,21 @@
+@startuml GetAnalysisResult
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class GetAnalysisResult {
+    + success: boolean
+    + message?: string
+    + analysisData?: object
+    + docsReport?: DocsAnalysisReportDTO | null
+    + codeReport?: CodeAnalysisReportDTO | null
+    + secReport?: SecAnalysisReportDTO | null
+    ---
+    - GetAnalysisResult(success, message?, analysisData?, docsReport?, codeReport?, secReport?)
+    + {static} success(data: GitHubAnalysisDetailedResult, message?): GetAnalysisResult
+    + {static} failure(message: string): GetAnalysisResult
+}
+@enduml

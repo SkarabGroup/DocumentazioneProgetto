@@ -10,6 +10,6 @@ interface StartAnalysisUseCase {
     + execute(command: StartAnalysisCommand): Promise<StartAnalysisResult>
 }
 
-StartAnalysisUseCase --right-> StartAnalysisCommand
-StartAnalysisUseCase --right-> StartAnalysisResult
+StartAnalysisUseCase --down-> StartAnalysisCommand
+StartAnalysisUseCase --down-> StartAnalysisResult
 @enduml

@@ -19,6 +19,6 @@ class OWASPFinding {
     + equals(other: OWASPFinding): boolean
 }
 
-OWASPFinding --right-> PathFinding
-OWASPFinding --right-> ErrorFinding
+OWASPFinding --down-> PathFinding
+OWASPFinding --down-> ErrorFinding
 @enduml

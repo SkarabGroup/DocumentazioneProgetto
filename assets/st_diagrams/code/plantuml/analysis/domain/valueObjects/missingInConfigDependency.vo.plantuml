@@ -19,6 +19,6 @@ class MissingInConfigDependency {
     + equals(other: MissingInConfigDependency): boolean
 }
 
-MissingInConfigDependency --right-> PathFinding
-MissingInConfigDependency --left-> SeverityFinding
+MissingInConfigDependency --down-> PathFinding
+MissingInConfigDependency --down-> SeverityFinding
 @enduml

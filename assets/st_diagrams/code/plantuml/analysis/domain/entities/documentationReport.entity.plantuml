@@ -1,0 +1,34 @@
+@startuml DocumentationReport
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class DocumentationReport {
+    - reportId: ReportId
+    - analysisId: AnalysisId
+    - apiViolations: APIViolation[]
+    - docsDiscrepancies: DocsDiscrepancy[]
+    - missingFiles: MissingFile[]
+    - dependencyAudit: DependencyAudit | null
+    ---
+    - DocumentationReport(reportId, analysisId, apiViolations, docsDiscrepancies, missingFiles, dependencyAudit)
+    + {static} create(properties: DocumentationReportProps): DocumentationReport
+    + getReportId(): ReportId
+    + getAnalysisId(): AnalysisId
+    + getApiViolations(): APIViolation[]
+    + getDocsDiscrepancies(): DocsDiscrepancy[]
+    + getMissingFiles(): MissingFile[]
+    + getDependencyAudit(): DependencyAudit | null
+    + equals(other: DocumentationReport): boolean
+}
+
+DocumentationReport --right-> ReportId
+DocumentationReport --left-> AnalysisId
+DocumentationReport --down-> APIViolation
+DocumentationReport --down-> DocsDiscrepancy
+DocumentationReport --down-> MissingFile
+DocumentationReport --down-> DependencyAudit
+@enduml

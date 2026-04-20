@@ -17,5 +17,5 @@ class UndocumentedDependency {
     + equals(other: UndocumentedDependency): boolean
 }
 
-UndocumentedDependency --right-> PathFinding
+UndocumentedDependency --down-> PathFinding
 @enduml

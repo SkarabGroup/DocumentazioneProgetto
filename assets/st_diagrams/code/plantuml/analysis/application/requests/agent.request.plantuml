@@ -1,4 +1,4 @@
-@startuml SupportedLanguages
+@startuml AgentRequest
 skinparam componentStyle uml2.5
 skinparam linetype ortho
 skinparam nodesep 30
@@ -6,10 +6,11 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-enum SupportedLanguages {
-    PYTHON
-    JAVASCRIPT
-    TYPESCRIPT
-    JAVA
+class AgentRequest {
+    + id: AnalysisId
+    ---
+    + AgentRequest(id: AnalysisId)
 }
+
+AgentRequest --right-> AnalysisId
 @enduml

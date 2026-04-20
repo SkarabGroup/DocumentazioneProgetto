@@ -25,7 +25,7 @@ class DependencyFinding {
     + getDescription(): DescriptionFinding
 }
 
-DependencyFinding --right-> PathFinding
-DependencyFinding --right-> SeverityFinding
-DependencyFinding --right-> DescriptionFinding
+DependencyFinding --down-> PathFinding
+DependencyFinding --down-> SeverityFinding
+DependencyFinding --down-> DescriptionFinding
 @enduml

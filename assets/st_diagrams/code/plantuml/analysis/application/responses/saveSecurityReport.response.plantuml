@@ -1,0 +1,17 @@
+@startuml SaveSecurityReportResponse
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class SaveSecurityReportResponse {
+    + isSuccess: boolean
+    + errorMessage?: string
+    ---
+    - SaveSecurityReportResponse(isSuccess, errorMessage?)
+    + {static} success(): SaveSecurityReportResponse
+    + {static} failure(error: string): SaveSecurityReportResponse
+}
+@enduml

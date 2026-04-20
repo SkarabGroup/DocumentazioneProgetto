@@ -1,0 +1,28 @@
+@startuml CodeAgentReport
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class CodeAgentReport {
+    - _id: ReportId
+    - _analysisId: AnalysisId
+    - _metadata: CodeAgentMetadata
+    - _interpretation: AIInterpretation
+    ---
+    - CodeAgentReport(id, analysisId, metadata, interpretation)
+    + {static} create(id: ReportId, analysisId: AnalysisId, metadata: CodeAgentMetadata, interpretation: AIInterpretation): CodeAgentReport
+    + getId(): ReportId
+    + getAnalysisId(): AnalysisId
+    + getMetadata(): CodeAgentMetadata
+    + getInterpretation(): AIInterpretation
+    + equals(other: CodeAgentReport): boolean
+}
+
+CodeAgentReport --down-> ReportId
+CodeAgentReport --down-> AnalysisId
+CodeAgentReport --down-> CodeAgentMetadata
+CodeAgentReport --down-> AIInterpretation
+@enduml

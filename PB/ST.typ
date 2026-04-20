@@ -2,7 +2,7 @@
 #import "../lib/variables.typ": *
 #import "../lib/stDiagramUtil.typ": *
 
-#let versione = "v0.12.0"
+#let versione = "v0.14.0"
 #set heading(numbering: "1.1.1")
 /*
 === FUNZIONAMENTO DEL DOCUMENTO ===
@@ -23,6 +23,13 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #titlePage("Specifica Tecnica", versione)
 #set page(numbering: "1", header: header("Specifica Tecnica"), footer: footer())
 #let history = (
+  (
+    "2026/04/20",
+    "0.14.0",
+    "Completati i componenti delle sezioni domain e application per Analysis Microservice",
+    members.andrea,
+    members.antonio
+  ),
   (
     "2026/04/19",
     "0.13.0",
@@ -376,8 +383,16 @@ L'obiettivo del Domain Core è modellare la realtà del problema attraverso un l
 ===== Value Object
 I Value Object rappresentano concetti del dominio definiti esclusivamente dai loro attributi. Sono progettati per essere *immutabili*: una volta istanziati, il loro stato non può subire variazioni, garantendo la thread-safety e la stabilità dei riferimenti durante l'intero ciclo di vita della richiesta. L'uguaglianza tra due Value Object è determinata dal valore delle proprietà incapsulate e non dall'identità dell'istanza in memoria.
 
+====== AIInterpretation <AIInterpretation>
+#codeDiagram("AIInterpretation", 100%)
+
+`AIInterpretation` è il Value Object che rappresenta la valutazione complessiva prodotta dall'agente AI a partire dai risultati dell'analisi statica e della copertura. Aggrega il verdetto finale, il sommario esecutivo e le due valutazioni di dettaglio.
+
+- *Verdetto Vincolato:* Il campo `_verdict` è tipizzato sull'enumerazione #link(<VerdictStatus>)[`VerdictStatus`], garantendo che il giudizio dell'agente sia sempre espresso con un valore riconosciuto dal dominio.
+- *Composizione Duale:* Aggrega #link(<StaticAnalysisEvaluation>)[`StaticAnalysisEvaluation`] e #link(<CoverageEvaluation>)[`CoverageEvaluation`], offrendo una visione unificata dei due assi di qualità analizzati.
+
 ====== AnalysisId <AnalysisId>
-#codeDiagram("AnalysisId", 100%)
+#codeDiagram("AnalysisId", 40%)
 
 L'entità `AnalysisId` è il Value Object che rappresenta l'identità univoca di un'analisi nel sistema. Incapsula un UUID v7 validato, garantendo che ogni analisi possa essere identificata in modo non ambiguo e cronologicamente ordinabile.
 
@@ -386,7 +401,7 @@ L'entità `AnalysisId` è il Value Object che rappresenta l'identità univoca di
 - *Contratto verso il Dominio:* Viene utilizzato da #link(<GitHubAnalysis>)[`GitHubAnalysis`] come identificatore primario e da #link(<IRepositoryCloner>)[`IRepositoryCloner`] per contestualizzare le operazioni di clonazione.
 
 ====== APIViolation <APIViolation>
-#codeDiagram("APIViolation", 100%)
+#codeDiagram("APIViolation", 90%)
 
 `APIViolation` è il Value Object che rappresenta una violazione rilevata nel contratto API del repository analizzato. Aggrega la localizzazione del problema, la regola violata, la severità e una descrizione testuale.
 
@@ -394,16 +409,23 @@ L'entità `AnalysisId` è il Value Object che rappresenta l'identità univoca di
 - *Composizione:* Aggrega #link(<PathFinding>)[`PathFinding`], #link(<SeverityFinding>)[`SeverityFinding`] e #link(<DescriptionFinding>)[`DescriptionFinding`], contestualizzando ogni violazione con la sua localizzazione, criticità e dettaglio testuale.
 
 ====== BranchName <BranchName>
-#codeDiagram("BranchName", 100%)
+#codeDiagram("BranchName", 40%)
 
 Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicando le regole sintattiche del protocollo Git a livello di dominio. Rappresenta un concetto esplicito del dominio, evitando l'uso di stringhe primitive non validate.
 
 - *Validazione di Dominio:* Tramite una regex derivata dalle specifiche Git (`git-check-ref-format`), impedisce la creazione di branch name che iniziano o terminano con `/`, contengono `..` o caratteri speciali proibiti (`~`, `^`, `:`, `?`, `*`, `[`).
 - *Uso come Parametro Contestuale:* Viene aggregato da #link(<GitHubAnalysis>)[`GitHubAnalysis`] per fissare la versione della sorgente analizzata.
 
+====== CodeAgentMetadata <CodeAgentMetadata>
+#codeDiagram("CodeAgentMetadata", 60%)
+
+`CodeAgentMetadata` è il Value Object che rappresenta i metadati contestuali prodotti dall'agente di analisi del codice, descrivendo il linguaggio analizzato e lo stato dell'esecuzione.
+
+- *Contesto dell'Esecuzione:* Il campo `_status` garantisce che ogni report sia accompagnato da un'indicazione esplicita sull'esito dell'esecuzione dell'agente, distinguendo analisi completate da quelle parziali o fallite.
+- *Linguaggio Dichiarato:* Il campo `_language` associa il report al linguaggio di programmazione analizzato, contestualizzando i risultati per i layer superiori che ne fanno uso.
 
 ====== CommitHash <CommitHash>
-#codeDiagram("CommitHash", 100%)
+#codeDiagram("CommitHash", 40%)
 
 `CommitHash` è il Value Object che rappresenta un hash SHA-1 di un commit Git (40 caratteri esadecimali). Garantisce che ogni riferimento a un commit nel sistema sia sintatticamente corretto e immutabile.
 
@@ -411,29 +433,36 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Riproducibilità:* In combinazione con #link(<BranchName>)[`BranchName`] e #link(<RepoURL>)[`RepoURL`], fissa lo stato esatto del repository, rendendo ogni analisi un'operazione deterministica.
 
 ====== ConfigDependency <ConfigDependency>
-#codeDiagram("ConfigDependency", 100%)
+#codeDiagram("ConfigDependency", 85%)
 
 `ConfigDependency` è il Value Object che rappresenta una dipendenza rilevata in un file di configurazione del progetto (es. `package.json`, `requirements.txt`).
 
 - *Localizzazione della Fonte:* Il campo `_pathFinding` di tipo #link(<PathFinding>)[`PathFinding`] identifica il file di configurazione specifico in cui la dipendenza è stata rilevata, permettendo di risalire alla fonte senza ambiguità.
 - *Versione Pinned Opzionale:* Il campo `_versionPinned` è nullable, gestendo i casi in cui una dipendenza sia dichiarata senza vincolo di versione nel file di configurazione.
 
-====== CoverageFinding <CoverageFinding>
-#codeDiagram("CoverageFinding", 100%)
+====== CoverageEvaluation <CoverageEvaluation>
+#codeDiagram("CoverageEvaluation", 85%)
 
-`CoverageFinding` è il Value Object aggregato che rappresenta il risultato completo dell'analisi di copertura per un intero progetto, per un dato linguaggio di programmazione.
+`CoverageEvaluation` è il Value Object che aggrega i risultati della valutazione dell'analisi di code coverage, combinando un giudizio sintetico sulla salute complessiva con il dettaglio ragionato per i file critici. 
 
-- *Aggregazione Consistente:* La validazione verifica che non esistano duplicati di percorsi tra i `FileCoverage` e che i totali siano coerenti con i file presenti.
-- *Report di Qualità:* Fornisce una vista a due livelli: totale aggregato per una valutazione rapida e dettaglio per file per un'analisi puntuale.
-
+- *Salute Aggregata:* Il campo `_overallHealth` fornisce una valutazione sintetica dell'intera copertura, permettendo ai layer superiori di ottenere un giudizio immediato senza dover ispezionare i singoli file.
+- *Dettaglio per File:* La collezione di #link(<CriticalFileReasoning>)[`CriticalFileReasoning`] raccoglie il ragionamento dettagliato per ciascun file critico, fornendo localizzazione delle lacune e spiegazione contestuale in un'unica struttura coesa.
 
 ====== CoveragePercentage <CoveragePercentage>
-#codeDiagram("CoveragePercentage", 100%)
+#codeDiagram("CoveragePercentage", 50%)
 
 `CoveragePercentage` è il Value Object che rappresenta una percentuale di copertura del codice come numero decimale nell'intervallo `[0, 1]`.
 
 - *Invariante Numerica:* La validazione garantisce che il valore sia un numero finito compreso tra 0 e 1 inclusivi, prevenendo valori impossibili come percentuali superiori al 100%.
-- *Primitivo di Copertura:* Viene usato come building block da #link(<FileCoverage>)[`FileCoverage`] e da #link(<CoverageFinding>)[`CoverageFinding`].
+- *Primitivo di Copertura:* Viene riutilizzato come building block da #link(<CriticalFileReasoning>)[`CriticalFileReasoning`] per rappresentare la percentuale di copertura per linee dei file critici.
+
+====== CriticalFileReasoning <CriticalFileReasoning>
+#codeDiagram("CriticalFileReasoning", 85%)
+
+`CriticalFileReasoning` è il Value Object che rappresenta il ragionamento dettagliato su un singolo file critico per la copertura, associando i dati quantitativi delle lacune alla spiegazione contestuale del problema.
+
+- *Dati Quantitativi:* I campi `_missingLines` e `_missingBranches` localizzano con precisione le lacune di copertura, permettendo di intervenire direttamente sulle righe e i branch non coperti.
+- *Spiegazione Contestuale:* Il campo `_aiReasoning` di tipo #link(<DescriptionFinding>)[`DescriptionFinding`] arricchisce i dati numerici con una descrizione del problema, trasformando il dato grezzo in un'indicazione azionabile.
 
 ====== DependencyAudit <DependencyAudit>
 #codeDiagram("DependencyAudit", 100%)
@@ -444,7 +473,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Uguaglianza Ordinata:* Il confronto tra collezioni è indipendente dall'ordine di inserimento, garantendo che due audit con le stesse dipendenze siano sempre considerati equivalenti.
 
 ====== DependencyFinding <DependencyFinding>
-#codeDiagram("DependencyFinding", 100%)
+#codeDiagram("DependencyFinding", 70%)
 
 `DependencyFinding` è il Value Object che rappresenta una vulnerabilità nota rilevata in una dipendenza del progetto (es. CVE in un pacchetto npm o pip).
 
@@ -453,45 +482,43 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 
 
 ====== DescriptionFinding <DescriptionFinding>
-#codeDiagram("DescriptionFinding", 100%)
+#codeDiagram("DescriptionFinding", 45%)
 
 `DescriptionFinding` è il Value Object primitivo che rappresenta la descrizione testuale di un finding di analisi. Garantisce che la descrizione non sia mai vuota o composta da soli spazi.
 
 - *Riuso Composizionale:* Viene riutilizzato come componente da Value Object più complessi quali #link(<ErrorFinding>)[`ErrorFinding`] e #link(<DependencyFinding>)[`DependencyFinding`].
 
 ====== DocsDiscrepancy <DocsDiscrepancy>
-#codeDiagram("DocsDiscrepancy", 100%)
+#codeDiagram("DocsDiscrepancy", 85%)
 
 `DocsDiscrepancy` è il Value Object che rappresenta una discrepanza tra quanto dichiarato nella documentazione e quanto effettivamente rilevato nel codice sorgente.
 
 - *Confronto Duale:* I campi `_docsClaim` e `_actualFinding` catturano esplicitamente entrambi i lati della divergenza, rendendo il problema autoesplicativo senza necessità di ricorrere al codice sorgente.
 - *Categorizzazione:* Il campo `_discrepancyCategory` raggruppa le discrepanze per tipologia, abilitando analisi aggregate e prioritizzazione degli interventi correttivi.
 
-====== DocumentationFinding <DocumentationFinding>
-#codeDiagram("DocumentationFinding", 100%)
-
-`DocumentationFinding` è il Value Object composito che rappresenta un singolo problema di documentazione rilevato. Combina la localizzazione del file, il dettaglio dell'errore e il percorso logico nel documento.
-
-- *Specificità del Dominio:* Il campo `documentPath` (array di stringhe) rappresenta il percorso logico all'interno di un documento strutturato (es. `["API", "endpoints"]`).
-- *Invarianti:* Tutte le parti del `documentPath` devono essere stringhe non vuote.
-
-
 ====== ErrorFinding <ErrorFinding>
-#codeDiagram("ErrorFinding", 100%)
+#codeDiagram("ErrorFinding", 90%)
 
 `ErrorFinding` è il Value Object composito che rappresenta un singolo errore rilevato durante l'analisi, aggregando la riga di codice incriminata, una descrizione e un livello di severità.
 
 - *Composizione di Primitivi:* Aggrega #link(<DescriptionFinding>)[`DescriptionFinding`] e #link(<SeverityFinding>)[`SeverityFinding`], arricchendoli con il numero di riga (intero positivo).
-- *Blocco Costruttivo:* Viene utilizzato come componente da #link(<OWASPFinding>)[`OWASPFinding`], #link(<SecretFinding>)[`SecretFinding`] e #link(<StaticAnalysisFinding>)[`StaticAnalysisFinding`].
+- *Blocco Costruttivo:* Viene utilizzato come componente da #link(<OWASPFinding>)[`OWASPFinding`] e #link(<SecretFinding>)[`SecretFinding`].
 
+====== IssueLocation <IssueLocation>
+#codeDiagram("IssueLocation", 75%)
 
-====== FileCoverage <FileCoverage>
-#codeDiagram("FileCoverage", 100%)
+`IssueLocation` è il Value Object che rappresenta la posizione precisa di un problema all'interno di un file sorgente, identificando l'intervallo di righe e la colonna coinvolti.
 
-`FileCoverage` è il Value Object che rappresenta la copertura di test di un singolo file, aggregando la percentuale di copertura per linee e branch, il percorso del file e le righe non coperte.
+- *Posizione Intervallare:* I campi `_lineStart` e `_lineEnd` modellano problemi che si estendono su più righe, garantendo tramite validazione che `lineStart` non superi mai `lineEnd` e che entrambi siano positivi.
+- *Localizzazione Completa:* Combinato con #link(<PathFinding>)[`PathFinding`] in #link(<KeyIssueReasoning>)[`KeyIssueReasoning`], consente di identificare un problema con la precisione necessaria per navigarvi direttamente in un editor.
 
-- *Coerenza Interna:* Se la copertura è 100%, le `missedLines` devono essere vuote; i numeri di riga devono essere interi positivi e univoci.
-- *Granularità:* Fornisce le informazioni necessarie per identificare esattamente quali righe richiedono test aggiuntivi.
+====== KeyIssueReasoning <KeyIssueReasoning>
+#codeDiagram("KeyIssueReasoning", 100%)
+
+`KeyIssueReasoning` è il Value Object che rappresenta il ragionamento dettagliato su un singolo problema rilevato dall'analisi statica, arricchendo il dato grezzo con interpretazione e risoluzione suggerita.
+
+- *Triplice Descrizione:* I campi `_originalDescription`, `_aiReasoning` e `_suggestedResolution`, tutti di tipo #link(<DescriptionFinding>)[`DescriptionFinding`], separano esplicitamente il problema rilevato dallo strumento, la sua interpretazione e la strategia di risoluzione proposta.
+- *Localizzazione Precisa:* Aggrega #link(<PathFinding>)[`PathFinding`] e #link(<IssueLocation>)[`IssueLocation`], permettendo di navigare direttamente al punto esatto del codice senza ambiguità.
 
 ====== MissingFile <MissingFile>
 #codeDiagram("MissingFile", 100%)
@@ -502,7 +529,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Stato Classificato:* Il campo `_statusMissing` di tipo #link(<StatusMissing>)[`StatusMissing`] distingue semanticamente le diverse cause di assenza, abilitando politiche di gestione differenziate.
 
 ====== MissingInConfigDependency <MissingInConfigDependency>
-#codeDiagram("MissingInConfigDependency", 100%)
+#codeDiagram("MissingInConfigDependency", 90%)
 
 `MissingInConfigDependency` è il Value Object che rappresenta una dipendenza documentata nel README ma assente nei file di configurazione del progetto.
 
@@ -510,7 +537,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Riferimento al Contesto:* Il campo `_pathFinding` di tipo #link(<PathFinding>)[`PathFinding`] indica il file di configurazione in cui la dipendenza avrebbe dovuto essere presente, contestualizzando il problema per chi deve risolverlo.
 
 ====== OWASPFinding <OWASPFinding>
-#codeDiagram("OWASPFinding", 100%)
+#codeDiagram("OWASPFinding", 70%)
 
 `OWASPFinding` è il Value Object che rappresenta una vulnerabilità di sicurezza classificata secondo la tassonomia OWASP. Aggrega localizzazione, dettaglio dell'errore e categoria OWASP.
 
@@ -518,7 +545,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 
 
 ====== PATPassword <PATPassword>
-#codeDiagram("PATPassword", 100%)
+#codeDiagram("PATPassword", 40%)
 
 `PATPassword` è il Value Object che rappresenta l'hash SHA-256 di una password usata per proteggere un Personal Access Token. Non contiene mai la password in chiaro.
 
@@ -526,7 +553,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 
 
 ====== PathFinding <PathFinding>
-#codeDiagram("PathFinding", 100%)
+#codeDiagram("PathFinding", 40%)
 
 `PathFinding` è il Value Object che rappresenta un percorso relativo a un file nel repository analizzato. Applica regole di sicurezza per impedire path traversal e percorsi assoluti.
 
@@ -534,22 +561,30 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 
 
 ====== PersonalAccessToken <PersonalAccessToken>
-#codeDiagram("PersonalAccessToken", 100%)
+#codeDiagram("PersonalAccessToken", 50%)
 
 `PersonalAccessToken` è il Value Object che incapsula un GitHub PAT, validandone il formato secondo i pattern ufficiali GitHub (`ghp_*` o `github_pat_*`).
 
 - *Validazione del Formato:* La regex garantisce che solo token con formato ufficiale possano essere usati, prevenendo la registrazione di token malformati.
 
 ====== ReadmeDependency <ReadmeDependency>
-#codeDiagram("ReadmeDependency", 100%)
+#codeDiagram("ReadmeDependency", 65%)
 
 `ReadmeDependency` è il Value Object che rappresenta una dipendenza dichiarata nel file README del repository.
 
 - *Versione Opzionale:* Il campo `_versionClaimed` è nullable, riflettendo la realtà documentale in cui un README può citare una dipendenza senza specificarne la versione esatta.
 - *Fonte Documentale:* Viene aggregato da #link(<DependencyAudit>)[`DependencyAudit`] come rappresentazione della dipendenza dal punto di vista della documentazione, da confrontare con quanto dichiarato nei file di configurazione.
 
+====== ReportId <ReportId>
+#codeDiagram("ReportId", 40%)
+
+`ReportId` è il Value Object che rappresenta l'identità univoca di un report nel sistema. Incapsula un UUID v7 validato, garantendo che ogni report possa essere identificato in modo non ambiguo e cronologicamente ordinabile.
+
+- *Uguaglianza Strutturale:* Il metodo `equals()` implementa la semantica dei Value Object: due `ReportId` sono uguali se e solo se il loro valore stringa è identico.
+//- *Contratto verso il Dominio:* Viene utilizzato come identificatore primario dalle entity di report quali #link(<CodeReport>)[`CodeReport`] e #link(<DocumentationReport>)[`DocumentationReport`].
+
 ====== RepoURL <RepoURL>
-#codeDiagram("RepoURL", 100%)
+#codeDiagram("RepoURL", 40%)
 
 `RepoURL` è il Value Object che rappresenta l'URL di un repository GitHub. La validazione garantisce la conformità al formato `https://github.com/<owner>/<repo>`.
 
@@ -558,7 +593,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 
 
 ====== SecretFinding <SecretFinding>
-#codeDiagram("SecretFinding", 100%)
+#codeDiagram("SecretFinding", 65%)
 
 `SecretFinding` rappresenta la rilevazione di un segreto esposto (API key, token, password) all'interno del codice sorgente analizzato.
 
@@ -567,23 +602,30 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 
 
 ====== SeverityFinding <SeverityFinding>
-#codeDiagram("SeverityFinding", 100%)
+#codeDiagram("SeverityFinding", 45%)
 
 `SeverityFinding` è il Value Object che rappresenta il livello di severità di un finding, vincolato all'enumerazione #link(<SeverityLevel>)[`SeverityLevel`] (`LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
 
 - *Coerenza del Dominio:* Normalizza la stringa in input e la valida, garantendo che nessun livello arbitrario possa essere introdotto.
 
+====== StaticAnalysisEvaluation <StaticAnalysisEvaluation>
+#codeDiagram("StaticAnalysisEvaluation", 100%)
 
-====== StaticAnalysisFinding <StaticAnalysisFinding>
-#codeDiagram("StaticAnalysisFinding", 100%)
+`StaticAnalysisEvaluation` è il Value Object che aggrega i risultati della valutazione dell'analisi statica, combinando il conteggio totale dei problemi rilevati con la collezione dei ragionamenti dettagliati per ciascun problema.
 
-`StaticAnalysisFinding` è il Value Object che rappresenta un problema di qualità del codice rilevato dall'analisi statica, classificato per linguaggio e categoria.
+- *Conteggio Totale:* Il campo `_totalIssuesAnalyzed` preserva il numero complessivo di problemi analizzati, permettendo di avere una visione quantitativa immediata dell'entità dei problemi rilevati.
+- *Ragionamenti Aggregati:* La collezione di #link(<KeyIssueReasoning>)[`KeyIssueReasoning`] raccoglie il dettaglio analitico per ciascun problema, fornendo localizzazione, severità e risoluzione suggerita in un'unica struttura coesa.
 
-- *Contestualizzazione:* Il campo `analyzedLanguage` garantisce che il finding sia sempre associato al linguaggio corretto.
-- *Categoria:* Il campo `errorCategory` fornisce un raggruppamento tematico (es. `null-dereference`) per analisi aggregate.
+====== ToolError <ToolError>
+#codeDiagram("ToolError", 60%)
+
+`ToolError` è il Value Object che rappresenta un errore verificatosi durante l'esecuzione di uno strumento di analisi, associando il nome dello strumento alla descrizione del problema riscontrato.
+
+- *Identificazione della Fonte:* Il campo `_toolName` permette di risalire immediatamente allo strumento che ha generato l'errore.
+- *Uguaglianza per Contenuto:* Il metodo `equals()` confronta sia il nome dello strumento che la descrizione, garantendo che due errori identici prodotti dallo stesso tool siano riconosciuti come equivalenti.
 
 ====== UndocumentedDependency <UndocumentedDependency>
-#codeDiagram("UndocumentedDependency", 100%)
+#codeDiagram("UndocumentedDependency", 70%)
 
 `UndocumentedDependency` è il Value Object che rappresenta una dipendenza presente nei file di configurazione del progetto ma non menzionata nel README.
 
@@ -591,7 +633,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Localizzazione Precisa:* Il campo `_pathFinding` di tipo #link(<PathFinding>)[`PathFinding`] indica il file di configurazione in cui la dipendenza è stata rilevata, facilitando l'intervento correttivo sulla documentazione.
 
 ====== UserId <UserId>
-#codeDiagram("UserId", 100%)
+#codeDiagram("UserId", 35%)
 
 `UserId` è il Value Object che rappresenta l'identità dell'utente che ha richiesto l'analisi. Incapsula un UUID standard validato.
 
@@ -608,7 +650,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 
 ===== Enums
 ====== AnalysisStatus <AnalysisStatus>
-#codeDiagram("AnalysisStatus", 100%)
+#codeDiagram("AnalysisStatus", 20%)
 
 `AnalysisStatus` è l'enumerazione che definisce gli stati del ciclo di vita di un'analisi: `PENDING`, `IN_PROGRESS`, `COMPLETED`, `FAILED`.
 
@@ -616,7 +658,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Osservabilità:* Permette ai servizi applicativi e all'infrastruttura di monitorare e persistere lo stato di avanzamento dell'analisi in modo type-safe.
 
 ====== SeverityLevel <SeverityLevel>
-#codeDiagram("SeverityLevel", 100%)
+#codeDiagram("SeverityLevel", 20%)
 
 `SeverityLevel` è l'enumerazione che definisce i livelli di criticità dei finding: `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`.
 
@@ -624,20 +666,20 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Standardizzazione:* Evita l'uso di stringhe libere, garantendo che tutti i componenti del sistema parlino lo stesso linguaggio per la prioritizzazione dei problemi rilevati.
 
 ====== StatusMissing <StatusMissing>
-#codeDiagram("StatusMissing", 100%)
+#codeDiagram("StatusMissing", 30%)
 
 `StatusMissing` è l'enumerazione che classifica la causa di assenza di un file referenziato nella documentazione: `NOT_FOUND`, `POSSIBLY_RENAMED`, `WRONG_PATH`.
 
 - *Vocabolario Diagnostico:* Definisce il vocabolario ufficiale del dominio per distinguere le diverse cause di assenza, usato da #link(<MissingFile>)[`MissingFile`] per caratterizzare semanticamente ogni file mancante.
 - *Azionabilità:* I tre valori guidano interventi distinti: `NOT_FOUND` suggerisce un file mai creato, `POSSIBLY_RENAMED` un refactoring non riflesso nella documentazione, `WRONG_PATH` un errore di percorso nel riferimento.
 
-====== SupportedLanguages <SupportedLanguages>
-#codeDiagram("SupportedLanguages", 100%)
+====== VerdictStatus <VerdictStatus>
+#codeDiagram("VerdictStatus", 20%)
 
-`SupportedLanguages` elenca i linguaggi di programmazione supportati dall'analisi: `PYTHON`, `JAVASCRIPT`, `TYPESCRIPT`, `JAVA`.
+`VerdictStatus` è l'enumerazione che definisce i livelli di qualità complessiva restituiti dall'analisi del codice: `CRITICAL`, `POOR`, `FAIR`, `GOOD`, `EXCELLENT`.
 
-- *Contratto di Supporto:* Definisce esplicitamente l'ambito tecnologico del sistema, usato da #link(<StaticAnalysisFinding>)[`StaticAnalysisFinding`] e #link(<CoverageFinding>)[`CoverageFinding`] per contestualizzare i risultati al linguaggio analizzato.
-- *Estendibilità Controllata:* L'aggiunta di nuovi linguaggi richiede una modifica esplicita all'enum, prevenendo l'introduzione accidentale di linguaggi non supportati.
+- *Scala Ordinata:* I cinque valori formano una scala progressiva dalla qualità peggiore alla migliore, usata da #link(<AIInterpretation>)[`AIInterpretation`] per esprimere il giudizio sintetico sull'intero repository analizzato.
+- *Standardizzazione:* Traduce il verdetto testuale presente nel JSON dell'agente in un valore type-safe del dominio, impedendo la propagazione di verdetti arbitrari nei layer applicativi.
 
 
 ===== Entity
@@ -650,129 +692,298 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 ====== GitHubAnalysis <GitHubAnalysis>
 #codeDiagram("GitHubAnalysis", 100%)
 
-`GitHubAnalysis` è l'entità radice dell'aggregato che rappresenta un'analisi di un repository GitHub. Incapsula l'identità, l'utente richiedente, il contesto del repository e la macchina a stati del ciclo di vita.
+`GitHubAnalysis` è l'entità radice dell'aggregato che rappresenta un'analisi di un repository GitHub. Incapsula l'identità, l'utente richiedente, il contesto del repository, i riferimenti ai report prodotti dalle analisi e la macchina a stati del ciclo di vita.
 
-- *Radice dell'Aggregato:* Coordina e protegge la consistenza dei Value Object #link(<AnalysisId>)[`AnalysisId`], #link(<UserId>)[`UserId`], #link(<RepoURL>)[`RepoURL`], #link(<BranchName>)[`BranchName`] e #link(<CommitHash>)[`CommitHash`].
+- *Identità Basata sull'Analisi:* Il metodo `equals()` confronta due istanze esclusivamente tramite #link(<AnalysisId>)[`AnalysisId`], esprimendo la semantica fondamentale delle entity: due `GitHubAnalysis` sono la stessa analisi se condividono l'identità, indipendentemente dai dati aggregati.
+- *Radice dell'Aggregato:* Coordina e protegge la consistenza dei Value Object #link(<AnalysisId>)[`AnalysisId`], #link(<UserId>)[`UserId`], #link(<RepoURL>)[`RepoURL`], #link(<BranchName>)[`BranchName`], #link(<CommitHash>)[`CommitHash`] e #link(<ReportId>)[`ReportId`].
+- *Riferimenti ai Report Opzionali:* I campi `codeReportId`, `docsReportId` e `securityReportId` sono nullable, modellando il fatto che un'analisi può coinvolgere solo un sottoinsieme dei tre tipi di report disponibili in base a quanto richiesto.
 - *Macchina a Stati Protetta:* I metodi `inProgress()`, `complete()` e `failed()` implementano le transizioni valide dell'#link(<AnalysisStatus>)[`AnalysisStatus`], rifiutando transizioni non consentite con errori espliciti.
-- *Creazione Controllata:* Il metodo statico `create()` è l'unico punto di ingresso, garantendo che nessuna istanza possa esistere in stato parziale o inconsistente.
 
+
+====== CodeAgentReport <CodeAgentReport>
+#codeDiagram("CodeAgentReport", 100%)
+
+`CodeAgentReport` è l'entità che rappresenta il report prodotto dall'analisi del codice per una specifica analisi. Aggrega i metadati dell'esecuzione e l'interpretazione complessiva dei risultati, collegandosi all'analisi di appartenenza tramite identificatori.
+
+- *Identità Basata sul Report:* Il metodo `equals()` confronta due istanze esclusivamente tramite #link(<ReportId>)[`ReportId`], esprimendo la semantica fondamentale delle entity: due `CodeAgentReport` sono lo stesso report se condividono l'identità, indipendentemente dai dati aggregati.
+- *Contenuto del Report:* Aggrega #link(<CodeAgentMetadata>)[`CodeAgentMetadata`] per i metadati contestuali dell'esecuzione e #link(<AIInterpretation>)[`AIInterpretation`] per il verdetto complessivo e le valutazioni di dettaglio sull'analisi statica e sulla copertura.
+
+====== DocumentationReport <DocumentationReport>
+#codeDiagram("DocumentationReport", 100%)
+
+`DocumentationReport` è l'entità che rappresenta il report prodotto dall'analisi della documentazione per una specifica analisi. Aggrega le violazioni API, le discrepanze documentali, i file mancanti e l'audit delle dipendenze, collegandosi all'analisi di appartenenza tramite identificatori.
+
+- *Identità Basata sul Report:* Il metodo `equals()` confronta due istanze esclusivamente tramite #link(<ReportId>)[`ReportId`], esprimendo la semantica fondamentale delle entity: due `DocumentationReport` sono lo stesso report se condividono l'identità, indipendentemente dai dati aggregati.
+- *Risultati Opzionali:* Le collezioni `apiViolations` (#link(<APIViolation>)[`APIViolation`]), `docsDiscrepancies` (#link(<DocsDiscrepancy>)[`DocsDiscrepancy`]) e `missingFiles` (#link(<MissingFile>)[`MissingFile`]) vengono inizializzate a array vuoto se non fornite, mentre `dependencyAudit` (#link(<DependencyAudit>)[`DependencyAudit`]) è nullable, modellando il fatto che ciascuna categoria di risultati può essere assente in base all'esito dell'analisi.
+
+====== SecurityReport <SecurityReport>
+#codeDiagram("SecurityReport", 100%)
+
+`SecurityReport` è l'entità che rappresenta il report prodotto dall'analisi di sicurezza per una specifica analisi. Aggrega i finding sulle dipendenze vulnerabili, le violazioni OWASP, i segreti esposti e gli eventuali errori degli strumenti di analisi, collegandosi all'analisi di appartenenza tramite identificatori.
+
+- *Identità Basata sul Report:* Il metodo `equals()` confronta due istanze esclusivamente tramite #link(<ReportId>)[`ReportId`], esprimendo la semantica fondamentale delle entity: due `SecurityReport` sono lo stesso report se condividono l'identità, indipendentemente dai dati aggregati.
+- *Tre Assi di Sicurezza:* Le collezioni `dependencyFindings` (#link(<DependencyFinding>)[`DependencyFinding`]), `owaspFindings` (#link(<OWASPFinding>)[`OWASPFinding`]) e `secretFindings` (#link(<SecretFinding>)[`SecretFinding`]) modellano tre categorie distinte di problemi di sicurezza (standard OWASP, dipendenze vulnerabili e segreti), ciascuna con la propria semantica e struttura dati.
+- *Tracciabilità degli Errori:* La collezione `toolErrors` di tipo #link(<ToolError>)[`ToolError`] preserva i fallimenti degli strumenti di analisi all'interno del report stesso, rendendo visibile anche un'esecuzione parziale senza perdere i risultati già raccolti.
 
 ===== Service
 ====== IPasswordProvider <IPasswordProvider>
-#codeDiagram("IPasswordProvider", 100%)
+#codeDiagram("IPasswordProvider", 60%)
 
 `IPasswordProvider` è l'interfaccia del Domain Service responsabile della trasformazione di una password in chiaro in un #link(<PATPassword>)[`PATPassword`] (hash SHA-256 validato).
 
 - *Separazione della Responsabilità:* Isola la logica di hashing dall'applicazione, permettendo di sostituire l'algoritmo di hashing senza modificare i servizi applicativi che dipendono da questo contratto.
 - *Porta del Dominio:* Definisce un contratto che viene implementato dal Domain Service concreto #link(<PATPasswordProvider>)[`PATPasswordProvider`], seguendo il pattern Ports & Adapters anche all'interno del dominio.
 
+====== ICodeReportEntityProvider <ICodeReportEntityProvider>
+#codeDiagram("ICodeReportEntityProvider", 100%)
+
+`ICodeReportEntityProvider` è l'interfaccia del Domain Service responsabile della costruzione di un'entità #link(<CodeAgentReport>)[`CodeAgentReport`] a partire dalla risposta grezza dell'agente di analisi del codice.
+
+- *Porta del Dominio:* Definisce il contratto che separa il dominio dal layer applicativo, impedendo che la logica di mapping del JSON dell'agente penetri nelle entità di dominio.
+- *Contestualizzazione:* Il metodo riceve #link(<ReportId>)[`ReportId`] e #link(<AnalysisId>)[`AnalysisId`] come parametri espliciti, garantendo che ogni entità prodotta sia immediatamente contestualizzata nel sistema senza ambiguità.
+
+====== IDocsReportEntityProvider <IDocsReportEntityProvider>
+#codeDiagram("IDocsReportEntityProvider", 100%)
+
+`IDocsReportEntityProvider` è l'interfaccia del Domain Service responsabile della costruzione di un'entità #link(<DocumentationReport>)[`DocumentationReport`] a partire dalla risposta grezza dell'agente di analisi della documentazione.
+
+- *Porta del Dominio:* Definisce il contratto che separa il dominio dal layer applicativo, impedendo che la logica di mapping del JSON dell'agente penetri nelle entità di dominio.
+- *Contestualizzazione:* Il metodo riceve #link(<ReportId>)[`ReportId`] e #link(<AnalysisId>)[`AnalysisId`] come parametri espliciti, garantendo che ogni entità prodotta sia immediatamente contestualizzata nel sistema senza ambiguità.
 
 ====== PATPasswordProvider <PATPasswordProvider>
-#codeDiagram("PATPasswordProvider", 100%)
+#codeDiagram("PATPasswordProvider", 58%)
 
 `PATPasswordProvider` è l'implementazione concreta del Domain Service #link(<IPasswordProvider>)[`IPasswordProvider`]. Valida i requisiti di complessità della password (maiuscola, numero, carattere speciale, lunghezza minima) e produce un #link(<PATPassword>)[`PATPassword`] tramite hash SHA-256.
 
 - *Politica di Sicurezza:* Applica una politica di complessità esplicita prima dell'hashing, garantendo che solo password sufficientemente robuste possano essere usate per proteggere i PAT.
 - *Immutabilità del Risultato:* Il risultato è sempre un `PATPassword` immutabile, che può circolare nel dominio senza rischio di esposizione della password originale.
 
+====== ISecurityReportEntityProvider <ISecurityReportEntityProvider>
+#codeDiagram("ISecurityReportEntityProvider", 100%)
+
+`ISecurityReportEntityProvider` è l'interfaccia del Domain Service responsabile della costruzione di un'entità #link(<SecurityReport>)[`SecurityReport`] a partire dalla risposta grezza dell'agente di analisi di sicurezza.
+
+- *Porta del Dominio:* Definisce il contratto che separa il dominio dal layer applicativo, impedendo che la logica di mapping del JSON dell'agente penetri nelle entità di dominio.
+- *Contestualizzazione:* Il metodo riceve #link(<ReportId>)[`ReportId`] e #link(<AnalysisId>)[`AnalysisId`] come parametri espliciti, garantendo che ogni entità prodotta sia immediatamente contestualizzata nel sistema senza ambiguità.
+
+====== ReportEntitiesProvider <ReportEntitiesProvider>
+#codeDiagram("ReportEntitiesProvider", 100%)
+
+`ReportEntitiesProvider` è il Domain Service concreto che implementa le tre interfacce #link(<ICodeReportEntityProvider>)[`ICodeReportEntityProvider`], #link(<IDocsReportEntityProvider>)[`IDocsReportEntityProvider`] e #link(<ISecurityReportEntityProvider>)[`ISecurityReportEntityProvider`], centralizzando in un'unica classe tutta la logica di mapping dalle risposte grezze degli agenti alle entità di dominio.
+
+- *Normalizzazione degli Alias:* Gestisce internamente le tabelle di alias (`STATUS_MISSING_ALIASES`, `SEVERITY_ALIASES`, `VERDICT_ALIASES`) che traducono i valori testuali non standardizzati prodotti dagli agenti nei valori type-safe delle enumerazioni di dominio, proteggendo le entità da input arbitrari.
+- *Mapping Strutturato:* Per ciascun tipo di report, decompone la risposta JSON in Value Object atomici — costruendo ad esempio #link(<KeyIssueReasoning>)[`KeyIssueReasoning`], #link(<CriticalFileReasoning>)[`CriticalFileReasoning`] e #link(<AIInterpretation>)[`AIInterpretation`] per il report del codice — prima di assemblarli nell'entità finale.
+- *Implementazione Tripla:* L'implementazione simultanea delle tre interfacce permette di registrare un unico bean nel container di NestJS, riducendo la complessità infrastrutturale senza violare la separazione dei contratti.
+
+==== Application
+
 ===== Command
+
+====== AddRepositoryCollectionCommand <AddRepositoryCollectionCommand>
+#codeDiagram("AddRepositoryCollectionCommand", 40%)
+
+`AddRepositoryCollectionCommand` è il Command Object per la creazione di una nuova collezione di repository, trasportando l'identità dell'utente, l'URL del repository, il nome della collezione e una descrizione opzionale.
+
+- *Oggetto di Trasferimento Validato:* I decorator `class-validator` garantiscono che i campi obbligatori siano presenti e non vuoti prima che il comando raggiunga il servizio applicativo.
+- *Neutralità verso il Dominio:* Lavora con tipi primitivi (`string`), delegando la costruzione dei Value Object al servizio applicativo, rispettando la separazione tra layer applicativo e dominio.
+
+
+====== DeletePatCommand <DeletePatCommand>
+#codeDiagram("DeletePatCommand", 30%)
+
+`DeletePatCommand` è il Command Object per l'eliminazione di un PAT esistente, richiedendo URL del repository e password di protezione come meccanismo di autorizzazione all'eliminazione.
+
+- *Autorizzazione Implicita:* La richiesta della `patPassword` garantisce che solo chi conosce la password possa eliminare le credenziali, implementando un controllo di accesso a livello applicativo.
+
+
+====== DeleteRepositoryCollectionCommand <DeleteRepositoryCollectionCommand>
+#codeDiagram("DeleteRepositoryCollectionCommand", 70%)
+
+`DeleteRepositoryCollectionCommand` è il Command Object per l'eliminazione di una collezione di repository, identificando la collezione tramite URL e l'utente richiedente.
+
+- *Costruzione Anticipata dei Value Object:* A differenza degli altri Command, il costruttore istanzia direttamente #link(<RepoURL>)[`RepoURL`] e #link(<UserId>)[`UserId`] a partire dalle stringhe ricevute, spostando la validazione strutturale nel punto di ingresso del comando anziché delegarla al servizio applicativo.
+
+====== GetAllAnalysesForUserCommand <GetAllAnalysesForUserCommand>
+#codeDiagram("GetAllAnalysesForUserCommand", 55%)
+
+`GetAllAnalysesForUserCommand` è il Command Object per il recupero di tutte le analisi associate a un utente, trasportando esclusivamente l'identificatore dell'utente richiedente.
+
+- *Oggetto di Trasferimento Validato:* Il decorator `@IsNotEmpty()` garantisce che l'identificatore utente sia sempre presente prima che il comando raggiunga il servizio applicativo.
+
+====== GetAllRepositoryCollectionsCommand <GetAllRepositoryCollectionsCommand>
+#codeDiagram("GetAllRepositoryCollectionsCommand", 58%)
+
+`GetAllRepositoryCollectionsCommand` è il Command Object per il recupero di tutte le collezioni di repository associate a un utente, trasportando esclusivamente l'identificatore dell'utente richiedente.
+
+- *Oggetto di Trasferimento Validato:* Il decorator `@IsNotEmpty()` garantisce che l'identificatore utente sia sempre presente prima che il comando raggiunga il servizio applicativo.
+
+====== GetAnalysisFromIdCommand <GetAnalysisFromIdCommand>
+#codeDiagram("GetAnalysisFromIdCommand", 55%)
+
+`GetAnalysisFromIdCommand` è il Command Object per il recupero di una singola analisi tramite il suo identificatore, trasportando esclusivamente l'`analysisId` come stringa primitiva.
+
+- *Oggetto di Trasferimento Validato:* Il decorator `@IsNotEmpty()` garantisce che l'identificatore sia sempre presente prima che il comando raggiunga il servizio applicativo.
+
+====== GetRepositoryCollectionCommand <GetRepositoryCollectionCommand>
+#codeDiagram("GetRepositoryCollectionCommand", 45%)
+
+`GetRepositoryCollectionCommand` è il Command Object per il recupero di una specifica collezione di repository, identificandola tramite URL e utente richiedente.
+
+- *Oggetto di Trasferimento Validato:* I decorator `class-validator` garantiscono che entrambi i campi siano presenti e non vuoti prima che il comando raggiunga il servizio applicativo.
+- *Neutralità verso il Dominio:* Lavora con tipi primitivi (`string`), delegando la costruzione dei Value Object al servizio applicativo, rispettando la separazione tra layer applicativo e dominio.
+
+====== NewPatCommand <NewPatCommand>
+#codeDiagram("NewPatCommand", 35%)
+
+`NewPatCommand` è il Command Object per la registrazione di un nuovo Personal Access Token, trasportando l'URL del repository, la password di protezione e il token PAT in chiaro.
+
+- *Dati Sensibili in Transito:* Il PAT è presente in chiaro solo nel Command, che viene processato e dismesso immediatamente dopo l'esecuzione del use case, minimizzando il tempo di esposizione del segreto.
+
+
 ====== StartAnalysisCommand <StartAnalysisCommand>
-#codeDiagram("StartAnalysisCommand", 100%)
+#codeDiagram("StartAnalysisCommand", 35%)
 
 `StartAnalysisCommand` è il Command Object che trasporta i dati di input per avviare una nuova analisi: l'identità dell'utente, l'URL del repository, la password opzionale per repository privati, e i flag per i tre tipi di analisi (codice, documentazione, sicurezza).
 
 - *Oggetto di Trasferimento Validato:* I decorator `class-validator` garantiscono che i campi obbligatori siano presenti e correttamente formattati prima che il comando raggiunga il servizio applicativo.
 - *Neutralità verso il Dominio:* Lavora con tipi primitivi (`string`, `boolean`), delegando la costruzione dei Value Object al servizio #link(<StartAnalysisService>)[`StartAnalysisService`], rispettando la separazione tra layer applicativo e dominio.
 
----
-
-====== NewPatCommand <NewPatCommand>
-#codeDiagram("NewPatCommand", 100%)
-
-`NewPatCommand` è il Command Object per la registrazione di un nuovo Personal Access Token, trasportando l'URL del repository, la password di protezione e il token PAT in chiaro.
-
-- *Dati Sensibili in Transito:* Il PAT è presente in chiaro solo nel Command, che viene processato e dismesso immediatamente dopo l'esecuzione del use case, minimizzando il tempo di esposizione del segreto.
-
----
-
-====== DeletePatCommand <DeletePatCommand>
-#codeDiagram("DeletePatCommand", 100%)
-
-`DeletePatCommand` è il Command Object per l'eliminazione di un PAT esistente, richiedendo URL del repository e password di protezione come meccanismo di autorizzazione all'eliminazione.
-
-- *Autorizzazione Implicita:* La richiesta della `patPassword` garantisce che solo chi conosce la password possa eliminare le credenziali, implementando un controllo di accesso a livello applicativo.
-
----
 
 ====== UpdatePatCommand <UpdatePatCommand>
-#codeDiagram("UpdatePatCommand", 100%)
+#codeDiagram("UpdatePatCommand", 32%)
 
 `UpdatePatCommand` è il Command Object per l'aggiornamento di un PAT esistente, richiedendo URL, password corrente e il nuovo PAT da sostituire.
 
 - *Sostituzione Sicura:* La verifica della password corrente (`patPassword`) prima della sostituzione impedisce aggiornamenti non autorizzati, garantendo che solo il proprietario delle credenziali possa modificarle.
 
 
-==== Application
+
 ===== Use Cases
-====== StartAnalysisUseCase <StartAnalysisUseCase>
-#codeDiagram("StartAnalysisUseCase", 100%)
+// descrizione? Il controller dipende solo da questa interfaccia (una per ogni controller), permettendo di sostituire l'implementazione senza modificare il layer di presentazione.
 
-`StartAnalysisUseCase` è l'interfaccia del use case principale del sistema: accetta uno #link(<StartAnalysisCommand>)[`StartAnalysisCommand`] e restituisce un #link(<StartAnalysisResult>)[`StartAnalysisResult`].
+====== AddRepositoryCollectionUseCase <AddRepositoryCollectionUseCase>
+#codeDiagram("AddRepositoryCollectionUseCase", 90%)
 
-- *Contratto Applicativo:* Definisce il punto di ingresso primario del bounded context, disaccoppiando la presentazione dall'implementazione concreta #link(<StartAnalysisService>)[`StartAnalysisService`].
+`AddRepositoryCollectionUseCase` è l'interfaccia del use case per la creazione di una nuova collezione di repository, implementata dal servizio applicativo corrispondente.
 
----
+====== DeletePatUseCase <DeletePatUseCase>
+#codeDiagram("DeletePatUseCase", 70%)
+
+`DeletePatUseCase` è l'interfaccia del use case per l'eliminazione di un PAT, implementata da #link(<DeletePatService>)[`DeletePatService`].
+
+====== DeleteRepositoryCollectionUseCase <DeleteRepositoryCollectionUseCase>
+#codeDiagram("DeleteRepositoryCollectionUseCase", 100%)
+
+`DeleteRepositoryCollectionUseCase` è l'interfaccia del use case per l'eliminazione di una collezione di repository, implementata dal servizio applicativo corrispondente.
+
+====== GetAllAnalysesForUserUseCase <GetAllAnalysesForUserUseCase>
+#codeDiagram("GetAllAnalysesForUserUseCase", 100%)
+
+`GetAllAnalysesForUserUseCase` è l'interfaccia del use case per il recupero di tutte le analisi associate a un utente, implementata dal servizio applicativo corrispondente.
+
+//- *Metodo Non Convenzionale:* Espone `getAllAnalysesForUser()` invece del canonico `execute()`, rendendo esplicita la semantica dell'operazione direttamente nella firma del contratto.
+
+====== GetAllRepositoryCollectionsUseCase <GetAllRepositoryCollectionsUseCase>
+#codeDiagram("GetAllRepositoryCollectionsUseCase", 100%)
+
+`GetAllRepositoryCollectionsUseCase` è l'interfaccia del use case per il recupero di tutte le collezioni di repository di un utente, implementata dal servizio applicativo corrispondente.
+
+//- *Metodo Non Convenzionale:* Espone `executeAll()` invece del canonico `execute()`, rendendo esplicita nella firma del contratto la natura collettiva dell'operazione.
+
+====== GetAnalysisUseCase <GetAnalysisUseCase>
+#codeDiagram("GetAnalysisUseCase", 80%)
+
+`GetAnalysisUseCase` è l'interfaccia del use case per il recupero di una singola analisi tramite il suo identificatore, implementata dal servizio applicativo corrispondente.
+
+====== GetRepositoryCollectionUseCase <GetRepositoryCollectionUseCase>
+#codeDiagram("GetRepositoryCollectionUseCase", 100%)
+
+`GetRepositoryCollectionUseCase` è l'interfaccia del use case per il recupero di una specifica collezione di repository tramite URL e utente, implementata dal servizio applicativo corrispondente.
+
 
 ====== NewPatUseCase <NewPatUseCase>
-#codeDiagram("NewPatUseCase", 100%)
+#codeDiagram("NewPatUseCase", 70%)
 
 `NewPatUseCase` è l'interfaccia del use case per la registrazione di un nuovo PAT, implementata da #link(<NewPatService>)[`NewPatService`].
 
 - *Disaccoppiamento Controller-Servizio:* Il controller #link(<PatController>)[`PatController`] dipende solo da questa interfaccia, permettendo di sostituire l'implementazione senza modificare il layer di presentazione.
 
----
+====== StartAnalysisUseCase <StartAnalysisUseCase>
+#codeDiagram("StartAnalysisUseCase", 80%)
 
-====== DeletePatUseCase <DeletePatUseCase>
-#codeDiagram("DeletePatUseCase", 100%)
+`StartAnalysisUseCase` è l'interfaccia del use case principale del sistema: accetta uno #link(<StartAnalysisCommand>)[`StartAnalysisCommand`] e restituisce un #link(<StartAnalysisResult>)[`StartAnalysisResult`].
 
-`DeletePatUseCase` è l'interfaccia del use case per l'eliminazione di un PAT, implementata da #link(<DeletePatService>)[`DeletePatService`].
+- *Contratto Applicativo:* Definisce il punto di ingresso primario del bounded context, disaccoppiando la presentazione dall'implementazione concreta #link(<StartAnalysisService>)[`StartAnalysisService`].
 
----
 
 ====== UpdatePatUseCase <UpdatePatUseCase>
-#codeDiagram("UpdatePatUseCase", 100%)
+#codeDiagram("UpdatePatUseCase", 80%)
 
 `UpdatePatUseCase` è l'interfaccia del use case per l'aggiornamento di un PAT, implementata da #link(<UpdatePatService>)[`UpdatePatService`].
 
 ===== Results
+
+====== AddRepositoryCollectionResult <AddRepositoryCollectionResult>
+#codeDiagram("AddRepositoryCollectionResult", 50%)
+
+`AddRepositoryCollectionResult` è il Result Object per l'esito della creazione di una nuova collezione di repository, con factory method `success()` e `failure(err)`.
+
+====== DeletePatResult <DeletePatResult>
+#codeDiagram("DeletePatResult", 50%)
+
+`DeletePatResult` è il Result Object per l'esito dell'eliminazione di un PAT.
+
+====== DeleteRepositoryCollectionResult <DeleteRepositoryCollectionResult>
+#codeDiagram("DeleteRepositoryCollectionResult", 60%)
+
+`DeleteRepositoryCollectionResult` è il Result Object per l'esito dell'eliminazione di una collezione di repository, con factory method `success()` e `failure(err)`.
+
+====== GetAllAnalysesForUserResult <GetAllAnalysesForUserResult>
+#codeDiagram("GetAllAnalysesForUserResult", 80%)
+
+`GetAllAnalysesForUserResult` è il Result Object per l'esito del recupero di tutte le analisi associate a un utente, trasportando in caso di successo la collezione di `GitHubAnalysisGeneralDataDTO`.
+
+- *Payload Opzionale:* La collezione `analyses` è presente solo in caso di successo, evitando che il layer di presentazione riceva dati parziali o inconsistenti in caso di errore.
+
+====== GetAllRepositoryCollectionsResult <GetAllRepositoryCollectionsResult>
+#codeDiagram("GetAllRepositoryCollectionsResult", 80%)
+
+`GetAllRepositoryCollectionsResult` è il Result Object per l'esito del recupero di tutte le collezioni di repository di un utente, trasportando in caso di successo la collezione di `RepositoryCollectionData`.
+
+- *Fallimento con Array Vuoto:* Il factory method `failure()` inizializza `collections` a array vuoto, garantendo che il layer di presentazione non riceva mai `undefined` al posto di una collezione iterabile.
+
+====== GetAnalysisResult <GetAnalysisResult>
+#codeDiagram("GetAnalysisResult", 87%)
+
+`GetAnalysisResult` è il Result Object per l'esito del recupero di una singola analisi, aggregando i metadati identificativi dell'analisi e i tre report opzionali (codice, documentazione, sicurezza).
+
+- *Report Opzionali:* I campi `docsReport`, `codeReport` e `secReport` sono nullable, riflettendo il fatto che un'analisi può coinvolgere solo un sottoinsieme dei tre tipi di report in base a quanto richiesto.
+
+====== GetRepositoryCollectionResult <GetRepositoryCollectionResult>
+#codeDiagram("GetRepositoryCollectionResult", 85%)
+
+`GetRepositoryCollectionResult` è il Result Object per l'esito del recupero di una specifica collezione di repository, trasportando URL, nome, descrizione opzionale e lista degli identificatori delle analisi associate.
+
+- *Fallimento Strutturato:* Il factory method `failure()` inizializza i campi obbligatori con valori vuoti, garantendo che il result sia sempre deserializzabile dal layer di presentazione indipendentemente dall'esito.
+
+====== NewPatResult <NewPatResult>
+#codeDiagram("NewPatResult", 47%)
+
+`NewPatResult` è il Result Object per l'esito della registrazione di un PAT, con factory method `success()` e `failure(errorMessage)`.
+
+- *Semplicità Intenzionale:* Il risultato è binario (successo/fallimento), riflettendo la natura atomica dell'operazione di salvataggio delle credenziali.
+
 ====== StartAnalysisResult <StartAnalysisResult>
-#codeDiagram("StartAnalysisResult", 100%)
+#codeDiagram("StartAnalysisResult", 77%)
 
 `StartAnalysisResult` è il Result Object che trasporta l'esito dell'avvio di un'analisi verso il layer di presentazione, includendo in caso di successo tutti i metadati identificativi dell'analisi creata.
 
 - *Pattern Result:* I factory method `success()` e `failure()` rendono esplicito l'esito dell'operazione, evitando eccezioni non gestite come meccanismo di controllo del flusso.
 - *Risposta Completa:* Il successo restituisce `user`, `id`, `url`, `branch` e `commit`, fornendo al client tutte le informazioni necessarie per tracciare e monitorare l'analisi avviata.
 
----
-
-====== NewPatResult <NewPatResult>
-#codeDiagram("NewPatResult", 100%)
-
-`NewPatResult` è il Result Object per l'esito della registrazione di un PAT, con factory method `success()` e `failure(errorMessage)`.
-
-- *Semplicità Intenzionale:* Il risultato è binario (successo/fallimento), riflettendo la natura atomica dell'operazione di salvataggio delle credenziali.
-
----
-
-====== DeletePatResult <DeletePatResult>
-#codeDiagram("DeletePatResult", 100%)
-
-`DeletePatResult` è il Result Object per l'esito dell'eliminazione di un PAT.
-
----
 
 ====== UpdatePatResult <UpdatePatResult>
-#codeDiagram("UpdatePatResult", 100%)
+#codeDiagram("UpdatePatResult", 50%)
 
 `UpdatePatResult` è il Result Object per l'esito dell'aggiornamento di un PAT.
 
@@ -785,75 +996,51 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 - *Orchestrazione Asincrona:* Il metodo `analyze()` è `void` (fire-and-forget), permettendo al use case di avviare l'analisi e rispondere immediatamente al client senza attendere il completamento dei processi AI.
 - *Punto di Estensione:* L'interfaccia permette di sostituire la strategia di orchestrazione (es. sequenziale vs. parallela, locale vs. distribuita) senza modificare il use case #link(<StartAnalysisService>)[`StartAnalysisService`].
 
----
+====== ICollectionExistenceChecker <ICollectionExistenceChecker>
+#codeDiagram("ICollectionExistenceChecker", 50%)
+
+`ICollectionExistenceChecker` è l'interfaccia del servizio che verifica l'esistenza di una collezione di repository per un dato utente, restituendo un booleano che indica la presenza di un duplicato.
+
+- *Punto di Estensione:* Disaccoppia la logica di verifica duplicati dall'implementazione concreta #link(<GitHubCollectionChecker>)[`GitHubCollectionChecker`], permettendo di sostituire la strategia di controllo senza modificare i servizi applicativi che la utilizzano.
 
 ====== IRepositoryAuthorizer <IRepositoryAuthorizer>
-#codeDiagram("IRepositoryAuthorizer", 100%)
+#codeDiagram("IRepositoryAuthorizer", 70%)
 
 `IRepositoryAuthorizer` è l'interfaccia del servizio che recupera un #link(<PersonalAccessToken>)[`PersonalAccessToken`] valido per un dato repository, gestendo la distinzione tra repository pubblici e privati.
 
 - *Strategia di Autorizzazione:* Nasconde la logica di selezione tra `PublicAuthorizationStrategy` (token di sistema da variabile d'ambiente) e `PrivateAuthorizationStrategy` (token utente da database), esponendo un'unica API uniforme al use case.
 
----
+
 
 ====== IRepositoryValidator <IRepositoryValidator>
-#codeDiagram("IRepositoryValidator", 100%)
+#codeDiagram("IRepositoryValidator", 80%)
 
 `IRepositoryValidator` è l'interfaccia del servizio che verifica la raggiungibilità e la validità di un repository GitHub, risolvendo branch e commit a valori concreti.
 
 - *Risoluzione dei Parametri:* Il metodo `check()` restituisce sempre `{ branch: BranchName; commit: CommitHash }` valori risolti, garantendo che l'analisi parta sempre da riferimenti esatti e non ambigui.
 
----
+
 
 ====== IRepositoryCloner <IRepositoryCloner>
-#codeDiagram("IRepositoryCloner", 100%)
+#codeDiagram("IRepositoryCloner", 80%)
 
 `IRepositoryCloner` è l'interfaccia del servizio che esegue la clonazione fisica del repository su filesystem locale, restituendo il percorso della cartella clonata.
 
 - *Isolamento dell'Infrastruttura:* Nasconde i dettagli operativi della clonazione Git (comandi git, gestione autenticazione, path di destinazione) al use case, che opera solo sul percorso risultante.
 
----
+
 
 // ============================================================
 // APPLICATION - SERVICES (IMPLEMENTATIONS)
 // ============================================================
 
-====== StartAnalysisService <StartAnalysisService>
-#codeDiagram("StartAnalysisService", 100%)
 
-`StartAnalysisService` è l'Application Service principale: implementa #link(<StartAnalysisUseCase>)[`StartAnalysisUseCase`] orchestrando l'intero flusso di avvio analisi — validazione, autorizzazione, clonazione e dispatching agli agenti AI.
+====== AddRepositoryCollectionService <AddRepositoryCollectionService>
+#codeDiagram("AddRepositoryCollectionService", 100%)
 
-- *Coordinamento del Flusso:* Sequenzia le chiamate a #link(<IRepositoryValidator>)[`IRepositoryValidator`] → #link(<IRepositoryAuthorizer>)[`IRepositoryAuthorizer`] → crea #link(<GitHubAnalysis>)[`GitHubAnalysis`] → #link(<IRepositoryCloner>)[`IRepositoryCloner`] → #link(<IAnalysisOrchestrator>)[`IAnalysisOrchestrator`].
-- *Costruzione dell'Aggregato:* È responsabile della creazione dell'entità `GitHubAnalysis` con un UUID v7 fresco e i parametri risolti dalla validazione, garantendo la consistenza dell'aggregato fin dalla sua nascita.
+`AddRepositoryCollectionService` implementa #link(<AddRepositoryCollectionUseCase>)[`AddRepositoryCollectionUseCase`], orchestrando il controllo dei duplicati e la persistenza della nuova collezione.
 
----
-
-====== GitAuthorizerService <GitAuthorizerService>
-#codeDiagram("GitAuthorizerService", 100%)
-
-`GitAuthorizerService` implementa #link(<IRepositoryAuthorizer>)[`IRepositoryAuthorizer`] selezionando dinamicamente la strategia di autorizzazione appropriata (pubblica o privata) in base alla presenza di una password nel comando.
-
-- *Pattern Strategy:* `PrivateAuthorizationStrategy` recupera il PAT da MongoDB tramite #link(<IGitCredentialReadPort>)[`IGitCredentialReadPort`]; `PublicAuthorizationStrategy` legge il token di sistema dalla configurazione. La scelta è trasparente per il chiamante.
-
----
-
-====== GitValidatorService <GitValidatorService>
-#codeDiagram("GitValidatorService", 100%)
-
-`GitValidatorService` implementa #link(<IRepositoryValidator>)[`IRepositoryValidator`] selezionando la strategia di validazione appropriata (`CommitValidationStrategy` o `BranchValidationStrategy`) in base ai parametri presenti nel comando.
-
-- *Validazione Contestuale:* Se è fornito un commit specifico, verifica l'esistenza di quel commit; altrimenti risolve il commit HEAD del branch specificato (o del branch default). In entrambi i casi, il risultato è un `{ branch, commit }` risolto e verificato.
-
----
-
-====== GitClonerService <GitClonerService>
-#codeDiagram("GitClonerService", 100%)
-
-`GitClonerService` implementa #link(<IRepositoryCloner>)[`IRepositoryCloner`] delegando l'operazione di clonazione al port #link(<IGitClonePort>)[`IGitClonePort`], costruendo il #link(<CloneRepoRequest>)[`CloneRepoRequest`] e gestendo l'esito.
-
-- *Adattamento del Contratto:* Traduce i parametri del servizio applicativo (Value Objects) nel DTO di richiesta per l'infrastruttura, e solleva un'eccezione esplicita in caso di fallimento della clonazione.
-
----
+- *Guardia Anti-Duplicato:* Prima di procedere alla creazione, interroga #link(<ICollectionExistenceChecker>)[`ICollectionExistenceChecker`] per verificare che non esista già una collezione per l'URL fornito, restituendo un fallimento esplicito in caso positivo.
 
 ====== AnalysisOrchestratorService <AnalysisOrchestratorService>
 #codeDiagram("AnalysisOrchestratorService", 100%)
@@ -862,21 +1049,76 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 - *Disaccoppiamento Temporale:* Il metodo `analyze()` avvia l'orchestrazione in background tramite una Promise non attesa, permettendo al use case di rispondere immediatamente al client con l'ID dell'analisi avviata.
 
----
-
-====== NewPatService <NewPatService>
-#codeDiagram("NewPatService", 100%)
-
-`NewPatService` implementa #link(<NewPatUseCase>)[`NewPatUseCase`], orchestrando la validazione del PAT, l'hashing della password e il salvataggio tramite #link(<IGitCredentialSavePort>)[`IGitCredentialSavePort`].
-
----
 
 ====== DeletePatService <DeletePatService>
 #codeDiagram("DeletePatService", 100%)
 
 `DeletePatService` implementa #link(<DeletePatUseCase>)[`DeletePatUseCase`], costruendo la richiesta di eliminazione con URL e hash della password, e delegando a #link(<IGitCredentialDeletePort>)[`IGitCredentialDeletePort`].
 
----
+====== GetAnalysisService <GetAnalysisService>
+#codeDiagram("GetAnalysisService", 100%)
+
+`GetAnalysisService` implementa simultaneamente #link(<GetAnalysisUseCase>)[`GetAnalysisUseCase`] e #link(<GetAllAnalysesForUserUseCase>)[`GetAllAnalysesForUserUseCase`], centralizzando in un'unica classe i due use case di lettura delle analisi.
+
+- *Implementazione Doppia:* Riunisce il recupero di una singola analisi per ID e il recupero di tutte le analisi per utente, evitando la proliferazione di classi per operazioni di lettura strettamente correlate.
+
+
+====== GitAuthorizerService <GitAuthorizerService>
+#codeDiagram("GitAuthorizerService", 100%)
+
+`GitAuthorizerService` implementa #link(<IRepositoryAuthorizer>)[`IRepositoryAuthorizer`] selezionando dinamicamente la strategia di autorizzazione appropriata (pubblica o privata) in base alla presenza di una password nel comando.
+
+- *Pattern Strategy:* `PrivateAuthorizationStrategy` recupera il PAT da MongoDB tramite #link(<IGitCredentialReadPort>)[`IGitCredentialReadPort`]; `PublicAuthorizationStrategy` legge il token di sistema dalla configurazione. La scelta è trasparente per il chiamante.
+
+
+====== GitClonerService <GitClonerService>
+#codeDiagram("GitClonerService", 100%)
+
+`GitClonerService` implementa #link(<IRepositoryCloner>)[`IRepositoryCloner`] delegando l'operazione di clonazione al port #link(<IGitClonePort>)[`IGitClonePort`], costruendo il #link(<CloneRepoRequest>)[`CloneRepoRequest`] e gestendo l'esito.
+
+- *Adattamento del Contratto:* Traduce i parametri del servizio applicativo (Value Objects) nel DTO di richiesta per l'infrastruttura, e solleva un'eccezione esplicita in caso di fallimento della clonazione.
+
+====== GitHubCollectionChecker <GitHubCollectionChecker>
+#codeDiagram("GitHubCollectionChecker", 80%)
+
+`GitHubCollectionChecker` implementa #link(<ICollectionExistenceChecker>)[`ICollectionExistenceChecker`], delegando la verifica di duplicati al port `ICollectionDuplicateCheckerPort` e restituendo il booleano estratto dalla risposta.
+
+- *Adattamento del Contratto:* Traduce i Value Object #link(<UserId>)[`UserId`] e #link(<RepoURL>)[`RepoURL`] nel DTO di richiesta per l'infrastruttura, isolando il layer applicativo dai dettagli della persistenza.
+
+====== GitHubCollectionDeleter <GitHubCollectionDeleter>
+#codeDiagram("GitHubCollectionDeleter", 100%)
+
+`GitHubCollectionDeleter` implementa #link(<DeleteRepositoryCollectionUseCase>)[`DeleteRepositoryCollectionUseCase`], delegando l'eliminazione della collezione al port `IDeleteRepositoryCollectionPort` e traducendo la risposta nel result applicativo.
+
+====== GitHubCollectionGetter <GitHubCollectionGetter>
+#codeDiagram("GitHubCollectionGetter", 100%)
+
+`GitHubCollectionGetter` implementa simultaneamente #link(<GetRepositoryCollectionUseCase>)[`GetRepositoryCollectionUseCase`] e #link(<GetAllRepositoryCollectionsUseCase>)[`GetAllRepositoryCollectionsUseCase`], centralizzando in un'unica classe i due use case di lettura delle collezioni.
+
+- *Implementazione Doppia:* Riunisce il recupero di una singola collezione per URL e utente e il recupero di tutte le collezioni di un utente, evitando la proliferazione di classi per operazioni di lettura strettamente correlate.
+
+====== GitValidatorService <GitValidatorService>
+#codeDiagram("GitValidatorService", 100%)
+
+`GitValidatorService` implementa #link(<IRepositoryValidator>)[`IRepositoryValidator`] selezionando la strategia di validazione appropriata (`CommitValidationStrategy` o `BranchValidationStrategy`) in base ai parametri presenti nel comando.
+
+- *Validazione Contestuale:* Se è fornito un commit specifico, verifica l'esistenza di quel commit; altrimenti risolve il commit HEAD del branch specificato (o del branch default). In entrambi i casi, il risultato è un `{ branch, commit }` risolto e verificato.
+
+
+====== NewPatService <NewPatService>
+#codeDiagram("NewPatService", 100%)
+
+`NewPatService` implementa #link(<NewPatUseCase>)[`NewPatUseCase`], orchestrando la validazione del PAT, l'hashing della password e il salvataggio tramite #link(<IGitCredentialSavePort>)[`IGitCredentialSavePort`].
+
+
+====== StartAnalysisService <StartAnalysisService>
+#codeDiagram("StartAnalysisService", 100%)
+
+`StartAnalysisService` è l'Application Service principale: implementa #link(<StartAnalysisUseCase>)[`StartAnalysisUseCase`] orchestrando l'intero flusso di avvio analisi — validazione, autorizzazione, clonazione, persistenza e dispatching agli agenti.
+
+- *Coordinamento del Flusso:* Sequenzia le chiamate a #link(<IRepositoryValidator>)[`IRepositoryValidator`] → #link(<IRepositoryAuthorizer>)[`IRepositoryAuthorizer`] → crea #link(<GitHubAnalysis>)[`GitHubAnalysis`] → #link(<IRepositoryCloner>)[`IRepositoryCloner`] → persiste tramite `IGitHubAnalysisSavePort` → #link(<IAnalysisOrchestrator>)[`IAnalysisOrchestrator`].
+- *Costruzione dell'Aggregato:* È responsabile della creazione dell'entità `GitHubAnalysis` con un UUID v7 fresco e i parametri risolti dalla validazione, garantendo la consistenza dell'aggregato fin dalla sua nascita.
+
 
 ====== UpdatePatService <UpdatePatService>
 #codeDiagram("UpdatePatService", 100%)
@@ -884,47 +1126,115 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 `UpdatePatService` implementa #link(<UpdatePatUseCase>)[`UpdatePatUseCase`], validando il nuovo PAT e la password corrente, e delegando l'aggiornamento a #link(<IGitCredentialUpdatePort>)[`IGitCredentialUpdatePort`].
 
 ===== Port
+
+====== ICodeAgentPort <ICodeAgentPort>
+#codeDiagram("ICodeAgentPort", 70%)
+
+`ICodeAgentPort` è il Driving Port che definisce il contratto per l'invocazione dell'agente di analisi del codice, accettando un #link(<AgentRequest>)[`AgentRequest`] e restituendo una `CodeAgentResponse`.
+
+====== ICollectionAdderPort <ICollectionAdderPort>
+#codeDiagram("ICollectionAdderPort", 80%)
+
+`ICollectionAdderPort` è il Driven Port per la persistenza di una nuova collezione di repository.
+
+====== ICodeReportSavePort <ICodeReportSavePort>
+#codeDiagram("ICodeReportSavePort", 80%)
+
+`ICodeReportSavePort` è il Driven Port per la persistenza di un #link(<CodeAgentReport>)[`CodeAgentReport`] prodotto dall'analisi del codice.
+
+====== IDocumentationAgentPort <IDocumentationAgentPort>
+#codeDiagram("IDocumentationAgentPort", 70%)
+
+`IDocumentationAgentPort` è il Driving Port che definisce il contratto per l'invocazione dell'agente di analisi della documentazione, accettando un #link(<AgentRequest>)[`AgentRequest`] e restituendo una `DocsAgentResponse`.
+
+====== ICollectionDuplicateCheckerPort <ICollectionDuplicateCheckerPort>
+#codeDiagram("ICollectionDuplicateCheckerPort", 90%)
+
+`ICollectionDuplicateCheckerPort` è il Driven Port per la verifica dell'esistenza di una collezione di repository nella persistenza, utilizzato da #link(<GitHubCollectionChecker>)[`GitHubCollectionChecker`] per implementare il controllo duplicati.
+
+====== IDeleteRepositoryCollectionPort <IDeleteRepositoryCollectionPort>
+#codeDiagram("IDeleteRepositoryCollectionPort", 90%)
+
+`IDeleteRepositoryCollectionPort` è il Driven Port per l'eliminazione di una collezione di repository dalla persistenza.
+
+====== IDocsReportSavePort <IDocsReportSavePort>
+#codeDiagram("IDocsReportSavePort", 80%)
+
+`IDocsReportSavePort` è il Driven Port per la persistenza di un #link(<DocumentationReport>)[`DocumentationReport`] prodotto dall'analisi della documentazione.
+
+====== IGetAllAnalysesForUserPort <IGetAllAnalysesForUserPort>
+#codeDiagram("IGetAllAnalysesForUserPort", 70%)
+
+`IGetAllAnalysesForUserPort` è il Driven Port per il recupero di tutte le analisi associate a un utente dalla persistenza.
+
+====== IGetAllRepositoryCollectionsPort <IGetAllRepositoryCollectionsPort>
+#codeDiagram("IGetAllRepositoryCollectionsPort", 80%)
+
+`IGetAllRepositoryCollectionsPort` è il Driven Port per il recupero di tutte le collezioni di repository di un utente dalla persistenza.
+
+====== IGetAnalysisFromIdPort <IGetAnalysisFromIdPort>
+#codeDiagram("IGetAnalysisFromIdPort", 70%)
+
+`IGetAnalysisFromIdPort` è il Driven Port per il recupero di una singola analisi per identificatore dalla persistenza, restituendo `null` se non trovata.
+
+====== IGetRepositoryCollectionPort <IGetRepositoryCollectionPort>
+#codeDiagram("IGetRepositoryCollectionPort", 80%)
+
+`IGetRepositoryCollectionPort` è il Driven Port per il recupero di una specifica collezione di repository dalla persistenza tramite URL e utente.
+
+====== IGitHubAnalysisSavePort <IGitHubAnalysisSavePort>
+#codeDiagram("IGitHubAnalysisSavePort", 70%)
+
+`IGitHubAnalysisSavePort` è il Driven Port per la persistenza di una nuova entità #link(<GitHubAnalysis>)[`GitHubAnalysis`] al momento dell'avvio dell'analisi.
+
+====== IGitClonePort <IGitClonePort>
+#codeDiagram("IGitClonePort", 70%)
+
+`IGitClonePort` è il Driving Port per l'operazione di clonazione Git, accettando un #link(<CloneRepoRequest>)[`CloneRepoRequest`] e restituendo un #link(<CloneRepoResponse>)[`CloneRepoResponse`].
+
+
+====== IGitCredentialDeletePort <IGitCredentialDeletePort>
+#codeDiagram("IGitCredentialDeletePort", 80%)
+
+`IGitCredentialDeletePort` è il Driven Port per l'eliminazione di credenziali Git.
+
+====== IGitCredentialReadPort <IGitCredentialReadPort>
+#codeDiagram("IGitCredentialReadPort", 70%)
+
+`IGitCredentialReadPort` è il Driven Port per la lettura/autorizzazione delle credenziali Git dal repository di persistenza.
+
+====== IGitCredentialSavePort <IGitCredentialSavePort>
+#codeDiagram("IGitCredentialSavePort", 70%)
+
+`IGitCredentialSavePort` è il Driven Port per il salvataggio di nuove credenziali Git.
+
+====== IGitCredentialUpdatePort <IGitCredentialUpdatePort>
+#codeDiagram("IGitCredentialUpdatePort", 80%)
+
+`IGitCredentialUpdatePort` è il Driven Port per l'aggiornamento del PAT di credenziali esistenti.
+
 ====== IGitHubAvailabilityPort <IGitHubAvailabilityPort>
-#codeDiagram("IGitHubAvailabilityPort", 100%)
+#codeDiagram("IGitHubAvailabilityPort", 70%)
 
 `IGitHubAvailabilityPort` è il Driving Port che definisce il contratto per verificare la raggiungibilità e i metadati di un repository GitHub, accettando un #link(<CheckAvailabilityRequest>)[`CheckAvailabilityRequest`] e restituendo un #link(<CheckAvailabilityResponse>)[`CheckAvailabilityResponse`].
 
 - *Inversione delle Dipendenze:* L'applicazione dipende da questa astrazione, non dall'implementazione concreta #link(<GitHubAdapter>)[`GitHubAdapter`], rispettando il principio DIP e facilitando il testing con mock.
 
----
+====== ISecurityAgentPort <ISecurityAgentPort>
+#codeDiagram("ISecurityAgentPort", 70%)
 
-====== IGitClonePort <IGitClonePort>
-#codeDiagram("IGitClonePort", 100%)
+`ISecurityAgentPort` è il Driving Port che definisce il contratto per l'invocazione dell'agente di analisi di sicurezza, accettando un #link(<AgentRequest>)[`AgentRequest`] e restituendo una `SecAgentResponse`.
 
-`IGitClonePort` è il Driving Port per l'operazione di clonazione Git, accettando un #link(<CloneRepoRequest>)[`CloneRepoRequest`] e restituendo un #link(<CloneRepoResponse>)[`CloneRepoResponse`].
+====== ISecurityReportSavePort <ISecurityReportSavePort>
+#codeDiagram("ISecurityReportSavePort", 80%)
 
----
+`ISecurityReportSavePort` è il Driven Port per la persistenza di un #link(<SecurityReport>)[`SecurityReport`] prodotto dall'analisi di sicurezza.
 
-====== IGitCredentialReadPort <IGitCredentialReadPort>
-#codeDiagram("IGitCredentialReadPort", 100%)
+====== IUpdateAnalysisPort <IUpdateAnalysisPort>
+#codeDiagram("IUpdateAnalysisPort", 80%)
 
-`IGitCredentialReadPort` è il Driven Port per la lettura/autorizzazione delle credenziali Git dal repository di persistenza.
+`IUpdateAnalysisPort` è il Driven Port per l'aggiornamento di un'analisi esistente con i riferimenti ai report prodotti al termine dell'orchestrazione degli agenti.
 
----
-
-====== IGitCredentialSavePort <IGitCredentialSavePort>
-#codeDiagram("IGitCredentialSavePort", 100%)
-
-`IGitCredentialSavePort` è il Driven Port per il salvataggio di nuove credenziali Git.
-
----
-
-====== IGitCredentialDeletePort <IGitCredentialDeletePort>
-#codeDiagram("IGitCredentialDeletePort", 100%)
-
-`IGitCredentialDeletePort` è il Driven Port per l'eliminazione di credenziali Git.
-
----
-
-====== IGitCredentialUpdatePort <IGitCredentialUpdatePort>
-#codeDiagram("IGitCredentialUpdatePort", 100%)
-
-`IGitCredentialUpdatePort` è il Driven Port per l'aggiornamento del PAT di credenziali esistenti.
 
 ===== Request
 ====== CheckAvailabilityRequest <CheckAvailabilityRequest>
@@ -934,81 +1244,190 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 - *Contratto del Port:* Definisce l'insieme minimo di informazioni che l'applicazione deve fornire all'infrastruttura per eseguire la verifica, disaccoppiando il dominio dai dettagli dell'API GitHub.
 
----
 
 ====== CloneRepoRequest <CloneRepoRequest>
 #codeDiagram("CloneRepoRequest", 100%)
 
 `CloneRepoRequest` è il DTO di richiesta per la clonazione di un repository, trasportando tutti i parametri necessari all'operazione Git: URL, ID analisi (per nominare la cartella), PAT, branch e commit.
 
----
 
 ====== GetGitCredentialRequest <GetGitCredentialRequest>
-#codeDiagram("GetGitCredentialRequest", 100%)
+#codeDiagram("GetGitCredentialRequest", 80%)
 
 `GetGitCredentialRequest` trasporta URL e hash della password per la lettura delle credenziali dal database.
 
----
 
 ====== PostGitCredentialRequest <PostGitCredentialRequest>
-#codeDiagram("PostGitCredentialRequest", 100%)
+#codeDiagram("PostGitCredentialRequest", 82%)
 
 `PostGitCredentialRequest` trasporta URL, hash della password e PAT per il salvataggio di nuove credenziali.
 
----
 
 ====== DeleteGitCredentialRequest <DeleteGitCredentialRequest>
-#codeDiagram("DeleteGitCredentialRequest", 100%)
+#codeDiagram("DeleteGitCredentialRequest", 80%)
 
 `DeleteGitCredentialRequest` trasporta URL e hash della password per l'eliminazione delle credenziali.
 
----
 
 ====== UpdateGitCredentialPatRequest <UpdateGitCredentialPatRequest>
-#codeDiagram("UpdateGitCredentialPatRequest", 100%)
+#codeDiagram("UpdateGitCredentialPatRequest", 90%)
 
 `UpdateGitCredentialPatRequest` trasporta URL, hash della password e nuovo PAT per l'aggiornamento delle credenziali.
 
+====== AddReportsToAnalysisRequest <AddReportsToAnalysisRequest>
+#codeDiagram("AddReportsToAnalysisRequest", 100%)
+
+`AddReportsToAnalysisRequest` trasporta l'identificatore dell'analisi e i tre riferimenti opzionali ai report da associare, utilizzato da #link(<IUpdateAnalysisPort>)[`IUpdateAnalysisPort`] al termine dell'orchestrazione.
+
+====== AddRepositoryCollectionRequest <AddRepositoryCollectionRequest>
+#codeDiagram("AddRepositoryCollectionRequest", 90%)
+
+`AddRepositoryCollectionRequest` trasporta i dati necessari alla creazione di una nuova collezione: utente, URL del repository, nome e descrizione opzionale, utilizzato da #link(<ICollectionAdderPort>)[`ICollectionAdderPort`].
+
+====== AgentRequest <AgentRequest>
+#codeDiagram("AgentRequest", 45%)
+
+`AgentRequest` è il DTO di richiesta condiviso dai tre port degli agenti, trasportando esclusivamente l'#link(<AnalysisId>)[`AnalysisId`] che identifica l'analisi da eseguire.
+
+- *Contratto Uniforme:* La struttura minimale e condivisa tra #link(<ICodeAgentPort>)[`ICodeAgentPort`], #link(<IDocumentationAgentPort>)[`IDocumentationAgentPort`] e #link(<ISecurityAgentPort>)[`ISecurityAgentPort`] permette di invocare qualsiasi agente con la stessa interfaccia.
+
+====== CheckCollectionDuplicateRequest <CheckCollectionDuplicateRequest>
+#codeDiagram("CheckCollectionDuplicateRequest", 65%)
+
+`CheckCollectionDuplicateRequest` trasporta utente e URL del repository per la verifica di duplicati, utilizzato da #link(<ICollectionDuplicateCheckerPort>)[`ICollectionDuplicateCheckerPort`].
+
+====== DeleteRepositoryCollectionRequest <DeleteRepositoryCollectionRequest>
+#codeDiagram("DeleteRepositoryCollectionRequest", 70%)
+
+`DeleteRepositoryCollectionRequest` trasporta utente e URL del repository per identificare la collezione da eliminare, utilizzato da #link(<IDeleteRepositoryCollectionPort>)[`IDeleteRepositoryCollectionPort`].
+
+====== GetAllRepositoryCollectionsRequest <GetAllRepositoryCollectionsRequest>
+#codeDiagram("GetAllRepositoryCollectionsRequest", 68%)
+
+`GetAllRepositoryCollectionsRequest` trasporta esclusivamente l'identificatore utente per il recupero di tutte le sue collezioni, utilizzato da #link(<IGetAllRepositoryCollectionsPort>)[`IGetAllRepositoryCollectionsPort`].
+
+====== GetRepositoryCollectionRequest <GetRepositoryCollectionRequest>
+#codeDiagram("GetRepositoryCollectionRequest", 70%)
+
+`GetRepositoryCollectionRequest` trasporta utente e URL del repository per il recupero di una specifica collezione, utilizzato da #link(<IGetRepositoryCollectionPort>)[`IGetRepositoryCollectionPort`].
+
+====== SaveCodeReportRequest <SaveCodeReportRequest>
+#codeDiagram("SaveCodeReportRequest", 100%)
+
+`SaveCodeReportRequest` trasporta i dati dell'entità #link(<CodeAgentReport>)[`CodeAgentReport`] verso la persistenza, aggregando identificatori e i Value Object #link(<CodeAgentMetadata>)[`CodeAgentMetadata`] e #link(<AIInterpretation>)[`AIInterpretation`].
+
+====== SaveDocsReportRequest <SaveDocsReportRequest>
+#codeDiagram("SaveDocsReportRequest", 100%)
+
+`SaveDocsReportRequest` trasporta i dati dell'entità #link(<DocumentationReport>)[`DocumentationReport`] verso la persistenza, aggregando identificatori e le collezioni di Value Object prodotti dall'analisi della documentazione.
+
+====== SaveGitHubAnalysisRequest <SaveGitHubAnalysisRequest>
+#codeDiagram("SaveGitHubAnalysisRequest", 100%)
+
+`SaveGitHubAnalysisRequest` trasporta i dati dell'entità #link(<GitHubAnalysis>)[`GitHubAnalysis`] verso la persistenza al momento della sua creazione, includendo tutti i Value Object identificativi e i riferimenti opzionali ai tre report.
+
+====== SaveSecurityReportRequest <SaveSecurityReportRequest>
+#codeDiagram("SaveSecurityReportRequest", 100%)
+
+`SaveSecurityReportRequest` trasporta i dati dell'entità #link(<SecurityReport>)[`SecurityReport`] verso la persistenza, aggregando identificatori e le collezioni di finding suddivisi per categoria di sicurezza.
+
 ===== Response
 ====== CheckAvailabilityResponse <CheckAvailabilityResponse>
-#codeDiagram("CheckAvailabilityResponse", 100%)
+#codeDiagram("CheckAvailabilityResponse", 80%)
 
 `CheckAvailabilityResponse` trasporta il risultato della verifica di raggiungibilità: flag di accessibilità, branch e commit risolti, eventuale messaggio di errore.
 
----
 
 ====== CloneRepoResponse <CloneRepoResponse>
-#codeDiagram("CloneRepoResponse", 100%)
+#codeDiagram("CloneRepoResponse", 70%)
 
 `CloneRepoResponse` trasporta l'esito della clonazione: flag di successo, percorso locale della cartella clonata, eventuale messaggio di errore.
 
----
 
 ====== GetGitCredentialResponse <GetGitCredentialResponse>
-#codeDiagram("GetGitCredentialResponse", 100%)
+#codeDiagram("GetGitCredentialResponse", 80%)
 
 `GetGitCredentialResponse` trasporta il PAT recuperato (o null in caso di errore) e il flag di autorizzazione.
 
----
 
 ====== PostGitCredentialResponse <PostGitCredentialResponse>
-#codeDiagram("PostGitCredentialResponse", 100%)
+#codeDiagram("PostGitCredentialResponse", 65%)
 
 `PostGitCredentialResponse` indica l'esito del salvataggio delle credenziali.
 
----
 
 ====== DeleteGitCredentialResponse <DeleteGitCredentialResponse>
-#codeDiagram("DeleteGitCredentialResponse", 100%)
+#codeDiagram("DeleteGitCredentialResponse", 70%)
 
 `DeleteGitCredentialResponse` indica l'esito dell'eliminazione delle credenziali.
 
----
 
 ====== UpdateGitCredentialPatResponse <UpdateGitCredentialPatResponse>
-#codeDiagram("UpdateGitCredentialPatResponse", 100%)
+#codeDiagram("UpdateGitCredentialPatResponse", 70%)
 
 `UpdateGitCredentialPatResponse` indica l'esito dell'aggiornamento del PAT.
+
+====== AddReportsToAnalysisResult <AddReportsToAnalysisResult>
+#codeDiagram("AddReportsToAnalysisResult", 67%)
+
+`AddReportsToAnalysisResult` indica l'esito dell'aggiornamento dell'analisi con i riferimenti ai report prodotti dall'orchestrazione.
+
+====== AddRepositoryCollectionResponse <AddRepositoryCollectionResponse>
+#codeDiagram("AddRepositoryCollectionResponse", 65%)
+
+`AddRepositoryCollectionResponse` indica l'esito della persistenza di una nuova collezione di repository.
+
+====== CheckCollectionDuplicateResponse <CheckCollectionDuplicateResponse>
+#codeDiagram("CheckCollectionDuplicateResponse", 67%)
+
+`CheckCollectionDuplicateResponse` trasporta esclusivamente il flag `duplicate`, indicando se esiste già una collezione per l'URL e l'utente forniti.
+
+====== DeleteRepositoryCollectionResponse <DeleteRepositoryCollectionResponse>
+#codeDiagram("DeleteRepositoryCollectionResponse", 67%)
+
+`DeleteRepositoryCollectionResponse` indica l'esito dell'eliminazione di una collezione di repository dalla persistenza.
+
+====== GetAllAnalysesForUserResponse <GetAllAnalysesForUserResponse>
+#codeDiagram("GetAllAnalysesForUserResponse", 79%)
+
+`GetAllAnalysesForUserResponse` trasporta la collezione di `GitHubAnalysisGeneralDataDTO` restituita dalla persistenza per un dato utente.
+
+====== GetAllRepositoryCollectionsResponse <GetAllRepositoryCollectionsResponse>
+#codeDiagram("GetAllRepositoryCollectionsResponse", 85%)
+
+`GetAllRepositoryCollectionsResponse` trasporta la collezione di `CollectionDataResponse` restituita dalla persistenza per un dato utente, con factory method `success()` e `failure()`.
+
+====== GetRepositoryCollectionResponse <GetRepositoryCollectionResponse>
+#codeDiagram("GetRepositoryCollectionResponse", 93%)
+
+`GetRepositoryCollectionResponse` trasporta i dati di una specifica collezione di repository — URL, nome, descrizione e lista degli identificatori delle analisi associate — con factory method `success()` e `failure()`.
+
+====== SaveCodeReportResponse <SaveCodeReportResponse>
+#codeDiagram("SaveCodeReportResponse", 67%)
+
+`SaveCodeReportResponse` indica l'esito della persistenza di un report di analisi del codice.
+
+====== SaveDocsReportResponse <SaveDocsReportResponse>
+#codeDiagram("SaveDocsReportResponse", 65%)
+
+`SaveDocsReportResponse` indica l'esito della persistenza di un report di analisi della documentazione.
+
+====== SaveGitHubAnalysisResponse <SaveGitHubAnalysisResponse>
+#codeDiagram("SaveGitHubAnalysisResponse", 70%)
+
+`SaveGitHubAnalysisResponse` indica l'esito della persistenza di una nuova analisi GitHub.
+
+====== SaveSecurityReportResponse <SaveSecurityReportResponse>
+#codeDiagram("SaveSecurityReportResponse", 67%)
+
+`SaveSecurityReportResponse` indica l'esito della persistenza di un report di analisi di sicurezza.
+
+====== GitHubAnalysisDetailedResult <GitHubAnalysisDetailedResult>
+#codeDiagram("GitHubAnalysisDetailedResult", 87%)
+
+`GitHubAnalysisDetailedResult` aggrega i dati generali di un'analisi con i tre report opzionali, utilizzato da #link(<IGetAnalysisFromIdPort>)[`IGetAnalysisFromIdPort`] per restituire al layer applicativo una visione completa dell'analisi recuperata.
+
+- *Report Opzionali:* I campi `docsReport`, `codeReport` e `secReport` sono nullable, riflettendo il fatto che un'analisi può coinvolgere solo un sottoinsieme dei tre tipi di report in base a quanto richiesto.
 
 ==== Infrastructure
 ===== Adapter

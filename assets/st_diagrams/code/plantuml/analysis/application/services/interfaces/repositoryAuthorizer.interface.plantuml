@@ -10,7 +10,7 @@ interface IRepositoryAuthorizer {
     + authorize(url: RepoURL, password?: PATPassword): Promise<PersonalAccessToken>
 }
 
-IRepositoryAuthorizer --right-> RepoURL
-IRepositoryAuthorizer --right-> PATPassword
+IRepositoryAuthorizer --down-> RepoURL
+IRepositoryAuthorizer --down-> PATPassword
 IRepositoryAuthorizer --down-> PersonalAccessToken
 @enduml
