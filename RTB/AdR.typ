@@ -511,7 +511,7 @@ La piattaforma supporta attività di analisi statica del codice sorgente e di in
 == Finalità del Documento
 Il documento di *Analisi dei Requisiti* formalizza le specifiche del prodotto software, descrivendo in modo dettagliato le funzionalità, i vincoli e gli standard di qualità che il sistema Code Guardian deve soddisfare per rispondere alle esigenze del committente.
 
-Il documento costituisce il riferimento primario per il gruppo di lavoro (#def[Skarab Group]) e per gli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#stakeholder")[#def[stakeholder]], perseguendo i seguenti obiettivi:
+Il documento costituisce il riferimento primario per il gruppo di lavoro Skarab Group e per gli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#stakeholder")[#def[stakeholder]], perseguendo i seguenti obiettivi:
 - modellare le interazioni tra gli utenti e il sistema attraverso la definizione formale dei #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#caso-d-uso")[#def("casi d'uso")];
 - individuare e dettagliare i requisiti di sistema, distinguendo tra #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-funzionali")[#def[requisiti funzionali]], #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-di-qualita")[#def[di qualità]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-di-vincolo")[#def[di vincolo]];
 - classificare i requisiti in base alla priorità negoziale e strategica (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-obbligatori")[#def[obbligatori]], #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-opzionali")[#def[opzionali]], #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#requisiti-desiderabili")[#def[desiderabili]]), fornendo una guida per la pianificazione dello sviluppo;
@@ -633,7 +633,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     [Piattaforma di hosting esterna. Interagisce con il sistema per fornire l'accesso al codice sorgente (via API o clone) e ai metadati dei repository.],
 
     [*Servizi AWS*],
-    [Infrastruttura cloud esterna di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#amazon-web-service")[#def[Amazon Web Service]] utilizzata dal sistema come ambiente di calcolo e storage per l'esecuzione delle analisi intensive.],
+    [Infrastruttura cloud esterna di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#amazon-web-services")[#def[Amazon Web Services]] utilizzata dal sistema come ambiente di calcolo e storage per l'esecuzione delle analisi intensive.],
 
     [*Strumenti di Analisi*],
     [Insieme degli strumenti terzi invocati dal sistema per l'esecuzione verticale delle scansioni di sicurezza e qualità del codice.],
