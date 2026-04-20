@@ -10,6 +10,6 @@ interface ISecurityAgentPort {
     + runAnalysis(model: AgentRequest): Promise<SecAgentResponse>
 }
 
-ISecurityAgentPort --right-> AgentRequest
-ISecurityAgentPort --right-> SecAgentResponse
+ISecurityAgentPort --down-> AgentRequest
+ISecurityAgentPort --down-> SecAgentResponse
 @enduml

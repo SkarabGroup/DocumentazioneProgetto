@@ -7,7 +7,8 @@ skinparam ClassAttributeIconSize 0
 hide circles
 
 interface IRepositoryCloner {
-    + clone(repoUrl: RepoURL, analysisId: AnalysisId, patToken: PersonalAccessToken | null, branch: BranchName | null, commit: CommitHash | null): Promise<string>
+    + clone(repoUrl: RepoURL, analysisId: AnalysisId, patToken: PersonalAccessToken | null, 
+    branch: BranchName | null, commit: CommitHash | null): Promise<string>
 }
 
 IRepositoryCloner --down-> RepoURL

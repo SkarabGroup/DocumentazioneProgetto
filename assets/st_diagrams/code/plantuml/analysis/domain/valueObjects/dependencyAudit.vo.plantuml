@@ -13,7 +13,8 @@ class DependencyAudit {
     - _undocumentedInReadme: UndocumentedDependency[]
     - _versionMismatches: VersionMismatchDependency[]
     ---
-    - DependencyAudit(readmeDefined, configDefined, missingInConfig, undocumentedInReadme, versionMismatches)
+    - DependencyAudit(readmeDefined, configDefined, missingInConfig, 
+        undocumentedInReadme, versionMismatches)
     + {static} create(props: DependencyAuditProps): DependencyAudit
     + getReadmeDefined(): ReadmeDependency[]
     + getConfigDefined(): ConfigDependency[]

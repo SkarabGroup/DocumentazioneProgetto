@@ -10,6 +10,6 @@ interface IGitHubAvailabilityPort {
     + check(model: CheckAvailabilityRequest): Promise<CheckAvailabilityResponse>
 }
 
-IGitHubAvailabilityPort --right-> CheckAvailabilityRequest
-IGitHubAvailabilityPort --right-> CheckAvailabilityResponse
+IGitHubAvailabilityPort --down-> CheckAvailabilityRequest
+IGitHubAvailabilityPort --down-> CheckAvailabilityResponse
 @enduml

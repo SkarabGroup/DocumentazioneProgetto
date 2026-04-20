@@ -16,7 +16,8 @@ class KeyIssueReasoning {
     - _suggestedResolution: DescriptionFinding
     ---
     - KeyIssueReasoning(file, location, rule, severity, originalDescription, aiReasoning, suggestedResolution)
-    + {static} create(file: PathFinding, location: IssueLocation, rule: string, severity: SeverityFinding, originalDescription: DescriptionFinding, aiReasoning: DescriptionFinding, suggestedResolution: DescriptionFinding): KeyIssueReasoning
+    + {static} create(file: PathFinding, location: IssueLocation, rule: string, severity: SeverityFinding, originalDescription: DescriptionFinding, 
+      {static} aiReasoning: DescriptionFinding, suggestedResolution: DescriptionFinding): KeyIssueReasoning
     + getFile(): PathFinding
     + getLocation(): IssueLocation
     + getRule(): string

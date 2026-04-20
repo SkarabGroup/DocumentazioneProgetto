@@ -10,6 +10,6 @@ interface IDeleteRepositoryCollectionPort {
     + deleteCollection(model: DeleteRepositoryCollectionRequest): Promise<DeleteRepositoryCollectionResponse>
 }
 
-IDeleteRepositoryCollectionPort --right-> DeleteRepositoryCollectionRequest
-IDeleteRepositoryCollectionPort --right-> DeleteRepositoryCollectionResponse
+IDeleteRepositoryCollectionPort --down-> DeleteRepositoryCollectionRequest
+IDeleteRepositoryCollectionPort --down-> DeleteRepositoryCollectionResponse
 @enduml

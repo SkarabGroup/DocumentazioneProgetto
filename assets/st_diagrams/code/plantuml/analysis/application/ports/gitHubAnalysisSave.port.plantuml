@@ -10,6 +10,6 @@ interface IGitHubAnalysisSavePort {
     + saveAnalysis(request: SaveGitHubAnalysisRequest): Promise<SaveGitHubAnalysisResponse>
 }
 
-IGitHubAnalysisSavePort --right-> SaveGitHubAnalysisRequest
-IGitHubAnalysisSavePort --right-> SaveGitHubAnalysisResponse
+IGitHubAnalysisSavePort --down-> SaveGitHubAnalysisRequest
+IGitHubAnalysisSavePort --down-> SaveGitHubAnalysisResponse
 @enduml

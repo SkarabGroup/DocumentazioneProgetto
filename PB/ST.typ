@@ -28,7 +28,7 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
     "0.13.0",
     "Completati i componenti delle sezioni domain e application per Analysis Microservice",
     members.andrea,
-    ""
+    members.antonio
   ),
   (
     "2026/04/16",
@@ -454,7 +454,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Primitivo di Copertura:* Viene riutilizzato come building block da #link(<CriticalFileReasoning>)[`CriticalFileReasoning`] per rappresentare la percentuale di copertura per linee dei file critici.
 
 ====== CriticalFileReasoning <CriticalFileReasoning>
-#codeDiagram("CriticalFileReasoning", 100%)
+#codeDiagram("CriticalFileReasoning", 85%)
 
 `CriticalFileReasoning` è il Value Object che rappresenta il ragionamento dettagliato su un singolo file critico per la copertura, associando i dati quantitativi delle lacune alla spiegazione contestuale del problema.
 
@@ -486,7 +486,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 - *Riuso Composizionale:* Viene riutilizzato come componente da Value Object più complessi quali #link(<ErrorFinding>)[`ErrorFinding`] e #link(<DependencyFinding>)[`DependencyFinding`].
 
 ====== DocsDiscrepancy <DocsDiscrepancy>
-#codeDiagram("DocsDiscrepancy", 100%)
+#codeDiagram("DocsDiscrepancy", 85%)
 
 `DocsDiscrepancy` è il Value Object che rappresenta una discrepanza tra quanto dichiarato nella documentazione e quanto effettivamente rilevato nel codice sorgente.
 
@@ -859,12 +859,12 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 // descrizione? Il controller dipende solo da questa interfaccia (una per ogni controller), permettendo di sostituire l'implementazione senza modificare il layer di presentazione.
 
 ====== AddRepositoryCollectionUseCase <AddRepositoryCollectionUseCase>
-#codeDiagram("AddRepositoryCollectionUseCase", 100%)
+#codeDiagram("AddRepositoryCollectionUseCase", 90%)
 
 `AddRepositoryCollectionUseCase` è l'interfaccia del use case per la creazione di una nuova collezione di repository, implementata dal servizio applicativo corrispondente.
 
 ====== DeletePatUseCase <DeletePatUseCase>
-#codeDiagram("DeletePatUseCase", 100%)
+#codeDiagram("DeletePatUseCase", 70%)
 
 `DeletePatUseCase` è l'interfaccia del use case per l'eliminazione di un PAT, implementata da #link(<DeletePatService>)[`DeletePatService`].
 
@@ -888,7 +888,7 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 //- *Metodo Non Convenzionale:* Espone `executeAll()` invece del canonico `execute()`, rendendo esplicita nella firma del contratto la natura collettiva dell'operazione.
 
 ====== GetAnalysisUseCase <GetAnalysisUseCase>
-#codeDiagram("GetAnalysisUseCase", 100%)
+#codeDiagram("GetAnalysisUseCase", 80%)
 
 `GetAnalysisUseCase` è l'interfaccia del use case per il recupero di una singola analisi tramite il suo identificatore, implementata dal servizio applicativo corrispondente.
 
@@ -899,14 +899,14 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 
 ====== NewPatUseCase <NewPatUseCase>
-#codeDiagram("NewPatUseCase", 100%)
+#codeDiagram("NewPatUseCase", 70%)
 
 `NewPatUseCase` è l'interfaccia del use case per la registrazione di un nuovo PAT, implementata da #link(<NewPatService>)[`NewPatService`].
 
 - *Disaccoppiamento Controller-Servizio:* Il controller #link(<PatController>)[`PatController`] dipende solo da questa interfaccia, permettendo di sostituire l'implementazione senza modificare il layer di presentazione.
 
 ====== StartAnalysisUseCase <StartAnalysisUseCase>
-#codeDiagram("StartAnalysisUseCase", 100%)
+#codeDiagram("StartAnalysisUseCase", 80%)
 
 `StartAnalysisUseCase` è l'interfaccia del use case principale del sistema: accetta uno #link(<StartAnalysisCommand>)[`StartAnalysisCommand`] e restituisce un #link(<StartAnalysisResult>)[`StartAnalysisResult`].
 
@@ -914,7 +914,7 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 
 ====== UpdatePatUseCase <UpdatePatUseCase>
-#codeDiagram("UpdatePatUseCase", 100%)
+#codeDiagram("UpdatePatUseCase", 80%)
 
 `UpdatePatUseCase` è l'interfaccia del use case per l'aggiornamento di un PAT, implementata da #link(<UpdatePatService>)[`UpdatePatService`].
 
@@ -1010,7 +1010,7 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 
 ====== IRepositoryValidator <IRepositoryValidator>
-#codeDiagram("IRepositoryValidator", 100%)
+#codeDiagram("IRepositoryValidator", 80%)
 
 `IRepositoryValidator` è l'interfaccia del servizio che verifica la raggiungibilità e la validità di un repository GitHub, risolvendo branch e commit a valori concreti.
 
@@ -1019,7 +1019,7 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 
 ====== IRepositoryCloner <IRepositoryCloner>
-#codeDiagram("IRepositoryCloner", 100%)
+#codeDiagram("IRepositoryCloner", 80%)
 
 `IRepositoryCloner` è l'interfaccia del servizio che esegue la clonazione fisica del repository su filesystem locale, restituendo il percorso della cartella clonata.
 
@@ -1125,110 +1125,110 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 ===== Port
 
 ====== ICodeAgentPort <ICodeAgentPort>
-#codeDiagram("ICodeAgentPort", 100%)
+#codeDiagram("ICodeAgentPort", 70%)
 
 `ICodeAgentPort` è il Driving Port che definisce il contratto per l'invocazione dell'agente di analisi del codice, accettando un #link(<AgentRequest>)[`AgentRequest`] e restituendo una `CodeAgentResponse`.
 
 ====== ICollectionAdderPort <ICollectionAdderPort>
-#codeDiagram("ICollectionAdderPort", 100%)
+#codeDiagram("ICollectionAdderPort", 80%)
 
 `ICollectionAdderPort` è il Driven Port per la persistenza di una nuova collezione di repository.
 
 ====== ICodeReportSavePort <ICodeReportSavePort>
-#codeDiagram("ICodeReportSavePort", 100%)
+#codeDiagram("ICodeReportSavePort", 80%)
 
 `ICodeReportSavePort` è il Driven Port per la persistenza di un #link(<CodeAgentReport>)[`CodeAgentReport`] prodotto dall'analisi del codice.
 
 ====== IDocumentationAgentPort <IDocumentationAgentPort>
-#codeDiagram("IDocumentationAgentPort", 100%)
+#codeDiagram("IDocumentationAgentPort", 70%)
 
 `IDocumentationAgentPort` è il Driving Port che definisce il contratto per l'invocazione dell'agente di analisi della documentazione, accettando un #link(<AgentRequest>)[`AgentRequest`] e restituendo una `DocsAgentResponse`.
 
 ====== ICollectionDuplicateCheckerPort <ICollectionDuplicateCheckerPort>
-#codeDiagram("ICollectionDuplicateCheckerPort", 100%)
+#codeDiagram("ICollectionDuplicateCheckerPort", 90%)
 
 `ICollectionDuplicateCheckerPort` è il Driven Port per la verifica dell'esistenza di una collezione di repository nella persistenza, utilizzato da #link(<GitHubCollectionChecker>)[`GitHubCollectionChecker`] per implementare il controllo duplicati.
 
 ====== IDeleteRepositoryCollectionPort <IDeleteRepositoryCollectionPort>
-#codeDiagram("IDeleteRepositoryCollectionPort", 100%)
+#codeDiagram("IDeleteRepositoryCollectionPort", 90%)
 
 `IDeleteRepositoryCollectionPort` è il Driven Port per l'eliminazione di una collezione di repository dalla persistenza.
 
 ====== IDocsReportSavePort <IDocsReportSavePort>
-#codeDiagram("IDocsReportSavePort", 100%)
+#codeDiagram("IDocsReportSavePort", 80%)
 
 `IDocsReportSavePort` è il Driven Port per la persistenza di un #link(<DocumentationReport>)[`DocumentationReport`] prodotto dall'analisi della documentazione.
 
 ====== IGetAllAnalysesForUserPort <IGetAllAnalysesForUserPort>
-#codeDiagram("IGetAllAnalysesForUserPort", 100%)
+#codeDiagram("IGetAllAnalysesForUserPort", 70%)
 
 `IGetAllAnalysesForUserPort` è il Driven Port per il recupero di tutte le analisi associate a un utente dalla persistenza.
 
 ====== IGetAllRepositoryCollectionsPort <IGetAllRepositoryCollectionsPort>
-#codeDiagram("IGetAllRepositoryCollectionsPort", 100%)
+#codeDiagram("IGetAllRepositoryCollectionsPort", 80%)
 
 `IGetAllRepositoryCollectionsPort` è il Driven Port per il recupero di tutte le collezioni di repository di un utente dalla persistenza.
 
 ====== IGetAnalysisFromIdPort <IGetAnalysisFromIdPort>
-#codeDiagram("IGetAnalysisFromIdPort", 100%)
+#codeDiagram("IGetAnalysisFromIdPort", 70%)
 
 `IGetAnalysisFromIdPort` è il Driven Port per il recupero di una singola analisi per identificatore dalla persistenza, restituendo `null` se non trovata.
 
 ====== IGetRepositoryCollectionPort <IGetRepositoryCollectionPort>
-#codeDiagram("IGetRepositoryCollectionPort", 100%)
+#codeDiagram("IGetRepositoryCollectionPort", 80%)
 
 `IGetRepositoryCollectionPort` è il Driven Port per il recupero di una specifica collezione di repository dalla persistenza tramite URL e utente.
 
 ====== IGitHubAnalysisSavePort <IGitHubAnalysisSavePort>
-#codeDiagram("IGitHubAnalysisSavePort", 100%)
+#codeDiagram("IGitHubAnalysisSavePort", 70%)
 
 `IGitHubAnalysisSavePort` è il Driven Port per la persistenza di una nuova entità #link(<GitHubAnalysis>)[`GitHubAnalysis`] al momento dell'avvio dell'analisi.
 
 ====== IGitClonePort <IGitClonePort>
-#codeDiagram("IGitClonePort", 100%)
+#codeDiagram("IGitClonePort", 70%)
 
 `IGitClonePort` è il Driving Port per l'operazione di clonazione Git, accettando un #link(<CloneRepoRequest>)[`CloneRepoRequest`] e restituendo un #link(<CloneRepoResponse>)[`CloneRepoResponse`].
 
 
 ====== IGitCredentialDeletePort <IGitCredentialDeletePort>
-#codeDiagram("IGitCredentialDeletePort", 100%)
+#codeDiagram("IGitCredentialDeletePort", 80%)
 
 `IGitCredentialDeletePort` è il Driven Port per l'eliminazione di credenziali Git.
 
 ====== IGitCredentialReadPort <IGitCredentialReadPort>
-#codeDiagram("IGitCredentialReadPort", 100%)
+#codeDiagram("IGitCredentialReadPort", 70%)
 
 `IGitCredentialReadPort` è il Driven Port per la lettura/autorizzazione delle credenziali Git dal repository di persistenza.
 
 ====== IGitCredentialSavePort <IGitCredentialSavePort>
-#codeDiagram("IGitCredentialSavePort", 100%)
+#codeDiagram("IGitCredentialSavePort", 70%)
 
 `IGitCredentialSavePort` è il Driven Port per il salvataggio di nuove credenziali Git.
 
 ====== IGitCredentialUpdatePort <IGitCredentialUpdatePort>
-#codeDiagram("IGitCredentialUpdatePort", 100%)
+#codeDiagram("IGitCredentialUpdatePort", 80%)
 
 `IGitCredentialUpdatePort` è il Driven Port per l'aggiornamento del PAT di credenziali esistenti.
 
 ====== IGitHubAvailabilityPort <IGitHubAvailabilityPort>
-#codeDiagram("IGitHubAvailabilityPort", 100%)
+#codeDiagram("IGitHubAvailabilityPort", 70%)
 
 `IGitHubAvailabilityPort` è il Driving Port che definisce il contratto per verificare la raggiungibilità e i metadati di un repository GitHub, accettando un #link(<CheckAvailabilityRequest>)[`CheckAvailabilityRequest`] e restituendo un #link(<CheckAvailabilityResponse>)[`CheckAvailabilityResponse`].
 
 - *Inversione delle Dipendenze:* L'applicazione dipende da questa astrazione, non dall'implementazione concreta #link(<GitHubAdapter>)[`GitHubAdapter`], rispettando il principio DIP e facilitando il testing con mock.
 
 ====== ISecurityAgentPort <ISecurityAgentPort>
-#codeDiagram("ISecurityAgentPort", 100%)
+#codeDiagram("ISecurityAgentPort", 70%)
 
 `ISecurityAgentPort` è il Driving Port che definisce il contratto per l'invocazione dell'agente di analisi di sicurezza, accettando un #link(<AgentRequest>)[`AgentRequest`] e restituendo una `SecAgentResponse`.
 
 ====== ISecurityReportSavePort <ISecurityReportSavePort>
-#codeDiagram("ISecurityReportSavePort", 100%)
+#codeDiagram("ISecurityReportSavePort", 80%)
 
 `ISecurityReportSavePort` è il Driven Port per la persistenza di un #link(<SecurityReport>)[`SecurityReport`] prodotto dall'analisi di sicurezza.
 
 ====== IUpdateAnalysisPort <IUpdateAnalysisPort>
-#codeDiagram("IUpdateAnalysisPort", 100%)
+#codeDiagram("IUpdateAnalysisPort", 80%)
 
 `IUpdateAnalysisPort` è il Driven Port per l'aggiornamento di un'analisi esistente con i riferimenti ai report prodotti al termine dell'orchestrazione degli agenti.
 
@@ -1448,7 +1448,7 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 ===== Schema
 ====== GitCredential <GitCredential>
-#codeDiagram("GitCredential", 100%)
+//#codeDiagram("GitCredential", 100%)
 
 `GitCredential` è lo schema Mongoose che definisce la struttura del documento MongoDB per le credenziali Git: URL del repository (chiave univoca), hash della password, e PAT cifrato.
 

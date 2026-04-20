@@ -10,6 +10,6 @@ interface IGetAllRepositoryCollectionsPort {
     + getAllCollections(model: GetAllRepositoryCollectionsRequest): Promise<GetAllRepositoryCollectionsResponse>
 }
 
-IGetAllRepositoryCollectionsPort --right-> GetAllRepositoryCollectionsRequest
-IGetAllRepositoryCollectionsPort --right-> GetAllRepositoryCollectionsResponse
+IGetAllRepositoryCollectionsPort --down-> GetAllRepositoryCollectionsRequest
+IGetAllRepositoryCollectionsPort --down-> GetAllRepositoryCollectionsResponse
 @enduml

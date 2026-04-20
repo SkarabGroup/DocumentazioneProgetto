@@ -10,6 +10,6 @@ interface GetAllAnalysesForUserUseCase {
     + getAllAnalysesForUser(command: GetAllAnalysesForUserCommand): Promise<GetAllAnalysesForUserResult>
 }
 
-GetAllAnalysesForUserUseCase --right-> GetAllAnalysesForUserCommand
-GetAllAnalysesForUserUseCase --right-> GetAllAnalysesForUserResult
+GetAllAnalysesForUserUseCase --down-> GetAllAnalysesForUserCommand
+GetAllAnalysesForUserUseCase --down-> GetAllAnalysesForUserResult
 @enduml

@@ -13,10 +13,10 @@ class ReportEntitiesProvider {
     + fromSecurityAgentResponse(response: SecAgentResponse, reportId: ReportId, analysisId: AnalysisId): SecurityReport
 }
 
-ReportEntitiesProvider ..|> ICodeReportEntityProvider
-ReportEntitiesProvider ..|> IDocsReportEntityProvider
-ReportEntitiesProvider ..|> ISecurityReportEntityProvider
-ReportEntitiesProvider --right-> CodeAgentReport
-ReportEntitiesProvider --right-> DocumentationReport
-ReportEntitiesProvider --right-> SecurityReport
+ReportEntitiesProvider ..up|> ICodeReportEntityProvider
+ReportEntitiesProvider ..up|> IDocsReportEntityProvider
+ReportEntitiesProvider ..up|> ISecurityReportEntityProvider
+ReportEntitiesProvider --down-> CodeAgentReport
+ReportEntitiesProvider --down-> DocumentationReport
+ReportEntitiesProvider --down-> SecurityReport
 @enduml

@@ -10,6 +10,6 @@ interface IGetAllAnalysesForUserPort {
     + getAllAnalysesForUser(id: UserId): Promise<GetAllAnalysesForUserResponse>
 }
 
-IGetAllAnalysesForUserPort --right-> UserId
-IGetAllAnalysesForUserPort --right-> GetAllAnalysesForUserResponse
+IGetAllAnalysesForUserPort --down-> UserId
+IGetAllAnalysesForUserPort --down-> GetAllAnalysesForUserResponse
 @enduml

@@ -10,6 +10,6 @@ interface NewPatUseCase {
     + execute(command: NewPatCommand): Promise<NewPatResult>
 }
 
-NewPatUseCase --right-> NewPatCommand
-NewPatUseCase --right-> NewPatResult
+NewPatUseCase --down-> NewPatCommand
+NewPatUseCase --down-> NewPatResult
 @enduml

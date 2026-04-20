@@ -10,6 +10,6 @@ interface ICodeAgentPort {
     + runAnalysis(model: AgentRequest): Promise<CodeAgentResponse>
 }
 
-ICodeAgentPort --right-> AgentRequest
-ICodeAgentPort --right-> CodeAgentResponse
+ICodeAgentPort --down-> AgentRequest
+ICodeAgentPort --down-> CodeAgentResponse
 @enduml

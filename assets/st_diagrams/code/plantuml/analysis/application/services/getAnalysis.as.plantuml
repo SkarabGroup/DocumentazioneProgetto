@@ -23,8 +23,8 @@ class GetAnalysisService {
     + getAllAnalysesForUser(command: GetAllAnalysesForUserCommand): Promise<GetAllAnalysesForUserResult>
 }
 
-GetAnalysisService ..|> GetAnalysisUseCase
-GetAnalysisService ..|> GetAllAnalysesForUserUseCase
+GetAnalysisService ..up|> GetAnalysisUseCase
+GetAnalysisService ..down|> GetAllAnalysesForUserUseCase
 GetAnalysisService --right-> IGetAnalysisFromIdPort
 GetAnalysisService --left-> IGetAllAnalysesForUserPort
 @enduml

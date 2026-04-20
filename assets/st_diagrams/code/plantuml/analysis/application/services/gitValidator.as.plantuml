@@ -14,7 +14,8 @@ class GitValidatorService {
     - availabilityPort: IGitHubAvailabilityPort
     ---
     + GitValidatorService(availabilityPort)
-    + check(url: RepoURL, pat: PersonalAccessToken | null, branch: BranchName | null, commit: CommitHash | null): Promise<{branch: BranchName, commit: CommitHash}>
+    + check(url: RepoURL, pat: PersonalAccessToken | null, branch: BranchName | null, 
+    commit: CommitHash | null): Promise<{branch: BranchName, commit: CommitHash}>
 }
 
 GitValidatorService ..|> IRepositoryValidator

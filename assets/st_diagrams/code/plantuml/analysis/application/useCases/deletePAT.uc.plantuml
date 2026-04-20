@@ -10,6 +10,6 @@ interface DeletePatUseCase {
     + execute(command: DeletePatCommand): Promise<DeletePatResult>
 }
 
-DeletePatUseCase --right-> DeletePatCommand
-DeletePatUseCase --right-> DeletePatResult
+DeletePatUseCase --down-> DeletePatCommand
+DeletePatUseCase --down-> DeletePatResult
 @enduml

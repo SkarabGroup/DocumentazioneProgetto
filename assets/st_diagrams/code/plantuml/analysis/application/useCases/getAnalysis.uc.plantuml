@@ -10,6 +10,6 @@ interface GetAnalysisUseCase {
     + execute(command: GetAnalysisFromIdCommand): Promise<GetAnalysisResult>
 }
 
-GetAnalysisUseCase --right-> GetAnalysisFromIdCommand
-GetAnalysisUseCase --right-> GetAnalysisResult
+GetAnalysisUseCase --down-> GetAnalysisFromIdCommand
+GetAnalysisUseCase --down-> GetAnalysisResult
 @enduml

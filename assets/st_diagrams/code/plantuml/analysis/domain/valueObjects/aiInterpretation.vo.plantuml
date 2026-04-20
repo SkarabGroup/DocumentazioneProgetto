@@ -13,7 +13,8 @@ class AIInterpretation {
     - _coverageEvaluation: CoverageEvaluation
     ---
     - AIInterpretation(verdict, executiveSummary, staticAnalysisEvaluation, coverageEvaluation)
-    + {static} create(verdict: VerdictStatus, executiveSummary: DescriptionFinding, staticAnalysisEvaluation: StaticAnalysisEvaluation, coverageEvaluation: CoverageEvaluation): AIInterpretation
+    + {static} create(verdict: VerdictStatus, executiveSummary: DescriptionFinding, staticAnalysisEvaluation: StaticAnalysisEvaluation, 
+      {static} coverageEvaluation: CoverageEvaluation): AIInterpretation
     + getVerdict(): VerdictStatus
     + getExecutiveSummary(): DescriptionFinding
     + getStaticAnalysisEvaluation(): StaticAnalysisEvaluation

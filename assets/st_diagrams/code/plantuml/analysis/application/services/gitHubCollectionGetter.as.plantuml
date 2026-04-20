@@ -23,7 +23,7 @@ class GitHubCollectionGetter {
     + executeAll(command: GetAllRepositoryCollectionsCommand): Promise<GetAllRepositoryCollectionsResult>
 }
 
-GitHubCollectionGetter ..|> GetRepositoryCollectionUseCase
+GitHubCollectionGetter ..up|> GetRepositoryCollectionUseCase
 GitHubCollectionGetter ..|> GetAllRepositoryCollectionsUseCase
 GitHubCollectionGetter --right-> IGetRepositoryCollectionPort
 GitHubCollectionGetter --left-> IGetAllRepositoryCollectionsPort

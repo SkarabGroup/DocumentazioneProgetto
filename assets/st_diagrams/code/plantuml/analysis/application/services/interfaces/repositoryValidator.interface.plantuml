@@ -7,7 +7,8 @@ skinparam ClassAttributeIconSize 0
 hide circles
 
 interface IRepositoryValidator {
-    + check(url: RepoURL, pat: PersonalAccessToken | null, branch: BranchName | null, commit: CommitHash | null): Promise<{branch: BranchName, commit: CommitHash}>
+    + check(url: RepoURL, pat: PersonalAccessToken | null, branch: BranchName | null, 
+    commit: CommitHash | null): Promise<{branch: BranchName, commit: CommitHash}>
 }
 
 IRepositoryValidator --down-> RepoURL

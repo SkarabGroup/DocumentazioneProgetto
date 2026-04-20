@@ -22,12 +22,12 @@ class StartAnalysisService {
     + execute(command: StartAnalysisCommand): Promise<StartAnalysisResult>
 }
 
-StartAnalysisService ..|> StartAnalysisUseCase
+StartAnalysisService ..up|> StartAnalysisUseCase
 StartAnalysisService --down-> IPasswordProvider
 StartAnalysisService --down-> IRepositoryAuthorizer
 StartAnalysisService --down-> IRepositoryValidator
 StartAnalysisService --down-> IRepositoryCloner
-StartAnalysisService --left-> IAnalysisOrchestrator
-StartAnalysisService --left-> IGitHubAnalysisSavePort
-StartAnalysisService --right-> GitHubAnalysis
+StartAnalysisService --down-> IAnalysisOrchestrator
+StartAnalysisService --down-> IGitHubAnalysisSavePort
+StartAnalysisService --down-> GitHubAnalysis
 @enduml

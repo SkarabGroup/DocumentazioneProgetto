@@ -14,7 +14,8 @@ class CriticalFileReasoning {
     - _aiReasoning: DescriptionFinding
     ---
     - CriticalFileReasoning(file, lineCoveragePct, missingLines, missingBranches, aiReasoning)
-    + {static} create(file: PathFinding, lineCoveragePct: CoveragePercentage, missingLines: number[], missingBranches: number, aiReasoning: DescriptionFinding): CriticalFileReasoning
+    + {static} create(file: PathFinding, lineCoveragePct: CoveragePercentage, missingLines: number[], 
+      {static} missingBranches: number, aiReasoning: DescriptionFinding): CriticalFileReasoning
     + getFile(): PathFinding
     + getLineCoveragePct(): CoveragePercentage
     + getMissingLines(): number[]

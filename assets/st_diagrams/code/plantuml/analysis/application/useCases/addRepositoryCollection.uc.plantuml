@@ -10,6 +10,6 @@ interface AddRepositoryCollectionUseCase {
     + execute(command: AddRepositoryCollectionCommand): Promise<AddRepositoryCollectionResult>
 }
 
-AddRepositoryCollectionUseCase --right-> AddRepositoryCollectionCommand
-AddRepositoryCollectionUseCase --right-> AddRepositoryCollectionResult
+AddRepositoryCollectionUseCase --down-> AddRepositoryCollectionCommand
+AddRepositoryCollectionUseCase --down-> AddRepositoryCollectionResult
 @enduml

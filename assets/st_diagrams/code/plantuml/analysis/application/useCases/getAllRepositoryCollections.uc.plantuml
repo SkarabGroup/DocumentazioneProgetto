@@ -10,6 +10,6 @@ interface GetAllRepositoryCollectionsUseCase {
     + executeAll(command: GetAllRepositoryCollectionsCommand): Promise<GetAllRepositoryCollectionsResult>
 }
 
-GetAllRepositoryCollectionsUseCase --right-> GetAllRepositoryCollectionsCommand
-GetAllRepositoryCollectionsUseCase --right-> GetAllRepositoryCollectionsResult
+GetAllRepositoryCollectionsUseCase --down-> GetAllRepositoryCollectionsCommand
+GetAllRepositoryCollectionsUseCase --down-> GetAllRepositoryCollectionsResult
 @enduml

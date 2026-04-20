@@ -10,6 +10,6 @@ interface IGetRepositoryCollectionPort {
     + getRepositoryCollection(model: GetRepositoryCollectionRequest): Promise<GetRepositoryCollectionResponse>
 }
 
-IGetRepositoryCollectionPort --right-> GetRepositoryCollectionRequest
-IGetRepositoryCollectionPort --right-> GetRepositoryCollectionResponse
+IGetRepositoryCollectionPort --down-> GetRepositoryCollectionRequest
+IGetRepositoryCollectionPort --down-> GetRepositoryCollectionResponse
 @enduml

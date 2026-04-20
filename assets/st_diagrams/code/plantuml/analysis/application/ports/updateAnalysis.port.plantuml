@@ -10,6 +10,6 @@ interface IUpdateAnalysisPort {
     + addReportsToAnalysis(model: AddReportsToAnalysisRequest): Promise<AddReportsToAnalysisResult>
 }
 
-IUpdateAnalysisPort --right-> AddReportsToAnalysisRequest
-IUpdateAnalysisPort --right-> AddReportsToAnalysisResult
+IUpdateAnalysisPort --down-> AddReportsToAnalysisRequest
+IUpdateAnalysisPort --down-> AddReportsToAnalysisResult
 @enduml

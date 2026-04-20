@@ -10,6 +10,6 @@ interface GetRepositoryCollectionUseCase {
     + execute(command: GetRepositoryCollectionCommand): Promise<GetRepositoryCollectionResult>
 }
 
-GetRepositoryCollectionUseCase --right-> GetRepositoryCollectionCommand
-GetRepositoryCollectionUseCase --right-> GetRepositoryCollectionResult
+GetRepositoryCollectionUseCase --down-> GetRepositoryCollectionCommand
+GetRepositoryCollectionUseCase --down-> GetRepositoryCollectionResult
 @enduml

@@ -10,6 +10,6 @@ interface ICollectionAdderPort {
     + addCollection(model: AddRepositoryCollectionRequest): Promise<AddRepositoryCollectionResponse>
 }
 
-ICollectionAdderPort --right-> AddRepositoryCollectionRequest
-ICollectionAdderPort --right-> AddRepositoryCollectionResponse
+ICollectionAdderPort --down-> AddRepositoryCollectionRequest
+ICollectionAdderPort --down-> AddRepositoryCollectionResponse
 @enduml

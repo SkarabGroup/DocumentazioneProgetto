@@ -10,6 +10,6 @@ interface IGetAnalysisFromIdPort {
     + getAnalysisFromId(analysisId: AnalysisId): Promise<GitHubAnalysisDetailedResult | null>
 }
 
-IGetAnalysisFromIdPort --right-> AnalysisId
-IGetAnalysisFromIdPort --right-> GitHubAnalysisDetailedResult
+IGetAnalysisFromIdPort --down-> AnalysisId
+IGetAnalysisFromIdPort --down-> GitHubAnalysisDetailedResult
 @enduml
