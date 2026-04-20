@@ -1,11 +1,18 @@
 #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
-#let versione = "v1.7.0"
+#let versione = "v2.0.0"
 
 #titlePage("Piano di Progetto", versione)
 #set page(numbering: "1", header: header("Piano di Progetto"), footer: footer())
 #set heading(numbering: "1.1.1")
 #let history = (
+  (
+    "2026/04/20",
+    "2.0.0",
+    "verifica e versionamento",
+    "",
+    members.berengan
+  ),
   (
     "2026/04/18",
     "1.7.0",
