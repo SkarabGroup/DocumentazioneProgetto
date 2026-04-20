@@ -4,11 +4,9 @@ package "View — Layout" {
     --
     Barra di navigazione laterale collassabile presente in tutte le
     pagine protette. Mostra logo, link di navigazione (Repository,
-    Storico, Classifica, Impostazioni), nome utente, pulsante logout
-    e indicatore stato connessione WebSocket (connected/disconnected).
+    Storico, Classifica, Impostazioni), nome utente e pulsante logout.
   }
 
   Sidebar --> "useAuth" : user, logout()
-  Sidebar --> "SocketContext" : isConnected
 }
 @enduml

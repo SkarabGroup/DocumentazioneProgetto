@@ -1,0 +1,19 @@
+@startuml
+package "Hooks Layer (ViewModel)" {
+  class useAnalysisPolling {
+    + options.repositoryId: string
+    + options.onStarted?: (e) => void
+    + options.onProgress?: (e) => void
+    + options.onCompleted?: (e) => void
+    + options.onFailed?: (e) => void
+    --
+    Custom hook che interroga periodicamente il microservizio
+    Analysis tramite HTTP GET per ottenere lo stato dell'analisi del repository.
+    Verifica se lo stato cambia in (pending, in-progress, completed, failed)
+    ed esegue le callback indicate. Il polling si interrompe automaticamente
+    quando viene raggiunto uno stato terminale o al dismount del componente.
+  }
+
+  useAnalysisPolling --> "AnalysisApi" : consuma endpoints
+}
+@enduml

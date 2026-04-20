@@ -38,7 +38,7 @@ package "Components Layer (View)" {
     class RepositoryDetailPage {
       --
       Mostra i dettagli di un repository, lo storico delle analisi
-      e il report dell'ultima analisi con score e remediation.
+      e il report dell'ultima analisi con score e tab di dettaglio.
       Consente di avviare una nuova analisi.
     }
 
@@ -57,15 +57,15 @@ package "Components Layer (View)" {
     class SettingsPage {
       --
       Gestione del profilo utente: aggiornamento dati,
-      cambio password, generazione API key e collegamento
-      con l'account GitHub.
+      cambio password, gestione dei PAT GitHub
+      e cancellazione dell'account.
     }
   }
 
   class CodeGuardianApp {
     --
     Componente root che inizializza il router,
-    i Context provider (AuthContext, SocketContext)
+    il Context provider (AuthContext)
     e il sistema di notifiche toast.
   }
 
@@ -83,7 +83,7 @@ package "Components Layer (View)" {
   LoginPage --> "Hooks Layer" : useAuth
   RegisterPage --> "Hooks Layer" : useAuth
   RepositoriesPage --> "Hooks Layer" : useAuth
-  RepositoryDetailPage --> "Hooks Layer" : useAnalysisSocket
+  RepositoryDetailPage --> "Hooks Layer" : useAnalysisPolling
   SettingsPage --> "Hooks Layer" : useAuth
 }
 @enduml
