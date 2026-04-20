@@ -10,7 +10,7 @@
     "2026/04/18",
     "1.7.0",
     "Fix generali e inizio aggiunta sprint 10",
-    members.andrea,
+    members.kevin,
     "",
   ),
   (
@@ -18,14 +18,14 @@
     "1.6.0",
     "Retrospettiva Sprint 9",
     members.andrea,
-    "",
+    members.kevin,
   ),
   (
     "2026/04/05",
     "1.5.0",
     "Retrospettiva Sprint 8 e aggiunto Sprint 9",
     members.andrea,
-    "",
+    members.kevin,
   ),
   (
     "2026/03/31",
@@ -51,7 +51,7 @@
   (
     "2026/03/08",
     "1.1.0",
-    "Aggiunta tabella attvità e modifica alle ore preventivsate di sprint 5",
+    "Aggiunta tabella attvità e modifica alle ore preventivate di sprint 5",
     members.berengan,
     members.andrea
   ),
@@ -528,66 +528,30 @@ Questa categoria raggruppa le criticità legate alla pianificazione temporale, a
   "Basso", // I=1 -> R=2 (Basso)
 )
 
-=== RCO6: Ritardi o incomprensioni nella comunicazione con la proponente
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr),
-    inset: 10pt,
-    table.header(
-      [*Tipologia Dato*],
-      [*Valore*],
-    ),
+=== RCO6: Ritardi o incomprensioni nella comunicazione con la proponente <RCO6>
 
-    [*Codice*],
-    [RCO3],
-    [*Nome*], 
-    [Ritardi o incomprensioni nella comunicazione con la proponente],
-    [*Descrizione*], 
-    [Possibili ritardi nelle risposte da parte di #def[Var Group] o interpretazioni errate dei feedback forniti durante le sessioni di mentoring. Questo potrebbe portare a sviluppare funzionalità non in linea con le aspettative della proponente.],
-    [*Mitigazione*], 
-    [Programmazione di incontri periodici fissi e redazione di verbali (verbali esterni) dopo ogni incontro per formalizzare quanto deciso. Uso di canali di comunicazione diretti (#def[Slack]) per chiarimenti rapidi. In caso di dubbi sull'interpretazione dei feedback, il gruppo si impegnerà a richiedere chiarimenti tempestivi alla proponente per evitare incomprensioni. Nel caso in cui la proponente non risponda entro tempi ragionevoli il gruppo contattera il Prof. Vardanega per consigli su come procedere.],
-    [*Probabilità di avvenimento*],
-    [Media],
-    [*Pericolosità delle ripercussioni*],
-    [Media],
-  ),
-  caption: [Informazioni sul rischio RCO3],
+#schedaRischio(
+  "RC06",
+  "Ritardi o incomprensioni nella comunicazione con la proponente",
+  [Possibili ritardi nelle risposte da parte di #def[Var Group] o interpretazioni errate dei feedback forniti durante le sessioni di mentoring. Questo potrebbe portare a sviluppare funzionalità non in linea con le aspettative della proponente.],
+  [Azienda con priorità variabili e canali di comunicazione non strutturati, che possono generare ritardi o fraintendimenti. La mancanza di un processo formale per la gestione dei feedback aumenta il rischio di incomprensioni.],
+  [Programmazione di incontri periodici fissi e redazione di verbali (verbali esterni) dopo ogni incontro per formalizzare quanto deciso. Uso di canali di comunicazione diretti (#def[Slack]) per chiarimenti rapidi. In caso di dubbi sull'interpretazione dei feedback, il gruppo si impegnerà a richiedere chiarimenti tempestivi alla proponente per evitare incomprensioni. Nel caso in cui la proponente non risponda entro tempi ragionevoli il gruppo contattera il Prof. Vardanega per consigli su come procedere.],
+  [Continui sforzi di allineamento e chiarimenti, ma con rischio residuo di sviluppare funzionalità non in linea con le aspettative. Possibile necessità di rework in caso di feedback tardivi o fraintesi.],  
+  "Media",
+  "Media",
 )
 
-=== RCO7: Disomogeneità nella produzione della documentazione
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr),
-    inset: 10pt,
-    table.header(
-      [*Tipologia Dato*],
-      [*Valore*],
-    ),
+=== RCO7: Disomogeneità nella produzione della documentazione <RCO7>
 
-    [*Codice*],
-    [RCO4],
-    [*Nome*], 
-    [Disomogeneità nella produzione della documentazione],
-    [*Descrizione*], 
-    [Dato che i membri del team hanno stili di scrittura diversi, i documenti (#def[Piano di Progetto], #def[Norme di Progetto], ecc.) potrebbero risultare frammentati, poco coerenti o con terminologie discordanti. Questo potrebbe compromettere la chiarezza e la professionalità della documentazione consegnata.],
-    [*Mitigazione*], 
-    [Definizione rigorosa dei template riguardante l'aspetto visivo, l'impaginazione e la formattazione del testo. Ogni documento deve passare per una fase di verifica incrociata, un membro diverso dal redattore controlla il lavoro, prima di essere considerato definitivo. Inoltre, viene stabilito un glossario condiviso per uniformare la terminologia tecnica utilizzata nei documenti.],
-    [*Probabilità di avvenimento*],
-    [Media],
-    [*Pericolosità delle ripercussioni*],
-    [Medio-Bassa],
-  ),
-  caption: [Informazioni sul rischio RCO4],
+#schedaRischio(
+  "RC07",
+  "Disomogeneità nella produzione della documentazione",
+  [Dato che i membri del team hanno stili di scrittura diversi, i documenti (#def[Piano di Progetto], #def[Norme di Progetto], ecc.) potrebbero risultare frammentati, poco coerenti o con terminologie discordanti. Questo potrebbe compromettere la chiarezza e la professionalità della documentazione consegnata.],
+  [Allinementi mancati tra componenti su stili, formati e terminologia, uniti alla mancanza di un processo di revisione sistematico, aumentano il rischio di incoerenze. La redazione parallela senza coordinamento favorisce la frammentazione.],
+  [Definizione rigorosa dei template riguardante l'aspetto visivo, l'impaginazione e la formattazione del testo. Ogni documento deve passare per una fase di verifica incrociata, un membro diverso dal redattore controlla il lavoro, prima di essere considerato definitivo. Inoltre, viene stabilito un glossario condiviso per uniformare la terminologia tecnica utilizzata nei documenti.],
+  [Continui sforzi di allineamento e revisione, ma con rischio residuo di incoerenze stilistiche o terminologiche. Possibile necessità di interventi correttivi in fase di revisione finale per armonizzare i documenti.],
+  "Media",
+  "Medio-Basso",
 )
 
 
@@ -683,6 +647,7 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
       - Costi: *Sprint 2*
       - Sprint: *Sprint 3-4*
       - Revisione: *Sprint 4*
+      - Aggiornamento sull'andamento: *trasversale*
     ],
     [Concluso],
 
@@ -699,6 +664,7 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
       - Test: *Sprint 1-2-4*
       - Cruscotto: *Sprint 3-4*
       - Revisione: *Sprint 4*
+      - Aggiornamento grafici di andamento: *trasversale*
     ],
     [Concluso],
 
@@ -715,6 +681,7 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
       - Processi: *Sprint 1-2*
       - Standard: *Sprint 2*
       - Revisione: *Sprint 3-4*
+      - Aggiornamento processi: *trasversale*
     ],
     [Concluso],
 
@@ -723,7 +690,7 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
     [Redazione incrementale dei termini tecnici.
       Responsabilità diffusa tra tutti i membri per garantire un vocabolario controllato (#link(<RCO5>)[#underline[RCO5]]).],
     [Trasversale],
-    [In corso],
+    [Concluso],
 
     // Proof of Concept - ANTICIPATO
     [*Sviluppo PoC*],
@@ -750,7 +717,7 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
       - Monitoraggio task su Jira.
     ],
     [Trasversale],
-    [In corso],
+    [Concluso],
 
     // Presentazione
     [*Preparazione RTB*],
@@ -762,7 +729,7 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
       - Slide: *Sprint 3*
       - Esposizione: *Sprint 4*
     ],
-    [In corso],
+    [Concluso],
   ),
   caption: [Dettaglio attività pianificate per la fase RTB],
 )
@@ -794,6 +761,32 @@ Sviluppo funzionalità avanzate e UI finale.
 Fase dedicata alla Quality Assurance e alla consegna.
 - *Obiettivo:* Conformità totale ai requisiti e stabilità.
 - *Attività:* System Test intensivi, User Acceptance Test (UAT) con il proponente, Manualistica finale e chiusura metriche di qualità.
+
+
+=== Calendario degli Sprint (Fase PB)
+La fase è suddivisa in 6 iterazioni (*Sprint*). Le date sono state definite tenendo conto dell'assenza di eventi che avrebbero potuto interferire con lo sviluppo.
+
+#figure(
+  table(
+    columns: (auto, 1fr, 1fr),
+    inset: 8pt,
+    align: (col, row) => if col == 0 { center + horizon } else { left + horizon },
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    stroke: 0.5pt + luma(200),
+    table.header(
+      text(fill: white, weight: "bold")[Iterazione],
+      text(fill: white, weight: "bold")[Data Inizio],
+      text(fill: white, weight: "bold")[Data Fine],
+    ),
+    [*Sprint 5*], [22/02/2026], [07/03/2026],
+    [*Sprint 6*], [07/03/2026], [21/03/2026],
+    [*Sprint 7*], [21/03/2026], [28/03/2026],
+    [*Sprint 8*], [28/03/2026], [04/04/2026],
+    [*Sprint 9*], [04/04/2026], [11/04/2026],
+    [*Sprint 10*], [11/04/2026], [21/04/2026],
+  ),
+  caption: [Calendario degli Sprint pianificati per la fase PB],
+)
 
 #pagebreak()
 = Preventivo e Allocazione delle Risorse
@@ -1803,13 +1796,23 @@ Il coordinamento interno di questo sprint è migliorato rispetto ai precedenti. 
 - *Verificatore:* Preventivato 11h, Consuntivo 2h
 
 ===== Rischi rilevati
+Durante questo sprint si sono manifestati i seguenti rischi:
+- #link(<RI4>)[#underline[[RI4]]]: la mancata comunicazione efficace su come svolgere alcune attività o il conflitto di idee hanno portato a un importante rallentamento e lavoro aggiuntivo.
+- #link(<RI5>)[#underline[[RI5]]]: è stata riscontrata una disomogeneità del lavoro svolto da parte dei membri durante lo sprint.
 
 ===== Obiettivi per lo Sprint Successivo
 Per lo sprint successivo il team si pone i seguenti obiettvi prioritari:
 - Terminare le attività di progettazione
 - Iniziare le attvità di codifica
 
-===== Aggiornamento preventivo a finire PB
+==== Misure correttive
+Per mitigare i rischi emersi durante lo sprint 5, il team ha deciso di adottare le seguenti misure correttive:
+- Per entrambi i rischi riscontrati, il team ha deciso di implementare un sistema di comunicazione più strutturato, con incontri di allineamento più frequenti e l'utilizzo di strumenti di collaborazione online per garantire che tutti i membri siano sempre aggiornati sulle attività in corso e sui compiti assegnati.
+  - Questo include l'adozione di un nuovo metodo di lavoro per branch di feature singolo e non di branch per documento come durante la fase RTB
+
+==== Miglioramento della pianificazione futura
+- Da questo sprint abbiamo potuto notare come mai prima d'ora l'importanza di una pianificazione più dettagliata e realistica, soprattutto per quanto riguarda le attività di progettazione che richiedono un grande investimento di tempo e risorse. Per questo motivo, per i prossimi sprint, il team si impegna a dedicare più tempo alla fase di pianificazione, coinvolgendo tutti i membri del team nella stima delle attività e nella definizione degli obiettivi, in modo da garantire una distribuzione più equilibrata del lavoro e un maggiore rispetto delle scadenze.
+==== Aggiornamento preventivo a finire PB
 #preventivo_a_finire(
   (
     //               Resp  Amm  Anal  Prog  Cod  Ver
@@ -1821,7 +1824,7 @@ Per lo sprint successivo il team si pone i seguenti obiettvi prioritari:
     ([Alberto],         1,   0,   0,   17,   9,  13),
     ([Alice],           1,   4,  -2,   17,  20,  12),
   ),
-  [Consuntivo Sprint],
+  [Aggiornamento preventivo a finire sprint 5],
   (7,0,5,54,0,11),  // preventivo
   (7,0,4,0,0,2),  // consuntivo ← nuovo argomento
 )
@@ -1910,6 +1913,15 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
 - Chiudere le decisioni progettuali sui pattern in Specifica Tecnica.
 - Iniziare lo sviluppo dei microservizi.
 
+==== Misure correttive
+Per mitigare i rischi emersi durante lo sprint 6, il team ha deciso di adottare le seguenti misure correttive:
+- Il team si dividerá ufficialmente in 3 a coprire le 3 aree (frontend e 2 microservizi), in modo da aumentare la responsabilità individuale e migliorare il coordinamento interno, con incontri giornalieri di allineamento intra-team e almeno 2 incontri di allineamento inter-team a settimana, in modo da garantire che tutte le componenti siano sempre aggiornate sulle scelte progettuali e sui progressi fatti.
+
+==== Miglioramento della pianificazione futura
+Questo sprint é stato il primo in cui la pianificazione é stata rispettata, e questo é stato possibile grazie a un miglioramento del coordinamento interno e a una maggiore responsabilizzazione dei membri. Per questo motivo, per i prossimi sprint, il team si impegna a mantenere questo livello di coordinamento e responsabilità, continuando a dedicare tempo alla pianificazione dettagliata delle attività e alla definizione degli obiettivi, in modo da garantire una distribuzione equilibrata del lavoro e un maggiore rispetto delle scadenze.
+
+==== Aggiornamento preventivo a finire PB
+
 #preventivo_a_finire(
   (
     //               Resp  Amm  Anal  Prog  Cod  Ver
@@ -1921,7 +1933,7 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
     ([Alberto],         1,   0,   0,   11,   9,  13),
     ([Alice],           1,   4,  -2,   11,  20,  12),
   ),
-  [Consuntivo Sprint],
+  [Aggiornamento preventivo a finire sprint 6],
   (2,0,0,38,0,0),  // preventivo
   (2,0,0,54,0,14),  // consuntivo ← nuovo argomento
 )
@@ -1950,7 +1962,7 @@ La seguente tabella riporta la pianificazione oraria per ruolo.
     ([Suar Alberto], 0, 0, 0, 3, 3, 1),
     ([Zago Alice], 0, 0, 0, 4, 2, 0),
   ),
-  [Prospetto orario preventivato per lo Sprint 7 (Totale: 49 ore)],
+  [Prospetto orario preventivato per lo Sprint 7],
 )
 
 ==== Prospetto attività
@@ -1971,11 +1983,11 @@ La seguente tabella riporta la pianificazione oraria per ruolo.
 
     ("Coordinamento branch, merge PR e avanzamento sprint", "Responsabile", "2:00", "2:00", "Completata"),
 
-    ("Code review PR principali (#2, #4, #5, #6, #7, #8, #9, #10, #12, #13, #15, #16)", "Verificatore", "4:00", "4:30", "Completata"),
+    ("Code review PR principali", "Verificatore", "4:00", "4:30", "Completata"),
     ("Verifica pipeline CI/CD (GitHub Actions, lint, format, coverage, Docker)", "Verificatore", "2:00", "2:30", "Completata"),
     ("Verifica verbale interno del 18 marzo e controlli CONTRIBUTING", "Verificatore", "2:00", "2:00", "Completata")
   ),
-  [Riassunto delle attività svolte durante lo sprint 7 (Preventivo: 49h, Consuntivo: 50h)]
+  [Riassunto delle attività svolte durante lo sprint 7]
 )
 
 ==== Consumo Tempo e Costi Effettivi (Consuntivo)
@@ -2010,7 +2022,7 @@ Le decisioni finali sull'architettura, la stesura in ST dei modelli C3/C4 e la r
 
 ===== Rischi Rilevati
 Nel corso dello Sprint si è prestata particolare attenzione a evitare i seguenti rischi già censiti:
-- #link(<RT8>)[#underline[[RT8]]]: per evitare disomogeneità o conflitti tra i membri durante i merge del codice si è ribadito il corretto standard procedurale di push e pull per Git.
+- #link(<RT8>)[#underline[[RT8]]]: il team ha riscontrato disomogeneitá tra le implementazioni dei vari membri.
 
 ===== Obiettivi per lo Sprint Successivo
 Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
@@ -2019,7 +2031,14 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
 - Sviluppo del microservizio agenti.
 - Sviluppo del microservizio autenticazione.
 
+==== Misure correttive
+Per mitigare i rischi emersi durante lo sprint 7, il team ha deciso di adottare le seguenti misure correttive:
+- Per evitare i rischi di disomogeneità o conflitti tra i membri durante i merge del codice, il team ha deciso di implementare un sistema di code review più rigoroso, con almeno 1 revisore diverso dal programmatore per ogni PR, e di utilizzare strumenti di integrazione continua (CI) per automatizzare i test e garantire la coerenza del codice prima del merge.
 
+==== Miglioramento della pianificazione futura
+- Per i prossimi sprint, il team si impegna a mantenere una pianificazione dettagliata e realistica, coinvolgendo tutti i membri del team nella stima delle attività e nella definizione degli obiettivi, in modo da garantire una distribuzione equilibrata del lavoro e un maggiore rispetto delle scadenze. Inoltre, il team si impegna a monitorare costantemente l'avanzamento delle attività e a essere flessibile nell'adattare la pianificazione in caso di imprevisti o cambiamenti nelle priorità.
+
+==== Aggiornamento preventivo a finire PB
 #preventivo_a_finire(
   (
     //               Resp  Amm  Anal  Prog  Cod  Ver
@@ -2031,7 +2050,7 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
     ([Alberto],         1,   0,   0,   10,   6,  13),
     ([Alice],           1,   4,  -2,   8,  18,  12),
   ),
-  [Consuntivo Sprint],
+  [Aggiornamento preventivo a finire sprint 7],
   (2,0,0,28,11,8),  // preventivo
   (2,0,0,28,11,9),  // consuntivo ← nuovo argomento
 )
@@ -2103,15 +2122,15 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
     ("Credential model + mock PAT password + PAT Password VO", "Programmatore", "1:30", "2:30", "Completata"),
     ("MongoDBAdapter + IGitCredentialWritePort + GitHub interaction + final fix test/package", "Programmatore", "5:00", "5:00", "Completata"),
 
-    ("Verifica PR #32 (AdR) e coerenza requisiti", "Verificatore", "2:00", "2:00", "Completata"),
-    ("Verifica PR #33 (PdQ) e consistenza dei test", "Verificatore", "1:00", "1:30", "Completata"),
-    ("Verifica PR #34 e #37 (PdP), inclusa revisione ore verificatore", "Verificatore", "2:00", "2:30", "Completata"),
-    ("Verifica PR #35, #38, #39 (ST) e assegnazione verifier", "Verificatore", "3:00", "3:30", "Completata"),
-    ("Verifica PR #36 (NdP) e aggiornamento membri", "Verificatore", "2:30", "2:00", "Completata"),
-    ("Verifica PR backend #17-#33 su test e coerenza dominio", "Verificatore", "3:00", "3:00", "Completata"),
+    ("Verifica PR (AdR) e coerenza requisiti", "Verificatore", "2:00", "2:00", "Completata"),
+    ("Verifica PR  (PdQ) e consistenza dei test", "Verificatore", "1:00", "1:30", "Completata"),
+    ("Verifica PR (PdP), inclusa revisione ore verificatore", "Verificatore", "2:00", "2:30", "Completata"),
+    ("Verifica PR  (ST) e assegnazione verifier", "Verificatore", "3:00", "3:30", "Completata"),
+    ("Verifica PR (NdP) e aggiornamento membri", "Verificatore", "2:30", "2:00", "Completata"),
+    ("Verifica PR backend  su test e coerenza dominio", "Verificatore", "3:00", "3:00", "Completata"),
     ("Verifica fix CI/lint/check-test-symmetry", "Verificatore", "2:30", "2:30", "Completata")
   ),
-  [Riassunto delle attività svolte durante lo sprint 8 (Preventivo: 78h 30m, Consuntivo: 79h 30m)]
+  [Riassunto delle attività svolte durante lo sprint 8]
 )
 
 ==== Consumo Tempo e Costi Effettivi (Consuntivo)
@@ -2144,7 +2163,7 @@ L'imprevista necessità di studiare l'ambiente Serverless e la successiva riprog
 
 ===== Rischi Rilevati
 Nel corso dello Sprint si sono manifestati o sono stati sfiorati i seguenti rischi già censiti:
-- #link(<RT1>)[#underline[[RT1]]] e #link(<RT3>)[#underline[[RT3]]]: L'inesperienza con architetture cloud complesse (Serverless) stava per far deragliare la progettazione. Il rischio è stato mitigato riconducendo il sistema a pattern noti (NestJS interno).
+- #link(<RT1>)[#underline[[RT1]]] e #link(<RT3>)[#underline[[RT3]]]: L'inesperienza con architetture cloud complesse (Serverless) stava per far deragliare la progettazione. 
 - #link(<RCO1>)[#underline[[RCO1]]]: La stima dei tempi per l'integrazione di Step Functions era stata sottovalutata. Il team ha cambiato rotta in tempo, evitando ritardi significativi.
 - #link(<RCO4>)[#underline[[RCO4]]]: La Propronente non si è presentata al colloquio di revisione, impedendo un feedback diretto. Il team ha comunque proseguito con le attività, ma resta il rischio di non essere allineati sulle aspettative dell'azienda.
 - #link(<RI4>)[#underline[[RI4]]]: Fisiologici conflitti comunicativi durante la progettazione, risolti con successo tramite mediazione e confronto tecnico.
@@ -2156,7 +2175,16 @@ Per lo Sprint successivo, il team si pone i seguenti obiettivi prioritari:
 - Affrontare la riunione di allineamento con l'azienda Proponente mostrando un'architettura consolidata.
 - Proseguire lo sviluppo del Frontend collegandolo in modo basilare ai Backend.
 
-===== Aggiornamento preventivo a finire PB
+==== Misure correttive
+Per mitigare i rischi emersi durante lo sprint 8, il team ha deciso di adottare le seguenti misure correttive:
+- Riguardo i rischi legati all' AI e alla complessità architetturale, il team ha deciso di adottare un approccio iterativo e incrementale nello sviluppo del microservizio di analisi, iniziando con una versione semplificata senza l'integrazione degli agenti LLM in local per poi passare all'integrazione con AWS.
+- Riguardo i rischi di disallineamento con la Proponente, il team ha continuato con la comuinicazione su Slack.
+- Riguardo i conflitti interni alcuni membri hanno deciso di prendere in mano le redini e coordinare le attività di progettazione, mediazione e sviluppo, in modo da garantire un allineamento costante e una risoluzione rapida dei conflitti.
+
+==== Miglioramento della pianificazione futura
+Questo sprint ha evidenziato l'importanza di una valutazione più accurata della complessitá dei lavori, e delle skill dei vari componenti del team, soprattutto quando si tratta di tecnologie o architetture nuove.
+
+==== Aggiornamento preventivo a finire PB
 #preventivo_a_finire(
   (
     //               Resp  Amm  Anal  Prog  Cod  Ver
@@ -2168,7 +2196,7 @@ Per lo Sprint successivo, il team si pone i seguenti obiettivi prioritari:
     ([Alberto],         1,   -4,   0,   4,   1,  11),
     ([Alice],           1,   4,  -2,   7,  14,  10),
   ),
-  [Consuntivo Sprint],
+  [Aggiornamento preventivo a finire sprint 8],
   (3.5,4,0,22,30,16),  // preventivo
   (3.5,4,0,22,33,17),  // consuntivo ← nuovo argomento
 )
@@ -2205,7 +2233,7 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
     ([Suar Alberto], 0, 3, 0, 2, 6, 3),
     ([Zago Alice], 0, 0, 0, 0, 7, 7),
   ),
-  [Prospetto orario preventivato per lo Sprint 9 (Totale: 109h 30m)],
+  [Prospetto orario preventivato per lo Sprint 9],
 )
 
 ==== Prospetto attività
@@ -2239,15 +2267,15 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
     ("Git clone application service + AnalysisController + integrazione MongoDB", "Programmatore", "4:00", "4:00", "Completata"),
     ("Auth hardening: JWT guard, secret-jwt-string, ISessionSave/ISessionDelete", "Programmatore", "4:00", "4:00", "Completata"),
 
-    ("Verifica PR VO findings (#36-#40, #42, #48, #49, #52, #54, #57, #58)", "Verificatore", "6:00", "6:00", "Completata"),
-    ("Verifica PR report entities e save port (#62, #63, #65)", "Verificatore", "4:30", "4:30", "Completata"),
-    ("Verifica PR orchestrator/agents/code-agent (#61, #64) e fix correlati", "Verificatore", "4:30", "4:30", "Completata"),
-    ("Verifica PR PAT flow/controllers (#34, #41, #43, #50, #56)", "Verificatore", "5:00", "5:00", "Completata"),
-    ("Verifica PR auth/session/exceptions (#17, #18, #19, #59)", "Verificatore", "4:00", "4:00", "Completata"),
-    ("Verifica PR account controllers/logout/e2e/delete (#12, #13, #14, #15, #16)", "Verificatore", "3:00", "3:00", "Completata"),
-    ("Verifica PR documentazione ST/PdP/verbali (#40, #41, #42, #43, #44)", "Verificatore", "3:00", "3:00", "Completata"),
+    ("Verifica PR VO findings", "Verificatore", "6:00", "6:00", "Completata"),
+    ("Verifica PR report entities e save port", "Verificatore", "4:30", "4:30", "Completata"),
+    ("Verifica PR orchestrator/agents/code-agent e fix correlati", "Verificatore", "4:30", "4:30", "Completata"),
+    ("Verifica PR PAT flow/controllers", "Verificatore", "5:00", "5:00", "Completata"),
+    ("Verifica PR auth/session/exceptions", "Verificatore", "4:00", "4:00", "Completata"),
+    ("Verifica PR account controllers/logout/e2e/delete ", "Verificatore", "3:00", "3:00", "Completata"),
+    ("Verifica PR documentazione ST/PdP/verbali ", "Verificatore", "3:00", "3:00", "Completata"),
   ),
-  [Riassunto delle attività svolte durante lo sprint 9 (Preventivo: 109h 30m, Consuntivo: 109h 30m)]
+  [Riassunto delle attività svolte durante lo sprint 9]
 )
 ==== Consumo Tempo e Costi Effettivi (Consuntivo)
 La tabella sottostante illustra le ore produttive effettivamente rendicontate.
@@ -2303,7 +2331,18 @@ Per lo Sprint successivo, il team si pone i seguenti obiettivi prioritari:
 - Concludere il collegamento delle interfacce frontend con gli endpoint dei microservizi e completare la generazione dei grafici/diagrammi da inserire nella Specifica Tecnica.
 - Revisionare e terminare la Specifica Tecnica in tutte le sue parti, gettare le basi per la stesura del Manuale Utente e sistemare definitivamente tabelle e consuntivi nel Piano di Progetto (PdP).
 
-===== Aggiornamento preventivo a finire PB
+==== Misure correttive
+Per mitigare i rischi emersi durante lo sprint 9, il team ha deciso di adottare le seguenti misure correttive:
+- Riguardo i rischi legati all' AI e alla complessità architetturale, il team ha deciso di adottare un approccio iterativo e incrementale nello sviluppo del microservizio di analisi, iniziando con una versione semplificata senza l'integrazione degli agenti LLM in local per poi passare all'integrazione con AWS.
+- Riguardo i rischi di disallineamento e conflitti interni, il team ha raggiunto uno stato di "stallo" ovvero pensa di aver applicato tutte le misure necessarie a mitigare i conflitti, ma questi continuano a manifestarsi. Il rapporto meramente umano é nato e cresciuto incrinato e non riesce a reggere le tensioni generate da divergenze di opinioni su cosa sia lavoro rendicontabile e su come debba essere svolto. Il team ha deciso di continuare lasciando le task pú articolate ai membri piú esperti/volenterosi ma è evidente che questa situazione rappresenta un rischio molto elevato per il successo del progetto. Questo é anche la causa del motivo per cui ci sono gli squilibri orario, anche se molto mitigati oramai.
+- Riguardo i rischi legati ai costi e limiti di utilizzo, il team ha deciso di adottare un approccio pragmatico, cercando di ottimizzare le richieste fatte all'API per rientrare nei limiti di token, e valutando l'hosting non continuo su AWS durante la fase di sviluppo e testing degli agenti, per poi passare a un hosting continuo solo nella fase finale di consolidamento e presentazione.
+
+==== Miglioramento della pianificazione futura
+Essendo il prossimo l'ultimo sprint, il team si concentrerà principalmente sul completamento delle attività rimanenti e sulla preparazione della presentazione finale. Tuttavia, è importante sottolineare che la pianificazione futura dovrebbe tenere in considerazione le lezioni apprese durante questo sprint, in particolare per quanto riguarda la stima dei tempi e la gestione dei conflitti interni. Per migliorare la pianificazione futura, il team potrebbe:
+- Adottare una stima più conservativa dei tempi per le attività critiche, soprattutto quando si tratta di tecnologie o architetture nuove.
+- Continuare a monitorare e gestire attivamente i conflitti interni, cercando di mantenere un ambiente di lavoro collaborativo e supportivo, anche se la situazione attuale sembra essere in stallo.
+- Valutare l'adozione di strumenti o metodologie per migliorare la comunicazione e la collaborazione all'interno del team, al fine di ridurre le incomprensioni e migliorare l'allineamento sulle aspettative e sui rendiconti di lavoro.
+==== Aggiornamento preventivo a finire PB
 #preventivo_a_finire(
   (
     //               Resp  Amm  Anal  Prog  Cod  Ver
@@ -2315,7 +2354,7 @@ Per lo Sprint successivo, il team si pone i seguenti obiettivi prioritari:
     ([Alberto],         1,   -7,   0,   2,   -4,  7),
     ([Alice],           1,   4,  -2,   6,  4,  4),
   ),
-  [Consuntivo Sprint],
+  [Aggiornamento preventivo a finire sprint 9],
   (3.5,10,0,17,42,30),  // preventivo
   (3.5,10,0,17,49,30),  // consuntivo ← nuovo argomento
 )
@@ -2324,7 +2363,7 @@ Per lo Sprint successivo, il team si pone i seguenti obiettivi prioritari:
 //KEVIN
 
 === Sprint 10
-*Periodo:* dal 11/04/2026 al 18/04/2026
+*Periodo:* dal 11/04/2026 al 21/04/2026
 ==== Attività Principali
 Le attività pianificate per questo sprint si concentrano sul completamento del codice e dei test per l'MVP, completamento documenti e preparazione alla presentazione finale.
 
@@ -2393,7 +2432,7 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
     ("Verifica finale consistenza documentazione e tabelle con consuntivi", "Verificatore", "2:30", "2:00", "Completata"),
     ("Verifica finale ST e coerenza con codice implementato", "Verificatore", "6:00", "3:00", "Completata")
   ),
-  [Riassunto delle attività svolte durante lo Sprint 10 (Preventivo: 60h, Consuntivo: 60h)]
+  [Riassunto delle attività svolte durante lo Sprint 10 ]
 )
 ==== Consumo Tempo e Costi Effettivi (Consuntivo)
 La tabella sottostante illustra le ore produttive effettivamente rendicontate.
@@ -2408,7 +2447,7 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
     ([Suar Alberto], 0, 0, 0, 0, 0, 4),
     ([Zago Alice], 0, 4, 0, 2, 3, 5),
   ),
-  [Prospetto orario consuntivato per lo Sprint 10 (Totale: 60 ore)],
+  [Prospetto orario consuntivato per lo Sprint 10],
 )
 
 ==== Retrospettiva dello sprint 10
@@ -2444,13 +2483,14 @@ Nel corso dello Sprint si sono manifestati o sono stati sfiorati i seguenti risc
 - #link(<RT5>)[#underline[[RT5]]] Costi e Limiti di Utilizzo: Il limite di token in output è stato superato più volte dall'Agente Codice a causa della dimensione dei report generati, rendendo difficile il testing nonostante il passaggio a modelli superiori. Il rischio è stato mitigato con un tuning specifico degli agenti e una ristrutturazione del formato dei report per ridurne la dimensione.
 - #link(<RI4>)[#underline[[RI4]]] e #link(<RI5>)[#underline[[RI5]]] Conflitti interni e disomogeneità: Si sono verificate frizioni
  comunicative e incomprensioni dovute a uno sbilanciamento produttivo e a divergenze su cosa debba essere considerato 
- "lavoro rendicontabile". Il rischio è stato mitigato con un confronto diretto tra i membri del team per riallineare 
- le aspettative e definire in modo più chiaro e definitivo i criteri di rendicontazione.
+ "lavoro rendicontabile".
 
+==== Misure correttive
+Per mitigare i rischi emersi durante lo sprint 10, il team ha deciso di adottare le seguenti misure correttive:
+- Riguardo i rischi legati alla saturazione del budget di token, il team ha adottato un approccio pragmatico, ottimizzando le richieste fatte all'API per rientrare nei limiti di token, passando ad un hosting continuo su aws solo pochi giorni prima della consegna dell MVP all'azienda.
+- Riguardo i rischi di disallineamento e conflitti interni, come giá detto, il team ha vissuto questo progetto in maniera molto travagliata a livello umano, con frizioni comunicative e incomprensioni dovute a uno sbilanciamento produttivo e a divergenze su cosa debba essere considerato "lavoro rendicontabile". Alcuni membri del team hanno, quindi ,dovuto colmare i vuoti lasciati da altri membri meno produttivi, portando a un ulteriore sbilanciamento e a frizioni comunicative.
 
-#pagebreak()
-
-==== Preventivo a finire PB
+==== Aggiornamento preventivo a finire PB
 #preventivo_a_finire(
   (
     //               Resp  Amm  Anal  Prog  Cod  Ver
@@ -2479,7 +2519,7 @@ Nel corso dello Sprint si sono manifestati o sono stati sfiorati i seguenti risc
     ([Sgreva Andrea], 7, 5, 13, 21, 18, 16),
     ([Suar Alberto], 6, 20, 12, 15, 24, 18),
     ([Zago Alice], 6, 13, 14, 13, 19, 22),
-  ),["Totale spesa per progetto"]
+  ),[Totale spesa per progetto]
 )
 
 Come si può vedere dalla tabella sopra, il progetto si è concluso con un consumo totale di ore inferiore al preventivo iniziale, questo ha portato il team Skarab 
