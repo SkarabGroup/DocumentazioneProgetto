@@ -7,11 +7,11 @@ package "View — Pagine protette" {
     nuovi repository tramite AddRepositoryModal.
     Per ogni repository mostra stato ultima analisi (AnalysisStatusBadge)
     e permette di avviare una nuova analisi tramite AnalysisOptionsModal.
-    Aggiorna lo stato dell'analisi in tempo reale via useAnalysisSocket.
+    Aggiorna lo stato dell'analisi in tempo reale via useAnalysisPolling.
   }
 
   RepositoriesPage --> "RepositoriesApi" : list, create, startAnalysis
-  RepositoriesPage --> "useAnalysisSocket" : aggiornamenti real-time
+  RepositoriesPage --> "useAnalysisPolling" : aggiornamenti real-time
   RepositoriesPage ..> "AddRepositoryModal" : apre
   RepositoriesPage ..> "AnalysisOptionsModal" : apre
   RepositoriesPage ..> "AnalysisStatusBadge" : usa

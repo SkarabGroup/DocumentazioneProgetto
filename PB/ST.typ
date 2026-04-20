@@ -24,6 +24,13 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #set page(numbering: "1", header: header("Specifica Tecnica"), footer: footer())
 #let history = (
   (
+    "2026/04/19",
+    "0.13.0",
+    "Miglioramento parte frontend in seguito alle integrazioni con i microservizi di analisi e di autentificazione",
+    members.martinello,
+    members.suar,
+  ),
+  (
     "2026/04/16",
     "0.12.0",
     "Aggiunta sezione Design Patterns per Account Microservice",
@@ -299,10 +306,6 @@ L'insieme di queste scelte tecnologiche mira a minimizzare il Total Cost of Owne
     [Axios],
     [1.x],
     [Client HTTP per le chiamate REST verso i microservizi Account e Analysis. Integrato nel modulo Gateway con interceptor per autenticazione Bearer e refresh automatico dei token su risposta 401.],
-
-    [Socket.io-client],
-    [4.x],
-    [Libreria per la comunicazione real-time via WebSocket. Utilizzata per ricevere gli aggiornamenti sullo stato delle analisi in corso direttamente dal microservizio Analysis, senza ricorrere al polling HTTP.],
 
     [Zod],
     [3.x],
@@ -1029,7 +1032,7 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 ===== Schema
 ====== GitCredential <GitCredential>
-#codeDiagram("GitCredential", 100%)
+//#codeDiagram("GitCredential", 100%)
 
 `GitCredential` è lo schema Mongoose che definisce la struttura del documento MongoDB per le credenziali Git: URL del repository (chiave univoca), hash della password, e PAT cifrato.
 
@@ -1544,13 +1547,13 @@ Il frontend di Code Guardian è una *Single-Page Application* (SPA) sviluppata i
 Il pattern MVVM (Model-View-ViewModel) separa le responsabilità in tre aree principali:
 
 ====== Model <Model>
-rappresenta i dati di dominio e la logica di accesso remoto. Comprende i moduli API (`AuthApi`, `UsersApi`, `RepositoriesApi`, `AnalysisApi`) e i tipi TypeScript condivisi.
+Rappresenta i dati di dominio e la logica di accesso remoto. Comprende i moduli API (`AuthApi`, `UsersApi`, `RepositoriesApi`, `AnalysisApi`) e i tipi TypeScript condivisi.
 
 ====== ViewModel <ViewModel>
-media tra Model e View, espone stato osservabile e comandi ai componenti. Implementato tramite React Context (`AuthContext`, `SocketContext`) e custom hook (`useAuth`, `useAnalysisSocket`).
+Media tra Model e View, espone stato osservabile e comandi ai componenti. Implementato tramite React Context (`AuthContext`) e custom hook (`useAuth`, `useAnalysisPolling`).
 
 ====== View <View>
-l'interfaccia utente, composta da pagine e componenti React. Legge lo stato dal ViewModel e delega le azioni ai hook; non contiene logica di business.
+L'interfaccia utente, composta da pagine e componenti React. Legge lo stato dal ViewModel e delega le azioni ai hook; non contiene logica di business.
 
 
 La dipendenza è unidirezionale: View → ViewModel → Model. Nessuno strato dipende dallo strato superiore.
@@ -1562,22 +1565,22 @@ La dipendenza è unidirezionale: View → ViewModel → Model. Nessuno strato di
 Lo strato Model è composto da cinque moduli, tutti costruiti attorno a un'istanza Axios centralizzata denominata `Gateway`:
 
 ====== Gateway <Gateway>
-istanza Axios configurata con la base URL proveniente dalla variabile d'ambiente `VITE_GATEWAY_URL`. Espone un interceptor in entrata che aggiunge il token Bearer ad ogni richiesta, e un interceptor in uscita che: (1) normalizza lo stato dell'analisi dalla convenzione del backend (`PENDING`, `IN_PROGRESS`) a quella del frontend (`"pending"`, `"in-progress"`); (2) converte la copertura dei test da intervallo $[0,1]$ a $[0,100]$; (3) su risposta 401, tenta il refresh del token e mette in coda le richieste in attesa, poi le ri-esegue con il nuovo token. Se il refresh fallisce, pulisce i token e reindirizza al login.
+Istanza Axios centralizzata che gestisce dinamicamente il `baseURL`. L'interceptor in entrata analizza il path della richiesta (es. `/account`) per indirizzarla al microservizio corretto utilizzando le variabili d'ambiente (`VITE_ACCOUNT_URL` o `VITE_ANALYSIS_URL`) e aggiunge il token Bearer. L'interceptor in uscita si occupa di due compiti principali: (1) l'adattamento delle risposte (es. converte la copertura test da proporzione $[0,1]$ a percentuale, e normalizza gli stati dell'analisi come `PENDING` in `"pending"`); (2) nel caso di risposta 401, blocca le richieste pendenti provando un refresh del token, e le ri-esegue con il nuovo token in caso di successo. Se il refresh fallisce o la richiesta originale era proprio il refresh, elimina lo stato persistente e reindirizza al login.
 
 ====== AuthApi <AuthApi>
-chiamate di login, registrazione, refresh e logout verso il microservizio Account. I metodi `login` e `register` restituiscono sia i token (`accessToken`, `refreshToken`) sia l'oggetto `user`.
+Chiamate di login, registrazione, refresh e logout verso il microservizio Account. I metodi `login` e `register` restituiscono sia i token (`accessToken`, `refreshToken`) sia l'oggetto `user`.
 
 ====== UsersApi <UsersApi>
-operazioni per il cambio password e la cancellazione dell'account.
+Operazioni per il cambio password e la cancellazione dell'account.
 
 ====== PatApi <PatApi>
-operazioni di aggiunta, aggiornamento e rimozione dei Personal Access Token (PAT) associati agli URL dei repository.
+Operazioni di aggiunta, aggiornamento e rimozione dei Personal Access Token (PAT) associati agli URL dei repository.
 
 ====== RepositoriesApi <RepositoriesApi>
-CRUD dei repository, avvio analisi, recupero report, storico per repository e classifica globale per score. Il metodo `startAnalysis` distingue tra due path di backend: se `repositoryUrl` è fornito, utilizza `POST /analysis/start` (endpoint reale); altrimenti ricade su `POST /analysis/repositories/:id/analyze` per compatibilità con la modalità mock.
+CRUD dei repository, avvio analisi, recupero report, storico per repository e classifica globale per score. Il metodo `startAnalysis` invia le opzioni di esecuzione invocando un endpoint backend unificato per l'avvio.
 
 ====== AnalysisApi <AnalysisApi>
-recupero e parsing di un report di analisi, esportazione in formato PDF, JSON o Markdown, aggiornamento della decisione di remediation per una singola issue.
+Recupero e parsing di un report di analisi, esportazione in formato PDF o JSON.
 
 
 #codeDiagram("api_layer", 90%)
@@ -1587,7 +1590,7 @@ recupero e parsing di un report di analisi, esportazione in formato PDF, JSON o 
 I tipi TypeScript condivisi tra tutti gli strati sono definiti nel modulo `@/types`. Le strutture principali sono:
 
 ====== Entità <Entità>
-`User`, `Repository`, `Analysis`, `AnalysisReport`, `Issue`, `Remediation`, `RankedRepository`, `CodeAgentStaticIssue` e `AIInterpretation`.
+`User`, `Repository`, `Analysis`, `AnalysisReport`, `Issue`, `RankedRepository`, `CodeAgentStaticIssue` e `AIInterpretation`.
 
 ====== Enum <Enum>
 `AnalysisStatus` (`not-analyzed` | `pending` | `in-progress` | `completed` | `failed`), `IssueSeverity` (`critical` | `high` | `medium` | `low` | `info`), `AnalysisArea` (`code` | `security` | `documentation`).
@@ -1597,13 +1600,10 @@ I tipi TypeScript condivisi tra tutti gli strati sono definiti nel modulo `@/typ
 
 ===== ViewModel — Context Layer
 
-Lo strato ViewModel è implementato tramite due React Context provider, montati alla radice dell'applicazione in `App.tsx`:
+Lo strato ViewModel è implementato tramite un React Context provider, montato alla radice dell'applicazione in `App.tsx`:
 
 ====== AuthProvider <AuthProvider>
-gestisce lo stato dell'utente autenticato (`user`, `isAuthenticated`, `isLoading`). Al mount, tenta il ripristino della sessione decodificando localmente il payload del JWT di accesso per estrarre i dati dell'utente e verificandone la scadenza, evitando così chiamate di rete aggiuntive. Espone le azioni `login`, `register`, `logout` e `refreshUser`.
-
-====== SocketProvider <SocketProvider>
-inizializza la connessione Socket.io verso il microservizio Analysis e propaga gli eventi di avanzamento delle analisi (`analysis:started`, `analysis:progress`, `analysis:completed`, `analysis:failed`) ai componenti sottoscritti tramite il hook `useAnalysisSocket`.
+Gestisce lo stato dell'utente autenticato (`user`, `isAuthenticated`, `isLoading`). Al mount, tenta il ripristino della sessione decodificando localmente il payload del JWT di accesso per estrarre i dati dell'utente e verificandone la scadenza, evitando così chiamate di rete aggiuntive. Espone le azioni `login`, `register`, `logout` e `refreshUser`.
 
 
 #codeDiagram("contexts", 80%)
@@ -1613,10 +1613,10 @@ inizializza la connessione Socket.io verso il microservizio Analysis e propaga g
 I custom hook isolano la logica stateful riutilizzabile e la rendono disponibile a più componenti:
 
 ====== useAuth <useAuth>
-legge `AuthContext` e garantisce, tramite type narrowing, che `user` non sia mai `null` nelle pagine protette.
+Legge `AuthContext` e garantisce, tramite type narrowing, che `user` non sia mai `null` nelle pagine protette.
 
-====== useAnalysisSocket <useAnalysisSocket>
-sottoscrive gli eventi Socket.io relativi a uno specifico `repositoryId`, invocando i callback `onStarted`, `onProgress`, `onCompleted` e `onFailed` al verificarsi dei rispettivi eventi.
+====== useAnalysisPolling <useAnalysisPolling>
+Effettua il polling periodico verso il microservizio Analysis relativo a uno specifico `repositoryId`, invocando i callback `onStarted`, `onProgress`, `onCompleted` e `onFailed` al variare dello stato dell'analisi recuperata.
 
 
 #codeDiagram("hooks_logic", 80%)
@@ -1627,22 +1627,22 @@ I componenti sono organizzati in due categorie:
 
 *Componenti di dominio*:
 ====== AppLayout <AppLayout>
-wrapper delle route protette che compone `Sidebar` e `<Outlet />`. Verifica `isAuthenticated` e reindirizza al login se necessario.
+Wrapper delle route protette che compone `Sidebar` e `<Outlet />`. Verifica `isAuthenticated` e reindirizza al login se necessario.
 
 ====== Sidebar <Sidebar>
-navigazione principale con link alle sezioni protette, indicatore visivo dello stato della connessione WebSocket, e pulsante di logout.
+Navigazione principale con link alle sezioni protette e pulsante di logout.
 
 ====== ScoreCard <ScoreCard>
-gauge SVG semicircolare e barra lineare per la visualizzazione degli score. Il colore si adatta dinamicamente al valore: verde (score ≥ 75), giallo (≥ 50), rosso (< 50).
+Gauge SVG semicircolare e barra lineare per la visualizzazione degli score. Il colore si adatta dinamicamente al valore: verde (score ≥ 75), giallo (≥ 50), rosso (< 50).
 
 ====== AnalysisStatusBadge <AnalysisStatusBadge>
-badge visivo che rappresenta i cinque stati del ciclo di vita di un'analisi.
+Badge visivo che rappresenta i cinque stati del ciclo di vita di un'analisi.
 
 ====== AddRepositoryModal <AddRepositoryModal>
-dialog con form per l'aggiunta di un repository, con validazione dell'URL GitHub.
+Dialog con form per l'aggiunta di un repository, con validazione dell'URL GitHub.
 
 ====== AnalysisOptionsModal <AnalysisOptionsModal>
-dialog per la configurazione di un'analisi (selezione delle aree, branch, commit hash). Seleziona automaticamente il path dell'endpoint in base alla disponibilità di `repositoryUrl`.
+Dialog per la configurazione di un'analisi (selezione delle aree, branch, commit hash). Seleziona automaticamente il path dell'endpoint in base alla disponibilità di `repositoryUrl`.
 
 
 *Primitive UI* (basate su Radix UI tramite shadcn/ui): `Button` in sette varianti (default, destructive, outline, secondary, ghost, link, accent) e quattro taglie; `Card`, `Dialog`, `Badge`, `Tabs`, `Input`, `Progress`, `Skeleton`, `Separator`.
@@ -1655,30 +1655,30 @@ Le pagine si dividono in pubbliche e protette:
 
 *Pagine pubbliche* (accessibili senza autenticazione):
 ====== LandingPage <LandingPage>
-presentazione del prodotto con chiamata all'azione verso login e registrazione.
+Presentazione del prodotto con chiamata all'azione verso login e registrazione.
 
 ====== LoginPage <LoginPage>
-form con validazione Zod; delegano le operazioni di autenticazione ad `AuthContext`.
+Form con validazione Zod; delegano le operazioni di autenticazione ad `AuthContext`.
 
 ====== NotFoundPage <NotFoundPage>
-pagina di fallback per route non mappate.
+Pagina di fallback per route non mappate.
 
 
 *Pagine protette* (accessibili solo con utente autenticato):
 ====== RepositoriesPage <RepositoriesPage>
-lista dei repository con ricerca full-text e paginazione. Permette di aggiungere nuovi repository tramite `AddRepositoryModal` e di avviare analisi tramite `AnalysisOptionsModal`.
+Lista dei repository con ricerca full-text e paginazione. Permette di aggiungere nuovi repository tramite `AddRepositoryModal` e di avviare analisi tramite `AnalysisOptionsModal`.
 
 ====== RepositoryDetailPage <RepositoryDetailPage>
-dettaglio di un repository con tab per Code Quality, Security, Documentation, Remediation e History. Mostra il report dell'ultima analisi, la progressione in tempo reale via `useAnalysisSocket`, e permette di esportare il report nei formati PDF, JSON e Markdown.
+Dettaglio di un repository con tab per Code Quality, Security, Documentation e History. Mostra il report dell'ultima analisi, la progressione in tempo reale via `useAnalysisPolling`, e permette di esportare il report nei formati PDF e JSON.
 
 ====== HistoryPage <HistoryPage>
-storico globale delle analisi con paginazione.
+Storico globale delle analisi con paginazione.
 
 ====== RankingPage <RankingPage>
-classifica ordinata per score aggregato. Per ogni repository mostra il delta dello score rispetto all'analisi precedente (`scoreDelta`) con icone di tendenza (`TrendingUp` / `TrendingDown`).
+Classifica ordinata per score aggregato. Per ogni repository mostra il delta dello score rispetto all'analisi precedente (`scoreDelta`) con icone di tendenza (`TrendingUp` / `TrendingDown`).
 
 ====== SettingsPage <SettingsPage>
-gestione e salvataggio dei Personal Access Token (PAT) per repository specifici, cambio password utente e cancellazione definitiva dell'account.
+Gestione e salvataggio dei Personal Access Token (PAT) per repository specifici, cambio password utente e cancellazione definitiva dell'account.
 
 
 #codeDiagram("app", 80%)
@@ -1690,7 +1690,7 @@ Il routing è gestito da React Router v7. `App.tsx` definisce due gruppi di rout
 `LandingPage`, `LoginPage`, `RegisterPage`, `NotFoundPage`.
 
 ====== Route protette <Routeprotette>
-avvolte da `AppLayout`, che verifica `isAuthenticated` e reindirizza al login se necessario.
+Avvolte da `AppLayout`, che verifica `isAuthenticated` e reindirizza al login se necessario.
 
 
 All'avvio dell'applicazione, `AuthProvider` tenta il ripristino della sessione estraendo e validando localmente il payload dal token JWT salvato. Tre scenari possibili:
@@ -1702,8 +1702,8 @@ Il token di accesso viene allegato automaticamente a ogni richiesta dall'interce
 
 ==== Aggiornamenti in tempo reale
 
-Le analisi dei repository sono operazioni a lunga durata (ordine dei minuti). Il frontend non utilizza polling HTTP ricorrente, ma una connessione *Socket.io* persistente verso il microservizio Analysis.
+Le analisi dei repository sono operazioni a lunga durata (ordine dei minuti). Per mantenere l'utente informato dello stato di avanzamento, il frontend utilizza un meccanismo di *polling HTTP* implementato tramite l'hook custom `useAnalysisPolling`.
 
-Quando un'analisi cambia stato, il server emette un evento che `SocketProvider` riceve e propaga. Il hook `useAnalysisSocket` permette a qualsiasi componente di sottoscriversi agli eventi relativi a un repository specifico tramite callback (`onStarted`, `onProgress`, `onCompleted`, `onFailed`), senza conoscere i dettagli del protocollo WebSocket.
+Quando l'utente avvia un'analisi o visualizza la pagina di un repository in fase di elaborazione, il hook effettua richieste periodiche verso il microservizio Analysis per ottenere lo stato aggiornato dell'analisi in corso. Ai fini di ottimizzazione, il polling viene sospeso automaticamente non appena l'analisi giunge a uno stato terminale (completato o fallito).
 
-Questo approccio elimina il carico di polling e garantisce che `RepositoryDetailPage` aggiorni la barra di avanzamento e il report in tempo reale, riducendo la latenza percepita dall'utente.
+Questo approccio garantisce che la `RepositoryDetailPage` aggiorni dinamicamente lo stato dell'analisi (con i relativi callback `onStarted`, `onCompleted`, `onFailed`) e presenti infine il report completo, fornendo il necessario feedback visivo senza complessità architetturali legate a WebSockets persistenti.

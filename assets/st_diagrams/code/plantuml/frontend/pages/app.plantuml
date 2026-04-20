@@ -3,7 +3,7 @@ package "View — Root" {
   class App {
     --
     Componente radice dell'applicazione. Inizializza BrowserRouter,
-    avvolge l'intera app in AuthProvider e SocketProvider, e definisce
+    avvolge l'intera app in AuthProvider, e definisce
     la struttura delle route tramite AppRoutes.
     Aggiunge il sistema di notifiche toast (Sonner) in posizione
     bottom-right con tema scuro.
