@@ -2,7 +2,7 @@
 #import "../lib/variables.typ": *
 #import "../lib/stDiagramUtil.typ": *
 
-#let versione = "v0.14.0"
+#let versione = "v0.15.0"
 #set heading(numbering: "1.1.1")
 /*
 === FUNZIONAMENTO DEL DOCUMENTO ===
@@ -23,6 +23,13 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #titlePage("Specifica Tecnica", versione)
 #set page(numbering: "1", header: header("Specifica Tecnica"), footer: footer())
 #let history = (
+  (
+    "2026/04/20",
+    "0.15",
+    "Completati i componenti della sezione presentation per Analysis Microservice",
+    members.antonio,
+    ""
+  ),
   (
     "2026/04/20",
     "0.14.0",
@@ -1458,75 +1465,158 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 - *Persistenza delle Credenziali:* Rappresenta la proiezione di persistenza dei dati gestiti dai Value Object #link(<RepoURL>)[`RepoURL`], #link(<PATPassword>)[`PATPassword`] e #link(<PersonalAccessToken>)[`PersonalAccessToken`], adattandoli al formato MongoDB.
 
 ==== Presentation
-===== Controller
+===== Helpers
+====== JwtAuthGuard <JwtHelper>
+#codeDiagram("JwtHelper", 80%)
+
+`JwtHelper` raggruppa i componenti responsabili dell'autenticazione basata su JWT, integrando il meccanismo di validazione dei token con il framework applicativo. Include la strategia di validazione (`JwtStrategy`), il meccanismo di protezione degli endpoint (`JwtAuthGuard`) e un decoratore per l'estrazione dell'identità utente (`UserId`).
+
+- *Separazione tra Validazione e Accesso:* La `JwtStrategy` è responsabile della validazione del token e della costruzione del contesto utente, mentre `JwtAuthGuard` si occupa di applicare tale validazione agli endpoint protetti.
+- *Integrazione con il Framework di Autenticazione:* Il guard estende il meccanismo standard (`AuthGuard`), permettendo di riutilizzare l'infrastruttura di autenticazione senza introdurre logica applicativa nel controller.
+- *Accesso Tipizzato all'Utente:* Il decoratore `UserId` consente di accedere in modo tipizzato alle informazioni dell'utente estratte dal token, evitando la propagazione diretta del modello HTTP nei livelli superiori.
+
+===== Controllers
 ====== AnalysisController <AnalysisController>
-#codeDiagram("AnalysisController", 100%)
+#codeDiagram("AnalysisController", 90%)
 
-`AnalysisController` è il controller NestJS che espone l'endpoint `POST /analysis/start`, protetto da `JwtAuthGuard`. Riceve la richiesta HTTP, costruisce lo #link(<StartAnalysisCommand>)[`StartAnalysisCommand`] e delega al use case #link(<StartAnalysisUseCase>)[`StartAnalysisUseCase`].
+`AnalysisController` espone l'endpoint HTTP per richiedere l'avvio di una nuova analisi su un repository. Inietta `StartAnalysisUseCase`, al quale delega completamente l'esecuzione del flusso applicativo, ricevendo un `StartAnalysisRequestDTO` e restituendo un `StartAnalysisResponseDTO`.
 
-- *Layer di Presentazione:* Traduce il protocollo HTTP (DTO di richiesta/risposta, HTTP status codes) in chiamate al layer applicativo, separando le preoccupazioni di trasporto dalla logica di business.
-- *Autenticazione JWT:* Implementa l'estrazione dello `userId` dal JWT payload tramite il decorator `@UserId`, garantendo che ogni analisi sia tracciata all'utente autenticato.
-
----
+- *Separazione tra API e Dominio:* Il controller traduce il `StartAnalysisRequestDTO` in un `StartAnalysisCommand`, mantenendo separati il modello di trasporto HTTP e quello applicativo.
+- *Delegazione del Flusso:* La logica di orchestrazione è interamente demandata al `StartAnalysisUseCase`, mantenendo il controller come semplice punto di ingresso e uscita del sistema.
 
 ====== PatController <PatController>
 #codeDiagram("PatController", 100%)
 
-`PatController` è il controller NestJS che espone gli endpoint per la gestione dei Personal Access Token: `POST /analysis/pat` (aggiunta), `DELETE /analysis/pat` (eliminazione), `PUT /analysis/pat` (aggiornamento).
+`PatController` espone gli endpoint HTTP per la gestione dei Personal Access Token. Inietta tre use case distinti (`NewPatUseCase`, `DeletePatUseCase`, `UpdatePatUseCase`), ciascuno responsabile di una specifica operazione, e restituisce i rispettivi DTO di risposta.
 
-- *Delega ai Use Case:* Per ogni endpoint, costruisce il Command appropriato e delega al rispettivo use case (#link(<NewPatUseCase>)[`NewPatUseCase`], #link(<DeletePatUseCase>)[`DeletePatUseCase`], #link(<UpdatePatUseCase>)[`UpdatePatUseCase`]), mantenendo la logica di controllo nel layer applicativo.
+- *Segregazione dei Casi d'Uso:* Ogni operazione (creazione, aggiornamento, eliminazione) è delegata a un use case dedicato, garantendo isolamento dei flussi applicativi e coerenza con il principio di singola responsabilità.
+- *Uniformità del Flusso Applicativo:* Tutti gli endpoint seguono lo stesso schema: trasformazione del DTO di input in command e delega al caso d'uso, favorendo consistenza e manutenibilità.
 
-===== Request
+====== RepositoriesController <RepositoriesController>
+#codeDiagram("RepositoriesController", 110%)
+
+`RepositoriesController` espone gli endpoint HTTP per la gestione delle collezioni di repository e delle analisi associate. Inietta diversi use case per coprire operazioni di creazione, recupero e cancellazione, restituendo DTO di risposta specifici per ciascun endpoint.
+
+- *Composizione dei Casi d'Uso:* Il controller coordina più use case distinti per gestire scenari complessi, mantenendo comunque separata la logica applicativa nei rispettivi componenti.
+- *Aggregazione dei Dati in Lettura:* Alcuni endpoint combinano risultati provenienti da più casi d'uso per restituire viste più ricche, centralizzando l'aggregazione a livello di controller senza introdurre logica di business.
+
+===== Presentation DTOs - Requests
+====== AddRepositoryCollectionRequestDTO <AddRepositoryCollectionRequestDTO>
+#codeDiagram("AddRepositoryCollectionRequestDTO", 60%)
+
+`AddRepositoryCollectionRequestDTO` definisce il contratto del body della richiesta HTTP per la creazione di una nuova collezione di repository. I campi `url` e `name` sono obbligatori, mentre `description` è opzionale, riflettendo la possibilità di fornire metadati aggiuntivi senza renderli necessari al completamento dell'operazione.
+
+====== DeletePatRequestDTO <DeletePatRequestDTO>
+#codeDiagram("DeletePatRequestDTO", 50%)
+
+`DeletePatRequestDTO` definisce il contratto del body della richiesta HTTP per la rimozione di un Personal Access Token. I campi `repositoryUrl` e `password` sono obbligatori, garantendo che il sistema disponga delle informazioni necessarie per identificare il repository e autorizzare l'operazione.
+
+====== PostPatRequestDTO <PostPatRequestDTO>
+#codeDiagram("PostPatRequestDTO", 70%)
+
+`PostPatRequestDTO` definisce il contratto del body della richiesta HTTP per la creazione di un Personal Access Token. I campi `repositoryUrl`, `password` e `personalAccessToken` sono obbligatori, garantendo che il sistema disponga delle informazioni necessarie per associare e validare il token rispetto al repository indicato.
+
 ====== StartAnalysisRequestDTO <StartAnalysisRequestDTO>
 #codeDiagram("StartAnalysisRequestDTO", 100%)
 
-`StartAnalysisRequestDTO` è il DTO di presentazione per la richiesta di avvio analisi, raccogliendo URL, password opzionale, branch/commit opzionali e i flag per i tre tipi di analisi.
+`StartAnalysisRequestDTO` definisce il contratto del body della richiesta HTTP per l'avvio di una nuova analisi. Il campo `repoUrl` è obbligatorio, mentre `password`, `branch` e `commit` sono opzionali, permettendo di specificare credenziali e contesto di analisi solo quando necessario. I flag booleani (`requestedCode`, `requestedDocumentation`, `requestedSecurity`) consentono al client di configurare il tipo di analisi richiesta.
 
-====== PostPatRequestDTO <PostPatRequestDTO>
-#codeDiagram("PostPatRequestDTO", 100%)
-
-`PostPatRequestDTO` è il DTO di presentazione per la registrazione di un nuovo PAT.
-
----
-
-====== DeletePatRequestDTO <DeletePatRequestDTO>
-#codeDiagram("DeletePatRequestDTO", 100%)
-
-`DeletePatRequestDTO` è il DTO di presentazione per l'eliminazione di un PAT.
-
----
+- *Configurabilità dell'Analisi:* La presenza di flag espliciti permette al client di selezionare in modo granulare le componenti dell'analisi, evitando la necessità di endpoint distinti per ogni variante.
 
 ====== UpdatePatRequestDTO <UpdatePatRequestDTO>
-#codeDiagram("UpdatePatRequestDTO", 100%)
+#codeDiagram("UpdatePatRequestDTO", 70%)
 
-`UpdatePatRequestDTO` è il DTO di presentazione per l'aggiornamento di un PAT.
+`UpdatePatRequestDTO` definisce il contratto del body della richiesta HTTP per l’aggiornamento di un Personal Access Token. I campi `repositoryUrl`, `password` e `newPersonalAccessToken` sono obbligatori, assicurando che il sistema possa identificare il contesto corretto e sostituire in modo sicuro il token esistente.
 
-===== Response
-====== StartAnalysisResponseDTO <StartAnalysisResponseDTO>
-#codeDiagram("StartAnalysisResponseDTO", 100%)
+===== Presentation DTOs - Response
+====== AddRepositoryCollectionResponseDTO  <AddRepositoryCollectionResponseDTO>
+#codeDiagram("AddRepositoryCollectionResponseDTO", 60%)
 
-`StartAnalysisResponseDTO` è il DTO di risposta per l'avvio analisi, con factory method `success()` (restituisce i metadati dell'analisi) e `failure()` (restituisce il messaggio di errore).
+`AddRepositoryCollectionResponseDTO` definisce il contratto della risposta HTTP per l'operazione di creazione di una collezione di repository. Il campo booleano `success` indica l'esito dell'operazione, mentre `message` fornisce un eventuale dettaglio descrittivo in caso di errore.
 
-====== PostPatResponseDTO <PostPatResponseDTO>
-#codeDiagram("PostPatResponseDTO", 100%)
-
-`PostPatResponseDTO` è il DTO di risposta per la registrazione di un PAT.
-
----
+- *Factory Method per la Creazione:* L'utilizzo di metodi statici (`success`, `failure`) centralizza la costruzione delle risposte, garantendo coerenza nella rappresentazione degli esiti.
 
 ====== DeletePatResponseDTO <DeletePatResponseDTO>
-#codeDiagram("DeletePatResponseDTO", 100%)
+#codeDiagram("DeletePatResponseDTO", 45%)
 
-`DeletePatResponseDTO` è il DTO di risposta per l'eliminazione di un PAT.
+`DeletePatResponseDTO` definisce la risposta HTTP per l'operazione di rimozione di un Personal Access Token. Il campo `removed` rappresenta l'esito dell'operazione, mentre `error` consente di trasportare un messaggio descrittivo in caso di fallimento.
 
----
+- *Esplicitazione dell'Esito:* L'utilizzo di un campo booleano dedicato consente al client di distinguere chiaramente tra successo e fallimento senza dipendere esclusivamente dal codice HTTP.
+
+====== DeleteRepositoryCollectionResponseDTO <DeleteRepositoryCollectionResponseDTO>
+#codeDiagram("DeleteRepositoryCollectionResponseDTO", 65%)
+
+`DeleteRepositoryCollectionResponseDTO` definisce la risposta HTTP per l'operazione di eliminazione di una collezione di repository. Il campo `deleted` indica se l'operazione è stata completata con successo, mentre `message` fornisce eventuali dettagli aggiuntivi.
+
+- *Contratto Semplice e Tipizzato:* La struttura minimale del DTO riflette la natura dell'operazione, fornendo al client un'informazione chiara e immediata sull'esito.
+
+====== GetAllAnalysesForUserResponseDTO <GetAllAnalysesForUserResponseDTO>
+#codeDiagram("GetAllAnalysesForUserResponseDTO", 85%)
+
+`GetAllAnalysesForUserResponseDTO` definisce il contratto della risposta HTTP per il recupero delle analisi associate a un utente. Oltre ai campi `success` e `message`, espone la collezione `analyses`, che corrisponde a una rappresentazione sintetica dei dati di analisi tramite `GitHubAnalysisGeneralDataDTO`.
+
+- *Aggregazione di Dati:* Il DTO raccoglie una lista di elementi, permettendo al client di ottenere una visione complessiva delle analisi con una singola risposta.
+- *Separazione tra Result e Response:* Il metodo `fromResult` consente di trasformare l'oggetto applicativo (`GetAllAnalysesForUserResult`) nel formato esposto verso l'esterno, mantenendo disaccoppiati i livelli applicativo e di presentazione.
+
+====== GetAllRepositoryCollectionsResponseDTO <GetAllRepositoryCollectionsResponseDTO>
+#codeDiagram("GetAllRepositoryCollectionsResponseDTO", 90%)
+
+`GetAllRepositoryCollectionsResponseDTO` definisce la risposta HTTP per il recupero delle collezioni di repository associate all'utente. Il campo `collections` contiene una lista di `RepositoryCollectionItemDTO`, che rappresentano una proiezione sintetica delle informazioni rilevanti per ciascun repository.
+
+- *Aggregazione di Elementi:* Il DTO espone una collezione tipizzata, consentendo al client di ottenere una vista compatta delle risorse disponibili.
+- *Separazione della Proiezione:* L'utilizzo di `RepositoryCollectionItemDTO` evita l'esposizione diretta di modelli interni, mantenendo il disaccoppiamento tra livelli.
+
+====== GetAnalysisResponseDTO <GetAnalysisResponseDTO>
+#codeDiagram("GetAnalysisResponseDTO", 100%)
+
+`GetAnalysisResponseDTO` definisce la risposta HTTP per il recupero dettagliato di una singola analisi. Oltre ai metadati principali (identificativi, repository, stato e timestamp), include i report opzionali (`docsReportJson`, `codeReportJson`, `secReportJson`) che rappresentano i risultati delle diverse componenti di analisi.
+
+- *Composizione di Dati Complessi:* Il DTO aggrega più sotto-strutture (`DocsAnalysisReportDTO`, `CodeAnalysisReportDTO`, `SecAnalysisReportDTO`), permettendo al client di ottenere una vista completa dell'analisi.
+- *Gestione di Dati Opzionali:* La presenza di campi opzionali consente di rappresentare analisi parziali o in corso.
+- *Separazione tra Result e Response:* Il metodo `fromResult` realizza la trasformazione dal livello applicativo (`GetAnalysisResult`) al formato esposto verso l'esterno.
+
+====== GetFullRepositoryCollectionDetailsResponseDTO <GetFullRepositoryCollectionDetailsResponseDTO>
+#codeDiagram("GetFullRepositoryCollectionDetailsResponseDTO", 90%)
+
+`GetFullRepositoryCollectionDetailsResponseDTO` definisce la risposta HTTP per il recupero completo dei dettagli di una collezione di repository. Il campo `data` aggrega le informazioni della collezione insieme alla lista delle analisi associate, rappresentate tramite `GetAnalysisResponseDTO`.
+
+- *Aggregazione Gerarchica:* Il DTO combina informazioni di alto livello della collezione con una lista dettagliata di analisi, fornendo una vista completa in un'unica risposta.
+- *Composizione di DTO:* L'utilizzo di `GetAnalysisResponseDTO` consente di riutilizzare una rappresentazione già definita, mantenendo coerenza tra endpoint.
+
+====== GetRepositoryCollectionResponseDTO <GetRepositoryCollectionResponseDTO>
+#codeDiagram("GetRepositoryCollectionResponseDTO", 70%)
+
+`GetRepositoryCollectionResponseDTO` definisce la risposta HTTP per il recupero sintetico di una collezione di repository. Il campo `data` include le informazioni principali della collezione e una lista di identificativi (`analyses`) delle analisi associate.
+
+- *Vista Sintetica:* A differenza della versione completa, il DTO espone solo gli identificativi delle analisi, riducendo il payload e migliorando le performance.
+- *Differenziazione dei Livelli di Dettaglio:* La presenza di DTO distinti per vista completa e sintetica consente al client di scegliere il livello di dettaglio più appropriato.
+
+====== PostPatResponseDTO <PostPatResponseDTO>
+#codeDiagram("PostPatResponseDTO", 45%)
+
+`PostPatResponseDTO` definisce la risposta HTTP per l'operazione di creazione di un Personal Access Token. Il campo `added` indica l'esito dell'operazione, mentre `error` consente di trasportare un messaggio descrittivo in caso di fallimento.
+
+- *Factory Method per la Creazione:* I metodi statici (`success`, `failure`) garantiscono una costruzione coerente delle risposte, evitando stati non validi.
+
+====== StartAnalysisResponseDTO <StartAnalysisResponseDTO>
+#codeDiagram("StartAnalysisResponseDTO", 75%)
+
+`StartAnalysisResponseDTO` definisce la risposta HTTP per l'avvio di una nuova analisi. Il DTO include i principali metadati dell'analisi avviata (`user`, `id`, `url`, `branch`, `commit`) e un campo `errorMessage` che rappresenta il risultato dell'operazione.
+
+- *Trasporto di Informazioni Operative:* In caso di successo, il DTO restituisce i dati identificativi dell'analisi appena avviata.
+- *Messaggio Sempre Presente:* Il campo `errorMessage` viene utilizzato sia per confermare il successo dell'operazione sia per descrivere eventuali errori, fornendo un feedback uniforme al client.
+- *Costruzione Controllata:* I metodi statici assicurano che i dati siano valorizzati solo nei casi appropriati, mantenendo coerenza tra successo e fallimento.
 
 ====== UpdatePatResponseDTO <UpdatePatResponseDTO>
-#codeDiagram("UpdatePatResponseDTO", 100%)
+#codeDiagram("UpdatePatResponseDTO", 50%)
 
-`UpdatePatResponseDTO` è il DTO di risposta per l'aggiornamento di un PAT.
+`UpdatePatResponseDTO` definisce la risposta HTTP per l'aggiornamento di un Personal Access Token. Il campo `updated` indica l'esito dell'operazione, mentre `error` fornisce eventuali dettagli in caso di errore.
+
+- *Contratto Semplice:* La struttura minimale riflette la natura dell'operazione, permettendo al client di interpretare facilmente il risultato.
+- *Coerenza dei Pattern:* L'utilizzo di factory method mantiene allineato il comportamento con gli altri DTO di risposta.
 
 #pagebreak()
+
 
 === Account Microservice
 L'Account Microservice rappresenta il modulo centrale per la gestione del ciclo di vita delle identità all'interno di _CodeGuardian_. Progettato seguendo i principi dell'*Architettura Esagonale*, il servizio isola rigorosamente i processi core — quali la gestione delle utenze, l'autenticazione basata su JWT e la sicurezza delle credenziali — dalle tecnologie di persistenza (PostgreSQL) e di cifratura (Bcrypt). Grazie a una netta separazione tra porte e adattatori, il microservizio garantisce l'integrità del dominio utente e la flessibilità nell'evoluzione dei criteri di sicurezza, fungendo da garante per l'accesso protetto a tutte le funzionalità della piattaforma.
@@ -1957,6 +2047,8 @@ L'entità `User` costituisce l'entità radice del dominio di autenticazione. Ess
 
 - *Centralizzazione della Gestione degli Errori:* Concentrare la traduzione delle eccezioni in un unico filtro garantisce uniformità nel formato delle risposte di errore verso i client, evitando che dettagli tecnici interni vengano esposti accidentalmente.
 - *Mapping Eccezioni - HTTP:* Il filtro implementa la logica di mapping tra le eccezioni di dominio (es. `InvalidCredentialsException`) e i codici di stato HTTP appropriati (es. `401 Unauthorized`), centralizzando questa trasformazione e rimuovendo la necessità di gestirla nei singoli controller.
+
+
 === Frontend Application
 
 Il frontend di Code Guardian è una *Single-Page Application* (SPA) sviluppata in TypeScript con React, strutturata seguendo il pattern architetturale *Model-View-ViewModel* (MVVM). Le responsabilità sono distribuite in quattro strati orizzontali con dipendenze che fluiscono sempre dalla View verso il Model, senza mai invertirsi.

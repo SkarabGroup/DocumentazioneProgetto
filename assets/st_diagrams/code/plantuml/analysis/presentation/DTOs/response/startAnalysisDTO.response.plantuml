@@ -2,7 +2,7 @@
 skinparam componentStyle uml2.5
 skinparam linetype ortho
 skinparam nodesep 30
-skinparam ranksep 30
+skinparam ranksep 50
 skinparam ClassAttributeIconSize 0
 hide circles
 
@@ -16,6 +16,7 @@ class StartAnalysisResponseDTO {
     ---
     - StartAnalysisResponseDTO(user, id, url, branch, commit, errorMessage)
     + {static} success(user, id, url, branch, commit): StartAnalysisResponseDTO
-    + {static} failure(error): StartAnalysisResponseDTO
+    + {static} failure(error: string): StartAnalysisResponseDTO
 }
+
 @enduml
