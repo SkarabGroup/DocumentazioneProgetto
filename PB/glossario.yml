@@ -161,8 +161,9 @@ E:
   Estimate At Completion:
     acronimo: EAC
     descrizione: Previsione del costo finale complessivo del progetto basata sulla proiezione delle performance correnti (CPI) sul budget rimanente.
-  ECS:
-    descrizione: Amazon Elastic Container Service, servizio di orchestrazione di container che consente di eseguire e scalare applicazioni containerizzate su AWS.
+  Elastic Container Service:
+    acronimo: ECS
+    descrizione: Servizio di orchestrazione di container che consente di eseguire e scalare applicazioni containerizzate su Amazon Web Service.
 
 F:
   Failure Density:
@@ -410,6 +411,9 @@ S:
   Segreti hardcoded:
     alternative: Hardcoded secrets
     descrizione: Informazioni sensibili come credenziali, scritte direttamente all'interno del codice sorgente, che introducono un severo rischio di sicurezza. 
+  Simple Storage Service:
+  acronimo: S3
+  descrizione: Amazon Simple Storage Service, servizio di storage cloud scalabile e duraturo utilizzato per archiviare dati, file e asset del progetto.
   Sistema multiagente:
     alternative: Multi-agent system, sistema multi agente, multiagente
     descrizione: Architettura software in cui più agenti intelligenti e autonomi interagiscono tra loro per risolvere problemi complessi non affrontabili da un singolo componente.
@@ -450,8 +454,6 @@ S:
   Sviluppatore software:
     alternative: software developer, sviluppatori software, sviluppatori
     descrizione: Persona che scrive, testa e mantiene il codice sorgente di applicazioni o sistemi software.
-  S3:
-    descrizione: Amazon Simple Storage Service, servizio di storage cloud scalabile e duraturo utilizzato per archiviare dati, file e asset del progetto.
 T:
   Task:
     descrizione: Unità elementare di lavoro, tracciabile e assegnabile a un singolo membro del team, necessaria per il completamento di una funzionalità o di un obiettivo di progetto.   
