@@ -142,7 +142,7 @@
 
   outline(
     title: text(weight: "bold", size: 22pt)[Indice],
-    depth: 5,
+    depth: 7,
     indent: auto,
   )
 

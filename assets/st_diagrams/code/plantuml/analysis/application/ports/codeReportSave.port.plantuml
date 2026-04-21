@@ -10,6 +10,6 @@ interface ICodeReportSavePort {
     + saveCodeReport(model: SaveCodeReportRequest): Promise<SaveCodeReportResponse>
 }
 
-ICodeReportSavePort --down-> SaveCodeReportRequest
-ICodeReportSavePort --down-> SaveCodeReportResponse
+ICodeReportSavePort --down.> SaveCodeReportRequest
+ICodeReportSavePort --down.> SaveCodeReportResponse
 @enduml

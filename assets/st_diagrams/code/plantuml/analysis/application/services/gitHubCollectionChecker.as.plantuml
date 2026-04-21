@@ -10,6 +10,8 @@ interface ICollectionExistenceChecker {
     + check(user: UserId, url: RepoURL): Promise<boolean>
 }
 
+interface ICollectionDuplicateCheckerPort
+
 class GitHubCollectionChecker {
     - duplicateCheckerPort: ICollectionDuplicateCheckerPort
     ---
@@ -17,6 +19,7 @@ class GitHubCollectionChecker {
     + check(user: UserId, url: RepoURL): Promise<boolean>
 }
 
-GitHubCollectionChecker ..|> ICollectionExistenceChecker
-GitHubCollectionChecker --right-> ICollectionDuplicateCheckerPort
+GitHubCollectionChecker ..up.|> ICollectionExistenceChecker
+GitHubCollectionChecker --down-> ICollectionDuplicateCheckerPort 
+
 @enduml

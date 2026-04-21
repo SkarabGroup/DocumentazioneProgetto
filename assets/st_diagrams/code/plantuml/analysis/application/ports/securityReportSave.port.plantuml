@@ -10,6 +10,6 @@ interface ISecurityReportSavePort {
     + saveSecurityReport(model: SaveSecurityReportRequest): Promise<SaveSecurityReportResponse>
 }
 
-ISecurityReportSavePort --down-> SaveSecurityReportRequest
-ISecurityReportSavePort --down-> SaveSecurityReportResponse
+ISecurityReportSavePort --down.> SaveSecurityReportRequest
+ISecurityReportSavePort --down.> SaveSecurityReportResponse
 @enduml
