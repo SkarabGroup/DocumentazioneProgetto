@@ -1,0 +1,37 @@
+@startuml JwtAuthentication
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 40
+skinparam ranksep 50
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class JwtPayload <<Type>> {
+    + sub: string
+    + email: string
+    + iat?: number
+    + exp?: number
+}
+
+interface RequestWithUser <<Interface>> {
+    + user: { userId: string, email: string }
+}
+
+class JwtStrategy <<Strategy>> {
+    ---
+    + JwtStrategy(config: ConfigurationService)
+    + validate(payload: JwtPayload): Promise<{ userId: string, email: string }>
+}
+
+class JwtAuthGuard <<Guard>> {
+}
+
+class UserIdDecorator <<Decorator>> {
+    + {static} userIdFactory(_data: unknown, ctx: ExecutionContext): string
+    + {static} UserId(): ParameterDecorator
+}
+
+JwtStrategy ..> JwtPayload : "valida"
+UserIdDecorator ..> RequestWithUser : "estrae id da"
+JwtAuthGuard -right[hidden]- JwtStrategy
+@enduml
