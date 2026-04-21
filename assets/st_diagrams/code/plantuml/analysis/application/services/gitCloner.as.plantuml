@@ -10,6 +10,8 @@ interface IRepositoryCloner {
     + clone(repoUrl, analysisId, patToken, branch, commit): Promise<string>
 }
 
+interface IGitClonePort
+
 class GitClonerService {
     - cloningPort: IGitClonePort
     ---
@@ -18,6 +20,8 @@ class GitClonerService {
     branch: BranchName | null, commit: CommitHash | null): Promise<string>
 }
 
-GitClonerService ..|> IRepositoryCloner
-GitClonerService --down-> IGitClonePort
+
+GitClonerService ..up..|> IRepositoryCloner
+GitClonerService --> IGitClonePort
+
 @enduml
