@@ -10,6 +10,6 @@ interface ICollectionDuplicateCheckerPort {
     + checkDuplicate(model: CheckCollectionDuplicateRequest): Promise<CheckCollectionDuplicateResponse>
 }
 
-ICollectionDuplicateCheckerPort --down-> CheckCollectionDuplicateRequest
-ICollectionDuplicateCheckerPort --down-> CheckCollectionDuplicateResponse
+ICollectionDuplicateCheckerPort --down.> CheckCollectionDuplicateRequest
+ICollectionDuplicateCheckerPort --down.> CheckCollectionDuplicateResponse
 @enduml

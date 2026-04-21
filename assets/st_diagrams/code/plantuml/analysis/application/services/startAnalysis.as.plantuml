@@ -29,5 +29,5 @@ StartAnalysisService --down-> IRepositoryValidator
 StartAnalysisService --down-> IRepositoryCloner
 StartAnalysisService --down-> IAnalysisOrchestrator
 StartAnalysisService --down-> IGitHubAnalysisSavePort
-StartAnalysisService --down-> GitHubAnalysis
+StartAnalysisService ..down.> GitHubAnalysis
 @enduml

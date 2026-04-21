@@ -11,11 +11,62 @@ interface IAnalysisOrchestrator {
 }
 
 class AnalysisOrchestratorService {
+    -- IDocumentationAgentPort
+    -- ICodeAgentPort
+    -- ISecurityAgentPort
+    -- IDocsReportEntityProvider
+    -- ICodeReportEntityProvider
+    -- ISecurityReportEntityProvider
+    -- IDocsReportSavePort
+    -- ICodeReportSavePort
+    -- ISecurityReportSavePort
+    -- IUpdateAnalysisPort
     ---
     + AnalysisOrchestratorService()
     + analyze(analysis: GitHubAnalysis, path: string, code: boolean, docs: boolean, security: boolean): void
     - orchestrateAnalysis(analysis, repoPath, code, docs, security): Promise<void>
 }
 
-AnalysisOrchestratorService ..|> IAnalysisOrchestrator
+AnalysisOrchestratorService ..up.|> IAnalysisOrchestrator : implements
+
+class GitHubAnalysis
+AnalysisOrchestratorService ..up.> GitHubAnalysis : analyzes
+AnalysisOrchestratorService .up.> ReportId : creates
+
+together {
+    interface IDocumentationAgentPort
+    interface IDocsReportEntityProvider
+    interface IDocsReportSavePort
+}
+
+AnalysisOrchestratorService --down-> IDocumentationAgentPort
+AnalysisOrchestratorService -down-> IDocsReportEntityProvider
+AnalysisOrchestratorService -down-> IDocsReportSavePort
+
+
+together {
+    interface ICodeAgentPort
+    interface ICodeReportEntityProvider
+    interface ICodeReportSavePort
+}
+
+AnalysisOrchestratorService --down-> ICodeAgentPort
+AnalysisOrchestratorService -down-> ICodeReportEntityProvider
+AnalysisOrchestratorService -down-> ICodeReportSavePort
+
+together {
+    interface ISecurityAgentPort
+    interface ISecurityReportEntityProvider
+    interface ISecurityReportSavePort
+}
+
+AnalysisOrchestratorService --down-> ISecurityAgentPort
+AnalysisOrchestratorService -down-> ISecurityReportEntityProvider
+AnalysisOrchestratorService -down-> ISecurityReportSavePort
+
+interface IUpdateAnalysisPort
+
+AnalysisOrchestratorService -down-> IUpdateAnalysisPort
+
+
 @enduml

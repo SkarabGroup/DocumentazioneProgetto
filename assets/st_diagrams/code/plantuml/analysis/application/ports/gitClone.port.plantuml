@@ -10,6 +10,6 @@ interface IGitClonePort {
     + clone(model: CloneRepoRequest): Promise<CloneRepoResponse>
 }
 
-IGitClonePort --down-> CloneRepoRequest
-IGitClonePort --down-> CloneRepoResponse
+IGitClonePort --down.> CloneRepoRequest
+IGitClonePort --down.> CloneRepoResponse
 @enduml

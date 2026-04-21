@@ -10,6 +10,6 @@ interface IDocumentationAgentPort {
     + runAnalysis(model: AgentRequest): Promise<DocsAgentResponse>
 }
 
-IDocumentationAgentPort --down-> AgentRequest
-IDocumentationAgentPort --down-> DocsAgentResponse
+IDocumentationAgentPort --down.> AgentRequest
+IDocumentationAgentPort --down.> DocsAgentResponse
 @enduml
