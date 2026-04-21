@@ -1438,47 +1438,90 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 ==== Infrastructure
 ===== Adapter
-====== GitHubAdapter <GitHubAdapter>
+/* ====== GitHubAdapter <GitHubAdapter>
 #codeDiagram("GitHubAdapter", 100%)
 
 `GitHubAdapter` è il Driven Adapter che implementa sia #link(<IGitHubAvailabilityPort>)[`IGitHubAvailabilityPort`] che #link(<IGitClonePort>)[`IGitClonePort`], eseguendo operazioni Git tramite chiamate `curl` all'API GitHub e comandi shell per la clonazione.
 
 - *Adattamento verso l'Esterno:* Traduce i DTO del dominio applicativo in comandi shell Git/curl e ne interpreta le risposte, isolando il resto del sistema dai dettagli dell'API GitHub.
-- *Testabilità:* Il costruttore accetta un `execAsync` iniettabile, permettendo il testing con mock senza eseguire comandi reali.
+- *Testabilità:* Il costruttore accetta un `execAsync` iniettabile, permettendo il testing con mock senza eseguire comandi reali. */
 
-====== LocalCodeAnalysisAdapter <LocalCodeAnalysisAdapter>
+====== GitHubAdapter <GitHubAdapter>
+#codeDiagram("GitHubAdapter", 100%)
+
+`GitHubAdapter` è il Driven Adapter responsabile dell'interazione con l'ecosistema GitHub. Implementando i port #link(<IGitHubAvailabilityPort>)[`IGitHubAvailabilityPort`] e #link(<IGitClonePort>)[`IGitClonePort`], funge da ponte traduttore: prende le richieste del dominio applicativo e le trasforma nei comandi tecnici necessari per comunicare con l'esterno, come chiamate di rete (`curl`) e comandi shell nativi (`git`).
+
+- *Integrazione Lightweight tramite Shell:* Invece di dipendere da SDK esterni pesanti, l'adapter utilizza direttamente comandi shell di sistema. Il costruttore accetta una funzione `execAsync` iniettabile (di default basata su `child_process.exec`), permettendo un mocking completo durante i test unitari senza dover effettuare reali chiamate di rete.
+- *Risoluzione Dinamica e Validazione (`check`):* Il metodo `check` non si limita a verificare i permessi. Interrogando l'API REST di GitHub tramite `curl`, estrae e analizza lo status code HTTP. Se il repository è accessibile, processa il payload JSON per risolvere dinamicamente l'esatto hash SHA del commit (sia che l'utente abbia richiesto un branch specifico, un commit esatto, o si sia affidato al branch di default). Questo garantisce che le fasi successive dell'analisi siano assolutamente deterministiche.
+- *Clonazione Ottimizzata (`clone`):* La logica di clonazione applica strategie diverse per minimizzare l'uso di banda e disco. Se viene richiesto un branch specifico o il branch di default, esegue una clonazione "shallow" (`--depth 1`), scaricando solo l'ultima versione dei file ignorando lo storico dei commit passati; se è richiesto un commit storico specifico, esegue una clonazione standard seguita da un `checkout` mirato.
+- *Gestione Sicura dell'Autenticazione:* L'adapter inietta in modo sicuro i #link(<PersonalAccessToken>)[`PersonalAccessToken`] passandoli come header `Bearer` per le API o incorporandoli dinamicamente nell'URL HTTPS durante la clonazione. Inoltre, implementa un meccanismo di fallback a livello di sistema qualora l'utente non fornisca credenziali proprie.
+- *Resilienza e Cleanup:* Per prevenire il rapido esaurimento dello spazio su disco del server (disk leak), l'adapter isola ogni clonazione in una cartella temporanea univoca in `/tmp/` basata sull'ID dell'analisi. Garantisce inoltre, tramite un blocco `catch`, che le directory temporanee vengano rimosse forzatamente in caso di fallimento del clone.
+
+/* ====== LocalCodeAnalysisAdapter <LocalCodeAnalysisAdapter>
 #codeDiagram("LocalCodeAnalysisAdapter", 60%)
 
 `LocalCodeAnalysisAdapter` è il Driven Adapter che implementa #link(<ICodeAgentPort>)[`ICodeAgentPort`], avviando il container Docker dell'agente di analisi del codice e raccogliendo il JSON prodotto dallo stdout.
 
 - *Estrazione Resiliente:* Il metodo `extractJson()` scansiona iterativamente lo stdout del container alla ricerca del blocco JSON valido, gestendo output misti a log o messaggi di errore parziali.
-- *Fallback Garantito:* In caso di errore del container, `createFallbackResponse()` restituisce una risposta strutturata con stato di errore, evitando la propagazione di eccezioni non gestite verso l'orchestratore.
+- *Fallback Garantito:* In caso di errore del container, `createFallbackResponse()` restituisce una risposta strutturata con stato di errore, evitando la propagazione di eccezioni non gestite verso l'orchestratore. */
 
-====== DocumentationAnalysisAdapter <DocumentationAnalysisAdapter>
+====== LocalCodeAnalysisAdapter <LocalCodeAnalysisAdapter>
+#codeDiagram("LocalCodeAnalysisAdapter", 60%)
+
+`LocalCodeAnalysisAdapter` è il Driven Adapter che implementa il port #link(<ICodeAgentPort>)[`ICodeAgentPort`]. È responsabile dell'orchestrazione locale dell'agente di analisi del codice, incapsulando l'esecuzione del container Docker e il recupero sicuro dei risultati.
+
+- *Orchestrazione Docker Nativa:* Il metodo `runContainer()` utilizza il modulo `child_process.spawn` di Node.js per avviare il container `strands-code-analyzer`. Si occupa di montare dinamicamente i volumi condivisi (`analysis_tmp_data`) e di iniettare in modo sicuro le variabili d'ambiente necessarie (tramite `.env`) senza esporle nel codice.
+- *Estrazione Resiliente del JSON:* Poiché lo `stdout` di un container può contenere log di sistema o warning prima del risultato effettivo, il metodo `extractJson()` non si affida a un semplice parsing. Implementa un algoritmo iterativo di conteggio delle parentesi (`{` e `}`) per scansionare l'output, isolare il blocco JSON valido e cercare specificamente il nodo root `analysis_report`.
+- *Arricchimento del Payload:* Prima di restituire il risultato, l'adapter agisce da vero e proprio strato di traduzione: intercetta il JSON grezzo emesso dall'agente e vi inietta metadati operativi cruciali (come il `repository` ID e lo stato `success`), garantendo che il DTO finale sia perfettamente allineato alle aspettative del livello Application.
+- *Fallback Garantito:* In caso di crash del container, output malformato o timeout, il blocco `catch` invoca `createFallbackResponse()`. Questo metodo genera preventivamente una risposta strutturata e type-safe con un verdetto di errore (`Critical`), evitando che un'eccezione infrastrutturale faccia fallire a cascata l'intero orchestratore delle analisi.
+
+/* ====== DocumentationAnalysisAdapter <DocumentationAnalysisAdapter>
 #codeDiagram("DocumentationAnalysisAdapter", 60%)
 
 `DocumentationAnalysisAdapter` è il Driven Adapter che implementa #link(<IDocumentationAgentPort>)[`IDocumentationAgentPort`], avviando il container Docker dell'agente di analisi della documentazione e raccogliendo il JSON prodotto dallo stdout.
 
 - *Estrazione Resiliente:* Il metodo `extractJson()` scansiona iterativamente lo stdout del container alla ricerca del blocco JSON valido, gestendo output misti a log o messaggi di errore parziali.
-- *Fallback Garantito:* In caso di errore del container, `createFallbackResponse()` restituisce una risposta strutturata con stato di errore, evitando la propagazione di eccezioni non gestite verso l'orchestratore.
+- *Fallback Garantito:* In caso di errore del container, `createFallbackResponse()` restituisce una risposta strutturata con stato di errore, evitando la propagazione di eccezioni non gestite verso l'orchestratore. */
 
-====== LocalSecurityAnalysisAdapter <LocalSecurityAnalysisAdapter>
+====== DocumentationAnalysisAdapter <DocumentationAnalysisAdapter>
+#codeDiagram("DocumentationAnalysisAdapter", 60%)
+
+`DocumentationAnalysisAdapter` è il Driven Adapter che implementa il port #link(<IDocumentationAgentPort>)[`IDocumentationAgentPort`]. Gestisce l'orchestrazione locale dell'agente incaricato di valutare la qualità, le discrepanze e i file mancanti della documentazione del repository.
+
+- *Esecuzione Isolata via Docker:* Sfruttando `child_process.spawn`, il metodo `runContainer()` avvia l'immagine `strands-documentation-analyzer`. Monta dinamicamente una cartella condivisa (`analysis_tmp_data`) e mappa il percorso del repository in modo che il container Python possa accedere esclusivamente ai file scaricati per l'analisi corrente.
+- *Parsing Iterativo a Tolleranza d'Errore:* Consapevole che lo `stdout` Docker non è mai un JSON "puro" (spesso include log di boot o messaggi di sistema), l'adapter impiega `extractJson()`. Questo algoritmo custom scansiona l'output carattere per carattere gestendo la nidificazione delle parentesi per isolare il payload utile (`analysis_report`), scartando il rumore circostante.
+- *Risoluzione Silenziosa dei Fallimenti:* Se l'agente Python va in crash o supera i timeout di sistema, l'eccezione viene catturata dal blocco `catch` principale. Il metodo `createFallbackResponse()` inietta immediatamente uno stato di errore controllato (`status: 'error'`), restituendo array vuoti per tutte le categorie (violazioni, audit, file mancanti) così da permettere alla pipeline generale di concludersi senza corrompere i risultati delle altre analisi (codice e sicurezza).
+
+/* ====== LocalSecurityAnalysisAdapter <LocalSecurityAnalysisAdapter>
 #codeDiagram("LocalSecurityAnalysisAdapter", 70%)
 
 `LocalSecurityAnalysisAdapter` è il Driven Adapter che implementa #link(<ISecurityAgentPort>)[`ISecurityAgentPort`], avviando il container Docker dell'agente di analisi della sicurezza e raccogliendo il JSON prodotto dallo stdout.
 
 - *Estrazione Resiliente:* Il metodo `extractJson()` scansiona iterativamente lo stdout del container alla ricerca del blocco JSON valido, gestendo output misti a log o messaggi di errore parziali.
-- *Fallback Garantito:* In caso di errore del container, `createFallbackResponse()` costruisce una risposta con lista degli errori per tool, preservando il contesto del repository analizzato.
+- *Fallback Garantito:* In caso di errore del container, `createFallbackResponse()` costruisce una risposta con lista degli errori per tool, preservando il contesto del repository analizzato. */
+
+====== LocalSecurityAnalysisAdapter <LocalSecurityAnalysisAdapter>
+#codeDiagram("LocalSecurityAnalysisAdapter", 70%)
+
+`LocalSecurityAnalysisAdapter` è il Driven Adapter che implementa il port #link(<ISecurityAgentPort>)[`ISecurityAgentPort`]. Gestisce l'orchestrazione locale dell'agente dedicato alla scansione delle vulnerabilità, incapsulando l'esecuzione dell'immagine Docker e la complessa gestione dei risultati aggregati dei vari tool.
+
+- *Orchestrazione Docker Sicura:* Il metodo `runContainer()` utilizza `child_process.spawn` per avviare in isolamento il container `strands-security-analyzer`. Inietta dinamicamente il file `.env` di configurazione (se presente) e mappa il volume condiviso (`analysis_tmp_data`) in cui risiede il codice clonato, garantendo che l'agente abbia accesso esclusivo al contesto necessario.
+- *Parsing Iterativo e Resiliente:* Poiché lo `stdout` del container viene spesso inquinato dai log di avvio dei tool di sicurezza sottostanti, il metodo `extractJson()` utilizza un algoritmo custom di bilanciamento delle parentesi per scansionare l'intero flusso testuale, scartando il rumore e isolando esclusivamente il payload JSON valido associato alla chiave `analysis_report`.
+- *Arricchimento del Contesto:* Prima di istanziare la risposta finale, l'adapter agisce da strato di traduzione arricchendo il JSON grezzo: inietta l'identificativo del `repository` e impone lo stato `success` nei `metadata`, allineando l'output grezzo dell'agente al contratto rigoroso atteso dal livello Application.
+- *Fallback Strutturato e Tracciabilità:* In caso di fallimento infrastrutturale (es. crash del container o errore di Docker), l'adapter applica un pattern di graceful degradation tramite `createFallbackResponse()`. Invece di far fallire l'orchestratore, restituisce un DTO strutturato con stato `FAILED` e incapsula esplicitamente il motivo del crash all'interno dell'array `errors` associandolo al tool, garantendo la tracciabilità del problema direttamente nel report di sicurezza finale.
 
 ====== MongoDBAdapter <MongoDBAdapter>
 #codeDiagram("MongoDBAdapter", 100%)
 
-`MongoDBAdapter` è il Driven Adapter che implementa tutti i port di repository del sistema, concentrando in un unico componente la gestione della persistenza su MongoDB tramite Mongoose per credenziali, analisi, report e collezioni.
+`MongoDBAdapter` è il Driven Adapter centralizzato che implementa l'intero livello di persistenza del sistema su MongoDB. Funge da ponte tra i contratti definiti nel livello Application e il database fisico, incapsulando tutta la logica di accesso, traduzione e aggregazione dei dati attraverso la libreria Mongoose.
 
-- *Adattatore Unificato:* Implementa quattordici port distinti, coprendo le operazioni su credenziali Git, analisi GitHub, report di codice, documentazione e sicurezza, e collezioni di repository.
-- *Modelli Multipli:* Inietta nel costruttore sei modelli Mongoose distinti, derivati dai rispettivi schema per mappare i dati sulle collezioni MongoDB: #link(<GitCredential>)[`GitCredential`], #link(<GitHubAnalysisRecord>)[`GitHubAnalysisRecord`], #link(<DocumentationReportModel>)[`DocumentationReportModel`], #link(<CodeReportModel>)[`CodeReportModel`], #link(<SecurityReportModel>)[`SecurityReportModel`] e #link(<GitHubCollection>)[`GitHubCollection`].
+- *Adattatore Unificato:* Centralizza le operazioni di I/O implementando ben sedici port di repository distinti, gestendo l'intero ciclo di vita per credenziali Git, record di analisi, i tre report di dominio (codice, documentazione, sicurezza) e la gestione delle collezioni utente.
+- *Iniezione dei Modelli:* Inietta nel costruttore sei modelli Mongoose distinti, derivati dai rispettivi schema per mappare i dati in modo type-safe sulle collezioni MongoDB: #link(<GitCredential>)[`GitCredential`], #link(<GitHubAnalysisRecord>)[`GitHubAnalysisRecord`], #link(<DocumentationReportModel>)[`DocumentationReportModel`], #link(<CodeReportModel>)[`CodeReportModel`], #link(<SecurityReportModel>)[`SecurityReportModel`] e #link(<GitHubCollection>)[`GitHubCollection`].
+- *Mappatura e Aggregazione Complessa:* Oltre alle classiche operazioni CRUD, il componente si fa carico di aggregazioni avanzate. Il metodo `getAnalysisFromId()`, ad esempio, recupera il record base dell'analisi e interroga condizionalmente le singole collezioni dei report, mappando la vasta alberatura dei documenti DB nei complessi DTO di risposta richiesti dal Presentation Layer, isolando il dominio dai dettagli del database.
+- *Isolamento degli Errori Infrastrutturali:* Implementa un robusto meccanismo di error handling che intercetta le eccezioni specifiche di Mongoose/MongoDB (come l'errore `11000` per i vincoli di unicità violati nel salvataggio delle credenziali) e i fallimenti di rete, traducendoli sistematicamente in oggetti di fallimento strutturati (`Response.failure()`) ed evitando la propagazione di eccezioni non gestite.
+- *Ricostruzione Dinamica delle Relazioni:* Per i metodi legati alle collezioni (es. `getRepositoryCollection()` e `getAllCollections()`), l'adapter adotta un approccio dinamico. Invece di affidarsi a liste di ID statiche, interroga "al volo" la collezione `github_analyses` filtrando per `userId` e `repoURL` e applicando ordinamenti temporali (`sort({ createdAt: -1 })`). Questo garantisce che lo storico delle analisi sia sempre coerente e aggiornato in tempo reale.
 
-====== S3Adapter <S3Adapter>
+/* ====== S3Adapter <S3Adapter>
 #codeDiagram("S3Adapter", 60%)
 
 `S3Adapter` è il Driven Adapter cloud-native che implementa #link(<IGitClonePort>)[`IGitClonePort`]. Sostituisce la semplice clonazione locale clonando il repository, comprimendolo in un archivio `tar.gz` e caricandolo su un bucket AWS S3.
@@ -1509,6 +1552,43 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 - *Scalabilità Serverless:* Lancia un task Fargate iniettando i parametri di rete e di sicurezza necessari (subnet e security group definiti nella configurazione). Al termine, `fetchResultFromS3()` recupera il file `security_report.json`.
 - *Resilienza Architetturale:* Il pattern di polling tramite `DescribeTasksCommand` permette di rilevare non solo il completamento, ma anche eventuali fallimenti prematuri del container, scatenando la generazione del report di fallback con gli errori aggregati.
+ */
+
+====== S3Adapter <S3Adapter>
+#codeDiagram("S3Adapter", 60%)
+
+`S3Adapter` è il Driven Adapter cloud-native che implementa #link(<IGitClonePort>)[`IGitClonePort`]. Sostituisce la clonazione locale preparando il codice per un'architettura distribuita.
+
+- *Clonazione Dinamica:* Clona il repository localmente adattando la strategia alla richiesta (utilizzando `--depth 1` per branch/default o checkout mirati per commit specifici), minimizzando i tempi di download.
+- *Compressione e Upload S3:* Una volta clonato il codice, comprime l'intera cartella in un archivio `.tar.gz` e lo carica su un bucket AWS S3 tramite `PutObjectCommand`. Questo archivio diventa il volume di partenza "congelato" per i successivi container di analisi.
+- *Gestione Sicura del Ciclo di Vita:* Utilizza un blocco `try/catch` per garantire la pulizia assoluta del file system locale. Rimuove forzatamente sia le cartelle clonate che gli archivi compressi indipendentemente dall'esito dell'operazione, prevenendo leak di spazio sul disco dell'orchestratore.
+
+====== ECSCodeAnalysisAdapter <ECSCodeAnalysisAdapter>
+#codeDiagram("ECSCodeAnalysisAdapter", 67%)
+
+`ECSCodeAnalysisAdapter` è il Driven Adapter che implementa #link(<ICodeAgentPort>)[`ICodeAgentPort`], delegando l'esecuzione dell'agente di analisi all'infrastruttura serverless AWS ECS (Fargate).
+
+- *Orchestrazione Serverless:* Il metodo `runEcsTask()` avvia un task isolato tramite `RunTaskCommand`, iniettando le configurazioni di rete necessarie (subnet, security group) e passando l'ID dell'analisi come variabile d'ambiente.
+- *Sincronizzazione via Polling:* Dato che ECS è asincrono, l'adapter implementa un loop di attesa (`waitForTaskCompletion`) che utilizza `DescribeTasksCommand` per interrogare AWS a intervalli regolari, bloccando l'esecuzione finché il task non raggiunge lo stato `STOPPED`.
+- *Recupero Cloud-Native e Fallback:* Diversamente dagli adapter locali, usa `GetObjectCommand` per scaricare il report pulito (`code_report.json`) direttamente da S3. Integra inoltre un meccanismo di fallback che restituisce un verdetto `Critical` strutturato in caso di crash dell'infrastruttura AWS.
+
+====== ECSDocumentationAnalysisAdapter <ECSDocumentationAnalysisAdapter>
+#codeDiagram("ECSDocumentationAnalysisAdapter", 70%)
+
+`ECSDocumentationAnalysisAdapter` è il Driven Adapter che implementa #link(<IDocumentationAgentPort>)[`IDocumentationAgentPort`] eseguendo l'agente di documentazione su AWS ECS (Fargate).
+
+- *Esecuzione Distribuita:* Avvia l'agente Docker su AWS tramite il client ECS, isolando completamente il carico computazionale dal server applicativo principale.
+- *Gestione dell'Attesa:* Mantiene sincronizzato il flusso dell'orchestratore mettendo in polling lo stato del container Fargate, gestendo autonomamente la verifica degli exit code del processo remoto.
+- *Integrazione e Resilienza:* Recupera il payload scaricando il file `docs_report.json` da S3. Se il task fallisce o restituisce un codice anomalo, l'eccezione viene trasformata in una risposta di fallback controllata (con array vuoti e `status: 'error'`), evitando di far fallire l'intera pipeline di analisi.
+
+====== ECSSecurityAnalysisAdapter <ECSSecurityAnalysisAdapter>
+#codeDiagram("ECSSecurityAnalysisAdapter", 74%)
+
+`ECSSecurityAnalysisAdapter` è il Driven Adapter che implementa #link(<ISecurityAgentPort>)[`ISecurityAgentPort`] eseguendo la suite di sicurezza su AWS ECS (Fargate).
+
+- *Scalabilità e Isolamento:* Lancia il task Fargate configurando esplicitamente le regole di rete VPC per garantire l'isolamento della scansione di sicurezza.
+- *Monitoraggio dell'Esecuzione:* Implementa la logica di polling per attendere la fine dell'analisi sui worker distribuiti, prelevando infine il risultato `security_report.json` depositato sul bucket S3.
+- *Tracciabilità degli Errori:* Il pattern di fallback è particolarmente curato. Se l'esecuzione su ECS fallisce prematuramente, `createFallbackResponse()` non solo imposta lo stato a `FAILED`, ma inserisce l'eccezione infrastrutturale nell'array `errors` simulando un finding di un tool fittizio (`tool: 'agent'`), garantendo trasparenza sul motivo del fallimento.
 
 ===== Schema
 ====== GitCredential <GitCredential>
