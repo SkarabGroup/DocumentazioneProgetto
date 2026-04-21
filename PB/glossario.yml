@@ -156,14 +156,14 @@ E:
   Earned Value Management:
     acronimo: EVM
     descrizione: Tecnica di gestione di progetto che integra misure di ambito, schedulazione e costi per fornire una valutazione oggettiva della performance e dei rischi economici.
+  Elastic Container Service:
+  acronimo: ECS
+  descrizione: Servizio di orchestrazione di container che consente di eseguire e scalare applicazioni containerizzate su Amazon Web Service.
   ESLint:
     descrizione: Strumento di analisi statica utilizzato per identificare e segnalare pattern problematici o violazioni delle convenzioni di stile nel codice JavaScript e TypeScript.
   Estimate At Completion:
     acronimo: EAC
     descrizione: Previsione del costo finale complessivo del progetto basata sulla proiezione delle performance correnti (CPI) sul budget rimanente.
-  Elastic Container Service:
-    acronimo: ECS
-    descrizione: Servizio di orchestrazione di container che consente di eseguire e scalare applicazioni containerizzate su Amazon Web Service.
 
 F:
   Failure Density:
