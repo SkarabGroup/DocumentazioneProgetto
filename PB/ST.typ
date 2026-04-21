@@ -2,7 +2,7 @@
 #import "../lib/variables.typ": *
 #import "../lib/stDiagramUtil.typ": *
 
-#let versione = "v0.14.0"
+#let versione = "v0.15.0"
 #set heading(numbering: "1.1.1")
 /*
 === FUNZIONAMENTO DEL DOCUMENTO ===
@@ -23,6 +23,12 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #titlePage("Specifica Tecnica", versione)
 #set page(numbering: "1", header: header("Specifica Tecnica"), footer: footer())
 #let history = (
+  (
+    "2026/04/21",
+    "0.15.0",
+    "Revisione Introduzione, Introduzione a Architettura di Deployment, Introduzione a Architettura Logica",
+    members.suar
+  ),
   (
     "2026/04/20",
     "0.14.0",
@@ -169,7 +175,7 @@ I seguenti documenti hanno valore vincolante per la redazione della Specifica Te
   (ultimo accesso: *31/03/2026*)
 
 - *Analisi dei Requisiti*: insieme dei requisiti e dei casi d'uso coperti nel Minimum Viable Product. <AdR> \
-  #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/AdR.pdf")] \
+  #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/AdR.pdf")] \
   (versione: *v2.0.0*)
 
 - *Norme di Progetto*: regole, convenzioni e standard di qualità adottati dal gruppo. <NdP> \
