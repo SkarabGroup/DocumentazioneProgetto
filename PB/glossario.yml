@@ -157,8 +157,8 @@ E:
     acronimo: EVM
     descrizione: Tecnica di gestione di progetto che integra misure di ambito, schedulazione e costi per fornire una valutazione oggettiva della performance e dei rischi economici.
   Elastic Container Service:
-  acronimo: ECS
-  descrizione: Servizio di orchestrazione di container che consente di eseguire e scalare applicazioni containerizzate su Amazon Web Service.
+    acronimo: ECS
+    descrizione: Servizio di orchestrazione di container che consente di eseguire e scalare applicazioni containerizzate su Amazon Web Service.
   ESLint:
     descrizione: Strumento di analisi statica utilizzato per identificare e segnalare pattern problematici o violazioni delle convenzioni di stile nel codice JavaScript e TypeScript.
   Estimate At Completion:
@@ -412,8 +412,8 @@ S:
     alternative: Hardcoded secrets
     descrizione: Informazioni sensibili come credenziali, scritte direttamente all'interno del codice sorgente, che introducono un severo rischio di sicurezza. 
   Simple Storage Service:
-  acronimo: S3
-  descrizione: Amazon Simple Storage Service, servizio di storage cloud scalabile e duraturo utilizzato per archiviare dati, file e asset del progetto.
+    acronimo: S3
+    descrizione: Amazon Simple Storage Service, servizio di storage cloud scalabile e duraturo utilizzato per archiviare dati, file e asset del progetto.
   Sistema multiagente:
     alternative: Multi-agent system, sistema multi agente, multiagente
     descrizione: Architettura software in cui più agenti intelligenti e autonomi interagiscono tra loro per risolvere problemi complessi non affrontabili da un singolo componente.
