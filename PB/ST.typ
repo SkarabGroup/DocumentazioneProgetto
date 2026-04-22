@@ -618,6 +618,33 @@ Questi componenti rappresentano l’unico punto in cui vengono utilizzate librer
 
 #pagebreak()
 
+==== Flussi completi di Esecuzione
+Il diagramma seguente illustra un flusso operativo completo, evidenziando l’interazione tra i livelli dell’architettura esagonale a partire da un singolo controller HTTP fino alla conclusione della richiesta. Questa sezione ha l'obiettivo é di fornire una panoramica ad alto livello del percorso di esecuzione, evidenziando i passaggi chiave e le interazioni tra i componenti, senza entrare nei dettagli di implementazione specifici, interazioni con oggetti di dominio o contratti tra la parti, in quanto questo livello di dettaglio sará visibile nelle sezioni successive.
+
+===== Analysis
+Il flusso che segue rappresenta la sequenza operativa di un'analisi completa, partendo dalla ricezione della richiesta HTTP fino alla conclusione dell'audit e alla restituzione dei risultati all'utente. Nota: la risposta viene ritornata all'utente immediatamente dopo la fase di staging su S3, mentre l'esecuzione dell'agente e la generazione dei report avvengono in modo asincrono.
+#controllerDiagram("AnalysisControllerReachableClasses", 80%)
+#pagebreak()
+Il diagramma nel diagramma sopra non é presente il flusso di orchestrazione agentica in quanto,
+come giá esposto, l'esecuzione dell'agente avviene in modo asincrono e non blocca la risposta HTTP. Il controller si limita a orchestrare le operazioni sincrone (interazione con GitHub, staging su S3) e a delegare l'orchestrazione degli agenti all'OrchestratorService, senza attendere il completamento di quest'ultima per rispondere all'utente. Per questo motivo, il flusso di orchestrazione agentica é rappresentato in un diagramma a parte.
+#controllerDiagram("OrchestratorReachableClasses", 100%)
+#pagebreak()
+===== PAT
+Il controller dei PAT (Personal Access Token) gestisce ogni operazione su di essi, il salvataggio in uno nuovo, la modifica e l'eliminazione.
+
+#controllerDiagram("PatControllerReachableClasses", 100%)
+#pagebreak()
+===== Repositories
+Il controller dei repository gestisce ogni operazione sul database delle collections e delle analisi, in particolare permette di:
+- Creare una nuova collection
+- Richiedere i metadati di tutte le analisi di un utente indipendentemente dalla repo, branch o commit analizzati
+- Richiedere tutte le collection di un dato user
+- Richiedere i metadati di una collection a partire dall'url della repo
+- Richiedere il dettaglio di una analisi a partire dal suo ID
+- Cancellare una collezione
+- Richiedere i dettagli di tutte le analisi di una collection
+#controllerDiagram("RepositoryControllerReachableClasses", 100%)
+#pagebreak()
 ==== Domain
 Il Dominio rappresenta il nucleo centrale dell'architettura esagonale, dove risiedono esclusivamente la logica di business e le regole vitali del progetto. Questa sezione è progettata per essere totalmente agnostica rispetto alla tecnologia: non possiede alcuna conoscenza di database, protocolli di comunicazione (HTTP/REST) o framework esterni.
 

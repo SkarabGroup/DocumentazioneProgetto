@@ -1,0 +1,74 @@
+@startuml PatControllerReachableClasses
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 35
+skinparam ranksep 50
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class PatController
+
+class PostPatRequestDTO
+class DeletePatRequestDTO
+class UpdatePatRequestDTO
+
+class PostPatResponseDTO
+class DeletePatResponseDTO
+class UpdatePatResponseDTO
+
+interface NewPatUseCase
+interface DeletePatUseCase
+interface UpdatePatUseCase
+
+class NewPatService
+class DeletePatService
+class UpdatePatService
+
+
+interface IGitCredentialSavePort
+interface IGitCredentialDeletePort
+interface IGitCredentialUpdatePort
+
+interface IPasswordProvider
+class PATPasswordProvider
+
+class MongoDBAdapter
+
+' Controller dependencies
+PatController --down-> NewPatUseCase
+PatController --down-> DeletePatUseCase
+PatController --down-> UpdatePatUseCase
+
+PatController ..up.> PostPatRequestDTO
+PatController ..up.> DeletePatRequestDTO
+PatController ..up.> UpdatePatRequestDTO
+
+PatController ..up.> PostPatResponseDTO
+PatController ..up.> DeletePatResponseDTO
+PatController ..up.> UpdatePatResponseDTO
+
+
+' Use case implementations
+NewPatService ..up.|> NewPatUseCase
+DeletePatService ..up.|> DeletePatUseCase
+UpdatePatService ..up.|> UpdatePatUseCase
+
+' Service dependencies
+NewPatService --down-> IPasswordProvider
+NewPatService --down-> IGitCredentialSavePort
+
+DeletePatService --down-> IPasswordProvider
+DeletePatService --down-> IGitCredentialDeletePort
+
+UpdatePatService --down-> IPasswordProvider
+UpdatePatService --down-> IGitCredentialUpdatePort
+
+' Password provider implementation
+PATPasswordProvider ..up.|> IPasswordProvider
+
+' Infrastructure implementations for reached ports
+MongoDBAdapter ..up.|> IGitCredentialSavePort
+MongoDBAdapter ..up.|> IGitCredentialDeletePort
+MongoDBAdapter ..up.|> IGitCredentialUpdatePort
+
+@enduml
