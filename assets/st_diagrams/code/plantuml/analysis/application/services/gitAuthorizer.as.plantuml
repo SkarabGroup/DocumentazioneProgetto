@@ -18,6 +18,49 @@ class GitAuthorizerService {
     + authorize(url: RepoURL, password?: PATPassword): Promise<PersonalAccessToken>
 }
 
-GitAuthorizerService ..|> IRepositoryAuthorizer
-GitAuthorizerService --right-> IGitCredentialReadPort
+GitAuthorizerService ..up.|> IRepositoryAuthorizer
+GitAuthorizerService --down-> IGitCredentialReadPort
+
+interface AuthorizationStrategy {
+    + getPersonalAccessToken(url?: RepoURL): Promise<string>
+}
+
+interface IGitCredentialReadPort {
+    + authorize(request: GetGitCredentialRequest): Promise<GetGitCredentialResponse>
+}
+
+class ConfigurationService {
+    + codeGuardianToken: string
+}
+
+class PrivateAuthorizationStrategy {
+    - port: IGitCredentialReadPort
+    - password: PATPassword
+    ---
+    + PrivateAuthorizationStrategy(port, password)
+    + getPersonalAccessToken(url: RepoURL): Promise<string>
+}
+
+class PublicAuthorizationStrategy {
+    - configService: ConfigurationService
+    ---
+    + PublicAuthorizationStrategy(configService)
+    + getPersonalAccessToken(url?: RepoURL): Promise<string>
+}
+
+class PATPassword {
+    - value: string
+    ---
+    + PATPassword(value)
+}
+
+
+PrivateAuthorizationStrategy ..up.|> AuthorizationStrategy
+PublicAuthorizationStrategy ..up.|> AuthorizationStrategy
+PrivateAuthorizationStrategy --> IGitCredentialReadPort : authorize(request)
+PublicAuthorizationStrategy --> ConfigurationService : codeGuardianToken
+
+PrivateAuthorizationStrategy ..> PATPassword
+GitAuthorizerService --> AuthorizationStrategy : strategy
+GitAuthorizerService --> ConfigurationService
 @enduml
