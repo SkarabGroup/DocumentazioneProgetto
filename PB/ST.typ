@@ -28,7 +28,7 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
     "0.18.0",
     "Aggiunta la sezione di mappatura dei requisiti",
     members.antonio,
-    "",
+    members.suar,
   ),
   (
     "2026/04/22",
