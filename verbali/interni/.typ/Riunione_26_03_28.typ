@@ -5,9 +5,10 @@
   versioni: (
     (
       "2026-03-28",
-      "0.1.0",
-      "Prima stesura del documento",
+      "1.0.0",
+      "Stesura verbale",
       members.martinello,
+      members.kevin
     ),
   ),
 
@@ -48,29 +49,47 @@
     #puntoOdg(
       punto1,
       "I membri del team hanno presentato e discusso l'avanzamento relativo ai diagrammi di livello C3 e C4.",
-      decisione: "Approvare lo stato di avanzamento e procedere verso la finalizzazione dei diagrammi.",
+      decisione: "Si è deciso di procedere con la finalizzazione dei diagrammi architetturali, assicurando la pulizia degli artefatti grafici e l'allineamento dei nomi dei componenti all'Ubiquitous Language stabilito nel glossario.",
     )
 
     === Punto 2: #punto2
     #puntoOdg(
       punto2,
       "I membri del team hanno mostrato l'avanzamento lato codice (progettazione e sviluppo). Inoltre è stata fornita a tutti una spiegazione dettagliata su come procedere correttamente con le operazioni di push e pull per il repository condiviso.",
-      decisione: "Adottare lo standard condiviso per le operazioni su Git per evitare conflitti.",
+      decisione: "È stata approvata l'adozione degli standard Git per le operazioni sui branch, recependo tali direttive nelle Norme di Progetto. Contestualmente è stato confermato l'avvio dello sviluppo dei servizi core di autenticazione, dei relativi test e dell'interazione con il database.",
     )
 
     === Punto 3: #punto3
     #puntoOdg(
       punto3,
       "Si è dato il via alla discussione per la stesura del documento di Specifica Tecnica. Per quanto riguarda i diagrammi delle classi, si è deciso di optare per una versione che mostri il nome della classe, le responsabilità principali/uso e le operazioni, per spiegarne il significato all'interno dell'infrastruttura.",
-      decisione: "I diagrammi UML nella Specifica Tecnica conterranno una versione compatta delle classi.",
+      decisione: "È stata definita la rappresentazione UML compatta per le classi in ST; si è quindi stabilito di revisionare gli errori nei link ai componenti e di integrare le nuove sezioni relative ai command applicativi e all'architettura di deployment.",
     )
 
     = Azioni e responsabilità
     #task_table((
-      ("Sviluppo microservizio analisi", "Programmatore", "8:00"),
-      ("Sviluppo frontend", "Programmatore", "8:00"),
-      ("Sviluppo microservizio agenti", "Programmatore", "8:00"),
-      ("Sviluppo microservizio autenticazione", "Programmatore", "8:00"),
+      ("Aggiornamento NdP: recepimento delle direttive di codifica", "Amministratore", "1:00"),
+      ("Aggiornamento PdQ: correzione delle metriche di testing e consolidamento", "Amministratore", "0:45"),
+      ("Stesura Glossario v1.1.0 e aggiornamento del sito web per la PB", "Amministratore", "0:30"),
+      ("Revisione ST: correzione degli errori e dei collegamenti ai componenti", "Progettista", "3:00"),
+      ("Stesura ST: introduzione e definizione dei command applicativi", "Progettista", "3:00"),
+      ("Stesura ST: definizione dell'architettura di deployment", "Progettista", "3:30"),
+      ("Progettazione in ST: Value Object per il microservizio Account", "Progettista", "3:00"),
+      ("Ristrutturazione logica dei Sub-Application Services", "Progettista", "2:30"),
+      ("Progettazione dell'Helper Service per i mapper e definizione confini StartAnalysis", "Progettista", "3:00"),
+      ("Revisione artefatti architetturali per allineamento all'Ubiquitous Language", "Progettista", "4:00"),
+      
+      ("Sviluppo delle entità User e GitHub Token con relativi test", "Programmatore", "3:00"),
+      ("Implementazione del Value Object PasswordHash e relativi test", "Programmatore", "1:00"),
+      ("Sviluppo di DTO, porte e factory per l'integrazione GitHub con test", "Programmatore", "2:30"),
+      ("Implementazione dei casi d'uso per i servizi GitHub e relativi test", "Programmatore", "2:30"),
+      ("Sviluppo servizi di autenticazione JWT e BCrypt con risoluzione errori di linting", "Programmatore", "2:30"),
+      ("Implementazione del servizio di registrazione e correzione adapter PostgreSQL", "Programmatore", "3:30"),
+      ("Sviluppo dei servizi di login/registrazione e configurazione ambiente Docker", "Programmatore", "2:00"),
+      ("Implementazione del servizio e del controller di eliminazione con test", "Programmatore", "3:30"),
+      ("Sviluppo componenti di richiesta Git, mapper e comando StartAnalysis con test", "Programmatore", "3:00"),
+      ("Implementazione del modello credenziali e del Value Object PAT Password", "Programmatore", "1:30"),
+      ("Sviluppo adapter MongoDB, scrittura credenziali GitHub e correzioni ai pacchetti", "Programmatore", "5:00"),
     ))
 
     #chiusuraVerbale(orarioFineRiunione, presidenteRiunione)

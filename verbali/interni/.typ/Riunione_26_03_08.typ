@@ -5,9 +5,10 @@
   versioni: (
     (
       "2026-03-08",
-      "0.1.0",
-      "Prima stesura del documento",
+      "1.0.0",
+      "Stesura verbale",
       members.berengan,
+      members.suar,
     ),
   ),
 
@@ -45,24 +46,31 @@
     #puntoOdg(
       punto1,
       "I membri del team hanno discusso in merito al documento Specifica Tecnica, ognuno ha riportato agli altri membri le conoscenze acquisite durante lo studio individuale. Inoltre è stata discussa la progettazione, decidendo le priorità sul lavoro da svolgere.",
-      decisione: "Sono state assegnate delle ore di studio individuale ed è stata indivudata la necessità di delle sessioni di brainstorming collettivo relative all'architettura del prodotto."
+      decisione: "Sono state assegnate delle ore di studio individuale ed è stata individuata la necessità di sessioni di brainstorming collettivo relative all'architettura del prodotto. Da questa decisione scaturisce l'assegnazione delle attività di stesura tecnica in ST e la progettazione dei modelli C4, riportate esplicitamente nella tabella delle azioni e responsabilità.."
     )
 
     === Punto 2: #punto2
     #puntoOdg(
       punto2,
       "Sono state discusse le modalità di lavoro, in particolare la modifica di comportamenti che si sono rivelati dannosi ed hanno rallentato il lavoro del team durante la RTB",
-      decisione: "Assegnazione immediata e chiara delle task settimanali unita ad una maggior periodicità delle riunioni nella prima parte della PB. Ciò serve ad adottare un metodo di lavoro incrementale, evitando iterazioni inutili e costose"
+      decisione: "Assegnazione immediata e chiara delle task settimanali unita ad una maggior periodicità delle riunioni nella prima parte della PB. In linea con questa riorganizzazione, si è deciso di completare le correzioni ai documenti AdR e NdP segnalate dal docente e di aggiornare la pianificazione nel PdP; i compiti specifici di modifica e verifica sono tracciati nella tabella sottostante."
     )
 
      = Azioni e responsabilità
     #task_table((
-      ("Modfica del documento AdR in conformità con le correzioni proposte dal docente Cardin", "Analista", "2:00"),
-      ("Modifica della definizione di verificatore nel documneto NdP", "Analista", "1:00"),
-      ("Verifica delle modfiche ai documenti AdR e Ndp", "Verificatore", "2:00"),
-      ("Scrittura della sezione dei microsevizi per agenti LLM in ST", "Progettista", "2:00"),
-      ("Scrittura della sezione dei microsevizi per backend in ST", "Progettista", "2:00"),
-      ("Scrittura della sezione dei microsevizi per persistenza in ST", "Progettista", "2:00"),
+    ("Modifica del documento AdR in conformità alle correzioni proposte", "Analista", "2:00"),
+    ("Stesura introduzione e primi capitoli del documento ST", "Analista", "3:00"),
+    ("Scrittura in ST dell'architettura a microservizi, sezione relativa alla persistenza", "Progettista", "6:00"),
+    ("Scrittura in ST dell'architettura a microservizi, sezione relativa al backend", "Progettista", "12:00"),    
+    ("Scrittura in ST dell'architettura a microservizi, sezione relativa agli agenti LLM", "Progettista", "10:00",),
+    ("Progettazione di livello 3 del C4 model per il microservizio di Analisi", "Progettista", "12:00"),
+    ("Progettazione di livello 3 del C4 model per il microservizio di Gestione degli Account", "Progettista","8:00"),
+    ("Progettazione di livello 3 del C4 model per il frontend", "Progettista","6:00"),
+    ("Verifica verbale riunione interna prima settimana", "Verificatore","0:30"),
+    ("Verifica verbale riunione interna seconda settimana", "Verificatore","0:30"),
+    ("Verifica ST","Verificatore","8:00"),
+    ("Verifica delle modifiche al documento AdR", "Verificatore", "1:00"),
+    ("Verifica delle modifiche in NdP", "Verificatore", "1:00"),
     ))
     #chiusuraVerbale(orarioFineRiunione, presidenteRiunione)
   ],

@@ -6,16 +6,9 @@
     (
       "2026-04-04",
       "1.0.0",
-      "Approvazione verbale",
-      "",
-      members.antonio,
-    ),
-    (
-      "2026-04-04",
-      "0.1.0",
-      "Prima stesura del documento",
+      "Stesura verbale",
       members.andrea,
-      members.antonio
+      members.kevin,
     ),
   ),
 
@@ -56,32 +49,44 @@
     === Punto 1: #punto1
     #puntoOdg(
       punto1,
-      "Si è discusso lo stato attuale dei due microservizi, cosa manca da ultimare e le tempistiche previste per il completamento.",
-      decisione: "Per il microservizio di analisi, la comunicazione preliminare all'avvio dell'analisi è a buon punto; mancano da ultimare gli use case per il recupero dei report, la logica finale di clonazione della repository e i test di integrazione con MongoDB. Per quanto riguarda il microservizio di amministrazione account, è necessario completare i controller per le fasi di login e registrazione, sistemare in via definitiva il Postgres Adapter per il database e integrare la gestione dei Personal Access Token (PAT) per le repository private.",
+      "Si è discusso lo stato attuale dei due microservizi, definendo le attività necessarie per ultimare i flussi di comunicazione e persistenza.",
+      decisione: "Si è stabilito di procedere con il completamento dei controller per l'autenticazione e la gestione dei Personal Access Token (PAT). Contestualmente, è stato approvato l'avvio dello sviluppo del servizio di clonazione delle repository e dell'integrazione con MongoDB, unitamente al rafforzamento della sicurezza tramite JWT. Tali attività operative sono state assegnate ai programmatori e dettagliate nella tabella sottostante.",
     )
 
     === Punto 2: #punto2
     #puntoOdg(
       punto2,
-      "Il team ha fatto il resoconto dei Value Object, arrivando alla conclusione che mancano ancora quelli per la Code Coverage e per la Documentazione. È sorto inoltre un dubbio su dove e come convertire i valori eterogenei restituiti dai vari tool (ad esempio, le scale di severità degli errori).",
-      decisione: "Si è deciso per ragioni architetturali che la conversione e la standardizzazione dei dati non devono avvenire nell'Application Service. Sarà responsabilità esclusiva dell'Adapter del singolo tool occuparsi di mappare la risposta nel formato di dominio.",
+      "Il team ha analizzato la necessità di standardizzare i dati restituiti dai vari tool di analisi attraverso i Value Object e gli Adapter dedicati.",
+      decisione: "È stata approvata l'implementazione dei Value Object relativi a coverage, sicurezza e documentazione, delegando agli adapter (CodeAgentAdapter) la responsabilità del mapping dei dati. Da tale decisione scaturiscono i compiti di sviluppo delle entità dei report di analisi e dei servizi di orchestrazione degli agenti.",
     )
 
     === Punto 3: #punto3
     #puntoOdg(
       punto3,
       "Si è valutato l'avanzamento dei mockup della dashboard React e discusso di come scrivere la Specifica Tecnica per il Frontend.",
-      decisione: "Il lavoro sul Frontend procederà affiancandosi allo sviluppo dei controller del backend. Per quanto riguarda la documentazione, si è deciso che i componenti grafici (es. bottoni o form) non verranno descritti nel dettaglio a livello di codice, ma verranno raggruppati in macro-componenti per spiegarne la logica costruttiva.",
+      decisione: "Si è deciso di procedere con la documentazione in ST dei componenti del microservizio di analisi e la definizione dei pattern di autorizzazione (Strategy/Authorization). Queste scelte progettuali e la ristrutturazione dei servizi applicativi pongono le basi necessarie per il successivo sviluppo dell'interfaccia grafica.",
     )
 
     = Azioni e responsabilità
     #task_table((
-      ("Completamento Use Case recupero report e test integrazione MongoDB", "Programmatore", "5:00"),
-      ("Implementazione gestione credenziali tramite PAT per repository private", "Programmatore", "5:00"),
-      ("Definizione e implementazione Value Object mancanti", "Programmatore", "7:00"),
-      ("Sviluppo logica di mapping negli Adapter dei tool", "Progettista", "6:00"),
-      ("Sviluppo controller Login/Registrazione e fix PostgreAdapter", "Programmatore", "6:00"),
-      ("Sviluppo interfacce Frontend", "Programmatore", "5:00")
+      ("Specifica Tecnica: analisi e selezione degli strumenti per la sicurezza", "Progettista", "3:00"),
+      ("Specifica Tecnica: definizione dei componenti per il microservizio di Analisi", "Progettista", "3:00"),
+      ("Aggiornamento dei diagrammi PlantUML relativi ai Value Object per l'analisi del codice", "Progettista", "3:00"),
+      ("Definizione dei pattern Strategy e Authorization per il modulo di analisi", "Progettista", "3:00"),
+      ("Progettazione del flusso di clonazione repository e integrazione con MongoDB", "Progettista", "2:30"),
+      ("Progettazione dei contratti di sessione e gestione delle eccezioni", "Progettista", "2:30"),
+
+      ("Sviluppo dei Value Object per i risultati base (coverage, path, severity) con relativi test", "Programmatore", "3:30"),
+      ("Sviluppo dei Value Object per i risultati estesi (file-coverage, dependency) con relativi test", "Programmatore", "3:00"),
+      ("Sviluppo dei Value Object per la sicurezza (static-analysis, owasp, secrets) con relativi test", "Programmatore", "4:30"),
+      ("Implementazione delle entità per i report di analisi (documentation e code report) con test d'unità", "Programmatore", "4:00"),
+      ("Implementazione delle porte di salvataggio per i report di analisi con test d'unità", "Programmatore", "3:30"),
+      ("Sviluppo del CodeAgentAdapter e della relativa porta di comunicazione", "Programmatore", "5:00"),
+      ("Implementazione dell'OrchestratorService e configurazione iniziale della cartella agenti", "Programmatore", "3:00"),
+      ("Sviluppo iniziale del Documentation Agent e ottimizzazione dell'adapter", "Programmatore", "4:00"),
+      ("Implementazione del flusso completo per la gestione dei PAT: validatori e controller", "Programmatore", "4:30"),
+      ("Sviluppo del servizio applicativo di clonazione, AnalysisController e integrazione MongoDB", "Programmatore", "4:00"),
+      ("Rafforzamento della sicurezza: implementazione JWT Guard e gestione persistenza sessioni", "Programmatore", "4:00"),
     ))
 
     #chiusuraVerbale(orarioFineRiunione, presidenteRiunione)

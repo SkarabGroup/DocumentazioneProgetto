@@ -5,8 +5,8 @@
   versioni: (
     (
       "2026-04-18",
-      "0.1.0",
-      "Prima stesura del documento",
+      "1.0.0",
+      "Stesura verbale",
       members.martinello,
       members.suar
     ),
@@ -29,7 +29,7 @@
     == Argomenti proposti
     #let punto1 = "Stato di avanzamento microservizio Account (Backend)"
     #let punto2 = "Stato di avanzamento microservizio Analisi"
-    #let punto3 = "Aggiornamento documenti PdQ, PdP e NdP"
+    #let punto3 = "Aggiornamento documenti PdQ, PdP, NdP e ST"
     #let punto4 = "Stato di avanzamento Frontend"
     + #punto1.
     + #punto2.
@@ -50,14 +50,14 @@
     #puntoOdg(
       punto1,
       "Per quanto riguarda il microservizio dell'account, la parte di codifica è stata completata interamente. Relativamente alla Specifica Tecnica, è stata ultimata la descrizione dei pattern, delle classi e dell'introduzione, mentre deve essere aggiunta l'architettura. Per il Manuale Utente, sono state definite le prime funzionalità, testate tramite procedure con relative immagini a supporto, mentre per il PdQ restano alcune cose da ultimare e andrà rivista la documentazione prodotta fino ad ora.",
-      decisione: "Ultimazione della sezione di architettura in ST, completamento del PdQ per la parte backend e verifica complessiva di quanto redatto.",
+      decisione: "Si è deciso di procedere con l'ultimazione della sezione di architettura in ST e il completamento del PdQ per la parte backend. Contestualmente, si darà priorità alla conclusione del Manuale Utente per le parti già consolidate del sistema.",
     )
 
     === Punto 2: #punto2
     #puntoOdg(
       punto2,
       "Lo sviluppo degli agenti per il microservizio di analisi è a buon punto: due su tre sono completati, mentre l'agente di sicurezza è in fase finale di sviluppo. Gli endpoint sono attualmente in fase di revisione e si stanno aggiungendo gli ultimi necessari. Riguardo la documentazione, nella Specifica Tecnica mancano ancora i design pattern e risulta necessario arricchire le sezioni sull'architettura logica e di deployment. Infine, la sezione del Manuale Utente per questo microservizio deve ancora essere completata in toto.",
-      decisione: "Terminare lo sviluppo dell'agente di sicurezza, completare la sezione architettura, design pattern in ST e sviluppare interamente le sezioni del Manuale Utente mancanti.",
+      decisione: "Terminare lo sviluppo dell'agente di sicurezza e dei relativi endpoint. È stata inoltre approvata la stesura delle ultime sezioni architetturali in ST e l'allineamento dei pattern di risposta degli agenti con le entità di dominio, procedendo infine con le configurazioni per il deploy su AWS.",
     )
 
     === Punto 3: #punto3
@@ -76,11 +76,14 @@
 
     = Azioni e responsabilità
     #task_table((
-      ("Sviluppo agente di sicurezza ed endpoint", "Programmatore", "4:00"),
-      ("Stesura sezione architettura e pattern in ST", "Progettista", "6:00"),
-      ("Stesura Manuale Utente (microservizio analisi)", "Progettista", "5:00"),
+      ("Conclusione manuale utente", "Amministratore", "4:00"),
       ("Integrazione frontend con microservizio analisi", "Programmatore", "4:00"),
-      ("Verifica testing in PdQ e avanzamento PdP", "Responsabile", "4:00"),
+      ("Allineamento pattern risposta agenti con entity di dominio", "Progettista", "2:00"),
+      ("Stesura delle ultime sezioni in ST", "Progettista", "6:00"),
+      ("Sviluppo agente di sicurezza ed endpoint", "Programmatore", "4:00"),
+      ("Deploy AWS", "Programmatore", "1:00"),
+      ("Verifica testing in PdQ e avanzamento PdP", "Verificatore", "4:00"),
+      ("verifica finale ST", "Verificatore", "6:00"),
       ("Rilettura finale NdP", "Verificatore", "2:00"),
     ))
 
