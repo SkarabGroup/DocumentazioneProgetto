@@ -52,9 +52,6 @@ A:
     alternative: Tempo di risposta medio
     descrizione: Metrica prestazionale che indica la media aritmetica dell'intervallo temporale tra la sottomissione di un input e l'output finale prodotto dal sistema.
 
-  Amazon Web Services:
-    acronimo: AWS
-    descizione: Ecosistema di servizi cloud che fornisce l'infrastruttura computazionale e di storage per il sistema. Consente l'esecuzione di task intensivi in ambienti isolati e la gestione dinamica delle risorse, garantendo la scalabilità necessaria alle operazioni di analisi e la persistenza dei dati non sensibili.
 B:
   Backlog:
     descrizione: Elenco dinamico e prioritizzato di tutto il lavoro necessario per realizzare il prodotto (user story, task, bug), gestito dal Responsabile in collaborazione con il team.
@@ -339,6 +336,9 @@ P:
   Programmatori:
     alternative: Developer, Programmatore, Sviluppatore software
     descrizione: Membri del team responsabili dell'implementazione del codice sorgente, del debugging e della traduzione delle specifiche tecniche in software funzionante.
+  Project Management Institute:
+    acronimo: PMI
+    descrizione: Organizzazione globale leader nella definizione di standard (come il PMBOK), certificazioni e ricerca per la gestione professionale dei progetti.
   Prompt Engineering:
     descrizione: L'insieme delle tecniche e delle strategie utilizzate per progettare, scrivere e affinare le istruzioni fornite a un sistema di intelligenza artificiale.
   Proof of Concept:
@@ -346,9 +346,6 @@ P:
     descrizione: Realizzazione prototipale o sperimentale limitata volta a dimostrare la fattibilità tecnica di un'idea o di una specifica tecnologia prima dello sviluppo completo.
   Proponente:
     descrizione: Organizzazione o entità (es. Var Group) che presenta la richiesta o il capitolato iniziale per la realizzazione di un progetto.
-  Project Management Institute:
-    acronimo: PMI
-    descrizione: Organizzazione globale leader nella definizione di standard (come il PMBOK), certificazioni e ricerca per la gestione professionale dei progetti.
   Python:
     descrizione: Linguaggio di programmazione ad alto livello utilizzato nel progetto per la logica degli Agenti, il trattamento dati e l'interazione con framework di IA.
 

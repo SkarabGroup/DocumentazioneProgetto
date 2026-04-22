@@ -24,10 +24,11 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #set page(numbering: "1", header: header("Specifica Tecnica"), footer: footer())
 #let history = (
   (
-    "2026/04/21",
+    "2026/04/22",
     "0.19.0",
     "Revisione Introduzione, Introduzione a Architettura di Deployment, Introduzione a Architettura Logica",
-    members.suar
+    members.suar,
+    members.antonio
   ),
   (
     "2026/04/22",
@@ -172,31 +173,31 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 = Introduzione
 
 == Scopo del Prodotto
-Il presente documento descrive la #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#specifica-tecnica")[#def("Specifica Tecnica")] relativa al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def("Code Guardian")], commissionato dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def("Var Group")] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def("Skarab Group")] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
+Il presente documento descrive la #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#specifica-tecnica")[#def("Specifica Tecnica")] relativa al #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#progetto")[#def[progetto]] #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def("Code Guardian")], commissionato dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def("Var Group")] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def("Skarab Group")] nell’ambito del corso di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#ingegneria-del-software")[#def("Ingegneria del Software")] presso l’Università degli Studi di Padova.
 
-Il progetto ha come obiettivo la realizzazione di un sistema per l'automazione dei processi di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] delle vulnerabilità del software. L'architettura si basa sul paradigma degli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] software intelligenti, operanti in modo asincrono su repository di codice sorgente. 
+Il progetto ha come obiettivo la realizzazione di un sistema per l'automazione dei processi di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] delle vulnerabilità del software. L'architettura si basa sul paradigma degli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] software intelligenti, operanti in modo asincrono su #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#repository")[#def[repository]] di codice sorgente. 
 
-La piattaforma supporta attività di analisi statica del codice e individuazione delle principali criticità di sicurezza, fornendo suggerimenti di correzione automatizzati. Tale meccanismo è governato da modelli di linguaggio di grandi dimensioni (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]), integrati nel workflow per formulare e validare le modifiche senza compromettere l'integrità logica del software analizzato. La conformità del sistema è strettamente vincolata ai requisiti concordati e formalizzati nel documento di Analisi dei Requisiti.
+La piattaforma supporta attività di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[analisi statica]] del codice e individuazione delle principali criticità di sicurezza, fornendo suggerimenti di correzione automatizzati. Tale meccanismo è governato da modelli di linguaggio di grandi dimensioni (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]), integrati nel workflow per formulare e validare le modifiche senza compromettere l'integrità logica del software analizzato. La conformità del sistema è strettamente vincolata ai requisiti concordati e formalizzati nel documento di #link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/AdR.pdf")[*Analisi dei Requisiti*].
 
 === Perimetro e Vincoli Operativi
-Lo sviluppo del Minimum Viable Product (MVP) di Code Guardian è soggetto a specifici vincoli operativi per garantire la compatibilità dell'interfaccia web sui principali ambienti operativi e di navigazione. Nello specifico, l'applicativo deve supportare i seguenti sistemi:
+Lo sviluppo del #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#minimum-viable-product")[#def[Minimum Viable Product]] (MVP) di Code Guardian è soggetto a specifici vincoli operativi per garantire la compatibilità dell'interfaccia web sui principali ambienti operativi e di navigazione. Nello specifico, l'applicativo deve supportare i seguenti sistemi:
 - *Sistemi Operativi:* Windows 10/11, macOS 14+, distribuzioni Linux (Ubuntu 22.04+);
 - *Browser Web:* Google Chrome 120+, Mozilla Firefox 120+, Apple Safari 17+.
 
 == Finalità del Documento
-Il presente documento traccia il passaggio dalla fase di analisi dei requisiti alla progettazione architetturale e di dettaglio, definendo le scelte implementative necessarie alla realizzazione di Code Guardian. Costituisce il riferimento tecnico primario per il team di sviluppo e per gli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#stakeholder")[#def[stakeholder]], perseguendo i seguenti obiettivi:
+Il presente documento traccia il passaggio dalla fase di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-dei-requisiti")[#def[analisi dei requisiti]] alla progettazione architetturale e di dettaglio, definendo le scelte implementative necessarie alla realizzazione di Code Guardian. Costituisce il riferimento tecnico primario per il team di sviluppo e per gli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#stakeholder")[#def[stakeholder]], perseguendo i seguenti obiettivi:
 
-- definire l'#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#architettura-logica")[#def[architettura logica]] del sistema, descrivendo la scomposizione in layer basata sul patterFn #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#architettura-esagonale")[#def[esagonale]] per garantire un elevato disaccoppiamento tra il dominio applicativo e le infrastrutture esterne;
+- definire l'#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#architettura-logica")[#def[architettura logica]] del sistema, descrivendo la scomposizione in layer basata sul pattern #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#architettura-esagonale")[#def[esagonale]] per garantire un elevato disaccoppiamento tra il dominio applicativo e le infrastrutture esterne;
 - illustrare l'#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#architettura-di-deployment")[#def[architettura di deployment]], specificando i nodi di calcolo, la topologia di rete e le strategie di containerizzazione necessarie all'erogazione del servizio;
 - formalizzare i #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#design-pattern")[#def[design pattern]] adottati (creazionali, strutturali e comportamentali), motivandone l'impiego per assicurare manutenibilità, modularità e testabilità del codice;
 - definire le interfacce e i contratti di comunicazione, garantendo l'estensibilità del sistema verso l'integrazione di nuovi provider LLM o l'analisi di ulteriori linguaggi di programmazione;
-- fornire una rappresentazione grafica mediante diagrammi UML, facilitando la comprensione delle dipendenze e del flusso dei dati;
-- garantire la tracciabilità bidirezionale, dimostrando che ogni specifica individuata nell'Analisi dei Requisiti trovi riscontro in un'adeguata componente tecnica.
+- fornire una rappresentazione grafica mediante diagrammi #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#unified-modeling-language")[#def[UML]], facilitando la comprensione delle dipendenze e del flusso dei dati;
+- garantire la tracciabilità bidirezionale, dimostrando che ogni specifica individuata nell'#link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/AdR.pdf")[*Analisi dei Requisiti*] trovi riscontro in un'adeguata componente tecnica.
 
 == Destinatari del Documento
 I principali destinatari di questo documento sono:
-- i *Progettisti* e i *Programmatori* del gruppo Skarab Group, che lo utilizzeranno come linea guida prescrittiva per l'implementazione e l'integrazione del software;
-- i *Verificatori* del gruppo Skarab Group, per comprendere le dipendenze architetturali e pianificare adeguate strategie di test (unitari e di integrazione);
+- i *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#progettisti")[#def[Progettisti]]* e i *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#programmatori")[#def[Programmatori]]* del gruppo Skarab Group, che lo utilizzeranno come linea guida prescrittiva per l'implementazione e l'integrazione del software;
+- i *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#verificatori")[#def[Verificatori]]* del gruppo Skarab Group, per comprendere le dipendenze architetturali e pianificare adeguate strategie di test (unitari e di integrazione);
 - l'azienda proponente *Var Group*, per valutare la coerenza delle scelte tecnologiche e progettuali rispetto alle richieste del capitolato d'appalto;
 - i committenti del progetto, *Prof. Tullio Vardanega* e *Prof. Riccardo Cardin*, per la valutazione accademica inerente alla correttezza formale e architetturale del sistema progettato.
 
@@ -206,7 +207,7 @@ Il documento è organizzato nei seguenti capitoli principali:
 - *2. Tecnologie Adottate:* specifica i linguaggi di programmazione, i framework e gli strumenti di supporto scelti per la realizzazione dei diversi layer applicativi.
 - *3. Architettura di Deployment:* illustra la distribuzione fisica e logica del sistema, includendo la descrizione dell'architettura esagonale adottata e la mappatura sui nodi di calcolo.
 - *4. Architettura Logica:* approfondisce la progettazione di dettaglio tramite diagrammi delle classi, l'applicazione dei design pattern e la spiegazione funzionale dei singoli componenti del sistema.
-- *5. Mappatura dei Requisiti:* fornisce il tracciamento formale tra i requisiti definiti in fase di analisi e le relative componenti architetturali incaricate di soddisfarli.
+- *5. Mappatura dei Requisiti:* documenta lo stato di soddisfacimento dei requisiti definiti in fase di analisi.
 
 == Glossario
 Al fine di prevenire ambiguità interpretative, è stato redatto un glossario che definisce in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio utilizzati all’interno della documentazione.
@@ -221,35 +222,34 @@ La versione più recente del Glossario è disponibile al seguente link: \
 I seguenti documenti hanno valore vincolante per la redazione della Specifica Tecnica:
 - *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> \
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
-  (ultimo accesso: *21/04/2026*)
+  (ultimo accesso: *22/04/2026*)
 
-- *Analisi dei Requisiti*: insieme dei requisiti e dei casi d'uso coperti nel Minimum Viable Product. <AdR> \
+- *Analisi dei Requisiti*: insieme dei requisiti e dei #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#caso-d-uso")[#def("casi d'uso")] coperti nel Minimum Viable Product. <AdR> \
   #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/AdR.pdf")] \
   (versione: *v2.0.0*)
 
 - *Norme di Progetto*: regole, convenzioni e standard di qualità adottati dal gruppo. <NdP> \
-  #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")] \
+  #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/NdP.pdf")] \
   (versione: *v2.0.0*)
 
 === Riferimenti Informativi
 - *Standard IEEE/ISO/IEC 42010-2022*: International Standard for Software, systems and enterprise -- Architecture description \
   #underline[#link("https://ieeexplore.ieee.org/document/9938446")] \
-  (ultimo accesso: *21/04/2026*)
+  (ultimo accesso: *22/04/2026*)
 
 - *Dispense del Corso di Ingegneria del Software*: \
-  #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T06.pdf")[Progettazione Software]] \ (ultimo accesso: *21/04/2026*) \
-  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Design%20Pattern%20Architetturali%20-%20Dependency%20Injection.pdf")[Dependency Injection]] \ (ultimo accesso: *21/04/2026*) \
-  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Dependency%20Management%20in%20Object-Oriented%20Programming.pdf")[Dependency Management in Object-Oriented Programming]] \ (ultimo accesso: *21/04/2026*) \
-  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2023/Diagrammi%20delle%20Classi.pdf")[Diagrammi delle Classi]] <ddC> \ (ultimo accesso: *21/04/2026*) \
-  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20di%20Attivit%C3%A0.pdf")[Diagrammi delle Attività]] <ddA> \ (ultimo accesso: *21/04/2026*) \
-  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Software%20Architecture%20Patterns.pdf")[Pattern Architetturali]]\ (ultimo accesso: *21/04/2026*)  \
-  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Design%20Pattern%20Architetturali%20-%20Dependency%20Injection.pdf")[Dependency Injection]] \ (ultimo accesso: *21/04/2026*) \
+  #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T06.pdf")[Progettazione Software]] \ (ultimo accesso: *22/04/2026*) \
+  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Design%20Pattern%20Architetturali%20-%20Dependency%20Injection.pdf")[Dependency Injection]] \ (ultimo accesso: *22/04/2026*) \
+  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Dependency%20Management%20in%20Object-Oriented%20Programming.pdf")[Dependency Management in Object-Oriented Programming]] \ (ultimo accesso: *22/04/2026*) \
+  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2023/Diagrammi%20delle%20Classi.pdf")[Diagrammi delle Classi]] <ddC> \ (ultimo accesso: *22/04/2026*) \
+  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20di%20Attivit%C3%A0.pdf")[Diagrammi delle Attività]] <ddA> \ (ultimo accesso: *22/04/2026*) \
+  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Software%20Architecture%20Patterns.pdf")[Pattern Architetturali]]\ (ultimo accesso: *22/04/2026*)  \
   #underline[#link("https://www.math.unipd.it/~rcardin/sweb/2022/L02.pdf")[Model-View Patterns]] \
-  (ultimo accesso: *21/04/2026*) \
-  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Design%20Pattern%20Creazionali.pdf")[Design Pattern Creazionali]] \ (ultimo accesso: *21/04/2026*) \
-  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Design%20Pattern%20Strutturali.pdf")[Design Pattern Strutturali]] \ (ultimo accesso: *21/04/2026*) \
+  (ultimo accesso: *22/04/2026*) \
+  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Design%20Pattern%20Creazionali.pdf")[Design Pattern Creazionali]] \ (ultimo accesso: *22/04/2026*) \
+  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Design%20Pattern%20Strutturali.pdf")[Design Pattern Strutturali]] \ (ultimo accesso: *22/04/2026*) \
   #underline[#link("https://drive.google.com/file/d/1cpi6rORMxFtC91nI6_sPrG1Xn-28z8eI/view?usp=sharing")[Design Pattern Comportamentali]] \
-  (ultimo accesso: *21/04/2026*)
+  (ultimo accesso: *22/04/2026*)
 #pagebreak()
 
 = Tecnologie
@@ -266,11 +266,11 @@ I seguenti documenti hanno valore vincolante per la redazione della Specifica Te
 
   [TypeScript],
   [5.9.3],
-  [TypeScript è il linguaggio principale adottato per lo sviluppo dei microservizi backend e del frontend. La tipizzazione statica forte consente di rilevare errori a tempo di compilazione anziché a runtime, riducendo il rischio di regressioni e rendendo i contratti tra componenti espliciti e verificabili staticamente. Questa caratteristica è particolarmente rilevante in un'architettura a microservizi dove le interfacce tra moduli devono essere chiare e stabili nel tempo. La compatibilità con l'intero ecosistema Node.js garantisce accesso a un vasto insieme di librerie mature e mantenute attivamente.],
+  [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#typescript")[#def[TypeScript]] è il linguaggio principale adottato per lo sviluppo dei microservizi #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#back-end")[#def[backend]] e del #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#front-end")[#def[frontend]]. La tipizzazione statica forte consente di rilevare errori a tempo di compilazione anziché a runtime, riducendo il rischio di regressioni e rendendo i contratti tra componenti espliciti e verificabili staticamente. Questa caratteristica è particolarmente rilevante in un'architettura a microservizi dove le interfacce tra moduli devono essere chiare e stabili nel tempo. La compatibilità con l'intero ecosistema Node.js garantisce accesso a un vasto insieme di librerie mature e mantenute attivamente.],
 
   [Python],
   [3.12.3],
-  [Python è il linguaggio adottato per la componente agentica del sistema, ospitata all'interno del microservizio di analisi. La scelta è motivata dalla maturità e dall'ampiezza del suo ecosistema nel dominio dell'intelligenza artificiale: Python dispone delle librerie più aggiornate per l'integrazione con modelli di linguaggio di grandi dimensioni (LLM) e per la costruzione di sistemi agentici complessi e pipeline di machine learning.],
+  [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#python")[#def[Python]] è il linguaggio adottato per la componente agentica del sistema, ospitata all'interno del microservizio di analisi. La scelta è motivata dalla maturità e dall'ampiezza del suo ecosistema nel dominio dell'intelligenza artificiale: Python dispone delle librerie più aggiornate per l'integrazione con modelli di linguaggio di grandi dimensioni (LLM) e per la costruzione di sistemi agentici complessi e pipeline di machine learning.],
 )
 
 == Framework e Librerie
@@ -285,15 +285,15 @@ I seguenti documenti hanno valore vincolante per la redazione della Specifica Te
 
   [NestJS],
   [11.0.16],
-  [NestJS è il framework adottato per i microservizi TypeScript. La scelta è motivata da molteplici fattori rispetto ad alternative più minimali come Express. NestJS è un framework completo che impone una struttura modulare ben definita. Ogni modulo incapsula un dominio funzionale coeso, favorendo la separazione delle responsabilità. Il supporto nativo alla Dependency Injection, basato su decoratori, consente di dichiarare le dipendenze in modo esplicito, meccanismo che si sposa perfettamente con l'architettura Ports & Adapters adottata: le porte vengono definite come interfacce e gli adapter come implementazioni concrete, iniettate dal container.],
+  [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#nestjs")[#def[NestJS]] è il framework adottato per i microservizi TypeScript. La scelta è motivata da molteplici fattori rispetto ad alternative più minimali come Express. NestJS è un framework completo che impone una struttura modulare ben definita. Ogni modulo incapsula un dominio funzionale coeso, favorendo la separazione delle responsabilità. Il supporto nativo alla Dependency Injection, basato su decoratori, consente di dichiarare le dipendenze in modo esplicito, meccanismo che si sposa perfettamente con l'architettura Ports & Adapters adottata: le porte vengono definite come interfacce e gli adapter come implementazioni concrete, iniettate dal container.],
 
   [AWS Strands],
   [Managed],
-  [AWS Strands è il framework adottato per la definizione e l'orchestrazione degli agenti software. Fornisce le primitive necessarie per integrare i modelli LLM all'interno di flussi agentici strutturati, gestendo il ciclo di vita degli agenti, la comunicazione e la composizione dei tool a loro disposizione per l'analisi e la remediation.],
+  [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#amazon-web-services")[#def[AWS]] Strands è il framework adottato per la definizione e l'orchestrazione degli agenti software. Fornisce le primitive necessarie per integrare i modelli LLM all'interno di flussi agentici strutturati, gestendo il ciclo di vita degli agenti, la comunicazione e la composizione dei tool a loro disposizione per l'analisi e la remediation.],
 
   [React],
   [19.0.0],
-  [Libreria JavaScript per la costruzione di interfacce utente basata su componenti dichiarativi e aggiornamenti reattivi tramite Virtual DOM. Costituisce la base architetturale di tutte le interfacce, viste e comportamenti dinamici dell'applicazione lato client.],
+  [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#react")[#def[React]] è una libreria JavaScript per la costruzione di interfacce utente basata su componenti dichiarativi e aggiornamenti reattivi tramite Virtual DOM. Costituisce la base architetturale di tutte le interfacce, viste e comportamenti dinamici dell'applicazione lato client.],
 
   [Vite],
   [6.0.0],
@@ -301,7 +301,7 @@ I seguenti documenti hanno valore vincolante per la redazione della Specifica Te
 
   [React Router],
   [7.0.0],
-  [Libreria standardizzata per il routing client-side in Single Page Application. Gestisce la navigazione tra viste pubbliche e protette applicando il pattern #emph[nested routes], consentendo cambi di URL e renderizzazione dinamica dei contenuti senza ricaricamento del browser.],
+  [Libreria standardizzata per il routing client-side in Single Page Application. Gestisce la navigazione tra viste pubbliche e protette applicando il pattern #emph[nested routes], consentendo cambi di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#uniform-resource-locator")[#def[URL]] e renderizzazione dinamica dei contenuti senza ricaricamento del browser.],
 )
 
 == Servizi Esterni (Cloud e Infrastruttura)
@@ -316,19 +316,19 @@ I seguenti documenti hanno valore vincolante per la redazione della Specifica Te
 
   [MongoDB Atlas],
   [Managed],
-  [MongoDB Atlas è il sistema di persistenza adottato per il microservizio di analisi. La motivazione principale risiede nella natura eterogenea dei report prodotti: i risultati di audit variano pesantemente per struttura a seconda del tipo di analisi e dei tool coinvolti, rendendo inadeguato uno schema relazionale rigido. Un document store permette di persistere queste entità senza complesse migrazioni di schema. La versione gestita Atlas elimina l'onere amministrativo di provisioning e backup.],
+  [#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#mongodb")[#def[MongoDB]] Atlas è il sistema di persistenza adottato per il microservizio di analisi. La motivazione principale risiede nella natura eterogenea dei report prodotti: i risultati di audit variano pesantemente per struttura a seconda del tipo di analisi e dei tool coinvolti, rendendo inadeguato uno schema relazionale rigido. Un document store permette di persistere queste entità senza complesse migrazioni di schema. La versione gestita Atlas elimina l'onere amministrativo di provisioning e backup.],
 
   [Amazon RDS],
   [Managed],
-  [Amazon RDS è il sistema di persistenza adottato per il microservizio dedicato alla gestione delle credenziali e degli account. A differenza dei risultati eterogenei dell'analisi, le entità di gestione utenti possiedono una struttura relazionale rigorosa, con vincoli di integrità forti. RDS garantisce consistenza transazionale (ACID) e integrità referenziale ottimali. Essendo un servizio completamente gestito, automatizza i backup, le patch e la disponibilità Multi-AZ.],
+  [Amazon RDS è il sistema di persistenza adottato per il microservizio dedicato alla gestione delle credenziali e degli account. A differenza dei risultati eterogenei dell'analisi, le entità di gestione #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#utente")[#def[utenti]] possiedono una struttura relazionale rigorosa, con vincoli di integrità forti. RDS garantisce consistenza transazionale (ACID) e integrità referenziale ottimali. Essendo un servizio completamente gestito, automatizza i backup, le patch e la disponibilità Multi-AZ.],
 
   [Amazon ECS],
   [Managed],
-  [Amazon Elastic Container Service (ECS) è il servizio di orchestrazione dei container adottato per ospitare il microservizio di analisi. Garantisce un elevato livello di flessibilità e controllo nella gestione dei carichi di lavoro dockerizzati. L'adozione di ECS consente un'allocazione granulare delle risorse di calcolo e un'integrazione fluida e sicura con il resto dei servizi infrastrutturali dell'ecosistema AWS, garantendo un'efficiente scalabilità orizzontale in base alla mole di analisi richieste.],
+  [Amazon #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#elastic-container-service")[#def[Elastic Container Service]] (ECS) è il servizio di orchestrazione dei container adottato per ospitare il microservizio di analisi. Garantisce un elevato livello di flessibilità e controllo nella gestione dei carichi di lavoro dockerizzati. L'adozione di ECS consente un'allocazione granulare delle risorse di calcolo e un'integrazione fluida e sicura con il resto dei servizi infrastrutturali dell'ecosistema AWS, garantendo un'efficiente scalabilità orizzontale in base alla mole di analisi richieste.],
 
   [Amazon S3],
   [Managed],
-  [Amazon Simple Storage Service (S3) è utilizzato come storage a oggetti altamente scalabile in molteplici contesti dell'applicativo. Per il motore di analisi, S3 opera come "Data Staging Layer" sicuro per ospitare il codice sorgente scaricato prima della fase di ispezione, garantendo così l'immutabilità del dataset in elaborazione e disaccoppiando l'acquisizione logica dal calcolo. Inoltre, S3 è utilizzato come origin storage per servire gli asset e le build statiche del frontend applicativo web.],
+  [Amazon #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#simple-storage-service")[#def[Simple Storage Service]] (S3) è utilizzato come storage a oggetti altamente scalabile in molteplici contesti dell'applicativo. Per il motore di analisi, S3 opera come "Data Staging Layer" sicuro per ospitare il codice sorgente scaricato prima della fase di ispezione, garantendo così l'immutabilità del dataset in elaborazione e disaccoppiando l'acquisizione logica dal calcolo. Inoltre, S3 è utilizzato come origin storage per servire gli asset e le build statiche del frontend applicativo web.],
 
   [Amazon CloudFront],
   [Managed],
@@ -485,7 +485,7 @@ Il sistema Code Guardian è stato progettato per operare interamente in ambiente
 === Adozione del Paradigma a Microservizi
 La scomposizione del backend nelle due unità computazionali indipendenti (Microservizio Account e Microservizio Analysis) deriva da una rigorosa valutazione dei requisiti non funzionali e delle criticità intrinseche al dominio applicativo. Questa consapevolezza si riflette in molteplici vantaggi sistemici:
 - *Scalabilità Asimmetrica:* Il dominio della gestione utenti (Account) è caratterizzato da un traffico leggero, costante e prevedibile. Al contrario, il dominio dell'analisi (Analysis) è soggetto a picchi di carico improvvisi, dovuti al download di repository massivi e all'orchestrazione degli agenti. Disaccoppiare i servizi permette ad App Runner di scalare orizzontalmente solo il modulo sotto stress, ottimizzando i costi operativi (FinOps).
-- *Isolamento dei Guasti (Fault Isolation):* La netta separazione degli ambienti di esecuzione su App Runner confina le eventuali criticità al singolo dominio applicativo. Qualora il Microservizio Analysis subisca un'anomalia severa (ad esempio, un #emph[memory leak] causato dall'estrazione di un pacchetto ZIP malformato o un timeout verso le API di GitHub), l'errore non si propaga al resto del sistema. Il Microservizio Account permane integro e pienamente operativo, garantendo che gli utenti possano continuare ad autenticarsi, consultare il proprio profilo e interagire con le funzionalità di storico della piattaforma senza percepire un disservizio generalizzato.
+- *Isolamento dei Guasti (Fault Isolation):* La netta separazione degli ambienti di esecuzione su App Runner confina le eventuali criticità al singolo dominio applicativo. Qualora il Microservizio Analysis subisca un'anomalia grave (ad esempio, un #emph[memory leak] causato dall'estrazione di un pacchetto ZIP malformato o un timeout verso le API di GitHub), l'errore non si propaga al resto del sistema. Il Microservizio Account permane integro e pienamente operativo, garantendo che gli utenti possano continuare ad autenticarsi, consultare il proprio profilo e interagire con le funzionalità di storico della piattaforma senza percepire un disservizio generalizzato.
 - *Allineamento al Domain-Driven Design (DDD):* I due microservizi rappresentano dei #emph[Bounded Context] rigorosi. Ognuno possiede il proprio database esclusivo (RDS per Account, MongoDB per Analysis), prevenendo la creazione di anti-pattern come il database condiviso. Questo isolamento garantisce che i contratti dei dati possano evolvere indipendentemente senza causare regressioni a cascata.
 
 === Topologia dell'Infrastruttura
@@ -499,7 +499,7 @@ Il deployment del frontend si basa su due servizi AWS orchestrati in sinergia:
 
 ==== Microservizi Core (ECR + App Runner)
 Il deployment dei due microservizi in NestJS è gestito attraverso la seguente catena:
-- *Amazon ECR (Elastic Container Registry):* registro privato per le immagini Docker. Le pipeline di Continuous Integration pushano le immagini compilate su ECR, garantendo il versionamento semantico e un repository unico per gli ambienti di test e produzione.
+- *Amazon ECR (Elastic Container Registry):* registro privato per le immagini Docker. Le pipeline di Continuous Integration effettuano il push delle immagini compilate su ECR, garantendo il versionamento semantico e un repository unico per gli ambienti di test e produzione.
 - *AWS App Runner:* servizio di orchestrazione fully-managed scelto per l'esecuzione. I Controller NestJS implementati nel progetto espongono un'architettura puramente RESTful e #emph[stateless]. App Runner astrae la complessità del bilanciamento del carico, istanziando dinamicamente i container necessari. I Controller fungono da *Primary Adapters* (Ports & Adapters): intercettano l'HTTP, validano i payload e traducono la richiesta in comandi puri per il Domain Core.
 
 ==== Infrastruttura Agentica e di Analisi Asincrona (Amazon ECS + S3)
@@ -508,7 +508,7 @@ Il cuore computazionale di Code Guardian è delegato a un'infrastruttura separat
 Gli agenti seguono un modello a container effimeri (#emph[ephemeral tasks]):
 - *Isolamento e Sandbox:* Gli agenti (Sicurezza, Documentazione, Codice) sono racchiusi in immagini Docker Python distinte. Quando l'Analysis Service riceve una richiesta, avvia un Task ECS dedicato su un cluster serverless. Ogni task opera in una sandbox di memoria e rete isolata, prevenendo contaminazioni tra i repository di clienti diversi.
 - *Data Staging Layer (Amazon S3):* Per l'elaborazione, si adotta il pattern "#emph[Claim Check]". Il Microservizio Analysis carica il repository target su un bucket S3 adibito a staging. Il Task ECS riceve solo l'URI: l'agente scarica i sorgenti nel proprio volume effimero, esegue i tool (es. Semgrep, PMD), compatta il contesto con Repomix e interroga i provider LLM tramite AWS Strands.
-- *Persistenza e Ritorno:* Al termine del flusso, l'agente Python *non* grava il database documentale inserendo file massivi. Al contrario, salva i log dettagliati, i report di audit e i diff delle remediation direttamente sotto forma di artefatti strutturati all'interno di *Amazon S3*. Per rilevare la fine delle operazioni non si utilizzano meccanismi di push, bensì una logica di #emph[polling] governata dal Microservizio Analysis: un *Secondary Adapter* dedicato rimane in ascolto interrogando periodicamente lo stato del task infrastrutturale. Una volta rilevato il completamento dell'esecuzione e la disponibilità degli artefatti su S3, l'adapter informa il dominio che provvede ad aggiornare lo stato dell'analisi su MongoDB, mentre il container ECS effimero viene liberato.
+- *Persistenza e Ritorno:* Al termine del flusso, l'agente Python *non* appesantisce il database documentale inserendo file massivi. Al contrario, salva i log dettagliati, i report di audit e i diff delle remediation direttamente sotto forma di artefatti strutturati in *Amazon S3*. Per rilevare la fine delle operazioni non si utilizzano meccanismi di push, bensì una logica di #emph[polling] governata dal Microservizio Analysis: un *Secondary Adapter* dedicato rimane in ascolto interrogando periodicamente lo stato del task infrastrutturale. Una volta rilevato il completamento dell'esecuzione e la disponibilità degli artefatti su S3, l'adapter informa il dominio che provvede ad aggiornare lo stato dell'analisi su MongoDB, mentre il container ECS effimero viene liberato.
 
 ==== Configurazioni Infrastrutturali Esterne (VPC e IAM)
 Per completezza, è imperativo citare elementi di sicurezza essenziali che, pur non essendo componenti di "codice" o microservizi esplicitamente rappresentati nel ciclo di deployment applicativo, costituiscono l'infrastruttura di base (spesso definita tramite approcci #emph[Infrastructure as Code]):
@@ -536,7 +536,7 @@ Il diagramma architetturale traccia la sequenza operativa end-to-end di un'attiv
 == Architettura Logica
 === Microservizio Analysis
 
-Il Microservizio *Analysis*, sviluppato in TypeScript tramite il framework NestJS, è responsabile della gestione e coordinazione del flusso di analisi all’interno del sistema Code Guardian. Esso incapsula la logica di audit e validazione delle vulnerabilità, fungendo da punto di aggregazione tra input esterni, logica di dominio e servizi infrastrutturali.
+Il Microservizio *Analysis*, sviluppato in TypeScript tramite il framework NestJS, è responsabile della gestione e coordinamento del flusso di analisi all’interno del sistema Code Guardian. Esso incapsula la logica di audit e validazione delle vulnerabilità, fungendo da punto di aggregazione tra input esterni, logica di dominio e servizi infrastrutturali.
 
 Al fine di gestire la complessità derivante dall’integrazione con servizi cloud eterogenei e garantire elevata manutenibilità ed evolvibilità nel tempo, l’architettura logica è stata progettata seguendo il pattern *Ports and Adapters* (Architettura Esagonale).
 
