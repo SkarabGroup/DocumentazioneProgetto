@@ -9,7 +9,7 @@
   (
     "2026/04/20",
     "2.0.0",
-    "verifica e versionamento",
+    "Revisione per PB",
     "",
     members.berengan
   ),

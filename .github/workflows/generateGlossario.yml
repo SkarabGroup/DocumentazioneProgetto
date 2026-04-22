@@ -1,10 +1,6 @@
-name: Generate Glossario HTML + PDF Typst
+name: Generate Glossario HTML
 
 on:
-  push:
-    branches:
-      - develop
-      - main
   pull_request:
     types: [closed]
     branches:
@@ -16,14 +12,14 @@ permissions:
 
 jobs:
   generate:
-    if: github.event_name == 'push' || github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref }}
+          ref: ${{ github.event.pull_request.base.ref }}
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -34,37 +30,22 @@ jobs:
         run: |
           pip install pyyaml
 
-      - name: Install Typst
-        run: |
-          curl -L https://github.com/typst/typst/releases/latest/download/typst-x86_64-unknown-linux-musl.tar.xz -o typst.tar.xz
-          tar -xf typst.tar.xz
-          sudo mv typst*/typst /usr/local/bin/
-
       - name: Generate HTML from glossario
         run: |
           python Glossario/glossario.py
 
-      - name: Compile Typst files to PDF
-        run: |
-          for file in PB/*.typ; do
-            if [ -f "$file" ]; then
-              output="${file%.typ}.pdf"
-              typst compile --root . "$file" "$output"
-              echo "Compilato $file -> $output"
-            fi
-          done
-
-      - name: Auto commit generated files
+      - name: Auto commit glossario.html
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           
+          # Aggiungi il file
           git add Glossario/glossario.html
-          git add PB/*.pdf
           
+          # Controlla se ci sono modifiche prima di committare (per evitare errori)
           if git diff --staged --quiet; then
             echo "Nessuna modifica da committare"
           else
-            git commit -m "Aggiornamento automatico HTML + PDF [skip ci]"
+            git commit -m "Aggiornamento automatico [skip ci]"
             git push
           fi
