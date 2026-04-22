@@ -1,37 +1,71 @@
 @startuml MongoDBAdapter
 skinparam componentStyle uml2.5
 skinparam linetype ortho
-skinparam nodesep 30
-skinparam ranksep 30
+left to right direction 
+skinparam nodesep 10 
+skinparam ranksep 100
 skinparam ClassAttributeIconSize 0
 hide circles
+hide interface methods
 
-interface IGitCredentialReadPort {
-    + authorize(model: GetGitCredentialRequest): Promise<GetGitCredentialResponse>
-}
-interface IGitCredentialSavePort {
-    + save(request: PostGitCredentialRequest): Promise<PostGitCredentialResponse>
-}
-interface IGitCredentialDeletePort {
-    + deletePAT(request: DeleteGitCredentialRequest): Promise<DeleteGitCredentialResponse>
-}
-interface IGitCredentialUpdatePort {
-    + updatePAT(request: UpdateGitCredentialPatRequest): Promise<UpdateGitCredentialPatResponse>
-}
+interface IGitCredentialReadPort
+interface IGitCredentialSavePort
+interface IGitCredentialDeletePort
+interface IGitCredentialUpdatePort
+interface IGitHubAnalysisSavePort
+interface ICodeReportSavePort
+interface IDocsReportSavePort
+interface ISecurityReportSavePort
+interface IUpdateAnalysisPort
+interface IGetAnalysisFromIdPort
+interface IGetAllAnalysesForUserPort
+interface ICollectionAdderPort
+interface IGetAllRepositoryCollectionsPort
+interface IGetRepositoryCollectionPort
+interface ICollectionDuplicateCheckerPort
+interface IDeleteRepositoryCollectionPort
 
 class MongoDBAdapter {
-    - readonly model: Model<GitCredential>
+    - credentialModel: Model<GitCredentialDocument>
+    - analysisModel: Model<GitHubAnalysisDocument>
+    - docsReportModel: Model<DocumentationReportDocument>
+    - codeReportModel: Model<CodeReportDocument>
+    - securityReportModel: Model<SecurityReportDocument>
+    - collectionModel: Model<GitHubCollectionDocument>
     ---
-    + MongoDBAdapter(model)
+    + MongoDBAdapter(...)
     + authorize(model: GetGitCredentialRequest): Promise<GetGitCredentialResponse>
-    + save(request: PostGitCredentialRequest): Promise<PostGitCredentialResponse>
+    + save(model: PostGitCredentialRequest): Promise<PostGitCredentialResponse>
     + deletePAT(request: DeleteGitCredentialRequest): Promise<DeleteGitCredentialResponse>
     + updatePAT(request: UpdateGitCredentialPatRequest): Promise<UpdateGitCredentialPatResponse>
+    + saveAnalysis(request: SaveGitHubAnalysisRequest): Promise<SaveGitHubAnalysisResponse>
+    + saveCodeReport(model: SaveCodeReportRequest): Promise<SaveCodeReportResponse>
+    + saveDocsReport(model: SaveDocsReportRequest): Promise<SaveDocsReportResponse>
+    + saveSecurityReport(model: SaveSecurityReportRequest): Promise<SaveSecurityReportResponse>
+    + addReportsToAnalysis(model: AddReportsToAnalysisRequest): Promise<AddReportsToAnalysisResult>
+    + getAnalysisFromId(analysisId: AnalysisId): Promise<GitHubAnalysisDetailedResult | null>
+    + getAllAnalysesForUser(id: UserId): Promise<GetAllAnalysesForUserResponse>
+    + checkDuplicate(model: CheckCollectionDuplicateRequest): Promise<CheckCollectionDuplicateResponse>
+    + addCollection(model: AddRepositoryCollectionRequest): Promise<AddRepositoryCollectionResponse>
+    + getRepositoryCollection(model: GetRepositoryCollectionRequest): Promise<GetRepositoryCollectionResponse>
+    + getAllCollections(request: GetAllRepositoryCollectionsRequest): Promise<GetAllRepositoryCollectionsResponse>
+    + deleteCollection(model: DeleteRepositoryCollectionRequest): Promise<DeleteRepositoryCollectionResult>
 }
 
 MongoDBAdapter ..|> IGitCredentialReadPort
 MongoDBAdapter ..|> IGitCredentialSavePort
 MongoDBAdapter ..|> IGitCredentialDeletePort
 MongoDBAdapter ..|> IGitCredentialUpdatePort
-MongoDBAdapter --right-> GitCredential
+MongoDBAdapter ..|> IGitHubAnalysisSavePort
+MongoDBAdapter ..|> ICodeReportSavePort
+MongoDBAdapter ..|> IDocsReportSavePort
+MongoDBAdapter ..|> ISecurityReportSavePort
+MongoDBAdapter ..|> IUpdateAnalysisPort
+MongoDBAdapter ..|> IGetAnalysisFromIdPort
+MongoDBAdapter ..|> IGetAllAnalysesForUserPort
+MongoDBAdapter ..|> ICollectionAdderPort
+MongoDBAdapter ..|> IGetAllRepositoryCollectionsPort
+MongoDBAdapter ..|> IGetRepositoryCollectionPort
+MongoDBAdapter ..|> ICollectionDuplicateCheckerPort
+MongoDBAdapter ..|> IDeleteRepositoryCollectionPort
 @enduml

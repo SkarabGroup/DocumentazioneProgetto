@@ -1,0 +1,18 @@
+@startuml GitHubCollection
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class GitHubCollection <<Mongoose Schema>> {
+    - url: string
+    - name: string
+    - userId: string
+    - description: string
+    - analyses: ObjectId[]
+    - createdAt: Date
+    - updatedAt: Date
+}
+@enduml

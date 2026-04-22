@@ -10,6 +10,9 @@ interface AddRepositoryCollectionUseCase {
     + execute(command: AddRepositoryCollectionCommand): Promise<AddRepositoryCollectionResult>
 }
 
+interface ICollectionExistenceChecker
+interface ICollectionAdderPort
+
 class AddRepositoryCollectionService {
     - duplicateChecker: ICollectionExistenceChecker
     - collectionAdder: ICollectionAdderPort
@@ -18,7 +21,26 @@ class AddRepositoryCollectionService {
     + execute(command: AddRepositoryCollectionCommand): Promise<AddRepositoryCollectionResult>
 }
 
+class AddRepositoryCollectionCommand
+class AddRepositoryCollectionResult
+class AddRepositoryCollectionRequest
+class AddRepositoryCollectionResponse
+class UserId
+class RepoURL
+
 AddRepositoryCollectionService ..|> AddRepositoryCollectionUseCase
-AddRepositoryCollectionService --right-> ICollectionExistenceChecker
-AddRepositoryCollectionService --left-> ICollectionAdderPort
+AddRepositoryCollectionService --> ICollectionExistenceChecker : inject
+AddRepositoryCollectionService --> ICollectionAdderPort : inject
+
+AddRepositoryCollectionService ..> AddRepositoryCollectionCommand : execute()
+AddRepositoryCollectionService ..> AddRepositoryCollectionResult : returns
+AddRepositoryCollectionService ..> AddRepositoryCollectionRequest : creates
+AddRepositoryCollectionService ..> AddRepositoryCollectionResponse : receives
+AddRepositoryCollectionService ..> UserId : creates
+AddRepositoryCollectionService ..> RepoURL : creates
+
+ICollectionExistenceChecker --down-> UserId
+ICollectionExistenceChecker --down-> RepoURL
+ICollectionAdderPort --down-> AddRepositoryCollectionRequest
+ICollectionAdderPort --down-> AddRepositoryCollectionResponse
 @enduml

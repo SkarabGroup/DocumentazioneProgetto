@@ -1,24 +1,38 @@
 #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
-#let versione = "v1.6.0"
+#let versione = "v2.0.0"
 
 #titlePage("Piano di Progetto", versione)
 #set page(numbering: "1", header: header("Piano di Progetto"), footer: footer())
 #set heading(numbering: "1.1.1")
 #let history = (
   (
+    "2026/04/20",
+    "2.0.0",
+    "verifica e versionamento",
+    "",
+    members.berengan
+  ),
+  (
+    "2026/04/18",
+    "1.7.0",
+    "Fix generali e inizio aggiunta sprint 10",
+    members.kevin,
+    members.berengan,
+  ),
+  (
     "2026/04/11",
     "1.6.0",
     "Retrospettiva Sprint 9",
     members.andrea,
-    "",
+    members.kevin,
   ),
   (
     "2026/04/05",
     "1.5.0",
     "Retrospettiva Sprint 8 e aggiunto Sprint 9",
     members.andrea,
-    "",
+    members.kevin,
   ),
   (
     "2026/03/31",
@@ -44,7 +58,7 @@
   (
     "2026/03/08",
     "1.1.0",
-    "Aggiunta tabella attvità e modifica alle ore preventivsate di sprint 5",
+    "Aggiunta tabella attvità e modifica alle ore preventivate di sprint 5",
     members.berengan,
     members.andrea
   ),
@@ -521,66 +535,30 @@ Questa categoria raggruppa le criticità legate alla pianificazione temporale, a
   "Basso", // I=1 -> R=2 (Basso)
 )
 
-=== RCO6: Ritardi o incomprensioni nella comunicazione con la proponente
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr),
-    inset: 10pt,
-    table.header(
-      [*Tipologia Dato*],
-      [*Valore*],
-    ),
+=== RCO6: Ritardi o incomprensioni nella comunicazione con la proponente <RCO6>
 
-    [*Codice*],
-    [RCO3],
-    [*Nome*], 
-    [Ritardi o incomprensioni nella comunicazione con la proponente],
-    [*Descrizione*], 
-    [Possibili ritardi nelle risposte da parte di #def[Var Group] o interpretazioni errate dei feedback forniti durante le sessioni di mentoring. Questo potrebbe portare a sviluppare funzionalità non in linea con le aspettative della proponente.],
-    [*Mitigazione*], 
-    [Programmazione di incontri periodici fissi e redazione di verbali (verbali esterni) dopo ogni incontro per formalizzare quanto deciso. Uso di canali di comunicazione diretti (#def[Slack]) per chiarimenti rapidi. In caso di dubbi sull'interpretazione dei feedback, il gruppo si impegnerà a richiedere chiarimenti tempestivi alla proponente per evitare incomprensioni. Nel caso in cui la proponente non risponda entro tempi ragionevoli il gruppo contattera il Prof. Vardanega per consigli su come procedere.],
-    [*Probabilità di avvenimento*],
-    [Media],
-    [*Pericolosità delle ripercussioni*],
-    [Media],
-  ),
-  caption: [Informazioni sul rischio RCO3],
+#schedaRischio(
+  "RC06",
+  "Ritardi o incomprensioni nella comunicazione con la proponente",
+  [Possibili ritardi nelle risposte da parte di #def[Var Group] o interpretazioni errate dei feedback forniti durante le sessioni di mentoring. Questo potrebbe portare a sviluppare funzionalità non in linea con le aspettative della proponente.],
+  [Azienda con priorità variabili e canali di comunicazione non strutturati, che possono generare ritardi o fraintendimenti. La mancanza di un processo formale per la gestione dei feedback aumenta il rischio di incomprensioni.],
+  [Programmazione di incontri periodici fissi e redazione di verbali (verbali esterni) dopo ogni incontro per formalizzare quanto deciso. Uso di canali di comunicazione diretti (#def[Slack]) per chiarimenti rapidi. In caso di dubbi sull'interpretazione dei feedback, il gruppo si impegnerà a richiedere chiarimenti tempestivi alla proponente per evitare incomprensioni. Nel caso in cui la proponente non risponda entro tempi ragionevoli il gruppo contattera il Prof. Vardanega per consigli su come procedere.],
+  [Continui sforzi di allineamento e chiarimenti, ma con rischio residuo di sviluppare funzionalità non in linea con le aspettative. Possibile necessità di rework in caso di feedback tardivi o fraintesi.],  
+  "Media",
+  "Media",
 )
 
-=== RCO7: Disomogeneità nella produzione della documentazione
-#figure(
-  table(
-    fill: (x, y) => if (y == 0) {
-      luma(63.75%)
-    } else if (calc.gcd(y, 2) == 2) {
-      luma(220)
-    },
-    columns: (3fr, 4fr),
-    inset: 10pt,
-    table.header(
-      [*Tipologia Dato*],
-      [*Valore*],
-    ),
+=== RCO7: Disomogeneità nella produzione della documentazione <RCO7>
 
-    [*Codice*],
-    [RCO4],
-    [*Nome*], 
-    [Disomogeneità nella produzione della documentazione],
-    [*Descrizione*], 
-    [Dato che i membri del team hanno stili di scrittura diversi, i documenti (#def[Piano di Progetto], #def[Norme di Progetto], ecc.) potrebbero risultare frammentati, poco coerenti o con terminologie discordanti. Questo potrebbe compromettere la chiarezza e la professionalità della documentazione consegnata.],
-    [*Mitigazione*], 
-    [Definizione rigorosa dei template riguardante l'aspetto visivo, l'impaginazione e la formattazione del testo. Ogni documento deve passare per una fase di verifica incrociata, un membro diverso dal redattore controlla il lavoro, prima di essere considerato definitivo. Inoltre, viene stabilito un glossario condiviso per uniformare la terminologia tecnica utilizzata nei documenti.],
-    [*Probabilità di avvenimento*],
-    [Media],
-    [*Pericolosità delle ripercussioni*],
-    [Medio-Bassa],
-  ),
-  caption: [Informazioni sul rischio RCO4],
+#schedaRischio(
+  "RC07",
+  "Disomogeneità nella produzione della documentazione",
+  [Dato che i membri del team hanno stili di scrittura diversi, i documenti (#def[Piano di Progetto], #def[Norme di Progetto], ecc.) potrebbero risultare frammentati, poco coerenti o con terminologie discordanti. Questo potrebbe compromettere la chiarezza e la professionalità della documentazione consegnata.],
+  [Allinementi mancati tra componenti su stili, formati e terminologia, uniti alla mancanza di un processo di revisione sistematico, aumentano il rischio di incoerenze. La redazione parallela senza coordinamento favorisce la frammentazione.],
+  [Definizione rigorosa dei template riguardante l'aspetto visivo, l'impaginazione e la formattazione del testo. Ogni documento deve passare per una fase di verifica incrociata, un membro diverso dal redattore controlla il lavoro, prima di essere considerato definitivo. Inoltre, viene stabilito un glossario condiviso per uniformare la terminologia tecnica utilizzata nei documenti.],
+  [Continui sforzi di allineamento e revisione, ma con rischio residuo di incoerenze stilistiche o terminologiche. Possibile necessità di interventi correttivi in fase di revisione finale per armonizzare i documenti.],
+  "Media",
+  "Medio-Basso",
 )
 
 
@@ -676,6 +654,7 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
       - Costi: *Sprint 2*
       - Sprint: *Sprint 3-4*
       - Revisione: *Sprint 4*
+      - Aggiornamento sull'andamento: *trasversale*
     ],
     [Concluso],
 
@@ -692,6 +671,7 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
       - Test: *Sprint 1-2-4*
       - Cruscotto: *Sprint 3-4*
       - Revisione: *Sprint 4*
+      - Aggiornamento grafici di andamento: *trasversale*
     ],
     [Concluso],
 
@@ -708,6 +688,7 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
       - Processi: *Sprint 1-2*
       - Standard: *Sprint 2*
       - Revisione: *Sprint 3-4*
+      - Aggiornamento processi: *trasversale*
     ],
     [Concluso],
 
@@ -716,7 +697,7 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
     [Redazione incrementale dei termini tecnici.
       Responsabilità diffusa tra tutti i membri per garantire un vocabolario controllato (#link(<RCO5>)[#underline[RCO5]]).],
     [Trasversale],
-    [In corso],
+    [Concluso],
 
     // Proof of Concept - ANTICIPATO
     [*Sviluppo PoC*],
@@ -743,7 +724,7 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
       - Monitoraggio task su Jira.
     ],
     [Trasversale],
-    [In corso],
+    [Concluso],
 
     // Presentazione
     [*Preparazione RTB*],
@@ -755,7 +736,7 @@ La tabella seguente dettaglia il carico di lavoro pianificato.
       - Slide: *Sprint 3*
       - Esposizione: *Sprint 4*
     ],
-    [In corso],
+    [Concluso],
   ),
   caption: [Dettaglio attività pianificate per la fase RTB],
 )
@@ -787,6 +768,32 @@ Sviluppo funzionalità avanzate e UI finale.
 Fase dedicata alla Quality Assurance e alla consegna.
 - *Obiettivo:* Conformità totale ai requisiti e stabilità.
 - *Attività:* System Test intensivi, User Acceptance Test (UAT) con il proponente, Manualistica finale e chiusura metriche di qualità.
+
+
+=== Calendario degli Sprint (Fase PB)
+La fase è suddivisa in 6 iterazioni (*Sprint*). Le date sono state definite tenendo conto dell'assenza di eventi che avrebbero potuto interferire con lo sviluppo.
+
+#figure(
+  table(
+    columns: (auto, 1fr, 1fr),
+    inset: 8pt,
+    align: (col, row) => if col == 0 { center + horizon } else { left + horizon },
+    fill: (col, row) => if row == 0 { luma(64%) } else { white },
+    stroke: 0.5pt + luma(200),
+    table.header(
+      text(fill: white, weight: "bold")[Iterazione],
+      text(fill: white, weight: "bold")[Data Inizio],
+      text(fill: white, weight: "bold")[Data Fine],
+    ),
+    [*Sprint 5*], [22/02/2026], [07/03/2026],
+    [*Sprint 6*], [07/03/2026], [21/03/2026],
+    [*Sprint 7*], [21/03/2026], [28/03/2026],
+    [*Sprint 8*], [28/03/2026], [04/04/2026],
+    [*Sprint 9*], [04/04/2026], [11/04/2026],
+    [*Sprint 10*], [11/04/2026], [21/04/2026],
+  ),
+  caption: [Calendario degli Sprint pianificati per la fase PB],
+)
 
 #pagebreak()
 = Preventivo e Allocazione delle Risorse
@@ -1634,7 +1641,7 @@ Riguardo ai costi, il preventivo di 4690.00€ è stato sforato di poco (60,00�
 
 
 Dal prossimo Sprint inizieranno le attività in vista della PB.
-
+#pagebreak()
 ==== Riassunto utilizzo orario RTB
 #figure(
   table(
@@ -1666,7 +1673,35 @@ Dal prossimo Sprint inizieranno le attività in vista della PB.
   caption: [Tabella riassuntiva utilizzo ore per RTB],
 )
 
+=== Consumo orario per membro RTB
+#sprint_table(
+  (
+  ([Kevin],      7,  8,  8,  0,  10,5,  38),
+ ([Riccardo B.],0,    5,  6,  0,  10,  5, 26),
+ ([Riccardo M.],0,    5,  4,  0,  6,  5,  20),
+ ([Antonio],    7,  6,  15,0,  0,     3, 31),
+ ([Andrea],     0,    5,  11,0,  0,     5, 21),
+ ([Alberto],    6,  13,12,0,  11, 8,  50),
+ ([Alice],      6,  9,  13,0,  0,     9, 37,)
+ ),
+ [Consumo orario per membro RTB],
+)
 #pagebreak()
+=== Ore rimanenti per PB
+La seguente tabella riporta le ore rimanenti di ogni componente per ruolo per completare la PB.
+#sprint_table(
+  (
+  ([Kevin],       0,  5,  4,  17, 10, 16, 52),
+  ([Riccardo B.], 7,  8,  6,  17, 10, 16, 64),
+  ([Riccardo M.], 7,  8,  8,  17, 14, 16, 70),
+  ([Antonio],     0,  7,  -3, 17, 20, 18, 59),
+  ([Andrea],      7,  8,  1,  17, 20, 16, 69),
+  ([Alberto],     1,  0,  0,  17, 9,  13, 40),
+  ([Alice],       1,  4,  -1, 17, 20, 12, 53), 
+
+  ),
+  [Ore rimanenti per PB per membro],
+)   
 
 === Sprint 5
 *Periodo:* dal 22/02/2026 al 07/03/2026
@@ -1685,17 +1720,18 @@ Le attività svolte nel periodo di riferimento sono state incentrate sulla proge
 - *Specifica Tecnica (ST):*
   - prima stesura del documento comprensiva di introduzione e tecnologie utilizzate
   - Scrittura di alcuni lati dell'architettura a microservizi
+#pagebreak()
 
 ==== Prospetto Consumo Tempo (Preventivo)
 La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
 #sprint_table(
   (
     ([Basso Kevin], 0, 0, 0, 8, 0, 0),
-    ([Berengan Riccardo], 7, 0, 1, 7, 0, 0),
-    ([Martinello Riccardo], 0, 0, 0, 6, 0, 2),
-    ([Sandu Antonio], 0, 0, 0, 8, 0, 0),
-    ([Sgreva Andrea], 0, 0, 2, 6, 0, 0),
-    ([Suar Alberto], 0, 0, 0, 8, 0, 0),
+    ([Berengan Riccardo], 7, 0, 1, 7, 0, 2),
+    ([Martinello Riccardo], 0, 0, 0, 10, 0, 4),
+    ([Sandu Antonio], 0, 0, 0, 9, 0, 3),
+    ([Sgreva Andrea], 0, 0, 3, 7, 0, 2),
+    ([Suar Alberto], 0, 0, 0, 7, 0, 0),
     ([Zago Alice], 0, 0, 1, 6, 0, 0),
   ),
   [Prospetto orario preventivato per lo Sprint 5],
@@ -1704,17 +1740,27 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 ==== Prospetto attività
 #activity_table(
   (
-    ("Modifica del documento AdR in conformità alle correzioni proposte", "Analista", "2:00", "2:00", "Completata"),
-    ("Verifica delle modifiche al documento AdR", "Verificatore", "1:00","1:00", "Completata"),
-    ("Modifica della definizione di verificatore nelle NdP", "Analista", "0:30", "1:00", "Completata"),
-    ("Verifica delle modifiche in NdP", "Verificatore", "1:00", "1:00", "Completata"),
-    ("Scrittura del diario di bordo del giorno 2026-03-11", "Analista", "1:00", "1:00", "Completata"),
-    ("Prima stesura del documento ST", "Analista", "1:00", "1:00", "Completata"),
-    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa alla persistenza", "Progettista", "2:00", "2:00", "Completata"),
-    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa al backend", "Progettista", "2:00", "2:00", "Completata"),    
-    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa agli agenti LLM", "Progettista", "2:00", "2:00", "Completata"),
-    ("Progettazione di livello 3 del C4 model per il microservizio di Analisi", "Progettista", "Progettista", "2:00", "2:00", "Completata"),
-    ("Progettazione di livello 3 del C4 model per il microservizio di Gestione degli Account", "Progettista","2:00", "2:00", "Completata"),
+    ("Modifica del documento AdR in conformità alle correzioni proposte", "Analista", "2:00", "3:00", "Completata"),
+    ("Stesura introduzione e primi capitoli del documento ST", "Analista", "3:00", "1:00", "Completata"),
+
+    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa alla persistenza", "Progettista", "6:00", "0:00", "Rimandata causa ritardo nella palestra"),
+    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa al backend", "Progettista", "12:00", "0:00", "Rimandata causa ritardo nella palestra"),    
+    ("Scrittura in ST dell'architettura a microsevizi, sezione relativa agli agenti LLM", "Progettista", "10:00", "0:00", "Rimandata causa ritardo nella palestra"),
+    ("Progettazione di livello 3 del C4 model per il microservizio di Analisi", "Progettista", "12:00", "0:00", "Rimandata causa ritardo nella palestra"),
+    ("Progettazione di livello 3 del C4 model per il microservizio di Gestione degli Account", "Progettista","8:00", "0:00", "Rimandata causa ritardo nella palestra"),
+    ("Progettazione di livello 3 del C4 model per il frontend", "Progettista","6:00", "0:00", "Rimandata causa ritardo nella palestra"),
+    
+    ("Stesura verbale riunione prima settimana", "Responsabile","1:00","1:00","Completata"),
+    ("Stesura verbale riunione seconda settimana", "Responsabile","1:00","1:00","Completata"),  
+    ("Gestione ordine del giorno e coordinamento riunioni", "Responsabile","2:30","2:00","Completata"),
+    ("Aggiunta task Jira", "Responsabile","0:30","1:00","Completata"),
+    ("Aggiunto sprint 5 nel PdP", "Responsabile","2:00","2:00","Completata"),
+
+    ("Verifica verbale riunione interna prima settimana", "Verificatore","0:30","0:15","Completata"),
+    ("Verifica verbale riunione interna seconda settimana", "Verificatore","0:30","0:15","Completata"),
+    ("Verifica ST","Verificatore","8:00","0:00","Rimandata causa ritardo nella palestra"),
+    ("Verifica delle modifiche al documento AdR", "Verificatore", "1:00","0:45", "Completata"),
+    ("Verifica delle modifiche in NdP", "Verificatore", "1:00", "0:45", "Completata"),
   ),
   [Riassunto delle attività svolte durante lo sprint 5]
 )
@@ -1751,48 +1797,43 @@ Il coordinamento interno di questo sprint è migliorato rispetto ai precedenti. 
 - Dato il grande quantitativo di ore dedicate allo studio individuale (palestra) necessarie per la progettazione, le ore preventivate erano molto maggiori delle ore produttive consuntivate. La distribuzione delle task è risultata comunque equilibrata e per il momento sono stati raggiunti gli obiettivi previsti.
 - *Responsabile:* Preventivato 7h, Consuntivo 7h
 - *Amministratore:* Preventivato 0h, Consuntivo 0h
-- *Analista:* Aanalista 4h, Consuntivo 4h
-- *Progettista:* Preventivato 49h, Consuntivo 20h
+- *Analista:* Analista 5h, Consuntivo 4h
+- *Progettista:* Preventivato 54h, Consuntivo 0h
 - *Programmatore:* Preventivato 0h, Consuntivo 0h
-- *Verificatore:* Preventivato 2h, Consuntivo 2h
+- *Verificatore:* Preventivato 11h, Consuntivo 2h
 
 ===== Rischi rilevati
+Durante questo sprint si sono manifestati i seguenti rischi:
+- #link(<RI4>)[#underline[[RI4]]]: la mancata comunicazione efficace su come svolgere alcune attività o il conflitto di idee hanno portato a un importante rallentamento e lavoro aggiuntivo.
+- #link(<RI5>)[#underline[[RI5]]]: è stata riscontrata una disomogeneità del lavoro svolto da parte dei membri durante lo sprint.
 
 ===== Obiettivi per lo Sprint Successivo
 Per lo sprint successivo il team si pone i seguenti obiettvi prioritari:
 - Terminare le attività di progettazione
 - Iniziare le attvità di codifica
 
-===== Aggiornamento preventivo a finire PB
-#figure(
-  table(
-    fill: (col, row) => if row == 0 { luma(64%) } else { white },
-    columns: (1fr, 1fr, 1fr, 1fr),
-    inset: 10pt,
-    align: center + horizon,
-    stroke: 0.5pt + luma(200),
+==== Misure correttive
+Per mitigare i rischi emersi durante lo sprint 5, il team ha deciso di adottare le seguenti misure correttive:
+- Per entrambi i rischi riscontrati, il team ha deciso di implementare un sistema di comunicazione più strutturato, con incontri di allineamento più frequenti e l'utilizzo di strumenti di collaborazione online per garantire che tutti i membri siano sempre aggiornati sulle attività in corso e sui compiti assegnati.
+  - Questo include l'adozione di un nuovo metodo di lavoro per branch di feature singolo e non di branch per documento come durante la fase RTB
 
-    table.header(
-      text(fill: white, weight: "bold")[Ruolo],
-      text(fill: white, weight: "bold")[Ore rimanenti per PB],
-      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
-      text(fill: white, weight: "bold")[Preventivo a finire costi],
-    ),
-
-    [Responsabile], [21], [-],[€ 630,00],
-    [Amministratore], [35], [-], [€ 700,00],
-    [Analista], [17], [-],[€ 425,00],
-    [Progettista], [105],text(fill:green)[-49->€+1225],[€ 2625,00],
-    [Programmatore], [119], [-],[€ 1785,00],
-    [Verificatore], [103],[],[€ 1545,00],
-
-    table.cell(fill: luma(240))[*Totale PB*],
-    table.cell(fill: luma(240))[*400*],
-    table.cell(fill: luma(240))[#text(fill: green)[*-49 -> € +1125*]],
-    table.cell(fill: luma(240))[*€ 7710,00*],
+==== Miglioramento della pianificazione futura
+- Da questo sprint abbiamo potuto notare come mai prima d'ora l'importanza di una pianificazione più dettagliata e realistica, soprattutto per quanto riguarda le attività di progettazione che richiedono un grande investimento di tempo e risorse. Per questo motivo, per i prossimi sprint, il team si impegna a dedicare più tempo alla fase di pianificazione, coinvolgendo tutti i membri del team nella stima delle attività e nella definizione degli obiettivi, in modo da garantire una distribuzione più equilibrata del lavoro e un maggiore rispetto delle scadenze.
+==== Aggiornamento preventivo a finire PB
+#preventivo_a_finire(
+  (
+    //               Resp  Amm  Anal  Prog  Cod  Ver
+    ([Kevin],           0,   5,   4,   17,  10,  16),
+    ([Riccardo B.],     0,   8,   5,   17,  10,  16),
+    ([Riccardo M.],     7,   8,   8,   17,  14,  14),
+    ([Antonio],         0,   7,  -3,   17,  20,  18),
+    ([Andrea],          7,   8,  -1,   17,  20,  16),
+    ([Alberto],         1,   0,   0,   17,   9,  13),
+    ([Alice],           1,   4,  -2,   17,  20,  12),
   ),
-
-  caption: [Aggiornamento preventivo a finire sprint 5],
+  [Aggiornamento preventivo a finire sprint 5],
+  (7,0,5,54,0,11),  // preventivo
+  (7,0,4,0,0,2),  // consuntivo ← nuovo argomento
 )
 #pagebreak()
 
@@ -1810,12 +1851,12 @@ Le attività svolte nel periodo di riferimento si sono concentrate sulla progett
 La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
 #sprint_table(
   (
-    ([Basso Kevin], 0, 0, 0, 8, 0, 0),
-    ([Berengan Riccardo], 0, 0, 0, 6, 0, 0),
-    ([Martinello Riccardo], 2, 0, 0, 4, 0, 0),
-    ([Sandu Antonio], 0, 0, 0, 3, 0, 0),
-    ([Sgreva Andrea], 0, 0, 0, 3, 0, 0),
-    ([Suar Alberto], 0, 0, 0, 8, 0, 0),
+    ([Basso Kevin], 0, 0, 0, 7, 0, 0),
+    ([Berengan Riccardo], 0, 0, 0, 5, 0, 0),
+    ([Martinello Riccardo], 2, 0, 0, 5, 0, 0),
+    ([Sandu Antonio], 0, 0, 0, 4, 0, 0),
+    ([Sgreva Andrea], 0, 0, 0, 4, 0, 0),
+    ([Suar Alberto], 0, 0, 0, 7, 0, 0),
     ([Zago Alice], 0, 0, 0, 6, 0, 0),
   ),
   [Prospetto orario preventivato per lo Sprint 6],
@@ -1824,13 +1865,18 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 ==== Prospetto attività
 #activity_table(
   (
-    ("Completare l'analisi dei tool mancanti e redigerne la documentazione", "Progettista", "10:00", "10:00", "Completata"),
-    ("Studi sull'implementazione e configurazione OAuth", "Progettista", "5:00", "5:00", "Completata"),
-    ("Completamento del componente C3 e relative integrazioni interne", "Progettista", "8:00", "8:00", "Completata"),
-    ("Spacchettamento del repository e definizione persistenza", "Progettista", "6:00", "6:00", "Completata"),
-    ("Definire gateway e porte di ingresso per l'architettura esagonale", "Progettista", "5:00", "5:00", "Completata"),
-    ("Verifica del meccanismo di zipping e del flusso dati", "Progettista", "4:00", "4:00", "Completata"),
+    ("Completare l'analisi dei tool mancanti e redigerne la documentazione", "Progettista", "8:00", "10:00", "Completata"),
+    ("Progettazione dell'implementazione e configurazione OAuth", "Progettista", "5:00", "7:00", "Completata"),
+    ("Completamento del componente C3 e relative integrazioni interne", "Progettista", "7:00", "9:00", "Completata"),
+    ("Progettazione dell'impacchettamento del repository e definizione persistenza", "Progettista", "6:00", "8:00", "Completata"),
+    ("Progettazione dei gateway e delle porte di ingresso per l'architettura esagonale", "Progettista", "5:00", "7:00", "Completata"),
+    ("Progettazione del meccanismo di zipping e del flusso dati", "Progettista", "4:00", "6:00", "Completata"),
+    ("Rifinitura diagrammi C3/C4 e allineamento decisioni architetturali", "Progettista", "3:00", "7:00", "Completata"),
+
     ("Gestione riunioni e allineamento Sprint 6", "Responsabile", "2:00", "2:00", "Completata"),
+    ("Verifica documentazione ST e coerenza requisiti architetturali", "Verificatore", "0:00", "4:00", "Completata"),
+    ("Verifica diagrammi C3/C4 e consistenza delle interfacce", "Verificatore", "0:00", "5:00", "Completata"),
+    ("Review PR e controllo conformità alle convenzioni", "Verificatore", "0:00", "5:00", "Completata"),
   ),
   [Riassunto delle attività svolte durante lo sprint 6]
 )
@@ -1841,11 +1887,11 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
 #sprint_table(
   (
     ([Basso Kevin], 0, 0, 0, 8, 0, 0),
-    ([Berengan Riccardo], 0, 0, 0, 6, 0, 0),
-    ([Martinello Riccardo], 2, 0, 0, 4, 0, 0),
-    ([Sandu Antonio], 0, 0, 0, 3, 0, 0),
-    ([Sgreva Andrea], 0, 0, 0, 3, 0, 0),
-    ([Suar Alberto], 0, 0, 0, 8, 0, 0),
+    ([Berengan Riccardo], 0, 0, 0, 8, 0, 2),
+    ([Martinello Riccardo], 2, 0, 0, 10, 0, 6),
+    ([Sandu Antonio], 0, 0, 0, 8, 0, 3),
+    ([Sgreva Andrea], 0, 0, 0, 8, 0, 3),
+    ([Suar Alberto], 0, 0, 0, 6, 0, 0),
     ([Zago Alice], 0, 0, 0, 6, 0, 0),
   ),
   [Consuntivo orario effettivo per lo Sprint 6],
@@ -1862,6 +1908,8 @@ Si sono presentati dei problemi di coordinamento, e di ritardo nello svolgimento
 - Nonostante i ritardi logistici e i problemi di coordinamento emersi, grazie al tempestivo re-allineamento del gruppo, le ore rendicontate hanno potuto coincidere col monte ore preventivato.
 - *Responsabile:* Preventivato 2h, Consuntivo 2h
 - *Progettista:* Preventivato 38h, Consuntivo 38h
+- *Verificatore:* Preventivato 0h, Consuntivo 12h
+ - Questo é stato un errore di valutazione in quanto il team non pensava di riuscire anche a verificare le modifiche in 1 sola settimana, invece tutte le verifiche necessarie sono state portate a termine entro la fine dello sprint.
 
 ===== Rischi Rilevati
 Nel corso dello Sprint si sono manifestati i seguenti rischi già censiti:
@@ -1872,35 +1920,29 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
 - Chiudere le decisioni progettuali sui pattern in Specifica Tecnica.
 - Iniziare lo sviluppo dei microservizi.
 
-===== Aggiornamento preventivo a finire PB
-#figure(
-  table(
-    fill: (col, row) => if row == 0 { luma(64%) } else { white },
-    columns: (1fr, 1fr, 1fr, 1fr),
-    inset: 10pt,
-    align: center + horizon,
-    stroke: 0.5pt + luma(200),
+==== Misure correttive
+Per mitigare i rischi emersi durante lo sprint 6, il team ha deciso di adottare le seguenti misure correttive:
+- Il team si dividerá ufficialmente in 3 a coprire le 3 aree (frontend e 2 microservizi), in modo da aumentare la responsabilità individuale e migliorare il coordinamento interno, con incontri giornalieri di allineamento intra-team e almeno 2 incontri di allineamento inter-team a settimana, in modo da garantire che tutte le componenti siano sempre aggiornate sulle scelte progettuali e sui progressi fatti.
 
-    table.header(
-      text(fill: white, weight: "bold")[Ruolo],
-      text(fill: white, weight: "bold")[Ore rimanenti per PB],
-      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
-      text(fill: white, weight: "bold")[Preventivo a finire costi],
-    ),
+==== Miglioramento della pianificazione futura
+Questo sprint é stato il primo in cui la pianificazione é stata rispettata, e questo é stato possibile grazie a un miglioramento del coordinamento interno e a una maggiore responsabilizzazione dei membri. Per questo motivo, per i prossimi sprint, il team si impegna a mantenere questo livello di coordinamento e responsabilità, continuando a dedicare tempo alla pianificazione dettagliata delle attività e alla definizione degli obiettivi, in modo da garantire una distribuzione equilibrata del lavoro e un maggiore rispetto delle scadenze.
 
-    [Responsabile], [19], [-], [€ 570,00],
-    [Amministratore], [35], [-], [€ 700,00],
-    [Analista], [17], [-], [€ 425,00],
-    [Progettista], [67], [-], [€ 1675,00],
-    [Programmatore], [119], [-], [€ 1785,00],
-    [Verificatore], [103], [-], [€ 1545,00],
+==== Aggiornamento preventivo a finire PB
 
-    table.cell(fill: luma(240))[*Totale PB*],
-    table.cell(fill: luma(240))[*360*],
-    table.cell(fill: luma(240))[*[-]*],
-    table.cell(fill: luma(240))[*€ 6700,00*],
+#preventivo_a_finire(
+  (
+    //               Resp  Amm  Anal  Prog  Cod  Ver
+    ([Kevin],           0,   5,   4,   9,  10,  16),
+    ([Riccardo B.],     0,   8,   5,   9,  10,  14),
+    ([Riccardo M.],     5,   8,   8,   7,  14,  8),
+    ([Antonio],         0,   7,  -3,   9,  20,  15),
+    ([Andrea],          7,   8,  -1,   9,  20,  13),
+    ([Alberto],         1,   0,   0,   11,   9,  13),
+    ([Alice],           1,   4,  -2,   11,  20,  12),
   ),
-  caption: [Aggiornamento preventivo a finire sprint 6],
+  [Aggiornamento preventivo a finire sprint 6],
+  (2,0,0,38,0,0),  // preventivo
+  (2,0,0,54,0,14),  // consuntivo ← nuovo argomento
 )
 #pagebreak()
 
@@ -1919,13 +1961,13 @@ La seguente tabella riporta la pianificazione oraria per ruolo.
 
 #sprint_table(
   (
-    ([Basso Kevin], 0, 0, 0, 4, 4, 0),
-    ([Berengan Riccardo], 0, 0, 0, 3, 2, 0),
-    ([Martinello Riccardo], 2, 0, 0, 3, 0, 0),
-    ([Sandu Antonio], 0, 0, 0, 3, 0, 0),
-    ([Sgreva Andrea], 0, 0, 0, 3, 0, 0),
-    ([Suar Alberto], 0, 0, 0, 4, 3, 0),
-    ([Zago Alice], 0, 0, 0, 3, 2, 0),
+    ([Basso Kevin], 0, 0, 0, 4, 4, 2),
+    ([Berengan Riccardo], 0, 0, 0, 3, 2, 1),
+    ([Martinello Riccardo], 2, 0, 0, 5, 0, 2),
+    ([Sandu Antonio], 0, 0, 0, 5, 0, 1),
+    ([Sgreva Andrea], 0, 0, 0, 4, 0, 1),
+    ([Suar Alberto], 0, 0, 0, 3, 3, 1),
+    ([Zago Alice], 0, 0, 0, 4, 2, 0),
   ),
   [Prospetto orario preventivato per lo Sprint 7],
 )
@@ -1933,11 +1975,24 @@ La seguente tabella riporta la pianificazione oraria per ruolo.
 ==== Prospetto attività
 #activity_table(
   (
-    ("Progettazione diagrammi concettuali e architettura C3/C4", "Progettista", "11:00", "11:00", "Completata"),
-    ("Stesura capitoli Specifica Tecnica sui microservizi", "Progettista", "9:00", "9:00", "Completata"),
-    ("Rivalutazione e confronto tecnico architetturale per i tool", "Progettista", "3:00", "3:00", "Completata"),
-    ("Avvio sviluppo, setup repository e prime implementazioni del codice", "Programmatore", "11:00", "11:00", "Completata"),
-    ("Coordinamento riunioni e avanzamenti", "Responsabile", "2:00", "2:00", "Completata"),
+    ("Allineamento architetturale domain/entity/factory del microservizio analisi", "Progettista", "6:00", "6:30", "Completata"),
+    ("Definizione model Analysis e flussi del provider", "Progettista", "5:00", "5:00", "Completata"),
+    ("Revisione struttura repository (src-only) e convenzioni build", "Progettista", "3:00", "2:30", "Completata"),
+    ("Aggiornamento diagrammi C3/C4 su Value Object ed Entity", "Progettista", "8:00", "8:00", "Completata"),
+    ("Consolidamento capitoli ST su dominio analisi e tool", "Progettista", "6:00", "6:00", "Completata"),
+
+    ("Implementazione userId/repoURL/personalAccessToken VO con test", "Programmatore", "2:30", "2:30", "Completata"),
+    ("Implementazione commitHash/branchName/analysisId VO con test", "Programmatore", "2:00", "2:00", "Completata"),
+    ("Implementazione encrypted-pat/github-id VO con test", "Programmatore", "1:30", "1:30", "Completata"),
+    ("Implementazione Analysis, GitHubAnalysis, FactoryCommand e Factory", "Programmatore", "2:30", "2:30", "Completata"),
+    ("Implementazione AnalysisProvider e analysis model", "Programmatore", "1:30", "1:30", "Completata"),
+    ("Fix tooling build/test (ESM→CJS uuid, rootDir, path check-test-symmetry)", "Programmatore", "1:00", "1:00", "Completata"),
+
+    ("Coordinamento branch, merge PR e avanzamento sprint", "Responsabile", "2:00", "2:00", "Completata"),
+
+    ("Code review PR principali", "Verificatore", "4:00", "4:30", "Completata"),
+    ("Verifica pipeline CI/CD (GitHub Actions, lint, format, coverage, Docker)", "Verificatore", "2:00", "2:30", "Completata"),
+    ("Verifica verbale interno del 18 marzo e controlli CONTRIBUTING", "Verificatore", "2:00", "2:00", "Completata")
   ),
   [Riassunto delle attività svolte durante lo sprint 7]
 )
@@ -1947,12 +2002,12 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
 
 #sprint_table(
   (
-    ([Basso Kevin], 0, 0, 0, 4, 4, 0),
-    ([Berengan Riccardo], 0, 0, 0, 3, 2, 0),
-    ([Martinello Riccardo], 2, 0, 0, 3, 0, 0),
-    ([Sandu Antonio], 0, 0, 0, 3, 0, 0),
-    ([Sgreva Andrea], 0, 0, 0, 3, 0, 0),
-    ([Suar Alberto], 0, 0, 0, 4, 3, 0),
+    ([Basso Kevin], 0, 0, 0, 4, 4, 2),
+    ([Berengan Riccardo], 0, 0, 0, 3, 2, 2),
+    ([Martinello Riccardo], 2, 0, 0, 6, 0, 3),
+    ([Sandu Antonio], 0, 0, 0, 6, 0, 1),
+    ([Sgreva Andrea], 0, 0, 0, 5, 0, 1),
+    ([Suar Alberto], 0, 0, 0, 1, 3, 0),
     ([Zago Alice], 0, 0, 0, 3, 2, 0),
   ),
   [Consuntivo orario effettivo per lo Sprint 7],
@@ -1968,12 +2023,13 @@ Le decisioni finali sull'architettura, la stesura in ST dei modelli C3/C4 e la r
 ===== Squilibri orari preventivati e reali
 - Le ore preventivate e le ore consuntivate coincidono, in quanto l'esatta definizione e ripartizione dei compiti per l'avvio della programmazione era stata ben pianificata in precedenza.
 - *Responsabile:* Preventivato 2h, Consuntivo 2h
-- *Progettista:* Preventivato 23h, Consuntivo 23h
+- *Progettista:* Preventivato 28h, Consuntivo 28h
 - *Programmatore:* Preventivato 11h, Consuntivo 11h
+- *Verificatore:* Preventivato 8h, Consuntivo 9h
 
 ===== Rischi Rilevati
 Nel corso dello Sprint si è prestata particolare attenzione a evitare i seguenti rischi già censiti:
-- #link(<RT8>)[#underline[[RT8]]]: per evitare disomogeneità o conflitti tra i membri durante i merge del codice si è ribadito il corretto standard procedurale di push e pull per Git.
+- #link(<RT8>)[#underline[[RT8]]]: il team ha riscontrato disomogeneitá tra le implementazioni dei vari membri.
 
 ===== Obiettivi per lo Sprint Successivo
 Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
@@ -1982,39 +2038,30 @@ Per lo Sprint successivo il team si pone i seguenti obiettivi prioritari:
 - Sviluppo del microservizio agenti.
 - Sviluppo del microservizio autenticazione.
 
+==== Misure correttive
+Per mitigare i rischi emersi durante lo sprint 7, il team ha deciso di adottare le seguenti misure correttive:
+- Per evitare i rischi di disomogeneità o conflitti tra i membri durante i merge del codice, il team ha deciso di implementare un sistema di code review più rigoroso, con almeno 1 revisore diverso dal programmatore per ogni PR, e di utilizzare strumenti di integrazione continua (CI) per automatizzare i test e garantire la coerenza del codice prima del merge.
 
-===== Aggiornamento preventivo a finire PB
-#figure(
-  table(
-    fill: (col, row) => if row == 0 { luma(64%) } else { white },
-    columns: (1fr, 1fr, 1fr, 1fr),
-    inset: 10pt,
-    align: center + horizon,
-    stroke: 0.5pt + luma(200),
+==== Miglioramento della pianificazione futura
+- Per i prossimi sprint, il team si impegna a mantenere una pianificazione dettagliata e realistica, coinvolgendo tutti i membri del team nella stima delle attività e nella definizione degli obiettivi, in modo da garantire una distribuzione equilibrata del lavoro e un maggiore rispetto delle scadenze. Inoltre, il team si impegna a monitorare costantemente l'avanzamento delle attività e a essere flessibile nell'adattare la pianificazione in caso di imprevisti o cambiamenti nelle priorità.
 
-    table.header(
-      text(fill: white, weight: "bold")[Ruolo],
-      text(fill: white, weight: "bold")[Ore rimanenti per PB],
-      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
-      text(fill: white, weight: "bold")[Preventivo a finire costi],
-    ),
-
-    [Responsabile], [17], [-],[€ 510,00],
-    [Amministratore], [35], [-], [€ 700,00],
-    [Analista], [17], [-],[€ 425,00],
-    [Progettista], [44],[-],[€ 1100,00],
-    [Programmatore], [108],[-],[€ 1620,00],
-    [Verificatore], [103],[-],[€ 1545,00],
-
-    table.cell(fill: luma(240))[*Totale PB*],
-    table.cell(fill: luma(240))[*324*],
-    table.cell(fill: luma(240))[*[-]*],
-    table.cell(fill: luma(240))[*€ 5900,00*],
+==== Aggiornamento preventivo a finire PB
+#preventivo_a_finire(
+  (
+    //               Resp  Amm  Anal  Prog  Cod  Ver
+    ([Kevin],           0,   5,   4,   5,  6,  14),
+    ([Riccardo B.],     0,   8,   5,   6,  8,  12),
+    ([Riccardo M.],     3,   8,   8,   7,  8,  5),
+    ([Antonio],         0,   7,  -3,   3,  20,  14),
+    ([Andrea],          7,   8,  -1,   4,  20,  12),
+    ([Alberto],         1,   0,   0,   10,   6,  13),
+    ([Alice],           1,   4,  -2,   8,  18,  12),
   ),
-  caption: [Aggiornamento preventivo a finire sprint 7],
+  [Aggiornamento preventivo a finire sprint 7],
+  (2,0,0,28,11,8),  // preventivo
+  (2,0,0,28,11,9),  // consuntivo ← nuovo argomento
 )
 #pagebreak()
-
 
 === Sprint 8
 *Periodo:* dal 28/03/2026 al 04/04/2026
@@ -2036,16 +2083,15 @@ Le attività pianificate per questo sprint si concentrano sull'avanzamento della
 
 ==== Prospetto Consumo Tempo (Preventivo)
 La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
-
 #sprint_table(
   (
     ([Basso Kevin], 0, 0, 0, 2, 3, 2),
-    ([Berengan Riccardo], 0, 0, 0, 1, 4, 2),
-    ([Martinello Riccardo], 0, 0, 0, 1, 4, 2),
-    ([Sandu Antonio], 0, 0, 0, 3, 3, 2),
-    ([Sgreva Andrea], 3.5, 0, 0, 3, 2, 2),
-    ([Suar Alberto], 0, 4, 0, 6, 6, 2),
-    ([Zago Alice], 0, 0, 0, 1, 4, 2),
+    ([Berengan Riccardo], 0, 0, 0, 2, 3, 1),
+    ([Martinello Riccardo], 0, 0, 0, 3, 8, 2),
+    ([Sandu Antonio], 0, 0, 0, 4, 5, 3),
+    ([Sgreva Andrea], 3.5, 0, 0, 4, 3, 4),
+    ([Suar Alberto], 0, 4, 0, 5, 4, 2),
+    ([Zago Alice], 0, 0, 0, 2, 4, 2),
   ),
   [Prospetto orario preventivato per lo Sprint 8],
 )
@@ -2053,13 +2099,43 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 ==== Prospetto attività
 #activity_table(
   (
-    ("Stesura norme di codifica e design pattern in ST", "Amministratore", "4:00", "", "Completata"),
-    ("Progettazione architettura AWS Lambda e Step Functions", "Progettista", "4:00", "", "Scartata"),
-    ("Aggiornamento diagrammi architetturali e di dominio (C3/C4)", "Progettista", "13:00", "", "Completata"),
-    ("Inizio sviluppo interfaccia Frontend", "Programmatore", "4:00", "", "Completata"),
-    ("Implementazione codice dei due microservizi con test", "Programmatore", "22:00", "", "Completata"),
-    ("Coordinamento riunioni e avanzamenti", "Responsabile", "3:30", "", "Completata"),
-    ("Attività di verifica dei documenti e del codice", "Verificatore", "14:00", "", "Completata"),
+    ("Coordinamento merge PR backend/documentazione", "Responsabile", "1:30", "1:30", "Completata"),
+    ("Pianificazione sprint e riallocazione ore di verifica", "Responsabile", "1:00", "1:00", "Completata"),
+    ("Allineamento branch develop e chiusura milestone", "Responsabile", "1:00", "1:00", "Completata"),
+
+    ("NdP v1.1.0: recepimento direttive di codifica", "Amministratore", "1:00", "1:00", "Completata"),
+    ("PdP v1.4.0: aggiunta sprint e prospetti", "Amministratore", "1:00", "1:00", "Completata"),
+    ("PdQ v1.1.0: correzione testing e consolidamento", "Amministratore", "0:45", "0:45", "Completata"),
+    ("AdR v1.1.0: modifiche richieste da Cardin", "Amministratore", "0:45", "0:45", "Completata"),
+    ("Glossario v1.1.0 + aggiornamento sito PB", "Amministratore", "0:30", "0:30", "Completata"),
+
+    ("ST v0.3.0: revisione errori e link ai componenti", "Progettista", "3:00", "3:00", "Completata"),
+    ("ST v0.4.0: introduzione e command applicativi", "Progettista", "3:00", "4:00", "Completata"),
+    ("ST v0.4.0: avvio architettura di deployment", "Progettista", "3:30", "3:00", "Completata"),
+    ("ST v0.5.0: value object per Account Microservice", "Progettista", "3:00", "3:00", "Completata"),
+    ("Refactor in Sub-Application Services", "Progettista", "2:30", "3:00", "Completata"),
+    ("Helper service per mapper e confini StartAnalysis", "Progettista", "3:00", "3:00", "Completata"),
+    ("Pulizia artefatti architetturali e allineamento Ubiquitous Language", "Progettista", "4:00", "3:00", "Completata"),
+
+    ("Feature entities: user.entity e github-token.entity + test", "Programmatore", "3:00", "3:00", "Completata"),
+    ("Aggiunta password-hash.vo + test", "Programmatore", "1:00", "3:00", "Completata"),
+    ("GitHub DTO/ports e github-token-factory + test", "Programmatore", "2:30", "2:30", "Completata"),
+    ("Use-case servizi GitHub con test", "Programmatore", "2:30", "2:30", "Completata"),
+    ("DTO/services JWT e BCrypt + fix linting", "Programmatore", "2:30", "2:30", "Completata"),
+    ("Register services e fix postgres adapter/dependency", "Programmatore", "3:30", "3:30", "Completata"),
+    ("Login/registration services + docker", "Programmatore", "2:00", "3:00", "Completata"),
+    ("Delete service + delete controller + test", "Programmatore", "3:30", "3:00", "Completata"),
+    ("Git request result/mapper/enum/port + start-analysis-command + test", "Programmatore", "3:00", "3:30", "Completata"),
+    ("Credential model + mock PAT password + PAT Password VO", "Programmatore", "1:30", "2:30", "Completata"),
+    ("MongoDBAdapter + IGitCredentialWritePort + GitHub interaction + final fix test/package", "Programmatore", "5:00", "5:00", "Completata"),
+
+    ("Verifica PR (AdR) e coerenza requisiti", "Verificatore", "2:00", "2:00", "Completata"),
+    ("Verifica PR  (PdQ) e consistenza dei test", "Verificatore", "1:00", "1:30", "Completata"),
+    ("Verifica PR (PdP), inclusa revisione ore verificatore", "Verificatore", "2:00", "2:30", "Completata"),
+    ("Verifica PR  (ST) e assegnazione verifier", "Verificatore", "3:00", "3:30", "Completata"),
+    ("Verifica PR (NdP) e aggiornamento membri", "Verificatore", "2:30", "2:00", "Completata"),
+    ("Verifica PR backend  su test e coerenza dominio", "Verificatore", "3:00", "3:00", "Completata"),
+    ("Verifica fix CI/lint/check-test-symmetry", "Verificatore", "2:30", "2:30", "Completata")
   ),
   [Riassunto delle attività svolte durante lo sprint 8]
 )
@@ -2069,13 +2145,13 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
 
 #sprint_table(
   (
-    ([Basso Kevin], 0, 0, 0, 4, 4, 2),
-    ([Berengan Riccardo], 0, 0, 0, 1, 4, 2), // non pervenuto
-    ([Martinello Riccardo], 0, 0, 0, 2, 4, 0),
-    ([Sandu Antonio], 0, 0, 0, 5, 0, 0),
-    ([Sgreva Andrea], 3.5, 0, 0, 5, 0, 2),
-    ([Suar Alberto], 0, 1.5, 0, 3, 6, 2),
-    ([Zago Alice], 0, 0, 0, 3, 4, 2),
+    ([Basso Kevin], 0, 0, 0, 2, 3, 2),
+    ([Berengan Riccardo], 0, 0, 0, 2, 5, 2),
+    ([Martinello Riccardo], 0, 0, 0, 3, 8, 2),
+    ([Sandu Antonio], 0, 0, 0, 4, 5, 3),
+    ([Sgreva Andrea], 3.5, 0, 0, 4, 3, 4),
+    ([Suar Alberto], 0, 4, 0, 6, 5, 2),
+    ([Zago Alice], 0, 0, 0, 1, 4, 2),
   ),
   [Consuntivo orario effettivo per lo Sprint 8],
 )
@@ -2087,14 +2163,14 @@ Questo sprint è stato caratterizzato da un cruciale cambio di rotta architettur
 ===== Squilibri orari preventivati e reali
 L'imprevista necessità di studiare l'ambiente Serverless e la successiva riprogettazione dell'architettura interna hanno generato un maggiore consumo di ore da "Progettista" e un minore consumo di ore da "Programmatore". Per quanto riguarda il ruolo di "Verificatore" e "Amministratore" c'è stato un minore consumo di ore rispetto al preventivo, in quanto questi ruoli sono stati utilizzati meno di quanto previsto.
 - *Responsabile:* Preventivato 3.5h, Consuntivo 3.5h
-- *Progettista:* Preventivato 17h, Consuntivo 23h
-- *Programmatore:* Preventivato 26h, Consuntivo 22h
-- *Amministratore:* Preventivato 4h, Consuntivo 1.5h
-- *Verificatore:* Preventivato 14h, Consuntivo 10h
+- *Amministratore:* Preventivato 4h, Consuntivo 4h
+- *Progettista:* Preventivato 22h, Consuntivo 22h
+- *Programmatore:* Preventivato 30h, Consuntivo 33h
+- *Verificatore:* Preventivato 16h, Consuntivo 17h
 
 ===== Rischi Rilevati
 Nel corso dello Sprint si sono manifestati o sono stati sfiorati i seguenti rischi già censiti:
-- #link(<RT1>)[#underline[[RT1]]] e #link(<RT3>)[#underline[[RT3]]]: L'inesperienza con architetture cloud complesse (Serverless) stava per far deragliare la progettazione. Il rischio è stato mitigato riconducendo il sistema a pattern noti (NestJS interno).
+- #link(<RT1>)[#underline[[RT1]]] e #link(<RT3>)[#underline[[RT3]]]: L'inesperienza con architetture cloud complesse (Serverless) stava per far deragliare la progettazione. 
 - #link(<RCO1>)[#underline[[RCO1]]]: La stima dei tempi per l'integrazione di Step Functions era stata sottovalutata. Il team ha cambiato rotta in tempo, evitando ritardi significativi.
 - #link(<RCO4>)[#underline[[RCO4]]]: La Propronente non si è presentata al colloquio di revisione, impedendo un feedback diretto. Il team ha comunque proseguito con le attività, ma resta il rischio di non essere allineati sulle aspettative dell'azienda.
 - #link(<RI4>)[#underline[[RI4]]]: Fisiologici conflitti comunicativi durante la progettazione, risolti con successo tramite mediazione e confronto tecnico.
@@ -2106,47 +2182,41 @@ Per lo Sprint successivo, il team si pone i seguenti obiettivi prioritari:
 - Affrontare la riunione di allineamento con l'azienda Proponente mostrando un'architettura consolidata.
 - Proseguire lo sviluppo del Frontend collegandolo in modo basilare ai Backend.
 
-===== Aggiornamento preventivo a finire PB
-#figure(
-  table(
-    fill: (col, row) => if row == 0 { luma(64%) } else { white },
-    columns: (1fr, 1fr, 1fr, 1fr),
-    inset: 10pt,
-    align: center + horizon,
-    stroke: 0.5pt + luma(200),
+==== Misure correttive
+Per mitigare i rischi emersi durante lo sprint 8, il team ha deciso di adottare le seguenti misure correttive:
+- Riguardo i rischi legati all' AI e alla complessità architetturale, il team ha deciso di adottare un approccio iterativo e incrementale nello sviluppo del microservizio di analisi, iniziando con una versione semplificata senza l'integrazione degli agenti LLM in local per poi passare all'integrazione con AWS.
+- Riguardo i rischi di disallineamento con la Proponente, il team ha continuato con la comuinicazione su Slack.
+- Riguardo i conflitti interni alcuni membri hanno deciso di prendere in mano le redini e coordinare le attività di progettazione, mediazione e sviluppo, in modo da garantire un allineamento costante e una risoluzione rapida dei conflitti.
 
-    table.header(
-      text(fill: white, weight: "bold")[Ruolo],
-      text(fill: white, weight: "bold")[Ore rimanenti per PB],
-      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
-      text(fill: white, weight: "bold")[Preventivo a finire costi],
-    ),
+==== Miglioramento della pianificazione futura
+Questo sprint ha evidenziato l'importanza di una valutazione più accurata della complessitá dei lavori, e delle skill dei vari componenti del team, soprattutto quando si tratta di tecnologie o architetture nuove.
 
-    [Responsabile], [13.5], [-],[€ 405,00],
-    [Amministratore], [33.5], text(fill:green)[-2.5 -> € +50], [€ 670,00],
-    [Analista], [17], [-],[€ 425,00],
-    [Progettista], [21],text(fill:red)[+6 -> € -150],[€ 525,00],
-    [Programmatore], [86],text(fill:green)[-4 -> € +60],[€ 1290,00],
-    [Verificatore], [93],text(fill:green)[-4 -> € +60],[€ 1395,00],
-
-    table.cell(fill: luma(240))[*Totale PB*],
-    table.cell(fill: luma(240))[*264*],
-    table.cell(fill: luma(240))[#text(fill: green)[*€ +20*]],
-    table.cell(fill: luma(240))[*€ 4710,00*],
+==== Aggiornamento preventivo a finire PB
+#preventivo_a_finire(
+  (
+    //               Resp  Amm  Anal  Prog  Cod  Ver
+    ([Kevin],           0,   5,   4,   3,  3,  12),
+    ([Riccardo B.],     0,   8,   5,   4,  3,  10),
+    ([Riccardo M.],     3,   8,   8,   4,  0,  3),
+    ([Antonio],         0,   7,  -3,   -1,  15,  11),
+    ([Andrea],          3,5,   8,  -1,   0,  17,  8),
+    ([Alberto],         1,   -4,   0,   4,   1,  11),
+    ([Alice],           1,   4,  -2,   7,  14,  10),
   ),
-  caption: [Aggiornamento preventivo a finire sprint 8],
+  [Aggiornamento preventivo a finire sprint 8],
+  (3.5,4,0,22,30,16),  // preventivo
+  (3.5,4,0,22,33,17),  // consuntivo ← nuovo argomento
 )
 #pagebreak()
 
 === Sprint 9
 *Periodo:* dal 04/04/2026 al 11/04/2026
-
 ==== Attività Principali
 Le attività pianificate per questo sprint si concentrano sull'avanzamento della codifica e sul consolidamento delle nuove scelte architetturali.
 
 - *Sviluppo Microservizio Analisi:*
   - Completamento degli use case per il recupero dei report, finalizzazione della logica di clonazione della repository e sviluppo dei test di integrazione con MongoDB.
-  - Fine svilippo e implementazione dei Value Object per i report delle analisi.
+  - Fine sviluppo e implementazione dei Value Object per i report delle analisi.
   - Sviluppo focalizzato sull'implementazione pratica degli Agenti LLM (Agente Codice, Agente Documentazione e base dell'Agente Sicurezza).
   - Sviluppo della logica di conversione (mapping) all'interno degli Adapter dei tool per standardizzare in un formato comprensibile per l'Application Service.
 - *Sviluppo Microservizio Credenziali/Account:*
@@ -2159,15 +2229,16 @@ Le attività pianificate per questo sprint si concentrano sull'avanzamento della
 ==== Prospetto Consumo Tempo (Preventivo)
 La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
 
+
 #sprint_table(
   (
-    ([Basso Kevin], 0, 0, 0, 0, 6, 4),
-    ([Berengan Riccardo], 0, 0, 0, 1, 10, 1), 
-    ([Martinello Riccardo], 0, 0, 0, 4, 2, 0),
-    ([Sandu Antonio], 0, 2, 0, 1, 6, 2),
-    ([Sgreva Andrea], 3.5, 0, 0, 1, 8, 2),
-    ([Suar Alberto], 0, 3, 0, 2, 6, 4),
-    ([Zago Alice], 0, 0, 0, 0, 0, 0),
+    ([Basso Kevin], 0, 5, 0, 0, 6, 8),
+    ([Berengan Riccardo], 0, 0, 0, 4, 7, 1), 
+    ([Martinello Riccardo], 0, 0, 0, 4, 4, 4),
+    ([Sandu Antonio], 0, 2, 0, 2, 5, 4),
+    ([Sgreva Andrea], 3.5, 0, 0, 5, 7, 3),
+    ([Suar Alberto], 0, 3, 0, 2, 6, 3),
+    ([Zago Alice], 0, 0, 0, 0, 7, 7),
   ),
   [Prospetto orario preventivato per lo Sprint 9],
 )
@@ -2175,32 +2246,56 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
 ==== Prospetto attività
 #activity_table(
   (
-    ("Stesura ST (Microservizio Account e Tecnologie)", "Amministratore", "5:00", "5:00", "Completata"),
-    ("Progettazione diagrammi Value Object in ST", "Progettista", "4:00", "4:00", "Completata"),
-    ("Sviluppo Microservizio Account e credenziali", "Programmatore", "12:00", "12:00", "Completata"),
-    ("Sviluppo Agenti (Codice, Doc, Sicurezza) e tool", "Programmatore", "18:00", "18:00", "Completata"),
-    ("Sviluppo interfaccia Frontend", "Programmatore", "2:00", "2:00", "Completata"),
-    ("Progettazione interfaccia Frontend", "Progettista", "4:00", "4:00", "Completata"),
-    ("Configurazione Deployment AWS (AppRunner, RDS)", "Programmatore", "6:00", "6:00", "Completata"),
-    ("Progettazione configurazione Deployment AWS (AppRunner, RDS)", "Programmatore", "1:00", "1:00", "Completata"),
-    ("Coordinamento riunioni e avanzamenti", "Responsabile", "3:30", "3:30", "Completata"),
-    ("Attività di verifica PR, codice e documenti", "Verificatore", "13:00", "13:00", "Completata"),
+    ("Coordinamento merge train PR backend e documentazione", "Responsabile", "1:30", "1:30", "Completata"),
+    ("Pianificazione sprint, assegnazioni e chiusura milestone", "Responsabile", "2:00", "2:00", "Completata"),
+
+    ("PdP v1.5.0: retrospettiva Sprint 8 e apertura Sprint 9", "Amministratore", "2:00", "2:00", "Completata"),
+    ("Aggiornamento prospetti ore/consuntivi in PdP", "Amministratore", "2:00", "2:00", "Completata"),
+    ("Stesura verbale interno del 04/04 e pubblicazione", "Amministratore", "2:00", "2:00", "Completata"),
+    ("Normalizzazione sezioni testuali e fix refusi documentali", "Amministratore", "2:00", "2:00", "Completata"),
+    ("Gestione verifier nei PR documentali (alice/suar/antonio)", "Amministratore", "2:00", "2:00", "Completata"),
+
+    ("ST v0.6.0: scelta tool analisi sicurezza", "Progettista", "3:00", "3:00", "Completata"),
+    ("ST v0.7.0: definizione componenti Microservizio Analisi", "Progettista", "3:00", "3:00", "Completata"),
+    ("Aggiornamento diagrammi PlantUML code analysis VO", "Progettista", "3:00", "3:00", "Completata"),
+    ("Definizione Strategy/Authorization pattern per analisi", "Progettista", "3:00", "3:00", "Completata"),
+    ("Progettazione flusso clone repository + integrazione MongoDB", "Progettista", "2:30", "2:30", "Completata"),
+    ("Progettazione contratti sessione ed eccezioni (fix_port/exceptions)", "Progettista", "2:30", "2:30", "Completata"),
+
+    ("Implementazione VO findings base (coverage-percentage, path, description, severity) + UT", "Programmatore", "3:30", "4:30", "Completata"),
+    ("Implementazione VO findings estesi (error, file-coverage, dependency, coverage) + UT", "Programmatore", "3:00", "4:30", "Completata"),
+    ("Implementazione VO findings sicurezza (static-analysis, owasp, documentation, secret) + UT", "Programmatore", "4:30", "5:00", "Completata"),
+    ("Implementazione Analysis report entities (documentation/code report) + unit test", "Programmatore", "4:00", "5:00", "Completata"),
+    ("Implementazione save port (GitHubAnalysis, code-report) + unit test", "Programmatore", "3:30", "4:00", "Completata"),
+    ("Implementazione CodeAgentAdapter e Agent Port", "Programmatore", "5:00", "4:00", "Completata"),
+    ("Implementazione OrchestratorService e bootstrap cartella agents", "Programmatore", "3:00", "4:30", "Completata"),
+    ("Prima implementazione Documentation Agent e tuning adapter", "Programmatore", "4:00", "5:00", "Completata"),
+    ("Flusso PAT completo: save/update/delete, validator e controllers", "Programmatore", "4:30", "4:30", "Completata"),
+    ("Git clone application service + AnalysisController + integrazione MongoDB", "Programmatore", "4:00", "4:00", "Completata"),
+    ("Auth hardening: JWT guard, secret-jwt-string, ISessionSave/ISessionDelete", "Programmatore", "4:00", "4:00", "Completata"),
+
+    ("Verifica PR VO findings", "Verificatore", "6:00", "6:00", "Completata"),
+    ("Verifica PR report entities e save port", "Verificatore", "4:30", "4:30", "Completata"),
+    ("Verifica PR orchestrator/agents/code-agent e fix correlati", "Verificatore", "4:30", "4:30", "Completata"),
+    ("Verifica PR PAT flow/controllers", "Verificatore", "5:00", "5:00", "Completata"),
+    ("Verifica PR auth/session/exceptions", "Verificatore", "4:00", "4:00", "Completata"),
+    ("Verifica PR account controllers/logout/e2e/delete ", "Verificatore", "3:00", "3:00", "Completata"),
+    ("Verifica PR documentazione ST/PdP/verbali ", "Verificatore", "3:00", "3:00", "Completata"),
   ),
   [Riassunto delle attività svolte durante lo sprint 9]
 )
-
 ==== Consumo Tempo e Costi Effettivi (Consuntivo)
 La tabella sottostante illustra le ore produttive effettivamente rendicontate.
 
 #sprint_table(
   (
-    ([Basso Kevin], 0, 0, 0, 0, 6, 4),
-    ([Berengan Riccardo], 0, 0, 0, 1, 10, 1), 
-    ([Martinello Riccardo], 0, 0, 0, 4, 2, 0),
-    ([Sandu Antonio], 0, 2, 0, 1, 6, 2),
-    ([Sgreva Andrea], 3.5, 0, 0, 1, 8, 2),
-    ([Suar Alberto], 0, 3, 0, 2, 6, 4),
-    ([Zago Alice], 0, 0, 0, 0, 0, 0),
+    ([Basso Kevin], 0, 5, 0, 0, 6, 9),
+    ([Berengan Riccardo], 0, 0, 0, 3, 10, 1), 
+    ([Martinello Riccardo], 0, 0, 0, 5, 3, 4),
+    ([Sandu Antonio], 0, 2, 0, 2, 7, 3),
+    ([Sgreva Andrea], 3.5, 0, 0, 4, 8, 3),
+    ([Suar Alberto], 0, 3, 0, 2, 5, 4),
+    ([Zago Alice], 0, 0, 0, 1, 10, 6),
   ),
   [Consuntivo orario effettivo per lo Sprint 9],
 )
@@ -2223,7 +2318,12 @@ Questo sprint si è concluso con un forte avanzamento per quanto riguarda la cod
 
 ===== Squilibri orari preventivati e reali
 Poiché non era stato redatto un preventivo formale a inizio settimana, le stime del preventivo sono state adattate basandosi sul lavoro effettivamente svolto (consuntivo) per mantenere la coerenza dei documenti.  
-#TODO("Cambiare questa parte se si fa il preventivo")
+
+- *Responsabile:* Preventivato 3.5h, Consuntivo 3.5h
+- *Amministratore:* Preventivato 10h, Consuntivo 10h
+- *Progettista:* Preventivato 17h, Consuntivo 17h
+- *Programmatore:* Preventivato 42h, Consuntivo 49h
+- *Verificatore:* Preventivato 30h, Consuntivo 30h
 
 ===== Rischi Rilevati
 Nel corso dello Sprint si sono manifestati o sono stati sfiorati i seguenti rischi già censiti:
@@ -2238,35 +2338,203 @@ Per lo Sprint successivo, il team si pone i seguenti obiettivi prioritari:
 - Concludere il collegamento delle interfacce frontend con gli endpoint dei microservizi e completare la generazione dei grafici/diagrammi da inserire nella Specifica Tecnica.
 - Revisionare e terminare la Specifica Tecnica in tutte le sue parti, gettare le basi per la stesura del Manuale Utente e sistemare definitivamente tabelle e consuntivi nel Piano di Progetto (PdP).
 
-===== Aggiornamento preventivo a finire PB
-#TODO("Cambiare questa parte se si fanno modifiche orarie")
-#figure(
-  table(
-    fill: (col, row) => if row == 0 { luma(64%) } else { white },
-    columns: (1fr, 1fr, 1fr, 1fr),
-    inset: 10pt,
-    align: center + horizon,
-    stroke: 0.5pt + luma(200),
+==== Misure correttive
+Per mitigare i rischi emersi durante lo sprint 9, il team ha deciso di adottare le seguenti misure correttive:
+- Riguardo i rischi legati all' AI e alla complessità architetturale, il team ha deciso di adottare un approccio iterativo e incrementale nello sviluppo del microservizio di analisi, iniziando con una versione semplificata senza l'integrazione degli agenti LLM in local per poi passare all'integrazione con AWS.
+- Riguardo i rischi di disallineamento e conflitti interni, il team ha raggiunto uno stato di "stallo" ovvero pensa di aver applicato tutte le misure necessarie a mitigare i conflitti, ma questi continuano a manifestarsi. Il rapporto meramente umano é nato e cresciuto incrinato e non riesce a reggere le tensioni generate da divergenze di opinioni su cosa sia lavoro rendicontabile e su come debba essere svolto. Il team ha deciso di continuare lasciando le task pú articolate ai membri piú esperti/volenterosi ma è evidente che questa situazione rappresenta un rischio molto elevato per il successo del progetto. Questo é anche la causa del motivo per cui ci sono gli squilibri orario, anche se molto mitigati oramai.
+- Riguardo i rischi legati ai costi e limiti di utilizzo, il team ha deciso di adottare un approccio pragmatico, cercando di ottimizzare le richieste fatte all'API per rientrare nei limiti di token, e valutando l'hosting non continuo su AWS durante la fase di sviluppo e testing degli agenti, per poi passare a un hosting continuo solo nella fase finale di consolidamento e presentazione.
 
-    table.header(
-      text(fill: white, weight: "bold")[Ruolo],
-      text(fill: white, weight: "bold")[Ore rimanenti per PB],
-      text(fill: white, weight: "bold")[Differenze rispetto a preventivo dello sprint],
-      text(fill: white, weight: "bold")[Preventivo a finire costi],
-    ),
-
-    [Responsabile], [10], [-],[€ 300,00],
-    [Amministratore], [28.5], [-], [€ 570,00],
-    [Analista], [17], [-],[€ 425,00],
-    [Progettista], [12],[-],[€ 300,00],
-    [Programmatore], [48],[-],[€ 720,00],
-    [Verificatore], [80],[-],[€ 1200,00],
-
-    table.cell(fill: luma(240))[*Totale PB*],
-    table.cell(fill: luma(240))[*196.5*],
-    table.cell(fill: luma(240))[[*-*]],
-    table.cell(fill: luma(240))[*€ 3540,00*],
+==== Miglioramento della pianificazione futura
+Essendo il prossimo l'ultimo sprint, il team si concentrerà principalmente sul completamento delle attività rimanenti e sulla preparazione della presentazione finale. Tuttavia, è importante sottolineare che la pianificazione futura dovrebbe tenere in considerazione le lezioni apprese durante questo sprint, in particolare per quanto riguarda la stima dei tempi e la gestione dei conflitti interni. Per migliorare la pianificazione futura, il team potrebbe:
+- Adottare una stima più conservativa dei tempi per le attività critiche, soprattutto quando si tratta di tecnologie o architetture nuove.
+- Continuare a monitorare e gestire attivamente i conflitti interni, cercando di mantenere un ambiente di lavoro collaborativo e supportivo, anche se la situazione attuale sembra essere in stallo.
+- Valutare l'adozione di strumenti o metodologie per migliorare la comunicazione e la collaborazione all'interno del team, al fine di ridurre le incomprensioni e migliorare l'allineamento sulle aspettative e sui rendiconti di lavoro.
+==== Aggiornamento preventivo a finire PB
+#preventivo_a_finire(
+  (
+    //               Resp  Amm  Anal  Prog  Cod  Ver
+    ([Kevin],           0,   0,   4,   3,  -3,  3),
+    ([Riccardo B.],     0,   8,   5,   1,  -7,  9),
+    ([Riccardo M.],     3,   8,   8,   -1,  -3,  -1),
+    ([Antonio],         0,   5,  -3,   -3,  8,  8),
+    ([Andrea],          0,   8,  -1,   -4,  9,  5),
+    ([Alberto],         1,   -7,   0,   2,   -4,  7),
+    ([Alice],           1,   4,  -2,   6,  4,  4),
   ),
-  caption: [Aggiornamento preventivo a finire sprint 9],
+  [Aggiornamento preventivo a finire sprint 9],
+  (3.5,10,0,17,42,30),  // preventivo
+  (3.5,10,0,17,49,30),  // consuntivo ← nuovo argomento
 )
 #pagebreak()
+
+//KEVIN
+
+=== Sprint 10
+*Periodo:* dal 11/04/2026 al 21/04/2026
+==== Attività Principali
+Le attività pianificate per questo sprint si concentrano sul completamento del codice e dei test per l'MVP, completamento documenti e preparazione alla presentazione finale.
+
+- *Sviluppo Microservizio Analisi:*
+  - Completamento sviluppo agenti ed entitá annesse, completamento test di integrazione e unitari, completamento logica di mapping degli adapter.
+  - Completamento integrazioen database, salvataggio dei report e query per il recupero delle analisi.
+- *Sviluppo Microservizio Credenziali/Account:*
+  - Ultimi ritocchi e test.
+- *Sviluppo Front-end*
+  - Integrazione con i controller dei microservizi.
+- *Progettazione e Specifica Tecnica (ST):*
+  - Ultimazione di tutti i diagrammi mancanti e completamento della stesura della Specifica Tecnica.
+- *Altri documenti*
+  - Completamento del Manuale Utente e sistemazione finale di tabelle, consuntivi e sezioni testuali del Piano di Progetto (PdP).
+  - Completamento grafici PdQ e revisione finale del documento.
+
+
+==== Prospetto Consumo Tempo (Preventivo)
+La seguente tabella riporta la pianificazione oraria per ruolo definita all'inizio dell'iterazione.
+
+#sprint_table(
+  (
+    ([Basso Kevin], 4, 0, 0, 2, 1, 5),
+    ([Berengan Riccardo], 0, 4, 0, 1, 0, 7), 
+    ([Martinello Riccardo], 0, 5, 0, 1, 1, 3),
+    ([Sandu Antonio], 0, 0, 0, 0, 6, 0),
+    ([Sgreva Andrea], 0, 0, 0, 1, 6, 0),
+    ([Suar Alberto], 0, 0, 0, 0, 0, 4),
+    ([Zago Alice], 0, 4, 0, 2, 2, 6),
+  ),
+  [Prospetto orario preventivato per lo Sprint 10],
+)
+
+==== Prospetto attività
+#activity_table(
+  (
+    ("Coordinamento Team, verifiche varie ed eventuali", "Responsabile", "0:30", "1:00", "Completata"),
+    ("Pianificazione sprint e assegnazione task puntuali", "Responsabile", "1:00", "1:00", "Completata"),
+    ("Allineamento milestone e chiusura avanzamento", "Responsabile", "1:00", "1:00", "Completata"),
+    ("Gestione riunioni e verbali", "Responsabile", "1:30", "1:00", "Completata"),
+
+    ("Stesura Sprint 10 nel PdP", "Amministratore", "2:00", "2:30", "Completata"),
+    ("Refinement task più puntuali nel prospetto attività", "Amministratore", "2:30", "3:00", "Completata"),
+    ("Aggiornamento PdQ", "Amministratore", "2:30", "2:30", "Completata"),
+    ("Pulizia sezioni e contenuti obsoleti di documentazione", "Amministratore", "2:00", "2:00", "Completata"),
+    ("Conclusione manuale utente", "Amministratore", "4:00", "3:00", "Completata"),
+
+    ("Definizione contratti getAnalysis/getAll e struttura response DTO", "Progettista", "1:30", "2:00", "Completata"),
+    ("Revisione code-report schema e mapping entity/model", "Progettista", "2:00", "1:30", "Completata"),
+    ("Rifinitura orchestrator per integrazione code-save port", "Progettista", "1:30", "1:30", "Completata"),
+    ("Allineamento pattern risposta agenti con entity di dominio", "Progettista", "2:00", "2:00", "Completata"),
+
+    ("Avvio implementazione getAnalysis", "Programmatore", "3:00", "2:30", "Completata"),
+    ("Aggiunta GET su analysisId", "Programmatore", "2:30", "2:00", "Completata"),
+    ("Implementazione feature getAll", "Programmatore", "3:00", "2:30", "Completata"),
+    ("Aggiunta code-save port in OrchestratorService", "Programmatore", "2:00", "2:00", "Completata"),
+    ("Aggiunta save-code-report model e fix code-agent-report entity", "Programmatore", "2:30", "2:00", "Completata"),
+    ("Aggiunta saveCodeReport su mongo-adapter e test dedicati", "Programmatore", "2:00", "2:30", "Completata"),
+    ("Deploy AWS", "Programmatore", "1:00", "2:30", "Completata"),
+
+    ("Verifica codice agenti e mapping", "Verificatore", "3:00", "3:30", "Completata"),
+    ("Verifica PR #76 code-report-save-port e regressione finale", "Verificatore", "4:00", "4:00", "Completata"),
+    ("Verifica modifiche PdP e documentazione correlata", "Verificatore", "3:30", "2:30", "Completata"),
+    ("Verifica documenti", "Verificatore", "3:00", "2:30", "Completata"),
+    ("verifica manuale utente e grafici PdQ", "Verificatore", "3:00", "2:30", "Completata"),
+    ("Verifica finale consistenza documentazione e tabelle con consuntivi", "Verificatore", "2:30", "2:00", "Completata"),
+    ("Verifica finale ST e coerenza con codice implementato", "Verificatore", "6:00", "3:00", "Completata")
+  ),
+  [Riassunto delle attività svolte durante lo Sprint 10 ]
+)
+==== Consumo Tempo e Costi Effettivi (Consuntivo)
+La tabella sottostante illustra le ore produttive effettivamente rendicontate.
+
+#sprint_table(
+  (
+    ([Basso Kevin], 4, 0, 0, 3, 0, 5),
+    ([Berengan Riccardo], 0, 4, 0, 0, 0, 6), 
+    ([Martinello Riccardo], 0, 5, 0, 2, 0, 0),
+    ([Sandu Antonio], 0, 0, 0, 0, 6, 0),
+    ([Sgreva Andrea], 0, 0, 0, 0, 7, 0),
+    ([Suar Alberto], 0, 0, 0, 0, 0, 4),
+    ([Zago Alice], 0, 4, 0, 2, 3, 5),
+  ),
+  [Prospetto orario consuntivato per lo Sprint 10],
+)
+
+==== Retrospettiva dello sprint 10
+===== Valutazione del Periodo
+Questo sprint ha permesso al team di concludere il progetto con un consumo orario minore del previsto, ma in forte ritardo rispetto alla pianificazione iniziale. 
+Il focus è stato principalmente sul completamento del codice e dei test per il microservizio di analisi, con particolare attenzione agli agenti e alla logica di salvataggio e recupero delle analisi. 
+Il deployment su AWS è stato completato, ma ha richiesto più tempo del previsto a causa di complessità tecniche non anticipate. 
+Sul fronte documentale, sono stati completati la Specifica Tecnica, il Manuale Utente e la revisione finale del Piano di Progetto (PdP) e Piano di Qualifica.
+===== Stato di Avanzamento dei Deliverable
+- *Microservizio Account/Credenziali*: non sono state apportate modifiche dato che era giá stato completato allo sprint 9.
+
+- *Microservizio Analisi (Agenti)*: 
+  - *Agente Documentazione*: Lo sviluppo è stato completato, è stata implementata la logica di salvataggio dei report e sono state completate le query per il recupero delle analisi.
+  - *Agente Codice*: Lo sviluppo è stato completato, è stata implementata la logica di salvataggio dei report e sono state completate le query per il recupero delle analisi. Il testing è stato 
+  ostacolato da problemi legati all'esaurimento dei token durante l'analisi dei report di coverage, ma è stato comunque possibile concludere lo sviluppo.
+  - *Agente Sicurezza*: Lo sviluppo è stato completato, è stata implementata la logica di salvataggio dei report e sono state completate le query per il recupero delle analisi.
+
+- *Deployment*: É stato completato il deployment su AWS (AppRunner, ECS, RDS, Fargate), ma è stato necessario più tempo del previsto a causa di complessità tecniche non anticipate.
+
+- *Frontend*: É stata completata la stesura della Specifica Tecnica
+
+===== Squilibri orari preventivati e reali
+Poiché non era stato redatto un preventivo formale a inizio settimana, le stime del preventivo sono state adattate basandosi sul lavoro effettivamente svolto (consuntivo) per mantenere la coerenza dei documenti.  
+
+- *Responsabile:* Preventivato 4h, Consuntivo 4h
+- *Amministratore:* Preventivato 13h, Consuntivo 13h
+- *Progettista:* Preventivato 7h, Consuntivo 17h
+- *Programmatore:* Preventivato 16h, Consuntivo 16h
+- *Verificatore:* Preventivato 25h, Consuntivo 20h
+
+===== Rischi Rilevati
+Nel corso dello Sprint si sono manifestati o sono stati sfiorati i seguenti rischi già censiti:
+- #link(<RT5>)[#underline[[RT5]]] Costi e Limiti di Utilizzo: Il limite di token in output è stato superato più volte dall'Agente Codice a causa della dimensione dei report generati, rendendo difficile il testing nonostante il passaggio a modelli superiori. Il rischio è stato mitigato con un tuning specifico degli agenti e una ristrutturazione del formato dei report per ridurne la dimensione.
+- #link(<RI4>)[#underline[[RI4]]] e #link(<RI5>)[#underline[[RI5]]] Conflitti interni e disomogeneità: Si sono verificate frizioni
+ comunicative e incomprensioni dovute a uno sbilanciamento produttivo e a divergenze su cosa debba essere considerato 
+ "lavoro rendicontabile".
+
+==== Misure correttive
+Per mitigare i rischi emersi durante lo sprint 10, il team ha deciso di adottare le seguenti misure correttive:
+- Riguardo i rischi legati alla saturazione del budget di token, il team ha adottato un approccio pragmatico, ottimizzando le richieste fatte all'API per rientrare nei limiti di token, passando ad un hosting continuo su aws solo pochi giorni prima della consegna dell MVP all'azienda.
+- Riguardo i rischi di disallineamento e conflitti interni, come giá detto, il team ha vissuto questo progetto in maniera molto travagliata a livello umano, con frizioni comunicative e incomprensioni dovute a uno sbilanciamento produttivo e a divergenze su cosa debba essere considerato "lavoro rendicontabile". Alcuni membri del team hanno, quindi ,dovuto colmare i vuoti lasciati da altri membri meno produttivi, portando a un ulteriore sbilanciamento e a frizioni comunicative.
+
+==== Aggiornamento preventivo a finire PB
+#preventivo_a_finire(
+  (
+    //               Resp  Amm  Anal  Prog  Cod  Ver
+    ([Kevin],           -4,   0,   4,   0,  -3,  -2),
+    ([Riccardo B.],     0,   4,   5,   1,  -7,  3),
+    ([Riccardo M.],     3,   3,   8,   -3,  -3,  -1),
+    ([Antonio],         0,   5,  -3,   -3,  2,  8),
+    ([Andrea],          0,   8,  -1,   -4,  2,  5),
+
+    ([Alberto],         1,   -7,   0,   2,   -4,  3),
+    ([Alice],           1,   0,  -2,   4,  1,  -1),
+  ),
+  [Preventivo a finire post sprint 10],
+  (4,13,0,7,16,25),  // preventivo
+  (4,13,0,7,16,20),  // consuntivo ← nuovo argomento
+)
+
+=== Conclusioni Finali
+#sprint_table_con_preventivo(
+  (  //              Resp  Amm  Anal  Prog  Cod  Ver
+      //              7     13    12   17   20    21
+    ([Basso Kevin], 11, 13, 8, 17, 23, 23),
+    ([Berengan Riccardo], 7, 9, 7, 16, 27, 18), 
+    ([Martinello Riccardo], 4, 10, 4, 20, 23, 22),
+    ([Sandu Antonio], 7, 7, 15, 20, 18, 14),
+    ([Sgreva Andrea], 7, 5, 13, 21, 18, 16),
+    ([Suar Alberto], 6, 20, 12, 15, 24, 18),
+    ([Zago Alice], 6, 13, 14, 13, 19, 22),
+  ),[Totale spesa per progetto]
+)
+
+Come si può vedere dalla tabella sopra, il progetto si è concluso con un consumo totale di ore inferiore al preventivo iniziale, questo ha portato il team Skarab 
+a concludere il progetto con una spesa di *12130€* contro i *12670€* preventivati, con un risparmio di *540€*.
+
+Durante tutto il progetto il team ha riscontrato molte divergenze nella produttivitá e impiego di ore produttive da parte dei vari membri del team,
+infatti, osservando la tabella 71, si può notare come alcuni membri del team abbiano speso più ore di quanto preventivato 
+mentre altri ne hanno spese meno. Questo indica, per l'appunto uno squilibrio di impegno e redditività tra i membri del team, che ha portato a frizioni comunicative 
+e difficoltà di coordinamento, specialmente nei momenti più critici del progetto.
+
+In particolare si puó notare come la maggior parte de tempo sia stato speso per attività di programmazione, progettazione e verifica, mentre le attività di analisi e amministrazione hanno avuto un consumo di ore più contenuto.

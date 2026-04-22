@@ -31,6 +31,13 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
     members.andrea,
   ),
   (
+    "2026/04/21",
+    "0.15.0",
+    "Completati i componenti della sezione infrastructure per Analysis Microservice",
+    members.andrea,
+    members.kevin
+  ),
+  (
     "2026/04/20",
     "0.14.0",
     "Completati i componenti delle sezioni domain e application per Analysis Microservice",
@@ -367,18 +374,34 @@ L'insieme di queste scelte tecnologiche mira a minimizzare il Total Cost of Owne
 #pagebreak()
 = Architettura
 == Architettura di Deployment
+=== Microservizio di Analisi
 Il servizio di Analisi è progettato come un microservizio autonomo, responsabile della gestione completa del ciclo di vita delle analisi delle repository. Esso opera in un Bounded Context segregato, isolando la logica di business relativa ai parametri di qualità e alla scansione dei repository dalle altre funzionalità della piattaforma.
 
 Seguendo il pattern Database per Service, il microservizio dispone di uno schema di persistenza dedicato. Questo garantisce l'indipendenza del deployment e impedisce l'accoppiamento a livello di dati con altri servizi, permettendo evoluzioni dello schema senza impatti collaterali sul resto del sistema.
 
 L'interazione con l'ecosistema avviene esclusivamente tramite interfacce ben definite (API Contract). Il servizio espone porte d'ingresso (Primary Adapters) per la ricezione dei comandi e utilizza porte d'uscita (Secondary Adapters) per comunicare in modo asincrono o sincrono con i servizi esterni (es. GitHub API, Servizi di Notifica), mantenendo l'integrità del core logico.
 
-La natura di microservizio permette una scalabilità orizzontale selettiva: essendo l'analisi del codice un'operazione ad alto consumo di risorse (CPU/RAM), il servizio può essere replicato indipendentemente dagli altri moduli del sistema per gestire picchi di carico durante le scansioni massive.
+ Il microservizio di Analisi viene hostato su #def[AWS] #def[Fargate], garantendo scalabilità automatica e gestione semplificata dell'infrastruttura. Esso è progettato per essere stateless, con la persistenza dei dati affidata a #def[MongoDB] Atlas e l'archiviazione temporanea dei repository su Amazon #def[S3]. Esso gestisce l'orchestrazione del flusso agentico tramite le API di #def[AWS], consentendo un'esecuzione modulare e resiliente delle analisi.
+
+=== Agenti
+Vengono utilizzate tecnologie di containerizzazione (#def[Docker]) e orchestrazione (#def[AWS] #def[Fargate]) per garantire un deployment flessibile, portabile e facilmente scalabile, con un modello di costo basato sull'effettivo utilizzo delle risorse. Gli agenti #def("Strands") operano su istanze di #def[ECS] Fargate, consentendo di scalare dinamicamente in base al carico di lavoro e di isolare le esecuzioni per garantire sicurezza e affidabilità; queste istanze sono gestite dal microservizio di Analisi, il quale decide se lanciare un nuovo container in base alla richiesta. I report generati dalle analisi vengono persistiti in un database dedicato (#def[MongoDB] Atlas) e resi accessibili tramite API REST, garantendo un accesso rapido e sicuro ai risultati.
+
 == Architettura Logica
-#TODO("Inserire introduzione")
-#pagebreak()
+
 === Analysis Microservice
-#TODO("Inserire introduzione")
+Il microservizio di Analisi adotta l'architettura esagonale (Ports & Adapters) come modello strutturale primario. Questo approccio garantisce una netta separazione tra il nucleo logico di business e i dettagli tecnologici di infrastruttura, facilitando la testabilità, la manutenibilità e l'evoluzione indipendente dei componenti.
+
+L'architettura si articola su quattro strati principali, ciascuno con responsabilità ben definite:
+
+- *Domain Layer:* Incapsula la logica di business pura, espressa attraverso Value Object (concetti immutabili del dominio) ed Entity (oggetti con identità persistente). Questo strato è totalmente indipendente dalla tecnologia.
+- *Application Layer:* Implementa i Use Case attraverso servizi e comandi, orchestrando il flusso di business. Definisce le porte (inbound e outbound) che consentono la comunicazione strutturata con i livelli adiacenti.
+- *Infrastructure Layer:* Contiene gli adapter concreti che implementano le porte, fornendo l'integrazione con risorse esterne (GitHub API, persistenza MongoDB, servizi di notifica).
+- *Presentation Layer:* Espone controller HTTP e DTOs per la comunicazione con i client, traducendo le richieste HTTP in comandi e risposte in formati standardizzati.
+
+L'interazione tra strati avviene esclusivamente attraverso le porte, invertendo le dipendenze verso il core: i livelli esterni dipendono dal dominio, mai viceversa.
+
+#pagebreak()
+
 ==== Domain
 Il Dominio rappresenta il nucleo centrale dell'architettura esagonale, dove risiedono esclusivamente la logica di business e le regole vitali del progetto. Questa sezione è progettata per essere totalmente agnostica rispetto alla tecnologia: non possiede alcuna conoscenza di database, protocolli di comunicazione (HTTP/REST) o framework esterni.
 
@@ -780,11 +803,12 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 - *Normalizzazione degli Alias:* Gestisce internamente le tabelle di alias (`STATUS_MISSING_ALIASES`, `SEVERITY_ALIASES`, `VERDICT_ALIASES`) che traducono i valori testuali non standardizzati prodotti dagli agenti nei valori type-safe delle enumerazioni di dominio, proteggendo le entità da input arbitrari.
 - *Mapping Strutturato:* Per ciascun tipo di report, decompone la risposta JSON in Value Object atomici — costruendo ad esempio #link(<KeyIssueReasoning>)[`KeyIssueReasoning`], #link(<CriticalFileReasoning>)[`CriticalFileReasoning`] e #link(<AIInterpretation>)[`AIInterpretation`] per il report del codice — prima di assemblarli nell'entità finale.
-- *Implementazione Tripla:* L'implementazione simultanea delle tre interfacce permette di registrare un unico bean nel container di NestJS, riducendo la complessità infrastrutturale senza violare la separazione dei contratti.
+- *Implementazione Tripla:* Una singola classe concreta implementa tre contratti distinti, ma viene esposta nel container NestJS tramite token separati per ciascuna interfaccia. Questa scelta riduce la duplicazione infrastrutturale preservando basso accoppiamento, aderenza al principio di segregazione delle interfacce e sostituibilità indipendente dei port nei test e nelle evoluzioni future.
 
 ==== Application
-
+Lo strato application è un livello architetturale che funge da intermediario tra il dominio del business e il mondo esterno (presentation, API, interfacce)
 ===== Command
+Lo strato Application contiene i Command Object che rappresentano le richieste di azioni da parte dell'utente o di sistemi esterni. Questi oggetti sono progettati per essere semplici contenitori di dati (DTO) che trasportano le informazioni necessarie per eseguire un use case specifico, senza contenere logica di business o dipendenze verso il dominio.
 
 ====== AddRepositoryCollectionCommand <AddRepositoryCollectionCommand>
 #codeDiagram("AddRepositoryCollectionCommand", 40%)
@@ -802,7 +826,7 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 - *Autorizzazione Implicita:* La richiesta della `patPassword` garantisce che solo chi conosce la password possa eliminare le credenziali, implementando un controllo di accesso a livello applicativo.
 
-
+#TODO("domain logic nei command")
 ====== DeleteRepositoryCollectionCommand <DeleteRepositoryCollectionCommand>
 #codeDiagram("DeleteRepositoryCollectionCommand", 70%)
 
@@ -866,7 +890,14 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 
 ===== Use Cases
-// descrizione? Il controller dipende solo da questa interfaccia (una per ogni controller), permettendo di sostituire l'implementazione senza modificare il layer di presentazione.
+I *Use Case* rappresentano i contratti applicativi che espongono le capacità del sistema verso il layer di presentazione. Ogni use case definisce un’operazione atomica del dominio applicativo (es. avvio analisi, gestione PAT, recupero collezioni) tramite un’interfaccia stabile, così che i controller dipendano da astrazioni e non da implementazioni concrete.
+
+Nel microservizio di Analisi, i use case seguono un modello uniforme:
+- ricevono un *Command Object* in input, che trasporta i parametri della richiesta;
+- delegano l’orchestrazione ai servizi applicativi, che coordinano Domain Service e Port;
+- restituiscono un *Result Object* tipizzato, che esplicita successo o fallimento senza esporre dettagli infrastrutturali.
+
+Questa struttura consente disaccoppiamento, testabilità e sostituibilità delle implementazioni, mantenendo il confine tra Application Layer e Presentation Layer chiaro e verificabile.
 
 ====== AddRepositoryCollectionUseCase <AddRepositoryCollectionUseCase>
 #codeDiagram("AddRepositoryCollectionUseCase", 90%)
@@ -881,46 +912,41 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 ====== DeleteRepositoryCollectionUseCase <DeleteRepositoryCollectionUseCase>
 #codeDiagram("DeleteRepositoryCollectionUseCase", 100%)
 
-`DeleteRepositoryCollectionUseCase` è l'interfaccia del use case per l'eliminazione di una collezione di repository, implementata dal servizio applicativo corrispondente.
+`DeleteRepositoryCollectionUseCase` è l'interfaccia del use case per l'eliminazione di una collezione di repository, implementata da #link(<GitHubCollectionDeleter>)[`GitHubCollectionDeleter`].
 
 ====== GetAllAnalysesForUserUseCase <GetAllAnalysesForUserUseCase>
 #codeDiagram("GetAllAnalysesForUserUseCase", 100%)
 
-`GetAllAnalysesForUserUseCase` è l'interfaccia del use case per il recupero di tutte le analisi associate a un utente, implementata dal servizio applicativo corrispondente.
+`GetAllAnalysesForUserUseCase` è l'interfaccia del use case per il recupero di tutte le analisi associate a un utente, implementata da #link(<GetAnalysisService>)[`GetAnalysisService`].
 
 //- *Metodo Non Convenzionale:* Espone `getAllAnalysesForUser()` invece del canonico `execute()`, rendendo esplicita la semantica dell'operazione direttamente nella firma del contratto.
 
 ====== GetAllRepositoryCollectionsUseCase <GetAllRepositoryCollectionsUseCase>
 #codeDiagram("GetAllRepositoryCollectionsUseCase", 100%)
 
-`GetAllRepositoryCollectionsUseCase` è l'interfaccia del use case per il recupero di tutte le collezioni di repository di un utente, implementata dal servizio applicativo corrispondente.
+`GetAllRepositoryCollectionsUseCase` è l'interfaccia del use case per il recupero di tutte le collezioni di repository di un utente, implementata da #link(<GitHubCollectionGetter>)[`GitHubCollectionGetter`].
 
 //- *Metodo Non Convenzionale:* Espone `executeAll()` invece del canonico `execute()`, rendendo esplicita nella firma del contratto la natura collettiva dell'operazione.
 
 ====== GetAnalysisUseCase <GetAnalysisUseCase>
 #codeDiagram("GetAnalysisUseCase", 80%)
 
-`GetAnalysisUseCase` è l'interfaccia del use case per il recupero di una singola analisi tramite il suo identificatore, implementata dal servizio applicativo corrispondente.
+`GetAnalysisUseCase` è l'interfaccia del use case per il recupero di una singola analisi tramite il suo identificatore, implementata da #link(<GetAnalysisService>)[`GetAnalysisService`].
 
 ====== GetRepositoryCollectionUseCase <GetRepositoryCollectionUseCase>
 #codeDiagram("GetRepositoryCollectionUseCase", 100%)
 
-`GetRepositoryCollectionUseCase` è l'interfaccia del use case per il recupero di una specifica collezione di repository tramite URL e utente, implementata dal servizio applicativo corrispondente.
-
+`GetRepositoryCollectionUseCase` è l'interfaccia del use case per il recupero di una specifica collezione di repository tramite URL e utente, implementata da #link(<GitHubCollectionGetter>)[`GitHubCollectionGetter`].
 
 ====== NewPatUseCase <NewPatUseCase>
 #codeDiagram("NewPatUseCase", 70%)
 
 `NewPatUseCase` è l'interfaccia del use case per la registrazione di un nuovo PAT, implementata da #link(<NewPatService>)[`NewPatService`].
 
-- *Disaccoppiamento Controller-Servizio:* Il controller #link(<PatController>)[`PatController`] dipende solo da questa interfaccia, permettendo di sostituire l'implementazione senza modificare il layer di presentazione.
-
 ====== StartAnalysisUseCase <StartAnalysisUseCase>
 #codeDiagram("StartAnalysisUseCase", 80%)
 
-`StartAnalysisUseCase` è l'interfaccia del use case principale del sistema: accetta uno #link(<StartAnalysisCommand>)[`StartAnalysisCommand`] e restituisce un #link(<StartAnalysisResult>)[`StartAnalysisResult`].
-
-- *Contratto Applicativo:* Definisce il punto di ingresso primario del bounded context, disaccoppiando la presentazione dall'implementazione concreta #link(<StartAnalysisService>)[`StartAnalysisService`].
+`StartAnalysisUseCase` è l'interfaccia dello use case principale del sistema, ed é implementata da #link(<StartAnalysisService>)[`StartAnalysisService`].
 
 
 ====== UpdatePatUseCase <UpdatePatUseCase>
@@ -929,16 +955,17 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 `UpdatePatUseCase` è l'interfaccia del use case per l'aggiornamento di un PAT, implementata da #link(<UpdatePatService>)[`UpdatePatService`].
 
 ===== Results
+I result sono i contratti di risposta dello use case verso il layer di presentazione. Incapsulano sia i dati di output in caso di successo che le informazioni sull'eventuale fallimento, permettendo al controller di gestire in modo strutturato e type-safe le diverse casistiche di esito. Per questo il messaggio é inteso come di errore e non é presente nel caso di successo, mentre tutti i campi di output sono valorizzati solo in caso di successo (o impostati a null/array vuoto in caso di fallimento) evitando che il controller debba gestire dati parziali o inconsistenti in caso di fallimento.
 
 ====== AddRepositoryCollectionResult <AddRepositoryCollectionResult>
 #codeDiagram("AddRepositoryCollectionResult", 50%)
-
+#TODO("Davvero factory?")
 `AddRepositoryCollectionResult` è il Result Object per l'esito della creazione di una nuova collezione di repository, con factory method `success()` e `failure(err)`.
 
 ====== DeletePatResult <DeletePatResult>
 #codeDiagram("DeletePatResult", 50%)
 
-`DeletePatResult` è il Result Object per l'esito dell'eliminazione di un PAT.
+`DeletePatResult` è il Result Object per l'esito dell'eliminazione di un PAT
 
 ====== DeleteRepositoryCollectionResult <DeleteRepositoryCollectionResult>
 #codeDiagram("DeleteRepositoryCollectionResult", 60%)
@@ -949,8 +976,6 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 #codeDiagram("GetAllAnalysesForUserResult", 80%)
 
 `GetAllAnalysesForUserResult` è il Result Object per l'esito del recupero di tutte le analisi associate a un utente, trasportando in caso di successo la collezione di `GitHubAnalysisGeneralDataDTO`.
-
-- *Payload Opzionale:* La collezione `analyses` è presente solo in caso di successo, evitando che il layer di presentazione riceva dati parziali o inconsistenti in caso di errore.
 
 ====== GetAllRepositoryCollectionsResult <GetAllRepositoryCollectionsResult>
 #codeDiagram("GetAllRepositoryCollectionsResult", 80%)
@@ -995,82 +1020,71 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 `UpdatePatResult` è il Result Object per l'esito dell'aggiornamento di un PAT.
 
 ===== Service
-====== IAnalysisOrchestrator <IAnalysisOrchestrator>
+
+Gli application service sono le implementazioni concrete dei use case, orchestrano la logica di business e coordinano l'interazione con i Domain Service, i Repository e le altre dipendenze necessarie per realizzare i requisiti del dominio. Ogni servizio applicativo implementa una o piú use cases, permettendo al layer di presentazione di dipendere solo da contratti astratti e facilitando la sostituzione o evoluzione delle implementazioni senza impattare il controller.
+
+====== Interfacce degli Helper Services
+Queste servono a disaccoppiare la logica specifica di alcune operazioni (es. orchestrazione degli agenti, verifica duplicati, autorizzazione, validazione, clonazione) dal servizio applicativo principale, permettendo di sostituire le strategie implementative senza modificare i servizi che le utilizzano.
+
+======= IAnalysisOrchestrator <IAnalysisOrchestrator>
 #codeDiagram("IAnalysisOrchestrator", 100%)
 
 `IAnalysisOrchestrator` è l'interfaccia del servizio applicativo che coordina l'esecuzione degli agenti di analisi (codice, documentazione, sicurezza) su un repository clonato.
 
-- *Orchestrazione Asincrona:* Il metodo `analyze()` è `void` (fire-and-forget), permettendo al use case di avviare l'analisi e rispondere immediatamente al client senza attendere il completamento dei processi AI.
-- *Punto di Estensione:* L'interfaccia permette di sostituire la strategia di orchestrazione (es. sequenziale vs. parallela, locale vs. distribuita) senza modificare il use case #link(<StartAnalysisService>)[`StartAnalysisService`].
+- *Orchestrazione Asincrona:* Il metodo `analyze()` è `void` (fire-and-forget), permettendo al chiamante di avviare l'analisi e rispondere immediatamente al client senza attendere il completamento dei processi AI.
+- *Punto di Estensione:* L'interfaccia permette di sostituire la strategia di orchestrazione (es. sequenziale vs. parallela, locale vs. distribuita) senza modificare l'utilizzatore #link(<StartAnalysisService>)[`StartAnalysisService`].
 
-====== ICollectionExistenceChecker <ICollectionExistenceChecker>
+======= ICollectionExistenceChecker <ICollectionExistenceChecker>
 #codeDiagram("ICollectionExistenceChecker", 50%)
 
-`ICollectionExistenceChecker` è l'interfaccia del servizio che verifica l'esistenza di una collezione di repository per un dato utente, restituendo un booleano che indica la presenza di un duplicato.
+`ICollectionExistenceChecker` è l'interfaccia del servizio che verifica l'esistenza di una collezione di repository per un dato utente, restituendo un booleano che indica la presenza di una collection corrispondente a user e url.
 
 - *Punto di Estensione:* Disaccoppia la logica di verifica duplicati dall'implementazione concreta #link(<GitHubCollectionChecker>)[`GitHubCollectionChecker`], permettendo di sostituire la strategia di controllo senza modificare i servizi applicativi che la utilizzano.
 
-====== IRepositoryAuthorizer <IRepositoryAuthorizer>
+======= IRepositoryAuthorizer <IRepositoryAuthorizer>
 #codeDiagram("IRepositoryAuthorizer", 70%)
 
 `IRepositoryAuthorizer` è l'interfaccia del servizio che recupera un #link(<PersonalAccessToken>)[`PersonalAccessToken`] valido per un dato repository, gestendo la distinzione tra repository pubblici e privati.
 
-- *Strategia di Autorizzazione:* Nasconde la logica di selezione tra `PublicAuthorizationStrategy` (token di sistema da variabile d'ambiente) e `PrivateAuthorizationStrategy` (token utente da database), esponendo un'unica API uniforme al use case.
+- *Strategia di Autorizzazione:* Nasconde la logica di selezione tra `PublicAuthorizationStrategy` (token di sistema utilizzato per il cloning tramite https per repositories pubbliche) e `PrivateAuthorizationStrategy` (token utente presente nel database per repositories private), esponendo un'unica API uniforme al use case.
 
-
-
-====== IRepositoryValidator <IRepositoryValidator>
-#codeDiagram("IRepositoryValidator", 80%)
-
-`IRepositoryValidator` è l'interfaccia del servizio che verifica la raggiungibilità e la validità di un repository GitHub, risolvendo branch e commit a valori concreti.
-
-- *Risoluzione dei Parametri:* Il metodo `check()` restituisce sempre `{ branch: BranchName; commit: CommitHash }` valori risolti, garantendo che l'analisi parta sempre da riferimenti esatti e non ambigui.
-
-
-
-====== IRepositoryCloner <IRepositoryCloner>
+======= IRepositoryCloner <IRepositoryCloner>
 #codeDiagram("IRepositoryCloner", 80%)
 
 `IRepositoryCloner` è l'interfaccia del servizio che esegue la clonazione fisica del repository su filesystem locale, restituendo il percorso della cartella clonata.
 
-- *Isolamento dell'Infrastruttura:* Nasconde i dettagli operativi della clonazione Git (comandi git, gestione autenticazione, path di destinazione) al use case, che opera solo sul percorso risultante.
+- *Isolamento dell'Infrastruttura:* Nasconde i dettagli operativi della clonazione Git (comandi git, gestione autenticazione, path di destinazione) al servizio utilizzatore, che opera solo sul percorso risultante.
 
+
+======= IRepositoryValidator <IRepositoryValidator>
+#codeDiagram("IRepositoryValidator", 80%)
+
+`IRepositoryValidator` è l'interfaccia del servizio che verifica la raggiungibilità e la validità di un repository GitHub, risolvendo branch e commit a valori concreti in modo da evitare failure successive durante la clonazione o l'analisi.
+
+- *Risoluzione dei Parametri:* Il metodo `check()` restituisce sempre `{ branch: BranchName; commit: CommitHash }` valori risolti, garantendo che l'analisi parta sempre da riferimenti esatti e non ambigui e lancia un exception esplicita in caso di problemi di raggiungibilità o validità del repository, che può essere gestita dal servizio chiamante per restituire un errore strutturato al client.
 
 
 // ============================================================
 // APPLICATION - SERVICES (IMPLEMENTATIONS)
 // ============================================================
 
+====== Helper Services
+Questi sono application services che non implementano uno use case diretto, ma forniscono funzionalità specifiche (es. validazione, autorizzazione, controllo duplicati, orchestrazione) che vengono utilizzate dai servizi dei use case per realizzare la logica di business richiesta. Questi helper services permettono di isolare e sostituire facilmente strategie specifiche senza modificare i servizi applicativi principali.
 
-====== AddRepositoryCollectionService <AddRepositoryCollectionService>
-#codeDiagram("AddRepositoryCollectionService", 100%)
-
-`AddRepositoryCollectionService` implementa #link(<AddRepositoryCollectionUseCase>)[`AddRepositoryCollectionUseCase`], orchestrando il controllo dei duplicati e la persistenza della nuova collezione.
-
-- *Guardia Anti-Duplicato:* Prima di procedere alla creazione, interroga #link(<ICollectionExistenceChecker>)[`ICollectionExistenceChecker`] per verificare che non esista già una collezione per l'URL fornito, restituendo un fallimento esplicito in caso positivo.
-
-====== AnalysisOrchestratorService <AnalysisOrchestratorService>
+======= AnalysisOrchestratorService <AnalysisOrchestratorService>
 #codeDiagram("AnalysisOrchestratorService", 100%)
 
-`AnalysisOrchestratorService` implementa #link(<IAnalysisOrchestrator>)[`IAnalysisOrchestrator`], avviando in modo asincrono (fire-and-forget) l'orchestrazione degli agenti AI sul repository clonato.
+`AnalysisOrchestratorService` implementa #link(<IAnalysisOrchestrator>)[`IAnalysisOrchestrator`], avviando in modo asincrono (fire-and-forget) l'orchestrazione degli agenti AI sul repository clonato. In seguito valida i risultati e li trasforma in entità di dominio prima di salvarli nel sistema di persistenza e associarli all'analisi.
 
-- *Disaccoppiamento Temporale:* Il metodo `analyze()` avvia l'orchestrazione in background tramite una Promise non attesa, permettendo al use case di rispondere immediatamente al client con l'ID dell'analisi avviata.
-
-
-====== DeletePatService <DeletePatService>
-#codeDiagram("DeletePatService", 100%)
-
-`DeletePatService` implementa #link(<DeletePatUseCase>)[`DeletePatUseCase`], costruendo la richiesta di eliminazione con URL e hash della password, e delegando a #link(<IGitCredentialDeletePort>)[`IGitCredentialDeletePort`].
-
-====== GetAnalysisService <GetAnalysisService>
-#codeDiagram("GetAnalysisService", 100%)
-
-`GetAnalysisService` implementa simultaneamente #link(<GetAnalysisUseCase>)[`GetAnalysisUseCase`] e #link(<GetAllAnalysesForUserUseCase>)[`GetAllAnalysesForUserUseCase`], centralizzando in un'unica classe i due use case di lettura delle analisi.
-
-- *Implementazione Doppia:* Riunisce il recupero di una singola analisi per ID e il recupero di tutte le analisi per utente, evitando la proliferazione di classi per operazioni di lettura strettamente correlate.
+I passaggi chiave dell'orchestrazione sono:
+- Gli agenti vengono eseguiti in parallelo tramite `Promise.all()`, massimizzando l'efficienza temporale dell'analisi complessiva. Ogni agente é gestito da un adapter specifico e la sua implementazione é nascosta dietro un'interfaccia(#link(<ICodeAgentPort>)[`ICodeAgentPort`], #link(<IDocumentationAgentPort>)[`IDocsAnalysisAgent`], #link(<ISecurityAgentPort>)[`ISecurityAgent`]), permettendo di sostituire o modificare gli agenti senza impattare l'orchestratore.
+- Le risposte degli agenti (in formato JSON grezzo) vengono trasformate in entità di dominio tramite un service che implementa #link(<IDocsReportEntityProvider>)[`IDocsReportEntityProvider`], #link(<ICodeReportEntityProvider>)[`ICodeReportEntityProvider`] e #link(<ISecurityReportEntityProvider>)[`ISecurityReportEntityProvider`], permettendo di validare e contestualizzare i dati prima di inserirli nel dominio.
+- I report validati vengono salvati nel sistema di persistenza tramite #link(<ISecurityReportSavePort>)[`ISecurityReportSavePort`], #link(<ICodeReportSavePort>)[`ICodeReportSavePort`] e #link(<IDocsReportSavePort>)[`IDocsReportSavePort`], che si occupano di gestire la persistenza dei report e le eventuali relazioni con l'entità dell'analisi.
+- I report validati vengono associati all'analisi tramite #link(<IUpdateAnalysisPort>)[`IUpdateAnalysisPort`], che si occupa di aggiornare l'entità nel database.
 
 
-====== GitAuthorizerService <GitAuthorizerService>
+#TODO("Sauar help me")
+======= GitAuthorizerService <GitAuthorizerService>
 #codeDiagram("GitAuthorizerService", 100%)
 
 `GitAuthorizerService` implementa #link(<IRepositoryAuthorizer>)[`IRepositoryAuthorizer`] selezionando dinamicamente la strategia di autorizzazione appropriata (pubblica o privata) in base alla presenza di una password nel comando.
@@ -1078,172 +1092,207 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 - *Pattern Strategy:* `PrivateAuthorizationStrategy` recupera il PAT da MongoDB tramite #link(<IGitCredentialReadPort>)[`IGitCredentialReadPort`]; `PublicAuthorizationStrategy` legge il token di sistema dalla configurazione. La scelta è trasparente per il chiamante.
 
 
-====== GitClonerService <GitClonerService>
+======= GitClonerService <GitClonerService>
 #codeDiagram("GitClonerService", 100%)
 
 `GitClonerService` implementa #link(<IRepositoryCloner>)[`IRepositoryCloner`] delegando l'operazione di clonazione al port #link(<IGitClonePort>)[`IGitClonePort`], costruendo il #link(<CloneRepoRequest>)[`CloneRepoRequest`] e gestendo l'esito.
 
 - *Adattamento del Contratto:* Traduce i parametri del servizio applicativo (Value Objects) nel DTO di richiesta per l'infrastruttura, e solleva un'eccezione esplicita in caso di fallimento della clonazione.
 
-====== GitHubCollectionChecker <GitHubCollectionChecker>
+
+======= GitHubCollectionChecker <GitHubCollectionChecker>
 #codeDiagram("GitHubCollectionChecker", 80%)
 
 `GitHubCollectionChecker` implementa #link(<ICollectionExistenceChecker>)[`ICollectionExistenceChecker`], delegando la verifica di duplicati al port `ICollectionDuplicateCheckerPort` e restituendo il booleano estratto dalla risposta.
 
 - *Adattamento del Contratto:* Traduce i Value Object #link(<UserId>)[`UserId`] e #link(<RepoURL>)[`RepoURL`] nel DTO di richiesta per l'infrastruttura, isolando il layer applicativo dai dettagli della persistenza.
 
-====== GitHubCollectionDeleter <GitHubCollectionDeleter>
-#codeDiagram("GitHubCollectionDeleter", 100%)
-
-`GitHubCollectionDeleter` implementa #link(<DeleteRepositoryCollectionUseCase>)[`DeleteRepositoryCollectionUseCase`], delegando l'eliminazione della collezione al port `IDeleteRepositoryCollectionPort` e traducendo la risposta nel result applicativo.
-
-====== GitHubCollectionGetter <GitHubCollectionGetter>
-#codeDiagram("GitHubCollectionGetter", 100%)
-
-`GitHubCollectionGetter` implementa simultaneamente #link(<GetRepositoryCollectionUseCase>)[`GetRepositoryCollectionUseCase`] e #link(<GetAllRepositoryCollectionsUseCase>)[`GetAllRepositoryCollectionsUseCase`], centralizzando in un'unica classe i due use case di lettura delle collezioni.
-
-- *Implementazione Doppia:* Riunisce il recupero di una singola collezione per URL e utente e il recupero di tutte le collezioni di un utente, evitando la proliferazione di classi per operazioni di lettura strettamente correlate.
-
-====== GitValidatorService <GitValidatorService>
+#TODO("HOW?")
+======= GitValidatorService <GitValidatorService>
 #codeDiagram("GitValidatorService", 100%)
 
 `GitValidatorService` implementa #link(<IRepositoryValidator>)[`IRepositoryValidator`] selezionando la strategia di validazione appropriata (`CommitValidationStrategy` o `BranchValidationStrategy`) in base ai parametri presenti nel comando.
 
 - *Validazione Contestuale:* Se è fornito un commit specifico, verifica l'esistenza di quel commit; altrimenti risolve il commit HEAD del branch specificato (o del branch default). In entrambi i casi, il risultato è un `{ branch, commit }` risolto e verificato.
+//validator,. orchestrator,. authorizer,. cloner, .checker
+
+====== Application Services
+Questa sezione include i servizi che implementano direttamente i use case, orchestrando la logica di business e coordinando le dipendenze necessarie per realizzare i requisiti del dominio. Ogni servizio applicativo implementa uno o più use case, permettendo la modifica della logica applicativa senza impattare il layer di presentazione, che dipende solo dalle interfacce dei use case.
+======= AddRepositoryCollectionService <AddRepositoryCollectionService>
+#codeDiagram("AddRepositoryCollectionService", 100%)
+
+`AddRepositoryCollectionService` implementa #link(<AddRepositoryCollectionUseCase>)[`AddRepositoryCollectionUseCase`], orchestrando il controllo dei duplicati e la persistenza della nuova collezione.
+
+- *Guardia Anti-Duplicato:* Prima di procedere alla creazione, interroga #link(<ICollectionExistenceChecker>)[`ICollectionExistenceChecker`] per verificare che non esista già una collezione per l'URL fornito, restituendo un fallimento esplicito in caso positivo.
 
 
-====== NewPatService <NewPatService>
+
+======= DeletePatService <DeletePatService>
+#codeDiagram("DeletePatService", 100%)
+
+`DeletePatService` implementa #link(<DeletePatUseCase>)[`DeletePatUseCase`], costruendo la richiesta di eliminazione con URL e hash della password validando quest'ultima tramite il Domain Service #link(<IPasswordProvider>)[`IPasswordProvider`], e delegando a #link(<IGitCredentialDeletePort>)[`IGitCredentialDeletePort`] cl'effettiva eliminazione dal sistema di persistenza.
+
+======= GetAnalysisService <GetAnalysisService>
+#codeDiagram("GetAnalysisService", 100%)
+
+`GetAnalysisService` implementa simultaneamente #link(<GetAnalysisUseCase>)[`GetAnalysisUseCase`] e #link(<GetAllAnalysesForUserUseCase>)[`GetAllAnalysesForUserUseCase`], centralizzando in un'unica classe i due use case di lettura delle analisi.
+
+- *Implementazione Doppia:* Riunisce il recupero di una singola analisi per ID e il recupero di tutte le analisi per utente, evitando la proliferazione di classi per operazioni di lettura strettamente correlate. Per ciascuna richiesta delega la query alla port di riferimento specifica per quell'operazione (#link(<IGetAnalysisFromIdPort>)[`IGetAnalysisFromIdPort`] e #link(<IGetAllAnalysesForUserPort>)[`IGetAllAnalysesForUserPort`]) e traduce i risultati nel result applicativo corrispondente.
+
+
+======= GitHubCollectionDeleter <GitHubCollectionDeleter>
+#codeDiagram("GitHubCollectionDeleter", 100%)
+
+`GitHubCollectionDeleter` implementa #link(<DeleteRepositoryCollectionUseCase>)[`DeleteRepositoryCollectionUseCase`], delegando l'eliminazione della collezione al port `IDeleteRepositoryCollectionPort` e traducendo la risposta nel result applicativo e gestendo eventuali errori di recupero con risultati strutturati.
+
+======= GitHubCollectionGetter <GitHubCollectionGetter>
+#codeDiagram("GitHubCollectionGetter", 100%)
+
+`GitHubCollectionGetter` implementa simultaneamente #link(<GetRepositoryCollectionUseCase>)[`GetRepositoryCollectionUseCase`] e #link(<GetAllRepositoryCollectionsUseCase>)[`GetAllRepositoryCollectionsUseCase`], centralizzando in un'unica classe i due use case di lettura delle collezioni delegando le query alle rispettive port di riferimento (#link(<IGetRepositoryCollectionPort>)[`IGetRepositoryCollectionPort`] e #link(<IGetAllRepositoryCollectionsPort>)[`IGetAllRepositoryCollectionsPort`]) e traducendo i risultati nei result applicativi corrispondenti.
+
+- *Implementazione Doppia:* Riunisce il recupero di una singola collezione per URL e utente e il recupero di tutte le collezioni di un utente, evitando la proliferazione di classi per operazioni di lettura strettamente correlate.
+
+
+
+======= NewPatService <NewPatService>
 #codeDiagram("NewPatService", 100%)
 
-`NewPatService` implementa #link(<NewPatUseCase>)[`NewPatUseCase`], orchestrando la validazione del PAT, l'hashing della password e il salvataggio tramite #link(<IGitCredentialSavePort>)[`IGitCredentialSavePort`].
+`NewPatService` implementa #link(<NewPatUseCase>)[`NewPatUseCase`], orchestrando la validazione del PAT, delegando l'hashing della password al domain service #link(<IPasswordProvider>)[`IPasswordProvider`] e il salvataggio alla porta #link(<IGitCredentialSavePort>)[`IGitCredentialSavePort`].
 
 
-====== StartAnalysisService <StartAnalysisService>
+======= StartAnalysisService <StartAnalysisService>
 #codeDiagram("StartAnalysisService", 100%)
 
 `StartAnalysisService` è l'Application Service principale: implementa #link(<StartAnalysisUseCase>)[`StartAnalysisUseCase`] orchestrando l'intero flusso di avvio analisi — validazione, autorizzazione, clonazione, persistenza e dispatching agli agenti.
 
-- *Coordinamento del Flusso:* Sequenzia le chiamate a #link(<IRepositoryValidator>)[`IRepositoryValidator`] → #link(<IRepositoryAuthorizer>)[`IRepositoryAuthorizer`] → crea #link(<GitHubAnalysis>)[`GitHubAnalysis`] → #link(<IRepositoryCloner>)[`IRepositoryCloner`] → persiste tramite `IGitHubAnalysisSavePort` → #link(<IAnalysisOrchestrator>)[`IAnalysisOrchestrator`].
-- *Costruzione dell'Aggregato:* È responsabile della creazione dell'entità `GitHubAnalysis` con un UUID v7 fresco e i parametri risolti dalla validazione, garantendo la consistenza dell'aggregato fin dalla sua nascita.
+Svolge i seguenti passaggi per permettere a #link(<AnalysisOrchestratorService>)[`AnalysisOrchestratorService`] di eseguire l'analisi in modo asincrono dopo aver risposto al client:
+1. Genera l'hash della password ricevuta (se presente) tramite #link(<IPasswordProvider>)[`IPasswordProvider`] per l'autorizzazione alla clonazione.
+2. Recupera un PAT valido per il repository tramite #link(<IRepositoryAuthorizer>)[`IRepositoryAuthorizer`], che gestisce la distinzione tra repository pubblici e privati.
+3. Valida la raggiungibilità e la validità del repository tramite #link(<IRepositoryValidator>)[`IRepositoryValidator`], risolvendo branch e commit a valori concreti.
+4. Clona il repository tramite #link(<IRepositoryCloner>)[`IRepositoryCloner`].
+5. Crea una nuova entità `GitHubAnalysis` con i metadati identificativi e la persistenza tramite #link(<IGitHubAnalysisSavePort>)[`IGitHubAnalysisSavePort`].
+6. Avvia l'orchestrazione degli agenti in modo asincrono tramite #link(<IAnalysisOrchestrator>)[`IAnalysisOrchestrator`], e i riferimenti all'analisi appena creata per l'associazione dei risultati e l'Id per recuperare la repository clonata.
+7. Restituisce al client un #link(<StartAnalysisResult>)[`StartAnalysisResult`] con i metadati dell'analisi avviata, permettendo al client di tracciare l'analisi in corso.
 
 
-====== UpdatePatService <UpdatePatService>
+======= UpdatePatService <UpdatePatService>
 #codeDiagram("UpdatePatService", 100%)
 
-`UpdatePatService` implementa #link(<UpdatePatUseCase>)[`UpdatePatUseCase`], validando il nuovo PAT e la password corrente, e delegando l'aggiornamento a #link(<IGitCredentialUpdatePort>)[`IGitCredentialUpdatePort`].
+`UpdatePatService` implementa #link(<UpdatePatUseCase>)[`UpdatePatUseCase`], validando il nuovo PAT e la password corrente tramite il domain service #link(<IPasswordProvider>)[`IPasswordProvider`], e delegando l'aggiornamento a #link(<IGitCredentialUpdatePort>)[`IGitCredentialUpdatePort`].
 
 ===== Port
-
+Le porte sono le interfacce che definiscono i contratti di comunicazione tra il dominio applicativo e le dipendenze esterne (infrastruttura, agenti, persistenza). Ogni porta rappresenta un punto di estensione che permette di sostituire o modificare l'implementazione concreta senza impattare la logica applicativa, facilitando testabilità, manutenibilità e evoluzione del sistema. Ogni porta è progettata per essere il più possibile specifica e orientata al caso d'uso, evitando di esporre operazioni generiche o non necessarie che potrebbero portare a dipendenze indesiderate o a un accoppiamento eccessivo tra layer.
 ====== ICodeAgentPort <ICodeAgentPort>
 #codeDiagram("ICodeAgentPort", 70%)
 
-`ICodeAgentPort` è il Driving Port che definisce il contratto per l'invocazione dell'agente di analisi del codice, accettando un #link(<AgentRequest>)[`AgentRequest`] e restituendo una `CodeAgentResponse`.
+`ICodeAgentPort` è la Porta che definisce il contratto per l'invocazione dell'agente di analisi del codice, accettando un #link(<AgentRequest>)[`AgentRequest`] contenente un #link(<AnalysisId>)[`AnalysisId`] e restituendo una `CodeAgentResponse` con i risultati dell'analisi tramite dei DTO.
 
 ====== ICollectionAdderPort <ICollectionAdderPort>
 #codeDiagram("ICollectionAdderPort", 80%)
 
-`ICollectionAdderPort` è il Driven Port per la persistenza di una nuova collezione di repository.
+`ICollectionAdderPort` è la Porta che gestisce la persistenza di una nuova collezione di repository. Accetta un #link(<AddRepositoryCollectionRequest>)[`AddRepositoryCollectionRequest`] e restituisce una #link(<AddRepositoryCollectionResponse>)[`AddRepositoryCollectionResponse`] che indica l'esito dell'operazione.
 
 ====== ICodeReportSavePort <ICodeReportSavePort>
 #codeDiagram("ICodeReportSavePort", 80%)
 
-`ICodeReportSavePort` è il Driven Port per la persistenza di un #link(<CodeAgentReport>)[`CodeAgentReport`] prodotto dall'analisi del codice.
+`ICodeReportSavePort` è la Porta per la persistenza di un #link(<CodeAgentReport>)[`CodeAgentReport`] prodotto dall'analisi del codice.
 
 ====== IDocumentationAgentPort <IDocumentationAgentPort>
 #codeDiagram("IDocumentationAgentPort", 70%)
 
-`IDocumentationAgentPort` è il Driving Port che definisce il contratto per l'invocazione dell'agente di analisi della documentazione, accettando un #link(<AgentRequest>)[`AgentRequest`] e restituendo una `DocsAgentResponse`.
+`IDocumentationAgentPort` è la Porta che definisce il contratto per l'invocazione dell'agente di analisi della documentazione, accettando un #link(<AgentRequest>)[`AgentRequest`] contenente un #link(<AnalysisId>)[`AnalysisId`] e restituendo una `DocsAgentResponse` contenente i risultati dell'analisi tramite dei DTO.
 
 ====== ICollectionDuplicateCheckerPort <ICollectionDuplicateCheckerPort>
 #codeDiagram("ICollectionDuplicateCheckerPort", 90%)
 
-`ICollectionDuplicateCheckerPort` è il Driven Port per la verifica dell'esistenza di una collezione di repository nella persistenza, utilizzato da #link(<GitHubCollectionChecker>)[`GitHubCollectionChecker`] per implementare il controllo duplicati.
+`ICollectionDuplicateCheckerPort` è la porta per la verifica dell'esistenza di una collezione di repository nella persistenza, utilizzato da #link(<GitHubCollectionChecker>)[`GitHubCollectionChecker`] per implementare il controllo duplicati.
 
 ====== IDeleteRepositoryCollectionPort <IDeleteRepositoryCollectionPort>
 #codeDiagram("IDeleteRepositoryCollectionPort", 90%)
 
-`IDeleteRepositoryCollectionPort` è il Driven Port per l'eliminazione di una collezione di repository dalla persistenza.
+`IDeleteRepositoryCollectionPort` è la porta per l'eliminazione di una collezione di repository dalla persistenza, accettando un #link(<DeleteRepositoryCollectionRequest>)[`DeleteRepositoryCollectionRequest`] e restituendo un #link(<DeleteRepositoryCollectionResponse>)[`DeleteRepositoryCollectionResponse`] che indica l'esito dell'operazione.
 
 ====== IDocsReportSavePort <IDocsReportSavePort>
 #codeDiagram("IDocsReportSavePort", 80%)
 
-`IDocsReportSavePort` è il Driven Port per la persistenza di un #link(<DocumentationReport>)[`DocumentationReport`] prodotto dall'analisi della documentazione.
+`IDocsReportSavePort` è la porta per la persistenza di un #link(<DocumentationReport>)[`DocumentationReport`] prodotto dall'analisi della documentazione. Accenttando un #link(<DocumentationReport>)[`DocumentationReport`] come input, permette di disaccoppiare la logica di persistenza dei report dal formato specifico dei dati restituiti dagli agenti, facilitando l'evoluzione indipendente di entrambi.
 
 ====== IGetAllAnalysesForUserPort <IGetAllAnalysesForUserPort>
 #codeDiagram("IGetAllAnalysesForUserPort", 70%)
 
-`IGetAllAnalysesForUserPort` è il Driven Port per il recupero di tutte le analisi associate a un utente dalla persistenza.
+`IGetAllAnalysesForUserPort` è la porta per il recupero di tutte le analisi associate a un utente dalla persistenza. Accetta un semplice value object #link(<UserId>)[`UserId`] e restituisce una collezione di GitHubAnalysisGeneralDataDTO #TODO("perché non c'é?")che aggregano i metadati identificativi di ciascuna analisi senza includere i report dettagliati.
 
 ====== IGetAllRepositoryCollectionsPort <IGetAllRepositoryCollectionsPort>
 #codeDiagram("IGetAllRepositoryCollectionsPort", 80%)
 
-`IGetAllRepositoryCollectionsPort` è il Driven Port per il recupero di tutte le collezioni di repository di un utente dalla persistenza.
+`IGetAllRepositoryCollectionsPort` è la porta per il recupero di tutte le collezioni di repository di un utente dalla persistenza.
 
 ====== IGetAnalysisFromIdPort <IGetAnalysisFromIdPort>
 #codeDiagram("IGetAnalysisFromIdPort", 70%)
 
-`IGetAnalysisFromIdPort` è il Driven Port per il recupero di una singola analisi per identificatore dalla persistenza, restituendo `null` se non trovata.
+`IGetAnalysisFromIdPort` è la porta per il recupero di una singola analisi per identificatore dalla persistenza, restituendo `null` se non trovata.
 
 ====== IGetRepositoryCollectionPort <IGetRepositoryCollectionPort>
 #codeDiagram("IGetRepositoryCollectionPort", 80%)
 
-`IGetRepositoryCollectionPort` è il Driven Port per il recupero di una specifica collezione di repository dalla persistenza tramite URL e utente.
+`IGetRepositoryCollectionPort` è la porta per il recupero di una specifica collezione di repository dalla persistenza tramite URL e utente.
 
 ====== IGitHubAnalysisSavePort <IGitHubAnalysisSavePort>
 #codeDiagram("IGitHubAnalysisSavePort", 70%)
 
-`IGitHubAnalysisSavePort` è il Driven Port per la persistenza di una nuova entità #link(<GitHubAnalysis>)[`GitHubAnalysis`] al momento dell'avvio dell'analisi.
+`IGitHubAnalysisSavePort` è la porta per la persistenza di una nuova entità #link(<GitHubAnalysis>)[`GitHubAnalysis`] al momento dell'avvio dell'analisi.
 
 ====== IGitClonePort <IGitClonePort>
 #codeDiagram("IGitClonePort", 70%)
 
-`IGitClonePort` è il Driving Port per l'operazione di clonazione Git, accettando un #link(<CloneRepoRequest>)[`CloneRepoRequest`] e restituendo un #link(<CloneRepoResponse>)[`CloneRepoResponse`].
+`IGitClonePort` è la porta per l'operazione di clonazione Git, accettando un #link(<CloneRepoRequest>)[`CloneRepoRequest`] e restituendo un #link(<CloneRepoResponse>)[`CloneRepoResponse`].
 
 
 ====== IGitCredentialDeletePort <IGitCredentialDeletePort>
 #codeDiagram("IGitCredentialDeletePort", 80%)
 
-`IGitCredentialDeletePort` è il Driven Port per l'eliminazione di credenziali Git.
+`IGitCredentialDeletePort` è la porta per l'eliminazione di credenziali Git.
 
 ====== IGitCredentialReadPort <IGitCredentialReadPort>
 #codeDiagram("IGitCredentialReadPort", 70%)
 
-`IGitCredentialReadPort` è il Driven Port per la lettura/autorizzazione delle credenziali Git dal repository di persistenza.
+`IGitCredentialReadPort` è la porta per la lettura/autorizzazione delle credenziali Git dal repository di persistenza.
 
 ====== IGitCredentialSavePort <IGitCredentialSavePort>
 #codeDiagram("IGitCredentialSavePort", 70%)
 
-`IGitCredentialSavePort` è il Driven Port per il salvataggio di nuove credenziali Git.
+`IGitCredentialSavePort` è la porta per il salvataggio di nuove credenziali Git.
 
 ====== IGitCredentialUpdatePort <IGitCredentialUpdatePort>
 #codeDiagram("IGitCredentialUpdatePort", 80%)
 
-`IGitCredentialUpdatePort` è il Driven Port per l'aggiornamento del PAT di credenziali esistenti.
+`IGitCredentialUpdatePort` è la porta per l'aggiornamento del PAT di credenziali esistenti.
 
 ====== IGitHubAvailabilityPort <IGitHubAvailabilityPort>
 #codeDiagram("IGitHubAvailabilityPort", 70%)
 
-`IGitHubAvailabilityPort` è il Driving Port che definisce il contratto per verificare la raggiungibilità e i metadati di un repository GitHub, accettando un #link(<CheckAvailabilityRequest>)[`CheckAvailabilityRequest`] e restituendo un #link(<CheckAvailabilityResponse>)[`CheckAvailabilityResponse`].
+`IGitHubAvailabilityPort` è la ports che definisce il contratto per verificare la raggiungibilità e i metadati di un repository GitHub, accettando un #link(<CheckAvailabilityRequest>)[`CheckAvailabilityRequest`] e restituendo un #link(<CheckAvailabilityResponse>)[`CheckAvailabilityResponse`].
 
-- *Inversione delle Dipendenze:* L'applicazione dipende da questa astrazione, non dall'implementazione concreta #link(<GitHubAdapter>)[`GitHubAdapter`], rispettando il principio DIP e facilitando il testing con mock.
 
 ====== ISecurityAgentPort <ISecurityAgentPort>
 #codeDiagram("ISecurityAgentPort", 70%)
 
-`ISecurityAgentPort` è il Driving Port che definisce il contratto per l'invocazione dell'agente di analisi di sicurezza, accettando un #link(<AgentRequest>)[`AgentRequest`] e restituendo una `SecAgentResponse`.
+`ISecurityAgentPort` è la ports che definisce il contratto per l'invocazione dell'agente di analisi di sicurezza, accettando un #link(<AgentRequest>)[`AgentRequest`] e restituendo una `SecAgentResponse`.
 
 ====== ISecurityReportSavePort <ISecurityReportSavePort>
 #codeDiagram("ISecurityReportSavePort", 80%)
 
-`ISecurityReportSavePort` è il Driven Port per la persistenza di un #link(<SecurityReport>)[`SecurityReport`] prodotto dall'analisi di sicurezza.
+`ISecurityReportSavePort` è la porta per la persistenza di un #link(<SecurityReport>)[`SecurityReport`] prodotto dall'analisi di sicurezza.
 
 ====== IUpdateAnalysisPort <IUpdateAnalysisPort>
 #codeDiagram("IUpdateAnalysisPort", 80%)
 
-`IUpdateAnalysisPort` è il Driven Port per l'aggiornamento di un'analisi esistente con i riferimenti ai report prodotti al termine dell'orchestrazione degli agenti.
+`IUpdateAnalysisPort` è la porta per l'aggiornamento di un'analisi esistente con i riferimenti ai report prodotti al termine dell'orchestrazione degli agenti.
 
 
 ===== Request
+
+I contratti di richiesta sono i DTO che trasportano i dati necessari dalle classi del dominio applicativo (application service, domain service) verso le implementazioni concrete delle porte, hanno un formato specifico richiesto da ciascuna porta. Ogni request è progettata per essere il più possibile specifica e orientata al caso d'uso, evitando di esporre dati non necessari o di permettere l'invio di informazioni incomplete o incoerenti.
 ====== CheckAvailabilityRequest <CheckAvailabilityRequest>
 #codeDiagram("CheckAvailabilityRequest", 100%)
 
@@ -1339,6 +1388,8 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 `SaveSecurityReportRequest` trasporta i dati dell'entità #link(<SecurityReport>)[`SecurityReport`] verso la persistenza, aggregando identificatori e le collezioni di finding suddivisi per categoria di sicurezza.
 
 ===== Response
+
+I contratti di risposta sono i DTO che trasportano i dati restituiti dalle implementazioni concrete delle porte verso le classi del dominio applicativo (application service, domain service), hanno un formato specifico restituito da ciascuna porta. Ogni response è progettata per essere il più possibile specifica e orientata al caso d'uso, evitando di esporre dati non necessari o di permettere l'invio di informazioni incomplete o incoerenti.
 ====== CheckAvailabilityResponse <CheckAvailabilityResponse>
 #codeDiagram("CheckAvailabilityResponse", 80%)
 
@@ -1438,31 +1489,156 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 ==== Infrastructure
 ===== Adapter
+Questa sezione descrive i Driven Adapter, i componenti concreti del livello infrastrutturale incaricati di implementare i contratti (Port) definiti nel livello Application. Nel rigoroso rispetto dell'Architettura Esagonale, gli adapter agiscono come strato di confine e di traduzione tra il nucleo applicativo e l'infrastruttura esterna, isolando la logica di business da qualsiasi dettaglio tecnologico. Essi incapsulano tutta la complessità necessaria per interagire con il database (MongoDB), le API esterne (GitHub), i processi di sistema (esecuzioni Docker locali) e l'infrastruttura Cloud (AWS ECS e S3). Grazie a questo isolamento, la logica di business e l'orchestrazione dei flussi rimangono puramente agnostiche e protette dai dettagli di I/O, garantendo un'altissima testabilità e flessibilità architetturale.
+
 ====== GitHubAdapter <GitHubAdapter>
 #codeDiagram("GitHubAdapter", 100%)
 
-`GitHubAdapter` è il Driven Adapter che implementa sia #link(<IGitHubAvailabilityPort>)[`IGitHubAvailabilityPort`] che #link(<IGitClonePort>)[`IGitClonePort`], eseguendo operazioni Git tramite chiamate `curl` all'API GitHub e comandi shell per la clonazione.
+`GitHubAdapter` è il Driven Adapter responsabile dell'interazione con l'ecosistema GitHub. Implementando i port #link(<IGitHubAvailabilityPort>)[`IGitHubAvailabilityPort`] e #link(<IGitClonePort>)[`IGitClonePort`], funge da ponte traduttore: prende le richieste del dominio applicativo e le trasforma nei comandi tecnici necessari per comunicare con l'esterno, come chiamate di rete (`curl`) e comandi shell nativi (`git`).
 
-- *Adattamento verso l'Esterno:* Traduce i DTO del dominio applicativo in comandi shell Git/curl e ne interpreta le risposte, isolando il resto del sistema dai dettagli dell'API GitHub.
-- *Testabilità:* Il costruttore accetta un `execAsync` iniettabile, permettendo il testing con mock senza eseguire comandi reali.
+- *Integrazione Lightweight tramite Shell:* Invece di dipendere da SDK esterni pesanti, l'adapter utilizza direttamente comandi shell di sistema. Il costruttore accetta una funzione `execAsync` iniettabile (di default basata su `child_process.exec`), permettendo un mocking completo durante i test unitari senza dover effettuare reali chiamate di rete.
+- *Risoluzione Dinamica e Validazione (`check`):* Il metodo `check` non si limita a verificare i permessi. Interrogando l'API REST di GitHub tramite `curl`, estrae e analizza lo status code HTTP. Se il repository è accessibile, processa il payload JSON per risolvere dinamicamente l'esatto hash SHA del commit (sia che l'utente abbia richiesto un branch specifico, un commit esatto, o si sia affidato al branch di default). Questo garantisce che le fasi successive dell'analisi siano assolutamente deterministiche. Nel caso in cui venga richiesto il branch di default, il metodo esegue una seconda chiamata HTTP tramite `getCommitFromBranch` per risolvere il commit SHA esatto, poiché la risposta iniziale sull'endpoint `/repos/{owner}/{repo}` non lo espone direttamente.
+- *Clonazione Ottimizzata (`clone`):* La logica di clonazione applica strategie diverse per minimizzare l'uso di banda e disco. Se viene richiesto un branch specifico o il branch di default, esegue una clonazione "shallow" (`--depth 1`), scaricando solo l'ultima versione dei file ignorando lo storico dei commit passati; se è richiesto un commit storico specifico, esegue una clonazione standard seguita da un `checkout` mirato.
+- *Gestione Sicura dell'Autenticazione:* L'adapter inietta in modo sicuro i #link(<PersonalAccessToken>)[`PersonalAccessToken`] passandoli come header `Bearer` per le API o incorporandoli dinamicamente nell'URL HTTPS durante la clonazione. Inoltre, implementa un meccanismo di fallback a livello di sistema qualora l'utente non fornisca credenziali proprie.
+- *Resilienza e Cleanup:* Per prevenire il rapido esaurimento dello spazio su disco del server (disk leak), l'adapter isola ogni clonazione in una cartella temporanea univoca in `/tmp/` basata sull'ID dell'analisi. Garantisce inoltre, tramite un blocco `catch`, che le directory temporanee vengano rimosse forzatamente in caso di fallimento del clone.
 
----
+====== LocalCodeAnalysisAdapter <LocalCodeAnalysisAdapter>
+#codeDiagram("LocalCodeAnalysisAdapter", 60%)
+
+`LocalCodeAnalysisAdapter` è il Driven Adapter che implementa il port #link(<ICodeAgentPort>)[`ICodeAgentPort`]. È responsabile dell'orchestrazione locale dell'agente di analisi del codice, incapsulando l'esecuzione del container Docker e il recupero sicuro dei risultati.
+
+- *Orchestrazione Docker Nativa:* Il metodo `runContainer()` utilizza il modulo `child_process.spawn` di Node.js per avviare il container `strands-code-analyzer`. Si occupa di montare dinamicamente i volumi condivisi (`analysis_tmp_data`) e di iniettare in modo sicuro le variabili d'ambiente necessarie (verificando la presenza del file `.env` tramite `fs.existsSync`) senza esporle nel codice.
+- *Parsing Resiliente a Tolleranza d'Errore:* Lo `stdout` di un container Docker include spesso log di boot o warning estranei al risultato. Per questo, il metodo `extractJson()` esegue due passaggi: prima scansiona l'output alla ricerca di un token esplicito di errore (`{"status": "error"`); se non lo trova, applica un sofisticato algoritmo iterativo di bilanciamento delle parentesi per isolare il blocco JSON valido contenente il nodo root `analysis_report`. In aggiunta, il metodo `runContainer()` implementa una logica di tolleranza sull'exit code: se il container termina con un codice diverso da zero ma ha comunque prodotto output su `stdout`, il risultato viene comunque promosso invece di essere scartato, permettendo il recupero di report parziali da container che crashano dopo aver completato la scrittura.
+- *Arricchimento del Payload:* Prima di restituire il risultato tramite il metodo `runAnalysis()`, l'adapter funge da strato di traduzione. Intercetta il JSON grezzo emesso dall'agente e vi inietta dinamicamente i metadati operativi cruciali (come l'identificativo del `repository` e lo `status` dell'operazione), garantendo che il DTO finale rispetti rigorosamente le aspettative del livello Application.
+- *Risoluzione dei fallimenti (Fallback):* In caso di crash improvviso del container, fallimento del Docker o corruzione dell'output testuale, l'eccezione non viene propagata. Il blocco `catch` invoca `createFallbackResponse()`, che istanzia e restituisce una risposta strutturata, type-safe e con verdetto `Critical`, incapsulando il motivo del fallimento. Questo isolamento garantisce che l'orchestratore globale non si blocchi per colpa di un singolo agente.
+
+====== DocumentationAnalysisAdapter <DocumentationAnalysisAdapter>
+#codeDiagram("DocumentationAnalysisAdapter", 60%)
+
+`DocumentationAnalysisAdapter` è il Driven Adapter che implementa il port #link(<IDocumentationAgentPort>)[`IDocumentationAgentPort`]. Gestisce l'orchestrazione locale dell'agente incaricato di valutare la qualità, le discrepanze e i file mancanti della documentazione del repository.
+
+- *Esecuzione Isolata via Docker:* Il metodo `runContainer()` utilizza il modulo `child_process.spawn` per avviare il container `strands-documentation-analyzer`. Si occupa di montare dinamicamente il volume condiviso (`analysis_tmp_data`) per l'accesso al codice e di iniettare il file di configurazione ambientale `.env`.
+- *Overriding Dinamico dell'Entrypoint:* A differenza degli altri adapter, sovrascrive dinamicamente l'entrypoint di default del container (`--entrypoint sh`) per lanciare esplicitamente lo script Python dell'agente. In questa fase, applica un quoting rigoroso al path del repository (`"${repoPathInContainer}"`) per prevenire bug legati al word-splitting della shell (ad esempio se il nome della repo contiene spazi).
+- *Parsing Resiliente a Tolleranza d'Errore:* Consapevole che lo `stdout` Docker non è mai un JSON "puro", l'adapter impiega il metodo custom `extractJson()`. Dapprima verifica l'eventuale presenza di un token esplicito di errore; in sua assenza, utilizza un algoritmo iterativo basato sul conteggio delle parentesi per scansionare l'output, scartare il rumore di boot e isolare il blocco JSON valido contenente l'oggetto `analysis_report`.
+- *Arricchimento del Payload:* Prima di restituire l'esito tramite `runAnalysis()`, l'adapter inietta nel JSON grezzo i metadati operativi mancanti (come l'ID del `repository` e lo `status` di successo), allineando strutturalmente l'output alle aspettative del livello Application.
+- *Risoluzione dei fallimenti (Fallback):* Se l'agente Python va in crash o genera un output incomprensibile, il blocco `catch` invoca `createFallbackResponse()`. Questo metodo inietta uno stato di errore controllato (`status: 'error'`) e restituisce una risposta strutturata contenente array vuoti per tutte le categorie (violazioni, audit, file mancanti). Ciò permette alla pipeline generale di concludersi senza corrompere o bloccare l'esecuzione degli altri agenti di analisi paralleli.
+
+====== LocalSecurityAnalysisAdapter <LocalSecurityAnalysisAdapter>
+#codeDiagram("LocalSecurityAnalysisAdapter", 70%)
+
+`LocalSecurityAnalysisAdapter` è il Driven Adapter che implementa il port #link(<ISecurityAgentPort>)[`ISecurityAgentPort`]. Gestisce l'orchestrazione locale dell'agente dedicato alla scansione delle vulnerabilità, incapsulando l'esecuzione dell'immagine Docker e la complessa gestione dei risultati aggregati dei vari tool.
+
+- *Orchestrazione Docker Sicura:* Il metodo `runContainer()` utilizza `child_process.spawn` per avviare in isolamento il container `strands-security-analyzer`. Inietta dinamicamente il file `.env` di configurazione (verificandone preventivamente l'esistenza tramite `fs.existsSync`) e mappa il volume condiviso (`analysis_tmp_data`) in cui risiede il codice clonato, garantendo che l'agente abbia accesso esclusivo al contesto necessario.
+- *Parsing Resiliente a Tolleranza d'Errore:* Poiché lo `stdout` del container viene spesso inquinato dai log di avvio dei tool sottostanti, il metodo `extractJson()` adotta una strategia a due fasi: dapprima scansiona l'output alla ricerca di un token esplicito di errore (`{"status": "error"`); in sua assenza, utilizza un algoritmo custom di bilanciamento delle parentesi per scansionare il flusso testuale, scartare il rumore e isolare esclusivamente il payload JSON valido associato alla chiave `analysis_report`.
+- *Arricchimento del Contesto:* Prima di istanziare la risposta finale, l'adapter agisce da strato di traduzione arricchendo il JSON grezzo: inietta l'identificativo del `repository` e impone lo stato `success` nei `metadata`, allineando l'output grezzo dell'agente alle aspettative strutturali del livello Application.
+- *Risoluzione dei fallimenti (Fallback):* In caso di fallimento infrastrutturale (es. crash del container o errore di Docker), l'adapter applica un pattern di graceful degradation tramite `createFallbackResponse()`. Invece di far fallire l'orchestratore, restituisce un DTO strutturato con stato `FAILED` e incapsula esplicitamente il motivo del crash all'interno dell'array `errors` associandolo al tool fittizio `'agent'`, garantendo la tracciabilità del problema direttamente nel report di sicurezza finale.
 
 ====== MongoDBAdapter <MongoDBAdapter>
 #codeDiagram("MongoDBAdapter", 100%)
 
-`MongoDBAdapter` è il Driven Adapter che implementa tutti e quattro i port di repository per le credenziali Git (#link(<IGitCredentialReadPort>)[`IGitCredentialReadPort`], #link(<IGitCredentialSavePort>)[`IGitCredentialSavePort`], #link(<IGitCredentialDeletePort>)[`IGitCredentialDeletePort`], #link(<IGitCredentialUpdatePort>)[`IGitCredentialUpdatePort`]), interagendo con MongoDB tramite Mongoose.
+`MongoDBAdapter` è il Driven Adapter centralizzato che implementa l'intero livello di persistenza del sistema su MongoDB. Funge da ponte tra i contratti definiti nel livello Application e il database fisico, incapsulando la logica di accesso, traduzione e aggregazione attraverso la libreria Mongoose. Inietta nel costruttore i sei modelli definiti nel dominio e implementa sedici port distinti, suddividendo il suo operato su diverse aree funzionali:
 
-- *Adattatore Unificato:* Concentra tutta la logica di persistenza delle credenziali in un unico adapter, semplificando la configurazione del modulo NestJS e riducendo la frammentazione infrastrutturale.
-- *Schema MongoDB:* Utilizza lo schema #link(<GitCredential>)[`GitCredential`] per mappare le credenziali sul documento MongoDB, applicando validazione a livello di schema (regex SHA-256 per la password, unicità dell'URL).
+- *Gestione Sicura delle Credenziali:* Tramite i metodi `authorize()`, `save()`, `updatePAT()` e `deletePAT()`, gestisce il ciclo di vita dei token di accesso mappandoli sullo schema #link(<GitCredential>)[`GitCredential`]. Oltre alle operazioni CRUD, isola gli errori infrastrutturali intercettando il codice `11000` di MongoDB per tradurlo in un fallimento di "credenziali duplicate" gestibile dal dominio.
+- *Tracciamento del Ciclo di Vita dell'Analisi:* Il metodo `saveAnalysis()` inizializza il documento #link(<GitHubAnalysisRecord>)[`GitHubAnalysisRecord`] all'avvio del processo. Successivamente, `addReportsToAnalysis()` agisce da aggregatore: riceve gli identificativi dei report generati dagli agenti e aggiorna atomicamente il record principale, associando le chiavi esterne e spostandone lo status a `COMPLETED`.
+- *Archiviazione Multi-Report:* Espone tre metodi dedicati (`saveCodeReport()`, `saveDocsReport()` e `saveSecurityReport()`) per riversare le complesse alberature dei Value Object di dominio all'interno dei documenti di database. Più nello specifico:
+  - Traduce le metriche di copertura, le issue strutturali e i verdetti dell'AI nello schema #link(<CodeReportModel>)[`CodeReportModel`].
+  - Mappa l'intero albero delle discrepanze testuali, i file mancanti e l'audit delle dipendenze all'interno dello schema #link(<DocumentationReportModel>)[`DocumentationReportModel`].
+  - Scompone logicamente le vulnerabilità rilevate, separandole per tool di origine (Trivy, Semgrep, Grype) e per categoria, strutturandole all'interno del #link(<SecurityReportModel>)[`SecurityReportModel`].
+- *Aggregazione Dinamica in Lettura:* Il metodo `getAnalysisFromId()` orchestra query complesse al posto di una semplice `find`. Recupera il record base e, tramite interrogazioni condizionali sui modelli Mongoose, "pesca" i tre report separati (se presenti), assemblandoli al volo nel DTO `GitHubAnalysisDetailedResult` richiesto dal frontend. Il metodo `getAllAnalysesForUser()` fornisce invece viste generalizzate leggere.
+- *Gestione Dinamica delle Collezioni:* Attraverso metodi come `addCollection()`, `deleteCollection()` e `getRepositoryCollection()`, l'adapter gestisce le viste aggregate per utente basate sullo schema #link(<GitHubCollection>)[`GitHubCollection`]. Nell'orchestrare le letture, non duplica i dati storici ma interroga dinamicamente la collezione `github_analyses` filtrando per `url` e `userId` (ordinando per `createdAt`), garantendo che la collezione restituisca uno storico sempre aggiornato.
+
+====== S3Adapter <S3Adapter>
+#codeDiagram("S3Adapter", 60%)
+
+`S3Adapter` è il Driven Adapter cloud-native che implementa #link(<IGitClonePort>)[`IGitClonePort`]. Sostituisce la clonazione locale preparando il codice per un'architettura distribuita.
+
+- *Clonazione Dinamica e Autenticazione:* Clona il repository localmente adattando la strategia alla richiesta (`--depth 1` per branch/default, o checkout mirati per commit storici). Gestisce l'autenticazione iniettando il PAT dell'utente o applicando dinamicamente il token di sistema di fallback (`CODE_GUARDIAN_TOKEN`).
+- *Compressione e Upload S3:* Una volta clonato il codice, utilizza la libreria `tar` per comprimere l'intera cartella in un archivio `.tar.gz`. Successivamente, lo carica su un bucket AWS S3 tramite `PutObjectCommand`. Questo file diventa il volume di partenza "congelato" per i container di analisi.
+- *Gestione Sicura del Ciclo di Vita:* Utilizza un blocco `try/catch` per garantire la pulizia assoluta del file system locale dell'orchestratore. Sia in caso di successo che di eccezione, rimuove forzatamente sia la directory clonata (`rm -rf`) che l'archivio generato (`fs.unlinkSync`), prevenendo ogni leak di spazio su disco.
+
+====== ECSCodeAnalysisAdapter <ECSCodeAnalysisAdapter>
+#codeDiagram("ECSCodeAnalysisAdapter", 67%)
+
+`ECSCodeAnalysisAdapter` è il Driven Adapter che implementa #link(<ICodeAgentPort>)[`ICodeAgentPort`], delegando l'esecuzione dell'agente di analisi del codice all'infrastruttura serverless AWS ECS (Fargate).
+
+- *Orchestrazione Serverless:* Il metodo `runEcsTask()` avvia un task isolato tramite `RunTaskCommand`, configurando esplicitamente la rete VPC (subnet, security group). Inietta nel container le variabili d'ambiente fondamentali (`ANALYSIS_ID` e `S3_BUCKET_NAME`) necessarie all'agente per scaricare il codice e caricare il risultato.
+- *Monitoraggio Attivo (Polling):* Dato che ECS è asincrono, l'adapter implementa `waitForTaskCompletion()`. Questo loop utilizza `DescribeTasksCommand` interrogando AWS ogni 10 secondi fino al raggiungimento dello stato `STOPPED`. Verifica rigorosamente l'exit code del container: un'uscita diversa da zero solleva immediatamente un'eccezione infrastrutturale.
+- *Recupero e Arricchimento:* Tramite `GetObjectCommand` scarica da S3 il file di reportistica prodotto (`code_report.json`). Agendo da strato di traduzione, l'adapter inietta nel JSON i metadati applicativi (`repository` ID e `status: 'success'`) prima di passare il controllo al livello Application.
+- *Risoluzione dei fallimenti (Fallback):* In caso di timeout, fallimento di AWS o exit code anomalo, il blocco `catch` invoca `createFallbackResponse()`. Invece di far crollare l'applicazione, restituisce un DTO type-safe con verdetto `Critical`, incapsulando il motivo esatto del fallimento infrastrutturale.
+
+====== ECSDocumentationAnalysisAdapter <ECSDocumentationAnalysisAdapter>
+#codeDiagram("ECSDocumentationAnalysisAdapter", 70%)
+
+`ECSDocumentationAnalysisAdapter` è il Driven Adapter che implementa #link(<IDocumentationAgentPort>)[`IDocumentationAgentPort`] eseguendo l'agente di documentazione su AWS ECS (Fargate).
+
+- *Esecuzione Distribuita:* Il metodo `runEcsTask()` utilizza `RunTaskCommand` per avviare il task basato sulla definizione `ecsTaskDefinitionDocs`. Passa il contesto operativo iniettando `ANALYSIS_ID` e `S3_BUCKET_NAME` come variabili d'ambiente.
+- *Gestione dell'Attesa (Polling):* L'adapter delega a `waitForTaskCompletion()` l'attesa asincrona. Tramite chiamate ripetute a `DescribeTasksCommand`, interroga lo stato del container Fargate e controlla rigorosamente la proprietà `exitCode` per validare l'integrità dell'esecuzione remota.
+- *Integrazione S3 e Payload:* Tramite `fetchResultFromS3()`, scarica dal bucket il file prodotto dall'agente (`docs_report.json`). Valida la radice strutturale `analysis_report` e vi inietta i metadati applicativi (`repository` e `status: 'success'`) prima di completare la risoluzione.
+- *Graceful Degradation:* Se il task fallisce o restituisce un exit code anomalo, il catch block invoca `createFallbackResponse()`. L'eccezione viene trasformata in una risposta controllata con array vuoti (per violazioni, audit e file mancanti) e stato `'error'`, evitando di far fallire l'intera pipeline globale.
+
+====== ECSSecurityAnalysisAdapter <ECSSecurityAnalysisAdapter>
+#codeDiagram("ECSSecurityAnalysisAdapter", 74%)
+
+`ECSSecurityAnalysisAdapter` è il Driven Adapter che implementa #link(<ISecurityAgentPort>)[`ISecurityAgentPort`] eseguendo la suite di sicurezza su AWS ECS (Fargate).
+
+- *Scalabilità e Isolamento:* Il metodo `runEcsTask()` lancia il container (`ecsTaskDefinitionSecurity`) applicando le regole di rete VPC (subnet e security group) necessarie per garantire un ambiente cloud isolato durante la scansione delle vulnerabilità.
+- *Monitoraggio dell'Esecuzione:* Il flusso viene bloccato in attesa sicura dal metodo `waitForTaskCompletion()`. Questo ciclo verifica che il task ECS raggiunga lo stato `STOPPED` senza errori sistemici, sollevando eccezioni in caso di `exitCode` diverso da zero.
+- *Estrazione Dati Cloud-Native:* Al termine dell'esecuzione, il metodo `fetchResultFromS3()` preleva dal bucket l'artefatto JSON (`security_report.json`). L'adapter lo parsa e lo arricchisce dinamicamente con i metadati necessari a soddisfare il contratto del livello Application.
+- *Tracciabilità degli Errori:* Il pattern di fallback, gestito da `createFallbackResponse()`, è particolarmente curato. Se l'esecuzione su ECS fallisce, non si limita a impostare lo stato a `FAILED`: inserisce l'eccezione infrastrutturale nell'array `errors` associandola a un tool fittizio (`tool: 'agent'`), per garantire totale trasparenza sul motivo del blocco al front-end.
 
 ===== Schema
-====== GitCredential <GitCredential>
-//#codeDiagram("GitCredential", 100%)
+Questa sezione descrive gli Schema Mongoose, ovvero i modelli di dati fisici utilizzati dal livello di persistenza per interfacciarsi con il database MongoDB. Nel rispetto dell'Architettura Esagonale, gli Schema fungono da proiezione persistente delle Entità e dei Value Object definiti nel Domain Layer. Essi incapsulano esclusivamente dettagli infrastrutturali — come i vincoli di unicità, l'indicizzazione per l'ottimizzazione delle query e la gestione dei tipi nativi del database (es. `ObjectId` e `timestamps`) — mantenendo il dominio puro e completamente agnostico rispetto alla tecnologia di memorizzazione.
 
-`GitCredential` è lo schema Mongoose che definisce la struttura del documento MongoDB per le credenziali Git: URL del repository (chiave univoca), hash della password, e PAT cifrato.
+====== GitCredential <GitCredential>
+#codeDiagram("GitCredential", 20%)
+
+`GitCredential` è lo schema Mongoose che definisce la struttura del documento MongoDB per le credenziali Git: URL del repository (chiave univoca), hash della password e PAT.
 
 - *Persistenza delle Credenziali:* Rappresenta la proiezione di persistenza dei dati gestiti dai Value Object #link(<RepoURL>)[`RepoURL`], #link(<PATPassword>)[`PATPassword`] e #link(<PersonalAccessToken>)[`PersonalAccessToken`], adattandoli al formato MongoDB.
+- *Ricerca Ottimizzata:* Il campo `repoUrl` è marcato come `unique` e indicizzato (`index: true`), garantendo l'unicità delle credenziali per repository e ricerche fulminee durante l'autorizzazione.
+
+====== GitHubAnalysisRecord <GitHubAnalysisRecord>
+#codeDiagram("GitHubAnalysisRecord", 30%)
+
+`GitHubAnalysisRecord` è lo schema Mongoose che definisce la persistenza dell'entità #link(<GitHubAnalysis>)[`GitHubAnalysis`], memorizzando i metadati dell'analisi e i riferimenti ai vari report generati.
+
+- *Proiezione dell'Entità:* Mappa gli attributi gestiti dai Value Object #link(<AnalysisId>)[`AnalysisId`], #link(<UserId>)[`UserId`], #link(<RepoURL>)[`RepoURL`], #link(<BranchName>)[`BranchName`], #link(<CommitHash>)[`CommitHash`] e l'enumerazione #link(<AnalysisStatus>)[`AnalysisStatus`] in tipi primitivi persistibili nel database.
+- *Tracciamento dei Report:* Mantiene i riferimenti opzionali (di tipo stringa, derivati dal Value Object #link(<ReportId>)[`ReportId`]) ai documenti separati che contengono i payload massivi generati dagli agenti.
+- *Gestione Temporale:* Utilizza l'opzione `timestamps: true` di Mongoose per gestire automaticamente i campi `createdAt` e `updatedAt`.
+
+====== GitHubCollection <GitHubCollection>
+#codeDiagram("GitHubCollection", 25%)
+
+`GitHubCollection` è lo schema Mongoose che raggruppa le analisi ripetute su uno stesso repository per un dato utente, creando una vista "storica" o di progetto.
+
+- *Relazioni MongoDB:* Il campo `analyses` utilizza `ObjectId` per referenziare multipli documenti della collezione `github_analyses` (ossia analisi derivanti dall'entità #link(<GitHubAnalysis>)[`GitHubAnalysis`]), modellando una relazione uno-a-molti. Tuttavia, per garantire uno storico sempre aggiornato e inclusivo anche delle analisi precedenti alla creazione della collezione, il `MongoDBAdapter` non utilizza questo campo in lettura: le analisi vengono recuperate dinamicamente tramite query diretta sulla collezione `github_analyses`, filtrando per `url` e `userId`. Il campo rimane presente per compatibilità strutturale del documento.
+- *Indice Composto:* Definisce un indice composto e univoco su `{ url: 1, userId: 1 }` per garantire che un utente non possa creare più collezioni per lo stesso repository, ottimizzando contemporaneamente le query di lookup basate in origine su #link(<RepoURL>)[`RepoURL`] e #link(<UserId>)[`UserId`].
+
+====== CodeReportModel <CodeReportModel>
+#codeDiagram("CodeReportModel", 35%)
+
+`CodeReportModel` è lo schema Mongoose che archivia i risultati dettagliati prodotti dall'agente di analisi del codice, fungendo da proiezione persistente per l'entità #link(<CodeAgentReport>)[`CodeAgentReport`].
+
+- *Integrità Strutturale:* Utilizza regex per validare che `reportId` e `analysisId` (rappresentazioni testuali di #link(<ReportId>)[`ReportId`] e #link(<AnalysisId>)[`AnalysisId`]) siano formattati correttamente come UUID v7.
+- *Sub-documenti Strutturati:* Fa un uso estensivo di classi Schema interne per mappare fedelmente l'alberatura complessa prodotta dai Value Object #link(<CodeAgentMetadata>)[`CodeAgentMetadata`] e #link(<AIInterpretation>)[`AIInterpretation`].
+- *Indicizzazione Strategica:* Crea indici specifici su `interpretation.verdict` (direttamente correlato all'enumerazione #link(<VerdictStatus>)[`VerdictStatus`]) e `metadata.language` per permettere aggregazioni e filtri rapidi a livello di database.
+
+====== DocumentationReportModel <DocumentationReportModel>
+#codeDiagram("DocumentationReportModel", 42%)
+
+`DocumentationReportModel` è lo schema Mongoose dedicato al salvataggio massivo dei risultati emessi dall'agente di analisi della documentazione, fungendo da proiezione persistente per l'entità #link(<DocumentationReport>)[`DocumentationReport`].
+
+- *Mappatura delle Discrepanze:* Salva direttamente gli array di oggetti complessi derivati dai Value Object #link(<APIViolation>)[`APIViolation`], #link(<DocsDiscrepancy>)[`DocsDiscrepancy`], #link(<MissingFile>)[`MissingFile`] e #link(<DependencyAudit>)[`DependencyAudit`].
+- *Integrità Relazionale:* Come gli altri report, vincola i campi legati a #link(<ReportId>)[`ReportId`] e #link(<AnalysisId>)[`AnalysisId`] ad essere univoci.
+- *Ottimizzazione delle Ricerche:* Implementa indici manuali sui campi di severità annidati (correlati all'enumerazione #link(<SeverityLevel>)[`SeverityLevel`]), fondamentali per estrarre rapidamente le metriche senza caricare interi documenti in memoria.
+
+====== SecurityReportModel <SecurityReportModel>
+#codeDiagram("SecurityReportModel", 45%)
+
+`SecurityReportModel` è lo schema Mongoose progettato per immagazzinare in modo strutturato le vulnerabilità riscontrate, fungendo da proiezione persistente per l'entità #link(<SecurityReport>)[`SecurityReport`].
+
+- *Categorizzazione Multi-Tool:* Separa logicamente i risultati in array di sub-documenti tipizzati che riflettono esattamente le collezioni di Value Object dell'entità: #link(<DependencyFinding>)[`DependencyFinding`], #link(<OWASPFinding>)[`OWASPFinding`], #link(<SecretFinding>)[`SecretFinding`] e gli errori #link(<ToolError>)[`ToolError`].
+- *Indicizzazione Profonda:* Include indici composti e specifici sulle proprietà annidate (come i livelli di severità legati a #link(<SeverityFinding>)[`SeverityFinding`] o le categorie OWASP) per supportare query ad alte prestazioni necessarie per i cruscotti di sicurezza.
 
 ==== Presentation
 ===== Helpers

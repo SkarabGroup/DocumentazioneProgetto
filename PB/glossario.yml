@@ -52,6 +52,9 @@ A:
     alternative: Tempo di risposta medio
     descrizione: Metrica prestazionale che indica la media aritmetica dell'intervallo temporale tra la sottomissione di un input e l'output finale prodotto dal sistema.
 
+  Amazon Web Services:
+    acronimo: AWS
+    descizione: Ecosistema di servizi cloud che fornisce l'infrastruttura computazionale e di storage per il sistema. Consente l'esecuzione di task intensivi in ambienti isolati e la gestione dinamica delle risorse, garantendo la scalabilità necessaria alle operazioni di analisi e la persistenza dei dati non sensibili.
 B:
   Backlog:
     descrizione: Elenco dinamico e prioritizzato di tutto il lavoro necessario per realizzare il prodotto (user story, task, bug), gestito dal Responsabile in collaborazione con il team.
@@ -153,6 +156,9 @@ E:
   Earned Value Management:
     acronimo: EVM
     descrizione: Tecnica di gestione di progetto che integra misure di ambito, schedulazione e costi per fornire una valutazione oggettiva della performance e dei rischi economici.
+  Elastic Container Service:
+    acronimo: ECS
+    descrizione: Servizio di orchestrazione di container che consente di eseguire e scalare applicazioni containerizzate su Amazon Web Service.
   ESLint:
     descrizione: Strumento di analisi statica utilizzato per identificare e segnalare pattern problematici o violazioni delle convenzioni di stile nel codice JavaScript e TypeScript.
   Estimate At Completion:
@@ -169,7 +175,8 @@ F:
   Front-end:
     alternative: Frontend
     descrizione: Parte di un'applicazione o sistema con cui gli utenti interagiscono direttamente, comprendente l'interfaccia utente e l'esperienza utente.
-
+  Fargate:
+    descrizione: Servizio di orchestrazione di container serverless di AWS che consente di eseguire container Docker senza dover gestire l'infrastruttura sottostante, ideale per carichi di lavoro dinamici e scalabili come quelli degli agenti AI.
 G:
   Gantt:
     descrizione: Diagramma a barre utilizzato per la pianificazione temporale delle attività di progetto, illustrando durate, scadenze e dipendenze reciproche su una scala temporale.
@@ -404,6 +411,9 @@ S:
   Segreti hardcoded:
     alternative: Hardcoded secrets
     descrizione: Informazioni sensibili come credenziali, scritte direttamente all'interno del codice sorgente, che introducono un severo rischio di sicurezza. 
+  Simple Storage Service:
+    acronimo: S3
+    descrizione: Amazon Simple Storage Service, servizio di storage cloud scalabile e duraturo utilizzato per archiviare dati, file e asset del progetto.
   Sistema multiagente:
     alternative: Multi-agent system, sistema multi agente, multiagente
     descrizione: Architettura software in cui più agenti intelligenti e autonomi interagiscono tra loro per risolvere problemi complessi non affrontabili da un singolo componente.
@@ -428,6 +438,8 @@ S:
     descrizione: Metrica che valuta il successo di uno sprint calcolando la percentuale di obiettivi critici portati a termine rispetto a quelli pianificati.  
   Stima:
     descrizione: Previsione quantitativa dell'impegno (ore), dei tempi o dei costi necessari per completare un'attività, basata su esperienza o dati storici.
+  Strands:
+    descrizione: Framework open source di AWS per la creazione di agenti AI autonomi, utilizzato come base per lo sviluppo del sistema multiagente di Code Guardian.
   Stakeholder:
     alternative: stakeholders, portatori di interesse
     descrizione: Individui o gruppi che possono influenzare o essere influenzati dalle attività o dai risultati del progetto.
@@ -442,7 +454,6 @@ S:
   Sviluppatore software:
     alternative: software developer, sviluppatori software, sviluppatori
     descrizione: Persona che scrive, testa e mantiene il codice sorgente di applicazioni o sistemi software.
-
 T:
   Task:
     descrizione: Unità elementare di lavoro, tracciabile e assegnabile a un singolo membro del team, necessaria per il completamento di una funzionalità o di un obiettivo di progetto.   
