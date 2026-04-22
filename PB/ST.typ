@@ -24,11 +24,11 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #set page(numbering: "1", header: header("Specifica Tecnica"), footer: footer())
 #let history = (
   (
-    "2026/04/20",
+    "2026/04/21",
     "0.15",
     "Completati i componenti della sezione presentation per Analysis Microservice",
     members.antonio,
-    ""
+    members.andrea,
   ),
   (
     "2026/04/20",
@@ -1466,7 +1466,9 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 
 ==== Presentation
 ===== Helpers
-====== JwtAuthGuard <JwtHelper>
+Questa sezione descrive i componenti ausiliari del livello di presentazione, responsabili di fornire funzionalità trasversali riutilizzabili dai controller. In particolare, raggruppa i meccanismi di autenticazione e autorizzazione basati su JWT, isolando la logica di validazione dei token dal codice applicativo dei controller e garantendo che ogni endpoint protetto possa verificare l'identità del chiamante in modo uniforme e disaccoppiato.
+
+====== JwtHelper <JwtHelper>
 #codeDiagram("JwtHelper", 80%)
 
 `JwtHelper` raggruppa i componenti responsabili dell'autenticazione basata su JWT, integrando il meccanismo di validazione dei token con il framework applicativo. Include la strategia di validazione (`JwtStrategy`), il meccanismo di protezione degli endpoint (`JwtAuthGuard`) e un decoratore per l'estrazione dell'identità utente (`UserId`).
@@ -1476,6 +1478,8 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 - *Accesso Tipizzato all'Utente:* Il decoratore `UserId` consente di accedere in modo tipizzato alle informazioni dell'utente estratte dal token, evitando la propagazione diretta del modello HTTP nei livelli superiori.
 
 ===== Controllers
+Questa sezione descrive i Controller, i componenti del livello di presentazione incaricati di esporre gli endpoint HTTP e di tradurre le richieste in ingresso nei comandi applicativi corrispondenti. Nel rispetto dell'Architettura Esagonale, i controller non contengono logica di business: si limitano a trasformare i DTO di trasporto in comandi, delegare l'esecuzione ai rispettivi Use Case e restituire al client i DTO di risposta appropriati.
+
 ====== AnalysisController <AnalysisController>
 #codeDiagram("AnalysisController", 90%)
 
@@ -1498,9 +1502,11 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 `RepositoriesController` espone gli endpoint HTTP per la gestione delle collezioni di repository e delle analisi associate. Inietta diversi use case per coprire operazioni di creazione, recupero e cancellazione, restituendo DTO di risposta specifici per ciascun endpoint.
 
 - *Composizione dei Casi d'Uso:* Il controller coordina più use case distinti per gestire scenari complessi, mantenendo comunque separata la logica applicativa nei rispettivi componenti.
-- *Aggregazione dei Dati in Lettura:* Alcuni endpoint combinano risultati provenienti da più casi d'uso per restituire viste più ricche, centralizzando l'aggregazione a livello di controller senza introdurre logica di business.
+- *Aggregazione dei Dati in Lettura:* Alcuni endpoint combinano risultati provenienti da più casi d'uso per restituire viste più ricche, centralizzando l'aggregazione a livello di controller senza introdurre logica di business. In particolare, l'endpoint `getFullCollectionData` recupera prima gli identificativi delle analisi dalla collezione, quindi esegue il recupero dei dettagli di ciascuna analisi in parallelo tramite `Promise.all`, ottimizzando i tempi di risposta in presenza di collezioni con molte analisi associate.
 
 ===== Presentation DTOs - Requests
+Questa sezione descrive i DTO di richiesta del livello di presentazione, ovvero i contratti che definiscono la struttura dei dati in ingresso per ciascun endpoint HTTP. Essi fungono da strato di traduzione tra il formato atteso dal client e il modello applicativo interno, garantendo che i controller ricevano dati strutturati e tipizzati prima di costruire i comandi da inviare ai Use Case.
+
 ====== AddRepositoryCollectionRequestDTO <AddRepositoryCollectionRequestDTO>
 #codeDiagram("AddRepositoryCollectionRequestDTO", 60%)
 
@@ -1529,6 +1535,7 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 `UpdatePatRequestDTO` definisce il contratto del body della richiesta HTTP per l’aggiornamento di un Personal Access Token. I campi `repositoryUrl`, `password` e `newPersonalAccessToken` sono obbligatori, assicurando che il sistema possa identificare il contesto corretto e sostituire in modo sicuro il token esistente.
 
 ===== Presentation DTOs - Response
+Questa sezione descrive i DTO di risposta del livello di presentazione, ovvero i contratti che definiscono la struttura dei dati restituiti al client per ciascun endpoint HTTP. Essi fungono da strato di traduzione tra i risultati prodotti dal livello applicativo e il formato esposto verso l'esterno, garantendo il disaccoppiamento tra i modelli interni e la rappresentazione pubblica dell'API.
 ====== AddRepositoryCollectionResponseDTO  <AddRepositoryCollectionResponseDTO>
 #codeDiagram("AddRepositoryCollectionResponseDTO", 60%)
 
@@ -1604,7 +1611,7 @@ A differenza dei Value Object, le Entity sono definite dalla loro *identità* pe
 `StartAnalysisResponseDTO` definisce la risposta HTTP per l'avvio di una nuova analisi. Il DTO include i principali metadati dell'analisi avviata (`user`, `id`, `url`, `branch`, `commit`) e un campo `errorMessage` che rappresenta il risultato dell'operazione.
 
 - *Trasporto di Informazioni Operative:* In caso di successo, il DTO restituisce i dati identificativi dell'analisi appena avviata.
-- *Messaggio Sempre Presente:* Il campo `errorMessage` viene utilizzato sia per confermare il successo dell'operazione sia per descrivere eventuali errori, fornendo un feedback uniforme al client.
+- *Messaggio Sempre Presente:* Il campo `errorMessage` viene popolato con la stringa fissa `Analysis Started Successfully` in caso di successo, o con il messaggio di errore specifico in caso di fallimento, fornendo un feedback uniforme al client indipendentemente dall'esito.
 - *Costruzione Controllata:* I metodi statici assicurano che i dati siano valorizzati solo nei casi appropriati, mantenendo coerenza tra successo e fallimento.
 
 ====== UpdatePatResponseDTO <UpdatePatResponseDTO>
