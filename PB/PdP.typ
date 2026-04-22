@@ -2462,7 +2462,7 @@ Questo sprint ha permesso al team di concludere il progetto con un consumo orari
 Il focus è stato principalmente sul completamento del codice e dei test per il microservizio di analisi, con particolare attenzione agli agenti e alla logica di salvataggio e recupero delle analisi. 
 Il deployment su AWS è stato completato, ma ha richiesto più tempo del previsto a causa di complessità tecniche non anticipate. 
 Sul fronte documentale, sono stati completati la Specifica Tecnica, il Manuale Utente e la revisione finale del Piano di Progetto (PdP) e Piano di Qualifica.
-Il MVP é stato 
+Il MVP é stato presentato all'azienda Proponente, ricevendo feedback positivi e apprezzamenti per il lavoro svolto, nonostante le difficoltà incontrate durante il progetto.
 ===== Stato di Avanzamento dei Deliverable
 - *Microservizio Account/Credenziali*: non sono state apportate modifiche dato che era giá stato completato allo sprint 9.
 
