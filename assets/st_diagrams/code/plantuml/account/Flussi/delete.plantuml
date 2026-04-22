@@ -1,0 +1,37 @@
+@startuml DeleteControllerReachableClasses
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 35
+skinparam ranksep 50
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class DeleteUserController
+
+class DeleteResponseDto
+
+interface IDeleteUseCase
+
+class DeleteService
+
+interface IUserDeletePort
+interface IVerifyTokenPort
+
+class PostgresAdapter
+class JwtAdapter
+
+' Presentation -> Application
+DeleteUserController --down-> IDeleteUseCase
+DeleteUserController --down-> IVerifyTokenPort
+DeleteUserController ..up.> DeleteResponseDto
+
+' Use case implementation
+DeleteService ..up.|> IDeleteUseCase
+
+' DeleteService dependencies
+DeleteService --down-> IUserDeletePort
+
+' Infrastructure implementations
+PostgresAdapter ..up.|> IUserDeletePort
+JwtAdapter ..up.|> IVerifyTokenPort
+@enduml

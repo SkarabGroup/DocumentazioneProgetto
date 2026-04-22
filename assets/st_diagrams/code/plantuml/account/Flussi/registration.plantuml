@@ -1,0 +1,48 @@
+@startuml RegistrationControllerReachableClasses
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 35
+skinparam ranksep 50
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class RegistrationController
+
+class RegistrationDto
+class AuthResponseDto
+class UserResponseDto
+
+interface IregistrationUseCase
+
+class RegistrationService
+
+interface IUserFindPort
+interface IUserSavePort
+interface IHashPasswordPort
+interface ITokenProviderPort
+
+class PostgresAdapter
+class BcryptAdapter
+class JwtAdapter
+
+' Presentation -> Application
+RegistrationController --down-> IregistrationUseCase
+RegistrationController ..up.> RegistrationDto
+RegistrationController ..up.> AuthResponseDto
+RegistrationController ..up.> UserResponseDto
+
+' Use case implementation
+RegistrationService ..up.|> IregistrationUseCase
+
+' RegistrationService dependencies
+RegistrationService --down-> IUserFindPort
+RegistrationService --down-> IUserSavePort
+RegistrationService --down-> IHashPasswordPort
+RegistrationService --down-> ITokenProviderPort
+
+' Infrastructure implementations
+PostgresAdapter ..up.|> IUserFindPort
+PostgresAdapter ..up.|> IUserSavePort
+BcryptAdapter ..up.|> IHashPasswordPort
+JwtAdapter ..up.|> ITokenProviderPort
+@enduml
