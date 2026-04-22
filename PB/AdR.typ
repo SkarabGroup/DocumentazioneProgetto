@@ -642,7 +642,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     [Piattaforma di hosting esterna. Interagisce con il sistema per fornire l'accesso al codice sorgente (via API o clone) e ai metadati dei repository.],
 
     [*Servizi AWS*],
-    [Infrastruttura cloud esterna di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#amazon-web-service")[#def[Amazon Web Service]] utilizzata dal sistema come ambiente di calcolo e storage per l'esecuzione delle analisi intensive.],
+    [Infrastruttura cloud esterna di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#amazon-web-service")[#def[Amazon Web Services]] utilizzata dal sistema come ambiente di calcolo e storage per l'esecuzione delle analisi intensive.],
 
     [*Strumenti di Analisi*],
     [Insieme degli strumenti terzi invocati dal sistema per l'esecuzione verticale delle scansioni di sicurezza e qualità del codice.],

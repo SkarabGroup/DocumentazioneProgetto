@@ -142,37 +142,58 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #pagebreak()
 
 = Introduzione
+
+== Scopo del Prodotto
 Il presente documento descrive la #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#specifica-tecnica")[#def("Specifica Tecnica")] relativa al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def("Code Guardian")], commissionato dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def("Var Group")] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def("Skarab Group")] nell’ambito del corso di Ingegneria del Software presso l’Università degli Studi di Padova.
 
-Il progetto ha come obiettivo la realizzazione di un sistema per l'automazione dei processi di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] delle vulnerabilità del software. L'architettura si basa sul paradigma degli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] software intelligenti, operanti su repository di codice sorgente. La conformità del sistema è vincolata ai requisiti definiti nel documento Analisi dei Requisiti.
+Il progetto ha come obiettivo la realizzazione di un sistema per l'automazione dei processi di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] delle vulnerabilità del software. L'architettura si basa sul paradigma degli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] software intelligenti, operanti in modo asincrono su repository di codice sorgente. 
 
-La piattaforma supporta attività di analisi statica del codice sorgente e di individuazione delle principali criticità di sicurezza, fornendo suggerimenti di correzione attraverso meccanismi automatizzati basati su modelli di linguaggio di grandi dimensioni (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]), integrati nel workflow degli agenti per formulare e validare le correzioni.
+La piattaforma supporta attività di analisi statica del codice e individuazione delle principali criticità di sicurezza, fornendo suggerimenti di correzione automatizzati. Tale meccanismo è governato da modelli di linguaggio di grandi dimensioni (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]), integrati nel workflow per formulare e validare le modifiche senza compromettere l'integrità logica del software analizzato. La conformità del sistema è strettamente vincolata ai requisiti concordati e formalizzati nel documento di Analisi dei Requisiti.
+
+=== Perimetro e Vincoli Operativi
+Lo sviluppo del Minimum Viable Product (MVP) di Code Guardian è soggetto a specifici vincoli operativi per garantire la compatibilità dell'interfaccia web sui principali ambienti operativi e di navigazione. Nello specifico, l'applicativo deve supportare i seguenti sistemi:
+- *Sistemi Operativi:* Windows 10/11, macOS 14+, distribuzioni Linux (Ubuntu 22.04+);
+- *Browser Web:* Google Chrome 120+, Mozilla Firefox 120+, Apple Safari 17+.
 
 == Finalità del Documento
-Il presente documento ha lo scopo di definire l'architettura di sistema e le scelte implementative necessarie alla realizzazione di Code Guardian. Partendo dai requisiti definiti nell'Analisi dei Requisiti, il documento ne formalizza la traduzione in componenti software, definendo i vincoli tecnologici e i pattern di progettazione adottati.
+Il presente documento traccia il passaggio dalla fase di analisi dei requisiti alla progettazione architetturale e di dettaglio, definendo le scelte implementative necessarie alla realizzazione di Code Guardian. Costituisce il riferimento tecnico primario per il team di sviluppo e per gli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#stakeholder")[#def[stakeholder]], perseguendo i seguenti obiettivi:
 
-Il documento costituisce il riferimento tecnico primario per il gruppo di lavoro (#def[Skarab Group]) e per gli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#stakeholder")[#def[stakeholder]], perseguendo i seguenti obiettivi:
-- definire l'#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#architettura-logica")[#def[architettura logica]] del sistema, descrivendo l'interazione tra i componenti attraverso una scomposizione in layer basata sul pattern #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#architettura-esagonale")[#def[esagonale]];
-- illustrare l'#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#architettura-di-deployment")[#def[architettura di deployment]], specificando la topologia di rete, i nodi di calcolo e le strategie di orchestrazione dei container necessari all'erogazione del servizio;
-- formalizzare i #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#design-pattern")[#def[design pattern]] applicati, motivandone l'adozione per garantire la modularità e la testabilità del codice;
-- garantire la tracciabilità del progetto attraverso la mappatura dei requisiti, verificando che ogni specifica identificata nell'Analisi dei Requisiti trovi riscontro in una componente tecnica o in una logica di business implementata;
-- definire le interfacce di comunicazione per garantire l'estensibilità del sistema a nuovi linguaggi di programmazione o nuovi modelli di intelligenza artificiale;
-- fornire una rappresentazione grafica del sistema mediante diagrammi UML e schemi architetturali, facilitando la comprensione delle dipendenze e del flusso dei dati tra i sottosistemi.
+- definire l'#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#architettura-logica")[#def[architettura logica]] del sistema, descrivendo la scomposizione in layer basata sul pattern #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#architettura-esagonale")[#def[esagonale]] per garantire un elevato disaccoppiamento tra il dominio applicativo e le infrastrutture esterne;
+- illustrare l'#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#architettura-di-deployment")[#def[architettura di deployment]], specificando i nodi di calcolo, la topologia di rete e le strategie di containerizzazione necessarie all'erogazione del servizio;
+- formalizzare i #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#design-pattern")[#def[design pattern]] adottati (creazionali, strutturali e comportamentali), motivandone l'impiego per assicurare manutenibilità, modularità e testabilità del codice;
+- definire le interfacce e i contratti di comunicazione, garantendo l'estensibilità del sistema verso l'integrazione di nuovi provider LLM o l'analisi di ulteriori linguaggi di programmazione;
+- fornire una rappresentazione grafica mediante diagrammi UML, facilitando la comprensione delle dipendenze e del flusso dei dati;
+- garantire la tracciabilità bidirezionale, dimostrando che ogni specifica individuata nell'Analisi dei Requisiti trovi riscontro in un'adeguata componente tecnica.
+
+== Destinatari del Documento
+I principali destinatari di questo documento sono:
+- i *Progettisti* e i *Programmatori* del gruppo Skarab Group, che lo utilizzeranno come linea guida prescrittiva per l'implementazione e l'integrazione del software;
+- i *Verificatori* del gruppo Skarab Group, per comprendere le dipendenze architetturali e pianificare adeguate strategie di test (unitari e di integrazione);
+- l'azienda proponente *Var Group*, per valutare la coerenza delle scelte tecnologiche e progettuali rispetto alle richieste del capitolato d'appalto;
+- i committenti del progetto, *Prof. Tullio Vardanega* e *Prof. Riccardo Cardin*, per la valutazione accademica inerente alla correttezza formale e architetturale del sistema progettato.
+
+== Struttura del Documento
+Il documento è organizzato nei seguenti capitoli principali:
+- *1. Introduzione:* definisce lo scopo, i destinatari, la struttura del documento e i riferimenti normativi e informativi utilizzati.
+- *2. Tecnologie Adottate:* specifica i linguaggi di programmazione, i framework e gli strumenti di supporto scelti per la realizzazione dei diversi layer applicativi.
+- *3. Architettura di Deployment:* illustra la distribuzione fisica e logica del sistema, includendo la descrizione dell'architettura esagonale adottata e la mappatura sui nodi di calcolo.
+- *4. Architettura Logica:* approfondisce la progettazione di dettaglio tramite diagrammi delle classi, l'applicazione dei design pattern e la spiegazione funzionale dei singoli componenti del sistema.
+- *5. Mappatura dei Requisiti:* fornisce il tracciamento formale tra i requisiti definiti in fase di analisi e le relative componenti architetturali incaricate di soddisfarli.
 
 == Glossario
 Al fine di prevenire ambiguità interpretative, è stato redatto un glossario che definisce in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio utilizzati all’interno della documentazione.
 
-Nel testo, *ogni termine evidenziato tramite una G come apice*, rimanda alla voce corrispondente del Glossario pubblicato sul sito ufficiale del gruppo, consentendo al lettore di accedere direttamente alla definizione associata.
+Nel testo, *ogni termine evidenziato tramite la lettera G come apice* (reso graficamente tramite apposita formattazione), rimanda alla voce corrispondente del Glossario pubblicato sul sito ufficiale del gruppo, consentendo al lettore di accedere direttamente alla definizione associata.
 
 La versione più recente del Glossario è disponibile al seguente link: \
-#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario (v1.0.0)]].
+#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario (v2.0.0)]].
 
 == Riferimenti
 === Riferimenti Normativi
 I seguenti documenti hanno valore vincolante per la redazione della Specifica Tecnica:
 - *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> \
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
-  (ultimo accesso: *31/03/2026*)
+  (ultimo accesso: *21/04/2026*)
 
 - *Analisi dei Requisiti*: insieme dei requisiti e dei casi d'uso coperti nel Minimum Viable Product. <AdR> \
   #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/AdR.pdf")] \
@@ -183,54 +204,30 @@ I seguenti documenti hanno valore vincolante per la redazione della Specifica Te
   (versione: *v2.0.0*)
 
 === Riferimenti Informativi
-- *Standard IEEE/ISO/IEC 42010-2022*: International Standard for Software, systems and enterprise--Architecture description \
+- *Standard IEEE/ISO/IEC 42010-2022*: International Standard for Software, systems and enterprise -- Architecture description \
   #underline[#link("https://ieeexplore.ieee.org/document/9938446")] \
-  (ultimo accesso: *31/03/2026*)
+  (ultimo accesso: *21/04/2026*)
 
-- *Dispense del Corso di Ingegneria del Software sulla Progettazione*: \
-  #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T06.pdf")] \
-  (ultimo accesso: *31/03/2026*)
-
-- *Dispense del Corso di Ingegneria del Software sulla Dependency Management*: \
-  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Dependency%20Management%20in%20Object-Oriented%20Programming.pdf")] \
-  (ultimo accesso: *31/03/2026*)
-
-- *Dispense del Corso di Ingegneria del Software sui Diagrammi delle Classi*: <ddC> \
-  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2023/Diagrammi%20delle%20Classi.pdf")] \
-  (ultimo accesso: *31/03/2026*)
-
-- *Dispense del Corso di Ingegneria del Software sui Diagrammi delle Attività*: <ddA> \
-  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20di%20Attivit%C3%A0.pdf")] \
-  (ultimo accesso: *31/03/2026*)
-
-- *Dispense del Corso di Ingegneria del Software sui Pattern Architetturali*: \
-  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Software%20Architecture%20Patterns.pdf")] \
-  (ultimo accesso: *31/03/2026*)
-
-- *Dispense del Corso di Ingegneria del Software sulla Dependency Injection*: \
-  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Design%20Pattern%20Architetturali%20-%20Dependency%20Injection.pdf")] \
-  (ultimo accesso: *31/03/2026*)
-
-- *Dispense del Corso di Ingegneria del Software sui Model-View Patterns*: \
-  #underline[#link("https://www.math.unipd.it/~rcardin/sweb/2022/L02.pdf")] \
-  (ultimo accesso: *31/03/2026*)
-
-- *Dispense del Corso di Ingegneria del Software sui Pattern Creazionali*: \
-  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Design%20Pattern%20Creazionali.pdf")] \
-  (ultimo accesso: *31/03/2026*)
-
-- *Dispense del Corso di Ingegneria del Software sui Pattern Strutturali*: \
-  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Design%20Pattern%20Strutturali.pdf")] \
-  (ultimo accesso: *31/03/2026*)
-
-- *Dispense del Corso di Ingegneria del Software sui Pattern Comportamentali*: \
-  #underline[#link("https://drive.google.com/file/d/1cpi6rORMxFtC91nI6_sPrG1Xn-28z8eI/view?usp=sharing")] \
-  (ultimo accesso: *31/03/2026*)
-
+- *Dispense del Corso di Ingegneria del Software*: \
+  #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T06.pdf")[Progettazione Software]] \ (ultimo accesso: *21/04/2026*) \
+  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Design%20Pattern%20Architetturali%20-%20Dependency%20Injection.pdf")[Dependency Injection]] \ (ultimo accesso: *21/04/2026*) \
+  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Dependency%20Management%20in%20Object-Oriented%20Programming.pdf")[Dependency Management in Object-Oriented Programming]] \ (ultimo accesso: *21/04/2026*) \
+  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2023/Diagrammi%20delle%20Classi.pdf")[Diagrammi delle Classi]] <ddC> \ (ultimo accesso: *21/04/2026*) \
+  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20di%20Attivit%C3%A0.pdf")[Diagrammi delle Attività]] <ddA> \ (ultimo accesso: *21/04/2026*) \
+  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Software%20Architecture%20Patterns.pdf")[Pattern Architetturali]]\ (ultimo accesso: *21/04/2026*)  \
+  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Design%20Pattern%20Architetturali%20-%20Dependency%20Injection.pdf")[Dependency Injection]] \ (ultimo accesso: *21/04/2026*) \
+  #underline[#link("https://www.math.unipd.it/~rcardin/sweb/2022/L02.pdf")[Model-View Patterns]] \
+  (ultimo accesso: *21/04/2026*) \
+  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Design%20Pattern%20Creazionali.pdf")[Design Pattern Creazionali]] \ (ultimo accesso: *21/04/2026*) \
+  #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Design%20Pattern%20Strutturali.pdf")[Design Pattern Strutturali]] \ (ultimo accesso: *21/04/2026*) \
+  #underline[#link("https://drive.google.com/file/d/1cpi6rORMxFtC91nI6_sPrG1Xn-28z8eI/view?usp=sharing")[Design Pattern Comportamentali]] \
+  (ultimo accesso: *21/04/2026*)
 #pagebreak()
 
 = Tecnologie
-== Linguaggi e Runtime
+
+== Linguaggi di Programmazione
+
 #table(
   columns: (1.5fr, 1.3fr, 8fr),
   inset: 10pt,
@@ -241,103 +238,122 @@ I seguenti documenti hanno valore vincolante per la redazione della Specifica Te
 
   [TypeScript],
   [5.9.3],
-  [TypeScript è il linguaggio principale adottato per lo sviluppo di entrambi i microservizi. La tipizzazione statica forte consente di rilevare errori a tempo di compilazione anziché a runtime, riducendo il rischio di regressioni e rendendo i contratti tra componenti espliciti e verificabili staticamente. Questa caratteristica è particolarmente rilevante in un'architettura a microservizi dove le interfacce tra moduli devono essere chiare e stabili nel tempo. La compatibilità con l'intero ecosistema Node.js garantisce inoltre accesso a un vasto insieme di librerie mature e mantenute attivamente.],
+  [TypeScript è il linguaggio principale adottato per lo sviluppo dei microservizi backend e del frontend. La tipizzazione statica forte consente di rilevare errori a tempo di compilazione anziché a runtime, riducendo il rischio di regressioni e rendendo i contratti tra componenti espliciti e verificabili staticamente. Questa caratteristica è particolarmente rilevante in un'architettura a microservizi dove le interfacce tra moduli devono essere chiare e stabili nel tempo. La compatibilità con l'intero ecosistema Node.js garantisce accesso a un vasto insieme di librerie mature e mantenute attivamente.],
 
   [Python],
-  [TBD],
-  [Python è il linguaggio adottato per la componente agentica del sistema, ospitata all'interno del microservizio di analisi. La scelta è motivata dalla maturità e dall'ampiezza del suo ecosistema nel dominio dell'intelligenza artificiale: Python dispone delle librerie più aggiornate per l'integrazione con modelli di linguaggio di grandi dimensioni e per la costruzione di sistemi agentici. In particolare, AWS Strands — il framework agentico adottato — è disponibile nativamente in Python, rendendo questo linguaggio la scelta obbligata per la componente che esegue all'interno delle funzioni Lambda.],
+  [3.12.3],
+  [Python è il linguaggio adottato per la componente agentica del sistema, ospitata all'interno del microservizio di analisi. La scelta è motivata dalla maturità e dall'ampiezza del suo ecosistema nel dominio dell'intelligenza artificiale: Python dispone delle librerie più aggiornate per l'integrazione con modelli di linguaggio di grandi dimensioni (LLM) e per la costruzione di sistemi agentici complessi e pipeline di machine learning.],
+)
+
+== Framework e Librerie
+
+#table(
+  columns: (1.5fr, 1.3fr, 8fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*Tecnologia*], [*Versione*], [*Motivazioni*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, center, center).at(col) + horizon,
 
   [NestJS],
   [11.0.16],
-  [NestJS è il framework adottato per entrambi i microservizi TypeScript. La scelta è motivata da molteplici fattori rispetto ad alternative più minimali come Express.
-    A differenza di Express, che è una libreria priva di convenzioni architetturali, NestJS è un framework completo che impone una struttura modulare ben definita. Ogni modulo incapsula un dominio funzionale coeso, favorendo la separazione delle responsabilità e rendendo il codice più comprensibile e manutenibile nel tempo.
-    Il supporto nativo alla Dependency Injection, basato su decoratori e metadata reflection, consente di dichiarare le dipendenze tra componenti in modo esplicito e di delegarne la risoluzione al framework. Questo meccanismo è particolarmente compatibile con l'architettura Ports & Adapters adottata: le porte vengono definite come interfacce TypeScript e gli adapter come implementazioni concrete, iniettate dal container di NestJS senza che il dominio ne sia a conoscenza.
-    L'integrazione nativa con Jest e il supporto al mocking delle dipendenze tramite il sistema di DI rendono il testing unitario e di integrazione agevole e strutturato, consentendo di sostituire le implementazioni reali con mock durante i test senza modificare il codice di produzione.],
+  [NestJS è il framework adottato per i microservizi TypeScript. La scelta è motivata da molteplici fattori rispetto ad alternative più minimali come Express. NestJS è un framework completo che impone una struttura modulare ben definita. Ogni modulo incapsula un dominio funzionale coeso, favorendo la separazione delle responsabilità. Il supporto nativo alla Dependency Injection, basato su decoratori, consente di dichiarare le dipendenze in modo esplicito, meccanismo che si sposa perfettamente con l'architettura Ports & Adapters adottata: le porte vengono definite come interfacce e gli adapter come implementazioni concrete, iniettate dal container.],
 
   [AWS Strands],
-  [TBD],
-  [AWS Strands è il framework adottato per la definizione e l'orchestrazione  degli agenti software nella componente Python. Fornisce le primitive necessarie per integrare modelli LLM all'interno di flussi agentici strutturati, gestendo il ciclo di vita degli agenti, la comunicazione con i modelli e la composizione dei tool disponibili. La scelta è motivata dalla sua integrazione nativa con l'ecosistema AWS, in particolare con i servizi Lambda e Step Functions utilizzati per l'orchestrazione del flusso agentico.],
-
-  [MongoDB Atlas],
-  [TBD],
-  [MongoDB Atlas è il sistema di persistenza adottato per il microservizio di analisi. La motivazione principale risiede nella natura eterogenea dei documenti prodotti: i risultati di audit su repository differenti variano per struttura e contenuto a seconda del tipo di analisi eseguita, rendendo inadeguato uno schema relazionale rigido come quello di PostgreSQL o MySQL. Un documento store come MongoDB permette di persistere risultati con struttura variabile senza migrazioni di schema, adattandosi naturalmente all'evoluzione del dominio. La scelta della versione gestita Atlas elimina l'onere di amministrazione dell'infrastruttura database — provisioning, backup, patching e monitoring sono delegati alla piattaforma — consentendo al team di concentrarsi sul dominio applicativo. MongoDB Atlas offre inoltre scalabilità orizzontale nativa tramite sharding, garantendo che le performance rimangano adeguate all'aumentare del volume di analisi e della dimensione dei documenti persistiti.],
-
-  [Amazon RDS],
-  [TBD],
-  [Amazon RDS è il sistema di persistenza adottato per il microservizio di gestione delle credenziali. A differenza dei risultati di analisi, le credenziali utente hanno una struttura relazionale ben definita, stabile nel tempo e con vincoli di integrità forti tra entità. Un database relazionale è quindi la scelta più appropriata, garantendo consistenza transazionale e integrità referenziale che un document store non offre nativamente. La versione gestita RDS delega l'amministrazione dell'infrastruttura ad AWS, analogamente a quanto avviene con MongoDB Atlas per il microservizio di analisi.],
-
-  [Amazon Fargate],
-  [TBD],
-  [AWS Fargate è utilizzato per l'hosting containerizzato del microservizio di analisi. Rispetto a una gestione diretta di istanze EC2, Fargate elimina la necessità di amministrare il sistema operativo e l'infrastruttura sottostante, delegando ad AWS il provisioning e la gestione dei nodi. La scalabilità automatica in base al carico garantisce che il microservizio possa gestire picchi di richieste senza intervento manuale, mantenendo al contempo costi proporzionali all'utilizzo effettivo.],
-
-  [Amazon S3],
-  [TBD],
-  [Amazon S3 è utilizzato per la memorizzazione del contenuto delle repository da analizzare. Prima di avviare il flusso agentico, il microservizio di analisi carica il codice sorgente su S3, rendendolo accessibile in modo condiviso e affidabile alle funzioni Lambda durante l'esecuzione. S3 garantisce durabilità e disponibilità elevata degli artefatti, disaccoppiando la fase di acquisizione del codice dalla fase di analisi vera e propria e consentendo alle Lambda di operare in modo stateless. In questo contesto, Amazon S3 non funge solo da storage statico, ma opera come un Data Staging Layer fondamentale per l'architettura stateless delle Lambda. Caricando preventivamente i sorgenti su S3, il microservizio di analisi supera i limiti fisici di trasferimento dati tra container e funzioni serverless, garantendo che l'agente Python operi su un set di dati immutabile e prontamente disponibile. Tale disaccoppiamento protegge il sistema da perdite di dati in caso di interruzioni del flusso e facilita eventuali operazioni di re-try o debugging post-mortem.],
-
-  [Amazon Step Function & Amazon Lambda],
-  [TBD],
-  [AWS Step Functions e AWS Lambda costituiscono il motore del flusso agentico. Step Functions definisce il workflow come macchina a stati esplicita, coordinando l'esecuzione sequenziale e condizionale dei singoli passi agentici implementati come funzioni Lambda in Python. Questo approccio offre diversi vantaggi architetturali e operativi.La gestione degli errori e i meccanismi di retry sono configurabili direttamente nella definizione della macchina a stati, senza dover implementare logica di resilienza all'interno del codice applicativo. In caso di fallimento di un passo, Step Functions può ritentare automaticamente o instradare il flusso verso uno stato di compensazione, rendendo il workflow intrinsecamente robusto.Le funzioni Lambda scalano automaticamente in risposta al numero di esecuzioni concorrenti, con un modello di costo pay-per-use che rende l'approccio economicamente efficiente per carichi di lavoro discontinui come le analisi di repository.Dal punto di vista architetturale, il microservizio NestJS avvia il flusso attraverso una porta dedicata, la cui implementazione è delegata a un adapter che comunica con Step Functions. Questo disaccoppiamento, coerente con l'architettura Ports & Adapters adottata, garantisce che il dominio applicativo non abbia dipendenze dirette verso l'infrastruttura AWS: sostituire Step Functions con un altro orchestratore richiederebbe unicamente la riscrittura dell'adapter, senza alcun impatto sul dominio.],
-
-  [Amazon App Runner],
-  [TBD],
-  [AWS App Runner è utilizzato per l'hosting del microservizio di gestione delle credenziali. Rispetto a Fargate, App Runner offre un livello di astrazione superiore: il deployment avviene direttamente da un'immagine container senza necessità di configurare cluster, task definition o load balancer. Questa semplicità è adeguata per un microservizio con requisiti di scalabilità e controllo infrastrutturale meno stringenti rispetto al microservizio di analisi.],
+  [Managed],
+  [AWS Strands è il framework adottato per la definizione e l'orchestrazione degli agenti software. Fornisce le primitive necessarie per integrare i modelli LLM all'interno di flussi agentici strutturati, gestendo il ciclo di vita degli agenti, la comunicazione e la composizione dei tool a loro disposizione per l'analisi e la remediation.],
 
   [React],
-  [19],
-  [Libreria JavaScript per la costruzione di interfacce utente basata su componenti dichiarativi e aggiornamenti reattivi tramite Virtual DOM. Costituisce la base di tutte le pagine e i componenti del frontend.],
+  [19.0.0],
+  [Libreria JavaScript per la costruzione di interfacce utente basata su componenti dichiarativi e aggiornamenti reattivi tramite Virtual DOM. Costituisce la base architetturale di tutte le interfacce, viste e comportamenti dinamici dell'applicazione lato client.],
 
   [Vite],
-  [6],
-  [Build tool e dev server ad alte prestazioni per progetti TypeScript e React. Offre Hot Module Replacement (HMR) e un sistema di proxy per il forwarding delle richieste HTTP verso i microservizi durante lo sviluppo locale.],
+  [6.0.0],
+  [Build tool e dev server ad altissime prestazioni per progetti moderni. Offre Hot Module Replacement (HMR) fulmineo e un sistema avanzato di proxy per il forwarding delle richieste HTTP verso i microservizi durante lo sviluppo e testing locale.],
 
   [React Router],
-  [7],
-  [Libreria per il routing client-side nelle SPA React. Gestisce la navigazione tra pagine pubbliche e protette tramite il pattern #emph[nested routes] con un layout condiviso per le route autenticate.],
+  [7.0.0],
+  [Libreria standardizzata per il routing client-side in Single Page Application. Gestisce la navigazione tra viste pubbliche e protette applicando il pattern #emph[nested routes], consentendo cambi di URL e renderizzazione dinamica dei contenuti senza ricaricamento del browser.],
 )
 
-L'insieme di queste scelte tecnologiche mira a minimizzare il Total Cost of Ownership (TCO) del sistema. L'orientamento verso servizi Managed (Atlas, RDS) e Serverless (Lambda, Step Functions, Fargate) riduce drasticamente l'overhead operativo legato alla manutenzione del ferro e del software di base. Questo approccio 'Ops-less' consente di scalare i costi in modo lineare rispetto all'effettivo utilizzo della piattaforma, trasformando i costi fissi di infrastruttura in costi variabili ottimizzati sul volume di analisi processate.
+== Servizi Esterni (Cloud e Infrastruttura)
+
+#table(
+  columns: (1.5fr, 1.3fr, 8fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*Tecnologia*], [*Versione*], [*Motivazioni*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, center, center).at(col) + horizon,
+
+  [MongoDB Atlas],
+  [Managed],
+  [MongoDB Atlas è il sistema di persistenza adottato per il microservizio di analisi. La motivazione principale risiede nella natura eterogenea dei report prodotti: i risultati di audit variano pesantemente per struttura a seconda del tipo di analisi e dei tool coinvolti, rendendo inadeguato uno schema relazionale rigido. Un document store permette di persistere queste entità senza complesse migrazioni di schema. La versione gestita Atlas elimina l'onere amministrativo di provisioning e backup.],
+
+  [Amazon RDS],
+  [Managed],
+  [Amazon RDS è il sistema di persistenza adottato per il microservizio dedicato alla gestione delle credenziali e degli account. A differenza dei risultati eterogenei dell'analisi, le entità di gestione utenti possiedono una struttura relazionale rigorosa, con vincoli di integrità forti. RDS garantisce consistenza transazionale (ACID) e integrità referenziale ottimali. Essendo un servizio completamente gestito, automatizza i backup, le patch e la disponibilità Multi-AZ.],
+
+  [Amazon ECS],
+  [Managed],
+  [Amazon Elastic Container Service (ECS) è il servizio di orchestrazione dei container adottato per ospitare il microservizio di analisi. Garantisce un elevato livello di flessibilità e controllo nella gestione dei carichi di lavoro dockerizzati. L'adozione di ECS consente un'allocazione granulare delle risorse di calcolo e un'integrazione fluida e sicura con il resto dei servizi infrastrutturali dell'ecosistema AWS, garantendo un'efficiente scalabilità orizzontale in base alla mole di analisi richieste.],
+
+  [Amazon S3],
+  [Managed],
+  [Amazon Simple Storage Service (S3) è utilizzato come storage a oggetti altamente scalabile in molteplici contesti dell'applicativo. Per il motore di analisi, S3 opera come "Data Staging Layer" sicuro per ospitare il codice sorgente scaricato prima della fase di ispezione, garantendo così l'immutabilità del dataset in elaborazione e disaccoppiando l'acquisizione logica dal calcolo. Inoltre, S3 è utilizzato come origin storage per servire gli asset e le build statiche del frontend applicativo web.],
+
+  [Amazon CloudFront],
+  [Managed],
+  [Amazon CloudFront funge da Content Delivery Network (CDN) primaria del sistema, occupandosi della distribuzione dell'interfaccia utente web (la Single Page Application in React) con la minima latenza e la massima larghezza di banda. L'integrazione nativa con S3 assicura tempi di caricamento istantanei a livello globale e fornisce un layer fondamentale di sicurezza esterna bloccando attacchi DDoS e applicando la terminazione TLS per le connessioni cifrate HTTPS.],
+
+  [Amazon CloudWatch],
+  [Managed],
+  [Amazon CloudWatch funge da cruscotto centralizzato per il monitoraggio operativo (osservabilità) e la gestione log dell'intera infrastruttura cloud. Raccogliendo automaticamente stream di dati e metriche di utilizzo da ECS, RDS e dagli applicativi, permette al team di avere visibilità in tempo reale sullo stato di salute del backend. Questa integrazione consente di instaurare alert per l'individuazione e risoluzione celere di anomalie prestazionali durante l'audit.],
+
+  [Amazon App Runner],
+  [Managed],
+  [AWS App Runner è utilizzato per l'hosting del microservizio di gestione delle credenziali. Offre un livello di astrazione superiore rispetto ai classici orchestratori: il deployment avviene direttamente da un'immagine container senza necessità di configurare bilanciatori di carico o task definition complesse, rendendolo ideale per servizi con endpoint HTTP classici e requisiti operativi diretti.],
+)
 
 == Librerie e Strumenti Frontend
 
-#figure(
-  table(
-    columns: (1fr, 1fr, 3fr),
-    inset: 10pt,
-    stroke: 0.5pt + luma(200),
-    table.header([*Tecnologia*], [*Versione*], [*Descrizione*]),
-    fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
-    align: (col, row) => (center, left, center).at(col) + horizon,
+#table(
+  columns: (1fr, 1fr, 3fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*Tecnologia*], [*Versione*], [*Descrizione*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, center, center).at(col) + horizon,
 
-    [Tailwind CSS],
-    [4],
-    [Framework CSS utility-first. Permette di definire stili direttamente come classi HTML, eliminando la necessità di fogli CSS custom e garantendo consistenza visiva su tutti i componenti.],
+  [Tailwind CSS],
+  [4.0.0],
+  [Framework CSS utility-first. Permette di definire stili direttamente come classi semantiche inline nell'HTML, eliminando la necessità di file CSS separati e garantendo consistenza visiva attraverso un design system altamente scalabile.],
 
-    [shadcn/ui + Radix UI],
-    [—],
-    [Set di componenti UI accessibili costruiti su primitive Radix UI. Fornisce Button, Dialog, Tabs, Badge, Input, Progress e Skeleton già integrati nel design system del progetto.],
+  [shadcn/ui + Radix UI],
+  [—],
+  [Set di componenti UI modulari, headless e accessibili. Fornisce primitive interattive come modali, tab, bottoni, barra di progressione ed elementi form integrati coerentemente nello stile visivo del progetto.],
 
-    [Axios],
-    [1.x],
-    [Client HTTP per le chiamate REST verso i microservizi Account e Analysis. Integrato nel modulo Gateway con interceptor per autenticazione Bearer e refresh automatico dei token su risposta 401.],
+  [Axios],
+  [1.7.9],
+  [Client HTTP basato su Promise per chiamate REST asincrone. È stato integrato attraverso interceptor personalizzati per la gestione dell'autenticazione Bearer e il rinfresco proattivo dei token alla ricezione di codici 401 Unauthorized.],
 
-    [Zod],
-    [3.x],
-    [Libreria di validazione e parsing di schemi TypeScript. Utilizzata nelle pagine di login e registrazione per validare i dati dei form lato client prima dell'invio al backend.],
+  [Zod],
+  [3.24.2],
+  [Libreria robusta per la dichiarazione e validazione tipizzata di schemi dati. Previene invii di richieste non valide intercettando gli input utente errati in modo formale direttamente lato client, restituendo feedback mirato.],
 
-    [Recharts],
-    [2.x],
-    [Libreria per la visualizzazione di dati tramite grafici SVG basati su React. Utilizzata nella pagina di dettaglio repository per la cronologia degli score di qualità nel tempo.],
+  [Recharts],
+  [2.15.0],
+  [Libreria performante per la visualizzazione dei dati analitici sotto forma di grafici interattivi SVG su DOM React. Sfruttata diffusamente nei cruscotti per tracciare temporalmente la qualità e sicurezza dei repository scansionati.],
 
-    [Sonner],
-    [—],
-    [Sistema di notifiche toast non invasive. Fornisce feedback visivo per le operazioni asincrone: avvio analisi, errori di rete, conferme di salvataggio.],
-  ),
-  caption: "Librerie e strumenti del frontend",
+  [Sonner],
+  [1.7.0],
+  [Libreria dedicata al sistema unificato di notifiche (#emph[toast]) a comparsa. Veicola i micro-feedback transazionali per gli utenti (successo analisi, salvataggi, disconnessioni di rete) senza risultare invasivo nell'esperienza d'uso.],
 )
 
+== Strumenti di analisi agentica
 
-== Tool per l'analisi
-=== Tool per l'agente di sicurezza
+=== Strumenti per l'Agente di Sicurezza
+
 #table(
   columns: (1.5fr, 1.3fr, 8fr),
   inset: 10pt,
@@ -347,50 +363,230 @@ L'insieme di queste scelte tecnologiche mira a minimizzare il Total Cost of Owne
   align: (col, row) => (center, center, center).at(col) + horizon,
 
   [Semgrep CE],
-  [1.155.0],
-  [Semgrep CE (Community Edition) è uno strumento di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#static-application-security-testing")[#def[Static Application Security Testing]] (SAST) open source che trova vulnerabilità e pattern pericolosi. È integrabile come #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#command-line-interface")[#def[CLI]] tool e con la giusta configurazione è in grado di rilevare in dettaglio il livello di aderenza di un dato repository alla #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#open-web-application-security-project")[#def[OWASP]] Top 10 tramite finding mappati sulle dieci categorie. Tra i tool testati è stato quello più preciso (restituisce anche seggerimenti di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]]). Rispetto ad altri tool di SAST rimane abbastanza leggero e veloce. Anche se scritto su Python e non Typescript, non è un problema integrarlo nell'ecosistema, più rilevante è il formato dei risultati, che possono venir restituiti sotto forma di JSON, facilmente leggibile e modellabile. Supporta molti linguaggi, tra cui Python, Js/Ts, Java, Go, C/C++, Ruby, PHP, HTML e CSS. Si possono anche aggiungere regole personalizzate per un'analisi più precisa.],
+  [Gestita via pip],
+  [Semgrep CE (Community Edition) è uno strumento di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#static-application-security-testing")[#def[Static Application Security Testing]] (SAST) open source integrato via Python pip. Trova vulnerabilità e pattern pericolosi nel codice sorgente ed è in grado di rilevare il livello di aderenza di un repository alla conformità #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#open-web-application-security-project")[#def[OWASP]] Top 10 tramite regole strutturate. Si rivela rapido nell'analisi, copre linguaggi multipli e permette l'estrazione di report in formati parsabili (JSON) necessari all'integrazione con gli agenti.],
 
   [Trivy],
-  [0.69.3],
-  [Trivy è uno strumento CLI leggero e open source in grado di rilevare #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#segreti-hardcoded")[#def[segreti hardcoded]] che consente di scansionare un repository velocemente e trovare dati esposti come Chiavi API, Token, credenziali di Database, certificati e chiavi private, che potrebbero portare a violazioni della sicurezza. Lo fa tramite regole preconfigurate basate su espressioni regolari (regole che stanno in un piccolo database aggiornato automaticamente all'avvio del tool). Tra i formati disponibili per generare il report finale, si può selezionare il formato JSON che come detto per il tool precedente, è ottimo per gli scopi del sistema. Come semgrep inoltre supporta l'aggiunta di regole personalizzate. Supporta linguaggi come Js, Node, Ruby, Pyhton, Java, Go, PHP, Rust.],
+  [Latest (sh script)],
+  [Trivy è uno scanner universale, installato tramite script di shell, adottato per rilevare #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#segreti-hardcoded")[#def[segreti hardcoded]] (credenziali DB, chiavi AWS, token) inavvertitamente committati nel repository. Sfrutta meccanismi di detection espandibili basati su un database costantemente aggiornato e su espressioni regolari. Come per gli altri strumenti della suite, il risultato restituito come JSON è indispensabile al motore d'analisi per strutturare una remediation appropriata all'esposizione.],
 
   [Syft],
-  [1.42.2],
-  [Syft è un tool CLI, open source e standalone che genera una #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#software-bill-of-materials")[#def[Software Bill of Materials]] (SBOM) dettagliata basandosi sui dati forniti dai file di configurazione dei repository. Grype utilizza tale SBOM direttamente per eseguire la propria scansione. Per il progetto viene preferito un approccio SBOM-based perché riduce la dipendenza dalla presenza di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#lockfile")[#def[lockfile]], da quindi la possibilità di essere più flessibili con le richieste dell'utente. Supporta linguaggi come Js, Node, Python, Java, Ruby, Go, PHP, Rust.],
+  [Latest (sh script)],
+  [Syft è uno strumento specializzato che analizza nativamente i file di configurazione dei repository per generare una #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#software-bill-of-materials")[#def[Software Bill of Materials]] (SBOM). Adottare un approccio SBOM-based svincola l'ispezione architetturale dalla dipendenza da specifici manifest o lockfile: Syft distilla un elenco formale di ogni dipendenza e lo standardizza per i successivi controlli di vulnerabilità.],
 
   [Grype],
-  [0.109.1],
-  [Grype è uno strumento di scansione delle dipendenze, open source, leggero e veloce che legge un file SBOM e identifica le vulnerabilità note (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#common-vulnerabilities-and-exposures")[#def[CVE]]) presenti nei pacchetti del repository. Il formato finale del report può essere generato in JSON rendendolo facilmente modellabile come detto nei punti precedenti. Come Syft supporta numerosi linguaggi come Js, Node, Python, Java, Ruby, Go, PHP, Rust.],
+  [Latest (sh script)],
+  [Grype è uno scanner di vulnerabilità di terze parti, disegnato per agire in sinergia formale con Syft. Riceve l'output SBOM da quest'ultimo ed esamina le librerie confrontandole con i database di vulnerabilità noti (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#common-vulnerabilities-and-exposures")[#def[CVE]]). Il design combinato Syft+Grype massimizza l'efficienza rispetto agli analizzatori monolitici, fornendo riscontri isolati unicamente sulle dipendenze introdotte nel progetto.],
+)
+
+=== Strumenti per l'Agente di Documentazione
+
+#table(
+  columns: (1.5fr, 1.3fr, 8fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*Tecnologia*], [*Versione*], [*Motivazioni*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, center, center).at(col) + horizon,
+
+  [Spectral CLI],
+  [Gestita via npm],
+  [Spectral (`@stoplight/spectral-cli`) è uno strumento avanzato di linting e validazione adottato specificamente per le interfacce API e file di specifica. Introdotto nel loop degli audit documentali per assicurare la consistenza e la robustezza del design dell'API, analizza le specifiche applicando regole stringenti (#emph[ruleset]) che bloccano pattern insicuri o mancanze nella documentazione tecnica.],
+
+  [Repomix],
+  [Gestita via npm],
+  [Repomix è la tecnologia fondamentale adottata per preparare ed aggregare il materiale sorgente in formato "#emph[AI-friendly]". Prima che gli agenti IA scansionino i sorgenti integrali, Repomix aggrega e compatta molteplici file di progetto limitando le astrazioni superflue. Questo strumento è imperativo per ridurre radicalmente il consumo di token e mantenere l'input focalizzato entro la #emph[context window] concessa all'LLM incaricato di orchestrare l'aggiornamento documentale.],
+)
+
+=== Strumenti per l'Agente di Codice
+
+#table(
+  columns: (1.5fr, 1.3fr, 8fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*Tecnologia*], [*Versione*], [*Motivazioni*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, center, center).at(col) + horizon,
+
+  [PMD],
+  [7.0.0],
+  [PMD è un analizzatore statico multi-linguaggio scaricato in versione standalone ed eseguito tramite Java Runtime Environment (`openjdk-21-jre-headless`). Identifica difetti di programmazione comuni, come variabili non utilizzate, blocchi catch vuoti, e complessità ciclomatica elevata. Viene integrato per fornire all'agente un set di ispezioni statiche di base su linguaggi supportati, garantendo audit strutturali al codice sorgente.],
+
+  [Biome],
+  [Gestita via npm],
+  [Biome (`@biomejs/biome`) è uno strumento ad alte prestazioni che combina funzionalità di formattazione e linting per l'ecosistema web (JavaScript, TypeScript, JSON, ecc.). È stato integrato nell'agente di codice per eseguire check rapidissimi sulla sintassi e sulla stilistica del codice prima e dopo le potenziali modifiche dell'LLM.],
+
+  [ESLint],
+  [Gestita via npm],
+  [ESLint è lo strumento standard di analisi statica per identificare pattern problematici nel codice JavaScript/TypeScript. L'agente di codice se ne serve per validare la correttezza semantica e far rispettare le regole di qualità del software prima di proporre e approvare una correzione definitiva.],
+
+  [Jest],
+  [Gestita via npm],
+  [Jest è un framework di testing completo. Viene fornito all'agente di codice per abilitare la validazione automatica delle modifiche: l'agente può invocare l'esecuzione delle test suite esistenti nel repository analizzato per verificare che le proprie #emph[remediation] non abbiano introdotto regressioni comportamentali.],
+
+  [TypeScript CLI],
+  [Gestita via npm],
+  [Il compilatore TypeScript (`typescript`) è incluso per permettere all'agente di eseguire la validazione dei tipi (#emph[type-checking]) sul codice sorgente. Garantisce che le correzioni proposte per basi di codice TS rispettino rigorosamente i vincoli di tipizzazione definiti nel progetto analizzato.],
+
+  [pnpm e Yarn],
+  [Gestite via npm],
+  [Gestori di pacchetti alternativi a npm installati a livello globale. La loro presenza all'interno dell'ambiente di esecuzione dell'agente assicura che il sistema sia in grado di interpretare, risolvere le dipendenze ed eseguire script indipendentemente dal package manager adottato nativamente dal repository target.],
+)
+
+== Strumenti di Testing
+
+#table(
+  columns: (1.5fr, 1.3fr, 8fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*Tecnologia*], [*Versione*], [*Motivazioni*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, center, center).at(col) + horizon,
+
+  [Jest],
+  [Gestita via npm],
+  [Indipendentemente dall'utilizzo interno all'agente di codice, Jest è il framework ufficiale adottato dal team di sviluppo per la stesura e l'esecuzione dei test di unità e di integrazione sui microservizi in NestJS e sul frontend. Costituisce il core delle #emph[quality gates] all'interno delle pipeline di Continuous Integration (CI/CD): la corretta esecuzione della test suite e il rispetto della configurazione dei plugin (`jestPlugin.configs.recommended.rules`) sono vincolanti per la validazione della build e per il successivo deployment in produzione del sistema Code Guardian.],
 )
 
 #pagebreak()
 = Architettura
 == Architettura di Deployment
-=== Microservizio di Analisi
-Il servizio di Analisi è progettato come un microservizio autonomo, responsabile della gestione completa del ciclo di vita delle analisi delle repository. Esso opera in un Bounded Context segregato, isolando la logica di business relativa ai parametri di qualità e alla scansione dei repository dalle altre funzionalità della piattaforma.
 
-Seguendo il pattern Database per Service, il microservizio dispone di uno schema di persistenza dedicato. Questo garantisce l'indipendenza del deployment e impedisce l'accoppiamento a livello di dati con altri servizi, permettendo evoluzioni dello schema senza impatti collaterali sul resto del sistema.
+Il sistema Code Guardian è stato progettato per operare interamente in ambiente cloud, adottando un approccio containerizzato basato sul paradigma a microservizi. La topologia di deployment sfrutta nativamente i servizi gestiti di Amazon Web Services (AWS) per garantire scalabilità orizzontale, alta disponibilità e una netta separazione delle responsabilità (Separation of Concerns).
 
-L'interazione con l'ecosistema avviene esclusivamente tramite interfacce ben definite (API Contract). Il servizio espone porte d'ingresso (Primary Adapters) per la ricezione dei comandi e utilizza porte d'uscita (Secondary Adapters) per comunicare in modo asincrono o sincrono con i servizi esterni (es. GitHub API, Servizi di Notifica), mantenendo l'integrità del core logico.
+=== Adozione del Paradigma a Microservizi
+La scomposizione del backend nelle due unità computazionali indipendenti (Microservizio Account e Microservizio Analysis) deriva da una rigorosa valutazione dei requisiti non funzionali e delle criticità intrinseche al dominio applicativo. Questa consapevolezza si riflette in molteplici vantaggi sistemici:
+- *Scalabilità Asimmetrica:* Il dominio della gestione utenti (Account) è caratterizzato da un traffico leggero, costante e prevedibile. Al contrario, il dominio dell'analisi (Analysis) è soggetto a picchi di carico improvvisi, dovuti al download di repository massivi e all'orchestrazione degli agenti. Disaccoppiare i servizi permette ad App Runner di scalare orizzontalmente solo il modulo sotto stress, ottimizzando i costi operativi (FinOps).
+- *Isolamento dei Guasti (Fault Isolation):* La netta separazione degli ambienti di esecuzione su App Runner confina le eventuali criticità al singolo dominio applicativo. Qualora il Microservizio Analysis subisca un'anomalia severa (ad esempio, un #emph[memory leak] causato dall'estrazione di un pacchetto ZIP malformato o un timeout verso le API di GitHub), l'errore non si propaga al resto del sistema. Il Microservizio Account permane integro e pienamente operativo, garantendo che gli utenti possano continuare ad autenticarsi, consultare il proprio profilo e interagire con le funzionalità di storico della piattaforma senza percepire un disservizio generalizzato.
+- *Allineamento al Domain-Driven Design (DDD):* I due microservizi rappresentano dei #emph[Bounded Context] rigorosi. Ognuno possiede il proprio database esclusivo (RDS per Account, MongoDB per Analysis), prevenendo la creazione di anti-pattern come il database condiviso. Questo isolamento garantisce che i contratti dei dati possano evolvere indipendentemente senza causare regressioni a cascata.
 
- Il microservizio di Analisi viene hostato su #def[AWS] #def[Fargate], garantendo scalabilità automatica e gestione semplificata dell'infrastruttura. Esso è progettato per essere stateless, con la persistenza dei dati affidata a #def[MongoDB] Atlas e l'archiviazione temporanea dei repository su Amazon #def[S3]. Esso gestisce l'orchestrazione del flusso agentico tramite le API di #def[AWS], consentendo un'esecuzione modulare e resiliente delle analisi.
+=== Topologia dell'Infrastruttura
 
-=== Agenti
-Vengono utilizzate tecnologie di containerizzazione (#def[Docker]) e orchestrazione (#def[AWS] #def[Fargate]) per garantire un deployment flessibile, portabile e facilmente scalabile, con un modello di costo basato sull'effettivo utilizzo delle risorse. Gli agenti #def("Strands") operano su istanze di #def[ECS] Fargate, consentendo di scalare dinamicamente in base al carico di lavoro e di isolare le esecuzioni per garantire sicurezza e affidabilità; queste istanze sono gestite dal microservizio di Analisi, il quale decide se lanciare un nuovo container in base alla richiesta. I report generati dalle analisi vengono persistiti in un database dedicato (#def[MongoDB] Atlas) e resi accessibili tramite API REST, garantendo un accesso rapido e sicuro ai risultati.
+==== Frontend e Content Delivery (S3 + CloudFront)
+L'interfaccia utente è implementata come una Single Page Application (SPA) sviluppata in React e buildata tramite Vite. Essendo un'applicazione client-side, il processo di build genera esclusivamente artefatti statici (HTML, CSS, JS minificati e asset).
 
+Il deployment del frontend si basa su due servizi AWS orchestrati in sinergia:
+- *Amazon S3 (Simple Storage Service):* funge da origin storage immutabile per gli artefatti della build. La scelta di S3 garantisce durabilità e un costo di archiviazione trascurabile, eliminando la necessità di avere un web server computazionale dedicato in esecuzione per servire il client.
+- *Amazon CloudFront:* funge da Content Delivery Network (CDN) globale e rappresenta l'unico #emph[entrypoint] pubblico dell'intero sistema. CloudFront garantisce una latenza minima memorizzando in cache gli asset nelle #emph[Edge Location], agisce da reverse proxy unificato annullando le problematiche CORS (instradando `/api/*` ai backend) e gestisce centralmente la terminazione TLS (HTTPS).
+
+==== Microservizi Core (ECR + App Runner)
+Il deployment dei due microservizi in NestJS è gestito attraverso la seguente catena:
+- *Amazon ECR (Elastic Container Registry):* registro privato per le immagini Docker. Le pipeline di Continuous Integration pushano le immagini compilate su ECR, garantendo il versionamento semantico e un repository unico per gli ambienti di test e produzione.
+- *AWS App Runner:* servizio di orchestrazione fully-managed scelto per l'esecuzione. I Controller NestJS implementati nel progetto espongono un'architettura puramente RESTful e #emph[stateless]. App Runner astrae la complessità del bilanciamento del carico, istanziando dinamicamente i container necessari. I Controller fungono da *Primary Adapters* (Ports & Adapters): intercettano l'HTTP, validano i payload e traducono la richiesta in comandi puri per il Domain Core.
+
+==== Infrastruttura Agentica e di Analisi Asincrona (Amazon ECS + S3)
+Il cuore computazionale di Code Guardian è delegato a un'infrastruttura separata basata su *Amazon ECS (Elastic Container Service)*, garantendo che le operazioni intensive non degradino le performance delle API.
+
+Gli agenti seguono un modello a container effimeri (#emph[ephemeral tasks]):
+- *Isolamento e Sandbox:* Gli agenti (Sicurezza, Documentazione, Codice) sono racchiusi in immagini Docker Python distinte. Quando l'Analysis Service riceve una richiesta, avvia un Task ECS dedicato su un cluster serverless. Ogni task opera in una sandbox di memoria e rete isolata, prevenendo contaminazioni tra i repository di clienti diversi.
+- *Data Staging Layer (Amazon S3):* Per l'elaborazione, si adotta il pattern "#emph[Claim Check]". Il Microservizio Analysis carica il repository target su un bucket S3 adibito a staging. Il Task ECS riceve solo l'URI: l'agente scarica i sorgenti nel proprio volume effimero, esegue i tool (es. Semgrep, PMD), compatta il contesto con Repomix e interroga i provider LLM tramite AWS Strands.
+- *Persistenza e Ritorno:* Al termine del flusso, l'agente Python *non* grava il database documentale inserendo file massivi. Al contrario, salva i log dettagliati, i report di audit e i diff delle remediation direttamente sotto forma di artefatti strutturati all'interno di *Amazon S3*. Per rilevare la fine delle operazioni non si utilizzano meccanismi di push, bensì una logica di #emph[polling] governata dal Microservizio Analysis: un *Secondary Adapter* dedicato rimane in ascolto interrogando periodicamente lo stato del task infrastrutturale. Una volta rilevato il completamento dell'esecuzione e la disponibilità degli artefatti su S3, l'adapter informa il dominio che provvede ad aggiornare lo stato dell'analisi su MongoDB, mentre il container ECS effimero viene liberato.
+
+==== Configurazioni Infrastrutturali Esterne (VPC e IAM)
+Per completezza, è imperativo citare elementi di sicurezza essenziali che, pur non essendo componenti di "codice" o microservizi esplicitamente rappresentati nel ciclo di deployment applicativo, costituiscono l'infrastruttura di base (spesso definita tramite approcci #emph[Infrastructure as Code]):
+- *Virtual Private Cloud (VPC):* Le configurazioni di rete, incluse le subnet private e i Security Group, isolano i database (RDS e Atlas) dalla rete Internet pubblica. Si tratta di un'impostazione a livello di account AWS che prescinde dal codice dell'applicativo.
+- *Identity Access Management (IAM):* La gestione dei permessi segue il principio del #emph[Least Privilege]. I ruoli IAM (ad esempio, il `TaskExecutionRole` che permette all'agente su ECS di scrivere esclusivamente sul bucket S3 di destinazione) sono astrazioni gestionali di AWS e non blocchi di software in esecuzione.
+
+#pagebreak()
+==== Flusso Operativo e di Integrazione
+Il diagramma architetturale traccia la sequenza operativa end-to-end di un'attività di audit, riassumibile nelle seguenti fasi:
++ *Interazione Utente:* L'utente accede alla piattaforma scaricando la SPA React via CloudFront.
++ *API Requests:* Le operazioni di business vengono instradate ai microservizi (`/api/auth`, `/api/analysis`).
++ *Acquisizione Metadati:* L'Analysis Service interroga le API di GitHub per recuperare lo stato del repository.
++ *Staging del Codice:* L'Analysis Service scarica il sorgente e lo deposita su S3, separando i dati grezzi dalla logica computazionale.
++ *Trigger Task:* Viene invocata l'API di ECS per istanziare un container agentico usa-e-getta.
++ *Pull Repo Zip:* Il Task ECS avvia l'agente Python, che recupera il pacchetto sorgente da S3.
++ *Prompt e Validazione:* L'agente genera il contesto e interroga il modello LLM.
++ *Persistenza Artefatti:* L'agente termina le operazioni caricando i report finali e le remediation direttamente su *Amazon S3* ed emettendo l'evento di conclusione.
+
+#figure(
+  image("../assets/st_diagrams/deployment.png", width: 120%),
+  caption: "Diagramma UML dell'Architettura di Deployment"
+) <fig_deployment>
+
+#pagebreak()
 == Architettura Logica
+=== Microservizio Analysis
 
-=== Analysis Microservice
-Il microservizio di Analisi adotta l'architettura esagonale (Ports & Adapters) come modello strutturale primario. Questo approccio garantisce una netta separazione tra il nucleo logico di business e i dettagli tecnologici di infrastruttura, facilitando la testabilità, la manutenibilità e l'evoluzione indipendente dei componenti.
+Il Microservizio *Analysis*, sviluppato in TypeScript tramite il framework NestJS, è responsabile della gestione e coordinazione del flusso di analisi all’interno del sistema Code Guardian. Esso incapsula la logica di audit e validazione delle vulnerabilità, fungendo da punto di aggregazione tra input esterni, logica di dominio e servizi infrastrutturali.
 
-L'architettura si articola su quattro strati principali, ciascuno con responsabilità ben definite:
+Al fine di gestire la complessità derivante dall’integrazione con servizi cloud eterogenei e garantire elevata manutenibilità ed evolvibilità nel tempo, l’architettura logica è stata progettata seguendo il pattern *Ports and Adapters* (Architettura Esagonale).
 
-- *Domain Layer:* Incapsula la logica di business pura, espressa attraverso Value Object (concetti immutabili del dominio) ed Entity (oggetti con identità persistente). Questo strato è totalmente indipendente dalla tecnologia.
-- *Application Layer:* Implementa i Use Case attraverso servizi e comandi, orchestrando il flusso di business. Definisce le porte (inbound e outbound) che consentono la comunicazione strutturata con i livelli adiacenti.
-- *Infrastructure Layer:* Contiene gli adapter concreti che implementano le porte, fornendo l'integrazione con risorse esterne (GitHub API, persistenza MongoDB, servizi di notifica).
-- *Presentation Layer:* Espone controller HTTP e DTOs per la comunicazione con i client, traducendo le richieste HTTP in comandi e risposte in formati standardizzati.
+==== Motivazioni Architetturali
 
-L'interazione tra strati avviene esclusivamente attraverso le porte, invertendo le dipendenze verso il core: i livelli esterni dipendono dal dominio, mai viceversa.
+L’adozione di tale pattern è guidata da esigenze specifiche del dominio applicativo e da considerazioni ingegneristiche:
+
+- *Agnosticismo Tecnologico (Framework Independence):*  
+  Le regole di business relative all’analisi del codice e alla validazione delle vulnerabilità sono completamente indipendenti da NestJS, dai driver di persistenza (es. MongoDB) e dagli SDK cloud (es. AWS). Ciò consente di sostituire o aggiornare le tecnologie infrastrutturali senza impattare il dominio.
+
+- *Testabilità Isolata (Shift-Left Testing):*  
+  La definizione esplicita delle porte consente di testare i casi d’uso in isolamento, sostituendo gli adapter reali con implementazioni fittizie (Mock e Stub). Questo approccio abilita test unitari rapidi e deterministici nelle pipeline CI/CD, eliminando la dipendenza da risorse esterne.
+
+- *Inversione delle Dipendenze (Dependency Inversion):*  
+  In conformità ai principi SOLID, il flusso delle dipendenze è orientato verso l’interno: il dominio definisce le astrazioni (porte), mentre gli adapter le implementano. Questo disaccoppia completamente la logica di business dai dettagli tecnici.
+
+- *Evolvibilità del Dominio:*  
+  Il sistema Code Guardian è progettato per integrare nel tempo nuovi strumenti di analisi (statici e dinamici) e nuovi provider infrastrutturali. L’architettura esagonale consente di introdurre nuovi adapter senza modificare i casi d’uso esistenti, preservando la stabilità del core applicativo.
+
+- *Isolamento delle Integrazioni Esterne:*  
+  Le interazioni con sistemi esterni (storage, servizi di analisi, orchestrazione cloud) sono confinate negli adapter, riducendo l’impatto di cambiamenti o fault esterni sul dominio.
+
+- *Trade-off Architetturali:*  
+  L’adozione del pattern introduce un overhead strutturale dovuto alla presenza di interfacce, adapter e livelli di astrazione aggiuntivi. Tuttavia, tale complessità è giustificata dalla necessità di garantire scalabilità, manutenibilità ed evoluzione controllata del sistema nel lungo periodo.
+
+==== Scomposizione dei Livelli
+
+L’architettura è organizzata in tre aree concentriche, separate da confini ben definiti:
+
+===== Domain Core (Logica di Business)
+
+Rappresenta il cuore dell’architettura e non dipende da alcun framework o libreria esterna.
+
+Contiene:
+
+- *Entità e Modelli:*  
+  Strutture dati pure che rappresentano i concetti del dominio e ne incapsulano le invarianti.
+
+- *Casi d’Uso (Use Cases):*  
+  Servizi applicativi che implementano la logica operativa. Coordinano il flusso di analisi trasformando input in output, senza effetti collaterali diretti verso l’esterno.
+
+- *Ports (Interfacce):*  
+  Contratti che definiscono le modalità di interazione:
+  - *Primary Ports:* espongono le operazioni disponibili agli adapter in ingresso
+  - *Secondary Ports:* definiscono i servizi richiesti dal dominio (persistenza, storage, orchestrazione)
+
+===== Primary Adapters (Driving Adapters)
+
+Costituiscono i punti di ingresso del sistema e hanno il compito di tradurre le richieste esterne in invocazioni ai casi d’uso.
+
+Responsabilità principali:
+
+- Ricezione input (HTTP, eventi, messaggi)
+- Validazione formale dei dati (DTO)
+- Invocazione dei casi d’uso tramite le Primary Ports
+- Formattazione della risposta verso il chiamante
+
+Questo livello dipende dal framework (NestJS), ma il dominio ne rimane completamente isolato.
+
+===== Secondary Adapters (Driven Adapters)
+
+Implementano concretamente i servizi richiesti dal dominio attraverso le Secondary Ports.
+
+Comprendono:
+
+- *Adapter di Persistenza:*  
+  Gestiscono la traduzione tra entità di dominio e modelli di database.
+
+- *Adapter di Integrazione:*  
+  Incapsulano la comunicazione con API esterne e strumenti di analisi.
+
+- *Adapter di Storage:*  
+  Gestiscono il trasferimento e la gestione dei file.
+
+- *Adapter di Orchestrazione:*  
+  Traducono le richieste del dominio in operazioni su infrastrutture asincrone o sistemi distribuiti.
+
+Questi componenti rappresentano l’unico punto in cui vengono utilizzate librerie specifiche o SDK esterni.
 
 #pagebreak()
 
