@@ -1166,7 +1166,7 @@ Svolge i seguenti passaggi per permettere a #link(<AnalysisOrchestratorService>)
 
 `UpdatePatService` implementa #link(<UpdatePatUseCase>)[`UpdatePatUseCase`], validando il nuovo PAT e la password corrente tramite il domain service #link(<IPasswordProvider>)[`IPasswordProvider`], e delegando l'aggiornamento a #link(<IGitCredentialUpdatePort>)[`IGitCredentialUpdatePort`].
 
-===== Port
+===== Port <AnalysisPorts>
 Le porte sono le interfacce che definiscono i contratti di comunicazione tra il dominio applicativo e le dipendenze esterne (infrastruttura, agenti, persistenza). Ogni porta rappresenta un punto di estensione che permette di sostituire o modificare l'implementazione concreta senza impattare la logica applicativa, facilitando testabilità, manutenibilità e evoluzione del sistema. Ogni porta è progettata per essere il più possibile specifica e orientata al caso d'uso, evitando di esporre operazioni generiche o non necessarie che potrebbero portare a dipendenze indesiderate o a un accoppiamento eccessivo tra layer.
 ====== ICodeAgentPort <ICodeAgentPort>
 #codeDiagram("ICodeAgentPort", 70%)
@@ -1474,7 +1474,7 @@ I contratti di risposta sono i DTO che trasportano i dati restituiti dalle imple
 - *Report Opzionali:* I campi `docsReport`, `codeReport` e `secReport` sono nullable, riflettendo il fatto che un'analisi può coinvolgere solo un sottoinsieme dei tre tipi di report in base a quanto richiesto.
 
 ==== Infrastructure
-===== Adapter
+===== Adapters <Analysis_Adapters>
 ====== GitHubAdapter <GitHubAdapter>
 #codeDiagram("GitHubAdapter", 100%)
 
@@ -1574,35 +1574,6 @@ I contratti di risposta sono i DTO che trasportano i dati restituiti dalle imple
 
 === Account Microservice
 L'Account Microservice rappresenta il modulo centrale per la gestione del ciclo di vita delle identità all'interno di _CodeGuardian_. Progettato seguendo i principi dell'*Architettura Esagonale*, il servizio isola rigorosamente i processi core — quali la gestione delle utenze, l'autenticazione basata su JWT e la sicurezza delle credenziali — dalle tecnologie di persistenza (PostgreSQL) e di cifratura (Bcrypt). Grazie a una netta separazione tra porte e adattatori, il microservizio garantisce l'integrità del dominio utente e la flessibilità nell'evoluzione dei criteri di sicurezza, fungendo da garante per l'accesso protetto a tutte le funzionalità della piattaforma.
-
-==== Design Patterns
-
-All'interno dell'Account Microservice sono stati adottati molteplici design pattern per garantire disaccoppiamento, testabilità e manutenibilità del codice. Di seguito vengono descritti i principali pattern utilizzati e le motivazioni alla base della loro scelta:
-
-===== Architettura Esagonale (Ports and Adapters)
-L'intera struttura del microservizio si basa saldamente sui principi di Ports and Adapters.
-- *Problema risolto:* Evita il forte accoppiamento logico tra il nucleo applicativo (Domain e Application) e i layer esterni come database, interfacce utente e servizi di terze parti, isolando la logica di business e rendendola indipendente dalle tecnologie di contorno.
-- *Implementazione:* Il livello applicativo definisce interfacce specifiche dette "Porte" (come `IUserSavePort` o `IHashPasswordPort`), mentre il livello infrastrutturale e di presentazione ospita i componenti concreti detti "Adapters" (come `PostgresAdapter`) che si curano di implementare o utilizzare tali interfacce.
-
-===== Command Pattern
-Il pattern *Command* è stato utilizzato diffusamente nel layer applicativo per incapsulare i dati di una specifica operazione richiesta dall'utente (es. `LoginCommand`, `DeleteCommand`, `RegistrationUserCommand`).
-- *Problema risolto:* Semplifica le firme dei metodi nei casi d'uso, evitando il passaggio di liste di argomenti lunghe e fragili alle modifiche.
-- *Implementazione:* Invece di passare molteplici parametri sparsi ai metodi dei servizi, ogni Use Case accetta come unico parametro un oggetto istanza di un Command specifico, che raggruppa logicamente e tipizza tutti i parametri necessari per svolgere l'operazione.
-
-===== Data Transfer Object (DTO)
-Il pattern *DTO* viene impiegato sistematicamente sia a livello applicativo (`AuthResultDto`, `UserDTO`) che a livello di presentazione e comunicazione HTTP (`LoginRequestDto`, `AuthResponseDto`).
-- *Problema risolto:* Consente di trasferire dati tra i diversi layer del microservizio e verso i client esterni senza esporre direttamente le entità di dominio interno. Quest'ultime, infatti, potrebbero nascondere metadati o riferimenti sensibili come `PasswordHash` che non devono in nessun caso fuoriuscire dal sistema inavvertitamente.
-- *Implementazione:* Tramite i DTO, i dati in transito assumono una forma asettica e consona per le sole esigenze di comunicazione, abilitando inoltre l'inserimento di una logica di convalida lato framework sfruttando i decoratori di NestJS (es. `class-validator`) direttamente sulle classi di richiesta in arrivo.
-
-===== Adapter Pattern
-Nel livello infrastrutturale è evidente l'adozione dell'*Adapter Pattern*, guidato dall'architettura esagonale.
-- *Problema risolto:* Astrae completamente la logica di business in merito ai dettagli sulle operazioni di memorizzazione dei dati e alle query sql, mantenendo nascosta la specifica tecnologia di database relazionale utilizzata (PostgreSQL).
-- *Implementazione:* `PostgresAdapter` agisce da adattatore verso il livello di persistenza, centralizzando fisicamente le esecuzioni delle transazioni nel DB e traducendo i contratti del dominio. Al contempo soddisfa molteplici porte del core applicativo (es. `IUserFindPort`, `IUserSavePort`). Ciò garantisce un disaccoppiamento così netto da permettere, qualora si rivelasse necessario, di sostituire agilmente il database con una tecnologia differente.
-
-===== Dependency Injection
-Sfruttando nativamente le capacità del framework NestJS, l'*Iniezione delle Dipendenze (DI)* rappresenta uno dei pattern tecnici principali alla base del progetto software.
-- *Problema risolto:* Evita la creazione "hard-coded" ed esplicita delle dipendenze direttamente cablate in ogni classe chiamante, migliorando notevolmente le probabilità di riutilizzo del codice, la modularità e abbattendo gli ostacoli che impediscono altrimenti l'agevole testing unitario.
-- *Implementazione:* Attraverso i costruttori di classe, i vari Controllers e i Services ricevono all'avvio del sistema le loro rispettive dipendenze sotto forma ridotta di interfacce/componenti di istanziazione validati. Un container `Inversion of Control` (IoC) di supporto si prende in totale carico l'apposita istanziazione ed assegnazione dei componenti.
 
 ==== Domain
 Il Dominio rappresenta il nucleo centrale dell'architettura esagonale, dove risiedono esclusivamente la logica di business e le regole vitali del progetto. Questa sezione è progettata per essere totalmente agnostica rispetto alla tecnologia: non possiede alcuna conoscenza di database, protocolli di comunicazione (HTTP/REST) o framework esterni.
@@ -1729,7 +1700,7 @@ L'entità `User` costituisce l'entità radice del dominio di autenticazione. Ess
 
 `InvalidCredentialsException` è l'eccezione sollevata dal `LoginService` quando la combinazione email/password fornita non corrisponde a nessun account valido nel sistema. Il costruttore senza parametri formalizza un errore di business che non richiede dettagli aggiuntivi: l'unica informazione rilevante è che le credenziali sono invalide.
 
-===== Ports
+===== Ports <CredentialPorts>
 
 ====== IHashComparePort <IHashComparePort>
 #codeDiagram("IHashComparePort", 65%)
@@ -1881,7 +1852,7 @@ L'entità `User` costituisce l'entità radice del dominio di autenticazione. Ess
 
 ==== Infrastructure
 
-===== Adapters
+===== Adapters <Credential_Adapters>
 
 ====== BcryptAdapter <BcryptAdapter>
 #codeDiagram("BcryptAdapter", 60%)
@@ -2170,3 +2141,101 @@ Le analisi dei repository sono operazioni a lunga durata (ordine dei minuti). Pe
 Quando l'utente avvia un'analisi o visualizza la pagina di un repository in fase di elaborazione, il hook effettua richieste periodiche verso il microservizio Analysis per ottenere lo stato aggiornato dell'analisi in corso. Ai fini di ottimizzazione, il polling viene sospeso automaticamente non appena l'analisi giunge a uno stato terminale (completato o fallito).
 
 Questo approccio garantisce che la `RepositoryDetailPage` aggiorni dinamicamente lo stato dell'analisi (con i relativi callback `onStarted`, `onCompleted`, `onFailed`) e presenti infine il report completo, fornendo il necessario feedback visivo senza complessità architetturali legate a WebSockets persistenti.
+
+= Design Patterns Applicati
+== Creazionali 
+=== Singleton
+Dato l'utilizzo di nest per entrambi i microservizi, non è necessario implementare pattern singleton a livello di codice, in quanto il framework gestisce l'istanza dei servizi e degli adattatori come singleton per default. Ovvero un provider dichiarato in un modulo viene istanziato una sola volta e condiviso tra tutti i componenti che lo iniettano, garantendo implicitamente il comportamento singleton senza dover implementare manualmente il pattern. Questo permette di mantenere il codice pulito e focalizzato sulla logica di business, delegando al framework la gestione del ciclo di vita delle istanze.
+=== Strutturali
+=== Ports and Adapters
+Il pattern adapter è presente in entrambi i microservizi data l'architettura logica applicata. 
+==== Problema risolto
+ Evita il forte accoppiamento logico tra il nucleo applicativo (Domain e Application) e i layer esterni come database, interfacce utente e servizi di terze parti, isolando la logica di business e rendendola indipendente dalle tecnologie di contorno.
+==== Implementazione 
+- Nel microservizio Credenziali, gli #link(<Credential_Adapters>)[adapters] permettono di astrarre completamente la logica di business in merito ai dettagli sulle operazioni di memorizzazione dei dati e alle query sql, mantenendo nascosta la specifica tecnologia di database relazionale utilizzata (PostgreSQL). Al contempo soddisfano molteplici #link(<CredentialPorts>)[porte] del core applicativo, garantendo un disaccoppiamento così netto da permettere, qualora si rivelasse necessario, di sostituire agilmente il database con una tecnologia differente.
+
+- Nel microservizio Analysis, gli #link(<Analysis_Adapters>)[adapters] permettono di astrarre completamente la logica di business in merito ai dettagli sulle operazioni di memorizzazione dei dati, 
+gestione API esterne come github e AWS. Al contempo soddisfano molteplici #link(<AnalysisPorts>)[porte] del core applicativo, garantendo un disaccoppiamento così netto da permettere, qualora si rivelasse necessario, 
+ di sostituire agilmente un database o un servizio esterno con una tecnologia differente.
+
+
+Inoltre, in entrambi i microservizi ogni porta espone un solo metodo dell'adapter aderendo al principio 
+di segregazione delle interfacce, evitando di esporre metodi non necessari e mantenendo un contratto
+ chiaro e specifico tra il core applicativo e le implementazioni infrastrutturali.
+
+=== Facade
+==== Problema risolto
+Fornisce un'interfaccia semplificata e unificata a un insieme di interfacce in un sottosistema, 
+nascondendo la complessità delle interazioni tra i componenti sottostanti e facilitando l'uso 
+del sistema da parte dei client.
+==== Implementazione
+Nel microservizio di analisi, #link(<StartAnalysisService>)[StartAnalysisService] funge da Facade, 
+orchestrando un flusso complesso che coinvolge più adapter (GitHubAdapter, S3Adapter, PostgresAdapter) 
+e #link(<AnalysisOrchestratorService>)[AnalysisOrchestratorService] per eseguire un'analisi completa. 
+Fornisce un'interfaccia semplificata (`execute`) che nasconde la complessità sottostante, permettendo 
+al controller di avviare un'analisi con una singola chiamata.
+
+== Comportamentali
+=== Orchestrator
+==== Problema risolto
+Coordina l'esecuzione di un processo complesso che coinvolge più componenti o servizi, definendo 
+l'ordine delle operazioni e gestendo le dipendenze tra di esse, senza che i componenti coinvolti debbano
+ conoscere l'intero flusso o le responsabilità degli altri.
+==== Implementazione
+Nel microservizio di analisi, #link(<AnalysisOrchestratorService>)[AnalysisOrchestratorService] funge 
+da Orchestrator, coordinando l'intero processo di analisi del codice. Gestisce l'ordine delle operazioni,
+come la chiamata selettiva degli adapter per gli agenti, la memorizzazione dei risultati ottenuti e la gestione degli errori, 
+senza che i singoli adapter o servizi coinvolti debbano conoscere l'intero flusso o le responsabilità degli altri componenti.
+=== Command
+Il pattern Command è ampiamente utilizzato in entrambi i microservizi per incapsulare tutte le informazioni necessarie a 
+eseguire un'azione o un'operazione specifica, permettendo di disaccoppiare il mittente dell'azione dalla logica che la esegue.
+L'utilizzo di questo patter è guidato dalla scelta di architettura logica esagonale.
+==== Problema risolto
+Semplifica le firme dei metodi nei casi d'uso, evitando il passaggio di liste di argomenti lunghe e fragili alle modifiche.
+
+==== Implementazione
+Invece di passare molteplici parametri sparsi ai metodi dei servizi, ogni Use Case accetta come unico parametro un oggetto 
+istanza di un Command specifico, che raggruppa logicamente e tipizza tutti i parametri necessari per svolgere l'operazione. 
+Facendo una prima validazione dei campi con dei decoratori(`@IsString`,`@IsNotEmpty`...), questo evita che i dati in ingresso 
+siano incompleti o malformati, e permette di bloccare richieste con body non validi prima di essere processate.
+=== State
+==== Problema risolto
+Permette di gestire in modo chiaro e organizzato i diversi stati di un processo o entità, definendo transizioni ben definite 
+tra di essi e facilitando la manutenzione del codice.
+==== Implementazione
+Nel microservizio di analisi, il pattern State è applicato alla gestione dello stato dell'analisi del codice. L'entità 
+#link(<GitHubAnalysis>)[GitHubAnalysis] ha un campo `status` che rappresenta lo stato attuale dell'analisi 
+(es. `pending`, `in-progress`, `completed`, `failed`). Le transizioni di stato sono gestite internamente all'entitá,
+evitando un passaggio non valido da uno stato all'altro, come tra `failed` e `completed` o tra `pending` e `completed`.
+
+=== Strategy
+==== Problema risolto
+Permette di variare il comportamento di validazione e autorizzazione del repository senza introdurre logica condizionale 
+complessa nei servizi applicativi.  
+==== Implementazione
+Nel microservizio di Analisi il pattern è applicato in due punti: #link(<GitValidatorService>)[GitValidatorService], che seleziona dinamicamente la strategia 
+tra validazione per commit, branch o default, e #link(<GitAuthorizerService>)[GitAuthorizerService], che sceglie tra autorizzazione privata (token utente da persistenza) e pubblica (token di sistema da configurazione).  
+In questo modo il servizio chiamante dipende da un contratto unico, mentre l’algoritmo concreto viene scelto a runtime in base al contesto della richiesta.
+
+=== Dependency injection
+Sfruttando nativamente le capacità del framework NestJS, l'*Iniezione delle Dipendenze (DI)* rappresenta uno dei pattern tecnici principali alla base del progetto software.
+==== Problema risolto
+La Dependency Injection risolve il problema dell’accoppiamento rigido tra una classe e le sue dipendenze concrete.  
+Senza DI, ogni componente crea direttamente i servizi che usa, rendendo il codice più fragile ai cambiamenti e difficile da testare.
+
+Con DI:
+- le dipendenze sono fornite dall’esterno (container IoC);
+- il codice dipende da interfacce/contratti, non da classi concrete;
+- modularità, riuso e testabilità (mock/stub) migliorano in modo significativo.
+==== Implementazione
+Attraverso i costruttori di classe, i vari Controllers e i Services ricevono all'avvio del sistema le loro rispettive dipendenze sotto forma ridotta di interfacce/componenti 
+di istanziazione validati. Un container `Inversion of Control` (IoC) organizzato in un module di NestJs di supporto si prende in totale carico l'apposita istanziazione ed assegnazione dei componenti.
+
+=== Data Transfer Object (DTO)
+==== Problema risolto
+Il pattern DTo permette di trasferire dati tra i diversi layer del microservizio e verso i client esterni senza
+ esporre direttamente le entità di dominio interno che contengono una logica di core che non deve essere esposta.
+==== Implementazione
+Il pattern *DTO* viene impiegato sistematicamente in entrambi i microservizi sia a livello di presentazione (Request e Result DTOs) che a livello applicativo 
+per trasportare dati sotto forma di tipi primitivi.
+ Tramite i DTO, i dati in transito assumono una forma asettica e consona per le sole esigenze di comunicazione..
