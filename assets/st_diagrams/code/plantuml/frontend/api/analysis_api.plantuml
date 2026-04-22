@@ -11,9 +11,20 @@ package "API Layer (Model)" {
     + getById(id): Promise<Analysis>
     + getHistory(params): Promise<PaginatedResponse<Analysis>>
     + exportReport(id, format): Promise<Blob>
+<<<<<<< HEAD:assets/st_diagrams/code/plantuml/frontend/api/analysis_api.plantuml
         --
     Recupera singoli report di analisi, lo storico globale di tutte
     le analisi dell'utente, esporta i report nei formati JSON e PDF.
+=======
+    + updateRemediationDecision(analysisId, remediationId, decision): Promise<void>
+    --
+    Recupera singoli report tramite GET /analysis/one con body { analysisId },
+    mappando la risposta al tipo Analysis (meta-dati + DocsAnalysisReport).
+    getHistory chiama GET /analysis/all: ritorna tutte le analisi dell'utente
+    corrente (userId da JWT) come PaginatedResponse con pagina unica.
+    Gestisce l'esportazione in json/pdf/csv/markdown
+    e l'aggiornamento delle decisioni sulle remediation suggerite.
+>>>>>>> d2e4c4cff7167edef0511877b09f78914ea3f1d5:assets/st_diagrams/code/frontend/api/analysis_api.plantuml
   }
 
   AnalysisApi --> "Gateway" : usa

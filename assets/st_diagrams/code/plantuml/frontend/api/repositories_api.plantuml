@@ -15,7 +15,6 @@ package "API Layer (Model)" {
     + delete(id): Promise<void>
     + getRanking(): Promise<RankedRepository[]>
     + startAnalysis(id, payload): Promise<{ analysisId }>
-    + getAnalysis(id): Promise<Analysis>
     + getHistory(id, params): Promise<PaginatedResponse<Analysis>>
     + compareAnalyses(id, ids): Promise<unknown>
     --
