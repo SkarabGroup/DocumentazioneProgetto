@@ -17,11 +17,15 @@ interface IGitClonePort {
 class GitHubAdapter {
     - execAsync: ExecAsync
     ---
-    + GitHubAdapter(execAsync?)
+    + GitHubAdapter(execAsync?: ExecAsync)
     + check(request: CheckAvailabilityRequest): Promise<CheckAvailabilityResponse>
     + clone(request: CloneRepoRequest): Promise<CloneRepoResponse>
-    - buildAccessRequestCurl(request): string
-    - parseResponse(stdout, request): CheckAvailabilityResponse
+    - buildAccessRequestCurl(request: CheckAvailabilityRequest): string
+    - buildUrl(request: CheckAvailabilityRequest): string
+    - parseResponse(stdout: string, request: CheckAvailabilityRequest): Promise<CheckAvailabilityResponse>
+    - validateBody(body: string, request: CheckAvailabilityRequest): Promise<CheckAvailabilityResponse>
+    - getCommitFromBranch(repoPath: string, branch: string, patToken?: string): Promise<{sha: string} | null>
+    - extractRepoPath(repositoryUrl: string): string
 }
 
 GitHubAdapter ..|> IGitHubAvailabilityPort

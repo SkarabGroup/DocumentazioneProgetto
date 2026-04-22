@@ -2,7 +2,7 @@
 #import "../lib/variables.typ": *
 #import "../lib/stDiagramUtil.typ": *
 
-#let versione = "v0.15.0"
+#let versione = "v0.18.0"
 #set heading(numbering: "1.1.1")
 /*
 === FUNZIONAMENTO DEL DOCUMENTO ===
@@ -25,10 +25,31 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #let history = (
   (
     "2026/04/22",
-    "0.15.0",
+    "0.18.0",
     "Aggiunta la sezione di mappatura dei requisiti",
     members.antonio,
     "",
+  ),
+  (
+    "2026/04/22",
+    "0.17.0",
+    "Aggiunta sezione design patterns",
+    members.kevin,
+    members.andrea,
+  ),
+  (
+    "2026/04/21",
+    "0.16.0",
+    "Completati i componenti della sezione presentation per Analysis Microservice",
+    members.antonio,
+    members.andrea,
+  ),
+  (
+    "2026/04/21",
+    "0.15.0",
+    "Completati i componenti della sezione infrastructure per Analysis Microservice",
+    members.andrea,
+    members.kevin
   ),
   (
     "2026/04/20",
@@ -1173,7 +1194,7 @@ Svolge i seguenti passaggi per permettere a #link(<AnalysisOrchestratorService>)
 
 `UpdatePatService` implementa #link(<UpdatePatUseCase>)[`UpdatePatUseCase`], validando il nuovo PAT e la password corrente tramite il domain service #link(<IPasswordProvider>)[`IPasswordProvider`], e delegando l'aggiornamento a #link(<IGitCredentialUpdatePort>)[`IGitCredentialUpdatePort`].
 
-===== Port
+===== Port <AnalysisPorts>
 Le porte sono le interfacce che definiscono i contratti di comunicazione tra il dominio applicativo e le dipendenze esterne (infrastruttura, agenti, persistenza). Ogni porta rappresenta un punto di estensione che permette di sostituire o modificare l'implementazione concreta senza impattare la logica applicativa, facilitando testabilità, manutenibilità e evoluzione del sistema. Ogni porta è progettata per essere il più possibile specifica e orientata al caso d'uso, evitando di esporre operazioni generiche o non necessarie che potrebbero portare a dipendenze indesiderate o a un accoppiamento eccessivo tra layer.
 ====== ICodeAgentPort <ICodeAgentPort>
 #codeDiagram("ICodeAgentPort", 70%)
@@ -1481,135 +1502,320 @@ I contratti di risposta sono i DTO che trasportano i dati restituiti dalle imple
 - *Report Opzionali:* I campi `docsReport`, `codeReport` e `secReport` sono nullable, riflettendo il fatto che un'analisi può coinvolgere solo un sottoinsieme dei tre tipi di report in base a quanto richiesto.
 
 ==== Infrastructure
-===== Adapter
+===== Adapters <Analysis_Adapters>
+Questa sezione descrive i Driven Adapter, i componenti concreti del livello infrastrutturale incaricati di implementare i contratti (Port) definiti nel livello Application. Nel rigoroso rispetto dell'Architettura Esagonale, gli adapter agiscono come strato di confine e di traduzione tra il nucleo applicativo e l'infrastruttura esterna, isolando la logica di business da qualsiasi dettaglio tecnologico. Essi incapsulano tutta la complessità necessaria per interagire con il database (MongoDB), le API esterne (GitHub), i processi di sistema (esecuzioni Docker locali) e l'infrastruttura Cloud (AWS ECS e S3). Grazie a questo isolamento, la logica di business e l'orchestrazione dei flussi rimangono puramente agnostiche e protette dai dettagli di I/O, garantendo un'altissima testabilità e flessibilità architetturale.
 ====== GitHubAdapter <GitHubAdapter>
 #codeDiagram("GitHubAdapter", 100%)
 
-`GitHubAdapter` è il Driven Adapter che implementa sia #link(<IGitHubAvailabilityPort>)[`IGitHubAvailabilityPort`] che #link(<IGitClonePort>)[`IGitClonePort`], eseguendo operazioni Git tramite chiamate `curl` all'API GitHub e comandi shell per la clonazione.
+`GitHubAdapter` è il Driven Adapter responsabile dell'interazione con l'ecosistema GitHub. Implementando i port #link(<IGitHubAvailabilityPort>)[`IGitHubAvailabilityPort`] e #link(<IGitClonePort>)[`IGitClonePort`], funge da ponte traduttore: prende le richieste del dominio applicativo e le trasforma nei comandi tecnici necessari per comunicare con l'esterno, come chiamate di rete (`curl`) e comandi shell nativi (`git`).
 
-- *Adattamento verso l'Esterno:* Traduce i DTO del dominio applicativo in comandi shell Git/curl e ne interpreta le risposte, isolando il resto del sistema dai dettagli dell'API GitHub.
-- *Testabilità:* Il costruttore accetta un `execAsync` iniettabile, permettendo il testing con mock senza eseguire comandi reali.
+- *Integrazione Lightweight tramite Shell:* Invece di dipendere da SDK esterni pesanti, l'adapter utilizza direttamente comandi shell di sistema. Il costruttore accetta una funzione `execAsync` iniettabile (di default basata su `child_process.exec`), permettendo un mocking completo durante i test unitari senza dover effettuare reali chiamate di rete.
+- *Risoluzione Dinamica e Validazione (`check`):* Il metodo `check` non si limita a verificare i permessi. Interrogando l'API REST di GitHub tramite `curl`, estrae e analizza lo status code HTTP. Se il repository è accessibile, processa il payload JSON per risolvere dinamicamente l'esatto hash SHA del commit (sia che l'utente abbia richiesto un branch specifico, un commit esatto, o si sia affidato al branch di default). Questo garantisce che le fasi successive dell'analisi siano assolutamente deterministiche. Nel caso in cui venga richiesto il branch di default, il metodo esegue una seconda chiamata HTTP tramite `getCommitFromBranch` per risolvere il commit SHA esatto, poiché la risposta iniziale sull'endpoint `/repos/{owner}/{repo}` non lo espone direttamente.
+- *Clonazione Ottimizzata (`clone`):* La logica di clonazione applica strategie diverse per minimizzare l'uso di banda e disco. Se viene richiesto un branch specifico o il branch di default, esegue una clonazione "shallow" (`--depth 1`), scaricando solo l'ultima versione dei file ignorando lo storico dei commit passati; se è richiesto un commit storico specifico, esegue una clonazione standard seguita da un `checkout` mirato.
+- *Gestione Sicura dell'Autenticazione:* L'adapter inietta in modo sicuro i #link(<PersonalAccessToken>)[`PersonalAccessToken`] passandoli come header `Bearer` per le API o incorporandoli dinamicamente nell'URL HTTPS durante la clonazione. Inoltre, implementa un meccanismo di fallback a livello di sistema qualora l'utente non fornisca credenziali proprie.
+- *Resilienza e Cleanup:* Per prevenire il rapido esaurimento dello spazio su disco del server (disk leak), l'adapter isola ogni clonazione in una cartella temporanea univoca in `/tmp/` basata sull'ID dell'analisi. Garantisce inoltre, tramite un blocco `catch`, che le directory temporanee vengano rimosse forzatamente in caso di fallimento del clone.
 
----
+====== LocalCodeAnalysisAdapter <LocalCodeAnalysisAdapter>
+#codeDiagram("LocalCodeAnalysisAdapter", 60%)
+
+`LocalCodeAnalysisAdapter` è il Driven Adapter che implementa il port #link(<ICodeAgentPort>)[`ICodeAgentPort`]. È responsabile dell'orchestrazione locale dell'agente di analisi del codice, incapsulando l'esecuzione del container Docker e il recupero sicuro dei risultati.
+
+- *Orchestrazione Docker Nativa:* Il metodo `runContainer()` utilizza il modulo `child_process.spawn` di Node.js per avviare il container `strands-code-analyzer`. Si occupa di montare dinamicamente i volumi condivisi (`analysis_tmp_data`) e di iniettare in modo sicuro le variabili d'ambiente necessarie (verificando la presenza del file `.env` tramite `fs.existsSync`) senza esporle nel codice.
+- *Parsing Resiliente a Tolleranza d'Errore:* Lo `stdout` di un container Docker include spesso log di boot o warning estranei al risultato. Per questo, il metodo `extractJson()` esegue due passaggi: prima scansiona l'output alla ricerca di un token esplicito di errore (`{"status": "error"`); se non lo trova, applica un sofisticato algoritmo iterativo di bilanciamento delle parentesi per isolare il blocco JSON valido contenente il nodo root `analysis_report`. In aggiunta, il metodo `runContainer()` implementa una logica di tolleranza sull'exit code: se il container termina con un codice diverso da zero ma ha comunque prodotto output su `stdout`, il risultato viene comunque promosso invece di essere scartato, permettendo il recupero di report parziali da container che crashano dopo aver completato la scrittura.
+- *Arricchimento del Payload:* Prima di restituire il risultato tramite il metodo `runAnalysis()`, l'adapter funge da strato di traduzione. Intercetta il JSON grezzo emesso dall'agente e vi inietta dinamicamente i metadati operativi cruciali (come l'identificativo del `repository` e lo `status` dell'operazione), garantendo che il DTO finale rispetti rigorosamente le aspettative del livello Application.
+- *Risoluzione dei fallimenti (Fallback):* In caso di crash improvviso del container, fallimento del Docker o corruzione dell'output testuale, l'eccezione non viene propagata. Il blocco `catch` invoca `createFallbackResponse()`, che istanzia e restituisce una risposta strutturata, type-safe e con verdetto `Critical`, incapsulando il motivo del fallimento. Questo isolamento garantisce che l'orchestratore globale non si blocchi per colpa di un singolo agente.
+
+====== DocumentationAnalysisAdapter <DocumentationAnalysisAdapter>
+#codeDiagram("DocumentationAnalysisAdapter", 60%)
+
+`DocumentationAnalysisAdapter` è il Driven Adapter che implementa il port #link(<IDocumentationAgentPort>)[`IDocumentationAgentPort`]. Gestisce l'orchestrazione locale dell'agente incaricato di valutare la qualità, le discrepanze e i file mancanti della documentazione del repository.
+
+- *Esecuzione Isolata via Docker:* Il metodo `runContainer()` utilizza il modulo `child_process.spawn` per avviare il container `strands-documentation-analyzer`. Si occupa di montare dinamicamente il volume condiviso (`analysis_tmp_data`) per l'accesso al codice e di iniettare il file di configurazione ambientale `.env`.
+- *Overriding Dinamico dell'Entrypoint:* A differenza degli altri adapter, sovrascrive dinamicamente l'entrypoint di default del container (`--entrypoint sh`) per lanciare esplicitamente lo script Python dell'agente. In questa fase, applica un quoting rigoroso al path del repository (`"${repoPathInContainer}"`) per prevenire bug legati al word-splitting della shell (ad esempio se il nome della repo contiene spazi).
+- *Parsing Resiliente a Tolleranza d'Errore:* Consapevole che lo `stdout` Docker non è mai un JSON "puro", l'adapter impiega il metodo custom `extractJson()`. Dapprima verifica l'eventuale presenza di un token esplicito di errore; in sua assenza, utilizza un algoritmo iterativo basato sul conteggio delle parentesi per scansionare l'output, scartare il rumore di boot e isolare il blocco JSON valido contenente l'oggetto `analysis_report`.
+- *Arricchimento del Payload:* Prima di restituire l'esito tramite `runAnalysis()`, l'adapter inietta nel JSON grezzo i metadati operativi mancanti (come l'ID del `repository` e lo `status` di successo), allineando strutturalmente l'output alle aspettative del livello Application.
+- *Risoluzione dei fallimenti (Fallback):* Se l'agente Python va in crash o genera un output incomprensibile, il blocco `catch` invoca `createFallbackResponse()`. Questo metodo inietta uno stato di errore controllato (`status: 'error'`) e restituisce una risposta strutturata contenente array vuoti per tutte le categorie (violazioni, audit, file mancanti). Ciò permette alla pipeline generale di concludersi senza corrompere o bloccare l'esecuzione degli altri agenti di analisi paralleli.
+
+====== LocalSecurityAnalysisAdapter <LocalSecurityAnalysisAdapter>
+#codeDiagram("LocalSecurityAnalysisAdapter", 70%)
+
+`LocalSecurityAnalysisAdapter` è il Driven Adapter che implementa il port #link(<ISecurityAgentPort>)[`ISecurityAgentPort`]. Gestisce l'orchestrazione locale dell'agente dedicato alla scansione delle vulnerabilità, incapsulando l'esecuzione dell'immagine Docker e la complessa gestione dei risultati aggregati dei vari tool.
+
+- *Orchestrazione Docker Sicura:* Il metodo `runContainer()` utilizza `child_process.spawn` per avviare in isolamento il container `strands-security-analyzer`. Inietta dinamicamente il file `.env` di configurazione (verificandone preventivamente l'esistenza tramite `fs.existsSync`) e mappa il volume condiviso (`analysis_tmp_data`) in cui risiede il codice clonato, garantendo che l'agente abbia accesso esclusivo al contesto necessario.
+- *Parsing Resiliente a Tolleranza d'Errore:* Poiché lo `stdout` del container viene spesso inquinato dai log di avvio dei tool sottostanti, il metodo `extractJson()` adotta una strategia a due fasi: dapprima scansiona l'output alla ricerca di un token esplicito di errore (`{"status": "error"`); in sua assenza, utilizza un algoritmo custom di bilanciamento delle parentesi per scansionare il flusso testuale, scartare il rumore e isolare esclusivamente il payload JSON valido associato alla chiave `analysis_report`.
+- *Arricchimento del Contesto:* Prima di istanziare la risposta finale, l'adapter agisce da strato di traduzione arricchendo il JSON grezzo: inietta l'identificativo del `repository` e impone lo stato `success` nei `metadata`, allineando l'output grezzo dell'agente alle aspettative strutturali del livello Application.
+- *Risoluzione dei fallimenti (Fallback):* In caso di fallimento infrastrutturale (es. crash del container o errore di Docker), l'adapter applica un pattern di graceful degradation tramite `createFallbackResponse()`. Invece di far fallire l'orchestratore, restituisce un DTO strutturato con stato `FAILED` e incapsula esplicitamente il motivo del crash all'interno dell'array `errors` associandolo al tool fittizio `'agent'`, garantendo la tracciabilità del problema direttamente nel report di sicurezza finale.
 
 ====== MongoDBAdapter <MongoDBAdapter>
 #codeDiagram("MongoDBAdapter", 100%)
 
-`MongoDBAdapter` è il Driven Adapter che implementa tutti e quattro i port di repository per le credenziali Git (#link(<IGitCredentialReadPort>)[`IGitCredentialReadPort`], #link(<IGitCredentialSavePort>)[`IGitCredentialSavePort`], #link(<IGitCredentialDeletePort>)[`IGitCredentialDeletePort`], #link(<IGitCredentialUpdatePort>)[`IGitCredentialUpdatePort`]), interagendo con MongoDB tramite Mongoose.
+`MongoDBAdapter` è il Driven Adapter centralizzato che implementa l'intero livello di persistenza del sistema su MongoDB. Funge da ponte tra i contratti definiti nel livello Application e il database fisico, incapsulando la logica di accesso, traduzione e aggregazione attraverso la libreria Mongoose. Inietta nel costruttore i sei modelli definiti nel dominio e implementa sedici port distinti, suddividendo il suo operato su diverse aree funzionali:
 
-- *Adattatore Unificato:* Concentra tutta la logica di persistenza delle credenziali in un unico adapter, semplificando la configurazione del modulo NestJS e riducendo la frammentazione infrastrutturale.
-- *Schema MongoDB:* Utilizza lo schema #link(<GitCredential>)[`GitCredential`] per mappare le credenziali sul documento MongoDB, applicando validazione a livello di schema (regex SHA-256 per la password, unicità dell'URL).
+- *Gestione Sicura delle Credenziali:* Tramite i metodi `authorize()`, `save()`, `updatePAT()` e `deletePAT()`, gestisce il ciclo di vita dei token di accesso mappandoli sullo schema #link(<GitCredential>)[`GitCredential`]. Oltre alle operazioni CRUD, isola gli errori infrastrutturali intercettando il codice `11000` di MongoDB per tradurlo in un fallimento di "credenziali duplicate" gestibile dal dominio.
+- *Tracciamento del Ciclo di Vita dell'Analisi:* Il metodo `saveAnalysis()` inizializza il documento #link(<GitHubAnalysisRecord>)[`GitHubAnalysisRecord`] all'avvio del processo. Successivamente, `addReportsToAnalysis()` agisce da aggregatore: riceve gli identificativi dei report generati dagli agenti e aggiorna atomicamente il record principale, associando le chiavi esterne e spostandone lo status a `COMPLETED`.
+- *Archiviazione Multi-Report:* Espone tre metodi dedicati (`saveCodeReport()`, `saveDocsReport()` e `saveSecurityReport()`) per riversare le complesse alberature dei Value Object di dominio all'interno dei documenti di database. Più nello specifico:
+  - Traduce le metriche di copertura, le issue strutturali e i verdetti dell'AI nello schema #link(<CodeReportModel>)[`CodeReportModel`].
+  - Mappa l'intero albero delle discrepanze testuali, i file mancanti e l'audit delle dipendenze all'interno dello schema #link(<DocumentationReportModel>)[`DocumentationReportModel`].
+  - Scompone logicamente le vulnerabilità rilevate, separandole per tool di origine (Trivy, Semgrep, Grype) e per categoria, strutturandole all'interno del #link(<SecurityReportModel>)[`SecurityReportModel`].
+- *Aggregazione Dinamica in Lettura:* Il metodo `getAnalysisFromId()` orchestra query complesse al posto di una semplice `find`. Recupera il record base e, tramite interrogazioni condizionali sui modelli Mongoose, "pesca" i tre report separati (se presenti), assemblandoli al volo nel DTO `GitHubAnalysisDetailedResult` richiesto dal frontend. Il metodo `getAllAnalysesForUser()` fornisce invece viste generalizzate leggere.
+- *Gestione Dinamica delle Collezioni:* Attraverso metodi come `addCollection()`, `deleteCollection()` e `getRepositoryCollection()`, l'adapter gestisce le viste aggregate per utente basate sullo schema #link(<GitHubCollection>)[`GitHubCollection`]. Nell'orchestrare le letture, non duplica i dati storici ma interroga dinamicamente la collezione `github_analyses` filtrando per `url` e `userId` (ordinando per `createdAt`), garantendo che la collezione restituisca uno storico sempre aggiornato.
+
+====== S3Adapter <S3Adapter>
+#codeDiagram("S3Adapter", 60%)
+
+`S3Adapter` è il Driven Adapter cloud-native che implementa #link(<IGitClonePort>)[`IGitClonePort`]. Sostituisce la clonazione locale preparando il codice per un'architettura distribuita.
+
+- *Clonazione Dinamica e Autenticazione:* Clona il repository localmente adattando la strategia alla richiesta (`--depth 1` per branch/default, o checkout mirati per commit storici). Gestisce l'autenticazione iniettando il PAT dell'utente o applicando dinamicamente il token di sistema di fallback (`CODE_GUARDIAN_TOKEN`).
+- *Compressione e Upload S3:* Una volta clonato il codice, utilizza la libreria `tar` per comprimere l'intera cartella in un archivio `.tar.gz`. Successivamente, lo carica su un bucket AWS S3 tramite `PutObjectCommand`. Questo file diventa il volume di partenza "congelato" per i container di analisi.
+- *Gestione Sicura del Ciclo di Vita:* Utilizza un blocco `try/catch` per garantire la pulizia assoluta del file system locale dell'orchestratore. Sia in caso di successo che di eccezione, rimuove forzatamente sia la directory clonata (`rm -rf`) che l'archivio generato (`fs.unlinkSync`), prevenendo ogni leak di spazio su disco.
+
+====== ECSCodeAnalysisAdapter <ECSCodeAnalysisAdapter>
+#codeDiagram("ECSCodeAnalysisAdapter", 67%)
+
+`ECSCodeAnalysisAdapter` è il Driven Adapter che implementa #link(<ICodeAgentPort>)[`ICodeAgentPort`], delegando l'esecuzione dell'agente di analisi del codice all'infrastruttura serverless AWS ECS (Fargate).
+
+- *Orchestrazione Serverless:* Il metodo `runEcsTask()` avvia un task isolato tramite `RunTaskCommand`, configurando esplicitamente la rete VPC (subnet, security group). Inietta nel container le variabili d'ambiente fondamentali (`ANALYSIS_ID` e `S3_BUCKET_NAME`) necessarie all'agente per scaricare il codice e caricare il risultato.
+- *Monitoraggio Attivo (Polling):* Dato che ECS è asincrono, l'adapter implementa `waitForTaskCompletion()`. Questo loop utilizza `DescribeTasksCommand` interrogando AWS ogni 10 secondi fino al raggiungimento dello stato `STOPPED`. Verifica rigorosamente l'exit code del container: un'uscita diversa da zero solleva immediatamente un'eccezione infrastrutturale.
+- *Recupero e Arricchimento:* Tramite `GetObjectCommand` scarica da S3 il file di reportistica prodotto (`code_report.json`). Agendo da strato di traduzione, l'adapter inietta nel JSON i metadati applicativi (`repository` ID e `status: 'success'`) prima di passare il controllo al livello Application.
+- *Risoluzione dei fallimenti (Fallback):* In caso di timeout, fallimento di AWS o exit code anomalo, il blocco `catch` invoca `createFallbackResponse()`. Invece di far crollare l'applicazione, restituisce un DTO type-safe con verdetto `Critical`, incapsulando il motivo esatto del fallimento infrastrutturale.
+
+====== ECSDocumentationAnalysisAdapter <ECSDocumentationAnalysisAdapter>
+#codeDiagram("ECSDocumentationAnalysisAdapter", 70%)
+
+`ECSDocumentationAnalysisAdapter` è il Driven Adapter che implementa #link(<IDocumentationAgentPort>)[`IDocumentationAgentPort`] eseguendo l'agente di documentazione su AWS ECS (Fargate).
+
+- *Esecuzione Distribuita:* Il metodo `runEcsTask()` utilizza `RunTaskCommand` per avviare il task basato sulla definizione `ecsTaskDefinitionDocs`. Passa il contesto operativo iniettando `ANALYSIS_ID` e `S3_BUCKET_NAME` come variabili d'ambiente.
+- *Gestione dell'Attesa (Polling):* L'adapter delega a `waitForTaskCompletion()` l'attesa asincrona. Tramite chiamate ripetute a `DescribeTasksCommand`, interroga lo stato del container Fargate e controlla rigorosamente la proprietà `exitCode` per validare l'integrità dell'esecuzione remota.
+- *Integrazione S3 e Payload:* Tramite `fetchResultFromS3()`, scarica dal bucket il file prodotto dall'agente (`docs_report.json`). Valida la radice strutturale `analysis_report` e vi inietta i metadati applicativi (`repository` e `status: 'success'`) prima di completare la risoluzione.
+- *Graceful Degradation:* Se il task fallisce o restituisce un exit code anomalo, il catch block invoca `createFallbackResponse()`. L'eccezione viene trasformata in una risposta controllata con array vuoti (per violazioni, audit e file mancanti) e stato `'error'`, evitando di far fallire l'intera pipeline globale.
+
+====== ECSSecurityAnalysisAdapter <ECSSecurityAnalysisAdapter>
+#codeDiagram("ECSSecurityAnalysisAdapter", 74%)
+
+`ECSSecurityAnalysisAdapter` è il Driven Adapter che implementa #link(<ISecurityAgentPort>)[`ISecurityAgentPort`] eseguendo la suite di sicurezza su AWS ECS (Fargate).
+
+- *Scalabilità e Isolamento:* Il metodo `runEcsTask()` lancia il container (`ecsTaskDefinitionSecurity`) applicando le regole di rete VPC (subnet e security group) necessarie per garantire un ambiente cloud isolato durante la scansione delle vulnerabilità.
+- *Monitoraggio dell'Esecuzione:* Il flusso viene bloccato in attesa sicura dal metodo `waitForTaskCompletion()`. Questo ciclo verifica che il task ECS raggiunga lo stato `STOPPED` senza errori sistemici, sollevando eccezioni in caso di `exitCode` diverso da zero.
+- *Estrazione Dati Cloud-Native:* Al termine dell'esecuzione, il metodo `fetchResultFromS3()` preleva dal bucket l'artefatto JSON (`security_report.json`). L'adapter lo parsa e lo arricchisce dinamicamente con i metadati necessari a soddisfare il contratto del livello Application.
+- *Tracciabilità degli Errori:* Il pattern di fallback, gestito da `createFallbackResponse()`, è particolarmente curato. Se l'esecuzione su ECS fallisce, non si limita a impostare lo stato a `FAILED`: inserisce l'eccezione infrastrutturale nell'array `errors` associandola a un tool fittizio (`tool: 'agent'`), per garantire totale trasparenza sul motivo del blocco al front-end.
 
 ===== Schema
-====== GitCredential <GitCredential>
-//#codeDiagram("GitCredential", 100%)
+Questa sezione descrive gli Schema Mongoose, ovvero i modelli di dati fisici utilizzati dal livello di persistenza per interfacciarsi con il database MongoDB. Nel rispetto dell'Architettura Esagonale, gli Schema fungono da proiezione persistente delle Entità e dei Value Object definiti nel Domain Layer. Essi incapsulano esclusivamente dettagli infrastrutturali — come i vincoli di unicità, l'indicizzazione per l'ottimizzazione delle query e la gestione dei tipi nativi del database (es. `ObjectId` e `timestamps`) — mantenendo il dominio puro e completamente agnostico rispetto alla tecnologia di memorizzazione.
 
-`GitCredential` è lo schema Mongoose che definisce la struttura del documento MongoDB per le credenziali Git: URL del repository (chiave univoca), hash della password, e PAT cifrato.
+====== GitCredential <GitCredential>
+#codeDiagram("GitCredential", 20%)
+
+`GitCredential` è lo schema Mongoose che definisce la struttura del documento MongoDB per le credenziali Git: URL del repository (chiave univoca), hash della password e PAT.
 
 - *Persistenza delle Credenziali:* Rappresenta la proiezione di persistenza dei dati gestiti dai Value Object #link(<RepoURL>)[`RepoURL`], #link(<PATPassword>)[`PATPassword`] e #link(<PersonalAccessToken>)[`PersonalAccessToken`], adattandoli al formato MongoDB.
+- *Ricerca Ottimizzata:* Il campo `repoUrl` è marcato come `unique` e indicizzato (`index: true`), garantendo l'unicità delle credenziali per repository e ricerche fulminee durante l'autorizzazione.
+
+====== GitHubAnalysisRecord <GitHubAnalysisRecord>
+#codeDiagram("GitHubAnalysisRecord", 30%)
+
+`GitHubAnalysisRecord` è lo schema Mongoose che definisce la persistenza dell'entità #link(<GitHubAnalysis>)[`GitHubAnalysis`], memorizzando i metadati dell'analisi e i riferimenti ai vari report generati.
+
+- *Proiezione dell'Entità:* Mappa gli attributi gestiti dai Value Object #link(<AnalysisId>)[`AnalysisId`], #link(<UserId>)[`UserId`], #link(<RepoURL>)[`RepoURL`], #link(<BranchName>)[`BranchName`], #link(<CommitHash>)[`CommitHash`] e l'enumerazione #link(<AnalysisStatus>)[`AnalysisStatus`] in tipi primitivi persistibili nel database.
+- *Tracciamento dei Report:* Mantiene i riferimenti opzionali (di tipo stringa, derivati dal Value Object #link(<ReportId>)[`ReportId`]) ai documenti separati che contengono i payload massivi generati dagli agenti.
+- *Gestione Temporale:* Utilizza l'opzione `timestamps: true` di Mongoose per gestire automaticamente i campi `createdAt` e `updatedAt`.
+
+====== GitHubCollection <GitHubCollection>
+#codeDiagram("GitHubCollection", 25%)
+
+`GitHubCollection` è lo schema Mongoose che raggruppa le analisi ripetute su uno stesso repository per un dato utente, creando una vista "storica" o di progetto.
+
+- *Relazioni MongoDB:* Il campo `analyses` utilizza `ObjectId` per referenziare multipli documenti della collezione `github_analyses` (ossia analisi derivanti dall'entità #link(<GitHubAnalysis>)[`GitHubAnalysis`]), modellando una relazione uno-a-molti. Tuttavia, per garantire uno storico sempre aggiornato e inclusivo anche delle analisi precedenti alla creazione della collezione, il `MongoDBAdapter` non utilizza questo campo in lettura: le analisi vengono recuperate dinamicamente tramite query diretta sulla collezione `github_analyses`, filtrando per `url` e `userId`. Il campo rimane presente per compatibilità strutturale del documento.
+- *Indice Composto:* Definisce un indice composto e univoco su `{ url: 1, userId: 1 }` per garantire che un utente non possa creare più collezioni per lo stesso repository, ottimizzando contemporaneamente le query di lookup basate in origine su #link(<RepoURL>)[`RepoURL`] e #link(<UserId>)[`UserId`].
+
+====== CodeReportModel <CodeReportModel>
+#codeDiagram("CodeReportModel", 35%)
+
+`CodeReportModel` è lo schema Mongoose che archivia i risultati dettagliati prodotti dall'agente di analisi del codice, fungendo da proiezione persistente per l'entità #link(<CodeAgentReport>)[`CodeAgentReport`].
+
+- *Integrità Strutturale:* Utilizza regex per validare che `reportId` e `analysisId` (rappresentazioni testuali di #link(<ReportId>)[`ReportId`] e #link(<AnalysisId>)[`AnalysisId`]) siano formattati correttamente come UUID v7.
+- *Sub-documenti Strutturati:* Fa un uso estensivo di classi Schema interne per mappare fedelmente l'alberatura complessa prodotta dai Value Object #link(<CodeAgentMetadata>)[`CodeAgentMetadata`] e #link(<AIInterpretation>)[`AIInterpretation`].
+- *Indicizzazione Strategica:* Crea indici specifici su `interpretation.verdict` (direttamente correlato all'enumerazione #link(<VerdictStatus>)[`VerdictStatus`]) e `metadata.language` per permettere aggregazioni e filtri rapidi a livello di database.
+
+====== DocumentationReportModel <DocumentationReportModel>
+#codeDiagram("DocumentationReportModel", 42%)
+
+`DocumentationReportModel` è lo schema Mongoose dedicato al salvataggio massivo dei risultati emessi dall'agente di analisi della documentazione, fungendo da proiezione persistente per l'entità #link(<DocumentationReport>)[`DocumentationReport`].
+
+- *Mappatura delle Discrepanze:* Salva direttamente gli array di oggetti complessi derivati dai Value Object #link(<APIViolation>)[`APIViolation`], #link(<DocsDiscrepancy>)[`DocsDiscrepancy`], #link(<MissingFile>)[`MissingFile`] e #link(<DependencyAudit>)[`DependencyAudit`].
+- *Integrità Relazionale:* Come gli altri report, vincola i campi legati a #link(<ReportId>)[`ReportId`] e #link(<AnalysisId>)[`AnalysisId`] ad essere univoci.
+- *Ottimizzazione delle Ricerche:* Implementa indici manuali sui campi di severità annidati (correlati all'enumerazione #link(<SeverityLevel>)[`SeverityLevel`]), fondamentali per estrarre rapidamente le metriche senza caricare interi documenti in memoria.
+
+====== SecurityReportModel <SecurityReportModel>
+#codeDiagram("SecurityReportModel", 45%)
+
+`SecurityReportModel` è lo schema Mongoose progettato per immagazzinare in modo strutturato le vulnerabilità riscontrate, fungendo da proiezione persistente per l'entità #link(<SecurityReport>)[`SecurityReport`].
+
+- *Categorizzazione Multi-Tool:* Separa logicamente i risultati in array di sub-documenti tipizzati che riflettono esattamente le collezioni di Value Object dell'entità: #link(<DependencyFinding>)[`DependencyFinding`], #link(<OWASPFinding>)[`OWASPFinding`], #link(<SecretFinding>)[`SecretFinding`] e gli errori #link(<ToolError>)[`ToolError`].
+- *Indicizzazione Profonda:* Include indici composti e specifici sulle proprietà annidate (come i livelli di severità legati a #link(<SeverityFinding>)[`SeverityFinding`] o le categorie OWASP) per supportare query ad alte prestazioni necessarie per i cruscotti di sicurezza.
 
 ==== Presentation
-===== Controller
+===== Helpers
+Questa sezione descrive i componenti ausiliari del livello di presentazione, responsabili di fornire funzionalità trasversali riutilizzabili dai controller. In particolare, raggruppa i meccanismi di autenticazione e autorizzazione basati su JWT, isolando la logica di validazione dei token dal codice applicativo dei controller e garantendo che ogni endpoint protetto possa verificare l'identità del chiamante in modo uniforme e disaccoppiato.
+
+====== JwtHelper <JwtHelper>
+#codeDiagram("JwtHelper", 80%)
+
+`JwtHelper` raggruppa i componenti responsabili dell'autenticazione basata su JWT, integrando il meccanismo di validazione dei token con il framework applicativo. Include la strategia di validazione (`JwtStrategy`), il meccanismo di protezione degli endpoint (`JwtAuthGuard`) e un decoratore per l'estrazione dell'identità utente (`UserId`).
+
+- *Separazione tra Validazione e Accesso:* La `JwtStrategy` è responsabile della validazione del token e della costruzione del contesto utente, mentre `JwtAuthGuard` si occupa di applicare tale validazione agli endpoint protetti.
+- *Integrazione con il Framework di Autenticazione:* Il guard estende il meccanismo standard (`AuthGuard`), permettendo di riutilizzare l'infrastruttura di autenticazione senza introdurre logica applicativa nel controller.
+- *Accesso Tipizzato all'Utente:* Il decoratore `UserId` consente di accedere in modo tipizzato alle informazioni dell'utente estratte dal token, evitando la propagazione diretta del modello HTTP nei livelli superiori.
+
+===== Controllers
+Questa sezione descrive i Controller, i componenti del livello di presentazione incaricati di esporre gli endpoint HTTP e di tradurre le richieste in ingresso nei comandi applicativi corrispondenti. Nel rispetto dell'Architettura Esagonale, i controller non contengono logica di business: si limitano a trasformare i DTO di trasporto in comandi, delegare l'esecuzione ai rispettivi Use Case e restituire al client i DTO di risposta appropriati.
+
 ====== AnalysisController <AnalysisController>
-#codeDiagram("AnalysisController", 100%)
+#codeDiagram("AnalysisController", 90%)
 
-`AnalysisController` è il controller NestJS che espone l'endpoint `POST /analysis/start`, protetto da `JwtAuthGuard`. Riceve la richiesta HTTP, costruisce lo #link(<StartAnalysisCommand>)[`StartAnalysisCommand`] e delega al use case #link(<StartAnalysisUseCase>)[`StartAnalysisUseCase`].
+`AnalysisController` espone l'endpoint HTTP per richiedere l'avvio di una nuova analisi su un repository. Inietta `StartAnalysisUseCase`, al quale delega completamente l'esecuzione del flusso applicativo, ricevendo un `StartAnalysisRequestDTO` e restituendo un `StartAnalysisResponseDTO`.
 
-- *Layer di Presentazione:* Traduce il protocollo HTTP (DTO di richiesta/risposta, HTTP status codes) in chiamate al layer applicativo, separando le preoccupazioni di trasporto dalla logica di business.
-- *Autenticazione JWT:* Implementa l'estrazione dello `userId` dal JWT payload tramite il decorator `@UserId`, garantendo che ogni analisi sia tracciata all'utente autenticato.
-
----
+- *Separazione tra API e Dominio:* Il controller traduce il `StartAnalysisRequestDTO` in un `StartAnalysisCommand`, mantenendo separati il modello di trasporto HTTP e quello applicativo.
+- *Delegazione del Flusso:* La logica di orchestrazione è interamente demandata al `StartAnalysisUseCase`, mantenendo il controller come semplice punto di ingresso e uscita del sistema.
 
 ====== PatController <PatController>
 #codeDiagram("PatController", 100%)
 
-`PatController` è il controller NestJS che espone gli endpoint per la gestione dei Personal Access Token: `POST /analysis/pat` (aggiunta), `DELETE /analysis/pat` (eliminazione), `PUT /analysis/pat` (aggiornamento).
+`PatController` espone gli endpoint HTTP per la gestione dei Personal Access Token. Inietta tre use case distinti (`NewPatUseCase`, `DeletePatUseCase`, `UpdatePatUseCase`), ciascuno responsabile di una specifica operazione, e restituisce i rispettivi DTO di risposta.
 
-- *Delega ai Use Case:* Per ogni endpoint, costruisce il Command appropriato e delega al rispettivo use case (#link(<NewPatUseCase>)[`NewPatUseCase`], #link(<DeletePatUseCase>)[`DeletePatUseCase`], #link(<UpdatePatUseCase>)[`UpdatePatUseCase`]), mantenendo la logica di controllo nel layer applicativo.
+- *Segregazione dei Casi d'Uso:* Ogni operazione (creazione, aggiornamento, eliminazione) è delegata a un use case dedicato, garantendo isolamento dei flussi applicativi e coerenza con il principio di singola responsabilità.
+- *Uniformità del Flusso Applicativo:* Tutti gli endpoint seguono lo stesso schema: trasformazione del DTO di input in command e delega al caso d'uso, favorendo consistenza e manutenibilità.
 
-===== Request
+====== RepositoriesController <RepositoriesController>
+#codeDiagram("RepositoriesController", 110%)
+
+`RepositoriesController` espone gli endpoint HTTP per la gestione delle collezioni di repository e delle analisi associate. Inietta diversi use case per coprire operazioni di creazione, recupero e cancellazione, restituendo DTO di risposta specifici per ciascun endpoint.
+
+- *Composizione dei Casi d'Uso:* Il controller coordina più use case distinti per gestire scenari complessi, mantenendo comunque separata la logica applicativa nei rispettivi componenti.
+- *Aggregazione dei Dati in Lettura:* Alcuni endpoint combinano risultati provenienti da più casi d'uso per restituire viste più ricche, centralizzando l'aggregazione a livello di controller senza introdurre logica di business. In particolare, l'endpoint `getFullCollectionData` recupera prima gli identificativi delle analisi dalla collezione, quindi esegue il recupero dei dettagli di ciascuna analisi in parallelo tramite `Promise.all`, ottimizzando i tempi di risposta in presenza di collezioni con molte analisi associate.
+
+===== Presentation DTOs - Requests
+Questa sezione descrive i DTO di richiesta del livello di presentazione, ovvero i contratti che definiscono la struttura dei dati in ingresso per ciascun endpoint HTTP. Essi fungono da strato di traduzione tra il formato atteso dal client e il modello applicativo interno, garantendo che i controller ricevano dati strutturati e tipizzati prima di costruire i comandi da inviare ai Use Case.
+
+====== AddRepositoryCollectionRequestDTO <AddRepositoryCollectionRequestDTO>
+#codeDiagram("AddRepositoryCollectionRequestDTO", 60%)
+
+`AddRepositoryCollectionRequestDTO` definisce il contratto del body della richiesta HTTP per la creazione di una nuova collezione di repository. I campi `url` e `name` sono obbligatori, mentre `description` è opzionale, riflettendo la possibilità di fornire metadati aggiuntivi senza renderli necessari al completamento dell'operazione.
+
+====== DeletePatRequestDTO <DeletePatRequestDTO>
+#codeDiagram("DeletePatRequestDTO", 50%)
+
+`DeletePatRequestDTO` definisce il contratto del body della richiesta HTTP per la rimozione di un Personal Access Token. I campi `repositoryUrl` e `password` sono obbligatori, garantendo che il sistema disponga delle informazioni necessarie per identificare il repository e autorizzare l'operazione.
+
+====== PostPatRequestDTO <PostPatRequestDTO>
+#codeDiagram("PostPatRequestDTO", 70%)
+
+`PostPatRequestDTO` definisce il contratto del body della richiesta HTTP per la creazione di un Personal Access Token. I campi `repositoryUrl`, `password` e `personalAccessToken` sono obbligatori, garantendo che il sistema disponga delle informazioni necessarie per associare e validare il token rispetto al repository indicato.
+
 ====== StartAnalysisRequestDTO <StartAnalysisRequestDTO>
 #codeDiagram("StartAnalysisRequestDTO", 100%)
 
-`StartAnalysisRequestDTO` è il DTO di presentazione per la richiesta di avvio analisi, raccogliendo URL, password opzionale, branch/commit opzionali e i flag per i tre tipi di analisi.
+`StartAnalysisRequestDTO` definisce il contratto del body della richiesta HTTP per l'avvio di una nuova analisi. Il campo `repoUrl` è obbligatorio, mentre `password`, `branch` e `commit` sono opzionali, permettendo di specificare credenziali e contesto di analisi solo quando necessario. I flag booleani (`requestedCode`, `requestedDocumentation`, `requestedSecurity`) consentono al client di configurare il tipo di analisi richiesta.
 
-====== PostPatRequestDTO <PostPatRequestDTO>
-#codeDiagram("PostPatRequestDTO", 100%)
-
-`PostPatRequestDTO` è il DTO di presentazione per la registrazione di un nuovo PAT.
-
----
-
-====== DeletePatRequestDTO <DeletePatRequestDTO>
-#codeDiagram("DeletePatRequestDTO", 100%)
-
-`DeletePatRequestDTO` è il DTO di presentazione per l'eliminazione di un PAT.
-
----
+- *Configurabilità dell'Analisi:* La presenza di flag espliciti permette al client di selezionare in modo granulare le componenti dell'analisi, evitando la necessità di endpoint distinti per ogni variante.
 
 ====== UpdatePatRequestDTO <UpdatePatRequestDTO>
-#codeDiagram("UpdatePatRequestDTO", 100%)
+#codeDiagram("UpdatePatRequestDTO", 70%)
 
-`UpdatePatRequestDTO` è il DTO di presentazione per l'aggiornamento di un PAT.
+`UpdatePatRequestDTO` definisce il contratto del body della richiesta HTTP per l’aggiornamento di un Personal Access Token. I campi `repositoryUrl`, `password` e `newPersonalAccessToken` sono obbligatori, assicurando che il sistema possa identificare il contesto corretto e sostituire in modo sicuro il token esistente.
 
-===== Response
-====== StartAnalysisResponseDTO <StartAnalysisResponseDTO>
-#codeDiagram("StartAnalysisResponseDTO", 100%)
+===== Presentation DTOs - Response
+Questa sezione descrive i DTO di risposta del livello di presentazione, ovvero i contratti che definiscono la struttura dei dati restituiti al client per ciascun endpoint HTTP. Essi fungono da strato di traduzione tra i risultati prodotti dal livello applicativo e il formato esposto verso l'esterno, garantendo il disaccoppiamento tra i modelli interni e la rappresentazione pubblica dell'API.
+====== AddRepositoryCollectionResponseDTO  <AddRepositoryCollectionResponseDTO>
+#codeDiagram("AddRepositoryCollectionResponseDTO", 60%)
 
-`StartAnalysisResponseDTO` è il DTO di risposta per l'avvio analisi, con factory method `success()` (restituisce i metadati dell'analisi) e `failure()` (restituisce il messaggio di errore).
+`AddRepositoryCollectionResponseDTO` definisce il contratto della risposta HTTP per l'operazione di creazione di una collezione di repository. Il campo booleano `success` indica l'esito dell'operazione, mentre `message` fornisce un eventuale dettaglio descrittivo in caso di errore.
 
-====== PostPatResponseDTO <PostPatResponseDTO>
-#codeDiagram("PostPatResponseDTO", 100%)
-
-`PostPatResponseDTO` è il DTO di risposta per la registrazione di un PAT.
-
----
+- *Factory Method per la Creazione:* L'utilizzo di metodi statici (`success`, `failure`) centralizza la costruzione delle risposte, garantendo coerenza nella rappresentazione degli esiti.
 
 ====== DeletePatResponseDTO <DeletePatResponseDTO>
-#codeDiagram("DeletePatResponseDTO", 100%)
+#codeDiagram("DeletePatResponseDTO", 45%)
 
-`DeletePatResponseDTO` è il DTO di risposta per l'eliminazione di un PAT.
+`DeletePatResponseDTO` definisce la risposta HTTP per l'operazione di rimozione di un Personal Access Token. Il campo `removed` rappresenta l'esito dell'operazione, mentre `error` consente di trasportare un messaggio descrittivo in caso di fallimento.
 
----
+- *Esplicitazione dell'Esito:* L'utilizzo di un campo booleano dedicato consente al client di distinguere chiaramente tra successo e fallimento senza dipendere esclusivamente dal codice HTTP.
+
+====== DeleteRepositoryCollectionResponseDTO <DeleteRepositoryCollectionResponseDTO>
+#codeDiagram("DeleteRepositoryCollectionResponseDTO", 65%)
+
+`DeleteRepositoryCollectionResponseDTO` definisce la risposta HTTP per l'operazione di eliminazione di una collezione di repository. Il campo `deleted` indica se l'operazione è stata completata con successo, mentre `message` fornisce eventuali dettagli aggiuntivi.
+
+- *Contratto Semplice e Tipizzato:* La struttura minimale del DTO riflette la natura dell'operazione, fornendo al client un'informazione chiara e immediata sull'esito.
+
+====== GetAllAnalysesForUserResponseDTO <GetAllAnalysesForUserResponseDTO>
+#codeDiagram("GetAllAnalysesForUserResponseDTO", 85%)
+
+`GetAllAnalysesForUserResponseDTO` definisce il contratto della risposta HTTP per il recupero delle analisi associate a un utente. Oltre ai campi `success` e `message`, espone la collezione `analyses`, che corrisponde a una rappresentazione sintetica dei dati di analisi tramite `GitHubAnalysisGeneralDataDTO`.
+
+- *Aggregazione di Dati:* Il DTO raccoglie una lista di elementi, permettendo al client di ottenere una visione complessiva delle analisi con una singola risposta.
+- *Separazione tra Result e Response:* Il metodo `fromResult` consente di trasformare l'oggetto applicativo (`GetAllAnalysesForUserResult`) nel formato esposto verso l'esterno, mantenendo disaccoppiati i livelli applicativo e di presentazione.
+
+====== GetAllRepositoryCollectionsResponseDTO <GetAllRepositoryCollectionsResponseDTO>
+#codeDiagram("GetAllRepositoryCollectionsResponseDTO", 90%)
+
+`GetAllRepositoryCollectionsResponseDTO` definisce la risposta HTTP per il recupero delle collezioni di repository associate all'utente. Il campo `collections` contiene una lista di `RepositoryCollectionItemDTO`, che rappresentano una proiezione sintetica delle informazioni rilevanti per ciascun repository.
+
+- *Aggregazione di Elementi:* Il DTO espone una collezione tipizzata, consentendo al client di ottenere una vista compatta delle risorse disponibili.
+- *Separazione della Proiezione:* L'utilizzo di `RepositoryCollectionItemDTO` evita l'esposizione diretta di modelli interni, mantenendo il disaccoppiamento tra livelli.
+
+====== GetAnalysisResponseDTO <GetAnalysisResponseDTO>
+#codeDiagram("GetAnalysisResponseDTO", 100%)
+
+`GetAnalysisResponseDTO` definisce la risposta HTTP per il recupero dettagliato di una singola analisi. Oltre ai metadati principali (identificativi, repository, stato e timestamp), include i report opzionali (`docsReportJson`, `codeReportJson`, `secReportJson`) che rappresentano i risultati delle diverse componenti di analisi.
+
+- *Composizione di Dati Complessi:* Il DTO aggrega più sotto-strutture (`DocsAnalysisReportDTO`, `CodeAnalysisReportDTO`, `SecAnalysisReportDTO`), permettendo al client di ottenere una vista completa dell'analisi.
+- *Gestione di Dati Opzionali:* La presenza di campi opzionali consente di rappresentare analisi parziali o in corso.
+- *Separazione tra Result e Response:* Il metodo `fromResult` realizza la trasformazione dal livello applicativo (`GetAnalysisResult`) al formato esposto verso l'esterno.
+
+====== GetFullRepositoryCollectionDetailsResponseDTO <GetFullRepositoryCollectionDetailsResponseDTO>
+#codeDiagram("GetFullRepositoryCollectionDetailsResponseDTO", 90%)
+
+`GetFullRepositoryCollectionDetailsResponseDTO` definisce la risposta HTTP per il recupero completo dei dettagli di una collezione di repository. Il campo `data` aggrega le informazioni della collezione insieme alla lista delle analisi associate, rappresentate tramite `GetAnalysisResponseDTO`.
+
+- *Aggregazione Gerarchica:* Il DTO combina informazioni di alto livello della collezione con una lista dettagliata di analisi, fornendo una vista completa in un'unica risposta.
+- *Composizione di DTO:* L'utilizzo di `GetAnalysisResponseDTO` consente di riutilizzare una rappresentazione già definita, mantenendo coerenza tra endpoint.
+
+====== GetRepositoryCollectionResponseDTO <GetRepositoryCollectionResponseDTO>
+#codeDiagram("GetRepositoryCollectionResponseDTO", 70%)
+
+`GetRepositoryCollectionResponseDTO` definisce la risposta HTTP per il recupero sintetico di una collezione di repository. Il campo `data` include le informazioni principali della collezione e una lista di identificativi (`analyses`) delle analisi associate.
+
+- *Vista Sintetica:* A differenza della versione completa, il DTO espone solo gli identificativi delle analisi, riducendo il payload e migliorando le performance.
+- *Differenziazione dei Livelli di Dettaglio:* La presenza di DTO distinti per vista completa e sintetica consente al client di scegliere il livello di dettaglio più appropriato.
+
+====== PostPatResponseDTO <PostPatResponseDTO>
+#codeDiagram("PostPatResponseDTO", 45%)
+
+`PostPatResponseDTO` definisce la risposta HTTP per l'operazione di creazione di un Personal Access Token. Il campo `added` indica l'esito dell'operazione, mentre `error` consente di trasportare un messaggio descrittivo in caso di fallimento.
+
+- *Factory Method per la Creazione:* I metodi statici (`success`, `failure`) garantiscono una costruzione coerente delle risposte, evitando stati non validi.
+
+====== StartAnalysisResponseDTO <StartAnalysisResponseDTO>
+#codeDiagram("StartAnalysisResponseDTO", 75%)
+
+`StartAnalysisResponseDTO` definisce la risposta HTTP per l'avvio di una nuova analisi. Il DTO include i principali metadati dell'analisi avviata (`user`, `id`, `url`, `branch`, `commit`) e un campo `errorMessage` che rappresenta il risultato dell'operazione.
+
+- *Trasporto di Informazioni Operative:* In caso di successo, il DTO restituisce i dati identificativi dell'analisi appena avviata.
+- *Messaggio Sempre Presente:* Il campo `errorMessage` viene popolato con la stringa fissa `Analysis Started Successfully` in caso di successo, o con il messaggio di errore specifico in caso di fallimento, fornendo un feedback uniforme al client indipendentemente dall'esito.
+- *Costruzione Controllata:* I metodi statici assicurano che i dati siano valorizzati solo nei casi appropriati, mantenendo coerenza tra successo e fallimento.
 
 ====== UpdatePatResponseDTO <UpdatePatResponseDTO>
-#codeDiagram("UpdatePatResponseDTO", 100%)
+#codeDiagram("UpdatePatResponseDTO", 50%)
 
-`UpdatePatResponseDTO` è il DTO di risposta per l'aggiornamento di un PAT.
+`UpdatePatResponseDTO` definisce la risposta HTTP per l'aggiornamento di un Personal Access Token. Il campo `updated` indica l'esito dell'operazione, mentre `error` fornisce eventuali dettagli in caso di errore.
+
+- *Contratto Semplice:* La struttura minimale riflette la natura dell'operazione, permettendo al client di interpretare facilmente il risultato.
+- *Coerenza dei Pattern:* L'utilizzo di factory method mantiene allineato il comportamento con gli altri DTO di risposta.
 
 #pagebreak()
 
+
 === Account Microservice
 L'Account Microservice rappresenta il modulo centrale per la gestione del ciclo di vita delle identità all'interno di _CodeGuardian_. Progettato seguendo i principi dell'*Architettura Esagonale*, il servizio isola rigorosamente i processi core — quali la gestione delle utenze, l'autenticazione basata su JWT e la sicurezza delle credenziali — dalle tecnologie di persistenza (PostgreSQL) e di cifratura (Bcrypt). Grazie a una netta separazione tra porte e adattatori, il microservizio garantisce l'integrità del dominio utente e la flessibilità nell'evoluzione dei criteri di sicurezza, fungendo da garante per l'accesso protetto a tutte le funzionalità della piattaforma.
-
-==== Design Patterns
-
-All'interno dell'Account Microservice sono stati adottati molteplici design pattern per garantire disaccoppiamento, testabilità e manutenibilità del codice. Di seguito vengono descritti i principali pattern utilizzati e le motivazioni alla base della loro scelta:
-
-===== Architettura Esagonale (Ports and Adapters)
-L'intera struttura del microservizio si basa saldamente sui principi di Ports and Adapters.
-- *Problema risolto:* Evita il forte accoppiamento logico tra il nucleo applicativo (Domain e Application) e i layer esterni come database, interfacce utente e servizi di terze parti, isolando la logica di business e rendendola indipendente dalle tecnologie di contorno.
-- *Implementazione:* Il livello applicativo definisce interfacce specifiche dette "Porte" (come `IUserSavePort` o `IHashPasswordPort`), mentre il livello infrastrutturale e di presentazione ospita i componenti concreti detti "Adapters" (come `PostgresAdapter`) che si curano di implementare o utilizzare tali interfacce.
-
-===== Command Pattern
-Il pattern *Command* è stato utilizzato diffusamente nel layer applicativo per incapsulare i dati di una specifica operazione richiesta dall'utente (es. `LoginCommand`, `DeleteCommand`, `RegistrationUserCommand`).
-- *Problema risolto:* Semplifica le firme dei metodi nei casi d'uso, evitando il passaggio di liste di argomenti lunghe e fragili alle modifiche.
-- *Implementazione:* Invece di passare molteplici parametri sparsi ai metodi dei servizi, ogni Use Case accetta come unico parametro un oggetto istanza di un Command specifico, che raggruppa logicamente e tipizza tutti i parametri necessari per svolgere l'operazione.
-
-===== Data Transfer Object (DTO)
-Il pattern *DTO* viene impiegato sistematicamente sia a livello applicativo (`AuthResultDto`, `UserDTO`) che a livello di presentazione e comunicazione HTTP (`LoginRequestDto`, `AuthResponseDto`).
-- *Problema risolto:* Consente di trasferire dati tra i diversi layer del microservizio e verso i client esterni senza esporre direttamente le entità di dominio interno. Quest'ultime, infatti, potrebbero nascondere metadati o riferimenti sensibili come `PasswordHash` che non devono in nessun caso fuoriuscire dal sistema inavvertitamente.
-- *Implementazione:* Tramite i DTO, i dati in transito assumono una forma asettica e consona per le sole esigenze di comunicazione, abilitando inoltre l'inserimento di una logica di convalida lato framework sfruttando i decoratori di NestJS (es. `class-validator`) direttamente sulle classi di richiesta in arrivo.
-
-===== Adapter Pattern
-Nel livello infrastrutturale è evidente l'adozione dell'*Adapter Pattern*, guidato dall'architettura esagonale.
-- *Problema risolto:* Astrae completamente la logica di business in merito ai dettagli sulle operazioni di memorizzazione dei dati e alle query sql, mantenendo nascosta la specifica tecnologia di database relazionale utilizzata (PostgreSQL).
-- *Implementazione:* `PostgresAdapter` agisce da adattatore verso il livello di persistenza, centralizzando fisicamente le esecuzioni delle transazioni nel DB e traducendo i contratti del dominio. Al contempo soddisfa molteplici porte del core applicativo (es. `IUserFindPort`, `IUserSavePort`). Ciò garantisce un disaccoppiamento così netto da permettere, qualora si rivelasse necessario, di sostituire agilmente il database con una tecnologia differente.
-
-===== Dependency Injection
-Sfruttando nativamente le capacità del framework NestJS, l'*Iniezione delle Dipendenze (DI)* rappresenta uno dei pattern tecnici principali alla base del progetto software.
-- *Problema risolto:* Evita la creazione "hard-coded" ed esplicita delle dipendenze direttamente cablate in ogni classe chiamante, migliorando notevolmente le probabilità di riutilizzo del codice, la modularità e abbattendo gli ostacoli che impediscono altrimenti l'agevole testing unitario.
-- *Implementazione:* Attraverso i costruttori di classe, i vari Controllers e i Services ricevono all'avvio del sistema le loro rispettive dipendenze sotto forma ridotta di interfacce/componenti di istanziazione validati. Un container `Inversion of Control` (IoC) di supporto si prende in totale carico l'apposita istanziazione ed assegnazione dei componenti.
 
 ==== Domain
 Il Dominio rappresenta il nucleo centrale dell'architettura esagonale, dove risiedono esclusivamente la logica di business e le regole vitali del progetto. Questa sezione è progettata per essere totalmente agnostica rispetto alla tecnologia: non possiede alcuna conoscenza di database, protocolli di comunicazione (HTTP/REST) o framework esterni.
@@ -1736,7 +1942,7 @@ L'entità `User` costituisce l'entità radice del dominio di autenticazione. Ess
 
 `InvalidCredentialsException` è l'eccezione sollevata dal `LoginService` quando la combinazione email/password fornita non corrisponde a nessun account valido nel sistema. Il costruttore senza parametri formalizza un errore di business che non richiede dettagli aggiuntivi: l'unica informazione rilevante è che le credenziali sono invalide.
 
-===== Ports
+===== Ports <CredentialPorts>
 
 ====== IHashComparePort <IHashComparePort>
 #codeDiagram("IHashComparePort", 65%)
@@ -1888,7 +2094,7 @@ L'entità `User` costituisce l'entità radice del dominio di autenticazione. Ess
 
 ==== Infrastructure
 
-===== Adapters
+===== Adapters <Credential_Adapters>
 
 ====== BcryptAdapter <BcryptAdapter>
 #codeDiagram("BcryptAdapter", 60%)
@@ -2008,6 +2214,8 @@ L'entità `User` costituisce l'entità radice del dominio di autenticazione. Ess
 
 - *Centralizzazione della Gestione degli Errori:* Concentrare la traduzione delle eccezioni in un unico filtro garantisce uniformità nel formato delle risposte di errore verso i client, evitando che dettagli tecnici interni vengano esposti accidentalmente.
 - *Mapping Eccezioni - HTTP:* Il filtro implementa la logica di mapping tra le eccezioni di dominio (es. `InvalidCredentialsException`) e i codici di stato HTTP appropriati (es. `401 Unauthorized`), centralizzando questa trasformazione e rimuovendo la necessità di gestirla nei singoli controller.
+
+
 === Frontend Application
 
 Il frontend di Code Guardian è una *Single-Page Application* (SPA) sviluppata in TypeScript con React, strutturata seguendo il pattern architetturale *Model-View-ViewModel* (MVVM). Le responsabilità sono distribuite in quattro strati orizzontali con dipendenze che fluiscono sempre dalla View verso il Model, senza mai invertirsi.
@@ -3372,3 +3580,101 @@ Questo approccio garantisce che la `RepositoryDetailPage` aggiorni dinamicamente
 )
 
 Sono dunque stati soddisfatti tutti i requisiti obbligatori previsti, solo una piccola parte di quelli desiderabili ma nessun opzionale.
+
+= Design Patterns Applicati
+== Creazionali 
+=== Singleton
+Dato l'utilizzo di nest per entrambi i microservizi, non è necessario implementare pattern singleton a livello di codice, in quanto il framework gestisce l'istanza dei servizi e degli adattatori come singleton per default. Ovvero un provider dichiarato in un modulo viene istanziato una sola volta e condiviso tra tutti i componenti che lo iniettano, garantendo implicitamente il comportamento singleton senza dover implementare manualmente il pattern. Questo permette di mantenere il codice pulito e focalizzato sulla logica di business, delegando al framework la gestione del ciclo di vita delle istanze.
+=== Strutturali
+=== Ports and Adapters
+Il pattern adapter è presente in entrambi i microservizi data l'architettura logica applicata. 
+==== Problema risolto
+ Evita il forte accoppiamento logico tra il nucleo applicativo (Domain e Application) e i layer esterni come database, interfacce utente e servizi di terze parti, isolando la logica di business e rendendola indipendente dalle tecnologie di contorno.
+==== Implementazione 
+- Nel microservizio Credenziali, gli #link(<Credential_Adapters>)[adapters] permettono di astrarre completamente la logica di business in merito ai dettagli sulle operazioni di memorizzazione dei dati e alle query sql, mantenendo nascosta la specifica tecnologia di database relazionale utilizzata (PostgreSQL). Al contempo soddisfano molteplici #link(<CredentialPorts>)[porte] del core applicativo, garantendo un disaccoppiamento così netto da permettere, qualora si rivelasse necessario, di sostituire agilmente il database con una tecnologia differente.
+
+- Nel microservizio Analysis, gli #link(<Analysis_Adapters>)[adapters] permettono di astrarre completamente la logica di business in merito ai dettagli sulle operazioni di memorizzazione dei dati, 
+gestione API esterne come github e AWS. Al contempo soddisfano molteplici #link(<AnalysisPorts>)[porte] del core applicativo, garantendo un disaccoppiamento così netto da permettere, qualora si rivelasse necessario, 
+ di sostituire agilmente un database o un servizio esterno con una tecnologia differente.
+
+
+Inoltre, in entrambi i microservizi ogni porta espone un solo metodo dell'adapter aderendo al principio 
+di segregazione delle interfacce, evitando di esporre metodi non necessari e mantenendo un contratto
+ chiaro e specifico tra il core applicativo e le implementazioni infrastrutturali.
+
+=== Facade
+==== Problema risolto
+Fornisce un'interfaccia semplificata e unificata a un insieme di interfacce in un sottosistema, 
+nascondendo la complessità delle interazioni tra i componenti sottostanti e facilitando l'uso 
+del sistema da parte dei client.
+==== Implementazione
+Nel microservizio di analisi, #link(<StartAnalysisService>)[StartAnalysisService] funge da Facade, 
+orchestrando un flusso complesso che coinvolge più adapter (GitHubAdapter, S3Adapter, PostgresAdapter) 
+e #link(<AnalysisOrchestratorService>)[AnalysisOrchestratorService] per eseguire un'analisi completa. 
+Fornisce un'interfaccia semplificata (`execute`) che nasconde la complessità sottostante, permettendo 
+al controller di avviare un'analisi con una singola chiamata.
+
+== Comportamentali
+=== Orchestrator
+==== Problema risolto
+Coordina l'esecuzione di un processo complesso che coinvolge più componenti o servizi, definendo 
+l'ordine delle operazioni e gestendo le dipendenze tra di esse, senza che i componenti coinvolti debbano
+ conoscere l'intero flusso o le responsabilità degli altri.
+==== Implementazione
+Nel microservizio di analisi, #link(<AnalysisOrchestratorService>)[AnalysisOrchestratorService] funge 
+da Orchestrator, coordinando l'intero processo di analisi del codice. Gestisce l'ordine delle operazioni,
+come la chiamata selettiva degli adapter per gli agenti, la memorizzazione dei risultati ottenuti e la gestione degli errori, 
+senza che i singoli adapter o servizi coinvolti debbano conoscere l'intero flusso o le responsabilità degli altri componenti.
+=== Command
+Il pattern Command è ampiamente utilizzato in entrambi i microservizi per incapsulare tutte le informazioni necessarie a 
+eseguire un'azione o un'operazione specifica, permettendo di disaccoppiare il mittente dell'azione dalla logica che la esegue.
+L'utilizzo di questo patter è guidato dalla scelta di architettura logica esagonale.
+==== Problema risolto
+Semplifica le firme dei metodi nei casi d'uso, evitando il passaggio di liste di argomenti lunghe e fragili alle modifiche.
+
+==== Implementazione
+Invece di passare molteplici parametri sparsi ai metodi dei servizi, ogni Use Case accetta come unico parametro un oggetto 
+istanza di un Command specifico, che raggruppa logicamente e tipizza tutti i parametri necessari per svolgere l'operazione. 
+Facendo una prima validazione dei campi con dei decoratori(`@IsString`,`@IsNotEmpty`...), questo evita che i dati in ingresso 
+siano incompleti o malformati, e permette di bloccare richieste con body non validi prima di essere processate.
+=== State
+==== Problema risolto
+Permette di gestire in modo chiaro e organizzato i diversi stati di un processo o entità, definendo transizioni ben definite 
+tra di essi e facilitando la manutenzione del codice.
+==== Implementazione
+Nel microservizio di analisi, il pattern State è applicato alla gestione dello stato dell'analisi del codice. L'entità 
+#link(<GitHubAnalysis>)[GitHubAnalysis] ha un campo `status` che rappresenta lo stato attuale dell'analisi 
+(es. `pending`, `in-progress`, `completed`, `failed`). Le transizioni di stato sono gestite internamente all'entitá,
+evitando un passaggio non valido da uno stato all'altro, come tra `failed` e `completed` o tra `pending` e `completed`.
+
+=== Strategy
+==== Problema risolto
+Permette di variare il comportamento di validazione e autorizzazione del repository senza introdurre logica condizionale 
+complessa nei servizi applicativi.  
+==== Implementazione
+Nel microservizio di Analisi il pattern è applicato in due punti: #link(<GitValidatorService>)[GitValidatorService], che seleziona dinamicamente la strategia 
+tra validazione per commit, branch o default, e #link(<GitAuthorizerService>)[GitAuthorizerService], che sceglie tra autorizzazione privata (token utente da persistenza) e pubblica (token di sistema da configurazione).  
+In questo modo il servizio chiamante dipende da un contratto unico, mentre l’algoritmo concreto viene scelto a runtime in base al contesto della richiesta.
+
+=== Dependency injection
+Sfruttando nativamente le capacità del framework NestJS, l'*Iniezione delle Dipendenze (DI)* rappresenta uno dei pattern tecnici principali alla base del progetto software.
+==== Problema risolto
+La Dependency Injection risolve il problema dell’accoppiamento rigido tra una classe e le sue dipendenze concrete.  
+Senza DI, ogni componente crea direttamente i servizi che usa, rendendo il codice più fragile ai cambiamenti e difficile da testare.
+
+Con DI:
+- le dipendenze sono fornite dall’esterno (container IoC);
+- il codice dipende da interfacce/contratti, non da classi concrete;
+- modularità, riuso e testabilità (mock/stub) migliorano in modo significativo.
+==== Implementazione
+Attraverso i costruttori di classe, i vari Controllers e i Services ricevono all'avvio del sistema le loro rispettive dipendenze sotto forma ridotta di interfacce/componenti 
+di istanziazione validati. Un container `Inversion of Control` (IoC) organizzato in un module di NestJs di supporto si prende in totale carico l'apposita istanziazione ed assegnazione dei componenti.
+
+=== Data Transfer Object (DTO)
+==== Problema risolto
+Il pattern DTo permette di trasferire dati tra i diversi layer del microservizio e verso i client esterni senza
+ esporre direttamente le entità di dominio interno che contengono una logica di core che non deve essere esposta.
+==== Implementazione
+Il pattern *DTO* viene impiegato sistematicamente in entrambi i microservizi sia a livello di presentazione (Request e Result DTOs) che a livello applicativo 
+per trasportare dati sotto forma di tipi primitivi.
+Tramite i DTO, i dati in transito assumono una forma asettica e consona per le sole esigenze di comunicazione..
