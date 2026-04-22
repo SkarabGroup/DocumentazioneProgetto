@@ -1,0 +1,31 @@
+@startuml GetAllRepositoryCollectionsResponseDTO
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 50
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class RepositoryCollectionItemDTO {
+    + url: string
+    + name: string
+    + description?: string
+    + lastAnalysisDate?: Date
+    ---
+    + RepositoryCollectionItemDTO(url, name, description?, lastAnalysisDate?)
+}
+
+class GetAllRepositoryCollectionsResponseDTO {
+    + success: boolean
+    + collections?: RepositoryCollectionItemDTO[]
+    + message?: string
+    ---
+    - GetAllRepositoryCollectionsResponseDTO(success, collections?, message?)
+    + {static} success(collections: RepositoryCollectionItemDTO[]): GetAllRepositoryCollectionsResponseDTO
+    + {static} failure(err: string): GetAllRepositoryCollectionsResponseDTO
+}
+
+' Relations
+GetAllRepositoryCollectionsResponseDTO --> RepositoryCollectionItemDTO
+
+@enduml

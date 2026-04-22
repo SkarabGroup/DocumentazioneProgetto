@@ -1,0 +1,22 @@
+@startuml GitHubAnalysisRecord
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class GitHubAnalysisRecord <<Mongoose Schema>> {
+    - analysisId: string
+    - userId: string
+    - repoURL: string
+    - branch: string
+    - commit: string
+    - status: string
+    - codeReportId: string | null
+    - docsReportId: string | null
+    - securityReportId: string | null
+    - createdAt: Date
+    - updatedAt: Date
+}
+@enduml

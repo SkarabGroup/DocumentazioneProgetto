@@ -1,0 +1,18 @@
+@startuml AddRepositoryCollectionResponseDTO
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 50
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class AddRepositoryCollectionResponseDTO {
+    + success: boolean
+    + message?: string
+    ---
+    - AddRepositoryCollectionResponseDTO(success, message?)
+    + {static} success(): AddRepositoryCollectionResponseDTO
+    + {static} failure(err: string): AddRepositoryCollectionResponseDTO
+}
+
+@enduml

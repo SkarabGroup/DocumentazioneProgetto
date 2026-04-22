@@ -1,0 +1,24 @@
+@startuml LocalCodeAnalysisAdapter
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+interface ICodeAgentPort {
+    + runAnalysis(model: AgentRequest): Promise<CodeAgentResponse>
+}
+
+class LocalCodeAnalysisAdapter {
+    - logger: Logger
+    ---
+    + LocalCodeAnalysisAdapter()
+    + runAnalysis(model: AgentRequest): Promise<CodeAgentResponse>
+    - runContainer(dockerArgs: string[]): Promise<string>
+    - extractJson(raw: string): Record<string, unknown>
+    - createFallbackResponse(reason: string): CodeAgentResponse
+}
+
+LocalCodeAnalysisAdapter ..|> ICodeAgentPort
+@enduml
