@@ -2688,6 +2688,13 @@ Con DI:
 Attraverso i costruttori di classe, i vari Controllers e i Services ricevono all'avvio del sistema le loro rispettive dipendenze sotto forma ridotta di interfacce/componenti 
 di istanziazione validati. Un container `Inversion of Control` (IoC) organizzato in un module di NestJs di supporto si prende in totale carico l'apposita istanziazione ed assegnazione dei componenti.
 
+=== Repository
+==== Problema risolto
+Isola la logica di accesso ai dati dal livello di business, nascondendo i dettagli legati al database (query, connessioni, ORM/ODM). Questo permette al dominio applicativo di trattare la persistenza come una semplice collezione di oggetti in memoria, garantendo testabilità (tramite mock) e la possibilità di cambiare tecnologia di storage senza impattare la logica di core.
+
+==== Implementazione
+Nel microservizio Analysis, il dominio definisce il contratto attraverso porte specifiche, le quali stabiliscono le firme dei metodi per recuperare e salvare le entità di dominio come i job di analisi. L'implementazione concreta è delegata agli adapter infrastrutturali, come #link(<MongoDBAdapter>)[`MongoDBAdapter`], che traducono queste chiamate in comandi nativi per Mongoose/MongoDB. Questo approccio garantisce che i casi d'uso orchestrino i dati in modo totalmente agnostico rispetto alla natura documentale del database sottostante. Analogamente, nel microservizio Account, il pattern astrae le operazioni sul database relazionale gestito tramite l'apposito adapter #link(<PostgresAdapter>)[`PostgresAdapter`].
+
 === Data Transfer Object (DTO)
 ==== Problema risolto
 Il pattern DTO permette di trasferire dati tra i diversi layer del microservizio e verso i client esterni senza
