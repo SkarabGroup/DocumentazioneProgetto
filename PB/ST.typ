@@ -2388,7 +2388,7 @@ Questo approccio garantisce che la `RepositoryDetailPage` aggiorni dinamicamente
 
 #pagebreak()
 
-= Mappatura dei requisiti di sistema
+= Mappatura dei Requisiti di Sistema
 
 #let fr_counter = counter("FR")
 #let qr_ob_counter = counter("QROb")
