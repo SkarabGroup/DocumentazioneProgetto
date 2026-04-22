@@ -56,7 +56,7 @@ repository software*
 \
 Si comunica, inoltre, che il gruppo ha sviluppato un *Minimum Viable Product (MVP)* che implementa un insieme minimo ma completo di funzionalità essenziali, volto a dimostrare il valore della soluzione proposta e a supportarne la valutazione operativa, reperibile al seguente indirizzo: #link("https://github.com/SkarabGroup/MinimumViableProduct")[#underline[Repository MVP]].
 
-Il verbale di approvazione del MVP da parte dell’azienda proponente è consultabile al seguente indirizzo: #link("https://github.com/SkarabGroup/DocumentazioneProgetto/verbali/esterni/Consegna_MVP_26_04_21.pdf")[#underline[Verbale di approvazione MVP]].
+Il verbale di approvazione del MVP da parte dell’azienda proponente è consultabile al seguente indirizzo: #link("https://skarabgroup.github.io/DocumentazioneProgetto/verbali/esterni/Consegna_MVP_26_04_21.pdf")[#underline[Verbale di approvazione MVP]].
 
 L'intera documentazione di progetto è consultabile visitando il sito ufficiale del gruppo, #link("https://skarabgroup.github.io/DocumentazioneProgetto/")[#underline[Skarab Group - Sito Documentazione]], oppure direttamente all'interno del #link("https://github.com/SkarabGroup/DocumentazioneProgetto")[#underline[Repository Documentazione]].
 

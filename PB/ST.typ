@@ -25,6 +25,13 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #let history = (
   (
     "2026/04/22",
+    "1.0.0",
+    "Revisione per PB",
+    "",
+    members.suar
+  ),
+  (
+    "2026/04/22",
     "0.22.0",
     "Aggiunti diagrammi complessivi di Account Microservice",
     members.alice,
