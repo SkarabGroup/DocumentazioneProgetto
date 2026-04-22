@@ -6,11 +6,11 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface IRepositoryCloner {
+class IRepositoryCloner <<Interface>> {
     + clone(repoUrl, analysisId, patToken, branch, commit): Promise<string>
 }
 
-interface IGitClonePort
+class IGitClonePort <<Interface>>
 
 class GitClonerService {
     - cloningPort: IGitClonePort

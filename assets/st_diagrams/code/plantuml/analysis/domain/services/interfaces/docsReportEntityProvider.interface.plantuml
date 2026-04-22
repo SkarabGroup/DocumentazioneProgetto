@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface IDocsReportEntityProvider {
+class IDocsReportEntityProvider <<Interface>> {
     + fromDocsAgentResponse(response: DocsAgentResponse, reportId: ReportId, analysisId: AnalysisId): DocumentationReport
 }
 

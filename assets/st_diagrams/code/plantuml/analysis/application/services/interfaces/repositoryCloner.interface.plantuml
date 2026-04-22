@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface IRepositoryCloner {
+class IRepositoryCloner <<Interface>> {
     + clone(repoUrl: RepoURL, analysisId: AnalysisId, patToken: PersonalAccessToken | null, 
     branch: BranchName | null, commit: CommitHash | null): Promise<string>
 }

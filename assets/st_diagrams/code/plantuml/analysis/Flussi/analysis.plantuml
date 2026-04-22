@@ -16,19 +16,19 @@ hide circles
 
 
 
-	interface StartAnalysisUseCase 
+	class StartAnalysisUseCase  <<Interface>>
 
 
 
 	class StartAnalysisService 
 
-	interface IRepositoryAuthorizer 
+	class IRepositoryAuthorizer  <<Interface>>
 
-	interface IRepositoryValidator 
+	class IRepositoryValidator  <<Interface>>
 
-	interface IRepositoryCloner 
+	class IRepositoryCloner  <<Interface>>
 
-	interface IAnalysisOrchestrator 
+	class IAnalysisOrchestrator  <<Interface>>
 
 	class GitAuthorizerService
 	class GitValidatorService
@@ -37,15 +37,15 @@ hide circles
 
 
 
-	interface IGitCredentialReadPort
-	interface IGitHubAvailabilityPort
-	interface IGitClonePort
+	class IGitCredentialReadPort <<Interface>>
+	class IGitHubAvailabilityPort <<Interface>>
+	class IGitClonePort <<Interface>>
 
-	interface IGitHubAnalysisSavePort
+	class IGitHubAnalysisSavePort <<Interface>>
 	
 
 
-	interface IPasswordProvider
+	class IPasswordProvider <<Interface>>
 	class PATPasswordProvider
 
 
@@ -72,7 +72,7 @@ StartAnalysisService --down-> IRepositoryCloner
 StartAnalysisService --down-> IAnalysisOrchestrator
 StartAnalysisService --down-> IGitHubAnalysisSavePort
 
-' Concrete services implementing interfaces
+' Concrete services implementing classs <<Interface>>
 GitAuthorizerService ..up.|> IRepositoryAuthorizer
 GitValidatorService ..up.|> IRepositoryValidator
 GitClonerService ..up.|> IRepositoryCloner

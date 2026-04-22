@@ -7,6 +7,13 @@ left to right direction
 skinparam ClassAttributeIconSize 0
 hide circles
 
+class AddRepositoryCollectionUseCase <<Interface>>
+class GetRepositoryCollectionUseCase <<Interface>>
+class GetAllAnalysesForUserUseCase <<Interface>>
+class DeleteRepositoryCollectionUseCase <<Interface>>
+class GetAnalysisUseCase <<Interface>>
+class GetAllAnalysesForUserUseCase <<Interface>>
+
 class RepositoriesController {
     - repoCollectionAdder: AddRepositoryCollectionUseCase
     - repoCollectionGetter: GetRepositoryCollectionUseCase & GetAllRepositoryCollectionsUseCase

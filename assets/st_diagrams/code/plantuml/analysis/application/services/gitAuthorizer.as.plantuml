@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface IRepositoryAuthorizer {
+class IRepositoryAuthorizer <<Interface>> {
     + authorize(url: RepoURL, password?: PATPassword): Promise<PersonalAccessToken>
 }
 
@@ -21,11 +21,11 @@ class GitAuthorizerService {
 GitAuthorizerService ..up.|> IRepositoryAuthorizer
 GitAuthorizerService --down-> IGitCredentialReadPort
 
-interface AuthorizationStrategy {
+class AuthorizationStrategy <<Interface>> {
     + getPersonalAccessToken(url?: RepoURL): Promise<string>
 }
 
-interface IGitCredentialReadPort {
+class IGitCredentialReadPort <<Interface>> {
     + authorize(request: GetGitCredentialRequest): Promise<GetGitCredentialResponse>
 }
 

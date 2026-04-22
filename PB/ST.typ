@@ -2769,6 +2769,7 @@ Il pattern *DTO* viene impiegato sistematicamente in entrambi i microservizi sia
 per trasportare dati sotto forma di tipi primitivi.
 Tramite i DTO, i dati in transito assumono una forma asettica e consona per le sole esigenze di comunicazione.
 
+#pagebreak()
 = Mappatura dei Requisiti di Sistema
 
 #let fr_counter = counter("FR")

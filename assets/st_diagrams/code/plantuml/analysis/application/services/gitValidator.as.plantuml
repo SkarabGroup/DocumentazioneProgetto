@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface IRepositoryValidator {
+class IRepositoryValidator <<Interface>> {
     + check(url, pat, branch, commit): Promise<{branch, commit}>
 }
 
@@ -18,15 +18,7 @@ class GitValidatorService {
     commit: CommitHash | null): Promise<{branch: BranchName, commit: CommitHash}>
 }
 
-
-skinparam componentStyle uml2.5
-skinparam linetype ortho
-skinparam nodesep 30
-skinparam ranksep 30
-skinparam ClassAttributeIconSize 0
-hide circles
-
-interface ValidationStrategy {
+class ValidationStrategy <<Interface>> {
     + validate(): Promise<RepositoryData>
 }
 
@@ -55,6 +47,7 @@ class DefaultValidationStrategy {
     + validate(): Promise<RepositoryData>
 }
 
+class IGitHubAvailabilityPort <<Interface>>
 
 GitValidatorService ..up.|> IRepositoryValidator
 GitValidatorService --down-> IGitHubAvailabilityPort

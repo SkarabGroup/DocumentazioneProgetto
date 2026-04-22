@@ -12,16 +12,22 @@ class LocalSecurityAnalysisAdapter
 class ECSDocumentationAnalysisAdapter
 class ECSCodeAnalysisAdapter
 class ECSSecurityAnalysisAdapter
-interface IDocsReportSavePort
-interface ICodeReportSavePort
-interface ISecurityReportSavePort
-interface IUpdateAnalysisPort
+class IDocsReportSavePort <<Interface>>
+class ICodeReportSavePort <<Interface>>
+class ISecurityReportSavePort <<Interface>>
+class IUpdateAnalysisPort <<Interface>>
 
-interface IDocumentationAgentPort
-interface ICodeAgentPort
-interface ISecurityAgentPort
+class IDocumentationAgentPort <<Interface>>
+class ICodeAgentPort <<Interface>>
+class ISecurityAgentPort <<Interface>>
 class AnalysisOrchestratorService
 
+class IDocsReportEntityProvider <<Interface>>
+class ICodeReportEntityProvider <<Interface>>
+class ISecurityReportEntityProvider <<Interface>>
+
+class IAnalysisOrchestrator <<Interface>>
+class ReportEntitiesProvider <<Interface>>
 
 AnalysisOrchestratorService ..up.|> IAnalysisOrchestrator
 AnalysisOrchestratorService --> IDocumentationAgentPort
@@ -31,6 +37,12 @@ AnalysisOrchestratorService --> IDocsReportSavePort
 AnalysisOrchestratorService --> ICodeReportSavePort
 AnalysisOrchestratorService --> ISecurityReportSavePort
 AnalysisOrchestratorService --> IUpdateAnalysisPort
+AnalysisOrchestratorService --up-> IDocsReportEntityProvider
+AnalysisOrchestratorService --up-> ICodeReportEntityProvider
+AnalysisOrchestratorService --up-> ISecurityReportEntityProvider
+IDocsReportEntityProvider ..up.|> ReportEntitiesProvider
+ICodeReportEntityProvider ..up.|> ReportEntitiesProvider
+ISecurityReportEntityProvider ..up.|> ReportEntitiesProvider
 MongoDBAdapter ..up.|> IDocsReportSavePort
 MongoDBAdapter ..up.|> ICodeReportSavePort
 MongoDBAdapter ..up.|> ISecurityReportSavePort

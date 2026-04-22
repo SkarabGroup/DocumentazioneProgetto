@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface IDocumentationAgentPort {
+interface IDocumentationAgentPort <<Interface>> {
     + runAnalysis(model: AgentRequest): Promise<DocsAgentResponse>
 }
 
@@ -18,5 +18,5 @@ class DocumentationAnalysisAdapter {
     - createFallbackResponse(repository: string): DocsAgentResponse
 }
 
-DocumentationAnalysisAdapter ..|> IDocumentationAgentPort
+DocumentationAnalysisAdapter ..up-|> IDocumentationAgentPort
 @enduml

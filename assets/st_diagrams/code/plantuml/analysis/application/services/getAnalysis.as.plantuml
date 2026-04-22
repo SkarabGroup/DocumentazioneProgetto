@@ -6,13 +6,16 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface GetAnalysisUseCase {
+class GetAnalysisUseCase <<Interface>> {
     + execute(command: GetAnalysisFromIdCommand): Promise<GetAnalysisResult>
 }
 
-interface GetAllAnalysesForUserUseCase {
+class GetAllAnalysesForUserUseCase <<Interface>> {
     + getAllAnalysesForUser(command: GetAllAnalysesForUserCommand): Promise<GetAllAnalysesForUserResult>
 }
+
+class IGetAllAnalysesForUserPort <<Interface>>
+class IGetAnalysisFromIdPort <<Interface>>
 
 class GetAnalysisService {
     - getAnalysisFromIdPort: IGetAnalysisFromIdPort
@@ -23,8 +26,8 @@ class GetAnalysisService {
     + getAllAnalysesForUser(command: GetAllAnalysesForUserCommand): Promise<GetAllAnalysesForUserResult>
 }
 
-GetAnalysisService ..up|> GetAnalysisUseCase
-GetAnalysisService ..down|> GetAllAnalysesForUserUseCase
+GetAnalysisService ..up-|> GetAnalysisUseCase
+GetAnalysisService ..up-|> GetAllAnalysesForUserUseCase
 GetAnalysisService --right-> IGetAnalysisFromIdPort
 GetAnalysisService --left-> IGetAllAnalysesForUserPort
 @enduml

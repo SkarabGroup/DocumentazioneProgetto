@@ -20,27 +20,27 @@ class GetAnalysisByIdRequestDTO
 class GetAnalysisResponseDTO
 
 
-interface AddRepositoryCollectionUseCase
-interface DeleteRepositoryCollectionUseCase
-interface GetRepositoryCollectionUseCase
-interface GetAllRepositoryCollectionsUseCase
-interface GetAnalysisUseCase
-interface GetAllAnalysesForUserUseCase
+class AddRepositoryCollectionUseCase <<Interface>>
+class DeleteRepositoryCollectionUseCase <<Interface>>
+class GetRepositoryCollectionUseCase <<Interface>>
+class GetAllRepositoryCollectionsUseCase <<Interface>>
+class GetAnalysisUseCase <<Interface>>
+class GetAllAnalysesForUserUseCase <<Interface>>
 
 class AddRepositoryCollectionService
 class GitHubCollectionDeleter
 class GitHubCollectionGetter
 class GetAnalysisService
 
-interface ICollectionExistenceChecker
-interface ICollectionAdderPort
-interface IDeleteRepositoryCollectionPort
-interface IGetRepositoryCollectionPort
-interface IGetAllRepositoryCollectionsPort
-interface IGetAnalysisFromIdPort
-interface IGetAllAnalysesForUserPort
+class ICollectionExistenceChecker <<Interface>>
+class ICollectionAdderPort <<Interface>>
+class IDeleteRepositoryCollectionPort <<Interface>>
+class IGetRepositoryCollectionPort <<Interface>>
+class IGetAllRepositoryCollectionsPort <<Interface>>
+class IGetAnalysisFromIdPort <<Interface>>
+class IGetAllAnalysesForUserPort <<Interface>>
 
-interface ICollectionDuplicateCheckerPort
+class ICollectionDuplicateCheckerPort <<Interface>>
 
 class GetAllAnalysesForUserResponseDTO
 

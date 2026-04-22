@@ -7,6 +7,9 @@ skinparam ranksep 70
 skinparam ClassAttributeIconSize 0
 hide circles
 
+class IDeleteUseCase <<Interface>> 
+class IUserDeletePort <<Interface>> 
+
 class DeleteService {
     - deletePort: IUserDeletePort
     ---
@@ -15,7 +18,7 @@ class DeleteService {
 }
 
 ' Relations
-DeleteService ..up|> IDeleteUseCase
+DeleteService ..up|> IDeleteUseCase 
 DeleteService --> IUserDeletePort
 DeleteService ..> DeleteCommand
 DeleteService ..> DeleteResponseDto

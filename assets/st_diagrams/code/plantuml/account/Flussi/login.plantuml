@@ -12,14 +12,14 @@ class LoginRequestDto
 class AuthResponseDto
 class UserResponseDto
 
-interface IloginUseCase
+class IloginUseCase <<Interface>> 
 
 class LoginService
 
-interface IUserFindPort
-interface ITokenProviderPort
-interface IHashComparePort
-interface ISessionSavePort
+class IUserFindPort <<Interface>> 
+class ITokenProviderPort <<Interface>> 
+class IHashComparePort <<Interface>> 
+class ISessionSavePort <<Interface>> 
 
 class PostgresAdapter
 class BcryptAdapter

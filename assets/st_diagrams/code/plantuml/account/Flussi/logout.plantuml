@@ -11,11 +11,11 @@ class LogoutController
 class LogoutRequestDto
 class LogoutResponseDto
 
-interface ILogoutUseCase
+class ILogoutUseCase <<Interface>> 
 
 class LogoutService
 
-interface ISessionDeletePort
+class ISessionDeletePort <<Interface>> 
 
 class PostgresAdapter
 

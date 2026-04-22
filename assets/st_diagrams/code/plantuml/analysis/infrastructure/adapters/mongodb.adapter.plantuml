@@ -3,27 +3,27 @@ skinparam componentStyle uml2.5
 skinparam linetype ortho
 left to right direction 
 skinparam nodesep 10 
-skinparam ranksep 100
+skinparam ranksep 109
 skinparam ClassAttributeIconSize 0
 hide circles
 hide interface methods
 
-interface IGitCredentialReadPort
-interface IGitCredentialSavePort
-interface IGitCredentialDeletePort
-interface IGitCredentialUpdatePort
-interface IGitHubAnalysisSavePort
-interface ICodeReportSavePort
-interface IDocsReportSavePort
-interface ISecurityReportSavePort
-interface IUpdateAnalysisPort
-interface IGetAnalysisFromIdPort
-interface IGetAllAnalysesForUserPort
-interface ICollectionAdderPort
-interface IGetAllRepositoryCollectionsPort
-interface IGetRepositoryCollectionPort
-interface ICollectionDuplicateCheckerPort
-interface IDeleteRepositoryCollectionPort
+class IGitCredentialReadPort <<Interface>>
+class IGitCredentialSavePort <<Interface>>
+class IGitCredentialDeletePort <<Interface>>
+class IGitCredentialUpdatePort <<Interface>>
+class IGitHubAnalysisSavePort <<Interface>>
+class ICodeReportSavePort <<Interface>>
+class IDocsReportSavePort <<Interface>>
+class ISecurityReportSavePort <<Interface>>
+class IUpdateAnalysisPort <<Interface>>
+class IGetAnalysisFromIdPort <<Interface>>
+class IGetAllAnalysesForUserPort <<Interface>>
+class ICollectionAdderPort <<Interface>>
+class IGetAllRepositoryCollectionsPort <<Interface>>
+class IGetRepositoryCollectionPort <<Interface>>
+class ICollectionDuplicateCheckerPort <<Interface>>
+class IDeleteRepositoryCollectionPort <<Interface>>
 
 class MongoDBAdapter {
     - credentialModel: Model<GitCredentialDocument>
@@ -52,20 +52,20 @@ class MongoDBAdapter {
     + deleteCollection(model: DeleteRepositoryCollectionRequest): Promise<DeleteRepositoryCollectionResult>
 }
 
-MongoDBAdapter ..|> IGitCredentialReadPort
-MongoDBAdapter ..|> IGitCredentialSavePort
-MongoDBAdapter ..|> IGitCredentialDeletePort
-MongoDBAdapter ..|> IGitCredentialUpdatePort
-MongoDBAdapter ..|> IGitHubAnalysisSavePort
-MongoDBAdapter ..|> ICodeReportSavePort
-MongoDBAdapter ..|> IDocsReportSavePort
-MongoDBAdapter ..|> ISecurityReportSavePort
-MongoDBAdapter ..|> IUpdateAnalysisPort
-MongoDBAdapter ..|> IGetAnalysisFromIdPort
-MongoDBAdapter ..|> IGetAllAnalysesForUserPort
-MongoDBAdapter ..|> ICollectionAdderPort
-MongoDBAdapter ..|> IGetAllRepositoryCollectionsPort
-MongoDBAdapter ..|> IGetRepositoryCollectionPort
-MongoDBAdapter ..|> ICollectionDuplicateCheckerPort
-MongoDBAdapter ..|> IDeleteRepositoryCollectionPort
+MongoDBAdapter ..down-|> IGitCredentialReadPort
+MongoDBAdapter ..down-|> IGitCredentialSavePort
+MongoDBAdapter ..down-|> IGitCredentialDeletePort
+MongoDBAdapter ..down-|> IGitCredentialUpdatePort
+MongoDBAdapter ..down-|> IGitHubAnalysisSavePort
+MongoDBAdapter ..down-|> ICodeReportSavePort
+MongoDBAdapter ..down-|> IDocsReportSavePort
+MongoDBAdapter ..down-|> ISecurityReportSavePort
+MongoDBAdapter ..down-|> IUpdateAnalysisPort
+MongoDBAdapter ..down-|> IGetAnalysisFromIdPort
+MongoDBAdapter ..down-|> IGetAllAnalysesForUserPort
+MongoDBAdapter ..down-|> IGetAllRepositoryCollectionsPort
+MongoDBAdapter ..down-|> ICollectionAdderPort
+MongoDBAdapter ..down-|> IGetRepositoryCollectionPort
+MongoDBAdapter ..down-|> ICollectionDuplicateCheckerPort
+MongoDBAdapter ..down-|> IDeleteRepositoryCollectionPort
 @enduml

@@ -6,6 +6,10 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
+class ICodeReportEntityProvider <<Interface>>
+class IDocsReportEntityProvider <<Interface>>
+class ISecurityReportEntityProvider <<Interface>>
+
 class ReportEntitiesProvider {
     ---
     + fromCodeAgentResponse(response: CodeAgentResponse, reportId: ReportId, analysisId: AnalysisId): CodeAgentReport

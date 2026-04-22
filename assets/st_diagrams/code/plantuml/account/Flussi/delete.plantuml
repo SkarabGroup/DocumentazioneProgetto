@@ -10,12 +10,12 @@ class DeleteUserController
 
 class DeleteResponseDto
 
-interface IDeleteUseCase
+class IDeleteUseCase <<Interface>> 
 
 class DeleteService
 
-interface IUserDeletePort
-interface IVerifyTokenPort
+class IUserDeletePort <<Interface>> 
+class IVerifyTokenPort <<Interface>> 
 
 class PostgresAdapter
 class JwtAdapter

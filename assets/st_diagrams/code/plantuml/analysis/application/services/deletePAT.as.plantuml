@@ -6,9 +6,11 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface DeletePatUseCase {
+class DeletePatUseCase <<Interface>> {
     + execute(command: DeletePatCommand): Promise<DeletePatResult>
 }
+
+class IGitCredentialDeletePort <<Interface>>
 
 class DeletePatService {
     - passwordProviderService: IPasswordProvider
@@ -18,7 +20,7 @@ class DeletePatService {
     + execute(command: DeletePatCommand): Promise<DeletePatResult>
 }
 
-DeletePatService ..|> DeletePatUseCase
+DeletePatService ..up-|> DeletePatUseCase
 DeletePatService --right-> IPasswordProvider
 DeletePatService --left-> IGitCredentialDeletePort
 @enduml

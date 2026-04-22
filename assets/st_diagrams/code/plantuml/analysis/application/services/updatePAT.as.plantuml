@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface UpdatePatUseCase {
+class UpdatePatUseCase <<Interface>> {
     + execute(command: UpdatePatCommand): Promise<UpdatePatResult>
 }
 
@@ -17,6 +17,8 @@ class UpdatePatService {
     + UpdatePatService(passwordProvider, updatePort)
     + execute(command: UpdatePatCommand): Promise<UpdatePatResult>
 }
+
+class IGitCredentialUpdatePort <<Interface>>
 
 UpdatePatService ..|> UpdatePatUseCase
 UpdatePatService --right-> IPasswordProvider

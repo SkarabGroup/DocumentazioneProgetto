@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface ISecurityReportSavePort {
+class ISecurityReportSavePort <<Interface>> {
     + saveSecurityReport(model: SaveSecurityReportRequest): Promise<SaveSecurityReportResponse>
 }
 

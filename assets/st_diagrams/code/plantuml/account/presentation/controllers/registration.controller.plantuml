@@ -7,6 +7,8 @@ skinparam ranksep 70
 skinparam ClassAttributeIconSize 0
 hide circles
 
+class IregistrationUseCase <<Interface>>
+
 class RegistrationController {
     - registrationUseCase: IregistrationUseCase
     ---

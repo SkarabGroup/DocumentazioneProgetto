@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface StartAnalysisUseCase {
+class StartAnalysisUseCase <<Interface>> {
     + execute(command: StartAnalysisCommand): Promise<StartAnalysisResult>
 }
 
@@ -21,6 +21,13 @@ class StartAnalysisService {
     + StartAnalysisService(passwordProvider, authorizer, validator, cloner, orchestrator, analysisSavePort)
     + execute(command: StartAnalysisCommand): Promise<StartAnalysisResult>
 }
+
+class IAnalysisOrchestrator <<Interface>>
+class IPasswordProvider <<Interface>>
+class IRepositoryAuthorizer <<Interface>>
+class IRepositoryCloner <<Interface>>
+class IRepositoryValidator <<Interface>>
+class IGitHubAnalysisSavePort <<Interface>>
 
 StartAnalysisService ..up|> StartAnalysisUseCase
 StartAnalysisService --down-> IPasswordProvider

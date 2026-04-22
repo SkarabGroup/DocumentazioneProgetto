@@ -16,20 +16,20 @@ class PostPatResponseDTO
 class DeletePatResponseDTO
 class UpdatePatResponseDTO
 
-interface NewPatUseCase
-interface DeletePatUseCase
-interface UpdatePatUseCase
+class NewPatUseCase <<Interface>>
+class DeletePatUseCase <<Interface>>
+class UpdatePatUseCase <<Interface>>
 
 class NewPatService
 class DeletePatService
 class UpdatePatService
 
 
-interface IGitCredentialSavePort
-interface IGitCredentialDeletePort
-interface IGitCredentialUpdatePort
+class IGitCredentialSavePort <<Interface>>
+class IGitCredentialDeletePort <<Interface>>
+class IGitCredentialUpdatePort <<Interface>>
 
-interface IPasswordProvider
+class IPasswordProvider <<Interface>>
 class PATPasswordProvider
 
 class MongoDBAdapter

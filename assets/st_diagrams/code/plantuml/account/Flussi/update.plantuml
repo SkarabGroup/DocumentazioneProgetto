@@ -12,15 +12,15 @@ class UpdateRequestDto
 class AuthResponseDto
 class UserResponseDto
 
-interface IupdateUseCase
+class IupdateUseCase <<Interface>> 
 
 class UpdateService
 
-interface IUserFindPort
-interface IUserUpdatePort
-interface IHashPasswordPort
-interface ITokenProviderPort
-interface IVerifyTokenPort
+class IUserFindPort <<Interface>> 
+class IUserUpdatePort <<Interface>> 
+class IHashPasswordPort <<Interface>> 
+class ITokenProviderPort <<Interface>> 
+class IVerifyTokenPort <<Interface>> 
 
 class PostgresAdapter
 class BcryptAdapter
