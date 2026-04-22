@@ -54,7 +54,7 @@ l’audit e la remediation dei
 repository software*
 ]
 \
-Si comunica, inoltre, che il gruppo ha sviluppato un *Minimum Viable Product (MVP)* che implementa un insieme minimo ma completo di funzionalità essenziali, volto a dimostrare il valore della soluzione proposta e a supportarne la valutazione operativa, reperibile al seguente indirizzo: #link("https://github.com/SkarabGroup/MinimumViableProduct")[#underline[Repository MVP]].
+Si comunica, inoltre, che il gruppo ha sviluppato un *Minimum Viable Product (MVP)* che implementa un insieme completo di funzionalità essenziali, volto a dimostrare il valore della soluzione proposta e a supportarne la valutazione operativa, reperibile al seguente indirizzo: #link("https://github.com/SkarabGroup/MinimumViableProduct")[#underline[Repository MVP]].
 
 Il verbale di approvazione del MVP da parte dell’azienda proponente è consultabile al seguente indirizzo: #link("https://skarabgroup.github.io/DocumentazioneProgetto/verbali/esterni/Consegna_MVP_26_04_21.pdf")[#underline[Verbale di approvazione MVP]].
 
