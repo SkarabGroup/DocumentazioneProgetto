@@ -201,7 +201,7 @@ I seguenti documenti hanno valore vincolante per la definizione delle strategie 
   (ultimo accesso: *24/02/2026*)
 
 - *Dispense del corso di Ingegneria del Software – Qualità del software* <dispense_qualità> #linebreak()
-  #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T06.pdf")] \
+  #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T07.pdf")] \
   (ultimo accesso: *24/02/2026*)
 
 #pagebreak()

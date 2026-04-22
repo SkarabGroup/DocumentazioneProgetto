@@ -557,36 +557,45 @@ Al fine di prevenire ambiguità interpretative, è stato redatto un glossario ch
 Nel testo, *ogni termine evidenziato tramite una G come apice*, rimanda alla voce corrispondente del Glossario pubblicato sul sito ufficiale del gruppo, consentendo al lettore di accedere direttamente alla definizione associata.
 
 La versione più recente del Glossario è disponibile al seguente link:
-#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario (v1.0.0)]].
+#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario (v2.0.0)]].
 
 == Riferimenti
 === Riferimenti Normativi
 I seguenti documenti hanno valore vincolante per la redazione dell'Analisi dei Requisiti:
-- *Standard IEEE 830-1998* IEEE Recommended Practice for Software Requirements Specifications <830> \
-  #underline[https://ieeexplore.ieee.org/document/720574] \
-  (ultimo accesso: *24/02/2026*)
 
-- *Standard IEEE 29148-2018* ISO/IEC/IEEE International Standard – Systems and software engineering – Life cycle processes – Requirements engineering <29148>\
-  #underline[https://ieeexplore.ieee.org/document/8559686] \
-  (ultimo accesso: *24/02/2026*)
+- *Regolamento del Progetto Didattico*: Regole e vincoli del corso di Ingegneria del Software. \
+  #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/PD1.pdf")] \
+  (ultimo accesso: *11/03/2026*)
 
 - *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> \
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
-  (ultimo accesso: *24/02/2026*)
+  (ultimo accesso: *11/03/2026*)
 
 - *Norme di Progetto*: regole, convenzioni e standard di qualità adottati dal gruppo. <NdP>\
-  #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")] \
-  (versione: *v1.0.0*)
+  #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/NdP.pdf")] \
+  (versione: *v2.0.0*)
+
 === Riferimenti Informativi
+
 - *Dispense del Corso di Ingegneria del Software sull'Analisi dei Requisiti* <dispense_AdR>\
   #underline[https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T05.pdf] \
-  (ultimo accesso: *24/02/2026*)
+  (ultimo accesso: *11/03/2026*)
+
 - *Dispense del Corso di Ingegneria del Software sui Casi d'Uso* <dispense_UC>\
   #underline[https://www.math.unipd.it/~rcardin/swea/2022/Diagrammi%20Use%20Case.pdf] \
-  (ultimo accesso: *24/02/2026*)
+  (ultimo accesso: *11/03/2026*)
+
+- *Standard IEEE 830-1998* IEEE Recommended Practice for Software Requirements Specifications <830> \
+  #underline[https://ieeexplore.ieee.org/document/720574] \
+  (ultimo accesso: *11/03/2026*)
+
+- *Standard IEEE 29148-2018* ISO/IEC/IEEE International Standard – Systems and software engineering – Life cycle processes – Requirements engineering <29148>\
+  #underline[https://ieeexplore.ieee.org/document/8559686] \
+  (ultimo accesso: *11/03/2026*)
+
 - *Glossario* <glossario>\
   #underline[https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html] \
-  (versione: *v1.0.0*)
+  (versione: *v2.0.0*)
 
 
 #pagebreak()
@@ -594,7 +603,7 @@ I seguenti documenti hanno valore vincolante per la redazione dell'Analisi dei R
 == Introduzione
 In questa sezione sono descritti i casi d'uso principali del sistema, che illustrano le interazioni funzionali tra gli utenti (umani e software) e l'applicazione.
 
-La specifica dei casi d'uso adotta il formato e le convenzioni di modellazione definite alla sezione *2.1.6.3.1* del documento #underline[#link(<NdP>)[Norme di Progetto]]. Si rimanda a tale documento per la descrizione dettagliata della struttura dei campi (precondizioni, postcondizioni, scenari) e della sintassi #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#uml")[#def[UML]] utilizzata.
+La specifica dei casi d'uso adotta il formato e le convenzioni di modellazione definite alla sezione *2.1.2.4.1* del documento #underline[#link(<NdP>)[Norme di Progetto]]. Si rimanda a tale documento per la descrizione dettagliata della struttura dei campi (precondizioni, postcondizioni, scenari) e della sintassi #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#uml")[#def[UML]] utilizzata.
 
 == Attori
 Gli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#attore")[#def[attori]] rappresentano le entità che interagiscono con il sistema #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]]. Essi sono classificati in base al ruolo svolto nell'interazione:
@@ -642,7 +651,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
     [Piattaforma di hosting esterna. Interagisce con il sistema per fornire l'accesso al codice sorgente (via API o clone) e ai metadati dei repository.],
 
     [*Servizi AWS*],
-    [Infrastruttura cloud esterna di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#amazon-web-service")[#def[Amazon Web Service]] utilizzata dal sistema come ambiente di calcolo e storage per l'esecuzione delle analisi intensive.],
+    [Infrastruttura cloud esterna di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#amazon-web-service")[#def[Amazon Web Services]] utilizzata dal sistema come ambiente di calcolo e storage per l'esecuzione delle analisi intensive.],
 
     [*Strumenti di Analisi*],
     [Insieme degli strumenti terzi invocati dal sistema per l'esecuzione verticale delle scansioni di sicurezza e qualità del codice.],
@@ -4207,7 +4216,7 @@ Di seguito vengono definiti i ruoli identificati nell'analisi.
 = Requisiti di Sistema
 In questa sezione sono elencati i requisiti del sistema CodeGuardian individuati da _Skarab Group_.
 
-Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 delle #link(<NdP>)[#underline[*Norme di Progetto*]].
+Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.2.4.2 delle #link(<NdP>)[#underline[*Norme di Progetto*]].
 
 #let fr_counter = counter("FR")
 #let qr_ob_counter = counter("QROb")
@@ -4280,15 +4289,15 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   [Il Sistema deve consentire l'immissione di un username alfanumerico con lunghezza compresa tra 4 e 20 caratteri.],
   [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
 
-  [#FRObx],
+  [#FROpx],
   [Il Sistema deve verificare l'univocità dello username rispetto agli account esistenti nel database.],
   [#link(<UC1.1>)[#underline[\[UC1.1\]]]],
 
-  [#FRObx],
+  [#FROpx],
   [Il Sistema deve imporre vincoli di unicità lato persistenza su username per prevenire registrazioni duplicate anche in presenza di richieste concorrenti.],
   [#link(<UC1.1.2>)[#underline[\[UC1.1.2\]]]],
 
-  [#FRObx],
+  [#FROpx],
   [In caso di violazione del vincolo di unicità in fase di persistenza, il Sistema deve annullare la registrazione e notificare l'utente con il messaggio previsto per username già in uso.],
   [#link(<UC1.1.2>)[#underline[\[UC1.1.2\]]]],
 
@@ -4297,7 +4306,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   [#link(<UC1.1.1>)[#underline[\[UC1.1.1\]]]],
 
   // --- EMAIL (UC1.2 + ESTENSIONI) ---
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve consentire l'immissione di un indirizzo email conforme allo standard RFC 5322.],
   [#link(<UC1.2>)[#underline[\[UC1.2\]]]],
 
@@ -4359,7 +4368,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   [Il Sistema deve utilizzare protocolli di comunicazione sicuri (HTTPS) per il trasferimento delle credenziali durante il login.],
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve utilizzare lo username fornito per recuperare dalla persistenza il record account associato.],
   [#link(<UC2>)[#underline[\[UC2\]]]],
 
@@ -4383,64 +4392,44 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora le credenziali non risultino valide o non corrispondano a nessun account registrato.],
   [#link(<UC2.0.2>)[#underline[\[UC2.0.2\]]]],
 
-  /* [#FRObx],
-  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora lo username inserito non rispetti i vincoli sintattici.],
-  [#link(<UC2.1.1>)[#underline[\[UC2.1.1\]]]],
-
-  [#FRObx],
-  [Il Sistema deve notificare l'utente qualora l'identificativo (username) inserito non risulti censito nel sistema.],
-  [#link(<UC2.1.2>)[#underline[\[UC2.1.2\]]]],
-
-  [#FRObx],
-  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora la password inserita non sia formalmente conforme.],
-  [#link(<UC2.2.1>)[#underline[\[UC2.2.1\]]]],
-
-  [#FRObx],
-  [Il Sistema deve notificare l'utente qualora la password inserita non corrisponda a quella registrata.],
-  [#link(<UC2.2.2>)[#underline[\[UC2.2.2\]]]], */
-
   // --- INTEGRAZIONE GITHUB (UC3) ---
-  [#FRObx],
+  [#FROpx],
   [Il Sistema deve consentire all'Utente Autorizzato l'accesso alla sezione dedicata al collegamento del profilo GitHub.],
   [#link(<UC3>)[#underline[\[UC3\]]]],
 
-  [#FRObx],
+  [#FROpx],
   [Il Sistema deve impedire l'avvio della procedura di collegamento qualora un profilo GitHub risulti già associato all'account CodeGuardian dell'utente.],
   [#link(<UC3>)[#underline[\[UC3\]]]],
 
-  [#FRObx],
+  [#FROpx],
   [Il Sistema deve utilizzare un parametro di stato (state) per prevenire attacchi di tipo Cross-Site Request Forgery (CSRF) durante il flusso OAuth2.],
   [#link(<UC3>)[#underline[\[UC3\]]]],
 
-  [#FRObx],
+  [#FROpx],
   [Il Sistema deve memorizzare i token di accesso ottenuti da GitHub esclusivamente in forma cifrata tramite algoritmi di crittografia forte (es. AES-256).],
   [#link(<UC3>)[#underline[\[UC3\]]]],
 
-  [#FRObx],
+  [#FROpx],
   [Il Sistema deve evitare la persistenza di token o associazioni qualora la procedura di collegamento non termini con esito positivo.],
   [#link(<UC3>)[#underline[\[UC3\]]]],
 
-  [#FRObx],
+  [#FROpx],
   [Il Sistema deve mostrare un avviso informativo obbligatorio prima di procedere al reindirizzamento verso il dominio esterno GitHub.],
   [#link(<UC3.1>)[#underline[\[UC3.1\]]]],
 
-  [#FRObx],
+  [#FROpx],
   [Il Sistema deve consentire all'utente di annullare il reindirizzamento, ripristinando lo stato della sezione integrazioni senza alcuna modifica.],
   [#link(<UC3.1.1>)[#underline[\[UC3.1.1\]]]],
 
-  /* [#FRObx],
-  [Il Sistema deve elaborare l'esito della procedura di collegamento al ritorno dell'utente su CodeGuardian e visualizzare un messaggio di esito.],
-  [#link(<UC3.2>)[#underline[\[UC3.2\]]]], */
-
-  [#FRObx],
+  [#FROpx],
   [Il Sistema deve gestire i timeout nelle chiamate verso le API di GitHub durante lo scambio del token, notificando l'utente del fallimento temporaneo.],
   [#link(<UC3.0.1>)[#underline[\[UC3.0.1\]]]],
 
-  [#FRObx],
+  [#FROpx],
   [Il Sistema deve inibire il collegamento qualora il profilo GitHub risulti già associato a un altro account CodeGuardian.],
   [#link(<UC3.0.2>)[#underline[\[UC3.0.2\]]]],
 
-  [#FRObx],
+  [#FROpx],
   [Il Sistema deve mostrare un messaggio di errore specifico qualora l'utente neghi il consenso alla condivisione dei dati su GitHub.],
   [#link(<UC3.0.3>)[#underline[\[UC3.0.3\]]]],
 
@@ -4461,28 +4450,23 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   [Il Sistema deve disabilitare il comando di conferma dell'invio a seguito della pressione dell'utente per prevenire richieste duplicate.],
   [#link(<UC4>)[#underline[\[UC4\]]]],
 
-  // --- EX RICEZIONE NOTIFICHE (UC27 - UC28) --- CASI D'USO CANCELLATI
-  [#FRObx],
+  [#FROpx],
   [Il Sistema deve consegnare la notifica di fine analisi attraverso i canali scelti dall'utente (es. email o notifiche app).],
   [#link(<UC4>)[#underline[\[UC4\]]]],
-  //ex [#link(<UC27>)[#underline[\[UC27\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve mostrare i dettagli dell'analisi (nome progetto e ora) direttamente nell'avviso ricevuto dall'utente.],
   [#link(<UC4>)[#underline[\[UC4\]]]],
-  //ex [#link(<UC27>)[#underline[\[UC27\]]]],
   
   [#FRObx],
   [Il Sistema deve inviare un avviso immediato se un'analisi si interrompe per un errore imprevisto, spiegandone brevemente il motivo.],
   [#link(<UC4>)[#underline[\[UC4\]]]],
-  //ex [#link(<UC28>)[#underline[\[UC28\]]]],
-  // ---
 
   [#FRObx],
   [Il Sistema deve restituire immediatamente il report esistente, senza avviare una nuova elaborazione, informando l'utente qualora i dati remoti risultino già aggiornati.],
   [#link(<UC4.0.1>)[#underline[\[UC4.0.1\]]]],
 
-  [#FRObx],
+  [#FROpx],
   [Il Sistema deve accodare la richiesta di analisi al processo già in corso per il medesimo repository, informando l'utente dell'avvenuta presa in carico.],
   [#link(<UC4.0.2>)[#underline[\[UC4.0.2\]]]],
 
@@ -4720,40 +4704,40 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   [#link(<UC12.1>)[#underline[\[UC12.1\]]]],
 
   // --- DISCONNESSIONE GITHUB (UC13) ---
-  [#FRObx],
+  [#FROpx],
   [Il Sistema deve consentire la rimozione dell'integrazione GitHub esclusivamente previa conferma esplicita dell'Utente Avanzato.],
   [#link(<UC13>)[#underline[\[UC13\]]]],
 
-  [#FRObx],
+  [#FROpx],
   [Il Sistema deve inviare una richiesta di revoca del token OAuth alle API di GitHub al momento della conferma della disconnessione.],
   [#link(<UC13>)[#underline[\[UC13\]]]],
 
-  [#FRObx],
+  [#FROpx],
   [Il Sistema deve eliminare definitivamente dal database i token (access e refresh) e l'ID utente GitHub associato all'account CodeGuardian.],
   [#link(<UC13>)[#underline[\[UC13\]]]],
 
-  [#FRObx],
+  [#FROpx],
   [Il Sistema deve gestire eventuali errori di comunicazione con GitHub durante la revoca, procedendo comunque alla cancellazione locale dei dati sensibili.],
   [#link(<UC13>)[#underline[\[UC13\]]]],
 
   // --- ESPORTAZIONE REPORT (UC14) ---
-  [#FRDex],
+  [#FRObx],
   [Il Sistema deve rendere disponibile il file generato tramite un link di download],
   [#link(<UC14>)[#underline[\[UC14\]]]],
 
-  [#FRDex],
+  [#FRObx],
   [Il Sistema deve consentire l'esportazione dei report nei formati PDF (per consultazione) e JSON (per interoperabilità dati).],
   [#link(<UC14.1>)[#underline[\[UC14.1\]]]],
 
-  [#FRDex],
+  [#FRObx],
   [Il Sistema deve inibire l'invio della richiesta di generazione file qualora l'utente non selezioni formalmente uno dei formati previsti.],
   [#link(<UC14.1.1>)[#underline[\[UC14.1.1\]]]],
 
-  [#FRDex],
+  [#FRObx],
   [Il Sistema deve generare il documento includendo i metadati del report (timestamp, commit hash) e i risultati delle sezioni effettivamente analizzate.],
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 
-  [#FRDex],
+  [#FRObx],
   [Il Sistema deve gestire il processo di generazione del file asincronamente per evitare il blocco dell'interfaccia utente durante il parsing di report voluminosi.],
   [#link(<UC14.2>)[#underline[\[UC14.2\]]]],
 
@@ -5031,19 +5015,19 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   [#link(<UC28.1>)[#underline[\[UC28.1\]]]],
 
   // --- GESTIONE ACCESSO GITHUB (UC29) ---
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve trasformare il codice provvisorio fornito da GitHub in una chiave di accesso permanente per poter leggere i repository.],
   [#link(<UC29>)[#underline[\[UC29\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve proteggere la chiave di accesso di GitHub nascondendola tramite cifratura prima di salvarla nei propri archivi.],
   [#link(<UC29>)[#underline[\[UC29\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve collegare la chiave di GitHub in modo esclusivo al profilo dell'utente che ha autorizzato l'operazione.],
   [#link(<UC29>)[#underline[\[UC29\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve annullare il collegamento e chiedere all'utente di rifare la procedura se la chiave provvisoria risulta scaduta o non valida.],
   [#link(<UC29.0.1>)[#underline[\[UC29.0.1\]]]],
 
@@ -5075,96 +5059,96 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   [#link(<UC32>)[#underline[\[UC32\]]]],
 
   // --- ACCETTAZIONE REMEDIATION CODICE (UC33 + ESTENSIONE) ---
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve consentire all'Utente Autorizzato di accettare una remediation relativa all'analisi del codice.],
   [#link(<UC33>)[#underline[\[UC33\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve applicare automaticamente alla codebase le modifiche previste dalla remediation del codice accettata.],
   [#link(<UC33>)[#underline[\[UC33\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve aggiornare lo stato della remediation del codice come "eseguita" nella dashboard a seguito dell'applicazione riuscita.],
   [#link(<UC33>)[#underline[\[UC33\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve gestire errori durante l'applicazione della remediation del codice notificando il fallimento all'utente e mantenendo invariata la codebase.],
   [#link(<UC33.0.1>)[#underline[\[UC33.0.1\]]]],
 
   // --- RIFIUTO REMEDIATION CODICE (UC34) ---
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve consentire all'Utente Autorizzato di rifiutare una remediation relativa all'analisi del codice.],
   [#link(<UC34>)[#underline[\[UC34\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve aggiornare lo stato della remediation del codice come "rifiutata" nella dashboard senza apportare modifiche al repository.],
   [#link(<UC34>)[#underline[\[UC34\]]]],
 
   // --- ACCETTAZIONE REMEDIATION SICUREZZA (UC35 + ESTENSIONE) ---
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve consentire all'Utente Autorizzato di accettare una remediation relativa all'analisi della sicurezza.],
   [#link(<UC35>)[#underline[\[UC35\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve applicare le patch o le configurazioni di sicurezza previste dalla remediation di sicurezza accettata.],
   [#link(<UC35>)[#underline[\[UC35\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve aggiornare lo stato della remediation di sicurezza come "eseguita" nella dashboard a seguito dell'applicazione riuscita.],
   [#link(<UC35>)[#underline[\[UC35\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve gestire errori durante l'applicazione della remediation di sicurezza notificando il fallimento all'utente.],
   [#link(<UC35.0.1>)[#underline[\[UC35.0.1\]]]],
 
   // --- RIFIUTO REMEDIATION SICUREZZA (UC36) ---
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve consentire all'Utente Autorizzato di rifiutare una remediation relativa all'analisi della sicurezza.],
   [#link(<UC36>)[#underline[\[UC36\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve aggiornare lo stato della remediation di sicurezza come "rifiutata" nella dashboard senza modificare il repository.],
   [#link(<UC36>)[#underline[\[UC36\]]]],
 
   // --- ACCETTAZIONE REMEDIATION DOCUMENTAZIONE (UC37 + ESTENSIONE) ---
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve consentire all'Utente Autorizzato di accettare una remediation relativa all'analisi della documentazione.],
   [#link(<UC37>)[#underline[\[UC37\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve applicare automaticamente ai file documentali le modifiche previste dalla remediation documentale accettata.],
   [#link(<UC37>)[#underline[\[UC37\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve aggiornare lo stato della remediation documentale come "eseguita" nella dashboard a seguito dell'applicazione riuscita.],
   [#link(<UC37>)[#underline[\[UC37\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve gestire errori durante l'applicazione della remediation documentale notificando il fallimento all'utente.],
   [#link(<UC37.0.1>)[#underline[\[UC37.0.1\]]]],
 
   // --- RIFIUTO REMEDIATION DOCUMENTAZIONE (UC38) ---
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve consentire all'Utente Autorizzato la visualizzazione del dettaglio di una singola remediation relativa all'analisi della documentazione.],
   [#link(<UC38>)[#underline[\[UC38\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve consentire all'Utente Autorizzato di rifiutare una remediation relativa all'analisi della documentazione.],
   [#link(<UC38>)[#underline[\[UC38\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve aggiornare lo stato della remediation documentale come "rifiutata" nella dashboard a seguito del rifiuto confermato dall'utente.],
   [#link(<UC38>)[#underline[\[UC38\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve garantire che il rifiuto di una remediation documentale non comporti alcuna modifica ai file sorgente o di documentazione del repository.],
   [#link(<UC38>)[#underline[\[UC38\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve rimuovere la remediation rifiutata dalla lista delle azioni pendenti dell'area "Documentazione" o marcarla visivamente come scartata.],
   [#link(<UC38>)[#underline[\[UC38\]]]],
 
-  [#FRObx],
+  [#FRDex],
   [Il Sistema deve mostrare all'Utente Autorizzato una conferma visiva dell'avvenuto rifiuto della proposta correttiva.],
   [#link(<UC38>)[#underline[\[UC38\]]]],
 
@@ -5259,7 +5243,7 @@ Per la nomenclatura utilizzata si consiglia di leggere la sezione 2.1.6.3.1 dell
   [Il Sistema deve consentire la revoca dei permessi di consultazione per un utente precedentemente autorizzato a seguito di conferma del proprietario.],
   [#link(<UC45.1>)[#underline[\[UC45.1\]]]],
 
-  // --- GESTIONE RACCOLTE E PROFILO (UC46, UC47) ---  uc47 diventato uc28
+  // --- GESTIONE RACCOLTE E PROFILO (UC46, UC47) --- 
   [#FRObx],
   [Il Sistema deve consentire la rimozione di una raccolta di report senza che questo comporti l'eliminazione dei singoli report di analisi in essa contenuti.],
   [#link(<UC46>)[#underline[\[UC46\]]]],
@@ -5298,10 +5282,9 @@ I seguenti requisiti garantiscono che il sistema sia manutenibile, performante e
   [Interno (Manutenibilità)],
 
   [#QRObx],
-  [È necessario rispettare rigorosamente le metriche di qualità del codice (complessità ciclomatica, duplicazione) definite nelle #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[*Norme di Progetto*].],
+  [È necessario rispettare rigorosamente le metriche di qualità del codice (complessità ciclomatica, duplicazione) definite nelle #link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/NdP.pdf")[*Norme di Progetto*].],
   [Interno],
 
-  // SPOSTATI DA REQUISITI DI VINCOLO ----------------------------------------------------------------------
   [#QRObx],
   [Il team deve svolgere un’attività di analisi preliminare includendo Design Thinking, User Story Mapping, Business Requirements e Diagrammi UML degli Use Case],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
@@ -5311,7 +5294,7 @@ I seguenti requisiti garantiscono che il sistema sia manutenibile, performante e
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
   [#QRObx],
-  [Deve essere fornito un Manuale Utente e un Manuale Manutentore (installazione e integrazione agenti) come parte integrante della fornitura finale],
+  [Deve essere fornito un Manuale Utente come parte integrante della fornitura finale],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
   [#QRObx],
@@ -5329,7 +5312,6 @@ I seguenti requisiti garantiscono che il sistema sia manutenibile, performante e
   [#QRObx],
   [L'analisi di sicurezza deve essere conforme agli standard OWASP Top 10 (v2021 o successivi)],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "OWASP"],
-  // ----------------------------------------------------------------------
 )
 
 #pagebreak()
@@ -5344,28 +5326,6 @@ Requisiti imposti dal committente riguardanti tecnologie, standard di sicurezza 
   fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
   align: (col, row) => (center, left, center).at(col) + horizon,
 
-  // SPOSTATI IN REQUISITI DI QUALITA' ----------------------------------------------------------------------
-  /* [#VRObx],
-  [Il team deve svolgere un’attività di analisi preliminare includendo Design Thinking, User Story Mapping, Business Requirements e Diagrammi UML degli Use Case],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
-
-  [#VRObx],
-  [Deve essere fornita documentazione tecnica tramite standard OpenAPI 3.0 (Swagger) per le API e documentazione del codice sorgente tramite TypeDoc],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
-
-  [#VRObx],
-  [Deve essere fornito un Manuale Utente e un Manuale Manutentore (installazione e integrazione agenti) come parte integrante della fornitura finale],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
-
-  [#VRObx],
-  [Al termine del progetto deve essere consegnato un MVP funzionante accompagnato da una Demo Live e dallo Schema Design relativo alla base dati],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
-
-  [#VRObx],
-  [Il codice prodotto deve raggiungere una copertura minima del 70% tramite test di unità automatizzati misurati con Jest],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"], */
-  // ----------------------------------------------------------------------
-
   [#VRObx],
   [L'applicativo deve essere strutturato in moduli indipendenti, garantendo che l'aggiunta di un nuovo agente di analisi avvenga senza richiedere modifiche al codice sorgente degli agenti già esistenti],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
@@ -5374,12 +5334,6 @@ Requisiti imposti dal committente riguardanti tecnologie, standard di sicurezza 
   [Deve essere fornito un sistema di Bug Reporting strutturato su GitHub Issues per tracciare e gestire le anomalie tramite apposite label],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
 
-  //prima: (non atomico)
-  /* [#VRObx],
-  [Il Back-end e l’Orchestratore devono essere sviluppati utilizzando NestJS v10+, il Frontend in React v18.3+ e gli agenti in Python v3.12+],
-  [Capitolato di Progetto], Sez. "Tecnologie"], */
-
-  //dopo
   [#VRObx],
   [Il Back-end e l’Orchestratore devono essere sviluppati utilizzando il framework NestJS v10+],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
@@ -5400,22 +5354,6 @@ Requisiti imposti dal committente riguardanti tecnologie, standard di sicurezza 
   [Devono essere utilizzate GitHub Actions per implementare pipeline di Continuous Integration e Continuous Deployment (CI/CD)],
   [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Tecnologie"],
 
-  // SPOSTATI IN REQUISITI DI QUALITA' ----------------------------------------------------------------------
-  /* [#VRObx],
-  [Il codice sorgente deve essere versionato utilizzando Git (v2.40+) seguendo la branching strategy definita nelle NdP],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "Vincoli Generali"],
-
-  [#VRObx],
-  [L'analisi di sicurezza deve essere conforme agli standard OWASP Top 10 (v2021 o successivi)],
-  [#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")[Capitolato di Progetto], Sez. "OWASP"], */
-  // ----------------------------------------------------------------------
-
-  //prima: (non atomico)
-  /* [#VRObx],
-  [L’interfaccia web deve essere compatibile con Windows 10/11, macOS 14+ e distribuzioni Linux (Ubuntu 22.04+) su browser Chrome 120+, Firefox 120+ e Safari 17+],
-  [Decisione Interna], */
-
-  //dopo
   [#VRObx],
   [L'interfaccia web deve essere compatibile con Windows 10/11],
   [Decisione Interna],
