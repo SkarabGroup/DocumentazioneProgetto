@@ -1,4 +1,11 @@
 @startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 120
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
 package "Hooks Layer (ViewModel)" {
   class useAuth {
     --
@@ -10,9 +17,8 @@ package "Hooks Layer (ViewModel)" {
     Effettua il polling periodico verso il microservizio Analysis\nper ottenere lo stato aggiornato dell'analisi in corso\n(avvio, progresso, completamento, fallimento)\ne notifica la UI tramite callback.
   }
 
-  useAuth --> "Context Layer" : AuthContext
-  useAuth --> "API Layer" : AuthApi
-  useAuth --> "API Layer" : UsersApi
-  useAnalysisPolling --> "API Layer" : AnalysisApi
+  useAuth --up-> "Context Layer" : AuthContext
+  useAuth --right-> "API Layer" : AuthApi, UsersApi
+  useAnalysisPolling --down-> "API Layer" : AnalysisApi
 }
 @enduml

@@ -1,4 +1,11 @@
 @startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
 package "API Layer (Model)" {
   class Gateway {
     # axiosInstance: AxiosInstance
@@ -56,10 +63,10 @@ package "API Layer (Model)" {
     Recupera i report di analisi e genera internamente\nl'esportazione nei formati supportati.
   }
 
-  Gateway <-- AuthApi : usa
-  Gateway <-- UsersApi : usa
-  Gateway <-- PatApi : usa
-  Gateway <-- RepositoriesApi : usa
-  Gateway <-- AnalysisApi : usa
+  Gateway <-left.. AuthApi : usa
+  Gateway <-right.. UsersApi : usa
+  Gateway <-down.. PatApi : usa
+  Gateway <-down.. RepositoriesApi : usa
+  Gateway <-down.. AnalysisApi : usa
 }
 @enduml
