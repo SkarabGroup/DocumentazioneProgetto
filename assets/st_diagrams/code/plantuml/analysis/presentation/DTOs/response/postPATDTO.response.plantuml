@@ -2,7 +2,7 @@
 skinparam componentStyle uml2.5
 skinparam linetype ortho
 skinparam nodesep 30
-skinparam ranksep 30
+skinparam ranksep 50
 skinparam ClassAttributeIconSize 0
 hide circles
 
@@ -12,6 +12,7 @@ class PostPatResponseDTO {
     ---
     - PostPatResponseDTO(added, error?)
     + {static} success(): PostPatResponseDTO
-    + {static} failure(error): PostPatResponseDTO
+    + {static} failure(error: string): PostPatResponseDTO
 }
+
 @enduml

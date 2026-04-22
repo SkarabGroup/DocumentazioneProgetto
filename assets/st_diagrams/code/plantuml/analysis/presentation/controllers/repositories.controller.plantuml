@@ -1,0 +1,55 @@
+@startuml RepositoriesController
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 70
+left to right direction
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class RepositoriesController {
+    - repoCollectionAdder: AddRepositoryCollectionUseCase
+    - repoCollectionGetter: GetRepositoryCollectionUseCase & GetAllRepositoryCollectionsUseCase
+    - repoCollectionDeleter: DeleteRepositoryCollectionUseCase
+    - getAnalysis: GetAnalysisUseCase
+    - getAllAnalyses: GetAllAnalysesForUserUseCase
+    ---
+    + RepositoriesController(repoCollectionAdder, repoCollectionGetter, repoCollectionDeleter, getAnalysis, getAllAnalyses)
+    + addRepositoryCollection(dto: AddRepositoryCollectionRequestDTO, id: string): Promise<AddRepositoryCollectionResponseDTO>
+    + getAllAnalysesForUser(userId: string): Promise<GetAllAnalysesForUserResponseDTO>
+    + getAllCollections(id: string): Promise<GetAllRepositoryCollectionsResponseDTO>
+    + getCollectionFromUrl(url: string, id: string): Promise<GetRepositoryCollectionResponseDTO>
+    + getAnalysisById(id: string): Promise<GetAnalysisResponseDTO>
+    + deleteCollection(url: string, id: string): Promise<DeleteRepositoryCollectionResponseDTO>
+    + getFullCollectionData(url: string, id: string): Promise<GetFullRepositoryCollectionDetailsResponseDTO>
+}
+
+' Use-Case relations
+RepositoriesController --> AddRepositoryCollectionUseCase
+RepositoriesController --> GetRepositoryCollectionUseCase
+RepositoriesController --> GetAllRepositoryCollectionsUseCase
+RepositoriesController --> DeleteRepositoryCollectionUseCase
+RepositoriesController --> GetAnalysisUseCase
+RepositoriesController --> GetAllAnalysesForUserUseCase
+
+' Command relations
+RepositoriesController ..> AddRepositoryCollectionCommand
+RepositoriesController ..> GetRepositoryCollectionCommand
+RepositoriesController ..> GetAnalysisFromIdCommand
+RepositoriesController ..> DeleteRepositoryCollectionCommand
+RepositoriesController ..> GetAllAnalysesForUserCommand
+RepositoriesController ..> GetAllRepositoryCollectionsCommand
+
+' DTO relations
+RepositoriesController ..> GetFullRepositoryCollectionDetailsResponseDTO
+RepositoriesController ..> DeleteRepositoryCollectionResponseDTO
+RepositoriesController ..> AddRepositoryCollectionRequestDTO
+RepositoriesController ..> GetAllAnalysesForUserResponseDTO
+RepositoriesController ..> GetAllRepositoryCollectionsResponseDTO
+RepositoriesController ..> GetRepositoryCollectionResponseDTO
+RepositoriesController ..> GetAnalysisResponseDTO
+RepositoriesController ..> AddRepositoryCollectionResponseDTO
+RepositoriesController ..> JwtAuthGuard
+RepositoriesController ..> RepositoryCollectionItemDTO
+
+@enduml
