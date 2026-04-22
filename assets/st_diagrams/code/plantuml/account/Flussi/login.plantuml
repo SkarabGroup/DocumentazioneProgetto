@@ -1,0 +1,48 @@
+@startuml LoginControllerReachableClasses
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 35
+skinparam ranksep 50
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class LoginController
+
+class LoginRequestDto
+class AuthResponseDto
+class UserResponseDto
+
+interface IloginUseCase
+
+class LoginService
+
+interface IUserFindPort
+interface ITokenProviderPort
+interface IHashComparePort
+interface ISessionSavePort
+
+class PostgresAdapter
+class BcryptAdapter
+class JwtAdapter
+
+' Presentation -> Application
+LoginController --down-> IloginUseCase
+LoginController ..up.> LoginRequestDto
+LoginController ..up.> AuthResponseDto
+LoginController ..up.> UserResponseDto
+
+' Use case implementation
+LoginService ..up.|> IloginUseCase
+
+' LoginService dependencies
+LoginService --down-> IUserFindPort
+LoginService --down-> ITokenProviderPort
+LoginService --down-> IHashComparePort
+LoginService --down-> ISessionSavePort
+
+' Infrastructure implementations
+PostgresAdapter ..up.|> IUserFindPort
+PostgresAdapter ..up.|> ISessionSavePort
+BcryptAdapter ..up.|> IHashComparePort
+JwtAdapter ..up.|> ITokenProviderPort
+@enduml

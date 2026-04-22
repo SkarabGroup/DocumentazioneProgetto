@@ -2,7 +2,7 @@
 #import "../lib/variables.typ": *
 #import "../lib/stDiagramUtil.typ": *
 
-#let versione = "v0.19.0"
+#let versione = "v0.22.0"
 #set heading(numbering: "1.1.1")
 /*
 === FUNZIONAMENTO DEL DOCUMENTO ===
@@ -25,24 +25,30 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #let history = (
   (
     "2026/04/22",
+    "0.22.0",
+    "Aggiunti diagrammi complessivi di Account Microservice",
+    members.alice,
+  ),
+  (
+    "2026/04/22",
     "0.21.0",
     "Aggiunti diagrammi frontend e pattern repository",
     members.suar,
-    members.kevin
+    members.kevin,
   ),
   (
     "2026/04/22",
     "0.20.0",
     "Aggiunti diagrammi complessivi di Analysis Microservice",
     members.kevin,
-    members.suar
+    members.suar,
   ),
   (
     "2026/04/22",
     "0.19.0",
     "Revisione Introduzione, Introduzione a Architettura di Deployment, Introduzione a Architettura Logica",
     members.suar,
-    members.antonio
+    members.antonio,
   ),
   (
     "2026/04/22",
@@ -70,7 +76,7 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
     "0.15.0",
     "Completati i componenti della sezione infrastructure per Analysis Microservice",
     members.andrea,
-    members.kevin
+    members.kevin,
   ),
   (
     "2026/04/20",
@@ -189,7 +195,7 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 == Scopo del Prodotto
 Il presente documento descrive la #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#specifica-tecnica")[#def("Specifica Tecnica")] relativa al #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#progetto")[#def[progetto]] #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def("Code Guardian")], commissionato dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def("Var Group")] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def("Skarab Group")] nell’ambito del corso di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#ingegneria-del-software")[#def("Ingegneria del Software")] presso l’Università degli Studi di Padova.
 
-Il progetto ha come obiettivo la realizzazione di un sistema per l'automazione dei processi di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] delle vulnerabilità del software. L'architettura si basa sul paradigma degli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] software intelligenti, operanti in modo asincrono su #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#repository")[#def[repository]] di codice sorgente. 
+Il progetto ha come obiettivo la realizzazione di un sistema per l'automazione dei processi di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] delle vulnerabilità del software. L'architettura si basa sul paradigma degli #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] software intelligenti, operanti in modo asincrono su #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#repository")[#def[repository]] di codice sorgente.
 
 La piattaforma supporta attività di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[analisi statica]] del codice e individuazione delle principali criticità di sicurezza, fornendo suggerimenti di correzione automatizzati. Tale meccanismo è governato da modelli di linguaggio di grandi dimensioni (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]), integrati nel workflow per formulare e validare le modifiche senza compromettere l'integrità logica del software analizzato. La conformità del sistema è strettamente vincolata ai requisiti concordati e formalizzati nel documento di #link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/AdR.pdf")[*Analisi dei Requisiti*].
 
@@ -262,7 +268,9 @@ I seguenti documenti hanno valore vincolante per la redazione della Specifica Te
   (ultimo accesso: *22/04/2026*) \
   #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Design%20Pattern%20Creazionali.pdf")[Design Pattern Creazionali]] \ (ultimo accesso: *22/04/2026*) \
   #underline[#link("https://www.math.unipd.it/~rcardin/swea/2022/Design%20Pattern%20Strutturali.pdf")[Design Pattern Strutturali]] \ (ultimo accesso: *22/04/2026*) \
-  #underline[#link("https://drive.google.com/file/d/1cpi6rORMxFtC91nI6_sPrG1Xn-28z8eI/view?usp=sharing")[Design Pattern Comportamentali]] \
+  #underline[#link(
+    "https://drive.google.com/file/d/1cpi6rORMxFtC91nI6_sPrG1Xn-28z8eI/view?usp=sharing",
+  )[Design Pattern Comportamentali]] \
   (ultimo accesso: *22/04/2026*)
 #pagebreak()
 
@@ -543,7 +551,7 @@ Il diagramma architetturale traccia la sequenza operativa end-to-end di un'attiv
 
 #figure(
   image("../assets/st_diagrams/deployment.png", width: 120%),
-  caption: "Diagramma UML dell'Architettura di Deployment"
+  caption: "Diagramma UML dell'Architettura di Deployment",
 ) <fig_deployment>
 
 #pagebreak()
@@ -558,22 +566,22 @@ Al fine di gestire la complessità derivante dall’integrazione con servizi clo
 
 L’adozione di tale pattern è guidata da esigenze specifiche del dominio applicativo e da considerazioni ingegneristiche:
 
-- *Agnosticismo Tecnologico (Framework Independence):*  
+- *Agnosticismo Tecnologico (Framework Independence):*
   Le regole di business relative all’analisi del codice e alla validazione delle vulnerabilità sono completamente indipendenti da NestJS, dai driver di persistenza (es. MongoDB) e dagli SDK cloud (es. AWS). Ciò consente di sostituire o aggiornare le tecnologie infrastrutturali senza impattare il dominio.
 
-- *Testabilità Isolata (Shift-Left Testing):*  
+- *Testabilità Isolata (Shift-Left Testing):*
   La definizione esplicita delle porte consente di testare i casi d’uso in isolamento, sostituendo gli adapter reali con implementazioni fittizie (Mock e Stub). Questo approccio abilita test unitari rapidi e deterministici nelle pipeline CI/CD, eliminando la dipendenza da risorse esterne.
 
-- *Inversione delle Dipendenze (Dependency Inversion):*  
+- *Inversione delle Dipendenze (Dependency Inversion):*
   In conformità ai principi SOLID, il flusso delle dipendenze è orientato verso l’interno: il dominio definisce le astrazioni (porte), mentre gli adapter le implementano. Questo disaccoppia completamente la logica di business dai dettagli tecnici.
 
-- *Evolvibilità del Dominio:*  
+- *Evolvibilità del Dominio:*
   Il sistema Code Guardian è progettato per integrare nel tempo nuovi strumenti di analisi (statici e dinamici) e nuovi provider infrastrutturali. L’architettura esagonale consente di introdurre nuovi adapter senza modificare i casi d’uso esistenti, preservando la stabilità del core applicativo.
 
-- *Isolamento delle Integrazioni Esterne:*  
+- *Isolamento delle Integrazioni Esterne:*
   Le interazioni con sistemi esterni (storage, servizi di analisi, orchestrazione cloud) sono confinate negli adapter, riducendo l’impatto di cambiamenti o fault esterni sul dominio.
 
-- *Trade-off Architetturali:*  
+- *Trade-off Architetturali:*
   L’adozione del pattern introduce un overhead strutturale dovuto alla presenza di interfacce, adapter e livelli di astrazione aggiuntivi. Tuttavia, tale complessità è giustificata dalla necessità di garantire scalabilità, manutenibilità ed evoluzione controllata del sistema nel lungo periodo.
 
 ==== Scomposizione dei Livelli
@@ -586,13 +594,13 @@ Rappresenta il cuore dell’architettura e non dipende da alcun framework o libr
 
 Contiene:
 
-- *Entità e Modelli:*  
+- *Entità e Modelli:*
   Strutture dati pure che rappresentano i concetti del dominio e ne incapsulano le invarianti.
 
-- *Casi d’Uso (Use Cases):*  
+- *Casi d’Uso (Use Cases):*
   Servizi applicativi che implementano la logica operativa. Coordinano il flusso di analisi trasformando input in output, senza effetti collaterali diretti verso l’esterno.
 
-- *Ports (Interfacce):*  
+- *Ports (Interfacce):*
   Contratti che definiscono le modalità di interazione:
   - *Primary Ports:* espongono le operazioni disponibili agli adapter in ingresso
   - *Secondary Ports:* definiscono i servizi richiesti dal dominio (persistenza, storage, orchestrazione)
@@ -616,16 +624,16 @@ Implementano concretamente i servizi richiesti dal dominio attraverso le Seconda
 
 Comprendono:
 
-- *Adapter di Persistenza:*  
+- *Adapter di Persistenza:*
   Gestiscono la traduzione tra entità di dominio e modelli di database.
 
-- *Adapter di Integrazione:*  
+- *Adapter di Integrazione:*
   Incapsulano la comunicazione con API esterne e strumenti di analisi.
 
-- *Adapter di Storage:*  
+- *Adapter di Storage:*
   Gestiscono il trasferimento e la gestione dei file.
 
-- *Adapter di Orchestrazione:*  
+- *Adapter di Orchestrazione:*
   Traducono le richieste del dominio in operazioni su infrastrutture asincrone o sistemi distribuiti.
 
 Questi componenti rappresentano l’unico punto in cui vengono utilizzate librerie specifiche o SDK esterni.
@@ -633,7 +641,7 @@ Questi componenti rappresentano l’unico punto in cui vengono utilizzate librer
 #pagebreak()
 
 ==== Flussi completi di Esecuzione
-Il diagramma seguente illustra un flusso operativo completo, evidenziando l’interazione tra i livelli dell’architettura esagonale a partire da un singolo controller HTTP fino alla conclusione della richiesta. Questa sezione ha l'obiettivo é di fornire una panoramica ad alto livello del percorso di esecuzione, evidenziando i passaggi chiave e le interazioni tra i componenti, senza entrare nei dettagli di implementazione specifici, interazioni con oggetti di dominio o contratti tra la parti, in quanto questo livello di dettaglio sará visibile nelle sezioni successive.
+Il diagramma seguente illustra un flusso operativo completo, evidenziando l’interazione tra i livelli dell’architettura esagonale a partire da un singolo controller HTTP fino alla conclusione della richiesta. Questa sezione ha l'obiettivo di fornire una panoramica ad alto livello del percorso di esecuzione, evidenziando i passaggi chiave e le interazioni tra i componenti, senza entrare nei dettagli di implementazione specifici, interazioni con oggetti di dominio o contratti tra la parti, in quanto questo livello di dettaglio sará visibile nelle sezioni successive.
 
 ===== Analysis
 Il flusso che segue rappresenta la sequenza operativa di un'analisi completa, partendo dalla ricezione della richiesta HTTP fino alla conclusione dell'audit e alla restituzione dei risultati all'utente. Nota: la risposta viene ritornata all'utente immediatamente dopo la fase di staging su S3, mentre l'esecuzione dell'agente e la generazione dei report avvengono in modo asincrono.
@@ -730,7 +738,7 @@ Il Value Object `BranchName` incapsula e valida un nome di branch Git, applicand
 ====== CoverageEvaluation <CoverageEvaluation>
 #codeDiagram("CoverageEvaluation", 85%)
 
-`CoverageEvaluation` è il Value Object che aggrega i risultati della valutazione dell'analisi di code coverage, combinando un giudizio sintetico sulla salute complessiva con il dettaglio ragionato per i file critici. 
+`CoverageEvaluation` è il Value Object che aggrega i risultati della valutazione dell'analisi di code coverage, combinando un giudizio sintetico sulla salute complessiva con il dettaglio ragionato per i file critici.
 
 - *Salute Aggregata:* Il campo `_overallHealth` fornisce una valutazione sintetica dell'intera copertura, permettendo ai layer superiori di ottenere un giudizio immediato senza dover ispezionare i singoli file.
 - *Dettaglio per File:* La collezione di #link(<CriticalFileReasoning>)[`CriticalFileReasoning`] raccoglie il ragionamento dettagliato per ciascun file critico, fornendo localizzazione delle lacune e spiegazione contestuale in un'unica struttura coesa.
@@ -2052,7 +2060,42 @@ Questa sezione descrive i DTO di risposta del livello di presentazione, ovvero i
 === Microservizio Account
 L'Account Microservice rappresenta il modulo centrale per la gestione del ciclo di vita delle identità all'interno di _CodeGuardian_. Progettato seguendo i principi dell'*Architettura Esagonale*, il servizio isola rigorosamente i processi core — quali la gestione delle utenze, l'autenticazione basata su JWT e la sicurezza delle credenziali — dalle tecnologie di persistenza (PostgreSQL) e di cifratura (Bcrypt). Grazie a una netta separazione tra porte e adattatori, il microservizio garantisce l'integrità del dominio utente e la flessibilità nell'evoluzione dei criteri di sicurezza, fungendo da garante per l'accesso protetto a tutte le funzionalità della piattaforma.
 
+#pagebreak()
+
+==== Flussi completi di Esecuzione
+Il diagramma seguente illustra un flusso operativo completo, evidenziando l'interazione tra i livelli dell'architettura esagonale a partire da un singolo controller HTTP fino alla conclusione della richiesta. Questa sezione ha l'obiettivo di fornire una panoramica ad alto livello del percorso di esecuzione, evidenziando i passaggi chiave e le interazioni tra i componenti, senza entrare nei dettagli di implementazione specifici, interazioni con oggetti di dominio o contratti tra la parti, in quanto questo livello di dettaglio sará visibile nelle sezioni successive.
+
+===== Registration
+Il flusso di registrazione gestisce la creazione di un nuovo account utente, verificando l'unicità dell'email, eseguendo l'hashing della password e generando i token di sessione iniziali.
+#controllerDiagram("RegistrationControllerReachableClasses", 75%)
+
+#pagebreak()
+
+===== Login
+Il flusso di login autentica un utente esistente confrontando le credenziali fornite con quelle memorizzate e generando una nuova sessione di lavoro.
+#controllerDiagram("LoginControllerReachableClasses", 75%)
+
+#pagebreak()
+
+===== Logout
+Il flusso di logout invalida la sessione corrente dell'utente rimuovendo il refresh token memorizzato nel sistema di persistenza.
+#controllerDiagram("LogoutControllerReachableClasses", 45%)
+
+#pagebreak()
+
+===== Update
+Il flusso di aggiornamento permette a un utente autenticato di modificare le proprie credenziali (password), garantendo che l'identità sia verificata tramite il token JWT.
+#controllerDiagram("UpdateControllerReachableClasses", 95%)
+
+#pagebreak()
+
+===== Delete
+Il flusso di cancellazione permette a un utente autenticato di rimuovere definitivamente il proprio account e tutti i dati associati dal sistema.
+#controllerDiagram("DeleteControllerReachableClasses", 40%)
+
+#pagebreak()
 ==== Domain
+
 Il Dominio rappresenta il nucleo centrale dell'architettura esagonale, dove risiedono esclusivamente la logica di business e le regole vitali del progetto. Questa sezione è progettata per essere totalmente agnostica rispetto alla tecnologia: non possiede alcuna conoscenza di database, protocolli di comunicazione (HTTP/REST) o framework esterni.
 
 L'obiettivo del Domain Core è modellare la realtà del problema attraverso un linguaggio comune (_Ubiquitous Language_), garantendo che ogni operazione sia coerente con le aspettative del business.
@@ -2478,7 +2521,7 @@ La dipendenza è rigorosamente unidirezionale: View → ViewModel → Model. Nes
 Lo strato Model è composto da cinque moduli specializzati, costruiti attorno a un'istanza Axios fortemente tipizzata e centralizzata denominata `Gateway`:
 
 ====== Gateway <Gateway>
-Istanza Axios singleton che gestisce dinamicamente il `baseURL` e centralizza le logiche trasversali (Cross-Cutting Concerns). 
+Istanza Axios singleton che gestisce dinamicamente il `baseURL` e centralizza le logiche trasversali (Cross-Cutting Concerns).
 L'interceptor in *request* analizza il path (es. `/account` o `/analysis`) per instradare la chiamata al microservizio corretto leggendo le variabili d'ambiente (`VITE_ACCOUNT_URL` o `VITE_ANALYSIS_URL`) e inietta l'header `Authorization` con il token Bearer.
 L'interceptor in *response* esegue due operazioni critiche:
 1. *Data Normalization:* Adatta le risposte grezze del backend ai formati attesi dalla UI (es. converte la copertura test da proporzione decimale a percentuale intera, e mappa le costanti del database in stringhe standardizzate per il frontend).
@@ -2555,7 +2598,7 @@ Badge semantico che mappa i cinque stati dell'analisi in icone e classi colore s
 ====== AddRepositoryModal e AnalysisOptionsModal <AnalysisOptionsModal>
 Dialog modali complessi che gestiscono lo stato dei form interni. Integrano librerie come `react-hook-form` e `zod` per la validazione sincrona e accessibile degli input (es. verifica regex dell'URL GitHub). Il modale di opzioni mappa dinamicamente il payload di invio in base al contesto del repository selezionato.
 
-*Primitive UI*: 
+*Primitive UI*:
 Implementate tramite Radix UI e `shadcn/ui`, garantiscono la totale aderenza agli standard di accessibilità *WAI-ARIA* (navigazione da tastiera, screen reader support, focus trap nei modali). Includono componenti come `Button` (con varianti polimorfiche), `Card`, `Dialog`, `Progress`, `Skeleton` (per i caricamenti progressivi) e `Separator`.
 
 #codeDiagram("components_1", 100%)
@@ -2617,81 +2660,81 @@ La logica implementativa è rigorosa:
 #pagebreak()
 
 = Design Patterns Applicati
-== Creazionali 
+== Creazionali
 === Singleton
 Dato l'utilizzo di nest per entrambi i microservizi, non è necessario implementare pattern singleton a livello di codice, in quanto il framework gestisce l'istanza dei servizi e degli adattatori come singleton per default. Ovvero un provider dichiarato in un modulo viene istanziato una sola volta e condiviso tra tutti i componenti che lo iniettano, garantendo implicitamente il comportamento singleton senza dover implementare manualmente il pattern. Questo permette di mantenere il codice pulito e focalizzato sulla logica di business, delegando al framework la gestione del ciclo di vita delle istanze.
 === Strutturali
 === Ports and Adapters
-Il pattern adapter è presente in entrambi i microservizi data l'architettura logica applicata. 
+Il pattern adapter è presente in entrambi i microservizi data l'architettura logica applicata.
 ==== Problema risolto
- Evita il forte accoppiamento logico tra il nucleo applicativo (Domain e Application) e i layer esterni come database, interfacce utente e servizi di terze parti, isolando la logica di business e rendendola indipendente dalle tecnologie di contorno.
-==== Implementazione 
+Evita il forte accoppiamento logico tra il nucleo applicativo (Domain e Application) e i layer esterni come database, interfacce utente e servizi di terze parti, isolando la logica di business e rendendola indipendente dalle tecnologie di contorno.
+==== Implementazione
 - Nel microservizio Credenziali, gli #link(<Credential_Adapters>)[adapters] permettono di astrarre completamente la logica di business in merito ai dettagli sulle operazioni di memorizzazione dei dati e alle query sql, mantenendo nascosta la specifica tecnologia di database relazionale utilizzata (PostgreSQL). Al contempo soddisfano molteplici #link(<CredentialPorts>)[porte] del core applicativo, garantendo un disaccoppiamento così netto da permettere, qualora si rivelasse necessario, di sostituire agilmente il database con una tecnologia differente.
 
 - Nel microservizio Analysis, gli #link(<Analysis_Adapters>)[adapters] permettono di astrarre completamente la logica di business in merito ai dettagli sulle operazioni di memorizzazione dei dati, gestione API esterne come github e AWS. Al contempo soddisfano molteplici #link(<AnalysisPorts>)[porte] del core applicativo, garantendo un disaccoppiamento così netto da permettere, qualora si rivelasse necessario, di sostituire agilmente un database o un servizio esterno con una tecnologia differente.
 
 
-Inoltre, in entrambi i microservizi ogni porta espone un solo metodo dell'adapter aderendo al principio 
+Inoltre, in entrambi i microservizi ogni porta espone un solo metodo dell'adapter aderendo al principio
 di segregazione delle interfacce, evitando di esporre metodi non necessari e mantenendo un contratto chiaro e specifico tra il core applicativo e le implementazioni infrastrutturali.
 
 === Facade
 ==== Problema risolto
-Fornisce un'interfaccia semplificata e unificata a un insieme di interfacce in un sottosistema, 
-nascondendo la complessità delle interazioni tra i componenti sottostanti e facilitando l'uso 
+Fornisce un'interfaccia semplificata e unificata a un insieme di interfacce in un sottosistema,
+nascondendo la complessità delle interazioni tra i componenti sottostanti e facilitando l'uso
 del sistema da parte dei client.
 ==== Implementazione
-Nel microservizio di analisi, #link(<StartAnalysisService>)[`StartAnalysisService`] funge da Facade, 
-orchestrando un flusso complesso che coinvolge più adapter (GitHubAdapter, S3Adapter, MongoDBAdapter) e #link(<AnalysisOrchestratorService>)[`AnalysisOrchestratorService`] per eseguire un'analisi completa. 
-Fornisce un'interfaccia semplificata che nasconde la complessità sottostante, permettendo 
+Nel microservizio di analisi, #link(<StartAnalysisService>)[`StartAnalysisService`] funge da Facade,
+orchestrando un flusso complesso che coinvolge più adapter (GitHubAdapter, S3Adapter, MongoDBAdapter) e #link(<AnalysisOrchestratorService>)[`AnalysisOrchestratorService`] per eseguire un'analisi completa.
+Fornisce un'interfaccia semplificata che nasconde la complessità sottostante, permettendo
 al controller di avviare un'analisi con una singola chiamata.
 
 
 == Comportamentali
 === Orchestrator
 ==== Problema risolto
-Coordina l'esecuzione di un processo complesso che coinvolge più componenti o servizi, definendo 
+Coordina l'esecuzione di un processo complesso che coinvolge più componenti o servizi, definendo
 l'ordine delle operazioni e gestendo le dipendenze tra di esse, senza che i componenti coinvolti debbano
- conoscere l'intero flusso o le responsabilità degli altri.
+conoscere l'intero flusso o le responsabilità degli altri.
 ==== Implementazione
-Nel microservizio di analisi, #link(<AnalysisOrchestratorService>)[`AnalysisOrchestratorService`] funge 
+Nel microservizio di analisi, #link(<AnalysisOrchestratorService>)[`AnalysisOrchestratorService`] funge
 da Orchestrator, coordinando l'intero processo di analisi del codice. Gestisce l'ordine delle operazioni,
-come la chiamata selettiva degli adapter per gli agenti, la memorizzazione dei risultati ottenuti e la gestione degli errori, 
+come la chiamata selettiva degli adapter per gli agenti, la memorizzazione dei risultati ottenuti e la gestione degli errori,
 senza che i singoli adapter o servizi coinvolti debbano conoscere l'intero flusso o le responsabilità degli altri componenti.
 === Command
-Il pattern Command è ampiamente utilizzato in entrambi i microservizi per incapsulare tutte le informazioni necessarie a 
+Il pattern Command è ampiamente utilizzato in entrambi i microservizi per incapsulare tutte le informazioni necessarie a
 eseguire un'azione o un'operazione specifica, permettendo di disaccoppiare il mittente dell'azione dalla logica che la esegue.
 L'utilizzo di questo patter è guidato dalla scelta di architettura logica esagonale.
 ==== Problema risolto
 Semplifica le firme dei metodi nei casi d'uso, evitando il passaggio di liste di argomenti lunghe e fragili alle modifiche.
 
 ==== Implementazione
-Invece di passare molteplici parametri sparsi ai metodi dei servizi, ogni Use Case accetta come unico parametro un oggetto 
-istanza di un Command specifico, che raggruppa logicamente e tipizza tutti i parametri necessari per svolgere l'operazione. 
-Facendo una prima validazione dei campi con dei decoratori(`@IsString`,`@IsNotEmpty`...), questo evita che i dati in ingresso 
+Invece di passare molteplici parametri sparsi ai metodi dei servizi, ogni Use Case accetta come unico parametro un oggetto
+istanza di un Command specifico, che raggruppa logicamente e tipizza tutti i parametri necessari per svolgere l'operazione.
+Facendo una prima validazione dei campi con dei decoratori(`@IsString`,`@IsNotEmpty`...), questo evita che i dati in ingresso
 siano incompleti o malformati, e permette di bloccare richieste con body non validi prima di essere processate.
 === State
 ==== Problema risolto
-Permette di gestire in modo chiaro e organizzato i diversi stati di un processo o entità, definendo transizioni ben definite 
+Permette di gestire in modo chiaro e organizzato i diversi stati di un processo o entità, definendo transizioni ben definite
 tra di essi e facilitando la manutenzione del codice.
 ==== Implementazione
-Nel microservizio di analisi, il pattern State è applicato alla gestione dello stato dell'analisi del codice. L'entità 
-#link(<GitHubAnalysis>)[`GitHubAnalysis`] ha un campo `status` che rappresenta lo stato attuale dell'analisi 
+Nel microservizio di analisi, il pattern State è applicato alla gestione dello stato dell'analisi del codice. L'entità
+#link(<GitHubAnalysis>)[`GitHubAnalysis`] ha un campo `status` che rappresenta lo stato attuale dell'analisi
 (es. `pending`, `in-progress`, `completed`, `failed`). Le transizioni di stato sono gestite internamente all'entitá,
 evitando un passaggio non valido da uno stato all'altro, come tra `failed` e `completed` o tra `pending` e `completed`.
 
 === Strategy <StrategyPattern>
 ==== Problema risolto
-Permette di variare il comportamento di validazione e autorizzazione del repository senza introdurre logica condizionale 
-complessa nei servizi applicativi.  
+Permette di variare il comportamento di validazione e autorizzazione del repository senza introdurre logica condizionale
+complessa nei servizi applicativi.
 ==== Implementazione
-Nel microservizio di Analisi il pattern è applicato in due punti: #link(<GitValidatorService>)[`GitValidatorService`], che seleziona dinamicamente la strategia 
-tra validazione per commit, branch o default, e #link(<GitAuthorizerService>)[`GitAuthorizerService`], che sceglie tra autorizzazione privata (token utente da persistenza) e pubblica (token di sistema da configurazione).  
+Nel microservizio di Analisi il pattern è applicato in due punti: #link(<GitValidatorService>)[`GitValidatorService`], che seleziona dinamicamente la strategia
+tra validazione per commit, branch o default, e #link(<GitAuthorizerService>)[`GitAuthorizerService`], che sceglie tra autorizzazione privata (token utente da persistenza) e pubblica (token di sistema da configurazione).
 In questo modo il servizio chiamante dipende da un contratto unico, mentre l’algoritmo concreto viene scelto a runtime in base al contesto della richiesta.
 
 === Dependency Injection
 Sfruttando nativamente le capacità del framework NestJS, l'*Iniezione delle Dipendenze (DI)* rappresenta uno dei pattern tecnici principali alla base del progetto software.
 ==== Problema risolto
-La Dependency Injection risolve il problema dell’accoppiamento rigido tra una classe e le sue dipendenze concrete.  
+La Dependency Injection risolve il problema dell’accoppiamento rigido tra una classe e le sue dipendenze concrete.
 Senza DI, ogni componente crea direttamente i servizi che usa, rendendo il codice più fragile ai cambiamenti e difficile da testare.
 
 Con DI:
@@ -2699,7 +2742,7 @@ Con DI:
 - il codice dipende da interfacce/contratti, non da classi concrete;
 - modularità, riuso e testabilità (mock/stub) migliorano in modo significativo.
 ==== Implementazione
-Attraverso i costruttori di classe, i vari Controllers e i Services ricevono all'avvio del sistema le loro rispettive dipendenze sotto forma ridotta di interfacce/componenti 
+Attraverso i costruttori di classe, i vari Controllers e i Services ricevono all'avvio del sistema le loro rispettive dipendenze sotto forma ridotta di interfacce/componenti
 di istanziazione validati. Un container `Inversion of Control` (IoC) organizzato in un module di NestJs di supporto si prende in totale carico l'apposita istanziazione ed assegnazione dei componenti.
 
 === Repository
@@ -2712,9 +2755,9 @@ Nel microservizio Analysis, il dominio definisce il contratto attraverso porte s
 === Data Transfer Object (DTO)
 ==== Problema risolto
 Il pattern DTO permette di trasferire dati tra i diversi layer del microservizio e verso i client esterni senza
- esporre direttamente le entità di dominio interno che contengono una logica di core che non deve essere esposta.
+esporre direttamente le entità di dominio interno che contengono una logica di core che non deve essere esposta.
 ==== Implementazione
-Il pattern *DTO* viene impiegato sistematicamente in entrambi i microservizi sia a livello di presentazione (Request e Result DTOs) che a livello applicativo 
+Il pattern *DTO* viene impiegato sistematicamente in entrambi i microservizi sia a livello di presentazione (Request e Result DTOs) che a livello applicativo
 per trasportare dati sotto forma di tipi primitivi.
 Tramite i DTO, i dati in transito assumono una forma asettica e consona per le sole esigenze di comunicazione.
 
@@ -2785,7 +2828,7 @@ Tramite i DTO, i dati in transito assumono una forma asettica e consona per le s
 
   [#FRObx],
   [Il Sistema deve inibire la registrazione e notificare l'utente indicando specificamente quali dati obbligatori non sono stati inseriti.],
-  [SODDISFATTO], 
+  [SODDISFATTO],
 
   // --- USERNAME (UC1.1 + ESTENSIONI) ---
   [#FRObx],
@@ -2813,9 +2856,7 @@ Tramite i DTO, i dati in transito assumono una forma asettica e consona per le s
   [Il Sistema deve consentire l'immissione di un indirizzo email conforme allo standard RFC 5322.],
   [NON SODDISFATTO],
 
-  [#FRObx],
-  [Il Sistema deve rifiutare indirizzi email contenenti spazi o privi del carattere "@".],
-  [SODDISFATTO],
+  [#FRObx], [Il Sistema deve rifiutare indirizzi email contenenti spazi o privi del carattere "@".], [SODDISFATTO],
 
   [#FRObx],
   [Il Sistema deve verificare l'univocità dell'indirizzo email rispetto agli account esistenti nel database.],
@@ -2960,7 +3001,7 @@ Tramite i DTO, i dati in transito assumono una forma asettica e consona per le s
   [#FRDex],
   [Il Sistema deve mostrare i dettagli dell'analisi (nome progetto e ora) direttamente nell'avviso ricevuto dall'utente.],
   [SODDISFATTO],
-  
+
   [#FRObx],
   [Il Sistema deve inviare un avviso immediato se un'analisi si interrompe per un errore imprevisto, spiegandone brevemente il motivo.],
   [SODDISFATTO],
@@ -3217,9 +3258,7 @@ Tramite i DTO, i dati in transito assumono una forma asettica e consona per le s
   [NON SODDISFATTO],
 
   // --- ESPORTAZIONE REPORT (UC14) ---
-  [#FRObx],
-  [Il Sistema deve rendere disponibile il file generato tramite un link di download],
-  [SODDISFATTO],
+  [#FRObx], [Il Sistema deve rendere disponibile il file generato tramite un link di download], [SODDISFATTO],
 
   [#FRObx],
   [Il Sistema deve consentire l'esportazione dei report nei formati PDF (per consultazione) e JSON (per interoperabilità dati).],
@@ -3787,9 +3826,7 @@ Tramite i DTO, i dati in transito assumono una forma asettica e consona per le s
   [Deve essere fornita documentazione tecnica tramite standard OpenAPI 3.0 (Swagger) per le API e documentazione del codice sorgente tramite TypeDoc],
   [SODDISFATTO],
 
-  [#QRObx],
-  [Deve essere fornito un Manuale Utente come parte integrante della fornitura finale],
-  [SODDISFATTO],
+  [#QRObx], [Deve essere fornito un Manuale Utente come parte integrante della fornitura finale], [SODDISFATTO],
 
   [#QRObx],
   [Al termine del progetto deve essere consegnato un MVP funzionante accompagnato da una Demo Live e dallo Schema Design relativo alla base dati],
@@ -3810,7 +3847,7 @@ Tramite i DTO, i dati in transito assumono una forma asettica e consona per le s
 
 #pagebreak()
 
-== Stato Attuale dei Requisiti di Vincolo 
+== Stato Attuale dei Requisiti di Vincolo
 
 #table(
   columns: (1fr, 2.5fr, 1.5fr),
@@ -3832,13 +3869,9 @@ Tramite i DTO, i dati in transito assumono una forma asettica e consona per le s
   [Il Back-end e l’Orchestratore devono essere sviluppati utilizzando il framework NestJS v10+],
   [SODDISFATTO],
 
-  [#VRObx],
-  [L'interfaccia Front-end deve essere sviluppata utilizzando la libreria React v18.3+],
-  [SODDISFATTO],
+  [#VRObx], [L'interfaccia Front-end deve essere sviluppata utilizzando la libreria React v18.3+], [SODDISFATTO],
 
-  [#VRObx],
-  [Gli agenti di analisi devono essere sviluppati utilizzando il linguaggio Python v3.12+],
-  [SODDISFATTO],
+  [#VRObx], [Gli agenti di analisi devono essere sviluppati utilizzando il linguaggio Python v3.12+], [SODDISFATTO],
 
   [#VRObx],
   [L'architettura deve essere ospitata su infrastruttura cloud AWS, utilizzando esclusivamente gli account IAM forniti dall'azienda proponente],
@@ -3848,29 +3881,17 @@ Tramite i DTO, i dati in transito assumono una forma asettica e consona per le s
   [Devono essere utilizzate GitHub Actions per implementare pipeline di Continuous Integration e Continuous Deployment (CI/CD)],
   [SODDISFATTO],
 
-  [#VRObx],
-  [L'interfaccia web deve essere compatibile con Windows 10/11],
-  [SODDISFATTO],
-    
-  [#VRObx],
-  [L'interfaccia web deve essere compatibile con macOS 14+],
-  [SODDISFATTO],
-  
-  [#VRObx],
-  [L'interfaccia web deve essere compatibile con distribuzioni Linux (Ubuntu 22.04+)],
-  [SODDISFATTO],
-    
-  [#VRObx],
-  [L'interfaccia web deve essere compatibile su browser Chrome 120+],
-  [SODDISFATTO],
-  
-  [#VRObx],
-  [L'interfaccia web deve essere compatibile su browser Firefox 120+],
-  [SODDISFATTO],
-  
-  [#VRObx],
-  [L'interfaccia web deve essere compatibile su browser Safari 17+],
-  [SODDISFATTO],
+  [#VRObx], [L'interfaccia web deve essere compatibile con Windows 10/11], [SODDISFATTO],
+
+  [#VRObx], [L'interfaccia web deve essere compatibile con macOS 14+], [SODDISFATTO],
+
+  [#VRObx], [L'interfaccia web deve essere compatibile con distribuzioni Linux (Ubuntu 22.04+)], [SODDISFATTO],
+
+  [#VRObx], [L'interfaccia web deve essere compatibile su browser Chrome 120+], [SODDISFATTO],
+
+  [#VRObx], [L'interfaccia web deve essere compatibile su browser Firefox 120+], [SODDISFATTO],
+
+  [#VRObx], [L'interfaccia web deve essere compatibile su browser Safari 17+], [SODDISFATTO],
 )
 
 == Tabella Riassuntiva
@@ -3883,30 +3904,15 @@ Tramite i DTO, i dati in transito assumono una forma asettica e consona per le s
   fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
   align: (col, row) => (center, center, center, center).at(col) + horizon,
 
-  [FROb],
-  [185],
-  [185],
-  [100%],
+  [FROb], [185], [185], [100%],
 
-  [FRDe],
-  [3],
-  [35],
-  [8,57%],
+  [FRDe], [3], [35], [8,57%],
 
-  [FROp],
-  [0],
-  [19],
-  [0%],
+  [FROp], [0], [19], [0%],
 
-  [QROb],
-  [11],
-  [11],
-  [100%],
+  [QROb], [11], [11], [100%],
 
-  [VROb],
-  [13],
-  [13],
-  [100%],
+  [VROb], [13], [13], [100%],
 )
 
 Sono dunque stati soddisfatti tutti i requisiti obbligatori previsti, solo una piccola parte di quelli desiderabili ma nessun opzionale.
