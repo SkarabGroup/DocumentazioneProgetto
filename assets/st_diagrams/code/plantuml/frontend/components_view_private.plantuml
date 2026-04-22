@@ -1,26 +1,13 @@
 @startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+
 package "Components Layer (View)" {
-
-  package "Route pubbliche" {
-    class LandingPage {
-      --
-      Pagina di presentazione pubblica del prodotto.
-      Punto di ingresso per utenti non autenticati.
-    }
-
-    class LoginPage {
-      --
-      Interfaccia per l'accesso tramite email e password.
-      Reindirizza a /repositories dopo login riuscito.
-    }
-
-    class RegisterPage {
-      --
-      Interfaccia per la registrazione di un nuovo account.
-      Include validazione della password in tempo reale.
-    }
-  }
-
   package "Route protette" {
     class AppLayout {
       --
@@ -69,9 +56,6 @@ package "Components Layer (View)" {
     e il sistema di notifiche toast.
   }
 
-  CodeGuardianApp *-- LandingPage
-  CodeGuardianApp *-- LoginPage
-  CodeGuardianApp *-- RegisterPage
   CodeGuardianApp *-- AppLayout
 
   AppLayout *-- RepositoriesPage
@@ -80,8 +64,6 @@ package "Components Layer (View)" {
   AppLayout *-- RankingPage
   AppLayout *-- SettingsPage
 
-  LoginPage --> "Hooks Layer" : useAuth
-  RegisterPage --> "Hooks Layer" : useAuth
   RepositoriesPage --> "Hooks Layer" : useAuth
   RepositoryDetailPage --> "Hooks Layer" : useAnalysisPolling
   SettingsPage --> "Hooks Layer" : useAuth

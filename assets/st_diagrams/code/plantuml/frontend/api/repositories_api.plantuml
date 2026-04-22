@@ -1,4 +1,11 @@
 @startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
 package "API Layer (Model)" {
   class RepositoriesApi {
     + list(params): Promise<Repository[]>
@@ -8,7 +15,6 @@ package "API Layer (Model)" {
     + delete(id): Promise<void>
     + getRanking(): Promise<RankedRepository[]>
     + startAnalysis(id, payload): Promise<{ analysisId }>
-    + getAnalysis(id): Promise<Analysis>
     + getHistory(id, params): Promise<PaginatedResponse<Analysis>>
     + compareAnalyses(id, ids): Promise<unknown>
     --

@@ -1,12 +1,23 @@
 @startuml
-
 skinparam componentStyle uml2.5
 skinparam linetype ortho
 skinparam nodesep auto
 skinparam ranksep 70
 skinparam ClassAttributeIconSize 0
 hide circles
+
 package "View — Componenti dominio" {
+  class AddRepositoryModal {
+    + isOpen: boolean
+    + onClose(): void
+    + onAdded(repository): void
+    --
+    Dialog modale per aggiungere un nuovo repository.
+    Raccoglie nome, URL GitHub e descrizione opzionale.
+    Valida il formato URL GitHub con Zod.
+    Chiama RepositoriesApi.create() al submit.
+  }
+
   class AnalysisOptionsModal {
     + open: boolean
     + repositoryId: string
@@ -23,6 +34,17 @@ package "View — Componenti dominio" {
     Chiama RepositoriesApi.startAnalysis() al submit.
   }
 
+  class AnalysisStatusBadge {
+    + status: AnalysisStatus
+    --
+    Badge visivo che rappresenta lo stato di un'analisi.
+    Mappa ogni stato a un colore e un'etichetta:
+    not-analyzed (grigio), pending (giallo), in-progress (giallo con pulse),
+    completed (verde), failed (rosso).
+  }
+
+  AddRepositoryModal --> "RepositoriesApi" : create()
   AnalysisOptionsModal --> "RepositoriesApi" : startAnalysis()
 }
+
 @enduml

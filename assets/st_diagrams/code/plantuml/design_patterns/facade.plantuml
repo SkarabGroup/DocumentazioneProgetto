@@ -1,0 +1,31 @@
+@startuml
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 90
+skinparam ranksep 100
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class Controller {
+}
+
+class StartAnalysisService <<Facade>> {
+    + execute(): void
+}
+
+class AnalysisOrchestratorService {
+}
+
+class GitHubAdapter {
+}
+
+class S3Adapter {
+}
+
+Controller --> StartAnalysisService : Invoca
+StartAnalysisService --> AnalysisOrchestratorService : Coordina
+StartAnalysisService --> GitHubAdapter : Clona Repository
+StartAnalysisService --> S3Adapter : Carica Repository
+StartAnalysisService --> MongoDBAdapter : Salva Report
+
+@enduml

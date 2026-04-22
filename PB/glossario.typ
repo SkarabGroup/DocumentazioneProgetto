@@ -2,21 +2,29 @@
 #import "../lib/variables.typ": *
 #import "../lib/glossarioUtil.typ": *
 
-#let versione = "v1.1.0"
+#let versione = "v2.0.0"
 
 #titlePage("Glossario", versione)
 #set page(numbering: "1", header: header("Glossario"), footer: footer())
 #let history = ( 
   (
+    "2026/04/22",
+    "2.0.0",
+    "Revsione per PB",
+    "",
+    members.suar
+  ),
+  (
     "2026/03/30",
     "1.1.0",
     "Aggiunto termine Ubiquitous Language",
-    members.suar
+    members.suar,
+    members.kevin
   ),
   (
     "2026/03/03",
     "1.0.0",
-    "Revision per RTB",
+    "Revisione per RTB",
     "",
     members.suar
   ),
