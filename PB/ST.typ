@@ -2,7 +2,7 @@
 #import "../lib/variables.typ": *
 #import "../lib/stDiagramUtil.typ": *
 
-#let versione = "v0.14.0"
+#let versione = "v0.15.0"
 #set heading(numbering: "1.1.1")
 /*
 === FUNZIONAMENTO DEL DOCUMENTO ===
@@ -24,11 +24,18 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #set page(numbering: "1", header: header("Specifica Tecnica"), footer: footer())
 #let history = (
   (
+    "2026/04/22",
+    "0.15.0",
+    "Aggiunta la sezione di mappatura dei requisiti",
+    members.antonio,
+    "",
+  ),
+  (
     "2026/04/20",
     "0.14.0",
     "Completati i componenti delle sezioni domain e application per Analysis Microservice",
     members.andrea,
-    members.antonio
+    members.antonio,
   ),
   (
     "2026/04/19",
@@ -42,7 +49,7 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
     "0.12.0",
     "Aggiunta sezione Design Patterns per Account Microservice",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/04/13",
@@ -2170,3 +2177,1198 @@ Le analisi dei repository sono operazioni a lunga durata (ordine dei minuti). Pe
 Quando l'utente avvia un'analisi o visualizza la pagina di un repository in fase di elaborazione, il hook effettua richieste periodiche verso il microservizio Analysis per ottenere lo stato aggiornato dell'analisi in corso. Ai fini di ottimizzazione, il polling viene sospeso automaticamente non appena l'analisi giunge a uno stato terminale (completato o fallito).
 
 Questo approccio garantisce che la `RepositoryDetailPage` aggiorni dinamicamente lo stato dell'analisi (con i relativi callback `onStarted`, `onCompleted`, `onFailed`) e presenti infine il report completo, fornendo il necessario feedback visivo senza complessità architetturali legate a WebSockets persistenti.
+
+#pagebreak()
+
+= Mappatura dei requisiti di sistema
+
+#let fr_counter = counter("FR")
+#let qr_ob_counter = counter("QROb")
+#let vr_ob_counter = counter("VROb")
+
+#let FRObx = context [FROb#fr_counter.step()#fr_counter.display()]
+#let FRDex = context [FRDe#fr_counter.step()#fr_counter.display()]
+#let FROpx = context [FROp#fr_counter.step()#fr_counter.display()]
+#let QRObx = context [QROb#qr_ob_counter.step()#qr_ob_counter.display()]
+#let VRObx = context [VROb#vr_ob_counter.step()#vr_ob_counter.display()]
+
+// partono da 1
+#fr_counter.step()
+#qr_ob_counter.step()
+#vr_ob_counter.step()
+
+== Stato Attuale dei Requisiti Funzionali
+
+#table(
+  columns: (1fr, 3fr, 1fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*ID*], [*Descrizione*], [*Stato*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, left, center).at(col) + horizon,
+
+  // --- REGISTRAZIONE (UC1) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente non registrato l'accesso alla sezione di creazione account.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve predisporre un comando di conferma per l'invio del modulo di registrazione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve eseguire la validazione completa dei campi obbligatori (presenza, formato, conformità ai vincoli e univocità) al momento dell'invio del modulo di registrazione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve permettere la finalizzazione della registrazione solo a seguito della validazione positiva di tutti i campi obbligatori.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve creare e memorizzare un record account che includa almeno username, email, hash della password e salt associato a seguito di registrazione completata con esito positivo.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve memorizzare le chiavi di accesso esclusivamente in forma cifrata tramite un algoritmo di hashing sicuro e generare un salt univoco per ciascun account.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve garantire l'atomicità della procedura di registrazione: in caso di fallimento della persistenza, nessun record parziale deve essere mantenuto nel database.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve visualizzare un messaggio di conferma esplicito a seguito della creazione corretta dell'account CodeGuardian.],
+  [SODDISFATTO],
+
+  // --- CAMPI OBBLIGATORI MANCANTI (UC1.0.1) ---
+  [#FRObx],
+  [Il Sistema deve rilevare il tentativo di invio del modulo di registrazione in presenza di campi obbligatori vuoti.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire la registrazione e notificare l'utente indicando specificamente quali dati obbligatori non sono stati inseriti.],
+  [SODDISFATTO], 
+
+  // --- USERNAME (UC1.1 + ESTENSIONI) ---
+  [#FRObx],
+  [Il Sistema deve consentire l'immissione di un username alfanumerico con lunghezza compresa tra 4 e 20 caratteri.],
+  [SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve verificare l'univocità dello username rispetto agli account esistenti nel database.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve imporre vincoli di unicità lato persistenza su username per prevenire registrazioni duplicate anche in presenza di richieste concorrenti.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [In caso di violazione del vincolo di unicità in fase di persistenza, il Sistema deve annullare la registrazione e notificare l'utente con il messaggio previsto per username già in uso.],
+  [NON SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora lo username inserito non rispetti i vincoli sintattici previsti.],
+  [SODDISFATTO],
+
+  // --- EMAIL (UC1.2 + ESTENSIONI) ---
+  [#FRDex],
+  [Il Sistema deve consentire l'immissione di un indirizzo email conforme allo standard RFC 5322.],
+  [NON SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve rifiutare indirizzi email contenenti spazi o privi del carattere "@".],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve verificare l'univocità dell'indirizzo email rispetto agli account esistenti nel database.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve imporre vincoli di unicità lato persistenza su indirizzo email per prevenire registrazioni duplicate.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora l'indirizzo email inserito non sia conforme ai requisiti sintattici.],
+  [SODDISFATTO],
+
+  // --- PASSWORD (UC1.3 + ESTENSIONE) ---
+  [#FRObx],
+  [Il Sistema deve accettare una password solo se di lunghezza pari o superiore ad 8 caratteri.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve accettare una password solo se include almeno una lettera maiuscola, una lettera minuscola, una cifra e un carattere speciale.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve rifiutare password che coincidono con lo username o che contengono lo username come sottostringa.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio che specifichi i requisiti di sicurezza non soddisfatti.],
+  [SODDISFATTO],
+
+  // --- AUTENTICAZIONE (UC2) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente non autenticato l'accesso alla sezione di autenticazione (Login).],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve predisporre un comando di conferma per finalizzare la procedura di accesso.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve eseguire la validazione completa delle credenziali (presenza, formato e corrispondenza) al momento dell'invio del modulo.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve garantire l'accesso alle funzionalità riservate esclusivamente a seguito di una corretta validazione delle credenziali.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve reindirizzare l'Utente verso la dashboard principale a seguito di autenticazione avvenuta con successo.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve utilizzare protocolli di comunicazione sicuri (HTTPS) per il trasferimento delle credenziali durante il login.],
+  [SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve utilizzare lo username fornito per recuperare dalla persistenza il record account associato.],
+  [NON SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve verificare la password inserita confrontando l'hash calcolato con l'hash memorizzato tramite la medesima funzione di hashing e salt.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve implementare meccanismi di rate limiting o lockout temporaneo a seguito di ripetuti tentativi di autenticazione falliti.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve visualizzare un indicatore di caricamento (spinner) durante la validazione delle credenziali per prevenire invii multipli.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve rilevare campi incompleti nel login e inibire l'accesso notificando l'utente tramite avviso specifico.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora le credenziali non risultino valide o non corrispondano a nessun account registrato.],
+  [SODDISFATTO],
+
+  // --- INTEGRAZIONE GITHUB (UC3) ---
+  [#FROpx],
+  [Il Sistema deve consentire all'Utente Autorizzato l'accesso alla sezione dedicata al collegamento del profilo GitHub.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve impedire l'avvio della procedura di collegamento qualora un profilo GitHub risulti già associato all'account CodeGuardian dell'utente.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve utilizzare un parametro di stato (state) per prevenire attacchi di tipo Cross-Site Request Forgery (CSRF) durante il flusso OAuth2.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve memorizzare i token di accesso ottenuti da GitHub esclusivamente in forma cifrata tramite algoritmi di crittografia forte (es. AES-256).],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve evitare la persistenza di token o associazioni qualora la procedura di collegamento non termini con esito positivo.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve mostrare un avviso informativo obbligatorio prima di procedere al reindirizzamento verso il dominio esterno GitHub.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve consentire all'utente di annullare il reindirizzamento, ripristinando lo stato della sezione integrazioni senza alcuna modifica.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve gestire i timeout nelle chiamate verso le API di GitHub durante lo scambio del token, notificando l'utente del fallimento temporaneo.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve inibire il collegamento qualora il profilo GitHub risulti già associato a un altro account CodeGuardian.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve mostrare un messaggio di errore specifico qualora l'utente neghi il consenso alla condivisione dei dati su GitHub.],
+  [NON SODDISFATTO],
+
+  // --- RICHIESTA ANALISI (UC4) ---
+  [#FRObx],
+  [Il Sistema deve consentire l'immissione dell'URL del repository GitHub nel modulo di richiesta analisi.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve validare che l'URL del repository GitHub inserito utilizzi il protocollo "https://" e punti al dominio "github.com".],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve verificare la dimensione del repository tramite API GitHub e inibire l'analisi qualora questa superi i limiti tecnici prestabiliti.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve disabilitare il comando di conferma dell'invio a seguito della pressione dell'utente per prevenire richieste duplicate.],
+  [SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve consegnare la notifica di fine analisi attraverso i canali scelti dall'utente (es. email o notifiche app).],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve mostrare i dettagli dell'analisi (nome progetto e ora) direttamente nell'avviso ricevuto dall'utente.],
+  [SODDISFATTO],
+  
+  [#FRObx],
+  [Il Sistema deve inviare un avviso immediato se un'analisi si interrompe per un errore imprevisto, spiegandone brevemente il motivo.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve restituire immediatamente il report esistente, senza avviare una nuova elaborazione, informando l'utente qualora i dati remoti risultino già aggiornati.],
+  [SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve accodare la richiesta di analisi al processo già in corso per il medesimo repository, informando l'utente dell'avvenuta presa in carico.],
+  [NON SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire la richiesta di analisi qualora non venga selezionata almeno un'area di interesse.],
+  [SODDISFATTO],
+
+  // --- VISUALIZZAZIONE LISTA (UC5) ---
+  [#FRObx],
+  [Il Sistema deve ordinare l'elenco dei repository analizzati in ordine decrescente rispetto alla data dell'ultima analisi disponibile.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve garantire che l'utente possa consultare i risultati nella propria area personale anche se la notifica via email non viene recapitata.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve contrassegnare l'analisi come "Fallita" nella lista dei progetti dell'utente se il processo non può essere completato.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve rendere visibili le cause del fallimento all'interno della dashboard, indipendentemente dall'invio o dalla ricezione dell'avviso di errore.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire la visualizzazione della lista e mostrare un'informativa specifica qualora non risultino repository analizzati.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire il rendering della lista e mostrare una notifica di errore qualora i servizi di persistenza non siano raggiungibili.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve fornire un comando di aggiornamento (Refresh) per consentire un nuovo tentativo di caricamento in caso di errore tecnico.],
+  [SODDISFATTO],
+
+  // --- VISUALIZZAZIONE REPORT (UC6) ---
+  [#FRObx],
+  [Il Sistema deve consentire la selezione di un repository dalla lista per il recupero del report di dettaglio associato.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve validare lato server che il report richiesto appartenga al repository associato all'account dell'Utente Autorizzato prima del rendering.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire il rendering e mostrare un errore di autorizzazione qualora l'utente tenti di accedere a un report di un repository non associato al proprio profilo.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve gestire i timeout nel recupero dei dati analitici dalla persistenza, notificando l'utente in caso di indisponibilità temporanea del report.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve permettere la selezione o deselezione dinamica delle aree analitiche (Codice, Sicurezza, Documentazione) tramite interfaccia utente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve aggiornare dinamicamente il contenuto a video in base ai filtri applicati senza richiedere il ricaricamento dell'intera pagina.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire la visualizzazione delle aree analitiche e mostrare un avviso informativo qualora non risulti selezionata alcuna area nei filtri.],
+  [SODDISFATTO],
+
+  // --- METADATI (UC6.2) ---
+  [#FRObx],
+  [Il Sistema deve esporre i metadati identificativi del report recuperati in fase di caricamento.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve esporre il timestamp (data e ora ISO 8601) relativo alla generazione del report.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve visualizzare l'identificativo SHA del commit GitHub analizzato, fornendo un link diretto al commit sulla piattaforma esterna.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve esporre lo username o l'identificativo dell'account che ha originato la scansione.],
+  [SODDISFATTO],
+
+  // --- RISULTATI E REMEDIATION (UC6.3) ---
+  [#FRObx],
+  [Il Sistema deve presentare le metriche tecniche aggregate (es. punteggi di qualità, numero bug, vulnerabilità) per ogni sezione attiva sulla stessa schermata.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve caricare e visualizzare la lista delle azioni correttive (remediation), esponendo per ogni elemento un titolo identificativo, il livello di criticità e una breve descrizione dell'intervento consigliato.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve consentire l'espansione dei dettagli di ogni singola remediation per la visualizzazione della proposta di risoluzione tecnica.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve visualizzare un messaggio di conferma esito positivo (badge "Clean" o simile) qualora il motore di analisi non rilevi criticità nella sezione.],
+  [SODDISFATTO],
+
+  // --- SELEZIONE INTERVALLO TEMPORALE (UC7) ---
+  [#FRObx],
+  [Il Sistema deve consentire la selezione di un intervallo temporale tramite input di data (inizio e fine) per l'estrazione dei report storici dal database.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve predisporre un comando di conferma per l'invio della richiesta di confronto dei dati.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire il caricamento dei dati e visualizzare un avviso specifico qualora i campi relativi alle date non risultino popolati.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve impedire l'invio della richiesta qualora la data di inizio sia cronologicamente successiva alla data di fine, segnalando l'errore di coerenza.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve limitare l'ampiezza dell'intervallo temporale a un massimo di 12 mesi solari, inibendo la richiesta e notificando l'utente in caso di superamento.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve gestire l'assenza di dati nel periodo selezionato visualizzando un'informativa di "Nessun report trovato" senza interrompere la sessione utente.],
+  [SODDISFATTO],
+
+  // --- VISUALIZZAZIONE METRICHE COMPARATIVE (UC8) ---
+  [#FRDex],
+  [Il Sistema deve generare rappresentazioni grafiche dinamiche (es. grafici a linee o istogrammi) per illustrare l'evoluzione temporale delle metriche analitiche.],
+  [SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve abilitare tooltips informativi al passaggio del cursore (hover) sui punti dati dei grafici per mostrare i valori esatti e l'hash del commit associato.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve presentare una tabella comparativa che elenchi i report selezionati in ordine cronologico crescente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve calcolare e visualizzare gli indicatori di variazione (trend incrementali o decrementali) tra ogni analisi e quella immediatamente precedente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve garantire l'allineamento dei dati tra la vista grafica e la vista tabellare, effettuando una singola operazione di fetch atomica per l'intero intervallo.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve gestire eventuali errori di rendering dei grafici (es. mancanza di librerie client-side) mostrando in alternativa i dati grezzi in formato tabellare.],
+  [SODDISFATTO],
+
+  // --- ANALISI DEL CODICE (UC9) ---
+  [#FRObx],
+  [Il Sistema deve caricare e visualizzare i dati relativi alla sezione "Codice" esclusivamente se l'area risulta attiva nei filtri di visualizzazione del report.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve esporre i risultati dell'analisi statica (bug, code smell) indicando per ogni rilievo la gravità e la posizione nel file sorgente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve esporre la percentuale di copertura dei test (Code Coverage) e il rapporto tra test superati e falliti rispetto al totale eseguito.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve presentare la lista delle remediation specifiche per il codice, esponendo per ogni elemento un titolo identificativo, il file associato, la riga di codice interessata e il livello di severità, permettendo inoltre la navigazione verso il dettaglio della singola azione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve visualizzare un'informativa di "Codice Conforme" qualora non siano rilevati bug o violazioni degli standard qualitativi.],
+  [SODDISFATTO],
+
+  // --- ANALISI DELLA SICUREZZA (UC10) ---
+  [#FRObx],
+  [Il Sistema deve caricare i dati della sezione "Sicurezza" in modo asincrono rispetto alle altre sezioni per ottimizzare i tempi di risposta.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve esporre l'elenco delle dipendenze vulnerabili indicando il codice CVE, il grado di severità (CVSS) e la versione sicura consigliata.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve mappare i rilievi di sicurezza rispetto alle categorie della Top 10 OWASP per facilitare la valutazione della conformità.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve presentare la lista delle remediation di sicurezza, esponendo per ogni elemento un titolo identificativo, la libreria o dipendenza vulnerabile associata, il livello di severità e l'azione correttiva consigliata, ordinandole prioritariamente in base alla criticità.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve visualizzare un'informativa di "Repository Sicuro" qualora non siano rilevate vulnerabilità note nelle dipendenze o nel codice.],
+  [SODDISFATTO],
+
+  // --- ANALISI DELLA DOCUMENTAZIONE (UC11) ---
+  [#FRObx],
+  [Il Sistema deve caricare e visualizzare i dati della sezione "Documentazione" analizzando la presenza e la sintassi dei file Markdown e testuali.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve segnalare gli errori sintattici e i link interrotti individuati all'interno della documentazione del repository.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve calcolare e mostrare un indice di completezza documentale basato sulla copertura delle interfacce pubbliche descritte.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve esporre nell'elenco delle remediation documentali il nome del file interessato, il livello di severità e i suggerimenti testuali per l'integrazione delle parti di documentazione mancanti o incomplete.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve visualizzare un'informativa di "Documentazione Completa" qualora non siano rilevati errori o mancanze informative.],
+  [SODDISFATTO],
+
+  // --- RANKING REPOSITORY (UC12) ---
+  [#FRObx],
+  [Il Sistema deve calcolare un punteggio di qualità globale (0-100) per ogni repository analizzato, basandosi sulle metriche pesate di codice, sicurezza e documentazione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve generare una graduatoria dinamica dei repository associati all'account dell'Utente Autorizzato, ordinata per punteggio di qualità decrescente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve esporre, per ogni riga del ranking: posizione in classifica, nome del repository, punteggio globale e un indicatore di trend rispetto al mese precedente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire il rendering del ranking e visualizzare un'informativa specifica qualora non risultino analisi completate per l'account utente.],
+  [SODDISFATTO],
+
+  // --- DISCONNESSIONE GITHUB (UC13) ---
+  [#FROpx],
+  [Il Sistema deve consentire la rimozione dell'integrazione GitHub esclusivamente previa conferma esplicita dell'Utente Avanzato.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve inviare una richiesta di revoca del token OAuth alle API di GitHub al momento della conferma della disconnessione.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve eliminare definitivamente dal database i token (access e refresh) e l'ID utente GitHub associato all'account CodeGuardian.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve gestire eventuali errori di comunicazione con GitHub durante la revoca, procedendo comunque alla cancellazione locale dei dati sensibili.],
+  [NON SODDISFATTO],
+
+  // --- ESPORTAZIONE REPORT (UC14) ---
+  [#FRObx],
+  [Il Sistema deve rendere disponibile il file generato tramite un link di download],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve consentire l'esportazione dei report nei formati PDF (per consultazione) e JSON (per interoperabilità dati).],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire l'invio della richiesta di generazione file qualora l'utente non selezioni formalmente uno dei formati previsti.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve generare il documento includendo i metadati del report (timestamp, commit hash) e i risultati delle sezioni effettivamente analizzate.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve gestire il processo di generazione del file asincronamente per evitare il blocco dell'interfaccia utente durante il parsing di report voluminosi.],
+  [SODDISFATTO],
+
+  // --- MODIFICA PASSWORD (UC15) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato l'accesso alla sezione dedicata alla modifica della chiave di accesso.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve richiedere l'immissione della password attualmente in uso e validarne la corrispondenza con l'hash memorizzato prima di procedere alla variazione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire la procedura e mostrare un errore specifico qualora la password corrente non venga inserita o risulti errata.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve validare che la nuova password rispetti i vincoli di complessità stabiliti per la registrazione iniziale.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve confrontare l'hash della nuova password con quello attuale e impedire la modifica qualora i valori coincidano.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve aggiornare la password nella persistenza esclusivamente tramite un nuovo processo di hashing sicuro e generazione di un nuovo salt univoco.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inviare una notifica email automatica all'indirizzo associato al profilo a seguito dell'avvenuta modifica delle credenziali.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve invalidare tutte le sessioni attive dell'utente (ad eccezione di quella corrente) a seguito del cambio password avvenuto con successo.],
+  [SODDISFATTO],
+
+  // --- VISUALIZZAZIONE REMEDIATION (UC16) ---
+  [#FRObx],
+  [Il Sistema deve consentire la visualizzazione dei dettagli tecnici di una specifica remediation selezionata dall'utente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve esporre per ogni remediation: descrizione del difetto, snippet di codice interessato (se applicabile), grado di severità e proposta di risoluzione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve includere riferimenti o link a documentazione esterna (es. CWE, OWASP) qualora la remediation riguardi una vulnerabilità di sicurezza nota.],
+  [SODDISFATTO],
+
+  // --- VERIFICA ACCESSIBILITÀ REPOSITORY (UC17) ---
+  [#FRObx],
+  [L'Orchestratore deve gestire il ciclo di vita della verifica accessibilità tramite chiamate asincrone verso le API REST di GitHub.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [L'Orchestratore deve implementare un meccanismo di "Exponential Backoff" per gestire i tentativi di riconnessione in caso di errori di rete temporanei verso GitHub.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [L'Orchestratore deve validare la raggiungibilità dell'endpoint API di GitHub inviando una richiesta di "Heartbeat" prima di tentare il fetch del repository.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [L'Orchestratore deve prima tentare l'accesso al repository senza intestazioni di autorizzazione per verificare se la risorsa è di dominio pubblico.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [In caso di errore HTTP 404 o 403 sulla risorsa pubblica, l'Orchestratore deve tentare una seconda richiesta iniettando nel modulo di autorizzazione il token OAuth 2.0 dell'utente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [L'Orchestratore deve verificare che il token fornito disponga degli "scopes" (permessi) minimi di lettura (repo o public_repo) necessari per il clonaggio.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [In caso di fallimento definitivo (es. token scaduto o repository eliminato), l'Orchestratore deve inviare un segnale di interruzione al modulo di notifica e aggiornare lo stato dell'audit in "FAILED_ACCESS".],
+  [SODDISFATTO],
+
+  // --- GESTIONE REMEDIATION (UC18 - UC19) ---
+  [#FRDex],
+  [Il Sistema deve consentire l'applicazione automatica delle modifiche al repository tramite l'integrazione GitHub a seguito dell'accettazione della remediation.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve eseguire una validazione di integrità sulla proposta correttiva prima dell'invio del commit verso il repository esterno.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve aggiornare lo stato della remediation in "Applied" o "Dismissed" nel database di persistenza a seguito dell'azione dell'utente.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve notificare l'utente in caso di fallimento del processo di scrittura (commit) sul repository remoto durante l'accettazione.],
+  [NON SODDISFATTO],
+
+  // --- CREAZIONE RACCOLTA REPORT (UC20) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato la definizione di un nome univoco per la raccolta di report all'interno del proprio account.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve validare la sintassi dell'URL GitHub fornito, assicurando l'uso del protocollo HTTPS e la corretta struttura del path user/repo.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve interrogare le API di GitHub per confermare l'esistenza e la raggiungibilità del repository indicato prima di finalizzare la raccolta.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve gestire i casi di inaccessibilità del repository (es. repository privato senza permessi) notificando l'utente tramite avviso specifico.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve impedire la creazione di raccolte duplicate che puntano al medesimo repository per lo stesso utente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve memorizzare la descrizione facoltativa della raccolta supportando la codifica UTF-8 per caratteri speciali e simboli.],
+  [SODDISFATTO],
+
+  // --- AVVIO ANALISI E CLONAZIONE (UC21 - UC21.1) ---
+  [#FRObx],
+  [L'Orchestratore deve parallelizzare le richieste di analisi verso i diversi strumenti per ottimizzare il tempo complessivo di esecuzione dell'audit.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [L'Orchestratore deve includere nella richiesta verso gli strumenti esterni i parametri di configurazione definiti dall'utente durante la fase di richiesta.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [L'Orchestratore deve trasmettere in modo sicuro (tramite secret manager) le credenziali o i token di accesso al servizio AWS incaricato della clonazione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [L'Orchestratore deve monitorare il completamento della clonazione e gestire eventuali timeout o errori di spazio disco insufficiente sul volume di destinazione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [In caso di errore durante la clonazione, l'Orchestratore deve inibire l'invio delle richieste agli strumenti di analisi e liberare immediatamente le risorse allocate.],
+  [SODDISFATTO],
+
+  // --- DISPATCHING ANALISI (UC21.2 - UC21.4) ---
+  [#FRObx],
+  [L'Orchestratore deve inoltrare la codebase o i file specifici agli strumenti di analisi esterna (Codice, Sicurezza, Documentazione) tramite protocolli di trasferimento sicuri.],
+  [SODDISFATTO],
+
+  // --- PERSISTENZA STATO (UC22) ---
+  [#FRObx],
+  [Il Sistema deve registrare lo stato dell'analisi nel sistema di persistenza impostandolo a "PENDING" a seguito dell'inizializzazione corretta di tutti i servizi esterni.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve associare univocamente l'ID dell'analisi al repository oggetto dell'audit e all'identificativo dell'utente richiedente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve persistere i metadati di avvio, inclusi l'hash del commit analizzato e il timestamp di sistema.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [In caso di errore critico durante la scrittura dello stato (UC22.0.1), l'Orchestratore deve tentare una procedura di "Rollback" informando gli strumenti esterni di annullare l'analisi.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve registrare nei log di audit ogni fallimento di persistenza dello stato, includendo lo stack trace dell'errore per finalità diagnostiche.],
+  [SODDISFATTO],
+
+  // --- RECUPERO RISULTATI (UC23) ---
+  [#FRObx],
+  [L'Orchestratore deve verificare regolarmente se gli strumenti esterni hanno terminato l'analisi del repository.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [L'Orchestratore deve scaricare i risultati delle analisi non appena questi vengono messi a disposizione dagli strumenti esterni.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [L'Orchestratore deve controllare che i file ricevuti siano completi e leggibili prima di utilizzarli.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve poter proseguire con la creazione del report anche se uno degli strumenti fallisce, utilizzando solo i dati recuperati con successo.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [L'Orchestratore deve impostare un tempo massimo di attesa per le analisi, oltre il quale smette di aspettare lo strumento ritardatario.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve segnalare all'interno del database se il report finale contiene solo dati parziali a causa di un problema tecnico.],
+  [SODDISFATTO],
+
+  //UC24
+  // --- GENERAZIONE DEL REPORT (UC24) ---
+  [#FRObx],
+  [Il Sistema deve unificare i dati provenienti dai diversi strumenti (codice, sicurezza, documentazione) in un unico documento di sintesi.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve convertire i diversi formati dei dati ricevuti dagli strumenti esterni in un modello standard comune.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve verificare che il report finale contenga tutte le informazioni essenziali (risultati, data, versione del codice) prima di procedere al salvataggio.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve calcolare i punteggi di riepilogo generali basandosi sui singoli risultati ottenuti nelle varie aree analizzate.],
+  [SODDISFATTO],
+
+  // --- SALVATAGGIO E CONCLUSIONE (UC25) ---
+  [#FRObx],
+  [Il Sistema deve archiviare il report in modo permanente, collegandolo correttamente al repository dell'utente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve modificare lo stato dell'analisi in "Completato" solo dopo aver confermato che il salvataggio dei dati è andato a buon fine.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve informare l'utente con un messaggio di errore se un problema tecnico impedisce il salvataggio definitivo del report.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve tenere traccia internamente dei motivi del fallimento del salvataggio per permettere controlli tecnici successivi.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [In caso di errore nel salvataggio, il Sistema deve tentare di mantenere una copia temporanea del report per evitare la perdita totale dei dati elaborati.],
+  [SODDISFATTO],
+
+  // --- NOTIFICA COMPLETAMENTO (UC26) ---
+  [#FRObx],
+  [Il Sistema deve generare automaticamente un avviso per l'utente non appena il report di analisi è pronto e salvato correttamente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [La notifica inviata deve contenere un link o un pulsante che permetta all'utente di accedere direttamente alla visualizzazione del report.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve includere nella notifica informazioni di base per identificare l'analisi, come il nome del repository e la data di esecuzione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve garantire che l'invio della notifica non interferisca con lo stato dell'analisi: se la notifica fallisce, il report deve comunque rimanere disponibile.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [In caso di errore nell'invio del messaggio (es. email non raggiungibile), il Sistema deve segnare l'anomalia nei registri interni per permettere verifiche tecniche.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve tentare nuovamente l'invio della notifica per un numero limitato di volte in caso di problemi temporanei di rete.],
+  [SODDISFATTO],
+
+  // VISUALIZZAZIONE DETTAGLIO REPOSITORY IN LISTA (UC27)
+  [#FRObx],
+  [Il Sistema deve esporre per ogni elemento selezionato della lista: nome del repository, URL di riferimento e data dell'ultima analisi.],
+  [SODDISFATTO],
+
+  // --- CANCELLAZIONE ACCOUNT (UC28) --- ex uc47
+  [#FRObx],
+  [Il Sistema deve richiedere l'inserimento della password attuale come verifica di identità obbligatoria prima di avviare la cancellazione dell'account.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve mostrare un avviso di irreversibilità prima della cancellazione definitiva del profilo, consentendo l'annullamento dell'operazione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [A seguito della cancellazione del profilo, il Sistema deve rimuovere i dati personali e le associazioni OAuth, invalidando ogni credenziale di accesso precedente.],
+  [SODDISFATTO],
+
+  // --- GESTIONE ACCESSO GITHUB (UC29) ---
+  [#FRDex],
+  [Il Sistema deve trasformare il codice provvisorio fornito da GitHub in una chiave di accesso permanente per poter leggere i repository.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve proteggere la chiave di accesso di GitHub nascondendola tramite cifratura prima di salvarla nei propri archivi.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve collegare la chiave di GitHub in modo esclusivo al profilo dell'utente che ha autorizzato l'operazione.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve annullare il collegamento e chiedere all'utente di rifare la procedura se la chiave provvisoria risulta scaduta o non valida.],
+  [NON SODDISFATTO],
+
+  // --- VISUALIZZAZIONE REMEDIATION CODICE (UC30) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato la visualizzazione del dettaglio di una singola remediation relativa all'analisi del codice.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve includere nel dettaglio della remediation del codice il titolo, la descrizione, la tipologia di criticità e il livello di severità.],
+  [SODDISFATTO],
+
+  // --- VISUALIZZAZIONE REMEDIATION SICUREZZA (UC31) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato la visualizzazione del dettaglio di una singola remediation relativa all'analisi della sicurezza.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve includere nel dettaglio della remediation di sicurezza il titolo, la descrizione, la tipologia di vulnerabilità e il livello di severità.],
+  [SODDISFATTO],
+
+  // --- VISUALIZZAZIONE REMEDIATION DOCUMENTAZIONE (UC32) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato la visualizzazione del dettaglio di una singola remediation relativa all'analisi della documentazione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve includere nel dettaglio della remediation documentale il titolo, la descrizione e la tipologia di rilievo documentale.],
+  [SODDISFATTO],
+
+  // --- ACCETTAZIONE REMEDIATION CODICE (UC33 + ESTENSIONE) ---
+  [#FRDex],
+  [Il Sistema deve consentire all'Utente Autorizzato di accettare una remediation relativa all'analisi del codice.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve applicare automaticamente alla codebase le modifiche previste dalla remediation del codice accettata.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve aggiornare lo stato della remediation del codice come "eseguita" nella dashboard a seguito dell'applicazione riuscita.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve gestire errori durante l'applicazione della remediation del codice notificando il fallimento all'utente e mantenendo invariata la codebase.],
+  [NON SODDISFATTO],
+
+  // --- RIFIUTO REMEDIATION CODICE (UC34) ---
+  [#FRDex],
+  [Il Sistema deve consentire all'Utente Autorizzato di rifiutare una remediation relativa all'analisi del codice.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve aggiornare lo stato della remediation del codice come "rifiutata" nella dashboard senza apportare modifiche al repository.],
+  [NON SODDISFATTO],
+
+  // --- ACCETTAZIONE REMEDIATION SICUREZZA (UC35 + ESTENSIONE) ---
+  [#FRDex],
+  [Il Sistema deve consentire all'Utente Autorizzato di accettare una remediation relativa all'analisi della sicurezza.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve applicare le patch o le configurazioni di sicurezza previste dalla remediation di sicurezza accettata.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve aggiornare lo stato della remediation di sicurezza come "eseguita" nella dashboard a seguito dell'applicazione riuscita.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve gestire errori durante l'applicazione della remediation di sicurezza notificando il fallimento all'utente.],
+  [NON SODDISFATTO],
+
+  // --- RIFIUTO REMEDIATION SICUREZZA (UC36) ---
+  [#FRDex],
+  [Il Sistema deve consentire all'Utente Autorizzato di rifiutare una remediation relativa all'analisi della sicurezza.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve aggiornare lo stato della remediation di sicurezza come "rifiutata" nella dashboard senza modificare il repository.],
+  [NON SODDISFATTO],
+
+  // --- ACCETTAZIONE REMEDIATION DOCUMENTAZIONE (UC37 + ESTENSIONE) ---
+  [#FRDex],
+  [Il Sistema deve consentire all'Utente Autorizzato di accettare una remediation relativa all'analisi della documentazione.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve applicare automaticamente ai file documentali le modifiche previste dalla remediation documentale accettata.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve aggiornare lo stato della remediation documentale come "eseguita" nella dashboard a seguito dell'applicazione riuscita.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve gestire errori durante l'applicazione della remediation documentale notificando il fallimento all'utente.],
+  [NON SODDISFATTO],
+
+  // --- RIFIUTO REMEDIATION DOCUMENTAZIONE (UC38) ---
+  [#FRDex],
+  [Il Sistema deve consentire all'Utente Autorizzato la visualizzazione del dettaglio di una singola remediation relativa all'analisi della documentazione.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve consentire all'Utente Autorizzato di rifiutare una remediation relativa all'analisi della documentazione.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve aggiornare lo stato della remediation documentale come "rifiutata" nella dashboard a seguito del rifiuto confermato dall'utente.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve garantire che il rifiuto di una remediation documentale non comporti alcuna modifica ai file sorgente o di documentazione del repository.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve rimuovere la remediation rifiutata dalla lista delle azioni pendenti dell'area "Documentazione" o marcarla visivamente come scartata.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve mostrare all'Utente Autorizzato una conferma visiva dell'avvenuto rifiuto della proposta correttiva.],
+  [NON SODDISFATTO],
+
+  // --- ANALISI REPOSITORY PRIVATI (UC39) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Avanzato di richiedere un'analisi per un repository GitHub privato a condizione che l'integrazione GitHub sia attiva.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve validare la presenza di un'integrazione GitHub valida prima di accettare la richiesta di analisi per una risorsa privata.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire la richiesta di analisi privata se l'utente non seleziona almeno un'area di interesse (Codice, Sicurezza, Documentazione).],
+  [SODDISFATTO],
+
+  // --- CATALOGO REPOSITORY PRIVATI (UC40, UC41, UC42) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Avanzato di inserire l'URL di un repository privato di sua proprietà nel proprio catalogo personale.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve impedire l'inserimento di un URL repository già presente nel catalogo personale dell'Utente Avanzato, notificando la duplicazione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve ordinare l’elenco dei repository privati registrati in ordine decrescente rispetto a data di inserimento.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve visualizzare un'informativa specifica che suggerisce l'inserimento della prima risorsa qualora il catalogo privato risulti vuoto.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve esporre all'Utente Avanzato la lista dei repository privati registrati, includendo per ciascuno il nome e l'URL della risorsa.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Avanzato di avviare la procedura di rimozione di un repository dal proprio catalogo privato.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve consentire la rimozione di un repository dal catalogo privato previa conferma esplicita dell'utente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [In caso di annullamento della procedura di rimozione, il Sistema deve garantire l'integrità del catalogo mantenendo la risorsa selezionata.],
+  [SODDISFATTO],
+
+  // --- GESTIONE PERMESSI TERZI (UC43, UC44, UC45) ---
+  [#FRObx],
+  [Il Sistema deve mostrare all'Utente Avanzato l'elenco dei profili autorizzati alla consultazione dei report per un repository privato selezionato in ordine alfabetico.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve informare l'utente proprietario qualora l'accesso ai report di un repository privato sia limitato esclusivamente al suo profilo.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve esporre all'Utente Avanzato le informazioni identificative di ogni profilo autorizzato presente nella lista, includendo lo username e/o l'indirizzo email associato.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve deve consentire l'aggiunta di un nuovo profilo autorizzato alla consultazione dei report per un repository privato.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve consentire l'aggiunta di un utente autorizzato tramite l'inserimento dello username o dell'indirizzo email del profilo destinatario.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire la procedura e mostrare un messaggio di errore qualora l'identificativo inserito per l'autorizzazione non rispetti il formato previsto.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve validare che l'identificativo inserito corrisponda a un profilo effettivamente registrato nella piattaforma.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve impedire l'autorizzazione multipla del medesimo profilo per lo stesso repository privato.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve mostrare un avviso di obbligatorietà e inibire l'aggiunta qualora il campo identificativo risulti vuoto al momento della conferma.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Avanzato di selezionare un utente dalla lista e avviare la procedura di revoca dei suoi permessi.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve consentire la revoca dei permessi di consultazione per un utente precedentemente autorizzato a seguito di conferma del proprietario.],
+  [SODDISFATTO],
+
+  // --- GESTIONE RACCOLTE E PROFILO (UC46, UC47) ---  uc47 diventato uc28
+  [#FRObx],
+  [Il Sistema deve consentire la rimozione di una raccolta di report senza che questo comporti l'eliminazione dei singoli report di analisi in essa contenuti.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve richiedere una conferma esplicita prima di procedere con l'eliminazione definitiva di una raccolta dal profilo.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve consentire di annullare la procedura di rimozione della raccolta, mantenendola inalterata nel sistema.],
+  [SODDISFATTO],
+)
+
+#pagebreak()
+
+== Stato Attuale dei Requisiti di Qualità
+
+#table(
+  columns: (1fr, 2.5fr, 1.5fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*ID*], [*Descrizione*], [*Stato*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, left, center).at(col) + horizon,
+
+  [#QRObx],
+  [L'architettura deve garantire un'alta coesione e un basso accoppiamento tra l'orchestratore NestJS e gli agenti Python, verificabile tramite revisione dei diagrammi UML2.5.],
+  [SODDISFATTO],
+
+  [#QRObx],
+  [Il sistema deve garantire tempi di risposta della dashboard web ottimizzati, minimizzando il carico computazionale lato client durante il rendering dei report di audit.],
+  [SODDISFATTO],
+
+  [#QRObx],
+  [Ogni componente software deve essere testabile isolatamente; la logica di business deve essere separata dalle interfacce di comunicazione (API/Database).],
+  [SODDISFATTO],
+
+  [#QRObx],
+  [È necessario rispettare rigorosamente le metriche di qualità del codice (complessità ciclomatica, duplicazione) definite nelle #link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/NdP.pdf")[*Norme di Progetto*].],
+  [SODDISFATTO],
+
+  [#QRObx],
+  [Il team deve svolgere un’attività di analisi preliminare includendo Design Thinking, User Story Mapping, Business Requirements e Diagrammi UML degli Use Case],
+  [SODDISFATTO],
+
+  [#QRObx],
+  [Deve essere fornita documentazione tecnica tramite standard OpenAPI 3.0 (Swagger) per le API e documentazione del codice sorgente tramite TypeDoc],
+  [SODDISFATTO],
+
+  [#QRObx],
+  [Deve essere fornito un Manuale Utente come parte integrante della fornitura finale],
+  [SODDISFATTO],
+
+  [#QRObx],
+  [Al termine del progetto deve essere consegnato un MVP funzionante accompagnato da una Demo Live e dallo Schema Design relativo alla base dati],
+  [SODDISFATTO],
+
+  [#QRObx],
+  [Il codice prodotto deve raggiungere una copertura minima del 70% tramite test di unità automatizzati misurati con Jest],
+  [SODDISFATTO],
+
+  [#QRObx],
+  [Il codice sorgente deve essere versionato utilizzando Git (v2.40+) seguendo la branching strategy definita nelle NdP],
+  [SODDISFATTO],
+
+  [#QRObx],
+  [L'analisi di sicurezza deve essere conforme agli standard OWASP Top 10 (v2021 o successivi)],
+  [SODDISFATTO],
+)
+
+#pagebreak()
+
+== Stato Attuale dei Requisiti di Vincolo 
+
+#table(
+  columns: (1fr, 2.5fr, 1.5fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*ID*], [*Descrizione*], [*Stato*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, left, center).at(col) + horizon,
+
+  [#VRObx],
+  [L'applicativo deve essere strutturato in moduli indipendenti, garantendo che l'aggiunta di un nuovo agente di analisi avvenga senza richiedere modifiche al codice sorgente degli agenti già esistenti],
+  [SODDISFATTO],
+
+  [#VRObx],
+  [Deve essere fornito un sistema di Bug Reporting strutturato su GitHub Issues per tracciare e gestire le anomalie tramite apposite label],
+  [SODDISFATTO],
+
+  [#VRObx],
+  [Il Back-end e l’Orchestratore devono essere sviluppati utilizzando il framework NestJS v10+],
+  [SODDISFATTO],
+
+  [#VRObx],
+  [L'interfaccia Front-end deve essere sviluppata utilizzando la libreria React v18.3+],
+  [SODDISFATTO],
+
+  [#VRObx],
+  [Gli agenti di analisi devono essere sviluppati utilizzando il linguaggio Python v3.12+],
+  [SODDISFATTO],
+
+  [#VRObx],
+  [L'architettura deve essere ospitata su infrastruttura cloud AWS, utilizzando esclusivamente gli account IAM forniti dall'azienda proponente],
+  [SODDISFATTO],
+
+  [#VRObx],
+  [Devono essere utilizzate GitHub Actions per implementare pipeline di Continuous Integration e Continuous Deployment (CI/CD)],
+  [SODDISFATTO],
+
+  [#VRObx],
+  [L'interfaccia web deve essere compatibile con Windows 10/11],
+  [SODDISFATTO],
+    
+  [#VRObx],
+  [L'interfaccia web deve essere compatibile con macOS 14+],
+  [SODDISFATTO],
+  
+  [#VRObx],
+  [L'interfaccia web deve essere compatibile con distribuzioni Linux (Ubuntu 22.04+)],
+  [SODDISFATTO],
+    
+  [#VRObx],
+  [L'interfaccia web deve essere compatibile su browser Chrome 120+],
+  [SODDISFATTO],
+  
+  [#VRObx],
+  [L'interfaccia web deve essere compatibile su browser Firefox 120+],
+  [SODDISFATTO],
+  
+  [#VRObx],
+  [L'interfaccia web deve essere compatibile su browser Safari 17+],
+  [SODDISFATTO],
+)
+
+== Tabella Riassuntiva
+
+#table(
+  columns: (1fr, 1fr, 1fr, 1fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*TIPO*], [*COMPLETATI*], [*TOTALI*], [*PERCENTUALE*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, center, center, center).at(col) + horizon,
+
+  [FROb],
+  [185],
+  [185],
+  [100%],
+
+  [FRDe],
+  [3],
+  [35],
+  [8,57%],
+
+  [FROp],
+  [0],
+  [19],
+  [0%],
+
+  [QROb],
+  [11],
+  [11],
+  [100%],
+
+  [VROb],
+  [13],
+  [13],
+  [100%],
+)
+
+Sono dunque stati soddisfatti tutti i requisiti obbligatori previsti, solo una piccola parte di quelli desiderabili ma nessun opzionale.
