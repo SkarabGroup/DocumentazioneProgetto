@@ -1,0 +1,28 @@
+@startuml ECSSecurityAnalysisAdapter
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+interface ISecurityAgentPort {
+    + runAnalysis(model: AgentRequest): Promise<SecAgentResponse>
+}
+
+class ECSSecurityAnalysisAdapter {
+    - logger: Logger
+    - ecsClient: ECSClient
+    - s3Client: S3Client
+    - configService: ConfigurationService
+    ---
+    + ECSSecurityAnalysisAdapter(configService: ConfigurationService)
+    + runAnalysis(model: AgentRequest): Promise<SecAgentResponse>
+    - runEcsTask(analysisId: string): Promise<void>
+    - waitForTaskCompletion(cluster: string, taskArn: string): Promise<void>
+    - fetchResultFromS3(analysisId: string): Promise<string>
+    - createFallbackResponse(reason: string, repositoryId: string): SecAgentResponse
+}
+
+ECSSecurityAnalysisAdapter ..|> ISecurityAgentPort
+@enduml

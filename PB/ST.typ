@@ -2,7 +2,7 @@
 #import "../lib/variables.typ": *
 #import "../lib/stDiagramUtil.typ": *
 
-#let versione = "v0.15.0"
+#let versione = "v0.19.0"
 #set heading(numbering: "1.1.1")
 /*
 === FUNZIONAMENTO DEL DOCUMENTO ===
@@ -25,16 +25,44 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #let history = (
   (
     "2026/04/21",
-    "0.15.0",
+    "0.19.0",
     "Revisione Introduzione, Introduzione a Architettura di Deployment, Introduzione a Architettura Logica",
     members.suar
+  ),
+  (
+    "2026/04/22",
+    "0.18.0",
+    "Aggiunta la sezione di mappatura dei requisiti",
+    members.antonio,
+    members.suar,
+  ),
+  (
+    "2026/04/22",
+    "0.17.0",
+    "Aggiunta sezione design patterns",
+    members.kevin,
+    members.andrea,
+  ),
+  (
+    "2026/04/21",
+    "0.16.0",
+    "Completati i componenti della sezione presentation per Analysis Microservice",
+    members.antonio,
+    members.andrea,
+  ),
+  (
+    "2026/04/21",
+    "0.15.0",
+    "Completati i componenti della sezione infrastructure per Analysis Microservice",
+    members.andrea,
+    members.kevin
   ),
   (
     "2026/04/20",
     "0.14.0",
     "Completati i componenti delle sezioni domain e application per Analysis Microservice",
     members.andrea,
-    members.antonio
+    members.antonio,
   ),
   (
     "2026/04/19",
@@ -48,7 +76,7 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
     "0.12.0",
     "Aggiunta sezione Design Patterns per Account Microservice",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/04/13",
@@ -1172,7 +1200,7 @@ Svolge i seguenti passaggi per permettere a #link(<AnalysisOrchestratorService>)
 
 `UpdatePatService` implementa #link(<UpdatePatUseCase>)[`UpdatePatUseCase`], validando il nuovo PAT e la password corrente tramite il domain service #link(<IPasswordProvider>)[`IPasswordProvider`], e delegando l'aggiornamento a #link(<IGitCredentialUpdatePort>)[`IGitCredentialUpdatePort`].
 
-===== Port
+===== Port <AnalysisPorts>
 Le porte sono le interfacce che definiscono i contratti di comunicazione tra il dominio applicativo e le dipendenze esterne (infrastruttura, agenti, persistenza). Ogni porta rappresenta un punto di estensione che permette di sostituire o modificare l'implementazione concreta senza impattare la logica applicativa, facilitando testabilità, manutenibilità e evoluzione del sistema. Ogni porta è progettata per essere il più possibile specifica e orientata al caso d'uso, evitando di esporre operazioni generiche o non necessarie che potrebbero portare a dipendenze indesiderate o a un accoppiamento eccessivo tra layer.
 ====== ICodeAgentPort <ICodeAgentPort>
 #codeDiagram("ICodeAgentPort", 70%)
@@ -1480,135 +1508,320 @@ I contratti di risposta sono i DTO che trasportano i dati restituiti dalle imple
 - *Report Opzionali:* I campi `docsReport`, `codeReport` e `secReport` sono nullable, riflettendo il fatto che un'analisi può coinvolgere solo un sottoinsieme dei tre tipi di report in base a quanto richiesto.
 
 ==== Infrastructure
-===== Adapter
+===== Adapters <Analysis_Adapters>
+Questa sezione descrive i Driven Adapter, i componenti concreti del livello infrastrutturale incaricati di implementare i contratti (Port) definiti nel livello Application. Nel rigoroso rispetto dell'Architettura Esagonale, gli adapter agiscono come strato di confine e di traduzione tra il nucleo applicativo e l'infrastruttura esterna, isolando la logica di business da qualsiasi dettaglio tecnologico. Essi incapsulano tutta la complessità necessaria per interagire con il database (MongoDB), le API esterne (GitHub), i processi di sistema (esecuzioni Docker locali) e l'infrastruttura Cloud (AWS ECS e S3). Grazie a questo isolamento, la logica di business e l'orchestrazione dei flussi rimangono puramente agnostiche e protette dai dettagli di I/O, garantendo un'altissima testabilità e flessibilità architetturale.
 ====== GitHubAdapter <GitHubAdapter>
 #codeDiagram("GitHubAdapter", 100%)
 
-`GitHubAdapter` è il Driven Adapter che implementa sia #link(<IGitHubAvailabilityPort>)[`IGitHubAvailabilityPort`] che #link(<IGitClonePort>)[`IGitClonePort`], eseguendo operazioni Git tramite chiamate `curl` all'API GitHub e comandi shell per la clonazione.
+`GitHubAdapter` è il Driven Adapter responsabile dell'interazione con l'ecosistema GitHub. Implementando i port #link(<IGitHubAvailabilityPort>)[`IGitHubAvailabilityPort`] e #link(<IGitClonePort>)[`IGitClonePort`], funge da ponte traduttore: prende le richieste del dominio applicativo e le trasforma nei comandi tecnici necessari per comunicare con l'esterno, come chiamate di rete (`curl`) e comandi shell nativi (`git`).
 
-- *Adattamento verso l'Esterno:* Traduce i DTO del dominio applicativo in comandi shell Git/curl e ne interpreta le risposte, isolando il resto del sistema dai dettagli dell'API GitHub.
-- *Testabilità:* Il costruttore accetta un `execAsync` iniettabile, permettendo il testing con mock senza eseguire comandi reali.
+- *Integrazione Lightweight tramite Shell:* Invece di dipendere da SDK esterni pesanti, l'adapter utilizza direttamente comandi shell di sistema. Il costruttore accetta una funzione `execAsync` iniettabile (di default basata su `child_process.exec`), permettendo un mocking completo durante i test unitari senza dover effettuare reali chiamate di rete.
+- *Risoluzione Dinamica e Validazione (`check`):* Il metodo `check` non si limita a verificare i permessi. Interrogando l'API REST di GitHub tramite `curl`, estrae e analizza lo status code HTTP. Se il repository è accessibile, processa il payload JSON per risolvere dinamicamente l'esatto hash SHA del commit (sia che l'utente abbia richiesto un branch specifico, un commit esatto, o si sia affidato al branch di default). Questo garantisce che le fasi successive dell'analisi siano assolutamente deterministiche. Nel caso in cui venga richiesto il branch di default, il metodo esegue una seconda chiamata HTTP tramite `getCommitFromBranch` per risolvere il commit SHA esatto, poiché la risposta iniziale sull'endpoint `/repos/{owner}/{repo}` non lo espone direttamente.
+- *Clonazione Ottimizzata (`clone`):* La logica di clonazione applica strategie diverse per minimizzare l'uso di banda e disco. Se viene richiesto un branch specifico o il branch di default, esegue una clonazione "shallow" (`--depth 1`), scaricando solo l'ultima versione dei file ignorando lo storico dei commit passati; se è richiesto un commit storico specifico, esegue una clonazione standard seguita da un `checkout` mirato.
+- *Gestione Sicura dell'Autenticazione:* L'adapter inietta in modo sicuro i #link(<PersonalAccessToken>)[`PersonalAccessToken`] passandoli come header `Bearer` per le API o incorporandoli dinamicamente nell'URL HTTPS durante la clonazione. Inoltre, implementa un meccanismo di fallback a livello di sistema qualora l'utente non fornisca credenziali proprie.
+- *Resilienza e Cleanup:* Per prevenire il rapido esaurimento dello spazio su disco del server (disk leak), l'adapter isola ogni clonazione in una cartella temporanea univoca in `/tmp/` basata sull'ID dell'analisi. Garantisce inoltre, tramite un blocco `catch`, che le directory temporanee vengano rimosse forzatamente in caso di fallimento del clone.
 
----
+====== LocalCodeAnalysisAdapter <LocalCodeAnalysisAdapter>
+#codeDiagram("LocalCodeAnalysisAdapter", 60%)
+
+`LocalCodeAnalysisAdapter` è il Driven Adapter che implementa il port #link(<ICodeAgentPort>)[`ICodeAgentPort`]. È responsabile dell'orchestrazione locale dell'agente di analisi del codice, incapsulando l'esecuzione del container Docker e il recupero sicuro dei risultati.
+
+- *Orchestrazione Docker Nativa:* Il metodo `runContainer()` utilizza il modulo `child_process.spawn` di Node.js per avviare il container `strands-code-analyzer`. Si occupa di montare dinamicamente i volumi condivisi (`analysis_tmp_data`) e di iniettare in modo sicuro le variabili d'ambiente necessarie (verificando la presenza del file `.env` tramite `fs.existsSync`) senza esporle nel codice.
+- *Parsing Resiliente a Tolleranza d'Errore:* Lo `stdout` di un container Docker include spesso log di boot o warning estranei al risultato. Per questo, il metodo `extractJson()` esegue due passaggi: prima scansiona l'output alla ricerca di un token esplicito di errore (`{"status": "error"`); se non lo trova, applica un sofisticato algoritmo iterativo di bilanciamento delle parentesi per isolare il blocco JSON valido contenente il nodo root `analysis_report`. In aggiunta, il metodo `runContainer()` implementa una logica di tolleranza sull'exit code: se il container termina con un codice diverso da zero ma ha comunque prodotto output su `stdout`, il risultato viene comunque promosso invece di essere scartato, permettendo il recupero di report parziali da container che crashano dopo aver completato la scrittura.
+- *Arricchimento del Payload:* Prima di restituire il risultato tramite il metodo `runAnalysis()`, l'adapter funge da strato di traduzione. Intercetta il JSON grezzo emesso dall'agente e vi inietta dinamicamente i metadati operativi cruciali (come l'identificativo del `repository` e lo `status` dell'operazione), garantendo che il DTO finale rispetti rigorosamente le aspettative del livello Application.
+- *Risoluzione dei fallimenti (Fallback):* In caso di crash improvviso del container, fallimento del Docker o corruzione dell'output testuale, l'eccezione non viene propagata. Il blocco `catch` invoca `createFallbackResponse()`, che istanzia e restituisce una risposta strutturata, type-safe e con verdetto `Critical`, incapsulando il motivo del fallimento. Questo isolamento garantisce che l'orchestratore globale non si blocchi per colpa di un singolo agente.
+
+====== DocumentationAnalysisAdapter <DocumentationAnalysisAdapter>
+#codeDiagram("DocumentationAnalysisAdapter", 60%)
+
+`DocumentationAnalysisAdapter` è il Driven Adapter che implementa il port #link(<IDocumentationAgentPort>)[`IDocumentationAgentPort`]. Gestisce l'orchestrazione locale dell'agente incaricato di valutare la qualità, le discrepanze e i file mancanti della documentazione del repository.
+
+- *Esecuzione Isolata via Docker:* Il metodo `runContainer()` utilizza il modulo `child_process.spawn` per avviare il container `strands-documentation-analyzer`. Si occupa di montare dinamicamente il volume condiviso (`analysis_tmp_data`) per l'accesso al codice e di iniettare il file di configurazione ambientale `.env`.
+- *Overriding Dinamico dell'Entrypoint:* A differenza degli altri adapter, sovrascrive dinamicamente l'entrypoint di default del container (`--entrypoint sh`) per lanciare esplicitamente lo script Python dell'agente. In questa fase, applica un quoting rigoroso al path del repository (`"${repoPathInContainer}"`) per prevenire bug legati al word-splitting della shell (ad esempio se il nome della repo contiene spazi).
+- *Parsing Resiliente a Tolleranza d'Errore:* Consapevole che lo `stdout` Docker non è mai un JSON "puro", l'adapter impiega il metodo custom `extractJson()`. Dapprima verifica l'eventuale presenza di un token esplicito di errore; in sua assenza, utilizza un algoritmo iterativo basato sul conteggio delle parentesi per scansionare l'output, scartare il rumore di boot e isolare il blocco JSON valido contenente l'oggetto `analysis_report`.
+- *Arricchimento del Payload:* Prima di restituire l'esito tramite `runAnalysis()`, l'adapter inietta nel JSON grezzo i metadati operativi mancanti (come l'ID del `repository` e lo `status` di successo), allineando strutturalmente l'output alle aspettative del livello Application.
+- *Risoluzione dei fallimenti (Fallback):* Se l'agente Python va in crash o genera un output incomprensibile, il blocco `catch` invoca `createFallbackResponse()`. Questo metodo inietta uno stato di errore controllato (`status: 'error'`) e restituisce una risposta strutturata contenente array vuoti per tutte le categorie (violazioni, audit, file mancanti). Ciò permette alla pipeline generale di concludersi senza corrompere o bloccare l'esecuzione degli altri agenti di analisi paralleli.
+
+====== LocalSecurityAnalysisAdapter <LocalSecurityAnalysisAdapter>
+#codeDiagram("LocalSecurityAnalysisAdapter", 70%)
+
+`LocalSecurityAnalysisAdapter` è il Driven Adapter che implementa il port #link(<ISecurityAgentPort>)[`ISecurityAgentPort`]. Gestisce l'orchestrazione locale dell'agente dedicato alla scansione delle vulnerabilità, incapsulando l'esecuzione dell'immagine Docker e la complessa gestione dei risultati aggregati dei vari tool.
+
+- *Orchestrazione Docker Sicura:* Il metodo `runContainer()` utilizza `child_process.spawn` per avviare in isolamento il container `strands-security-analyzer`. Inietta dinamicamente il file `.env` di configurazione (verificandone preventivamente l'esistenza tramite `fs.existsSync`) e mappa il volume condiviso (`analysis_tmp_data`) in cui risiede il codice clonato, garantendo che l'agente abbia accesso esclusivo al contesto necessario.
+- *Parsing Resiliente a Tolleranza d'Errore:* Poiché lo `stdout` del container viene spesso inquinato dai log di avvio dei tool sottostanti, il metodo `extractJson()` adotta una strategia a due fasi: dapprima scansiona l'output alla ricerca di un token esplicito di errore (`{"status": "error"`); in sua assenza, utilizza un algoritmo custom di bilanciamento delle parentesi per scansionare il flusso testuale, scartare il rumore e isolare esclusivamente il payload JSON valido associato alla chiave `analysis_report`.
+- *Arricchimento del Contesto:* Prima di istanziare la risposta finale, l'adapter agisce da strato di traduzione arricchendo il JSON grezzo: inietta l'identificativo del `repository` e impone lo stato `success` nei `metadata`, allineando l'output grezzo dell'agente alle aspettative strutturali del livello Application.
+- *Risoluzione dei fallimenti (Fallback):* In caso di fallimento infrastrutturale (es. crash del container o errore di Docker), l'adapter applica un pattern di graceful degradation tramite `createFallbackResponse()`. Invece di far fallire l'orchestratore, restituisce un DTO strutturato con stato `FAILED` e incapsula esplicitamente il motivo del crash all'interno dell'array `errors` associandolo al tool fittizio `'agent'`, garantendo la tracciabilità del problema direttamente nel report di sicurezza finale.
 
 ====== MongoDBAdapter <MongoDBAdapter>
 #codeDiagram("MongoDBAdapter", 100%)
 
-`MongoDBAdapter` è il Driven Adapter che implementa tutti e quattro i port di repository per le credenziali Git (#link(<IGitCredentialReadPort>)[`IGitCredentialReadPort`], #link(<IGitCredentialSavePort>)[`IGitCredentialSavePort`], #link(<IGitCredentialDeletePort>)[`IGitCredentialDeletePort`], #link(<IGitCredentialUpdatePort>)[`IGitCredentialUpdatePort`]), interagendo con MongoDB tramite Mongoose.
+`MongoDBAdapter` è il Driven Adapter centralizzato che implementa l'intero livello di persistenza del sistema su MongoDB. Funge da ponte tra i contratti definiti nel livello Application e il database fisico, incapsulando la logica di accesso, traduzione e aggregazione attraverso la libreria Mongoose. Inietta nel costruttore i sei modelli definiti nel dominio e implementa sedici port distinti, suddividendo il suo operato su diverse aree funzionali:
 
-- *Adattatore Unificato:* Concentra tutta la logica di persistenza delle credenziali in un unico adapter, semplificando la configurazione del modulo NestJS e riducendo la frammentazione infrastrutturale.
-- *Schema MongoDB:* Utilizza lo schema #link(<GitCredential>)[`GitCredential`] per mappare le credenziali sul documento MongoDB, applicando validazione a livello di schema (regex SHA-256 per la password, unicità dell'URL).
+- *Gestione Sicura delle Credenziali:* Tramite i metodi `authorize()`, `save()`, `updatePAT()` e `deletePAT()`, gestisce il ciclo di vita dei token di accesso mappandoli sullo schema #link(<GitCredential>)[`GitCredential`]. Oltre alle operazioni CRUD, isola gli errori infrastrutturali intercettando il codice `11000` di MongoDB per tradurlo in un fallimento di "credenziali duplicate" gestibile dal dominio.
+- *Tracciamento del Ciclo di Vita dell'Analisi:* Il metodo `saveAnalysis()` inizializza il documento #link(<GitHubAnalysisRecord>)[`GitHubAnalysisRecord`] all'avvio del processo. Successivamente, `addReportsToAnalysis()` agisce da aggregatore: riceve gli identificativi dei report generati dagli agenti e aggiorna atomicamente il record principale, associando le chiavi esterne e spostandone lo status a `COMPLETED`.
+- *Archiviazione Multi-Report:* Espone tre metodi dedicati (`saveCodeReport()`, `saveDocsReport()` e `saveSecurityReport()`) per riversare le complesse alberature dei Value Object di dominio all'interno dei documenti di database. Più nello specifico:
+  - Traduce le metriche di copertura, le issue strutturali e i verdetti dell'AI nello schema #link(<CodeReportModel>)[`CodeReportModel`].
+  - Mappa l'intero albero delle discrepanze testuali, i file mancanti e l'audit delle dipendenze all'interno dello schema #link(<DocumentationReportModel>)[`DocumentationReportModel`].
+  - Scompone logicamente le vulnerabilità rilevate, separandole per tool di origine (Trivy, Semgrep, Grype) e per categoria, strutturandole all'interno del #link(<SecurityReportModel>)[`SecurityReportModel`].
+- *Aggregazione Dinamica in Lettura:* Il metodo `getAnalysisFromId()` orchestra query complesse al posto di una semplice `find`. Recupera il record base e, tramite interrogazioni condizionali sui modelli Mongoose, "pesca" i tre report separati (se presenti), assemblandoli al volo nel DTO `GitHubAnalysisDetailedResult` richiesto dal frontend. Il metodo `getAllAnalysesForUser()` fornisce invece viste generalizzate leggere.
+- *Gestione Dinamica delle Collezioni:* Attraverso metodi come `addCollection()`, `deleteCollection()` e `getRepositoryCollection()`, l'adapter gestisce le viste aggregate per utente basate sullo schema #link(<GitHubCollection>)[`GitHubCollection`]. Nell'orchestrare le letture, non duplica i dati storici ma interroga dinamicamente la collezione `github_analyses` filtrando per `url` e `userId` (ordinando per `createdAt`), garantendo che la collezione restituisca uno storico sempre aggiornato.
+
+====== S3Adapter <S3Adapter>
+#codeDiagram("S3Adapter", 60%)
+
+`S3Adapter` è il Driven Adapter cloud-native che implementa #link(<IGitClonePort>)[`IGitClonePort`]. Sostituisce la clonazione locale preparando il codice per un'architettura distribuita.
+
+- *Clonazione Dinamica e Autenticazione:* Clona il repository localmente adattando la strategia alla richiesta (`--depth 1` per branch/default, o checkout mirati per commit storici). Gestisce l'autenticazione iniettando il PAT dell'utente o applicando dinamicamente il token di sistema di fallback (`CODE_GUARDIAN_TOKEN`).
+- *Compressione e Upload S3:* Una volta clonato il codice, utilizza la libreria `tar` per comprimere l'intera cartella in un archivio `.tar.gz`. Successivamente, lo carica su un bucket AWS S3 tramite `PutObjectCommand`. Questo file diventa il volume di partenza "congelato" per i container di analisi.
+- *Gestione Sicura del Ciclo di Vita:* Utilizza un blocco `try/catch` per garantire la pulizia assoluta del file system locale dell'orchestratore. Sia in caso di successo che di eccezione, rimuove forzatamente sia la directory clonata (`rm -rf`) che l'archivio generato (`fs.unlinkSync`), prevenendo ogni leak di spazio su disco.
+
+====== ECSCodeAnalysisAdapter <ECSCodeAnalysisAdapter>
+#codeDiagram("ECSCodeAnalysisAdapter", 67%)
+
+`ECSCodeAnalysisAdapter` è il Driven Adapter che implementa #link(<ICodeAgentPort>)[`ICodeAgentPort`], delegando l'esecuzione dell'agente di analisi del codice all'infrastruttura serverless AWS ECS (Fargate).
+
+- *Orchestrazione Serverless:* Il metodo `runEcsTask()` avvia un task isolato tramite `RunTaskCommand`, configurando esplicitamente la rete VPC (subnet, security group). Inietta nel container le variabili d'ambiente fondamentali (`ANALYSIS_ID` e `S3_BUCKET_NAME`) necessarie all'agente per scaricare il codice e caricare il risultato.
+- *Monitoraggio Attivo (Polling):* Dato che ECS è asincrono, l'adapter implementa `waitForTaskCompletion()`. Questo loop utilizza `DescribeTasksCommand` interrogando AWS ogni 10 secondi fino al raggiungimento dello stato `STOPPED`. Verifica rigorosamente l'exit code del container: un'uscita diversa da zero solleva immediatamente un'eccezione infrastrutturale.
+- *Recupero e Arricchimento:* Tramite `GetObjectCommand` scarica da S3 il file di reportistica prodotto (`code_report.json`). Agendo da strato di traduzione, l'adapter inietta nel JSON i metadati applicativi (`repository` ID e `status: 'success'`) prima di passare il controllo al livello Application.
+- *Risoluzione dei fallimenti (Fallback):* In caso di timeout, fallimento di AWS o exit code anomalo, il blocco `catch` invoca `createFallbackResponse()`. Invece di far crollare l'applicazione, restituisce un DTO type-safe con verdetto `Critical`, incapsulando il motivo esatto del fallimento infrastrutturale.
+
+====== ECSDocumentationAnalysisAdapter <ECSDocumentationAnalysisAdapter>
+#codeDiagram("ECSDocumentationAnalysisAdapter", 70%)
+
+`ECSDocumentationAnalysisAdapter` è il Driven Adapter che implementa #link(<IDocumentationAgentPort>)[`IDocumentationAgentPort`] eseguendo l'agente di documentazione su AWS ECS (Fargate).
+
+- *Esecuzione Distribuita:* Il metodo `runEcsTask()` utilizza `RunTaskCommand` per avviare il task basato sulla definizione `ecsTaskDefinitionDocs`. Passa il contesto operativo iniettando `ANALYSIS_ID` e `S3_BUCKET_NAME` come variabili d'ambiente.
+- *Gestione dell'Attesa (Polling):* L'adapter delega a `waitForTaskCompletion()` l'attesa asincrona. Tramite chiamate ripetute a `DescribeTasksCommand`, interroga lo stato del container Fargate e controlla rigorosamente la proprietà `exitCode` per validare l'integrità dell'esecuzione remota.
+- *Integrazione S3 e Payload:* Tramite `fetchResultFromS3()`, scarica dal bucket il file prodotto dall'agente (`docs_report.json`). Valida la radice strutturale `analysis_report` e vi inietta i metadati applicativi (`repository` e `status: 'success'`) prima di completare la risoluzione.
+- *Graceful Degradation:* Se il task fallisce o restituisce un exit code anomalo, il catch block invoca `createFallbackResponse()`. L'eccezione viene trasformata in una risposta controllata con array vuoti (per violazioni, audit e file mancanti) e stato `'error'`, evitando di far fallire l'intera pipeline globale.
+
+====== ECSSecurityAnalysisAdapter <ECSSecurityAnalysisAdapter>
+#codeDiagram("ECSSecurityAnalysisAdapter", 74%)
+
+`ECSSecurityAnalysisAdapter` è il Driven Adapter che implementa #link(<ISecurityAgentPort>)[`ISecurityAgentPort`] eseguendo la suite di sicurezza su AWS ECS (Fargate).
+
+- *Scalabilità e Isolamento:* Il metodo `runEcsTask()` lancia il container (`ecsTaskDefinitionSecurity`) applicando le regole di rete VPC (subnet e security group) necessarie per garantire un ambiente cloud isolato durante la scansione delle vulnerabilità.
+- *Monitoraggio dell'Esecuzione:* Il flusso viene bloccato in attesa sicura dal metodo `waitForTaskCompletion()`. Questo ciclo verifica che il task ECS raggiunga lo stato `STOPPED` senza errori sistemici, sollevando eccezioni in caso di `exitCode` diverso da zero.
+- *Estrazione Dati Cloud-Native:* Al termine dell'esecuzione, il metodo `fetchResultFromS3()` preleva dal bucket l'artefatto JSON (`security_report.json`). L'adapter lo parsa e lo arricchisce dinamicamente con i metadati necessari a soddisfare il contratto del livello Application.
+- *Tracciabilità degli Errori:* Il pattern di fallback, gestito da `createFallbackResponse()`, è particolarmente curato. Se l'esecuzione su ECS fallisce, non si limita a impostare lo stato a `FAILED`: inserisce l'eccezione infrastrutturale nell'array `errors` associandola a un tool fittizio (`tool: 'agent'`), per garantire totale trasparenza sul motivo del blocco al front-end.
 
 ===== Schema
-====== GitCredential <GitCredential>
-//#codeDiagram("GitCredential", 100%)
+Questa sezione descrive gli Schema Mongoose, ovvero i modelli di dati fisici utilizzati dal livello di persistenza per interfacciarsi con il database MongoDB. Nel rispetto dell'Architettura Esagonale, gli Schema fungono da proiezione persistente delle Entità e dei Value Object definiti nel Domain Layer. Essi incapsulano esclusivamente dettagli infrastrutturali — come i vincoli di unicità, l'indicizzazione per l'ottimizzazione delle query e la gestione dei tipi nativi del database (es. `ObjectId` e `timestamps`) — mantenendo il dominio puro e completamente agnostico rispetto alla tecnologia di memorizzazione.
 
-`GitCredential` è lo schema Mongoose che definisce la struttura del documento MongoDB per le credenziali Git: URL del repository (chiave univoca), hash della password, e PAT cifrato.
+====== GitCredential <GitCredential>
+#codeDiagram("GitCredential", 20%)
+
+`GitCredential` è lo schema Mongoose che definisce la struttura del documento MongoDB per le credenziali Git: URL del repository (chiave univoca), hash della password e PAT.
 
 - *Persistenza delle Credenziali:* Rappresenta la proiezione di persistenza dei dati gestiti dai Value Object #link(<RepoURL>)[`RepoURL`], #link(<PATPassword>)[`PATPassword`] e #link(<PersonalAccessToken>)[`PersonalAccessToken`], adattandoli al formato MongoDB.
+- *Ricerca Ottimizzata:* Il campo `repoUrl` è marcato come `unique` e indicizzato (`index: true`), garantendo l'unicità delle credenziali per repository e ricerche fulminee durante l'autorizzazione.
+
+====== GitHubAnalysisRecord <GitHubAnalysisRecord>
+#codeDiagram("GitHubAnalysisRecord", 30%)
+
+`GitHubAnalysisRecord` è lo schema Mongoose che definisce la persistenza dell'entità #link(<GitHubAnalysis>)[`GitHubAnalysis`], memorizzando i metadati dell'analisi e i riferimenti ai vari report generati.
+
+- *Proiezione dell'Entità:* Mappa gli attributi gestiti dai Value Object #link(<AnalysisId>)[`AnalysisId`], #link(<UserId>)[`UserId`], #link(<RepoURL>)[`RepoURL`], #link(<BranchName>)[`BranchName`], #link(<CommitHash>)[`CommitHash`] e l'enumerazione #link(<AnalysisStatus>)[`AnalysisStatus`] in tipi primitivi persistibili nel database.
+- *Tracciamento dei Report:* Mantiene i riferimenti opzionali (di tipo stringa, derivati dal Value Object #link(<ReportId>)[`ReportId`]) ai documenti separati che contengono i payload massivi generati dagli agenti.
+- *Gestione Temporale:* Utilizza l'opzione `timestamps: true` di Mongoose per gestire automaticamente i campi `createdAt` e `updatedAt`.
+
+====== GitHubCollection <GitHubCollection>
+#codeDiagram("GitHubCollection", 25%)
+
+`GitHubCollection` è lo schema Mongoose che raggruppa le analisi ripetute su uno stesso repository per un dato utente, creando una vista "storica" o di progetto.
+
+- *Relazioni MongoDB:* Il campo `analyses` utilizza `ObjectId` per referenziare multipli documenti della collezione `github_analyses` (ossia analisi derivanti dall'entità #link(<GitHubAnalysis>)[`GitHubAnalysis`]), modellando una relazione uno-a-molti. Tuttavia, per garantire uno storico sempre aggiornato e inclusivo anche delle analisi precedenti alla creazione della collezione, il `MongoDBAdapter` non utilizza questo campo in lettura: le analisi vengono recuperate dinamicamente tramite query diretta sulla collezione `github_analyses`, filtrando per `url` e `userId`. Il campo rimane presente per compatibilità strutturale del documento.
+- *Indice Composto:* Definisce un indice composto e univoco su `{ url: 1, userId: 1 }` per garantire che un utente non possa creare più collezioni per lo stesso repository, ottimizzando contemporaneamente le query di lookup basate in origine su #link(<RepoURL>)[`RepoURL`] e #link(<UserId>)[`UserId`].
+
+====== CodeReportModel <CodeReportModel>
+#codeDiagram("CodeReportModel", 35%)
+
+`CodeReportModel` è lo schema Mongoose che archivia i risultati dettagliati prodotti dall'agente di analisi del codice, fungendo da proiezione persistente per l'entità #link(<CodeAgentReport>)[`CodeAgentReport`].
+
+- *Integrità Strutturale:* Utilizza regex per validare che `reportId` e `analysisId` (rappresentazioni testuali di #link(<ReportId>)[`ReportId`] e #link(<AnalysisId>)[`AnalysisId`]) siano formattati correttamente come UUID v7.
+- *Sub-documenti Strutturati:* Fa un uso estensivo di classi Schema interne per mappare fedelmente l'alberatura complessa prodotta dai Value Object #link(<CodeAgentMetadata>)[`CodeAgentMetadata`] e #link(<AIInterpretation>)[`AIInterpretation`].
+- *Indicizzazione Strategica:* Crea indici specifici su `interpretation.verdict` (direttamente correlato all'enumerazione #link(<VerdictStatus>)[`VerdictStatus`]) e `metadata.language` per permettere aggregazioni e filtri rapidi a livello di database.
+
+====== DocumentationReportModel <DocumentationReportModel>
+#codeDiagram("DocumentationReportModel", 42%)
+
+`DocumentationReportModel` è lo schema Mongoose dedicato al salvataggio massivo dei risultati emessi dall'agente di analisi della documentazione, fungendo da proiezione persistente per l'entità #link(<DocumentationReport>)[`DocumentationReport`].
+
+- *Mappatura delle Discrepanze:* Salva direttamente gli array di oggetti complessi derivati dai Value Object #link(<APIViolation>)[`APIViolation`], #link(<DocsDiscrepancy>)[`DocsDiscrepancy`], #link(<MissingFile>)[`MissingFile`] e #link(<DependencyAudit>)[`DependencyAudit`].
+- *Integrità Relazionale:* Come gli altri report, vincola i campi legati a #link(<ReportId>)[`ReportId`] e #link(<AnalysisId>)[`AnalysisId`] ad essere univoci.
+- *Ottimizzazione delle Ricerche:* Implementa indici manuali sui campi di severità annidati (correlati all'enumerazione #link(<SeverityLevel>)[`SeverityLevel`]), fondamentali per estrarre rapidamente le metriche senza caricare interi documenti in memoria.
+
+====== SecurityReportModel <SecurityReportModel>
+#codeDiagram("SecurityReportModel", 45%)
+
+`SecurityReportModel` è lo schema Mongoose progettato per immagazzinare in modo strutturato le vulnerabilità riscontrate, fungendo da proiezione persistente per l'entità #link(<SecurityReport>)[`SecurityReport`].
+
+- *Categorizzazione Multi-Tool:* Separa logicamente i risultati in array di sub-documenti tipizzati che riflettono esattamente le collezioni di Value Object dell'entità: #link(<DependencyFinding>)[`DependencyFinding`], #link(<OWASPFinding>)[`OWASPFinding`], #link(<SecretFinding>)[`SecretFinding`] e gli errori #link(<ToolError>)[`ToolError`].
+- *Indicizzazione Profonda:* Include indici composti e specifici sulle proprietà annidate (come i livelli di severità legati a #link(<SeverityFinding>)[`SeverityFinding`] o le categorie OWASP) per supportare query ad alte prestazioni necessarie per i cruscotti di sicurezza.
 
 ==== Presentation
-===== Controller
+===== Helpers
+Questa sezione descrive i componenti ausiliari del livello di presentazione, responsabili di fornire funzionalità trasversali riutilizzabili dai controller. In particolare, raggruppa i meccanismi di autenticazione e autorizzazione basati su JWT, isolando la logica di validazione dei token dal codice applicativo dei controller e garantendo che ogni endpoint protetto possa verificare l'identità del chiamante in modo uniforme e disaccoppiato.
+
+====== JwtHelper <JwtHelper>
+#codeDiagram("JwtHelper", 80%)
+
+`JwtHelper` raggruppa i componenti responsabili dell'autenticazione basata su JWT, integrando il meccanismo di validazione dei token con il framework applicativo. Include la strategia di validazione (`JwtStrategy`), il meccanismo di protezione degli endpoint (`JwtAuthGuard`) e un decoratore per l'estrazione dell'identità utente (`UserId`).
+
+- *Separazione tra Validazione e Accesso:* La `JwtStrategy` è responsabile della validazione del token e della costruzione del contesto utente, mentre `JwtAuthGuard` si occupa di applicare tale validazione agli endpoint protetti.
+- *Integrazione con il Framework di Autenticazione:* Il guard estende il meccanismo standard (`AuthGuard`), permettendo di riutilizzare l'infrastruttura di autenticazione senza introdurre logica applicativa nel controller.
+- *Accesso Tipizzato all'Utente:* Il decoratore `UserId` consente di accedere in modo tipizzato alle informazioni dell'utente estratte dal token, evitando la propagazione diretta del modello HTTP nei livelli superiori.
+
+===== Controllers
+Questa sezione descrive i Controller, i componenti del livello di presentazione incaricati di esporre gli endpoint HTTP e di tradurre le richieste in ingresso nei comandi applicativi corrispondenti. Nel rispetto dell'Architettura Esagonale, i controller non contengono logica di business: si limitano a trasformare i DTO di trasporto in comandi, delegare l'esecuzione ai rispettivi Use Case e restituire al client i DTO di risposta appropriati.
+
 ====== AnalysisController <AnalysisController>
-#codeDiagram("AnalysisController", 100%)
+#codeDiagram("AnalysisController", 90%)
 
-`AnalysisController` è il controller NestJS che espone l'endpoint `POST /analysis/start`, protetto da `JwtAuthGuard`. Riceve la richiesta HTTP, costruisce lo #link(<StartAnalysisCommand>)[`StartAnalysisCommand`] e delega al use case #link(<StartAnalysisUseCase>)[`StartAnalysisUseCase`].
+`AnalysisController` espone l'endpoint HTTP per richiedere l'avvio di una nuova analisi su un repository. Inietta `StartAnalysisUseCase`, al quale delega completamente l'esecuzione del flusso applicativo, ricevendo un `StartAnalysisRequestDTO` e restituendo un `StartAnalysisResponseDTO`.
 
-- *Layer di Presentazione:* Traduce il protocollo HTTP (DTO di richiesta/risposta, HTTP status codes) in chiamate al layer applicativo, separando le preoccupazioni di trasporto dalla logica di business.
-- *Autenticazione JWT:* Implementa l'estrazione dello `userId` dal JWT payload tramite il decorator `@UserId`, garantendo che ogni analisi sia tracciata all'utente autenticato.
-
----
+- *Separazione tra API e Dominio:* Il controller traduce il `StartAnalysisRequestDTO` in un `StartAnalysisCommand`, mantenendo separati il modello di trasporto HTTP e quello applicativo.
+- *Delegazione del Flusso:* La logica di orchestrazione è interamente demandata al `StartAnalysisUseCase`, mantenendo il controller come semplice punto di ingresso e uscita del sistema.
 
 ====== PatController <PatController>
 #codeDiagram("PatController", 100%)
 
-`PatController` è il controller NestJS che espone gli endpoint per la gestione dei Personal Access Token: `POST /analysis/pat` (aggiunta), `DELETE /analysis/pat` (eliminazione), `PUT /analysis/pat` (aggiornamento).
+`PatController` espone gli endpoint HTTP per la gestione dei Personal Access Token. Inietta tre use case distinti (`NewPatUseCase`, `DeletePatUseCase`, `UpdatePatUseCase`), ciascuno responsabile di una specifica operazione, e restituisce i rispettivi DTO di risposta.
 
-- *Delega ai Use Case:* Per ogni endpoint, costruisce il Command appropriato e delega al rispettivo use case (#link(<NewPatUseCase>)[`NewPatUseCase`], #link(<DeletePatUseCase>)[`DeletePatUseCase`], #link(<UpdatePatUseCase>)[`UpdatePatUseCase`]), mantenendo la logica di controllo nel layer applicativo.
+- *Segregazione dei Casi d'Uso:* Ogni operazione (creazione, aggiornamento, eliminazione) è delegata a un use case dedicato, garantendo isolamento dei flussi applicativi e coerenza con il principio di singola responsabilità.
+- *Uniformità del Flusso Applicativo:* Tutti gli endpoint seguono lo stesso schema: trasformazione del DTO di input in command e delega al caso d'uso, favorendo consistenza e manutenibilità.
 
-===== Request
+====== RepositoriesController <RepositoriesController>
+#codeDiagram("RepositoriesController", 110%)
+
+`RepositoriesController` espone gli endpoint HTTP per la gestione delle collezioni di repository e delle analisi associate. Inietta diversi use case per coprire operazioni di creazione, recupero e cancellazione, restituendo DTO di risposta specifici per ciascun endpoint.
+
+- *Composizione dei Casi d'Uso:* Il controller coordina più use case distinti per gestire scenari complessi, mantenendo comunque separata la logica applicativa nei rispettivi componenti.
+- *Aggregazione dei Dati in Lettura:* Alcuni endpoint combinano risultati provenienti da più casi d'uso per restituire viste più ricche, centralizzando l'aggregazione a livello di controller senza introdurre logica di business. In particolare, l'endpoint `getFullCollectionData` recupera prima gli identificativi delle analisi dalla collezione, quindi esegue il recupero dei dettagli di ciascuna analisi in parallelo tramite `Promise.all`, ottimizzando i tempi di risposta in presenza di collezioni con molte analisi associate.
+
+===== Presentation DTOs - Requests
+Questa sezione descrive i DTO di richiesta del livello di presentazione, ovvero i contratti che definiscono la struttura dei dati in ingresso per ciascun endpoint HTTP. Essi fungono da strato di traduzione tra il formato atteso dal client e il modello applicativo interno, garantendo che i controller ricevano dati strutturati e tipizzati prima di costruire i comandi da inviare ai Use Case.
+
+====== AddRepositoryCollectionRequestDTO <AddRepositoryCollectionRequestDTO>
+#codeDiagram("AddRepositoryCollectionRequestDTO", 60%)
+
+`AddRepositoryCollectionRequestDTO` definisce il contratto del body della richiesta HTTP per la creazione di una nuova collezione di repository. I campi `url` e `name` sono obbligatori, mentre `description` è opzionale, riflettendo la possibilità di fornire metadati aggiuntivi senza renderli necessari al completamento dell'operazione.
+
+====== DeletePatRequestDTO <DeletePatRequestDTO>
+#codeDiagram("DeletePatRequestDTO", 50%)
+
+`DeletePatRequestDTO` definisce il contratto del body della richiesta HTTP per la rimozione di un Personal Access Token. I campi `repositoryUrl` e `password` sono obbligatori, garantendo che il sistema disponga delle informazioni necessarie per identificare il repository e autorizzare l'operazione.
+
+====== PostPatRequestDTO <PostPatRequestDTO>
+#codeDiagram("PostPatRequestDTO", 70%)
+
+`PostPatRequestDTO` definisce il contratto del body della richiesta HTTP per la creazione di un Personal Access Token. I campi `repositoryUrl`, `password` e `personalAccessToken` sono obbligatori, garantendo che il sistema disponga delle informazioni necessarie per associare e validare il token rispetto al repository indicato.
+
 ====== StartAnalysisRequestDTO <StartAnalysisRequestDTO>
 #codeDiagram("StartAnalysisRequestDTO", 100%)
 
-`StartAnalysisRequestDTO` è il DTO di presentazione per la richiesta di avvio analisi, raccogliendo URL, password opzionale, branch/commit opzionali e i flag per i tre tipi di analisi.
+`StartAnalysisRequestDTO` definisce il contratto del body della richiesta HTTP per l'avvio di una nuova analisi. Il campo `repoUrl` è obbligatorio, mentre `password`, `branch` e `commit` sono opzionali, permettendo di specificare credenziali e contesto di analisi solo quando necessario. I flag booleani (`requestedCode`, `requestedDocumentation`, `requestedSecurity`) consentono al client di configurare il tipo di analisi richiesta.
 
-====== PostPatRequestDTO <PostPatRequestDTO>
-#codeDiagram("PostPatRequestDTO", 100%)
-
-`PostPatRequestDTO` è il DTO di presentazione per la registrazione di un nuovo PAT.
-
----
-
-====== DeletePatRequestDTO <DeletePatRequestDTO>
-#codeDiagram("DeletePatRequestDTO", 100%)
-
-`DeletePatRequestDTO` è il DTO di presentazione per l'eliminazione di un PAT.
-
----
+- *Configurabilità dell'Analisi:* La presenza di flag espliciti permette al client di selezionare in modo granulare le componenti dell'analisi, evitando la necessità di endpoint distinti per ogni variante.
 
 ====== UpdatePatRequestDTO <UpdatePatRequestDTO>
-#codeDiagram("UpdatePatRequestDTO", 100%)
+#codeDiagram("UpdatePatRequestDTO", 70%)
 
-`UpdatePatRequestDTO` è il DTO di presentazione per l'aggiornamento di un PAT.
+`UpdatePatRequestDTO` definisce il contratto del body della richiesta HTTP per l’aggiornamento di un Personal Access Token. I campi `repositoryUrl`, `password` e `newPersonalAccessToken` sono obbligatori, assicurando che il sistema possa identificare il contesto corretto e sostituire in modo sicuro il token esistente.
 
-===== Response
-====== StartAnalysisResponseDTO <StartAnalysisResponseDTO>
-#codeDiagram("StartAnalysisResponseDTO", 100%)
+===== Presentation DTOs - Response
+Questa sezione descrive i DTO di risposta del livello di presentazione, ovvero i contratti che definiscono la struttura dei dati restituiti al client per ciascun endpoint HTTP. Essi fungono da strato di traduzione tra i risultati prodotti dal livello applicativo e il formato esposto verso l'esterno, garantendo il disaccoppiamento tra i modelli interni e la rappresentazione pubblica dell'API.
+====== AddRepositoryCollectionResponseDTO  <AddRepositoryCollectionResponseDTO>
+#codeDiagram("AddRepositoryCollectionResponseDTO", 60%)
 
-`StartAnalysisResponseDTO` è il DTO di risposta per l'avvio analisi, con factory method `success()` (restituisce i metadati dell'analisi) e `failure()` (restituisce il messaggio di errore).
+`AddRepositoryCollectionResponseDTO` definisce il contratto della risposta HTTP per l'operazione di creazione di una collezione di repository. Il campo booleano `success` indica l'esito dell'operazione, mentre `message` fornisce un eventuale dettaglio descrittivo in caso di errore.
 
-====== PostPatResponseDTO <PostPatResponseDTO>
-#codeDiagram("PostPatResponseDTO", 100%)
-
-`PostPatResponseDTO` è il DTO di risposta per la registrazione di un PAT.
-
----
+- *Factory Method per la Creazione:* L'utilizzo di metodi statici (`success`, `failure`) centralizza la costruzione delle risposte, garantendo coerenza nella rappresentazione degli esiti.
 
 ====== DeletePatResponseDTO <DeletePatResponseDTO>
-#codeDiagram("DeletePatResponseDTO", 100%)
+#codeDiagram("DeletePatResponseDTO", 45%)
 
-`DeletePatResponseDTO` è il DTO di risposta per l'eliminazione di un PAT.
+`DeletePatResponseDTO` definisce la risposta HTTP per l'operazione di rimozione di un Personal Access Token. Il campo `removed` rappresenta l'esito dell'operazione, mentre `error` consente di trasportare un messaggio descrittivo in caso di fallimento.
 
----
+- *Esplicitazione dell'Esito:* L'utilizzo di un campo booleano dedicato consente al client di distinguere chiaramente tra successo e fallimento senza dipendere esclusivamente dal codice HTTP.
+
+====== DeleteRepositoryCollectionResponseDTO <DeleteRepositoryCollectionResponseDTO>
+#codeDiagram("DeleteRepositoryCollectionResponseDTO", 65%)
+
+`DeleteRepositoryCollectionResponseDTO` definisce la risposta HTTP per l'operazione di eliminazione di una collezione di repository. Il campo `deleted` indica se l'operazione è stata completata con successo, mentre `message` fornisce eventuali dettagli aggiuntivi.
+
+- *Contratto Semplice e Tipizzato:* La struttura minimale del DTO riflette la natura dell'operazione, fornendo al client un'informazione chiara e immediata sull'esito.
+
+====== GetAllAnalysesForUserResponseDTO <GetAllAnalysesForUserResponseDTO>
+#codeDiagram("GetAllAnalysesForUserResponseDTO", 85%)
+
+`GetAllAnalysesForUserResponseDTO` definisce il contratto della risposta HTTP per il recupero delle analisi associate a un utente. Oltre ai campi `success` e `message`, espone la collezione `analyses`, che corrisponde a una rappresentazione sintetica dei dati di analisi tramite `GitHubAnalysisGeneralDataDTO`.
+
+- *Aggregazione di Dati:* Il DTO raccoglie una lista di elementi, permettendo al client di ottenere una visione complessiva delle analisi con una singola risposta.
+- *Separazione tra Result e Response:* Il metodo `fromResult` consente di trasformare l'oggetto applicativo (`GetAllAnalysesForUserResult`) nel formato esposto verso l'esterno, mantenendo disaccoppiati i livelli applicativo e di presentazione.
+
+====== GetAllRepositoryCollectionsResponseDTO <GetAllRepositoryCollectionsResponseDTO>
+#codeDiagram("GetAllRepositoryCollectionsResponseDTO", 90%)
+
+`GetAllRepositoryCollectionsResponseDTO` definisce la risposta HTTP per il recupero delle collezioni di repository associate all'utente. Il campo `collections` contiene una lista di `RepositoryCollectionItemDTO`, che rappresentano una proiezione sintetica delle informazioni rilevanti per ciascun repository.
+
+- *Aggregazione di Elementi:* Il DTO espone una collezione tipizzata, consentendo al client di ottenere una vista compatta delle risorse disponibili.
+- *Separazione della Proiezione:* L'utilizzo di `RepositoryCollectionItemDTO` evita l'esposizione diretta di modelli interni, mantenendo il disaccoppiamento tra livelli.
+
+====== GetAnalysisResponseDTO <GetAnalysisResponseDTO>
+#codeDiagram("GetAnalysisResponseDTO", 100%)
+
+`GetAnalysisResponseDTO` definisce la risposta HTTP per il recupero dettagliato di una singola analisi. Oltre ai metadati principali (identificativi, repository, stato e timestamp), include i report opzionali (`docsReportJson`, `codeReportJson`, `secReportJson`) che rappresentano i risultati delle diverse componenti di analisi.
+
+- *Composizione di Dati Complessi:* Il DTO aggrega più sotto-strutture (`DocsAnalysisReportDTO`, `CodeAnalysisReportDTO`, `SecAnalysisReportDTO`), permettendo al client di ottenere una vista completa dell'analisi.
+- *Gestione di Dati Opzionali:* La presenza di campi opzionali consente di rappresentare analisi parziali o in corso.
+- *Separazione tra Result e Response:* Il metodo `fromResult` realizza la trasformazione dal livello applicativo (`GetAnalysisResult`) al formato esposto verso l'esterno.
+
+====== GetFullRepositoryCollectionDetailsResponseDTO <GetFullRepositoryCollectionDetailsResponseDTO>
+#codeDiagram("GetFullRepositoryCollectionDetailsResponseDTO", 90%)
+
+`GetFullRepositoryCollectionDetailsResponseDTO` definisce la risposta HTTP per il recupero completo dei dettagli di una collezione di repository. Il campo `data` aggrega le informazioni della collezione insieme alla lista delle analisi associate, rappresentate tramite `GetAnalysisResponseDTO`.
+
+- *Aggregazione Gerarchica:* Il DTO combina informazioni di alto livello della collezione con una lista dettagliata di analisi, fornendo una vista completa in un'unica risposta.
+- *Composizione di DTO:* L'utilizzo di `GetAnalysisResponseDTO` consente di riutilizzare una rappresentazione già definita, mantenendo coerenza tra endpoint.
+
+====== GetRepositoryCollectionResponseDTO <GetRepositoryCollectionResponseDTO>
+#codeDiagram("GetRepositoryCollectionResponseDTO", 70%)
+
+`GetRepositoryCollectionResponseDTO` definisce la risposta HTTP per il recupero sintetico di una collezione di repository. Il campo `data` include le informazioni principali della collezione e una lista di identificativi (`analyses`) delle analisi associate.
+
+- *Vista Sintetica:* A differenza della versione completa, il DTO espone solo gli identificativi delle analisi, riducendo il payload e migliorando le performance.
+- *Differenziazione dei Livelli di Dettaglio:* La presenza di DTO distinti per vista completa e sintetica consente al client di scegliere il livello di dettaglio più appropriato.
+
+====== PostPatResponseDTO <PostPatResponseDTO>
+#codeDiagram("PostPatResponseDTO", 45%)
+
+`PostPatResponseDTO` definisce la risposta HTTP per l'operazione di creazione di un Personal Access Token. Il campo `added` indica l'esito dell'operazione, mentre `error` consente di trasportare un messaggio descrittivo in caso di fallimento.
+
+- *Factory Method per la Creazione:* I metodi statici (`success`, `failure`) garantiscono una costruzione coerente delle risposte, evitando stati non validi.
+
+====== StartAnalysisResponseDTO <StartAnalysisResponseDTO>
+#codeDiagram("StartAnalysisResponseDTO", 75%)
+
+`StartAnalysisResponseDTO` definisce la risposta HTTP per l'avvio di una nuova analisi. Il DTO include i principali metadati dell'analisi avviata (`user`, `id`, `url`, `branch`, `commit`) e un campo `errorMessage` che rappresenta il risultato dell'operazione.
+
+- *Trasporto di Informazioni Operative:* In caso di successo, il DTO restituisce i dati identificativi dell'analisi appena avviata.
+- *Messaggio Sempre Presente:* Il campo `errorMessage` viene popolato con la stringa fissa `Analysis Started Successfully` in caso di successo, o con il messaggio di errore specifico in caso di fallimento, fornendo un feedback uniforme al client indipendentemente dall'esito.
+- *Costruzione Controllata:* I metodi statici assicurano che i dati siano valorizzati solo nei casi appropriati, mantenendo coerenza tra successo e fallimento.
 
 ====== UpdatePatResponseDTO <UpdatePatResponseDTO>
-#codeDiagram("UpdatePatResponseDTO", 100%)
+#codeDiagram("UpdatePatResponseDTO", 50%)
 
-`UpdatePatResponseDTO` è il DTO di risposta per l'aggiornamento di un PAT.
+`UpdatePatResponseDTO` definisce la risposta HTTP per l'aggiornamento di un Personal Access Token. Il campo `updated` indica l'esito dell'operazione, mentre `error` fornisce eventuali dettagli in caso di errore.
+
+- *Contratto Semplice:* La struttura minimale riflette la natura dell'operazione, permettendo al client di interpretare facilmente il risultato.
+- *Coerenza dei Pattern:* L'utilizzo di factory method mantiene allineato il comportamento con gli altri DTO di risposta.
 
 #pagebreak()
 
+
 === Account Microservice
 L'Account Microservice rappresenta il modulo centrale per la gestione del ciclo di vita delle identità all'interno di _CodeGuardian_. Progettato seguendo i principi dell'*Architettura Esagonale*, il servizio isola rigorosamente i processi core — quali la gestione delle utenze, l'autenticazione basata su JWT e la sicurezza delle credenziali — dalle tecnologie di persistenza (PostgreSQL) e di cifratura (Bcrypt). Grazie a una netta separazione tra porte e adattatori, il microservizio garantisce l'integrità del dominio utente e la flessibilità nell'evoluzione dei criteri di sicurezza, fungendo da garante per l'accesso protetto a tutte le funzionalità della piattaforma.
-
-==== Design Patterns
-
-All'interno dell'Account Microservice sono stati adottati molteplici design pattern per garantire disaccoppiamento, testabilità e manutenibilità del codice. Di seguito vengono descritti i principali pattern utilizzati e le motivazioni alla base della loro scelta:
-
-===== Architettura Esagonale (Ports and Adapters)
-L'intera struttura del microservizio si basa saldamente sui principi di Ports and Adapters.
-- *Problema risolto:* Evita il forte accoppiamento logico tra il nucleo applicativo (Domain e Application) e i layer esterni come database, interfacce utente e servizi di terze parti, isolando la logica di business e rendendola indipendente dalle tecnologie di contorno.
-- *Implementazione:* Il livello applicativo definisce interfacce specifiche dette "Porte" (come `IUserSavePort` o `IHashPasswordPort`), mentre il livello infrastrutturale e di presentazione ospita i componenti concreti detti "Adapters" (come `PostgresAdapter`) che si curano di implementare o utilizzare tali interfacce.
-
-===== Command Pattern
-Il pattern *Command* è stato utilizzato diffusamente nel layer applicativo per incapsulare i dati di una specifica operazione richiesta dall'utente (es. `LoginCommand`, `DeleteCommand`, `RegistrationUserCommand`).
-- *Problema risolto:* Semplifica le firme dei metodi nei casi d'uso, evitando il passaggio di liste di argomenti lunghe e fragili alle modifiche.
-- *Implementazione:* Invece di passare molteplici parametri sparsi ai metodi dei servizi, ogni Use Case accetta come unico parametro un oggetto istanza di un Command specifico, che raggruppa logicamente e tipizza tutti i parametri necessari per svolgere l'operazione.
-
-===== Data Transfer Object (DTO)
-Il pattern *DTO* viene impiegato sistematicamente sia a livello applicativo (`AuthResultDto`, `UserDTO`) che a livello di presentazione e comunicazione HTTP (`LoginRequestDto`, `AuthResponseDto`).
-- *Problema risolto:* Consente di trasferire dati tra i diversi layer del microservizio e verso i client esterni senza esporre direttamente le entità di dominio interno. Quest'ultime, infatti, potrebbero nascondere metadati o riferimenti sensibili come `PasswordHash` che non devono in nessun caso fuoriuscire dal sistema inavvertitamente.
-- *Implementazione:* Tramite i DTO, i dati in transito assumono una forma asettica e consona per le sole esigenze di comunicazione, abilitando inoltre l'inserimento di una logica di convalida lato framework sfruttando i decoratori di NestJS (es. `class-validator`) direttamente sulle classi di richiesta in arrivo.
-
-===== Adapter Pattern
-Nel livello infrastrutturale è evidente l'adozione dell'*Adapter Pattern*, guidato dall'architettura esagonale.
-- *Problema risolto:* Astrae completamente la logica di business in merito ai dettagli sulle operazioni di memorizzazione dei dati e alle query sql, mantenendo nascosta la specifica tecnologia di database relazionale utilizzata (PostgreSQL).
-- *Implementazione:* `PostgresAdapter` agisce da adattatore verso il livello di persistenza, centralizzando fisicamente le esecuzioni delle transazioni nel DB e traducendo i contratti del dominio. Al contempo soddisfa molteplici porte del core applicativo (es. `IUserFindPort`, `IUserSavePort`). Ciò garantisce un disaccoppiamento così netto da permettere, qualora si rivelasse necessario, di sostituire agilmente il database con una tecnologia differente.
-
-===== Dependency Injection
-Sfruttando nativamente le capacità del framework NestJS, l'*Iniezione delle Dipendenze (DI)* rappresenta uno dei pattern tecnici principali alla base del progetto software.
-- *Problema risolto:* Evita la creazione "hard-coded" ed esplicita delle dipendenze direttamente cablate in ogni classe chiamante, migliorando notevolmente le probabilità di riutilizzo del codice, la modularità e abbattendo gli ostacoli che impediscono altrimenti l'agevole testing unitario.
-- *Implementazione:* Attraverso i costruttori di classe, i vari Controllers e i Services ricevono all'avvio del sistema le loro rispettive dipendenze sotto forma ridotta di interfacce/componenti di istanziazione validati. Un container `Inversion of Control` (IoC) di supporto si prende in totale carico l'apposita istanziazione ed assegnazione dei componenti.
 
 ==== Domain
 Il Dominio rappresenta il nucleo centrale dell'architettura esagonale, dove risiedono esclusivamente la logica di business e le regole vitali del progetto. Questa sezione è progettata per essere totalmente agnostica rispetto alla tecnologia: non possiede alcuna conoscenza di database, protocolli di comunicazione (HTTP/REST) o framework esterni.
@@ -1735,7 +1948,7 @@ L'entità `User` costituisce l'entità radice del dominio di autenticazione. Ess
 
 `InvalidCredentialsException` è l'eccezione sollevata dal `LoginService` quando la combinazione email/password fornita non corrisponde a nessun account valido nel sistema. Il costruttore senza parametri formalizza un errore di business che non richiede dettagli aggiuntivi: l'unica informazione rilevante è che le credenziali sono invalide.
 
-===== Ports
+===== Ports <CredentialPorts>
 
 ====== IHashComparePort <IHashComparePort>
 #codeDiagram("IHashComparePort", 65%)
@@ -1887,7 +2100,7 @@ L'entità `User` costituisce l'entità radice del dominio di autenticazione. Ess
 
 ==== Infrastructure
 
-===== Adapters
+===== Adapters <Credential_Adapters>
 
 ====== BcryptAdapter <BcryptAdapter>
 #codeDiagram("BcryptAdapter", 60%)
@@ -2007,6 +2220,8 @@ L'entità `User` costituisce l'entità radice del dominio di autenticazione. Ess
 
 - *Centralizzazione della Gestione degli Errori:* Concentrare la traduzione delle eccezioni in un unico filtro garantisce uniformità nel formato delle risposte di errore verso i client, evitando che dettagli tecnici interni vengano esposti accidentalmente.
 - *Mapping Eccezioni - HTTP:* Il filtro implementa la logica di mapping tra le eccezioni di dominio (es. `InvalidCredentialsException`) e i codici di stato HTTP appropriati (es. `401 Unauthorized`), centralizzando questa trasformazione e rimuovendo la necessità di gestirla nei singoli controller.
+
+
 === Frontend Application
 
 Il frontend di Code Guardian è una *Single-Page Application* (SPA) sviluppata in TypeScript con React, strutturata seguendo il pattern architetturale *Model-View-ViewModel* (MVVM). Le responsabilità sono distribuite in quattro strati orizzontali con dipendenze che fluiscono sempre dalla View verso il Model, senza mai invertirsi.
@@ -2176,3 +2391,1296 @@ Le analisi dei repository sono operazioni a lunga durata (ordine dei minuti). Pe
 Quando l'utente avvia un'analisi o visualizza la pagina di un repository in fase di elaborazione, il hook effettua richieste periodiche verso il microservizio Analysis per ottenere lo stato aggiornato dell'analisi in corso. Ai fini di ottimizzazione, il polling viene sospeso automaticamente non appena l'analisi giunge a uno stato terminale (completato o fallito).
 
 Questo approccio garantisce che la `RepositoryDetailPage` aggiorni dinamicamente lo stato dell'analisi (con i relativi callback `onStarted`, `onCompleted`, `onFailed`) e presenti infine il report completo, fornendo il necessario feedback visivo senza complessità architetturali legate a WebSockets persistenti.
+
+#pagebreak()
+
+= Mappatura dei Requisiti di Sistema
+
+#let fr_counter = counter("FR")
+#let qr_ob_counter = counter("QROb")
+#let vr_ob_counter = counter("VROb")
+
+#let FRObx = context [FROb#fr_counter.step()#fr_counter.display()]
+#let FRDex = context [FRDe#fr_counter.step()#fr_counter.display()]
+#let FROpx = context [FROp#fr_counter.step()#fr_counter.display()]
+#let QRObx = context [QROb#qr_ob_counter.step()#qr_ob_counter.display()]
+#let VRObx = context [VROb#vr_ob_counter.step()#vr_ob_counter.display()]
+
+// partono da 1
+#fr_counter.step()
+#qr_ob_counter.step()
+#vr_ob_counter.step()
+
+== Stato Attuale dei Requisiti Funzionali
+
+#table(
+  columns: (1fr, 3fr, 1fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*ID*], [*Descrizione*], [*Stato*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, left, center).at(col) + horizon,
+
+  // --- REGISTRAZIONE (UC1) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente non registrato l'accesso alla sezione di creazione account.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve predisporre un comando di conferma per l'invio del modulo di registrazione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve eseguire la validazione completa dei campi obbligatori (presenza, formato, conformità ai vincoli e univocità) al momento dell'invio del modulo di registrazione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve permettere la finalizzazione della registrazione solo a seguito della validazione positiva di tutti i campi obbligatori.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve creare e memorizzare un record account che includa almeno username, email, hash della password e salt associato a seguito di registrazione completata con esito positivo.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve memorizzare le chiavi di accesso esclusivamente in forma cifrata tramite un algoritmo di hashing sicuro e generare un salt univoco per ciascun account.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve garantire l'atomicità della procedura di registrazione: in caso di fallimento della persistenza, nessun record parziale deve essere mantenuto nel database.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve visualizzare un messaggio di conferma esplicito a seguito della creazione corretta dell'account CodeGuardian.],
+  [SODDISFATTO],
+
+  // --- CAMPI OBBLIGATORI MANCANTI (UC1.0.1) ---
+  [#FRObx],
+  [Il Sistema deve rilevare il tentativo di invio del modulo di registrazione in presenza di campi obbligatori vuoti.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire la registrazione e notificare l'utente indicando specificamente quali dati obbligatori non sono stati inseriti.],
+  [SODDISFATTO], 
+
+  // --- USERNAME (UC1.1 + ESTENSIONI) ---
+  [#FRObx],
+  [Il Sistema deve consentire l'immissione di un username alfanumerico con lunghezza compresa tra 4 e 20 caratteri.],
+  [SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve verificare l'univocità dello username rispetto agli account esistenti nel database.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve imporre vincoli di unicità lato persistenza su username per prevenire registrazioni duplicate anche in presenza di richieste concorrenti.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [In caso di violazione del vincolo di unicità in fase di persistenza, il Sistema deve annullare la registrazione e notificare l'utente con il messaggio previsto per username già in uso.],
+  [NON SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora lo username inserito non rispetti i vincoli sintattici previsti.],
+  [SODDISFATTO],
+
+  // --- EMAIL (UC1.2 + ESTENSIONI) ---
+  [#FRDex],
+  [Il Sistema deve consentire l'immissione di un indirizzo email conforme allo standard RFC 5322.],
+  [NON SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve rifiutare indirizzi email contenenti spazi o privi del carattere "@".],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve verificare l'univocità dell'indirizzo email rispetto agli account esistenti nel database.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve imporre vincoli di unicità lato persistenza su indirizzo email per prevenire registrazioni duplicate.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora l'indirizzo email inserito non sia conforme ai requisiti sintattici.],
+  [SODDISFATTO],
+
+  // --- PASSWORD (UC1.3 + ESTENSIONE) ---
+  [#FRObx],
+  [Il Sistema deve accettare una password solo se di lunghezza pari o superiore ad 8 caratteri.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve accettare una password solo se include almeno una lettera maiuscola, una lettera minuscola, una cifra e un carattere speciale.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve rifiutare password che coincidono con lo username o che contengono lo username come sottostringa.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio che specifichi i requisiti di sicurezza non soddisfatti.],
+  [SODDISFATTO],
+
+  // --- AUTENTICAZIONE (UC2) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente non autenticato l'accesso alla sezione di autenticazione (Login).],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve predisporre un comando di conferma per finalizzare la procedura di accesso.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve eseguire la validazione completa delle credenziali (presenza, formato e corrispondenza) al momento dell'invio del modulo.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve garantire l'accesso alle funzionalità riservate esclusivamente a seguito di una corretta validazione delle credenziali.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve reindirizzare l'Utente verso la dashboard principale a seguito di autenticazione avvenuta con successo.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve utilizzare protocolli di comunicazione sicuri (HTTPS) per il trasferimento delle credenziali durante il login.],
+  [SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve utilizzare lo username fornito per recuperare dalla persistenza il record account associato.],
+  [NON SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve verificare la password inserita confrontando l'hash calcolato con l'hash memorizzato tramite la medesima funzione di hashing e salt.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve implementare meccanismi di rate limiting o lockout temporaneo a seguito di ripetuti tentativi di autenticazione falliti.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve visualizzare un indicatore di caricamento (spinner) durante la validazione delle credenziali per prevenire invii multipli.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve rilevare campi incompleti nel login e inibire l'accesso notificando l'utente tramite avviso specifico.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire l'avanzamento della procedura e mostrare un messaggio di errore qualora le credenziali non risultino valide o non corrispondano a nessun account registrato.],
+  [SODDISFATTO],
+
+  // --- INTEGRAZIONE GITHUB (UC3) ---
+  [#FROpx],
+  [Il Sistema deve consentire all'Utente Autorizzato l'accesso alla sezione dedicata al collegamento del profilo GitHub.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve impedire l'avvio della procedura di collegamento qualora un profilo GitHub risulti già associato all'account CodeGuardian dell'utente.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve utilizzare un parametro di stato (state) per prevenire attacchi di tipo Cross-Site Request Forgery (CSRF) durante il flusso OAuth2.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve memorizzare i token di accesso ottenuti da GitHub esclusivamente in forma cifrata tramite algoritmi di crittografia forte (es. AES-256).],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve evitare la persistenza di token o associazioni qualora la procedura di collegamento non termini con esito positivo.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve mostrare un avviso informativo obbligatorio prima di procedere al reindirizzamento verso il dominio esterno GitHub.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve consentire all'utente di annullare il reindirizzamento, ripristinando lo stato della sezione integrazioni senza alcuna modifica.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve gestire i timeout nelle chiamate verso le API di GitHub durante lo scambio del token, notificando l'utente del fallimento temporaneo.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve inibire il collegamento qualora il profilo GitHub risulti già associato a un altro account CodeGuardian.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve mostrare un messaggio di errore specifico qualora l'utente neghi il consenso alla condivisione dei dati su GitHub.],
+  [NON SODDISFATTO],
+
+  // --- RICHIESTA ANALISI (UC4) ---
+  [#FRObx],
+  [Il Sistema deve consentire l'immissione dell'URL del repository GitHub nel modulo di richiesta analisi.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve validare che l'URL del repository GitHub inserito utilizzi il protocollo "https://" e punti al dominio "github.com".],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve verificare la dimensione del repository tramite API GitHub e inibire l'analisi qualora questa superi i limiti tecnici prestabiliti.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve disabilitare il comando di conferma dell'invio a seguito della pressione dell'utente per prevenire richieste duplicate.],
+  [SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve consegnare la notifica di fine analisi attraverso i canali scelti dall'utente (es. email o notifiche app).],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve mostrare i dettagli dell'analisi (nome progetto e ora) direttamente nell'avviso ricevuto dall'utente.],
+  [SODDISFATTO],
+  
+  [#FRObx],
+  [Il Sistema deve inviare un avviso immediato se un'analisi si interrompe per un errore imprevisto, spiegandone brevemente il motivo.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve restituire immediatamente il report esistente, senza avviare una nuova elaborazione, informando l'utente qualora i dati remoti risultino già aggiornati.],
+  [SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve accodare la richiesta di analisi al processo già in corso per il medesimo repository, informando l'utente dell'avvenuta presa in carico.],
+  [NON SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire la richiesta di analisi qualora non venga selezionata almeno un'area di interesse.],
+  [SODDISFATTO],
+
+  // --- VISUALIZZAZIONE LISTA (UC5) ---
+  [#FRObx],
+  [Il Sistema deve ordinare l'elenco dei repository analizzati in ordine decrescente rispetto alla data dell'ultima analisi disponibile.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve garantire che l'utente possa consultare i risultati nella propria area personale anche se la notifica via email non viene recapitata.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve contrassegnare l'analisi come "Fallita" nella lista dei progetti dell'utente se il processo non può essere completato.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve rendere visibili le cause del fallimento all'interno della dashboard, indipendentemente dall'invio o dalla ricezione dell'avviso di errore.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire la visualizzazione della lista e mostrare un'informativa specifica qualora non risultino repository analizzati.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire il rendering della lista e mostrare una notifica di errore qualora i servizi di persistenza non siano raggiungibili.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve fornire un comando di aggiornamento (Refresh) per consentire un nuovo tentativo di caricamento in caso di errore tecnico.],
+  [SODDISFATTO],
+
+  // --- VISUALIZZAZIONE REPORT (UC6) ---
+  [#FRObx],
+  [Il Sistema deve consentire la selezione di un repository dalla lista per il recupero del report di dettaglio associato.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve validare lato server che il report richiesto appartenga al repository associato all'account dell'Utente Autorizzato prima del rendering.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire il rendering e mostrare un errore di autorizzazione qualora l'utente tenti di accedere a un report di un repository non associato al proprio profilo.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve gestire i timeout nel recupero dei dati analitici dalla persistenza, notificando l'utente in caso di indisponibilità temporanea del report.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve permettere la selezione o deselezione dinamica delle aree analitiche (Codice, Sicurezza, Documentazione) tramite interfaccia utente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve aggiornare dinamicamente il contenuto a video in base ai filtri applicati senza richiedere il ricaricamento dell'intera pagina.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire la visualizzazione delle aree analitiche e mostrare un avviso informativo qualora non risulti selezionata alcuna area nei filtri.],
+  [SODDISFATTO],
+
+  // --- METADATI (UC6.2) ---
+  [#FRObx],
+  [Il Sistema deve esporre i metadati identificativi del report recuperati in fase di caricamento.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve esporre il timestamp (data e ora ISO 8601) relativo alla generazione del report.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve visualizzare l'identificativo SHA del commit GitHub analizzato, fornendo un link diretto al commit sulla piattaforma esterna.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve esporre lo username o l'identificativo dell'account che ha originato la scansione.],
+  [SODDISFATTO],
+
+  // --- RISULTATI E REMEDIATION (UC6.3) ---
+  [#FRObx],
+  [Il Sistema deve presentare le metriche tecniche aggregate (es. punteggi di qualità, numero bug, vulnerabilità) per ogni sezione attiva sulla stessa schermata.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve caricare e visualizzare la lista delle azioni correttive (remediation), esponendo per ogni elemento un titolo identificativo, il livello di criticità e una breve descrizione dell'intervento consigliato.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve consentire l'espansione dei dettagli di ogni singola remediation per la visualizzazione della proposta di risoluzione tecnica.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve visualizzare un messaggio di conferma esito positivo (badge "Clean" o simile) qualora il motore di analisi non rilevi criticità nella sezione.],
+  [SODDISFATTO],
+
+  // --- SELEZIONE INTERVALLO TEMPORALE (UC7) ---
+  [#FRObx],
+  [Il Sistema deve consentire la selezione di un intervallo temporale tramite input di data (inizio e fine) per l'estrazione dei report storici dal database.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve predisporre un comando di conferma per l'invio della richiesta di confronto dei dati.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire il caricamento dei dati e visualizzare un avviso specifico qualora i campi relativi alle date non risultino popolati.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve impedire l'invio della richiesta qualora la data di inizio sia cronologicamente successiva alla data di fine, segnalando l'errore di coerenza.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve limitare l'ampiezza dell'intervallo temporale a un massimo di 12 mesi solari, inibendo la richiesta e notificando l'utente in caso di superamento.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve gestire l'assenza di dati nel periodo selezionato visualizzando un'informativa di "Nessun report trovato" senza interrompere la sessione utente.],
+  [SODDISFATTO],
+
+  // --- VISUALIZZAZIONE METRICHE COMPARATIVE (UC8) ---
+  [#FRDex],
+  [Il Sistema deve generare rappresentazioni grafiche dinamiche (es. grafici a linee o istogrammi) per illustrare l'evoluzione temporale delle metriche analitiche.],
+  [SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve abilitare tooltips informativi al passaggio del cursore (hover) sui punti dati dei grafici per mostrare i valori esatti e l'hash del commit associato.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve presentare una tabella comparativa che elenchi i report selezionati in ordine cronologico crescente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve calcolare e visualizzare gli indicatori di variazione (trend incrementali o decrementali) tra ogni analisi e quella immediatamente precedente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve garantire l'allineamento dei dati tra la vista grafica e la vista tabellare, effettuando una singola operazione di fetch atomica per l'intero intervallo.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve gestire eventuali errori di rendering dei grafici (es. mancanza di librerie client-side) mostrando in alternativa i dati grezzi in formato tabellare.],
+  [SODDISFATTO],
+
+  // --- ANALISI DEL CODICE (UC9) ---
+  [#FRObx],
+  [Il Sistema deve caricare e visualizzare i dati relativi alla sezione "Codice" esclusivamente se l'area risulta attiva nei filtri di visualizzazione del report.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve esporre i risultati dell'analisi statica (bug, code smell) indicando per ogni rilievo la gravità e la posizione nel file sorgente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve esporre la percentuale di copertura dei test (Code Coverage) e il rapporto tra test superati e falliti rispetto al totale eseguito.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve presentare la lista delle remediation specifiche per il codice, esponendo per ogni elemento un titolo identificativo, il file associato, la riga di codice interessata e il livello di severità, permettendo inoltre la navigazione verso il dettaglio della singola azione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve visualizzare un'informativa di "Codice Conforme" qualora non siano rilevati bug o violazioni degli standard qualitativi.],
+  [SODDISFATTO],
+
+  // --- ANALISI DELLA SICUREZZA (UC10) ---
+  [#FRObx],
+  [Il Sistema deve caricare i dati della sezione "Sicurezza" in modo asincrono rispetto alle altre sezioni per ottimizzare i tempi di risposta.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve esporre l'elenco delle dipendenze vulnerabili indicando il codice CVE, il grado di severità (CVSS) e la versione sicura consigliata.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve mappare i rilievi di sicurezza rispetto alle categorie della Top 10 OWASP per facilitare la valutazione della conformità.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve presentare la lista delle remediation di sicurezza, esponendo per ogni elemento un titolo identificativo, la libreria o dipendenza vulnerabile associata, il livello di severità e l'azione correttiva consigliata, ordinandole prioritariamente in base alla criticità.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve visualizzare un'informativa di "Repository Sicuro" qualora non siano rilevate vulnerabilità note nelle dipendenze o nel codice.],
+  [SODDISFATTO],
+
+  // --- ANALISI DELLA DOCUMENTAZIONE (UC11) ---
+  [#FRObx],
+  [Il Sistema deve caricare e visualizzare i dati della sezione "Documentazione" analizzando la presenza e la sintassi dei file Markdown e testuali.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve segnalare gli errori sintattici e i link interrotti individuati all'interno della documentazione del repository.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve calcolare e mostrare un indice di completezza documentale basato sulla copertura delle interfacce pubbliche descritte.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve esporre nell'elenco delle remediation documentali il nome del file interessato, il livello di severità e i suggerimenti testuali per l'integrazione delle parti di documentazione mancanti o incomplete.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve visualizzare un'informativa di "Documentazione Completa" qualora non siano rilevati errori o mancanze informative.],
+  [SODDISFATTO],
+
+  // --- RANKING REPOSITORY (UC12) ---
+  [#FRObx],
+  [Il Sistema deve calcolare un punteggio di qualità globale (0-100) per ogni repository analizzato, basandosi sulle metriche pesate di codice, sicurezza e documentazione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve generare una graduatoria dinamica dei repository associati all'account dell'Utente Autorizzato, ordinata per punteggio di qualità decrescente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve esporre, per ogni riga del ranking: posizione in classifica, nome del repository, punteggio globale e un indicatore di trend rispetto al mese precedente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire il rendering del ranking e visualizzare un'informativa specifica qualora non risultino analisi completate per l'account utente.],
+  [SODDISFATTO],
+
+  // --- DISCONNESSIONE GITHUB (UC13) ---
+  [#FROpx],
+  [Il Sistema deve consentire la rimozione dell'integrazione GitHub esclusivamente previa conferma esplicita dell'Utente Avanzato.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve inviare una richiesta di revoca del token OAuth alle API di GitHub al momento della conferma della disconnessione.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve eliminare definitivamente dal database i token (access e refresh) e l'ID utente GitHub associato all'account CodeGuardian.],
+  [NON SODDISFATTO],
+
+  [#FROpx],
+  [Il Sistema deve gestire eventuali errori di comunicazione con GitHub durante la revoca, procedendo comunque alla cancellazione locale dei dati sensibili.],
+  [NON SODDISFATTO],
+
+  // --- ESPORTAZIONE REPORT (UC14) ---
+  [#FRObx],
+  [Il Sistema deve rendere disponibile il file generato tramite un link di download],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve consentire l'esportazione dei report nei formati PDF (per consultazione) e JSON (per interoperabilità dati).],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire l'invio della richiesta di generazione file qualora l'utente non selezioni formalmente uno dei formati previsti.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve generare il documento includendo i metadati del report (timestamp, commit hash) e i risultati delle sezioni effettivamente analizzate.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve gestire il processo di generazione del file asincronamente per evitare il blocco dell'interfaccia utente durante il parsing di report voluminosi.],
+  [SODDISFATTO],
+
+  // --- MODIFICA PASSWORD (UC15) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato l'accesso alla sezione dedicata alla modifica della chiave di accesso.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve richiedere l'immissione della password attualmente in uso e validarne la corrispondenza con l'hash memorizzato prima di procedere alla variazione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire la procedura e mostrare un errore specifico qualora la password corrente non venga inserita o risulti errata.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve validare che la nuova password rispetti i vincoli di complessità stabiliti per la registrazione iniziale.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve confrontare l'hash della nuova password con quello attuale e impedire la modifica qualora i valori coincidano.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve aggiornare la password nella persistenza esclusivamente tramite un nuovo processo di hashing sicuro e generazione di un nuovo salt univoco.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inviare una notifica email automatica all'indirizzo associato al profilo a seguito dell'avvenuta modifica delle credenziali.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve invalidare tutte le sessioni attive dell'utente (ad eccezione di quella corrente) a seguito del cambio password avvenuto con successo.],
+  [SODDISFATTO],
+
+  // --- VISUALIZZAZIONE REMEDIATION (UC16) ---
+  [#FRObx],
+  [Il Sistema deve consentire la visualizzazione dei dettagli tecnici di una specifica remediation selezionata dall'utente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve esporre per ogni remediation: descrizione del difetto, snippet di codice interessato (se applicabile), grado di severità e proposta di risoluzione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve includere riferimenti o link a documentazione esterna (es. CWE, OWASP) qualora la remediation riguardi una vulnerabilità di sicurezza nota.],
+  [SODDISFATTO],
+
+  // --- VERIFICA ACCESSIBILITÀ REPOSITORY (UC17) ---
+  [#FRObx],
+  [L'Orchestratore deve gestire il ciclo di vita della verifica accessibilità tramite chiamate asincrone verso le API REST di GitHub.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [L'Orchestratore deve implementare un meccanismo di "Exponential Backoff" per gestire i tentativi di riconnessione in caso di errori di rete temporanei verso GitHub.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [L'Orchestratore deve validare la raggiungibilità dell'endpoint API di GitHub inviando una richiesta di "Heartbeat" prima di tentare il fetch del repository.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [L'Orchestratore deve prima tentare l'accesso al repository senza intestazioni di autorizzazione per verificare se la risorsa è di dominio pubblico.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [In caso di errore HTTP 404 o 403 sulla risorsa pubblica, l'Orchestratore deve tentare una seconda richiesta iniettando nel modulo di autorizzazione il token OAuth 2.0 dell'utente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [L'Orchestratore deve verificare che il token fornito disponga degli "scopes" (permessi) minimi di lettura (repo o public_repo) necessari per il clonaggio.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [In caso di fallimento definitivo (es. token scaduto o repository eliminato), l'Orchestratore deve inviare un segnale di interruzione al modulo di notifica e aggiornare lo stato dell'audit in "FAILED_ACCESS".],
+  [SODDISFATTO],
+
+  // --- GESTIONE REMEDIATION (UC18 - UC19) ---
+  [#FRDex],
+  [Il Sistema deve consentire l'applicazione automatica delle modifiche al repository tramite l'integrazione GitHub a seguito dell'accettazione della remediation.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve eseguire una validazione di integrità sulla proposta correttiva prima dell'invio del commit verso il repository esterno.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve aggiornare lo stato della remediation in "Applied" o "Dismissed" nel database di persistenza a seguito dell'azione dell'utente.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve notificare l'utente in caso di fallimento del processo di scrittura (commit) sul repository remoto durante l'accettazione.],
+  [NON SODDISFATTO],
+
+  // --- CREAZIONE RACCOLTA REPORT (UC20) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato la definizione di un nome univoco per la raccolta di report all'interno del proprio account.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve validare la sintassi dell'URL GitHub fornito, assicurando l'uso del protocollo HTTPS e la corretta struttura del path user/repo.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve interrogare le API di GitHub per confermare l'esistenza e la raggiungibilità del repository indicato prima di finalizzare la raccolta.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve gestire i casi di inaccessibilità del repository (es. repository privato senza permessi) notificando l'utente tramite avviso specifico.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve impedire la creazione di raccolte duplicate che puntano al medesimo repository per lo stesso utente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve memorizzare la descrizione facoltativa della raccolta supportando la codifica UTF-8 per caratteri speciali e simboli.],
+  [SODDISFATTO],
+
+  // --- AVVIO ANALISI E CLONAZIONE (UC21 - UC21.1) ---
+  [#FRObx],
+  [L'Orchestratore deve parallelizzare le richieste di analisi verso i diversi strumenti per ottimizzare il tempo complessivo di esecuzione dell'audit.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [L'Orchestratore deve includere nella richiesta verso gli strumenti esterni i parametri di configurazione definiti dall'utente durante la fase di richiesta.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [L'Orchestratore deve trasmettere in modo sicuro (tramite secret manager) le credenziali o i token di accesso al servizio AWS incaricato della clonazione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [L'Orchestratore deve monitorare il completamento della clonazione e gestire eventuali timeout o errori di spazio disco insufficiente sul volume di destinazione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [In caso di errore durante la clonazione, l'Orchestratore deve inibire l'invio delle richieste agli strumenti di analisi e liberare immediatamente le risorse allocate.],
+  [SODDISFATTO],
+
+  // --- DISPATCHING ANALISI (UC21.2 - UC21.4) ---
+  [#FRObx],
+  [L'Orchestratore deve inoltrare la codebase o i file specifici agli strumenti di analisi esterna (Codice, Sicurezza, Documentazione) tramite protocolli di trasferimento sicuri.],
+  [SODDISFATTO],
+
+  // --- PERSISTENZA STATO (UC22) ---
+  [#FRObx],
+  [Il Sistema deve registrare lo stato dell'analisi nel sistema di persistenza impostandolo a "PENDING" a seguito dell'inizializzazione corretta di tutti i servizi esterni.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve associare univocamente l'ID dell'analisi al repository oggetto dell'audit e all'identificativo dell'utente richiedente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve persistere i metadati di avvio, inclusi l'hash del commit analizzato e il timestamp di sistema.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [In caso di errore critico durante la scrittura dello stato (UC22.0.1), l'Orchestratore deve tentare una procedura di "Rollback" informando gli strumenti esterni di annullare l'analisi.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve registrare nei log di audit ogni fallimento di persistenza dello stato, includendo lo stack trace dell'errore per finalità diagnostiche.],
+  [SODDISFATTO],
+
+  // --- RECUPERO RISULTATI (UC23) ---
+  [#FRObx],
+  [L'Orchestratore deve verificare regolarmente se gli strumenti esterni hanno terminato l'analisi del repository.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [L'Orchestratore deve scaricare i risultati delle analisi non appena questi vengono messi a disposizione dagli strumenti esterni.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [L'Orchestratore deve controllare che i file ricevuti siano completi e leggibili prima di utilizzarli.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve poter proseguire con la creazione del report anche se uno degli strumenti fallisce, utilizzando solo i dati recuperati con successo.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [L'Orchestratore deve impostare un tempo massimo di attesa per le analisi, oltre il quale smette di aspettare lo strumento ritardatario.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve segnalare all'interno del database se il report finale contiene solo dati parziali a causa di un problema tecnico.],
+  [SODDISFATTO],
+
+  //UC24
+  // --- GENERAZIONE DEL REPORT (UC24) ---
+  [#FRObx],
+  [Il Sistema deve unificare i dati provenienti dai diversi strumenti (codice, sicurezza, documentazione) in un unico documento di sintesi.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve convertire i diversi formati dei dati ricevuti dagli strumenti esterni in un modello standard comune.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve verificare che il report finale contenga tutte le informazioni essenziali (risultati, data, versione del codice) prima di procedere al salvataggio.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve calcolare i punteggi di riepilogo generali basandosi sui singoli risultati ottenuti nelle varie aree analizzate.],
+  [SODDISFATTO],
+
+  // --- SALVATAGGIO E CONCLUSIONE (UC25) ---
+  [#FRObx],
+  [Il Sistema deve archiviare il report in modo permanente, collegandolo correttamente al repository dell'utente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve modificare lo stato dell'analisi in "Completato" solo dopo aver confermato che il salvataggio dei dati è andato a buon fine.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve informare l'utente con un messaggio di errore se un problema tecnico impedisce il salvataggio definitivo del report.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve tenere traccia internamente dei motivi del fallimento del salvataggio per permettere controlli tecnici successivi.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [In caso di errore nel salvataggio, il Sistema deve tentare di mantenere una copia temporanea del report per evitare la perdita totale dei dati elaborati.],
+  [SODDISFATTO],
+
+  // --- NOTIFICA COMPLETAMENTO (UC26) ---
+  [#FRObx],
+  [Il Sistema deve generare automaticamente un avviso per l'utente non appena il report di analisi è pronto e salvato correttamente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [La notifica inviata deve contenere un link o un pulsante che permetta all'utente di accedere direttamente alla visualizzazione del report.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve includere nella notifica informazioni di base per identificare l'analisi, come il nome del repository e la data di esecuzione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve garantire che l'invio della notifica non interferisca con lo stato dell'analisi: se la notifica fallisce, il report deve comunque rimanere disponibile.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [In caso di errore nell'invio del messaggio (es. email non raggiungibile), il Sistema deve segnare l'anomalia nei registri interni per permettere verifiche tecniche.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve tentare nuovamente l'invio della notifica per un numero limitato di volte in caso di problemi temporanei di rete.],
+  [SODDISFATTO],
+
+  // VISUALIZZAZIONE DETTAGLIO REPOSITORY IN LISTA (UC27)
+  [#FRObx],
+  [Il Sistema deve esporre per ogni elemento selezionato della lista: nome del repository, URL di riferimento e data dell'ultima analisi.],
+  [SODDISFATTO],
+
+  // --- CANCELLAZIONE ACCOUNT (UC28) --- ex uc47
+  [#FRObx],
+  [Il Sistema deve richiedere l'inserimento della password attuale come verifica di identità obbligatoria prima di avviare la cancellazione dell'account.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve mostrare un avviso di irreversibilità prima della cancellazione definitiva del profilo, consentendo l'annullamento dell'operazione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [A seguito della cancellazione del profilo, il Sistema deve rimuovere i dati personali e le associazioni OAuth, invalidando ogni credenziale di accesso precedente.],
+  [SODDISFATTO],
+
+  // --- GESTIONE ACCESSO GITHUB (UC29) ---
+  [#FRDex],
+  [Il Sistema deve trasformare il codice provvisorio fornito da GitHub in una chiave di accesso permanente per poter leggere i repository.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve proteggere la chiave di accesso di GitHub nascondendola tramite cifratura prima di salvarla nei propri archivi.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve collegare la chiave di GitHub in modo esclusivo al profilo dell'utente che ha autorizzato l'operazione.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve annullare il collegamento e chiedere all'utente di rifare la procedura se la chiave provvisoria risulta scaduta o non valida.],
+  [NON SODDISFATTO],
+
+  // --- VISUALIZZAZIONE REMEDIATION CODICE (UC30) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato la visualizzazione del dettaglio di una singola remediation relativa all'analisi del codice.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve includere nel dettaglio della remediation del codice il titolo, la descrizione, la tipologia di criticità e il livello di severità.],
+  [SODDISFATTO],
+
+  // --- VISUALIZZAZIONE REMEDIATION SICUREZZA (UC31) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato la visualizzazione del dettaglio di una singola remediation relativa all'analisi della sicurezza.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve includere nel dettaglio della remediation di sicurezza il titolo, la descrizione, la tipologia di vulnerabilità e il livello di severità.],
+  [SODDISFATTO],
+
+  // --- VISUALIZZAZIONE REMEDIATION DOCUMENTAZIONE (UC32) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Autorizzato la visualizzazione del dettaglio di una singola remediation relativa all'analisi della documentazione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve includere nel dettaglio della remediation documentale il titolo, la descrizione e la tipologia di rilievo documentale.],
+  [SODDISFATTO],
+
+  // --- ACCETTAZIONE REMEDIATION CODICE (UC33 + ESTENSIONE) ---
+  [#FRDex],
+  [Il Sistema deve consentire all'Utente Autorizzato di accettare una remediation relativa all'analisi del codice.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve applicare automaticamente alla codebase le modifiche previste dalla remediation del codice accettata.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve aggiornare lo stato della remediation del codice come "eseguita" nella dashboard a seguito dell'applicazione riuscita.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve gestire errori durante l'applicazione della remediation del codice notificando il fallimento all'utente e mantenendo invariata la codebase.],
+  [NON SODDISFATTO],
+
+  // --- RIFIUTO REMEDIATION CODICE (UC34) ---
+  [#FRDex],
+  [Il Sistema deve consentire all'Utente Autorizzato di rifiutare una remediation relativa all'analisi del codice.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve aggiornare lo stato della remediation del codice come "rifiutata" nella dashboard senza apportare modifiche al repository.],
+  [NON SODDISFATTO],
+
+  // --- ACCETTAZIONE REMEDIATION SICUREZZA (UC35 + ESTENSIONE) ---
+  [#FRDex],
+  [Il Sistema deve consentire all'Utente Autorizzato di accettare una remediation relativa all'analisi della sicurezza.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve applicare le patch o le configurazioni di sicurezza previste dalla remediation di sicurezza accettata.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve aggiornare lo stato della remediation di sicurezza come "eseguita" nella dashboard a seguito dell'applicazione riuscita.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve gestire errori durante l'applicazione della remediation di sicurezza notificando il fallimento all'utente.],
+  [NON SODDISFATTO],
+
+  // --- RIFIUTO REMEDIATION SICUREZZA (UC36) ---
+  [#FRDex],
+  [Il Sistema deve consentire all'Utente Autorizzato di rifiutare una remediation relativa all'analisi della sicurezza.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve aggiornare lo stato della remediation di sicurezza come "rifiutata" nella dashboard senza modificare il repository.],
+  [NON SODDISFATTO],
+
+  // --- ACCETTAZIONE REMEDIATION DOCUMENTAZIONE (UC37 + ESTENSIONE) ---
+  [#FRDex],
+  [Il Sistema deve consentire all'Utente Autorizzato di accettare una remediation relativa all'analisi della documentazione.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve applicare automaticamente ai file documentali le modifiche previste dalla remediation documentale accettata.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve aggiornare lo stato della remediation documentale come "eseguita" nella dashboard a seguito dell'applicazione riuscita.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve gestire errori durante l'applicazione della remediation documentale notificando il fallimento all'utente.],
+  [NON SODDISFATTO],
+
+  // --- RIFIUTO REMEDIATION DOCUMENTAZIONE (UC38) ---
+  [#FRDex],
+  [Il Sistema deve consentire all'Utente Autorizzato la visualizzazione del dettaglio di una singola remediation relativa all'analisi della documentazione.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve consentire all'Utente Autorizzato di rifiutare una remediation relativa all'analisi della documentazione.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve aggiornare lo stato della remediation documentale come "rifiutata" nella dashboard a seguito del rifiuto confermato dall'utente.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve garantire che il rifiuto di una remediation documentale non comporti alcuna modifica ai file sorgente o di documentazione del repository.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve rimuovere la remediation rifiutata dalla lista delle azioni pendenti dell'area "Documentazione" o marcarla visivamente come scartata.],
+  [NON SODDISFATTO],
+
+  [#FRDex],
+  [Il Sistema deve mostrare all'Utente Autorizzato una conferma visiva dell'avvenuto rifiuto della proposta correttiva.],
+  [NON SODDISFATTO],
+
+  // --- ANALISI REPOSITORY PRIVATI (UC39) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Avanzato di richiedere un'analisi per un repository GitHub privato a condizione che l'integrazione GitHub sia attiva.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve validare la presenza di un'integrazione GitHub valida prima di accettare la richiesta di analisi per una risorsa privata.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire la richiesta di analisi privata se l'utente non seleziona almeno un'area di interesse (Codice, Sicurezza, Documentazione).],
+  [SODDISFATTO],
+
+  // --- CATALOGO REPOSITORY PRIVATI (UC40, UC41, UC42) ---
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Avanzato di inserire l'URL di un repository privato di sua proprietà nel proprio catalogo personale.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve impedire l'inserimento di un URL repository già presente nel catalogo personale dell'Utente Avanzato, notificando la duplicazione.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve ordinare l’elenco dei repository privati registrati in ordine decrescente rispetto a data di inserimento.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve visualizzare un'informativa specifica che suggerisce l'inserimento della prima risorsa qualora il catalogo privato risulti vuoto.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve esporre all'Utente Avanzato la lista dei repository privati registrati, includendo per ciascuno il nome e l'URL della risorsa.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Avanzato di avviare la procedura di rimozione di un repository dal proprio catalogo privato.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve consentire la rimozione di un repository dal catalogo privato previa conferma esplicita dell'utente.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [In caso di annullamento della procedura di rimozione, il Sistema deve garantire l'integrità del catalogo mantenendo la risorsa selezionata.],
+  [SODDISFATTO],
+
+  // --- GESTIONE PERMESSI TERZI (UC43, UC44, UC45) ---
+  [#FRObx],
+  [Il Sistema deve mostrare all'Utente Avanzato l'elenco dei profili autorizzati alla consultazione dei report per un repository privato selezionato in ordine alfabetico.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve informare l'utente proprietario qualora l'accesso ai report di un repository privato sia limitato esclusivamente al suo profilo.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve esporre all'Utente Avanzato le informazioni identificative di ogni profilo autorizzato presente nella lista, includendo lo username e/o l'indirizzo email associato.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve deve consentire l'aggiunta di un nuovo profilo autorizzato alla consultazione dei report per un repository privato.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve consentire l'aggiunta di un utente autorizzato tramite l'inserimento dello username o dell'indirizzo email del profilo destinatario.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve inibire la procedura e mostrare un messaggio di errore qualora l'identificativo inserito per l'autorizzazione non rispetti il formato previsto.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve validare che l'identificativo inserito corrisponda a un profilo effettivamente registrato nella piattaforma.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve impedire l'autorizzazione multipla del medesimo profilo per lo stesso repository privato.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve mostrare un avviso di obbligatorietà e inibire l'aggiunta qualora il campo identificativo risulti vuoto al momento della conferma.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve consentire all'Utente Avanzato di selezionare un utente dalla lista e avviare la procedura di revoca dei suoi permessi.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve consentire la revoca dei permessi di consultazione per un utente precedentemente autorizzato a seguito di conferma del proprietario.],
+  [SODDISFATTO],
+
+  // --- GESTIONE RACCOLTE E PROFILO (UC46, UC47) ---  uc47 diventato uc28
+  [#FRObx],
+  [Il Sistema deve consentire la rimozione di una raccolta di report senza che questo comporti l'eliminazione dei singoli report di analisi in essa contenuti.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve richiedere una conferma esplicita prima di procedere con l'eliminazione definitiva di una raccolta dal profilo.],
+  [SODDISFATTO],
+
+  [#FRObx],
+  [Il Sistema deve consentire di annullare la procedura di rimozione della raccolta, mantenendola inalterata nel sistema.],
+  [SODDISFATTO],
+)
+
+#pagebreak()
+
+== Stato Attuale dei Requisiti di Qualità
+
+#table(
+  columns: (1fr, 2.5fr, 1.5fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*ID*], [*Descrizione*], [*Stato*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, left, center).at(col) + horizon,
+
+  [#QRObx],
+  [L'architettura deve garantire un'alta coesione e un basso accoppiamento tra l'orchestratore NestJS e gli agenti Python, verificabile tramite revisione dei diagrammi UML2.5.],
+  [SODDISFATTO],
+
+  [#QRObx],
+  [Il sistema deve garantire tempi di risposta della dashboard web ottimizzati, minimizzando il carico computazionale lato client durante il rendering dei report di audit.],
+  [SODDISFATTO],
+
+  [#QRObx],
+  [Ogni componente software deve essere testabile isolatamente; la logica di business deve essere separata dalle interfacce di comunicazione (API/Database).],
+  [SODDISFATTO],
+
+  [#QRObx],
+  [È necessario rispettare rigorosamente le metriche di qualità del codice (complessità ciclomatica, duplicazione) definite nelle #link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/NdP.pdf")[*Norme di Progetto*].],
+  [SODDISFATTO],
+
+  [#QRObx],
+  [Il team deve svolgere un’attività di analisi preliminare includendo Design Thinking, User Story Mapping, Business Requirements e Diagrammi UML degli Use Case],
+  [SODDISFATTO],
+
+  [#QRObx],
+  [Deve essere fornita documentazione tecnica tramite standard OpenAPI 3.0 (Swagger) per le API e documentazione del codice sorgente tramite TypeDoc],
+  [SODDISFATTO],
+
+  [#QRObx],
+  [Deve essere fornito un Manuale Utente come parte integrante della fornitura finale],
+  [SODDISFATTO],
+
+  [#QRObx],
+  [Al termine del progetto deve essere consegnato un MVP funzionante accompagnato da una Demo Live e dallo Schema Design relativo alla base dati],
+  [SODDISFATTO],
+
+  [#QRObx],
+  [Il codice prodotto deve raggiungere una copertura minima del 70% tramite test di unità automatizzati misurati con Jest],
+  [SODDISFATTO],
+
+  [#QRObx],
+  [Il codice sorgente deve essere versionato utilizzando Git (v2.40+) seguendo la branching strategy definita nelle NdP],
+  [SODDISFATTO],
+
+  [#QRObx],
+  [L'analisi di sicurezza deve essere conforme agli standard OWASP Top 10 (v2021 o successivi)],
+  [SODDISFATTO],
+)
+
+#pagebreak()
+
+== Stato Attuale dei Requisiti di Vincolo 
+
+#table(
+  columns: (1fr, 2.5fr, 1.5fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*ID*], [*Descrizione*], [*Stato*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, left, center).at(col) + horizon,
+
+  [#VRObx],
+  [L'applicativo deve essere strutturato in moduli indipendenti, garantendo che l'aggiunta di un nuovo agente di analisi avvenga senza richiedere modifiche al codice sorgente degli agenti già esistenti],
+  [SODDISFATTO],
+
+  [#VRObx],
+  [Deve essere fornito un sistema di Bug Reporting strutturato su GitHub Issues per tracciare e gestire le anomalie tramite apposite label],
+  [SODDISFATTO],
+
+  [#VRObx],
+  [Il Back-end e l’Orchestratore devono essere sviluppati utilizzando il framework NestJS v10+],
+  [SODDISFATTO],
+
+  [#VRObx],
+  [L'interfaccia Front-end deve essere sviluppata utilizzando la libreria React v18.3+],
+  [SODDISFATTO],
+
+  [#VRObx],
+  [Gli agenti di analisi devono essere sviluppati utilizzando il linguaggio Python v3.12+],
+  [SODDISFATTO],
+
+  [#VRObx],
+  [L'architettura deve essere ospitata su infrastruttura cloud AWS, utilizzando esclusivamente gli account IAM forniti dall'azienda proponente],
+  [SODDISFATTO],
+
+  [#VRObx],
+  [Devono essere utilizzate GitHub Actions per implementare pipeline di Continuous Integration e Continuous Deployment (CI/CD)],
+  [SODDISFATTO],
+
+  [#VRObx],
+  [L'interfaccia web deve essere compatibile con Windows 10/11],
+  [SODDISFATTO],
+    
+  [#VRObx],
+  [L'interfaccia web deve essere compatibile con macOS 14+],
+  [SODDISFATTO],
+  
+  [#VRObx],
+  [L'interfaccia web deve essere compatibile con distribuzioni Linux (Ubuntu 22.04+)],
+  [SODDISFATTO],
+    
+  [#VRObx],
+  [L'interfaccia web deve essere compatibile su browser Chrome 120+],
+  [SODDISFATTO],
+  
+  [#VRObx],
+  [L'interfaccia web deve essere compatibile su browser Firefox 120+],
+  [SODDISFATTO],
+  
+  [#VRObx],
+  [L'interfaccia web deve essere compatibile su browser Safari 17+],
+  [SODDISFATTO],
+)
+
+== Tabella Riassuntiva
+
+#table(
+  columns: (1fr, 1fr, 1fr, 1fr),
+  inset: 10pt,
+  stroke: 0.5pt + luma(200),
+  table.header([*TIPO*], [*COMPLETATI*], [*TOTALI*], [*PERCENTUALE*]),
+  fill: (col, row) => if row == 0 { luma(62.75%) } else if calc.odd(row) { luma(220) },
+  align: (col, row) => (center, center, center, center).at(col) + horizon,
+
+  [FROb],
+  [185],
+  [185],
+  [100%],
+
+  [FRDe],
+  [3],
+  [35],
+  [8,57%],
+
+  [FROp],
+  [0],
+  [19],
+  [0%],
+
+  [QROb],
+  [11],
+  [11],
+  [100%],
+
+  [VROb],
+  [13],
+  [13],
+  [100%],
+)
+
+Sono dunque stati soddisfatti tutti i requisiti obbligatori previsti, solo una piccola parte di quelli desiderabili ma nessun opzionale.
+
+= Design Patterns Applicati
+== Creazionali 
+=== Singleton
+Dato l'utilizzo di nest per entrambi i microservizi, non è necessario implementare pattern singleton a livello di codice, in quanto il framework gestisce l'istanza dei servizi e degli adattatori come singleton per default. Ovvero un provider dichiarato in un modulo viene istanziato una sola volta e condiviso tra tutti i componenti che lo iniettano, garantendo implicitamente il comportamento singleton senza dover implementare manualmente il pattern. Questo permette di mantenere il codice pulito e focalizzato sulla logica di business, delegando al framework la gestione del ciclo di vita delle istanze.
+=== Strutturali
+=== Ports and Adapters
+Il pattern adapter è presente in entrambi i microservizi data l'architettura logica applicata. 
+==== Problema risolto
+ Evita il forte accoppiamento logico tra il nucleo applicativo (Domain e Application) e i layer esterni come database, interfacce utente e servizi di terze parti, isolando la logica di business e rendendola indipendente dalle tecnologie di contorno.
+==== Implementazione 
+- Nel microservizio Credenziali, gli #link(<Credential_Adapters>)[adapters] permettono di astrarre completamente la logica di business in merito ai dettagli sulle operazioni di memorizzazione dei dati e alle query sql, mantenendo nascosta la specifica tecnologia di database relazionale utilizzata (PostgreSQL). Al contempo soddisfano molteplici #link(<CredentialPorts>)[porte] del core applicativo, garantendo un disaccoppiamento così netto da permettere, qualora si rivelasse necessario, di sostituire agilmente il database con una tecnologia differente.
+
+- Nel microservizio Analysis, gli #link(<Analysis_Adapters>)[adapters] permettono di astrarre completamente la logica di business in merito ai dettagli sulle operazioni di memorizzazione dei dati, 
+gestione API esterne come github e AWS. Al contempo soddisfano molteplici #link(<AnalysisPorts>)[porte] del core applicativo, garantendo un disaccoppiamento così netto da permettere, qualora si rivelasse necessario, 
+ di sostituire agilmente un database o un servizio esterno con una tecnologia differente.
+
+
+Inoltre, in entrambi i microservizi ogni porta espone un solo metodo dell'adapter aderendo al principio 
+di segregazione delle interfacce, evitando di esporre metodi non necessari e mantenendo un contratto
+ chiaro e specifico tra il core applicativo e le implementazioni infrastrutturali.
+
+=== Facade
+==== Problema risolto
+Fornisce un'interfaccia semplificata e unificata a un insieme di interfacce in un sottosistema, 
+nascondendo la complessità delle interazioni tra i componenti sottostanti e facilitando l'uso 
+del sistema da parte dei client.
+==== Implementazione
+Nel microservizio di analisi, #link(<StartAnalysisService>)[StartAnalysisService] funge da Facade, 
+orchestrando un flusso complesso che coinvolge più adapter (GitHubAdapter, S3Adapter, PostgresAdapter) 
+e #link(<AnalysisOrchestratorService>)[AnalysisOrchestratorService] per eseguire un'analisi completa. 
+Fornisce un'interfaccia semplificata (`execute`) che nasconde la complessità sottostante, permettendo 
+al controller di avviare un'analisi con una singola chiamata.
+
+== Comportamentali
+=== Orchestrator
+==== Problema risolto
+Coordina l'esecuzione di un processo complesso che coinvolge più componenti o servizi, definendo 
+l'ordine delle operazioni e gestendo le dipendenze tra di esse, senza che i componenti coinvolti debbano
+ conoscere l'intero flusso o le responsabilità degli altri.
+==== Implementazione
+Nel microservizio di analisi, #link(<AnalysisOrchestratorService>)[AnalysisOrchestratorService] funge 
+da Orchestrator, coordinando l'intero processo di analisi del codice. Gestisce l'ordine delle operazioni,
+come la chiamata selettiva degli adapter per gli agenti, la memorizzazione dei risultati ottenuti e la gestione degli errori, 
+senza che i singoli adapter o servizi coinvolti debbano conoscere l'intero flusso o le responsabilità degli altri componenti.
+=== Command
+Il pattern Command è ampiamente utilizzato in entrambi i microservizi per incapsulare tutte le informazioni necessarie a 
+eseguire un'azione o un'operazione specifica, permettendo di disaccoppiare il mittente dell'azione dalla logica che la esegue.
+L'utilizzo di questo patter è guidato dalla scelta di architettura logica esagonale.
+==== Problema risolto
+Semplifica le firme dei metodi nei casi d'uso, evitando il passaggio di liste di argomenti lunghe e fragili alle modifiche.
+
+==== Implementazione
+Invece di passare molteplici parametri sparsi ai metodi dei servizi, ogni Use Case accetta come unico parametro un oggetto 
+istanza di un Command specifico, che raggruppa logicamente e tipizza tutti i parametri necessari per svolgere l'operazione. 
+Facendo una prima validazione dei campi con dei decoratori(`@IsString`,`@IsNotEmpty`...), questo evita che i dati in ingresso 
+siano incompleti o malformati, e permette di bloccare richieste con body non validi prima di essere processate.
+=== State
+==== Problema risolto
+Permette di gestire in modo chiaro e organizzato i diversi stati di un processo o entità, definendo transizioni ben definite 
+tra di essi e facilitando la manutenzione del codice.
+==== Implementazione
+Nel microservizio di analisi, il pattern State è applicato alla gestione dello stato dell'analisi del codice. L'entità 
+#link(<GitHubAnalysis>)[GitHubAnalysis] ha un campo `status` che rappresenta lo stato attuale dell'analisi 
+(es. `pending`, `in-progress`, `completed`, `failed`). Le transizioni di stato sono gestite internamente all'entitá,
+evitando un passaggio non valido da uno stato all'altro, come tra `failed` e `completed` o tra `pending` e `completed`.
+
+=== Strategy
+==== Problema risolto
+Permette di variare il comportamento di validazione e autorizzazione del repository senza introdurre logica condizionale 
+complessa nei servizi applicativi.  
+==== Implementazione
+Nel microservizio di Analisi il pattern è applicato in due punti: #link(<GitValidatorService>)[GitValidatorService], che seleziona dinamicamente la strategia 
+tra validazione per commit, branch o default, e #link(<GitAuthorizerService>)[GitAuthorizerService], che sceglie tra autorizzazione privata (token utente da persistenza) e pubblica (token di sistema da configurazione).  
+In questo modo il servizio chiamante dipende da un contratto unico, mentre l’algoritmo concreto viene scelto a runtime in base al contesto della richiesta.
+
+=== Dependency injection
+Sfruttando nativamente le capacità del framework NestJS, l'*Iniezione delle Dipendenze (DI)* rappresenta uno dei pattern tecnici principali alla base del progetto software.
+==== Problema risolto
+La Dependency Injection risolve il problema dell’accoppiamento rigido tra una classe e le sue dipendenze concrete.  
+Senza DI, ogni componente crea direttamente i servizi che usa, rendendo il codice più fragile ai cambiamenti e difficile da testare.
+
+Con DI:
+- le dipendenze sono fornite dall’esterno (container IoC);
+- il codice dipende da interfacce/contratti, non da classi concrete;
+- modularità, riuso e testabilità (mock/stub) migliorano in modo significativo.
+==== Implementazione
+Attraverso i costruttori di classe, i vari Controllers e i Services ricevono all'avvio del sistema le loro rispettive dipendenze sotto forma ridotta di interfacce/componenti 
+di istanziazione validati. Un container `Inversion of Control` (IoC) organizzato in un module di NestJs di supporto si prende in totale carico l'apposita istanziazione ed assegnazione dei componenti.
+
+=== Data Transfer Object (DTO)
+==== Problema risolto
+Il pattern DTo permette di trasferire dati tra i diversi layer del microservizio e verso i client esterni senza
+ esporre direttamente le entità di dominio interno che contengono una logica di core che non deve essere esposta.
+==== Implementazione
+Il pattern *DTO* viene impiegato sistematicamente in entrambi i microservizi sia a livello di presentazione (Request e Result DTOs) che a livello applicativo 
+per trasportare dati sotto forma di tipi primitivi.
+Tramite i DTO, i dati in transito assumono una forma asettica e consona per le sole esigenze di comunicazione..
