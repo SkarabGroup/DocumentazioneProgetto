@@ -2,7 +2,7 @@
 #import "../lib/variables.typ": *
 #import "../lib/stDiagramUtil.typ": *
 
-#let versione = "v0.15.0"
+#let versione = "v0.16.0"
 #set heading(numbering: "1.1.1")
 /*
 === FUNZIONAMENTO DEL DOCUMENTO ===
@@ -25,7 +25,7 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
 #let history = (
   (
     "2026/04/21",
-    "0.15",
+    "0.16.0",
     "Completati i componenti della sezione presentation per Analysis Microservice",
     members.antonio,
     members.andrea,
