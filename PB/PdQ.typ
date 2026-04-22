@@ -436,7 +436,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
     breakable: true,
     table(
       fill: (x, y) => if (y == 0) { luma(63.75%) } else if (calc.gcd(y, 2) == 2) { luma(220) },
-      columns: (1.2fr, 3.5fr, 1fr, 1.5fr, 1.2fr),
+      columns: (1.2fr, 3.5fr, 1fr, 1.2fr),
       inset: 10pt,
       align: horizon,
       table.header([*ID PdQ*], [*Descrizione*], [*UC*], [*Stato*]),
@@ -483,7 +483,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [UC2],
       passed,
 
-      [TS-2.1], [Verificare la validazione del formato delle credenziali in fase di login.], [UC2], [TV-LD-03], passed,
+      [TS-2.1], [Verificare la validazione del formato delle credenziali in fase di login.], [UC2], passed,
       [TS-2.2],
       [Verificare la segnalazione di errore per identificativo non presente a sistema.],
       [UC2.0.2],
@@ -599,7 +599,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [UC8],
       pending,
 
-      [TS-8.2], [Verificare il calcolo e la visualizzazione degli indicatori di trend in tabella.], [UC8], [-], pending,
+      [TS-8.2], [Verificare il calcolo e la visualizzazione degli indicatori di trend in tabella.], [UC8], pending,
 
       // --- ANALISI DEL CODICE (UC9) ---
       [TS-9.1],
@@ -607,7 +607,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [UC9.1],
       pending,
 
-      [TS-9.2], [Verificare la visualizzazione delle metriche di copertura dei test di unità.], [UC9.2], [-], pending,
+      [TS-9.2], [Verificare la visualizzazione delle metriche di copertura dei test di unità.], [UC9.2], pending,
       [TS-9.3],
       [Verificare la visualizzazione dell'informativa di esito positivo per l'area codice.],
       [UC9.3.1],
@@ -695,7 +695,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [UC17],
       pending,
 
-      [TS-17.1], [Verificare la gestione dell'errore di comunicazione con GitHub.], [UC17.0.1], [-], pending,
+      [TS-17.1], [Verificare la gestione dell'errore di comunicazione con GitHub.], [UC17.0.1], pending,
       [TS-17.2],
       [Verificare che l'Orchestratore tenti l'accesso tramite credenziali in caso di repository privato.],
       [UC17.1],
@@ -759,7 +759,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [UC21],
       pending,
 
-      [TS-21.1], [Verificare la corretta clonazione del repository nell'ambiente AWS.], [UC21.1], [-], pending,
+      [TS-21.1], [Verificare la corretta clonazione del repository nell'ambiente AWS.], [UC21.1], pending,
       [TS-21.2],
       [Verificare che l'Orchestratore interrompa il processo in caso di errore durante la clonazione.],
       [UC21.1.1],
@@ -989,7 +989,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
     breakable: true,
     table(
       fill: (x, y) => if (y == 0) { luma(63.75%) } else if (calc.gcd(y, 2) == 2) { luma(220) },
-      columns: (1fr, 1fr, 3fr, 2.5fr, 1.5fr, 1fr),
+      columns: (1fr, 1fr, 3fr, 2.5fr, 1fr),
       inset: 10pt,
       align: horizon,
       table.header([*ID PdQ*], [*Req.*], [*Descrizione Test*], [*Risultato Atteso*], [*Stato*]),
