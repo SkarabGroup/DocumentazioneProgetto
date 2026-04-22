@@ -22,6 +22,7 @@
     "1.2.0",
     "Aggiornamento Cruscotto di Valutazione",
     members.alice,
+    members.suar
   ),
   (
     "2026/03/11",
