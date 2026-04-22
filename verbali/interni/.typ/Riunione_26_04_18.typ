@@ -8,6 +8,7 @@
       "0.1.0",
       "Prima stesura del documento",
       members.martinello,
+      members.suar
     ),
   ),
 
