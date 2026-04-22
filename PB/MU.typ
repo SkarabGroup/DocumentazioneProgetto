@@ -1,7 +1,7 @@
 #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
 
-#let versione = "v0.2.0"
+#let versione = "v0.3.0"
 #set heading(numbering: "1.1.1")
 
 /*
@@ -12,6 +12,13 @@
 #titlePage("Manuale Utente", versione)
 #set page(numbering: "1", header: header("Manuale Utente"), footer: footer())
 #let history = (
+  (
+    "2026/04/22",
+    "0.3.0",
+    "Aggiornata introduzione e Guida, aggiunta sezione Risoluzione di problemi",
+    members.antonio,
+    ""
+  ),
   (
     "2026/04/19",
     "0.2.0",
@@ -37,14 +44,35 @@
 #pagebreak()
 
 = Introduzione
+Il presente documento descrive il #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#manuale-utente")[#def("Manuale Utente")] relativo al progetto #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def("Code Guardian")], commissionato dall’azienda #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def("Var Group")] e realizzato dal gruppo di studenti #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def("Skarab Group")] nell’ambito del corso di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def("Ingegneria del Software")] presso l’Università degli Studi di Padova.
 
-== Scopo del Documento
-Il presente documento ha lo scopo di guidare l'utilizzatore finale nell'impiego corretto e completo del sistema *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian")[#def[Code Guardian]]*, realizzato da _#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group")[#def[Skarab Group]]_ e proposto dall'azienda *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group")[#def[Var Group]]*, illustrandone i flussi operativi, le interfacce grafiche e le modalità di configurazione del proprio profilo.
-
-== Scopo del Prodotto
 _CodeGuardian_ è un'innovativa piattaforma ad #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente")[#def[agenti]] finalizzata all’#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit")[#def[audit]] e alla #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation")[#def[remediation]] automatizzata delle vulnerabilità presenti nei #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#repository")[#def[repository]] di codice sorgente.
 
-La piattaforma supporta attività di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-statica")[#def[analisi statica]] del codice sorgente e di individuazione delle principali criticità di sicurezza, fornendo suggerimenti di correzione attraverso meccanismi automatizzati basati su modelli di linguaggio di grandi dimensioni (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]).
+La piattaforma supporta attività di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-statica")[#def("analisi statica")] del codice sorgente e di individuazione delle principali criticità di sicurezza, fornendo suggerimenti di correzione attraverso meccanismi automatizzati basati su modelli di linguaggio di grandi dimensioni (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model")[#def[LLM]]), integrati nel workflow degli agenti per formulare e validare le correzioni.
+
+== Finalità del Documento
+Il presente documento ha lo scopo di guidare l'utilizzatore finale nell'impiego corretto e completo del sistema *Code Guardian*, illustrandone i flussi operativi, descrivendo dettagliatamente le interfacce grafiche e le funzionalità della dashboard utente.
+
+== Glossario
+Al fine di prevenire ambiguità interpretative, è stato redatto un glossario che definisce in modo univoco la terminologia tecnica, gli acronimi e i concetti di dominio utilizzati all’interno della documentazione.
+
+Nel testo, *ogni termine evidenziato tramite una G come apice*, rimanda alla voce corrispondente del Glossario pubblicato sul sito ufficiale del gruppo, consentendo al lettore di accedere direttamente alla definizione associata.
+
+La versione più recente del Glossario è disponibile al seguente link: \
+#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario (v2.0.0)]].
+
+== Riferimenti 
+=== Riferimenti Normativi
+I seguenti documenti hanno valore vincolante per la redazione della Specifica Tecnica:
+
+- *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> \
+  #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
+  (ultimo accesso: *22/04/2026*)
+
+= Requisiti di Browser e di Sistema
+Per garantire il corretto funzionamento e l'esperienza utente ottimale, si consiglia di utilizzare la piattaforma *CodeGuardian* su dispositivi che soddisfino i seguenti requisiti minimi di sistema e compatibilità del browser:
+- *Sistemi Operativi:* Windows 10/11, macOS 14+, distribuzioni Linux (Ubuntu 22.04+);
+- *Browser Web:* Google Chrome 120+, Mozilla Firefox 120+, Apple Safari 17+.
 
 #pagebreak()
 
@@ -57,7 +85,6 @@ La piattaforma *CodeGuardian* si presenta con un'intuitiva schermata iniziale, d
   image("../assets/manuale_utente/schermata_iniziale.png", width: 90%),
   caption: [Schermata Iniziale della Piattaforma],
 )
-
 
 == Autenticazione e Gestione Account
 
@@ -118,8 +145,7 @@ Una procedura pratica per aggiornare la password di accesso. Per procedere è ne
 
 Un'operazione irreversibile concepita per tutelare la privacy. Prima di poter eseguire l'eliminazione, per motivazioni di sicurezza è tassativamente richiesto di compilare il campo vuoto digitando _La tua password_ per confermare la propria identità. Cliccando infine sul pulsante rosso _Elimina account definitivamente_, l'utente provvede a rimuovere in modo definitivo e permanente il profilo dal sistema _CodeGuardian_, venendo immediatamente revocato da qualsiasi diritto d'accesso.
 
-
-
+#pagebreak()
 
 == Funzionalità della Piattaforma
 
@@ -134,21 +160,36 @@ Una volta effettuato l'accesso, l'utente ha a disposizione un menù di navigazio
 La sezione Repository costituisce la dashboard principale da cui gestire i propri progetti.
 
 #figure(
-  image("../assets/manuale_utente/dashboard_principale.png", width: 90%),
+  image("../assets/manuale_utente/dashboard_principale.png", width: 110%),
   caption: [Dashboard Principale: Lista dei Repository],
 )
 
 - *Aggiunta e Rimozione:* È possibile visualizzare la lista dei repository importati. Per aggiungerne uno nuovo da ispezionare, è sufficiente inserirne l'URL GitHub. È possibile anche rimuovere i repository non più necessari tramite l'apposito pulsante.
 
 #figure(
-  image("../assets/manuale_utente/aggiunta_o_rimozione.png", width: 80%),
+  image("../assets/manuale_utente/aggiunta_o_rimozione.png", width: 70%),
   caption: [Aggiunta di un nuovo Repository],
 )
+
+- *Repository già inserito:* Se si tenta di aggiungere un repository già presente, il sistema restituirà un messaggio di errore indicando che il repository è già stato importato.
+
+#figure(
+  image("../assets/manuale_utente/repository_gia_inserito.png", width: 50%),
+  caption: [Repository già inserito],
+)
+
 - *Esecuzione Analisi:* Cliccando su uno specifico repository, si accede alla sua *Pagina di Dettaglio*. Da qui, l'utente può avviare l'ispezione automatica cliccando sul pulsante dedicato. L'interfaccia aggiornerà dinamicamente lo stato dell'analisi (avvio, in corso, completamento) fornendo un chiaro feedback visivo senza complicati caricamenti.
 
 #figure(
-  image("../assets/manuale_utente/avvio_analisi.png", width: 90%),
+  image("../assets/manuale_utente/avvio_analisi.png", width: 60%),
   caption: [Pagina di Dettaglio: Avvio Analisi in corso],
+)
+
+- *Inserimento PAT:* Per i repository privati, è necessario fornire un Personal Access Token (PAT) per autorizzare l'accesso. Questo può essere inserito sia all'avvio di un'analisi nel campo apposito, che dalle impostazioni, dove è possibile inserire il token per un dato repository in modo da non doverlo reinserire all'avvio di una nuova analisi.
+
+#figure(
+  image("../assets/manuale_utente/inserimento_pat.png", width: 80%),
+  caption: [Inserimento PAT per repository privati],
 )
 
 - *Risultato ed Esportazione:* Al termine, il report viene presentato a schermo suddiviso per metriche di qualità, scorecard generali e lista accurata delle vulnerabilità. Per ogni scansione sono previste funzionalità di esportazione dirette scaricando il referto formattato in *PDF* oppure sotto forma di *JSON* strutturato.
@@ -158,10 +199,15 @@ La sezione Repository costituisce la dashboard principale da cui gestire i propr
   caption: [Pagina di Dettaglio: Risultato Analisi e metriche],
 )
 
+#figure(
+  image("../assets/manuale_utente/esportazione.png", width: 30%),
+  caption: [Esportazione: dettaglio],
+)
+
 === Storico Analisi
 
 #figure(
-  image("../assets/manuale_utente/storico_analisi.png", width: 90%),
+  image("../assets/manuale_utente/storico_analisi.png", width: 110%),
   caption: [Schermata Storico delle Analisi],
 )
 
@@ -172,9 +218,22 @@ La schermata *Storico* raccoglie la traccia di tutte le scansioni ed ispezioni d
 === Classifica (Ranking)
 
 #figure(
-  image("../assets/manuale_utente/classifica_analisi.png", width: 90%),
+  image("../assets/manuale_utente/classifica_analisi.png", width: 110%),
   caption: [Schermata Classifica Repository (Ranking)],
 )
 
-Questa prospettiva gestionale fornisce una panoramica focalizzata sugli scenari architetturali dei progetti caricati in CodeGuardian. 
+Questa prospettiva gestionale fornisce una panoramica focalizzata sugli scenari architetturali dei progetti caricati in CodeGuardian. #linebreak()
 L'applicativo genera in tempo reale una *Classifica* di tutti i repository associati all'utente: vengono elencati gerarchicamente tenendo conto dello "Score di Qualità" generale derivante dai più recenti audit, permettendo in modo istantaneo di confrontare i progetti più robusti e quelli che richiedono maggiore attenzione.
+
+#pagebreak()
+
+= Risoluzione di problemi
+Questa breve sezione descrive il giusto comportamento da seguire per affrontare alcuni problemi che potrebbero verificarsi durante l'utilizzo della piattaforma CodeGuardian.
+
+== Analisi "Bloccata" o Infinita:
+- *Possibili Cause:* Il repository che sta venendo analizzato è troppo grande o all'invio dell'analisi non è stato inserito il PAT per repository privati.
+
+- *Soluzione:* Si consiglia di controllare l'accessibilità del repository e/o verificare la dimensione del codice sorgente.
+
+== Password dimenticata:
+- *Soluzione:* Nel caso venga dimenticata la password dell'account è necessario contattare un amministratore per avviare una procedura di recupero delle credenziali.
