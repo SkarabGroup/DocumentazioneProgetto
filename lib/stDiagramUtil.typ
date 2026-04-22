@@ -23,3 +23,7 @@
 #let contextDiagram(name, width) = {
   _diagram("Context", name, width)
 }
+
+#let controllerDiagram(name, width) = {
+  _diagram("Controller", name, width)
+}

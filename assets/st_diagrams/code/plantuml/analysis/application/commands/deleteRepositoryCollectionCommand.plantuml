@@ -7,12 +7,10 @@ skinparam ClassAttributeIconSize 0
 hide circles
 
 class DeleteRepositoryCollectionCommand {
-    + url: RepoURL
-    + user: UserId
+    + url: String
+    + user: String
     ---
     + DeleteRepositoryCollectionCommand(data)
 }
 
-DeleteRepositoryCollectionCommand --right-> RepoURL
-DeleteRepositoryCollectionCommand --right-> UserId
 @enduml

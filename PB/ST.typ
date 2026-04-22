@@ -618,6 +618,33 @@ Questi componenti rappresentano l’unico punto in cui vengono utilizzate librer
 
 #pagebreak()
 
+==== Flussi completi di Esecuzione
+Il diagramma seguente illustra un flusso operativo completo, evidenziando l’interazione tra i livelli dell’architettura esagonale a partire da un singolo controller HTTP fino alla conclusione della richiesta. Questa sezione ha l'obiettivo é di fornire una panoramica ad alto livello del percorso di esecuzione, evidenziando i passaggi chiave e le interazioni tra i componenti, senza entrare nei dettagli di implementazione specifici, interazioni con oggetti di dominio o contratti tra la parti, in quanto questo livello di dettaglio sará visibile nelle sezioni successive.
+
+===== Analysis
+Il flusso che segue rappresenta la sequenza operativa di un'analisi completa, partendo dalla ricezione della richiesta HTTP fino alla conclusione dell'audit e alla restituzione dei risultati all'utente. Nota: la risposta viene ritornata all'utente immediatamente dopo la fase di staging su S3, mentre l'esecuzione dell'agente e la generazione dei report avvengono in modo asincrono.
+#controllerDiagram("AnalysisControllerReachableClasses", 80%)
+#pagebreak()
+Il diagramma nel diagramma sopra non é presente il flusso di orchestrazione agentica in quanto,
+come giá esposto, l'esecuzione dell'agente avviene in modo asincrono e non blocca la risposta HTTP. Il controller si limita a orchestrare le operazioni sincrone (interazione con GitHub, staging su S3) e a delegare l'orchestrazione degli agenti all'OrchestratorService, senza attendere il completamento di quest'ultima per rispondere all'utente. Per questo motivo, il flusso di orchestrazione agentica é rappresentato in un diagramma a parte.
+#controllerDiagram("OrchestratorReachableClasses", 100%)
+#pagebreak()
+===== PAT
+Il controller dei PAT (Personal Access Token) gestisce ogni operazione su di essi, il salvataggio in uno nuovo, la modifica e l'eliminazione.
+
+#controllerDiagram("PatControllerReachableClasses", 100%)
+#pagebreak()
+===== Repositories
+Il controller dei repository gestisce ogni operazione sul database delle collections e delle analisi, in particolare permette di:
+- Creare una nuova collection
+- Richiedere i metadati di tutte le analisi di un utente indipendentemente dalla repo, branch o commit analizzati
+- Richiedere tutte le collection di un dato user
+- Richiedere i metadati di una collection a partire dall'url della repo
+- Richiedere il dettaglio di una analisi a partire dal suo ID
+- Cancellare una collezione
+- Richiedere i dettagli di tutte le analisi di una collection
+#controllerDiagram("RepositoryControllerReachableClasses", 100%)
+#pagebreak()
 ==== Domain
 Il Dominio rappresenta il nucleo centrale dell'architettura esagonale, dove risiedono esclusivamente la logica di business e le regole vitali del progetto. Questa sezione è progettata per essere totalmente agnostica rispetto alla tecnologia: non possiede alcuna conoscenza di database, protocolli di comunicazione (HTTP/REST) o framework esterni.
 
@@ -1042,13 +1069,10 @@ Lo strato Application contiene i Command Object che rappresentano le richieste d
 
 - *Autorizzazione Implicita:* La richiesta della `patPassword` garantisce che solo chi conosce la password possa eliminare le credenziali, implementando un controllo di accesso a livello applicativo.
 
-#TODO("domain logic nei command")
 ====== DeleteRepositoryCollectionCommand <DeleteRepositoryCollectionCommand>
 #codeDiagram("DeleteRepositoryCollectionCommand", 70%)
 
 `DeleteRepositoryCollectionCommand` è il Command Object per l'eliminazione di una collezione di repository, identificando la collezione tramite URL e l'utente richiedente.
-
-- *Costruzione Anticipata dei Value Object:* A differenza degli altri Command, il costruttore istanzia direttamente #link(<RepoURL>)[`RepoURL`] e #link(<UserId>)[`UserId`] a partire dalle stringhe ricevute, spostando la validazione strutturale nel punto di ingresso del comando anziché delegarla al servizio applicativo.
 
 ====== GetAllAnalysesForUserCommand <GetAllAnalysesForUserCommand>
 #codeDiagram("GetAllAnalysesForUserCommand", 55%)
@@ -1175,8 +1199,7 @@ I result sono i contratti di risposta dello use case verso il layer di presentaz
 
 ====== AddRepositoryCollectionResult <AddRepositoryCollectionResult>
 #codeDiagram("AddRepositoryCollectionResult", 50%)
-#TODO("Davvero factory?")
-`AddRepositoryCollectionResult` è il Result Object per l'esito della creazione di una nuova collezione di repository, con factory method `success()` e `failure(err)`.
+`AddRepositoryCollectionResult` è il Result Object per l'esito della creazione di una nuova collezione di repository, con i metodi `success()` e `failure(err)` permette la sua creazione a stati di successo o fallimento.
 
 ====== DeletePatResult <DeletePatResult>
 #codeDiagram("DeletePatResult", 50%)
@@ -1298,14 +1321,12 @@ I passaggi chiave dell'orchestrazione sono:
 - I report validati vengono salvati nel sistema di persistenza tramite #link(<ISecurityReportSavePort>)[`ISecurityReportSavePort`], #link(<ICodeReportSavePort>)[`ICodeReportSavePort`] e #link(<IDocsReportSavePort>)[`IDocsReportSavePort`], che si occupano di gestire la persistenza dei report e le eventuali relazioni con l'entità dell'analisi.
 - I report validati vengono associati all'analisi tramite #link(<IUpdateAnalysisPort>)[`IUpdateAnalysisPort`], che si occupa di aggiornare l'entità nel database.
 
-
-#TODO("Sauar help me")
 ======= GitAuthorizerService <GitAuthorizerService>
 #codeDiagram("GitAuthorizerService", 100%)
 
-`GitAuthorizerService` implementa #link(<IRepositoryAuthorizer>)[`IRepositoryAuthorizer`] selezionando dinamicamente la strategia di autorizzazione appropriata (pubblica o privata) in base alla presenza di una password nel comando.
-
-- *Pattern Strategy:* `PrivateAuthorizationStrategy` recupera il PAT da MongoDB tramite #link(<IGitCredentialReadPort>)[`IGitCredentialReadPort`]; `PublicAuthorizationStrategy` legge il token di sistema dalla configurazione. La scelta è trasparente per il chiamante.
+`GitAuthorizerService` implementa #link(<IRepositoryAuthorizer>)[`IRepositoryAuthorizer`] utilizzando un pattern #link(<StrategyPattern>)[`Strategy Pattern`] per gestire in modo trasparente l'autorizzazione sia per repository pubblici che privati.
+- *Strategia Pubblica vs Privata:* Se il repository è pubblico, utilizza `PublicAuthorizationStrategy` che fornisce un token di sistema per l'accesso in sola lettura. Se il repository è privato, utilizza `PrivateAuthorizationStrategy` che recupera il token utente dal database tramite #link(<IGitCredentialReadPort>)[`IGitCredentialReadPort`] e lo restituisce per l'autenticazione.
+- *Isolamento della Logica di Autorizzazione:* Il servizio nasconde completamente i dettagli dell'autorizzazione al servizio chiamante, che riceve semplicemente un `PersonalAccessToken` valido indipendentemente dalla natura del repository, semplificando la logica del use case e permettendo di modificare le strategie di autorizzazione senza impattare i servizi applicativi.
 
 
 ======= GitClonerService <GitClonerService>
@@ -1323,14 +1344,12 @@ I passaggi chiave dell'orchestrazione sono:
 
 - *Adattamento del Contratto:* Traduce i Value Object #link(<UserId>)[`UserId`] e #link(<RepoURL>)[`RepoURL`] nel DTO di richiesta per l'infrastruttura, isolando il layer applicativo dai dettagli della persistenza.
 
-#TODO("HOW?")
 ======= GitValidatorService <GitValidatorService>
 #codeDiagram("GitValidatorService", 100%)
 
-`GitValidatorService` implementa #link(<IRepositoryValidator>)[`IRepositoryValidator`] selezionando la strategia di validazione appropriata (`CommitValidationStrategy` o `BranchValidationStrategy`) in base ai parametri presenti nel comando.
+`GitValidatorService` implementa #link(<IRepositoryValidator>)[`IRepositoryValidator`] selezionando la strategia di validazione appropriata tramite uno #link(<StrategyPattern>)[`Strategy Pattern`] in base alla natura del repository (pubblico vs privato) e delegando la validazione al port #link(<IGitHubAvailabilityPort>)[`IGitHubAvailabilityPort`].
 
-- *Validazione Contestuale:* Se è fornito un commit specifico, verifica l'esistenza di quel commit; altrimenti risolve il commit HEAD del branch specificato (o del branch default). In entrambi i casi, il risultato è un `{ branch, commit }` risolto e verificato.
-//validator,. orchestrator,. authorizer,. cloner, .checker
+Di default usa solo l' URL e prende il branch di defaul all'ultimo commit, se é richiesto un branch specifico o un commit specifico, verifica che esistano e siano raggiungibili, restituendo i valori risolti per URL, branch e commit in caso di successo o lanciando un'eccezione esplicita in caso di problemi di raggiungibilità o validità del repository.
 
 ====== Application Services
 Questa sezione include i servizi che implementano direttamente i use case, orchestrando la logica di business e coordinando le dipendenze necessarie per realizzare i requisiti del dominio. Ogni servizio applicativo implementa uno o più use case, permettendo la modifica della logica applicativa senza impattare il layer di presentazione, che dipende solo dalle interfacce dei use case.
@@ -1436,7 +1455,7 @@ Le porte sono le interfacce che definiscono i contratti di comunicazione tra il 
 ====== IGetAllAnalysesForUserPort <IGetAllAnalysesForUserPort>
 #codeDiagram("IGetAllAnalysesForUserPort", 70%)
 
-`IGetAllAnalysesForUserPort` è la porta per il recupero di tutte le analisi associate a un utente dalla persistenza. Accetta un semplice value object #link(<UserId>)[`UserId`] e restituisce una collezione di GitHubAnalysisGeneralDataDTO #TODO("perché non c'é?")che aggregano i metadati identificativi di ciascuna analisi senza includere i report dettagliati.
+`IGetAllAnalysesForUserPort` è la porta per il recupero di tutte le analisi associate a un utente dalla persistenza. Accetta un semplice value object #link(<UserId>)[`UserId`] e restituisce una collezione di GitHubAnalysisGeneralDataDTO che aggregano i metadati identificativi di ciascuna analisi senza includere i report dettagliati.
 
 ====== IGetAllRepositoryCollectionsPort <IGetAllRepositoryCollectionsPort>
 #codeDiagram("IGetAllRepositoryCollectionsPort", 80%)
@@ -2646,7 +2665,7 @@ Nel microservizio di analisi, il pattern State è applicato alla gestione dello 
 (es. `pending`, `in-progress`, `completed`, `failed`). Le transizioni di stato sono gestite internamente all'entitá,
 evitando un passaggio non valido da uno stato all'altro, come tra `failed` e `completed` o tra `pending` e `completed`.
 
-=== Strategy
+=== Strategy <StrategyPattern>
 ==== Problema risolto
 Permette di variare il comportamento di validazione e autorizzazione del repository senza introdurre logica condizionale 
 complessa nei servizi applicativi.  
