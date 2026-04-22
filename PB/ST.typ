@@ -35,6 +35,7 @@ dopo aver definito l'inizio del diagramma (almeno pr quelli di classe)
     "0.22.0",
     "Aggiunti diagrammi complessivi di Account Microservice",
     members.alice,
+    members.suar
   ),
   (
     "2026/04/22",
