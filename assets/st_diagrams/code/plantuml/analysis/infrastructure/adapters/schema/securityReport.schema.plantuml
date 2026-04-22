@@ -1,0 +1,19 @@
+@startuml SecurityReportModel
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class SecurityReport <<Mongoose Schema>> {
+    - reportId: string
+    - analysisId: string
+    - dependencyFindings: DependencyFinding[]
+    - owaspFindings: OWASPFinding[]
+    - secretFindings: SecretFinding[]
+    - toolErrors: ToolError[]
+    - createdAt: Date
+    - updatedAt: Date
+}
+@enduml
