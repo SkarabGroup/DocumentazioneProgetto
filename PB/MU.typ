@@ -1,7 +1,7 @@
 #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
 
-#let versione = "v0.3.0"
+#let versione = "v0.3.1"
 #set heading(numbering: "1.1.1")
 
 /*
@@ -13,9 +13,16 @@
 #set page(numbering: "1", header: header("Manuale Utente"), footer: footer())
 #let history = (
   (
+    "2026/04/23",
+    "0.3.1",
+    "Fix alla sezione di Risoluzione problemi",
+    members.antonio,
+    ""
+  ),
+  (
     "2026/04/22",
     "0.3.0",
-    "Aggiornata introduzione e Guida, aggiunta sezione Risoluzione di problemi",
+    "Aggiornata introduzione e Guida, aggiunta sezione Risoluzione problemi",
     members.antonio,
     ""
   ),
@@ -185,7 +192,7 @@ La sezione Repository costituisce la dashboard principale da cui gestire i propr
   caption: [Pagina di Dettaglio: Avvio Analisi in corso],
 )
 
-- *Inserimento PAT:* Per i repository privati, è necessario fornire un Personal Access Token (PAT) per autorizzare l'accesso. Questo può essere inserito sia all'avvio di un'analisi nel campo apposito, che dalle impostazioni, dove è possibile inserire il token per un dato repository in modo da non doverlo reinserire all'avvio di una nuova analisi.
+- *Configurazione del PAT:* Per l'analisi di repository privati, è richiesto l'inserimento di un Personal Access Token (PAT). Il token va configurato nella sezione dedicata delle impostazioni, dove viene associato al repository e protetto da una password. Quest'ultima dovrà essere inserita dall'utente ad ogni avvio dell'analisi al posto del token: questo doppio livello di autenticazione garantisce la massima sicurezza nell'accesso ai dati sensibili.
 
 #figure(
   image("../assets/manuale_utente/inserimento_pat.png", width: 80%),
@@ -227,13 +234,16 @@ L'applicativo genera in tempo reale una *Classifica* di tutti i repository assoc
 
 #pagebreak()
 
-= Risoluzione di problemi
+= Risoluzione problemi
 Questa breve sezione descrive il giusto comportamento da seguire per affrontare alcuni problemi che potrebbero verificarsi durante l'utilizzo della piattaforma CodeGuardian.
 
-== Analisi "Bloccata" o Infinita:
-- *Possibili Cause:* Il repository che sta venendo analizzato è troppo grande o all'invio dell'analisi non è stato inserito il PAT per repository privati.
+== Analisi bloccata o annullata:
+*Possibili Cause:* 
+=== Il repository che sta venendo analizzato ha dimensione superiore a 1GB
+- *Soluzione:* Verificare che la dimensione del codice sorgente non sia superiore a tale soglia.
 
-- *Soluzione:* Si consiglia di controllare l'accessibilità del repository e/o verificare la dimensione del codice sorgente.
+=== All'invio dell'analisi non è stato inserita la password per repository privati
+- *Soluzione:* Controllare l'accessibilità del repository, nel caso fosse privato, configurare il token di accesso al repository e inserire la password associata all'avvio di una nuova analisi.
 
-== Password dimenticata:
-- *Soluzione:* Nel caso venga dimenticata la password dell'account è necessario contattare un amministratore per avviare una procedura di recupero delle credenziali.
+== Password dell'account dimenticata
+- *Soluzione:* Nel caso si fosse scordata la password non è possibile recuperarla in alcun modo, quindi è necessario creare un nuovo account.

@@ -250,7 +250,7 @@ L:
 M:
   Manuale Utente:
     acronimo: MU
-    descrizione: Il manuale utente è un documento normativo che fornisce istruzioni dettagliate e linee guida per l'utilizzo corretto e completo del sistema da parte degli utenti finali, illustrandone le funzionalità, le interfacce e i flussi operativi.
+    descrizione: Documento che fornisce istruzioni dettagliate e linee guida per l'utilizzo corretto e completo del sistema da parte degli utenti finali, illustrandone le funzionalità, le interfacce e i flussi operativi.
   Manutenibilità:
     alternative: Maintainability
     descrizione: Caratteristica di qualità (ISO/IEC 25010) che esprime la facilità con cui un sistema può essere modificato per correggere difetti, migliorare prestazioni o adattarlo a nuovi requisiti.
