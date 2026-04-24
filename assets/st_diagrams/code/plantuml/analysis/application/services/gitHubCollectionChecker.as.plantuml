@@ -6,11 +6,11 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface ICollectionExistenceChecker {
+class ICollectionExistenceChecker <<Interface>> {
     + check(user: UserId, url: RepoURL): Promise<boolean>
 }
 
-interface ICollectionDuplicateCheckerPort
+class ICollectionDuplicateCheckerPort <<Interface>>
 
 class GitHubCollectionChecker {
     - duplicateCheckerPort: ICollectionDuplicateCheckerPort

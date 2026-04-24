@@ -6,9 +6,11 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface DeleteRepositoryCollectionUseCase {
+class DeleteRepositoryCollectionUseCase <<Interface>> {
     + execute(command: DeleteRepositoryCollectionCommand): Promise<DeleteRepositoryCollectionResult>
 }
+
+class IDeleteRepositoryCollectionPort <<Interface>>
 
 class GitHubCollectionDeleter {
     - port: IDeleteRepositoryCollectionPort
@@ -17,6 +19,6 @@ class GitHubCollectionDeleter {
     + execute(command: DeleteRepositoryCollectionCommand): Promise<DeleteRepositoryCollectionResult>
 }
 
-GitHubCollectionDeleter ..|> DeleteRepositoryCollectionUseCase
+GitHubCollectionDeleter ..up-|> DeleteRepositoryCollectionUseCase
 GitHubCollectionDeleter --right-> IDeleteRepositoryCollectionPort
 @enduml

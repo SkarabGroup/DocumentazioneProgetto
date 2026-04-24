@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface IDocumentationAgentPort {
+class IDocumentationAgentPort <<Interface>> {
     + runAnalysis(model: AgentRequest): Promise<DocsAgentResponse>
 }
 

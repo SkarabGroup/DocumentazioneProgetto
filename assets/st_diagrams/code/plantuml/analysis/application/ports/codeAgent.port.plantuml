@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface ICodeAgentPort {
+class ICodeAgentPort <<Interface>> {
     + runAnalysis(model: AgentRequest): Promise<CodeAgentResponse>
 }
 

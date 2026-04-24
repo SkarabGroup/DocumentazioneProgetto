@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface IAnalysisOrchestrator {
+class IAnalysisOrchestrator <<Interface>> {
     + analyze(analysis: GitHubAnalysis, path: string, code: boolean, docs: boolean, security: boolean): void
 }
 

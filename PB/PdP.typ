@@ -9,7 +9,7 @@
   (
     "2026/04/20",
     "2.0.0",
-    "verifica e versionamento",
+    "Revisione per PB",
     "",
     members.berengan
   ),
@@ -230,14 +230,13 @@ Entro tale scadenza, verranno rilasciati e sottoposti a verifica i seguenti arte
 - *Verbali*: documentazione tracciata delle decisioni e delle riunioni interne ed esterne rilevanti ai fini progettuali.
 
 === Revisione di Accettazione (Product Baseline – PB)
-Il rilascio finale del progetto, corrispondente alla Product Baseline, è pianificato per la data ultima del *21/03/2026*.
+Il rilascio finale del progetto, corrispondente alla Product Baseline, è pianificato per la data ultima del *21/03/2026*, questa data é stata, poi, spostata al 21/04/2026 a causa di ritardi accumulati durante lo sviluppo, principalmente dovuti alla complessità tecnica e alla curva di apprendimento dello stack tecnologico adottato.
 La pianificazione è coerente con quanto preventivato nella #link("https://skarabgroup.github.io/DocumentazioneProgetto/candidatura/Proposta_di_Candidatura.pdf")[*Proposta di Candidatura*] al capitolato.
 Entro tale termine, il gruppo fornirà:
 - *#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#minimum-viable-product")[#def[Minimum Viable Product]] (MVP)*: versione completa e funzionante del sistema, conforme ai requisiti funzionali e qualitativi approvati;
 - *Codice Sorgente*: intero codebase documentato e versionato nel repository ufficiale del progetto;
 - *Manualistica*:
   - *Manuale Utente*: guida all’utilizzo della piattaforma;
-  - *Manuale Amministratore*: guida all’installazione, configurazione e manutenzione del sistema;
 - *Documentazione Finale*: versioni definitive ed approvate di tutti i documenti normativi, gestionali e di supporto.
 
 == Glossario
@@ -2463,6 +2462,7 @@ Questo sprint ha permesso al team di concludere il progetto con un consumo orari
 Il focus è stato principalmente sul completamento del codice e dei test per il microservizio di analisi, con particolare attenzione agli agenti e alla logica di salvataggio e recupero delle analisi. 
 Il deployment su AWS è stato completato, ma ha richiesto più tempo del previsto a causa di complessità tecniche non anticipate. 
 Sul fronte documentale, sono stati completati la Specifica Tecnica, il Manuale Utente e la revisione finale del Piano di Progetto (PdP) e Piano di Qualifica.
+Il MVP é stato presentato all'azienda Proponente, ricevendo feedback positivi e apprezzamenti per il lavoro svolto, nonostante le difficoltà incontrate durante il progetto.
 ===== Stato di Avanzamento dei Deliverable
 - *Microservizio Account/Credenziali*: non sono state apportate modifiche dato che era giá stato completato allo sprint 9.
 

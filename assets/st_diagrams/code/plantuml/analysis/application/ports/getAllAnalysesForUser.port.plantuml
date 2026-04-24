@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface IGetAllAnalysesForUserPort {
+class IGetAllAnalysesForUserPort <<Interface>> {
     + getAllAnalysesForUser(id: UserId): Promise<GetAllAnalysesForUserResponse>
 }
 

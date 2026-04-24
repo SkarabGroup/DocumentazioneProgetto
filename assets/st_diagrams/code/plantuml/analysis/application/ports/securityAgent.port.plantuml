@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface ISecurityAgentPort {
+class ISecurityAgentPort <<Interface>> {
     + runAnalysis(model: AgentRequest): Promise<SecAgentResponse>
 }
 

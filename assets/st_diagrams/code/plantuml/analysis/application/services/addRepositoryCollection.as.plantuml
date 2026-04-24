@@ -6,12 +6,12 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface AddRepositoryCollectionUseCase {
+class AddRepositoryCollectionUseCase <<Interface>> {
     + execute(command: AddRepositoryCollectionCommand): Promise<AddRepositoryCollectionResult>
 }
 
-interface ICollectionExistenceChecker
-interface ICollectionAdderPort
+class ICollectionExistenceChecker <<Interface>>
+class ICollectionAdderPort <<Interface>>
 
 class AddRepositoryCollectionService {
     - duplicateChecker: ICollectionExistenceChecker
@@ -28,7 +28,7 @@ class AddRepositoryCollectionResponse
 class UserId
 class RepoURL
 
-AddRepositoryCollectionService ..|> AddRepositoryCollectionUseCase
+AddRepositoryCollectionService ..up-|> AddRepositoryCollectionUseCase
 AddRepositoryCollectionService --> ICollectionExistenceChecker : inject
 AddRepositoryCollectionService --> ICollectionAdderPort : inject
 

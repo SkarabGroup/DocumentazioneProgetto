@@ -1,4 +1,11 @@
 @startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
 package "Domain Types (Model)" {
 
   class User {
@@ -102,9 +109,32 @@ package "Domain Types (Model)" {
     + repository: Repository
     + score: number
     + lastAnalyzed?: string
+    + scoreDelta?: number
     --
     Rappresenta un repository nella classifica globale,
-    con posizione e score aggregato di qualità.
+    con posizione, score aggregato e variazione rispetto
+    all'analisi precedente.
+  }
+
+  class DocsAnalysisReport {
+    + metadata: { repository, status }
+    + API_standard_violations: DocsApiViolation[]
+    + docs_discrepancies: DocsDiscrepancy[]
+    + missing_files: DocsMissingFile[]
+    + dependency_audit: DocsDependencyAudit
+    --
+    Report prodotto dal Documentation Agent. Contiene violazioni
+    agli standard API (Spectral), discrepanze tra docs e codice,
+    file mancanti e audit delle dipendenze.
+  }
+
+  class DocumentationAnalysisSection {
+    + issues: Issue[]
+    + report?: DocsAnalysisReport
+    --
+    Sezione documentazione del report di analisi.
+    Il campo report contiene la struttura completa
+    prodotta dal backend Documentation Agent.
   }
 
   enum AnalysisStatus {
@@ -143,5 +173,6 @@ package "Domain Types (Model)" {
   Analysis --> AnalysisStatus
   Issue --> IssueSeverity
   Analysis --> AnalysisArea
+  DocumentationAnalysisSection --> DocsAnalysisReport
 }
 @enduml

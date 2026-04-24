@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface IAnalysisOrchestrator {
+class IAnalysisOrchestrator <<Interface>> {
     + analyze(analysis, path, code, docs, security): void
 }
 
@@ -34,9 +34,9 @@ AnalysisOrchestratorService ..up.> GitHubAnalysis : analyzes
 AnalysisOrchestratorService .up.> ReportId : creates
 
 together {
-    interface IDocumentationAgentPort
-    interface IDocsReportEntityProvider
-    interface IDocsReportSavePort
+    class IDocumentationAgentPort<<Interface>>
+    class IDocsReportEntityProvider<<Interface>>
+    class IDocsReportSavePort<<Interface>>
 }
 
 AnalysisOrchestratorService --down-> IDocumentationAgentPort
@@ -45,9 +45,9 @@ AnalysisOrchestratorService -down-> IDocsReportSavePort
 
 
 together {
-    interface ICodeAgentPort
-    interface ICodeReportEntityProvider
-    interface ICodeReportSavePort
+    class ICodeAgentPort<<Interface>>
+    class ICodeReportEntityProvider<<Interface>>
+    class ICodeReportSavePort<<Interface>>
 }
 
 AnalysisOrchestratorService --down-> ICodeAgentPort
@@ -55,16 +55,16 @@ AnalysisOrchestratorService -down-> ICodeReportEntityProvider
 AnalysisOrchestratorService -down-> ICodeReportSavePort
 
 together {
-    interface ISecurityAgentPort
-    interface ISecurityReportEntityProvider
-    interface ISecurityReportSavePort
+    class ISecurityAgentPort <<Interface>>
+    class ISecurityReportEntityProvider <<Interface>>
+    class ISecurityReportSavePort <<Interface>>
 }
 
 AnalysisOrchestratorService --down-> ISecurityAgentPort
 AnalysisOrchestratorService -down-> ISecurityReportEntityProvider
 AnalysisOrchestratorService -down-> ISecurityReportSavePort
 
-interface IUpdateAnalysisPort
+class IUpdateAnalysisPort <<Interface>>
 
 AnalysisOrchestratorService -down-> IUpdateAnalysisPort
 

@@ -6,13 +6,16 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface GetRepositoryCollectionUseCase {
+class GetRepositoryCollectionUseCase <<Interface>> {
     + execute(command: GetRepositoryCollectionCommand): Promise<GetRepositoryCollectionResult>
 }
 
-interface GetAllRepositoryCollectionsUseCase {
+class GetAllRepositoryCollectionsUseCase <<Interface>> {
     + executeAll(command: GetAllRepositoryCollectionsCommand): Promise<GetAllRepositoryCollectionsResult>
 }
+
+class IGetAllRepositoryCollectionsPort <<Interface>>
+class IGetRepositoryCollectionPort <<Interface>>
 
 class GitHubCollectionGetter {
     - singleCollectionGetter: IGetRepositoryCollectionPort
@@ -23,8 +26,8 @@ class GitHubCollectionGetter {
     + executeAll(command: GetAllRepositoryCollectionsCommand): Promise<GetAllRepositoryCollectionsResult>
 }
 
-GitHubCollectionGetter ..up|> GetRepositoryCollectionUseCase
-GitHubCollectionGetter ..|> GetAllRepositoryCollectionsUseCase
+GitHubCollectionGetter ..up-|> GetRepositoryCollectionUseCase
+GitHubCollectionGetter ..up-|> GetAllRepositoryCollectionsUseCase
 GitHubCollectionGetter --right-> IGetRepositoryCollectionPort
 GitHubCollectionGetter --left-> IGetAllRepositoryCollectionsPort
 @enduml

@@ -1,0 +1,79 @@
+@startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+skinparam direction top to bottom
+
+package "View — UI Primitives" {
+  class Button {
+    + variant: default | destructive | outline | secondary | ghost | link | accent
+    + size: default | sm | lg | icon
+    --
+    Componente pulsante riutilizzabile con 7 varianti visive e 4 taglie.
+    Basato su class-variance-authority per la composizione delle classi.
+    Supporta tutti gli attributi HTML nativi del button.
+  }
+
+  class Card {
+    --
+    Componente contenitore con bordo e padding, composto da
+    sotto-componenti: CardHeader, CardTitle, CardDescription,
+    CardContent, CardFooter. Usato come wrapper strutturale
+    per blocchi di contenuto nelle pagine.
+  }
+
+  class Dialog {
+    --
+    Componente modale basato su Radix UI Dialog primitive.
+    Include overlay con effetto blur, animazioni di apertura/chiusura
+    e gestione accessibilità (focus trap, aria-label). Composto da
+    DialogContent, DialogHeader, DialogTitle, DialogDescription.
+    Usato come base per AddRepositoryModal e AnalysisOptionsModal.
+  }
+
+  class Badge {
+    + variant: default | secondary | destructive | outline | success | warning | info
+    --
+    Etichetta visiva inline per indicare stati o categorie.
+    7 varianti di colore mappate alle variabili CSS del tema.
+  }
+
+  class Tabs {
+    --
+    Navigazione a schede basata su Radix UI Tabs. Composta da
+    TabsList, TabsTrigger e TabsContent. Usata in SettingsPage
+    e RepositoryDetailPage per organizzare sezioni di contenuto.
+  }
+
+  class Input {
+    --
+    Campo di testo HTML nativo con stili di focus, placeholder
+    e stato disabilitato coerenti con il design system.
+  }
+
+  class Progress {
+    + value: number (0-100)
+    --
+    Barra di avanzamento animata. Usata per mostrare
+    il progresso di un'analisi in RepositoryDetailPage.
+  }
+
+  class Skeleton {
+    --
+    Placeholder animato (pulse) per il caricamento lazy di contenuti.
+    Mantiene il layout stabile durante il fetch dei dati.
+  }
+
+  class Separator {
+    + orientation: horizontal | vertical
+    --
+    Linea divisoria basata su Radix UI Separator.
+    Usata per separare sezioni di contenuto nella UI.
+  }
+}
+
+@enduml

@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface GetRepositoryCollectionUseCase {
+class GetRepositoryCollectionUseCase <<Interface>> {
     + execute(command: GetRepositoryCollectionCommand): Promise<GetRepositoryCollectionResult>
 }
 

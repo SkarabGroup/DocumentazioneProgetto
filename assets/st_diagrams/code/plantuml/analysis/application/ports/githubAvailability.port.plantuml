@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface IGitHubAvailabilityPort {
+class IGitHubAvailabilityPort <<Interface>> {
     + check(model: CheckAvailabilityRequest): Promise<CheckAvailabilityResponse>
 }
 

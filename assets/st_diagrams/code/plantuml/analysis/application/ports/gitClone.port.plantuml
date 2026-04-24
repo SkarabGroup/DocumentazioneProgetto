@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface IGitClonePort {
+class IGitClonePort <<Interface>> {
     + clone(model: CloneRepoRequest): Promise<CloneRepoResponse>
 }
 

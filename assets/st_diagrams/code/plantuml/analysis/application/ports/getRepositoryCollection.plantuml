@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface IGetRepositoryCollectionPort {
+class IGetRepositoryCollectionPort <<Interface>> {
     + getRepositoryCollection(model: GetRepositoryCollectionRequest): Promise<GetRepositoryCollectionResponse>
 }
 

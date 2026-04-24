@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface IRepositoryValidator {
+class IRepositoryValidator <<Interface>> {
     + check(url: RepoURL, pat: PersonalAccessToken | null, branch: BranchName | null, 
     commit: CommitHash | null): Promise<{branch: BranchName, commit: CommitHash}>
 }

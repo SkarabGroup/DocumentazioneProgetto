@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface ISecurityAgentPort {
+class ISecurityAgentPort <<Interface>> {
     + runAnalysis(model: AgentRequest): Promise<SecAgentResponse>
 }
 
@@ -19,5 +19,5 @@ class LocalSecurityAnalysisAdapter {
     - createFallbackResponse(reason: string, repositoryId: string): SecAgentResponse
 }
 
-LocalSecurityAnalysisAdapter ..|> ISecurityAgentPort
+LocalSecurityAnalysisAdapter ..up-|> ISecurityAgentPort
 @enduml

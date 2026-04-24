@@ -11,11 +11,18 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v1.1.0"
+#let versione = "v2.0.0"
 
 #titlePage("Analisi dei Requisiti", versione)
 #set page(numbering: "1", header: header("Analisi dei Requisiti"), footer: footer())
 #let history = (
+  (
+    "2026/04/22",
+    "2.0.0",
+    "Revisione per PB",
+    "",
+    members.suar
+  ),
   (
     "2026/03/11",
     "1.1.0",

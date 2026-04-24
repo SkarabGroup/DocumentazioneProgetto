@@ -6,7 +6,7 @@ skinparam ranksep 30
 skinparam ClassAttributeIconSize 0
 hide circles
 
-interface NewPatUseCase {
+class NewPatUseCase <<Interface>> {
     + execute(command: NewPatCommand): Promise<NewPatResult>
 }
 
@@ -18,7 +18,9 @@ class NewPatService {
     + execute(command: NewPatCommand): Promise<NewPatResult>
 }
 
-NewPatService ..|> NewPatUseCase
+class IGitCredentialSavePort <<Interface>>
+
+NewPatService ..up-|> NewPatUseCase
 NewPatService --right-> IPasswordProvider
 NewPatService --left-> IGitCredentialSavePort
 @enduml

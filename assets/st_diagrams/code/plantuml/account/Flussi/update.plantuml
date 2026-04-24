@@ -1,0 +1,51 @@
+@startuml UpdateControllerReachableClasses
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 35
+skinparam ranksep 50
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class UpdateController
+
+class UpdateRequestDto
+class AuthResponseDto
+class UserResponseDto
+
+class IupdateUseCase <<Interface>> 
+
+class UpdateService
+
+class IUserFindPort <<Interface>> 
+class IUserUpdatePort <<Interface>> 
+class IHashPasswordPort <<Interface>> 
+class ITokenProviderPort <<Interface>> 
+class IVerifyTokenPort <<Interface>> 
+
+class PostgresAdapter
+class BcryptAdapter
+class JwtAdapter
+
+' Presentation -> Application
+UpdateController --down-> IupdateUseCase
+UpdateController --down-> IVerifyTokenPort
+UpdateController ..up.> UpdateRequestDto
+UpdateController ..up.> AuthResponseDto
+UpdateController ..up.> UserResponseDto
+
+' Use case implementation
+UpdateService ..up.|> IupdateUseCase
+
+' UpdateService dependencies
+UpdateService --down-> IUserFindPort
+UpdateService --down-> IUserUpdatePort
+UpdateService --down-> IHashPasswordPort
+UpdateService --down-> ITokenProviderPort
+
+' Infrastructure implementations
+PostgresAdapter ..up.|> IUserFindPort
+PostgresAdapter ..up.|> IUserUpdatePort
+BcryptAdapter ..up.|> IHashPasswordPort
+JwtAdapter ..up.|> ITokenProviderPort
+JwtAdapter ..up.|> IVerifyTokenPort
+@enduml
