@@ -31,10 +31,12 @@
     #let punto2 = "Stato di avanzamento microservizio Analisi"
     #let punto3 = "Aggiornamento documenti PdQ, PdP, NdP e ST"
     #let punto4 = "Stato di avanzamento Frontend"
+    #let punto5 = "Verifica PDCA: Allocazione Oraria e Scadenze (AM02)"
     + #punto1.
     + #punto2.
     + #punto3.
     + #punto4.
+    + #punto5.
 
     = Svolgimento Riunione
     #let orarioInizioRiunione = "10:00"
@@ -74,6 +76,14 @@
       decisione: "Continuare lo sviluppo e procedere all'integrazione del frontend con il microservizio di analisi.",
     )
 
+    === Punto 5: #punto5
+    #puntoOdg(
+      punto5,
+      "Valutazione conclusiva dell'Azione di Auto-Miglioramento AM02 (Rimodulazione budget orario) avviata in precedenza.\n- *Riscontro (Check)*: L'analisi delle metriche di Cost Variance (CV) e Schedule Variance (SV) riportate nel PdP dimostra che la ridistribuzione delle ore ha garantito il completamento tempestivo dei microservizi core (Account e Agenti), consentendo al team di rientrare nelle soglie di tolleranza attese per la chiusura della PB.",
+      decisione: "- *Decisione (Act)*: La strategia flessibile di allocazione temporale si è rivelata determinante per sventare i rischi di ritardo. Viene ratificata l'adozione di tale strategia come 'Lesson Learned' da mantenere e descrivere nel Piano di Progetto per la fase conclusiva dei prossimi cicli operativi."
+    )
+
+#pagebreak()
     = Azioni e responsabilità
     #task_table((
       ("Conclusione manuale utente", "Amministratore", "4:00"),
@@ -89,4 +99,4 @@
 
     #chiusuraVerbale(orarioFineRiunione, presidenteRiunione)
   ],
-)
+) 

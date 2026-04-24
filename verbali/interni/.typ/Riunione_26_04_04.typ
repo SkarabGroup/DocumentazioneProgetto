@@ -32,9 +32,11 @@
     #let punto1 = "Stato di avanzamento dei microservizi (Analisi e Account)"
     #let punto2 = "Definizione dei Value Object per report e responsabilità degli Adapter (mapping dati)"
     #let punto3 = "Avanzamento Frontend"
+    #let punto4 = "Verifica PDCA: Efficacia Azioni Correttive su Comunicazione e Toolchain"
     + #punto1.
     + #punto2.
     + #punto3.
+    + #punto4.
 
     = Svolgimento Riunione
     #let orarioInizioRiunione = "10:11"
@@ -67,6 +69,13 @@
       decisione: "Si è deciso di procedere con la documentazione in ST dei componenti del microservizio di analisi e la definizione dei pattern di autorizzazione (Strategy/Authorization). Queste scelte progettuali e la ristrutturazione dei servizi applicativi pongono le basi necessarie per il successivo sviluppo dell'interfaccia grafica.",
     )
 
+    === Punto 4: #punto4
+    #puntoOdg(
+      punto4,
+      "A distanza di alcuni sprint dalla loro implementazione, il team ha verificato l'impatto delle Azioni Correttive AM01 (Micro-allineamenti) e AM04 (Toolchain).\n- *Riscontro (Check)*: Dai dati del PdP si evince che le metriche di produttività (Schedule Performance Index) sono tornate in positivo (SPI ≥ 1). L'assenza di blocchi prolungati conferma l'efficacia degli allineamenti rapidi, mentre la costanza nell'uso degli strumenti ha azzerato l'overhead iniziale.",
+      decisione: "- *Decisione (Act)*: Le pratiche introdotte vengono consolidate definitivamente come standard metodologico di Skarab Group. Non sono richieste ulteriori iterazioni di aggiustamento per questi due ambiti."
+    )
+#pagebreak()
     = Azioni e responsabilità
     #task_table((
       ("Specifica Tecnica: analisi e selezione degli strumenti per la sicurezza", "Progettista", "3:00"),

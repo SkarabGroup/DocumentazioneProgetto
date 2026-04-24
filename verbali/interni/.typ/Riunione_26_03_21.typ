@@ -30,8 +30,10 @@
     == Argomenti proposti
     #let punto1 = "Verifica dello stato di avanzamento dei punti discussi nella riunione precedente"
     #let punto2 = "Avvio della progettazione tecnica in vista della codifica"
+    #let punto3 = "Retrospettiva di Sprint e Ciclo PDCA: Disomogeneità nella Documentazione"
     + #punto1.
     + #punto2.
+    + #punto3.
 
     = Svolgimento Riunione
     #let orarioInizioRiunione = "21:30"
@@ -57,6 +59,13 @@
       decisione: "È stato stabilito l'avvio della codifica dei componenti software di base, partendo dall'implementazione dei principali Value Object e delle entità del dominio analisi, contestualmente alla revisione degli strumenti di build per uniformare l'ambiente di sviluppo.",
     )
 
+    === Punto 3: #punto3
+    #puntoOdg(
+      punto3,
+      "Nell'ambito del miglioramento continuo (PDCA), è stata condotta una retrospettiva sulla qualità documentale.\n- *Obiettivo (Plan)*: Garantire redazioni parallele coerenti per la stesura della PB.\n- *Riscontro (Check)*: I controlli di qualità effettuati dai Verificatori e tracciati nel Piano di Qualifica (PdQ) evidenziano una disomogeneità testuale. La stesura parallela ha prodotto incoerenze stilistiche e formattazioni ridondanti.",
+      decisione: "- *Decisione (Act)*: Istituzione dell'Azione Correttiva AM03. Il team ha deciso di ingegnerizzare ulteriormente le funzioni in Typst e adottare template fortemente vincolanti per annullare l'incidenza dello stile personale e standardizzare ogni documento prodotto."
+    )
+#pagebreak()
     = Azioni e responsabilità
     #task_table((
       ("Allineamento architetturale domain/entity/factory del microservizio analisi", "Progettista", "6:00"),
@@ -71,6 +80,7 @@
     ("Implementazione Analysis, GitHubAnalysis, FactoryCommand e Factory", "Programmatore", "2:30"),
     ("Implementazione AnalysisProvider e analysis model", "Programmatore", "1:30"),
     ("Fix tooling build/test (ESM→CJS uuid, rootDir, path check-test-symmetry)", "Programmatore", "1:00"),
+    ("Ingegnerizzazione avanzata template Typst (AM03)", "Amministratore", "1:30"),
     ))
 
     #chiusuraVerbale(orarioFineRiunione, presidenteRiunione)

@@ -33,10 +33,12 @@
     #let punto2 = "Pianificazione documentazione (ST, PdP, PdQ) e test"
     #let punto3 = "Definizione dei criteri di rendicontazione oraria e allineamento sui task"
     #let punto4 = "Definizione dell'architettura dei dati e della persistenza dei report"
+    #let punto5 = "Verifica PDCA: Efficacia Standardizzazione Documentale (AM03)"
     + #punto1.
     + #punto2.
     + #punto3.
     + #punto4.
+    + #punto5.
 
     = Svolgimento Riunione
     #let orarioInizioRiunione = "9:55"
@@ -72,10 +74,17 @@
     === Punto 4: #punto4
     #puntoOdg(
       punto4,
-      "Il team ha discusso la struttura tecnica necessaria per garantire la corretta memorizzazione e il recupero dei report generati dagli agenti.",
+      "Il team ha discusso la structure tecnica necessaria per garantire la corretta memorizzazione e il recupero dei report generati dagli agenti.",
       decisione: "Si è deciso di procedere con la revisione dello schema dei code-report e con la definizione puntuale del mapping tra le entità di dominio e i modelli di persistenza. Tale modellazione include la creazione del modello save-code-report e lo sviluppo della logica di salvataggio nell'adapter MongoDB, corredata dai necessari test di integrazione.",
     )
 
+    === Punto 5: #punto5
+    #puntoOdg(
+      punto5,
+      "Controllo degli esiti dell'Azione Correttiva AM03 implementata negli sprint precedenti.\n- *Riscontro (Check)*: Il tracciamento dei difetti documentali riportati dai Verificatori nel Piano di Qualifica (PdQ) ha confermato che l'utilizzo rigoroso dei nuovi template ingegnerizzati in Typst ha annullato l'incidenza delle disomogeneità testuali e grafiche tra i vari autori.",
+      decisione: "- *Decisione (Act)*: L'iniziativa viene dichiarata un successo assoluto. Il ciclo PDCA relativo all'uniformità documentale si conclude positivamente; i template restano lo standard vincolante, non passibile di ulteriori modifiche strutturali fino a fine progetto."
+    )
+#pagebreak()
     = Azioni e responsabilità
     #task_table((
       ("Manutenzione della documentazione: revisione dei contenuti e rimozione delle sezioni obsolete", "Amministratore", "2:00"),

@@ -31,9 +31,11 @@
     #let punto1 = "Aggiornamento sui progressi dei diagrammi C3 e C4"
     #let punto2 = "Avanzamento codice e procedure Git"
     #let punto3 = "Discussione documento di Specifica Tecnica"
+    #let punto4 = "Retrospettiva di Sprint e Ciclo PDCA: Rimodulazione Budget Orario"
     + #punto1.
     + #punto2.
     + #punto3.
+    + #punto4.
 
     = Svolgimento Riunione
     #let orarioInizioRiunione = "9:50"
@@ -66,6 +68,13 @@
       decisione: "È stata definita la rappresentazione UML compatta per le classi in ST; si è quindi stabilito di revisionare gli errori nei link ai componenti e di integrare le nuove sezioni relative ai command applicativi e all'architettura di deployment.",
     )
 
+    === Punto 4: #punto4
+    #puntoOdg(
+      punto4,
+      "Durante l'analisi per il completamento della Product Baseline, si è svolta l'attività di controllo PDCA sulla pianificazione temporale.\n- *Obiettivo (Plan)*: Rispettare in modo rigoroso le milestone di progetto assicurando il rilascio del core applicativo.\n- *Riscontro (Check)*: I report estratti dal Piano di Progetto (PdP) mostrano una potenziale criticità sulle scadenze (Schedule Variance tendente in negativo) dovuta alla sottostima iniziale dell'impegno necessario per alcuni microservizi complessi.",
+      decisione: "- *Decisione (Act)*: Approvazione dell'Azione Correttiva AM02. Viene disposta una rimodulazione strategica del budget orario, riallocando tempestivamente le risorse sulle attività critiche di sviluppo (Backend e Agenti) e mettendo in secondo piano task a minor priorità, per garantire la consegna della PB nei tempi stabiliti."
+    )
+#pagebreak()
     = Azioni e responsabilità
     #task_table((
       ("Aggiornamento NdP: recepimento delle direttive di codifica", "Amministratore", "1:00"),
@@ -90,6 +99,7 @@
       ("Sviluppo componenti di richiesta Git, mapper e comando StartAnalysis con test", "Programmatore", "3:00"),
       ("Implementazione del modello credenziali e del Value Object PAT Password", "Programmatore", "1:30"),
       ("Sviluppo adapter MongoDB, scrittura credenziali GitHub e correzioni ai pacchetti", "Programmatore", "5:00"),
+      ("Rimodulazione risorse e adeguamento budget nel PdP (AM02)", "Responsabile", "1:30"),
     ))
 
     #chiusuraVerbale(orarioFineRiunione, presidenteRiunione)

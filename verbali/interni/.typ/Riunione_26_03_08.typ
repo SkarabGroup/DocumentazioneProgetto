@@ -29,8 +29,10 @@
     == Argomenti proposti
     #let punto1 = "Discussione in merito al documento Specifica Tecnica (ST) e progettazione"
     #let punto2 = "Discussione sulle modalità di lavoro per procedere con la PB"
+    #let punto3 = "Retrospettiva di Sprint e Ciclo PDCA: Inefficienza nella Comunicazione Interna"
     + #punto1.
     + #punto2.
+    + #punto3.
 
     = Svolgimento Riunione
     #let orarioInizioRiunione = "14:00"
@@ -56,6 +58,13 @@
       decisione: "Assegnazione immediata e chiara delle task settimanali unita ad una maggior periodicità delle riunioni nella prima parte della PB. In linea con questa riorganizzazione, si è deciso di completare le correzioni ai documenti AdR e NdP segnalate dal docente e di aggiornare la pianificazione nel PdP; i compiti specifici di modifica e verifica sono tracciati nella tabella sottostante."
     )
 
+    === Punto 3: #punto3
+    #puntoOdg(
+      punto3,
+      "In ottemperanza al ciclo di Deming (PDCA), il team ha condotto una retrospettiva sulle inefficienze di comunicazione emerse durante l'ultimo sprint.\n- *Obiettivo (Plan)*: Garantire massima reattività per la risoluzione dei blocchi operativi.\n- *Riscontro (Check)*: Dall'analisi a consuntivo nel Piano di Progetto (PdP), è emerso che alcuni task hanno subito uno slittamento rispetto all'Estimated Time. Il team ha identificato come causa (Root Cause) un eccessivo affidamento alla comunicazione asincrona, che ha generato colli di bottiglia decisionali.",
+      decisione: "- *Decisione (Act)*: Viene istituita l'Azione Correttiva AM01. Vengono definiti canali diretti per le emergenze e si inserisce a calendario una routine di micro-allineamenti frequenti per sbloccare i task pendenti in tempo reale. Le Norme di Progetto (NdP) verranno aggiornate di conseguenza."
+    )
+#pagebreak()
      = Azioni e responsabilità
     #task_table((
     ("Modifica del documento AdR in conformità alle correzioni proposte", "Analista", "2:00"),
@@ -71,6 +80,7 @@
     ("Verifica ST","Verificatore","8:00"),
     ("Verifica delle modifiche al documento AdR", "Verificatore", "1:00"),
     ("Verifica delle modifiche in NdP", "Verificatore", "1:00"),
+    ("Applicazione Azione Correttiva AM01 in NdP", "Amministratore", "1:00"),
     ))
     #chiusuraVerbale(orarioFineRiunione, presidenteRiunione)
   ],
