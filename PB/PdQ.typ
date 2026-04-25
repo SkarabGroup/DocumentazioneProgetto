@@ -1104,7 +1104,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TU-2.1],
       [FROb25],
       [Verifica rendering pagina di Login.],
-      [Visualizzazione corretto del form di autenticazione.],
+      [Visualizzazione corretta del form di autenticazione.],
       pending,
 
       [TU-2.2],
@@ -1571,7 +1571,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TU-12.4],
       [FROb109],
       [Verifica inibizione rendering ranking in assenza di analisi completate.],
-      [Messaggio suggerimento prima analisi mostrato.],
+      [Messaggio di suggerimento di prima analisi mostrato.],
       pending,
 
       // --- ESPORTAZIONE (UC14) ---
@@ -1742,11 +1742,16 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       pending,
 
       // --- CREAZIONE RACCOLTA REPORT (UC20) ---
-      [TU-20.1], [FROb140], [Verifica definizione nome univoco raccolta.], [Nomi non conformi rifiutati.], pending,
+      [TU-20.1], 
+      [FROb140], 
+      [Verifica definizione nome univoco raccolta.], 
+      [Nomi non conformi rifiutati.], 
+      pending,
+
       [TU-20.2],
       [FROb141],
       [Verifica validazione sintattica URL GitHub.],
-      [https://www.wordreference.com/iten/non-conforme],
+      [URL sintatticamente non validi vengono rifiutati.],
       pending,
 
       [TU-20.3],
@@ -2087,7 +2092,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TU-35.4],
       [FROb202],
       [Verifica notifica fallimento applicazione remediation sicurezza.],
-      [Vulnerabilità non mitigata in caso insuccesso.],
+      [Vulnerabilità non mitigata in caso di insuccesso.],
       pending,
 
       [TU-36.1],
@@ -2128,7 +2133,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
 
       [TU-38.1],
       [FROb209],
-      [Verifica accesso al dettaglio per procedura rifiuto documentale.],
+      [Verifica accesso al dettaglio per procedura di rifiuto documentale.],
       [Dettaglio visualizzato prima del rifiuto.],
       pending,
 
@@ -2289,7 +2294,11 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [Profilo rimosso; accesso revocato.],
       pending,
 
-      [TU-45.2], [FROb236], [Verifica selezione utente e avvio procedura revoca.], [Azione di revoca avviata.], pending,
+      [TU-45.2], 
+      [FROb236], 
+      [Verifica selezione utente e avvio procedura revoca.], 
+      [Azione di revoca avviata.], 
+      pending,
 
       [TU-46.1],
       [FROb237],
