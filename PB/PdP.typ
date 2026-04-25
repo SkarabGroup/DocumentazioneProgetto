@@ -16,7 +16,7 @@
   (
     "2026/04/18",
     "1.7.0",
-    "Fix generali e inizio aggiunta sprint 10",
+    "Fix generali e inizio aggiunta Sprint 10",
     members.kevin,
     members.berengan,
   ),
@@ -58,7 +58,7 @@
   (
     "2026/03/08",
     "1.1.0",
-    "Aggiunta tabella attvità e modifica alle ore preventivate di sprint 5",
+    "Aggiunta tabella attività e modifica alle ore preventivate di Sprint 5",
     members.berengan,
     members.andrea
   ),
@@ -93,7 +93,7 @@
   (
     "2026/02/11",
     "0.8.0",
-    "Aggiunte tabelle attivitá sprint 1,2,3, piccoli fix e aggiunte spiegazioni delle discrepanze orarie tra consuntivo e preventivo",
+    "Aggiunte tabelle attività Sprint 1,2,3, piccoli fix e aggiunte spiegazioni delle discrepanze orarie tra consuntivo e preventivo",
     members.kevin,
     members.antonio,
   ),
@@ -114,7 +114,7 @@
   (
     "2026/01/12",
     "0.7.0",
-    "Preventivo dei costi per la RTB e revisione sprint e retrospettiva",
+    "Preventivo dei costi per la RTB e revisione Sprint e retrospettiva",
     members.suar,
     members.alice,
   ),
@@ -881,7 +881,7 @@ Per questo motivo, oltre il *60%* del monte ore complessivo del ruolo di *Ammini
 
 == Stima per il Periodo verso la Product Baseline (PB)
 Il budget residuo è orientato alle attività di sviluppo, integrazione e verifica del prodotto.
-In questo intervallo, le ore di *Amministratore* sono ridotte alla manutenzione della documentazione, mentre aumentano significativamente le ore di *Progettazione* e *Programmazione* necessarie alla realizzazione del MVP.
+In questo intervallo, le ore di *Amministratore* sono ridotte alla manutenzione della documentazione, mentre aumentano significativamente le ore di *Progettazione* e *Programmazione* necessarie alla realizzazione dell'MVP.
 
 #figure(
   table(
@@ -1044,7 +1044,7 @@ Le attività svolte nel periodo di riferimento si sono focalizzate sul consolida
     ("Verifica PdP","Verificatore","4:00","2:00","Completata"),
     ("Verifica NdP","Verificatore","1:30","1:00","Completata"),
   ),
-  [Riassunto delle attivitá svolte durante lo Sprint 1]
+  [Riassunto delle attività svolte durante lo Sprint 1]
 )
 ==== Consumo Tempo e Costi Effettivi (Consuntivo)
 Si nota una flessione nel monte ore totale dovuta alla pausa natalizia. Alcune attività di verifica sono slittate allo sprint successivo.
@@ -1144,7 +1144,7 @@ Per lo Sprint 2 il team si pone i seguenti obiettivi:
 === Sprint 2
 *Periodo:* dal 03/01/2026 al 17/01/2026
 
-==== Attività principali
+==== Attività Principali
 Focus sul consolidamento della documentazione (versione per RTB) e accelerazione sull'Analisi dei Requisiti:
 - *Piano di Progetto:* Arricchimento sezione Rischi e conformità IEEE 1058.
 - *Analisi dei Requisiti:* Allocazione massiva risorse (5 membri) per definizione UC e Requisiti.
@@ -1675,13 +1675,13 @@ Dal prossimo Sprint inizieranno le attività in vista della PB.
 === Consumo orario per membro RTB
 #sprint_table(
   (
-  ([Kevin],      7,  8,  8,  0,  10,5,  38),
- ([Riccardo B.],0,    5,  6,  0,  10,  5, 26),
- ([Riccardo M.],0,    5,  4,  0,  6,  5,  20),
- ([Antonio],    7,  6,  15,0,  0,     3, 31),
- ([Andrea],     0,    5,  11,0,  0,     5, 21),
- ([Alberto],    6,  13,12,0,  11, 8,  50),
- ([Alice],      6,  9,  13,0,  0,     9, 37,)
+  ([Basso Kevin],      7,  8,  8,  0,  10,5,  38),
+ ([Berengan Riccardo],0,    5,  6,  0,  10,  5, 26),
+ ([Martinello Riccardo],0,    5,  4,  0,  6,  5,  20),
+ ([Sandu Antonio],    7,  6,  15,0,  0,     3, 31),
+ ([Sgreva Andrea],     0,    5,  11,0,  0,     5, 21),
+ ([Suar Alberto],    6,  13,12,0,  11, 8,  50),
+ ([Zago Alice],      6,  9,  13,0,  0,     9, 37,)
  ),
  [Consumo orario per membro RTB],
 )
@@ -1690,13 +1690,13 @@ Dal prossimo Sprint inizieranno le attività in vista della PB.
 La seguente tabella riporta le ore rimanenti di ogni componente per ruolo per completare la PB.
 #sprint_table(
   (
-  ([Kevin],       0,  5,  4,  17, 10, 16, 52),
-  ([Riccardo B.], 7,  8,  6,  17, 10, 16, 64),
-  ([Riccardo M.], 7,  8,  8,  17, 14, 16, 70),
-  ([Antonio],     0,  7,  -3, 17, 20, 18, 59),
-  ([Andrea],      7,  8,  1,  17, 20, 16, 69),
-  ([Alberto],     1,  0,  0,  17, 9,  13, 40),
-  ([Alice],       1,  4,  -1, 17, 20, 12, 53), 
+  ([Basso Kevin],       0,  5,  4,  17, 10, 16, 52),
+  ([Berengan Riccardo], 7,  8,  6,  17, 10, 16, 64),
+  ([Martinello Riccardo], 7,  8,  8,  17, 14, 16, 70),
+  ([Sandu Antonio],     0,  7,  -3, 17, 20, 18, 59),
+  ([Sgreva Andrea],      7,  8,  1,  17, 20, 16, 69),
+  ([Suar Alberto],     1,  0,  0,  17, 9,  13, 40),
+  ([Zago Alice],       1,  4,  -1, 17, 20, 12, 53), 
 
   ),
   [Ore rimanenti per PB per membro],
@@ -1713,11 +1713,11 @@ Le attività svolte nel periodo di riferimento sono state incentrate sulla proge
 - *Norme di Progetto (NdP):*
   - Modifica definizione del ruolo di verificatore
 - *Piano di Qualifica (PdQ):*
-  - aggiunta del cruscotto di valutaizone per il quinto sprint
+  - Aggiunta del cruscotto di valutazione per il quinto sprint
 - *Analisi dei Requisiti (AdR)*:
   - Modifica del documento basate sulle correzioni segnalate dal Professor. Cardin.
 - *Specifica Tecnica (ST):*
-  - prima stesura del documento comprensiva di introduzione e tecnologie utilizzate
+  - Prima stesura del documento comprensiva di introduzione e tecnologie utilizzate
   - Scrittura di alcuni lati dell'architettura a microservizi
 #pagebreak()
 
@@ -1780,12 +1780,12 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
   [Consuntivo orario effettivo per lo Sprint 5],
 )
 
-==== Retrospettiva dello sprint 5
+==== Retrospettiva dello Sprint 5
 ===== Valutazione del Periodo
 Questo sprint è stato caratterizzato dall'inizio ufficiale della PB e dalla conseguente fase di progettazione. É stato necessario un cambio di passo, derivante dal ritardo accumulato durante la RTB. Lo sprint è stato caratterizzato da una quantità maggiore di incontri di allineamento e progettazione collettiva, in modo da rendere più costate il lavoro dei membri del gruppo, che ha comunque presentato alcune lacune e scadenze non rispettate.
 
-===== Stato di Avanzamento dei Derivable 
-- *Ndp :* è stato modificata la descrizione del ruolo di verificatore.
+===== Stato di Avanzamento dei Deliverable 
+- *NdP :* è stato modificata la descrizione del ruolo di verificatore.
 - *Specifica Tecnica :* prima stesura del documento.
 - *AdR* : il documento è stato modificato seconod le correzioni proposte, ora in versione stabile.
 
@@ -1801,15 +1801,15 @@ Il coordinamento interno di questo sprint è migliorato rispetto ai precedenti. 
 - *Programmatore:* Preventivato 0h, Consuntivo 0h
 - *Verificatore:* Preventivato 11h, Consuntivo 2h
 
-===== Rischi rilevati
+===== Rischi Rilevati
 Durante questo sprint si sono manifestati i seguenti rischi:
 - #link(<RI4>)[#underline[[RI4]]]: la mancata comunicazione efficace su come svolgere alcune attività o il conflitto di idee hanno portato a un importante rallentamento e lavoro aggiuntivo.
 - #link(<RI5>)[#underline[[RI5]]]: è stata riscontrata una disomogeneità del lavoro svolto da parte dei membri durante lo sprint.
 
 ===== Obiettivi per lo Sprint Successivo
-Per lo sprint successivo il team si pone i seguenti obiettvi prioritari:
+Per lo sprint successivo il team si pone i seguenti obiettivi prioritari:
 - Terminare le attività di progettazione
-- Iniziare le attvità di codifica
+- Iniziare le attività di codifica
 
 ==== Misure correttive
 Per mitigare i rischi emersi durante lo sprint 5, il team ha deciso di adottare le seguenti misure correttive:
@@ -1822,13 +1822,13 @@ Per mitigare i rischi emersi durante lo sprint 5, il team ha deciso di adottare 
 #preventivo_a_finire(
   (
     //               Resp  Amm  Anal  Prog  Cod  Ver
-    ([Kevin],           0,   5,   4,   17,  10,  16),
-    ([Riccardo B.],     0,   8,   5,   17,  10,  16),
-    ([Riccardo M.],     7,   8,   8,   17,  14,  14),
-    ([Antonio],         0,   7,  -3,   17,  20,  18),
-    ([Andrea],          7,   8,  -1,   17,  20,  16),
-    ([Alberto],         1,   0,   0,   17,   9,  13),
-    ([Alice],           1,   4,  -2,   17,  20,  12),
+    ([Basso Kevin],           0,   5,   4,   17,  10,  16),
+    ([Berengan Riccardo],     0,   8,   5,   17,  10,  16),
+    ([Martinello Riccardo],     7,   8,   8,   17,  14,  14),
+    ([Sandu Antonio],         0,   7,  -3,   17,  20,  18),
+    ([Sgreva Andrea],          7,   8,  -1,   17,  20,  16),
+    ([Suar Alberto],         1,   0,   0,   17,   9,  13),
+    ([Zago Alice],           1,   4,  -2,   17,  20,  12),
   ),
   [Aggiornamento preventivo a finire sprint 5],
   (7,0,5,54,0,11),  // preventivo
@@ -1861,7 +1861,7 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
   [Prospetto orario preventivato per lo Sprint 6],
 )
 
-==== Prospetto attività
+==== Prospetto Attività
 #activity_table(
   (
     ("Completare l'analisi dei tool mancanti e redigerne la documentazione", "Progettista", "8:00", "10:00", "Completata"),
@@ -1896,7 +1896,7 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
   [Consuntivo orario effettivo per lo Sprint 6],
 )
 
-==== Retrospettiva dello sprint 6
+==== Retrospettiva dello Sprint 6
 ===== Valutazione del Periodo
 Le attività di questo sprint si sono concentrate sulla progettazione di dettaglio, chiarendo tutti i principali pattern (Port/Adapter, microservizi) prima di avviare la codifica. Il team è riuscito a definire in maniera chiara gli strati dell'applicazione.
 
@@ -1931,13 +1931,13 @@ Questo sprint é stato il primo in cui la pianificazione é stata rispettata, e 
 #preventivo_a_finire(
   (
     //               Resp  Amm  Anal  Prog  Cod  Ver
-    ([Kevin],           0,   5,   4,   9,  10,  16),
-    ([Riccardo B.],     0,   8,   5,   9,  10,  14),
-    ([Riccardo M.],     5,   8,   8,   7,  14,  8),
-    ([Antonio],         0,   7,  -3,   9,  20,  15),
-    ([Andrea],          7,   8,  -1,   9,  20,  13),
-    ([Alberto],         1,   0,   0,   11,   9,  13),
-    ([Alice],           1,   4,  -2,   11,  20,  12),
+    ([Basso Kevin],           0,   5,   4,   9,  10,  16),
+    ([Berengan Riccardo],     0,   8,   5,   9,  10,  14),
+    ([Martinello Riccardo],     5,   8,   8,   7,  14,  8),
+    ([Sandu Antonio],         0,   7,  -3,   9,  20,  15),
+    ([Sgreva Andrea],          7,   8,  -1,   9,  20,  13),
+    ([Suar Alberto],         1,   0,   0,   11,   9,  13),
+    ([Zago Alice],           1,   4,  -2,   11,  20,  12),
   ),
   [Aggiornamento preventivo a finire sprint 6],
   (2,0,0,38,0,0),  // preventivo
@@ -1971,7 +1971,7 @@ La seguente tabella riporta la pianificazione oraria per ruolo.
   [Prospetto orario preventivato per lo Sprint 7],
 )
 
-==== Prospetto attività
+==== Prospetto Attività
 #activity_table(
   (
     ("Allineamento architetturale domain/entity/factory del microservizio analisi", "Progettista", "6:00", "6:30", "Completata"),
@@ -2012,7 +2012,7 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
   [Consuntivo orario effettivo per lo Sprint 7],
 )
 
-==== Retrospettiva dello sprint 7
+==== Retrospettiva dello Sprint 7
 ===== Valutazione del Periodo
 Le decisioni finali sull'architettura, la stesura in ST dei modelli C3/C4 e la rivisitazione dei tool hanno chiuso l'ultima fase legata prettamente alla progettazione ad alto e medio livello. Ha preso avvio effettivo la parte di programmazione.
 
@@ -2048,13 +2048,13 @@ Per mitigare i rischi emersi durante lo sprint 7, il team ha deciso di adottare 
 #preventivo_a_finire(
   (
     //               Resp  Amm  Anal  Prog  Cod  Ver
-    ([Kevin],           0,   5,   4,   5,  6,  14),
-    ([Riccardo B.],     0,   8,   5,   6,  8,  12),
-    ([Riccardo M.],     3,   8,   8,   7,  8,  5),
-    ([Antonio],         0,   7,  -3,   3,  20,  14),
-    ([Andrea],          7,   8,  -1,   4,  20,  12),
-    ([Alberto],         1,   0,   0,   10,   6,  13),
-    ([Alice],           1,   4,  -2,   8,  18,  12),
+    ([Basso Kevin],           0,   5,   4,   5,  6,  14),
+    ([Berengan Riccardo],     0,   8,   5,   6,  8,  12),
+    ([Martinello Riccardo],     3,   8,   8,   7,  8,  5),
+    ([Sandu Antonio],         0,   7,  -3,   3,  20,  14),
+    ([Sgreva Andrea],          7,   8,  -1,   4,  20,  12),
+    ([Suar Alberto],         1,   0,   0,   10,   6,  13),
+    ([Zago Alice],           1,   4,  -2,   8,  18,  12),
   ),
   [Aggiornamento preventivo a finire sprint 7],
   (2,0,0,28,11,8),  // preventivo
@@ -2095,7 +2095,7 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
   [Prospetto orario preventivato per lo Sprint 8],
 )
 
-==== Prospetto attività
+==== Prospetto Attività
 #activity_table(
   (
     ("Coordinamento merge PR backend/documentazione", "Responsabile", "1:30", "1:30", "Completata"),
@@ -2155,7 +2155,7 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
   [Consuntivo orario effettivo per lo Sprint 8],
 )
 
-==== Retrospettiva dello sprint 8
+==== Retrospettiva dello Sprint 8
 ===== Valutazione del Periodo
 Questo sprint è stato caratterizzato da un cruciale cambio di rotta architetturale che ha ridefinito la struttura del microservizio di analisi per quanto riguarda la parte di agenti. Il team aveva inizialmente esplorato l'adozione di un'architettura Serverless basata su AWS Step Functions e Lambda. Tuttavia, valutata l'eccessiva complessità infrastrutturale e i tempi di sviluppo incompatibili con le scadenze della Product Baseline, il gruppo ha deciso di scartare la soluzione Serverless. Si è optato per mantenere l'orchestrazione all'interno dell'esagono del microservizio di analisi. Per quanto riguarda gli altri aspetti del microservizio di analisi e il microservizio credenziali/account, lo sviluppo del codice sta proseguendo secondo le tempistiche previste.
 
@@ -2194,13 +2194,13 @@ Questo sprint ha evidenziato l'importanza di una valutazione più accurata della
 #preventivo_a_finire(
   (
     //               Resp  Amm  Anal  Prog  Cod  Ver
-    ([Kevin],           0,   5,   4,   3,  3,  12),
-    ([Riccardo B.],     0,   8,   5,   4,  3,  10),
-    ([Riccardo M.],     3,   8,   8,   4,  0,  3),
-    ([Antonio],         0,   7,  -3,   -1,  15,  11),
-    ([Andrea],          3,5,   8,  -1,   0,  17,  8),
-    ([Alberto],         1,   -4,   0,   4,   1,  11),
-    ([Alice],           1,   4,  -2,   7,  14,  10),
+    ([Basso Kevin],           0,   5,   4,   3,  3,  12),
+    ([Berengan Riccardo],     0,   8,   5,   4,  3,  10),
+    ([Martinello Riccardo],     3,   8,   8,   4,  0,  3),
+    ([Sandu Antonio],         0,   7,  -3,   -1,  15,  11),
+    ([Sgreva Andrea],          3,5,   8,  -1,   0,  17,  8),
+    ([Suar Alberto],         1,   -4,   0,   4,   1,  11),
+    ([Zago Alice],           1,   4,  -2,   7,  14,  10),
   ),
   [Aggiornamento preventivo a finire sprint 8],
   (3.5,4,0,22,30,16),  // preventivo
@@ -2242,7 +2242,7 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
   [Prospetto orario preventivato per lo Sprint 9],
 )
 
-==== Prospetto attività
+==== Prospetto Attività
 #activity_table(
   (
     ("Coordinamento merge train PR backend e documentazione", "Responsabile", "1:30", "1:30", "Completata"),
@@ -2299,7 +2299,7 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
   [Consuntivo orario effettivo per lo Sprint 9],
 )
 
-==== Retrospettiva dello sprint 9
+==== Retrospettiva dello Sprint 9
 ===== Valutazione del Periodo
 Questo sprint si è concluso con un forte avanzamento per quanto riguarda la codifica e l'integrazione. Il focus principale del team è stato lo sviluppo pratico dei microservizi ed in particolare dello sviluppo degli agenti, il testing degli endpoint e l'inizio delle complesse procedure di deployment in ambiente AWS.
 
@@ -2352,13 +2352,13 @@ Essendo il prossimo l'ultimo sprint, il team si concentrerà principalmente sul 
 #preventivo_a_finire(
   (
     //               Resp  Amm  Anal  Prog  Cod  Ver
-    ([Kevin],           0,   0,   4,   3,  -3,  3),
-    ([Riccardo B.],     0,   8,   5,   1,  -7,  9),
-    ([Riccardo M.],     3,   8,   8,   -1,  -3,  -1),
-    ([Antonio],         0,   5,  -3,   -3,  8,  8),
-    ([Andrea],          0,   8,  -1,   -4,  9,  5),
-    ([Alberto],         1,   -7,   0,   2,   -4,  7),
-    ([Alice],           1,   4,  -2,   6,  4,  4),
+    ([Basso Kevin],           0,   0,   4,   3,  -3,  3),
+    ([Berengan Riccardo],     0,   8,   5,   1,  -7,  9),
+    ([Martinello Riccardo],     3,   8,   8,   -1,  -3,  -1),
+    ([Sandu Antonio],         0,   5,  -3,   -3,  8,  8),
+    ([Sgreva Andrea],          0,   8,  -1,   -4,  9,  5),
+    ([Suar Alberto],         1,   -7,   0,   2,   -4,  7),
+    ([Zago Alice],           1,   4,  -2,   6,  4,  4),
   ),
   [Aggiornamento preventivo a finire sprint 9],
   (3.5,10,0,17,42,30),  // preventivo
@@ -2375,7 +2375,7 @@ Le attività pianificate per questo sprint si concentrano sul completamento del 
 
 - *Sviluppo Microservizio Analisi:*
   - Completamento sviluppo agenti ed entitá annesse, completamento test di integrazione e unitari, completamento logica di mapping degli adapter.
-  - Completamento integrazioen database, salvataggio dei report e query per il recupero delle analisi.
+  - Completamento integrazione database, salvataggio dei report e query per il recupero delle analisi.
 - *Sviluppo Microservizio Credenziali/Account:*
   - Ultimi ritocchi e test.
 - *Sviluppo Front-end*
@@ -2403,7 +2403,7 @@ La seguente tabella riporta la pianificazione oraria per ruolo definita all'iniz
   [Prospetto orario preventivato per lo Sprint 10],
 )
 
-==== Prospetto attività
+==== Prospetto Attività
 #activity_table(
   (
     ("Coordinamento Team, verifiche varie ed eventuali", "Responsabile", "0:30", "1:00", "Completata"),
@@ -2456,13 +2456,13 @@ La tabella sottostante illustra le ore produttive effettivamente rendicontate.
   [Prospetto orario consuntivato per lo Sprint 10],
 )
 
-==== Retrospettiva dello sprint 10
+==== Retrospettiva dello Sprint 10
 ===== Valutazione del Periodo
 Questo sprint ha permesso al team di concludere il progetto con un consumo orario minore del previsto, ma in forte ritardo rispetto alla pianificazione iniziale. 
 Il focus è stato principalmente sul completamento del codice e dei test per il microservizio di analisi, con particolare attenzione agli agenti e alla logica di salvataggio e recupero delle analisi. 
 Il deployment su AWS è stato completato, ma ha richiesto più tempo del previsto a causa di complessità tecniche non anticipate. 
 Sul fronte documentale, sono stati completati la Specifica Tecnica, il Manuale Utente e la revisione finale del Piano di Progetto (PdP) e Piano di Qualifica.
-Il MVP é stato presentato all'azienda Proponente, ricevendo feedback positivi e apprezzamenti per il lavoro svolto, nonostante le difficoltà incontrate durante il progetto.
+L'MVP é stato presentato all'azienda Proponente, ricevendo feedback positivi e apprezzamenti per il lavoro svolto, nonostante le difficoltà incontrate durante il progetto.
 ===== Stato di Avanzamento dei Deliverable
 - *Microservizio Account/Credenziali*: non sono state apportate modifiche dato che era giá stato completato allo sprint 9.
 
@@ -2494,21 +2494,21 @@ Nel corso dello Sprint si sono manifestati o sono stati sfiorati i seguenti risc
 
 ==== Misure correttive
 Per mitigare i rischi emersi durante lo sprint 10, il team ha deciso di adottare le seguenti misure correttive:
-- Riguardo i rischi legati alla saturazione del budget di token, il team ha adottato un approccio pragmatico, ottimizzando le richieste fatte all'API per rientrare nei limiti di token, passando ad un hosting continuo su aws solo pochi giorni prima della consegna dell MVP all'azienda.
+- Riguardo i rischi legati alla saturazione del budget di token, il team ha adottato un approccio pragmatico, ottimizzando le richieste fatte all'API per rientrare nei limiti di token, passando ad un hosting continuo su aws solo pochi giorni prima della consegna dell'MVP all'azienda.
 - Riguardo i rischi di disallineamento e conflitti interni, come giá detto, il team ha vissuto questo progetto in maniera molto travagliata a livello umano, con frizioni comunicative e incomprensioni dovute a uno sbilanciamento produttivo e a divergenze su cosa debba essere considerato "lavoro rendicontabile". Alcuni membri del team hanno, quindi ,dovuto colmare i vuoti lasciati da altri membri meno produttivi, portando a un ulteriore sbilanciamento e a frizioni comunicative.
 
 ==== Aggiornamento preventivo a finire PB
 #preventivo_a_finire(
   (
     //               Resp  Amm  Anal  Prog  Cod  Ver
-    ([Kevin],           -4,   0,   4,   0,  -3,  -2),
-    ([Riccardo B.],     0,   4,   5,   1,  -7,  3),
-    ([Riccardo M.],     3,   3,   8,   -3,  -3,  -1),
-    ([Antonio],         0,   5,  -3,   -3,  2,  8),
-    ([Andrea],          0,   8,  -1,   -4,  2,  5),
+    ([Basso Kevin],           -4,   0,   4,   0,  -3,  -2),
+    ([Berengan Riccardo],     0,   4,   5,   1,  -7,  3),
+    ([Martinello Riccardo],     3,   3,   8,   -3,  -3,  -1),
+    ([Sandu Antonio],         0,   5,  -3,   -3,  2,  8),
+    ([Sgreva Andrea],          0,   8,  -1,   -4,  2,  5),
 
-    ([Alberto],         1,   -7,   0,   2,   -4,  3),
-    ([Alice],           1,   0,  -2,   4,  1,  -1),
+    ([Suar Alberto],         1,   -7,   0,   2,   -4,  3),
+    ([Zago Alice],           1,   0,  -2,   4,  1,  -1),
   ),
   [Preventivo a finire post sprint 10],
   (4,13,0,7,16,25),  // preventivo
@@ -2534,7 +2534,7 @@ a concludere il progetto con una spesa di *12130€* contro i *12670€* prevent
 
 Durante tutto il progetto il team ha riscontrato molte divergenze nella produttivitá e impiego di ore produttive da parte dei vari membri del team,
 infatti, osservando la tabella 71, si può notare come alcuni membri del team abbiano speso più ore di quanto preventivato 
-mentre altri ne hanno spese meno. Questo indica, per l'appunto uno squilibrio di impegno e redditività tra i membri del team, che ha portato a frizioni comunicative 
+mentre altri ne hanno spese meno. Questo indica, per l'appunto, uno squilibrio di impegno e redditività tra i membri del team, che ha portato a frizioni comunicative 
 e difficoltà di coordinamento, specialmente nei momenti più critici del progetto.
 
 In particolare si puó notare come la maggior parte de tempo sia stato speso per attività di programmazione, progettazione e verifica, mentre le attività di analisi e amministrazione hanno avuto un consumo di ore più contenuto.
