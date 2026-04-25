@@ -1,7 +1,7 @@
 #import "../lib/docsUtil.typ": *
 #import "../lib/variables.typ": *
 
-#let versione = "v0.4.0"
+#let versione = "v1.0.0"
 #set heading(numbering: "1.1.1")
 #show heading: set text(fill: black)
 #show image: it => box(radius: 8pt, clip: true, it)
@@ -10,10 +10,18 @@
 #set page(numbering: "1", header: header("Manuale Utente"), footer: footer())
 #let history = (
   (
+    "2026/04/25",
+    "1.0.0",
+    "Revisione per PB",
+    "",
+    members.andrea
+  ),
+  (
     "2026/04/23",
     "0.4.0",
     "Rielaborazione documento e pubblicazione sito",
-    members.suar
+    members.suar,
+    members.andrea
   ),
   (
     "2026/04/23",
@@ -74,7 +82,7 @@ La versione più recente del Glossario è disponibile al seguente link: \
 == Versioni del Manuale
 Per garantire la massima fruibilità, il presente *Manuale Utente* è consultabile in due formati perfettamente allineati a livello contenutistico:
 - *Documento PDF:* Ottimizzato per la stampa, la lettura sequenziale e l'archiviazione documentale formale (la versione corrente).
-- *Formato Web (HTML):* Integrato direttamente nel sito ufficiale di progetto, progettato per una rapida consultazione interattiva. \ #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/manuale_utente.html")[Link al Manuale Utente (v1.0.0)]]
+- *Formato Web (HTML):* Integrato direttamente nel sito ufficiale di progetto, progettato per una rapida consultazione interattiva. \ #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/manuale_utente.html")[Link al Manuale Utente (v1.0.0)]]
 
 == Riferimenti 
 === Riferimenti Normativi
