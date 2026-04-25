@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuale Utente - Code Guardian</title>
+    <link rel="icon" type="image/png" href="website/images/logo_vino2.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="website/style.css">
+
+    <style>
+        .manual-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-light);
+        }
+
+        .manual-header h1 {
+            border: none;
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+
+        a {
+          color: var(--accent);
+          transition: color 0.3s ease;
+        }
+
+        a:hover {
+          color: var(--accent-hover);
+        }
+
+        .section h2 { border-bottom: 1px solid var(--primary-dark); padding-bottom: 0.5rem; }
+        .section h3 { color: var(--accent); margin-top: 1.5rem; }
+        .section h4 { margin-top: 1.2rem; margin-bottom: 0.5rem; color: var(--text); }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center; 
+            margin-bottom: 2.5rem;
+        }
+        .grid-layout.reverse { grid-template-columns: 1.2fr 1fr; }
+
+        .grid-layout.sidebar-special {
+            grid-template-columns: 0.7fr 1.3fr; 
+        }
+
+        .grid-layout.sidebar-special.reverse {
+            grid-template-columns: 1.3fr 0.7fr;
+        }
+
+        .sidebar-special .image-container {
+            max-width: 280px; 
+            margin: 0 auto;  
+        }
+
+        .image-container {
+            border: 1px solid var(--primary-dark);
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--bg);
+            text-align: center;
+            box-shadow: 0 4px 10px var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+
+        .image-container img { max-width: 100%; height: auto; display: block; }
+        
+        .image-caption {
+            font-size: 0.85rem;
+            color: var(--text);
+            opacity: 0.8;
+            padding: 0.8rem;
+            border-top: 1px solid var(--primary-dark);
+            background-color: var(--surface);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background-color: var(--bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px var(--shadow);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--primary-dark);
+        }
+
+        th { background-color: var(--primary-dark); color: #fff; font-weight: 600; }
+        tr:last-child td { border-bottom: none; }
+
+        .callout {
+            padding: 1rem 1.5rem;
+            border-left: 4px solid var(--primary);
+            background-color: var(--bg);
+            border-radius: 0 12px 12px 0;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .callout strong { color: var(--accent); }
+
+        @media (max-width: 768px) {
+            .grid-layout, .grid-layout.reverse, .grid-layout.sidebar-special { grid-template-columns: 1fr !important; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-circle">
+        <img src="website/images/logo_vino2.png" alt="Skarab Group logo">
+    </div>
+    <h1>Skarab Group</h1>
+    <div class="contact-button">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=skarabswegroup@gmail.com" target="_blank" rel="noopener noreferrer">Contattaci</a>
+    </div>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#introduzione" class="active">Introduzione</a></li>
+        <li><a href="#requisiti">Requisiti</a></li>
+        <li><a href="#guida">Guida Operativa</a></li>
+        <li><a href="#funzionalita">Funzionalità</a></li>
+        <li><a href="#faq">Risoluzione Problemi</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    
+    <div class="manual-header">
+        <h1>Manuale Utente</h1>
+        <p><strong>Versione:</strong> 1.0.0 | Code Guardian</p>
+    </div>
+
+    <section id="introduzione" class="section">
+        <h2>1. Introduzione</h2>
+        <p>Il presente documento descrive il <a href="https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#manuale-utente" target="_blank">Manuale Utente</a> relativo al progetto <a href="https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-guardian" target="_blank">Code Guardian</a>, commissionato dall’azienda <a href="https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#var-group" target="_blank">Var Group</a> e realizzato dal gruppo di studenti <a href="https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group" target="_blank">Skarab Group</a> nell’ambito del corso di <a href="https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#skarab-group" target="_blank">Ingegneria del Software</a> presso l’Università degli Studi di Padova.</p>
+        
+        <p><em>CodeGuardian</em> è un'innovativa piattaforma ad <a href="https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#agente" target="_blank">agenti</a> finalizzata all’<a href="https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#audit" target="_blank">audit</a> e alla <a href="https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#remediation" target="_blank">remediation</a> automatizzata delle vulnerabilità presenti nei <a href="https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#repository" target="_blank">repository</a> di codice sorgente.</p>
+        
+        <p>La piattaforma supporta attività di <a href="https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#analisi-statica" target="_blank">analisi statica</a> del codice sorgente e di individuazione delle principali criticità di sicurezza, fornendo suggerimenti di correzione attraverso meccanismi automatizzati basati su modelli di linguaggio di grandi dimensioni (<a href="https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#large-language-model" target="_blank">LLM</a>), integrati nel workflow degli agenti per formulare e validare le correzioni.</p>
+    
+        <div class="callout" style="border-left-color: var(--accent);">
+    <strong>Formati Disponibili:</strong> Per garantire la massima fruibilità, il presente manuale è disponibile anche in versione documentale. Se stai visualizzando questo sito ma desideri una copia per la stampa o l'archiviazione offline, puoi <a href="https://skarabgroup.github.io/DocumentazioneProgetto/PB/MU.pdf" target="_blank">consultare il Manuale in formato PDF</a>.
+</div>  
+    </section>
+
+    <section id="requisiti" class="section">
+        <h2>2. Requisiti di Browser e di Sistema</h2>
+        <p>Per garantire il corretto funzionamento e l'esperienza utente ottimale, si consiglia di utilizzare la piattaforma <strong>CodeGuardian</strong> su dispositivi che soddisfino i seguenti requisiti minimi di sistema e compatibilità del browser:</p>
+        <ul>
+            <li><strong>Sistemi Operativi:</strong> Windows 10/11, macOS 14+, distribuzioni Linux (Ubuntu 22.04+);</li>
+            <li><strong>Browser Web:</strong> Google Chrome 120+, Mozilla Firefox 120+, Apple Safari 17+.</li>
+        </ul>
+    </section>
+
+    <section id="guida" class="section">
+        <h2>3. Guida Operativa</h2>
+
+        <h3>3.1 Schermata Iniziale</h3>
+        <div class="grid-layout">
+            <div>
+                <p>La piattaforma <strong>CodeGuardian</strong> si presenta con un'intuitiva schermata iniziale, dalla quale è possibile l'accesso diretto ai moduli di registrazione e autenticazione per iniziare ad ispezionare i propri repository.</p>
+            </div>
+            <div class="image-container" style="margin-bottom: 0;">
+                <img src="assets/manuale_utente/schermata_iniziale.png" alt="Schermata Iniziale della Piattaforma">
+                <div class="image-caption">Schermata Iniziale della Piattaforma</div>
+            </div>
+        </div>
+
+        <h3>3.2 Autenticazione e Gestione Account</h3>
+        <p>Per poter accedere agli strumenti di monitoraggio e ai report di <em>CodeGuardian</em> è necessario possedere un'identità verificata all'interno del sistema; ciò consente di mantenere protette le associazioni con i propri <a href="https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#uniform-resource-locator" target="_blank">URL</a> repository e l'eventuale tracciamento privato.</p>
+
+        <h4>Registrazione</h4>
+        <div class="grid-layout reverse">
+            <div class="image-container" style="margin-bottom: 0;">
+                <img src="assets/manuale_utente/registrazione.png" alt="Schermata di Registrazione Profilo">
+                <div class="image-caption">Schermata di Registrazione Profilo</div>
+            </div>
+            <div>
+                <p>La creazione di un nuovo <a href="https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#utente" target="_blank">utente</a> avviene tramite l'apposita schermata di registrazione, raggiungibile direttamente dalla pagina iniziale.</p>
+                <p>Per effettuare la registrazione è necessario:</p>
+                <ol>
+                    <li>Compilare il campo <strong>Username</strong>: deve essere un identificativo univoco (tra i 4 e i 20 caratteri) contenente esclusivamente lettere e numeri, senza spazi.</li>
+                    <li>Inserire un indirizzo <strong>Email</strong> valido nel formato standard.</li>
+                    <li>Scegliere una <strong>Password</strong> sicura. A tutela dell'account, la password deve contenere minimo 8 caratteri ed includere obbligatoriamente almeno una lettera maiuscola, una minuscola, un numero e un carattere speciale. Per motivi di sicurezza addizionali, la password <strong>non può</strong> mai contenere al suo interno la stringa dello username.</li>
+                    <li><strong>Confermare</strong> la password re-inserendola nell'ultimo campo e selezionare il pulsante <em>Crea Account</em>.</li>
+                </ol>
+                <div class="callout">
+                    Inizierà la fase di approvazione; in caso di successo, un messaggio di notifica riporterà l'avvenuta creazione e l'utente verrà reindirizzato ed automaticamente autenticato alla dashboard principale.
+                </div>
+            </div>
+        </div>
+
+        <h4>Accesso (Login)</h4>
+        <div class="grid-layout">
+            <div>
+                <p>Gli utenti precedentemente iscritti o coloro a cui è temporaneamente scaduta la sessione di navigazione possono ricollegarsi tramite la schermata di <strong>Accesso</strong>.</p>
+                <p>Fornendo l'indirizzo <em>Email</em> e la <em>Password</em> associata, la piattaforma autorizza istantaneamente l'accesso sbloccando i privilegi utente. In caso di errore o credenziali errate, il sistema restituirà l'avviso di <strong>"Credenziali non valide"</strong>.</p>
+            </div>
+            <div class="image-container" style="margin-bottom: 0;">
+                <img src="assets/manuale_utente/login.png" alt="Schermata di Accesso">
+                <div class="image-caption">Schermata di Accesso</div>
+            </div>
+        </div>
+
+        <h4>Uscita dal sistema (Logout)</h4>
+        <div class="grid-layout reverse sidebar-special">
+            <div class="image-container" style="margin-bottom: 0;">
+                <img src="assets/manuale_utente/logout.png" alt="Schermata di Disconnessione">
+                <div class="image-caption">Schermata di Disconessione</div>
+            </div>
+            <div>
+                <p>Per terminare in totale sicurezza la sessione attiva, l'utente può usufruire del pulsante testuale <strong>Esci</strong>, situato nel menù di navigazione laterale in corrispondenza del riquadro contenente i propri dati di profilo (Username ed Email formattati).</p>
+                <p>Questa azione comporta la chiusura definitiva della sessione di lavoro, garantendo la protezione del profilo. Per accedere nuovamente alle funzionalità del sistema, sarà necessario effettuare un nuovo <em>Accesso</em> (Login).</p>
+            </div>
+        </div>
+        
+        <h3>3.3 Impostazioni</h3>
+        <p>L'area impostazioni costituisce il pannello di controllo della gestione dell'Account.</p>
+
+        <h4>1. Cambio Password</h4>
+        <div class="grid-layout">
+            <div>
+                <p>Una procedura pratica per aggiornare la password di accesso. Per procedere è necessario compilare nell'ordine i campi previsti dalla schermata:</p>
+                <ul>
+                    <li>Digitare inizialmente <em>La tua password attuale</em>.</li>
+                    <li>Inserire la sequenza desiderata in <em>La nuova password</em>.</li>
+                    <li>Confermarla un'ultima volta in <em>Conferma la nuova password</em>.</li>
+                </ul>
+                <p>Rispettando sempre i pattern di sicurezza in vigore.</p>
+            </div>
+            <div class="image-container" style="margin-bottom: 0;">
+                <img src="assets/manuale_utente/cambio_password.png" alt="Impostazioni: Cambio Password">
+                <div class="image-caption">Impostazioni: Cambio Password</div>
+            </div>
+        </div>
+
+        <h4>2. Eliminazione Profilo</h4>
+        <div class="grid-layout reverse">
+            <div class="image-container" style="margin-bottom: 0;">
+                <img src="assets/manuale_utente/eliminazione.png" alt="Impostazioni: Eliminazione Definitiva Profilo">
+                <div class="image-caption">Impostazioni: Eliminazione Definitiva Profilo</div>
+            </div>
+            <div>
+                <p>Un'operazione irreversibile concepita per tutelare la privacy. Prima di poter eseguire l'eliminazione, per motivazioni di sicurezza è tassativamente richiesto di compilare il campo vuoto digitando <em>La tua password</em> per confermare la propria identità.</p>
+                <p>Cliccando infine sul pulsante rosso <strong>Elimina account definitivamente</strong>, l'utente provvede a rimuovere in modo definitivo e permanente il profilo dal sistema <em>CodeGuardian</em>, venendo immediatamente revocato da qualsiasi diritto d'accesso.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="funzionalita" class="section">
+        <h2>4. Funzionalità della Piattaforma</h2>
+        
+        <div class="grid-layout sidebar-special">
+            <div>
+                <p>Una volta effettuato l'accesso, l'utente ha a disposizione un menù di navigazione laterale che suddivide l'applicativo nelle seguenti sezioni principali: <strong>Repository</strong>, <strong>Storico</strong>, <strong>Classifica</strong> e <strong>Impostazioni</strong>.</p>
+            </div>
+            <div class="image-container" style="margin-bottom: 0;">
+                <img src="assets/manuale_utente/sidebar.png" alt="Sidebar">
+                <div class="image-caption">Menù di navigazione laterale (Sidebar)</div>
+            </div>
+        </div>
+
+        <h3>4.1 Repository (Dashboard Principale)</h3>
+        <p>La sezione Repository costituisce la dashboard principale da cui gestire i propri progetti.</p>
+        
+        <div class="image-container">
+            <img src="assets/manuale_utente/dashboard_principale.png" alt="Dashboard Principale">
+            <div class="image-caption">Dashboard Principale: Lista dei Repository</div>
+        </div>
+
+        <div class="grid-layout">
+            <div>
+                <p><strong>Aggiunta e Rimozione:</strong> È possibile visualizzare la lista dei repository importati. Per aggiungerne uno nuovo da ispezionare, è sufficiente inserirne l'URL GitHub. È possibile anche rimuovere i repository non più necessari tramite l'apposito pulsante.</p>
+            </div>
+            <div class="image-container" style="margin-bottom: 0;">
+                <img src="assets/manuale_utente/aggiunta_o_rimozione.png" alt="Aggiunta di un nuovo Repository">
+                <div class="image-caption">Aggiunta di un nuovo Repository</div>
+            </div>
+        </div>
+
+        <div class="grid-layout reverse">
+            <div class="image-container" style="margin-bottom: 0;">
+                <img src="assets/manuale_utente/repository_gia_inserito.png" alt="Repository già inserito">
+                <div class="image-caption">Repository già inserito</div>
+            </div>
+            <div>
+                <p><strong>Repository già inserito:</strong> Se si tenta di aggiungere un repository già presente, il sistema restituirà un messaggio di errore indicando che il repository è già stato importato.</p>
+            </div>
+        </div>
+
+        <div class="grid-layout">
+            <div>
+                <p><strong>Esecuzione Analisi:</strong> Cliccando su uno specifico repository, si accede alla sua <em>Pagina di Dettaglio</em>. Da qui, l'utente può avviare l'ispezione automatica cliccando sul pulsante dedicato. L'interfaccia aggiornerà dinamicamente lo stato dell'analisi (avvio, in corso, completamento) fornendo un chiaro feedback visivo senza complicati caricamenti.</p>
+            </div>
+            <div class="image-container" style="margin-bottom: 0;">
+                <img src="assets/manuale_utente/avvio_analisi.png" alt="Pagina di Dettaglio: Avvio Analisi in corso">
+                <div class="image-caption">Pagina di Dettaglio: Avvio Analisi in corso</div>
+            </div>
+        </div>
+
+        <div class="grid-layout reverse">
+            <div class="image-container" style="margin-bottom: 0;">
+                <img src="assets/manuale_utente/inserimento_pat.png" alt="Inserimento PAT per repository privati">
+                <div class="image-caption">Inserimento PAT per repository privati</div>
+            </div>
+            <div>
+                <p><strong>Configurazione del PAT:</strong> Per l'analisi di repository privati, è richiesto l'inserimento di un Personal Access Token (PAT). Il token va configurato nella sezione dedicata delle impostazioni, dove viene associato al repository e protetto da una password. Quest'ultima dovrà essere inserita dall'utente ad ogni avvio dell'analisi al posto del token: questo doppio livello di autenticazione garantisce la massima sicurezza nell'accesso ai dati sensibili.</p>
+            </div>
+        </div>
+
+        <h4>Risultato ed Esportazione</h4>
+        <p>Al termine, il report viene presentato a schermo suddiviso per metriche di qualità, scorecard generali e lista accurata delle vulnerabilità.</p>
+        <div class="image-container">
+            <img src="assets/manuale_utente/risultato_analisi.png" alt="Pagina di Dettaglio: Risultato Analisi e metriche">
+            <div class="image-caption">Pagina di Dettaglio: Risultato Analisi e metriche</div>
+        </div>
+
+        <p>Per ogni scansione sono previste funzionalità di esportazione dirette scaricando il referto formattato in <strong>PDF</strong> oppure sotto forma di <strong>JSON</strong> strutturato.</p>
+        <div class="image-container" style="max-width: 200px; margin-left: 0;">
+            <img src="assets/manuale_utente/esportazione.png" alt="Esportazione: dettaglio">
+            <div class="image-caption">Esportazione: dettaglio</div>
+        </div>
+
+        <h3>4.2 Storico Analisi</h3>
+        <p>La schermata <strong>Storico</strong> raccoglie la traccia di tutte le scansioni ed ispezioni del codice precedentemente eseguite sulla piattaforma, relative all'utente attivo.</p>
+        <ul>
+            <li>L'interfaccia fornisce una visuale strutturata che mostra la data, il repository analizzato e l'esito per ciascuna richiesta pregressa.</li>
+            <li>Attraverso i controlli messi a disposizione dall'interfaccia (es. intervalli di date d'interesse), l'utente può filtrare l'elenco e cercare rapidamente report di analisi storiche o valutare l'andamento del codice nel tempo.</li>
+        </ul>
+        <div class="image-container">
+            <img src="assets/manuale_utente/storico_analisi.png" alt="Schermata Storico delle Analisi">
+            <div class="image-caption">Schermata Storico delle Analisi</div>
+        </div>
+
+        <h3>4.3 Classifica (Ranking)</h3>
+        <p>Questa prospettiva gestionale fornisce una panoramica focalizzata sugli scenari architetturali dei progetti caricati in CodeGuardian. <br>L'applicativo genera in tempo reale una <strong>Classifica</strong> di tutti i repository associati all'utente: vengono elencati gerarchicamente tenendo conto dello "Score di Qualità" generale derivante dai più recenti audit, permettendo in modo istantaneo di confrontare i progetti più robusti e quelli che richiedono maggiore attenzione.</p>
+        <div class="image-container">
+            <img src="assets/manuale_utente/classifica_analisi.png" alt="Schermata Classifica Repository (Ranking)">
+            <div class="image-caption">Schermata Classifica Repository (Ranking)</div>
+        </div>
+    </section>
+
+    <section id="faq" class="section">
+        <h2>5. Risoluzione problemi</h2>
+        <p>Questa breve sezione descrive il giusto comportamento da seguire per affrontare alcuni problemi che potrebbero verificarsi durante l'utilizzo della piattaforma CodeGuardian.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Problema</th>
+                    <th>Causa Probabile</th>
+                    <th>Soluzione Suggerita</th>
+                </tr>
+            </thead>
+            <tbody>
+    <tr>
+        <td><strong>Analisi bloccata o annullata</strong></td>
+        <td>Il repository ha dimensione superiore a 1GB oppure non è stata inserita la password per i repository privati.</td>
+        <td>Verificare la dimensione del codice sorgente. Se il progetto è privato, configurare il token di accesso e inserire la password associata all'avvio.</td>
+    </tr>
+    <tr>
+        <td><strong>Impossibile aggiungere un nuovo repository</strong></td>
+        <td>L'URL inserito non è formattato correttamente, non è raggiungibile, oppure il repository è già stato inserito.</td>
+        <td>Assicurarsi di copiare l'URL completo (es. <code>https://github.com/...</code>) senza spazi. Verificare nella Dashboard che il progetto non sia già monitorato dal sistema.</td>
+    </tr>
+    <tr>
+        <td><strong>Errore durante la registrazione del profilo</strong></td>
+        <td>L'indirizzo email inserito non è valido o risulta già in uso.</td>
+        <td>Controllare che l'email rispetti il formato standard. Se risulta già in uso, tornare alla pagina iniziale e procedere tramite la schermata di Accesso (Login).</td>
+    </tr>
+    <tr>
+        <td><strong>Password dell'account dimenticata</strong></td>
+        <td>L'utente ha smarrito le credenziali di accesso.</td>
+        <td>Non è possibile recuperarla in alcun modo per via delle stringenti policy di sicurezza, quindi è necessario creare un nuovo account.</td>
+    </tr>
+    <tr>
+        <td><strong>Esportazione del report non disponibile</strong></td>
+        <td>I pulsanti di download (PDF/JSON) non rispondono.</td>
+        <td>L'esportazione è disponibile solo ad ispezione conclusa. Assicurarsi di attendere che il feedback visivo dell'analisi passi allo stato di "Completato".</td>
+    </tr>
+    <tr>
+        <td><strong>Disconnessione improvvisa</strong></td>
+        <td>La sessione attiva è scaduta.</td>
+        <td>Per tutelare i dati e i token, la piattaforma disconnette l'utente dopo un periodo prolungato di inattività. Effettuare nuovamente il Login per ripristinare l'accesso.</td>
+    </tr>
+</tbody>
+        </table>
+    </section>
+
+</div>
+
+<footer>
+    <p>&copy; 2026 Skarab Group. Tutti i diritti riservati.</p>
+</footer>
+
+<script>
+    const navLinks = document.querySelectorAll('nav a');
+    const sections = document.querySelectorAll('.section');
+</script>
+<script src="website/script.js"></script>
+
+</body>
+</html>
