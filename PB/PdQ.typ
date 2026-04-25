@@ -11,7 +11,7 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v1.2.0"
+#let versione = "v1.3.0"
 
 #titlePage("Piano di Qualifica", versione)
 #set heading(numbering: "1.1.1")
@@ -20,16 +20,16 @@
   (
     "2026/04/18",
     "1.3.0",
-    "Aggiunta e correzione test di unità e sistema per micreoservizio di gestione account",
+    "Aggiunta e correzione test di unità e sistema per microservizio di gestione account",
     members.berengan,
-    ""
+    "",
   ),
   (
     "2026/04/19",
     "1.2.0",
     "Aggiornamento Cruscotto di Valutazione",
     members.alice,
-    members.suar
+    members.suar,
   ),
   (
     "2026/03/11",
@@ -200,24 +200,24 @@ La versione più recente del Glossario è disponibile al seguente link:
 I seguenti documenti hanno valore vincolante per la definizione delle strategie di qualità e per le attività di verifica:
 - *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> #linebreak()
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
-  (ultimo accesso: *24/02/2026*)
+  (ultimo accesso: *18/04/2026*)
 
 - *Norme di Progetto*: Il documento definisce il "Way of Working", stabilendo gli strumenti e le procedure che questo Piano si occupa di misurare. <NdP> #linebreak()
-  #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")] \
-  (versione: *v1.0.0*)
+  #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/NdP.pdf")] \
+  (versione: *v2.0.0*)
 
 === Riferimenti Informativi
 - *ISO/IEC 25010:2011*: Systems and software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE). <25010> #linebreak()
   #underline[#link("https://iso25000.com/index.php/en/iso-25000-standards/iso-25010")] \
-  (ultimo accesso: *24/02/2026*)
+  (ultimo accesso: *18/04/2026*)
 
 - *ISO/IEC 12207:2008*: Systems and software engineering — Software life cycle processes. <12207> #linebreak()
   #underline[#link("https://ieeexplore.ieee.org/document/4475826")] \
-  (ultimo accesso: *24/02/2026*)
+  (ultimo accesso: *18/04/2026*)
 
 - *Dispense del corso di Ingegneria del Software – Qualità del software* <dispense_qualità> #linebreak()
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T07.pdf")] \
-  (ultimo accesso: *24/02/2026*)
+  (ultimo accesso: *18/04/2026*)
 
 #pagebreak()
 = Qualità di Processo
@@ -423,7 +423,7 @@ Skarab Group ha adottato un approccio di testing multilivello che copre:
 - *Test di Regressione*.
 - *Test di Integrazione*.
 
-La definizione dei test e la nomenclatura utilizzata sono presenti all'interno delle #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[#underline[*Norme di Progetto*]], alla sezione *2.1.9.3.5*. // inserire sezione
+La definizione dei test e la nomenclatura utilizzata sono presenti all'interno delle #link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/NdP.pdf")[#underline[*Norme di Progetto*]], alla sezione *2.1.9.3.5*. // inserire sezione
 I Test di Regressione e i Test di Integrazione, qui non presenti, verranno identificati durante lo svolgimento delle attività per la _Product Baseline_ (PB).
 
 == Test di Sistema
@@ -484,20 +484,14 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       passed,
 
       [TS-2.1], [Verificare la validazione del formato delle credenziali in fase di login.], [UC2], passed,
-      [TS-2.2],
-      [Verificare la segnalazione di errore per identificativo non presente a sistema.],
-      [UC2.0.2],
-      passed,
+      [TS-2.2], [Verificare la segnalazione di errore per identificativo non presente a sistema.], [UC2.0.2], passed,
 
       [TS-2.3],
       [Verificare la segnalazione di errore in caso di password non corrispondente all'identificativo fornito.],
       [UC2.0.2],
       passed,
 
-      [TS-2.4],
-      [Verificare l'inibizione dell'accesso in caso di modulo di login incompleto.],
-      [UC2.0.1],
-      passed,
+      [TS-2.4], [Verificare l'inibizione dell'accesso in caso di modulo di login incompleto.], [UC2.0.1], passed,
 
       // --- RICHIESTE DI ANALISI (UC4) ---
       [TS-4],
@@ -652,21 +646,12 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [UC14, UC14.2],
       pending,
 
-      [TS-14.1],
-      [Verificare la segnalazione di errore se l'utente non seleziona alcun formato.],
-      [UC14.1.1],
-      pending,
+      [TS-14.1], [Verificare la segnalazione di errore se l'utente non seleziona alcun formato.], [UC14.1.1], pending,
 
       // --- MODIFICA PASSWORD (UC15) ---
-      [TS-15.1],
-      [Verificare la segnalazione di errore in caso di password corrente omessa.],
-      [UC15.1.1],
-      passed,
+      [TS-15.1], [Verificare la segnalazione di errore in caso di password corrente omessa.], [UC15.1.1], passed,
 
-      [TS-15.2],
-      [Verificare la segnalazione di errore in caso di password corrente errata.],
-      [UC15.1.2],
-      passed,
+      [TS-15.2], [Verificare la segnalazione di errore in caso di password corrente errata.], [UC15.1.2], passed,
 
       [TS-15.3],
       [Verificare la segnalazione di errore se la nuova password è assente o non conforme.],
@@ -678,16 +663,10 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [UC15.2.3],
       passed,
 
-      [TS-15.5],
-      [Verificare la corretta persistenza e la notifica di successo post-modifica.],
-      [UC15.3],
-      passed,
+      [TS-15.5], [Verificare la corretta persistenza e la notifica di successo post-modifica.], [UC15.3], passed,
 
       // --- VISUALIZZAZIONE SINGOLA REMEDIATION GENERICA (UC16) ---
-      [TS-16],
-      [Verificare la corretta visualizzazione dei dettagli di una remediation selezionata.],
-      [UC16],
-      pending,
+      [TS-16], [Verificare la corretta visualizzazione dei dettagli di una remediation selezionata.], [UC16], pending,
 
       // --- VERIFICA ACCESSIBILITÀ REPOSITORY (UC17) ---
       [TS-17],
@@ -736,15 +715,9 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [UC20.2],
       pending,
 
-      [TS-20.5],
-      [Verificare la segnalazione di errore in caso di URL sintatticamente non valido.],
-      [UC20.2.1],
-      pending,
+      [TS-20.5], [Verificare la segnalazione di errore in caso di URL sintatticamente non valido.], [UC20.2.1], pending,
 
-      [TS-20.6],
-      [Verificare la segnalazione di errore in caso di repository non accessibile.],
-      [UC20.2.2],
-      pending,
+      [TS-20.6], [Verificare la segnalazione di errore in caso di repository non accessibile.], [UC20.2.2], pending,
 
       [TS-20.7],
       [Verificare la segnalazione di errore in caso di campo URL non popolato al momento della conferma.],
@@ -754,10 +727,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TS-20.8], [Verificare la corretta acquisizione della descrizione della raccolta.], [UC20.3], pending,
 
       // --- AVVIO ANALISI (UC21) ---
-      [TS-21],
-      [Verificare che l'Orchestratore avvii le richieste verso tutti gli strumenti esterni.],
-      [UC21],
-      pending,
+      [TS-21], [Verificare che l'Orchestratore avvii le richieste verso tutti gli strumenti esterni.], [UC21], pending,
 
       [TS-21.1], [Verificare la corretta clonazione del repository nell'ambiente AWS.], [UC21.1], pending,
       [TS-21.2],
@@ -820,10 +790,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       pending,
 
       [TS-26], [Verificare l'invio della notifica di completamento dell'analisi del repository.], [UC26], pending,
-      [TS-26.1],
-      [Verificare che il fallimento della notifica venga registrato nei log interni.],
-      [UC26.0.1],
-      pending,
+      [TS-26.1], [Verificare che il fallimento della notifica venga registrato nei log interni.], [UC26.0.1], pending,
 
       // --- VISUALIZZAZIONE INFORMAZIONI REPOSITORY (UC27) ---
       [TS-27],
@@ -910,20 +877,14 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [UC39],
       pending,
 
-      [TS-40],
-      [Verificare il corretto inserimento di un repository privato nel catalogo personale.],
-      [UC40],
-      pending,
+      [TS-40], [Verificare il corretto inserimento di un repository privato nel catalogo personale.], [UC40], pending,
 
       [TS-40.1],
       [Verificare la segnalazione di duplicazione in caso di inserimento di un URL già presente.],
       [UC40.0.1],
       pending,
 
-      [TS-41],
-      [Verificare la corretta visualizzazione del catalogo dei repository privati inseriti.],
-      [UC41],
-      pending,
+      [TS-41], [Verificare la corretta visualizzazione del catalogo dei repository privati inseriti.], [UC41], pending,
 
       [TS-41.1],
       [Verificare la visualizzazione dell'informativa specifica quando il catalogo privato risulta vuoto.],
@@ -1143,7 +1104,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TU-2.1],
       [FROb25],
       [Verifica rendering pagina di Login.],
-      [Visualizzazione corretto del form di autenticazione.],
+      [Visualizzazione corretta del form di autenticazione.],
       pending,
 
       [TU-2.2],
@@ -1450,11 +1411,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [Blocco e segnalazione errore.],
       pending,
 
-      [TU-7.5],
-      [FROb83],
-      [Controllo ampiezza massima intervallo.],
-      [Errore restituito e richiesta inibita.],
-      pending,
+      [TU-7.5], [FROb83], [Controllo ampiezza massima intervallo.], [Errore restituito e richiesta inibita.], pending,
 
       [TU-7.6],
       [FROb84],
@@ -1614,7 +1571,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TU-12.4],
       [FROb109],
       [Verifica inibizione rendering ranking in assenza di analisi completate.],
-      [Messaggio suggerimento prima analisi mostrato.],
+      [Messaggio di suggerimento di prima analisi mostrato.],
       pending,
 
       // --- ESPORTAZIONE (UC14) ---
@@ -1785,11 +1742,16 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       pending,
 
       // --- CREAZIONE RACCOLTA REPORT (UC20) ---
-      [TU-20.1], [FROb140], [Verifica definizione nome univoco raccolta.], [Nomi non conformi rifiutati.], pending,
+      [TU-20.1], 
+      [FROb140], 
+      [Verifica definizione nome univoco raccolta.], 
+      [Nomi non conformi rifiutati.], 
+      pending,
+
       [TU-20.2],
       [FROb141],
       [Verifica validazione sintattica URL GitHub.],
-      [https://www.wordreference.com/iten/non-conforme],
+      [URL sintatticamente non validi vengono rifiutati.],
       pending,
 
       [TU-20.3],
@@ -2130,7 +2092,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TU-35.4],
       [FROb202],
       [Verifica notifica fallimento applicazione remediation sicurezza.],
-      [Vulnerabilità non mitigata in caso insuccesso.],
+      [Vulnerabilità non mitigata in caso di insuccesso.],
       pending,
 
       [TU-36.1],
@@ -2171,7 +2133,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
 
       [TU-38.1],
       [FROb209],
-      [Verifica accesso al dettaglio per procedura rifiuto documentale.],
+      [Verifica accesso al dettaglio per procedura di rifiuto documentale.],
       [Dettaglio visualizzato prima del rifiuto.],
       pending,
 
@@ -2332,10 +2294,10 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [Profilo rimosso; accesso revocato.],
       pending,
 
-      [TU-45.2],
-      [FROb236],
-      [Verifica selezione utente e avvio procedura revoca.],
-      [Azione di revoca avviata.],
+      [TU-45.2], 
+      [FROb236], 
+      [Verifica selezione utente e avvio procedura revoca.], 
+      [Azione di revoca avviata.], 
       pending,
 
       [TU-46.1],
@@ -2366,6 +2328,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
 == Test di Accettazione
 
 #show figure: set block(breakable: true)
+#let ni = table.cell(fill: rgb("#E0E0E0"))[*NI*]
 
 #figure(
   block(
@@ -2376,107 +2339,141 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       } else if (calc.gcd(y, 2) == 2) {
         luma(220)
       },
-      columns: (1.3fr, 4fr),
+      columns: (1.3fr, 4fr, 0.8fr),
       inset: 10pt,
-      table.header([*ID Test*], [*Descrizione*]),
+      table.header([*ID Test*], [*Descrizione*], [*Stato*]),
+
       [TA-1],
       [Verificare che l'utente possa completare con successo la procedura di registrazione e la successiva autenticazione al sistema.],
+      passed,
 
       [TA-2],
       [Verificare che le chiavi di accesso non siano mai salvate o trasmesse in chiaro, garantendo l'integrità del sistema di hashing.],
+      passed,
 
       [TA-3],
       [Verificare che il sistema gestisca correttamente il reindirizzamento e il ritorno dalla piattaforma esterna GitHub, associando correttamente l'identificativo OAuth e cifrando il token ottenuto.],
+      ni,
 
       [TA-4],
       [Verificare che l'utente possa configurare e avviare una richiesta di analisi fornendo un URL valido e selezionando le aree di interesse.],
+      passed,
 
       [TA-5],
       [Verificare che il sistema inibisca l'avvio di analisi ridondanti qualora il repository non abbia subito modifiche dall'ultimo report.],
+      ni,
 
       [TA-6],
       [Verificare che il sistema impedisca l'avvio di analisi concorrenti sul medesimo repository, notificando correttamente lo stato di "Analisi in corso".],
+      ni,
 
       [TA-7],
       [Verificare che l'accesso all'analisi di repository privati sia interdetto agli utenti che non hanno completato l'integrazione con GitHub, e che la richiesta di analisi (pubblica o privata) sia inibita in assenza di selezione di almeno un'area di interesse.],
+      ni,
 
       [TA-8],
       [Verificare che il sistema protegga i dati di sessione e i token GitHub tramite cifratura e protocolli di comunicazione sicuri (HTTPS).],
+      passed,
 
       [TA-9],
       [Verificare che l'utente possa visualizzare correttamente lo storico globale dei repository analizzati, identificando chiaramente i progetti tramite i metadati esposti.],
+      passed,
 
       [TA-10],
       [Verificare che l'utente possa navigare nel dettaglio di un singolo report, filtrando le sezioni di interesse (Codice, Sicurezza, Documentazione) e visualizzando i relativi metadati di audit.],
+      passed,
 
       [TA-11],
       [Verificare che il sistema presenti chiaramente le criticità rilevate e le relative remediation suggerite, distinguendo i casi di conformità (esito positivo).],
+      passed,
 
       [TA-12],
       [Verificare che l'utente possa impostare un intervallo temporale valido per generare un confronto storico tra le metriche di diversi report.],
+      ni,
 
       [TA-13],
-      [Verificare che il sistema generi visualizzazioni grafiche e tabelle comparative coerenti, evidenziando i trend di miglioramento o peggioramento delle metriche del codice.],
+      [Verificare che il sistema generi visualizzazioni grafiche o tabelle comparative coerenti, evidenziando i trend di miglioramento o peggioramento delle metriche del codice.],
+      passed,
 
       [TA-14],
       [Verificare che l'analisi della qualità del codice esponga correttamente i dati di analisi statica (bug/smell) e le percentuali di copertura dei test di unità.],
+      passed,
 
       [TA-15],
       [Verificare che l'analisi della sicurezza esponga correttamente le vulnerabilità delle librerie (CVE) e i rilievi di conformità agli standard OWASP.],
+      passed,
 
       [TA-16],
       [Verificare che l'analisi della documentazione identifichi correttamente gli errori di sintassi e il grado di completezza rispetto al codice sorgente.],
+      passed,
 
       [TA-17],
       [Verificare che l'utente possa consultare il ranking dei repository ordinati per punteggio di qualità globale, ricevendo un'informativa corretta in assenza di dati.],
+      passed,
 
       [TA-18],
       [Verificare che l'utente possa disconnettere l'account GitHub dal profilo CodeGuardian, con conseguente revoca delle autorizzazioni e dei token.],
+      ni,
 
       [TA-19],
       [Verificare che l'utente possa esportare i report di analisi in formati standard (PDF/JSON), garantendo la selezione obbligatoria del formato.],
+      passed,
 
       [TA-20],
       [Verificare che l'utente possa modificare la propria password di accesso previa validazione della credenziale attuale e rispetto dei criteri di sicurezza.],
+      passed,
 
       [TA-21],
       [Verificare che l'utente possa creare una raccolta di report associata a un repository GitHub, fornendo nome e URL validi, con eventuale descrizione facoltativa.],
+      passed,
 
       [TA-22],
-      [Verificare che l'Orchestratore verifichi correttamente l'accessibilità del repository prima di avviare l'analisi, distinguendo tra risorse pubbliche e private e gestendo i fallimenti di accesso.],
+      [Verificare che il Servizio di Analisi verifichi correttamente l'accessibilità del repository prima di avviare l'effettiva analisi, distinguendo tra risorse pubbliche e private e gestendo i fallimenti di accesso.],
+      passed,
 
       [TA-23],
       [Verificare che l'Orchestratore avvii correttamente il processo di analisi, clonando il repository e distribuendo la codebase agli strumenti di analisi per le aree selezionate.],
+      passed,
 
       [TA-24],
       [Verificare che il sistema aggreghi i risultati degli strumenti di analisi in un report strutturato, lo archivi correttamente nel sistema di persistenza e aggiorni lo stato dell'analisi a "completato".],
+      passed,
 
       [TA-25],
       [Verificare che l'utente riceva una notifica al completamento dell'analisi e che il report risulti consultabile nella propria area personale anche in assenza di ricezione della notifica.],
+      passed,
 
       [TA-26],
       [Verificare che l'utente venga notificato in caso di errore critico durante l'analisi e che lo stato di fallimento sia visibile nella dashboard indipendentemente dalla ricezione della notifica.],
+      ni,
 
       [TA-27],
       [Verificare che l'Utente Avanzato possa accettare una remediation proposta, con conseguente applicazione delle modifiche al repository e aggiornamento dello stato nella dashboard.],
+      ni,
 
       [TA-28],
       [Verificare che l'Utente Avanzato possa rifiutare una remediation proposta, con conseguente scarto della proposta e invarianza del repository.],
+      ni,
 
       [TA-29],
-      [Verificare che l'Utente Avanzato con integrazione GitHub attiva possa avviare con successo l'analisi di un repository GitHub privato presente nel proprio catalogo, selezionando le aree di interesse.],
+      [Verificare che l'Utente Avanzato possa avviare con successo l'analisi di un repository GitHub privato presente nel proprio catalogo, selezionando le aree di interesse.],
+      passed,
 
       [TA-30],
       [Verificare che l'Utente Avanzato possa gestire il proprio catalogo di repository privati, inserendo, visualizzando e rimuovendo risorse, con corretta gestione dei duplicati.],
+      ni,
 
       [TA-31],
       [Verificare che il proprietario di un repository privato possa gestire i permessi di accesso ai report, aggiungendo e revocando le autorizzazioni per altri utenti della piattaforma.],
+      ni,
 
       [TA-32],
       [Verificare che l'utente possa rimuovere una raccolta di report dal proprio profilo senza che i singoli report in essa contenuti vengano eliminati.],
+      passed,
 
       [TA-33],
-      [Verificare che l'utente possa cancellare definitivamente il proprio profilo CodeGuardian, con conseguente rimozione dei dati personali, delle associazioni OAuth e invalidazione delle credenziali precedenti.],
+      [Verificare che l'utente possa cancellare definitivamente il proprio profilo CodeGuardian, con conseguente rimozione dei dati personali e invalidazione delle credenziali precedenti.],
+      passed,
     ),
   ),
   caption: [Tabella dei Test di Accettazione],
@@ -2650,7 +2647,8 @@ Durante la PB, l'_Indice di Gulpease_ per tutti i documenti monitorati si è att
 Durante i primi sprint, il grafico evidenzia la presenza di alcuni errori ortografici nella documentazione, con un picco registrato nello _Sprint 2_. Il team ha prontamente identificato la criticità e adottato misure correttive, portando il conteggio degli errori a zero entro lo _Sprint 3_ per la maggior parte dei documenti.
 
 ==== Product Baseline (PB)
-La correttezza ortografica è stata mantenuta a zero errori per i documenti consolidati nella RTB. Anche per il _Manuale Utente_ e la _Specifica Tecnica_, grazie all'adozione di procedure di controllo incrociato più stringenti, non sono stati rilevati errori fin dalla loro introduzione nello _Sprint 8_.
+La correttezza ortografica è stata mantenuta a zero errori per quasi tutti i documenti consolidati nella RTB, eccezion fatta per il _Piano di Progetto_ che ha registrato alcune imperfezioni tra lo _Sprint 7_ e lo _Sprint 8_ a causa di revisioni interne.
+L'introduzione del _Manuale Utente_ e della _Specifica Tecnica_ ha comportato la fisiologica comparsa di alcuni errori ortografici durante gli _Sprint 9_ e _10_, legati alla stesura di questa nuova documentazione. Il team ha prontamente intensificato le procedure di revisione incrociata, correggendo le criticità e riportando il conteggio a zero errori per l'intero corredo documentale.
 
 #pagebreak()
 === Code Coverage (MPC13)
@@ -2661,6 +2659,8 @@ La metrica _Code Coverage_ non è stata rilevata durante la baseline RTB.
 
 ==== Product Baseline (PB)
 La metrica non è stata rilevata durante i primi sprint della PB, in quanto il team era focalizzato sulla progettazione. Il valore iniziale rilevato nello _Sprint 7_ si è attestato al 94%, superando la soglia minima del 70%. Negli Sprint successivi la copertura ha mostrato un trend di crescita costante fino a raggiungere il 98%, superando ampiamente la soglia di qualità del 90% imposta nelle configurazioni di test del progetto.
+
+Per cogliere tempestivamente le necessità di miglioramento, il team ha reso questa metrica "attiva" e direttamente vincolante: qualora la _Code Coverage_ scenda sotto la soglia ottimale durante una nuova Pull Request, l'indicatore innesca il blocco automatico del merge tramite le pipeline di GitHub Actions, forzando il programmatore a un'azione correttiva tempestiva prima dell'integrazione del codice.
 
 #pagebreak()
 === Test Success Rate (MPC14)
@@ -2683,7 +2683,7 @@ Durante lo _Sprint 1_ il valore si è attestato al di sopra della soglia minima 
 Nello _Sprint 4_, lo sforamento orario e le difficoltà incontrate hanno causato un nuovo calo. Il team prende atto della criticità e si impegna ad adottare misure correttive nella fase successiva per garantire un maggiore rispetto delle metriche definite.
 
 ==== Product Baseline (PB)
-Nello _Sprint 5_ si è registrata una lieve flessione al di sotto della soglia minima a causa del mancato raggiungimento di alcuni obiettivi. Tuttavia, a partire dallo _Sprint 6_, il valore si è attestato costantemente al 100%, indicando che tutte le metriche definite nel Piano di Qualifica rispettano le soglie di accettabilità per il resto del periodo di sviluppo.
+Nello _Sprint 5_ si è registrata una lieve flessione al di sotto della soglia minima a causa del mancato raggiungimento di alcuni obiettivi. A partire dallo _Sprint 6_, tuttavia, il valore ha intrapreso un trend di crescita costante (dal 95% al 98%), raggiungendo e mantenendo il valore ottimale del 100% a partire dallo _Sprint 9_. Questo andamento progressivo testimonia il consolidamento dei processi qualitativi nel corso della fase conclusiva del progetto.
 
 #pagebreak()
 === Sprint Goal Achievement (MPC16)
@@ -2693,7 +2693,7 @@ Nello _Sprint 5_ si è registrata una lieve flessione al di sotto della soglia m
 Dal grafico è possibile osservare la buona efficacia operativa dimostrata durante lo _Sprint 1_ dal team, che è riuscito a completare gli obiettivi prefissati quasi nella loro interezza. Durante lo _Sprint 2_, invece, la metrica ha subito una flessione poiché gli obiettivi prefissati non sono stati pienamente raggiunti.
 
 ==== Product Baseline (PB)
-La PB è iniziata con una criticità nello _Sprint 5_, dove lo _Sprint Goal Achievement_ è sceso al 68%, al di sotto della soglia minima accettabile dell'80%. Il team ha reagito tempestivamente rivedendo, in particolare, la granularità dei task: tale intervento ha permesso di mantenere un tasso di successo del 100% per tutti gli Sprint successivi.
+La PB è iniziata con una criticità nello _Sprint 5_, dove lo _Sprint Goal Achievement_ è sceso al 68%, al di sotto della soglia minima accettabile dell'80%. Il team ha reagito tempestivamente rivedendo, in particolare, la granularità dei task: tale intervento ha innescato un recupero progressivo e costante dell'efficacia negli Sprint successivi (con valori dal 93% al 97%), fino al pieno raggiungimento degli obiettivi (100%).
 
 #pagebreak()
 === Copertura Requisiti Obbligatori (MPD01)
@@ -2742,7 +2742,7 @@ A partire dallo _Sprint 7_, la _Cyclomatic Complexity_ media si è attestata su 
 La metrica _Coupling_ non è stata rilevata durante la baseline RTB.
 
 ==== Product Baseline (PB)
-Dallo _Sprint 7_, il valore di _Coupling_ si è attestato tra 3 e 2, in pieno rispetto della soglia ottimale (≤ 3). Il rigoroso utilizzo dell'_Architettura Esagonale_ e l'inversione delle dipendenze tramite _Porte_ hanno permesso di mantenere un basso grado di accoppiamento tra i moduli.
+Dallo _Sprint 7_, il valore di _Coupling_ si è attestato tra 3 e 2, in pieno rispetto della soglia ottimale (≤ 3). Il rigoroso utilizzo dell'_Architettura Esagonale_ e l'Inversione delle Dipendenze tramite _Porte_ hanno permesso di mantenere un basso grado di accoppiamento tra i moduli.
 
 #pagebreak()
 === Vulnerability Detection (MPD07)
@@ -2802,10 +2802,40 @@ Di seguito sono riportate le criticità emerse e le relative azioni correttive, 
   ),
 )
 
+#improvement_table(
+  [Storico delle azioni di miglioramento (Periodo PB)],
+  (
+    // --- CATEGORIA: TECNOLOGIE E ARCHITETTURA ---
+    table.cell(colspan: 3, fill: luma(200), align: center)[*Area: Tecnologie e Architettura*],
+    [*AM05*],
+    [*Complessità Architettura Serverless* \
+      Durante la prima fase di progettazione, l'adozione di AWS Step Functions e Lambda per l'orchestrazione degli agenti si è rivelata eccessivamente complessa.],
+    [*Cambio di Architettura* \
+      Il team ha deciso tempestivamente di scartare la soluzione Serverless, internalizzando la logica di orchestrazione direttamente nell'esagono del microservizio di analisi.],
+    [*AM06*],
+    [*Inconsistenze d'Integrazione del Codice* \
+      Con l'avvio della codifica distribuita, sono emersi rischi legati a disomogeneità implementative e build fallite al momento del merge sul repository condiviso.],
+    [*Adozione di Pipeline CI/CD* \
+      Sono state introdotte e rese vincolanti pipeline di Continuous Integration tramite GitHub Actions, automatizzando linting, formattazione e test.],
+    [*AM07*],
+    [*Difficoltà nel Deployment* \
+      L'inesperienza pregressa del team con i servizi AWS ha reso le configurazioni di deployment più dispendiose in termini di tempo rispetto a quanto stimato inizialmente.],
+    [*Studio Mirato e Containerizzazione* \
+      Per superare questo ostacolo logistico, il team ha dedicato sessioni di studio alla documentazione AWS e ha standardizzato gli ambienti tramite l'uso di container (Docker).],
+    // --- CATEGORIA: ORGANIZZAZIONE DEL TEAM ---
+    table.cell(colspan: 3, fill: luma(200), align: center)[*Area: Organizzazione del Team*],
+    [*AM08*],
+    [*Colli di Bottiglia nel Coordinamento Globale* \
+      La gestione contemporanea dell'intera codebase da parte di tutto il team generava confusione sui task, sovrapposizioni e rallentamenti nelle decisioni di basso livello.],
+    [*Divisione in Sottogruppi Specializzati* \
+      Il team si è diviso in tre sottogruppi (Frontend, Microservizio Account, Microservizio Analisi). Questo ha snellito le decisioni interne, aumentando il parallelismo e la responsabilità individuale.],
+  ),
+)
+
 = Conclusioni
 
-L'attività di miglioramento continuo per il progetto _Code Guardian_ si è rivelata non solo una pratica formale, ma una necessità operativa. L'analisi delle metriche e le retrospettive hanno evidenziato come l'avvio del progetto abbia scontato l'inevitabile "prezzo d'ingresso" dovuto alla curva di apprendimento dei nuovi strumenti (come Jira e Typst) e al necessario assestamento delle dinamiche comunicative interne.
+L'attività di miglioramento continuo per il progetto _Code Guardian_ si è rivelata non solo una pratica formale, ma il vero motore per garantire la qualità finale del prodotto. Durante la RTB, l'analisi delle metriche ha evidenziato come l'avvio del progetto abbia scontato il "prezzo d'ingresso" della curva di apprendimento dei nuovi strumenti e del necessario assestamento delle dinamiche comunicative. Le azioni correttive iniziali (*AM01*, *AM03*) hanno permesso di superare quella prima frammentazione operativa.
 
-Le azioni correttive intraprese, in particolare la ristrutturazione dei canali informativi (*AM01*) e la standardizzazione documentale (*AM03*), hanno permesso di superare l'iniziale frammentazione operativa. Sebbene la ridistribuzione del budget orario (*AM02*) abbia garantito il raggiungimento degli obiettivi RTB, ha reso evidente l'importanza di una pianificazione più granulare per il futuro.
+Con l'ingresso nella PB, la complessità tecnica ed organizzativa è aumentata. Le nuove criticità non riguardavano più l'assestamento iniziale, ma l'implementazione pratica. In questo contesto, il ciclo di _Plan-Do-Check-Act_ ha dimostrato la sua reale efficacia: la decisione di cambiare tempestivamente l'architettura scartando il Serverless (*AM05*) ha salvaguardato le scadenze, l'imposizione di rigorose pipeline CI/CD (*AM06*) ha arginato il debito tecnico e la standardizzazione del deployment (*AM07*) ha mitigato le complessità del cloud.
 
-Consapevoli che l'assetto attuale non è un traguardo definitivo ma uno stato da preservare, il team si impegna a mantenere alta la vigilanza. L'obiettivo per le prossime fasi non è l'assenza di problemi, ma la capacità di identificarli tempestivamente tramite il monitoraggio dei dati e risolverli con la stessa reattività dimostrata in questo primo periodo.
+Dal punto di vista organizzativo, la transizione verso sottogruppi specializzati (*AM08*) ha trasformato il gruppo in un team di sviluppo maturo ed efficiente.
