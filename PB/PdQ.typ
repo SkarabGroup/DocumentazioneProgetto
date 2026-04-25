@@ -11,7 +11,7 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v1.2.0"
+#let versione = "v1.3.0"
 
 #titlePage("Piano di Qualifica", versione)
 #set heading(numbering: "1.1.1")
@@ -20,7 +20,7 @@
   (
     "2026/04/18",
     "1.3.0",
-    "Aggiunta e correzione test di unità e sistema per micreoservizio di gestione account",
+    "Aggiunta e correzione test di unità e sistema per microservizio di gestione account",
     members.berengan,
     "",
   ),
@@ -200,24 +200,24 @@ La versione più recente del Glossario è disponibile al seguente link:
 I seguenti documenti hanno valore vincolante per la definizione delle strategie di qualità e per le attività di verifica:
 - *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> #linebreak()
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
-  (ultimo accesso: *24/02/2026*)
+  (ultimo accesso: *18/04/2026*)
 
 - *Norme di Progetto*: Il documento definisce il "Way of Working", stabilendo gli strumenti e le procedure che questo Piano si occupa di misurare. <NdP> #linebreak()
-  #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")] \
-  (versione: *v1.0.0*)
+  #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/NdP.pdf")] \
+  (versione: *v2.0.0*)
 
 === Riferimenti Informativi
 - *ISO/IEC 25010:2011*: Systems and software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE). <25010> #linebreak()
   #underline[#link("https://iso25000.com/index.php/en/iso-25000-standards/iso-25010")] \
-  (ultimo accesso: *24/02/2026*)
+  (ultimo accesso: *18/04/2026*)
 
 - *ISO/IEC 12207:2008*: Systems and software engineering — Software life cycle processes. <12207> #linebreak()
   #underline[#link("https://ieeexplore.ieee.org/document/4475826")] \
-  (ultimo accesso: *24/02/2026*)
+  (ultimo accesso: *18/04/2026*)
 
 - *Dispense del corso di Ingegneria del Software – Qualità del software* <dispense_qualità> #linebreak()
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T07.pdf")] \
-  (ultimo accesso: *24/02/2026*)
+  (ultimo accesso: *18/04/2026*)
 
 #pagebreak()
 = Qualità di Processo
@@ -423,7 +423,7 @@ Skarab Group ha adottato un approccio di testing multilivello che copre:
 - *Test di Regressione*.
 - *Test di Integrazione*.
 
-La definizione dei test e la nomenclatura utilizzata sono presenti all'interno delle #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/NdP.pdf")[#underline[*Norme di Progetto*]], alla sezione *2.1.9.3.5*. // inserire sezione
+La definizione dei test e la nomenclatura utilizzata sono presenti all'interno delle #link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/NdP.pdf")[#underline[*Norme di Progetto*]], alla sezione *2.1.9.3.5*. // inserire sezione
 I Test di Regressione e i Test di Integrazione, qui non presenti, verranno identificati durante lo svolgimento delle attività per la _Product Baseline_ (PB).
 
 == Test di Sistema
@@ -2419,8 +2419,8 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       passed,
 
       [TA-22],
-      [Verificare che l'Orchestratore verifichi correttamente l'accessibilità del repository prima di avviare l'analisi, distinguendo tra risorse pubbliche e private e gestendo i fallimenti di accesso.],
-      ni,
+      [Verificare che il Servizio di Analisi verifichi correttamente l'accessibilità del repository prima di avviare l'effettiva analisi, distinguendo tra risorse pubbliche e private e gestendo i fallimenti di accesso.],
+      passed,
 
       [TA-23],
       [Verificare che l'Orchestratore avvii correttamente il processo di analisi, clonando il repository e distribuendo la codebase agli strumenti di analisi per le aree selezionate.],
