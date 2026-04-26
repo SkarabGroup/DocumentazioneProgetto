@@ -145,7 +145,7 @@ Per terminare in totale sicurezza la sessione attiva, l'utente può usufruire de
 Questa azione comporta la chiusura definitiva della sessione di lavoro, garantendo la protezione del profilo. Per accedere nuovamente alle funzionalità del sistema, sarà necessario effettuare un nuovo _Accesso_ (Login).
 
 #figure(
-  image("../assets/manuale_utente/logout.png", width: 80%),
+  image("../assets/manuale_utente/logout.png", width: 60%),
   caption: [Schermata di Disconessione],
 )
 
