@@ -660,7 +660,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TS-15.5], [Verificare la corretta persistenza e la notifica di successo post-modifica.], [UC15.3], passed,
 
       // --- VISUALIZZAZIONE SINGOLA REMEDIATION GENERICA (UC16) ---
-      [TS-16], [Verificare la corretta visualizzazione dei dettagli di una remediation selezionata.], [UC16], pending,
+      [TS-16], [Verificare la corretta visualizzazione dei dettagli di una remediation selezionata.], [UC16], not_implemented,
 
       // --- VERIFICA ACCESSIBILITÀ REPOSITORY (UC17) ---
       [TS-17],
@@ -1181,14 +1181,14 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
 
       [TU-2.12],
       [FROb36],
-      [Verifica notifica formato username non conforme in fase di login.],
-      [Messaggio di errore su formato username errato.],
+      [Verifica notifica formato email non conforme in fase di login.],
+      [Messaggio di errore su formato email errato.],
       pending,
 
       [TU-2.13],
       [FROb36],
-      [Verifica notifica username non esistente nel sistema.],
-      [Feedback specifico per username non censito.],
+      [Verifica notifica email non esistente nel sistema.],
+      [Feedback specifico per email non censito.],
       passed,
 
       [TU-2.14],
@@ -1322,7 +1322,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TU-6.7],
       [FROb70],
       [Controllo validazione: almeno un'area attiva nei filtri.],
-      [Blocco visualizzazione con avviso se nessuna area selezionata.],
+      [Almeno un'area rimane sempre selezionata.],
       pending,
 
       [TU-6.8],
@@ -1414,7 +1414,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TU-8.2],
       [FRDe86],
       [Verifica tooltip informativi all'hover sui punti dati del grafico.],
-      [Valore esatto e hash commit mostrati.],
+      [Valore esatto mostrato.],
       pending,
 
       [TU-8.3],
@@ -1432,14 +1432,14 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TU-8.5],
       [FROb89],
       [Validazione algoritmo calcolo indicatori di variazione.],
-      [Calcolo variazione percentuale eseguito correttamente.],
+      [Calcolo variazione score eseguito correttamente.],
       pending,
 
       [TU-8.6],
       [FROb90],
       [Verifica fallback visualizzazione dati grezzi in tabella in caso di errore.],
       [Dati mostrati in formato tabellare.],
-      pending,
+      passed,
 
       // --- ANALISI DEL CODICE (UC9) ---
       [TU-9.1],
@@ -1567,38 +1567,38 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
 
       // --- ESPORTAZIONE (UC14) ---
       [TU-14.1],
-      [FRDe113],
+      [FROb114],
       [Verifica disponibilità link di download del file generato.],
       [Link di download presente e funzionante.],
       passed,
 
       [TU-14.2],
-      [FRDe114],
+      [FROb115],
       [Verifica supporto formati di esportazione PDF e JSON.],
       [Accetta esclusivamente PDF o JSON.],
       passed,
 
       [TU-14.3],
-      [FRDe115],
+      [FROb116],
       [Verifica inibizione invio richiesta in assenza di formato selezionato.],
-      [Messaggio di errore se utente non sceglie il formato.],
-      pending,
+      [Impossibilità di non selezionare il formato.],
+      passed,
 
       [TU-14.4],
-      [FRDe116],
+      [FROb117],
       [Verifica modulo generazione file: mapping dati e metadati.],
       [I dati vengono mappati senza perdite.],
       pending,
 
       [TU-14.5],
-      [FRDe117],
+      [FROb118],
       [Verifica processo di generazione file asincrono senza blocco interfaccia.],
       [L'UI rimane responsiva durante il parsing.],
-      pending,
+      passed,
 
       // --- MODIFICA PASSWORD (UC15) ---
       [TU-15.1],
-      [FROb118],
+      [FROb119],
       [Verifica accesso alla sezione dedicata alla modifica password.],
       [Rendering corretto del modulo nel profilo.],
       passed,
@@ -1637,7 +1637,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb124],
       [Verifica invio notifica email automatica a seguito di modifica.],
       [Email di notifica inviata post-cambio.],
-      pending,
+      passed,
 
       [TU-15.8],
       [FROb125],
