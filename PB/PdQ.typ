@@ -11,12 +11,19 @@
 
   Si raccomanda di modificare sempre questo valore quando si lavora su un qualunque file
 */
-#let versione = "v1.3.0"
+#let versione = "v2.0.0"
 
 #titlePage("Piano di Qualifica", versione)
 #set heading(numbering: "1.1.1")
 #set page(numbering: "1", header: header("Piano di Qualifica"), footer: footer())
 #let history = (
+  (
+    "2026/04/26",
+    "2.0.0",
+    "Revisione per PB",
+    "",
+    members.antonio
+  ),
   (
     "2026/04/18",
     "1.3.0",
@@ -181,7 +188,7 @@ Per la milestone RTB (*25/02/2026*), le attività di qualità si concentrano sul
 - *Qualità del Prototipo (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#proof-of-concept")[#def[PoC]])*: L'attività di verifica è focalizzata esclusivamente sulla *dimostrazione della fattibilità tecnica* (Technology Baseline), con particolare attenzione all'interazione Agenti-LLM. Il testing in questa fase ha valore _sperimentale e propedeutico_: esso funge da caso di studio per calibrare le metriche e validare le strategie di verifica che saranno poi applicate in modo sistematico ed estensivo sul #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#minimum-viable-product")[#def[MVP]].
 
 === Revisione di Accettazione (Product Baseline – PB)
-Per il rilascio finale (*15/04/2026*), il focus si sposta sulla robustezza, sulla copertura e sulla soddisfazione dei requisiti:
+Per il rilascio finale (*26/04/2026*), il focus si sposta sulla robustezza, sulla copertura e sulla soddisfazione dei requisiti:
 - *Qualità del Prodotto (MVP)*: Esecuzione completa dei test di unità, integrazione e sistema. Validazione finale rispetto ai requisiti funzionali e prestazionali del capitolato.
 - *Qualità del Codice*: Rispetto dei vincoli di stile, assenza di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-smell")[*#def[code smells]*] e raggiungimento delle soglie di copertura del codice #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-coverage")[#def[Code Coverage]] definite nel presente piano.
 - *Validazione Utente*: Verifica dell'usabilità tramite test di accettazione (UAT) basati sui casi d'uso principali.
@@ -192,7 +199,7 @@ Al fine di prevenire ambiguità interpretative, è stato redatto un glossario ch
 Nel testo, *ogni termine evidenziato tramite una G come apice*, rimanda alla voce corrispondente del Glossario pubblicato sul sito ufficiale del gruppo, consentendo al lettore di accedere direttamente alla definizione associata.
 
 La versione più recente del Glossario è disponibile al seguente link:
-#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario (v1.0.0)]].
+#underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[Link al Glossario (v2.0.0)]].
 
 == Riferimenti
 
@@ -200,7 +207,7 @@ La versione più recente del Glossario è disponibile al seguente link:
 I seguenti documenti hanno valore vincolante per la definizione delle strategie di qualità e per le attività di verifica:
 - *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> #linebreak()
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
-  (ultimo accesso: *18/04/2026*)
+  (ultimo accesso: *26/04/2026*)
 
 - *Norme di Progetto*: Il documento definisce il "Way of Working", stabilendo gli strumenti e le procedure che questo Piano si occupa di misurare. <NdP> #linebreak()
   #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/NdP.pdf")] \
@@ -209,15 +216,15 @@ I seguenti documenti hanno valore vincolante per la definizione delle strategie 
 === Riferimenti Informativi
 - *ISO/IEC 25010:2011*: Systems and software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE). <25010> #linebreak()
   #underline[#link("https://iso25000.com/index.php/en/iso-25000-standards/iso-25010")] \
-  (ultimo accesso: *18/04/2026*)
+  (ultimo accesso: *26/04/2026*)
 
 - *ISO/IEC 12207:2008*: Systems and software engineering — Software life cycle processes. <12207> #linebreak()
   #underline[#link("https://ieeexplore.ieee.org/document/4475826")] \
-  (ultimo accesso: *18/04/2026*)
+  (ultimo accesso: *26/04/2026*)
 
 - *Dispense del corso di Ingegneria del Software – Qualità del software* <dispense_qualità> #linebreak()
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T07.pdf")] \
-  (ultimo accesso: *18/04/2026*)
+  (ultimo accesso: *26/04/2026*)
 
 #pagebreak()
 = Qualità di Processo
@@ -423,7 +430,7 @@ Skarab Group ha adottato un approccio di testing multilivello che copre:
 - *Test di Regressione*.
 - *Test di Integrazione*.
 
-La definizione dei test e la nomenclatura utilizzata sono presenti all'interno delle #link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/NdP.pdf")[#underline[*Norme di Progetto*]], alla sezione *2.1.9.3.5*. // inserire sezione
+La definizione dei test e la nomenclatura utilizzata sono presenti all'interno delle #link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/NdP.pdf")[#underline[*Norme di Progetto*]], alla sezione *2.2.1.5.1*.\
 I Test di Regressione e i Test di Integrazione, qui non presenti, verranno identificati durante lo svolgimento delle attività per la _Product Baseline_ (PB).
 
 == Test di Sistema
@@ -496,17 +503,17 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
 
       // --- RICHIESTE DI ANALISI (UC4) ---
       [TS-4],
-      [Verificare la corretta presa in carico di una richiesta di analisi per un repository GitHub.],
+      [Verificare la corretta presa in carico del sistema di una richiesta di analisi per un repository GitHub.],
       [UC4],
       passed,
 
       [TS-4.1],
-      [Verificare la segnalazione dell'informativa se l'analisi risulta già aggiornata rispetto ai dati remoti.],
+      [Verificare la segnalazione del messaggio informativo se l'analisi risulta già aggiornata rispetto ai dati remoti.],
       [UC4.0.1],
       passed,
 
       [TS-4.3],
-      [Verificare l'inibizione della richiesta se non viene selezionata almeno un'area di interesse.],
+      [Verificare l'impossibilità di non selezionare almeno un'area di interesse.],
       [UC4.1.1],
       passed,
 
@@ -533,7 +540,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       passed,
 
       [TS-6.2],
-      [Verificare l'inibizione del rendering e la notifica se non viene selezionata alcuna area.],
+      [Verificare l'impossibilità di non selezionare alcuna area da visualizzare.],
       [UC6.1.1],
       passed,
 
@@ -610,7 +617,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       // --- ESPORTAZIONE (UC14) ---
       [TS-14], [Verificare il corretto download del report nel formato selezionato (PDF/JSON).], [UC14, UC14.2], passed,
 
-      [TS-14.1], [Verificare la segnalazione di errore se l'utente non seleziona alcun formato.], [UC14.1.1], passed,
+      [TS-14.1], [Verificare l'impossibilità per l'utente di non selezionare alcun formato.], [UC14.1.1], passed,
 
       // --- MODIFICA PASSWORD (UC15) ---
       [TS-15.1], [Verificare la segnalazione di errore in caso di password corrente omessa.], [UC15.1.1], passed,
@@ -634,18 +641,18 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
 
       // --- VERIFICA ACCESSIBILITÀ REPOSITORY (UC17) ---
       [TS-17],
-      [Verificare che l'Orchestratore verifichi con successo l'accessibilità di un repository pubblico tramite le API GitHub.],
+      [Verificare che il Sistema verifichi con successo l'accessibilità di un repository pubblico tramite le API GitHub.],
       [UC17],
       passed,
 
       [TS-17.1], [Verificare la gestione dell'errore di comunicazione con GitHub.], [UC17.0.1], passed,
       [TS-17.2],
-      [Verificare che l'Orchestratore tenti l'accesso tramite credenziali in caso di repository privato.],
+      [Verificare che il Sistema tenti l'accesso tramite credenziali in caso di repository privato.],
       [UC17.1],
       passed,
 
       [TS-17.3],
-      [Verificare che l'Orchestratore annulli l'audit se tutti i metodi di accesso falliscono.],
+      [Verificare che il Sistema annulli l'audit se tutti i metodi di accesso falliscono.],
       [UC17.1.1],
       passed,
 
@@ -716,7 +723,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
 
       // --- PERSISTENZA STATO ANALISI E RECUPERO (UC22 - UC26) ---
       [TS-22],
-      [Verificare che lo stato dell'analisi venga registrato correttamente come “passed” nella persistenza.],
+      [Verificare che lo stato dell'analisi venga registrato correttamente come “pending” nella persistenza.],
       [UC22],
       passed,
 
@@ -766,7 +773,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       passed,
 
       [TS-28.1],
-      [Verificare che a seguito della cancellazione vengano rimossi i dati personali e credenziali invalide.],
+      [Verificare che a seguito della cancellazione vengano rimossi i dati personali e credenziali vengano invalidate.],
       [UC28.1],
       passed,
 
@@ -972,19 +979,19 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       passed,
 
       [TU-1.12],
-      [FROb12],
+      [FROp12],
       [Query di verifica unicità dello username nel database.],
       [Identificazione di collisioni con account già esistenti.],
       ni,
 
       [TU-1.13],
-      [FROb13],
+      [FROp13],
       [Verifica vincolo di unicità lato persistenza su username.],
       [Il sistema rileva la duplicazione e annulla la registrazione.],
       ni,
 
       [TU-1.14],
-      [FROb14],
+      [FROp14],
       [Verifica notifica username già in uso a seguito di violazione unicità.],
       [Feedback visivo immediato per username non disponibile.],
       ni,
@@ -996,7 +1003,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       passed,
 
       [TU-1.16],
-      [FROb16],
+      [FRDe16],
       [Verifica input email e validazione sintattica secondo standard RFC.],
       [Accettazione di formati standard (user\@domain.ext).],
       passed,
@@ -1087,10 +1094,10 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       passed,
 
       [TU-2.7],
-      [FROb31],
+      [FRDe31],
       [Verifica utilizzo username per fetch del record account dalla persistenza.],
       [Lo username viene utilizzato per recuperare il record DB.],
-      passed,
+      ni,
 
       [TU-2.8],
       [FROb32],
@@ -1102,7 +1109,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb33],
       [Test del meccanismo di rate limiting / lockout temporaneo.],
       [Blocco dell'account dopo N tentativi falliti.],
-      ni,
+      passed,
 
       [TU-2.10],
       [FROb34],
@@ -1153,34 +1160,46 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [Validazione positiva solo per URL conformi.],
       passed,
 
-      [TU-4.5],
+      [TU-4.3],
+      [FROb49],
+      [Verifica dimensione repository e inibire analisi qualora il limite venisse superato],
+      [Analisi bloccata in caso di limite superato],
+      passed,
+
+      [TU-4.4],
       [FROb50],
       [Verifica disabilitazione comando di conferma dopo prima pressione.],
       [Bottone disabilitato dopo il click per prevenire duplicati.],
       passed,
 
-      [TU-4.7],
-      [FROb56],
-      [Verifica inibizione richiesta in assenza di selezione aree.],
-      [Messaggio di errore se nessuna area è selezionata.],
-      passed,
-
-      [TU-4.8],
-      [FROb51],
+      [TU-4.5],
+      [FROp51],
       [Verifica consegna notifica di fine analisi tramite canali scelti.],
       [Notifica recapitata sul canale configurato.],
-      passed,
+      ni,
 
-      [TU-4.9],
-      [FROb52],
+      [TU-4.6],
+      [FRDe52],
       [Verifica inclusione dettagli analisi (nome, ora) nell'avviso ricevuto.],
       [Messaggio contiene nome progetto e timestamp.],
       passed,
 
-      [TU-4.10],
+      [TU-4.7],
       [FROb53],
       [Verifica invio avviso immediato con causa errore in caso interruzione.],
       [Notifica di errore con breve spiegazione tempestiva.],
+      passed,
+
+      [TU-4.8],
+      [FROb54],
+      [Verifica restituzione immediata del report esistente.],
+      [Notifica all'utente dei dati già aggiornati.],
+      passed,
+      
+      [TU-4.9],
+      [FROb56],
+      [Verifica inibizione richiesta in assenza di selezione aree.],
+      [Messaggio di errore se nessuna area è selezionata.],
       passed,
 
       // --- LISTA REPOSITORY (UC5) ---
@@ -1218,6 +1237,12 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb59],
       [Verifica contrassegno analisi come “Fallita” nella lista progetti.],
       [Stato “Fallita” visibile nella dashboard.],
+      passed,
+
+      [TU-5.7],
+      [FROb60],
+      [Verifica avviso fallimento con cause nella dashboard.],
+      [Avviso mostrato correttamente nella dashboard indipendentemente dalla ricezione dell'avviso di errore.],
       passed,
       // --- VISUALIZZAZIONE REPORT (UC6) ---
       [TU-6.1],
@@ -1272,6 +1297,12 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb72],
       [Verifica correttezza timestamp generazione audit (formato ISO 8601).],
       [Data e ora corrispondono al record del database.],
+      passed,
+
+      [TU-6.10],
+      [FROb73],
+      [Sistema deve visualizzare l'identificativo SHA del commit.],
+      [Link al commit fornito.],
       passed,
 
       [TU-6.11],
@@ -1391,6 +1422,12 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb93],
       [Controllo calcolo percentuale copertura test (Code Coverage).],
       [Valore normalizzato e conteggio calcolati correttamente.],
+      passed,
+
+      [TU-9.4],
+      [FROb94],
+      [Verifica presentazione lista specifica per codice.],
+      [Lista esposta con titolo, file, riga per ogni remediation.],
       passed,
 
       [TU-9.5],
@@ -1537,349 +1574,378 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       passed,
 
       [TU-15.2],
+      [FROb120],
+      [Verifica inserimento obbligatorio della password attualmente in uso durante la modifica password.],
+      [Password corrente richiesta e validata.],
+      passed,
+
+      [TU-15.3],
+      [FROb121],
+      [Verifica inibizione della procedura per password non corretta.],
+      [Procedura bloccata per password non inserita o errata.],
+      passed,
+
+      [TU-15.4],
+      [FROb122],
+      [Validazione sulla nuova password.],
+      [Controllo dei vincoli di complessità sulla nuova password.],
+      passed,
+
+      [TU-15.5],
       [FROb123],
+      [Verifica inibizione procedura se hash password coincidono.],
+      [Impedita la modifica se i valori coincidono.],
+      passed,
+
+      [TU-15.5],
+      [FROb124],
       [Verifica Adattatori per Modifica Password ('PostgresAdapter' - update).],
       [Le query UPDATE SQL vengono eseguite correttamente garantendo la transazionalità.],
       passed,
 
-      [TU-15.7],
-      [FROb124],
+      [TU-15.6],
+      [FROb125],
       [Verifica invio notifica email automatica a seguito di modifica.],
       [Email di notifica inviata post-cambio.],
       passed,
 
-      [TU-15.8],
-      [FROb125],
+      [TU-15.7],
+      [FROb126],
       [Verifica invalidazione di tutte le sessioni attive post-cambio password.],
       [Sessioni parallele invalidate; corrente attiva.],
       passed,
 
       // --- VISUALIZZAZIONE REMEDIATION GENERICA (UC16) ---
       [TU-16.1],
-      [FROb126],
+      [FROb127],
       [Verifica visualizzazione dettaglio tecnico singola remediation.],
       [Dettaglio correttamente caricato.],
       passed,
 
       [TU-16.2],
-      [FROb127],
+      [FROb128],
       [Verifica esposizione campi obbligatori remediation (descrizione, snippet).],
       [Tutti i campi previsti presenti.],
       passed,
 
       [TU-16.3],
-      [FROb128],
+      [FROb129],
       [Verifica inclusione riferimenti esterni per vulnerabilità note.],
       [Link a documentazione esterna mostrati.],
       passed,
 
       // --- VERIFICA ACCESSIBILITA' REPOSITORY (UC17) ---
       [TU-17.1],
-      [FROb129],
+      [FROb130],
       [Verifica gestione ciclo verifica accessibilità tramite API GitHub.],
       [Chiamate asincrone eseguite e tracciate.],
       passed,
 
       [TU-17.2],
-      [FROb130],
+      [FROb131],
       [Verifica meccanismo “Exponential Backoff” per errori di rete.],
       [Ritardi crescenti; interruzione su max tentativi.],
       passed,
 
       [TU-17.3],
-      [FROb131],
+      [FROb132],
       [Verifica validazione raggiungibilità endpoint tramite “Heartbeat”.],
       [Verifica operatività servizio remoto.],
       passed,
 
       [TU-17.4],
-      [FROb132],
+      [FROb133],
       [Verifica tentativo accesso pubblico prima dell'uso di credenziali.],
       [Richiesta senza intestazioni di autorizzazione.],
       passed,
 
       [TU-17.5],
-      [FROb133],
+      [FROb134],
       [Verifica accesso privato via token su errore 403/404 della risorsa.],
       [Seconda richiesta con token iniettato.],
       passed,
 
       [TU-17.6],
-      [FROb134],
+      [FROb135],
       [Verifica controllo “scopes” del token: permessi minimi di lettura.],
       [Token insufficiente viene rifiutato.],
       passed,
 
       [TU-17.7],
-      [FROb135],
+      [FROb136],
       [Verifica aggiornamento stato analisi a “FAILED_ACCESS”.],
       [Stato impostato a “FAILED_ACCESS”.],
       passed,
 
       [TU-18.1],
-      [FRDe136],
+      [FRDe137],
       [Verifica applicazione automatica modifiche tramite integrazione GitHub.],
       [Commit inviato al repository remoto.],
       ni,
 
       [TU-18.2],
-      [FRDe137],
+      [FRDe138],
       [Verifica validazione di integrità della proposta correttiva prima del commit.],
       [Proposta validata; commit bloccato se fallisce.],
       ni,
 
       [TU-18.3],
-      [FRDe138],
+      [FRDe139],
       [Verifica aggiornamento stato remediation in “Applied” nel DB.],
       [Stato correttamente aggiornato.],
       ni,
 
       [TU-18.4],
-      [FRDe139],
+      [FRDe140],
       [Verifica notifica all'utente in caso di fallimento del commit.],
       [Messaggio errore; codebase invariata.],
       ni,
 
       // --- CREAZIONE RACCOLTA REPORT (UC20) ---
-      [TU-20.1], [FROb140], [Verifica definizione nome univoco raccolta.], [Nomi non conformi rifiutati.], passed,
+      [TU-20.1], 
+      [FRDe141], 
+      [Verifica definizione nome univoco raccolta.], 
+      [Nomi non conformi rifiutati.], 
+      passed,
+      
       [TU-20.2],
-      [FROb141],
+      [FROb142],
       [Verifica validazione sintattica URL GitHub.],
-      [https://www.wordreference.com/iten/non-conforme],
+      [URL non conformi vengono rifiutati.],
       passed,
 
       [TU-20.3],
-      [FROb142],
+      [FROb143],
       [Verifica interrogazione API GitHub per conferma esistenza repository.],
       [Repository inesistenti bloccano la raccolta.],
       passed,
 
       [TU-20.4],
-      [FROb143],
+      [FROb144],
       [Verifica gestione repository inaccessibile con notifica utente.],
       [Avviso specifico mostrato.],
       passed,
 
       [TU-20.5],
-      [FROb144],
+      [FROb145],
       [Verifica impedimento creazione raccolta duplicata per stesso utente.],
       [Errore di duplicazione gestito.],
       passed,
 
       [TU-20.6],
-      [FROb145],
+      [FROb146],
       [Verifica memorizzazione descrizione facoltativa con supporto UTF-8.],
       [Caratteri speciali memorizzati correttamente.],
       passed,
 
       // --- AVVIO ANALISI (UC21) ---
       [TU-21.1],
-      [FROb146],
+      [FROb147],
       [Verifica parallelizzazione richieste verso gli strumenti esterni.],
       [Richieste inviate in parallelo.],
       passed,
 
       [TU-21.2],
-      [FROb147],
+      [FROb148],
       [Verifica inclusione parametri di configurazione utente nelle richieste.],
       [Parametri trasmessi correttamente.],
       passed,
 
       [TU-21.3],
-      [FROb148],
+      [FROb149],
       [Verifica trasmissione sicura credenziali al servizio AWS per clonazione.],
       [Credenziali non esposte in chiaro.],
       passed,
 
       [TU-21.4],
-      [FROb149],
+      [FROb150],
       [Verifica monitoraggio completamento clonazione e gestione timeout.],
       [Procedura interrotta con segnalazione su errori.],
       passed,
 
       [TU-21.5],
-      [FROb150],
+      [FROb151],
       [Verifica inibizione inoltro strumenti su errore clonazione.],
       [Nessuna richiesta inoltrata agli strumenti.],
       passed,
 
       [TU-21.6],
-      [FROb151],
+      [FROb152],
       [Verifica inoltro codebase agli strumenti di analisi via protocolli sicuri.],
       [File trasmessi tramite canali cifrati.],
       passed,
 
       [TU-21.7],
-      [FROb146],
+      [FROb147],
       [Verifica orchestrazione processi agenti locali (code/docs/security) e corretta raccolta stream output.],
       [I processi vengono avviati, monitorati e chiusi senza deadlock.],
       passed,
 
       // --- PERSISTENZA STATO ANALISI E RECUPERO (UC22 - UC26) ---
       [TU-22.1],
-      [FROb152],
+      [FROb153],
       [Verifica registrazione stato analisi come “PENDING”.],
       [Stato scritto correttamente nel DB.],
       passed,
 
       [TU-22.2],
-      [FROb153],
+      [FROb154],
       [Verifica associazione univoca ID analisi a repository e utente.],
       [ID associato; impossibile creare duplicati.],
       passed,
 
       [TU-22.3],
-      [FROb154],
+      [FROb155],
       [Verifica persistenza metadati di avvio (hash commit, timestamp).],
       [Dati registrati all'avvio.],
       passed,
 
       [TU-22.4],
-      [FROb155],
+      [FROb156],
       [Verifica Rollback e segnalazione su errore scrittura stato.],
       [Analisi annullata su fallimento persistenza.],
       passed,
 
       [TU-22.5],
-      [FROb156],
+      [FROb157],
       [Verifica registrazione log di audit su fallimento persistenza.],
       [Log di errore completi scritti.],
       passed,
 
       [TU-23.1],
-      [FROb157],
+      [FROb158],
       [Verifica polling o ricezione segnale completamento strumenti.],
       [Rilevata disponibilità risultati.],
       passed,
 
       [TU-23.2],
-      [FROb158],
+      [FROb159],
       [Verifica download risultati non appena disponibili.],
       [File scaricati correttamente.],
       passed,
 
       [TU-23.3],
-      [FROb159],
+      [FROb160],
       [Verifica controllo integrità file ricevuti.],
       [File corrotti rilevati e segnalati.],
       passed,
 
       [TU-23.4],
-      [FROb160],
+      [FROb161],
       [Verifica prosecuzione report con dati parziali su fallimento strumento.],
       [Report generato con i dati disponibili.],
       passed,
 
       [TU-23.5],
-      [FROb161],
+      [FROb162],
       [Verifica impostazione timeout massimo per strumento ritardatario.],
       [Attesa interrotta post timeout.],
       passed,
 
       [TU-23.6],
-      [FROb162],
+      [FROb163],
       [Verifica segnalazione nel DB di report con dati parziali.],
       [Flag “parziale” impostato.],
       passed,
 
       [TU-24.1],
-      [FROb163],
+      [FROb164],
       [Verifica unificazione dati in documento di sintesi unico.],
       [Output aggregati correttamente.],
       passed,
 
       [TU-24.2],
-      [FROb164],
+      [FROb165],
       [Verifica conversione formati eterogenei in modello standard.],
       [Formati normalizzati senza perdite.],
       passed,
 
       [TU-24.3],
-      [FROb165],
+      [FROb166],
       [Verifica validazione completezza report prima del salvataggio.],
       [Report incompleto non inoltrato al DB.],
       passed,
 
       [TU-24.4],
-      [FROb166],
+      [FROb167],
       [Verifica calcolo punteggi di riepilogo per aree.],
       [Punteggi calcolati coerentemente.],
       passed,
 
       [TU-24.5],
-      [FROb163],
+      [FROb166],
       [Verifica costruzione entità report (code/documentation/security) e validazione dei value object di supporto.],
       [Le entità risultano consistenti e serializzabili nel modello di dominio.],
       passed,
 
       [TU-25.1],
-      [FROb167],
+      [FROb168],
       [Verifica archiviazione permanente report con collegamento repository.],
       [Report salvato e associato a profilo e repo.],
       passed,
 
       [TU-25.2],
-      [FROb168],
+      [FROb169],
       [Verifica aggiornamento stato analisi a “Completato”.],
       [Stato impostato a seguito di conferma scrittura.],
       passed,
 
       [TU-25.3],
-      [FROb169],
+      [FROb170],
       [Verifica notifica utente in caso impossibilità salvataggio.],
       [Messaggio di errore generato per notifica.],
       passed,
 
       [TU-25.4],
-      [FROb170],
+      [FROb171],
       [Verifica tracciamento fallimento salvataggio per audit.],
       [Log errore scritto dettagliatamente.],
       passed,
 
       [TU-25.5],
-      [FROb171],
+      [FROb172],
       [Verifica copia temporanea report su errore salvataggio definitivo.],
       [Copia disponibile per recupero.],
       passed,
 
       [TU-25.6],
-      [FROb167],
+      [FROb168],
       [Verifica persistenza Mongo dei report e collegamento corretto tra analisi, report e utente.],
       [Le associazioni sono mantenute correttamente nel database.],
       passed,
 
       [TU-26.1],
-      [FROb172],
+      [FROb173],
       [Verifica generazione automatica notifica utente a report salvato.],
       [Notifica generata dopo archiviazione.],
       passed,
 
       [TU-26.2],
-      [FROb173],
+      [FROb174],
       [Verifica inclusione link accesso diretto nella notifica.],
       [Notifica contiene riferimento report.],
       passed,
 
       [TU-26.3],
-      [FROb174],
+      [FROb175],
       [Verifica inclusione informazioni identificative nella notifica.],
       [Nome repo e data presenti nel messaggio.],
       passed,
 
       [TU-26.4],
-      [FROb175],
+      [FROb176],
       [Verifica indipendenza stato report dall'esito invio notifica.],
       [Report disponibile anche se notifica fallisce.],
       passed,
 
       [TU-26.5],
-      [FROb176],
+      [FROb177],
       [Verifica registrazione anomalia su errore invio notifica.],
       [Log aggiornato con causa fallimento.],
       passed,
 
       [TU-26.6],
-      [FROb177],
+      [FROb178],
       [Verifica meccanismo di retry invio notifica per problemi di rete.],
       [Tentativi ripetuti prima di rinunciare.],
       passed,
@@ -1899,6 +1965,12 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       passed,
 
       [TU-28.2],
+      [FROb181],
+      [Verifica della corretto avviso di azione irreversibile.],
+      [Messaggio di conferma con possibilità di tornare indietro mostrato.],
+      passed,
+
+      [TU-28.3],
       [FROb182],
       [Verifica Adattatori per Cancellazione Account ('PostgresAdapter' - deleteUser).],
       [La query DELETE SQL rimuove coerentemente il profilo dal database.],
@@ -1906,28 +1978,28 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
 
       // --- GESTIONE ACCESSO GITHUB (UC29) ---
       [TU-29.1],
-      [FROb183],
+      [FRDe183],
       [Verifica scambio codice OAuth GitHub in token persistente e gestione risposte non valide.],
       [Il token viene ottenuto solo con codice valido.],
-      passed,
+      ni,
 
       [TU-29.2],
-      [FROb184],
+      [FRDe184],
       [Verifica cifratura del token GitHub prima del salvataggio su persistenza.],
       [Il token non viene mai salvato in chiaro.],
-      passed,
+      ni,
 
       [TU-29.3],
-      [FROb185],
+      [FRDe185],
       [Verifica associazione univoca token OAuth al profilo utente autorizzante.],
       [Ogni token resta vincolato all'utente proprietario.],
-      passed,
+      ni,
 
       [TU-29.4],
-      [FROb186],
+      [FRDe186],
       [Verifica annullamento collegamento su codice OAuth scaduto/non valido con richiesta nuova procedura.],
       [Il sistema invalida la procedura corrente e richiede nuova autorizzazione.],
-      passed,
+      ni,
 
       // --- VISUALIZZAZIONE E ACCETTAZIONE REMEDIATION (UC30 - UC38) ---
       [TU-30.1],
@@ -1967,139 +2039,143 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       passed,
 
       [TU-33.1],
-      [FROb193],
+      [FRDe193],
       [Verifica abilitazione comando accettazione remediation codice (Utente Avanzato).],
       [Solo Utente Avanzato vede comando.],
       ni,
 
       [TU-33.2],
-      [FROb194],
+      [FRDe194],
       [Verifica applicazione modifiche codebase a seguito accettazione.],
       [Commit inviato al repository.],
       ni,
 
       [TU-33.3],
-      [FROb195],
+      [FRDe195],
       [Verifica aggiornamento stato remediation codice a “eseguita”.],
       [Stato aggiornato correttamente.],
       ni,
 
       [TU-33.4],
-      [FROb196],
+      [FRDe196],
       [Verifica notifica fallimento e invarianza codebase in caso errore.],
       [Nessuna modifica in caso di fallimento.],
       ni,
 
       [TU-34.1],
-      [FROb197],
+      [FRDe197],
       [Verifica abilitazione comando di rifiuto remediation codice.],
       [Comando disponibile nell'interfaccia.],
       ni,
 
       [TU-34.2],
-      [FROb198],
+      [FRDe198],
       [Verifica aggiornamento stato a “rifiutata” senza modifiche.],
       [Stato aggiornato; codebase invariata.],
       ni,
 
       [TU-35.1],
-      [FROb199],
+      [FRDe199],
       [Verifica abilitazione comando di accettazione remediation sicurezza.],
       [Comando disponibile per Utente Avanzato.],
       ni,
 
       [TU-35.2],
-      [FROb200],
+      [FRDe200],
       [Verifica applicazione patch/configurazioni di sicurezza.],
       [Modifiche applicate al repository.],
       ni,
 
       [TU-35.3],
-      [FROb201],
+      [FRDe201],
       [Verifica aggiornamento stato remediation sicurezza a “eseguita”.],
       [Stato aggiornato nella dashboard.],
       ni,
 
       [TU-35.4],
-      [FROb202],
+      [FRDe202],
       [Verifica notifica fallimento applicazione remediation sicurezza.],
       [Vulnerabilità non mitigata in caso insuccesso.],
       ni,
 
       [TU-36.1],
-      [FROb203],
+      [FRDe203],
       [Verifica abilitazione comando di rifiuto remediation sicurezza.],
       [Comando disponibile nell'area.],
       ni,
 
-      [TU-36.2], [FROb204], [Verifica aggiornamento stato a “rifiutata” senza modifiche.], [Repository invariato.], ni,
+      [TU-36.2], 
+      [FRDe204], 
+      [Verifica aggiornamento stato a “rifiutata” senza modifiche.],
+      [Repository invariato.], 
+      ni,
 
       [TU-37.1],
-      [FROb205],
+      [FRDe205],
       [Verifica abilitazione comando accettazione remediation documentale.],
       [Comando disponibile per Utente Avanzato.],
       ni,
 
       [TU-37.2],
-      [FROb206],
+      [FRDe206],
       [Verifica applicazione modifiche ai file documentali a seguito accettazione.],
       [File aggiornati nel repository.],
       ni,
 
       [TU-37.3],
-      [FROb207],
+      [FRDe207],
       [Verifica aggiornamento stato remediation documentale a “eseguita”.],
       [Stato aggiornato nella dashboard.],
       ni,
 
       [TU-37.4],
-      [FROb208],
+      [FRDe208],
       [Verifica notifica errore e invarianza documentazione in caso di fallimento I/O.],
       [File documentazione rimangono invariati.],
       ni,
 
       [TU-38.1],
-      [FROb209],
+      [FRDe209],
       [Verifica accesso al dettaglio per procedura di rifiuto documentale.],
       [Dettaglio visualizzato prima del rifiuto.],
-      passed,
+      ni,
 
       [TU-38.2],
-      [FROb210],
+      [FRDe210],
       [Verifica abilitazione comando di rifiuto remediation documentale.],
       [Comando disponibile nell'area.],
-      passed,
+      ni,
 
       [TU-38.3],
-      [FROb211],
+      [FRDe211],
       [Verifica aggiornamento stato remediation documentale a “rifiutata”.],
       [Stato aggiornato a seguito del rifiuto.],
-      passed,
+      ni,
 
       [TU-38.4],
-      [FROb212],
+      [FRDe212],
       [Verifica che il rifiuto non comporti modifiche ai file.],
       [Nessuna modifica al repository.],
-      passed,
+      ni,
 
       [TU-38.5],
-      [FROb213],
+      [FRDe213],
       [Verifica rimozione/marcatura visiva remediation rifiutata.],
       [Remediation non più pendente.],
-      passed,
+      ni,
 
       [TU-38.6],
-      [FROb214],
+      [FRDe214],
       [Verifica visualizzazione conferma visiva avvenuto rifiuto.],
       [Messaggio di conferma rifiuto mostrato.],
-      passed,
+      ni,
 
       // --- REPOSITORY PRIVATI, CATALOGO E PERMESSI (UC39 - UC46) ---
       [TU-39.1],
       [FROb215],
-      [Verifica abilitazione richiesta repository privato solo per Utente Avanzato.],
-      [Funzionalità inibita per utenti standard.],
-      ni,
+      [Verifica abilitazione richiesta repository privato solo dopo aver inserito PAT token del repositoy.],
+      [Funzionalità inibita per utenti che non l'hanno inserito.],
+      passed,
 
       [TU-39.2],
       [FROb216],
@@ -2165,63 +2241,67 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb226],
       [Verifica visualizzazione elenco profili autorizzati per repository.],
       [Lista caricata correttamente.],
-      ni,
+      passed,
 
       [TU-43.2],
       [FROb227],
       [Verifica informativa per accesso limitato esclusivamente al proprietario.],
       [Messaggio mostrato se lista è vuota.],
-      ni,
+      passed,
 
       [TU-43.3],
       [FROb228],
       [Verifica esposizione informazioni identificative del profilo autorizzato.],
       [Username/email visibili.],
-      ni,
+      passed,
 
       [TU-44.1],
       [FROb229],
       [Verifica aggiunta utente autorizzato con validazione profilo.],
       [Profilo inesistente rifiutato con errore.],
-      ni,
+      passed,
 
       [TU-44.2],
       [FROb230],
       [Verifica validazione corrispondenza identificativo in piattaforma.],
       [Identificativo non trovato genera avviso.],
-      ni,
+      passed,
 
       [TU-44.3],
       [FROb231],
       [Verifica impedimento autorizzazione multipla medesimo profilo.],
       [Avviso duplicazione; lista invariata.],
-      ni,
+      passed,
 
       [TU-44.4],
       [FROb232],
       [Verifica predisposizione comando conferma per aggiunta utente.],
       [Pulsante presente e funzionante.],
-      ni,
+      passed,
 
       [TU-44.5],
       [FROb233],
       [Verifica notifica errore sintattico per identificativo non valido.],
       [Messaggio di errore mostrato.],
-      ni,
+      passed,
 
       [TU-44.6],
       [FROb234],
       [Verifica inibizione form autorizzazione con identificativo vuoto.],
       [Procedura inibita su campo vuoto.],
-      ni,
+      passed,
 
       [TU-45.1],
       [FROb235],
       [Verifica revoca permessi utente autorizzato previa conferma.],
       [Profilo rimosso; accesso revocato.],
-      ni,
+      passed,
 
-      [TU-45.2], [FROb236], [Verifica selezione utente e avvio procedura revoca.], [Azione di revoca avviata.], ni,
+      [TU-45.2], 
+      [FROb236], 
+      [Verifica selezione utente e avvio procedura revoca.], 
+      [Azione di revoca avviata.], 
+      passed,
 
       [TU-46.1],
       [FROb237],
@@ -2550,9 +2630,9 @@ A completamento della specifica dei test, la seguente tabella riassume i risulta
     inset: 10pt,
     fill: (x, y) => if y == 0 { luma(230) } else { white },
     table.header([*Parametro*], [*Valore*], [*Descrizione*]),
-    [Test Pianificati (Specifica)], [386], [Totale casi di test formalizzati.],
-    [Test Eseguiti], [313], [Test effettuati sulle funzionalità stabili.],
-    [Test Superati], [313], [Esiti positivi (Passed).],
+    [Test Pianificati (Specifica)], [396], [Totale casi di test formalizzati.],
+    [Test Eseguiti], [324], [Test effettuati sulle funzionalità stabili.],
+    [Test Superati], [324], [Esiti positivi (Passed).],
     [Success Rate], [100%], [Rapporto Superati / Eseguiti.],
     [Copertura Funzionale], [81,1%], [Rapporto Eseguiti / Pianificati.],
   ),
@@ -2752,7 +2832,6 @@ A partire dallo _Sprint 7_, il _Test Success Rate_ ha mostrato un trend di cresc
 
 #pagebreak()
 
-#pagebreak()
 == Processi Organizzativi
 === Metrics Satisfaction (MPC15)
 #image("../assets/graficiPdQ/grafico_ms.png", height: 50%)
