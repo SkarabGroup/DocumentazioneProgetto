@@ -660,7 +660,10 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TS-15.5], [Verificare la corretta persistenza e la notifica di successo post-modifica.], [UC15.3], passed,
 
       // --- VISUALIZZAZIONE SINGOLA REMEDIATION GENERICA (UC16) ---
-      [TS-16], [Verificare la corretta visualizzazione dei dettagli di una remediation selezionata.], [UC16], not_implemented,
+      [TS-16],
+      [Verificare la corretta visualizzazione dei dettagli di una remediation selezionata.],
+      [UC16],
+      not_implemented,
 
       // --- VERIFICA ACCESSIBILITÀ REPOSITORY (UC17) ---
       [TS-17],
@@ -1050,7 +1053,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb14],
       [Verifica notifica username già in uso a seguito di violazione unicità.],
       [Feedback visivo immediato per username non disponibile.],
-      pending,
+      passed,
 
       [TU-1.15],
       [FROb15],
@@ -1147,7 +1150,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb30],
       [Verifica protocollo di trasmissione credenziali (HTTPS).],
       [Dati cifrati durante il transito verso il server.],
-      pending,
+      passed,
 
       [TU-2.7],
       [FROb31],
@@ -1183,7 +1186,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb36],
       [Verifica notifica formato email non conforme in fase di login.],
       [Messaggio di errore su formato email errato.],
-      pending,
+      passed,
 
       [TU-2.13],
       [FROb36],
@@ -1195,7 +1198,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb36],
       [Verifica notifica formato password errato in login.],
       [Feedback su errore sintattico password.],
-      pending,
+      passed,
 
       [TU-2.15],
       [FROb36],
@@ -1251,7 +1254,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb57],
       [Verifica ordinamento lista repository per data (decrescente).],
       [Repository visualizzati in ordine dall'analisi più recente.],
-      pending,
+      passed,
 
       [TU-5.2],
       [FROb61],
@@ -1323,7 +1326,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb70],
       [Controllo validazione: almeno un'area attiva nei filtri.],
       [Almeno un'area rimane sempre selezionata.],
-      pending,
+      passed,
 
       [TU-6.8],
       [FROb71],
@@ -1335,7 +1338,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb72],
       [Verifica correttezza timestamp generazione audit (formato ISO 8601).],
       [Data e ora corrispondono al record del database.],
-      pending,
+      passed,
 
       [TU-6.11],
       [FROb74],
@@ -1384,7 +1387,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb81],
       [Controllo campi obbligatori temporali: inibizione se non popolati.],
       [Avviso mostrato e confronto inibito.],
-      pending,
+      passed,
 
       [TU-7.4],
       [FROb82],
@@ -1415,7 +1418,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FRDe86],
       [Verifica tooltip informativi all'hover sui punti dati del grafico.],
       [Valore esatto mostrato.],
-      pending,
+      passed,
 
       [TU-8.3],
       [FROb87],
@@ -1433,7 +1436,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb89],
       [Validazione algoritmo calcolo indicatori di variazione.],
       [Calcolo variazione score eseguito correttamente.],
-      pending,
+      passed,
 
       [TU-8.6],
       [FROb90],
@@ -1489,7 +1492,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb99],
       [Verifica presentazione remediation di sicurezza ordinate per criticità.],
       [Remediation esposte in ordine decrescente.],
-      pending,
+      passed,
 
       [TU-10.5],
       [FROb100],
@@ -1588,7 +1591,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb117],
       [Verifica modulo generazione file: mapping dati e metadati.],
       [I dati vengono mappati senza perdite.],
-      pending,
+      passed,
 
       [TU-14.5],
       [FROb118],
@@ -1643,7 +1646,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb125],
       [Verifica invalidazione di tutte le sessioni attive post-cambio password.],
       [Sessioni parallele invalidate; corrente attiva.],
-      pending,
+      passed,
 
       // --- VISUALIZZAZIONE REMEDIATION GENERICA (UC16) ---
       [TU-16.1],
@@ -1706,6 +1709,30 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [Verifica aggiornamento stato analisi a “FAILED_ACCESS”.],
       [Stato impostato a “FAILED_ACCESS”.],
       passed,
+
+      [TU-18.1],
+      [FRDe136],
+      [Verifica applicazione automatica modifiche tramite integrazione GitHub.],
+      [Commit inviato al repository remoto.],
+      not_implemented,
+
+      [TU-18.2],
+      [FRDe137],
+      [Verifica validazione di integrità della proposta correttiva prima del commit.],
+      [Proposta validata; commit bloccato se fallisce.],
+      not_implemented,
+
+      [TU-18.3],
+      [FRDe138],
+      [Verifica aggiornamento stato remediation in “Applied” nel DB.],
+      [Stato correttamente aggiornato.],
+      not_implemented,
+
+      [TU-18.4],
+      [FRDe139],
+      [Verifica notifica all'utente in caso di fallimento del commit.],
+      [Messaggio errore; codebase invariata.],
+      not_implemented,
 
       // --- CREAZIONE RACCOLTA REPORT (UC20) ---
       [TU-20.1], [FROb140], [Verifica definizione nome univoco raccolta.], [Nomi non conformi rifiutati.], passed,
@@ -2039,6 +2066,102 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [Campi previsti presenti.],
       passed,
 
+      [TU-33.1],
+      [FROb193],
+      [Verifica abilitazione comando accettazione remediation codice (Utente Avanzato).],
+      [Solo Utente Avanzato vede comando.],
+      not_implemented,
+
+      [TU-33.2],
+      [FROb194],
+      [Verifica applicazione modifiche codebase a seguito accettazione.],
+      [Commit inviato al repository.],
+      not_implemented,
+
+      [TU-33.3],
+      [FROb195],
+      [Verifica aggiornamento stato remediation codice a “eseguita”.],
+      [Stato aggiornato correttamente.],
+      not_implemented,
+
+      [TU-33.4],
+      [FROb196],
+      [Verifica notifica fallimento e invarianza codebase in caso errore.],
+      [Nessuna modifica in caso di fallimento.],
+      not_implemented,
+
+      [TU-34.1],
+      [FROb197],
+      [Verifica abilitazione comando di rifiuto remediation codice.],
+      [Comando disponibile nell'interfaccia.],
+      not_implemented,
+
+      [TU-34.2],
+      [FROb198],
+      [Verifica aggiornamento stato a “rifiutata” senza modifiche.],
+      [Stato aggiornato; codebase invariata.],
+      not_implemented,
+
+      [TU-35.1],
+      [FROb199],
+      [Verifica abilitazione comando di accettazione remediation sicurezza.],
+      [Comando disponibile per Utente Avanzato.],
+      not_implemented,
+
+      [TU-35.2],
+      [FROb200],
+      [Verifica applicazione patch/configurazioni di sicurezza.],
+      [Modifiche applicate al repository.],
+      not_implemented,
+
+      [TU-35.3],
+      [FROb201],
+      [Verifica aggiornamento stato remediation sicurezza a “eseguita”.],
+      [Stato aggiornato nella dashboard.],
+      not_implemented,
+
+      [TU-35.4],
+      [FROb202],
+      [Verifica notifica fallimento applicazione remediation sicurezza.],
+      [Vulnerabilità non mitigata in caso insuccesso.],
+      not_implemented,
+
+      [TU-36.1],
+      [FROb203],
+      [Verifica abilitazione comando di rifiuto remediation sicurezza.],
+      [Comando disponibile nell'area.],
+      not_implemented,
+
+      [TU-36.2],
+      [FROb204],
+      [Verifica aggiornamento stato a “rifiutata” senza modifiche.],
+      [Repository invariato.],
+      not_implemented,
+
+      [TU-37.1],
+      [FROb205],
+      [Verifica abilitazione comando accettazione remediation documentale.],
+      [Comando disponibile per Utente Avanzato.],
+      not_implemented,
+
+      [TU-37.2],
+      [FROb206],
+      [Verifica applicazione modifiche ai file documentali a seguito accettazione.],
+      [File aggiornati nel repository.],
+      not_implemented,
+
+      [TU-37.3],
+      [FROb207],
+      [Verifica aggiornamento stato remediation documentale a “eseguita”.],
+      [Stato aggiornato nella dashboard.],
+      not_implemented,
+
+      [TU-37.4],
+      [FROb208],
+      [Verifica notifica errore e invarianza documentazione in caso di fallimento I/O.],
+      [File documentazione rimangono invariati.],
+      not_implemented,
+
       [TU-38.1],
       [FROb209],
       [Verifica accesso al dettaglio per procedura di rifiuto documentale.],
@@ -2076,6 +2199,12 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       passed,
 
       // --- REPOSITORY PRIVATI, CATALOGO E PERMESSI (UC39 - UC46) ---
+      [TU-39.1],
+      [FROb215],
+      [Verifica abilitazione richiesta repository privato solo per Utente Avanzato.],
+      [Funzionalità inibita per utenti standard.],
+      not_implemented,
+
       [TU-39.2],
       [FROb216],
       [Verifica validazione integrazione GitHub attiva per risorse private.],
@@ -2135,6 +2264,72 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [Verifica avvio procedura di rimozione di un repository.],
       [Caricamento corretto del dialog.],
       passed,
+
+      [TU-43.1],
+      [FROb226],
+      [Verifica visualizzazione elenco profili autorizzati per repository.],
+      [Lista caricata correttamente.],
+      not_implemented,
+
+      [TU-43.2],
+      [FROb227],
+      [Verifica informativa per accesso limitato esclusivamente al proprietario.],
+      [Messaggio mostrato se lista è vuota.],
+      not_implemented,
+
+      [TU-43.3],
+      [FROb228],
+      [Verifica esposizione informazioni identificative del profilo autorizzato.],
+      [Username/email visibili.],
+      not_implemented,
+
+      [TU-44.1],
+      [FROb229],
+      [Verifica aggiunta utente autorizzato con validazione profilo.],
+      [Profilo inesistente rifiutato con errore.],
+      not_implemented,
+
+      [TU-44.2],
+      [FROb230],
+      [Verifica validazione corrispondenza identificativo in piattaforma.],
+      [Identificativo non trovato genera avviso.],
+      not_implemented,
+
+      [TU-44.3],
+      [FROb231],
+      [Verifica impedimento autorizzazione multipla medesimo profilo.],
+      [Avviso duplicazione; lista invariata.],
+      not_implemented,
+
+      [TU-44.4],
+      [FROb232],
+      [Verifica predisposizione comando conferma per aggiunta utente.],
+      [Pulsante presente e funzionante.],
+      not_implemented,
+
+      [TU-44.5],
+      [FROb233],
+      [Verifica notifica errore sintattico per identificativo non valido.],
+      [Messaggio di errore mostrato.],
+      not_implemented,
+
+      [TU-44.6],
+      [FROb234],
+      [Verifica inibizione form autorizzazione con identificativo vuoto.],
+      [Procedura inibita su campo vuoto.],
+      not_implemented,
+
+      [TU-45.1],
+      [FROb235],
+      [Verifica revoca permessi utente autorizzato previa conferma.],
+      [Profilo rimosso; accesso revocato.],
+      not_implemented,
+
+      [TU-45.2],
+      [FROb236],
+      [Verifica selezione utente e avvio procedura revoca.],
+      [Azione di revoca avviata.],
+      not_implemented,
 
       [TU-46.1],
       [FROb237],
