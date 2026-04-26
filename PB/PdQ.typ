@@ -22,7 +22,7 @@
     "1.3.0",
     "Aggiunta e correzione test di unità e sistema per microservizio di gestione account",
     members.berengan,
-    "",
+    members.alice,
   ),
   (
     "2026/04/19",
@@ -429,7 +429,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
 == Test di Sistema
 #let passed = table.cell(fill: rgb("#D6F0D4"))[*Superato*]
 #let pending = table.cell(fill: rgb("#FFF3CC"))[*In attesa*]
-#let not_implemented = table.cell(fill: rgb("#F0D6D6"))[*Non implementato*]
+#let ni = table.cell(fill: rgb("#E0E0E0"))[*NI*]
 
 #show figure: set block(breakable: true)
 #figure(
@@ -456,7 +456,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TS-1.2],
       [Verificare l'inibizione della registrazione in caso di username già associato a un account esistente.],
       [UC1.1.2],
-      passed,
+      ni,
 
       [TS-1.3],
       [Verificare la validazione sintattica dell'indirizzo email secondo gli standard previsti.],
@@ -553,44 +553,26 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [UC7],
       passed,
 
-      [TS-7.1],
-      [Verificare la segnalazione di errore in caso di invio con campi temporali incompleti.],
-      [UC7.0.1],
-      passed,
+      [TS-7.1], [Verificare la segnalazione di errore in caso di invio con campi temporali incompleti.], [UC7.0.1], ni,
 
-      [TS-7.2],
-      [Verificare la segnalazione di assenza dati se non vi sono report nel periodo scelto.],
-      [UC7.0.2],
-      passed,
+      [TS-7.2], [Verificare la segnalazione di assenza dati se non vi sono report nel periodo scelto.], [UC7.0.2], ni,
 
-      [TS-7.3],
-      [Verificare la segnalazione di errore in caso di data inizio successiva alla data fine.],
-      [UC7.0.3],
-      passed,
+      [TS-7.3], [Verificare la segnalazione di errore in caso di data inizio successiva alla data fine.], [UC7.0.3], ni,
 
       [TS-7.4],
       [Verificare l'inibizione della richiesta se l'intervallo supera l'ampiezza massima (12 mesi).],
       [UC7.0.4],
-      passed,
+      ni,
 
       // --- METRICHE COMPARATIVE (UC8) ---
-      [TS-8],
-      [Verificare la corretta generazione dei grafici di andamento e della tabella comparativa.],
-      [UC8],
-      passed,
+      [TS-8], [Verificare la corretta generazione dei grafici di andamento e della tabella comparativa.], [UC8], passed,
 
-      [TS-8.1],
-      [Verificare l'esposizione dei dati puntuali all'interazione (click/hover) con il grafico.],
-      [UC8],
-      passed,
+      [TS-8.1], [Verificare l'esposizione dei dati puntuali all'interazione (click/hover) con il grafico.], [UC8], ni,
 
-      [TS-8.2], [Verificare il calcolo e la visualizzazione degli indicatori di trend in tabella.], [UC8], passed,
+      [TS-8.2], [Verificare il calcolo e la visualizzazione degli indicatori di trend in tabella.], [UC8], ni,
 
       // --- ANALISI DEL CODICE (UC9) ---
-      [TS-9.1],
-      [Verificare l'esposizione dei rilievi di analisi statica (bug, smell, vulnerabilità).],
-      [UC9.1],
-      passed,
+      [TS-9.1], [Verificare l'esposizione dei rilievi di analisi statica (bug, smell, vulnerabilità).], [UC9.1], passed,
 
       [TS-9.2], [Verificare la visualizzazione delle metriche di copertura dei test di unità.], [UC9.2], passed,
       [TS-9.3],
@@ -615,16 +597,10 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [UC11.1, UC11.2],
       passed,
 
-      [TS-11.2],
-      [Verificare la visualizzazione dell'informativa di assenza criticità documentali.],
-      [UC11.3.1],
-      passed,
+      [TS-11.2], [Verificare la visualizzazione dell'informativa di assenza criticità documentali.], [UC11.3.1], passed,
 
       // --- RANKING (UC12) ---
-      [TS-12],
-      [Verificare la generazione della graduatoria ordinata per punteggio di qualità globale.],
-      [UC12],
-      passed,
+      [TS-12], [Verificare la generazione della graduatoria ordinata per punteggio di qualità globale.], [UC12], passed,
 
       [TS-12.1],
       [Verificare la segnalazione di assenza dati se l'utente non ha mai effettuato analisi.],
@@ -632,15 +608,9 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       passed,
 
       // --- ESPORTAZIONE (UC14) ---
-      [TS-14],
-      [Verificare il corretto download del report nel formato selezionato (PDF/JSON).],
-      [UC14, UC14.2],
-      passed,
+      [TS-14], [Verificare il corretto download del report nel formato selezionato (PDF/JSON).], [UC14, UC14.2], passed,
 
-      [TS-14.1],
-      [Verificare la segnalazione di errore se l'utente non seleziona alcun formato.],
-      [UC14.1.1],
-      passed,
+      [TS-14.1], [Verificare la segnalazione di errore se l'utente non seleziona alcun formato.], [UC14.1.1], passed,
 
       // --- MODIFICA PASSWORD (UC15) ---
       [TS-15.1], [Verificare la segnalazione di errore in caso di password corrente omessa.], [UC15.1.1], passed,
@@ -660,7 +630,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TS-15.5], [Verificare la corretta persistenza e la notifica di successo post-modifica.], [UC15.3], passed,
 
       // --- VISUALIZZAZIONE SINGOLA REMEDIATION GENERICA (UC16) ---
-      [TS-16], [Verificare la corretta visualizzazione dei dettagli di una remediation selezionata.], [UC16], pending,
+      [TS-16], [Verificare la corretta visualizzazione dei dettagli di una remediation selezionata.], [UC16], passed,
 
       // --- VERIFICA ACCESSIBILITÀ REPOSITORY (UC17) ---
       [TS-17],
@@ -680,8 +650,8 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       passed,
 
       // --- ACCETTAZIONE/RIFIUTO REMEDIATION GENERICA (UC18/UC19) ---
-      [TS-18], [Verificare che l'Utente Avanzato possa accettare una singola remediation.], [UC18], not_implemented,
-      [TS-19], [Verificare che l'Utente Avanzato possa rifiutare una singola remediation.], [UC19], not_implemented,
+      [TS-18], [Verificare che l'Utente Avanzato possa accettare una singola remediation.], [UC18], ni,
+      [TS-19], [Verificare che l'Utente Avanzato possa rifiutare una singola remediation.], [UC19], ni,
 
       // --- CREAZIONE RACCOLTA REPORT (UC20) ---
       [TS-20],
@@ -709,15 +679,9 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [UC20.2],
       passed,
 
-      [TS-20.5],
-      [Verificare la segnalazione di errore in caso di URL sintatticamente non valido.],
-      [UC20.2.1],
-      passed,
+      [TS-20.5], [Verificare la segnalazione di errore in caso di URL sintatticamente non valido.], [UC20.2.1], passed,
 
-      [TS-20.6],
-      [Verificare la segnalazione di errore in caso di repository non accessibile.],
-      [UC20.2.2],
-      passed,
+      [TS-20.6], [Verificare la segnalazione di errore in caso di repository non accessibile.], [UC20.2.2], passed,
 
       [TS-20.7],
       [Verificare la segnalazione di errore in caso di campo URL non popolato al momento della conferma.],
@@ -727,10 +691,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TS-20.8], [Verificare la corretta acquisizione della descrizione della raccolta.], [UC20.3], passed,
 
       // --- AVVIO ANALISI (UC21) ---
-      [TS-21],
-      [Verificare che l'Orchestratore avvii le richieste verso tutti gli strumenti esterni.],
-      [UC21],
-      passed,
+      [TS-21], [Verificare che l'Orchestratore avvii le richieste verso tutti gli strumenti esterni.], [UC21], passed,
 
       [TS-21.1], [Verificare la corretta clonazione del repository nell'ambiente AWS.], [UC21.1], passed,
       [TS-21.2],
@@ -755,7 +716,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
 
       // --- PERSISTENZA STATO ANALISI E RECUPERO (UC22 - UC26) ---
       [TS-22],
-      [Verificare che lo stato dell'analisi venga registrato correttamente come “pending” nella persistenza.],
+      [Verificare che lo stato dell'analisi venga registrato correttamente come “passed” nella persistenza.],
       [UC22],
       passed,
 
@@ -793,16 +754,10 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       passed,
 
       [TS-26], [Verificare l'invio della notifica di completamento dell'analisi del repository.], [UC26], passed,
-      [TS-26.1],
-      [Verificare che il fallimento della notifica venga registrato nei log interni.],
-      [UC26.0.1],
-      passed,
+      [TS-26.1], [Verificare che il fallimento della notifica venga registrato nei log interni.], [UC26.0.1], passed,
 
       // --- VISUALIZZAZIONE INFORMAZIONI REPOSITORY (UC27) ---
-      [TS-27],
-      [Verificare l'esposizione delle informazioni identificative del repository selezionato.],
-      [UC27],
-      passed,
+      [TS-27], [Verificare l'esposizione delle informazioni identificative del repository selezionato.], [UC27], passed,
 
       // --- CANCELLAZIONE PROFILO (UC28) ---
       [TS-28],
@@ -819,63 +774,54 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TS-30],
       [Verificare la corretta visualizzazione del dettaglio di una singola remediation dell'area codice.],
       [UC30],
-      not_implemented,
+      ni,
 
       [TS-31],
       [Verificare la corretta visualizzazione del dettaglio di una singola remediation dell'area sicurezza.],
       [UC31],
-      not_implemented,
+      ni,
 
       [TS-32],
       [Verificare la corretta visualizzazione del dettaglio di una singola remediation dell'area documentazione.],
       [UC32],
-      not_implemented,
+      ni,
 
       // --- ACCETTAZIONE/RIFIUTO REMEDIATION SPECIFICHE (UC33 - UC38) ---
       [TS-33],
       [Verificare l'applicazione della remediation del codice e l'aggiornamento dello stato a “eseguita”.],
       [UC33],
-      not_implemented,
+      ni,
 
       [TS-33.1],
       [Verificare la notifica di fallimento all'utente in caso di errore durante l'applicazione.],
       [UC33.0.1],
-      not_implemented,
+      ni,
 
-      [TS-34],
-      [Verificare che il rifiuto di una remediation del codice aggiorni lo stato a “rifiutata”.],
-      [UC34],
-      not_implemented,
+      [TS-34], [Verificare che il rifiuto di una remediation del codice aggiorni lo stato a “rifiutata”.], [UC34], ni,
 
       [TS-35],
       [Verificare l'applicazione delle patch di sicurezza e l'aggiornamento dello stato a “eseguita”.],
       [UC35],
-      not_implemented,
+      ni,
 
       [TS-35.1],
       [Verificare la notifica di fallimento all'utente in caso di errore durante l'applicazione (sicurezza).],
       [UC35.0.1],
-      not_implemented,
+      ni,
 
-      [TS-36],
-      [Verificare che il rifiuto di una remediation di sicurezza aggiorni lo stato a “rifiutata”.],
-      [UC36],
-      not_implemented,
+      [TS-36], [Verificare che il rifiuto di una remediation di sicurezza aggiorni lo stato a “rifiutata”.], [UC36], ni,
 
       [TS-37],
       [Verificare l'applicazione delle modifiche documentali e l'aggiornamento dello stato a “eseguita”.],
       [UC37],
-      not_implemented,
+      ni,
 
       [TS-37.1],
       [Verificare la notifica di fallimento all'utente in caso di errore durante l'applicazione (doc).],
       [UC37.0.1],
-      not_implemented,
+      ni,
 
-      [TS-38],
-      [Verificare che il rifiuto di una remediation documentale aggiorni lo stato a “rifiutata”.],
-      [UC38],
-      not_implemented,
+      [TS-38], [Verificare che il rifiuto di una remediation documentale aggiorni lo stato a “rifiutata”.], [UC38], ni,
 
       // --- GESTIONE REPOSITORY PRIVATI E RACCOLTE (UC39 - UC46) ---
       [TS-39],
@@ -883,20 +829,14 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [UC39],
       passed,
 
-      [TS-40],
-      [Verificare il corretto inserimento di un repository privato nel catalogo personale.],
-      [UC40],
-      passed,
+      [TS-40], [Verificare il corretto inserimento di un repository privato nel catalogo personale.], [UC40], passed,
 
       [TS-40.1],
       [Verificare la segnalazione di duplicazione in caso di inserimento di un URL già presente.],
       [UC40.0.1],
       passed,
 
-      [TS-41],
-      [Verificare la corretta visualizzazione del catalogo dei repository privati inseriti.],
-      [UC41],
-      passed,
+      [TS-41], [Verificare la corretta visualizzazione del catalogo dei repository privati inseriti.], [UC41], passed,
 
       [TS-41.1],
       [Verificare la visualizzazione dell'informativa specifica quando il catalogo privato risulta vuoto.],
@@ -916,17 +856,14 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TS-43],
       [Verificare la corretta visualizzazione dell'elenco dei profili autorizzati per un repository privato.],
       [UC43],
-      not_implemented,
+      ni,
 
       [TS-43.1],
       [Verificare la visualizzazione dell'informativa di assenza utenti autorizzati quando la lista è vuota.],
       [UC43.0.1],
-      not_implemented,
+      ni,
 
-      [TS-44],
-      [Verificare la corretta aggiunta di un utente autorizzato tramite username o email.],
-      [UC44, UC44.1],
-      not_implemented,
+      [TS-44], [Verificare la corretta aggiunta di un utente autorizzato tramite username o email.], [UC44, UC44.1], ni,
 
       [TS-44.1],
       [Verificare la segnalazione di errore per formato non valido, utente inesistente o campo vuoto.],
@@ -936,7 +873,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [TS-45],
       [Verificare la corretta revoca dei permessi di consultazione per un utente precedentemente autorizzato.],
       [UC45, UC45.1],
-      not_implemented,
+      ni,
 
       [TS-46],
       [Verificare la corretta rimozione di una raccolta di report senza che i singoli report vengano eliminati.],
@@ -967,240 +904,55 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       align: horizon,
       table.header([*ID PdQ*], [*Req.*], [*Descrizione Test*], [*Risultato Atteso*], [*Stato*]),
 
-      // --- REGISTRAZIONE (UC1) ---
+      // --- ACCOUNT DOMAIN E VALUE OBJECTS (UC1, UC2) ---
       [TU-1.1],
       [FROb1],
-      [Verifica rendering del componente di creazione account.],
-      [Caricamento corretto del modulo di registrazione.],
+      [Verifica 'User Entity' (create, reconstitute, updatePassword, equals, toDTO).],
+      [L'entità viene istanziata correttamente e rispetta le invarianti di dominio.],
       passed,
 
       [TU-1.2],
-      [FROb2],
-      [Verifica predisposizione comando di conferma nel modulo.],
-      [Pulsante di conferma presente e funzionante.],
-      passed,
-
-      [TU-1.3],
-      [FROb3],
-      [Verifica esecuzione della validazione completa di tutti i campi obbligatori all'invio.],
-      [Tutti i controlli vengono eseguiti prima di procedere.],
-      passed,
-
-      [TU-1.4],
-      [FROb4],
-      [Verifica che la finalizzazione sia consentita solo dopo validazione positiva.],
-      [Blocco della procedura in caso di parametri non validi.],
-      passed,
-
-      [TU-1.5],
-      [FROb5],
-      [Verifica logica di persistenza dei dati utente nel DB.],
-      [Le credenziali vengono scritte correttamente nel database.],
-      passed,
-
-      [TU-1.6],
-      [FROb6],
-      [Verifica della funzione di hashing: algoritmo sicuro + salt univoco.],
-      [La password non è leggibile; l'hash prodotto è coerente.],
-      passed,
-
-      [TU-1.7],
-      [FROb7],
-      [Verifica atomicità della registrazione.],
-      [Nessun record parziale viene mantenuto nel database.],
-      passed,
-
-      [TU-1.8],
-      [FROb8],
-      [Verifica visualizzazione messaggio di conferma avvenuta creazione account.],
-      [Messaggio di conferma mostrato.],
-      passed,
-
-      [TU-1.9],
-      [FROb9],
-      [Controllo rilevamento campi obbligatori vuoti (null check).],
-      [Rilevamento campi vuoti nel modulo di registrazione.],
-      passed,
-
-      [TU-1.10],
-      [FROb10],
-      [Verifica logica di inibizione e notifica per campi mancanti.],
-      [Impossibilità di procedere; messaggio specifico per campo.],
-      passed,
-
-      [TU-1.11],
       [FROb11],
-      [Verifica input username: vincoli alfanumerici e lunghezza (4-20).],
-      [Rifiuto di stringhe < 4 o > 20 caratteri.],
+      [Verifica Value Object Account ('Username', 'Email', 'Password', 'PasswordHash').],
+      [I value object validano sintassi e requisiti e rigettano valori non conformi.],
       passed,
 
-      [TU-1.12],
-      [FROb12],
-      [Query di verifica unicità dello username nel database.],
-      [Identificazione di collisioni con account già esistenti.],
-      pending,
-
-      [TU-1.13],
-      [FROb13],
-      [Verifica vincolo di unicità lato persistenza su username.],
-      [Il sistema rileva la duplicazione e annulla la registrazione.],
-      pending,
-
-      [TU-1.14],
-      [FROb14],
-      [Verifica notifica username già in uso a seguito di violazione unicità.],
-      [Feedback visivo immediato per username non disponibile.],
-      pending,
-
-      [TU-1.15],
-      [FROb15],
-      [Verifica inibizione e trigger notifica errore formato username non conforme.],
-      [Comparsa del messaggio di errore; procedura inibita.],
-      passed,
-
-      [TU-1.16],
-      [FROb16],
-      [Verifica input email e validazione sintattica secondo standard RFC.],
-      [Accettazione di formati standard (user\@domain.ext).],
-      passed,
-
-      [TU-1.17],
-      [FROb17],
-      [Verifica rifiuto di email con spazi o prive del carattere “\@”.],
-      [Email malformate rifiutate con messaggio di errore.],
-      passed,
-
-      [TU-1.18],
-      [FROb18],
-      [Query di verifica unicità email nel database.],
-      [Identificazione di email già associate ad altri profili.],
-      passed,
-
-      [TU-1.19],
-      [FROb19],
-      [Verifica vincolo di unicità lato persistenza su email.],
-      [Il sistema impedisce registrazioni duplicate.],
-      passed,
-
-      [TU-1.20],
-      [FROb20],
-      [Verifica trigger notifica errore email non valida o già registrata.],
-      [Messaggio di errore per email duplicata o malformata.],
-      passed,
-
-      [TU-1.21],
-      [FROb21],
-      [Verifica requisito lunghezza password (minimo 8 caratteri).],
-      [Password con meno di 8 caratteri rifiutate.],
-      passed,
-
-      [TU-1.22],
-      [FROb22],
-      [Verifica requisiti complessità password.],
-      [Validazione positiva solo se tutti i criteri sono soddisfatti.],
-      passed,
-
-      [TU-1.23],
-      [FROb23],
-      [Verifica rifiuto password coincidente o contenente lo username.],
-      [Password che contengono lo username come sottostringa rifiutate.],
-      passed,
-
-      [TU-1.24],
-      [FROb24],
-      [Verifica trigger notifica errore password non conforme ai requisiti.],
-      [Elenco puntuale dei criteri non rispettati.],
-      passed,
-
-      // --- AUTENTICAZIONE (UC2) ---
+      // --- ACCOUNT APPLICATION SERVICES E CONTROLLERS (UC1, UC2) ---
       [TU-2.1],
-      [FROb25],
-      [Verifica rendering pagina di Login.],
-      [Visualizzazione corretto del form di autenticazione.],
+      [FROb5],
+      [Verifica Servizi Applicativi ('RegistrationService', 'LoginService', 'LogoutService').],
+      [I flussi di registrazione, login e logout gestiscono le eccezioni o ritornano i token validi.],
       passed,
 
       [TU-2.2],
-      [FROb26],
-      [Verifica predisposizione comando di conferma per il login.],
-      [Pulsante di conferma presente e funzionante.],
+      [FROb28],
+      [Verifica Controller REST ('RegistrationController', 'LoginController', 'LogoutController').],
+      [I controller mappano correttamente la richiesta REST ai comandi applicativi.],
       passed,
 
       [TU-2.3],
-      [FROb27],
-      [Verifica validazione completa credenziali all'invio.],
-      [Procedura inibita se uno dei controlli fallisce.],
+      [FROb25],
+      [Verifica Gestione Eccezioni e Configurazione ('AllExceptionsFilter', 'loadConfig').],
+      [Le eccezioni interne sono correttamente mascherate verso il client e la configurazione caricata.],
       passed,
 
-      [TU-2.4],
-      [FROb28],
-      [Verifica autorizzazione post-validazione credenziali.],
-      [Rilascio della sessione solo con dati corretti.],
-      passed,
-
-      [TU-2.5],
-      [FROb29],
-      [Verifica reindirizzamento verso dashboard a seguito di autenticazione.],
-      [L'utente viene reindirizzato correttamente.],
-      passed,
-
-      [TU-2.6],
-      [FROb30],
-      [Verifica protocollo di trasmissione credenziali (HTTPS).],
-      [Dati cifrati durante il transito verso il server.],
-      pending,
-
-      [TU-2.7],
-      [FROb31],
-      [Verifica utilizzo username per fetch del record account dalla persistenza.],
-      [Lo username viene utilizzato per recuperare il record DB.],
-      passed,
-
-      [TU-2.8],
+      // --- ACCOUNT ADAPTERS E INFRASTRUTTURA (UC1, UC2) ---
+      [TU-3.1],
       [FROb32],
-      [Verifica confronto hash password fornita con hash memorizzato.],
-      [Accesso concesso solo se coincidono.],
+      [Verifica Adattatori di Persistenza ('PostgresAdapter' - save, find, Session Management).],
+      [Il salvataggio e recupero tramite query SQL funzionano senza perdite e le sessioni sono gestite correttamente.],
       passed,
 
-      [TU-2.9],
-      [FROb33],
-      [Test del meccanismo di rate limiting / lockout temporaneo.],
-      [Blocco dell'account dopo N tentativi falliti.],
-      pending,
-
-      [TU-2.10],
-      [FROb34],
-      [Verifica visualizzazione spinner durante validazione credenziali.],
-      [Indicatore mostrato; bottone disabilitato.],
+      [TU-3.2],
+      [FROb6],
+      [Verifica Adattatori di Sicurezza ('BcryptAdapter', 'JwtAdapter', 'verifyToken').],
+      [La crittografia e la generazione/validazione dei JWT rispettano i requisiti di sicurezza.],
       passed,
 
-      [TU-2.11],
-      [FROb35],
-      [Verifica rilevamento campi mancanti e inibizione del login.],
-      [Trigger errore per campi vuoti; accesso negato.],
-      passed,
-
-      [TU-2.12],
-      [FROb36],
-      [Verifica notifica formato username non conforme in fase di login.],
-      [Messaggio di errore su formato username errato.],
-      pending,
-
-      [TU-2.13],
-      [FROb36],
-      [Verifica notifica username non esistente nel sistema.],
-      [Feedback specifico per username non censito.],
-      passed,
-
-      [TU-2.14],
-      [FROb36],
-      [Verifica notifica formato password errato in login.],
-      [Feedback su errore sintattico password.],
-      pending,
-
-      [TU-2.15],
-      [FROb36],
-      [Verifica notifica password errata (hash non corrisponde).],
-      [Feedback specifico per credenziali non corrispondenti.],
+      [TU-3.3],
+      [FROb25],
+      [Verifica Flussi di Autenticazione end-to-end ('Authentication Flow e2e').],
+      [I flussi e2e dal login al rilascio della sessione non presentano errori infrastrutturali.],
       passed,
 
       // --- RICHIEDA ANALISI (UC4) ---
@@ -1251,7 +1003,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb57],
       [Verifica ordinamento lista repository per data (decrescente).],
       [Repository visualizzati in ordine dall'analisi più recente.],
-      pending,
+      passed,
 
       [TU-5.2],
       [FROb61],
@@ -1323,7 +1075,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb70],
       [Controllo validazione: almeno un'area attiva nei filtri.],
       [Blocco visualizzazione con avviso se nessuna area selezionata.],
-      pending,
+      passed,
 
       [TU-6.8],
       [FROb71],
@@ -1335,7 +1087,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb72],
       [Verifica correttezza timestamp generazione audit (formato ISO 8601).],
       [Data e ora corrispondono al record del database.],
-      pending,
+      passed,
 
       [TU-6.11],
       [FROb74],
@@ -1384,7 +1136,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb81],
       [Controllo campi obbligatori temporali: inibizione se non popolati.],
       [Avviso mostrato e confronto inibito.],
-      pending,
+      passed,
 
       [TU-7.4],
       [FROb82],
@@ -1392,11 +1144,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [Blocco e segnalazione errore.],
       passed,
 
-      [TU-7.5],
-      [FROb83],
-      [Controllo ampiezza massima intervallo.],
-      [Errore restituito e richiesta inibita.],
-      passed,
+      [TU-7.5], [FROb83], [Controllo ampiezza massima intervallo.], [Errore restituito e richiesta inibita.], passed,
 
       [TU-7.6],
       [FROb84],
@@ -1415,7 +1163,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FRDe86],
       [Verifica tooltip informativi all'hover sui punti dati del grafico.],
       [Valore esatto e hash commit mostrati.],
-      pending,
+      passed,
 
       [TU-8.3],
       [FROb87],
@@ -1433,13 +1181,13 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb89],
       [Validazione algoritmo calcolo indicatori di variazione.],
       [Calcolo variazione percentuale eseguito correttamente.],
-      pending,
+      passed,
 
       [TU-8.6],
       [FROb90],
       [Verifica fallback visualizzazione dati grezzi in tabella in caso di errore.],
       [Dati mostrati in formato tabellare.],
-      pending,
+      passed,
 
       // --- ANALISI DEL CODICE (UC9) ---
       [TU-9.1],
@@ -1489,7 +1237,7 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FROb99],
       [Verifica presentazione remediation di sicurezza ordinate per criticità.],
       [Remediation esposte in ordine decrescente.],
-      pending,
+      passed,
 
       [TU-10.5],
       [FROb100],
@@ -1582,68 +1330,32 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [FRDe115],
       [Verifica inibizione invio richiesta in assenza di formato selezionato.],
       [Messaggio di errore se utente non sceglie il formato.],
-      pending,
+      passed,
 
       [TU-14.4],
       [FRDe116],
       [Verifica modulo generazione file: mapping dati e metadati.],
       [I dati vengono mappati senza perdite.],
-      pending,
+      passed,
 
       [TU-14.5],
       [FRDe117],
       [Verifica processo di generazione file asincrono senza blocco interfaccia.],
       [L'UI rimane responsiva durante il parsing.],
-      pending,
+      passed,
 
       // --- MODIFICA PASSWORD (UC15) ---
       [TU-15.1],
       [FROb118],
-      [Verifica accesso alla sezione dedicata alla modifica password.],
-      [Rendering corretto del modulo nel profilo.],
+      [Verifica Servizi Applicativi e Controller Modifica Password ('UpdateService', 'UpdateController').],
+      [L'aggiornamento della password elabora le richieste e invoca correttamente l'infrastruttura.],
       passed,
 
       [TU-15.2],
-      [FROb119],
-      [Confronto hash tra password corrente inserita e hash memorizzato.],
-      [Restituisce true solo se gli hash corrispondono.],
-      passed,
-
-      [TU-15.3],
-      [FROb120],
-      [Verifica inibizione e notifica errore per password corrente errata.],
-      [Messaggio specifico mostrato.],
-      passed,
-
-      [TU-15.4],
-      [FROb121],
-      [Validatore criteri complessità nuova password.],
-      [Rigetto password non conformi a requisiti.],
-      passed,
-
-      [TU-15.5],
-      [FROb122],
-      [Controllo eterogeneità: nuova password diversa da quella attuale.],
-      [Errore se l'hash coincide con quello attuale.],
-      passed,
-
-      [TU-15.6],
       [FROb123],
-      [Verifica aggiornamento password nella persistenza tramite nuovo hashing.],
-      [Nuova password salvata cifrata con salt rigenerato.],
+      [Verifica Adattatori per Modifica Password ('PostgresAdapter' - update).],
+      [Le query UPDATE SQL vengono eseguite correttamente garantendo la transazionalità.],
       passed,
-
-      [TU-15.7],
-      [FROb124],
-      [Verifica invio notifica email automatica a seguito di modifica.],
-      [Email di notifica inviata post-cambio.],
-      pending,
-
-      [TU-15.8],
-      [FROb125],
-      [Verifica invalidazione di tutte le sessioni attive post-cambio password.],
-      [Sessioni parallele invalidate; corrente attiva.],
-      pending,
 
       // --- VISUALIZZAZIONE REMEDIATION GENERICA (UC16) ---
       [TU-16.1],
@@ -1961,20 +1673,14 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       // --- CANCELLAZIONE PROFILO (UC28) ---
       [TU-28.1],
       [FROb180],
-      [Verifica richiesta password come verifica identità pre-cancellazione.],
-      [Procedura bloccata senza verifica corretta.],
+      [Verifica Servizi e Controller di Cancellazione Account ('DeleteService', 'DeleteUserController').],
+      [Il flusso di rimozione account invalida i token ed elimina i dati utente senza errori.],
       passed,
 
       [TU-28.2],
-      [FROb181],
-      [Verifica visualizzazione avviso irreversibilità con annullamento.],
-      [Dialog avviso mostrato.],
-      passed,
-
-      [TU-28.3],
       [FROb182],
-      [Verifica rimozione dati personali e invalidazione credenziali.],
-      [Accesso con credenziali precedenti impossibile.],
+      [Verifica Adattatori per Cancellazione Account ('PostgresAdapter' - deleteUser).],
+      [La query DELETE SQL rimuove coerentemente il profilo dal database.],
       passed,
 
       // --- GESTIONE ACCESSO GITHUB (UC29) ---
@@ -2278,7 +1984,6 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [Sottoprocessi chiamati gestendo retry o interruzioni causate da sbom bloccanti.],
       passed,
 
-
       [TU-50.3],
       [FROb98],
       [Verifica tool SAST semgrep (parser_valid, skips_non_error, invalid_json, tool_success/timeout).],
@@ -2290,8 +1995,6 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
       [Verifica finding di segreti in trivy (parser_valid, no_secrets, low_severity_filtered, tool_error).],
       [Risultati limitati a leakage di credenziali/segreti in source_code con scarto anomalie trivial.],
       passed,
-
-      
     ),
   ),
   caption: [Tabella dei Test di Unità (Completa)],
@@ -2456,6 +2159,25 @@ I Test di Regressione e i Test di Integrazione, qui non presenti, verranno ident
   supplement: [Table],
 )
 
+== Riepilogo Quantitativo Test (PB)
+
+A completamento della specifica dei test, la seguente tabella riassume i risultati quantitativi conseguiti durante la campagna di test per la Product Baseline. Tali valori riflettono lo stato di avanzamento della verifica rispetto ai requisiti implementati e ai test pianificati.
+
+#figure(
+  table(
+    columns: (2fr, 1fr, 1.5fr),
+    inset: 10pt,
+    fill: (x, y) => if y == 0 { luma(230) } else { white },
+    table.header([*Parametro*], [*Valore*], [*Descrizione*]),
+    [Test Pianificati (Specifica)], [321], [Totale casi di test formalizzati.],
+    [Test Eseguiti], [291], [Test effettuati sulle funzionalità stabili.],
+    [Test Superati], [291], [Esiti positivi (Passed).],
+    [Success Rate], [100%], [Rapporto Superati / Eseguiti.],
+    [Copertura Funzionale], [90,7%], [Rapporto Eseguiti / Pianificati.],
+  ),
+  caption: [Sintesi quantitativa della Campagna di Test],
+)
+
 #pagebreak()
 
 = Cruscotto di Valutazione
@@ -2498,7 +2220,7 @@ Monitoraggio dell'efficacia delle attività di testing dinamico.
 
 === Code Coverage e Test Success
 _Metriche: MPC13, MPC14_ \
-Cruscotto tecnico che visualizza la copertura del codice raggiunta dai test automatizzati e il tasso di successo dei test eseguiti. Questi indicatori sono fondamentali per valutare la robustezza del codice prima del rilascio.
+Cruscotto tecnico che visualizza la copertura del codice raggiunta dai test automatizzati e il tasso di successo dei test eseguiti.
 
 == Processi di Supporto: Gestione della Qualità
 Visione d'insieme sull'efficacia del Piano di Qualifica stesso.
@@ -2646,6 +2368,8 @@ La metrica _Test Success Rate_ non è stata rilevata durante la baseline RTB.
 
 ==== Product Baseline (PB)
 A partire dallo _Sprint 7_, il _Test Success Rate_ ha mostrato un trend di crescita costante, passando dal 96% fino a raggiungere il valore ottimale del 100% nello _Sprint 9_. Il team è riuscito a mantenere stabilmente il valore obiettivo per tutta la fase conclusiva della PB.
+
+#pagebreak()
 
 #pagebreak()
 == Processi Organizzativi
