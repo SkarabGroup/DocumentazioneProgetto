@@ -81,8 +81,8 @@
     === Punto 5: #punto5
     #puntoOdg(
       punto5,
-      "Controllo degli esiti dell'Azione Correttiva AM03 implementata negli sprint precedenti.\n- *Riscontro (Check)*: Il tracciamento dei difetti documentali riportati dai Verificatori nel Piano di Qualifica (PdQ) ha confermato che l'utilizzo rigoroso dei nuovi template ingegnerizzati in Typst ha annullato l'incidenza delle disomogeneità testuali e grafiche tra i vari autori.",
-      decisione: "- *Decisione (Act)*: L'iniziativa viene dichiarata un successo assoluto. Il ciclo PDCA relativo all'uniformità documentale si conclude positivamente; i template restano lo standard vincolante, non passibile di ulteriori modifiche strutturali fino a fine progetto."
+      "Controllo degli esiti dell'Azione Correttiva AM03 implementata negli sprint precedenti.\n- Riscontro (Check): Il tracciamento dei difetti documentali riportati dai Verificatori nel Piano di Qualifica (PdQ) ha confermato che l'utilizzo rigoroso dei nuovi template ingegnerizzati in Typst ha annullato l'incidenza delle disomogeneità testuali e grafiche tra i vari autori.",
+      decisione: "(Act) L'iniziativa viene dichiarata un successo assoluto. Il ciclo PDCA relativo all'uniformità documentale si conclude positivamente; i template restano lo standard vincolante, non passibile di ulteriori modifiche strutturali fino a fine progetto."
     )
 #pagebreak()
     = Azioni e responsabilità

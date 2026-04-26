@@ -71,8 +71,8 @@
     === Punto 4: #punto4
     #puntoOdg(
       punto4,
-      "Durante l'analisi per il completamento della Product Baseline, si è svolta l'attività di controllo PDCA sulla pianificazione temporale.\n- *Obiettivo (Plan)*: Rispettare in modo rigoroso le milestone di progetto assicurando il rilascio del core applicativo.\n- *Riscontro (Check)*: I report estratti dal Piano di Progetto (PdP) mostrano una potenziale criticità sulle scadenze (Schedule Variance tendente in negativo) dovuta alla sottostima iniziale dell'impegno necessario per alcuni microservizi complessi.",
-      decisione: "- *Decisione (Act)*: Approvazione dell'Azione Correttiva AM02. Viene disposta una rimodulazione strategica del budget orario, riallocando tempestivamente le risorse sulle attività critiche di sviluppo (Backend e Agenti) e mettendo in secondo piano task a minor priorità, per garantire la consegna della PB nei tempi stabiliti."
+      "Durante l'analisi per il completamento della Product Baseline, si è svolta l'attività di controllo PDCA sulla pianificazione temporale.\n- Obiettivo (Plan): Rispettare in modo rigoroso le milestone di progetto assicurando il rilascio del core applicativo.\n- Riscontro (Check): I report estratti dal Piano di Progetto (PdP) mostrano una potenziale criticità sulle scadenze (Schedule Variance tendente in negativo) dovuta alla sottostima iniziale dell'impegno necessario per alcuni microservizi complessi.",
+      decisione: "(Act) Approvazione dell'Azione Correttiva AM02. Viene disposta una rimodulazione strategica del budget orario, riallocando tempestivamente le risorse sulle attività critiche di sviluppo (Backend e Agenti) e mettendo in secondo piano task a minor priorità, per garantire la consegna della PB nei tempi stabiliti."
     )
 #pagebreak()
     = Azioni e responsabilità

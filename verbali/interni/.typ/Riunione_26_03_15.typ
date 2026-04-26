@@ -61,8 +61,8 @@
     === Punto 3: #punto3
     #puntoOdg(
       punto3,
-      "In ottica PDCA, il team ha analizzato l'impatto degli strumenti a supporto della documentazione e del management (Jira, GitHub, Typst).\n- *Obiettivo (Plan)*: Aumentare l'efficienza della pianificazione e della redazione.\n- *Riscontro (Check)*: Dai valori di Schedule Performance Index (SPI) del Piano di Progetto (PdP) è emersa una lieve deflessione. La curva di apprendimento per i nuovi strumenti ha richiesto più tempo del previsto, creando un overhead non preventivato.",
-      decisione: "- *Decisione (Act)*: Viene istituita l'Azione Correttiva AM04. Il team consolida la toolchain standardizzandone l'utilizzo in NdP. L'uso metodico degli strumenti diventa vincolante e quotidiano, per ammortizzare l'overhead iniziale e trasformarlo in un vantaggio strutturale a lungo termine."
+      "In ottica PDCA, il team ha analizzato l'impatto degli strumenti a supporto della documentazione e del management (Jira, GitHub, Typst).\n- Obiettivo (Plan): Aumentare l'efficienza della pianificazione e della redazione.\n- Riscontro (Check): Dai valori di Schedule Performance Index (SPI) del Piano di Progetto (PdP) è emersa una lieve deflessione. La curva di apprendimento per i nuovi strumenti ha richiesto più tempo del previsto, creando un overhead non preventivato.",
+      decisione: "(Act) Viene istituita l'Azione Correttiva AM04. Il team consolida la toolchain standardizzandone l'utilizzo in NdP. L'uso metodico degli strumenti diventa vincolante e quotidiano, per ammortizzare l'overhead iniziale e trasformarlo in un vantaggio strutturale a lungo termine."
     )
     #pagebreak()
     = Azioni e responsabilità

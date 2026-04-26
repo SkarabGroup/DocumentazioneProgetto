@@ -62,8 +62,8 @@
     === Punto 3: #punto3
     #puntoOdg(
       punto3,
-      "Nell'ambito del miglioramento continuo (PDCA), è stata condotta una retrospettiva sulla qualità documentale.\n- *Obiettivo (Plan)*: Garantire redazioni parallele coerenti per la stesura della PB.\n- *Riscontro (Check)*: I controlli di qualità effettuati dai Verificatori e tracciati nel Piano di Qualifica (PdQ) evidenziano una disomogeneità testuale. La stesura parallela ha prodotto incoerenze stilistiche e formattazioni ridondanti.",
-      decisione: "- *Decisione (Act)*: Istituzione dell'Azione Correttiva AM03. Il team ha deciso di ingegnerizzare ulteriormente le funzioni in Typst e adottare template fortemente vincolanti per annullare l'incidenza dello stile personale e standardizzare ogni documento prodotto."
+      "Nell'ambito del miglioramento continuo (PDCA), è stata condotta una retrospettiva sulla qualità documentale.\n- Obiettivo (Plan): Garantire redazioni parallele coerenti per la stesura della PB.\n- Riscontro (Check): I controlli di qualità effettuati dai Verificatori e tracciati nel Piano di Qualifica (PdQ) evidenziano una disomogeneità testuale. La stesura parallela ha prodotto incoerenze stilistiche e formattazioni ridondanti.",
+      decisione: "(Act) Istituzione dell'Azione Correttiva AM03. Il team ha deciso di ingegnerizzare ulteriormente le funzioni in Typst e adottare template fortemente vincolanti per annullare l'incidenza dello stile personale e standardizzare ogni documento prodotto."
     )
 #pagebreak()
     = Azioni e responsabilità

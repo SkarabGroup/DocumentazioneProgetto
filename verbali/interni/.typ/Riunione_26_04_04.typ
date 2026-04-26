@@ -72,8 +72,8 @@
     === Punto 4: #punto4
     #puntoOdg(
       punto4,
-      "A distanza di alcuni sprint dalla loro implementazione, il team ha verificato l'impatto delle Azioni Correttive AM01 (Micro-allineamenti) e AM04 (Toolchain).\n- *Riscontro (Check)*: Dai dati del PdP si evince che le metriche di produttività (Schedule Performance Index) sono tornate in positivo (SPI ≥ 1). L'assenza di blocchi prolungati conferma l'efficacia degli allineamenti rapidi, mentre la costanza nell'uso degli strumenti ha azzerato l'overhead iniziale.",
-      decisione: "- *Decisione (Act)*: Le pratiche introdotte vengono consolidate definitivamente come standard metodologico di Skarab Group. Non sono richieste ulteriori iterazioni di aggiustamento per questi due ambiti."
+      "A distanza di alcuni sprint dalla loro implementazione, il team ha verificato l'impatto delle Azioni Correttive AM01 (Micro-allineamenti) e AM04 (Toolchain).\n- Riscontro (Check): Dai dati del PdP si evince che le metriche di produttività (Schedule Performance Index) sono tornate in positivo (SPI ≥ 1). L'assenza di blocchi prolungati conferma l'efficacia degli allineamenti rapidi, mentre la costanza nell'uso degli strumenti ha azzerato l'overhead iniziale.",
+      decisione: "(Act) Le pratiche introdotte vengono consolidate definitivamente come standard metodologico di Skarab Group. Non sono richieste ulteriori iterazioni di aggiustamento per questi due ambiti."
     )
 #pagebreak()
     = Azioni e responsabilità
