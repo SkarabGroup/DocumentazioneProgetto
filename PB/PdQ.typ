@@ -18,7 +18,7 @@
 #set page(numbering: "1", header: header("Piano di Qualifica"), footer: footer())
 #let history = (
   (
-    "2026/04/26",
+    "2026/04/27",
     "2.0.0",
     "Revisione per PB",
     "",
@@ -188,7 +188,7 @@ Per la milestone RTB (*25/02/2026*), le attività di qualità si concentrano sul
 - *Qualità del Prototipo (#link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#proof-of-concept")[#def[PoC]])*: L'attività di verifica è focalizzata esclusivamente sulla *dimostrazione della fattibilità tecnica* (Technology Baseline), con particolare attenzione all'interazione Agenti-LLM. Il testing in questa fase ha valore _sperimentale e propedeutico_: esso funge da caso di studio per calibrare le metriche e validare le strategie di verifica che saranno poi applicate in modo sistematico ed estensivo sul #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#minimum-viable-product")[#def[MVP]].
 
 === Revisione di Accettazione (Product Baseline – PB)
-Per il rilascio finale (*26/04/2026*), il focus si sposta sulla robustezza, sulla copertura e sulla soddisfazione dei requisiti:
+Per il rilascio finale (*27/04/2026*), il focus si sposta sulla robustezza, sulla copertura e sulla soddisfazione dei requisiti:
 - *Qualità del Prodotto (MVP)*: Esecuzione completa dei Test di Unità (UT), Test di Integrazione (IT) e Test di Sistema (ST). Validazione finale rispetto ai requisiti funzionali e prestazionali del capitolato.
 - *Qualità del Codice*: Rispetto dei vincoli di stile, assenza di #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-smell")[*#def[code smells]*] e raggiungimento delle soglie di copertura del codice #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html#code-coverage")[#def[Code Coverage]] definite nel presente piano.
 - *Validazione Utente*: Verifica dell'usabilità tramite Test di Accettazione (TA) basati sui casi d'uso principali.
@@ -207,7 +207,7 @@ La versione più recente del Glossario è disponibile al seguente link:
 I seguenti documenti hanno valore vincolante per la definizione delle strategie di qualità e per le attività di verifica:
 - *Capitolato C2*: Piattaforma ad agenti per l’audit e la remediation dei repository software. <capitolato> #linebreak()
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Progetto/C2.pdf")] \
-  (ultimo accesso: *26/04/2026*)
+  (ultimo accesso: *27/04/2026*)
 
 - *Norme di Progetto*: Il documento definisce il "Way of Working", stabilendo gli strumenti e le procedure che questo Piano si occupa di misurare. <NdP> #linebreak()
   #underline[#link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/NdP.pdf")] \
@@ -216,15 +216,15 @@ I seguenti documenti hanno valore vincolante per la definizione delle strategie 
 === Riferimenti Informativi
 - *ISO/IEC 25010:2011*: Systems and software engineering – Systems and software Quality Requirements and Evaluation (SQuaRE). <25010> #linebreak()
   #underline[#link("https://iso25000.com/index.php/en/iso-25000-standards/iso-25010")] \
-  (ultimo accesso: *26/04/2026*)
+  (ultimo accesso: *27/04/2026*)
 
 - *ISO/IEC 12207:2008*: Systems and software engineering – Software life cycle processes. <12207> #linebreak()
   #underline[#link("https://ieeexplore.ieee.org/document/4475826")] \
-  (ultimo accesso: *26/04/2026*)
+  (ultimo accesso: *27/04/2026*)
 
 - *Dispense del corso di Ingegneria del Software – Qualità del software* <dispense_qualità> #linebreak()
   #underline[#link("https://www.math.unipd.it/~tullio/IS-1/2025/Dispense/T07.pdf")] \
-  (ultimo accesso: *26/04/2026*)
+  (ultimo accesso: *27/04/2026*)
 
 #pagebreak()
 = Qualità di Processo
