@@ -2874,7 +2874,7 @@ A completamento della specifica dei test, la seguente tabella riassume i risulta
     [Test Eseguiti], [368], [Test effettuati sulle funzionalità stabili.],
     [Test Superati], [368], [Esiti positivi (Passed).],
     [Success Rate], [100%], [Rapporto Superati / Eseguiti.],
-    [Copertura Funzionale], [83,4%], [Rapporto Eseguiti / Pianificati.],
+    [Copertura Requisiti], [83,4%], [Rapporto Eseguiti / Pianificati.],
   ),
   caption: [Sintesi quantitativa della Campagna di Test],
 )
@@ -3102,7 +3102,7 @@ La PB è iniziata con una criticità nello _Sprint 5_, dove lo _Sprint Goal Achi
 La metrica _Copertura dei Requisiti Obbligatori_ non è stata rilevata durante la baseline RTB.
 
 ==== Product Baseline (PB)
-Il mancato raggiungimento del 100% a partire dallo _Sprint 7_ è ascrivibile alla scelta strategica di declassare alcuni requisiti inizialmente obbligatori a opzionali, concentrando le risorse sugli obiettivi core del prodotto.
+La copertura dei requisiti obbligatori ha raggiunto il valore ottimale del 100%. Alcuni requisiti che inizialmente erano stati classificati come obbligatori sono stati declassati a opzionali e non sono stati effettivamente implementati, ma tutti i requisiti rimasti obbligatori sono stati pienamente soddisfatti.
 
 #pagebreak()
 === Failure Density - Availability (MPD02 e MPD03)
