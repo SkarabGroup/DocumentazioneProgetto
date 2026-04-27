@@ -54,7 +54,7 @@ con la presente, il gruppo *Skarab Group* comunica formalmente la propria intenz
   repository software*
 ]
 \
-Tale candidatura viene presentata a seguito del conseguimento del "semaforo verde", ottenuto dopo il colloquio di valutazione con il docente Cardin, avvenuto in data *??/04/2026*, che ha confermato l'idoneità del gruppo a procedere con la seconda parte della revisione.
+Tale candidatura viene presentata a seguito del conseguimento del "semaforo verde", ottenuto dopo il colloquio di valutazione con il docente Cardin, avvenuto in data *27/04/2026*, che ha confermato l'idoneità del gruppo a procedere con la seconda parte della revisione.
 \
 
 Si comunica, inoltre, che il gruppo ha sviluppato un *Minimum Viable Product (MVP)* che implementa un insieme completo di funzionalità essenziali, volto a dimostrare il valore della soluzione proposta e a supportarne la valutazione operativa, reperibile al seguente indirizzo: #link("https://github.com/SkarabGroup/MinimumViableProduct")[#underline[Repository MVP]].
@@ -64,7 +64,7 @@ L'intera documentazione di progetto è consultabile visitando il sito ufficiale 
 I documenti consultabili presenti sono i seguenti: 
 === Lettere di Presentazione
 - Il presente documento
-- #link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/candidatura_RTB_cardin.pdf")[#underline[Lettera di Candidatura alla PB (Docente Cardin)]]
+- #link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/candidatura_PB_cardin.pdf")[#underline[Lettera di Presentazione alla PB (Docente Cardin)]]
 
 === Documenti Interni
 - #link("https://skarabgroup.github.io/DocumentazioneProgetto/PB/glossario.pdf")[#underline[Glossario (v2.0.0)]], visionabile anche sul sito #link("https://skarabgroup.github.io/DocumentazioneProgetto/Glossario/glossario.html")[#underline[al seguente link]]
@@ -86,7 +86,7 @@ I documenti consultabili presenti sono i seguenti:
 === Verbali Riunioni Interne
 - #link("https://skarabgroup.github.io/DocumentazioneProgetto/verbali/interni/Riunione_26_04_18.pdf")[#underline[Verbale Riunione Interna | 2026 - 04 - 18]]
 - #link("https://skarabgroup.github.io/DocumentazioneProgetto/verbali/interni/Riunione_26_04_12.pdf")[#underline[Verbale Riunione Interna | 2026 - 04 - 12]]
-- #link("https://skarabgroup.github.io/DocumentazioneProgetto/verbali/interni/Riunione_26_04_14.pdf")[#underline[Verbale Riunione Interna | 2026 - 04 - 04]]
+- #link("https://skarabgroup.github.io/DocumentazioneProgetto/verbali/interni/Riunione_26_04_04.pdf")[#underline[Verbale Riunione Interna | 2026 - 04 - 04]]
 - #link("https://skarabgroup.github.io/DocumentazioneProgetto/verbali/interni/Riunione_26_03_28.pdf")[#underline[Verbale Riunione Interna | 2026 - 03 - 28]]
 - #link("https://skarabgroup.github.io/DocumentazioneProgetto/verbali/interni/Riunione_26_03_21.pdf")[#underline[Verbale Riunione Interna | 2026 - 03 - 21]]
 - #link("https://skarabgroup.github.io/DocumentazioneProgetto/verbali/interni/Riunione_26_03_15.pdf")[#underline[Verbale Riunione Interna | 2026 - 03 - 15]]
