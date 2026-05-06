@@ -1,0 +1,26 @@
+@startuml DeletePatService
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class DeletePatUseCase <<Interface>> {
+    + execute(command: DeletePatCommand): Promise<DeletePatResult>
+}
+
+class IGitCredentialDeletePort <<Interface>>
+
+class DeletePatService {
+    - passwordProviderService: IPasswordProvider
+    - credentialPort: IGitCredentialDeletePort
+    ---
+    + DeletePatService(passwordProvider, deletePort)
+    + execute(command: DeletePatCommand): Promise<DeletePatResult>
+}
+
+DeletePatService ..up-|> DeletePatUseCase
+DeletePatService --right-> IPasswordProvider
+DeletePatService --left-> IGitCredentialDeletePort
+@enduml

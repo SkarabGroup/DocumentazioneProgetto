@@ -25,7 +25,7 @@
   v(1.5em)
 }
 
-#let glossario(file-dati: "../RTB/glossario.yml") = {
+#let glossario(file-dati: "../PB/glossario.yml") = {
   let raw-data = yaml(file-dati)
 
   show heading.where(level: 2): it => {

@@ -1,0 +1,24 @@
+@startuml GitHubCollectionDeleter
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class DeleteRepositoryCollectionUseCase <<Interface>> {
+    + execute(command: DeleteRepositoryCollectionCommand): Promise<DeleteRepositoryCollectionResult>
+}
+
+class IDeleteRepositoryCollectionPort <<Interface>>
+
+class GitHubCollectionDeleter {
+    - port: IDeleteRepositoryCollectionPort
+    ---
+    + GitHubCollectionDeleter(port)
+    + execute(command: DeleteRepositoryCollectionCommand): Promise<DeleteRepositoryCollectionResult>
+}
+
+GitHubCollectionDeleter ..up-|> DeleteRepositoryCollectionUseCase
+GitHubCollectionDeleter --right-> IDeleteRepositoryCollectionPort
+@enduml

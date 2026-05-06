@@ -60,7 +60,7 @@ L'intera documentazione di progetto è consultabile visitando il sito ufficiale 
 
 Il documento di *Analisi dei Requisiti* aggiornato e completo è disponibile per la consultazione al seguente link: #link("https://skarabgroup.github.io/DocumentazioneProgetto/RTB/AdR.pdf")[#underline[Analisi dei Requisiti v1.0.0]].
 
-Confermiamo, in conclusione, la nostra ferma intenzione di completare e consegnare il progetto entro la data del *15/04/2026*, posticipando la scadenza precedentemente fissata al *21/03/2026* a causa di ritardi di natura organizzativa e gestionale emersi durante lo sviluppo.
+Confermiamo, in conclusione, la nostra ferma intenzione di completare e consegnare il progetto entro la data del *15/04/2026*, posticipando la scadenza precedentemente fissata al *21/03/2026* a causa di ritardi di natura organizzativa e gestionale emersi durante lo sviluppo. Precisiamo inoltre che, nonostante il ricalcolo delle tempistiche, il budget richiesto rimane invariato a *12.670 €*
 
 #v(1cm)
 

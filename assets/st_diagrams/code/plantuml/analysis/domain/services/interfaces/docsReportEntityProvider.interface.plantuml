@@ -1,0 +1,14 @@
+@startuml IDocsReportEntityProvider
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class IDocsReportEntityProvider <<Interface>> {
+    + fromDocsAgentResponse(response: DocsAgentResponse, reportId: ReportId, analysisId: AnalysisId): DocumentationReport
+}
+
+IDocsReportEntityProvider --down-> DocumentationReport
+@enduml

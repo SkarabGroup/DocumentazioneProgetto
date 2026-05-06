@@ -117,9 +117,9 @@ def generate_html(yaml_file, output_file, version="v0.8.0"):
 
 if __name__ == "__main__":
     # Configura qui i path
-    YAML_FILE = "RTB/glossario.yml"
+    YAML_FILE = "PB/glossario.yml"
     OUTPUT_FILE = "glossario.html"
-    VERSION = "v0.8.0"
+    VERSION = "v1.1.0"
     
     # Verifica che il file YAML esista
     if not Path(YAML_FILE).exists():

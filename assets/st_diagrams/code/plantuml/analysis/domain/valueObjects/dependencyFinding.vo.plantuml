@@ -1,0 +1,31 @@
+@startuml DependencyFinding
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class DependencyFinding {
+    - _path: PathFinding
+    - _packageName: string
+    - _packageVersion: string
+    - _vulnerabilityId: string
+    - _severity: SeverityFinding
+    - _description: DescriptionFinding
+    ---
+    - DependencyFinding(path, name, version, vulnId, severity, desc)
+    - validate(vulnerabilityId): void
+    + {static} create(path, name, version, vulnId, severity, desc): DependencyFinding
+    + getPath(): PathFinding
+    + getPackageName(): string
+    + getPackageVersion(): string
+    + getVulnerabilityId(): string
+    + getSeverity(): SeverityFinding
+    + getDescription(): DescriptionFinding
+}
+
+DependencyFinding --down-> PathFinding
+DependencyFinding --down-> SeverityFinding
+DependencyFinding --down-> DescriptionFinding
+@enduml

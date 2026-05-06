@@ -1,0 +1,30 @@
+@startuml SaveGitHubAnalysisRequest
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class SaveGitHubAnalysisRequest {
+    + analysisId: AnalysisId
+    + userId: UserId
+    + repoURL: RepoURL
+    + branch: BranchName
+    + commit: CommitHash
+    + status: AnalysisStatus
+    + codeReportId: ReportId | null
+    + docsReportId: ReportId | null
+    + securityReportId: ReportId | null
+    ---
+    + SaveGitHubAnalysisRequest(analysisId, userId, repoURL, branch, commit, status, codeReportId, docsReportId, securityReportId)
+}
+
+SaveGitHubAnalysisRequest --down-> AnalysisId
+SaveGitHubAnalysisRequest --down-> UserId
+SaveGitHubAnalysisRequest --down-> RepoURL
+SaveGitHubAnalysisRequest --down-> BranchName
+SaveGitHubAnalysisRequest --down-> CommitHash
+SaveGitHubAnalysisRequest --down-> AnalysisStatus
+SaveGitHubAnalysisRequest --down-> ReportId
+@enduml

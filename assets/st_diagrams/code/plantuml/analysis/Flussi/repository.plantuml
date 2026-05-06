@@ -1,0 +1,110 @@
+@startuml RepositoryControllerReachableClasses
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 0
+skinparam ranksep 0
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class RepositoriesController
+
+class AddRepositoryCollectionRequestDTO
+class AddRepositoryCollectionResponseDTO
+class GetAllRepositoryCollectionsResponseDTO
+class RepositoryCollectionItemDTO
+class GetRepositoryCollectionResponseDTO
+class GetFullRepositoryCollectionDetailsResponseDTO
+class GetAllAnalysesForUserRequestDTO
+class GetAllAnalysesForUserResponseDTO
+class GetAnalysisByIdRequestDTO
+class GetAnalysisResponseDTO
+
+
+class AddRepositoryCollectionUseCase <<Interface>>
+class DeleteRepositoryCollectionUseCase <<Interface>>
+class GetRepositoryCollectionUseCase <<Interface>>
+class GetAllRepositoryCollectionsUseCase <<Interface>>
+class GetAnalysisUseCase <<Interface>>
+class GetAllAnalysesForUserUseCase <<Interface>>
+
+class AddRepositoryCollectionService
+class GitHubCollectionDeleter
+class GitHubCollectionGetter
+class GetAnalysisService
+
+class ICollectionExistenceChecker <<Interface>>
+class ICollectionAdderPort <<Interface>>
+class IDeleteRepositoryCollectionPort <<Interface>>
+class IGetRepositoryCollectionPort <<Interface>>
+class IGetAllRepositoryCollectionsPort <<Interface>>
+class IGetAnalysisFromIdPort <<Interface>>
+class IGetAllAnalysesForUserPort <<Interface>>
+
+class ICollectionDuplicateCheckerPort <<Interface>>
+
+class GetAllAnalysesForUserResponseDTO
+
+
+class MongoDBAdapter
+class GitHubCollectionChecker
+
+' Controller dependencies
+RepositoriesController --down-> AddRepositoryCollectionUseCase
+RepositoriesController --down-> GetRepositoryCollectionUseCase
+RepositoriesController --down-> GetAllRepositoryCollectionsUseCase
+RepositoriesController --down-> DeleteRepositoryCollectionUseCase
+RepositoriesController --down-> GetAnalysisUseCase
+RepositoriesController --down-> GetAllAnalysesForUserUseCase
+
+RepositoriesController ..up.> AddRepositoryCollectionRequestDTO
+AddRepositoryCollectionRequestDTO --[hidden]--> AddRepositoryCollectionResponseDTO
+RepositoriesController ..up.> AddRepositoryCollectionResponseDTO
+RepositoriesController ..up.> GetAllRepositoryCollectionsResponseDTO
+GetAllRepositoryCollectionsResponseDTO --[hidden]--> RepositoryCollectionItemDTO
+RepositoriesController ..up.> RepositoryCollectionItemDTO
+RepositoriesController ..up.> GetRepositoryCollectionResponseDTO
+GetRepositoryCollectionResponseDTO --[hidden]--> GetFullRepositoryCollectionDetailsResponseDTO
+RepositoriesController ..up.> GetFullRepositoryCollectionDetailsResponseDTO
+RepositoriesController ..up.> GetAllAnalysesForUserRequestDTO
+GetAllAnalysesForUserRequestDTO --[hidden]--> GetAllAnalysesForUserResponseDTO
+RepositoriesController ..up.> GetAllAnalysesForUserResponseDTO
+RepositoriesController ..up.> GetAnalysisByIdRequestDTO
+GetAnalysisByIdRequestDTO --[hidden]--> GetAnalysisResponseDTO
+RepositoriesController ..up.> GetAnalysisResponseDTO
+
+' Use case implementations
+AddRepositoryCollectionService ..up.|> AddRepositoryCollectionUseCase
+GitHubCollectionDeleter ..up.|> DeleteRepositoryCollectionUseCase
+GitHubCollectionGetter ..up.|> GetRepositoryCollectionUseCase
+GitHubCollectionGetter ..up.|> GetAllRepositoryCollectionsUseCase
+GetAnalysisService ..up.|> GetAnalysisUseCase
+GetAnalysisService ..up.|> GetAllAnalysesForUserUseCase
+
+' Add repository collection flow
+AddRepositoryCollectionService --down-> ICollectionExistenceChecker
+AddRepositoryCollectionService --down-> ICollectionAdderPort
+
+GitHubCollectionChecker ..up.|> ICollectionExistenceChecker
+GitHubCollectionChecker --down-> ICollectionDuplicateCheckerPort
+
+' Delete repository collection flow
+GitHubCollectionDeleter --down-> IDeleteRepositoryCollectionPort
+
+' Get repository collection flow
+GitHubCollectionGetter --down-> IGetRepositoryCollectionPort
+GitHubCollectionGetter --down-> IGetAllRepositoryCollectionsPort
+
+' Get analysis flow
+GetAnalysisService --down-> IGetAnalysisFromIdPort
+GetAnalysisService --down-> IGetAllAnalysesForUserPort
+
+' Infrastructure implementations
+MongoDBAdapter ..up.|> IGetAllRepositoryCollectionsPort
+MongoDBAdapter ..up.|> ICollectionAdderPort
+MongoDBAdapter ..up.|> IDeleteRepositoryCollectionPort
+MongoDBAdapter ..up.|> IGetRepositoryCollectionPort
+MongoDBAdapter ..up.|> IGetAnalysisFromIdPort
+MongoDBAdapter ..up.|> IGetAllAnalysesForUserPort
+MongoDBAdapter ..up.|> ICollectionDuplicateCheckerPort
+
+@enduml

@@ -1,0 +1,66 @@
+@startuml GitAuthorizerService
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class IRepositoryAuthorizer <<Interface>> {
+    + authorize(url: RepoURL, password?: PATPassword): Promise<PersonalAccessToken>
+}
+
+class GitAuthorizerService {
+    - credentialPort: IGitCredentialReadPort
+    - configService: ConfigService
+    ---
+    + GitAuthorizerService(credentialPort, configService)
+    + authorize(url: RepoURL, password?: PATPassword): Promise<PersonalAccessToken>
+}
+
+GitAuthorizerService ..up.|> IRepositoryAuthorizer
+GitAuthorizerService --down-> IGitCredentialReadPort
+
+class AuthorizationStrategy <<Interface>> {
+    + getPersonalAccessToken(url?: RepoURL): Promise<string>
+}
+
+class IGitCredentialReadPort <<Interface>> {
+    + authorize(request: GetGitCredentialRequest): Promise<GetGitCredentialResponse>
+}
+
+class ConfigurationService {
+    + codeGuardianToken: string
+}
+
+class PrivateAuthorizationStrategy {
+    - port: IGitCredentialReadPort
+    - password: PATPassword
+    ---
+    + PrivateAuthorizationStrategy(port, password)
+    + getPersonalAccessToken(url: RepoURL): Promise<string>
+}
+
+class PublicAuthorizationStrategy {
+    - configService: ConfigurationService
+    ---
+    + PublicAuthorizationStrategy(configService)
+    + getPersonalAccessToken(url?: RepoURL): Promise<string>
+}
+
+class PATPassword {
+    - value: string
+    ---
+    + PATPassword(value)
+}
+
+
+PrivateAuthorizationStrategy ..up.|> AuthorizationStrategy
+PublicAuthorizationStrategy ..up.|> AuthorizationStrategy
+PrivateAuthorizationStrategy --> IGitCredentialReadPort : authorize(request)
+PublicAuthorizationStrategy --> ConfigurationService : codeGuardianToken
+
+PrivateAuthorizationStrategy ..> PATPassword
+GitAuthorizerService --> AuthorizationStrategy : strategy
+GitAuthorizerService --> ConfigurationService
+@enduml

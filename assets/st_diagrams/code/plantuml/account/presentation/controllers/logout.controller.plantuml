@@ -1,0 +1,24 @@
+@startuml LogoutController
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class ILogoutUseCase <<Interface>>
+
+class LogoutController {
+    - logoutUseCase: ILogoutUseCase
+    ---
+    + LogoutController(logoutUseCase: ILogoutUseCase)
+    + logout(logoutDto: LogoutRequestDto): Promise<LogoutResponseDto>
+}
+
+' Relations
+LogoutController --> ILogoutUseCase
+LogoutController ..> LogoutRequestDto
+LogoutController ..> LogoutResponseDto
+
+@enduml

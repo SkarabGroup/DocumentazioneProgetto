@@ -1,0 +1,22 @@
+@startuml AnalysisController
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class StartAnalysisUseCase <<Interface>>
+
+class AnalysisController {
+    - startAnalysis: StartAnalysisUseCase
+    ---
+    + AnalysisController(startAnalysis: StartAnalysisUseCase)
+    + requestAnalysis(dto: StartAnalysisRequestDTO, userId: string): Promise<StartAnalysisResponseDTO>
+}
+
+AnalysisController --> StartAnalysisUseCase
+AnalysisController ..down-> StartAnalysisRequestDTO
+AnalysisController ..down-> StartAnalysisResponseDTO
+AnalysisController ..down-> StartAnalysisCommand
+@enduml

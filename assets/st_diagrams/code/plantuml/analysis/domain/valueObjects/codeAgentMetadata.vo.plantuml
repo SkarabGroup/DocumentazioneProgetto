@@ -1,0 +1,18 @@
+@startuml CodeAgentMetadata
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class CodeAgentMetadata {
+    - _language: string
+    - _status: string
+    ---
+    - CodeAgentMetadata(language, status)
+    + {static} create(language: string, status: string): CodeAgentMetadata
+    + getLanguage(): string
+    + getStatus(): string
+}
+@enduml

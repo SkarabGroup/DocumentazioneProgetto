@@ -1,0 +1,72 @@
+@startuml AnalysisOrchestratorService
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class IAnalysisOrchestrator <<Interface>> {
+    + analyze(analysis, path, code, docs, security): void
+}
+
+class AnalysisOrchestratorService {
+    -- IDocumentationAgentPort
+    -- ICodeAgentPort
+    -- ISecurityAgentPort
+    -- IDocsReportEntityProvider
+    -- ICodeReportEntityProvider
+    -- ISecurityReportEntityProvider
+    -- IDocsReportSavePort
+    -- ICodeReportSavePort
+    -- ISecurityReportSavePort
+    -- IUpdateAnalysisPort
+    ---
+    + AnalysisOrchestratorService()
+    + analyze(analysis: GitHubAnalysis, path: string, code: boolean, docs: boolean, security: boolean): void
+    - orchestrateAnalysis(analysis, repoPath, code, docs, security): Promise<void>
+}
+
+AnalysisOrchestratorService ..up.|> IAnalysisOrchestrator : implements
+
+class GitHubAnalysis
+AnalysisOrchestratorService ..up.> GitHubAnalysis : analyzes
+AnalysisOrchestratorService .up.> ReportId : creates
+
+together {
+    class IDocumentationAgentPort<<Interface>>
+    class IDocsReportEntityProvider<<Interface>>
+    class IDocsReportSavePort<<Interface>>
+}
+
+AnalysisOrchestratorService --down-> IDocumentationAgentPort
+AnalysisOrchestratorService -down-> IDocsReportEntityProvider
+AnalysisOrchestratorService -down-> IDocsReportSavePort
+
+
+together {
+    class ICodeAgentPort<<Interface>>
+    class ICodeReportEntityProvider<<Interface>>
+    class ICodeReportSavePort<<Interface>>
+}
+
+AnalysisOrchestratorService --down-> ICodeAgentPort
+AnalysisOrchestratorService -down-> ICodeReportEntityProvider
+AnalysisOrchestratorService -down-> ICodeReportSavePort
+
+together {
+    class ISecurityAgentPort <<Interface>>
+    class ISecurityReportEntityProvider <<Interface>>
+    class ISecurityReportSavePort <<Interface>>
+}
+
+AnalysisOrchestratorService --down-> ISecurityAgentPort
+AnalysisOrchestratorService -down-> ISecurityReportEntityProvider
+AnalysisOrchestratorService -down-> ISecurityReportSavePort
+
+class IUpdateAnalysisPort <<Interface>>
+
+AnalysisOrchestratorService -down-> IUpdateAnalysisPort
+
+
+@enduml

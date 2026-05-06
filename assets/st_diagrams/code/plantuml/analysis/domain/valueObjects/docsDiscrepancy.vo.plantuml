@@ -1,0 +1,30 @@
+@startuml DocsDiscrepancy
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class DocsDiscrepancy {
+    - _pathFinding: PathFinding
+    - _discrepancyCategory: string
+    - _severity: SeverityFinding
+    - _docsClaim: DescriptionFinding
+    - _actualFinding: DescriptionFinding
+    ---
+    - DocsDiscrepancy(path, category, severity, docsClaim, actualFinding)
+    + {static} create(path: PathFinding, category: string, severity: SeverityFinding, 
+      {static} docsClaim: DescriptionFinding, actualFinding: DescriptionFinding): DocsDiscrepancy
+    + getPathFinding(): PathFinding
+    + getDiscrepancyCategory(): string
+    + getSeverityFinding(): SeverityFinding
+    + getDocsClaim(): DescriptionFinding
+    + getActualFinding(): DescriptionFinding
+    + equals(other: DocsDiscrepancy): boolean
+}
+
+DocsDiscrepancy --down-> PathFinding
+DocsDiscrepancy --down-> SeverityFinding
+DocsDiscrepancy --down-> DescriptionFinding
+@enduml

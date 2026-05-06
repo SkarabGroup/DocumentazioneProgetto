@@ -1,0 +1,20 @@
+@startuml StaticAnalysisEvaluation
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class StaticAnalysisEvaluation {
+    - _totalIssuesAnalyzed: number
+    - _keyIssuesReasoning: KeyIssueReasoning[]
+    ---
+    - StaticAnalysisEvaluation(totalIssuesAnalyzed, keyIssuesReasoning)
+    + {static} create(totalIssuesAnalyzed: number, keyIssuesReasoning: KeyIssueReasoning[]): StaticAnalysisEvaluation
+    + getTotalIssuesAnalyzed(): number
+    + getKeyIssuesReasoning(): KeyIssueReasoning[]
+}
+
+StaticAnalysisEvaluation --down-> KeyIssueReasoning
+@enduml

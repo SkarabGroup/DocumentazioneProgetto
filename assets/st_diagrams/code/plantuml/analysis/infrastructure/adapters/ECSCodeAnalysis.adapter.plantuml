@@ -1,0 +1,28 @@
+@startuml ECSCodeAnalysisAdapter
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class ICodeAgentPort <<Interface>> {
+    + runAnalysis(model: AgentRequest): Promise<CodeAgentResponse>
+}
+
+class ECSCodeAnalysisAdapter {
+    - logger: Logger
+    - ecsClient: ECSClient
+    - s3Client: S3Client
+    - configService: ConfigurationService
+    ---
+    + ECSCodeAnalysisAdapter(configService: ConfigurationService)
+    + runAnalysis(model: AgentRequest): Promise<CodeAgentResponse>
+    - createFallbackResponse(reason: string): CodeAgentResponse
+    - runEcsTask(analysisId: string): Promise<void>
+    - waitForTaskCompletion(cluster: string, taskArn: string): Promise<void>
+    - fetchResultFromS3(analysisId: string): Promise<string>
+}
+
+ECSCodeAnalysisAdapter ..up-|> ICodeAgentPort
+@enduml

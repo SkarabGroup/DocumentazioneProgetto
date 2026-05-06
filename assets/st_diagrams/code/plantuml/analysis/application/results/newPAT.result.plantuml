@@ -1,0 +1,17 @@
+@startuml NewPatResult
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class NewPatResult {
+    + isSuccess: boolean
+    + errorMessage?: string
+    ---
+    - NewPatResult(isSuccess, errorMessage?)
+    + {static} success(): NewPatResult
+    + {static} failure(errorMessage): NewPatResult
+}
+@enduml

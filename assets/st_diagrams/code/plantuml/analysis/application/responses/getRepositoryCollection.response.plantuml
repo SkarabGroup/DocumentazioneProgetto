@@ -1,0 +1,21 @@
+@startuml GetRepositoryCollectionResponse
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class GetRepositoryCollectionResponse {
+    + success: boolean
+    + url: string
+    + name: string
+    + description: string | null
+    + analyses: string[]
+    + message?: string
+    ---
+    + GetRepositoryCollectionResponse(success, url, name, description, analyses, message?)
+    + {static} success(payload): GetRepositoryCollectionResponse
+    + {static} failure(message: string): GetRepositoryCollectionResponse
+}
+@enduml

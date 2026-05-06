@@ -1,0 +1,58 @@
+@startuml OrchestratorReachableClasses
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 5
+skinparam ranksep 50
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class DocumentationAnalysisAdapter
+class LocalCodeAnalysisAdapter
+class LocalSecurityAnalysisAdapter
+class ECSDocumentationAnalysisAdapter
+class ECSCodeAnalysisAdapter
+class ECSSecurityAnalysisAdapter
+class IDocsReportSavePort <<Interface>>
+class ICodeReportSavePort <<Interface>>
+class ISecurityReportSavePort <<Interface>>
+class IUpdateAnalysisPort <<Interface>>
+
+class IDocumentationAgentPort <<Interface>>
+class ICodeAgentPort <<Interface>>
+class ISecurityAgentPort <<Interface>>
+class AnalysisOrchestratorService
+
+class IDocsReportEntityProvider <<Interface>>
+class ICodeReportEntityProvider <<Interface>>
+class ISecurityReportEntityProvider <<Interface>>
+
+class IAnalysisOrchestrator <<Interface>>
+class ReportEntitiesProvider <<Interface>>
+
+AnalysisOrchestratorService ..up.|> IAnalysisOrchestrator
+AnalysisOrchestratorService --> IDocumentationAgentPort
+AnalysisOrchestratorService --> ICodeAgentPort
+AnalysisOrchestratorService --> ISecurityAgentPort
+AnalysisOrchestratorService --> IDocsReportSavePort
+AnalysisOrchestratorService --> ICodeReportSavePort
+AnalysisOrchestratorService --> ISecurityReportSavePort
+AnalysisOrchestratorService --> IUpdateAnalysisPort
+AnalysisOrchestratorService --up-> IDocsReportEntityProvider
+AnalysisOrchestratorService --up-> ICodeReportEntityProvider
+AnalysisOrchestratorService --up-> ISecurityReportEntityProvider
+IDocsReportEntityProvider ..up.|> ReportEntitiesProvider
+ICodeReportEntityProvider ..up.|> ReportEntitiesProvider
+ISecurityReportEntityProvider ..up.|> ReportEntitiesProvider
+MongoDBAdapter ..up.|> IDocsReportSavePort
+MongoDBAdapter ..up.|> ICodeReportSavePort
+MongoDBAdapter ..up.|> ISecurityReportSavePort
+MongoDBAdapter ..up.|> IUpdateAnalysisPort
+DocumentationAnalysisAdapter ..up.|> IDocumentationAgentPort
+LocalCodeAnalysisAdapter ..up.|> ICodeAgentPort
+LocalSecurityAnalysisAdapter ..up.|> ISecurityAgentPort
+ECSDocumentationAnalysisAdapter ..up.|> IDocumentationAgentPort
+ECSCodeAnalysisAdapter  ..up.|> ICodeAgentPort
+ECSSecurityAnalysisAdapter  ..up.|> ISecurityAgentPort
+
+MongoDBAdapter  ..[hidden]down.> ISecurityAgentPort
+MongoDBAdapter  ..[hidden]down.> ICodeAgentPort

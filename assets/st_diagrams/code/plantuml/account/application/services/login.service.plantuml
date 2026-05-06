@@ -1,0 +1,35 @@
+@startuml LoginService
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class IloginUseCase <<Interface>> 
+class IUserFindPort <<Interface>> 
+class ITokenProviderPort <<Interface>> 
+class IHashComparePort <<Interface>> 
+class ISessionSavePort <<Interface>> 
+
+class LoginService {
+    - userFindPort: IUserFindPort
+    - tokenProviderPort: ITokenProviderPort
+    - hashComparePort: IHashComparePort
+    - sessionPort: ISessionSavePort
+    ---
+    + LoginService(userFindPort: IUserFindPort, tokenProviderPort: ITokenProviderPort, hashComparePort: IHashComparePort, sessionPort: ISessionSavePort)
+    + execute(command: LoginCommand): Promise<AuthResultDto>
+}
+
+' Relations
+LoginService ..up|> IloginUseCase
+LoginService --> IUserFindPort
+LoginService --> ITokenProviderPort
+LoginService --> IHashComparePort
+LoginService --> ISessionSavePort
+LoginService ..> LoginCommand
+LoginService ..> AuthResultDto
+
+@enduml

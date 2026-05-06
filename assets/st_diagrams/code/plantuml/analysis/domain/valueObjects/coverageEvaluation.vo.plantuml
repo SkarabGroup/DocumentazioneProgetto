@@ -1,0 +1,20 @@
+@startuml CoverageEvaluation
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class CoverageEvaluation {
+    - _overallHealth: string
+    - _criticalFilesReasoning: CriticalFileReasoning[]
+    ---
+    - CoverageEvaluation(overallHealth, criticalFilesReasoning)
+    + {static} create(overallHealth: string, criticalFilesReasoning: CriticalFileReasoning[]): CoverageEvaluation
+    + getOverallHealth(): string
+    + getCriticalFilesReasoning(): CriticalFileReasoning[]
+}
+
+CoverageEvaluation --down-> CriticalFileReasoning
+@enduml

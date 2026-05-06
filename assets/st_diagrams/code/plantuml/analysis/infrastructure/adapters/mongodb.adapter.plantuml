@@ -1,0 +1,71 @@
+@startuml MongoDBAdapter
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+left to right direction 
+skinparam nodesep 10 
+skinparam ranksep 109
+skinparam ClassAttributeIconSize 0
+hide circles
+hide interface methods
+
+class IGitCredentialReadPort <<Interface>>
+class IGitCredentialSavePort <<Interface>>
+class IGitCredentialDeletePort <<Interface>>
+class IGitCredentialUpdatePort <<Interface>>
+class IGitHubAnalysisSavePort <<Interface>>
+class ICodeReportSavePort <<Interface>>
+class IDocsReportSavePort <<Interface>>
+class ISecurityReportSavePort <<Interface>>
+class IUpdateAnalysisPort <<Interface>>
+class IGetAnalysisFromIdPort <<Interface>>
+class IGetAllAnalysesForUserPort <<Interface>>
+class ICollectionAdderPort <<Interface>>
+class IGetAllRepositoryCollectionsPort <<Interface>>
+class IGetRepositoryCollectionPort <<Interface>>
+class ICollectionDuplicateCheckerPort <<Interface>>
+class IDeleteRepositoryCollectionPort <<Interface>>
+
+class MongoDBAdapter {
+    - credentialModel: Model<GitCredentialDocument>
+    - analysisModel: Model<GitHubAnalysisDocument>
+    - docsReportModel: Model<DocumentationReportDocument>
+    - codeReportModel: Model<CodeReportDocument>
+    - securityReportModel: Model<SecurityReportDocument>
+    - collectionModel: Model<GitHubCollectionDocument>
+    ---
+    + MongoDBAdapter(...)
+    + authorize(model: GetGitCredentialRequest): Promise<GetGitCredentialResponse>
+    + save(model: PostGitCredentialRequest): Promise<PostGitCredentialResponse>
+    + deletePAT(request: DeleteGitCredentialRequest): Promise<DeleteGitCredentialResponse>
+    + updatePAT(request: UpdateGitCredentialPatRequest): Promise<UpdateGitCredentialPatResponse>
+    + saveAnalysis(request: SaveGitHubAnalysisRequest): Promise<SaveGitHubAnalysisResponse>
+    + saveCodeReport(model: SaveCodeReportRequest): Promise<SaveCodeReportResponse>
+    + saveDocsReport(model: SaveDocsReportRequest): Promise<SaveDocsReportResponse>
+    + saveSecurityReport(model: SaveSecurityReportRequest): Promise<SaveSecurityReportResponse>
+    + addReportsToAnalysis(model: AddReportsToAnalysisRequest): Promise<AddReportsToAnalysisResult>
+    + getAnalysisFromId(analysisId: AnalysisId): Promise<GitHubAnalysisDetailedResult | null>
+    + getAllAnalysesForUser(id: UserId): Promise<GetAllAnalysesForUserResponse>
+    + checkDuplicate(model: CheckCollectionDuplicateRequest): Promise<CheckCollectionDuplicateResponse>
+    + addCollection(model: AddRepositoryCollectionRequest): Promise<AddRepositoryCollectionResponse>
+    + getRepositoryCollection(model: GetRepositoryCollectionRequest): Promise<GetRepositoryCollectionResponse>
+    + getAllCollections(request: GetAllRepositoryCollectionsRequest): Promise<GetAllRepositoryCollectionsResponse>
+    + deleteCollection(model: DeleteRepositoryCollectionRequest): Promise<DeleteRepositoryCollectionResult>
+}
+
+MongoDBAdapter ..down-|> IGitCredentialReadPort
+MongoDBAdapter ..down-|> IGitCredentialSavePort
+MongoDBAdapter ..down-|> IGitCredentialDeletePort
+MongoDBAdapter ..down-|> IGitCredentialUpdatePort
+MongoDBAdapter ..down-|> IGitHubAnalysisSavePort
+MongoDBAdapter ..down-|> ICodeReportSavePort
+MongoDBAdapter ..down-|> IDocsReportSavePort
+MongoDBAdapter ..down-|> ISecurityReportSavePort
+MongoDBAdapter ..down-|> IUpdateAnalysisPort
+MongoDBAdapter ..down-|> IGetAnalysisFromIdPort
+MongoDBAdapter ..down-|> IGetAllAnalysesForUserPort
+MongoDBAdapter ..down-|> IGetAllRepositoryCollectionsPort
+MongoDBAdapter ..down-|> ICollectionAdderPort
+MongoDBAdapter ..down-|> IGetRepositoryCollectionPort
+MongoDBAdapter ..down-|> ICollectionDuplicateCheckerPort
+MongoDBAdapter ..down-|> IDeleteRepositoryCollectionPort
+@enduml

@@ -1,0 +1,15 @@
+@startuml DeletePatUseCase
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class DeletePatUseCase <<Interface>> {
+    + execute(command: DeletePatCommand): Promise<DeletePatResult>
+}
+
+DeletePatUseCase --down-> DeletePatCommand
+DeletePatUseCase --down-> DeletePatResult
+@enduml

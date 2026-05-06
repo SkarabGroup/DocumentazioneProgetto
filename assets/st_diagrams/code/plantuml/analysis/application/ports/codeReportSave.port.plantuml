@@ -1,0 +1,15 @@
+@startuml ICodeReportSavePort
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class ICodeReportSavePort <<Interface>> {
+    + saveCodeReport(model: SaveCodeReportRequest): Promise<SaveCodeReportResponse>
+}
+
+ICodeReportSavePort --down.> SaveCodeReportRequest
+ICodeReportSavePort --down.> SaveCodeReportResponse
+@enduml

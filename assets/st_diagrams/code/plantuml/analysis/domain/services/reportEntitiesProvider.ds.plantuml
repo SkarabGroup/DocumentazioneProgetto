@@ -1,0 +1,26 @@
+@startuml ReportEntitiesProvider
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class ICodeReportEntityProvider <<Interface>>
+class IDocsReportEntityProvider <<Interface>>
+class ISecurityReportEntityProvider <<Interface>>
+
+class ReportEntitiesProvider {
+    ---
+    + fromCodeAgentResponse(response: CodeAgentResponse, reportId: ReportId, analysisId: AnalysisId): CodeAgentReport
+    + fromDocsAgentResponse(response: DocsAgentResponse, reportId: ReportId, analysisId: AnalysisId): DocumentationReport
+    + fromSecurityAgentResponse(response: SecAgentResponse, reportId: ReportId, analysisId: AnalysisId): SecurityReport
+}
+
+ReportEntitiesProvider ..up|> ICodeReportEntityProvider
+ReportEntitiesProvider ..up|> IDocsReportEntityProvider
+ReportEntitiesProvider ..up|> ISecurityReportEntityProvider
+ReportEntitiesProvider --down-> CodeAgentReport
+ReportEntitiesProvider --down-> DocumentationReport
+ReportEntitiesProvider --down-> SecurityReport
+@enduml

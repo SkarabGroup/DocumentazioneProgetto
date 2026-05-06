@@ -1,0 +1,25 @@
+@startuml VersionMismatchDependency
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class VersionMismatchDependency {
+    - _name: string
+    - _readmeVersion: string
+    - _configVersion: string
+    - _pathFinding: PathFinding
+    ---
+    - VersionMismatchDependency(name, readmeVersion, configVersion, pathFinding)
+    + {static} create(name: string, readmeVersion: string, configVersion: string, path: PathFinding): VersionMismatchDependency
+    + getName(): string
+    + getReadmeVersion(): string
+    + getConfigVersion(): string
+    + getPathFinding(): PathFinding
+    + equals(other: VersionMismatchDependency): boolean
+}
+
+VersionMismatchDependency --down-> PathFinding
+@enduml

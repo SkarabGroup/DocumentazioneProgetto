@@ -1,0 +1,33 @@
+@startuml GitHubAdapter
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class IGitHubAvailabilityPort <<Interface>> {
+    + check(model: CheckAvailabilityRequest): Promise<CheckAvailabilityResponse>
+}
+
+class IGitClonePort <<Interface>> {
+    + clone(model: CloneRepoRequest): Promise<CloneRepoResponse>
+}
+
+class GitHubAdapter {
+    - execAsync: ExecAsync
+    ---
+    + GitHubAdapter(execAsync?: ExecAsync)
+    + check(request: CheckAvailabilityRequest): Promise<CheckAvailabilityResponse>
+    + clone(request: CloneRepoRequest): Promise<CloneRepoResponse>
+    - buildAccessRequestCurl(request: CheckAvailabilityRequest): string
+    - buildUrl(request: CheckAvailabilityRequest): string
+    - parseResponse(stdout: string, request: CheckAvailabilityRequest): Promise<CheckAvailabilityResponse>
+    - validateBody(body: string, request: CheckAvailabilityRequest): Promise<CheckAvailabilityResponse>
+    - getCommitFromBranch(repoPath: string, branch: string, patToken?: string): Promise<{sha: string} | null>
+    - extractRepoPath(repositoryUrl: string): string
+}
+
+GitHubAdapter ..|> IGitHubAvailabilityPort
+GitHubAdapter ..|> IGitClonePort
+@enduml

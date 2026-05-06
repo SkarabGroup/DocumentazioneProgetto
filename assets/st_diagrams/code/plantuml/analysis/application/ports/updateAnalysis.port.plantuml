@@ -1,0 +1,15 @@
+@startuml IUpdateAnalysisPort
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class IUpdateAnalysisPort <<Interface>> {
+    + addReportsToAnalysis(model: AddReportsToAnalysisRequest): Promise<AddReportsToAnalysisResult>
+}
+
+IUpdateAnalysisPort --down.> AddReportsToAnalysisRequest
+IUpdateAnalysisPort --down.> AddReportsToAnalysisResult
+@enduml

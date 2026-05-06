@@ -1,0 +1,21 @@
+@startuml GetFullRepositoryCollectionDetailsResponseDTO
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 50
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class GetFullRepositoryCollectionDetailsResponseDTO {
+    + success: boolean
+    + message?: string
+    + data?: \{ url: string; name: string; description: string | null; analyses: GetAnalysisResponseDTO[] \}
+    ---
+    + GetFullRepositoryCollectionDetailsResponseDTO(success, message?, data?)
+    + {static} success(data): GetFullRepositoryCollectionDetailsResponseDTO
+    + {static} failure(message: string): GetFullRepositoryCollectionDetailsResponseDTO
+}
+
+GetFullRepositoryCollectionDetailsResponseDTO --> GetAnalysisResponseDTO
+
+@enduml

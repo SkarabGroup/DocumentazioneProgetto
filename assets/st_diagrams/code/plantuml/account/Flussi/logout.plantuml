@@ -1,0 +1,35 @@
+@startuml LogoutControllerReachableClasses
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 35
+skinparam ranksep 50
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class LogoutController
+
+class LogoutRequestDto
+class LogoutResponseDto
+
+class ILogoutUseCase <<Interface>> 
+
+class LogoutService
+
+class ISessionDeletePort <<Interface>> 
+
+class PostgresAdapter
+
+' Presentation -> Application
+LogoutController --down-> ILogoutUseCase
+LogoutController ..up.> LogoutRequestDto
+LogoutController ..up.> LogoutResponseDto
+
+' Use case implementation
+LogoutService ..up.|> ILogoutUseCase
+
+' LogoutService dependencies
+LogoutService --down-> ISessionDeletePort
+
+' Infrastructure implementations
+PostgresAdapter ..up.|> ISessionDeletePort
+@enduml

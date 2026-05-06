@@ -1,0 +1,28 @@
+@startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+package "API Layer (Model)" {
+  class RepositoriesApi {
+    + list(params): Promise<Repository[]>
+    + get(id): Promise<Repository>
+    + create(payload): Promise<Repository>
+    + update(id, payload): Promise<Repository>
+    + delete(id): Promise<void>
+    + getRanking(): Promise<RankedRepository[]>
+    + startAnalysis(id, payload): Promise<{ analysisId }>
+    + getHistory(id, params): Promise<PaginatedResponse<Analysis>>
+    + compareAnalyses(id, ids): Promise<unknown>
+    --
+    Gestisce tutte le operazioni sui repository verso il microservizio
+    Analysis: CRUD, avvio analisi, recupero storico per repository
+    e classifica globale per score di qualità.
+  }
+
+  RepositoriesApi --> "Gateway" : usa
+}
+@enduml

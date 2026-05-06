@@ -1,0 +1,22 @@
+@startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+package "View — Pagine protette" {
+  class RankingPage {
+    --
+    Mostra la classifica globale dei repository ordinata per score
+    di qualità aggregato. Evidenzia i primi tre con icone medaglia
+    (oro, argento, bronzo). Per ogni riga mostra scoreDelta: variazione
+    rispetto all'analisi precedente, con icona TrendingUp/TrendingDown.
+    Usa getScoreVar() e formatDateShort() per formattare score e date.
+  }
+
+  RankingPage --> "RepositoriesApi" : getRanking()
+  RankingPage ..> "getScoreVar, formatDateShort" : utils
+}
+@enduml

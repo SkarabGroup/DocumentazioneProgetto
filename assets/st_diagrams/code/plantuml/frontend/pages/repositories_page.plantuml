@@ -1,0 +1,26 @@
+@startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+package "View — Pagine protette" {
+  class RepositoriesPage {
+    --
+    Pagina principale post-login. Mostra la lista dei repository
+    dell'utente con ricerca per nome/URL e possibilità di aggiungere
+    nuovi repository tramite AddRepositoryModal.
+    Per ogni repository mostra stato ultima analisi (AnalysisStatusBadge)
+    e permette di avviare una nuova analisi tramite AnalysisOptionsModal.
+    Aggiorna lo stato dell'analisi in tempo reale via useAnalysisPolling.
+  }
+
+  RepositoriesPage --> "RepositoriesApi" : list, create, startAnalysis
+  RepositoriesPage --> "useAnalysisPolling" : aggiornamenti real-time
+  RepositoriesPage ..> "AddRepositoryModal" : apre
+  RepositoriesPage ..> "AnalysisOptionsModal" : apre
+  RepositoriesPage ..> "AnalysisStatusBadge" : usa
+}
+@enduml

@@ -1,0 +1,28 @@
+@startuml MissingFile
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class MissingFile {
+    - _referencedPath: PathFinding
+    - _referencedIn: PathFinding
+    - _descriptionFinding: DescriptionFinding
+    - _statusMissing: StatusMissing
+    ---
+    - MissingFile(referencedPath, referencedIn, description, statusMissing)
+    - validate(): void
+    + {static} create(referencedPath: PathFinding, referencedIn: PathFinding, status: StatusMissing, description: DescriptionFinding): MissingFile
+    + getReferencedPath(): PathFinding
+    + getReferencedIn(): PathFinding
+    + getStatusMissing(): StatusMissing
+    + getDescriptionFinding(): DescriptionFinding
+    + equals(other: MissingFile): boolean
+}
+
+MissingFile --down-> PathFinding
+MissingFile --down-> DescriptionFinding
+MissingFile --down-> StatusMissing
+@enduml

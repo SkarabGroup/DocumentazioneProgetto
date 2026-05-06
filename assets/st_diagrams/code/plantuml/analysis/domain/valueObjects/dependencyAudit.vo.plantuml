@@ -1,0 +1,33 @@
+@startuml DependencyAudit
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class DependencyAudit {
+    - _readmeDefined: ReadmeDependency[]
+    - _configDefined: ConfigDependency[]
+    - _missingInConfig: MissingInConfigDependency[]
+    - _undocumentedInReadme: UndocumentedDependency[]
+    - _versionMismatches: VersionMismatchDependency[]
+    ---
+    - DependencyAudit(readmeDefined, configDefined, missingInConfig, 
+        undocumentedInReadme, versionMismatches)
+    + {static} create(props: DependencyAuditProps): DependencyAudit
+    + getReadmeDefined(): ReadmeDependency[]
+    + getConfigDefined(): ConfigDependency[]
+    + getMissingInConfig(): MissingInConfigDependency[]
+    + getUndocumentedInReadme(): UndocumentedDependency[]
+    + getVersionMismatches(): VersionMismatchDependency[]
+    + equals(other: DependencyAudit): boolean
+    - arrayEquals(a: T[], b: T[]): boolean
+}
+
+DependencyAudit --down-> ReadmeDependency
+DependencyAudit --down-> ConfigDependency
+DependencyAudit --down-> MissingInConfigDependency
+DependencyAudit --down-> UndocumentedDependency
+DependencyAudit --down-> VersionMismatchDependency
+@enduml

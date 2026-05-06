@@ -1,0 +1,20 @@
+@startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+package "API Layer (Model)" {
+  class UsersApi {
+    + changePassword(payload): Promise<void>
+    + deleteAccount(): Promise<void>
+    --
+    Gestisce le operazioni sul profilo utente verso il microservizio
+    Account: cambio password ed eliminazione account.
+  }
+
+  UsersApi --> "Gateway" : usa
+}
+@enduml

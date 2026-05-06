@@ -1,0 +1,46 @@
+@startuml AddRepositoryCollectionService
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class AddRepositoryCollectionUseCase <<Interface>> {
+    + execute(command: AddRepositoryCollectionCommand): Promise<AddRepositoryCollectionResult>
+}
+
+class ICollectionExistenceChecker <<Interface>>
+class ICollectionAdderPort <<Interface>>
+
+class AddRepositoryCollectionService {
+    - duplicateChecker: ICollectionExistenceChecker
+    - collectionAdder: ICollectionAdderPort
+    ---
+    + AddRepositoryCollectionService(duplicateChecker, collectionAdder)
+    + execute(command: AddRepositoryCollectionCommand): Promise<AddRepositoryCollectionResult>
+}
+
+class AddRepositoryCollectionCommand
+class AddRepositoryCollectionResult
+class AddRepositoryCollectionRequest
+class AddRepositoryCollectionResponse
+class UserId
+class RepoURL
+
+AddRepositoryCollectionService ..up-|> AddRepositoryCollectionUseCase
+AddRepositoryCollectionService --> ICollectionExistenceChecker : inject
+AddRepositoryCollectionService --> ICollectionAdderPort : inject
+
+AddRepositoryCollectionService ..> AddRepositoryCollectionCommand : execute()
+AddRepositoryCollectionService ..> AddRepositoryCollectionResult : returns
+AddRepositoryCollectionService ..> AddRepositoryCollectionRequest : creates
+AddRepositoryCollectionService ..> AddRepositoryCollectionResponse : receives
+AddRepositoryCollectionService ..> UserId : creates
+AddRepositoryCollectionService ..> RepoURL : creates
+
+ICollectionExistenceChecker --down-> UserId
+ICollectionExistenceChecker --down-> RepoURL
+ICollectionAdderPort --down-> AddRepositoryCollectionRequest
+ICollectionAdderPort --down-> AddRepositoryCollectionResponse
+@enduml

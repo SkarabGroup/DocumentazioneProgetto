@@ -1,0 +1,20 @@
+@startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+package "View — Layout" {
+  class AppLayout {
+    --
+    Wrapper delle route protette. Compone la Sidebar con l'area
+    contenuto principale (React Router Outlet). È inserito dentro
+    ProtectedRoute, quindi è sempre renderizzato solo se autenticato.
+  }
+
+  AppLayout *-- "Sidebar"
+  AppLayout --> "Outlet (React Router)" : renderizza pagina corrente
+}
+@enduml

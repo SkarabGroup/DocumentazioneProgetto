@@ -1,0 +1,27 @@
+@startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+package "View — Pagine protette" {
+  class RepositoryDetailPage {
+    --
+    Pagina di dettaglio per un singolo repository. Mostra i metadati
+    del repository e il report dell'ultima analisi in tab separate:
+    Code Quality, Security, Documentation e History.
+    Include ScoreCard per i punteggi, barra di avanzamento per
+    analisi in corso, e permette di avviare una nuova analisi.
+    Aggiorna lo stato in tempo reale via useAnalysisPolling.
+  }
+
+  RepositoryDetailPage --> "RepositoriesApi" : get, startAnalysis, getHistory
+  RepositoryDetailPage --> "AnalysisApi" : exportReport
+  RepositoryDetailPage --> "useAnalysisPolling" : aggiornamenti real-time
+  RepositoryDetailPage ..> "AnalysisOptionsModal" : apre
+  RepositoryDetailPage ..> "ScoreCard" : usa
+  RepositoryDetailPage ..> "AnalysisStatusBadge" : usa
+}
+@enduml

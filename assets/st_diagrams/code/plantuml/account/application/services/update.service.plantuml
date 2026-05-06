@@ -1,0 +1,35 @@
+@startuml UpdateService
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class IupdateUseCase <<Interface>> 
+class IUserFindPort <<Interface>> 
+class ITokenProviderPort <<Interface>> 
+class IHashPasswordPort <<Interface>> 
+class IUserFindPort <<Interface>> 
+
+class UpdateService {
+    - userFindPort: IUserFindPort
+    - userUpdatePort: IUserUpdatePort
+    - tokenProviderPort: ITokenProviderPort
+    - hashPasswordPort: IHashPasswordPort
+    ---
+    + UpdateService(userFindPort: IUserFindPort, userUpdatePort: IUserUpdatePort, tokenProviderPort: ITokenProviderPort, hashPasswordPort: IHashPasswordPort)
+    + execute(command: UpdateUserCommand): Promise<AuthResultDto>
+}
+
+' Relations
+UpdateService ..up|> IupdateUseCase
+UpdateService --> IUserFindPort
+UpdateService --> IUserUpdatePort
+UpdateService --> ITokenProviderPort
+UpdateService --> IHashPasswordPort
+UpdateService ..> UpdateUserCommand
+UpdateService ..> AuthResultDto
+
+@enduml

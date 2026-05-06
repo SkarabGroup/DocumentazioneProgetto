@@ -1,0 +1,21 @@
+@startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+package "View — Componenti condivisi" {
+  class ScoreCard {
+    + score: number
+    + label: string
+    + description?: string
+    --
+    Visualizza un punteggio numerico (0-100) tramite un gauge SVG
+    semicircolare e una barra di progresso lineare. Il colore
+    si adatta al valore: verde (>= 80), giallo (>= 50), rosso (< 50).
+    Riutilizzato in RepositoryDetailPage e RankingPage.
+  }
+}
+@enduml

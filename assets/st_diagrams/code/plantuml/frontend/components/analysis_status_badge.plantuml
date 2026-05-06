@@ -1,0 +1,19 @@
+@startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+package "View — Componenti dominio" {
+  class AnalysisStatusBadge {
+    + status: AnalysisStatus
+    --
+    Badge visivo che rappresenta lo stato di un'analisi.
+    Mappa ogni stato a un colore e un'etichetta:
+    not-analyzed (grigio), pending (giallo), in-progress (giallo con pulse),
+    completed (verde), failed (rosso).
+  }
+}
+@enduml

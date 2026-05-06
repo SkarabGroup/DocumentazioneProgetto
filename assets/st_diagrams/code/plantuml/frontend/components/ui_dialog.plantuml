@@ -1,0 +1,19 @@
+@startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+package "View — UI Primitives" {
+  class Dialog {
+    --
+    Componente modale basato su Radix UI Dialog primitive.
+    Include overlay con effetto blur, animazioni di apertura/chiusura
+    e gestione accessibilità (focus trap, aria-label). Composto da
+    DialogContent, DialogHeader, DialogTitle, DialogDescription.
+    Usato come base per AddRepositoryModal e AnalysisOptionsModal.
+  }
+}
+@enduml

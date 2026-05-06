@@ -1,0 +1,18 @@
+@startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+package "View — UI Primitives" {
+  class Card {
+    --
+    Componente contenitore con bordo e padding, composto da
+    sotto-componenti: CardHeader, CardTitle, CardDescription,
+    CardContent, CardFooter. Usato come wrapper strutturale
+    per blocchi di contenuto nelle pagine.
+  }
+}
+@enduml

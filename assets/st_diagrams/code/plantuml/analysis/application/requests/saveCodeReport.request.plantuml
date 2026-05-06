@@ -1,0 +1,22 @@
+@startuml SaveCodeReportRequest
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class SaveCodeReportRequest {
+    + reportId: ReportId
+    + analysisId: AnalysisId
+    + codeAgentMetadata: CodeAgentMetadata
+    + aiInterpretation: AIInterpretation
+    ---
+    + SaveCodeReportRequest(reportId, analysisId, codeAgentMetadata, aiInterpretation)
+}
+
+SaveCodeReportRequest --right-> ReportId
+SaveCodeReportRequest --right-> AnalysisId
+SaveCodeReportRequest --down-> CodeAgentMetadata
+SaveCodeReportRequest --down-> AIInterpretation
+@enduml

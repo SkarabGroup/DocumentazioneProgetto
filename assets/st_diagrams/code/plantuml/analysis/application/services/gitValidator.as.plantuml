@@ -1,0 +1,64 @@
+@startuml GitValidatorService
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class IRepositoryValidator <<Interface>> {
+    + check(url, pat, branch, commit): Promise<{branch, commit}>
+}
+
+class GitValidatorService {
+    - availabilityPort: IGitHubAvailabilityPort
+    ---
+    + GitValidatorService(availabilityPort)
+    + check(url: RepoURL, pat: PersonalAccessToken | null, branch: BranchName | null, 
+    commit: CommitHash | null): Promise<{branch: BranchName, commit: CommitHash}>
+}
+
+class ValidationStrategy <<Interface>> {
+    + validate(): Promise<RepositoryData>
+}
+
+
+class CommitValidationStrategy {
+    - port: IGitHubAvailabilityPort
+    - url: RepoURL
+    - commit: CommitHash
+    - branch: BranchName | null
+    - pat: PersonalAccessToken | null
+    + validate(): Promise<RepositoryData>
+}
+
+class BranchValidationStrategy {
+    - port: IGitHubAvailabilityPort
+    - url: RepoURL
+    - branch: BranchName
+    - pat: PersonalAccessToken | null
+    + validate(): Promise<RepositoryData>
+}
+
+class DefaultValidationStrategy {
+    - port: IGitHubAvailabilityPort
+    - url: RepoURL
+    - pat: PersonalAccessToken | null
+    + validate(): Promise<RepositoryData>
+}
+
+class IGitHubAvailabilityPort <<Interface>>
+
+GitValidatorService ..up.|> IRepositoryValidator
+GitValidatorService --down-> IGitHubAvailabilityPort
+CommitValidationStrategy ..down.> IGitHubAvailabilityPort
+BranchValidationStrategy ..down.> IGitHubAvailabilityPort
+DefaultValidationStrategy ..down.> IGitHubAvailabilityPort
+ValidationStrategy <|.down.. CommitValidationStrategy
+ValidationStrategy <|.down.. BranchValidationStrategy
+ValidationStrategy <|.down.. DefaultValidationStrategy
+
+
+GitValidatorService ..> ValidationStrategy
+
+@enduml

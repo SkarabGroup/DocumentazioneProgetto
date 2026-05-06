@@ -1,0 +1,19 @@
+@startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+package "View — Layout" {
+  class Sidebar {
+    --
+    Barra di navigazione laterale collassabile presente in tutte le
+    pagine protette. Mostra logo, link di navigazione (Repository,
+    Storico, Classifica, Impostazioni), nome utente e pulsante logout.
+  }
+
+  Sidebar --> "useAuth" : user, logout()
+}
+@enduml

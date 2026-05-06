@@ -1,0 +1,20 @@
+@startuml IssueLocation
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class IssueLocation {
+    - _lineStart: number
+    - _lineEnd: number
+    - _column: number
+    ---
+    - IssueLocation(lineStart, lineEnd, column)
+    + {static} create(lineStart: number, lineEnd: number, column: number): IssueLocation
+    + getLineStart(): number
+    + getLineEnd(): number
+    + getColumn(): number
+}
+@enduml

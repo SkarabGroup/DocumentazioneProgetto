@@ -1,0 +1,25 @@
+@startuml LogoutService
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class ILogoutUseCase <<Interface>> 
+class ISessionDeletePort <<Interface>> 
+
+class LogoutService {
+    - sessionPort: ISessionDeletePort
+    ---
+    + LogoutService(sessionPort: ISessionDeletePort)
+    + execute(command: LogoutCommand): Promise<void>
+}
+
+' Relations
+LogoutService ..up|> ILogoutUseCase
+LogoutService --> ISessionDeletePort
+LogoutService ..> LogoutCommand
+
+@enduml

@@ -1,0 +1,23 @@
+@startuml LocalSecurityAnalysisAdapter
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class ISecurityAgentPort <<Interface>> {
+    + runAnalysis(model: AgentRequest): Promise<SecAgentResponse>
+}
+
+class LocalSecurityAnalysisAdapter {
+    - logger: Logger
+    ---
+    + runAnalysis(model: AgentRequest): Promise<SecAgentResponse>
+    - runContainer(dockerArgs: string[]): Promise<string>
+    - extractJson(raw: string): Record<string, unknown>
+    - createFallbackResponse(reason: string, repositoryId: string): SecAgentResponse
+}
+
+LocalSecurityAnalysisAdapter ..up-|> ISecurityAgentPort
+@enduml

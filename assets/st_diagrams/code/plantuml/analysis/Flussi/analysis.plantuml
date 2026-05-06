@@ -1,0 +1,104 @@
+@startuml AnalysisControllerReachableClasses
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 35
+skinparam ranksep 50
+skinparam ClassAttributeIconSize 0
+hide circles
+
+
+
+
+	class AnalysisController 
+
+	class StartAnalysisRequestDTO
+	class StartAnalysisResponseDTO
+
+
+
+	class StartAnalysisUseCase  <<Interface>>
+
+
+
+	class StartAnalysisService 
+
+	class IRepositoryAuthorizer  <<Interface>>
+
+	class IRepositoryValidator  <<Interface>>
+
+	class IRepositoryCloner  <<Interface>>
+
+	class IAnalysisOrchestrator  <<Interface>>
+
+	class GitAuthorizerService
+	class GitValidatorService
+	class GitClonerService
+	
+
+
+
+	class IGitCredentialReadPort <<Interface>>
+	class IGitHubAvailabilityPort <<Interface>>
+	class IGitClonePort <<Interface>>
+
+	class IGitHubAnalysisSavePort <<Interface>>
+	
+
+
+	class IPasswordProvider <<Interface>>
+	class PATPasswordProvider
+
+
+
+	class MongoDBAdapter
+	class GitHubAdapter
+	class ConfigurationService
+   
+
+
+' Presentation -> Application
+AnalysisController --down-> StartAnalysisUseCase
+AnalysisController ..up.> StartAnalysisRequestDTO
+AnalysisController ..up.> StartAnalysisResponseDTO
+
+' Use case implementation
+StartAnalysisService ..up.|> StartAnalysisUseCase
+
+' StartAnalysisService dependencies
+StartAnalysisService --down-> IPasswordProvider
+StartAnalysisService --down-> IRepositoryAuthorizer
+StartAnalysisService --down-> IRepositoryValidator
+StartAnalysisService --down-> IRepositoryCloner
+StartAnalysisService --down-> IAnalysisOrchestrator
+StartAnalysisService --down-> IGitHubAnalysisSavePort
+
+' Concrete services implementing classs <<Interface>>
+GitAuthorizerService ..up.|> IRepositoryAuthorizer
+GitValidatorService ..up.|> IRepositoryValidator
+GitClonerService ..up.|> IRepositoryCloner
+PATPasswordProvider ..up.|> IPasswordProvider
+
+' Authorizer path
+GitAuthorizerService --down-> IGitCredentialReadPort
+GitAuthorizerService --down-> ConfigurationService
+
+' Validator path
+GitValidatorService --> IGitHubAvailabilityPort
+
+
+' Cloner path
+GitClonerService --> IGitClonePort
+
+
+' Orchestrator path
+
+
+' Infrastructure implementations for reached ports
+MongoDBAdapter ..up.|> IGitCredentialReadPort
+MongoDBAdapter ..up.|> IGitHubAnalysisSavePort
+GitHubAdapter ..up.|> IGitHubAvailabilityPort
+GitHubAdapter ..up.|> IGitClonePort
+@enduml
+
+
+

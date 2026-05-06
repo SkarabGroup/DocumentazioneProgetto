@@ -1,0 +1,26 @@
+@startuml UpdatePatService
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class UpdatePatUseCase <<Interface>> {
+    + execute(command: UpdatePatCommand): Promise<UpdatePatResult>
+}
+
+class UpdatePatService {
+    - passwordProviderService: IPasswordProvider
+    - credentialPort: IGitCredentialUpdatePort
+    ---
+    + UpdatePatService(passwordProvider, updatePort)
+    + execute(command: UpdatePatCommand): Promise<UpdatePatResult>
+}
+
+class IGitCredentialUpdatePort <<Interface>>
+
+UpdatePatService ..|> UpdatePatUseCase
+UpdatePatService --right-> IPasswordProvider
+UpdatePatService --left-> IGitCredentialUpdatePort
+@enduml

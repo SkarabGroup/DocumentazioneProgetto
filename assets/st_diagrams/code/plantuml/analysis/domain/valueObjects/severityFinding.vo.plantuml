@@ -1,0 +1,20 @@
+@startuml SeverityFinding
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class SeverityFinding {
+    - _value: SeverityLevel
+    ---
+    - SeverityFinding(value: SeverityLevel)
+    - validate(value: string): void
+    + {static} create(value: string): SeverityFinding
+    + get value(): SeverityLevel
+    + equals(other: SeverityFinding): boolean
+}
+
+SeverityFinding --down-> SeverityLevel
+@enduml

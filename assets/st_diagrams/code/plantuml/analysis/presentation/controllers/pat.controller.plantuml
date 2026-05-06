@@ -1,0 +1,38 @@
+@startuml PatController
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class NewPatUseCase <<Interface>>
+class DeletePatUseCase <<Interface>>
+class UpdatePatUseCase <<Interface>>
+
+class PatController {
+    - newPatService: NewPatUseCase
+    - deletePatService: DeletePatUseCase
+    - updatePatService: UpdatePatUseCase
+    ---
+    + PatController(newPatService: NewPatUseCase, deletePatService: DeletePatUseCase, updatePatService: UpdatePatUseCase)
+    + addNewPat(dto: PostPatRequestDTO): Promise<PostPatResponseDTO>
+    + deletePat(dto: DeletePatRequestDTO): Promise<DeletePatResponseDTO>
+    + updatePat(dto: UpdatePatRequestDTO): Promise<UpdatePatResponseDTO>
+}
+
+' Relations
+PatController --up> NewPatUseCase
+PatController --up-> DeletePatUseCase
+PatController --up-> UpdatePatUseCase
+PatController ..up.> PostPatRequestDTO
+PatController ..up.> PostPatResponseDTO
+PatController ..up.> DeletePatRequestDTO
+PatController ..up> DeletePatResponseDTO
+PatController ..> UpdatePatRequestDTO
+PatController ..> UpdatePatResponseDTO
+PatController ..> NewPatCommand
+PatController ..> DeletePatCommand
+PatController ..> UpdatePatCommand
+
+@enduml

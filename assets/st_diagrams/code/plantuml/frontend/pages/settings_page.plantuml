@@ -1,0 +1,22 @@
+@startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+package "View — Pagine protette" {
+  class SettingsPage {
+    --
+    Pagina di gestione account organizzata in tab:
+    - Profilo (PAT): aggiornamento ed eliminazione dei Personal Access Token GitHub
+    - Password: cambio password
+    - Account: eliminazione account con dialog di conferma
+  }
+
+  SettingsPage --> "UsersApi" : changePassword, deleteAccount
+  SettingsPage --> "PatApi" : add, update, delete
+  SettingsPage --> "useAuth" : logout() dopo deleteAccount
+}
+@enduml

@@ -1,0 +1,18 @@
+@startuml PathFinding
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class PathFinding {
+    - _value: string
+    ---
+    - PathFinding(value: string)
+    - validate(value: string): void
+    + {static} create(value: string): PathFinding
+    + get value(): string
+    + equals(other: PathFinding): boolean
+}
+@enduml

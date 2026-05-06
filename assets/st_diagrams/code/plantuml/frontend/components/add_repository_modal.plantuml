@@ -1,0 +1,23 @@
+@startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+package "View — Componenti dominio" {
+  class AddRepositoryModal {
+    + isOpen: boolean
+    + onClose(): void
+    + onAdded(repository): void
+    --
+    Dialog modale per aggiungere un nuovo repository.
+    Raccoglie nome, URL GitHub e descrizione opzionale.
+    Valida il formato URL GitHub con Zod.
+    Chiama RepositoriesApi.create() al submit.
+  }
+
+  AddRepositoryModal --> "RepositoriesApi" : create()
+}
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+package "View — Pagine pubbliche" {
+  class RegisterPage {
+    --
+    Interfaccia per la registrazione di un nuovo account.
+    Valida username, email e password con Zod: la password deve
+    contenere maiuscola, minuscola, numero e carattere speciale.
+    Mostra indicatori visivi dei requisiti password in tempo reale.
+    Richiama useAuth().register() al submit.
+  }
+
+  RegisterPage --> "useAuth" : register()
+}
+@enduml

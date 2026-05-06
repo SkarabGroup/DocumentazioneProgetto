@@ -1,0 +1,15 @@
+@startuml IGitHubAnalysisSavePort
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class IGitHubAnalysisSavePort <<Interface>> {
+    + saveAnalysis(request: SaveGitHubAnalysisRequest): Promise<SaveGitHubAnalysisResponse>
+}
+
+IGitHubAnalysisSavePort --down.> SaveGitHubAnalysisRequest
+IGitHubAnalysisSavePort --down.> SaveGitHubAnalysisResponse
+@enduml

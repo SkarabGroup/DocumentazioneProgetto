@@ -1,0 +1,33 @@
+@startuml GetAnalysisService
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class GetAnalysisUseCase <<Interface>> {
+    + execute(command: GetAnalysisFromIdCommand): Promise<GetAnalysisResult>
+}
+
+class GetAllAnalysesForUserUseCase <<Interface>> {
+    + getAllAnalysesForUser(command: GetAllAnalysesForUserCommand): Promise<GetAllAnalysesForUserResult>
+}
+
+class IGetAllAnalysesForUserPort <<Interface>>
+class IGetAnalysisFromIdPort <<Interface>>
+
+class GetAnalysisService {
+    - getAnalysisFromIdPort: IGetAnalysisFromIdPort
+    - getAllAnalysesForUserPort: IGetAllAnalysesForUserPort
+    ---
+    + GetAnalysisService(getAnalysisFromIdPort, getAllAnalysesForUserPort)
+    + execute(command: GetAnalysisFromIdCommand): Promise<GetAnalysisResult>
+    + getAllAnalysesForUser(command: GetAllAnalysesForUserCommand): Promise<GetAllAnalysesForUserResult>
+}
+
+GetAnalysisService ..up-|> GetAnalysisUseCase
+GetAnalysisService ..up-|> GetAllAnalysesForUserUseCase
+GetAnalysisService --right-> IGetAnalysisFromIdPort
+GetAnalysisService --left-> IGetAllAnalysesForUserPort
+@enduml

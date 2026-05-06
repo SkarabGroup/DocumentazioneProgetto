@@ -1,0 +1,17 @@
+@startuml DescriptionFinding
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep 30
+skinparam ranksep 30
+skinparam ClassAttributeIconSize 0
+hide circles
+
+class DescriptionFinding {
+    - _value: string
+    ---
+    - DescriptionFinding(value: string)
+    + {static} create(value: string): DescriptionFinding
+    + get value(): string
+    + equals(other: DescriptionFinding): boolean
+}
+@enduml

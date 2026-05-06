@@ -1,0 +1,19 @@
+@startuml
+
+skinparam componentStyle uml2.5
+skinparam linetype ortho
+skinparam nodesep auto
+skinparam ranksep 70
+skinparam ClassAttributeIconSize 0
+hide circles
+package "View — UI Primitives" {
+  class Button {
+    + variant: default | destructive | outline | secondary | ghost | link | accent
+    + size: default | sm | lg | icon
+    --
+    Componente pulsante riutilizzabile con 7 varianti visive e 4 taglie.
+    Basato su class-variance-authority per la composizione delle classi.
+    Supporta tutti gli attributi HTML nativi del button.
+  }
+}
+@enduml
